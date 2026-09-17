@@ -1,0 +1,17 @@
+{
+  "name": "clipchat-dump",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only visual + structural snapshot of clipchat.ai/create/clipboard UI states via your own Chrome profile",
+  "bin": { "clipchat-dump": "./dump.mjs" },
+  "scripts": {
+    "dump": "node dump.mjs",
+    "dump:manual": "node dump.mjs --manual",
+    "dump:block": "node dump.mjs --writes block"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "playwright": "^1.63.0"
+  }
+}
