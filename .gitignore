@@ -1,0 +1,5 @@
+node_modules/
+clipchat-dump/
+.chrome-profile-copy/
+*.log
+.DS_Store
