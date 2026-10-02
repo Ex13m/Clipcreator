@@ -5,12 +5,14 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ALBUM = process.argv[2] || 'https://photos.app.goo.gl/u9B7oqEaWCKnYZuR6';
-const OUT = path.resolve(new URL('..', import.meta.url).pathname, '01_RAW');
+const OUT = path.resolve(fileURLToPath(new URL('..', import.meta.url)), '01_RAW');
 await fs.mkdir(OUT, { recursive: true });
 
 const browser = await chromium.launch({
+  channel: process.platform === "win32" ? "chrome" : undefined, // локально: установленный Chrome, без скачивания браузера
   executablePath: process.env.PW_CHROMIUM || undefined,
   proxy: process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY } : undefined,
 });
