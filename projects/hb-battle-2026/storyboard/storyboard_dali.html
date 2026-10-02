@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<title>HB2026 – storyboard (Dalí)</title>
+<style>@font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(../proto/assets/fonts/montserrat-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(../proto/assets/fonts/montserrat-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:normal;src:url(../proto/assets/fonts/montserrat-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:normal;src:url(../proto/assets/fonts/montserrat-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Source Sans 3';font-weight:400;font-style:normal;src:url(../proto/assets/fonts/source-sans-3-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Source Sans 3';font-weight:400;font-style:normal;src:url(../proto/assets/fonts/source-sans-3-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(../proto/assets/fonts/source-sans-3-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(../proto/assets/fonts/source-sans-3-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+</style>
+<style>
+  :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; --sand:#c8a066; --sand2:#9c7442; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#0a1430; color:var(--ice); font-family:'Source Sans 3', sans-serif; padding:48px; width:2000px; }
+  header { display:flex; align-items:baseline; gap:24px; margin-bottom:28px; }
+  h1 { font-family:Montserrat; font-weight:800; font-size:44px; margin:0; }
+  h1 .red { color:var(--red); }
+  header p { margin:0; opacity:.75; font-size:20px; }
+  .grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:32px; }
+  .panel { background:#111c3d; border-left:6px solid var(--blue); }
+  .panel svg { display:block; width:100%; height:auto; }
+  .cap { padding:14px 18px 18px; display:grid; grid-template-columns:auto 1fr; gap:4px 18px; font-size:18px; }
+  .num { grid-row:span 3; font-family:Montserrat; font-weight:800; font-size:40px; color:var(--red); line-height:1; }
+  .ttl { font-family:Montserrat; font-weight:800; font-size:22px; }
+  .ttl .t { font-family:'Source Sans 3'; font-weight:600; opacity:.7; font-size:18px; margin-left:10px; }
+  .act { opacity:.9; }
+  .cam { color:#9fb4e6; font-weight:600; }
+  footer { margin-top:28px; opacity:.6; font-size:16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>H-BATTLE <span class="red">2026</span> – začátek · storyboard</h1>
+  <p>Surreálný styl à la Dalí · 16:9 rámec, přerušovaně ořez 9:16 · grid: jehla = 0:01.2, 120 BPM (do příchodu tracku Suno)</p>
+</header>
+<div class="grid" id="grid"></div>
+<footer>Kresba je kódovaná (SVG), loga jsou originální soubory, texty sázené písmem — žádné AI generování loga/textu. Postavy jsou siluety bez obličejů.</footer>
+
+<script>
+const W = 960, H = 540;
+const TA = '../proto/assets/ta_label.png', HB = '../proto/assets/hb_round.png';
+let uid = 0;
+const id = (p) => `${p}${++uid}`;
+
+// ---------- примитивы «под Дали» ----------
+function sky(top = '#0b1e42', mid = '#304285', low = '#f2d9a6') {
+  const g = id('sky');
+  return { defs: `<linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${top}"/><stop offset=".55" stop-color="${mid}"/><stop offset=".72" stop-color="${low}"/></linearGradient>`,
+    body: `<rect width="${W}" height="${H}" fill="url(#${g})"/>` };
+}
+function desert(hy = 360) {
+  const g = id('sand');
+  return { defs: `<linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b47a"/><stop offset="1" stop-color="#8a6236"/></linearGradient>`,
+    body: `<path d="M0 ${hy} Q ${W * .3} ${hy - 6} ${W * .55} ${hy + 2} T ${W} ${hy - 4} V ${H} H 0 Z" fill="url(#${g})"/>
+      <path d="M${W * .62} ${hy + 4} q 120 -40 260 -6 v 8 z" fill="#6f7f9e" opacity=".55"/>` };   // далёкие скалы Кадакеса
+}
+const shadow = (x, y, len, w = 10, op = .35) =>
+  `<ellipse cx="${x + len / 2}" cy="${y}" rx="${len / 2}" ry="${w / 2}" fill="#3b2410" opacity="${op}"/>`;
+function deadTree(x, y, s = 1) {
+  return `<g transform="translate(${x} ${y}) scale(${s})" fill="none" stroke="#3a2a1a" stroke-linecap="round">
+    <path d="M0 0 C 4 -60 -6 -110 6 -170" stroke-width="12"/>
+    <path d="M4 -150 C 50 -170 110 -168 170 -150" stroke-width="7"/>
+    <path d="M2 -120 C -30 -140 -60 -160 -80 -190" stroke-width="5"/></g>`;
+}
+// «тающий» диск: круг с картинкой + стекающая капля
+function meltDisc(x, y, r, href, drip = 1, rot = 0) {
+  const c = id('clip');
+  const d = r * drip;
+  const path = `M ${-r} 0 A ${r} ${r} 0 0 1 ${r} 0 C ${r} ${d * .6} ${r * .35} ${d * .5} ${r * .25} ${d * 1.25}
+     C ${r * .18} ${d * 1.6} ${-r * .05} ${d * 1.6} ${-r * .1} ${d * 1.2} C ${-r * .2} ${d * .8} ${-r} ${d * .7} ${-r} 0 Z`;
+  return `<defs><clipPath id="${c}"><path d="${path}"/></clipPath></defs>
+    <g transform="translate(${x} ${y}) rotate(${rot})">
+      <path d="${path}" fill="#111" transform="translate(4 6)" opacity=".35"/>
+      <g clip-path="url(#${c})">
+        <rect x="${-r}" y="${-r}" width="${2 * r}" height="${r * 3}" fill="#121216"/>
+        ${Array.from({ length: 9 }, (_, i) => `<circle r="${r * (.96 - i * .06)}" fill="none" stroke="#2a2a33" stroke-width="1.2"/>`).join('')}
+        ${href ? `<image href="${href}" x="${-r * .42}" y="${-r * .42}" width="${r * .84}" height="${r * .84}"/>` : ''}
+      </g></g>`;
+}
+// плоский логотип-диск (солнце/часы)
+const logoDisc = (x, y, r, href, op = 1) =>
+  `<image href="${href}" x="${x - r}" y="${y - r}" width="${2 * r}" height="${2 * r}" opacity="${op}"/>`;
+// длинноногий «слон»-носитель: тело-капсула на тонких ногах
+function stilt(x, y, h, body, color = '#2b1d12') {
+  return `<g fill="${color}" stroke="${color}">
+    ${[-.35, -.12, .12, .35].map((k, i) => `<path d="M ${x + k * body} ${y - h} L ${x + k * body * 1.3 + (i % 2 ? 6 : -6)} ${y}" stroke-width="2.4" fill="none"/>`).join('')}
+    <ellipse cx="${x}" cy="${y - h - body * .22}" rx="${body * .55}" ry="${body * .25}"/>
+  </g>${shadow(x - 10, y + 2, h * 1.6, 8, .3)}`;
+}
+// силуэт человека (без лица), вытянутый
+function figure(x, y, h, color = '#1b1410', flag) {
+  const w = h * .16;
+  return `<g fill="${color}">
+    <ellipse cx="${x}" cy="${y - h * .93}" rx="${w * .38}" ry="${w * .46}"/>
+    <path d="M ${x - w / 2} ${y - h * .82} Q ${x} ${y - h * .9} ${x + w / 2} ${y - h * .82} L ${x + w * .3} ${y - h * .4} L ${x + w * .22} ${y} L ${x + w * .05} ${y} L ${x} ${y - h * .35} L ${x - w * .05} ${y} L ${x - w * .22} ${y} L ${x - w * .3} ${y - h * .4} Z"/>
+    ${flag ? `<path d="M ${x + w * .45} ${y - h * .8} V ${y - h * 1.35}" stroke="${color}" stroke-width="2"/>${meltFlag(x + w * .45, y - h * 1.35, h * .32)}` : ''}
+  </g>${shadow(x, y, h * 1.2, 6, .28)}`;
+}
+// чешский флаг, «стекающий» с древка
+function meltFlag(x, y, s) {
+  const c = id('fl');
+  const p = `M0 0 H ${s} C ${s * 1.05} ${s * .3} ${s * .8} ${s * .55} ${s * .7} ${s * .95} C ${s * .62} ${s * 1.2} ${s * .4} ${s * .8} ${s * .2} ${s * .7} C ${s * .1} ${s * .66} 0 ${s * .7} 0 ${s * .66} Z`;
+  return `<defs><clipPath id="${c}"><path d="${p}"/></clipPath></defs>
+    <g transform="translate(${x} ${y})" clip-path="url(#${c})">
+      <rect width="${s * 1.2}" height="${s * .33}" fill="#fff"/><rect y="${s * .33}" width="${s * 1.2}" height="${s * .9}" fill="#d7141a"/>
+      <path d="M0 0 L ${s * .5} ${s * .33} L 0 ${s * .66} Z" fill="#11457e"/></g>`;
+}
+// форель-силуэт
+function trout(x, y, s, rot = 0, stache = false) {
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})">
+    <path d="M -60 0 C -30 -26 30 -26 55 -4 L 80 -22 L 74 2 L 82 24 L 55 6 C 30 26 -30 24 -60 0 Z" fill="#7f95c2" stroke="#1c2b55" stroke-width="2"/>
+    <path d="M -50 2 C -20 8 20 8 50 2" stroke="#e31e24" stroke-width="5" fill="none" opacity=".8"/>
+    ${Array.from({ length: 10 }, (_, i) => `<circle cx="${-30 + i * 7}" cy="${-10 + (i % 3) * 3}" r="1.6" fill="#1c2b55"/>`).join('')}
+    <circle cx="-44" cy="-5" r="3.4" fill="#0b1e42"/>
+    ${stache ? `<path d="M -60 4 C -66 0 -70 -10 -62 -22 M -60 4 C -50 4 -44 -6 -40 -24" stroke="#0b1e42" stroke-width="2.6" fill="none" stroke-linecap="round"/>` : ''}
+  </g>`;
+}
+// каменные плиты со словами
+function slab(x, y, w, h, word, red) {
+  return `<g><path d="M ${x} ${y} h ${w} l -8 ${h} h ${-w + 16} z" fill="#d8cdb8" stroke="#5c4a33" stroke-width="2"/>
+    <text x="${x + w / 2 - 4}" y="${y + h * .64}" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="${h * .42}" fill="${red ? '#e31e24' : '#0b1e42'}">${word}</text>
+  </g>${shadow(x + w - 10, y + h, w * 1.4, 10, .3)}`;
+}
+// виджет-проигрыватель (миниатюра)
+function widget(x, y, s = 1, armDown = true) {
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+    <rect x="0" y="0" width="200" height="56" rx="14" fill="#304285" opacity=".95"/>
+    <circle cx="36" cy="28" r="36" fill="#121216"/>${[30, 24, 18].map((r) => `<circle cx="36" cy="28" r="${r}" fill="none" stroke="#2a2a33"/>`).join('')}
+    <image href="${TA}" x="22" y="14" width="28" height="28"/>
+    <path d="${armDown ? 'M 70 -6 L 64 40 L 56 54' : 'M 70 -6 L 86 36 L 84 52'}" stroke="#dfe4ee" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <circle cx="70" cy="-6" r="6" fill="#c9ced8"/>
+    <text x="88" y="24" font-family="Montserrat" font-weight="800" font-size="13" fill="#eef2f9">H-BATTLE 2026</text>
+    <rect x="88" y="36" width="96" height="3" rx="1.5" fill="#eef2f9" opacity=".3"/><rect x="88" y="36" width="30" height="3" rx="1.5" fill="#e31e24"/>
+  </g>`;
+}
+const safe916 = `<rect x="${W / 2 - H * 9 / 32}" y="0" width="${H * 9 / 16}" height="${H}" fill="none" stroke="#eef2f9" stroke-dasharray="8 8" stroke-width="2" opacity=".55"/>`;
+const arrow = (x1, y1, x2, y2) => `<g stroke="#e31e24" stroke-width="4" fill="#e31e24"><path d="M ${x1} ${y1} L ${x2} ${y2}"/><circle cx="${x2}" cy="${y2}" r="6"/></g>`;
+
+function svg(parts, extra = '') {
+  const defs = parts.map((p) => p.defs || '').join('');
+  const body = parts.map((p) => (typeof p === 'string' ? p : p.body)).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg"><defs>${defs}</defs>${body}${extra}${safe916}</svg>`;
+}
+
+// ---------- кадры ----------
+const P = [
+  { t: '0:00–0:01.2', ttl: 'Jehla dopadá', en: 'Needle drop',
+    act: 'Rozteklá deska s modrým logem TA visí přes větev suchého stromu jako hodiny. Rameno s jehlou se samo spouští – v dotyku začíná track.',
+    cam: 'Kamera: pomalý push-in na jehlu', art: () => svg([sky(), desert(), deadTree(330, 360, 1.15), meltDisc(420, 186, 92, TA, 1.1, -8),
+      `<path d="M 560 70 C 540 120 520 150 470 176" stroke="#dfe4ee" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="560" cy="70" r="14" fill="#c9ced8"/><rect x="456" y="170" width="24" height="12" rx="3" fill="#e31e24" transform="rotate(-30 468 176)"/>`,
+      shadow(300, 372, 420, 14)]) },
+  { t: '0:01.2–0:05.2', ttl: 'H-BATTLE vychází', en: 'Logo rises',
+    act: 'Logo H-BATTLE (malé) vychází nad obzorem jako slunce, poušť vrhá dlouhé stíny. Přehrávač se zmenší a zaparkuje do pravého dolního rohu.',
+    cam: 'Kamera: jeřáb vzhůru + 3D otočka loga (three.js)', art: () => svg([sky('#0b1e42', '#304285', '#f6e2b4'), desert(), logoDisc(480, 250, 70, HB),
+      `<g opacity=".25">${Array.from({ length: 9 }, (_, i) => `<path d="M 480 250 L ${480 + Math.cos(-Math.PI * (i + 1) / 10) * 600} ${250 + Math.sin(-Math.PI * (i + 1) / 10) * 600}" stroke="#f6e2b4" stroke-width="3"/>`).join('')}</g>`,
+      `<text x="480" y="420" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="40" fill="#eef2f9">H-BATTLE <tspan fill="#e31e24">2026</tspan></text>
+       <text x="480" y="452" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="16" letter-spacing="4" fill="#eef2f9">SLOVENSKO · 1.–2. 10. 2026</text>`,
+      widget(720, 470, .95), arrow(480, 330, 480, 290)]) },
+  { t: '0:05.2–0:11.2', ttl: 'Nepřijeli jsme bojovat…', en: '…přijeli jsme za přáteli.',
+    act: 'Slova jako kamenné desky v poušti, padají do písku po dobách. Poslední deska „přáteli.“ je červená; pod ní EN titulek.',
+    cam: 'Kamera: dolly-in podél desek, strih na takt', art: () => svg([sky(), desert(330),
+      slab(70, 120, 220, 70, 'Nepřijeli'), slab(310, 150, 130, 70, 'jsme'), slab(460, 110, 220, 70, 'bojovat,'),
+      slab(120, 250, 190, 66, 'přijeli'), slab(330, 270, 120, 66, 'jsme'), slab(470, 250, 90, 66, 'za'), slab(580, 230, 240, 74, 'přáteli.', true),
+      `<text x="480" y="500" text-anchor="middle" font-size="22" font-weight="600" fill="#eef2f9" font-family="Source Sans 3">We didn’t come to fight. We came for friends.</text>`,
+      widget(760, 476, .8)]) },
+  { t: '0:11.2–0:19.2', ttl: '01 · Příjezd', en: 'Arrival',
+    act: 'Auta a lidé na dlouhých tenkých nohou (sloni à la Dalí) kráčí pouští k jezeru-zrcadlu. Foto 01–02 s 2.5D paralaxou.',
+    cam: 'Kamera: pan doprava, paralaxa 3 vrstvy', art: () => svg([sky(), desert(),
+      `<ellipse cx="780" cy="420" rx="170" ry="26" fill="#9cc8f0" opacity=".85"/><ellipse cx="780" cy="420" rx="120" ry="14" fill="#eef2f9" opacity=".5"/>`,
+      stilt(200, 400, 170, 120), stilt(390, 410, 210, 140), stilt(560, 395, 150, 90),
+      `<rect x="150" y="196" width="100" height="26" rx="8" fill="#304285"/><rect x="330" y="160" width="120" height="30" rx="9" fill="#e31e24"/>`,
+      figure(640, 420, 90), figure(670, 424, 84), arrow(80, 470, 300, 470)]) },
+  { t: '0:19.2–0:27.2', ttl: '02 · Den 1 · trénink', en: 'Day 1 · practice',
+    act: '4 střihy po taktu: nához – záběr – pstruh v podběráku – pustit zpět. Jezero je drážkovaná deska, prut se ohýbá do tekoucího oblouku.',
+    cam: 'Kamera: pan L → push → pull → tilt (každý shot jiný pohyb)', art: () => svg([sky(), desert(),
+      `<ellipse cx="560" cy="430" rx="300" ry="60" fill="#121216"/>${[270, 230, 190, 150, 110].map((r) => `<ellipse cx="560" cy="430" rx="${r}" ry="${r / 5}" fill="none" stroke="#2a2a33" stroke-width="2"/>`).join('')}
+       <image href="${TA}" x="530" y="418" width="60" height="24" preserveAspectRatio="none"/>`,
+      figure(190, 430, 150),
+      `<path d="M 210 300 C 340 180 480 160 590 300 C 610 330 600 360 585 380" stroke="#2b1d12" stroke-width="5" fill="none"/><path d="M 585 380 L 585 420" stroke="#eef2f9" stroke-width="1.5"/>`,
+      trout(600, 250, 1.1, -24)]) },
+  { t: '0:27.2–0:35.2', ttl: '03 · Prezentace týmů', en: 'Team presentation',
+    act: 'Protáhlé siluety týmů jako cypřiše, vlajky stékají z žerdí. Lower third „TÝM ČESKÁ REPUBLIKA“.',
+    cam: 'Kamera: push-in na tým ČR, pak pan přes ostatní týmy', art: () => svg([sky(), desert(),
+      ...[120, 200, 280, 360].map((x) => figure(x, 430, 230, '#1b1410', x === 200)),
+      ...[560, 630, 700, 770, 840].map((x, i) => figure(x, 420, 160 - i * 6, '#3a2a1a')),
+      `<rect x="70" y="462" width="330" height="40" fill="#eef2f9"/><text x="86" y="491" font-family="Montserrat" font-weight="800" font-size="22" fill="#0b1e42">TÝM ČESKÁ REPUBLIKA</text>`]) },
+  { t: '0:35.2–0:41.2', ttl: '04 · Zahájení', en: 'Opening ceremony',
+    act: 'Řada žerdí s tekoucími vlajkami, nástup týmů jako dlouhé stíny v písku. Přípitek pořadatelů.',
+    cam: 'Kamera: push → tilt nahoru po žerdi → pull', art: () => svg([sky(), desert(),
+      ...[160, 300, 440, 580, 720].map((x) => `<path d="M ${x} 410 V 150" stroke="#3a2a1a" stroke-width="5"/>${meltFlag(x, 150, 90)}${shadow(x, 412, 320, 8, .3)}`),
+      ...[220, 360, 500, 640].map((x) => figure(x, 470, 90))]) },
+  { t: '0:41.2–0:49.2', ttl: '05 · Losování', en: 'The draw',
+    act: 'Dalího prádelník v poušti: šuplíky se vysouvají po dobách, v každém řádek losování (závodník · kolo 1–3). Tabulka v kánonu MiČR.',
+    cam: 'Kamera: pomalý push + 3D náklon tabulky', art: () => svg([sky(), desert(),
+      `<g transform="translate(250 120)"><rect width="460" height="300" fill="#7a5230" stroke="#3a2412" stroke-width="4"/>
+        ${[0, 1, 2, 3, 4].map((i) => `<g transform="translate(${i % 2 ? 40 : 0} ${14 + i * 56})"><rect x="16" width="428" height="46" fill="#304285" stroke="#0b1e42" stroke-width="2"/>
+          <text x="30" y="31" font-family="Source Sans 3" font-weight="600" font-size="20" fill="#eef2f9">Závodník ${i + 1}</text>
+          <text x="230" y="31" font-family="Source Sans 3" font-size="20" fill="#eef2f9">—        —        —</text></g>`).join('')}</g>`,
+      `<path d="M 300 420 L 290 470 M 660 420 L 670 470" stroke="#3a2412" stroke-width="10"/>`, shadow(700, 470, 240, 12),
+      `<text x="250" y="96" font-family="Montserrat" font-weight="800" font-size="36" fill="#eef2f9">LOSOVÁNÍ <tspan font-size="18" font-weight="600" opacity=".7">The draw</tspan></text>`]) },
+  { t: '0:49.2–0:53.2', ttl: '06 · Zákulisí', en: 'Backstage',
+    act: 'Vtipná fotka týmu. Pstruh s Dalího knírem „mrkne“ do kamery. Titulek: Takhle vypadá náš „boj“.',
+    cam: 'Kamera: whip-zoom (rychlý nájezd) a dojezd', art: () => svg([sky(), desert(), trout(480, 230, 2.6, -6, true),
+      `<text x="480" y="440" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="34" fill="#eef2f9">Takhle vypadá náš „boj“.</text>
+       <text x="480" y="472" text-anchor="middle" font-family="Source Sans 3" font-weight="600" font-size="18" fill="#eef2f9" opacity=".85">This is what our “battle” looks like.</text>`]) },
+  { t: '0:53.2–1:01.2', ttl: 'Finále', en: 'Ending',
+    act: 'Dvě loga (TA + H-BATTLE, malá) visí na větvi jako rozteklé hodiny. Citát a datum. Rameno se zvedá, deska dobíhá – konec.',
+    cam: 'Kamera: pomalý pull-out, rameno zpět do klidu', art: () => svg([sky(), desert(), deadTree(380, 380, 1.2),
+      meltDisc(420, 170, 60, TA, .9, -6), meltDisc(570, 190, 56, HB, 1.0, 8),
+      `<text x="480" y="420" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="26" fill="#eef2f9">Nepřijeli jsme bojovat. <tspan fill="#e31e24">Přijeli jsme za přáteli.</tspan></text>
+       <text x="480" y="450" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="14" letter-spacing="3" fill="#eef2f9">H-BATTLE 2026 · SLOVENSKO · 1.–2. 10. 2026</text>`,
+      widget(720, 470, .95, false)]) },
+];
+
+document.getElementById('grid').innerHTML = P.map((p, i) => `
+  <div class="panel">${p.art()}
+    <div class="cap"><div class="num">${String(i + 1).padStart(2, '0')}</div>
+      <div class="ttl">${p.ttl}<span class="t">${p.en} · ${p.t}</span></div>
+      <div class="act">${p.act}</div><div class="cam">${p.cam}</div></div>
+  </div>`).join('');
+</script>
+</body>
+</html>

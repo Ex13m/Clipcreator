@@ -61,7 +61,7 @@
       .slate-note { font-size:35px; color:var(--red); font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
 
       /* плашка сцены */
-      .chip { position:absolute; left:76px; bottom:324px; display:flex; align-items:baseline; gap:22px;
+      .chip { position:absolute; left:76px; bottom:335px; display:flex; align-items:baseline; gap:22px;
         background:rgba(11,30,66,.86); border-left:11px solid var(--red); padding:17px 32px; }
       .chip-num { font-family:Montserrat; font-weight:800; font-size:48px; color:var(--red); }
       .chip-cz { font-family:Montserrat; font-weight:800; font-size:48px; text-transform:uppercase; }
@@ -72,7 +72,7 @@
         font-family:Montserrat; font-weight:800; font-size:58px; letter-spacing:.04em; }
 
       /* жеребьёвка */
-      #draw-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px; perspective:2160px; }
+      #draw-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px 0; perspective:2160px; }
       .d-title { font-family:Montserrat; font-weight:800; font-size:97px; margin-bottom:11px; }
       .d-title .en { font-size:.45em; opacity:.7; font-weight:600; margin-left:.4em; }
       .d-note { color:var(--red); font-weight:600; font-size:35px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:32px; }
@@ -87,22 +87,47 @@
       #vtip-cap .cap .en { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; opacity:.85; margin-top:13px; }
 
       /* финал */
-      #outro .o-wrap { position:absolute; left:76px; right:76px; top:1490px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:17px; }
+      #outro .o-wrap { position:absolute; left:76px; right:76px; top:929px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:17px; }
       .o-quote { font-family:Montserrat; font-weight:800; font-size:60px; line-height:1.1; }
       .o-quote .red { color:var(--red); }
       .o-meta { font-family:Montserrat; font-weight:600; font-size:37px; letter-spacing:.16em; text-transform:uppercase; opacity:.85; }
 
+
+      /* ---- виджет-проигрыватель ---- */
+      #player { position:absolute; right:54.0px; bottom:108.0px; width:648.0px; height:183.6px; }
+      #card { position:absolute; inset:0; border-radius:40.4px; background:linear-gradient(135deg, rgba(48,66,133,.92), rgba(11,30,66,.94));
+        box-shadow:0 13px 43px rgba(0,0,0,.45), inset 0 0 0 2px rgba(238,242,249,.18); }
+      #vinyl-wrap { position:absolute; left:17.3px; top:-29.4px; width:242.4px; height:242.4px; }
+      #vinyl { position:absolute; inset:0; border-radius:50%;
+        background:repeating-radial-gradient(circle at 50% 50%, #0d0d10 0 1.5px, #1c1c22 1.5px 2.7px);
+        box-shadow:0 9px 24px rgba(0,0,0,.6); }
+      #vinyl img { position:absolute; left:30%; top:30%; width:40%; height:40%; border-radius:50%; }
+      #vinyl .hole { position:absolute; left:48.6%; top:48.6%; width:2.8%; height:2.8%; border-radius:50%; background:#c9ced8; }
+      #sheen { position:absolute; inset:0; border-radius:50%; pointer-events:none;
+        background:conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.16) 12%, transparent 18% 52%, rgba(255,255,255,.12) 60%, transparent 66%);
+        -webkit-mask-image:radial-gradient(circle, transparent 0 20%, #000 21%); }
+      #arm { position:absolute; left:252.4px; top:-19.7px; width:0; height:0; }
+      #arm svg { position:absolute; left:-121.2px; top:-29.1px; overflow:visible; }
+      #p-text { position:absolute; left:294.2px; right:25.9px; top:31.2px; bottom:25.7px; display:flex; flex-direction:column; justify-content:space-between; }
+      .p-title { font-family:Montserrat; font-weight:800; font-size:37px; line-height:1.1; white-space:nowrap; }
+      .p-artist { font-size:28px; font-weight:600; opacity:.72; white-space:nowrap; }
+      .p-row { display:flex; align-items:center; gap:13px; font-size:24px; font-weight:600; opacity:.9; }
+      .p-bar { position:relative; flex:1; height:5px; background:rgba(238,242,249,.22); border-radius:5px; overflow:hidden; }
+      #p-fill { position:absolute; inset:0; background:var(--red); transform-origin:left center; }
+      #p-eq { display:flex; align-items:flex-end; gap:4px; height:24px; }
+      #p-eq i { display:block; width:6px; height:100%; background:var(--ice); transform-origin:bottom center; }
+      .nw { white-space:nowrap; }
       #wipe { position:absolute; inset:0; background:var(--red); }
       #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
       #proto-badge { position:absolute; right:32px; top:32px; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; opacity:.45; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="60" data-fps="30">
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="61.2" data-fps="30">
       <div id="bg"><div id="stripes"></div></div>
 
       
-      <section id="sh01" class="clip shot" data-start="10" data-duration="4" data-track-index="2">
+      <section id="sh01" class="clip shot" data-start="11.2" data-duration="4" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">01</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -112,7 +137,7 @@
           <div class="slate-note">foto / video doplnit · 4 s</div>
         </div>
       </section>
-      <section id="sh02" class="clip shot" data-start="14" data-duration="4" data-track-index="2">
+      <section id="sh02" class="clip shot" data-start="15.2" data-duration="4" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">02</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -122,7 +147,7 @@
           <div class="slate-note">foto / video doplnit · 4 s</div>
         </div>
       </section>
-      <section id="sh03" class="clip shot" data-start="18" data-duration="2" data-track-index="2">
+      <section id="sh03" class="clip shot" data-start="19.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">03</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -132,7 +157,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh04" class="clip shot" data-start="20" data-duration="2" data-track-index="2">
+      <section id="sh04" class="clip shot" data-start="21.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">04</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -142,7 +167,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh05" class="clip shot" data-start="22" data-duration="2" data-track-index="2">
+      <section id="sh05" class="clip shot" data-start="23.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">05</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -152,7 +177,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh06" class="clip shot" data-start="24" data-duration="2" data-track-index="2">
+      <section id="sh06" class="clip shot" data-start="25.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">06</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -162,7 +187,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh07" class="clip shot" data-start="26" data-duration="4" data-track-index="2">
+      <section id="sh07" class="clip shot" data-start="27.2" data-duration="4" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">07</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -172,7 +197,7 @@
           <div class="slate-note">foto / video doplnit · 4 s</div>
         </div>
       </section>
-      <section id="sh08" class="clip shot" data-start="30" data-duration="4" data-track-index="2">
+      <section id="sh08" class="clip shot" data-start="31.2" data-duration="4" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">08</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -182,7 +207,7 @@
           <div class="slate-note">foto / video doplnit · 4 s</div>
         </div>
       </section>
-      <section id="sh09" class="clip shot" data-start="34" data-duration="2" data-track-index="2">
+      <section id="sh09" class="clip shot" data-start="35.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">09</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -192,7 +217,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh10" class="clip shot" data-start="36" data-duration="2" data-track-index="2">
+      <section id="sh10" class="clip shot" data-start="37.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">10</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -202,7 +227,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh11" class="clip shot" data-start="38" data-duration="2" data-track-index="2">
+      <section id="sh11" class="clip shot" data-start="39.2" data-duration="2" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">11</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -212,7 +237,7 @@
           <div class="slate-note">foto / video doplnit · 2 s</div>
         </div>
       </section>
-      <section id="sh12" class="clip shot" data-start="48" data-duration="4" data-track-index="2">
+      <section id="sh12" class="clip shot" data-start="49.2" data-duration="4" data-track-index="2">
         <div class="layer l-bg"></div>
         <div class="layer l-mid"><span class="bignum">12</span></div>
         <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
@@ -223,7 +248,7 @@
         </div>
       </section>
 
-      <section id="draw" class="clip" data-start="40" data-duration="8" data-track-index="2">
+      <section id="draw" class="clip" data-start="41.2" data-duration="8" data-track-index="2">
         <div id="draw-cam">
           <div class="d-title">LOSOVÁNÍ<span class="en">The draw</span></div>
           <div class="d-note">ryba · data z losování doplnit</div>
@@ -240,14 +265,14 @@
 
       <div id="three-wrap"><canvas id="three-layer"></canvas></div>
 
-      <section id="title-clip" class="clip" data-start="1.5" data-duration="2.5" data-track-index="3">
+      <section id="title-clip" class="clip" data-start="2.7" data-duration="2.5" data-track-index="3">
         <div class="t-wrap">
           <div id="t-main" class="t-main">H-BATTLE <span class="red">2026</span></div>
-          <div id="t-sub" class="t-sub">Slovensko · 1.–2.&nbsp;10.&nbsp;2026</div>
+          <div id="t-sub" class="t-sub">Slovensko · <span class="nw">1.–2. 10. 2026</span></div>
         </div>
       </section>
 
-      <section id="kin" class="clip" data-start="4" data-duration="6" data-track-index="3">
+      <section id="kin" class="clip" data-start="5.2" data-duration="6" data-track-index="3">
         <div id="kin-cam">
           <div class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
           <div class="k-line"><span class="k-mask"><span id="k2w0" class="k-word">přijeli</span></span><span class="k-mask"><span id="k2w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k2w2" class="k-word">za</span></span><span class="k-mask"><span id="k2w3" class="k-word red">přáteli.</span></span></div>
@@ -257,145 +282,187 @@
       </section>
 
       
-      <section id="chip-prijezd" class="clip chip-clip" data-start="10" data-duration="8" data-track-index="4">
+      <section id="chip-prijezd" class="clip chip-clip" data-start="11.2" data-duration="8" data-track-index="4">
         <div class="chip"><span class="chip-num">01</span><span class="chip-cz">Příjezd</span><span class="chip-en">Arrival</span></div>
       </section>
-      <section id="chip-trenink" class="clip chip-clip" data-start="18" data-duration="8" data-track-index="4">
+      <section id="chip-trenink" class="clip chip-clip" data-start="19.2" data-duration="8" data-track-index="4">
         <div class="chip"><span class="chip-num">02</span><span class="chip-cz">Den 1 · trénink</span><span class="chip-en">Day 1 · practice</span></div>
       </section>
-      <section id="chip-prezentace" class="clip chip-clip" data-start="26" data-duration="8" data-track-index="4">
+      <section id="chip-prezentace" class="clip chip-clip" data-start="27.2" data-duration="8" data-track-index="4">
         <div class="chip"><span class="chip-num">03</span><span class="chip-cz">Prezentace týmů</span><span class="chip-en">Team presentation</span></div>
       </section>
-      <section id="chip-zahajeni" class="clip chip-clip" data-start="34" data-duration="6" data-track-index="4">
+      <section id="chip-zahajeni" class="clip chip-clip" data-start="35.2" data-duration="6" data-track-index="4">
         <div class="chip"><span class="chip-num">04</span><span class="chip-cz">Zahájení</span><span class="chip-en">Opening ceremony</span></div>
       </section>
-      <section id="chip-losovani" class="clip chip-clip" data-start="40" data-duration="8" data-track-index="4">
+      <section id="chip-losovani" class="clip chip-clip" data-start="41.2" data-duration="8" data-track-index="4">
         <div class="chip"><span class="chip-num">05</span><span class="chip-cz">Losování</span><span class="chip-en">The draw</span></div>
       </section>
-      <section id="chip-vtip" class="clip chip-clip" data-start="48" data-duration="4" data-track-index="4">
+      <section id="chip-vtip" class="clip chip-clip" data-start="49.2" data-duration="4" data-track-index="4">
         <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Zákulisí</span><span class="chip-en">Backstage</span></div>
       </section>
 
-      <section id="lt-cz" class="clip" data-start="27" data-duration="3" data-track-index="5">
+      <section id="lt-cz" class="clip" data-start="28.2" data-duration="3" data-track-index="5">
         <div id="lt-box" class="lt">TÝM ČESKÁ REPUBLIKA</div>
       </section>
 
-      <section id="vtip-cap" class="clip" data-start="48.5" data-duration="3.5" data-track-index="5">
+      <section id="vtip-cap" class="clip" data-start="49.7" data-duration="3.5" data-track-index="5">
         <div id="vtip-text" class="cap">Takhle vypadá náš „boj“.<span class="en">This is what our “battle” looks like.</span></div>
       </section>
 
-      <section id="outro" class="clip" data-start="53" data-duration="7" data-track-index="3">
+      <section id="outro" class="clip" data-start="54.2" data-duration="7" data-track-index="3">
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
-          <div id="o-meta" class="o-meta">H-BATTLE 2026 · Slovensko · 1.–2.&nbsp;10.&nbsp;2026</div>
+          <div id="o-meta" class="o-meta">H-BATTLE 2026 · Slovensko · <span class="nw">1.–2. 10. 2026</span></div>
         </div>
       </section>
 
+
+      <div id="player">
+        <div id="card"></div>
+        <div id="vinyl-wrap">
+          <div id="vinyl"><img src="assets/ta_label.png" alt="" /><div class="hole"></div></div>
+          <div id="sheen"></div>
+        </div>
+        <div id="arm">
+          <svg width="242.4px" height="242.4px" viewBox="-121.2 -29.1 242.4 242.4">
+            <circle cx="0" cy="0" r="18.2" fill="#c9ced8" stroke="#0b1e42" stroke-width="2.9" />
+            <circle cx="0" cy="0" r="7.3" fill="#0b1e42" />
+            <path d="M 0 0 L -19.4 150.3 L -48.5 198.7" fill="none" stroke="#dfe4ee" stroke-width="6.8" stroke-linecap="round" stroke-linejoin="round" />
+            <rect x="-65.4" y="193.9" width="31.5" height="18.2" rx="3.6" fill="#e31e24" transform="rotate(-34 -48.5 203.6)" />
+          </svg>
+        </div>
+        <div id="p-text">
+          <div class="p-title">H-BATTLE 2026</div>
+          <div class="p-artist">začátek · Trout Area CZ</div>
+          <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>1:00</span></div>
+        </div>
+      </div>
       <div id="wipe-holder"><div id="wipe"></div></div>
       <div id="proto-badge">RYBA · v0</div>
 
-      <audio id="bgm" src="assets/placeholder_120bpm.wav" data-start="0" data-duration="60" data-track-index="9" data-volume="0.8"></audio>
+      <audio id="bgm" src="assets/placeholder_120bpm.wav" data-start="1.2" data-duration="60" data-track-index="9" data-volume="0.8"></audio>
     </div>
 
     <script>
       const tl = gsap.timeline({ paused: true });
       // фон: полосы дрейфуют весь ролик
-      tl.fromTo("#stripes", { xPercent: -3 }, { xPercent: 3, duration: 60, ease: "none" }, 0);
+      tl.fromTo("#stripes", { xPercent: -3 }, { xPercent: 3, duration: 61.2, ease: "none" }, 0);
       // 3D-слой виден в интро и в финале
-      tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0.18, duration: 0.5, ease: "power1.inOut" }, 4);
-      tl.to("#three-wrap", { opacity: 0, duration: 0.25 }, 9.75);
-      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 52);
+      tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0.18, duration: 0.5, ease: "power1.inOut" }, 5.2);
+      tl.to("#three-wrap", { opacity: 0, duration: 0.25 }, 10.95);
+      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 53.2);
       // титул
-      tl.fromTo("#t-main", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2);
-      tl.fromTo("#t-sub", { opacity: 0, scaleX: 1.15 }, { opacity: 0.85, scaleX: 1, duration: 0.8, ease: "power2.out" }, 2.5);
-      tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 4);
-      tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 4.5);
-      tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 5);
-      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 6);
-      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 6.5);
-      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7);
-      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7.5);
-      tl.fromTo("#k-under", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power2.inOut"}, 7.5);
-      tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 8);
-      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:6, ease:"none"}, 4);
-      tl.fromTo("#sh01 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 10);
-      tl.fromTo("#sh01 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 10);
-      tl.fromTo("#sh01 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 10);
-      tl.fromTo("#sh01 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 10.05);
-      tl.fromTo("#sh02 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 14);
-      tl.fromTo("#sh02 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 14);
-      tl.fromTo("#sh02 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 14);
-      tl.fromTo("#sh02 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 14.05);
-      tl.fromTo("#sh03 .l-bg", {"scale":1.12,"xPercent":1.4}, {"scale":1.12,"xPercent":-1.4,"duration":2,"ease":"none"}, 18);
-      tl.fromTo("#sh03 .l-mid", {"scale":1.12,"xPercent":2.8}, {"scale":1.12,"xPercent":-2.8,"duration":2,"ease":"none"}, 18);
-      tl.fromTo("#sh03 .l-fg", {"scale":1.12,"xPercent":4.8}, {"scale":1.12,"xPercent":-4.8,"duration":2,"ease":"none"}, 18);
-      tl.fromTo("#sh03 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 18.05);
-      tl.fromTo("#sh04 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 20);
-      tl.fromTo("#sh04 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 20);
-      tl.fromTo("#sh04 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 20);
-      tl.fromTo("#sh04 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 20.05);
-      tl.fromTo("#sh05 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
-      tl.fromTo("#sh05 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
-      tl.fromTo("#sh05 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
-      tl.fromTo("#sh05 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 22.05);
-      tl.fromTo("#sh06 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 24);
-      tl.fromTo("#sh06 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 24);
-      tl.fromTo("#sh06 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 24);
-      tl.fromTo("#sh06 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 24.05);
-      tl.fromTo("#sh07 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 26);
-      tl.fromTo("#sh07 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 26);
-      tl.fromTo("#sh07 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 26);
-      tl.fromTo("#sh07 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 26.05);
-      tl.fromTo("#sh08 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 30);
-      tl.fromTo("#sh08 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 30);
-      tl.fromTo("#sh08 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 30);
-      tl.fromTo("#sh08 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 30.05);
-      tl.fromTo("#sh09 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 34);
-      tl.fromTo("#sh09 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 34);
-      tl.fromTo("#sh09 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 34);
-      tl.fromTo("#sh09 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 34.05);
-      tl.fromTo("#sh10 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 36);
-      tl.fromTo("#sh10 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 36);
-      tl.fromTo("#sh10 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 36);
-      tl.fromTo("#sh10 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 36.05);
-      tl.fromTo("#sh11 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
-      tl.fromTo("#sh11 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
-      tl.fromTo("#sh11 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
-      tl.fromTo("#sh11 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 38.05);
-      tl.fromTo("#sh12 .l-bg", {scale:1.74, xPercent:-10.5}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
-      tl.to("#sh12 .l-bg", {scale:1.061, duration:3.55, ease:"none"}, 48.45);
-      tl.fromTo("#sh12 .l-mid", {scale:1.8800000000000001, xPercent:-21}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
-      tl.to("#sh12 .l-mid", {scale:1.082, duration:3.55, ease:"none"}, 48.45);
-      tl.fromTo("#sh12 .l-fg", {scale:2.08, xPercent:-36}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
-      tl.to("#sh12 .l-fg", {scale:1.112, duration:3.55, ease:"none"}, 48.45);
-      tl.fromTo("#sh12 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 48.05);
+      tl.fromTo("#t-main", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 3.2);
+      tl.fromTo("#t-sub", { opacity: 0, scaleX: 1.15 }, { opacity: 0.85, scaleX: 1, duration: 0.8, ease: "power2.out" }, 3.7);
+      tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 5.2);
+      tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 5.7);
+      tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 6.2);
+      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7.2);
+      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7.7);
+      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 8.2);
+      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 8.7);
+      tl.fromTo("#k-under", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power2.inOut"}, 8.7);
+      tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 9.2);
+      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:6, ease:"none"}, 5.2);
+      tl.fromTo("#sh01 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 11.2);
+      tl.fromTo("#sh01 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 11.2);
+      tl.fromTo("#sh01 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 11.2);
+      tl.fromTo("#sh01 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 11.25);
+      tl.fromTo("#sh02 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 15.2);
+      tl.fromTo("#sh02 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 15.2);
+      tl.fromTo("#sh02 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 15.2);
+      tl.fromTo("#sh02 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 15.25);
+      tl.fromTo("#sh03 .l-bg", {"scale":1.12,"xPercent":1.4}, {"scale":1.12,"xPercent":-1.4,"duration":2,"ease":"none"}, 19.2);
+      tl.fromTo("#sh03 .l-mid", {"scale":1.12,"xPercent":2.8}, {"scale":1.12,"xPercent":-2.8,"duration":2,"ease":"none"}, 19.2);
+      tl.fromTo("#sh03 .l-fg", {"scale":1.12,"xPercent":4.8}, {"scale":1.12,"xPercent":-4.8,"duration":2,"ease":"none"}, 19.2);
+      tl.fromTo("#sh03 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 19.25);
+      tl.fromTo("#sh04 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 21.2);
+      tl.fromTo("#sh04 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 21.2);
+      tl.fromTo("#sh04 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 21.2);
+      tl.fromTo("#sh04 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 21.25);
+      tl.fromTo("#sh05 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 23.2);
+      tl.fromTo("#sh05 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 23.2);
+      tl.fromTo("#sh05 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 23.2);
+      tl.fromTo("#sh05 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 23.25);
+      tl.fromTo("#sh06 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 25.2);
+      tl.fromTo("#sh06 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 25.2);
+      tl.fromTo("#sh06 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 25.2);
+      tl.fromTo("#sh06 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 25.25);
+      tl.fromTo("#sh07 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 27.2);
+      tl.fromTo("#sh07 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 27.2);
+      tl.fromTo("#sh07 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 27.2);
+      tl.fromTo("#sh07 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 27.25);
+      tl.fromTo("#sh08 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 31.2);
+      tl.fromTo("#sh08 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 31.2);
+      tl.fromTo("#sh08 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 31.2);
+      tl.fromTo("#sh08 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 31.25);
+      tl.fromTo("#sh09 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 35.2);
+      tl.fromTo("#sh09 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 35.2);
+      tl.fromTo("#sh09 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 35.2);
+      tl.fromTo("#sh09 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 35.25);
+      tl.fromTo("#sh10 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 37.2);
+      tl.fromTo("#sh10 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 37.2);
+      tl.fromTo("#sh10 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 37.2);
+      tl.fromTo("#sh10 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 37.25);
+      tl.fromTo("#sh11 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 39.2);
+      tl.fromTo("#sh11 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 39.2);
+      tl.fromTo("#sh11 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 39.2);
+      tl.fromTo("#sh11 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 39.25);
+      tl.fromTo("#sh12 .l-bg", {scale:1.74, xPercent:-10.5}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 49.2);
+      tl.to("#sh12 .l-bg", {scale:1.061, duration:3.55, ease:"none"}, 49.65);
+      tl.fromTo("#sh12 .l-mid", {scale:1.8800000000000001, xPercent:-21}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 49.2);
+      tl.to("#sh12 .l-mid", {scale:1.082, duration:3.55, ease:"none"}, 49.65);
+      tl.fromTo("#sh12 .l-fg", {scale:2.08, xPercent:-36}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 49.2);
+      tl.to("#sh12 .l-fg", {scale:1.112, duration:3.55, ease:"none"}, 49.65);
+      tl.fromTo("#sh12 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 49.25);
       // плашки сцен: въезд на сильную долю
-      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 10.5);
-      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 18.5);
-      tl.fromTo("#chip-prezentace .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 26.5);
-      tl.fromTo("#chip-zahajeni .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 34.5);
-      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 40.5);
-      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 48.5);
-      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.4, ease: "power3.out" }, 27);
-      tl.fromTo("#vtip-text", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 48.5);
+      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 11.7);
+      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 19.7);
+      tl.fromTo("#chip-prezentace .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 27.7);
+      tl.fromTo("#chip-zahajeni .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 35.7);
+      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 41.7);
+      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 49.7);
+      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.4, ease: "power3.out" }, 28.2);
+      tl.fromTo("#vtip-text", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 49.7);
       // жеребьёвка: камера + строки на доли
-      tl.fromTo("#draw-cam", { scale: 1.0 }, { scale: 1.07, duration: 8, ease: "none" }, 40);
-      tl.fromTo("#draw-table", { rotationX: 18 }, { rotationX: 4, duration: 8, ease: "power1.out" }, 40);
-      tl.fromTo("#dr0", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 41);
-      tl.fromTo("#dr1", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 41.5);
-      tl.fromTo("#dr2", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42);
-      tl.fromTo("#dr3", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42.5);
-      tl.fromTo("#dr4", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 43);
+      tl.fromTo("#draw-cam", { scale: 1.0 }, { scale: 1.07, duration: 8, ease: "none" }, 41.2);
+      tl.fromTo("#draw-table", { rotationX: 18 }, { rotationX: 4, duration: 8, ease: "power1.out" }, 41.2);
+      tl.fromTo("#dr0", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42.2);
+      tl.fromTo("#dr1", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42.7);
+      tl.fromTo("#dr2", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 43.2);
+      tl.fromTo("#dr3", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 43.7);
+      tl.fromTo("#dr4", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 44.2);
       // финал
-      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 54);
-      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 0.85, duration: 0.6 }, 55);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut"}, 9.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 17.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 25.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 33.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 39.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 47.75);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 51.75);
+      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 55.2);
+      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 0.85, duration: 0.6 }, 56.2);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut"}, 10.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 18.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 26.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 34.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 40.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 48.95);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 52.95);
+
+      // ---- проигрыватель: старт в центре, рука опускает иглу в T0, виджет уезжает в угол ----
+      tl.fromTo("#player", { x: -162.0, y: -760.2, scale: 1.45, opacity: 0 }, { x: -162.0, y: -760.2, scale: 1.45, opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+      tl.to("#player", { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, 1.65);
+      tl.fromTo("#arm", { rotation: -20 }, { rotation: 0, duration: 0.75, ease: "power2.inOut" }, 0.3);
+      tl.fromTo("#arm svg", { scale: 1.06 }, { scale: 1, duration: 0.15, ease: "power2.in" }, 1.05);
+      tl.to("#arm", { rotation: 9, duration: 58.80, ease: "none" }, 1.2);
+      tl.to("#arm", { rotation: -20, duration: 0.7, ease: "power2.inOut" }, 60.30);
+      // 33⅓ об/мин = 200°/с; разгон 0.6 с от иглы
+      tl.fromTo("#vinyl", { rotation: 0 }, { rotation: 60, duration: 0.6, ease: "power1.in" }, 1.1);
+      tl.to("#vinyl", { rotation: 11820, duration: 58.80, ease: "none" }, 1.7);
+      tl.to("#vinyl", { rotation: "+=90", duration: 0.7, ease: "power2.out" }, 60.50);
+      tl.fromTo("#p-fill", { scaleX: 0 }, { scaleX: 1, duration: 60, ease: "none" }, 1.2);
+      // время и эквалайзер — от позиции плейхеда (seek-safe)
+      const pClock = { t: 0 }, pTime = document.getElementById("p-time"), pEq = [...document.querySelectorAll("#p-eq i")];
+      tl.fromTo(pClock, { t: 0 }, { t: 61.2, duration: 61.2, ease: "none", onUpdate() {
+        const s = Math.max(0, pClock.t - 1.2);
+        pTime.textContent = Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+        const ph = s % 0.5, on = pClock.t >= 1.2 && s < 59.4;
+        pEq.forEach((el, i) => { const k = on ? 0.25 + 0.75 * Math.exp(-(6 + i * 2.3) * ((ph + i * 0.07) % 0.5)) : 0.12; el.style.transform = "scaleY(" + k.toFixed(3) + ")"; });
+      } }, 0);
       window.__timelines["main"] = tl;
     </script>
 
@@ -440,18 +507,20 @@
       const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
       const lerp = (a, b, t) => a + (b - a) * t;
 
-      function renderAt(t) {
+      const T0 = 1.2;
+      function renderAt(tt) {
+        const t = tt - T0; // время от опускания иглы
         camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2 - Math.min(t, 10) * 0.04);
         camera.lookAt(0, 0, 0);
 
         // H-BATTLE: интро 0–10 с, финал 52–60 с
-        if (t < 10.5) {
+        if (t > 0 && t < 10.5) {
           const a = eo(t / 2.2);
           const lift = eo((t - 3.6) / 0.8);
           hb.visible = true;
-          hb.position.set(0, lerp(PORTRAIT ? 0.5 : 0.25, PORTRAIT ? 2.4 : 1.2, lift), lerp(-28, 0, a));
+          hb.position.set(0, lerp(PORTRAIT ? 0.7 : 0.35, PORTRAIT ? 2.5 : 1.3, lift), lerp(-28, 0, a));
           hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-2.6, 0, eo(t / 2.6)) + Math.sin(t * 0.7) * 0.08, 0);
-          hb.scale.setScalar(lerp(PORTRAIT ? 1.35 : 1.1, PORTRAIT ? 0.7 : 0.55, lift));
+          hb.scale.setScalar(lerp(PORTRAIT ? 0.8 : 0.62, PORTRAIT ? 0.42 : 0.34, lift));
           ta.visible = false;
           key.position.set(lerp(-6, 6, clamp((t - 1.4) / 1.6)), 2, 4);
           rim.intensity = 0;
@@ -460,14 +529,14 @@
           const a = eo(lt / 1.4);
           const gap = PORTRAIT ? 1.25 : 1.35;
           hb.visible = ta.visible = true;
-          const sc = PORTRAIT ? 0.85 : 0.95;
+          const sc = PORTRAIT ? 0.55 : 0.58;
           ta.scale.setScalar(sc); hb.scale.setScalar(sc);
           if (PORTRAIT) {
-            ta.position.set(lerp(-6, 0, a), 1.45, 0);
-            hb.position.set(lerp(6, 0, a), -0.45, 0);
+            ta.position.set(lerp(-6, -0.72, a), 0.9, 0);
+            hb.position.set(lerp(6, 0.72, a), 0.9, 0);
           } else {
-            ta.position.set(lerp(-7, -gap, a), 0.45, 0);
-            hb.position.set(lerp(7, gap, a), 0.45, 0);
+            ta.position.set(lerp(-7, -0.8, a), 0.5, 0);
+            hb.position.set(lerp(7, 0.8, a), 0.5, 0);
           }
           ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.8)) + Math.sin(lt * 0.8) * 0.06, 0);
           hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.8)) - Math.sin(lt * 0.8) * 0.06, 0);
