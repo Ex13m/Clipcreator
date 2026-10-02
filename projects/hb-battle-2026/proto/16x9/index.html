@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>H-BATTLE 2026 – začátek (16:9) — RYBA</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(assets/fonts/montserrat-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:normal;src:url(assets/fonts/montserrat-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Source Sans 3';font-weight:400;font-style:normal;src:url(assets/fonts/source-sans-3-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Source Sans 3';font-weight:400;font-style:normal;src:url(assets/fonts/source-sans-3-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(assets/fonts/source-sans-3-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(assets/fonts/source-sans-3-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+
+      :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; }
+      body { margin:0; background:var(--navy); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
+      #root { position:relative; width:100%; height:100%; overflow:hidden; background:var(--navy); }
+      .clip { position:absolute; inset:0; }
+      .layer { position:absolute; inset:-86px; will-change:transform; }
+
+      /* фон-мотив TA: горизонтальные «скоростные» полосы как в логотипе */
+      #bg { position:absolute; inset:0; background:radial-gradient(120% 80% at 50% 40%, #16306b 0%, var(--navy) 70%); }
+      #stripes { position:absolute; inset:-108px; opacity:.16;
+        background:repeating-linear-gradient(180deg, transparent 0 17px, #9cc8f0 17px 23px);
+        -webkit-mask-image:linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent); }
+
+      #three-wrap { position:absolute; inset:0; }
+      #three-layer { width:100%; height:100%; display:block; }
+
+      /* заголовок интро */
+      #title-clip .t-wrap { position:absolute; left:0; right:0; bottom:86px; display:flex; flex-direction:column; align-items:center; gap:15px; }
+      .t-main { font-family:Montserrat; font-weight:800; font-size:81px; letter-spacing:.02em; line-height:1; }
+      .t-main .red { color:var(--red); }
+      .t-sub { font-family:Montserrat; font-weight:600; font-size:32px; letter-spacing:.18em; text-transform:uppercase; opacity:.85; }
+
+      /* кинетика */
+      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 86px; }
+      .k-line { display:flex; flex-wrap:wrap; column-gap:.28em; font-family:Montserrat; font-weight:800; line-height:1.02; font-size:103px; }
+      .k-mask { display:block; overflow:hidden; padding-bottom:.06em; }
+      .k-word { display:block; }
+      .k-word.red { color:var(--red); }
+      #k-under { height:11px; width:518px; background:var(--red); transform-origin:left center; margin:27px 0 22px; }
+      #k-en { font-size:37px; font-weight:600; opacity:.9; }
+
+      /* слейты-заглушки шотов */
+      .l-bg { background:linear-gradient(160deg, var(--blue) 0%, #1a2b62 55%, var(--navy) 100%); }
+      .l-bg::after { content:""; position:absolute; inset:0; opacity:.2;
+        background:repeating-linear-gradient(180deg, transparent 0 26px, #bfe0ff 26px 30px); }
+      .l-mid { display:flex; align-items:center; justify-content:center; }
+      .bignum { font-family:Montserrat; font-weight:800; font-size:518px; color:transparent; -webkit-text-stroke:4px rgba(238,242,249,.28); line-height:1; }
+      .horizon { position:absolute; left:-10%; right:-10%; bottom:-6%; height:34%; background:#0a1838; border-radius:50% 50% 0 0 / 22% 22% 0 0; }
+      .reeds { position:absolute; left:4%; bottom:20%; width:30%; height:30%;
+        background:repeating-linear-gradient(95deg, transparent 0 13px, rgba(10,24,56,.95) 13px 18px);
+        -webkit-mask-image:linear-gradient(0deg, #000 30%, transparent); }
+      .slate-meta { position:absolute; left:76px; right:76px; top:108px; display:flex; flex-direction:column; gap:17px; }
+      .slate-tag { font-family:Montserrat; font-weight:600; font-size:26px; letter-spacing:.16em; color:#9fb4e6; }
+      .slate-act { font-family:Montserrat; font-weight:800; font-size:60px; line-height:1.05; max-width:1188px; }
+      .slate-note { font-size:26px; color:var(--red); font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+
+      /* плашка сцены */
+      .chip { position:absolute; left:76px; bottom:76px; display:flex; align-items:baseline; gap:22px;
+        background:rgba(11,30,66,.86); border-left:11px solid var(--red); padding:17px 32px; }
+      .chip-num { font-family:Montserrat; font-weight:800; font-size:35px; color:var(--red); }
+      .chip-cz { font-family:Montserrat; font-weight:800; font-size:35px; text-transform:uppercase; }
+      .chip-en { font-size:27px; opacity:.75; }
+
+      /* нижняя плашка «Tým ČR» */
+      #lt-cz .lt { position:absolute; left:76px; bottom:216px; background:var(--ice); color:var(--navy); padding:17px 32px;
+        font-family:Montserrat; font-weight:800; font-size:43px; letter-spacing:.04em; }
+
+      /* жеребьёвка */
+      #draw-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px; perspective:2160px; }
+      .d-title { font-family:Montserrat; font-weight:800; font-size:69px; margin-bottom:11px; }
+      .d-title .en { font-size:.45em; opacity:.7; font-weight:600; margin-left:.4em; }
+      .d-note { color:var(--red); font-weight:600; font-size:25px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:32px; }
+      #draw-table { transform-origin:50% 0%; }
+      .tr { display:grid; grid-template-columns:2.2fr 1fr 1fr 1fr; align-items:center; background:rgba(238,242,249,.06); margin-bottom:9px; border-left:9px solid var(--blue); }
+      .tr.th { background:var(--blue); border-left-color:var(--red); }
+      .td { padding:19px 22px; font-size:30px; font-weight:600; }
+      .th .td { font-family:Montserrat; font-weight:800; text-transform:uppercase; font-size:25px; letter-spacing:.04em; white-space:nowrap; }
+
+      /* «боевой» мем */
+      #vtip-cap .cap { position:absolute; left:76px; right:76px; bottom:194px; font-family:Montserrat; font-weight:800; font-size:54px; line-height:1.05; }
+      #vtip-cap .cap .en { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; opacity:.85; margin-top:13px; }
+
+      /* финал */
+      #outro .o-wrap { position:absolute; left:76px; right:76px; bottom:76px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:17px; }
+      .o-quote { font-family:Montserrat; font-weight:800; font-size:41px; line-height:1.1; }
+      .o-quote .red { color:var(--red); }
+      .o-meta { font-family:Montserrat; font-weight:600; font-size:26px; letter-spacing:.16em; text-transform:uppercase; opacity:.85; }
+
+      #wipe { position:absolute; inset:0; background:var(--red); }
+      #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+      #proto-badge { position:absolute; right:32px; top:32px; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; opacity:.45; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="60" data-fps="30">
+      <div id="bg"><div id="stripes"></div></div>
+
+      
+      <section id="sh01" class="clip shot" data-start="10" data-duration="4" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">01</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 01 · PŘÍJEZD</div>
+          <div class="slate-act">Příjezd na revír, vykládání prutů</div>
+          <div class="slate-note">foto / video doplnit · 4 s</div>
+        </div>
+      </section>
+      <section id="sh02" class="clip shot" data-start="14" data-duration="4" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">02</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 02 · PŘÍJEZD</div>
+          <div class="slate-act">Přivítání s domácím týmem</div>
+          <div class="slate-note">foto / video doplnit · 4 s</div>
+        </div>
+      </section>
+      <section id="sh03" class="clip shot" data-start="18" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">03</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 03 · DEN 1 · TRÉNINK</div>
+          <div class="slate-act">Nához z břehu</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh04" class="clip shot" data-start="20" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">04</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 04 · DEN 1 · TRÉNINK</div>
+          <div class="slate-act">Záběr, ohnutý prut</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh05" class="clip shot" data-start="22" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">05</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 05 · DEN 1 · TRÉNINK</div>
+          <div class="slate-act">Pstruh v podběráku</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh06" class="clip shot" data-start="24" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">06</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 06 · DEN 1 · TRÉNINK</div>
+          <div class="slate-act">Pustit zpátky do vody</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh07" class="clip shot" data-start="26" data-duration="4" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">07</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 07 · PREZENTACE TÝMŮ</div>
+          <div class="slate-act">Tým ČR na pódiu</div>
+          <div class="slate-note">foto / video doplnit · 4 s</div>
+        </div>
+      </section>
+      <section id="sh08" class="clip shot" data-start="30" data-duration="4" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">08</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 08 · PREZENTACE TÝMŮ</div>
+          <div class="slate-act">Ostatní týmy, vlajky</div>
+          <div class="slate-note">foto / video doplnit · 4 s</div>
+        </div>
+      </section>
+      <section id="sh09" class="clip shot" data-start="34" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">09</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 09 · ZAHÁJENÍ</div>
+          <div class="slate-act">Nástup týmů</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh10" class="clip shot" data-start="36" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">10</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 10 · ZAHÁJENÍ</div>
+          <div class="slate-act">Vlajky, hymna</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh11" class="clip shot" data-start="38" data-duration="2" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">11</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 11 · ZAHÁJENÍ</div>
+          <div class="slate-act">Přípitek pořadatelů</div>
+          <div class="slate-note">foto / video doplnit · 2 s</div>
+        </div>
+      </section>
+      <section id="sh12" class="clip shot" data-start="48" data-duration="4" data-track-index="2">
+        <div class="layer l-bg"></div>
+        <div class="layer l-mid"><span class="bignum">12</span></div>
+        <div class="layer l-fg"><div class="horizon"></div><div class="reeds"></div></div>
+        <div class="slate-meta">
+          <div class="slate-tag">SHOT 12 · ZÁKULISÍ</div>
+          <div class="slate-act">Vtipná fotka týmu</div>
+          <div class="slate-note">foto / video doplnit · 4 s</div>
+        </div>
+      </section>
+
+      <section id="draw" class="clip" data-start="40" data-duration="8" data-track-index="2">
+        <div id="draw-cam">
+          <div class="d-title">LOSOVÁNÍ<span class="en">The draw</span></div>
+          <div class="d-note">ryba · data z losování doplnit</div>
+          <div id="draw-table">
+            <div class="tr th"><span class="td">Závodník</span><span class="td">Kolo 1</span><span class="td">Kolo 2</span><span class="td">Kolo 3</span></div>
+          <div class="tr" id="dr0"><span class="td name">Závodník 1</span><span class="td">—</span><span class="td">—</span><span class="td">—</span></div>
+          <div class="tr" id="dr1"><span class="td name">Závodník 2</span><span class="td">—</span><span class="td">—</span><span class="td">—</span></div>
+          <div class="tr" id="dr2"><span class="td name">Závodník 3</span><span class="td">—</span><span class="td">—</span><span class="td">—</span></div>
+          <div class="tr" id="dr3"><span class="td name">Závodník 4</span><span class="td">—</span><span class="td">—</span><span class="td">—</span></div>
+          <div class="tr" id="dr4"><span class="td name">Závodník 5</span><span class="td">—</span><span class="td">—</span><span class="td">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div id="three-wrap"><canvas id="three-layer"></canvas></div>
+
+      <section id="title-clip" class="clip" data-start="1.5" data-duration="2.5" data-track-index="3">
+        <div class="t-wrap">
+          <div id="t-main" class="t-main">H-BATTLE <span class="red">2026</span></div>
+          <div id="t-sub" class="t-sub">Slovensko · 1.–2.&nbsp;10.&nbsp;2026</div>
+        </div>
+      </section>
+
+      <section id="kin" class="clip" data-start="4" data-duration="6" data-track-index="3">
+        <div id="kin-cam">
+          <div class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
+          <div class="k-line"><span class="k-mask"><span id="k2w0" class="k-word">přijeli</span></span><span class="k-mask"><span id="k2w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k2w2" class="k-word">za</span></span><span class="k-mask"><span id="k2w3" class="k-word red">přáteli.</span></span></div>
+          <div id="k-under"></div>
+          <div id="k-en">We didn’t come to fight. We came for friends.</div>
+        </div>
+      </section>
+
+      
+      <section id="chip-prijezd" class="clip chip-clip" data-start="10" data-duration="8" data-track-index="4">
+        <div class="chip"><span class="chip-num">01</span><span class="chip-cz">Příjezd</span><span class="chip-en">Arrival</span></div>
+      </section>
+      <section id="chip-trenink" class="clip chip-clip" data-start="18" data-duration="8" data-track-index="4">
+        <div class="chip"><span class="chip-num">02</span><span class="chip-cz">Den 1 · trénink</span><span class="chip-en">Day 1 · practice</span></div>
+      </section>
+      <section id="chip-prezentace" class="clip chip-clip" data-start="26" data-duration="8" data-track-index="4">
+        <div class="chip"><span class="chip-num">03</span><span class="chip-cz">Prezentace týmů</span><span class="chip-en">Team presentation</span></div>
+      </section>
+      <section id="chip-zahajeni" class="clip chip-clip" data-start="34" data-duration="6" data-track-index="4">
+        <div class="chip"><span class="chip-num">04</span><span class="chip-cz">Zahájení</span><span class="chip-en">Opening ceremony</span></div>
+      </section>
+      <section id="chip-losovani" class="clip chip-clip" data-start="40" data-duration="8" data-track-index="4">
+        <div class="chip"><span class="chip-num">05</span><span class="chip-cz">Losování</span><span class="chip-en">The draw</span></div>
+      </section>
+      <section id="chip-vtip" class="clip chip-clip" data-start="48" data-duration="4" data-track-index="4">
+        <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Zákulisí</span><span class="chip-en">Backstage</span></div>
+      </section>
+
+      <section id="lt-cz" class="clip" data-start="27" data-duration="3" data-track-index="5">
+        <div id="lt-box" class="lt">TÝM ČESKÁ REPUBLIKA</div>
+      </section>
+
+      <section id="vtip-cap" class="clip" data-start="48.5" data-duration="3.5" data-track-index="5">
+        <div id="vtip-text" class="cap">Takhle vypadá náš „boj“.<span class="en">This is what our “battle” looks like.</span></div>
+      </section>
+
+      <section id="outro" class="clip" data-start="53" data-duration="7" data-track-index="3">
+        <div class="o-wrap">
+          <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
+          <div id="o-meta" class="o-meta">H-BATTLE 2026 · Slovensko · 1.–2.&nbsp;10.&nbsp;2026</div>
+        </div>
+      </section>
+
+      <div id="wipe-holder"><div id="wipe"></div></div>
+      <div id="proto-badge">RYBA · v0</div>
+
+      <audio id="bgm" src="assets/placeholder_120bpm.wav" data-start="0" data-duration="60" data-track-index="9" data-volume="0.8"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // фон: полосы дрейфуют весь ролик
+      tl.fromTo("#stripes", { xPercent: -3 }, { xPercent: 3, duration: 60, ease: "none" }, 0);
+      // 3D-слой виден в интро и в финале
+      tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0.18, duration: 0.5, ease: "power1.inOut" }, 4);
+      tl.to("#three-wrap", { opacity: 0, duration: 0.25 }, 9.75);
+      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 52);
+      // титул
+      tl.fromTo("#t-main", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2);
+      tl.fromTo("#t-sub", { opacity: 0, scaleX: 1.15 }, { opacity: 0.85, scaleX: 1, duration: 0.8, ease: "power2.out" }, 2.5);
+      tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 4);
+      tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 4.5);
+      tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 5);
+      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 6);
+      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 6.5);
+      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7);
+      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.35, ease:"power3.out"}, 7.5);
+      tl.fromTo("#k-under", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power2.inOut"}, 7.5);
+      tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 8);
+      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:6, ease:"none"}, 4);
+      tl.fromTo("#sh01 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 10);
+      tl.fromTo("#sh01 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 10);
+      tl.fromTo("#sh01 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 10);
+      tl.fromTo("#sh01 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 10.05);
+      tl.fromTo("#sh02 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 14);
+      tl.fromTo("#sh02 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 14);
+      tl.fromTo("#sh02 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 14);
+      tl.fromTo("#sh02 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 14.05);
+      tl.fromTo("#sh03 .l-bg", {"scale":1.12,"xPercent":1.4}, {"scale":1.12,"xPercent":-1.4,"duration":2,"ease":"none"}, 18);
+      tl.fromTo("#sh03 .l-mid", {"scale":1.12,"xPercent":2.8}, {"scale":1.12,"xPercent":-2.8,"duration":2,"ease":"none"}, 18);
+      tl.fromTo("#sh03 .l-fg", {"scale":1.12,"xPercent":4.8}, {"scale":1.12,"xPercent":-4.8,"duration":2,"ease":"none"}, 18);
+      tl.fromTo("#sh03 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 18.05);
+      tl.fromTo("#sh04 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 20);
+      tl.fromTo("#sh04 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 20);
+      tl.fromTo("#sh04 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 20);
+      tl.fromTo("#sh04 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 20.05);
+      tl.fromTo("#sh05 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
+      tl.fromTo("#sh05 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
+      tl.fromTo("#sh05 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 22);
+      tl.fromTo("#sh05 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 22.05);
+      tl.fromTo("#sh06 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 24);
+      tl.fromTo("#sh06 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 24);
+      tl.fromTo("#sh06 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 24);
+      tl.fromTo("#sh06 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 24.05);
+      tl.fromTo("#sh07 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":4,"ease":"none"}, 26);
+      tl.fromTo("#sh07 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":4,"ease":"none"}, 26);
+      tl.fromTo("#sh07 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":4,"ease":"none"}, 26);
+      tl.fromTo("#sh07 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 26.05);
+      tl.fromTo("#sh08 .l-bg", {"scale":1.12,"xPercent":-1.4}, {"scale":1.12,"xPercent":1.4,"duration":4,"ease":"none"}, 30);
+      tl.fromTo("#sh08 .l-mid", {"scale":1.12,"xPercent":-2.8}, {"scale":1.12,"xPercent":2.8,"duration":4,"ease":"none"}, 30);
+      tl.fromTo("#sh08 .l-fg", {"scale":1.12,"xPercent":-4.8}, {"scale":1.12,"xPercent":4.8,"duration":4,"ease":"none"}, 30);
+      tl.fromTo("#sh08 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 30.05);
+      tl.fromTo("#sh09 .l-bg", {"scale":1.02}, {"scale":1.055,"duration":2,"ease":"none"}, 34);
+      tl.fromTo("#sh09 .l-mid", {"scale":1.02}, {"scale":1.09,"duration":2,"ease":"none"}, 34);
+      tl.fromTo("#sh09 .l-fg", {"scale":1.02}, {"scale":1.1400000000000001,"duration":2,"ease":"none"}, 34);
+      tl.fromTo("#sh09 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 34.05);
+      tl.fromTo("#sh10 .l-bg", {"scale":1.12,"yPercent":1.4}, {"scale":1.12,"yPercent":-1.4,"duration":2,"ease":"none"}, 36);
+      tl.fromTo("#sh10 .l-mid", {"scale":1.12,"yPercent":2.8}, {"scale":1.12,"yPercent":-2.8,"duration":2,"ease":"none"}, 36);
+      tl.fromTo("#sh10 .l-fg", {"scale":1.12,"yPercent":4.8}, {"scale":1.12,"yPercent":-4.8,"duration":2,"ease":"none"}, 36);
+      tl.fromTo("#sh10 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 36.05);
+      tl.fromTo("#sh11 .l-bg", {"scale":1.062}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
+      tl.fromTo("#sh11 .l-mid", {"scale":1.104}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
+      tl.fromTo("#sh11 .l-fg", {"scale":1.164}, {"scale":1.02,"duration":2,"ease":"none"}, 38);
+      tl.fromTo("#sh11 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 38.05);
+      tl.fromTo("#sh12 .l-bg", {scale:1.74, xPercent:-10.5}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
+      tl.to("#sh12 .l-bg", {scale:1.061, duration:3.55, ease:"none"}, 48.45);
+      tl.fromTo("#sh12 .l-mid", {scale:1.8800000000000001, xPercent:-21}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
+      tl.to("#sh12 .l-mid", {scale:1.082, duration:3.55, ease:"none"}, 48.45);
+      tl.fromTo("#sh12 .l-fg", {scale:2.08, xPercent:-36}, {scale:1.04, xPercent:0, duration:0.45, ease:"expo.out"}, 48);
+      tl.to("#sh12 .l-fg", {scale:1.112, duration:3.55, ease:"none"}, 48.45);
+      tl.fromTo("#sh12 .slate-meta", {opacity:0, y:22}, {opacity:1, y:0, duration:0.25, ease:"power2.out"}, 48.05);
+      // плашки сцен: въезд на сильную долю
+      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 10.5);
+      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 18.5);
+      tl.fromTo("#chip-prezentace .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 26.5);
+      tl.fromTo("#chip-zahajeni .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 34.5);
+      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 40.5);
+      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 48.5);
+      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.4, ease: "power3.out" }, 27);
+      tl.fromTo("#vtip-text", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 48.5);
+      // жеребьёвка: камера + строки на доли
+      tl.fromTo("#draw-cam", { scale: 1.0 }, { scale: 1.07, duration: 8, ease: "none" }, 40);
+      tl.fromTo("#draw-table", { rotationX: 18 }, { rotationX: 4, duration: 8, ease: "power1.out" }, 40);
+      tl.fromTo("#dr0", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 41);
+      tl.fromTo("#dr1", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 41.5);
+      tl.fromTo("#dr2", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42);
+      tl.fromTo("#dr3", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 42.5);
+      tl.fromTo("#dr4", {xPercent:-104, opacity:0}, {xPercent:0, opacity:1, duration:0.35, ease:"power3.out"}, 43);
+      // финал
+      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 54);
+      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 0.85, duration: 0.6 }, 55);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut"}, 9.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 17.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 25.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 33.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 39.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 47.75);
+      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 51.75);
+      window.__timelines["main"] = tl;
+    </script>
+
+    <script type="module">
+      import * as THREE from "./assets/three.module.js";
+      const W = 1920, H = 1080, PORTRAIT = false;
+      const canvas = document.getElementById("three-layer");
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(W, H, false);
+      renderer.setPixelRatio(1);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(PORTRAIT ? 50 : 32, W / H, 0.1, 200);
+
+      const loader = new THREE.TextureLoader();
+      function disc(src, edge) {
+        const tex = loader.load(src);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.anisotropy = 8;
+        tex.center.set(0.5, 0.5);
+        tex.rotation = Math.PI / 2; // UV крышки цилиндра повёрнуты на 90°
+        const geo = new THREE.CylinderGeometry(1, 1, 0.14, 160, 1, false);
+        geo.rotateX(Math.PI / 2); // крышка смотрит в камеру (+Z)
+        const side = new THREE.MeshStandardMaterial({ color: edge, metalness: 0.75, roughness: 0.3 });
+        // цвета логотипа держит emissive (без пересвета), блик даёт key-свет поверх
+        const face = new THREE.MeshStandardMaterial({ map: tex, emissiveMap: tex, emissive: 0xffffff, emissiveIntensity: 0.82, color: 0x2a2a2a, metalness: 0.15, roughness: 0.35 });
+        const back = new THREE.MeshStandardMaterial({ color: 0x0b1e42, metalness: 0.4, roughness: 0.5 });
+        const m = new THREE.Mesh(geo, [side, face, back]);
+        scene.add(m);
+        return m;
+      }
+      const hb = disc("assets/H-BATTLE.png", 0x304285);
+      const ta = disc("assets/logo-TACR2-ready.png", 0x0b1e42);
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x0b1e42, 0.5));
+      const key = new THREE.DirectionalLight(0xffffff, 1.1);
+      scene.add(key);
+      const rim = new THREE.PointLight(0xe31e24, 0, 12);
+      scene.add(rim);
+
+      const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+      const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      function renderAt(t) {
+        camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2 - Math.min(t, 10) * 0.04);
+        camera.lookAt(0, 0, 0);
+
+        // H-BATTLE: интро 0–10 с, финал 52–60 с
+        if (t < 10.5) {
+          const a = eo(t / 2.2);
+          const lift = eo((t - 3.6) / 0.8);
+          hb.visible = true;
+          hb.position.set(0, lerp(PORTRAIT ? 0.5 : 0.25, PORTRAIT ? 2.4 : 1.2, lift), lerp(-28, 0, a));
+          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-2.6, 0, eo(t / 2.6)) + Math.sin(t * 0.7) * 0.08, 0);
+          hb.scale.setScalar(lerp(PORTRAIT ? 1.35 : 1.1, PORTRAIT ? 0.7 : 0.55, lift));
+          ta.visible = false;
+          key.position.set(lerp(-6, 6, clamp((t - 1.4) / 1.6)), 2, 4);
+          rim.intensity = 0;
+        } else if (t >= 51.9) {
+          const lt = t - 52;
+          const a = eo(lt / 1.4);
+          const gap = PORTRAIT ? 1.25 : 1.35;
+          hb.visible = ta.visible = true;
+          const sc = PORTRAIT ? 0.85 : 0.95;
+          ta.scale.setScalar(sc); hb.scale.setScalar(sc);
+          if (PORTRAIT) {
+            ta.position.set(lerp(-6, 0, a), 1.45, 0);
+            hb.position.set(lerp(6, 0, a), -0.45, 0);
+          } else {
+            ta.position.set(lerp(-7, -gap, a), 0.45, 0);
+            hb.position.set(lerp(7, gap, a), 0.45, 0);
+          }
+          ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.8)) + Math.sin(lt * 0.8) * 0.06, 0);
+          hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.8)) - Math.sin(lt * 0.8) * 0.06, 0);
+          key.position.set(lerp(-6, 6, clamp((lt - 2.2) / 1.6)), 2, 4);
+          rim.position.set(0, -2, 2.5);
+          rim.intensity = 6 * clamp((lt - 1) / 1);
+          camera.position.set(Math.sin(lt * 0.2) * 0.2, 0, 6.6 - lt * 0.08);
+          camera.lookAt(0, PORTRAIT ? 0 : 0.4, 0);
+        } else {
+          hb.visible = ta.visible = false;
+        }
+        renderer.render(scene, camera);
+      }
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      renderAt(window.__hfThreeTime || 0);
+    </script>
+  </body>
+</html>

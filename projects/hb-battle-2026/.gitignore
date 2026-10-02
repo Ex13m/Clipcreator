@@ -6,3 +6,8 @@
 03_MUSIC/*.wav
 04_RELEASE/**/*.mp4
 _work/
+node_modules/
+proto/*/renders/
+proto/*/snapshots/
+proto/*/.hyperframes/
+proto/assets/placeholder_120bpm.wav
