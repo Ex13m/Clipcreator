@@ -1,0 +1,8 @@
+01_RAW/*
+!01_RAW/_manifest.json
+02_SELECT/*.jpg
+02_SELECT/*.mp4
+03_MUSIC/*.mp3
+03_MUSIC/*.wav
+04_RELEASE/**/*.mp4
+_work/
