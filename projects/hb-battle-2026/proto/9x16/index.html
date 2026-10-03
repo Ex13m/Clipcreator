@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <title>H-BATTLE 2026 – začátek (9:16) — v3</title>
+    <title>H-BATTLE 2026 – začátek (9:16) — v4</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
@@ -14,87 +14,99 @@
 @font-face{font-family:'Source Sans 3';font-weight:400;font-style:normal;src:url(assets/fonts/source-sans-3-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 @font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(assets/fonts/source-sans-3-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
 @font-face{font-family:'Source Sans 3';font-weight:600;font-style:normal;src:url(assets/fonts/source-sans-3-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-weight:900;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:900;font-style:normal;src:url(assets/fonts/montserrat-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:italic;src:url(assets/fonts/montserrat-latin-ext-800-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:italic;src:url(assets/fonts/montserrat-latin-800-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-weight:900;font-style:italic;src:url(assets/fonts/montserrat-latin-ext-900-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-weight:900;font-style:italic;src:url(assets/fonts/montserrat-latin-900-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 
       :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; }
       body { margin:0; background:var(--navy); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
       #root { position:relative; width:100%; height:100%; overflow:hidden; background:var(--navy); }
       .clip { position:absolute; inset:0; }
-      .layer { position:absolute; inset:0; will-change:transform; }
 
-      /* ---- сцена «под Дали» в палитре TA ---- */
-      .sky { position:absolute; inset:-86px; background:linear-gradient(180deg, #0b1e42 0%, #304285 39%, #c9b48c 60%, #f2d9a6 63%); }
-      .sun { position:absolute; left:50%; top:49.0%; width:756px; height:756px; margin-left:-378px; border-radius:50%;
-        background:radial-gradient(circle, rgba(255,232,180,.55) 0%, rgba(255,232,180,0) 65%); }
-      .speed { position:absolute; inset:-86px; opacity:.12; background:repeating-linear-gradient(180deg, transparent 0 19px, #bfe0ff 19px 24px);
-        -webkit-mask-image:linear-gradient(180deg, #000 0, #000 44%, transparent 60%); }
-      .sand { position:absolute; left:-108px; right:-108px; bottom:-108px; background:linear-gradient(180deg, #d9b47a 0%, #a77c47 45%, #6e4a26 100%);
-        border-radius:60% 40% 0 0 / 22px 15px 0 0; }
-      .cliffs { position:absolute; right:-43px; width:497px; height:43px; background:#6f7f9e; opacity:.6; border-radius:70% 30% 0 0 / 100% 100% 0 0; }
-      .shadow { position:absolute; border-radius:50%; background:radial-gradient(ellipse at 0% 50%, rgba(43,26,10,.55), rgba(43,26,10,0) 70%); }
-      .frame { position:absolute; box-sizing:border-box; border:10px solid var(--ice); outline:3px solid var(--navy); box-shadow:13px 17px 32px rgba(0,0,0,.45); background:#111; }
-      .photo { position:absolute; left:0; top:0; background-repeat:no-repeat; }
-      .drip-wrap { position:absolute; left:-10px; top:100%; }
-      .drips { display:block; transform-origin:top center; }
-      .easel { position:absolute; width:10px; background:#3a2a1a; }
-      .leg { position:absolute; width:8px; background:#2b1d12; transform-origin:top center; }
-      .prop { position:absolute; overflow:visible; }
+      /* постер-фон */
+      #stage { position:absolute; inset:0; overflow:hidden; }
+      #st-bg { position:absolute; inset:-65px; background:radial-gradient(90% 60% at 50% 38%, #1d3a86 0%, #0b1e42 62%, #050d22 100%); }
+      #st-rays { position:absolute; left:50%; top:38%; width:2808px; height:2808px; margin:-1404px 0 0 -1404px; border-radius:50%; opacity:.22;
+        background:repeating-conic-gradient(from 0deg, rgba(238,242,249,.55) 0deg 3deg, transparent 3deg 14deg);
+        -webkit-mask-image:radial-gradient(circle, #000 0%, transparent 62%); }
+      .band { position:absolute; left:-108px; width:calc(100% + 216px); top:6%; height:70%; transform-origin:50% 50%; }
+      #st-band { position:absolute; inset:0; rotate:-24deg; opacity:.55; }
+      #st-dots { position:absolute; inset:0; opacity:.16; background:radial-gradient(circle, #9cc8f0 2px, transparent 3px) 0 0 / 17px 17px;
+        -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 55%, transparent 100%); }
+      .star { position:absolute; background:#fff; clip-path:polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); box-shadow:0 0 11px #fff; }
 
-      #stage { position:absolute; inset:0; }
       #three-wrap { position:absolute; inset:0; }
       #three-layer { width:100%; height:100%; display:block; }
 
-      /* титул */
-      #title-clip .t-wrap { position:absolute; left:0; right:0; top:66.0%; display:flex; flex-direction:column; align-items:center; gap:13px; }
-      .t-main { font-family:Montserrat; font-weight:800; font-size:113px; letter-spacing:.02em; line-height:1; text-shadow:0 4px 16px rgba(43,26,10,.5); }
-      .t-main .red { color:var(--red); }
-      .t-sub { font-family:Montserrat; font-weight:600; font-size:43px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy); }
+      /* шоты */
+      .cam { position:absolute; inset:0; }
+      .pbox { position:absolute; }
+      .pbox.panel .clipbox { box-shadow:0 0 0 8px var(--ice), 17px 22px 43px rgba(0,0,0,.55); }
+      .clipbox { position:absolute; inset:0; overflow:hidden; }
+      .ph, .gbg, .gfg { position:absolute; inset:0; background-size:cover; background-position:50% 50%; background-repeat:no-repeat; }
+      .rv { position:absolute; inset:0; }
+      .gfg { filter:drop-shadow(9px 13px 15px rgba(0,0,0,.55)); transform-origin:50% 100%; }
+      .word { position:absolute; font-family:Montserrat; font-weight:900; font-style:italic; line-height:.9; text-transform:uppercase; white-space:nowrap; pointer-events:none; }
+      .word span { display:inline-block; color:transparent; -webkit-text-stroke:4px rgba(238,242,249,.9); text-shadow:10px 10px 0 rgba(227,30,36,.75); }
+      .slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
+      .slash i { position:absolute; left:0; right:0; height:9%; }
+      .slash i:nth-child(1) { top:40%; background:var(--ice); } .slash i:nth-child(2) { top:49%; background:var(--red); } .slash i:nth-child(3) { top:58%; background:var(--blue); }
+      .plate { position:absolute; display:flex; flex-direction:column; background:#000; padding:15px 32px; border-left:13px solid var(--red);
+        clip-path:polygon(0 0, 100% 0, 96% 100%, 0 100%); }
+      .plate b { font-family:Montserrat; font-weight:900; font-style:italic; font-size:65px; text-transform:uppercase; letter-spacing:.01em; line-height:1; }
+      .plate i { font-style:normal; font-weight:600; font-size:37px; color:#ffd36b; margin-top:6px; }
+      .caption { position:absolute; font-family:Montserrat; font-weight:900; font-style:italic; font-size:69px; line-height:1.05; text-shadow:0 4px 17px rgba(0,0,0,.7); }
+      .caption span { display:block; font-family:'Source Sans 3'; font-style:normal; font-weight:600; font-size:.5em; margin-top:11px; opacity:.9; }
 
-      /* кинетика на плитах */
-      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 76px 216px; }
-      .k-line { display:flex; flex-wrap:wrap; gap:13px 17px; font-family:Montserrat; font-weight:800; line-height:1; font-size:119px; }
-      .k-mask { display:block; overflow:hidden; padding:4px 0 13px; }
-      .k-word { display:block; background:#d8cdb8; color:var(--navy); padding:9px 22px 11px; border:3px solid #5c4a33;
-        box-shadow:24px 11px 0 rgba(43,26,10,.35); }
-      .k-word.red { color:var(--red); }
-      #k-l2 { transform-origin:left center; margin-top:13px; }
-      #k-under { height:11px; width:648px; background:var(--red); transform-origin:left center; margin:22px 0 17px; }
-      #k-en { font-size:50px; font-weight:600; color:var(--ice); text-shadow:0 3px 13px rgba(0,0,0,.6); }
+      /* титул */
+      #title-clip .t-wrap { position:absolute; left:54px; right:54px; top:53%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
+      .t-main { font-family:Montserrat; font-weight:900; font-style:italic; font-size:140px; line-height:.95; text-shadow:6px 6px 0 var(--red), 0 9px 32px rgba(0,0,0,.6); }
+      .t-cup { font-family:Montserrat; font-weight:800; font-style:italic; font-size:43px; text-transform:uppercase; letter-spacing:.04em; }
+      .t-sub { font-family:Montserrat; font-weight:600; font-size:39px; letter-spacing:.18em; text-transform:uppercase; color:#ffd36b; }
+
+      /* кинетика */
+      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px 151px; }
+      .k-line { display:flex; flex-wrap:wrap; gap:0 24px; font-family:Montserrat; font-weight:900; font-style:italic; text-transform:uppercase; line-height:.98; }
+      #k-l1 { font-size:130px; }
+      #k-l2 { font-size:146px; margin-top:11px; }
+      .k-mask { display:block; overflow:hidden; padding:0 11px 6px 0; }
+      .k-word { display:block; text-shadow:6px 6px 0 rgba(227,30,36,.8); }
+      .k-word.red { color:var(--red); text-shadow:6px 6px 0 var(--ice); }
+      #k-l2 .k-word { transform-origin:50% 60%; }
+      #k-en { font-size:48px; font-weight:600; margin-top:22px; color:#ffd36b; }
+      #kin-slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
+      #kin-slash i { position:absolute; left:0; right:0; height:6%; }
+      #kin-slash i:nth-child(1) { top:44%; background:var(--ice); } #kin-slash i:nth-child(2) { top:50%; background:var(--red); } #kin-slash i:nth-child(3) { top:56%; background:var(--blue); }
       #flash { position:absolute; inset:0; background:var(--ice); opacity:0; pointer-events:none; }
 
+      /* вспышка-видение */
+      #blink { position:absolute; inset:0; opacity:0; pointer-events:none; }
+      #blink .bb, #blink .bf { position:absolute; inset:0; background-size:cover; background-position:50% 40%; }
+      #blink .bb { background-image:url(assets/gfx/p_winners_bg.jpg); }
+      #blink .bf { background-image:url(assets/gfx/p_winners_fg.png); }
+      #blink::after { content:""; position:absolute; inset:0; background:radial-gradient(circle, rgba(255,233,170,.0) 40%, rgba(255,233,170,.55) 100%); }
+
       /* плашки сцен */
-      .chip { position:absolute; left:76px; bottom:335px; display:flex; align-items:baseline; gap:22px;
-        background:rgba(11,30,66,.88); border-left:11px solid var(--red); padding:17px 32px; }
-      .chip-num { font-family:Montserrat; font-weight:800; font-size:48px; color:var(--red); }
-      .chip-cz { font-family:Montserrat; font-weight:800; font-size:48px; text-transform:uppercase; }
-      .chip-en { font-size:37px; opacity:.75; }
-      #lt-cz .lt { position:absolute; left:76px; top:281px; background:var(--ice); color:var(--navy); padding:17px 32px;
-        font-family:Montserrat; font-weight:800; font-size:54px; letter-spacing:.04em; }
-      .lt-sub { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.6em; letter-spacing:0; color:var(--red); margin-top:4px; }
-
-      /* жеребьёвка */
-      #draw .chest { position:absolute; left:50%; width:756px; margin-left:-378px; top:57.0%; height:281px;
-        background:#7a5230; border:5px solid #3a2412; }
-      #draw .chest i { position:absolute; left:6%; right:6%; height:22%; background:#304285; border:3px solid #0b1e42; }
-      #draw-sheet { position:absolute; left:-378.0px; top:268.8px; width:1836.0px; height:1099.7px;
-        background:url(assets/photos/g_losovani_den1.jpg) center / 100% 100% no-repeat; border:10px solid var(--ice); box-shadow:16px 22px 43px rgba(0,0,0,.5); }
-
-      /* зákulisí */
-      #vtip-cap .cap { position:absolute; left:76px; right:76px; top:238px; font-family:Montserrat; font-weight:800; font-size:76px; line-height:1.05;
-        text-shadow:0 4px 17px rgba(0,0,0,.55); }
-      #vtip-cap .cap .en { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; opacity:.9; margin-top:13px; }
+      .chip { position:absolute; left:65px; bottom:335px; display:flex; align-items:baseline; gap:19px;
+        background:#000; border-left:13px solid var(--red); padding:15px 37px 15px 26px; clip-path:polygon(0 0, 100% 0, 95% 100%, 0 100%); }
+      .chip-num { font-family:Montserrat; font-weight:900; font-style:italic; font-size:48px; color:var(--red); }
+      .chip-cz { font-family:Montserrat; font-weight:900; font-style:italic; font-size:48px; text-transform:uppercase; }
+      .chip-en { font-size:35px; color:#ffd36b; font-weight:600; }
 
       /* финал */
-      #outro .win { position:absolute; left:108.0px; top:432.0px; width:864.0px; height:648.0px; }
-      #outro .o-wrap { position:absolute; left:65px; right:65px; top:1177.2px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:15px;
-        background:rgba(11,30,66,.86); padding:22px 32px; border-left:11px solid var(--red); }
-      .o-quote { font-family:Montserrat; font-weight:800; font-size:56px; line-height:1.1; text-shadow:0 3px 13px rgba(0,0,0,.5); }
+      #outro .o-wrap { position:absolute; left:65px; right:65px; top:64%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px;
+        background:#000; padding:19px 32px; border-left:13px solid var(--red); }
+      .o-quote { font-family:Montserrat; font-weight:900; font-style:italic; font-size:54px; line-height:1.08; text-transform:uppercase; }
       .o-quote .red { color:var(--red); }
-      .o-meta { font-family:Montserrat; font-weight:600; font-size:35px; letter-spacing:.16em; text-transform:uppercase; color:var(--ice); }
+      .o-meta { font-family:Montserrat; font-weight:600; font-size:32px; letter-spacing:.16em; text-transform:uppercase; color:#ffd36b; }
 
       /* виджет-проигрыватель */
       #player { position:absolute; right:54.0px; bottom:108.0px; width:648.0px; height:183.6px; }
-      #card { position:absolute; inset:0; border-radius:40.4px; background:linear-gradient(135deg, rgba(48,66,133,.94), rgba(11,30,66,.96));
-        box-shadow:0 13px 43px rgba(0,0,0,.45), inset 0 0 0 2px rgba(238,242,249,.18); }
+      #card { position:absolute; inset:0; border-radius:40.4px; background:linear-gradient(135deg, rgba(48,66,133,.95), rgba(11,30,66,.97));
+        box-shadow:0 13px 43px rgba(0,0,0,.5), inset 0 0 0 2px rgba(238,242,249,.2); }
       #vinyl-wrap { position:absolute; left:17.3px; top:-29.4px; width:242.4px; height:242.4px; }
       #vinyl { position:absolute; inset:0; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, #0d0d10 0 1.5px, #1c1c22 1.5px 2.7px);
         box-shadow:0 9px 24px rgba(0,0,0,.6); }
@@ -106,7 +118,7 @@
       #arm { position:absolute; left:252.4px; top:-19.7px; width:0; height:0; }
       #arm svg { position:absolute; left:-121.2px; top:-29.1px; overflow:visible; }
       #p-text { position:absolute; left:294.2px; right:25.9px; top:31.2px; bottom:25.7px; display:flex; flex-direction:column; justify-content:space-between; }
-      .p-title { font-family:Montserrat; font-weight:800; font-size:37px; line-height:1.1; white-space:nowrap; }
+      .p-title { font-family:Montserrat; font-weight:900; font-style:italic; font-size:37px; line-height:1.1; white-space:nowrap; }
       .p-artist { font-size:28px; font-weight:600; opacity:.72; white-space:nowrap; }
       .p-row { display:flex; align-items:center; gap:13px; font-size:24px; font-weight:600; opacity:.9; }
       .p-bar { position:relative; flex:1; height:5px; background:rgba(238,242,249,.22); border-radius:5px; overflow:hidden; }
@@ -114,318 +126,273 @@
       #p-eq { display:flex; align-items:flex-end; gap:4px; height:24px; }
       #p-eq i { display:block; width:6px; height:100%; background:var(--ice); transform-origin:bottom center; }
       .nw { white-space:nowrap; }
-      #wipe { position:absolute; inset:0; background:var(--red); }
       #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+      #wipe { position:absolute; left:-30%; top:-30%; width:160%; height:160%; rotate:-18deg; }
+      #wipe i { position:absolute; left:0; right:0; height:24%; }
+      #wipe i:nth-child(1) { top:14%; background:var(--ice); } #wipe i:nth-child(2) { top:38%; background:var(--red); } #wipe i:nth-child(3) { top:62%; background:var(--blue); }
       #proto-badge { position:absolute; right:32px; top:32px; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; opacity:.5; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="61.48" data-fps="30">
-      <!-- общий фон-сцена (видна в интро, брейке, финале) -->
       <div id="stage">
-        <div class="layer" id="st-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer" id="st-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div></div>
+        <div id="st-bg"></div><div id="st-rays"></div>
+        <div id="st-band"><svg class="band" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="-10.0,38.2 -5.4,39.0 -0.8,38.1 3.8,40.7 8.5,38.3 13.1,39.5 17.7,39.3 22.3,37.9 26.9,38.0 31.5,40.2 36.2,40.6 40.8,40.8 45.4,39.7 50.0,40.0 54.6,40.1 59.2,40.9 63.8,39.8 68.5,38.7 73.1,38.1 77.7,40.0 82.3,38.4 86.9,38.2 91.5,39.7 96.2,40.5 100.8,38.7 105.4,40.6 110.0,38.1 110.0,47.5 105.4,47.0 100.8,47.6 96.2,49.4 91.5,49.2 86.9,48.0 82.3,48.7 77.7,49.3 73.1,47.6 68.5,47.7 63.8,49.5 59.2,47.0 54.6,49.0 50.0,47.7 45.4,48.1 40.8,48.0 36.2,47.5 31.5,48.8 26.9,49.5 22.3,48.1 17.7,47.6 13.1,49.4 8.5,48.4 3.8,48.8 -0.8,48.4 -5.4,48.6 -10.0,47.2" fill="#eef2f9" opacity=".9"/><polygon points="-10.0,48.0 -5.4,47.1 -0.8,49.7 3.8,47.3 8.5,48.5 13.1,48.3 17.7,46.9 22.3,47.0 26.9,49.2 31.5,49.6 36.2,49.8 40.8,48.7 45.4,49.0 50.0,49.1 54.6,49.9 59.2,48.8 63.8,47.7 68.5,47.1 73.1,49.0 77.7,47.4 82.3,47.2 86.9,48.7 91.5,49.5 96.2,47.7 100.8,49.6 105.4,47.1 110.0,47.0 110.0,58.1 105.4,56.5 100.8,56.0 96.2,56.6 91.5,58.4 86.9,58.2 82.3,57.0 77.7,57.7 73.1,58.3 68.5,56.6 63.8,56.7 59.2,58.5 54.6,56.0 50.0,58.0 45.4,56.7 40.8,57.1 36.2,57.0 31.5,56.5 26.9,57.8 22.3,58.5 17.7,57.1 13.1,56.6 8.5,58.4 3.8,57.4 -0.8,57.8 -5.4,57.4 -10.0,57.6" fill="#e31e24" opacity=".92"/>
+      <polygon points="-10.0,56.1 -5.4,58.7 -0.8,56.3 3.8,57.5 8.5,57.3 13.1,55.9 17.7,56.0 22.3,58.2 26.9,58.6 31.5,58.8 36.2,57.7 40.8,58.0 45.4,58.1 50.0,58.9 54.6,57.8 59.2,56.7 63.8,56.1 68.5,58.0 73.1,56.4 77.7,56.2 82.3,57.7 86.9,58.5 91.5,56.7 96.2,58.6 100.8,56.1 105.4,56.0 110.0,58.3 110.0,67.4 105.4,67.1 100.8,65.5 96.2,65.0 91.5,65.6 86.9,67.4 82.3,67.2 77.7,66.0 73.1,66.7 68.5,67.3 63.8,65.6 59.2,65.7 54.6,67.5 50.0,65.0 45.4,67.0 40.8,65.7 36.2,66.1 31.5,66.0 26.9,65.5 22.3,66.8 17.7,67.5 13.1,66.1 8.5,65.6 3.8,67.4 -0.8,66.4 -5.4,66.8 -10.0,66.4" fill="#304285"/></svg></div>
+        <div id="st-dots"></div>
+        <i class="star" id="star0" style="left:9.4%; top:27.5%; width:34px; height:34px"></i><i class="star" id="star1" style="left:88.6%; top:35.6%; width:23px; height:23px"></i><i class="star" id="star2" style="left:45.2%; top:67.2%; width:29px; height:29px"></i><i class="star" id="star3" style="left:72.1%; top:45.0%; width:15px; height:15px"></i><i class="star" id="star4" style="left:55.4%; top:10.7%; width:11px; height:11px"></i><i class="star" id="star5" style="left:94.6%; top:6.8%; width:33px; height:33px"></i><i class="star" id="star6" style="left:5.5%; top:5.6%; width:32px; height:32px"></i><i class="star" id="star7" style="left:9.5%; top:53.1%; width:25px; height:25px"></i><i class="star" id="star8" style="left:23.2%; top:60.0%; width:32px; height:32px"></i><i class="star" id="star9" style="left:1.0%; top:36.1%; width:21px; height:21px"></i><i class="star" id="star10" style="left:2.0%; top:41.6%; width:31px; height:31px"></i><i class="star" id="star11" style="left:26.2%; top:18.0%; width:15px; height:15px"></i><i class="star" id="star12" style="left:70.2%; top:28.3%; width:12px; height:12px"></i><i class="star" id="star13" style="left:45.9%; top:60.8%; width:11px; height:11px"></i><i class="star" id="star14" style="left:2.4%; top:28.0%; width:18px; height:18px"></i><i class="star" id="star15" style="left:20.7%; top:16.6%; width:32px; height:32px"></i><i class="star" id="star16" style="left:51.8%; top:48.6%; width:23px; height:23px"></i><i class="star" id="star17" style="left:53.7%; top:17.6%; width:11px; height:11px"></i><i class="star" id="star18" style="left:46.4%; top:28.0%; width:32px; height:32px"></i><i class="star" id="star19" style="left:38.0%; top:55.8%; width:20px; height:20px"></i><i class="star" id="star20" style="left:17.8%; top:44.1%; width:15px; height:15px"></i><i class="star" id="star21" style="left:25.0%; top:53.3%; width:24px; height:24px"></i><i class="star" id="star22" style="left:81.1%; top:34.9%; width:31px; height:31px"></i><i class="star" id="star23" style="left:73.9%; top:72.2%; width:26px; height:26px"></i><i class="star" id="star24" style="left:73.3%; top:8.4%; width:25px; height:25px"></i><i class="star" id="star25" style="left:1.7%; top:34.5%; width:35px; height:35px"></i><i class="star" id="star26" style="left:78.6%; top:42.3%; width:36px; height:36px"></i><i class="star" id="star27" style="left:63.7%; top:72.2%; width:35px; height:35px"></i>
       </div>
 
       
-      <section id="sh01" class="clip shot k-stilts" data-start="10.581" data-duration="3.715" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:477.8px; top:1220.4px; width:466.6px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="leg leg0" style="left:421.8px; top:1031.4px; height:183.6px"></div><div class="leg leg1" style="left:496.5px; top:1031.4px; height:183.6px"></div><div class="leg leg0" style="left:583.5px; top:1031.4px; height:183.6px"></div><div class="leg leg1" style="left:658.2px; top:1031.4px; height:183.6px"></div>
-          <div class="frame" style="left:384.5px; top:483.8px; width:311.0px; height:553.0px;">
-            <div class="photo" style="width:311.0px; height:553.0px; background-image:url(assets/photos/p_car.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="311.0px" height="97.2px" viewBox="0 0 311.0 97.2"><path d="M 125.7 0 C 125.7 24.8 137.6 27.2 138.5 42.1 A 5.5 5.5 0 0 0 149.6 42.1 C 150.5 27.2 162.5 24.8 162.5 0 Z" fill="#eef2f9"/><path d="M 4.7 0 C 4.7 34.9 27.1 38.4 28.8 59.4 A 10.4 10.4 0 0 0 49.5 59.4 C 51.3 38.4 73.7 34.9 73.7 0 Z" fill="#eef2f9"/><path d="M 26.0 0 C 26.0 33.9 38.6 37.3 39.6 57.7 A 5.8 5.8 0 0 0 51.2 57.7 C 52.2 37.3 64.8 33.9 64.8 0 Z" fill="#eef2f9"/><path d="M 180.9 0 C 180.9 22.1 198.3 24.3 199.6 37.5 A 8.0 8.0 0 0 0 215.7 37.5 C 217.0 24.3 234.4 22.1 234.4 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh01" class="clip shot" data-start="10.581" data-duration="3.715" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>CESTA</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_car.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_car_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_car_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh02" class="clip shot k-enter" data-start="14.296" data-duration="3.715" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:419.0px; top:1247.4px; width:907.2px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="easel" style="left:358.6px; top:1080.7px; height:193.7px"></div><div class="easel" style="left:721.4px; top:1080.7px; height:193.7px"></div>
-          <div class="frame" style="left:237.6px; top:838.8px; width:604.8px; height:403.2px;">
-            <div class="photo" style="width:604.8px; height:403.2px; background-image:url(assets/photos/p_lake_mist.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="604.8px" height="97.2px" viewBox="0 0 604.8 97.2"><path d="M 347.5 0 C 347.5 41.1 364.9 45.2 366.3 69.9 A 8.0 8.0 0 0 0 382.3 69.9 C 383.7 45.2 401.1 41.1 401.1 0 Z" fill="#eef2f9"/><path d="M 361.0 0 C 361.0 44.2 377.9 48.6 379.2 75.1 A 7.8 7.8 0 0 0 394.9 75.1 C 396.2 48.6 413.1 44.2 413.1 0 Z" fill="#eef2f9"/><path d="M 489.9 0 C 489.9 46.0 501.3 50.6 502.1 78.2 A 5.2 5.2 0 0 0 512.6 78.2 C 513.5 50.6 524.8 46.0 524.8 0 Z" fill="#eef2f9"/><path d="M 323.9 0 C 323.9 36.7 335.6 40.3 336.5 62.4 A 5.4 5.4 0 0 0 347.2 62.4 C 348.1 40.3 359.8 36.7 359.8 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh02" class="clip shot" data-start="14.296" data-duration="3.715" data-track-index="2">
+        <div class="word" style="left:54.0px; top:187.2px; width:972.0px; font-size:131.4px; text-align:left"><span>HOFER LAKE</span></div>
+        <div class="cam">
+          <div class="pbox panel" style="left:43.2px; top:360.0px; width:993.6px; height:662.4px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_lake_mist_bg.jpg)"></div></div></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh03" class="clip shot k-easel" data-start="18.011" data-duration="1.858" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:367.2px; top:1247.4px; width:1296.0px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="easel" style="left:280.8px; top:982.8px; height:291.6px"></div><div class="easel" style="left:799.2px; top:982.8px; height:291.6px"></div>
-          <div class="frame" style="left:108.0px; top:594.0px; width:864.0px; height:648.0px;">
-            <div class="photo" style="width:864.0px; height:648.0px; background-image:url(assets/photos/p_trenink_gear.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="864.0px" height="97.2px" viewBox="0 0 864.0 97.2"><path d="M 192.9 0 C 192.9 40.2 204.6 44.2 205.5 68.3 A 5.4 5.4 0 0 0 216.2 68.3 C 217.1 44.2 228.8 40.2 228.8 0 Z" fill="#eef2f9"/><path d="M 134.9 0 C 134.9 47.2 155.2 51.9 156.8 80.2 A 9.4 9.4 0 0 0 175.5 80.2 C 177.1 51.9 197.4 47.2 197.4 0 Z" fill="#eef2f9"/><path d="M 434.0 0 C 434.0 37.5 455.7 41.3 457.4 63.8 A 10.1 10.1 0 0 0 477.5 63.8 C 479.2 41.3 501.0 37.5 501.0 0 Z" fill="#eef2f9"/><path d="M 605.3 0 C 605.3 28.8 627.9 31.7 629.7 48.9 A 10.5 10.5 0 0 0 650.6 48.9 C 652.3 31.7 675.0 28.8 675.0 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh03" class="clip shot" data-start="18.011" data-duration="1.858" data-track-index="2">
+        <div class="word" style="left:54.0px; top:145.8px; width:972.0px; font-size:162.0px; text-align:left"><span>PŘÍPRAVA</span></div>
+        <div class="cam">
+          <div class="pbox panel" style="left:43.2px; top:318.6px; width:993.6px; height:745.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_trenink_gear.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_trenink_gear_bg.jpg)"></div></div></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh04" class="clip shot k-tree" data-start="19.869" data-duration="1.857" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:479.5px; top:1247.4px; width:777.6px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:324.0px; top:550.8px; width:518.4px; height:691.2px; rotate:-3deg;">
-            <div class="photo" style="width:518.4px; height:691.2px; background-image:url(assets/photos/p_tying_young.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="518.4px" height="97.2px" viewBox="0 0 518.4 97.2"><path d="M 31.4 0 C 31.4 39.7 54.0 43.7 55.8 67.5 A 10.5 10.5 0 0 0 76.7 67.5 C 78.4 43.7 101.1 39.7 101.1 0 Z" fill="#eef2f9"/><path d="M 325.5 0 C 325.5 26.2 343.8 28.9 345.2 44.6 A 8.4 8.4 0 0 0 362.0 44.6 C 363.4 28.9 381.6 26.2 381.6 0 Z" fill="#eef2f9"/><path d="M 270.9 0 C 270.9 24.4 290.5 26.9 292.0 41.5 A 9.0 9.0 0 0 0 310.0 41.5 C 311.5 26.9 331.0 24.4 331.0 0 Z" fill="#eef2f9"/><path d="M 39.6 0 C 39.6 36.7 59.5 40.3 61.0 62.4 A 9.2 9.2 0 0 0 79.4 62.4 C 80.9 40.3 100.8 36.7 100.8 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"><svg class="prop" style="left:0.0px; top:313.2px" width="325.0px" height="525.0px" viewBox="0 0 260 420" fill="none" stroke="#2b1d12" stroke-linecap="round">
-      <path d="M40 420 C 46 330 30 250 52 160" stroke-width="16"/><path d="M50 190 C 110 160 180 150 250 166" stroke-width="9"/><path d="M46 230 C 20 200 6 170 -6 130" stroke-width="7"/></svg></div>
+      <section id="sh04" class="clip shot" data-start="19.869" data-duration="1.857" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>UZLY</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_young.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_young_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_young_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh05" class="clip shot k-full" data-start="21.726" data-duration="1.858" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:341.3px; top:1261.2px; width:1490.4px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:43.2px; top:510.6px; width:993.6px; height:745.2px;">
-            <div class="photo" style="width:993.6px; height:745.2px; background-image:url(assets/photos/p_selfie_lake.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="993.6px" height="97.2px" viewBox="0 0 993.6 97.2"><path d="M 713.3 0 C 713.3 28.1 733.2 30.9 734.7 47.7 A 9.2 9.2 0 0 0 753.1 47.7 C 754.6 30.9 774.5 28.1 774.5 0 Z" fill="#eef2f9"/><path d="M 269.6 0 C 269.6 44.5 292.8 48.9 294.6 75.6 A 10.7 10.7 0 0 0 316.0 75.6 C 317.7 48.9 340.9 44.5 340.9 0 Z" fill="#eef2f9"/><path d="M 620.4 0 C 620.4 22.9 639.0 25.2 640.5 39.0 A 8.6 8.6 0 0 0 657.7 39.0 C 659.1 25.2 677.7 22.9 677.7 0 Z" fill="#eef2f9"/><path d="M 303.5 0 C 303.5 22.1 318.0 24.4 319.2 37.6 A 6.7 6.7 0 0 0 332.5 37.6 C 333.6 24.4 348.1 22.1 348.1 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh05" class="clip shot" data-start="21.726" data-duration="1.858" data-track-index="2">
+        <div class="word" style="left:54.0px; top:145.8px; width:972.0px; font-size:119.4px; text-align:left"><span>RÁNO U VODY</span></div>
+        <div class="cam">
+          <div class="pbox panel" style="left:43.2px; top:318.6px; width:993.6px; height:745.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh06" class="clip shot k-easel" data-start="23.584" data-duration="1.858" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:436.3px; top:1247.4px; width:777.6px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="easel" style="left:384.5px; top:965.5px; height:308.9px"></div><div class="easel" style="left:695.5px; top:965.5px; height:308.9px"></div>
-          <div class="frame" style="left:280.8px; top:550.8px; width:518.4px; height:691.2px;">
-            <div class="photo" style="width:518.4px; height:691.2px; background-image:url(assets/photos/p_tying_ms.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="518.4px" height="97.2px" viewBox="0 0 518.4 97.2"><path d="M 354.9 0 C 354.9 38.1 369.4 41.9 370.5 64.7 A 6.7 6.7 0 0 0 383.9 64.7 C 385.0 41.9 399.5 38.1 399.5 0 Z" fill="#eef2f9"/><path d="M 53.5 0 C 53.5 22.4 65.4 24.7 66.3 38.1 A 5.5 5.5 0 0 0 77.3 38.1 C 78.3 24.7 90.2 22.4 90.2 0 Z" fill="#eef2f9"/><path d="M 380.9 0 C 380.9 22.5 400.6 24.7 402.1 38.2 A 9.1 9.1 0 0 0 420.3 38.2 C 421.8 24.7 441.4 22.5 441.4 0 Z" fill="#eef2f9"/><path d="M 256.8 0 C 256.8 23.1 270.1 25.5 271.1 39.3 A 6.1 6.1 0 0 0 283.3 39.3 C 284.4 25.5 297.7 23.1 297.7 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh06" class="clip shot" data-start="23.584" data-duration="1.858" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:131.4px; text-align:center"><span>TRPĚLIVOST</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh07" class="clip shot k-stilts" data-start="25.442" data-duration="1.834" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:457.1px; top:1220.4px; width:622.1px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="leg leg0" style="left:382.4px; top:1031.4px; height:183.6px"></div><div class="leg leg1" style="left:481.9px; top:1031.4px; height:183.6px"></div><div class="leg leg0" style="left:598.1px; top:1031.4px; height:183.6px"></div><div class="leg leg1" style="left:697.6px; top:1031.4px; height:183.6px"></div>
-          <div class="frame" style="left:332.6px; top:483.8px; width:414.7px; height:553.0px;">
-            <div class="photo" style="width:414.7px; height:553.0px; background-image:url(assets/photos/p_reeling.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="414.7px" height="97.2px" viewBox="0 0 414.7 97.2"><path d="M 192.6 0 C 192.6 44.0 205.9 48.4 206.9 74.8 A 6.1 6.1 0 0 0 219.2 74.8 C 220.2 48.4 233.5 44.0 233.5 0 Z" fill="#eef2f9"/><path d="M 77.9 0 C 77.9 28.5 90.3 31.3 91.3 48.4 A 5.7 5.7 0 0 0 102.7 48.4 C 103.7 31.3 116.1 28.5 116.1 0 Z" fill="#eef2f9"/><path d="M 48.6 0 C 48.6 40.6 66.8 44.7 68.2 69.1 A 8.4 8.4 0 0 0 85.1 69.1 C 86.5 44.7 104.7 40.6 104.7 0 Z" fill="#eef2f9"/><path d="M 185.7 0 C 185.7 29.2 207.3 32.1 208.9 49.6 A 9.9 9.9 0 0 0 228.8 49.6 C 230.5 32.1 252.0 29.2 252.0 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh07" class="clip shot" data-start="25.442" data-duration="1.834" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>ZÁBĚR</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_reeling.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_reeling_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_reeling_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh08" class="clip shot k-full" data-start="27.276" data-duration="1.858" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:396.0px; top:1368.6px; width:1080.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:180.0px; top:403.2px; width:720.0px; height:960.0px;">
-            <div class="photo" style="width:720.0px; height:960.0px; background-image:url(assets/photos/p_landing1.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="720.0px" height="97.2px" viewBox="0 0 720.0 97.2"><path d="M 482.3 0 C 482.3 34.1 503.9 37.5 505.6 58.0 A 9.9 9.9 0 0 0 525.5 58.0 C 527.1 37.5 548.7 34.1 548.7 0 Z" fill="#eef2f9"/><path d="M 173.8 0 C 173.8 31.1 188.0 34.3 189.1 52.9 A 6.5 6.5 0 0 0 202.2 52.9 C 203.2 34.3 217.4 31.1 217.4 0 Z" fill="#eef2f9"/><path d="M 260.8 0 C 260.8 43.2 282.7 47.6 284.4 73.5 A 10.1 10.1 0 0 0 304.6 73.5 C 306.3 47.6 328.2 43.2 328.2 0 Z" fill="#eef2f9"/><path d="M 518.6 0 C 518.6 22.5 530.3 24.8 531.2 38.3 A 5.4 5.4 0 0 0 542.1 38.3 C 543.0 24.8 554.7 22.5 554.7 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh08" class="clip shot" data-start="27.276" data-duration="1.858" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>PODBĚRÁK</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_landing1.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_landing1_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_landing1_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh09" class="clip shot k-card" data-start="29.134" data-duration="0.905" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:439.6px; top:1223.4px; width:753.3px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:288.9px; top:548.4px; width:502.2px; height:669.6px; rotate:-2deg;">
-            <div class="photo" style="width:502.2px; height:669.6px; background-image:url(assets/photos/p_landing2.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="502.2px" height="97.2px" viewBox="0 0 502.2 97.2"><path d="M 187.2 0 C 187.2 36.5 199.0 40.1 199.9 62.0 A 5.4 5.4 0 0 0 210.7 62.0 C 211.6 40.1 223.3 36.5 223.3 0 Z" fill="#eef2f9"/><path d="M 138.2 0 C 138.2 27.4 149.6 30.1 150.5 46.6 A 5.2 5.2 0 0 0 161.0 46.6 C 161.8 30.1 173.2 27.4 173.2 0 Z" fill="#eef2f9"/><path d="M 280.6 0 C 280.6 34.1 301.1 37.6 302.7 58.0 A 9.5 9.5 0 0 0 321.7 58.0 C 323.3 37.6 343.9 34.1 343.9 0 Z" fill="#eef2f9"/><path d="M 44.8 0 C 44.8 23.5 63.7 25.8 65.2 39.9 A 8.7 8.7 0 0 0 82.6 39.9 C 84.1 25.8 103.0 23.5 103.0 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh09" class="clip shot" data-start="29.134" data-duration="0.905" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>MÁME HO!</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_landing2.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_landing2_bg.jpg)"></div></div></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh10" class="clip shot k-card" data-start="30.039" data-duration="0.952" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:439.6px; top:1223.4px; width:753.3px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:288.9px; top:548.4px; width:502.2px; height:669.6px; rotate:2deg;">
-            <div class="photo" style="width:502.2px; height:669.6px; background-image:url(assets/photos/p_net_close.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="502.2px" height="97.2px" viewBox="0 0 502.2 97.2"><path d="M 313.1 0 C 313.1 25.9 332.0 28.5 333.4 44.0 A 8.7 8.7 0 0 0 350.9 44.0 C 352.3 28.5 371.2 25.9 371.2 0 Z" fill="#eef2f9"/><path d="M 259.4 0 C 259.4 24.1 270.9 26.6 271.8 41.1 A 5.3 5.3 0 0 0 282.4 41.1 C 283.3 26.6 294.8 24.1 294.8 0 Z" fill="#eef2f9"/><path d="M 173.2 0 C 173.2 36.2 184.7 39.8 185.6 61.6 A 5.3 5.3 0 0 0 196.3 61.6 C 197.1 39.8 208.7 36.2 208.7 0 Z" fill="#eef2f9"/><path d="M 321.8 0 C 321.8 34.5 333.6 38.0 334.5 58.7 A 5.5 5.5 0 0 0 345.5 58.7 C 346.4 38.0 358.2 34.5 358.2 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh10" class="clip shot" data-start="30.039" data-duration="0.952" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>PSTRUH</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_net_close.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_net_close_bg.jpg)"></div></div></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh11" class="clip shot k-full" data-start="34.664" data-duration="1.835" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:348.0px; top:1368.6px; width:1440.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:60.0px; top:403.2px; width:960.0px; height:960.0px;">
-            <div class="photo" style="width:960.0px; height:960.0px; background-image:url(assets/photos/g_zmena_sestavy.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="960.0px" height="97.2px" viewBox="0 0 960.0 97.2"><path d="M 228.2 0 C 228.2 34.3 240.0 37.7 240.9 58.3 A 5.5 5.5 0 0 0 251.9 58.3 C 252.8 37.7 264.6 34.3 264.6 0 Z" fill="#eef2f9"/><path d="M 587.4 0 C 587.4 42.8 602.0 47.1 603.1 72.8 A 6.7 6.7 0 0 0 616.5 72.8 C 617.6 47.1 632.2 42.8 632.2 0 Z" fill="#eef2f9"/><path d="M 655.4 0 C 655.4 27.2 677.1 29.9 678.8 46.2 A 10.0 10.0 0 0 0 698.8 46.2 C 700.5 29.9 722.2 27.2 722.2 0 Z" fill="#eef2f9"/><path d="M 443.5 0 C 443.5 32.0 457.8 35.2 458.9 54.5 A 6.6 6.6 0 0 0 472.2 54.5 C 473.3 35.2 487.6 32.0 487.6 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh11" class="clip shot" data-start="34.664" data-duration="1.835" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:43.2px; top:194.4px; width:993.6px; height:993.6px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_zmena_sestavy.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh12" class="clip shot k-full" data-start="36.499" data-duration="1.834" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:357.6px; top:1368.6px; width:1368.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:84.0px; top:403.2px; width:912.0px; height:960.0px;">
-            <div class="photo" style="width:912.0px; height:960.0px; background-image:url(assets/photos/p_green_fish.jpg); background-size:100% auto; background-position:50% 30%;"></div><div class="drip-wrap"><svg class="drips" width="912.0px" height="97.2px" viewBox="0 0 912.0 97.2"><path d="M 138.2 0 C 138.2 38.0 152.6 41.8 153.7 64.6 A 6.6 6.6 0 0 0 166.9 64.6 C 168.0 41.8 182.4 38.0 182.4 0 Z" fill="#eef2f9"/><path d="M 214.8 0 C 214.8 26.6 234.9 29.3 236.5 45.3 A 9.3 9.3 0 0 0 255.0 45.3 C 256.6 29.3 276.7 26.6 276.7 0 Z" fill="#eef2f9"/><path d="M 630.5 0 C 630.5 31.1 645.2 34.2 646.4 52.9 A 6.8 6.8 0 0 0 659.9 52.9 C 661.0 34.2 675.7 31.1 675.7 0 Z" fill="#eef2f9"/><path d="M 222.8 0 C 222.8 32.0 236.4 35.2 237.5 54.4 A 6.3 6.3 0 0 0 250.1 54.4 C 251.2 35.2 264.8 32.0 264.8 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh12" class="clip shot" data-start="36.499" data-duration="1.834" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:145.9px; text-align:center"><span>NASTUPUJE</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_green_fish.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_green_fish_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_green_fish_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        <div class="plate" style="left:65px; top:1952.4px"><b>Martin Stoklasa</b><i>nastupuje do sestavy</i></div>
       </section>
-      <section id="sh13" class="clip shot k-full" data-start="38.333" data-duration="1.858" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:367.2px; top:1368.6px; width:1296.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:108.0px; top:403.2px; width:864.0px; height:960.0px;">
-            <div class="photo" style="width:864.0px; height:960.0px; background-image:url(assets/photos/p_training_plan.jpg); background-size:100% auto; background-position:50% 62%;"></div><div class="drip-wrap"><svg class="drips" width="864.0px" height="97.2px" viewBox="0 0 864.0 97.2"><path d="M 96.1 0 C 96.1 39.5 109.8 43.5 110.8 67.2 A 6.3 6.3 0 0 0 123.5 67.2 C 124.5 43.5 138.2 39.5 138.2 0 Z" fill="#eef2f9"/><path d="M 302.5 0 C 302.5 22.8 319.5 25.1 320.8 38.8 A 7.9 7.9 0 0 0 336.5 38.8 C 337.8 25.1 354.9 22.8 354.9 0 Z" fill="#eef2f9"/><path d="M 551.2 0 C 551.2 43.5 566.8 47.9 568.0 74.0 A 7.2 7.2 0 0 0 582.4 74.0 C 583.6 47.9 599.3 43.5 599.3 0 Z" fill="#eef2f9"/><path d="M 85.5 0 C 85.5 28.5 106.9 31.4 108.5 48.5 A 9.8 9.8 0 0 0 128.2 48.5 C 129.8 31.4 151.2 28.5 151.2 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh13" class="clip shot" data-start="38.333" data-duration="1.858" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>12 KOL</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_training_plan.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_training_plan_bg.jpg)"></div></div></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
-      <section id="sh14" class="clip shot k-easel" data-start="40.191" data-duration="1.834" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:436.3px; top:1247.4px; width:777.6px; height:28.1px"></div></div>
-        <div class="layer l-frame"><div class="easel" style="left:384.5px; top:965.5px; height:308.9px"></div><div class="easel" style="left:695.5px; top:965.5px; height:308.9px"></div>
-          <div class="frame" style="left:280.8px; top:550.8px; width:518.4px; height:691.2px;">
-            <div class="photo" style="width:518.4px; height:691.2px; background-image:url(assets/photos/p_portrait_dres.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="518.4px" height="97.2px" viewBox="0 0 518.4 97.2"><path d="M 139.8 0 C 139.8 41.6 161.2 45.8 162.8 70.7 A 9.8 9.8 0 0 0 182.5 70.7 C 184.2 45.8 205.5 41.6 205.5 0 Z" fill="#eef2f9"/><path d="M 404.6 0 C 404.6 37.1 416.1 40.8 417.0 63.0 A 5.3 5.3 0 0 0 427.7 63.0 C 428.6 40.8 440.1 37.1 440.1 0 Z" fill="#eef2f9"/><path d="M 210.0 0 C 210.0 31.0 232.5 34.1 234.2 52.7 A 10.3 10.3 0 0 0 254.9 52.7 C 256.6 34.1 279.0 31.0 279.0 0 Z" fill="#eef2f9"/><path d="M 417.9 0 C 417.9 41.5 436.0 45.6 437.4 70.5 A 8.4 8.4 0 0 0 454.1 70.5 C 455.5 45.6 473.7 41.5 473.7 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh14" class="clip shot" data-start="40.191" data-duration="1.834" data-track-index="2">
+        <div class="word" style="left:54.0px; top:960.0px; width:972.0px; font-size:162.0px; text-align:center"><span>SEKTOR 2</span></div>
+        <div class="cam">
+          <div class="pbox" style="left:0.0px; top:0.0px; width:1080.0px; height:1920.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_portrait_dres.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_portrait_dres_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_portrait_dres_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        <div class="plate" style="left:65px; top:1952.4px"><b>Dominik Švub</b><i>č. 23 · sektor 2</i></div>
       </section>
-      <section id="sh16" class="clip shot k-tree" data-start="47.552" data-duration="1.811" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:410.4px; top:1247.4px; width:1296.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:151.2px; top:594.0px; width:864.0px; height:648.0px; rotate:-3deg;">
-            <div class="photo" style="width:864.0px; height:648.0px; background-image:url(assets/photos/p_lunch.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="864.0px" height="97.2px" viewBox="0 0 864.0 97.2"><path d="M 375.5 0 C 375.5 34.7 387.5 38.2 388.4 59.0 A 5.5 5.5 0 0 0 399.4 59.0 C 400.4 38.2 412.4 34.7 412.4 0 Z" fill="#eef2f9"/><path d="M 275.6 0 C 275.6 27.2 293.4 30.0 294.8 46.3 A 8.2 8.2 0 0 0 311.2 46.3 C 312.6 30.0 330.4 27.2 330.4 0 Z" fill="#eef2f9"/><path d="M 397.8 0 C 397.8 38.9 410.9 42.8 411.9 66.1 A 6.1 6.1 0 0 0 424.1 66.1 C 425.1 42.8 438.2 38.9 438.2 0 Z" fill="#eef2f9"/><path d="M 448.3 0 C 448.3 35.7 460.6 39.3 461.5 60.7 A 5.7 5.7 0 0 0 472.9 60.7 C 473.8 39.3 486.1 35.7 486.1 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"><svg class="prop" style="left:-172.8px; top:356.4px" width="325.0px" height="525.0px" viewBox="0 0 260 420" fill="none" stroke="#2b1d12" stroke-linecap="round">
-      <path d="M40 420 C 46 330 30 250 52 160" stroke-width="16"/><path d="M50 190 C 110 160 180 150 250 166" stroke-width="9"/><path d="M46 230 C 20 200 6 170 -6 130" stroke-width="7"/></svg><svg class="prop" style="left:604.8px; top:1263.6px" width="390.0px" height="156.0px" viewBox="-150 -60 300 120">
-      <path d="M -110 0 C -60 -30 60 -30 100 -4 L 132 -26 L 124 2 L 136 28 L 100 6 C 60 30 -60 28 -110 0 Z" fill="#8aa0cf" stroke="#0b1e42" stroke-width="3"/>
-      <path d="M -96 4 C -50 12 40 12 96 4" stroke="#e31e24" stroke-width="7" fill="none"/>
-      <circle cx="-86" cy="-6" r="5" fill="#0b1e42"/>
-      <path d="M -112 6 C -124 0 -128 -16 -116 -36 M -112 6 C -96 6 -88 -8 -82 -38" stroke="#0b1e42" stroke-width="4.5" fill="none" stroke-linecap="round"/></svg></div>
+      <section id="sh15" class="clip shot" data-start="42.025" data-duration="5.527" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:-334.8px; top:307.2px; width:1749.6px; height:1047.9px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_losovani_den1.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh17" class="clip shot k-card" data-start="49.363" data-duration="0.464" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:445.1px; top:1223.4px; width:711.9px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:302.7px; top:548.4px; width:474.6px; height:669.6px; rotate:-3deg;">
-            <div class="photo" style="width:474.6px; height:669.6px; background-image:url(assets/photos/g_team_moldova.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="474.6px" height="97.2px" viewBox="0 0 474.6 97.2"><path d="M 49.7 0 C 49.7 27.1 62.0 29.8 63.0 46.1 A 5.7 5.7 0 0 0 74.3 46.1 C 75.3 29.8 87.6 27.1 87.6 0 Z" fill="#eef2f9"/><path d="M 357.5 0 C 357.5 42.8 375.5 47.1 376.9 72.8 A 8.3 8.3 0 0 0 393.5 72.8 C 394.9 47.1 412.9 42.8 412.9 0 Z" fill="#eef2f9"/><path d="M 54.7 0 C 54.7 27.1 71.9 29.8 73.2 46.0 A 7.9 7.9 0 0 0 89.1 46.0 C 90.4 29.8 107.6 27.1 107.6 0 Z" fill="#eef2f9"/><path d="M 50.8 0 C 50.8 40.1 69.4 44.1 70.8 68.2 A 8.6 8.6 0 0 0 88.0 68.2 C 89.4 44.1 108.0 40.1 108.0 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh16" class="clip shot" data-start="47.552" data-duration="1.811" data-track-index="2">
+        <div class="word" style="left:54.0px; top:145.8px; width:972.0px; font-size:162.0px; text-align:left"><span>BOJ</span></div>
+        <div class="cam">
+          <div class="pbox panel" style="left:43.2px; top:318.6px; width:993.6px; height:745.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_lunch.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_lunch_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_lunch_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        <div class="caption" style="left:65px; right:65px; top:1096.2px">Takhle vypadá náš „boj“.<span>This is what our “battle” looks like.</span></div>
       </section>
-      <section id="sh18" class="clip shot k-card" data-start="49.827" data-duration="0.465" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:371.0px; top:1126.2px; width:1267.2px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:117.6px; top:645.6px; width:844.8px; height:475.2px; rotate:3deg;">
-            <div class="photo" style="width:844.8px; height:475.2px; background-image:url(assets/photos/g_team_germany.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="844.8px" height="97.2px" viewBox="0 0 844.8 97.2"><path d="M 575.8 0 C 575.8 41.9 594.4 46.1 595.8 71.2 A 8.6 8.6 0 0 0 613.0 71.2 C 614.4 46.1 633.0 41.9 633.0 0 Z" fill="#eef2f9"/><path d="M 354.6 0 C 354.6 22.4 371.6 24.7 373.0 38.1 A 7.9 7.9 0 0 0 388.7 38.1 C 390.1 24.7 407.2 22.4 407.2 0 Z" fill="#eef2f9"/><path d="M 576.3 0 C 576.3 31.0 597.5 34.1 599.1 52.7 A 9.8 9.8 0 0 0 618.6 52.7 C 620.2 34.1 641.4 31.0 641.4 0 Z" fill="#eef2f9"/><path d="M 140.7 0 C 140.7 41.1 154.5 45.2 155.6 69.8 A 6.3 6.3 0 0 0 168.2 69.8 C 169.3 45.2 183.1 41.1 183.1 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh17" class="clip shot" data-start="49.363" data-duration="0.464" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:240.6px; top:307.2px; width:598.8px; height:844.8px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_moldova.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh19" class="clip shot k-card" data-start="50.292" data-duration="0.464" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:397.6px; top:1126.2px; width:1067.8px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:184.1px; top:645.6px; width:711.9px; height:475.2px; rotate:-3deg;">
-            <div class="photo" style="width:711.9px; height:475.2px; background-image:url(assets/photos/g_team_slovakia.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="711.9px" height="97.2px" viewBox="0 0 711.9 97.2"><path d="M 253.7 0 C 253.7 40.5 267.4 44.5 268.5 68.8 A 6.3 6.3 0 0 0 281.2 68.8 C 282.2 44.5 296.0 40.5 296.0 0 Z" fill="#eef2f9"/><path d="M 239.0 0 C 239.0 32.3 255.1 35.6 256.3 55.0 A 7.4 7.4 0 0 0 271.1 55.0 C 272.3 35.6 288.4 32.3 288.4 0 Z" fill="#eef2f9"/><path d="M 286.8 0 C 286.8 41.6 308.5 45.8 310.1 70.8 A 10.0 10.0 0 0 0 330.1 70.8 C 331.8 45.8 353.4 41.6 353.4 0 Z" fill="#eef2f9"/><path d="M 207.0 0 C 207.0 29.4 225.8 32.3 227.3 49.9 A 8.7 8.7 0 0 0 244.7 49.9 C 246.1 32.3 265.0 29.4 265.0 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh18" class="clip shot" data-start="49.827" data-duration="0.465" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:468.4px; width:928.8px; height:522.5px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_germany.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh20" class="clip shot k-card" data-start="50.756" data-duration="0.441" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:428.4px; top:1223.4px; width:837.2px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:260.9px; top:548.4px; width:558.1px; height:669.6px; rotate:3deg;">
-            <div class="photo" style="width:558.1px; height:669.6px; background-image:url(assets/photos/g_team_bulgaria.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="558.1px" height="97.2px" viewBox="0 0 558.1 97.2"><path d="M 111.0 0 C 111.0 34.2 129.8 37.7 131.3 58.2 A 8.7 8.7 0 0 0 148.7 58.2 C 150.1 37.7 169.0 34.2 169.0 0 Z" fill="#eef2f9"/><path d="M 73.8 0 C 73.8 47.9 87.3 52.7 88.3 81.4 A 6.2 6.2 0 0 0 100.7 81.4 C 101.8 52.7 115.3 47.9 115.3 0 Z" fill="#eef2f9"/><path d="M 48.0 0 C 48.0 37.2 63.6 40.9 64.8 63.2 A 7.2 7.2 0 0 0 79.2 63.2 C 80.4 40.9 96.0 37.2 96.0 0 Z" fill="#eef2f9"/><path d="M 200.9 0 C 200.9 30.4 216.9 33.4 218.1 51.7 A 7.4 7.4 0 0 0 232.9 51.7 C 234.2 33.4 250.2 30.4 250.2 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh19" class="clip shot" data-start="50.292" data-duration="0.464" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:419.6px; width:928.8px; height:620.0px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_slovakia.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh21" class="clip shot k-card" data-start="51.197" data-duration="0.464" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:358.4px; top:1126.2px; width:1362.0px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:86.0px; top:645.6px; width:908.0px; height:475.2px; rotate:-3deg;">
-            <div class="photo" style="width:908.0px; height:475.2px; background-image:url(assets/photos/g_team_hungary.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="908.0px" height="97.2px" viewBox="0 0 908.0 97.2"><path d="M 414.4 0 C 414.4 42.9 430.4 47.2 431.6 73.0 A 7.4 7.4 0 0 0 446.4 73.0 C 447.7 47.2 463.7 42.9 463.7 0 Z" fill="#eef2f9"/><path d="M 603.0 0 C 603.0 45.7 617.4 50.3 618.5 77.7 A 6.6 6.6 0 0 0 631.8 77.7 C 632.9 50.3 647.3 45.7 647.3 0 Z" fill="#eef2f9"/><path d="M 584.2 0 C 584.2 40.7 603.8 44.8 605.3 69.2 A 9.0 9.0 0 0 0 623.4 69.2 C 624.9 44.8 644.4 40.7 644.4 0 Z" fill="#eef2f9"/><path d="M 713.8 0 C 713.8 34.8 725.5 38.3 726.4 59.2 A 5.4 5.4 0 0 0 737.1 59.2 C 738.0 38.3 749.7 34.8 749.7 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh20" class="clip shot" data-start="50.756" data-duration="0.441" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:187.9px; top:307.2px; width:704.1px; height:844.8px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_bulgaria.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh22" class="clip shot k-card" data-start="51.661" data-duration="0.465" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:397.4px; top:1126.2px; width:1069.2px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:183.6px; top:645.6px; width:712.8px; height:475.2px; rotate:3deg;">
-            <div class="photo" style="width:712.8px; height:475.2px; background-image:url(assets/photos/g_team_poland.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="712.8px" height="97.2px" viewBox="0 0 712.8 97.2"><path d="M 479.6 0 C 479.6 36.4 491.3 40.0 492.2 61.9 A 5.4 5.4 0 0 0 503.0 61.9 C 503.9 40.0 515.5 36.4 515.5 0 Z" fill="#eef2f9"/><path d="M 590.9 0 C 590.9 22.0 612.4 24.3 614.1 37.5 A 9.9 9.9 0 0 0 633.9 37.5 C 635.5 24.3 657.0 22.0 657.0 0 Z" fill="#eef2f9"/><path d="M 398.1 0 C 398.1 33.7 412.4 37.1 413.5 57.3 A 6.6 6.6 0 0 0 426.8 57.3 C 427.9 37.1 442.3 33.7 442.3 0 Z" fill="#eef2f9"/><path d="M 514.9 0 C 514.9 30.0 528.8 33.0 529.9 51.0 A 6.4 6.4 0 0 0 542.7 51.0 C 543.8 33.0 557.7 30.0 557.7 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh21" class="clip shot" data-start="51.197" data-duration="0.464" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:486.6px; width:928.8px; height:486.1px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_hungary.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh23" class="clip shot k-card" data-start="52.126" data-duration="0.464" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:432.3px; top:1223.4px; width:808.1px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:270.6px; top:548.4px; width:538.7px; height:669.6px; rotate:-3deg;">
-            <div class="photo" style="width:538.7px; height:669.6px; background-image:url(assets/photos/g_team_belgium.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="538.7px" height="97.2px" viewBox="0 0 538.7 97.2"><path d="M 274.0 0 C 274.0 36.7 287.9 40.3 289.0 62.3 A 6.4 6.4 0 0 0 301.8 62.3 C 302.9 40.3 316.8 36.7 316.8 0 Z" fill="#eef2f9"/><path d="M 169.2 0 C 169.2 30.9 189.8 34.0 191.4 52.6 A 9.5 9.5 0 0 0 210.4 52.6 C 212.0 34.0 232.5 30.9 232.5 0 Z" fill="#eef2f9"/><path d="M 167.3 0 C 167.3 47.9 185.7 52.7 187.1 81.4 A 8.5 8.5 0 0 0 204.1 81.4 C 205.5 52.7 223.9 47.9 223.9 0 Z" fill="#eef2f9"/><path d="M 221.3 0 C 221.3 30.3 236.9 33.3 238.1 51.5 A 7.2 7.2 0 0 0 252.4 51.5 C 253.6 33.3 269.2 30.3 269.2 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh22" class="clip shot" data-start="51.661" data-duration="0.465" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:420.0px; width:928.8px; height:619.2px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_poland.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh24" class="clip shot k-card" data-start="52.59" data-duration="0.441" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:413.3px; top:1126.2px; width:950.4px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:223.2px; top:645.6px; width:633.6px; height:475.2px; rotate:3deg;">
-            <div class="photo" style="width:633.6px; height:475.2px; background-image:url(assets/photos/p_team_romania.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="633.6px" height="97.2px" viewBox="0 0 633.6 97.2"><path d="M 303.6 0 C 303.6 46.2 319.2 50.8 320.4 78.5 A 7.2 7.2 0 0 0 334.7 78.5 C 335.9 50.8 351.5 46.2 351.5 0 Z" fill="#eef2f9"/><path d="M 235.4 0 C 235.4 23.7 255.9 26.0 257.5 40.2 A 9.5 9.5 0 0 0 276.4 40.2 C 277.9 26.0 298.4 23.7 298.4 0 Z" fill="#eef2f9"/><path d="M 113.2 0 C 113.2 23.5 134.3 25.9 135.9 40.0 A 9.7 9.7 0 0 0 155.4 40.0 C 157.0 25.9 178.1 23.5 178.1 0 Z" fill="#eef2f9"/><path d="M 56.2 0 C 56.2 39.3 70.1 43.3 71.1 66.9 A 6.4 6.4 0 0 0 84.0 66.9 C 85.0 43.3 98.9 39.3 98.9 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh23" class="clip shot" data-start="52.126" data-duration="0.464" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:200.1px; top:307.2px; width:679.7px; height:844.8px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_belgium.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh25" class="clip shot k-card" data-start="53.031" data-duration="0.465" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:403.4px; top:1126.2px; width:1024.4px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:198.5px; top:645.6px; width:682.9px; height:475.2px; rotate:-3deg;">
-            <div class="photo" style="width:682.9px; height:475.2px; background-image:url(assets/photos/p_trophies.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="682.9px" height="97.2px" viewBox="0 0 682.9 97.2"><path d="M 528.7 0 C 528.7 23.9 542.6 26.3 543.7 40.6 A 6.4 6.4 0 0 0 556.5 40.6 C 557.6 26.3 571.5 23.9 571.5 0 Z" fill="#eef2f9"/><path d="M 453.8 0 C 453.8 42.8 465.3 47.1 466.1 72.8 A 5.3 5.3 0 0 0 476.7 72.8 C 477.6 47.1 489.0 42.8 489.0 0 Z" fill="#eef2f9"/><path d="M 390.4 0 C 390.4 33.5 403.9 36.9 405.0 57.0 A 6.2 6.2 0 0 0 417.4 57.0 C 418.5 36.9 432.0 33.5 432.0 0 Z" fill="#eef2f9"/><path d="M 321.9 0 C 321.9 43.0 341.7 47.3 343.3 73.1 A 9.1 9.1 0 0 0 361.5 73.1 C 363.1 47.3 382.9 43.0 382.9 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh24" class="clip shot" data-start="52.59" data-duration="0.441" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:381.3px; width:928.8px; height:696.6px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_team_romania.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_team_romania_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_team_romania_fg.png)"></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh26" class="clip shot k-card" data-start="53.496" data-duration="0.464" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:413.3px; top:1126.2px; width:950.4px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:223.2px; top:645.6px; width:633.6px; height:475.2px; rotate:3deg;">
-            <div class="photo" style="width:633.6px; height:475.2px; background-image:url(assets/photos/p_trenink_gear.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="633.6px" height="97.2px" viewBox="0 0 633.6 97.2"><path d="M 496.8 0 C 496.8 34.7 516.6 38.2 518.1 59.0 A 9.1 9.1 0 0 0 536.4 59.0 C 537.9 38.2 557.7 34.7 557.7 0 Z" fill="#eef2f9"/><path d="M 195.9 0 C 195.9 24.6 217.0 27.1 218.7 41.9 A 9.8 9.8 0 0 0 238.2 41.9 C 239.8 27.1 261.0 24.6 261.0 0 Z" fill="#eef2f9"/><path d="M 160.4 0 C 160.4 36.5 177.7 40.2 179.1 62.1 A 8.0 8.0 0 0 0 195.0 62.1 C 196.4 40.2 213.7 36.5 213.7 0 Z" fill="#eef2f9"/><path d="M 390.9 0 C 390.9 31.2 404.7 34.4 405.8 53.1 A 6.4 6.4 0 0 0 418.5 53.1 C 419.5 34.4 433.3 31.2 433.3 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh25" class="clip shot" data-start="53.031" data-duration="0.465" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:487.3px; width:928.8px; height:484.5px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_event_banner.jpg)"></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh27" class="clip shot k-card" data-start="53.96" data-duration="0.465" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:439.6px; top:1223.4px; width:753.3px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:288.9px; top:548.4px; width:502.2px; height:669.6px; rotate:-3deg;">
-            <div class="photo" style="width:502.2px; height:669.6px; background-image:url(assets/photos/p_landing1.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="502.2px" height="97.2px" viewBox="0 0 502.2 97.2"><path d="M 378.3 0 C 378.3 33.5 392.1 36.8 393.1 56.9 A 6.4 6.4 0 0 0 405.8 56.9 C 406.9 36.8 420.7 33.5 420.7 0 Z" fill="#eef2f9"/><path d="M 233.4 0 C 233.4 29.3 252.6 32.2 254.1 49.8 A 8.9 8.9 0 0 0 271.9 49.8 C 273.4 32.2 292.7 29.3 292.7 0 Z" fill="#eef2f9"/><path d="M 42.5 0 C 42.5 47.9 60.3 52.7 61.7 81.5 A 8.2 8.2 0 0 0 78.1 81.5 C 79.5 52.7 97.2 47.9 97.2 0 Z" fill="#eef2f9"/><path d="M 43.8 0 C 43.8 46.7 56.0 51.3 56.9 79.3 A 5.6 5.6 0 0 0 68.1 79.3 C 69.1 51.3 81.2 46.7 81.2 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh26" class="clip shot" data-start="53.496" data-duration="0.464" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:406.5px; width:928.8px; height:646.3px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_trophies.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_trophies_bg.jpg)"></div></div></div></div>
+        </div>
+        
+        
       </section>
-      <section id="sh28" class="clip shot k-card" data-start="54.425" data-duration="0.441" data-track-index="2">
-        <div class="layer l-sky"><div class="sky"></div><div class="sun"></div><div class="speed"></div></div>
-        <div class="layer l-ground"><div class="sand" style="top:63.0%"></div><div class="cliffs" style="top:60.0%"></div>
-          <div class="shadow" style="left:357.8px; top:1126.2px; width:1366.4px; height:28.1px"></div></div>
-        <div class="layer l-frame">
-          <div class="frame" style="left:84.5px; top:645.6px; width:910.9px; height:475.2px; rotate:3deg;">
-            <div class="photo" style="width:910.9px; height:475.2px; background-image:url(assets/photos/g_event_banner.jpg); background-size:cover; background-position:50% 50%;"></div><div class="drip-wrap"><svg class="drips" width="910.9px" height="97.2px" viewBox="0 0 910.9 97.2"><path d="M 129.9 0 C 129.9 26.5 142.0 29.1 143.0 45.0 A 5.6 5.6 0 0 0 154.2 45.0 C 155.1 29.1 167.3 26.5 167.3 0 Z" fill="#eef2f9"/><path d="M 412.1 0 C 412.1 23.6 425.8 26.0 426.8 40.1 A 6.3 6.3 0 0 0 439.5 40.1 C 440.6 26.0 454.3 23.6 454.3 0 Z" fill="#eef2f9"/><path d="M 672.0 0 C 672.0 22.2 693.1 24.4 694.7 37.7 A 9.8 9.8 0 0 0 714.3 37.7 C 715.9 24.4 737.0 22.2 737.0 0 Z" fill="#eef2f9"/><path d="M 569.0 0 C 569.0 31.9 582.6 35.0 583.7 54.2 A 6.3 6.3 0 0 0 596.3 54.2 C 597.4 35.0 611.1 31.9 611.1 0 Z" fill="#eef2f9"/></svg></div>
-          </div></div>
-        <div class="layer l-fg"></div>
+      <section id="sh27" class="clip shot" data-start="53.96" data-duration="0.465" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:381.3px; width:928.8px; height:696.6px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fg.png)"></div></div>
+        </div>
+        
+        
       </section>
-
-      <section id="draw" class="clip" data-start="42.025" data-duration="5.527" data-track-index="2">
-        <div class="layer" id="draw-bg"><div class="sky"></div><div class="speed"></div><div class="sand" style="top:63.0%"></div>
-          <div class="chest"><i style="top:8%"></i><i style="top:39%"></i><i style="top:70%"></i></div></div>
-        <div class="layer" id="draw-cam"><div id="draw-sheet"></div></div>
+      <section id="sh28" class="clip shot" data-start="54.425" data-duration="0.441" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:223.2px; top:307.2px; width:633.6px; height:844.8px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fg.png)"></div></div>
+        </div>
+        
+        
+      </section>
+      <section id="sh29" class="clip shot" data-start="54.866" data-duration="6.614" data-track-index="2">
+        
+        <div class="cam">
+          <div class="pbox panel" style="left:75.6px; top:384.0px; width:928.8px; height:696.6px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_cheers.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_cheers_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_cheers_fg.png)"></div></div>
+        </div>
+        <div class="slash"><i></i><i></i><i></i></div>
+        
       </section>
 
       <div id="three-wrap"><canvas id="three-layer"></canvas></div>
 
       <section id="title-clip" class="clip" data-start="4.985" data-duration="5.596" data-track-index="3">
         <div class="t-wrap">
-          <div id="t-main" class="t-main">H-BATTLE <span class="red">2026</span></div>
-          <div id="t-sub" class="t-sub"><span class="nw">Hofer Lake · Pružina (SK)</span></div>
-          <div id="t-date" class="t-sub">2.–4. 10. 2026</div>
+          <div id="t-main" class="t-main">H-BATTLE 2026</div>
+          <div id="t-cup" class="t-cup">Hard Baits Area Trout Fishing European Cup</div>
+          <div id="t-sub" class="t-sub"><span class="nw">Hofer Lake · Pružina (SK)</span> · <span class="nw">2.–4. 10. 2026</span></div>
         </div>
       </section>
 
       <section id="kin" class="clip" data-start="30.991" data-duration="3.673" data-track-index="3">
+        <div id="kin-slash"><i></i><i></i><i></i></div>
         <div id="kin-cam">
-          <div class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
+          <div id="k-l1" class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
           <div id="k-l2" class="k-line"><span class="k-mask"><span id="k2w0" class="k-word">přijeli</span></span><span class="k-mask"><span id="k2w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k2w2" class="k-word">za</span></span><span class="k-mask"><span id="k2w3" class="k-word red">přáteli.</span></span></div>
-          <div id="k-under"></div>
           <div id="k-en">We didn’t come to fight. We came for friends.</div>
         </div>
       </section>
@@ -450,23 +417,15 @@
         <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Přátelé</span><span class="chip-en">Friends</span></div>
       </section>
 
-      <section id="lt-cz" class="clip" data-start="36.499" data-duration="1.834" data-track-index="5">
-        <div id="lt-box" class="lt">MARTIN STOKLASA <span class="lt-sub">nastupuje do sestavy</span></div>
-      </section>
-
-      <section id="vtip-cap" class="clip" data-start="47.993" data-duration="1.37" data-track-index="5">
-        <div id="vtip-text" class="cap">Takhle vypadá náš „boj“.<span class="en">This is what our “battle” looks like.</span></div>
-      </section>
-
       <section id="outro" class="clip" data-start="54.866" data-duration="6.614" data-track-index="3">
-        <div id="win-cam" class="layer">
-          <div class="frame win" style="rotate:-2deg"><div class="photo" style="width:100%; height:100%; background-image:url(assets/photos/p_cheers.jpg); background-size:cover; background-position:50% 50%"></div></div>
-        </div>
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
           <div id="o-meta" class="o-meta">Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
         </div>
       </section>
+
+      <div id="blink"><div class="bb"></div><div class="bf"></div></div>
+      <div id="flash"></div>
 
       <div id="player">
         <div id="card"></div>
@@ -488,220 +447,240 @@
           <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>0:60</span></div>
         </div>
       </div>
-      <div id="flash"></div>
-      <div id="wipe-holder"><div id="wipe"></div></div>
-      <div id="proto-badge">DRAFT · v3</div>
+      <div id="wipe-holder"><div id="wipe"><i></i><i></i><i></i></div></div>
+      <div id="proto-badge">DRAFT · v4</div>
 
       <audio id="bgm" src="assets/track_edit60.wav" data-start="1.2" data-duration="59.68" data-track-index="9" data-volume="1"></audio>
     </div>
 
     <script>
       const tl = gsap.timeline({ paused: true });
-      // общая сцена: медленный дрейф неба и песка
-      tl.fromTo("#st-sky", { xPercent: -2, scale: 1.04 }, { xPercent: 2, scale: 1.08, duration: 61.48, ease: "none" }, 0);
-      tl.fromTo("#st-ground", { xPercent: 1.5, scale: 1.04 }, { xPercent: -1.5, scale: 1.1, duration: 61.48, ease: "none" }, 0);
-      // 3D-слой: интро и финал
+      tl.fromTo("#st-rays", { rotation: 0 }, { rotation: 40, duration: 61.48, ease: "none" }, 0);
+      tl.fromTo("#st-band", { xPercent: -4 }, { xPercent: 4, duration: 61.48, ease: "none" }, 0);
+      tl.fromTo("#star0", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:41, yoyo:true}, 1.84);
+      tl.fromTo("#star1", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.19, ease:"sine.inOut", repeat:49, yoyo:true}, 1.84);
+      tl.fromTo("#star2", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:43, yoyo:true}, 0.21);
+      tl.fromTo("#star3", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.93, ease:"sine.inOut", repeat:63, yoyo:true}, 0.10);
+      tl.fromTo("#star4", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.18, ease:"sine.inOut", repeat:49, yoyo:true}, 1.95);
+      tl.fromTo("#star5", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.26, ease:"sine.inOut", repeat:45, yoyo:true}, 1.02);
+      tl.fromTo("#star6", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.27, ease:"sine.inOut", repeat:47, yoyo:true}, 0.08);
+      tl.fromTo("#star7", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.81, ease:"sine.inOut", repeat:73, yoyo:true}, 0.40);
+      tl.fromTo("#star8", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.17, ease:"sine.inOut", repeat:49, yoyo:true}, 1.50);
+      tl.fromTo("#star9", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.48, ease:"sine.inOut", repeat:39, yoyo:true}, 2.01);
+      tl.fromTo("#star10", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.14, ease:"sine.inOut", repeat:51, yoyo:true}, 1.20);
+      tl.fromTo("#star11", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.06, ease:"sine.inOut", repeat:55, yoyo:true}, 0.15);
+      tl.fromTo("#star12", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.23, ease:"sine.inOut", repeat:47, yoyo:true}, 1.20);
+      tl.fromTo("#star13", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.08, ease:"sine.inOut", repeat:55, yoyo:true}, 0.82);
+      tl.fromTo("#star14", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.46, ease:"sine.inOut", repeat:39, yoyo:true}, 1.67);
+      tl.fromTo("#star15", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:41, yoyo:true}, 0.80);
+      tl.fromTo("#star16", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.97, ease:"sine.inOut", repeat:59, yoyo:true}, 1.65);
+      tl.fromTo("#star17", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.96, ease:"sine.inOut", repeat:61, yoyo:true}, 1.88);
+      tl.fromTo("#star18", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.97, ease:"sine.inOut", repeat:59, yoyo:true}, 1.89);
+      tl.fromTo("#star19", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.10, ease:"sine.inOut", repeat:53, yoyo:true}, 0.01);
+      tl.fromTo("#star20", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.92, ease:"sine.inOut", repeat:65, yoyo:true}, 0.01);
+      tl.fromTo("#star21", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.43, ease:"sine.inOut", repeat:41, yoyo:true}, 0.79);
+      tl.fromTo("#star22", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.49, ease:"sine.inOut", repeat:39, yoyo:true}, 1.31);
+      tl.fromTo("#star23", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.19, ease:"sine.inOut", repeat:49, yoyo:true}, 1.59);
+      tl.fromTo("#star24", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.07, ease:"sine.inOut", repeat:55, yoyo:true}, 0.61);
+      tl.fromTo("#star25", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.35, ease:"sine.inOut", repeat:43, yoyo:true}, 1.59);
+      tl.fromTo("#star26", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.01, ease:"sine.inOut", repeat:57, yoyo:true}, 2.18);
+      tl.fromTo("#star27", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.28, ease:"sine.inOut", repeat:45, yoyo:true}, 0.07);
       tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0, duration: 0.25 }, 10.331);
       tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 54.716);
-      // титул
-      tl.fromTo("#t-main", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.985);
-      tl.fromTo("#t-sub", { opacity: 0, scaleX: 1.15 }, { opacity: 0.9, scaleX: 1, duration: 0.8, ease: "power2.out" }, 5.914);
-      tl.fromTo("#t-date", { opacity: 0, y: 22 }, { opacity: 0.9, y: 0, duration: 0.5, ease: "power2.out" }, 6.842);
-      tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.3, ease:"power3.out"}, 30.991);
-      tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.3, ease:"power3.out"}, 31.456);
-      tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.3, ease:"power3.out"}, 31.897);
-      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.83);
-      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.87);
-      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.91);
-      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.95);
-      tl.fromTo("#k-l2", {scale:1.18}, {scale:1, duration:0.5, ease:"expo.out"}, 32.83);
-      tl.fromTo("#k-under", {scaleX:0}, {scaleX:1, duration:0.35, ease:"power2.out"}, 33.295);
+      tl.fromTo("#t-main", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, 4.985);
+      tl.fromTo("#t-cup", { opacity: 0, xPercent: -8 }, { opacity: 1, xPercent: 0, duration: 0.45, ease: "power3.out" }, 5.914);
+      tl.fromTo("#t-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 6.842);
+      tl.fromTo("#k1w0", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 30.991);
+      tl.fromTo("#k1w1", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 31.456);
+      tl.fromTo("#k1w2", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 31.897);
+      tl.fromTo("#k2w0", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.83);
+      tl.fromTo("#k2w1", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.865);
+      tl.fromTo("#k2w2", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.9);
+      tl.fromTo("#k2w3", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.935);
       tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, 33.736);
-      tl.fromTo("#kin-cam", {scale:1}, {scale:1.07, duration:3.673, ease:"none"}, 30.991);
-      tl.fromTo("#flash", {opacity:0.85}, {opacity:0, duration:0.35, ease:"power2.out", immediateRender:false}, 32.83);
-      tl.fromTo("#sh01 .l-sky", {"scale":1.1,"xPercent":-0.7000000000000001}, {"scale":1.1,"xPercent":0.7000000000000001,"duration":3.715,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .l-ground", {"scale":1.1,"xPercent":-1.575}, {"scale":1.1,"xPercent":1.575,"duration":3.715,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .l-frame", {"scale":1.1,"xPercent":-2.975}, {"scale":1.1,"xPercent":2.975,"duration":3.715,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .l-fg", {"scale":1.1,"xPercent":-4.55}, {"scale":1.1,"xPercent":4.55,"duration":3.715,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .drips", {scaleY:0.25}, {scaleY:1, duration:3.715, ease:"power1.in"}, 10.581);
-      tl.fromTo("#sh01 .leg0", {rotation:-4}, {rotation:4, duration:1.857, ease:"sine.inOut", repeat:1, yoyo:true}, 10.581);
-      tl.fromTo("#sh01 .leg1", {rotation:4}, {rotation:-4, duration:1.857, ease:"sine.inOut", repeat:1, yoyo:true}, 10.581);
-      tl.fromTo("#sh02 .l-sky", {"scale":1}, {"scale":1.02,"duration":3.715,"ease":"none"}, 14.296);
-      tl.fromTo("#sh02 .l-ground", {"scale":1}, {"scale":1.045,"duration":3.715,"ease":"none"}, 14.296);
-      tl.fromTo("#sh02 .l-frame", {scale:1, y:0}, {scale:1.08, y:0, duration:2.043, ease:"none"}, 14.296);
-      tl.to("#sh02 .l-frame", {scale:4.952, y:-80.4, duration:1.672, ease:"power2.in"}, 16.339);
-      tl.fromTo("#sh02 .l-fg", {"scale":1}, {"scale":1.13,"duration":3.715,"ease":"none"}, 14.296);
-      tl.fromTo("#sh02 .drips", {scaleY:0.25}, {scaleY:1, duration:3.715, ease:"power1.in"}, 14.296);
-      tl.fromTo("#sh03 .l-sky", {"scale":1.1,"xPercent":0.7000000000000001}, {"scale":1.1,"xPercent":-0.7000000000000001,"duration":1.858,"ease":"none"}, 18.011);
-      tl.fromTo("#sh03 .l-ground", {"scale":1.1,"xPercent":1.575}, {"scale":1.1,"xPercent":-1.575,"duration":1.858,"ease":"none"}, 18.011);
-      tl.fromTo("#sh03 .l-frame", {"scale":1.1,"xPercent":2.975}, {"scale":1.1,"xPercent":-2.975,"duration":1.858,"ease":"none"}, 18.011);
-      tl.fromTo("#sh03 .l-fg", {"scale":1.1,"xPercent":4.55}, {"scale":1.1,"xPercent":-4.55,"duration":1.858,"ease":"none"}, 18.011);
-      tl.fromTo("#sh03 .drips", {scaleY:0.25}, {scaleY:1, duration:1.858, ease:"power1.in"}, 18.011);
-      tl.fromTo("#sh04 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .drips", {scaleY:0.25}, {scaleY:1, duration:1.857, ease:"power1.in"}, 19.869);
-      tl.fromTo("#sh05 .l-sky", {"scale":1.1,"yPercent":0.6000000000000001}, {"scale":1.1,"yPercent":-0.6000000000000001,"duration":1.858,"ease":"none"}, 21.726);
-      tl.fromTo("#sh05 .l-ground", {"scale":1.1,"yPercent":1.35}, {"scale":1.1,"yPercent":-1.35,"duration":1.858,"ease":"none"}, 21.726);
-      tl.fromTo("#sh05 .l-frame", {"scale":1.1,"yPercent":2.55}, {"scale":1.1,"yPercent":-2.55,"duration":1.858,"ease":"none"}, 21.726);
-      tl.fromTo("#sh05 .l-fg", {"scale":1.1,"yPercent":3.9000000000000004}, {"scale":1.1,"yPercent":-3.9000000000000004,"duration":1.858,"ease":"none"}, 21.726);
-      tl.fromTo("#sh05 .drips", {scaleY:0.25}, {scaleY:1, duration:1.858, ease:"power1.in"}, 21.726);
-      tl.fromTo("#sh06 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":1.858,"ease":"none"}, 23.584);
-      tl.fromTo("#sh06 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":1.858,"ease":"none"}, 23.584);
-      tl.fromTo("#sh06 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":1.858,"ease":"none"}, 23.584);
-      tl.fromTo("#sh06 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":1.858,"ease":"none"}, 23.584);
-      tl.fromTo("#sh06 .drips", {scaleY:0.25}, {scaleY:1, duration:1.858, ease:"power1.in"}, 23.584);
-      tl.fromTo("#sh07 .l-sky", {"scale":1.1,"xPercent":-0.7000000000000001}, {"scale":1.1,"xPercent":0.7000000000000001,"duration":1.834,"ease":"none"}, 25.442);
-      tl.fromTo("#sh07 .l-ground", {"scale":1.1,"xPercent":-1.575}, {"scale":1.1,"xPercent":1.575,"duration":1.834,"ease":"none"}, 25.442);
-      tl.fromTo("#sh07 .l-frame", {"scale":1.1,"xPercent":-2.975}, {"scale":1.1,"xPercent":2.975,"duration":1.834,"ease":"none"}, 25.442);
-      tl.fromTo("#sh07 .l-fg", {"scale":1.1,"xPercent":-4.55}, {"scale":1.1,"xPercent":4.55,"duration":1.834,"ease":"none"}, 25.442);
-      tl.fromTo("#sh07 .drips", {scaleY:0.25}, {scaleY:1, duration:1.834, ease:"power1.in"}, 25.442);
-      tl.fromTo("#sh07 .leg0", {rotation:-4}, {rotation:4, duration:0.917, ease:"sine.inOut", repeat:1, yoyo:true}, 25.442);
-      tl.fromTo("#sh07 .leg1", {rotation:4}, {rotation:-4, duration:0.917, ease:"sine.inOut", repeat:1, yoyo:true}, 25.442);
-      tl.fromTo("#sh08 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":1.858,"ease":"none"}, 27.276);
-      tl.fromTo("#sh08 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":1.858,"ease":"none"}, 27.276);
-      tl.fromTo("#sh08 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":1.858,"ease":"none"}, 27.276);
-      tl.fromTo("#sh08 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":1.858,"ease":"none"}, 27.276);
-      tl.fromTo("#sh08 .drips", {scaleY:0.25}, {scaleY:1, duration:1.858, ease:"power1.in"}, 27.276);
-      tl.fromTo("#sh09 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .drips", {scaleY:0.25}, {scaleY:1, duration:0.905, ease:"power1.in"}, 29.134);
-      tl.fromTo("#sh09 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 29.134);
-      tl.fromTo("#sh10 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .drips", {scaleY:0.25}, {scaleY:1, duration:0.952, ease:"power1.in"}, 30.039);
-      tl.fromTo("#sh10 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 30.039);
-      tl.fromTo("#sh11 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":1.835,"ease":"none"}, 34.664);
-      tl.fromTo("#sh11 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":1.835,"ease":"none"}, 34.664);
-      tl.fromTo("#sh11 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":1.835,"ease":"none"}, 34.664);
-      tl.fromTo("#sh11 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":1.835,"ease":"none"}, 34.664);
-      tl.fromTo("#sh11 .drips", {scaleY:0.25}, {scaleY:1, duration:1.835, ease:"power1.in"}, 34.664);
-      tl.fromTo("#sh12 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":1.834,"ease":"none"}, 36.499);
-      tl.fromTo("#sh12 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":1.834,"ease":"none"}, 36.499);
-      tl.fromTo("#sh12 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":1.834,"ease":"none"}, 36.499);
-      tl.fromTo("#sh12 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":1.834,"ease":"none"}, 36.499);
-      tl.fromTo("#sh12 .drips", {scaleY:0.25}, {scaleY:1, duration:1.834, ease:"power1.in"}, 36.499);
-      tl.fromTo("#sh13 .l-sky", {"scale":1.1,"yPercent":0.6000000000000001}, {"scale":1.1,"yPercent":-0.6000000000000001,"duration":1.858,"ease":"none"}, 38.333);
-      tl.fromTo("#sh13 .l-ground", {"scale":1.1,"yPercent":1.35}, {"scale":1.1,"yPercent":-1.35,"duration":1.858,"ease":"none"}, 38.333);
-      tl.fromTo("#sh13 .l-frame", {"scale":1.1,"yPercent":2.55}, {"scale":1.1,"yPercent":-2.55,"duration":1.858,"ease":"none"}, 38.333);
-      tl.fromTo("#sh13 .l-fg", {"scale":1.1,"yPercent":3.9000000000000004}, {"scale":1.1,"yPercent":-3.9000000000000004,"duration":1.858,"ease":"none"}, 38.333);
-      tl.fromTo("#sh13 .drips", {scaleY:0.25}, {scaleY:1, duration:1.858, ease:"power1.in"}, 38.333);
-      tl.fromTo("#sh14 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":1.834,"ease":"none"}, 40.191);
-      tl.fromTo("#sh14 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":1.834,"ease":"none"}, 40.191);
-      tl.fromTo("#sh14 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":1.834,"ease":"none"}, 40.191);
-      tl.fromTo("#sh14 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":1.834,"ease":"none"}, 40.191);
-      tl.fromTo("#sh14 .drips", {scaleY:0.25}, {scaleY:1, duration:1.834, ease:"power1.in"}, 40.191);
-      tl.fromTo("#sh16 .l-sky", {scale:1.56, xPercent:-5.2}, {scale:1.04, xPercent:0, duration:0.4, ease:"expo.out"}, 47.552);
-      tl.to("#sh16 .l-sky", {scale:1.050, duration:1.411, ease:"none"}, 47.952);
-      tl.fromTo("#sh16 .l-ground", {scale:1.64, xPercent:-11.7}, {scale:1.04, xPercent:0, duration:0.4, ease:"expo.out"}, 47.552);
-      tl.to("#sh16 .l-ground", {scale:1.063, duration:1.411, ease:"none"}, 47.952);
-      tl.fromTo("#sh16 .l-frame", {scale:1.75, xPercent:-22.1}, {scale:1.04, xPercent:0, duration:0.4, ease:"expo.out"}, 47.552);
-      tl.to("#sh16 .l-frame", {scale:1.083, duration:1.411, ease:"none"}, 47.952);
-      tl.fromTo("#sh16 .l-fg", {scale:1.89, xPercent:-33.8}, {scale:1.04, xPercent:0, duration:0.4, ease:"expo.out"}, 47.552);
-      tl.to("#sh16 .l-fg", {scale:1.105, duration:1.411, ease:"none"}, 47.952);
-      tl.fromTo("#sh16 .drips", {scaleY:0.25}, {scaleY:1, duration:1.811, ease:"power1.in"}, 47.552);
-      tl.fromTo("#sh17 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.464,"ease":"none"}, 49.363);
-      tl.fromTo("#sh17 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.464,"ease":"none"}, 49.363);
-      tl.fromTo("#sh17 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.464,"ease":"none"}, 49.363);
-      tl.fromTo("#sh17 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.464,"ease":"none"}, 49.363);
-      tl.fromTo("#sh17 .drips", {scaleY:0.25}, {scaleY:1, duration:0.464, ease:"power1.in"}, 49.363);
-      tl.fromTo("#sh17 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 49.363);
-      tl.fromTo("#sh18 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.465,"ease":"none"}, 49.827);
-      tl.fromTo("#sh18 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.465,"ease":"none"}, 49.827);
-      tl.fromTo("#sh18 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.465,"ease":"none"}, 49.827);
-      tl.fromTo("#sh18 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.465,"ease":"none"}, 49.827);
-      tl.fromTo("#sh18 .drips", {scaleY:0.25}, {scaleY:1, duration:0.465, ease:"power1.in"}, 49.827);
-      tl.fromTo("#sh18 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 49.827);
-      tl.fromTo("#sh19 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.464,"ease":"none"}, 50.292);
-      tl.fromTo("#sh19 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.464,"ease":"none"}, 50.292);
-      tl.fromTo("#sh19 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.464,"ease":"none"}, 50.292);
-      tl.fromTo("#sh19 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.464,"ease":"none"}, 50.292);
-      tl.fromTo("#sh19 .drips", {scaleY:0.25}, {scaleY:1, duration:0.464, ease:"power1.in"}, 50.292);
-      tl.fromTo("#sh19 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 50.292);
-      tl.fromTo("#sh20 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.441,"ease":"none"}, 50.756);
-      tl.fromTo("#sh20 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.441,"ease":"none"}, 50.756);
-      tl.fromTo("#sh20 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.441,"ease":"none"}, 50.756);
-      tl.fromTo("#sh20 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.441,"ease":"none"}, 50.756);
-      tl.fromTo("#sh20 .drips", {scaleY:0.25}, {scaleY:1, duration:0.441, ease:"power1.in"}, 50.756);
-      tl.fromTo("#sh20 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 50.756);
-      tl.fromTo("#sh21 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.464,"ease":"none"}, 51.197);
-      tl.fromTo("#sh21 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.464,"ease":"none"}, 51.197);
-      tl.fromTo("#sh21 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.464,"ease":"none"}, 51.197);
-      tl.fromTo("#sh21 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.464,"ease":"none"}, 51.197);
-      tl.fromTo("#sh21 .drips", {scaleY:0.25}, {scaleY:1, duration:0.464, ease:"power1.in"}, 51.197);
-      tl.fromTo("#sh21 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 51.197);
-      tl.fromTo("#sh22 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.465,"ease":"none"}, 51.661);
-      tl.fromTo("#sh22 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.465,"ease":"none"}, 51.661);
-      tl.fromTo("#sh22 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.465,"ease":"none"}, 51.661);
-      tl.fromTo("#sh22 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.465,"ease":"none"}, 51.661);
-      tl.fromTo("#sh22 .drips", {scaleY:0.25}, {scaleY:1, duration:0.465, ease:"power1.in"}, 51.661);
-      tl.fromTo("#sh22 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 51.661);
-      tl.fromTo("#sh23 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.464,"ease":"none"}, 52.126);
-      tl.fromTo("#sh23 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.464,"ease":"none"}, 52.126);
-      tl.fromTo("#sh23 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.464,"ease":"none"}, 52.126);
-      tl.fromTo("#sh23 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.464,"ease":"none"}, 52.126);
-      tl.fromTo("#sh23 .drips", {scaleY:0.25}, {scaleY:1, duration:0.464, ease:"power1.in"}, 52.126);
-      tl.fromTo("#sh23 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 52.126);
-      tl.fromTo("#sh24 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.441,"ease":"none"}, 52.59);
-      tl.fromTo("#sh24 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.441,"ease":"none"}, 52.59);
-      tl.fromTo("#sh24 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.441,"ease":"none"}, 52.59);
-      tl.fromTo("#sh24 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.441,"ease":"none"}, 52.59);
-      tl.fromTo("#sh24 .drips", {scaleY:0.25}, {scaleY:1, duration:0.441, ease:"power1.in"}, 52.59);
-      tl.fromTo("#sh24 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 52.59);
-      tl.fromTo("#sh25 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.465,"ease":"none"}, 53.031);
-      tl.fromTo("#sh25 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.465,"ease":"none"}, 53.031);
-      tl.fromTo("#sh25 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.465,"ease":"none"}, 53.031);
-      tl.fromTo("#sh25 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.465,"ease":"none"}, 53.031);
-      tl.fromTo("#sh25 .drips", {scaleY:0.25}, {scaleY:1, duration:0.465, ease:"power1.in"}, 53.031);
-      tl.fromTo("#sh25 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 53.031);
-      tl.fromTo("#sh26 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.464,"ease":"none"}, 53.496);
-      tl.fromTo("#sh26 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.464,"ease":"none"}, 53.496);
-      tl.fromTo("#sh26 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.464,"ease":"none"}, 53.496);
-      tl.fromTo("#sh26 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.464,"ease":"none"}, 53.496);
-      tl.fromTo("#sh26 .drips", {scaleY:0.25}, {scaleY:1, duration:0.464, ease:"power1.in"}, 53.496);
-      tl.fromTo("#sh26 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 53.496);
-      tl.fromTo("#sh27 .l-sky", {"scale":1.02}, {"scale":1.038,"duration":0.465,"ease":"none"}, 53.96);
-      tl.fromTo("#sh27 .l-ground", {"scale":1.02}, {"scale":1.0605,"duration":0.465,"ease":"none"}, 53.96);
-      tl.fromTo("#sh27 .l-frame", {"scale":1.02}, {"scale":1.0965,"duration":0.465,"ease":"none"}, 53.96);
-      tl.fromTo("#sh27 .l-fg", {"scale":1.02}, {"scale":1.137,"duration":0.465,"ease":"none"}, 53.96);
-      tl.fromTo("#sh27 .drips", {scaleY:0.25}, {scaleY:1, duration:0.465, ease:"power1.in"}, 53.96);
-      tl.fromTo("#sh27 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 53.96);
-      tl.fromTo("#sh28 .l-sky", {"scale":1.04}, {"scale":1.02,"duration":0.441,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .l-ground", {"scale":1.065}, {"scale":1.02,"duration":0.441,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .l-frame", {"scale":1.105}, {"scale":1.02,"duration":0.441,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .l-fg", {"scale":1.15}, {"scale":1.02,"duration":0.441,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .drips", {scaleY:0.25}, {scaleY:1, duration:0.441, ease:"power1.in"}, 54.425);
-      tl.fromTo("#sh28 .frame", {yPercent:-18, opacity:0}, {yPercent:0, opacity:1, duration:0.18, ease:"back.out(2)"}, 54.425);
-      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 11.045);
-      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 18.475);
-      tl.fromTo("#chip-zmena .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 35.128);
-      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 38.797);
-      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 48.016);
-      tl.fromTo("#chip-pratele .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, 49.827);
-      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.35, ease: "power3.out" }, 36.499);
-      tl.fromTo("#vtip-text", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, 47.993);
-      // жеребьёвка: лист выезжает из комода, камера идёт по секторам 1→4
-      tl.fromTo("#draw-sheet", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 42.025);
-      tl.fromTo("#draw-cam", { x: 421.2, scale: 1.0 }, { x: -421.2, scale: 1.04, duration: 5.062, ease: "sine.inOut" }, 42.49);
-      tl.fromTo("#draw-bg", { scale: 1.02 }, { scale: 1.08, duration: 5.527, ease: "none" }, 42.025);
-      // финал
-      tl.fromTo("#win-cam", { scale: 1.08, y: 43 }, { scale: 1, y: 0, duration: 6.614, ease: "power2.out" }, 54.866);
-      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 55.795);
-      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 0.9, duration: 0.6 }, 56.7);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut"}, 10.331);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 17.761);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 34.414);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 38.083);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 47.302);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 49.113);
-      tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut", immediateRender:false}, 54.616);
+      tl.fromTo("#kin-cam", {scale:1}, {scale:1.08, duration:3.673, ease:"none"}, 30.991);
+      tl.fromTo("#kin-slash", {xPercent:-140}, {xPercent:140, duration:0.45, ease:"power2.inOut"}, 32.73);
+      tl.fromTo("#flash", {opacity:0.9}, {opacity:0, duration:0.35, ease:"power2.out", immediateRender:false}, 32.83);
+      tl.fromTo("#sh01 .cam", {"xPercent":-2.5,"scale":1.05}, {"xPercent":2.5,"scale":1.05,"duration":3.715,"ease":"none"}, 10.581);
+      tl.fromTo("#sh01 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 11.974);
+      tl.fromTo("#sh01 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":2.322000000000001,"ease":"none"}, 11.974);
+      tl.fromTo("#sh01 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 12.142);
+      tl.fromTo("#sh01 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":2.322000000000001,"ease":"none"}, 11.974);
+      tl.fromTo("#sh01 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 11.854);
+      tl.fromTo("#sh01 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 11.974);
+      tl.fromTo("#sh01 .word", {"x":0}, {"x":32.400000000000006,"duration":2.322000000000001,"ease":"none"}, 11.974);
+      tl.fromTo("#sh02 .cam", {"scale":1}, {"scale":1.07,"duration":3.715,"ease":"none"}, 14.296);
+      tl.fromTo("#sh02 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 15.689);
+      tl.fromTo("#sh02 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":2.321999999999999,"ease":"none"}, 15.689);
+      tl.fromTo("#sh02 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 15.569);
+      tl.fromTo("#sh02 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 15.689);
+      tl.fromTo("#sh02 .word", {"x":0}, {"x":32.400000000000006,"duration":2.321999999999999,"ease":"none"}, 15.689);
+      tl.fromTo("#sh03 .cam", {"xPercent":2.5,"scale":1.05}, {"xPercent":-2.5,"scale":1.05,"duration":1.858,"ease":"none"}, 18.011);
+      tl.fromTo("#sh03 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 18.940);
+      tl.fromTo("#sh03 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 18.940);
+      tl.fromTo("#sh03 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 18.820);
+      tl.fromTo("#sh03 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 18.940);
+      tl.fromTo("#sh03 .word", {"x":0}, {"x":32.400000000000006,"duration":0.929000000000002,"ease":"none"}, 18.940);
+      tl.fromTo("#sh04 .cam", {"scale":1}, {"scale":1.07,"duration":1.857,"ease":"none"}, 19.869);
+      tl.fromTo("#sh04 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 20.798);
+      tl.fromTo("#sh04 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9280000000000008,"ease":"none"}, 20.798);
+      tl.fromTo("#sh04 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 20.966);
+      tl.fromTo("#sh04 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9280000000000008,"ease":"none"}, 20.798);
+      tl.fromTo("#sh04 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 20.678);
+      tl.fromTo("#sh04 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 20.798);
+      tl.fromTo("#sh04 .word", {"x":0}, {"x":32.400000000000006,"duration":0.9280000000000008,"ease":"none"}, 20.798);
+      tl.fromTo("#sh05 .cam", {"scale":1.08}, {"scale":1,"duration":1.858,"ease":"none"}, 21.726);
+      tl.fromTo("#sh05 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 22.655);
+      tl.fromTo("#sh05 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 22.655);
+      tl.fromTo("#sh05 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 22.823);
+      tl.fromTo("#sh05 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 22.655);
+      tl.fromTo("#sh05 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 22.535);
+      tl.fromTo("#sh05 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 22.655);
+      tl.fromTo("#sh05 .word", {"x":0}, {"x":32.400000000000006,"duration":0.929000000000002,"ease":"none"}, 22.655);
+      tl.fromTo("#sh06 .cam", {"scale":1}, {"scale":1.07,"duration":1.858,"ease":"none"}, 23.584);
+      tl.fromTo("#sh06 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 24.490);
+      tl.fromTo("#sh06 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9520000000000017,"ease":"none"}, 24.490);
+      tl.fromTo("#sh06 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 24.658);
+      tl.fromTo("#sh06 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9520000000000017,"ease":"none"}, 24.490);
+      tl.fromTo("#sh06 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 24.370);
+      tl.fromTo("#sh06 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 24.490);
+      tl.fromTo("#sh06 .word", {"x":0}, {"x":32.400000000000006,"duration":0.9520000000000017,"ease":"none"}, 24.490);
+      tl.fromTo("#sh07 .cam", {"xPercent":-2.5,"scale":1.05}, {"xPercent":2.5,"scale":1.05,"duration":1.834,"ease":"none"}, 25.442);
+      tl.fromTo("#sh07 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 26.370);
+      tl.fromTo("#sh07 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9059999999999988,"ease":"none"}, 26.370);
+      tl.fromTo("#sh07 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 26.538);
+      tl.fromTo("#sh07 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9059999999999988,"ease":"none"}, 26.370);
+      tl.fromTo("#sh07 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 26.250);
+      tl.fromTo("#sh07 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 26.370);
+      tl.fromTo("#sh07 .word", {"x":0}, {"x":32.400000000000006,"duration":0.9059999999999988,"ease":"none"}, 26.370);
+      tl.fromTo("#sh08 .cam", {"scale":1}, {"scale":1.07,"duration":1.858,"ease":"none"}, 27.276);
+      tl.fromTo("#sh08 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 28.205);
+      tl.fromTo("#sh08 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 28.205);
+      tl.fromTo("#sh08 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 28.373);
+      tl.fromTo("#sh08 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 28.205);
+      tl.fromTo("#sh08 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 28.085);
+      tl.fromTo("#sh08 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 28.205);
+      tl.fromTo("#sh08 .word", {"x":0}, {"x":32.400000000000006,"duration":0.929000000000002,"ease":"none"}, 28.205);
+      tl.fromTo("#sh09 .cam", {"scale":1.08}, {"scale":1,"duration":0.905,"ease":"none"}, 29.134);
+      tl.fromTo("#sh09 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 29.598);
+      tl.fromTo("#sh09 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.44099999999999895,"ease":"none"}, 29.598);
+      tl.fromTo("#sh09 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 29.478);
+      tl.fromTo("#sh09 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 29.598);
+      tl.fromTo("#sh09 .word", {"x":0}, {"x":32.400000000000006,"duration":0.44099999999999895,"ease":"none"}, 29.598);
+      tl.fromTo("#sh10 .cam", {"scale":1}, {"scale":1.07,"duration":0.952,"ease":"none"}, 30.039);
+      tl.fromTo("#sh10 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 30.527);
+      tl.fromTo("#sh10 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.46399999999999864,"ease":"none"}, 30.527);
+      tl.fromTo("#sh10 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 30.407);
+      tl.fromTo("#sh10 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 30.527);
+      tl.fromTo("#sh10 .word", {"x":0}, {"x":32.400000000000006,"duration":0.46399999999999864,"ease":"none"}, 30.527);
+      tl.fromTo("#sh11 .cam", {"scale":1}, {"scale":1.07,"duration":1.835,"ease":"none"}, 34.664);
+      tl.fromTo("#sh11 .pbox", {"scale":0.9,"opacity":0}, {"scale":1,"opacity":1,"duration":0.3,"ease":"back.out(1.6)"}, 34.664);
+      tl.fromTo("#sh12 .cam", {"scale":1.08}, {"scale":1,"duration":1.834,"ease":"none"}, 36.499);
+      tl.fromTo("#sh12 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 37.428);
+      tl.fromTo("#sh12 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9050000000000011,"ease":"none"}, 37.428);
+      tl.fromTo("#sh12 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 37.596);
+      tl.fromTo("#sh12 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9050000000000011,"ease":"none"}, 37.428);
+      tl.fromTo("#sh12 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 37.308);
+      tl.fromTo("#sh12 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 37.428);
+      tl.fromTo("#sh12 .word", {"x":0}, {"x":32.400000000000006,"duration":0.9050000000000011,"ease":"none"}, 37.428);
+      tl.fromTo("#sh12 .plate", {"xPercent":-110}, {"xPercent":0,"duration":0.35,"ease":"power3.out"}, 37.428);
+      tl.fromTo("#sh13 .cam", {"yPercent":2,"scale":1.05}, {"yPercent":-2,"scale":1.05,"duration":1.858,"ease":"none"}, 38.333);
+      tl.fromTo("#sh13 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 39.262);
+      tl.fromTo("#sh13 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 39.262);
+      tl.fromTo("#sh13 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 39.142);
+      tl.fromTo("#sh13 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 39.262);
+      tl.fromTo("#sh13 .word", {"x":0}, {"x":32.400000000000006,"duration":0.929000000000002,"ease":"none"}, 39.262);
+      tl.fromTo("#sh14 .cam", {"scale":1}, {"scale":1.07,"duration":1.834,"ease":"none"}, 40.191);
+      tl.fromTo("#sh14 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 41.096);
+      tl.fromTo("#sh14 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 41.096);
+      tl.fromTo("#sh14 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 41.264);
+      tl.fromTo("#sh14 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 41.096);
+      tl.fromTo("#sh14 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 40.976);
+      tl.fromTo("#sh14 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 41.096);
+      tl.fromTo("#sh14 .word", {"x":0}, {"x":32.400000000000006,"duration":0.929000000000002,"ease":"none"}, 41.096);
+      tl.fromTo("#sh14 .plate", {"xPercent":-110}, {"xPercent":0,"duration":0.35,"ease":"power3.out"}, 41.096);
+      tl.fromTo("#sh15 .cam", {"x":334.8,"scale":1}, {"x":-334.8,"scale":1.02,"duration":5.527,"ease":"sine.inOut"}, 42.025);
+      tl.fromTo("#sh15 .pbox", {"yPercent":30,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"power3.out"}, 42.025);
+      tl.fromTo("#sh16 .cam", {"scale":1}, {"scale":1.07,"duration":1.811,"ease":"none"}, 47.552);
+      tl.fromTo("#sh16 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 48.457);
+      tl.fromTo("#sh16 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9059999999999988,"ease":"none"}, 48.457);
+      tl.fromTo("#sh16 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 48.625);
+      tl.fromTo("#sh16 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9059999999999988,"ease":"none"}, 48.457);
+      tl.fromTo("#sh16 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 48.337);
+      tl.fromTo("#sh16 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 48.457);
+      tl.fromTo("#sh16 .word", {"x":0}, {"x":32.400000000000006,"duration":0.9059999999999988,"ease":"none"}, 48.457);
+      tl.fromTo("#sh16 .caption", {"y":32.400000000000006,"opacity":0}, {"y":0,"opacity":1,"duration":0.3,"ease":"back.out(2)"}, 48.016);
+      tl.fromTo("#sh17 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 49.363);
+      tl.fromTo("#sh17 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 49.363);
+      tl.fromTo("#sh18 .cam", {"scale":1.08}, {"scale":1,"duration":0.465,"ease":"none"}, 49.827);
+      tl.fromTo("#sh18 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 49.827);
+      tl.fromTo("#sh19 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 50.292);
+      tl.fromTo("#sh19 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 50.292);
+      tl.fromTo("#sh20 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 50.756);
+      tl.fromTo("#sh20 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 50.756);
+      tl.fromTo("#sh21 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 51.197);
+      tl.fromTo("#sh21 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 51.197);
+      tl.fromTo("#sh22 .cam", {"scale":1.08}, {"scale":1,"duration":0.465,"ease":"none"}, 51.661);
+      tl.fromTo("#sh22 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 51.661);
+      tl.fromTo("#sh23 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 52.126);
+      tl.fromTo("#sh23 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 52.126);
+      tl.fromTo("#sh24 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 52.590);
+      tl.fromTo("#sh24 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 52.590);
+      tl.fromTo("#sh24 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 52.590);
+      tl.fromTo("#sh24 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4410000000000025,"ease":"none"}, 52.590);
+      tl.fromTo("#sh24 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 52.596);
+      tl.fromTo("#sh24 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4410000000000025,"ease":"none"}, 52.590);
+      tl.fromTo("#sh25 .cam", {"scale":1}, {"scale":1.07,"duration":0.465,"ease":"none"}, 53.031);
+      tl.fromTo("#sh25 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.031);
+      tl.fromTo("#sh26 .cam", {"scale":1.08}, {"scale":1,"duration":0.464,"ease":"none"}, 53.496);
+      tl.fromTo("#sh26 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.496);
+      tl.fromTo("#sh26 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 53.496);
+      tl.fromTo("#sh26 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.46399999999999864,"ease":"none"}, 53.496);
+      tl.fromTo("#sh27 .cam", {"scale":1}, {"scale":1.07,"duration":0.465,"ease":"none"}, 53.960);
+      tl.fromTo("#sh27 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.960);
+      tl.fromTo("#sh27 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 53.960);
+      tl.fromTo("#sh27 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4650000000000034,"ease":"none"}, 53.960);
+      tl.fromTo("#sh27 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 53.966);
+      tl.fromTo("#sh27 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4650000000000034,"ease":"none"}, 53.960);
+      tl.fromTo("#sh28 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 54.425);
+      tl.fromTo("#sh28 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 54.425);
+      tl.fromTo("#sh28 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 54.425);
+      tl.fromTo("#sh28 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4409999999999954,"ease":"none"}, 54.425);
+      tl.fromTo("#sh28 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 54.431);
+      tl.fromTo("#sh28 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4409999999999954,"ease":"none"}, 54.425);
+      tl.fromTo("#sh29 .cam", {"scale":1.08}, {"scale":1,"duration":6.614,"ease":"none"}, 54.866);
+      tl.fromTo("#sh29 .pbox", {"y":64.80000000000001,"opacity":0}, {"y":0,"opacity":1,"duration":0.5,"ease":"power3.out"}, 54.866);
+      tl.fromTo("#sh29 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 57.165);
+      tl.fromTo("#sh29 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":4.314999999999991,"ease":"none"}, 57.165);
+      tl.fromTo("#sh29 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 57.333);
+      tl.fromTo("#sh29 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":4.314999999999991,"ease":"none"}, 57.165);
+      tl.fromTo("#sh29 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 57.045);
+      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 11.045);
+      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 18.475);
+      tl.fromTo("#chip-zmena .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 35.128);
+      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 38.797);
+      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 48.016);
+      tl.fromTo("#chip-pratele .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 49.827);
+      tl.fromTo("#o-quote", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, 55.795);
+      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 56.7);
+      tl.set("#blink", {opacity:0}, 0);
+      tl.set("#blink", {opacity:1}, 32.89);
+      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.1, ease:"none", immediateRender:false}, 32.89);
+      tl.set("#blink", {opacity:0}, 32.99);
+      tl.set("#blink", {opacity:1}, 47.087);
+      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.1, ease:"none", immediateRender:false}, 47.087);
+      tl.set("#blink", {opacity:0}, 47.187);
+      tl.set("#blink", {opacity:1}, 57.629);
+      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.14, ease:"none", immediateRender:false}, 57.629);
+      tl.set("#blink", {opacity:0}, 57.769);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut"}, 10.311);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 17.741);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 34.394);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 38.063);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 47.282);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 49.093);
+      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 54.596);
 
-      // проигрыватель: старт в центре, игла в T0, затем мини-плеер в углу
       tl.fromTo("#player", { x: -162.0, y: -760.2, scale: 1.45, opacity: 0 }, { x: -162.0, y: -760.2, scale: 1.45, opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
       tl.to("#player", { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, 1.65);
       tl.fromTo("#arm", { rotation: -20 }, { rotation: 0, duration: 0.75, ease: "power2.inOut" }, 0.3);
@@ -729,17 +708,14 @@
       const W = 1080, H = 1920, PORTRAIT = true;
       const canvas = document.getElementById("three-layer");
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setSize(W, H, false);
-      renderer.setPixelRatio(1);
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setSize(W, H, false); renderer.setPixelRatio(1); renderer.outputColorSpace = THREE.SRGBColorSpace;
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(PORTRAIT ? 50 : 32, W / H, 0.1, 200);
       const loader = new THREE.TextureLoader();
       function disc(src, edge) {
         const tex = loader.load(src);
         tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8; tex.center.set(0.5, 0.5); tex.rotation = Math.PI / 2;
-        const geo = new THREE.CylinderGeometry(1, 1, 0.14, 160, 1, false);
-        geo.rotateX(Math.PI / 2);
+        const geo = new THREE.CylinderGeometry(1, 1, 0.14, 160, 1, false); geo.rotateX(Math.PI / 2);
         const side = new THREE.MeshStandardMaterial({ color: edge, metalness: 0.75, roughness: 0.3 });
         const face = new THREE.MeshStandardMaterial({ map: tex, emissiveMap: tex, emissive: 0xffffff, emissiveIntensity: 0.82, color: 0x2a2a2a, metalness: 0.15, roughness: 0.35 });
         const back = new THREE.MeshStandardMaterial({ color: 0x0b1e42, metalness: 0.4, roughness: 0.5 });
@@ -756,28 +732,25 @@
       const T0 = 1.2, OUT0 = 53.666, INTRO_END = 9.381;
       function renderAt(tt) {
         const t = tt - T0;
-        camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2 - Math.min(t, 10) * 0.04);
-        camera.lookAt(0, 0, 0);
+        camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2); camera.lookAt(0, 0, 0);
         if (t > 0 && t < INTRO_END + 0.1) {
-          // логотип восходит над горизонтом пустыни, как солнце
-          const a = eo(t / 2.2), rise = eo((t - 0.2) / 2.4);
+          const a = eo(t / 1.8);
           hb.visible = true; ta.visible = false;
-          hb.position.set(0, lerp(PORTRAIT ? -0.6 : -0.6, PORTRAIT ? 0.95 : 0.55, rise), lerp(-24, 0, a));
-          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-2.6, 0, eo(t / 2.6)) + Math.sin(t * 0.7) * 0.08, 0);
-          hb.scale.setScalar(PORTRAIT ? 0.78 : 0.6);
+          hb.position.set(0, PORTRAIT ? 1.3 : 0.75, lerp(-24, 0, a));
+          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-2.6 * 2, 0, eo(t / 2.2)) + Math.sin(t * 0.7) * 0.08, 0);
+          hb.scale.setScalar(PORTRAIT ? 0.85 : 0.62);
           key.position.set(lerp(-6, 6, clamp((t - 1.4) / 1.6)), 2, 4); rim.intensity = 0;
         } else if (t >= OUT0 - 0.15) {
-          const lt = t - OUT0, a = eo(lt / 1.4);
+          const lt = t - OUT0, a = eo(lt / 1.2);
           hb.visible = ta.visible = true;
-          const sc = PORTRAIT ? 0.42 : 0.5;
+          const sc = PORTRAIT ? 0.42 : 0.42;
           ta.scale.setScalar(sc); hb.scale.setScalar(sc);
-          if (PORTRAIT) { ta.position.set(lerp(-6, -0.62, a), 2.05, 0); hb.position.set(lerp(6, 0.62, a), 2.05, 0); }
-          else { ta.position.set(lerp(-8, -2.45, a), 0.35, 0); hb.position.set(lerp(8, 2.45, a), 0.35, 0); }
-          ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.8)) + Math.sin(lt * 0.8) * 0.06, 0);
-          hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.8)) - Math.sin(lt * 0.8) * 0.06, 0);
+          if (PORTRAIT) { ta.position.set(lerp(-6, -0.62, a), 2.15, 0); hb.position.set(lerp(6, 0.62, a), 2.15, 0); }
+          else { ta.position.set(lerp(-8, -2.55, a), 0.15, 0); hb.position.set(lerp(8, 2.55, a), 0.15, 0); }
+          ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.6)) + Math.sin(lt * 0.8) * 0.06, 0);
+          hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.6)) - Math.sin(lt * 0.8) * 0.06, 0);
           key.position.set(lerp(-6, 6, clamp((lt - 2.2) / 1.6)), 2, 4);
           rim.position.set(0, -2, 2.5); rim.intensity = 4 * clamp((lt - 1) / 1);
-          camera.position.set(0, 0, 6.2); camera.lookAt(0, 0, 0);
         } else { hb.visible = ta.visible = false; }
         renderer.render(scene, camera);
       }

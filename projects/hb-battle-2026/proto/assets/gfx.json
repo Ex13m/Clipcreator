@@ -1,0 +1,167 @@
+{
+ "p_portrait_dres": {
+  "fg": true,
+  "bbox": [
+   0.06319444444444444,
+   0.21510416666666668,
+   0.9805555555555555,
+   1.0
+  ]
+ },
+ "p_tying_young": {
+  "fg": true,
+  "bbox": [
+   0.05,
+   0.19479166666666667,
+   0.9847222222222223,
+   1.0
+  ]
+ },
+ "p_lunch": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.052083333333333336,
+   0.8619791666666666,
+   1.0
+  ]
+ },
+ "g_event_banner": {
+  "fg": false
+ },
+ "g_losovani_den1": {
+  "fg": false
+ },
+ "g_team_belgium": {
+  "fg": false
+ },
+ "g_team_bulgaria": {
+  "fg": false
+ },
+ "g_team_germany": {
+  "fg": false
+ },
+ "g_team_hungary": {
+  "fg": false
+ },
+ "g_team_moldova": {
+  "fg": false
+ },
+ "g_team_poland": {
+  "fg": false
+ },
+ "g_team_slovakia": {
+  "fg": false
+ },
+ "g_zmena_sestavy": {
+  "fg": false
+ },
+ "p_car": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.3307291666666667,
+   1.0,
+   1.0
+  ]
+ },
+ "p_ceremony_hall": {
+  "fg": false
+ },
+ "p_cheers": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.052083333333333336,
+   0.9526041666666667,
+   1.0
+  ]
+ },
+ "p_green_fish": {
+  "fg": true,
+  "bbox": [
+   0.40625,
+   0.0,
+   1.0,
+   0.8098958333333334
+  ]
+ },
+ "p_lake_mist": {
+  "fg": false
+ },
+ "p_landing1": {
+  "fg": true,
+  "bbox": [
+   0.5201388888888889,
+   0.21770833333333334,
+   1.0,
+   0.840625
+  ]
+ },
+ "p_landing2": {
+  "fg": false
+ },
+ "p_net_close": {
+  "fg": false
+ },
+ "p_plaque_1st": {
+  "fg": false
+ },
+ "p_reeling": {
+  "fg": true,
+  "bbox": [
+   0.23402777777777778,
+   0.2677083333333333,
+   1.0,
+   1.0
+  ]
+ },
+ "p_selfie_lake": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.26944444444444443,
+   0.9395833333333333,
+   1.0
+  ]
+ },
+ "p_stage_cz": {
+  "fg": false
+ },
+ "p_team_romania": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.08472222222222223,
+   1.0,
+   1.0
+  ]
+ },
+ "p_training_plan": {
+  "fg": false
+ },
+ "p_trenink_gear": {
+  "fg": false
+ },
+ "p_trophies": {
+  "fg": false
+ },
+ "p_tying_ms": {
+  "fg": true,
+  "bbox": [
+   0.26944444444444443,
+   0.3796875,
+   0.8138888888888889,
+   1.0
+  ]
+ },
+ "p_winners": {
+  "fg": true,
+  "bbox": [
+   0.0,
+   0.05156537753222836,
+   1.0,
+   1.0
+  ]
+ }
+}
