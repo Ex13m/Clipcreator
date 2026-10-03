@@ -156,9 +156,10 @@ function build(W, H, file) {
     }
     return pts.concat(pts2).join(' ');
   };
+  // чешский флаг: белая и красная полосы + синий клин от древка (слева)
   const band = `<svg class="band" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <polygon points="${brush(44, 9, 1)}" fill="#eef2f9" opacity=".9"/><polygon points="${brush(53, 9, 2)}" fill="#e31e24" opacity=".92"/>
-      <polygon points="${brush(62, 9, 3)}" fill="#304285"/></svg>`;
+      <polygon points="${brush(46, 12, 1)}" fill="#ffffff" opacity=".92"/><polygon points="${brush(58, 12, 2)}" fill="#d7141a" opacity=".95"/>
+      <polygon points="-10,38 22,52 -10,66" fill="#11457e"/></svg>`;
   const STARS = Array.from({ length: 28 }, (_, i) => ({ x: rnd(i * 3 + 1) * 100, y: rnd(i * 5 + 2) * (P ? 70 : 60) + 4, s: 0.6 + rnd(i * 7) * 1.6, p: rnd(i * 11) * 2.2 }));
   const starsHtml = STARS.map((st, i) => `<i class="star" id="star${i}" style="left:${st.x.toFixed(1)}%; top:${st.y.toFixed(1)}%; width:${px(st.s * 1.6)}; height:${px(st.s * 1.6)}"></i>`).join('');
   const starTweens = STARS.map((st, i) => {
@@ -231,7 +232,7 @@ function build(W, H, file) {
       .word span { display:inline-block; color:transparent; -webkit-text-stroke:${px(0.35)} rgba(238,242,249,.9); text-shadow:${px(0.9)} ${px(0.9)} 0 rgba(227,30,36,.75); }
       .slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
       .slash i { position:absolute; left:0; right:0; height:9%; }
-      .slash i:nth-child(1) { top:40%; background:var(--ice); } .slash i:nth-child(2) { top:49%; background:var(--red); } .slash i:nth-child(3) { top:58%; background:var(--blue); }
+      .slash i:nth-child(1) { top:40%; background:var(--blue); } .slash i:nth-child(2) { top:49%; background:var(--red); } .slash i:nth-child(3) { top:58%; background:var(--navy); }
       .plate { position:absolute; display:flex; flex-direction:column; background:#000; padding:${px(1.4)} ${px(3)}; border-left:${px(1.2)} solid var(--red);
         clip-path:polygon(0 0, 100% 0, 96% 100%, 0 100%); }
       .plate b { font-family:Montserrat; font-weight:900; font-style:italic; font-size:${px(P ? 6 : 4.4)}; text-transform:uppercase; letter-spacing:.01em; line-height:1; }
@@ -257,7 +258,7 @@ function build(W, H, file) {
       #k-en { font-size:${px(P ? 4.4 : 3.2)}; font-weight:600; margin-top:${px(2)}; color:#ffd36b; }
       #kin-slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
       #kin-slash i { position:absolute; left:0; right:0; height:6%; }
-      #kin-slash i:nth-child(1) { top:44%; background:var(--ice); } #kin-slash i:nth-child(2) { top:50%; background:var(--red); } #kin-slash i:nth-child(3) { top:56%; background:var(--blue); }
+      #kin-slash i:nth-child(1) { top:44%; background:var(--blue); } #kin-slash i:nth-child(2) { top:50%; background:var(--red); } #kin-slash i:nth-child(3) { top:56%; background:var(--navy); }
       #flash { position:absolute; inset:0; background:var(--ice); opacity:0; pointer-events:none; }
 
       /* вспышка-видение */
@@ -307,7 +308,7 @@ function build(W, H, file) {
       #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
       #wipe { position:absolute; left:-30%; top:-30%; width:160%; height:160%; rotate:-18deg; }
       #wipe i { position:absolute; left:0; right:0; height:24%; }
-      #wipe i:nth-child(1) { top:14%; background:var(--ice); } #wipe i:nth-child(2) { top:38%; background:var(--red); } #wipe i:nth-child(3) { top:62%; background:var(--blue); }
+      #wipe i:nth-child(1) { top:14%; background:var(--blue); } #wipe i:nth-child(2) { top:38%; background:var(--red); } #wipe i:nth-child(3) { top:62%; background:var(--navy); }
       #proto-badge { position:absolute; right:${px(3)}; top:${px(3)}; font-family:Montserrat; font-weight:600; font-size:${px(2)}; letter-spacing:.2em; opacity:.5; }
     </style>
   </head>
