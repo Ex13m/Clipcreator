@@ -14,3 +14,6 @@ proto/assets/placeholder_120bpm.wav
 04_RELEASE/**/work-*/
 04_RELEASE/**/.*hf-transaction*/
 proto/assets/track_edit60.wav
+02_SELECT/**/*.jpg
+02_SELECT/**/*.png
+proto/assets/photos/

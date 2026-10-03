@@ -1,0 +1,122 @@
+{
+"g_event_banner": [
+1200,
+626
+],
+"g_losovani_den1": [
+3840,
+2300
+],
+"g_team_belgium": [
+984,
+1223
+],
+"g_team_bulgaria": [
+916,
+1099
+],
+"g_team_germany": [
+1600,
+900
+],
+"g_team_hungary": [
+1200,
+628
+],
+"g_team_moldova": [
+1134,
+1600
+],
+"g_team_poland": [
+1536,
+1024
+],
+"g_team_slovakia": [
+1534,
+1024
+],
+"p_car": [
+1080,
+1920
+],
+"p_ceremony_hall": [
+1920,
+1280
+],
+"p_cheers": [
+1920,
+1440
+],
+"p_green_fish": [
+1440,
+1920
+],
+"p_lake_mist": [
+1620,
+1080
+],
+"p_landing1": [
+1440,
+1920
+],
+"p_landing2": [
+1440,
+1920
+],
+"p_lunch": [
+1920,
+1440
+],
+"p_net_close": [
+1440,
+1920
+],
+"p_plaque_1st": [
+1440,
+1920
+],
+"p_portrait_dres": [
+1440,
+1920
+],
+"p_reeling": [
+1440,
+1920
+],
+"p_selfie_lake": [
+1920,
+1440
+],
+"p_stage_cz": [
+1448,
+1086
+],
+"p_team_romania": [
+1920,
+1440
+],
+"p_training_plan": [
+1440,
+1920
+],
+"p_trenink_gear": [
+1920,
+1440
+],
+"p_trophies": [
+1920,
+1336
+],
+"p_tying_ms": [
+1440,
+1920
+],
+"p_tying_young": [
+1440,
+1920
+],
+"p_winners": [
+1448,
+1086
+]
+}
