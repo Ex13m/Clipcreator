@@ -159,7 +159,7 @@ const P = [
     cam: 'Kamera: jeřáb vzhůru + 3D otočka loga (three.js)', art: () => svg([sky('#0b1e42', '#304285', '#f6e2b4'), desert(), logoDisc(480, 250, 70, HB),
       `<g opacity=".25">${Array.from({ length: 9 }, (_, i) => `<path d="M 480 250 L ${480 + Math.cos(-Math.PI * (i + 1) / 10) * 600} ${250 + Math.sin(-Math.PI * (i + 1) / 10) * 600}" stroke="#f6e2b4" stroke-width="3"/>`).join('')}</g>`,
       `<text x="480" y="420" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="40" fill="#eef2f9">H-BATTLE <tspan fill="#e31e24">2026</tspan></text>
-       <text x="480" y="452" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="16" letter-spacing="4" fill="#eef2f9">SLOVENSKO · 1.–2. 10. 2026</text>`,
+       <text x="480" y="452" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="16" letter-spacing="4" fill="#eef2f9">HOFER LAKE · PRUŽINA (SK) · 2.–4. 10. 2026</text>`,
       widget(720, 470, .95), arrow(480, 330, 480, 290)]) },
   { t: '0:05.2–0:11.2', ttl: 'Nepřijeli jsme bojovat…', en: '…přijeli jsme za přáteli.',
     act: 'Slova jako kamenné desky v poušti, padají do písku po dobách. Poslední deska „přáteli.“ je červená; pod ní EN titulek.',
@@ -213,7 +213,7 @@ const P = [
     cam: 'Kamera: pomalý pull-out, rameno zpět do klidu', art: () => svg([sky(), desert(), deadTree(380, 380, 1.2),
       meltDisc(420, 170, 60, TA, .9, -6), meltDisc(570, 190, 56, HB, 1.0, 8),
       `<text x="480" y="420" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="26" fill="#eef2f9">Nepřijeli jsme bojovat. <tspan fill="#e31e24">Přijeli jsme za přáteli.</tspan></text>
-       <text x="480" y="450" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="14" letter-spacing="3" fill="#eef2f9">H-BATTLE 2026 · SLOVENSKO · 1.–2. 10. 2026</text>`,
+       <text x="480" y="450" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="14" letter-spacing="3" fill="#eef2f9">H-BATTLE 2026 · HOFER LAKE · PRUŽINA (SK) · 2.–4. 10. 2026</text>`,
       widget(720, 470, .95, false)]) },
 ];
 

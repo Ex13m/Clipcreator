@@ -1,6 +1,6 @@
 # H-BATTLE 2026 — začátek
 
-Video-prezentace pro Trout Area Czech Republic (Slovensko, 1.–2. 10. 2026).
+Video-prezentace pro Trout Area Czech Republic (Hofer Lake – Pružina, SK, 2.–4. 10. 2026; Trout Area European Hardbaits CUP 2026, pořádá Trout Area Slovakia + H-Battle).
 Koncepce: «Nepřijeli jsme bojovat, přijeli jsme za přáteli». 9:16 + 16:9, ~60 s, pod trek Suno.
 
 ## Struktura (zrcadlí `G:\Мой диск\TROUT AREA NEW\competition\HB battle 2026\`)
