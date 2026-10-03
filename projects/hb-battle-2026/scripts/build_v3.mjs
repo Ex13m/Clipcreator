@@ -22,9 +22,8 @@ const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), '
 const SCENES = [
   [s(5), s(9), 'prijezd', 'Příjezd', 'Arrival'],
   [s(9), s(16), 'trenink', 'Den 1 · trénink', 'Day 1 · practice'],
-  [s(18), s(20), 'prezentace', 'Prezentace týmů', 'Team presentation'],
-  [s(20), s(22), 'zahajeni', 'Zahájení', 'Opening ceremony'],
-  [s(22), s(25), 'losovani', 'Losování', 'The draw'],
+  [s(18), s(20), 'zmena', 'Změna v sestavě', 'Line-up change'],
+  [s(20), s(25), 'losovani', 'Losování', 'The draw'],
   [s(25), s(26), 'vtip', 'Zákulisí', 'Backstage'],
   [s(26), s(29), 'pratele', 'Přátelé', 'Friends'],
 ];
@@ -33,7 +32,7 @@ const SCENES = [
 // типы: enter (рамка в пустыне → въезд в кадр), easel (мольберт), tree (рамка на ветке), stilts (рамка на ногах-ходулях), full (почти во весь кадр), card (карточка «Přátelé»)
 const SH = (n, a, b, sc, img, kind, mv, o = {}) => ({ n, a, b, d: len(a, b), sc, img, kind, mv, ...o });
 const MONT = ['g_team_moldova', 'g_team_germany', 'g_team_slovakia', 'g_team_bulgaria', 'g_team_hungary', 'g_team_poland',
-  'g_team_belgium', 'p_team_romania', 'p_selfie_lake', 'p_ceremony_hall', 'p_cheers', 'g_event_banner'];
+  'g_team_belgium', 'p_team_romania', 'p_trophies', 'p_trenink_gear', 'p_landing1', 'g_event_banner'];
 const MONT_MV = ['push', 'pull', 'push', 'pull', 'push', 'pull', 'push', 'pull', 'push', 'pull', 'push', 'pull'];
 const SHOTS = [
   // příjezd: машина «на ходулях» → озеро-картина, въезд внутрь
@@ -42,19 +41,18 @@ const SHOTS = [
   // trénink: по такту, к концу — по полтакта (разгон перед брейком)
   SH(3, s(9), s(10), 'trenink', 'p_trenink_gear', 'easel', 'panL'),
   SH(4, s(10), s(11), 'trenink', 'p_tying_young', 'tree', 'push'),
-  SH(5, s(11), s(12), 'trenink', 'p_training_plan', 'full', 'tilt'),
+  SH(5, s(11), s(12), 'trenink', 'p_selfie_lake', 'full', 'tilt'),
   SH(6, s(12), s(13), 'trenink', 'p_tying_ms', 'easel', 'pull'),
   SH(7, s(13), s(14), 'trenink', 'p_reeling', 'stilts', 'panR'),
   SH(8, s(14), s(15), 'trenink', 'p_landing1', 'full', 'push'),
   SH(9, s(15), s(15, 2), 'trenink', 'p_landing2', 'card', 'push', { tilt: -2 }),
   SH(10, s(15, 2), s(16), 'trenink', 'p_net_close', 'card', 'pull', { tilt: 2 }),
   // prezentace
-  SH(11, s(18), s(19), 'prezentace', 'p_stage_cz', 'full', 'push', { flag: true }),
-  SH(12, s(19), s(20), 'prezentace', 'p_portrait_dres', 'easel', 'pull'),
+  SH(11, s(18), s(19), 'zmena', 'g_zmena_sestavy', 'full', 'push'),
+  SH(12, s(19), s(20), 'zmena', 'p_green_fish', 'full', 'pull', { crop: [100, 50, 30], aspect: 0.95 }),
   // zahájení
-  SH(13, s(20), s(21), 'zahajeni', 'p_ceremony_hall', 'full', 'push'),
-  SH(14, s(21), s(21, 2), 'zahajeni', 'g_event_banner', 'easel', 'tilt'),
-  SH(15, s(21, 2), s(22), 'zahajeni', 'p_trophies', 'easel', 'pull'),
+  SH(13, s(20), s(21), 'losovani', 'p_training_plan', 'full', 'tilt', { crop: [100, 50, 62], aspect: 0.9 }),
+  SH(14, s(21), s(22), 'losovani', 'p_portrait_dres', 'easel', 'push'),
   // zákulisí: «boj» = guláš
   SH(16, s(25), s(26), 'vtip', 'p_lunch', 'tree', 'whip', { stache: true }),
   // přátelé: 12 кадров по доле
@@ -181,7 +179,7 @@ function build(W, H, file) {
       </section>`).join('');
 
   // переходы на стыках сцен
-  const cuts = [s(5), s(9), s(18), s(20), s(22), s(25), s(26), s(29)];
+  const cuts = [s(5), s(9), s(18), s(20), s(25), s(26), s(29)];
   const wipes = cuts.map((t, i) => `tl.fromTo("#wipe", {xPercent:-101}, {xPercent:101, duration:0.5, ease:"power2.inOut"${i ? ', immediateRender:false' : ''}}, ${at(t - 0.25)});`).join('\n      ');
 
   // кинетика: брейк (такт 16) и пик (такт 17) — слова на каменных плитах в пустыне
@@ -267,7 +265,8 @@ function build(W, H, file) {
       .chip-cz { font-family:Montserrat; font-weight:800; font-size:${px(P ? 4.4 : 3.2)}; text-transform:uppercase; }
       .chip-en { font-size:${px(P ? 3.4 : 2.5)}; opacity:.75; }
       #lt-cz .lt { position:absolute; left:${px(7)}; ${P ? `top:${px(26)}` : `top:${px(8)}`}; background:var(--ice); color:var(--navy); padding:${px(1.6)} ${px(3)};
-        font-family:Montserrat; font-weight:800; font-size:${px(P ? 5.4 : 4)}; letter-spacing:.04em; }
+        font-family:Montserrat; font-weight:800; font-size:${px(P ? 5 : 3.6)}; letter-spacing:.04em; }
+      .lt-sub { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.6em; letter-spacing:0; color:var(--red); margin-top:${px(0.4)}; }
 
       /* жеребьёвка */
       #draw .chest { position:absolute; left:50%; width:${px(P ? 70 : 56)}; margin-left:${px(P ? -35 : -28)}; top:${(HZ * 100 - 6).toFixed(1)}%; height:${px(P ? 26 : 20)};
@@ -354,8 +353,8 @@ function build(W, H, file) {
 
       ${chipsHtml}
 
-      <section id="lt-cz" class="clip" data-start="${at(s(18, 1))}" data-duration="${len(s(18, 1), s(19))}" data-track-index="5">
-        <div id="lt-box" class="lt">TÝM ČESKÁ REPUBLIKA</div>
+      <section id="lt-cz" class="clip" data-start="${at(s(19))}" data-duration="${len(s(19), s(20))}" data-track-index="5">
+        <div id="lt-box" class="lt">MARTIN STOKLASA <span class="lt-sub">nastupuje do sestavy</span></div>
       </section>
 
       <section id="vtip-cap" class="clip" data-start="${at(s(25, 1))}" data-duration="${len(s(25, 1), s(26))}" data-track-index="5">
@@ -364,7 +363,7 @@ function build(W, H, file) {
 
       <section id="outro" class="clip" data-start="${at(s(29))}" data-duration="${len(at(s(29)), DUR)}" data-track-index="3">
         <div id="win-cam" class="layer">
-          <div class="frame win" style="rotate:-2deg"><div class="photo" style="width:100%; height:100%; background-image:url(assets/photos/p_winners.jpg); background-size:cover; background-position:50% 50%"></div></div>
+          <div class="frame win" style="rotate:-2deg"><div class="photo" style="width:100%; height:100%; background-image:url(assets/photos/p_cheers.jpg); background-size:cover; background-position:50% 50%"></div></div>
         </div>
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
@@ -414,7 +413,7 @@ function build(W, H, file) {
       ${kin}
       ${shotTweens}
       ${SCENES.map(([st, , id]) => `tl.fromTo("#chip-${id} .chip", {xPercent:-120}, {xPercent:0, duration:0.4, ease:"power3.out"}, ${at(st + G.beat)});`).join('\n      ')}
-      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.35, ease: "power3.out" }, ${at(s(18, 1))});
+      tl.fromTo("#lt-box", { xPercent: -110 }, { xPercent: 0, duration: 0.35, ease: "power3.out" }, ${at(s(19))});
       tl.fromTo("#vtip-text", { opacity: 0, y: ${Math.round(3 * u)} }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, ${at(s(25, 1))});
       // жеребьёвка: лист выезжает из комода, камера идёт по секторам 1→4
       tl.fromTo("#draw-sheet", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, ${at(s(22))});
