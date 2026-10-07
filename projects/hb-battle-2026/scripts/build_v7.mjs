@@ -13,8 +13,8 @@ const G0 = JSON.parse(fs.readFileSync(path.join(ROOT, '03_MUSIC/Trout_Area.beats
 // полный трек Suno 1:33 без монтажа
 const G = { beats: G0.beats, downbeats: G0.downbeats, duration: G0.duration, beat: +(G0.beats.slice(1).map((t, i) => t - G0.beats[i]).sort((a, b) => a - b)[Math.floor(G0.beats.length / 2)]).toFixed(4) };
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
-const NO_CUT = new Set(['p_podium', 'p_trenink_gear', 'p_landing2']);
-const GROUP = new Set(['p_team_romania', 'p_lunch', 'p_cheers', 'p_selfie_lake', 'p_car']);
+const NO_CUT = new Set(['p_podium', 'p_trenink_gear', 'p_landing2', 'p_fishpen', 'p_seq1', 'p_seq2', 'p_seq3', 'p_seq4', 'p_plaque']);
+const GROUP = new Set(['p_team_romania', 'p_team_romania_hi', 'p_lunch', 'p_cheers', 'p_selfie_lake', 'p_car', 'p_laugh']);
 
 const T0 = 1.2, SONG = G.duration, DUR = +(T0 + SONG + 0.6).toFixed(2);
 const at = (x) => +(x + T0).toFixed(3);
@@ -61,28 +61,32 @@ const SCENES = [
 ];
 const PH = (n, a, b, img, o = {}) => ({ n, a, b, d: len(a, b), img, ...o });
 const SHOTS = [
-  PH(1, s(5), s(7), 'p_car', { word: 'Cesta', sub: 'Na Slovensko' }),
-  PH(2, s(7), s(8), 'p_lake_mist', { word: 'Pružina', sub: 'Hofer Lake' }),
-  PH(3, s(8), s(9), 'p_selfie_lake', { word: 'Ráno' }),
-  PH(4, s(12), s(13), 'p_green_fish', { word: '#55', plate: ['Martin Stoklasa', 'nastupuje · sektor 4'] }),
-  PH(5, s(18), s(19), 'p_tying_young', { word: 'Uzly' }),
-  PH(6, s(19), s(20), 'p_tying_ms', { word: 'Klid' }),
-  PH(7, s(20), s(21), 'p_reeling', { word: 'Záběr' }),
-  PH(8, s(21), s(22), 'p_landing1', { word: 'Podběrák' }),
-  PH(9, s(22), s(23), 'p_landing2', { word: 'Máme ho!' }),
-  PH(10, s(23), s(24), 'p_svub_water', { word: '#23', plate: ['Dominik Švub', 'Hofer Lake'] }),
-  PH(11, s(24), s(25), 'p_net_close', { word: 'Pstruh' }),
-  PH(12, s(25), s(26), 'p_trenink_gear', { word: 'Tým' }),
-  PH(13, s(34), s(35), 'p_podium', { word: 'Top 3', sub: '1. Litva · 2. Ukrajina · 3. Bulharsko' }),
-  PH(14, s(36), s(37), 'p_team_romania', { word: 'Přátelé', sub: 'Team Romania' }),
-  PH(15, s(37), s(38), 'p_lunch', { word: 'Boj', caption: ['Takhle vypadá náš „boj“.', 'This is what our “battle” looks like.'] }),
-  PH(16, s(38), s(39), 'p_trophies', { word: 'Poháry', sub: 'O tohle se hrálo' }),
-  PH(17, s(39), s(43), 'p_lake_mist', { quote: true }),
-  // рекап: по одному фото на долю (4 такта = 16 долей)
-  ...['p_car', 'p_lake_mist', 'p_selfie_lake', 'p_tying_young', 'p_reeling', 'p_landing1', 'p_landing2', 'p_svub_water',
-    'p_net_close', 'p_green_fish', 'p_portrait_dres', 'p_lunch', 'p_team_romania', 'p_trophies', 'p_podium', 'p_cheers']
-    .map((img, k) => PH(18 + k, s(43, k), s(43, k + 1), img, { flash: true })),
-  PH(34, s(47), s(47) + 0.001, 'p_cheers', { final: true }),
+  PH(1, s(5), s(6), 'p_car', { word: 'Cesta', sub: 'Na Slovensko' }),
+  PH(2, s(6), s(7), 'p_lake_mist', { word: 'Pružina', sub: 'Hofer Lake' }),
+  PH(3, s(7), s(8), 'p_fishpen', { word: '300 kg', sub: 'Zarybnění · pstruzi čekají' }),
+  PH(4, s(8), s(9), 'p_selfie_lake', { word: 'Ráno' }),
+  PH(5, s(12), s(13), 'p_green_fish', { word: '#55', plate: ['Martin Stoklasa', 'nastupuje · sektor 4'] }),
+  PH(6, s(18), s(19), 'p_tying_young', { word: 'Uzly' }),
+  PH(7, s(19), s(20), 'p_phone', { word: 'Plán', sub: '12 kol tréninku' }),
+  PH(8, s(20), s(21), 'p_tying_ms', { word: 'Klid' }),
+  PH(9, s(21), s(22), 'p_reeling', { word: 'Záběr' }),
+  // stop-motion: podebírání po dobách
+  PH(10, s(22, 0), s(22, 1), 'p_seq1', { flash: true, word: 'Pod' }),
+  PH(11, s(22, 1), s(22, 2), 'p_seq2', { flash: true, word: 'bě' }),
+  PH(12, s(22, 2), s(22, 3), 'p_seq3', { flash: true, word: 'rák' }),
+  PH(13, s(22, 3), s(23), 'p_seq4', { flash: true, word: '!' }),
+  PH(14, s(23), s(24), 'p_svub_water', { word: '#23', plate: ['Dominik Švub', 'Hofer Lake'] }),
+  PH(15, s(24), s(25), 'p_net_close', { word: 'Pstruh' }),
+  PH(16, s(25), s(26), 'p_kucera_lake', { word: 'Fokus' }),
+  PH(17, s(34), s(35), 'p_podium', { word: 'Top 3', sub: '1. Litva · 2. Ukrajina · 3. Bulharsko' }),
+  PH(18, s(36), s(37), 'p_team_romania_hi', { word: 'Přátelé', sub: 'Team Romania' }),
+  PH(19, s(37), s(38), 'p_lunch', { word: 'Boj', caption: ['Takhle vypadá náš „boj“.', 'This is what our “battle” looks like.'] }),
+  PH(20, s(38), s(39), 'p_laugh', { word: 'Smích' }),
+  PH(21, s(39), s(43), 'p_lake_mist', { quote: true }),
+  ...['p_car', 'p_lake_mist', 'p_fishpen', 'p_tying_young', 'p_phone', 'p_seq2', 'p_seq4', 'p_svub_water',
+    'p_net_close', 'p_green_fish', 'p_portrait_dres', 'p_lunch', 'p_team_romania_hi', 'p_laugh', 'p_plaque', 'p_cheers']
+    .map((img, k) => PH(22 + k, s(43, k), s(43, k + 1), img, { flash: true })),
+  PH(38, s(47), s(47) + 0.001, 'p_cheers', { final: true }),
 ];
 
 function build(W, H, file) {
@@ -117,7 +121,7 @@ function build(W, H, file) {
     const side = !P && b.w < W * 0.72, above = P && b.h < H * 0.62;
     const depth = fg && !side && !above && !GROUP.has(sh.img);
     let wstyle = `font-size:${f(wordSize(word))}`;
-    if (side) { const ww = Math.max(b.x - 6 * u, 24 * u); wstyle = `left:${f(4 * u)}; right:auto; width:${f(ww)}; top:${f(H * 0.3)}; text-align:left; white-space:normal; font-size:${f(Math.min(14 * u, ww / (Math.max(3, Math.min(word.length, 8)) * 0.68)))}`; }
+    if (side) { const ww = Math.max(b.x - 6 * u, 24 * u); wstyle = `left:${f(8 * u)}; right:auto; width:${f(ww)}; top:${f(H * 0.3)}; text-align:left; white-space:nowrap; font-size:${f(Math.min(13 * u, ww / (Math.max(3, word.length) * 0.86)))}`; }
     if (above) wstyle = `top:${f(Math.max(6 * u, b.y - 22 * u))}; font-size:${f(Math.min(18 * u, wordSize(word)))}`;
     const wordEl = word ? `<div class="bigword${depth ? '' : ' over'}" style="${wstyle}"><span>${word}</span></div>` : '';
     return `
@@ -154,7 +158,7 @@ function build(W, H, file) {
     if (sh.word) {
       const tw = inBeats[0] ?? sh.a;
       T('.bigword span', { yPercent: 105, skewY: 8 }, { yPercent: 0, skewY: 0, duration: 0.45, ease: 'expo.out' }, at(tw));
-      T('.bigword', { x: 0 }, { x: -2.5 * u, duration: Math.max(0.3, end - tw), ease: 'none' }, at(tw));
+      T('.bigword', { x: 0 }, { x: 1.5 * u, duration: Math.max(0.3, end - tw), ease: 'none' }, at(tw));
     }
     if (sh.sub) T('.sub span', { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: 'power3.out' }, at(inBeats[1] ?? sh.a + BEAT));
     if (sh.plate) {
@@ -306,7 +310,7 @@ function build(W, H, file) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=${W}, height=${H}" />
-    <title>HB BATTLE 2026 – začátek (${P ? '9:16' : '16:9'}) — v7</title>
+    <title>HB BATTLE 2026 – začátek (${P ? '9:16' : '16:9'}) — v8</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       ${FONTS}
@@ -659,7 +663,7 @@ function build(W, H, file) {
       </div>
       <div id="grain"></div>
       
-      <div id="proto-badge">DRAFT · v7</div>
+      <div id="proto-badge">DRAFT · v8</div>
 
       <audio id="bgm" src="assets/track_full.wav" data-start="${T0}" data-duration="${SONG}" data-track-index="9" data-volume="1"></audio>
     </div>
