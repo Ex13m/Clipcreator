@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>H-BATTLE 2026 – začátek (16:9) — v4</title>
+    <title>HB BATTLE 2026 – začátek (16:9) — v6</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
@@ -21,92 +21,185 @@
 @font-face{font-family:'Montserrat';font-weight:900;font-style:italic;src:url(assets/fonts/montserrat-latin-ext-900-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
 @font-face{font-family:'Montserrat';font-weight:900;font-style:italic;src:url(assets/fonts/montserrat-latin-900-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 
-      :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; }
-      body { margin:0; background:var(--navy); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
-      #root { position:relative; width:100%; height:100%; overflow:hidden; background:var(--navy); }
+      :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; --deep:#050d22; }
+      body { margin:0; background:var(--deep); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
+      #root { position:relative; width:100%; height:100%; overflow:hidden; background:var(--deep); }
       .clip { position:absolute; inset:0; }
 
-      /* постер-фон */
-      #stage { position:absolute; inset:0; overflow:hidden; }
-      #st-bg { position:absolute; inset:-65px; background:radial-gradient(90% 60% at 50% 38%, #1d3a86 0%, #0b1e42 62%, #050d22 100%); }
-      #st-rays { position:absolute; left:50%; top:38%; width:2808px; height:2808px; margin:-1404px 0 0 -1404px; border-radius:50%; opacity:.22;
-        background:repeating-conic-gradient(from 0deg, rgba(238,242,249,.55) 0deg 3deg, transparent 3deg 14deg);
-        -webkit-mask-image:radial-gradient(circle, #000 0%, transparent 62%); }
-      .band { position:absolute; left:-108px; width:calc(100% + 216px); top:0%; height:100%; transform-origin:50% 50%; }
-      #st-band { position:absolute; inset:0; rotate:-12deg; opacity:.55; }
-      #st-dots { position:absolute; inset:0; opacity:.16; background:radial-gradient(circle, #9cc8f0 2px, transparent 3px) 0 0 / 17px 17px;
-        -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 55%, transparent 100%); }
-      .star { position:absolute; background:#fff; clip-path:polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); box-shadow:0 0 11px #fff; }
+      /* фон: мягкий mesh-gradient + зерно */
+      #mesh { position:absolute; inset:0; overflow:hidden; background:linear-gradient(180deg, #0b1e42 0%, #050d22 100%); }
+      .blob { position:absolute; border-radius:50%; filter:blur(108px); }
+      #b1 { width:972px; height:972px; left:-15%; top:5%; background:radial-gradient(circle, rgba(48,66,133,.85), transparent 70%); }
+      #b2 { width:756px; height:756px; right:-12%; top:40%; background:radial-gradient(circle, rgba(227,30,36,.28), transparent 70%); }
+      #b3 { width:864px; height:864px; left:20%; bottom:-25%; background:radial-gradient(circle, rgba(64,110,200,.45), transparent 70%); }
+      #grain { position:absolute; inset:0; background:url(assets/grain.png) 0 0 / 256px 256px; opacity:.55; mix-blend-mode:overlay; pointer-events:none; }
 
       #three-wrap { position:absolute; inset:0; }
       #three-layer { width:100%; height:100%; display:block; }
 
-      /* шоты */
+      /* фото-шоты без рамок */
       .cam { position:absolute; inset:0; }
-      .pbox { position:absolute; }
-      .pbox.panel .clipbox { box-shadow:0 0 0 8px var(--ice), 17px 22px 43px rgba(0,0,0,.55); }
-      .clipbox { position:absolute; inset:0; overflow:hidden; }
-      .ph, .gbg, .gfg { position:absolute; inset:0; background-size:cover; background-position:50% 50%; background-repeat:no-repeat; }
-      .rv { position:absolute; inset:0; }
-      .gfg { filter:drop-shadow(9px 13px 15px rgba(0,0,0,.55)); transform-origin:50% 100%; }
-      .word { position:absolute; font-family:Montserrat; font-weight:900; font-style:italic; line-height:.9; text-transform:uppercase; white-space:nowrap; pointer-events:none; }
-      .word span { display:inline-block; color:transparent; -webkit-text-stroke:4px rgba(238,242,249,.9); text-shadow:10px 10px 0 rgba(227,30,36,.75); }
-      .slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
-      .slash i { position:absolute; left:0; right:0; height:9%; }
-      .slash i:nth-child(1) { top:40%; background:var(--blue); } .slash i:nth-child(2) { top:49%; background:var(--red); } .slash i:nth-child(3) { top:58%; background:var(--navy); }
-      .plate { position:absolute; display:flex; flex-direction:column; background:#000; padding:15px 32px; border-left:13px solid var(--red);
-        clip-path:polygon(0 0, 100% 0, 96% 100%, 0 100%); }
-      .plate b { font-family:Montserrat; font-weight:900; font-style:italic; font-size:48px; text-transform:uppercase; letter-spacing:.01em; line-height:1; }
-      .plate i { font-style:normal; font-weight:600; font-size:27px; color:#ffd36b; margin-top:6px; }
-      .caption { position:absolute; font-family:Montserrat; font-weight:900; font-style:italic; font-size:48px; line-height:1.05; text-shadow:0 4px 17px rgba(0,0,0,.7); }
-      .caption span { display:block; font-family:'Source Sans 3'; font-style:normal; font-weight:600; font-size:.5em; margin-top:11px; opacity:.9; }
+      .ph, .gbg, .gfg { position:absolute; inset:0; background-size:cover; background-position:50% 35%; background-repeat:no-repeat; }
+      .ph, .gbg { -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 52%, transparent 92%); }
+      .ph { filter:saturate(.9) brightness(.85); }
+      .gfg { filter:drop-shadow(0 16px 32px rgba(0,0,0,.55)); -webkit-mask-image:linear-gradient(180deg, #000 70%, transparent 96%); }
+      .bigword { position:absolute; left:0; right:0; top:10%; text-align:center; overflow:hidden; line-height:.86; pointer-events:none;
+        font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; white-space:nowrap; }
+      .bigword span { display:inline-block; color:var(--ice); opacity:.95; }
+      .sub { position:absolute; left:65px; right:65px; bottom:216.0px; overflow:hidden; font-family:Montserrat; font-weight:600; font-size:30px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      .sub span { display:inline-block; }
+      .plate { position:absolute; left:65px; bottom:205.2px; display:flex; flex-direction:column; gap:4px; }
+      .plate b { font-family:Montserrat; font-weight:900; font-size:54px; letter-spacing:-.01em; line-height:1; }
+      .plate i { font-style:normal; font-weight:600; font-size:27px; color:#ffd36b; letter-spacing:.06em; text-transform:uppercase; }
+      .caption { position:absolute; left:65px; right:65px; bottom:205.2px; font-family:Montserrat; font-weight:900; font-size:50px; line-height:1.04; }
+      .caption span { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; margin-top:11px; color:#ffd36b; }
 
-      /* титул */
-      #title-clip .t-wrap { position:absolute; left:54px; right:54px; top:60%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
-      .t-main { font-family:Montserrat; font-weight:900; font-style:italic; font-size:103px; line-height:.95; text-shadow:6px 6px 0 var(--red), 0 9px 32px rgba(0,0,0,.6); }
-      .t-cup { font-family:Montserrat; font-weight:800; font-style:italic; font-size:31px; text-transform:uppercase; letter-spacing:.04em; }
-      .t-sub { font-family:Montserrat; font-weight:600; font-size:27px; letter-spacing:.18em; text-transform:uppercase; color:#ffd36b; }
+      /* общие заголовки инфографики */
+      .h2 { overflow:hidden; display:flex; flex-direction:column; }
+      .h2 span { display:block; font-family:Montserrat; font-weight:900; font-size:69px; letter-spacing:-.02em; line-height:.95; text-transform:uppercase; }
+      .h2 em { font-style:normal; font-weight:600; font-size:26px; color:#ffd36b; letter-spacing:.1em; text-transform:uppercase; margin-top:11px; }
+      .panel { position:absolute; left:65px; right:65px; top:9%; }
+
+      /* интро-титул и счётчики */
+      #title-clip .t-wrap { position:absolute; left:65px; right:65px; top:56%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
+      .t-main { font-family:Montserrat; font-weight:900; font-size:108px; letter-spacing:-.03em; line-height:.9; }
+      .t-main .red { color:var(--red); }
+      .t-cup { font-family:Montserrat; font-weight:700; font-size:26px; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+      .counts { display:flex; gap:65px; margin-top:22px; }
+      .cnt { display:flex; flex-direction:column; align-items:center; }
+      .cnt b { font-family:Montserrat; font-weight:900; font-size:65px; line-height:1; color:var(--ice); font-variant-numeric:tabular-nums; }
+      .cnt i { font-style:normal; font-weight:600; font-size:23px; color:#ffd36b; text-transform:uppercase; letter-spacing:.08em; }
+
+      /* состав */
+      .rgrid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:38px; }
+      .rcard { display:flex; align-items:center; gap:26px; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); border-radius:26px; padding:22px 28px;
+        backdrop-filter:blur(16px); }
+      .rno { flex:none; width:97px; height:97px; border-radius:22px; background:var(--red); display:grid; place-items:center;
+        font-family:Montserrat; font-weight:900; font-size:48px; }
+      .rtx { display:flex; flex-direction:column; }
+      .rtx b { font-family:Montserrat; font-weight:800; font-size:39px; line-height:1.05; }
+      .rtx i { font-style:normal; font-weight:600; font-size:24px; color:#9fb4e6; }
+      #roster-coach { margin-top:28px; font-weight:600; font-size:27px; color:#ffd36b; letter-spacing:.06em; text-transform:uppercase; }
+
+      /* замена */
+      .swap { display:flex; flex-direction:row; align-items:center; gap:32px; margin-top:54px; }
+      .person { position:relative; flex:1; border-radius:26px; padding:32px; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); }
+      .person b { display:block; font-family:Montserrat; font-weight:900; font-size:54px; line-height:1; }
+      .person i { display:block; font-style:normal; font-weight:600; font-size:26px; color:#9fb4e6; margin-top:11px; text-transform:uppercase; letter-spacing:.06em; }
+      .person .tag { display:inline-block; margin-bottom:13px; font-family:Montserrat; font-weight:800; font-size:22px; padding:6px 15px; border-radius:11px; }
+      #swap-out .tag { background:rgba(238,242,249,.15); }
+      #swap-in { background:linear-gradient(135deg, rgba(227,30,36,.35), rgba(48,66,133,.35)); border-color:rgba(227,30,36,.6); }
+      #swap-in .tag { background:var(--red); }
+      .strike { position:absolute; left:32px; right:32px; top:40%; height:8px; background:var(--red); transform-origin:left center; }
+      .arrow { font-family:Montserrat; font-weight:900; font-size:65px; color:var(--red); text-align:center; }
+      #swap-note { margin-top:32px; font-weight:600; font-size:28px; color:#ffd36b; }
+
+      /* сектора */
+      #lake { height:11px; margin-top:54px; border-radius:11px; background:linear-gradient(90deg, #9cc8f0, #304285, #9cc8f0); transform-origin:left center; }
+      .secs { display:grid; grid-template-columns:repeat(4, 1fr); gap:26px; margin-top:26px; }
+      .sec { border-radius:26px; padding:26px; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); display:flex; flex-direction:column; }
+      .sec-h { font-family:Montserrat; font-weight:800; font-size:26px; text-transform:uppercase; letter-spacing:.08em; color:#9fb4e6; }
+      .sec-r { font-size:23px; color:rgba(238,242,249,.6); }
+      .sec-no { font-family:Montserrat; font-weight:900; font-size:119px; line-height:1; color:var(--red); margin-top:13px; transform-origin:left bottom; }
+      .sec-n { font-family:Montserrat; font-weight:800; font-size:32px; text-transform:uppercase; }
+
+      /* поединки */
+      .duels { display:grid; grid-template-columns:repeat(4, 1fr); gap:19px; margin-top:32px; }
+      .dcol { border-radius:22px; background:rgba(238,242,249,.95); color:var(--navy); overflow:hidden; }
+      .dh { display:flex; align-items:center; gap:13px; background:var(--navy); color:var(--ice); padding:13px 15px; border-bottom:4px solid var(--red); }
+      .dno { background:var(--red); border-radius:9px; padding:2px 9px; font-family:Montserrat; font-weight:900; font-size:25px; }
+      .dh b { font-family:Montserrat; font-weight:800; font-size:22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .dwin { height:calc(9 * 36px); overflow:hidden; }
+      .drow { display:grid; grid-template-columns:28px 32px 1fr 32px; align-items:center; height:36px; padding:0 13px;
+        font-size:19px; border-bottom:1px solid rgba(11,30,66,.08); }
+      .dk { font-weight:700; color:#9fb4e6; } .dn { font-weight:800; color:var(--red); } .dname { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .dc { font-weight:700; text-align:right; color:var(--blue); }
+      #duels-note { margin-top:17px; font-size:19px; color:rgba(238,242,249,.6); }
+
+      /* страны */
+      .chips { display:flex; flex-wrap:wrap; gap:17px; margin-top:43px; max-width:1296px; }
+      .chips span { font-family:Montserrat; font-weight:900; font-size:45px; padding:11px 24px; border-radius:17px;
+        background:rgba(238,242,249,.07); border:1px solid rgba(238,242,249,.16); }
+      .chips span.cz { background:var(--red); border-color:var(--red); }
+      #world-sub { margin-top:32px; font-family:Montserrat; font-weight:800; font-size:32px; }
+      #world-sub em { font-style:normal; color:var(--red); }
+
+      /* результаты */
+      .prows { display:flex; flex-direction:column; gap:19px; margin-top:32px; }
+      .prow { display:grid; grid-template-columns:86px 1fr 119px; align-items:center; gap:22px; }
+      .pava { position:relative; width:86px; height:86px; border-radius:50%; background:linear-gradient(135deg, #304285, #0b1e42); border:4px solid rgba(238,242,249,.35); display:grid; place-items:center; color:#9fc4f0; }
+      .pava .ico { width:62%; height:62%; }
+      .pava span { position:absolute; right:-9px; bottom:-9px; background:var(--red); color:#fff; border-radius:11px; padding:0 9px; font-family:Montserrat; font-weight:900; font-size:21px; }
+      .pname { font-family:Montserrat; font-weight:800; font-size:30px; line-height:1.1; }
+      .pname i { display:block; font-family:'Source Sans 3'; font-style:normal; font-weight:600; font-size:19px; color:#9fb4e6; }
+      .pbar { position:relative; height:19px; margin-top:11px; border-radius:14px; background:rgba(238,242,249,.08); overflow:hidden; }
+      .pb1, .pb2 { position:absolute; top:0; bottom:0; transform-origin:left center; }
+      .pb1 { left:0; background:linear-gradient(90deg, #304285, #4b6bd1); border-radius:14px 0 0 14px; }
+      .pb2 { background:linear-gradient(90deg, #e31e24, #ff5a5f); border-radius:0 14px 14px 0; }
+      .pval { text-align:right; } .pval b { font-family:Montserrat; font-weight:900; font-size:65px; font-variant-numeric:tabular-nums; } .pval i { font-style:normal; font-weight:700; color:#9fb4e6; margin-left:4px; }
+      #pts-total { margin-top:28px; display:flex; align-items:baseline; gap:22px; }
+      #pts-total b { font-family:Montserrat; font-weight:900; font-size:86px; color:var(--red); line-height:1; }
+      #pts-total span { font-weight:600; font-size:24px; color:#ffd36b; }
+      .heat { display:flex; flex-direction:column; gap:19px; margin-top:32px; }
+      .hrow { display:flex; flex-direction:row; align-items:center; gap:22px; }
+      .hname { width:238px; font-family:Montserrat; font-weight:800; font-size:28px; text-transform:uppercase; display:flex; align-items:center; gap:11px; }
+      .hno { background:var(--red); border-radius:9px; padding:0 9px; font-weight:900; }
+      .hgrid { display:flex; flex-direction:column; gap:6px; }
+      .hline { display:flex; align-items:center; gap:6px; } .hline em { font-style:normal; width:59px; font-size:17px; color:#9fb4e6; font-weight:600; }
+      .hc { display:inline-block; width:39px; height:39px; border-radius:9px; }
+      .hW { background:#4b6bd1; } .hF { background:#9fb4e6; } .hD { background:rgba(238,242,249,.28); } .hL { background:var(--red); }
+      #heat-legend { margin-top:26px; display:flex; flex-wrap:wrap; gap:15px 32px; font-weight:600; font-size:21px; }
+      #heat-legend span { display:flex; align-items:center; gap:9px; } #heat-legend .hc { width:22px; height:22px; }
+      .frows { display:flex; flex-direction:column; gap:5px; margin-top:26px; }
+      .frow { display:grid; grid-template-columns:32px 48px 1fr 65px; align-items:center; gap:13px; font-size:21px; }
+      .fpos { color:#9fb4e6; font-weight:700; } .fc { font-family:Montserrat; font-weight:800; }
+      .fbar { height:18px; background:rgba(238,242,249,.06); border-radius:11px; overflow:hidden; }
+      .ffill { height:100%; background:linear-gradient(90deg, #304285, #6f8fe0); border-radius:11px; transform-origin:left center; }
+      .frow.cz .ffill { background:linear-gradient(90deg, #e31e24, #ff6b6f); } .frow.cz .fc, .frow.cz .fv { color:#ff6b6f; }
+      .frow { transform-origin:left center; }
+      .fv { font-family:Montserrat; font-weight:900; text-align:right; font-variant-numeric:tabular-nums; }
+      #fish-note { margin-top:19px; font-family:Montserrat; font-weight:800; font-size:32px; } #fish-note b { color:var(--red); }
+      .rank-wrap { position:absolute; left:65px; right:65px; top:16%; display:flex; flex-direction:column; align-items:center; text-align:center; }
+      #rank-n { font-family:Montserrat; font-weight:900; font-size:432px; line-height:.85; letter-spacing:-.04em; color:var(--ice); font-variant-numeric:tabular-nums; }
+      #rank-n span { color:var(--red); }
+      #rank-t { font-family:Montserrat; font-weight:900; font-size:54px; text-transform:uppercase; letter-spacing:-.01em; margin-top:11px; }
+      #rank-s { margin-top:22px; font-weight:600; font-size:26px; color:#ffd36b; }
 
       /* кинетика */
-      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px 65px; }
-      .k-line { display:flex; flex-wrap:wrap; gap:0 24px; font-family:Montserrat; font-weight:900; font-style:italic; text-transform:uppercase; line-height:.98; }
-      #k-l1 { font-size:97px; }
-      #k-l2 { font-size:113px; margin-top:11px; }
-      .k-mask { display:block; overflow:hidden; padding:0 11px 6px 0; }
-      .k-word { display:block; text-shadow:6px 6px 0 rgba(227,30,36,.8); }
-      .k-word.red { color:var(--red); text-shadow:6px 6px 0 var(--ice); }
-      #k-l2 .k-word { transform-origin:50% 60%; }
-      #k-en { font-size:35px; font-weight:600; margin-top:22px; color:#ffd36b; }
-      #kin-slash { position:absolute; left:-20%; top:-20%; width:140%; height:140%; rotate:-18deg; pointer-events:none; }
-      #kin-slash i { position:absolute; left:0; right:0; height:6%; }
-      #kin-slash i:nth-child(1) { top:44%; background:var(--blue); } #kin-slash i:nth-child(2) { top:50%; background:var(--red); } #kin-slash i:nth-child(3) { top:56%; background:var(--navy); }
+      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 65px 103.7px; }
+      .k-line { display:flex; flex-wrap:wrap; gap:0 26px; font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; line-height:.95; }
+      #k-l1 { font-size:92px; }
+      #k-l2 { font-size:108px; margin-top:16px; }
+      .k-mask { display:block; overflow:hidden; }
+      .k-word { display:block; }
+      .k-word.red { color:var(--red); }
+      #k-en { font-size:32px; font-weight:600; margin-top:26px; color:#ffd36b; }
       #flash { position:absolute; inset:0; background:var(--ice); opacity:0; pointer-events:none; }
 
       /* вспышка-видение */
       #blink { position:absolute; inset:0; opacity:0; pointer-events:none; }
       #blink .bb, #blink .bf { position:absolute; inset:0; background-size:cover; background-position:50% 40%; }
       #blink .bb { background-image:url(assets/gfx/p_winners_bg.jpg); }
-      #blink .bf { background-image:url(assets/gfx/p_winners_fg.png); }
-      #blink::after { content:""; position:absolute; inset:0; background:radial-gradient(circle, rgba(255,233,170,.0) 40%, rgba(255,233,170,.55) 100%); }
+      #blink .bf { background-image:url(assets/gfx/p_winners_fgc.png); }
 
       /* плашки сцен */
-      .chip { position:absolute; left:65px; bottom:54px; display:flex; align-items:baseline; gap:19px;
-        background:#000; border-left:13px solid var(--red); padding:15px 37px 15px 26px; clip-path:polygon(0 0, 100% 0, 95% 100%, 0 100%); }
-      .chip-num { font-family:Montserrat; font-weight:900; font-style:italic; font-size:35px; color:var(--red); }
-      .chip-cz { font-family:Montserrat; font-weight:900; font-style:italic; font-size:35px; text-transform:uppercase; }
-      .chip-en { font-size:26px; color:#ffd36b; font-weight:600; }
+      .chip { position:absolute; left:65px; bottom:54px; display:flex; align-items:baseline; gap:17px; }
+      .chip-num { font-family:Montserrat; font-weight:900; font-size:28px; color:var(--red); }
+      .chip-cz { font-family:Montserrat; font-weight:800; font-size:28px; text-transform:uppercase; letter-spacing:.06em; }
+      .chip-en { font-size:23px; color:rgba(238,242,249,.6); font-weight:600; }
 
       /* финал */
-      #outro .o-wrap { position:absolute; left:238px; right:238px; top:73%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px;
-        background:#000; padding:19px 32px; border-left:13px solid var(--red); }
-      .o-quote { font-family:Montserrat; font-weight:900; font-style:italic; font-size:35px; line-height:1.08; text-transform:uppercase; }
+      #outro .o-wrap { position:absolute; left:65px; right:65px; bottom:194.4px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
+      .o-quote { font-family:Montserrat; font-weight:900; font-size:45px; line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; }
       .o-quote .red { color:var(--red); }
-      .o-meta { font-family:Montserrat; font-weight:600; font-size:23px; letter-spacing:.16em; text-transform:uppercase; color:#ffd36b; }
+      .o-meta { font-family:Montserrat; font-weight:700; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      #outro .ph-final { position:absolute; inset:0; background-size:cover; background-position:50% 30%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 50%, transparent 80%); }
+      #outro .ph-final.bg { background-image:url(assets/gfx/p_cheers_bg.jpg); opacity:.55; }
+      #outro .ph-final.fg { background-image:url(assets/gfx/p_cheers_fgc.png); -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 60%, transparent 85%); }
 
       /* виджет-проигрыватель */
       #player { position:absolute; right:37.8px; bottom:37.8px; width:475.2px; height:124.2px; }
-      #card { position:absolute; inset:0; border-radius:27.3px; background:linear-gradient(135deg, rgba(48,66,133,.95), rgba(11,30,66,.97));
-        box-shadow:0 13px 43px rgba(0,0,0,.5), inset 0 0 0 2px rgba(238,242,249,.2); }
+      #card { position:absolute; inset:0; border-radius:29.8px; background:rgba(11,30,66,.72); backdrop-filter:blur(22px);
+        box-shadow:0 13px 43px rgba(0,0,0,.45), inset 0 0 0 1px rgba(238,242,249,.14); }
       #vinyl-wrap { position:absolute; left:17.3px; top:-19.9px; width:163.9px; height:163.9px; }
       #vinyl { position:absolute; inset:0; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, #0d0d10 0 1.0px, #1c1c22 1.0px 1.8px);
         box-shadow:0 9px 24px rgba(0,0,0,.6); }
@@ -118,7 +211,7 @@
       #arm { position:absolute; left:176.3px; top:-13.3px; width:0; height:0; }
       #arm svg { position:absolute; left:-82.0px; top:-19.7px; overflow:visible; }
       #p-text { position:absolute; left:215.8px; right:25.9px; top:21.1px; bottom:17.4px; display:flex; flex-direction:column; justify-content:space-between; }
-      .p-title { font-family:Montserrat; font-weight:900; font-style:italic; font-size:25px; line-height:1.1; white-space:nowrap; }
+      .p-title { font-family:Montserrat; font-weight:900; font-size:25px; line-height:1.1; white-space:nowrap; }
       .p-artist { font-size:19px; font-weight:600; opacity:.72; white-space:nowrap; }
       .p-row { display:flex; align-items:center; gap:13px; font-size:16px; font-weight:600; opacity:.9; }
       .p-bar { position:relative; flex:1; height:5px; background:rgba(238,242,249,.22); border-radius:5px; overflow:hidden; }
@@ -127,269 +220,326 @@
       #p-eq i { display:block; width:6px; height:100%; background:var(--ice); transform-origin:bottom center; }
       .nw { white-space:nowrap; }
       #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
-      #wipe { position:absolute; left:-30%; top:-30%; width:160%; height:160%; rotate:-18deg; }
-      #wipe i { position:absolute; left:0; right:0; height:24%; }
-      #wipe i:nth-child(1) { top:14%; background:var(--blue); } #wipe i:nth-child(2) { top:38%; background:var(--red); } #wipe i:nth-child(3) { top:62%; background:var(--navy); }
-      #proto-badge { position:absolute; right:32px; top:32px; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; opacity:.5; }
+      #wipe { position:absolute; left:0; right:0; top:-30%; height:160%; background:linear-gradient(180deg, transparent 0%, #050d22 22%, #050d22 78%, transparent 100%); }
+      #proto-badge { position:absolute; right:32px; top:32px; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; opacity:.45; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="61.48" data-fps="30">
-      <div id="stage">
-        <div id="st-bg"></div><div id="st-rays"></div>
-        <div id="st-band"><svg class="band" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <polygon points="-10.0,38.3 -5.4,39.3 -0.8,38.1 3.8,41.6 8.5,38.4 13.1,40.0 17.7,39.8 22.3,37.9 26.9,38.0 31.5,40.9 36.2,41.4 40.8,41.7 45.4,40.2 50.0,40.7 54.6,40.8 59.2,41.9 63.8,40.4 68.5,39.0 73.1,38.1 77.7,40.7 82.3,38.6 86.9,38.3 91.5,40.2 96.2,41.3 100.8,38.9 105.4,41.5 110.0,38.1 110.0,50.7 105.4,50.0 100.8,50.8 96.2,53.2 91.5,53.0 86.9,51.3 82.3,52.3 77.7,53.0 73.1,50.8 68.5,50.9 63.8,53.3 59.2,50.1 54.6,52.7 50.0,51.0 45.4,51.5 40.8,51.4 36.2,50.6 31.5,52.4 26.9,53.4 22.3,51.5 17.7,50.7 13.1,53.2 8.5,51.8 3.8,52.4 -0.8,51.9 -5.4,52.2 -10.0,50.3" fill="#ffffff" opacity=".92"/><polygon points="-10.0,51.3 -5.4,50.1 -0.8,53.6 3.8,50.4 8.5,52.0 13.1,51.8 17.7,49.9 22.3,50.0 26.9,52.9 31.5,53.4 36.2,53.7 40.8,52.2 45.4,52.7 50.0,52.8 54.6,53.9 59.2,52.4 63.8,51.0 68.5,50.1 73.1,52.7 77.7,50.6 82.3,50.3 86.9,52.2 91.5,53.3 96.2,50.9 100.8,53.5 105.4,50.1 110.0,49.9 110.0,64.7 105.4,62.7 100.8,62.0 96.2,62.8 91.5,65.2 86.9,65.0 82.3,63.3 77.7,64.3 73.1,65.0 68.5,62.8 63.8,62.9 59.2,65.3 54.6,62.1 50.0,64.7 45.4,63.0 40.8,63.5 36.2,63.4 31.5,62.6 26.9,64.4 22.3,65.4 17.7,63.5 13.1,62.7 8.5,65.2 3.8,63.8 -0.8,64.4 -5.4,63.9 -10.0,64.2" fill="#d7141a" opacity=".95"/>
-      <polygon points="-10,38 22,52 -10,66" fill="#11457e"/></svg></div>
-        <div id="st-dots"></div>
-        <i class="star" id="star0" style="left:9.4%; top:24.1%; width:34px; height:34px"></i><i class="star" id="star1" style="left:88.6%; top:31.1%; width:23px; height:23px"></i><i class="star" id="star2" style="left:45.2%; top:58.2%; width:29px; height:29px"></i><i class="star" id="star3" style="left:72.1%; top:39.1%; width:15px; height:15px"></i><i class="star" id="star4" style="left:55.4%; top:9.7%; width:11px; height:11px"></i><i class="star" id="star5" style="left:94.6%; top:6.4%; width:33px; height:33px"></i><i class="star" id="star6" style="left:5.5%; top:5.4%; width:32px; height:32px"></i><i class="star" id="star7" style="left:9.5%; top:46.1%; width:25px; height:25px"></i><i class="star" id="star8" style="left:23.2%; top:52.0%; width:32px; height:32px"></i><i class="star" id="star9" style="left:1.0%; top:31.5%; width:21px; height:21px"></i><i class="star" id="star10" style="left:2.0%; top:36.2%; width:31px; height:31px"></i><i class="star" id="star11" style="left:26.2%; top:16.0%; width:15px; height:15px"></i><i class="star" id="star12" style="left:70.2%; top:24.8%; width:12px; height:12px"></i><i class="star" id="star13" style="left:45.9%; top:52.6%; width:11px; height:11px"></i><i class="star" id="star14" style="left:2.4%; top:24.5%; width:18px; height:18px"></i><i class="star" id="star15" style="left:20.7%; top:14.8%; width:32px; height:32px"></i><i class="star" id="star16" style="left:51.8%; top:42.2%; width:23px; height:23px"></i><i class="star" id="star17" style="left:53.7%; top:15.6%; width:11px; height:11px"></i><i class="star" id="star18" style="left:46.4%; top:24.6%; width:32px; height:32px"></i><i class="star" id="star19" style="left:38.0%; top:48.4%; width:20px; height:20px"></i><i class="star" id="star20" style="left:17.8%; top:38.4%; width:15px; height:15px"></i><i class="star" id="star21" style="left:25.0%; top:46.3%; width:24px; height:24px"></i><i class="star" id="star22" style="left:81.1%; top:30.5%; width:31px; height:31px"></i><i class="star" id="star23" style="left:73.9%; top:62.4%; width:26px; height:26px"></i><i class="star" id="star24" style="left:73.3%; top:7.7%; width:25px; height:25px"></i><i class="star" id="star25" style="left:1.7%; top:30.1%; width:35px; height:35px"></i><i class="star" id="star26" style="left:78.6%; top:36.9%; width:36px; height:36px"></i><i class="star" id="star27" style="left:63.7%; top:62.5%; width:35px; height:35px"></i>
-      </div>
+      <div id="mesh"><div class="blob" id="b1"></div><div class="blob" id="b2"></div><div class="blob" id="b3"></div></div>
 
       
-      <section id="sh01" class="clip shot" data-start="10.581" data-duration="3.715" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:832.0px; font-size:140.4px; text-align:left"><span>CESTA</span></div>
+      <section id="sh01" class="clip shot" data-start="10.581" data-duration="1.857" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:896.9px; top:75.6px; width:510.3px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_car.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_car_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_car_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_car.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_car_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>CESTA</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_car_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        <div class="sub"><span>Na Slovensko</span></div>
+        
         
       </section>
-      <section id="sh02" class="clip shot" data-start="14.296" data-duration="3.715" data-track-index="2">
-        <div class="word" style="left:54.0px; top:453.6px; width:1812.0px; font-size:140.4px; text-align:center"><span>HOFER LAKE</span></div>
+      <section id="sh02" class="clip shot" data-start="12.438" data-duration="1.858" data-track-index="2">
         <div class="cam">
-          <div class="pbox" style="left:0.0px; top:0.0px; width:1920.0px; height:1080.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_lake_mist_bg.jpg)"></div></div></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_lake_mist_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>PRUŽINA</span></div>
+          
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        <div class="sub"><span>Hofer Lake</span></div>
+        
         
       </section>
-      <section id="sh03" class="clip shot" data-start="18.011" data-duration="1.858" data-track-index="2">
-        <div class="word" style="left:54.0px; top:453.6px; width:1812.0px; font-size:140.4px; text-align:center"><span>PŘÍPRAVA</span></div>
+      <section id="sh03" class="clip shot" data-start="14.296" data-duration="1.858" data-track-index="2">
         <div class="cam">
-          <div class="pbox" style="left:0.0px; top:0.0px; width:1920.0px; height:1080.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_trenink_gear.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_trenink_gear_bg.jpg)"></div></div></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>RÁNO</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        
         
       </section>
       <section id="sh04" class="clip shot" data-start="19.869" data-duration="1.857" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:140.4px; text-align:left"><span>UZLY</span></div>
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_young.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_young_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_young_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_green_fish.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_green_fish_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>#55</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_green_fish_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        <div class="plate"><b>Martin Stoklasa</b><i>nastupuje · sektor 4</i></div>
         
       </section>
-      <section id="sh05" class="clip shot" data-start="21.726" data-duration="1.858" data-track-index="2">
-        <div class="word" style="left:54.0px; top:453.6px; width:1812.0px; font-size:140.4px; text-align:center"><span>RÁNO U VODY</span></div>
+      <section id="sh05" class="clip shot" data-start="25.442" data-duration="0.928" data-track-index="2">
         <div class="cam">
-          <div class="pbox" style="left:0.0px; top:0.0px; width:1920.0px; height:1080.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_tying_young_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>UZLY</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_tying_young_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        
         
       </section>
-      <section id="sh06" class="clip shot" data-start="23.584" data-duration="1.858" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:100.9px; text-align:left"><span>TRPĚLIVOST</span></div>
+      <section id="sh06" class="clip shot" data-start="26.37" data-duration="0.906" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>KLID</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        
         
       </section>
-      <section id="sh07" class="clip shot" data-start="25.442" data-duration="1.834" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:140.4px; text-align:left"><span>ZÁBĚR</span></div>
+      <section id="sh07" class="clip shot" data-start="27.276" data-duration="0.929" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_reeling.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_reeling_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_reeling_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_reeling.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_reeling_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>ZÁBĚR</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_reeling_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        
         
       </section>
-      <section id="sh08" class="clip shot" data-start="27.276" data-duration="1.858" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:126.2px; text-align:left"><span>PODBĚRÁK</span></div>
+      <section id="sh08" class="clip shot" data-start="28.205" data-duration="0.929" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_landing1.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_landing1_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_landing1_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_landing1.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_landing1_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>PODBĚRÁK</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_landing1_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        
         
       </section>
       <section id="sh09" class="clip shot" data-start="29.134" data-duration="0.905" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:126.2px; text-align:left"><span>MÁME HO!</span></div>
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_landing2.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_landing2_bg.jpg)"></div></div></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_svub_water.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_svub_water_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>#23</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_svub_water_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
+        
+        <div class="plate"><b>Dominik Švub</b><i>Hofer Lake</i></div>
         
       </section>
       <section id="sh10" class="clip shot" data-start="30.039" data-duration="0.952" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:140.4px; text-align:left"><span>PSTRUH</span></div>
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_net_close.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_net_close_bg.jpg)"></div></div></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_net_close.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_net_close_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>PSTRUH</span></div>
+          
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
         
-      </section>
-      <section id="sh11" class="clip shot" data-start="34.664" data-duration="1.835" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:698.4px; top:75.6px; width:907.2px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_zmena_sestavy.jpg)"></div></div></div>
-        </div>
         
         
       </section>
-      <section id="sh12" class="clip shot" data-start="36.499" data-duration="1.834" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:112.2px; text-align:left"><span>NASTUPUJE</span></div>
+      <section id="sh11" class="clip shot" data-start="45.694" data-duration="1.858" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_green_fish.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_green_fish_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_green_fish_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_podium.jpg)"></div>
+          
+          <div class="bigword" style="font-size:280.8px"><span>TOP 3</span></div>
+          
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
-        <div class="plate" style="left:43px; top:691.2px"><b>Martin Stoklasa</b><i>nastupuje do sestavy</i></div>
-      </section>
-      <section id="sh13" class="clip shot" data-start="38.333" data-duration="1.858" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:140.4px; text-align:left"><span>12 KOL</span></div>
-        <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_training_plan.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_training_plan_bg.jpg)"></div></div></div></div>
-        </div>
-        <div class="slash"><i></i><i></i><i></i></div>
-        
-      </section>
-      <section id="sh14" class="clip shot" data-start="40.191" data-duration="1.834" data-track-index="2">
-        <div class="word" style="left:43.2px; top:324.0px; width:747.0px; font-size:126.2px; text-align:left"><span>SEKTOR 2</span></div>
-        <div class="cam">
-          <div class="pbox panel" style="left:811.8px; top:75.6px; width:680.4px; height:907.2px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_portrait_dres.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_portrait_dres_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_portrait_dres_fg.png)"></div></div>
-        </div>
-        <div class="slash"><i></i><i></i><i></i></div>
-        <div class="plate" style="left:43px; top:691.2px"><b>Dominik Švub</b><i>č. 23 · sektor 2</i></div>
-      </section>
-      <section id="sh15" class="clip shot" data-start="42.025" data-duration="5.527" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:326.4px; top:54.0px; width:1267.2px; height:759.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_losovani_den1.jpg)"></div></div></div>
-        </div>
+        <div class="sub"><span>1. Litva · 2. Ukrajina · 3. Bulharsko</span></div>
         
         
       </section>
-      <section id="sh16" class="clip shot" data-start="47.552" data-duration="1.811" data-track-index="2">
-        <div class="word" style="left:54.0px; top:453.6px; width:1812.0px; font-size:140.4px; text-align:center"><span>BOJ</span></div>
+      <section id="sh12" class="clip shot" data-start="47.552" data-duration="1.811" data-track-index="2">
         <div class="cam">
-          <div class="pbox" style="left:0.0px; top:0.0px; width:1920.0px; height:1080.0px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_lunch.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_lunch_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_lunch_fg.png)"></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_lunch.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_lunch_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>BOJ</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_lunch_fgc.png)"></div>
         </div>
-        <div class="slash"><i></i><i></i><i></i></div>
-        <div class="caption" style="left:43px; width:-86.4px; top:626.4px">Takhle vypadá náš „boj“.<span>This is what our “battle” looks like.</span></div>
+        
+        
+        <div class="caption">Takhle vypadá náš „boj“.<span>This is what our “battle” looks like.</span></div>
       </section>
-      <section id="sh17" class="clip shot" data-start="49.363" data-duration="0.464" data-track-index="2">
-        
+      <section id="sh13" class="clip shot" data-start="51.197" data-duration="3.669" data-track-index="2">
         <div class="cam">
-          <div class="pbox panel" style="left:692.1px; top:118.8px; width:535.8px; height:756.0px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_moldova.jpg)"></div></div></div>
+          <div class="ph" style="background-image:url(assets/photos/p_team_romania.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/p_team_romania_bg.jpg)"></div>
+          <div class="bigword" style="font-size:280.8px"><span>PŘÁTELÉ</span></div>
+          <div class="gfg" style="background-image:url(assets/gfx/p_team_romania_fgc.png)"></div>
         </div>
-        
-        
-      </section>
-      <section id="sh18" class="clip shot" data-start="49.827" data-duration="0.465" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:288.0px; top:118.8px; width:1344.0px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_germany.jpg)"></div></div></div>
-        </div>
+        <div class="sub"><span>Team Romania</span></div>
         
         
       </section>
-      <section id="sh19" class="clip shot" data-start="50.292" data-duration="0.464" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:393.7px; top:118.8px; width:1132.5px; height:756.0px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_slovakia.jpg)"></div></div></div>
+
+      <section id="roster" class="clip" data-start="16.154" data-duration="1.857" data-track-index="2">
+        <div class="panel"><div class="h2" id="roster-h"><span>Team Czech Republic</span><em>Reprezentují nás</em></div>
+          <div class="rgrid">
+          <div class="rcard" id="rc0"><span class="rno">7</span><span class="rtx"><b>Petr Hrabalík</b><i>Sektor 1 · místa 1–16</i></span></div>
+          <div class="rcard" id="rc1"><span class="rno">23</span><span class="rtx"><b>Dominik Švub</b><i>Sektor 2 · místa 17–32</i></span></div>
+          <div class="rcard" id="rc2"><span class="rno">39</span><span class="rtx"><b>Míra Kučera</b><i>Sektor 3 · místa 33–48</i></span></div>
+          <div class="rcard" id="rc3"><span class="rno">55</span><span class="rtx"><b>Martin Stoklasa</b><i>Sektor 4 · místa 49–64</i></span></div></div>
+          <div id="roster-coach">kouč Denis Zaikin</div>
         </div>
-        
-        
       </section>
-      <section id="sh20" class="clip shot" data-start="50.756" data-duration="0.441" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:644.9px; top:118.8px; width:630.1px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_bulgaria.jpg)"></div></div></div>
+
+      <section id="swap" class="clip" data-start="18.011" data-duration="1.858" data-track-index="2">
+        <div class="panel"><div class="h2" id="swap-h"><span>Změna v sestavě</span><em>Line-up change</em></div>
+          <div class="swap">
+            <div class="person" id="swap-out"><span class="tag">ze zdravotních důvodů</span><b>Michael Boček</b><i>nemůže nastoupit</i><div class="strike"></div></div>
+            <div class="arrow">→</div>
+            <div class="person" id="swap-in"><span class="tag">nastupuje</span><b>Martin Stoklasa</b><i>č. 55 · sektor 4</i></div>
+          </div>
+          <div id="swap-note">Michaele, brzy se uzdrav – tým za tebe zabojuje.</div>
         </div>
-        
-        
       </section>
-      <section id="sh21" class="clip shot" data-start="51.197" data-duration="0.464" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:288.0px; top:145.1px; width:1344.0px; height:703.4px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_hungary.jpg)"></div></div></div>
+
+      <section id="sectors" class="clip" data-start="21.726" data-duration="1.858" data-track-index="2">
+        <div class="panel"><div class="h2" id="sectors-h"><span>Losování</span><em>4 sektory · 64 lovných míst</em></div>
+          <div id="lake"></div>
+          <div class="secs">
+          <div class="sec" id="sec0"><div class="sec-h">Sektor 1</div><div class="sec-r">1–16</div><div class="sec-no" id="secno0">7</div><div class="sec-n">Hrabalík</div></div>
+          <div class="sec" id="sec1"><div class="sec-h">Sektor 2</div><div class="sec-r">17–32</div><div class="sec-no" id="secno1">23</div><div class="sec-n">Švub</div></div>
+          <div class="sec" id="sec2"><div class="sec-h">Sektor 3</div><div class="sec-r">33–48</div><div class="sec-no" id="secno2">39</div><div class="sec-n">Kučera</div></div>
+          <div class="sec" id="sec3"><div class="sec-h">Sektor 4</div><div class="sec-r">49–64</div><div class="sec-no" id="secno3">55</div><div class="sec-n">Stoklasa</div></div></div>
         </div>
-        
-        
       </section>
-      <section id="sh22" class="clip shot" data-start="51.661" data-duration="0.465" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:393.0px; top:118.8px; width:1134.0px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_poland.jpg)"></div></div></div>
+
+      <section id="duels" class="clip" data-start="23.584" data-duration="1.858" data-track-index="2">
+        <div class="panel"><div class="h2" id="duels-h"><span>15 soubojů</span><em>každý s každým ve svém sektoru</em></div>
+          <div class="duels">
+          <div class="dcol" id="dcol0">
+            <div class="dh"><span class="dno">7</span><b>Petr Hrabalík</b></div>
+            <div class="dwin"><div class="dlist" id="dlist0"><div class="drow"><span class="dk">1</span><span class="dn">10</span><span class="dname">Martin Drgoň</span><span class="dc">SK</span></div><div class="drow"><span class="dk">2</span><span class="dn">8</span><span class="dname">Alex Benkendorf</span><span class="dc">DE</span></div><div class="drow"><span class="dk">3</span><span class="dn">6</span><span class="dname">Ignatas Krastinas</span><span class="dc">GB</span></div><div class="drow"><span class="dk">4</span><span class="dn">4</span><span class="dname">Johnny Dubois</span><span class="dc">BE</span></div><div class="drow"><span class="dk">5</span><span class="dn">2</span><span class="dname">Pavlo Melanich</span><span class="dc">UA</span></div><div class="drow"><span class="dk">6</span><span class="dn">15</span><span class="dname">Viorel Preda</span><span class="dc">RO</span></div><div class="drow"><span class="dk">7</span><span class="dn">13</span><span class="dname">Andrzej Olejnik</span><span class="dc">PL</span></div><div class="drow"><span class="dk">8</span><span class="dn">11</span><span class="dname">Milan Popovič</span><span class="dc">SK</span></div><div class="drow"><span class="dk">9</span><span class="dn">9</span><span class="dname">Rinalds Tischenko</span><span class="dc">GB</span></div><div class="drow"><span class="dk">10</span><span class="dn">1</span><span class="dname">Jonas Čivinskas</span><span class="dc">LT</span></div><div class="drow"><span class="dk">11</span><span class="dn">5</span><span class="dname">Petko Ivanov</span><span class="dc">BG</span></div><div class="drow"><span class="dk">12</span><span class="dn">3</span><span class="dname">Anton Kishinets</span><span class="dc">DK</span></div><div class="drow"><span class="dk">13</span><span class="dn">16</span><span class="dname">Gellert Pankotay</span><span class="dc">HU</span></div><div class="drow"><span class="dk">14</span><span class="dn">14</span><span class="dname">Gustas Juozelskis</span><span class="dc">LT</span></div><div class="drow"><span class="dk">15</span><span class="dn">12</span><span class="dname">Aleksandr Potrakov</span><span class="dc">MD</span></div></div></div>
+          </div>
+          <div class="dcol" id="dcol1">
+            <div class="dh"><span class="dno">23</span><b>Dominik Švub</b></div>
+            <div class="dwin"><div class="dlist" id="dlist1"><div class="drow"><span class="dk">1</span><span class="dn">26</span><span class="dname">David Drančák</span><span class="dc">SK</span></div><div class="drow"><span class="dk">2</span><span class="dn">24</span><span class="dname">Frank Hens</span><span class="dc">DE</span></div><div class="drow"><span class="dk">3</span><span class="dn">22</span><span class="dname">Donatas Krastinas</span><span class="dc">GB</span></div><div class="drow"><span class="dk">4</span><span class="dn">20</span><span class="dname">Lucas Leonard</span><span class="dc">BE</span></div><div class="drow"><span class="dk">5</span><span class="dn">18</span><span class="dname">Oleksandr Mokhnatko</span><span class="dc">UA</span></div><div class="drow"><span class="dk">6</span><span class="dn">31</span><span class="dname">Ianis Colonescu</span><span class="dc">RO</span></div><div class="drow"><span class="dk">7</span><span class="dn">29</span><span class="dname">Filip Lukasz</span><span class="dc">PL</span></div><div class="drow"><span class="dk">8</span><span class="dn">27</span><span class="dname">Michal Slávik</span><span class="dc">SK</span></div><div class="drow"><span class="dk">9</span><span class="dn">25</span><span class="dname">Ruslan Navickij</span><span class="dc">GB</span></div><div class="drow"><span class="dk">10</span><span class="dn">17</span><span class="dname">Žilvinas Žalėnas</span><span class="dc">LT</span></div><div class="drow"><span class="dk">11</span><span class="dn">21</span><span class="dname">Ivan Radev</span><span class="dc">BG</span></div><div class="drow"><span class="dk">12</span><span class="dn">19</span><span class="dname">Oleksandr Shvets</span><span class="dc">DK</span></div><div class="drow"><span class="dk">13</span><span class="dn">32</span><span class="dname">Aniko Pankotayne</span><span class="dc">HU</span></div><div class="drow"><span class="dk">14</span><span class="dn">30</span><span class="dname">Julius Puidokas</span><span class="dc">LT</span></div><div class="drow"><span class="dk">15</span><span class="dn">28</span><span class="dname">Ionas Sergiu</span><span class="dc">MD</span></div></div></div>
+          </div>
+          <div class="dcol" id="dcol2">
+            <div class="dh"><span class="dno">39</span><b>Míra Kučera</b></div>
+            <div class="dwin"><div class="dlist" id="dlist2"><div class="drow"><span class="dk">1</span><span class="dn">42</span><span class="dname">Juraj Kozár</span><span class="dc">SK</span></div><div class="drow"><span class="dk">2</span><span class="dn">40</span><span class="dname">Alexander Choroschailow</span><span class="dc">DE</span></div><div class="drow"><span class="dk">3</span><span class="dn">38</span><span class="dname">Jurgita Krastiniene</span><span class="dc">GB</span></div><div class="drow"><span class="dk">4</span><span class="dn">36</span><span class="dname">Stephane Braham</span><span class="dc">BE</span></div><div class="drow"><span class="dk">5</span><span class="dn">34</span><span class="dname">Oleg Dorodniev</span><span class="dc">UA</span></div><div class="drow"><span class="dk">6</span><span class="dn">47</span><span class="dname">Sorin Dobre</span><span class="dc">RO</span></div><div class="drow"><span class="dk">7</span><span class="dn">45</span><span class="dname">Pawel Zakrzewski</span><span class="dc">PL</span></div><div class="drow"><span class="dk">8</span><span class="dn">43</span><span class="dname">Samuel Nagy</span><span class="dc">SK</span></div><div class="drow"><span class="dk">9</span><span class="dn">41</span><span class="dname">Mareks Selavins</span><span class="dc">GB</span></div><div class="drow"><span class="dk">10</span><span class="dn">33</span><span class="dname">Benas Žalėnas</span><span class="dc">LT</span></div><div class="drow"><span class="dk">11</span><span class="dn">37</span><span class="dname">Gani Mitev</span><span class="dc">BG</span></div><div class="drow"><span class="dk">12</span><span class="dn">35</span><span class="dname">Oleksand Kundelskyi</span><span class="dc">DK</span></div><div class="drow"><span class="dk">13</span><span class="dn">48</span><span class="dname">Imre Enessey</span><span class="dc">HU</span></div><div class="drow"><span class="dk">14</span><span class="dn">46</span><span class="dname">Leonardo Tofano</span><span class="dc">LT</span></div><div class="drow"><span class="dk">15</span><span class="dn">44</span><span class="dname">Oleh Chaus</span><span class="dc">MD</span></div></div></div>
+          </div>
+          <div class="dcol" id="dcol3">
+            <div class="dh"><span class="dno">55</span><b>Martin Stoklasa</b></div>
+            <div class="dwin"><div class="dlist" id="dlist3"><div class="drow"><span class="dk">1</span><span class="dn">58</span><span class="dname">Ján Potoček</span><span class="dc">SK</span></div><div class="drow"><span class="dk">2</span><span class="dn">56</span><span class="dname">Yannick Bruyninckx</span><span class="dc">DE</span></div><div class="drow"><span class="dk">3</span><span class="dn">54</span><span class="dname">Viktors Sidorovs</span><span class="dc">GB</span></div><div class="drow"><span class="dk">4</span><span class="dn">52</span><span class="dname">Leonard Cedric</span><span class="dc">BE</span></div><div class="drow"><span class="dk">5</span><span class="dn">50</span><span class="dname">Dmytro Korinchevskyi</span><span class="dc">UA</span></div><div class="drow"><span class="dk">6</span><span class="dn">63</span><span class="dname">Valentin Rossi</span><span class="dc">RO</span></div><div class="drow"><span class="dk">7</span><span class="dn">61</span><span class="dname">David Helman</span><span class="dc">PL</span></div><div class="drow"><span class="dk">8</span><span class="dn">59</span><span class="dname">Marián Michalka</span><span class="dc">SK</span></div><div class="drow"><span class="dk">9</span><span class="dn">57</span><span class="dname">Aleksandrs Zencaks</span><span class="dc">GB</span></div><div class="drow"><span class="dk">10</span><span class="dn">49</span><span class="dname">Mindaugas Narkus</span><span class="dc">LT</span></div><div class="drow"><span class="dk">11</span><span class="dn">53</span><span class="dname">Angov Martin</span><span class="dc">BG</span></div><div class="drow"><span class="dk">12</span><span class="dn">51</span><span class="dname">Maryan Podan</span><span class="dc">DK</span></div><div class="drow"><span class="dk">13</span><span class="dn">64</span><span class="dname">Daniel Szabó</span><span class="dc">HU</span></div><div class="drow"><span class="dk">14</span><span class="dn">62</span><span class="dname">Tomas Gulbis</span><span class="dc">LT</span></div><div class="drow"><span class="dk">15</span><span class="dn">60</span><span class="dname">Anton Akshyakov</span><span class="dc">MD</span></div></div></div>
+          </div></div>
+          <div id="duels-note">Předběžný rozpis podle losovací tabulky H-Battle · 1. závodní den, sobota 3. 10. 2026</div>
         </div>
-        
-        
       </section>
-      <section id="sh23" class="clip shot" data-start="52.126" data-duration="0.464" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:655.9px; top:118.8px; width:608.3px; height:756.0px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_team_belgium.jpg)"></div></div></div>
+
+      <section id="world" class="clip" data-start="49.363" data-duration="1.834" data-track-index="2">
+        <div class="panel"><div class="h2" id="world-h"><span>13 zemí</span><em>16 týmů · 64 závodníků</em></div>
+          <div class="chips"><span class="chip-c" id="cc0">LT</span><span class="chip-c" id="cc1">UA</span><span class="chip-c" id="cc2">DK</span><span class="chip-c" id="cc3">BE</span><span class="chip-c" id="cc4">BG</span><span class="chip-c" id="cc5">GB</span><span class="chip-c cz" id="cc6">CZ</span><span class="chip-c" id="cc7">DE</span><span class="chip-c" id="cc8">SK</span><span class="chip-c" id="cc9">MD</span><span class="chip-c" id="cc10">PL</span><span class="chip-c" id="cc11">RO</span><span class="chip-c" id="cc12">HU</span></div>
+          <div id="world-sub">Jedno jezero. <em>Jedna parta.</em></div>
         </div>
-        
-        
       </section>
-      <section id="sh24" class="clip shot" data-start="52.59" data-duration="0.441" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:456.0px; top:118.8px; width:1008.0px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_team_romania.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_team_romania_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_team_romania_fg.png)"></div></div>
+
+      <section id="pts" class="clip" data-start="34.664" data-duration="3.669" data-track-index="2">
+        <div class="panel"><div class="h2" id="pts-h"><span>Body Team CZ</span><em>oba dny · 1. den + 2. den</em></div>
+          <div class="prows">
+          <div class="prow" id="prow0">
+            <div class="pava"><svg viewBox="0 0 48 48" class="ico"><circle cx="20" cy="12" r="6" fill="currentColor"/><path d="M10 44 L13 26 Q20 20 27 26 L30 44 Z" fill="currentColor"/><path d="M27 27 L35 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 23 Q42 10 46 4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M46 4 L46 30" stroke="currentColor" stroke-width=".8" stroke-dasharray="2 2"/></svg><span>7</span></div>
+            <div class="pmain"><div class="pname">Petr Hrabalík<i>V · R · P 9 · 7 · 14 · 67 ryb</i></div>
+              <div class="pbar"><div class="pb1" id="pb1_0" style="width:44.0%"></div><div class="pb2" id="pb2_0" style="left:44.0%; width:32.0%"></div></div></div>
+            <div class="pval"><b id="pv0">0</b><i>b.</i></div>
+          </div>
+          <div class="prow" id="prow1">
+            <div class="pava"><svg viewBox="0 0 48 48" class="ico"><circle cx="20" cy="12" r="6" fill="currentColor"/><path d="M10 44 L13 26 Q20 20 27 26 L30 44 Z" fill="currentColor"/><path d="M27 27 L35 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 23 Q42 10 46 4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M46 4 L46 30" stroke="currentColor" stroke-width=".8" stroke-dasharray="2 2"/></svg><span>23</span></div>
+            <div class="pmain"><div class="pname">Dominik Švub<i>V · R · P 12 · 10 · 8 · 69 ryb</i></div>
+              <div class="pbar"><div class="pb1" id="pb1_1" style="width:44.0%"></div><div class="pb2" id="pb2_1" style="left:44.0%; width:54.0%"></div></div></div>
+            <div class="pval"><b id="pv1">0</b><i>b.</i></div>
+          </div>
+          <div class="prow" id="prow2">
+            <div class="pava"><svg viewBox="0 0 48 48" class="ico"><circle cx="20" cy="12" r="6" fill="currentColor"/><path d="M10 44 L13 26 Q20 20 27 26 L30 44 Z" fill="currentColor"/><path d="M27 27 L35 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 23 Q42 10 46 4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M46 4 L46 30" stroke="currentColor" stroke-width=".8" stroke-dasharray="2 2"/></svg><span>39</span></div>
+            <div class="pmain"><div class="pname">Miroslav Kučera<i>V · R · P 14 · 5 · 11 · 56 ryb</i></div>
+              <div class="pbar"><div class="pb1" id="pb1_2" style="width:66.0%"></div><div class="pb2" id="pb2_2" style="left:66.0%; width:30.0%"></div></div></div>
+            <div class="pval"><b id="pv2">0</b><i>b.</i></div>
+          </div>
+          <div class="prow" id="prow3">
+            <div class="pava"><svg viewBox="0 0 48 48" class="ico"><circle cx="20" cy="12" r="6" fill="currentColor"/><path d="M10 44 L13 26 Q20 20 27 26 L30 44 Z" fill="currentColor"/><path d="M27 27 L35 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 23 Q42 10 46 4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M46 4 L46 30" stroke="currentColor" stroke-width=".8" stroke-dasharray="2 2"/></svg><span>55</span></div>
+            <div class="pmain"><div class="pname">Martin Stoklasa<i>V · R · P 5 · 10 · 15 · 52 ryb</i></div>
+              <div class="pbar"><div class="pb1" id="pb1_3" style="width:42.0%"></div><div class="pb2" id="pb2_3" style="left:42.0%; width:20.0%"></div></div></div>
+            <div class="pval"><b id="pv3">0</b><i>b.</i></div>
+          </div></div>
+          <div id="pts-total"><b>166</b><span>bodů týmu z 360 · 30 soubojů na závodníka</span></div>
         </div>
-        
-        
       </section>
-      <section id="sh25" class="clip shot" data-start="53.031" data-duration="0.465" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:288.0px; top:146.2px; width:1344.0px; height:701.1px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/g_event_banner.jpg)"></div></div></div>
+
+      <section id="heat" class="clip" data-start="38.333" data-duration="1.858" data-track-index="2">
+        <div class="panel"><div class="h2" id="heat-h"><span>120 soubojů</span><em>každý čtvereček = jeden souboj</em></div>
+          <div class="heat">
+          <div class="hrow"><div class="hname"><span class="hno">7</span>Hrabalík</div>
+            <div class="hgrid"><div class="hline"><em>1. den</em><i class="hc hW" id="hc0_0_0"></i><i class="hc hW" id="hc0_0_1"></i><i class="hc hW" id="hc0_0_2"></i><i class="hc hF" id="hc0_0_3"></i><i class="hc hL" id="hc0_0_4"></i><i class="hc hL" id="hc0_0_5"></i><i class="hc hD" id="hc0_0_6"></i><i class="hc hL" id="hc0_0_7"></i><i class="hc hL" id="hc0_0_8"></i><i class="hc hL" id="hc0_0_9"></i><i class="hc hF" id="hc0_0_10"></i><i class="hc hL" id="hc0_0_11"></i><i class="hc hW" id="hc0_0_12"></i><i class="hc hW" id="hc0_0_13"></i><i class="hc hF" id="hc0_0_14"></i></div><div class="hline"><em>2. den</em><i class="hc hW" id="hc0_1_0"></i><i class="hc hL" id="hc0_1_1"></i><i class="hc hL" id="hc0_1_2"></i><i class="hc hL" id="hc0_1_3"></i><i class="hc hD" id="hc0_1_4"></i><i class="hc hD" id="hc0_1_5"></i><i class="hc hL" id="hc0_1_6"></i><i class="hc hL" id="hc0_1_7"></i><i class="hc hL" id="hc0_1_8"></i><i class="hc hL" id="hc0_1_9"></i><i class="hc hW" id="hc0_1_10"></i><i class="hc hF" id="hc0_1_11"></i><i class="hc hL" id="hc0_1_12"></i><i class="hc hW" id="hc0_1_13"></i><i class="hc hW" id="hc0_1_14"></i></div></div></div>
+          <div class="hrow"><div class="hname"><span class="hno">23</span>Švub</div>
+            <div class="hgrid"><div class="hline"><em>1. den</em><i class="hc hW" id="hc1_0_0"></i><i class="hc hW" id="hc1_0_1"></i><i class="hc hL" id="hc1_0_2"></i><i class="hc hD" id="hc1_0_3"></i><i class="hc hD" id="hc1_0_4"></i><i class="hc hW" id="hc1_0_5"></i><i class="hc hW" id="hc1_0_6"></i><i class="hc hD" id="hc1_0_7"></i><i class="hc hL" id="hc1_0_8"></i><i class="hc hW" id="hc1_0_9"></i><i class="hc hL" id="hc1_0_10"></i><i class="hc hL" id="hc1_0_11"></i><i class="hc hF" id="hc1_0_12"></i><i class="hc hF" id="hc1_0_13"></i><i class="hc hL" id="hc1_0_14"></i></div><div class="hline"><em>2. den</em><i class="hc hW" id="hc1_1_0"></i><i class="hc hF" id="hc1_1_1"></i><i class="hc hD" id="hc1_1_2"></i><i class="hc hL" id="hc1_1_3"></i><i class="hc hD" id="hc1_1_4"></i><i class="hc hD" id="hc1_1_5"></i><i class="hc hW" id="hc1_1_6"></i><i class="hc hL" id="hc1_1_7"></i><i class="hc hW" id="hc1_1_8"></i><i class="hc hW" id="hc1_1_9"></i><i class="hc hW" id="hc1_1_10"></i><i class="hc hW" id="hc1_1_11"></i><i class="hc hL" id="hc1_1_12"></i><i class="hc hD" id="hc1_1_13"></i><i class="hc hW" id="hc1_1_14"></i></div></div></div>
+          <div class="hrow"><div class="hname"><span class="hno">39</span>Kučera</div>
+            <div class="hgrid"><div class="hline"><em>1. den</em><i class="hc hL" id="hc2_0_0"></i><i class="hc hF" id="hc2_0_1"></i><i class="hc hW" id="hc2_0_2"></i><i class="hc hW" id="hc2_0_3"></i><i class="hc hL" id="hc2_0_4"></i><i class="hc hW" id="hc2_0_5"></i><i class="hc hW" id="hc2_0_6"></i><i class="hc hW" id="hc2_0_7"></i><i class="hc hL" id="hc2_0_8"></i><i class="hc hW" id="hc2_0_9"></i><i class="hc hW" id="hc2_0_10"></i><i class="hc hW" id="hc2_0_11"></i><i class="hc hW" id="hc2_0_12"></i><i class="hc hW" id="hc2_0_13"></i><i class="hc hD" id="hc2_0_14"></i></div><div class="hline"><em>2. den</em><i class="hc hL" id="hc2_1_0"></i><i class="hc hL" id="hc2_1_1"></i><i class="hc hD" id="hc2_1_2"></i><i class="hc hW" id="hc2_1_3"></i><i class="hc hL" id="hc2_1_4"></i><i class="hc hL" id="hc2_1_5"></i><i class="hc hL" id="hc2_1_6"></i><i class="hc hD" id="hc2_1_7"></i><i class="hc hL" id="hc2_1_8"></i><i class="hc hL" id="hc2_1_9"></i><i class="hc hL" id="hc2_1_10"></i><i class="hc hW" id="hc2_1_11"></i><i class="hc hW" id="hc2_1_12"></i><i class="hc hW" id="hc2_1_13"></i><i class="hc hD" id="hc2_1_14"></i></div></div></div>
+          <div class="hrow"><div class="hname"><span class="hno">55</span>Stoklasa</div>
+            <div class="hgrid"><div class="hline"><em>1. den</em><i class="hc hW" id="hc3_0_0"></i><i class="hc hF" id="hc3_0_1"></i><i class="hc hW" id="hc3_0_2"></i><i class="hc hL" id="hc3_0_3"></i><i class="hc hW" id="hc3_0_4"></i><i class="hc hF" id="hc3_0_5"></i><i class="hc hL" id="hc3_0_6"></i><i class="hc hL" id="hc3_0_7"></i><i class="hc hL" id="hc3_0_8"></i><i class="hc hD" id="hc3_0_9"></i><i class="hc hL" id="hc3_0_10"></i><i class="hc hW" id="hc3_0_11"></i><i class="hc hL" id="hc3_0_12"></i><i class="hc hF" id="hc3_0_13"></i><i class="hc hF" id="hc3_0_14"></i></div><div class="hline"><em>2. den</em><i class="hc hL" id="hc3_1_0"></i><i class="hc hD" id="hc3_1_1"></i><i class="hc hL" id="hc3_1_2"></i><i class="hc hL" id="hc3_1_3"></i><i class="hc hD" id="hc3_1_4"></i><i class="hc hF" id="hc3_1_5"></i><i class="hc hL" id="hc3_1_6"></i><i class="hc hD" id="hc3_1_7"></i><i class="hc hL" id="hc3_1_8"></i><i class="hc hL" id="hc3_1_9"></i><i class="hc hL" id="hc3_1_10"></i><i class="hc hF" id="hc3_1_11"></i><i class="hc hL" id="hc3_1_12"></i><i class="hc hL" id="hc3_1_13"></i><i class="hc hW" id="hc3_1_14"></i></div></div></div></div>
+          <div id="heat-legend"><span><i class="hc hW"></i>výhra 3 b.</span><span><i class="hc hF"></i>remíza s rybou 2 b.</span><span><i class="hc hD"></i>remíza 0:0 1 b.</span><span><i class="hc hL"></i>prohra</span></div>
         </div>
-        
-        
       </section>
-      <section id="sh26" class="clip shot" data-start="53.496" data-duration="0.464" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:416.8px; top:118.8px; width:1086.5px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_trophies.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_trophies_bg.jpg)"></div></div></div></div>
+
+      <section id="fish" class="clip" data-start="40.191" data-duration="3.669" data-track-index="2">
+        <div class="panel"><div class="h2" id="fish-h"><span>Ryby</span><em>úlovky týmů za oba dny</em></div>
+          <div class="frows">
+          <div class="frow" id="fr0"><span class="fpos">1</span><span class="fc">LT</span>
+            <div class="fbar"><div class="ffill" id="ff0" style="width:97.6%"></div></div><b class="fv" id="fv0">0</b></div>
+          <div class="frow" id="fr1"><span class="fpos">2</span><span class="fc">BG</span>
+            <div class="fbar"><div class="ffill" id="ff1" style="width:96.4%"></div></div><b class="fv" id="fv1">0</b></div>
+          <div class="frow" id="fr2"><span class="fpos">3</span><span class="fc">UA</span>
+            <div class="fbar"><div class="ffill" id="ff2" style="width:87.6%"></div></div><b class="fv" id="fv2">0</b></div>
+          <div class="frow cz" id="fr3"><span class="fpos">4</span><span class="fc">CZ</span>
+            <div class="fbar"><div class="ffill" id="ff3" style="width:73.6%"></div></div><b class="fv" id="fv3">0</b></div>
+          <div class="frow" id="fr4"><span class="fpos">5</span><span class="fc">RO</span>
+            <div class="fbar"><div class="ffill" id="ff4" style="width:70.0%"></div></div><b class="fv" id="fv4">0</b></div>
+          <div class="frow" id="fr5"><span class="fpos">6</span><span class="fc">SK</span>
+            <div class="fbar"><div class="ffill" id="ff5" style="width:65.2%"></div></div><b class="fv" id="fv5">0</b></div>
+          <div class="frow" id="fr6"><span class="fpos">7</span><span class="fc">DE</span>
+            <div class="fbar"><div class="ffill" id="ff6" style="width:63.9%"></div></div><b class="fv" id="fv6">0</b></div>
+          <div class="frow" id="fr7"><span class="fpos">8</span><span class="fc">GB</span>
+            <div class="fbar"><div class="ffill" id="ff7" style="width:62.4%"></div></div><b class="fv" id="fv7">0</b></div>
+          <div class="frow" id="fr8"><span class="fpos">9</span><span class="fc">HU</span>
+            <div class="fbar"><div class="ffill" id="ff8" style="width:61.8%"></div></div><b class="fv" id="fv8">0</b></div>
+          <div class="frow" id="fr9"><span class="fpos">10</span><span class="fc">SK</span>
+            <div class="fbar"><div class="ffill" id="ff9" style="width:60.0%"></div></div><b class="fv" id="fv9">0</b></div>
+          <div class="frow" id="fr10"><span class="fpos">11</span><span class="fc">LT</span>
+            <div class="fbar"><div class="ffill" id="ff10" style="width:60.0%"></div></div><b class="fv" id="fv10">0</b></div>
+          <div class="frow" id="fr11"><span class="fpos">12</span><span class="fc">BE</span>
+            <div class="fbar"><div class="ffill" id="ff11" style="width:58.5%"></div></div><b class="fv" id="fv11">0</b></div>
+          <div class="frow" id="fr12"><span class="fpos">13</span><span class="fc">PL</span>
+            <div class="fbar"><div class="ffill" id="ff12" style="width:56.1%"></div></div><b class="fv" id="fv12">0</b></div>
+          <div class="frow" id="fr13"><span class="fpos">14</span><span class="fc">DK</span>
+            <div class="fbar"><div class="ffill" id="ff13" style="width:55.2%"></div></div><b class="fv" id="fv13">0</b></div>
+          <div class="frow" id="fr14"><span class="fpos">15</span><span class="fc">MD</span>
+            <div class="fbar"><div class="ffill" id="ff14" style="width:55.2%"></div></div><b class="fv" id="fv14">0</b></div>
+          <div class="frow" id="fr15"><span class="fpos">16</span><span class="fc">GB</span>
+            <div class="fbar"><div class="ffill" id="ff15" style="width:53.0%"></div></div><b class="fv" id="fv15">0</b></div></div>
+          <div id="fish-note"><b>243 ryb</b> – 4. nejvíc ze všech týmů</div>
         </div>
-        
-        
       </section>
-      <section id="sh27" class="clip shot" data-start="53.96" data-duration="0.465" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:456.0px; top:118.8px; width:1008.0px; height:756.0px; rotate:-2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fg.png)"></div></div>
+
+      <section id="rank" class="clip" data-start="43.86" data-duration="1.834" data-track-index="2">
+        <div class="rank-wrap">
+          <div id="rank-n"><b id="rank-v">16</b><span>.</span></div>
+          <div id="rank-t">místo ze 16 týmů</div>
+          <div id="rank-s">součet umístění 78 (32 + 46) · 166 b. · 243 ryb</div>
         </div>
-        
-        
-      </section>
-      <section id="sh28" class="clip shot" data-start="54.425" data-duration="0.441" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:676.5px; top:118.8px; width:567.0px; height:756.0px; rotate:2.5deg;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fg.png)"></div></div>
-        </div>
-        
-        
-      </section>
-      <section id="sh29" class="clip shot" data-start="54.866" data-duration="6.614" data-track-index="2">
-        
-        <div class="cam">
-          <div class="pbox panel" style="left:513.6px; top:75.6px; width:892.8px; height:669.6px;"><div class="clipbox"><div class="ph" style="background-image:url(assets/photos/p_cheers.jpg)"></div><div class="rv"><div class="gbg" style="background-image:url(assets/gfx/p_cheers_bg.jpg)"></div></div></div><div class="gfg" style="background-image:url(assets/gfx/p_cheers_fg.png)"></div></div>
-        </div>
-        <div class="slash"><i></i><i></i><i></i></div>
-        
       </section>
 
       <div id="three-wrap"><canvas id="three-layer"></canvas></div>
 
       <section id="title-clip" class="clip" data-start="4.985" data-duration="5.596" data-track-index="3">
         <div class="t-wrap">
-          <div id="t-main" class="t-main">H-BATTLE 2026</div>
-          <div id="t-cup" class="t-cup">Hard Baits Area Trout Fishing European Cup</div>
-          <div id="t-sub" class="t-sub"><span class="nw">Hofer Lake · Pružina (SK)</span> · <span class="nw">2.–4. 10. 2026</span></div>
+          <div id="t-main" class="t-main">HB BATTLE <span class="red">2026</span></div>
+          <div id="t-cup" class="t-cup">Trout Area European Hardbaits Cup · <span class="nw">Pružina (SK)</span> · <span class="nw">2.–4. 10. 2026</span></div>
+          <div class="counts"><div class="cnt" id="cntb0"><b id="cnt0">0</b><i>týmů</i></div><div class="cnt" id="cntb1"><b id="cnt1">0</b><i>závodníků</i></div><div class="cnt" id="cntb2"><b id="cnt2">0</b><i>zemí</i></div></div>
         </div>
       </section>
 
       <section id="kin" class="clip" data-start="30.991" data-duration="3.673" data-track-index="3">
-        <div id="kin-slash"><i></i><i></i><i></i></div>
         <div id="kin-cam">
           <div id="k-l1" class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
           <div id="k-l2" class="k-line"><span class="k-mask"><span id="k2w0" class="k-word">přijeli</span></span><span class="k-mask"><span id="k2w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k2w2" class="k-word">za</span></span><span class="k-mask"><span id="k2w3" class="k-word red">přáteli.</span></span></div>
@@ -398,29 +548,36 @@
       </section>
 
       
-      <section id="chip-prijezd" class="clip chip-clip" data-start="10.581" data-duration="7.43" data-track-index="4">
+      <section id="chip-prijezd" class="clip chip-clip" data-start="10.581" data-duration="5.573" data-track-index="4">
         <div class="chip"><span class="chip-num">01</span><span class="chip-cz">Příjezd</span><span class="chip-en">Arrival</span></div>
       </section>
-      <section id="chip-trenink" class="clip chip-clip" data-start="18.011" data-duration="12.98" data-track-index="4">
-        <div class="chip"><span class="chip-num">02</span><span class="chip-cz">Den 1 · trénink</span><span class="chip-en">Day 1 · practice</span></div>
+      <section id="chip-tym" class="clip chip-clip" data-start="16.154" data-duration="1.857" data-track-index="4">
+        <div class="chip"><span class="chip-num">02</span><span class="chip-cz">Tým</span><span class="chip-en">Team</span></div>
       </section>
-      <section id="chip-zmena" class="clip chip-clip" data-start="34.664" data-duration="3.669" data-track-index="4">
+      <section id="chip-zmena" class="clip chip-clip" data-start="18.011" data-duration="3.715" data-track-index="4">
         <div class="chip"><span class="chip-num">03</span><span class="chip-cz">Změna v sestavě</span><span class="chip-en">Line-up change</span></div>
       </section>
-      <section id="chip-losovani" class="clip chip-clip" data-start="38.333" data-duration="9.219" data-track-index="4">
+      <section id="chip-losovani" class="clip chip-clip" data-start="21.726" data-duration="3.716" data-track-index="4">
         <div class="chip"><span class="chip-num">04</span><span class="chip-cz">Losování</span><span class="chip-en">The draw</span></div>
       </section>
+      <section id="chip-zavod" class="clip chip-clip" data-start="25.442" data-duration="5.549" data-track-index="4">
+        <div class="chip"><span class="chip-num">05</span><span class="chip-cz">Trénink a závod</span><span class="chip-en">Practice & race</span></div>
+      </section>
+      <section id="chip-vysledky" class="clip chip-clip" data-start="34.664" data-duration="12.888" data-track-index="4">
+        <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Výsledky</span><span class="chip-en">Results</span></div>
+      </section>
       <section id="chip-vtip" class="clip chip-clip" data-start="47.552" data-duration="1.811" data-track-index="4">
-        <div class="chip"><span class="chip-num">05</span><span class="chip-cz">Zákulisí</span><span class="chip-en">Backstage</span></div>
+        <div class="chip"><span class="chip-num">07</span><span class="chip-cz">Zákulisí</span><span class="chip-en">Backstage</span></div>
       </section>
       <section id="chip-pratele" class="clip chip-clip" data-start="49.363" data-duration="5.503" data-track-index="4">
-        <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Přátelé</span><span class="chip-en">Friends</span></div>
+        <div class="chip"><span class="chip-num">08</span><span class="chip-cz">Přátelé</span><span class="chip-en">Friends</span></div>
       </section>
 
       <section id="outro" class="clip" data-start="54.866" data-duration="6.614" data-track-index="3">
+        <div id="out-cam" class="clip"><div class="ph-final bg"></div><div class="ph-final fg"></div></div>
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
-          <div id="o-meta" class="o-meta">Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
+          <div id="o-meta" class="o-meta">Držíme palce, kluci! · Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
         </div>
       </section>
 
@@ -442,244 +599,290 @@
           </svg>
         </div>
         <div id="p-text">
-          <div class="p-title">H-BATTLE 2026</div>
+          <div class="p-title">HB BATTLE 2026</div>
           <div class="p-artist">začátek · Trout Area CZ</div>
           <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>0:60</span></div>
         </div>
       </div>
-      <div id="wipe-holder"><div id="wipe"><i></i><i></i><i></i></div></div>
-      <div id="proto-badge">DRAFT · v4</div>
+      <div id="grain"></div>
+      <div id="wipe-holder"><div id="wipe"></div></div>
+      <div id="proto-badge">DRAFT · v6</div>
 
       <audio id="bgm" src="assets/track_edit60.wav" data-start="1.2" data-duration="59.68" data-track-index="9" data-volume="1"></audio>
     </div>
 
     <script>
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#st-rays", { rotation: 0 }, { rotation: 40, duration: 61.48, ease: "none" }, 0);
-      tl.fromTo("#st-band", { xPercent: -4 }, { xPercent: 4, duration: 61.48, ease: "none" }, 0);
-      tl.fromTo("#star0", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:41, yoyo:true}, 1.84);
-      tl.fromTo("#star1", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.19, ease:"sine.inOut", repeat:49, yoyo:true}, 1.84);
-      tl.fromTo("#star2", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:43, yoyo:true}, 0.21);
-      tl.fromTo("#star3", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.93, ease:"sine.inOut", repeat:63, yoyo:true}, 0.10);
-      tl.fromTo("#star4", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.18, ease:"sine.inOut", repeat:49, yoyo:true}, 1.95);
-      tl.fromTo("#star5", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.26, ease:"sine.inOut", repeat:45, yoyo:true}, 1.02);
-      tl.fromTo("#star6", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.27, ease:"sine.inOut", repeat:47, yoyo:true}, 0.08);
-      tl.fromTo("#star7", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.81, ease:"sine.inOut", repeat:73, yoyo:true}, 0.40);
-      tl.fromTo("#star8", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.17, ease:"sine.inOut", repeat:49, yoyo:true}, 1.50);
-      tl.fromTo("#star9", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.48, ease:"sine.inOut", repeat:39, yoyo:true}, 2.01);
-      tl.fromTo("#star10", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.14, ease:"sine.inOut", repeat:51, yoyo:true}, 1.20);
-      tl.fromTo("#star11", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.06, ease:"sine.inOut", repeat:55, yoyo:true}, 0.15);
-      tl.fromTo("#star12", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.23, ease:"sine.inOut", repeat:47, yoyo:true}, 1.20);
-      tl.fromTo("#star13", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.08, ease:"sine.inOut", repeat:55, yoyo:true}, 0.82);
-      tl.fromTo("#star14", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.46, ease:"sine.inOut", repeat:39, yoyo:true}, 1.67);
-      tl.fromTo("#star15", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.39, ease:"sine.inOut", repeat:41, yoyo:true}, 0.80);
-      tl.fromTo("#star16", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.97, ease:"sine.inOut", repeat:59, yoyo:true}, 1.65);
-      tl.fromTo("#star17", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.96, ease:"sine.inOut", repeat:61, yoyo:true}, 1.88);
-      tl.fromTo("#star18", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.97, ease:"sine.inOut", repeat:59, yoyo:true}, 1.89);
-      tl.fromTo("#star19", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.10, ease:"sine.inOut", repeat:53, yoyo:true}, 0.01);
-      tl.fromTo("#star20", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.92, ease:"sine.inOut", repeat:65, yoyo:true}, 0.01);
-      tl.fromTo("#star21", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.43, ease:"sine.inOut", repeat:41, yoyo:true}, 0.79);
-      tl.fromTo("#star22", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.49, ease:"sine.inOut", repeat:39, yoyo:true}, 1.31);
-      tl.fromTo("#star23", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.19, ease:"sine.inOut", repeat:49, yoyo:true}, 1.59);
-      tl.fromTo("#star24", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.07, ease:"sine.inOut", repeat:55, yoyo:true}, 0.61);
-      tl.fromTo("#star25", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.35, ease:"sine.inOut", repeat:43, yoyo:true}, 1.59);
-      tl.fromTo("#star26", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.01, ease:"sine.inOut", repeat:57, yoyo:true}, 2.18);
-      tl.fromTo("#star27", {scale:0, opacity:0}, {scale:1, opacity:1, duration:1.28, ease:"sine.inOut", repeat:45, yoyo:true}, 0.07);
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: 324, y: 216, duration: 61.48, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: -270, y: -162, duration: 61.48, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b3", { x: 0, y: 0 }, { x: 216, y: -216, duration: 61.48, ease: "sine.inOut" }, 0);
+      tl.fromTo("#grain", { x: 0 }, { x: 64, duration: 61.48, ease: "steps(738)" }, 0);
       tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0, duration: 0.25 }, 10.331);
       tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 54.716);
-      tl.fromTo("#t-main", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, 4.985);
-      tl.fromTo("#t-cup", { opacity: 0, xPercent: -8 }, { opacity: 1, xPercent: 0, duration: 0.45, ease: "power3.out" }, 5.914);
-      tl.fromTo("#t-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 6.842);
-      tl.fromTo("#k1w0", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 30.991);
-      tl.fromTo("#k1w1", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 31.456);
-      tl.fromTo("#k1w2", {yPercent:120, skewX:-12}, {yPercent:0, skewX:0, duration:0.28, ease:"power4.out"}, 31.897);
-      tl.fromTo("#k2w0", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.83);
-      tl.fromTo("#k2w1", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.865);
-      tl.fromTo("#k2w2", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.9);
-      tl.fromTo("#k2w3", {scale:2.4, opacity:0}, {scale:1, opacity:1, duration:0.2, ease:"expo.out"}, 32.935);
+      tl.fromTo("#t-main", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 4.985);
+      tl.fromTo("#t-cup", { opacity: 0 }, { opacity: 0.85, duration: 0.5 }, 5.914);
+      { const o = { v: 0 }, el = document.getElementById("cnt0"); tl.fromTo(o, { v: 0 }, { v: 16, duration: 0.8, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 6.842); }
+      { const o = { v: 0 }, el = document.getElementById("cnt1"); tl.fromTo(o, { v: 0 }, { v: 64, duration: 0.8, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 7.307); }
+      { const o = { v: 0 }, el = document.getElementById("cnt2"); tl.fromTo(o, { v: 0 }, { v: 13, duration: 0.8, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 7.771); }
+      tl.fromTo("#cntb0", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.842);
+      tl.fromTo("#cntb1", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.307);
+      tl.fromTo("#cntb2", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.771);
+      tl.fromTo("#roster-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 16.154);
+      tl.fromTo("#rc0", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 16.154);
+      tl.fromTo("#rc1", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 16.618);
+      tl.fromTo("#rc2", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 17.082);
+      tl.fromTo("#rc3", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 17.547);
+      tl.fromTo("#roster-coach", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 17.747);
+      tl.fromTo("#roster .rgrid", { scale: 1 }, { scale: 1.03, duration: 1.857, ease: "none" }, 16.154);
+      tl.fromTo("#swap-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 18.011);
+      tl.fromTo("#swap-out", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 18.011);
+      tl.fromTo("#swap-out .strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, 18.476);
+      tl.fromTo("#swap-out", { opacity: 1 }, { opacity: 0.45, duration: 0.3, immediateRender: false }, 18.476);
+      tl.fromTo("#swap-in", { opacity: 0, x: 65 }, { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, 18.94);
+      tl.fromTo("#swap-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 19.404);
+      tl.fromTo("#sectors-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 21.726);
+      tl.fromTo("#lake", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 21.726);
+      tl.fromTo("#sec0", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 21.776);
+      tl.fromTo("#sec1", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 22.241);
+      tl.fromTo("#sec2", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 22.705);
+      tl.fromTo("#sec3", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 23.17);
+      tl.fromTo("#secno0", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 21.926);
+      tl.fromTo("#secno1", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 22.391);
+      tl.fromTo("#secno2", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 22.855);
+      tl.fromTo("#secno3", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 23.32);
+      tl.fromTo("#duels-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 23.584);
+      tl.fromTo("#dcol0", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 23.634);
+      tl.fromTo("#dcol1", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 24.075);
+      tl.fromTo("#dcol2", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 24.54);
+      tl.fromTo("#dcol3", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 25.004);
+      tl.fromTo("#dlist0", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
+      tl.fromTo("#dlist1", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
+      tl.fromTo("#dlist2", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
+      tl.fromTo("#dlist3", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
+      tl.fromTo("#world-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 49.363);
+      tl.fromTo("#cc0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.363);
+      tl.fromTo("#cc1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.595);
+      tl.fromTo("#cc2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.827);
+      tl.fromTo("#cc3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.059);
+      tl.fromTo("#cc4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.291);
+      tl.fromTo("#cc5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.523);
+      tl.fromTo("#cc6", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.755);
+      tl.fromTo("#cc7", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.987);
+      tl.fromTo("#cc8", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.219);
+      tl.fromTo("#cc9", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.451);
+      tl.fromTo("#cc10", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.683);
+      tl.fromTo("#cc11", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.915);
+      tl.fromTo("#cc12", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 52.147);
+      tl.fromTo("#world-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 51.156);
+      tl.fromTo("#pts-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 34.664);
+      tl.fromTo("#prow0", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 34.664);
+      tl.fromTo("#prow1", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 35.129);
+      tl.fromTo("#prow2", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 35.593);
+      tl.fromTo("#prow3", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 36.034);
+      tl.fromTo("#pb1_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 34.814);
+      tl.fromTo("#pb1_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 35.279);
+      tl.fromTo("#pb1_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 35.743);
+      tl.fromTo("#pb1_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.184);
+      tl.fromTo("#pb2_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.499);
+      tl.fromTo("#pb2_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.963);
+      tl.fromTo("#pb2_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 37.428);
+      tl.fromTo("#pb2_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 37.869);
+      { const o = { v: 0 }, el = document.getElementById("pv0"); tl.fromTo(o, { v: 0 }, { v: 38, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 34.814); }
+      { const o = { v: 0 }, el = document.getElementById("pv1"); tl.fromTo(o, { v: 0 }, { v: 49, duration: 2.434, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 35.279); }
+      { const o = { v: 0 }, el = document.getElementById("pv2"); tl.fromTo(o, { v: 0 }, { v: 48, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 35.743); }
+      { const o = { v: 0 }, el = document.getElementById("pv3"); tl.fromTo(o, { v: 0 }, { v: 31, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 36.184); }
+      tl.fromTo("#pts-total", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 38.069);
+      tl.fromTo("#heat-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 38.333);
+      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.533);
+      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.623);
+      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.713);
+      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.803);
+      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.893);
+      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.983);
+      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 39.073);
+      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 39.163);
+      tl.fromTo("#heat-legend", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 39.726);
+      tl.fromTo("#fish-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 40.191);
+      tl.fromTo("#fr0", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.341);
+      tl.fromTo("#fr1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.391);
+      tl.fromTo("#fr2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.441);
+      tl.fromTo("#fr3", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.491);
+      tl.fromTo("#fr4", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.541);
+      tl.fromTo("#fr5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.591);
+      tl.fromTo("#fr6", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.641);
+      tl.fromTo("#fr7", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.691);
+      tl.fromTo("#fr8", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.741);
+      tl.fromTo("#fr9", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.791);
+      tl.fromTo("#fr10", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.841);
+      tl.fromTo("#fr11", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.891);
+      tl.fromTo("#fr12", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.941);
+      tl.fromTo("#fr13", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.991);
+      tl.fromTo("#fr14", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 41.041);
+      tl.fromTo("#fr15", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 41.091);
+      tl.fromTo("#ff0", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.391);
+      tl.fromTo("#ff1", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.441);
+      tl.fromTo("#ff2", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.491);
+      tl.fromTo("#ff3", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.541);
+      tl.fromTo("#ff4", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.591);
+      tl.fromTo("#ff5", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.641);
+      tl.fromTo("#ff6", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.691);
+      tl.fromTo("#ff7", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.741);
+      tl.fromTo("#ff8", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.791);
+      tl.fromTo("#ff9", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.841);
+      tl.fromTo("#ff10", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.891);
+      tl.fromTo("#ff11", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.941);
+      tl.fromTo("#ff12", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.991);
+      tl.fromTo("#ff13", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.041);
+      tl.fromTo("#ff14", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.091);
+      tl.fromTo("#ff15", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.141);
+      { const o = { v: 0 }, el = document.getElementById("fv0"); tl.fromTo(o, { v: 0 }, { v: 322, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.391); }
+      { const o = { v: 0 }, el = document.getElementById("fv1"); tl.fromTo(o, { v: 0 }, { v: 318, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.441); }
+      { const o = { v: 0 }, el = document.getElementById("fv2"); tl.fromTo(o, { v: 0 }, { v: 289, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.491); }
+      { const o = { v: 0 }, el = document.getElementById("fv3"); tl.fromTo(o, { v: 0 }, { v: 243, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.541); }
+      { const o = { v: 0 }, el = document.getElementById("fv4"); tl.fromTo(o, { v: 0 }, { v: 231, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.591); }
+      { const o = { v: 0 }, el = document.getElementById("fv5"); tl.fromTo(o, { v: 0 }, { v: 215, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.641); }
+      { const o = { v: 0 }, el = document.getElementById("fv6"); tl.fromTo(o, { v: 0 }, { v: 211, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.691); }
+      { const o = { v: 0 }, el = document.getElementById("fv7"); tl.fromTo(o, { v: 0 }, { v: 206, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.741); }
+      { const o = { v: 0 }, el = document.getElementById("fv8"); tl.fromTo(o, { v: 0 }, { v: 204, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.791); }
+      { const o = { v: 0 }, el = document.getElementById("fv9"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.841); }
+      { const o = { v: 0 }, el = document.getElementById("fv10"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.891); }
+      { const o = { v: 0 }, el = document.getElementById("fv11"); tl.fromTo(o, { v: 0 }, { v: 193, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.941); }
+      { const o = { v: 0 }, el = document.getElementById("fv12"); tl.fromTo(o, { v: 0 }, { v: 185, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.991); }
+      { const o = { v: 0 }, el = document.getElementById("fv13"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.041); }
+      { const o = { v: 0 }, el = document.getElementById("fv14"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.091); }
+      { const o = { v: 0 }, el = document.getElementById("fv15"); tl.fromTo(o, { v: 0 }, { v: 175, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.141); }
+      tl.fromTo("#fish .cz", { scale: 1 }, { scale: 1.04, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 42.025);
+      tl.fromTo("#fish-note", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 42.49);
+      tl.fromTo("#rank-n", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, 43.86);
+      { const o = { v: 16 }, el = document.getElementById("rank-v"); tl.fromTo(o, { v: 16 }, { v: 9, duration: 0.7, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 43.86); }
+      tl.fromTo("#rank-t", { opacity: 0, x: -43 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 44.324);
+      tl.fromTo("#rank-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 44.788);
+      tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 30.991);
+      tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 31.456);
+      tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 31.897);
+      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.83);
+      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.87);
+      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.91);
+      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.95);
+      tl.fromTo("#k-l1", {opacity:1}, {opacity:0.35, duration:0.3, immediateRender:false}, 32.83);
       tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, 33.736);
-      tl.fromTo("#kin-cam", {scale:1}, {scale:1.08, duration:3.673, ease:"none"}, 30.991);
-      tl.fromTo("#kin-slash", {xPercent:-140}, {xPercent:140, duration:0.45, ease:"power2.inOut"}, 32.73);
-      tl.fromTo("#flash", {opacity:0.9}, {opacity:0, duration:0.35, ease:"power2.out", immediateRender:false}, 32.83);
-      tl.fromTo("#sh01 .cam", {"xPercent":-2.5,"scale":1.05}, {"xPercent":2.5,"scale":1.05,"duration":3.715,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 11.974);
-      tl.fromTo("#sh01 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":2.322000000000001,"ease":"none"}, 11.974);
-      tl.fromTo("#sh01 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 12.142);
-      tl.fromTo("#sh01 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":2.322000000000001,"ease":"none"}, 11.974);
-      tl.fromTo("#sh01 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 11.854);
-      tl.fromTo("#sh01 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 11.974);
-      tl.fromTo("#sh01 .word", {"x":0}, {"x":43.2,"duration":2.322000000000001,"ease":"none"}, 11.974);
-      tl.fromTo("#sh02 .cam", {"scale":1}, {"scale":1.07,"duration":3.715,"ease":"none"}, 14.296);
-      tl.fromTo("#sh02 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 15.689);
-      tl.fromTo("#sh02 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":2.321999999999999,"ease":"none"}, 15.689);
-      tl.fromTo("#sh02 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 15.569);
-      tl.fromTo("#sh02 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 15.689);
-      tl.fromTo("#sh02 .word", {"x":0}, {"x":43.2,"duration":2.321999999999999,"ease":"none"}, 15.689);
-      tl.fromTo("#sh03 .cam", {"xPercent":2.5,"scale":1.05}, {"xPercent":-2.5,"scale":1.05,"duration":1.858,"ease":"none"}, 18.011);
-      tl.fromTo("#sh03 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 18.940);
-      tl.fromTo("#sh03 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 18.940);
-      tl.fromTo("#sh03 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 18.820);
-      tl.fromTo("#sh03 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 18.940);
-      tl.fromTo("#sh03 .word", {"x":0}, {"x":43.2,"duration":0.929000000000002,"ease":"none"}, 18.940);
-      tl.fromTo("#sh04 .cam", {"scale":1}, {"scale":1.07,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 20.798);
-      tl.fromTo("#sh04 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9280000000000008,"ease":"none"}, 20.798);
-      tl.fromTo("#sh04 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 20.966);
-      tl.fromTo("#sh04 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9280000000000008,"ease":"none"}, 20.798);
-      tl.fromTo("#sh04 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 20.678);
-      tl.fromTo("#sh04 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 20.798);
-      tl.fromTo("#sh04 .word", {"x":0}, {"x":43.2,"duration":0.9280000000000008,"ease":"none"}, 20.798);
-      tl.fromTo("#sh05 .cam", {"scale":1.08}, {"scale":1,"duration":1.858,"ease":"none"}, 21.726);
-      tl.fromTo("#sh05 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 22.655);
-      tl.fromTo("#sh05 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 22.655);
-      tl.fromTo("#sh05 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 22.823);
-      tl.fromTo("#sh05 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 22.655);
-      tl.fromTo("#sh05 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 22.535);
-      tl.fromTo("#sh05 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 22.655);
-      tl.fromTo("#sh05 .word", {"x":0}, {"x":43.2,"duration":0.929000000000002,"ease":"none"}, 22.655);
-      tl.fromTo("#sh06 .cam", {"scale":1}, {"scale":1.07,"duration":1.858,"ease":"none"}, 23.584);
-      tl.fromTo("#sh06 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 24.490);
-      tl.fromTo("#sh06 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9520000000000017,"ease":"none"}, 24.490);
-      tl.fromTo("#sh06 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 24.658);
-      tl.fromTo("#sh06 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9520000000000017,"ease":"none"}, 24.490);
-      tl.fromTo("#sh06 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 24.370);
-      tl.fromTo("#sh06 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 24.490);
-      tl.fromTo("#sh06 .word", {"x":0}, {"x":43.2,"duration":0.9520000000000017,"ease":"none"}, 24.490);
-      tl.fromTo("#sh07 .cam", {"xPercent":-2.5,"scale":1.05}, {"xPercent":2.5,"scale":1.05,"duration":1.834,"ease":"none"}, 25.442);
-      tl.fromTo("#sh07 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 26.370);
-      tl.fromTo("#sh07 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9059999999999988,"ease":"none"}, 26.370);
-      tl.fromTo("#sh07 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 26.538);
-      tl.fromTo("#sh07 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9059999999999988,"ease":"none"}, 26.370);
-      tl.fromTo("#sh07 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 26.250);
-      tl.fromTo("#sh07 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 26.370);
-      tl.fromTo("#sh07 .word", {"x":0}, {"x":43.2,"duration":0.9059999999999988,"ease":"none"}, 26.370);
-      tl.fromTo("#sh08 .cam", {"scale":1}, {"scale":1.07,"duration":1.858,"ease":"none"}, 27.276);
-      tl.fromTo("#sh08 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 28.205);
-      tl.fromTo("#sh08 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 28.205);
-      tl.fromTo("#sh08 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 28.373);
-      tl.fromTo("#sh08 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 28.205);
-      tl.fromTo("#sh08 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 28.085);
-      tl.fromTo("#sh08 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 28.205);
-      tl.fromTo("#sh08 .word", {"x":0}, {"x":43.2,"duration":0.929000000000002,"ease":"none"}, 28.205);
-      tl.fromTo("#sh09 .cam", {"scale":1.08}, {"scale":1,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 29.598);
-      tl.fromTo("#sh09 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.44099999999999895,"ease":"none"}, 29.598);
-      tl.fromTo("#sh09 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 29.478);
-      tl.fromTo("#sh09 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 29.598);
-      tl.fromTo("#sh09 .word", {"x":0}, {"x":43.2,"duration":0.44099999999999895,"ease":"none"}, 29.598);
-      tl.fromTo("#sh10 .cam", {"scale":1}, {"scale":1.07,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 30.527);
-      tl.fromTo("#sh10 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.46399999999999864,"ease":"none"}, 30.527);
-      tl.fromTo("#sh10 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 30.407);
-      tl.fromTo("#sh10 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 30.527);
-      tl.fromTo("#sh10 .word", {"x":0}, {"x":43.2,"duration":0.46399999999999864,"ease":"none"}, 30.527);
-      tl.fromTo("#sh11 .cam", {"scale":1}, {"scale":1.07,"duration":1.835,"ease":"none"}, 34.664);
-      tl.fromTo("#sh11 .pbox", {"scale":0.9,"opacity":0}, {"scale":1,"opacity":1,"duration":0.3,"ease":"back.out(1.6)"}, 34.664);
-      tl.fromTo("#sh12 .cam", {"scale":1.08}, {"scale":1,"duration":1.834,"ease":"none"}, 36.499);
-      tl.fromTo("#sh12 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 37.428);
-      tl.fromTo("#sh12 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9050000000000011,"ease":"none"}, 37.428);
-      tl.fromTo("#sh12 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 37.596);
-      tl.fromTo("#sh12 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9050000000000011,"ease":"none"}, 37.428);
-      tl.fromTo("#sh12 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 37.308);
-      tl.fromTo("#sh12 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 37.428);
-      tl.fromTo("#sh12 .word", {"x":0}, {"x":43.2,"duration":0.9050000000000011,"ease":"none"}, 37.428);
-      tl.fromTo("#sh12 .plate", {"xPercent":-110}, {"xPercent":0,"duration":0.35,"ease":"power3.out"}, 37.428);
-      tl.fromTo("#sh13 .cam", {"yPercent":2,"scale":1.05}, {"yPercent":-2,"scale":1.05,"duration":1.858,"ease":"none"}, 38.333);
-      tl.fromTo("#sh13 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 39.262);
-      tl.fromTo("#sh13 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 39.262);
-      tl.fromTo("#sh13 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 39.142);
-      tl.fromTo("#sh13 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 39.262);
-      tl.fromTo("#sh13 .word", {"x":0}, {"x":43.2,"duration":0.929000000000002,"ease":"none"}, 39.262);
-      tl.fromTo("#sh14 .cam", {"scale":1}, {"scale":1.07,"duration":1.834,"ease":"none"}, 40.191);
-      tl.fromTo("#sh14 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 41.096);
-      tl.fromTo("#sh14 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.929000000000002,"ease":"none"}, 41.096);
-      tl.fromTo("#sh14 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 41.264);
-      tl.fromTo("#sh14 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.929000000000002,"ease":"none"}, 41.096);
-      tl.fromTo("#sh14 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 40.976);
-      tl.fromTo("#sh14 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 41.096);
-      tl.fromTo("#sh14 .word", {"x":0}, {"x":43.2,"duration":0.929000000000002,"ease":"none"}, 41.096);
-      tl.fromTo("#sh14 .plate", {"xPercent":-110}, {"xPercent":0,"duration":0.35,"ease":"power3.out"}, 41.096);
-      tl.fromTo("#sh15 .cam", {"x":0,"scale":1}, {"x":0,"scale":1.06,"duration":5.527,"ease":"sine.inOut"}, 42.025);
-      tl.fromTo("#sh15 .pbox", {"yPercent":30,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"power3.out"}, 42.025);
-      tl.fromTo("#sh16 .cam", {"scale":1}, {"scale":1.07,"duration":1.811,"ease":"none"}, 47.552);
-      tl.fromTo("#sh16 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 48.457);
-      tl.fromTo("#sh16 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.9059999999999988,"ease":"none"}, 48.457);
-      tl.fromTo("#sh16 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 48.625);
-      tl.fromTo("#sh16 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.9059999999999988,"ease":"none"}, 48.457);
-      tl.fromTo("#sh16 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 48.337);
-      tl.fromTo("#sh16 .word span", {"xPercent":-12,"opacity":0}, {"xPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out"}, 48.457);
-      tl.fromTo("#sh16 .word", {"x":0}, {"x":43.2,"duration":0.9059999999999988,"ease":"none"}, 48.457);
-      tl.fromTo("#sh16 .caption", {"y":32.400000000000006,"opacity":0}, {"y":0,"opacity":1,"duration":0.3,"ease":"back.out(2)"}, 48.016);
-      tl.fromTo("#sh17 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 49.363);
-      tl.fromTo("#sh17 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 49.363);
-      tl.fromTo("#sh18 .cam", {"scale":1.08}, {"scale":1,"duration":0.465,"ease":"none"}, 49.827);
-      tl.fromTo("#sh18 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 49.827);
-      tl.fromTo("#sh19 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 50.292);
-      tl.fromTo("#sh19 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 50.292);
-      tl.fromTo("#sh20 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 50.756);
-      tl.fromTo("#sh20 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 50.756);
-      tl.fromTo("#sh21 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 51.197);
-      tl.fromTo("#sh21 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 51.197);
-      tl.fromTo("#sh22 .cam", {"scale":1.08}, {"scale":1,"duration":0.465,"ease":"none"}, 51.661);
-      tl.fromTo("#sh22 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 51.661);
-      tl.fromTo("#sh23 .cam", {"scale":1}, {"scale":1.07,"duration":0.464,"ease":"none"}, 52.126);
-      tl.fromTo("#sh23 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 52.126);
-      tl.fromTo("#sh24 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 52.590);
-      tl.fromTo("#sh24 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 52.590);
-      tl.fromTo("#sh24 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 52.590);
-      tl.fromTo("#sh24 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4410000000000025,"ease":"none"}, 52.590);
-      tl.fromTo("#sh24 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 52.596);
-      tl.fromTo("#sh24 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4410000000000025,"ease":"none"}, 52.590);
-      tl.fromTo("#sh25 .cam", {"scale":1}, {"scale":1.07,"duration":0.465,"ease":"none"}, 53.031);
-      tl.fromTo("#sh25 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.031);
-      tl.fromTo("#sh26 .cam", {"scale":1.08}, {"scale":1,"duration":0.464,"ease":"none"}, 53.496);
-      tl.fromTo("#sh26 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.496);
-      tl.fromTo("#sh26 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 53.496);
-      tl.fromTo("#sh26 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.46399999999999864,"ease":"none"}, 53.496);
-      tl.fromTo("#sh27 .cam", {"scale":1}, {"scale":1.07,"duration":0.465,"ease":"none"}, 53.960);
-      tl.fromTo("#sh27 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 53.960);
-      tl.fromTo("#sh27 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 53.960);
-      tl.fromTo("#sh27 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4650000000000034,"ease":"none"}, 53.960);
-      tl.fromTo("#sh27 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 53.966);
-      tl.fromTo("#sh27 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4650000000000034,"ease":"none"}, 53.960);
-      tl.fromTo("#sh28 .cam", {"scale":1.08}, {"scale":1,"duration":0.441,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .pbox", {"scale":1.25,"opacity":0}, {"scale":1,"opacity":1,"duration":0.16,"ease":"back.out(2)"}, 54.425);
-      tl.fromTo("#sh28 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.01,"ease":"power2.inOut","immediateRender":true}, 54.425);
-      tl.fromTo("#sh28 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":0.4409999999999954,"ease":"none"}, 54.425);
-      tl.fromTo("#sh28 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 54.431);
-      tl.fromTo("#sh28 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":0.4409999999999954,"ease":"none"}, 54.425);
-      tl.fromTo("#sh29 .cam", {"scale":1.08}, {"scale":1,"duration":6.614,"ease":"none"}, 54.866);
-      tl.fromTo("#sh29 .pbox", {"y":64.80000000000001,"opacity":0}, {"y":0,"opacity":1,"duration":0.5,"ease":"power3.out"}, 54.866);
-      tl.fromTo("#sh29 .rv", {"clipPath":"polygon(-30% 0%, -10% 0%, -30% 100%, -50% 100%)"}, {"clipPath":"polygon(-30% 0%, 150% 0%, 130% 100%, -50% 100%)","duration":0.28,"ease":"power2.inOut","immediateRender":true}, 57.165);
-      tl.fromTo("#sh29 .gbg", {"xPercent":0,"scale":1.02}, {"xPercent":-2.5,"scale":1.06,"duration":4.314999999999991,"ease":"none"}, 57.165);
-      tl.fromTo("#sh29 .gfg", {"opacity":0,"scale":1}, {"opacity":1,"scale":1.05,"duration":0.22,"ease":"back.out(2.5)"}, 57.333);
-      tl.fromTo("#sh29 .gfg", {"xPercent":0}, {"xPercent":1.8,"duration":4.314999999999991,"ease":"none"}, 57.165);
-      tl.fromTo("#sh29 .slash", {"xPercent":-140}, {"xPercent":140,"duration":0.42,"ease":"power2.inOut"}, 57.045);
-      tl.fromTo("#chip-prijezd .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 11.045);
-      tl.fromTo("#chip-trenink .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 18.475);
-      tl.fromTo("#chip-zmena .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 35.128);
-      tl.fromTo("#chip-losovani .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 38.797);
-      tl.fromTo("#chip-vtip .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 48.016);
-      tl.fromTo("#chip-pratele .chip", {xPercent:-120}, {xPercent:0, duration:0.35, ease:"power3.out"}, 49.827);
-      tl.fromTo("#o-quote", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, 55.795);
+      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:3.673, ease:"none"}, 30.991);
+      tl.fromTo("#flash", {opacity:0.6}, {opacity:0, duration:0.4, ease:"power2.out", immediateRender:false}, 32.83);
+      tl.fromTo("#sh01 .cam", {"scale":1}, {"scale":1.06,"duration":1.857,"ease":"none"}, 10.581);
+      tl.fromTo("#sh01 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 11.510);
+      tl.fromTo("#sh01 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.927999999999999,"ease":"none","immediateRender":false}, 11.510);
+      tl.fromTo("#sh01 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 11.510);
+      tl.fromTo("#sh01 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.927999999999999,"ease":"none","immediateRender":false}, 11.510);
+      tl.fromTo("#sh01 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 11.510);
+      tl.fromTo("#sh01 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.927999999999999,"ease":"none"}, 11.510);
+      tl.fromTo("#sh01 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 11.974);
+      tl.fromTo("#sh02 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 12.438);
+      tl.fromTo("#sh02 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 13.367);
+      tl.fromTo("#sh02 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 13.367);
+      tl.fromTo("#sh02 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 13.367);
+      tl.fromTo("#sh02 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9290000000000003,"ease":"none"}, 13.367);
+      tl.fromTo("#sh02 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 13.831);
+      tl.fromTo("#sh03 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 14.296);
+      tl.fromTo("#sh03 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 15.225);
+      tl.fromTo("#sh03 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 15.225);
+      tl.fromTo("#sh03 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 15.225);
+      tl.fromTo("#sh03 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 15.225);
+      tl.fromTo("#sh03 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 15.225);
+      tl.fromTo("#sh03 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9290000000000003,"ease":"none"}, 15.225);
+      tl.fromTo("#sh04 .cam", {"scale":1}, {"scale":1.06,"duration":1.857,"ease":"none"}, 19.869);
+      tl.fromTo("#sh04 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 20.798);
+      tl.fromTo("#sh04 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9280000000000008,"ease":"none","immediateRender":false}, 20.798);
+      tl.fromTo("#sh04 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 20.798);
+      tl.fromTo("#sh04 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9280000000000008,"ease":"none","immediateRender":false}, 20.798);
+      tl.fromTo("#sh04 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 20.798);
+      tl.fromTo("#sh04 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9280000000000008,"ease":"none"}, 20.798);
+      tl.fromTo("#sh04 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 21.030);
+      tl.fromTo("#sh05 .cam", {"scale":1}, {"scale":1.06,"duration":0.928,"ease":"none"}, 25.442);
+      tl.fromTo("#sh05 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 25.906);
+      tl.fromTo("#sh05 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 25.906);
+      tl.fromTo("#sh05 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 25.906);
+      tl.fromTo("#sh05 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 25.906);
+      tl.fromTo("#sh05 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 25.906);
+      tl.fromTo("#sh05 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.4640000000000022,"ease":"none"}, 25.906);
+      tl.fromTo("#sh06 .cam", {"scale":1}, {"scale":1.06,"duration":0.906,"ease":"none"}, 26.370);
+      tl.fromTo("#sh06 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 26.812);
+      tl.fromTo("#sh06 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 26.812);
+      tl.fromTo("#sh06 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 26.812);
+      tl.fromTo("#sh06 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 26.812);
+      tl.fromTo("#sh06 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 26.812);
+      tl.fromTo("#sh06 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.4640000000000022,"ease":"none"}, 26.812);
+      tl.fromTo("#sh07 .cam", {"scale":1}, {"scale":1.06,"duration":0.929,"ease":"none"}, 27.276);
+      tl.fromTo("#sh07 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 27.740);
+      tl.fromTo("#sh07 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 27.740);
+      tl.fromTo("#sh07 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 27.740);
+      tl.fromTo("#sh07 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 27.740);
+      tl.fromTo("#sh07 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 27.740);
+      tl.fromTo("#sh07 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46499999999999986,"ease":"none"}, 27.740);
+      tl.fromTo("#sh08 .cam", {"scale":1}, {"scale":1.06,"duration":0.929,"ease":"none"}, 28.205);
+      tl.fromTo("#sh08 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 28.669);
+      tl.fromTo("#sh08 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 28.669);
+      tl.fromTo("#sh08 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 28.669);
+      tl.fromTo("#sh08 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 28.669);
+      tl.fromTo("#sh08 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 28.669);
+      tl.fromTo("#sh08 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46499999999999986,"ease":"none"}, 28.669);
+      tl.fromTo("#sh09 .cam", {"scale":1}, {"scale":1.06,"duration":0.905,"ease":"none"}, 29.134);
+      tl.fromTo("#sh09 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 29.598);
+      tl.fromTo("#sh09 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.44099999999999895,"ease":"none","immediateRender":false}, 29.598);
+      tl.fromTo("#sh09 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 29.598);
+      tl.fromTo("#sh09 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.44099999999999895,"ease":"none","immediateRender":false}, 29.598);
+      tl.fromTo("#sh09 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 29.598);
+      tl.fromTo("#sh09 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.44099999999999895,"ease":"none"}, 29.598);
+      tl.fromTo("#sh09 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 29.830);
+      tl.fromTo("#sh10 .cam", {"scale":1}, {"scale":1.06,"duration":0.952,"ease":"none"}, 30.039);
+      tl.fromTo("#sh10 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 30.527);
+      tl.fromTo("#sh10 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46399999999999864,"ease":"none","immediateRender":false}, 30.527);
+      tl.fromTo("#sh10 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 30.527);
+      tl.fromTo("#sh10 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46399999999999864,"ease":"none"}, 30.527);
+      tl.fromTo("#sh11 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 45.694);
+      tl.fromTo("#sh11 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 46.623);
+      tl.fromTo("#sh11 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9289999999999949,"ease":"none"}, 46.623);
+      tl.fromTo("#sh11 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 47.087);
+      tl.fromTo("#sh12 .cam", {"scale":1}, {"scale":1.06,"duration":1.811,"ease":"none"}, 47.552);
+      tl.fromTo("#sh12 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 48.457);
+      tl.fromTo("#sh12 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9059999999999988,"ease":"none","immediateRender":false}, 48.457);
+      tl.fromTo("#sh12 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 48.457);
+      tl.fromTo("#sh12 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9059999999999988,"ease":"none","immediateRender":false}, 48.457);
+      tl.fromTo("#sh12 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 48.457);
+      tl.fromTo("#sh12 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9059999999999988,"ease":"none"}, 48.457);
+      tl.fromTo("#sh12 .caption", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out"}, 48.016);
+      tl.fromTo("#sh13 .cam", {"scale":1}, {"scale":1.06,"duration":3.669,"ease":"none"}, 51.197);
+      tl.fromTo("#sh13 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 52.590);
+      tl.fromTo("#sh13 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":2.2759999999999962,"ease":"none","immediateRender":false}, 52.590);
+      tl.fromTo("#sh13 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 52.590);
+      tl.fromTo("#sh13 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":2.2759999999999962,"ease":"none","immediateRender":false}, 52.590);
+      tl.fromTo("#sh13 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 52.590);
+      tl.fromTo("#sh13 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":2.2759999999999962,"ease":"none"}, 52.590);
+      tl.fromTo("#sh13 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 53.054);
+      tl.fromTo("#chip-prijezd .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 11.045);
+      tl.fromTo("#chip-tym .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 16.618);
+      tl.fromTo("#chip-zmena .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 18.475);
+      tl.fromTo("#chip-losovani .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 22.19);
+      tl.fromTo("#chip-zavod .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 25.906);
+      tl.fromTo("#chip-vysledky .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 35.128);
+      tl.fromTo("#chip-vtip .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 48.016);
+      tl.fromTo("#chip-pratele .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 49.827);
+      tl.fromTo("#out-cam", { scale: 1.08 }, { scale: 1, duration: 6.614, ease: "power2.out" }, 54.866);
+      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 55.795);
       tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 56.7);
       tl.set("#blink", {opacity:0}, 0);
-      tl.set("#blink", {opacity:1}, 32.89);
-      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.1, ease:"none", immediateRender:false}, 32.89);
-      tl.set("#blink", {opacity:0}, 32.99);
-      tl.set("#blink", {opacity:1}, 47.087);
-      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.1, ease:"none", immediateRender:false}, 47.087);
-      tl.set("#blink", {opacity:0}, 47.187);
       tl.set("#blink", {opacity:1}, 57.629);
-      tl.fromTo("#blink .bf", {scale:1.08}, {scale:1, duration:0.14, ease:"none", immediateRender:false}, 57.629);
+      tl.fromTo("#blink .bf", {scale:1.06}, {scale:1, duration:0.14, ease:"none", immediateRender:false}, 57.629);
       tl.set("#blink", {opacity:0}, 57.769);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut"}, 10.311);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 17.741);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 34.394);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 38.063);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 47.282);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 49.093);
-      tl.fromTo("#wipe", {xPercent:-160}, {xPercent:160, duration:0.55, ease:"power2.inOut", immediateRender:false}, 54.596);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut"}, 10.331);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 15.904);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 17.761);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 21.476);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 25.192);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 30.741);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 34.414);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 47.302);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 49.113);
+      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 54.616);
 
       tl.fromTo("#player", { x: -684.6, y: -440.1, scale: 1.75, opacity: 0 }, { x: -684.6, y: -440.1, scale: 1.75, opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
       tl.to("#player", { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, 1.65);
@@ -736,21 +939,21 @@
         if (t > 0 && t < INTRO_END + 0.1) {
           const a = eo(t / 1.8);
           hb.visible = true; ta.visible = false;
-          hb.position.set(0, PORTRAIT ? 1.3 : 0.75, lerp(-24, 0, a));
-          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-2.6 * 2, 0, eo(t / 2.2)) + Math.sin(t * 0.7) * 0.08, 0);
-          hb.scale.setScalar(PORTRAIT ? 0.85 : 0.62);
+          hb.position.set(0, PORTRAIT ? 1.5 : 0.9, lerp(-24, 0, a));
+          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-5.2, 0, eo(t / 2.2)) + Math.sin(t * 0.7) * 0.08, 0);
+          hb.scale.setScalar(PORTRAIT ? 0.8 : 0.58);
           key.position.set(lerp(-6, 6, clamp((t - 1.4) / 1.6)), 2, 4); rim.intensity = 0;
         } else if (t >= OUT0 - 0.15) {
           const lt = t - OUT0, a = eo(lt / 1.2);
           hb.visible = ta.visible = true;
-          const sc = PORTRAIT ? 0.42 : 0.42;
+          const sc = 0.36;
           ta.scale.setScalar(sc); hb.scale.setScalar(sc);
-          if (PORTRAIT) { ta.position.set(lerp(-6, -0.62, a), 2.15, 0); hb.position.set(lerp(6, 0.62, a), 2.15, 0); }
-          else { ta.position.set(lerp(-8, -2.55, a), 0.15, 0); hb.position.set(lerp(8, 2.55, a), 0.15, 0); }
+          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.75, 0); hb.position.set(lerp(6, 0.5, a), 2.75, 0); }
+          else { ta.position.set(lerp(-8, -0.45, a), 1.45, 0); hb.position.set(lerp(8, 0.45, a), 1.45, 0); }
           ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.6)) + Math.sin(lt * 0.8) * 0.06, 0);
           hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.6)) - Math.sin(lt * 0.8) * 0.06, 0);
           key.position.set(lerp(-6, 6, clamp((lt - 2.2) / 1.6)), 2, 4);
-          rim.position.set(0, -2, 2.5); rim.intensity = 4 * clamp((lt - 1) / 1);
+          rim.position.set(0, -2, 2.5); rim.intensity = 3 * clamp((lt - 1) / 1);
         } else { hb.visible = ta.visible = false; }
         renderer.render(scene, camera);
       }

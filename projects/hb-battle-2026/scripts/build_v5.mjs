@@ -1,0 +1,574 @@
+// HB2026 v5 — чистый современный моушн: без рамок, вырезанные люди прямо на фоне, крупная типографика за людьми (глубина),
+// анимированная инфографика по данным банеров TA CZ (состав, сектора, жеребьёвка, 15 поединков, 13 стран).
+// Фото -> графика: фон дуотон+растр (растворён в navy), фигура постер-заливкой без обводки. Логотипы — оригиналы.
+// python3 scripts/edit_track.py && python3 scripts/make_gfx.py [--clean] && node scripts/build_v5.mjs
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const PROTO = path.join(ROOT, 'proto');
+const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
+const G = JSON.parse(fs.readFileSync(path.join(ROOT, '03_MUSIC/Trout_Area_edit60.grid.json'), 'utf8'));
+const GFX = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/gfx.json'), 'utf8'));
+
+const T0 = 1.2, SONG = G.duration, DUR = +(T0 + SONG + 0.6).toFixed(2);
+const at = (x) => +(x + T0).toFixed(3);
+const s = (bar, k = 0) => { const i = G.beats.findIndex((t) => Math.abs(t - G.downbeats[bar - 1]) < 0.06); return G.beats[i + k]; };
+const len = (a, b) => +(b - a).toFixed(3);
+const BEAT = G.beat;
+
+// ---------- данные (банеры TA CZ: HBCUP2026_Los_Vsechny_tymy, HBCUP2026_Kola_CZ_vse, Fandime, Stoklasa) ----------
+const TEAM = [
+  { no: 7, name: 'Petr Hrabalík', sek: 1, range: '1–16' },
+  { no: 23, name: 'Dominik Švub', sek: 2, range: '17–32' },
+  { no: 39, name: 'Míra Kučera', sek: 3, range: '33–48' },
+  { no: 55, name: 'Martin Stoklasa', sek: 4, range: '49–64' },
+];
+const OPP = [
+  [[10, 'Martin Drgoň', 'SK'], [8, 'Alex Benkendorf', 'DE'], [6, 'Ignatas Krastinas', 'GB'], [4, 'Johnny Dubois', 'BE'], [2, 'Pavlo Melanich', 'UA'], [15, 'Viorel Preda', 'RO'], [13, 'Andrzej Olejnik', 'PL'], [11, 'Milan Popovič', 'SK'], [9, 'Rinalds Tischenko', 'GB'], [1, 'Jonas Čivinskas', 'LT'], [5, 'Petko Ivanov', 'BG'], [3, 'Anton Kishinets', 'DK'], [16, 'Gellert Pankotay', 'HU'], [14, 'Gustas Juozelskis', 'LT'], [12, 'Aleksandr Potrakov', 'MD']],
+  [[26, 'David Drančák', 'SK'], [24, 'Frank Hens', 'DE'], [22, 'Donatas Krastinas', 'GB'], [20, 'Lucas Leonard', 'BE'], [18, 'Oleksandr Mokhnatko', 'UA'], [31, 'Ianis Colonescu', 'RO'], [29, 'Filip Lukasz', 'PL'], [27, 'Michal Slávik', 'SK'], [25, 'Ruslan Navickij', 'GB'], [17, 'Žilvinas Žalėnas', 'LT'], [21, 'Ivan Radev', 'BG'], [19, 'Oleksandr Shvets', 'DK'], [32, 'Aniko Pankotayne', 'HU'], [30, 'Julius Puidokas', 'LT'], [28, 'Ionas Sergiu', 'MD']],
+  [[42, 'Juraj Kozár', 'SK'], [40, 'Alexander Choroschailow', 'DE'], [38, 'Jurgita Krastiniene', 'GB'], [36, 'Stephane Braham', 'BE'], [34, 'Oleg Dorodniev', 'UA'], [47, 'Sorin Dobre', 'RO'], [45, 'Pawel Zakrzewski', 'PL'], [43, 'Samuel Nagy', 'SK'], [41, 'Mareks Selavins', 'GB'], [33, 'Benas Žalėnas', 'LT'], [37, 'Gani Mitev', 'BG'], [35, 'Oleksand Kundelskyi', 'DK'], [48, 'Imre Enessey', 'HU'], [46, 'Leonardo Tofano', 'LT'], [44, 'Oleh Chaus', 'MD']],
+  [[58, 'Ján Potoček', 'SK'], [56, 'Yannick Bruyninckx', 'DE'], [54, 'Viktors Sidorovs', 'GB'], [52, 'Leonard Cedric', 'BE'], [50, 'Dmytro Korinchevskyi', 'UA'], [63, 'Valentin Rossi', 'RO'], [61, 'David Helman', 'PL'], [59, 'Marián Michalka', 'SK'], [57, 'Aleksandrs Zencaks', 'GB'], [49, 'Mindaugas Narkus', 'LT'], [53, 'Angov Martin', 'BG'], [51, 'Maryan Podan', 'DK'], [64, 'Daniel Szabó', 'HU'], [62, 'Tomas Gulbis', 'LT'], [60, 'Anton Akshyakov', 'MD']],
+];
+const COUNTRIES = ['LT', 'UA', 'DK', 'BE', 'BG', 'GB', 'CZ', 'DE', 'SK', 'MD', 'PL', 'RO', 'HU'];
+
+// ---------- сцены и шоты ----------
+const SCENES = [
+  [s(5), s(9), 'prijezd', 'Příjezd', 'Arrival'],
+  [s(9), s(16), 'trenink', 'Den 1 · trénink', 'Day 1 · practice'],
+  [s(18), s(20), 'zmena', 'Změna v sestavě', 'Line-up change'],
+  [s(20), s(25), 'losovani', 'Losování', 'The draw'],
+  [s(25), s(26), 'vtip', 'Zákulisí', 'Backstage'],
+  [s(26), s(29), 'pratele', 'Přátelé', 'Friends'],
+];
+// фото-шоты: img, слово за фигурой, подпись
+const PH = (n, a, b, img, o = {}) => ({ n, a, b, d: len(a, b), img, ...o });
+const SHOTS = [
+  PH(1, s(5), s(7), 'p_car', { word: 'Cesta', sub: 'Praha → Pružina' }),
+  PH(2, s(7), s(9), 'p_lake_mist', { word: 'Pružina', sub: 'Hofer Lake · Slovensko' }),
+  PH(3, s(10), s(11), 'p_tying_young', { word: 'Uzly' }),
+  PH(4, s(11), s(12), 'p_selfie_lake', { word: 'Ráno' }),
+  PH(5, s(12), s(13), 'p_tying_ms', { word: 'Klid' }),
+  PH(6, s(13), s(14), 'p_reeling', { word: 'Záběr' }),
+  PH(7, s(14), s(15), 'p_landing1', { word: 'Podběrák' }),
+  PH(8, s(15), s(15, 2), 'p_landing2', { word: 'Máme ho!' }),
+  PH(9, s(15, 2), s(16), 'p_net_close', { word: 'Pstruh' }),
+  PH(10, s(19), s(20), 'p_green_fish', { word: '#55', plate: ['Martin Stoklasa', 'nastupuje · sektor 4'] }),
+  PH(11, s(21), s(22), 'p_portrait_dres', { word: '#23', plate: ['Dominik Švub', 'sektor 2 · místa 17–32'] }),
+  PH(12, s(25), s(26), 'p_lunch', { word: 'Boj', caption: ['Takhle vypadá náš „boj“.', 'This is what our “battle” looks like.'] }),
+  PH(13, s(27), s(29), 'p_team_romania', { word: 'Přátelé', sub: 'Team Romania' }),
+];
+
+function build(W, H, file) {
+  const P = H > W, u = Math.min(W, H) / 100;
+  const px = (n) => `${Math.round(n * u)}px`;
+  const f = (n) => n.toFixed(1) + 'px';
+  // безопасные зоны: снизу плашка сцены + плеер
+  const SAFE_B = P ? 34 * u : 16 * u;
+
+  // --- виджет-проигрыватель ---
+  const CW = (P ? 60 : 44) * u, CH = (P ? 17 : 11.5) * u, CM = (P ? 5 : 3.5) * u, CB = (P ? 10 : 3.5) * u;
+  const VD = CH * 1.32, VL = 1.6 * u, VT = (CH - VD) / 2, HERO = P ? 1.45 : 1.75;
+  const dockX = W / 2 - (W - CM - CW / 2), dockY = H / 2 - (H - CB - CH / 2);
+
+  const hasFg = (img) => GFX[img]?.fg && fs.existsSync(path.join(PROTO, `assets/gfx/${img}_fgc.png`));
+  const wordSize = (w) => Math.min(P ? 30 * u : 26 * u, (W * 0.92) / (Math.max(3, w.length) * 0.72));
+
+  // ===== фото-шот: живой кадр (растворён по краям) -> графика -> фигура выходит вперёд, слово за ней =====
+  const shotHtml = (sh) => {
+    const id = `sh${String(sh.n).padStart(2, '0')}`;
+    const word = (sh.word || '').toUpperCase();
+    const fg = hasFg(sh.img);
+    return `
+      <section id="${id}" class="clip shot" data-start="${at(sh.a)}" data-duration="${sh.d}" data-track-index="2">
+        <div class="cam">
+          <div class="ph" style="background-image:url(assets/photos/${sh.img}.jpg)"></div>
+          <div class="gbg" style="background-image:url(assets/gfx/${sh.img}_bg.jpg)"></div>
+          ${word ? `<div class="bigword" style="font-size:${f(wordSize(word))}"><span>${word}</span></div>` : ''}
+          ${fg ? `<div class="gfg" style="background-image:url(assets/gfx/${sh.img}_fgc.png)"></div>` : ''}
+        </div>
+        ${sh.sub ? `<div class="sub"><span>${sh.sub}</span></div>` : ''}
+        ${sh.plate ? `<div class="plate"><b>${sh.plate[0]}</b><i>${sh.plate[1]}</i></div>` : ''}
+        ${sh.caption ? `<div class="caption">${sh.caption[0]}<span>${sh.caption[1]}</span></div>` : ''}
+      </section>`;
+  };
+  const shotTweens = SHOTS.map((sh) => {
+    const id = `#sh${String(sh.n).padStart(2, '0')}`, d = sh.d, out = [];
+    const T = (sel, from, to, pos) => out.push(`tl.fromTo("${id} ${sel}", ${JSON.stringify(from)}, ${JSON.stringify(to)}, ${(+pos).toFixed(3)});`);
+    const short = d < 0.7;
+    const tc = short ? sh.a : (G.beats.find((t) => t > sh.a + d * 0.3 && t < sh.b - 0.1) ?? sh.a + d * 0.4);
+    const rest = Math.max(0.25, sh.b - tc);
+    T('.cam', { scale: 1.0 }, { scale: 1.06, duration: d, ease: 'none' }, at(sh.a));
+    // живое фото -> графика (мягкий кросс-фейд + лёгкий наезд)
+    T('.gbg', { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1.0, duration: short ? 0.01 : 0.35, ease: 'power2.out' }, at(tc));
+    T('.gbg', { xPercent: 0 }, { xPercent: -2, duration: rest, ease: 'none', immediateRender: false }, at(tc));
+    if (hasFg(sh.img)) {
+      T('.gfg', { opacity: 0, yPercent: 3, scale: 0.98 }, { opacity: 1, yPercent: 0, scale: 1, duration: short ? 0.12 : 0.3, ease: 'power3.out' }, at(tc));
+      T('.gfg', { xPercent: 0 }, { xPercent: 1.5, duration: rest, ease: 'none', immediateRender: false }, at(tc));
+    }
+    if (sh.word) {
+      T('.bigword span', { yPercent: 100 }, { yPercent: 0, duration: 0.4, ease: 'expo.out' }, at(tc));
+      T('.bigword', { x: 0 }, { x: -3 * u, duration: rest, ease: 'none' }, at(tc));
+    }
+    if (sh.sub) T('.sub span', { yPercent: 110 }, { yPercent: 0, duration: 0.35, ease: 'power3.out' }, at(tc + BEAT));
+    if (sh.plate) T('.plate', { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, at(tc + BEAT * 0.5));
+    if (sh.caption) T('.caption', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, at(sh.a + BEAT));
+    return out.join('\n      ');
+  }).join('\n      ');
+
+  // ===== инфографика =====
+  // 1) счётчики в интро
+  const COUNT = [[16, 'týmů', 'teams'], [64, 'závodníků', 'anglers'], [13, 'zemí', 'countries']];
+  // 2) состав (такт 9)
+  const roster = TEAM.map((m, i) => `
+          <div class="rcard" id="rc${i}"><span class="rno">${m.no}</span><span class="rtx"><b>${m.name}</b><i>Sektor ${m.sek} · místa ${m.range}</i></span></div>`).join('');
+  // 3) замена (такт 18)
+  // 4) сектора (такт 20)
+  const sectors = TEAM.map((m, i) => `
+          <div class="sec" id="sec${i}"><div class="sec-h">Sektor ${m.sek}</div><div class="sec-r">${m.range}</div><div class="sec-no" id="secno${i}">${m.no}</div><div class="sec-n">${m.name.split(' ')[1]}</div></div>`).join('');
+  // 5) поединки (такты 22–24)
+  const ROWS_VIS = P ? 6 : 8;
+  const duels = TEAM.map((m, i) => `
+          <div class="dcol" id="dcol${i}">
+            <div class="dh"><span class="dno">${m.no}</span><b>${m.name}</b></div>
+            <div class="dwin"><div class="dlist" id="dlist${i}">${OPP[i].map(([no, nm, c], k) => `<div class="drow"><span class="dk">${k + 1}</span><span class="dn">${no}</span><span class="dname">${nm}</span><span class="dc">${c}</span></div>`).join('')}</div></div>
+          </div>`).join('');
+  // 6) страны (такт 26)
+  const chips = COUNTRIES.map((c, i) => `<span class="chip-c${c === 'CZ' ? ' cz' : ''}" id="cc${i}">${c}</span>`).join('');
+
+  const infoTweens = [
+    // счётчики
+    ...COUNT.map(([n], i) => `{ const o = { v: 0 }, el = document.getElementById("cnt${i}"); tl.fromTo(o, { v: 0 }, { v: ${n}, duration: 0.8, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, ${at(s(3, i))}); }`),
+    ...COUNT.map((_, i) => `tl.fromTo("#cntb${i}", { opacity: 0, y: ${Math.round(3 * u)} }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, ${at(s(3, i))});`),
+    // состав
+    `tl.fromTo("#roster-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, ${at(s(9))});`,
+    ...TEAM.map((_, i) => `tl.fromTo("#rc${i}", { opacity: 0, x: ${Math.round(-6 * u)} }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, ${at(s(9, i))});`),
+    `tl.fromTo("#roster-coach", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${at(s(9, 3) + 0.2)});`,
+    `tl.fromTo("#roster .rgrid", { scale: 1 }, { scale: 1.03, duration: ${len(s(9), s(10))}, ease: "none" }, ${at(s(9))});`,
+    // замена
+    `tl.fromTo("#swap-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, ${at(s(18))});`,
+    `tl.fromTo("#swap-out", { opacity: 0, x: ${Math.round(-5 * u)} }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, ${at(s(18))});`,
+    `tl.fromTo("#swap-out .strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, ${at(s(18, 1))});`,
+    `tl.fromTo("#swap-out", { opacity: 1 }, { opacity: 0.45, duration: 0.3, immediateRender: false }, ${at(s(18, 1))});`,
+    `tl.fromTo("#swap-in", { opacity: 0, x: ${Math.round(6 * u)} }, { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, ${at(s(18, 2))});`,
+    `tl.fromTo("#swap-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, ${at(s(18, 3))});`,
+    // сектора
+    `tl.fromTo("#sectors-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, ${at(s(20))});`,
+    `tl.fromTo("#lake", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, ${at(s(20))});`,
+    ...TEAM.map((_, i) => `tl.fromTo("#sec${i}", { opacity: 0, y: ${Math.round(4 * u)} }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, ${at(s(20, i) + 0.05)});`),
+    ...TEAM.map((_, i) => `tl.fromTo("#secno${i}", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, ${at(s(20, i) + 0.2)});`),
+    // поединки: шапка, колонки, прокрутка списков
+    `tl.fromTo("#duels-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, ${at(s(22))});`,
+    ...TEAM.map((_, i) => `tl.fromTo("#dcol${i}", { opacity: 0, y: ${Math.round(5 * u)} }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, ${at(s(22, i % 4) + 0.05)});`),
+    ...TEAM.map((_, i) => `tl.fromTo("#dlist${i}", { yPercent: 0 }, { yPercent: ${(-(15 - ROWS_VIS) / 15 * 100).toFixed(1)}, duration: ${len(s(22, 3), s(25) - 0.3)}, ease: "sine.inOut" }, ${at(s(22, 3))});`),
+    // страны
+    `tl.fromTo("#world-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, ${at(s(26))});`,
+    ...COUNTRIES.map((_, i) => `tl.fromTo("#cc${i}", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, ${at(s(26) + i * BEAT * 0.5)});`),
+    `tl.fromTo("#world-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, ${at(s(26, 3) + 0.4)});`,
+  ].join('\n      ');
+
+  // мягкие переходы между сценами: вертикальный «шторка-градиент» navy
+  const cuts = [s(5), s(9), s(16), s(18), s(20), s(25), s(26), s(29)];
+  const wipes = cuts.map((t, i) => `tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut"${i ? ', immediateRender:false' : ''}}, ${at(t - 0.25)});`).join('\n      ');
+
+  const words1 = ['Nepřijeli', 'jsme', 'bojovat,'], words2 = ['přijeli', 'jsme', 'za', 'přáteli.'];
+  const kin = [
+    ...words1.map((w, i) => `tl.fromTo("#k1w${i}", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, ${at(s(16, i))});`),
+    ...words2.map((w, i) => `tl.fromTo("#k2w${i}", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, ${at(s(17) + i * 0.04)});`),
+    `tl.fromTo("#k-l1", {opacity:1}, {opacity:0.35, duration:0.3, immediateRender:false}, ${at(s(17))});`,
+    `tl.fromTo("#k-en", {opacity:0, y:${Math.round(2 * u)}}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, ${at(s(17, 2))});`,
+    `tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:${len(s(16), s(18))}, ease:"none"}, ${at(s(16))});`,
+    `tl.fromTo("#flash", {opacity:0.6}, {opacity:0, duration:0.4, ease:"power2.out", immediateRender:false}, ${at(s(17))});`,
+  ].join('\n      ');
+
+  // одна короткая вспышка постановочного фото с кубком (в финале)
+  const BL = [s(30, 2), 0.14];
+  const blink = `tl.set("#blink", {opacity:0}, 0);\n      tl.set("#blink", {opacity:1}, ${at(BL[0])});\n      tl.fromTo("#blink .bf", {scale:1.06}, {scale:1, duration:${BL[1]}, ease:"none", immediateRender:false}, ${at(BL[0])});\n      tl.set("#blink", {opacity:0}, ${at(BL[0] + BL[1])});`;
+
+  const chipsHtml = SCENES.map(([st, en, id, cz, eng], i) => `
+      <section id="chip-${id}" class="clip chip-clip" data-start="${at(st)}" data-duration="${len(st, en)}" data-track-index="4">
+        <div class="chip"><span class="chip-num">${String(i + 1).padStart(2, '0')}</span><span class="chip-cz">${cz}</span><span class="chip-en">${eng}</span></div>
+      </section>`).join('');
+
+  const H2 = (id, cz, en) => `<div class="h2" id="${id}"><span>${cz}</span><em>${en}</em></div>`;
+
+  const html = `<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=${W}, height=${H}" />
+    <title>HB BATTLE 2026 – začátek (${P ? '9:16' : '16:9'}) — v5</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      ${FONTS}
+      :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; --deep:#050d22; }
+      body { margin:0; background:var(--deep); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
+      #root { position:relative; width:100%; height:100%; overflow:hidden; background:var(--deep); }
+      .clip { position:absolute; inset:0; }
+
+      /* фон: мягкий mesh-gradient + зерно */
+      #mesh { position:absolute; inset:0; overflow:hidden; background:linear-gradient(180deg, #0b1e42 0%, #050d22 100%); }
+      .blob { position:absolute; border-radius:50%; filter:blur(${px(10)}); }
+      #b1 { width:${px(90)}; height:${px(90)}; left:-15%; top:5%; background:radial-gradient(circle, rgba(48,66,133,.85), transparent 70%); }
+      #b2 { width:${px(70)}; height:${px(70)}; right:-12%; top:40%; background:radial-gradient(circle, rgba(227,30,36,.28), transparent 70%); }
+      #b3 { width:${px(80)}; height:${px(80)}; left:20%; bottom:-25%; background:radial-gradient(circle, rgba(64,110,200,.45), transparent 70%); }
+      #grain { position:absolute; inset:0; background:url(assets/grain.png) 0 0 / 256px 256px; opacity:.55; mix-blend-mode:overlay; pointer-events:none; }
+
+      #three-wrap { position:absolute; inset:0; }
+      #three-layer { width:100%; height:100%; display:block; }
+
+      /* фото-шоты без рамок */
+      .cam { position:absolute; inset:0; }
+      .ph, .gbg, .gfg { position:absolute; inset:0; background-size:cover; background-position:50% 35%; background-repeat:no-repeat; }
+      .ph, .gbg { -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 52%, transparent 92%); }
+      .ph { filter:saturate(.9) brightness(.85); }
+      .gfg { filter:drop-shadow(0 ${px(1.5)} ${px(3)} rgba(0,0,0,.55)); -webkit-mask-image:linear-gradient(180deg, #000 70%, transparent 96%); }
+      .bigword { position:absolute; left:0; right:0; top:${P ? '14%' : '10%'}; text-align:center; overflow:hidden; line-height:.86; pointer-events:none;
+        font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; white-space:nowrap; }
+      .bigword span { display:inline-block; color:var(--ice); opacity:.95; }
+      .sub { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(SAFE_B + 4 * u)}; overflow:hidden; font-family:Montserrat; font-weight:600; font-size:${px(P ? 4 : 2.8)}; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      .sub span { display:inline-block; }
+      .plate { position:absolute; left:${px(6)}; bottom:${f(SAFE_B + 3 * u)}; display:flex; flex-direction:column; gap:${px(0.4)}; }
+      .plate b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 7.5 : 5)}; letter-spacing:-.01em; line-height:1; }
+      .plate i { font-style:normal; font-weight:600; font-size:${px(P ? 3.6 : 2.5)}; color:#ffd36b; letter-spacing:.06em; text-transform:uppercase; }
+      .caption { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(SAFE_B + 3 * u)}; font-family:Montserrat; font-weight:900; font-size:${px(P ? 6.6 : 4.6)}; line-height:1.04; }
+      .caption span { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; margin-top:${px(1)}; color:#ffd36b; }
+
+      /* общие заголовки инфографики */
+      .h2 { overflow:hidden; display:flex; flex-direction:column; }
+      .h2 span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 6.4)}; letter-spacing:-.02em; line-height:.95; text-transform:uppercase; }
+      .h2 em { font-style:normal; font-weight:600; font-size:${px(P ? 3.4 : 2.4)}; color:#ffd36b; letter-spacing:.1em; text-transform:uppercase; margin-top:${px(1)}; }
+      .panel { position:absolute; left:${px(6)}; right:${px(6)}; top:${P ? '9%' : '9%'}; }
+
+      /* интро-титул и счётчики */
+      #title-clip .t-wrap { position:absolute; left:${px(6)}; right:${px(6)}; top:${P ? '50%' : '56%'}; display:flex; flex-direction:column; align-items:center; text-align:center; gap:${px(1.2)}; }
+      .t-main { font-family:Montserrat; font-weight:900; font-size:${px(P ? 15 : 10)}; letter-spacing:-.03em; line-height:.9; }
+      .t-main .red { color:var(--red); }
+      .t-cup { font-family:Montserrat; font-weight:700; font-size:${px(P ? 3.6 : 2.4)}; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+      .counts { display:flex; gap:${px(P ? 5 : 6)}; margin-top:${px(2)}; }
+      .cnt { display:flex; flex-direction:column; align-items:center; }
+      .cnt b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 6)}; line-height:1; color:var(--ice); font-variant-numeric:tabular-nums; }
+      .cnt i { font-style:normal; font-weight:600; font-size:${px(P ? 3 : 2.1)}; color:#ffd36b; text-transform:uppercase; letter-spacing:.08em; }
+
+      /* состав */
+      .rgrid { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; gap:${px(P ? 2.4 : 2)}; margin-top:${px(P ? 5 : 3.5)}; }
+      .rcard { display:flex; align-items:center; gap:${px(2.4)}; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); border-radius:${px(2.4)}; padding:${px(2)} ${px(2.6)};
+        backdrop-filter:blur(${px(1.5)}); }
+      .rno { flex:none; width:${px(P ? 13 : 9)}; height:${px(P ? 13 : 9)}; border-radius:${px(2)}; background:var(--red); display:grid; place-items:center;
+        font-family:Montserrat; font-weight:900; font-size:${px(P ? 6.4 : 4.4)}; }
+      .rtx { display:flex; flex-direction:column; }
+      .rtx b { font-family:Montserrat; font-weight:800; font-size:${px(P ? 5.4 : 3.6)}; line-height:1.05; }
+      .rtx i { font-style:normal; font-weight:600; font-size:${px(P ? 3.2 : 2.2)}; color:#9fb4e6; }
+      #roster-coach { margin-top:${px(2.6)}; font-weight:600; font-size:${px(P ? 3.6 : 2.5)}; color:#ffd36b; letter-spacing:.06em; text-transform:uppercase; }
+
+      /* замена */
+      .swap { display:flex; flex-direction:${P ? 'column' : 'row'}; align-items:${P ? 'stretch' : 'center'}; gap:${px(3)}; margin-top:${px(P ? 7 : 5)}; }
+      .person { position:relative; flex:1; border-radius:${px(2.4)}; padding:${px(3)}; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); }
+      .person b { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 7 : 5)}; line-height:1; }
+      .person i { display:block; font-style:normal; font-weight:600; font-size:${px(P ? 3.4 : 2.4)}; color:#9fb4e6; margin-top:${px(1)}; text-transform:uppercase; letter-spacing:.06em; }
+      .person .tag { position:absolute; right:${px(2.4)}; top:${px(2.4)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 2.8 : 2)}; padding:${px(0.6)} ${px(1.4)}; border-radius:${px(1)}; }
+      #swap-out .tag { background:rgba(238,242,249,.15); }
+      #swap-in { background:linear-gradient(135deg, rgba(227,30,36,.35), rgba(48,66,133,.35)); border-color:rgba(227,30,36,.6); }
+      #swap-in .tag { background:var(--red); }
+      .strike { position:absolute; left:${px(3)}; right:${px(3)}; top:${P ? '42%' : '40%'}; height:${px(0.7)}; background:var(--red); transform-origin:left center; }
+      .arrow { font-family:Montserrat; font-weight:900; font-size:${px(P ? 8 : 6)}; color:var(--red); text-align:center; }
+      #swap-note { margin-top:${px(3)}; font-weight:600; font-size:${px(P ? 3.8 : 2.6)}; color:#ffd36b; }
+
+      /* сектора */
+      #lake { height:${px(P ? 1.4 : 1)}; margin-top:${px(P ? 8 : 5)}; border-radius:${px(1)}; background:linear-gradient(90deg, #9cc8f0, #304285, #9cc8f0); transform-origin:left center; }
+      .secs { display:grid; grid-template-columns:${P ? '1fr 1fr' : 'repeat(4, 1fr)'}; gap:${px(2.4)}; margin-top:${px(2.4)}; }
+      .sec { border-radius:${px(2.4)}; padding:${px(2.4)}; background:rgba(238,242,249,.06); border:1px solid rgba(238,242,249,.12); display:flex; flex-direction:column; }
+      .sec-h { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.6 : 2.4)}; text-transform:uppercase; letter-spacing:.08em; color:#9fb4e6; }
+      .sec-r { font-size:${px(P ? 3 : 2.1)}; color:rgba(238,242,249,.6); }
+      .sec-no { font-family:Montserrat; font-weight:900; font-size:${px(P ? 16 : 11)}; line-height:1; color:var(--red); margin-top:${px(1.2)}; transform-origin:left bottom; }
+      .sec-n { font-family:Montserrat; font-weight:800; font-size:${px(P ? 4.6 : 3)}; text-transform:uppercase; }
+
+      /* поединки */
+      .duels { display:grid; grid-template-columns:${P ? '1fr 1fr' : 'repeat(4, 1fr)'}; gap:${px(1.8)}; margin-top:${px(3)}; }
+      .dcol { border-radius:${px(2)}; background:rgba(238,242,249,.95); color:var(--navy); overflow:hidden; }
+      .dh { display:flex; align-items:center; gap:${px(1.2)}; background:var(--navy); color:var(--ice); padding:${px(1.2)} ${px(1.4)}; border-bottom:${px(0.4)} solid var(--red); }
+      .dno { background:var(--red); border-radius:${px(0.8)}; padding:${px(0.2)} ${px(0.8)}; font-family:Montserrat; font-weight:900; font-size:${px(P ? 3.4 : 2.3)}; }
+      .dh b { font-family:Montserrat; font-weight:800; font-size:${px(P ? 2.9 : 2)}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .dwin { height:calc(${ROWS_VIS} * ${px(P ? 4.6 : 3.3)}); overflow:hidden; }
+      .drow { display:grid; grid-template-columns:${px(P ? 3.6 : 2.6)} ${px(P ? 4.4 : 3)} 1fr ${px(P ? 4.4 : 3)}; align-items:center; height:${px(P ? 4.6 : 3.3)}; padding:0 ${px(1.2)};
+        font-size:${px(P ? 2.6 : 1.8)}; border-bottom:1px solid rgba(11,30,66,.08); }
+      .dk { font-weight:700; color:#9fb4e6; } .dn { font-weight:800; color:var(--red); } .dname { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .dc { font-weight:700; text-align:right; color:var(--blue); }
+      #duels-note { margin-top:${px(1.6)}; font-size:${px(P ? 2.6 : 1.8)}; color:rgba(238,242,249,.6); }
+
+      /* страны */
+      .chips { display:flex; flex-wrap:wrap; gap:${px(1.6)}; margin-top:${px(P ? 6 : 4)}; max-width:${px(P ? 88 : 120)}; }
+      .chips span { font-family:Montserrat; font-weight:900; font-size:${px(P ? 6 : 4.2)}; padding:${px(1)} ${px(2.2)}; border-radius:${px(1.6)};
+        background:rgba(238,242,249,.07); border:1px solid rgba(238,242,249,.16); }
+      .chips span.cz { background:var(--red); border-color:var(--red); }
+      #world-sub { margin-top:${px(3)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 4.4 : 3)}; }
+      #world-sub em { font-style:normal; color:var(--red); }
+
+      /* кинетика */
+      #kin-cam { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 ${px(6)} ${f(SAFE_B * 0.6)}; }
+      .k-line { display:flex; flex-wrap:wrap; gap:0 ${px(2.4)}; font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; line-height:.95; }
+      #k-l1 { font-size:${px(P ? 12 : 8.5)}; }
+      #k-l2 { font-size:${px(P ? 13.5 : 10)}; margin-top:${px(1.5)}; }
+      .k-mask { display:block; overflow:hidden; }
+      .k-word { display:block; }
+      .k-word.red { color:var(--red); }
+      #k-en { font-size:${px(P ? 4.2 : 3)}; font-weight:600; margin-top:${px(2.4)}; color:#ffd36b; }
+      #flash { position:absolute; inset:0; background:var(--ice); opacity:0; pointer-events:none; }
+
+      /* вспышка-видение */
+      #blink { position:absolute; inset:0; opacity:0; pointer-events:none; }
+      #blink .bb, #blink .bf { position:absolute; inset:0; background-size:cover; background-position:50% 40%; }
+      #blink .bb { background-image:url(assets/gfx/p_winners_bg.jpg); }
+      #blink .bf { background-image:url(assets/gfx/p_winners_fgc.png); }
+
+      /* плашки сцен */
+      .chip { position:absolute; left:${px(6)}; ${P ? `bottom:${px(31)}` : `bottom:${px(5)}`}; display:flex; align-items:baseline; gap:${px(1.6)}; }
+      .chip-num { font-family:Montserrat; font-weight:900; font-size:${px(P ? 3.6 : 2.6)}; color:var(--red); }
+      .chip-cz { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.6 : 2.6)}; text-transform:uppercase; letter-spacing:.06em; }
+      .chip-en { font-size:${px(P ? 3 : 2.1)}; color:rgba(238,242,249,.6); font-weight:600; }
+
+      /* финал */
+      #outro .o-wrap { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(SAFE_B + 2 * u)}; display:flex; flex-direction:column; align-items:${P ? 'flex-start' : 'center'}; text-align:${P ? 'left' : 'center'}; gap:${px(1.2)}; }
+      .o-quote { font-family:Montserrat; font-weight:900; font-size:${px(P ? 6.2 : 4.2)}; line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; }
+      .o-quote .red { color:var(--red); }
+      .o-meta { font-family:Montserrat; font-weight:700; font-size:${px(P ? 3.2 : 2.2)}; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      #outro .ph-final { position:absolute; inset:0; background-size:cover; background-position:50% 30%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 50%, transparent 80%); }
+      #outro .ph-final.bg { background-image:url(assets/gfx/p_cheers_bg.jpg); opacity:.55; }
+      #outro .ph-final.fg { background-image:url(assets/gfx/p_cheers_fgc.png); -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 60%, transparent 85%); }
+
+      /* виджет-проигрыватель */
+      #player { position:absolute; right:${f(CM)}; bottom:${f(CB)}; width:${f(CW)}; height:${f(CH)}; }
+      #card { position:absolute; inset:0; border-radius:${f(CH * 0.24)}; background:rgba(11,30,66,.72); backdrop-filter:blur(${px(2)});
+        box-shadow:0 ${px(1.2)} ${px(4)} rgba(0,0,0,.45), inset 0 0 0 1px rgba(238,242,249,.14); }
+      #vinyl-wrap { position:absolute; left:${f(VL)}; top:${f(VT)}; width:${f(VD)}; height:${f(VD)}; }
+      #vinyl { position:absolute; inset:0; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, #0d0d10 0 ${f(VD * 0.006)}, #1c1c22 ${f(VD * 0.006)} ${f(VD * 0.011)});
+        box-shadow:0 ${px(0.8)} ${px(2.2)} rgba(0,0,0,.6); }
+      #vinyl img { position:absolute; left:30%; top:30%; width:40%; height:40%; border-radius:50%; }
+      #vinyl .hole { position:absolute; left:48.6%; top:48.6%; width:2.8%; height:2.8%; border-radius:50%; background:#c9ced8; }
+      #sheen { position:absolute; inset:0; border-radius:50%; pointer-events:none;
+        background:conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.16) 12%, transparent 18% 52%, rgba(255,255,255,.12) 60%, transparent 66%);
+        -webkit-mask-image:radial-gradient(circle, transparent 0 20%, #000 21%); }
+      #arm { position:absolute; left:${f(VL + VD * 0.97)}; top:${f(VT + VD * 0.04)}; width:0; height:0; }
+      #arm svg { position:absolute; left:${f(-VD * 0.5)}; top:${f(-VD * 0.12)}; overflow:visible; }
+      #p-text { position:absolute; left:${f(VL + VD + 3.2 * u)}; right:${f(2.4 * u)}; top:${f(CH * 0.17)}; bottom:${f(CH * 0.14)}; display:flex; flex-direction:column; justify-content:space-between; }
+      .p-title { font-family:Montserrat; font-weight:900; font-size:${px(P ? 3.4 : 2.3)}; line-height:1.1; white-space:nowrap; }
+      .p-artist { font-size:${px(P ? 2.6 : 1.75)}; font-weight:600; opacity:.72; white-space:nowrap; }
+      .p-row { display:flex; align-items:center; gap:${px(1.2)}; font-size:${px(P ? 2.2 : 1.5)}; font-weight:600; opacity:.9; }
+      .p-bar { position:relative; flex:1; height:${px(0.5)}; background:rgba(238,242,249,.22); border-radius:${px(0.5)}; overflow:hidden; }
+      #p-fill { position:absolute; inset:0; background:var(--red); transform-origin:left center; }
+      #p-eq { display:flex; align-items:flex-end; gap:${px(0.4)}; height:${px(P ? 2.2 : 1.5)}; }
+      #p-eq i { display:block; width:${px(0.55)}; height:100%; background:var(--ice); transform-origin:bottom center; }
+      .nw { white-space:nowrap; }
+      #wipe-holder { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+      #wipe { position:absolute; left:0; right:0; top:-30%; height:160%; background:linear-gradient(180deg, transparent 0%, #050d22 22%, #050d22 78%, transparent 100%); }
+      #proto-badge { position:absolute; right:${px(3)}; top:${px(3)}; font-family:Montserrat; font-weight:600; font-size:${px(2)}; letter-spacing:.2em; opacity:.45; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="${W}" data-height="${H}" data-duration="${DUR}" data-fps="30">
+      <div id="mesh"><div class="blob" id="b1"></div><div class="blob" id="b2"></div><div class="blob" id="b3"></div></div>
+
+      ${SHOTS.map(shotHtml).join('')}
+
+      <section id="roster" class="clip" data-start="${at(s(9))}" data-duration="${len(s(9), s(10))}" data-track-index="2">
+        <div class="panel">${H2('roster-h', 'Team Czech Republic', 'Reprezentují nás')}
+          <div class="rgrid">${roster}</div>
+          <div id="roster-coach">kouč Denis Zaikin</div>
+        </div>
+      </section>
+
+      <section id="swap" class="clip" data-start="${at(s(18))}" data-duration="${len(s(18), s(19))}" data-track-index="2">
+        <div class="panel">${H2('swap-h', 'Změna v sestavě', 'Line-up change')}
+          <div class="swap">
+            <div class="person" id="swap-out"><span class="tag">ze zdravotních důvodů</span><b>Michael Boček</b><i>nemůže nastoupit</i><div class="strike"></div></div>
+            <div class="arrow">${P ? '↓' : '→'}</div>
+            <div class="person" id="swap-in"><span class="tag">nastupuje</span><b>Martin Stoklasa</b><i>č. 55 · sektor 4</i></div>
+          </div>
+          <div id="swap-note">Michaele, brzy se uzdrav – tým za tebe zabojuje.</div>
+        </div>
+      </section>
+
+      <section id="sectors" class="clip" data-start="${at(s(20))}" data-duration="${len(s(20), s(21))}" data-track-index="2">
+        <div class="panel">${H2('sectors-h', 'Losování', '4 sektory · 64 lovných míst')}
+          <div id="lake"></div>
+          <div class="secs">${sectors}</div>
+        </div>
+      </section>
+
+      <section id="duels" class="clip" data-start="${at(s(22))}" data-duration="${len(s(22), s(25))}" data-track-index="2">
+        <div class="panel">${H2('duels-h', '15 soubojů', 'každý s každým ve svém sektoru')}
+          <div class="duels">${duels}</div>
+          <div id="duels-note">Předběžný rozpis podle losovací tabulky H-Battle · 1. závodní den, sobota 3. 10. 2026</div>
+        </div>
+      </section>
+
+      <section id="world" class="clip" data-start="${at(s(26))}" data-duration="${len(s(26), s(27))}" data-track-index="2">
+        <div class="panel">${H2('world-h', '13 zemí', '16 týmů · 64 závodníků')}
+          <div class="chips">${chips}</div>
+          <div id="world-sub">Jedno jezero. <em>Jedna parta.</em></div>
+        </div>
+      </section>
+
+      <div id="three-wrap"><canvas id="three-layer"></canvas></div>
+
+      <section id="title-clip" class="clip" data-start="${at(s(2))}" data-duration="${len(s(2), s(5))}" data-track-index="3">
+        <div class="t-wrap">
+          <div id="t-main" class="t-main">HB BATTLE <span class="red">2026</span></div>
+          <div id="t-cup" class="t-cup">Trout Area European Hardbaits Cup · <span class="nw">Pružina (SK)</span> · <span class="nw">2.–4. 10. 2026</span></div>
+          <div class="counts">${COUNT.map(([n, cz], i) => `<div class="cnt" id="cntb${i}"><b id="cnt${i}">0</b><i>${cz}</i></div>`).join('')}</div>
+        </div>
+      </section>
+
+      <section id="kin" class="clip" data-start="${at(s(16))}" data-duration="${len(s(16), s(18))}" data-track-index="3">
+        <div id="kin-cam">
+          <div id="k-l1" class="k-line">${words1.map((w, i) => `<span class="k-mask"><span id="k1w${i}" class="k-word">${w}</span></span>`).join('')}</div>
+          <div id="k-l2" class="k-line">${words2.map((w, i) => `<span class="k-mask"><span id="k2w${i}" class="k-word${i === 3 ? ' red' : ''}">${w}</span></span>`).join('')}</div>
+          <div id="k-en">We didn’t come to fight. We came for friends.</div>
+        </div>
+      </section>
+
+      ${chipsHtml}
+
+      <section id="outro" class="clip" data-start="${at(s(29))}" data-duration="${len(at(s(29)), DUR)}" data-track-index="3">
+        <div id="out-cam" class="clip"><div class="ph-final bg"></div><div class="ph-final fg"></div></div>
+        <div class="o-wrap">
+          <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
+          <div id="o-meta" class="o-meta">Držíme palce, kluci! · Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
+        </div>
+      </section>
+
+      <div id="blink"><div class="bb"></div><div class="bf"></div></div>
+      <div id="flash"></div>
+
+      <div id="player">
+        <div id="card"></div>
+        <div id="vinyl-wrap">
+          <div id="vinyl"><img src="assets/ta_label.png" alt="" /><div class="hole"></div></div>
+          <div id="sheen"></div>
+        </div>
+        <div id="arm">
+          <svg width="${f(VD)}" height="${f(VD)}" viewBox="${(-VD * 0.5).toFixed(1)} ${(-VD * 0.12).toFixed(1)} ${VD.toFixed(1)} ${VD.toFixed(1)}">
+            <circle cx="0" cy="0" r="${(VD * 0.075).toFixed(1)}" fill="#c9ced8" stroke="#0b1e42" stroke-width="${(VD * 0.012).toFixed(1)}" />
+            <circle cx="0" cy="0" r="${(VD * 0.03).toFixed(1)}" fill="#0b1e42" />
+            <path d="M 0 0 L ${(-VD * 0.08).toFixed(1)} ${(VD * 0.62).toFixed(1)} L ${(-VD * 0.2).toFixed(1)} ${(VD * 0.82).toFixed(1)}" fill="none" stroke="#dfe4ee" stroke-width="${(VD * 0.028).toFixed(1)}" stroke-linecap="round" stroke-linejoin="round" />
+            <rect x="${(-VD * 0.27).toFixed(1)}" y="${(VD * 0.8).toFixed(1)}" width="${(VD * 0.13).toFixed(1)}" height="${(VD * 0.075).toFixed(1)}" rx="${(VD * 0.015).toFixed(1)}" fill="#e31e24" transform="rotate(-34 ${(-VD * 0.2).toFixed(1)} ${(VD * 0.84).toFixed(1)})" />
+          </svg>
+        </div>
+        <div id="p-text">
+          <div class="p-title">HB BATTLE 2026</div>
+          <div class="p-artist">začátek · Trout Area CZ</div>
+          <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>${Math.floor(SONG / 60)}:${String(Math.round(SONG % 60)).padStart(2, '0')}</span></div>
+        </div>
+      </div>
+      <div id="grain"></div>
+      <div id="wipe-holder"><div id="wipe"></div></div>
+      <div id="proto-badge">DRAFT · v5</div>
+
+      <audio id="bgm" src="assets/track_edit60.wav" data-start="${T0}" data-duration="${SONG}" data-track-index="9" data-volume="1"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: ${Math.round(30 * u)}, y: ${Math.round(20 * u)}, duration: ${DUR}, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: ${Math.round(-25 * u)}, y: ${Math.round(-15 * u)}, duration: ${DUR}, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b3", { x: 0, y: 0 }, { x: ${Math.round(20 * u)}, y: ${Math.round(-20 * u)}, duration: ${DUR}, ease: "sine.inOut" }, 0);
+      tl.fromTo("#grain", { x: 0 }, { x: 64, duration: ${DUR}, ease: "steps(${Math.round(DUR * 12)})" }, 0);
+      tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0, duration: 0.25 }, ${at(s(5) - 0.25)});
+      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, ${at(s(29) - 0.15)});
+      tl.fromTo("#t-main", { opacity: 0, y: ${Math.round(4 * u)} }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, ${at(s(2))});
+      tl.fromTo("#t-cup", { opacity: 0 }, { opacity: 0.85, duration: 0.5 }, ${at(s(2, 2))});
+      ${infoTweens}
+      ${kin}
+      ${shotTweens}
+      ${SCENES.map(([st, , id]) => `tl.fromTo("#chip-${id} .chip", {opacity:0, x:${Math.round(-3 * u)}}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, ${at(st + BEAT)});`).join('\n      ')}
+      tl.fromTo("#out-cam", { scale: 1.08 }, { scale: 1, duration: ${len(at(s(29)), DUR)}, ease: "power2.out" }, ${at(s(29))});
+      tl.fromTo("#o-quote", { opacity: 0, y: ${Math.round(3 * u)} }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, ${at(s(29, 2))});
+      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 1, duration: 0.5 }, ${at(s(30))});
+      ${blink}
+      ${wipes}
+
+      tl.fromTo("#player", { x: ${dockX.toFixed(1)}, y: ${dockY.toFixed(1)}, scale: ${HERO}, opacity: 0 }, { x: ${dockX.toFixed(1)}, y: ${dockY.toFixed(1)}, scale: ${HERO}, opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+      tl.to("#player", { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, ${at(0.45)});
+      tl.fromTo("#arm", { rotation: -20 }, { rotation: 0, duration: 0.75, ease: "power2.inOut" }, 0.3);
+      tl.fromTo("#arm svg", { scale: 1.06 }, { scale: 1, duration: 0.15, ease: "power2.in" }, ${(T0 - 0.15).toFixed(2)});
+      tl.to("#arm", { rotation: 9, duration: ${(SONG - 0.2).toFixed(2)}, ease: "none" }, ${at(0)});
+      tl.to("#arm", { rotation: -20, duration: 0.7, ease: "power2.inOut" }, ${(DUR - 0.9).toFixed(2)});
+      tl.fromTo("#vinyl", { rotation: 0 }, { rotation: 60, duration: 0.6, ease: "power1.in" }, ${at(-0.1)});
+      tl.to("#vinyl", { rotation: ${(60 + 200 * (SONG - 0.5)).toFixed(0)}, duration: ${(SONG - 0.5).toFixed(2)}, ease: "none" }, ${at(0.5)});
+      tl.to("#vinyl", { rotation: ${(60 + 200 * (SONG - 0.5) + 70).toFixed(0)}, duration: 0.6, ease: "power2.out" }, ${(T0 + SONG).toFixed(2)});
+      tl.fromTo("#p-fill", { scaleX: 0 }, { scaleX: 1, duration: ${SONG}, ease: "none" }, ${T0});
+      const BEATS = ${JSON.stringify(G.beats)};
+      const pClock = { t: 0 }, pTime = document.getElementById("p-time"), pEq = [...document.querySelectorAll("#p-eq i")];
+      tl.fromTo(pClock, { t: 0 }, { t: ${DUR}, duration: ${DUR}, ease: "none", onUpdate() {
+        const s = Math.max(0, pClock.t - ${T0});
+        pTime.textContent = Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+        let bi = 0; while (bi < BEATS.length - 1 && BEATS[bi + 1] <= s) bi++;
+        const ph = s >= BEATS[0] ? s - BEATS[bi] : 9, on = pClock.t >= ${T0} && s < ${SONG - 0.3};
+        pEq.forEach((el, i) => { const k = on ? 0.25 + 0.75 * Math.exp(-(6 + i * 2.3) * (ph + i * 0.03)) : 0.12; el.style.transform = "scaleY(" + k.toFixed(3) + ")"; });
+      } }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+
+    <script type="module">
+      import * as THREE from "./assets/three.module.js";
+      const W = ${W}, H = ${H}, PORTRAIT = ${P};
+      const canvas = document.getElementById("three-layer");
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(W, H, false); renderer.setPixelRatio(1); renderer.outputColorSpace = THREE.SRGBColorSpace;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(PORTRAIT ? 50 : 32, W / H, 0.1, 200);
+      const loader = new THREE.TextureLoader();
+      function disc(src, edge) {
+        const tex = loader.load(src);
+        tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8; tex.center.set(0.5, 0.5); tex.rotation = Math.PI / 2;
+        const geo = new THREE.CylinderGeometry(1, 1, 0.14, 160, 1, false); geo.rotateX(Math.PI / 2);
+        const side = new THREE.MeshStandardMaterial({ color: edge, metalness: 0.75, roughness: 0.3 });
+        const face = new THREE.MeshStandardMaterial({ map: tex, emissiveMap: tex, emissive: 0xffffff, emissiveIntensity: 0.82, color: 0x2a2a2a, metalness: 0.15, roughness: 0.35 });
+        const back = new THREE.MeshStandardMaterial({ color: 0x0b1e42, metalness: 0.4, roughness: 0.5 });
+        const m = new THREE.Mesh(geo, [side, face, back]); scene.add(m); return m;
+      }
+      const hb = disc("assets/H-BATTLE.png", 0x304285);
+      const ta = disc("assets/logo-TACR2-ready.png", 0x0b1e42);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x0b1e42, 0.5));
+      const key = new THREE.DirectionalLight(0xfff2d8, 1.1); scene.add(key);
+      const rim = new THREE.PointLight(0xe31e24, 0, 12); scene.add(rim);
+      const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+      const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const T0 = ${T0}, OUT0 = ${s(29)}, INTRO_END = ${s(5)};
+      function renderAt(tt) {
+        const t = tt - T0;
+        camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2); camera.lookAt(0, 0, 0);
+        if (t > 0 && t < INTRO_END + 0.1) {
+          const a = eo(t / 1.8);
+          hb.visible = true; ta.visible = false;
+          hb.position.set(0, PORTRAIT ? 1.5 : 0.9, lerp(-24, 0, a));
+          hb.rotation.set(Math.sin(t * 0.9) * 0.06, lerp(-5.2, 0, eo(t / 2.2)) + Math.sin(t * 0.7) * 0.08, 0);
+          hb.scale.setScalar(PORTRAIT ? 0.8 : 0.58);
+          key.position.set(lerp(-6, 6, clamp((t - 1.4) / 1.6)), 2, 4); rim.intensity = 0;
+        } else if (t >= OUT0 - 0.15) {
+          const lt = t - OUT0, a = eo(lt / 1.2);
+          hb.visible = ta.visible = true;
+          const sc = 0.36;
+          ta.scale.setScalar(sc); hb.scale.setScalar(sc);
+          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.75, 0); hb.position.set(lerp(6, 0.5, a), 2.75, 0); }
+          else { ta.position.set(lerp(-8, -0.45, a), 1.45, 0); hb.position.set(lerp(8, 0.45, a), 1.45, 0); }
+          ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.6)) + Math.sin(lt * 0.8) * 0.06, 0);
+          hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.6)) - Math.sin(lt * 0.8) * 0.06, 0);
+          key.position.set(lerp(-6, 6, clamp((lt - 2.2) / 1.6)), 2, 4);
+          rim.position.set(0, -2, 2.5); rim.intensity = 3 * clamp((lt - 1) / 1);
+        } else { hb.visible = ta.visible = false; }
+        renderer.render(scene, camera);
+      }
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      renderAt(window.__hfThreeTime || 0);
+    </script>
+  </body>
+</html>
+`;
+  fs.writeFileSync(path.join(PROTO, file), html);
+  console.log('wrote', file);
+}
+
+build(1080, 1920, '9x16/index.html');
+build(1920, 1080, '16x9/index.html');

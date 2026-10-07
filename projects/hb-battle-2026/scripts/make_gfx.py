@@ -4,6 +4,7 @@
 #   ph:  исходное фото того же кадрирования (для стартового «живого» состояния)
 # Геометрия не меняется — лица не искажаются. Выход: proto/assets/gfx/<name>_{bg,fg}.{jpg,png}
 import os, sys, json
+STICKER = True
 import numpy as np
 from PIL import Image, ImageFilter
 from scipy import ndimage
@@ -84,20 +85,23 @@ def make(name, maxside=1920):
     stroke = ndimage.binary_dilation(hard, iterations=rad)
     rim = ndimage.binary_dilation(stroke, iterations=max(2, rad // 3)) & ~stroke
     out = np.zeros(a.shape[:2] + (4,))
-    out[stroke] = (*ICE, 255)
-    out[rim] = (*NAVY, 255)
+    if STICKER:
+        out[stroke] = (*ICE, 255)
+        out[rim] = (*NAVY, 255)
     m = A[..., None]
     out[..., :3] = out[..., :3] * (1 - m) + rgb * m
     out[..., 3] = np.maximum(out[..., 3], A * 255)
     ys, xs = np.where(out[..., 3] > 8)
     bbox = [int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1]
     img = Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), 'RGBA')
-    img.save(os.path.join(OUT, name + '_fg.png'), optimize=True)
+    img.save(os.path.join(OUT, name + ('_fg.png' if STICKER else '_fgc.png')), optimize=True)
     w, h = src.size
     return {'fg': True, 'bbox': [bbox[0] / w, bbox[1] / h, bbox[2] / w, bbox[3] / h]}
 
 if __name__ == '__main__':
-    names = sys.argv[1:] or sorted(f[:-4] for f in os.listdir(PH) if f.endswith('.jpg'))
+    args = [a for a in sys.argv[1:] if a != '--clean']
+    STICKER = '--clean' not in sys.argv
+    names = args or sorted(f[:-4] for f in os.listdir(PH) if f.endswith('.jpg'))
     meta_p = os.path.join(ROOT, 'proto/assets/gfx.json')
     meta = json.load(open(meta_p)) if os.path.exists(meta_p) else {}
     for n in names:
