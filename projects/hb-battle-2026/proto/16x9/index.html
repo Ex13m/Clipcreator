@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>HB BATTLE 2026 – začátek (16:9) — v6</title>
+    <title>HB BATTLE 2026 – začátek (16:9) — v7</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url(assets/fonts/montserrat-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
@@ -53,6 +53,25 @@
       .plate i { font-style:normal; font-weight:600; font-size:27px; color:#ffd36b; letter-spacing:.06em; text-transform:uppercase; }
       .caption { position:absolute; left:65px; right:65px; bottom:205.2px; font-family:Montserrat; font-weight:900; font-size:50px; line-height:1.04; }
       .caption span { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; margin-top:11px; color:#ffd36b; }
+
+      /* фото целиком */
+      .blurfill { position:absolute; inset:-65px; background-size:cover; background-position:50% 50%; filter:blur(43px) brightness(.42) saturate(1.15); }
+      .beat { position:absolute; inset:0; }
+      .pc, .fgc { position:absolute; background-size:100% 100%; background-repeat:no-repeat; }
+      .pc { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%), linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%);
+        -webkit-mask-composite:source-in; mask-composite:intersect; }
+      .fgc { filter:drop-shadow(0 11px 26px rgba(0,0,0,.5)); }
+      .bigword.over span { text-shadow:0 6px 32px rgba(0,0,0,.55); }
+      .qwrap { position:absolute; left:76px; right:76px; top:24%; display:flex; flex-direction:column; gap:15px; }
+      .ql { overflow:hidden; font-family:Montserrat; font-weight:900; font-size:69px; line-height:1.02; text-transform:uppercase; letter-spacing:-.01em; position:relative; }
+      .ql span { display:inline-block; } .ql.red { color:var(--red); }
+      .ql.small { font-size:28px; font-weight:700; letter-spacing:.12em; color:#ffd36b; margin-top:17px; }
+      .ql.big { font-size:97px; padding-bottom:17px; }
+      .mk { position:absolute; left:0; bottom:0; height:9px; width:100%; background:var(--red); transform-origin:left center; border-radius:4px; }
+      .ql .mk { width:52%; }
+      .plate { padding-bottom:13px; }
+      .glow { position:absolute; inset:-35%; background:radial-gradient(closest-side, rgba(227,30,36,.55), rgba(227,30,36,0)); opacity:0; pointer-events:none; z-index:-1; }
+      .hlbox { position:relative; isolation:isolate; }
 
       /* общие заголовки инфографики */
       .h2 { overflow:hidden; display:flex; flex-direction:column; }
@@ -157,7 +176,7 @@
       .frow.cz .ffill { background:linear-gradient(90deg, #e31e24, #ff6b6f); } .frow.cz .fc, .frow.cz .fv { color:#ff6b6f; }
       .frow { transform-origin:left center; }
       .fv { font-family:Montserrat; font-weight:900; text-align:right; font-variant-numeric:tabular-nums; }
-      #fish-note { margin-top:19px; font-family:Montserrat; font-weight:800; font-size:32px; } #fish-note b { color:var(--red); }
+      #fish-note { position:relative; display:inline-block; padding-bottom:11px; margin-top:19px; font-family:Montserrat; font-weight:800; font-size:32px; } #fish-note b { color:var(--red); }
       .rank-wrap { position:absolute; left:65px; right:65px; top:16%; display:flex; flex-direction:column; align-items:center; text-align:center; }
       #rank-n { font-family:Montserrat; font-weight:900; font-size:432px; line-height:.85; letter-spacing:-.04em; color:var(--ice); font-variant-numeric:tabular-nums; }
       #rank-n span { color:var(--red); }
@@ -178,8 +197,8 @@
       /* вспышка-видение */
       #blink { position:absolute; inset:0; opacity:0; pointer-events:none; }
       #blink .bb, #blink .bf { position:absolute; inset:0; background-size:cover; background-position:50% 40%; }
-      #blink .bb { background-image:url(assets/gfx/p_winners_bg.jpg); }
-      #blink .bf { background-image:url(assets/gfx/p_winners_fgc.png); }
+      #blink .bb { background-image:url(assets/photos/p_winners.jpg); filter:brightness(1.1) saturate(1.1); }
+      #blink .bf { background-image:url(assets/cut/p_winners.png); }
 
       /* плашки сцен */
       .chip { position:absolute; left:65px; bottom:54px; display:flex; align-items:baseline; gap:17px; }
@@ -188,7 +207,7 @@
       .chip-en { font-size:23px; color:rgba(238,242,249,.6); font-weight:600; }
 
       /* финал */
-      #outro .o-wrap { position:absolute; left:65px; right:65px; bottom:194.4px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
+      #outro .o-wrap { position:absolute; left:65px; right:65px; bottom:194.4px; background:rgba(5,13,34,.78); backdrop-filter:blur(16px); border-radius:22px; padding:26px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; }
       .o-quote { font-family:Montserrat; font-weight:900; font-size:45px; line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; }
       .o-quote .red { color:var(--red); }
       .o-meta { font-family:Montserrat; font-weight:700; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
@@ -225,155 +244,455 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="61.48" data-fps="30">
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="94.68" data-fps="30">
       <div id="mesh"><div class="blob" id="b1"></div><div class="blob" id="b2"></div><div class="blob" id="b3"></div></div>
 
       
-      <section id="sh01" class="clip shot" data-start="10.581" data-duration="1.857" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_car.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_car_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>CESTA</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_car_fgc.png)"></div>
-        </div>
+      <section id="sh01" class="clip shot" data-start="10.581" data-duration="3.715" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_car.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
+          
+          <div class="fgc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:591.5px; top:324.0px; text-align:left; white-space:normal; font-size:151.2px"><span>CESTA</span></div>
+        </div></div>
+        
         <div class="sub"><span>Na Slovensko</span></div>
         
         
       </section>
-      <section id="sh02" class="clip shot" data-start="12.438" data-duration="1.858" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_lake_mist_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>PRUŽINA</span></div>
+      <section id="sh02" class="clip shot" data-start="14.296" data-duration="1.858" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
           
-        </div>
+          
+          <div class="bigword over" style="font-size:280.8px"><span>PRUŽINA</span></div>
+        </div></div>
+        
         <div class="sub"><span>Hofer Lake</span></div>
         
         
       </section>
-      <section id="sh03" class="clip shot" data-start="14.296" data-duration="1.858" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_selfie_lake_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>RÁNO</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_selfie_lake_fgc.png)"></div>
-        </div>
+      <section id="sh03" class="clip shot" data-start="16.154" data-duration="1.857" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_selfie_lake.png)"></div>
+          <div class="bigword over" style="font-size:280.8px"><span>RÁNO</span></div>
+        </div></div>
         
-        
-        
-      </section>
-      <section id="sh04" class="clip shot" data-start="19.869" data-duration="1.857" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_green_fish.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_green_fish_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>#55</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_green_fish_fgc.png)"></div>
-        </div>
-        
-        <div class="plate"><b>Martin Stoklasa</b><i>nastupuje · sektor 4</i></div>
-        
-      </section>
-      <section id="sh05" class="clip shot" data-start="25.442" data-duration="0.928" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_tying_young.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_tying_young_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>UZLY</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_tying_young_fgc.png)"></div>
-        </div>
         
         
         
       </section>
-      <section id="sh06" class="clip shot" data-start="26.37" data-duration="0.906" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_tying_ms_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>KLID</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_tying_ms_fgc.png)"></div>
-        </div>
+      <section id="sh04" class="clip shot" data-start="23.584" data-duration="1.858" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_green_fish.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:151.2px"><span>#55</span></div>
+        </div></div>
+        
+        
+        <div class="plate"><b>Martin Stoklasa</b><i>nastupuje · sektor 4</i><span class="mk"></span></div>
+        
+      </section>
+      <section id="sh05" class="clip shot" data-start="34.683" data-duration="1.811" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_tying_young.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:151.2px"><span>UZLY</span></div>
+        </div></div>
+        
         
         
         
       </section>
-      <section id="sh07" class="clip shot" data-start="27.276" data-duration="0.929" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_reeling.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_reeling_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>ZÁBĚR</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_reeling_fgc.png)"></div>
-        </div>
+      <section id="sh06" class="clip shot" data-start="36.494" data-duration="1.881" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_tying_ms.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_ms.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_ms.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:151.2px"><span>KLID</span></div>
+        </div></div>
         
-        
-        
-      </section>
-      <section id="sh08" class="clip shot" data-start="28.205" data-duration="0.929" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_landing1.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_landing1_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>PODBĚRÁK</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_landing1_fgc.png)"></div>
-        </div>
         
         
         
       </section>
-      <section id="sh09" class="clip shot" data-start="29.134" data-duration="0.905" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_svub_water.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_svub_water_bg.jpg)"></div>
+      <section id="sh07" class="clip shot" data-start="38.375" data-duration="1.858" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_reeling.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_reeling.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_reeling.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:144.2px"><span>ZÁBĚR</span></div>
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh08" class="clip shot" data-start="40.233" data-duration="1.834" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_landing1.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing1.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_landing1.png)"></div>
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:90.1px"><span>PODBĚRÁK</span></div>
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh09" class="clip shot" data-start="42.067" data-duration="1.834" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_landing2.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing2.jpg)"></div>
+          
+          
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:90.1px"><span>MÁME HO!</span></div>
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh10" class="clip shot" data-start="43.901" data-duration="1.858" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_svub_water.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
           <div class="bigword" style="font-size:280.8px"><span>#23</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_svub_water_fgc.png)"></div>
-        </div>
+          <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
+          
+        </div></div>
         
-        <div class="plate"><b>Dominik Švub</b><i>Hofer Lake</i></div>
+        
+        <div class="plate"><b>Dominik Švub</b><i>Hofer Lake</i><span class="mk"></span></div>
         
       </section>
-      <section id="sh10" class="clip shot" data-start="30.039" data-duration="0.952" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_net_close.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_net_close_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>PSTRUH</span></div>
+      <section id="sh11" class="clip shot" data-start="45.759" data-duration="1.834" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_net_close.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
           
-        </div>
+          
+          <div class="bigword over" style="left:43.2px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:normal; font-size:120.1px"><span>PSTRUH</span></div>
+        </div></div>
+        
         
         
         
       </section>
-      <section id="sh11" class="clip shot" data-start="45.694" data-duration="1.858" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_podium.jpg)"></div>
+      <section id="sh12" class="clip shot" data-start="47.593" data-duration="1.835" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_trenink_gear.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_trenink_gear.jpg)"></div>
           
-          <div class="bigword" style="font-size:280.8px"><span>TOP 3</span></div>
           
-        </div>
+          <div class="bigword over" style="font-size:280.8px"><span>TÝM</span></div>
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh13" class="clip shot" data-start="64.196" data-duration="1.834" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_podium.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:0.0px; top:180.5px; width:1920.0px; height:719.0px; background-image:url(assets/photos/p_podium.jpg)"></div>
+          
+          
+          <div class="bigword over" style="font-size:280.8px"><span>TOP 3</span></div>
+        </div></div>
+        
         <div class="sub"><span>1. Litva · 2. Ukrajina · 3. Bulharsko</span></div>
         
         
       </section>
-      <section id="sh12" class="clip shot" data-start="47.552" data-duration="1.811" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_lunch.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_lunch_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>BOJ</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_lunch_fgc.png)"></div>
-        </div>
+      <section id="sh14" class="clip shot" data-start="67.864" data-duration="1.835" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_team_romania.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_team_romania.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_team_romania.png)"></div>
+          <div class="bigword over" style="font-size:280.8px"><span>PŘÁTELÉ</span></div>
+        </div></div>
         
-        
-        <div class="caption">Takhle vypadá náš „boj“.<span>This is what our “battle” looks like.</span></div>
-      </section>
-      <section id="sh13" class="clip shot" data-start="51.197" data-duration="3.669" data-track-index="2">
-        <div class="cam">
-          <div class="ph" style="background-image:url(assets/photos/p_team_romania.jpg)"></div>
-          <div class="gbg" style="background-image:url(assets/gfx/p_team_romania_bg.jpg)"></div>
-          <div class="bigword" style="font-size:280.8px"><span>PŘÁTELÉ</span></div>
-          <div class="gfg" style="background-image:url(assets/gfx/p_team_romania_fgc.png)"></div>
-        </div>
         <div class="sub"><span>Team Romania</span></div>
         
         
       </section>
+      <section id="sh15" class="clip shot" data-start="69.699" data-duration="1.834" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_lunch.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
+          <div class="bigword over" style="font-size:280.8px"><span>BOJ</span></div>
+        </div></div>
+        
+        
+        
+        <div class="caption">Takhle vypadá náš „boj“.<span>This is what our “battle” looks like.</span></div>
+      </section>
+      <section id="sh16" class="clip shot" data-start="71.533" data-duration="1.858" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_trophies.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:184.0px; top:0.0px; width:1552.1px; height:1080.0px; background-image:url(assets/photos/p_trophies.jpg)"></div>
+          
+          
+          <div class="bigword over" style="font-size:280.8px"><span>POHÁRY</span></div>
+        </div></div>
+        
+        <div class="sub"><span>O tohle se hrálo</span></div>
+        
+        
+      </section>
+      <section id="sh17" class="clip shot" data-start="73.391" data-duration="7.361" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
+          
+          
+        </div></div>
+        <div class="qwrap"><div class="ql" id="q0"><span>Nepřijeli jsme bojovat.</span></div><div class="ql red" id="q1"><span>Přijeli jsme za přáteli.</span></div>
+          <div class="ql small" id="q2"><span>16 týmů · 13 zemí · 64 závodníků</span></div><div class="ql big" id="q3"><span>Jedna parta.</span><i class="mk"></i></div></div>
+        
+        
+        
+      </section>
+      <section id="sh18" class="clip shot" data-start="80.752" data-duration="0.441" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_car.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
+          
+          <div class="fgc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh19" class="clip shot" data-start="81.193" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
+          
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh20" class="clip shot" data-start="81.657" data-duration="0.465" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_selfie_lake.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh21" class="clip shot" data-start="82.122" data-duration="0.441" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_tying_young.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh22" class="clip shot" data-start="82.563" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_reeling.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_reeling.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_reeling.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh23" class="clip shot" data-start="83.027" data-duration="0.465" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_landing1.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing1.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_landing1.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh24" class="clip shot" data-start="83.492" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_landing2.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing2.jpg)"></div>
+          
+          
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh25" class="clip shot" data-start="83.956" data-duration="0.441" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_svub_water.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
+          
+          <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh26" class="clip shot" data-start="84.397" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_net_close.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
+          
+          
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh27" class="clip shot" data-start="84.861" data-duration="0.465" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_green_fish.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh28" class="clip shot" data-start="85.326" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
+          
+          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_portrait_dres.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh29" class="clip shot" data-start="85.79" data-duration="0.441" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_lunch.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh30" class="clip shot" data-start="86.231" data-duration="0.465" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_team_romania.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_team_romania.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_team_romania.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh31" class="clip shot" data-start="86.696" data-duration="0.464" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_trophies.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:184.0px; top:0.0px; width:1552.1px; height:1080.0px; background-image:url(assets/photos/p_trophies.jpg)"></div>
+          
+          
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh32" class="clip shot" data-start="87.16" data-duration="0.465" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_podium.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:0.0px; top:180.5px; width:1920.0px; height:719.0px; background-image:url(assets/photos/p_podium.jpg)"></div>
+          
+          
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh33" class="clip shot" data-start="87.625" data-duration="0.441" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_cheers.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_cheers.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
+      <section id="sh34" class="clip shot" data-start="88.066" data-duration="6.614" data-track-index="2">
+        <div class="blurfill" style="background-image:url(assets/photos/p_cheers.jpg)"></div>
+        <div class="cam"><div class="beat">
+          <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
+          
+          <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_cheers.png)"></div>
+          
+        </div></div>
+        
+        
+        
+        
+      </section>
 
-      <section id="roster" class="clip" data-start="16.154" data-duration="1.857" data-track-index="2">
+      <section id="roster" class="clip" data-start="18.011" data-duration="3.715" data-track-index="2">
         <div class="panel"><div class="h2" id="roster-h"><span>Team Czech Republic</span><em>Reprezentují nás</em></div>
           <div class="rgrid">
           <div class="rcard" id="rc0"><span class="rno">7</span><span class="rtx"><b>Petr Hrabalík</b><i>Sektor 1 · místa 1–16</i></span></div>
@@ -384,7 +703,7 @@
         </div>
       </section>
 
-      <section id="swap" class="clip" data-start="18.011" data-duration="1.858" data-track-index="2">
+      <section id="swap" class="clip" data-start="21.726" data-duration="1.858" data-track-index="2">
         <div class="panel"><div class="h2" id="swap-h"><span>Změna v sestavě</span><em>Line-up change</em></div>
           <div class="swap">
             <div class="person" id="swap-out"><span class="tag">ze zdravotních důvodů</span><b>Michael Boček</b><i>nemůže nastoupit</i><div class="strike"></div></div>
@@ -395,7 +714,7 @@
         </div>
       </section>
 
-      <section id="sectors" class="clip" data-start="21.726" data-duration="1.858" data-track-index="2">
+      <section id="sectors" class="clip" data-start="25.442" data-duration="1.834" data-track-index="2">
         <div class="panel"><div class="h2" id="sectors-h"><span>Losování</span><em>4 sektory · 64 lovných míst</em></div>
           <div id="lake"></div>
           <div class="secs">
@@ -406,7 +725,7 @@
         </div>
       </section>
 
-      <section id="duels" class="clip" data-start="23.584" data-duration="1.858" data-track-index="2">
+      <section id="duels" class="clip" data-start="27.276" data-duration="3.715" data-track-index="2">
         <div class="panel"><div class="h2" id="duels-h"><span>15 soubojů</span><em>každý s každým ve svém sektoru</em></div>
           <div class="duels">
           <div class="dcol" id="dcol0">
@@ -429,14 +748,14 @@
         </div>
       </section>
 
-      <section id="world" class="clip" data-start="49.363" data-duration="1.834" data-track-index="2">
+      <section id="world" class="clip" data-start="66.03" data-duration="1.834" data-track-index="2">
         <div class="panel"><div class="h2" id="world-h"><span>13 zemí</span><em>16 týmů · 64 závodníků</em></div>
           <div class="chips"><span class="chip-c" id="cc0">LT</span><span class="chip-c" id="cc1">UA</span><span class="chip-c" id="cc2">DK</span><span class="chip-c" id="cc3">BE</span><span class="chip-c" id="cc4">BG</span><span class="chip-c" id="cc5">GB</span><span class="chip-c cz" id="cc6">CZ</span><span class="chip-c" id="cc7">DE</span><span class="chip-c" id="cc8">SK</span><span class="chip-c" id="cc9">MD</span><span class="chip-c" id="cc10">PL</span><span class="chip-c" id="cc11">RO</span><span class="chip-c" id="cc12">HU</span></div>
           <div id="world-sub">Jedno jezero. <em>Jedna parta.</em></div>
         </div>
       </section>
 
-      <section id="pts" class="clip" data-start="34.664" data-duration="3.669" data-track-index="2">
+      <section id="pts" class="clip" data-start="49.428" data-duration="5.549" data-track-index="2">
         <div class="panel"><div class="h2" id="pts-h"><span>Body Team CZ</span><em>oba dny · 1. den + 2. den</em></div>
           <div class="prows">
           <div class="prow" id="prow0">
@@ -463,11 +782,11 @@
               <div class="pbar"><div class="pb1" id="pb1_3" style="width:42.0%"></div><div class="pb2" id="pb2_3" style="left:42.0%; width:20.0%"></div></div></div>
             <div class="pval"><b id="pv3">0</b><i>b.</i></div>
           </div></div>
-          <div id="pts-total"><b>166</b><span>bodů týmu z 360 · 30 soubojů na závodníka</span></div>
+          <div id="pts-total" class="hlbox"><span class="glow" id="g-pts"></span><b>166</b><span>bodů týmu z 360 · 30 soubojů na závodníka</span></div>
         </div>
       </section>
 
-      <section id="heat" class="clip" data-start="38.333" data-duration="1.858" data-track-index="2">
+      <section id="heat" class="clip" data-start="54.977" data-duration="3.692" data-track-index="2">
         <div class="panel"><div class="h2" id="heat-h"><span>120 soubojů</span><em>každý čtvereček = jeden souboj</em></div>
           <div class="heat">
           <div class="hrow"><div class="hname"><span class="hno">7</span>Hrabalík</div>
@@ -482,7 +801,7 @@
         </div>
       </section>
 
-      <section id="fish" class="clip" data-start="40.191" data-duration="3.669" data-track-index="2">
+      <section id="fish" class="clip" data-start="58.669" data-duration="3.669" data-track-index="2">
         <div class="panel"><div class="h2" id="fish-h"><span>Ryby</span><em>úlovky týmů za oba dny</em></div>
           <div class="frows">
           <div class="frow" id="fr0"><span class="fpos">1</span><span class="fc">LT</span>
@@ -517,13 +836,13 @@
             <div class="fbar"><div class="ffill" id="ff14" style="width:55.2%"></div></div><b class="fv" id="fv14">0</b></div>
           <div class="frow" id="fr15"><span class="fpos">16</span><span class="fc">GB</span>
             <div class="fbar"><div class="ffill" id="ff15" style="width:53.0%"></div></div><b class="fv" id="fv15">0</b></div></div>
-          <div id="fish-note"><b>243 ryb</b> – 4. nejvíc ze všech týmů</div>
+          <div id="fish-note" class="hlbox"><span class="glow" id="g-fish"></span><b>243 ryb</b> – 4. nejvíc ze všech týmů<span class="mk" id="mk-fish"></span></div>
         </div>
       </section>
 
-      <section id="rank" class="clip" data-start="43.86" data-duration="1.834" data-track-index="2">
+      <section id="rank" class="clip" data-start="62.338" data-duration="1.858" data-track-index="2">
         <div class="rank-wrap">
-          <div id="rank-n"><b id="rank-v">16</b><span>.</span></div>
+          <div id="rank-n" class="hlbox"><span class="glow" id="g-rank"></span><b id="rank-v">16</b><span>.</span></div>
           <div id="rank-t">místo ze 16 týmů</div>
           <div id="rank-s">součet umístění 78 (32 + 46) · 166 b. · 243 ryb</div>
         </div>
@@ -539,7 +858,7 @@
         </div>
       </section>
 
-      <section id="kin" class="clip" data-start="30.991" data-duration="3.673" data-track-index="3">
+      <section id="kin" class="clip" data-start="30.991" data-duration="3.692" data-track-index="3">
         <div id="kin-cam">
           <div id="k-l1" class="k-line"><span class="k-mask"><span id="k1w0" class="k-word">Nepřijeli</span></span><span class="k-mask"><span id="k1w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k1w2" class="k-word">bojovat,</span></span></div>
           <div id="k-l2" class="k-line"><span class="k-mask"><span id="k2w0" class="k-word">přijeli</span></span><span class="k-mask"><span id="k2w1" class="k-word">jsme</span></span><span class="k-mask"><span id="k2w2" class="k-word">za</span></span><span class="k-mask"><span id="k2w3" class="k-word red">přáteli.</span></span></div>
@@ -548,33 +867,33 @@
       </section>
 
       
-      <section id="chip-prijezd" class="clip chip-clip" data-start="10.581" data-duration="5.573" data-track-index="4">
+      <section id="chip-prijezd" class="clip chip-clip" data-start="10.581" data-duration="7.43" data-track-index="4">
         <div class="chip"><span class="chip-num">01</span><span class="chip-cz">Příjezd</span><span class="chip-en">Arrival</span></div>
       </section>
-      <section id="chip-tym" class="clip chip-clip" data-start="16.154" data-duration="1.857" data-track-index="4">
+      <section id="chip-tym" class="clip chip-clip" data-start="18.011" data-duration="3.715" data-track-index="4">
         <div class="chip"><span class="chip-num">02</span><span class="chip-cz">Tým</span><span class="chip-en">Team</span></div>
       </section>
-      <section id="chip-zmena" class="clip chip-clip" data-start="18.011" data-duration="3.715" data-track-index="4">
+      <section id="chip-zmena" class="clip chip-clip" data-start="21.726" data-duration="3.716" data-track-index="4">
         <div class="chip"><span class="chip-num">03</span><span class="chip-cz">Změna v sestavě</span><span class="chip-en">Line-up change</span></div>
       </section>
-      <section id="chip-losovani" class="clip chip-clip" data-start="21.726" data-duration="3.716" data-track-index="4">
+      <section id="chip-losovani" class="clip chip-clip" data-start="25.442" data-duration="5.549" data-track-index="4">
         <div class="chip"><span class="chip-num">04</span><span class="chip-cz">Losování</span><span class="chip-en">The draw</span></div>
       </section>
-      <section id="chip-zavod" class="clip chip-clip" data-start="25.442" data-duration="5.549" data-track-index="4">
+      <section id="chip-zavod" class="clip chip-clip" data-start="34.683" data-duration="14.745" data-track-index="4">
         <div class="chip"><span class="chip-num">05</span><span class="chip-cz">Trénink a závod</span><span class="chip-en">Practice & race</span></div>
       </section>
-      <section id="chip-vysledky" class="clip chip-clip" data-start="34.664" data-duration="12.888" data-track-index="4">
+      <section id="chip-vysledky" class="clip chip-clip" data-start="49.428" data-duration="16.602" data-track-index="4">
         <div class="chip"><span class="chip-num">06</span><span class="chip-cz">Výsledky</span><span class="chip-en">Results</span></div>
       </section>
-      <section id="chip-vtip" class="clip chip-clip" data-start="47.552" data-duration="1.811" data-track-index="4">
-        <div class="chip"><span class="chip-num">07</span><span class="chip-cz">Zákulisí</span><span class="chip-en">Backstage</span></div>
+      <section id="chip-pratele" class="clip chip-clip" data-start="66.03" data-duration="14.722" data-track-index="4">
+        <div class="chip"><span class="chip-num">07</span><span class="chip-cz">Přátelé</span><span class="chip-en">Friends</span></div>
       </section>
-      <section id="chip-pratele" class="clip chip-clip" data-start="49.363" data-duration="5.503" data-track-index="4">
-        <div class="chip"><span class="chip-num">08</span><span class="chip-cz">Přátelé</span><span class="chip-en">Friends</span></div>
+      <section id="chip-recap" class="clip chip-clip" data-start="80.752" data-duration="7.314" data-track-index="4">
+        <div class="chip"><span class="chip-num">08</span><span class="chip-cz">Takhle to bylo</span><span class="chip-en">That was it</span></div>
       </section>
 
-      <section id="outro" class="clip" data-start="54.866" data-duration="6.614" data-track-index="3">
-        <div id="out-cam" class="clip"><div class="ph-final bg"></div><div class="ph-final fg"></div></div>
+      <section id="outro" class="clip" data-start="88.066" data-duration="6.614" data-track-index="3">
+        <div id="out-cam" class="clip"></div>
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
           <div id="o-meta" class="o-meta">Držíme palce, kluci! · Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
@@ -601,24 +920,24 @@
         <div id="p-text">
           <div class="p-title">HB BATTLE 2026</div>
           <div class="p-artist">začátek · Trout Area CZ</div>
-          <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>0:60</span></div>
+          <div class="p-row"><div id="p-eq"><i></i><i></i><i></i><i></i><i></i></div><span id="p-time">0:00</span><div class="p-bar"><div id="p-fill"></div></div><span>1:33</span></div>
         </div>
       </div>
       <div id="grain"></div>
-      <div id="wipe-holder"><div id="wipe"></div></div>
-      <div id="proto-badge">DRAFT · v6</div>
+      
+      <div id="proto-badge">DRAFT · v7</div>
 
-      <audio id="bgm" src="assets/track_edit60.wav" data-start="1.2" data-duration="59.68" data-track-index="9" data-volume="1"></audio>
+      <audio id="bgm" src="assets/track_full.wav" data-start="1.2" data-duration="92.88" data-track-index="9" data-volume="1"></audio>
     </div>
 
     <script>
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#b1", { x: 0, y: 0 }, { x: 324, y: 216, duration: 61.48, ease: "sine.inOut" }, 0);
-      tl.fromTo("#b2", { x: 0, y: 0 }, { x: -270, y: -162, duration: 61.48, ease: "sine.inOut" }, 0);
-      tl.fromTo("#b3", { x: 0, y: 0 }, { x: 216, y: -216, duration: 61.48, ease: "sine.inOut" }, 0);
-      tl.fromTo("#grain", { x: 0 }, { x: 64, duration: 61.48, ease: "steps(738)" }, 0);
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: 324, y: 216, duration: 94.68, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: -270, y: -162, duration: 94.68, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b3", { x: 0, y: 0 }, { x: 216, y: -216, duration: 94.68, ease: "sine.inOut" }, 0);
+      tl.fromTo("#grain", { x: 0 }, { x: 64, duration: 94.68, ease: "steps(1136)" }, 0);
       tl.fromTo("#three-wrap", { opacity: 1 }, { opacity: 0, duration: 0.25 }, 10.331);
-      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 54.716);
+      tl.to("#three-wrap", { opacity: 1, duration: 0.3 }, 87.916);
       tl.fromTo("#t-main", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 4.985);
       tl.fromTo("#t-cup", { opacity: 0 }, { opacity: 0.85, duration: 0.5 }, 5.914);
       { const o = { v: 0 }, el = document.getElementById("cnt0"); tl.fromTo(o, { v: 0 }, { v: 16, duration: 0.8, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 6.842); }
@@ -627,280 +946,422 @@
       tl.fromTo("#cntb0", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.842);
       tl.fromTo("#cntb1", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.307);
       tl.fromTo("#cntb2", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.771);
-      tl.fromTo("#roster-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 16.154);
-      tl.fromTo("#rc0", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 16.154);
-      tl.fromTo("#rc1", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 16.618);
-      tl.fromTo("#rc2", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 17.082);
-      tl.fromTo("#rc3", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 17.547);
-      tl.fromTo("#roster-coach", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 17.747);
-      tl.fromTo("#roster .rgrid", { scale: 1 }, { scale: 1.03, duration: 1.857, ease: "none" }, 16.154);
-      tl.fromTo("#swap-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 18.011);
-      tl.fromTo("#swap-out", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 18.011);
-      tl.fromTo("#swap-out .strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, 18.476);
-      tl.fromTo("#swap-out", { opacity: 1 }, { opacity: 0.45, duration: 0.3, immediateRender: false }, 18.476);
-      tl.fromTo("#swap-in", { opacity: 0, x: 65 }, { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, 18.94);
-      tl.fromTo("#swap-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 19.404);
-      tl.fromTo("#sectors-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 21.726);
-      tl.fromTo("#lake", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 21.726);
-      tl.fromTo("#sec0", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 21.776);
-      tl.fromTo("#sec1", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 22.241);
-      tl.fromTo("#sec2", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 22.705);
-      tl.fromTo("#sec3", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 23.17);
-      tl.fromTo("#secno0", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 21.926);
-      tl.fromTo("#secno1", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 22.391);
-      tl.fromTo("#secno2", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 22.855);
-      tl.fromTo("#secno3", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 23.32);
-      tl.fromTo("#duels-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 23.584);
-      tl.fromTo("#dcol0", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 23.634);
-      tl.fromTo("#dcol1", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 24.075);
-      tl.fromTo("#dcol2", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 24.54);
-      tl.fromTo("#dcol3", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 25.004);
-      tl.fromTo("#dlist0", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
-      tl.fromTo("#dlist1", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
-      tl.fromTo("#dlist2", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
-      tl.fromTo("#dlist3", { yPercent: 0 }, { yPercent: -40.0, duration: 0.852, ease: "sine.inOut" }, 24.49);
-      tl.fromTo("#world-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 49.363);
-      tl.fromTo("#cc0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.363);
-      tl.fromTo("#cc1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.595);
-      tl.fromTo("#cc2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 49.827);
-      tl.fromTo("#cc3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.059);
-      tl.fromTo("#cc4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.291);
-      tl.fromTo("#cc5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.523);
-      tl.fromTo("#cc6", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.755);
-      tl.fromTo("#cc7", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 50.987);
-      tl.fromTo("#cc8", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.219);
-      tl.fromTo("#cc9", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.451);
-      tl.fromTo("#cc10", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.683);
-      tl.fromTo("#cc11", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 51.915);
-      tl.fromTo("#cc12", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 52.147);
-      tl.fromTo("#world-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 51.156);
-      tl.fromTo("#pts-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 34.664);
-      tl.fromTo("#prow0", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 34.664);
-      tl.fromTo("#prow1", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 35.129);
-      tl.fromTo("#prow2", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 35.593);
-      tl.fromTo("#prow3", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 36.034);
-      tl.fromTo("#pb1_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 34.814);
-      tl.fromTo("#pb1_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 35.279);
-      tl.fromTo("#pb1_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 35.743);
-      tl.fromTo("#pb1_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.184);
-      tl.fromTo("#pb2_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.499);
-      tl.fromTo("#pb2_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 36.963);
-      tl.fromTo("#pb2_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 37.428);
-      tl.fromTo("#pb2_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 37.869);
-      { const o = { v: 0 }, el = document.getElementById("pv0"); tl.fromTo(o, { v: 0 }, { v: 38, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 34.814); }
-      { const o = { v: 0 }, el = document.getElementById("pv1"); tl.fromTo(o, { v: 0 }, { v: 49, duration: 2.434, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 35.279); }
-      { const o = { v: 0 }, el = document.getElementById("pv2"); tl.fromTo(o, { v: 0 }, { v: 48, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 35.743); }
-      { const o = { v: 0 }, el = document.getElementById("pv3"); tl.fromTo(o, { v: 0 }, { v: 31, duration: 2.435, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 36.184); }
-      tl.fromTo("#pts-total", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 38.069);
-      tl.fromTo("#heat-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 38.333);
-      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.533);
-      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.623);
-      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.713);
-      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.803);
-      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.893);
-      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 38.983);
-      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 39.073);
-      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.022 }, 39.163);
-      tl.fromTo("#heat-legend", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 39.726);
-      tl.fromTo("#fish-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 40.191);
-      tl.fromTo("#fr0", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.341);
-      tl.fromTo("#fr1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.391);
-      tl.fromTo("#fr2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.441);
-      tl.fromTo("#fr3", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.491);
-      tl.fromTo("#fr4", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.541);
-      tl.fromTo("#fr5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.591);
-      tl.fromTo("#fr6", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.641);
-      tl.fromTo("#fr7", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.691);
-      tl.fromTo("#fr8", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.741);
-      tl.fromTo("#fr9", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.791);
-      tl.fromTo("#fr10", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.841);
-      tl.fromTo("#fr11", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.891);
-      tl.fromTo("#fr12", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.941);
-      tl.fromTo("#fr13", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 40.991);
-      tl.fromTo("#fr14", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 41.041);
-      tl.fromTo("#fr15", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 41.091);
-      tl.fromTo("#ff0", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.391);
-      tl.fromTo("#ff1", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.441);
-      tl.fromTo("#ff2", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.491);
-      tl.fromTo("#ff3", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.541);
-      tl.fromTo("#ff4", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.591);
-      tl.fromTo("#ff5", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.641);
-      tl.fromTo("#ff6", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.691);
-      tl.fromTo("#ff7", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.741);
-      tl.fromTo("#ff8", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.791);
-      tl.fromTo("#ff9", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.841);
-      tl.fromTo("#ff10", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.891);
-      tl.fromTo("#ff11", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.941);
-      tl.fromTo("#ff12", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 40.991);
-      tl.fromTo("#ff13", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.041);
-      tl.fromTo("#ff14", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.091);
-      tl.fromTo("#ff15", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 41.141);
-      { const o = { v: 0 }, el = document.getElementById("fv0"); tl.fromTo(o, { v: 0 }, { v: 322, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.391); }
-      { const o = { v: 0 }, el = document.getElementById("fv1"); tl.fromTo(o, { v: 0 }, { v: 318, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.441); }
-      { const o = { v: 0 }, el = document.getElementById("fv2"); tl.fromTo(o, { v: 0 }, { v: 289, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.491); }
-      { const o = { v: 0 }, el = document.getElementById("fv3"); tl.fromTo(o, { v: 0 }, { v: 243, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.541); }
-      { const o = { v: 0 }, el = document.getElementById("fv4"); tl.fromTo(o, { v: 0 }, { v: 231, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.591); }
-      { const o = { v: 0 }, el = document.getElementById("fv5"); tl.fromTo(o, { v: 0 }, { v: 215, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.641); }
-      { const o = { v: 0 }, el = document.getElementById("fv6"); tl.fromTo(o, { v: 0 }, { v: 211, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.691); }
-      { const o = { v: 0 }, el = document.getElementById("fv7"); tl.fromTo(o, { v: 0 }, { v: 206, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.741); }
-      { const o = { v: 0 }, el = document.getElementById("fv8"); tl.fromTo(o, { v: 0 }, { v: 204, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.791); }
-      { const o = { v: 0 }, el = document.getElementById("fv9"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.841); }
-      { const o = { v: 0 }, el = document.getElementById("fv10"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.891); }
-      { const o = { v: 0 }, el = document.getElementById("fv11"); tl.fromTo(o, { v: 0 }, { v: 193, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.941); }
-      { const o = { v: 0 }, el = document.getElementById("fv12"); tl.fromTo(o, { v: 0 }, { v: 185, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 40.991); }
-      { const o = { v: 0 }, el = document.getElementById("fv13"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.041); }
-      { const o = { v: 0 }, el = document.getElementById("fv14"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.091); }
-      { const o = { v: 0 }, el = document.getElementById("fv15"); tl.fromTo(o, { v: 0 }, { v: 175, duration: 0.9, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 41.141); }
-      tl.fromTo("#fish .cz", { scale: 1 }, { scale: 1.04, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 42.025);
-      tl.fromTo("#fish-note", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 42.49);
-      tl.fromTo("#rank-n", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, 43.86);
-      { const o = { v: 16 }, el = document.getElementById("rank-v"); tl.fromTo(o, { v: 16 }, { v: 9, duration: 0.7, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 43.86); }
-      tl.fromTo("#rank-t", { opacity: 0, x: -43 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 44.324);
-      tl.fromTo("#rank-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 44.788);
+      tl.fromTo("#roster-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 18.011);
+      tl.fromTo("#rc0", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 18.011);
+      tl.fromTo("#rc1", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 18.476);
+      tl.fromTo("#rc2", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 18.94);
+      tl.fromTo("#rc3", { opacity: 0, x: -65 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 19.404);
+      tl.fromTo("#roster-coach", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 19.604);
+      tl.fromTo("#roster .rgrid", { scale: 1 }, { scale: 1.03, duration: 3.715, ease: "none" }, 18.011);
+      tl.fromTo("#swap-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 21.726);
+      tl.fromTo("#swap-out", { opacity: 0, x: -54 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 21.726);
+      tl.fromTo("#swap-out .strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, 22.191);
+      tl.fromTo("#swap-out", { opacity: 1 }, { opacity: 0.45, duration: 0.3, immediateRender: false }, 22.191);
+      tl.fromTo("#swap-in", { opacity: 0, x: 65 }, { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, 22.655);
+      tl.fromTo("#swap-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 23.12);
+      tl.fromTo("#sectors-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 25.442);
+      tl.fromTo("#lake", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 25.442);
+      tl.fromTo("#sec0", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 25.492);
+      tl.fromTo("#sec1", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 25.956);
+      tl.fromTo("#sec2", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 26.42);
+      tl.fromTo("#sec3", { opacity: 0, y: 43 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 26.862);
+      tl.fromTo("#secno0", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 25.642);
+      tl.fromTo("#secno1", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 26.106);
+      tl.fromTo("#secno2", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 26.57);
+      tl.fromTo("#secno3", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 27.012);
+      tl.fromTo("#duels-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 27.276);
+      tl.fromTo("#dcol0", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 27.326);
+      tl.fromTo("#dcol1", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 27.79);
+      tl.fromTo("#dcol2", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 28.255);
+      tl.fromTo("#dcol3", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 28.719);
+      tl.fromTo("#dlist0", { yPercent: 0 }, { yPercent: -40.0, duration: 2.686, ease: "sine.inOut" }, 28.205);
+      tl.fromTo("#dlist1", { yPercent: 0 }, { yPercent: -40.0, duration: 2.686, ease: "sine.inOut" }, 28.205);
+      tl.fromTo("#dlist2", { yPercent: 0 }, { yPercent: -40.0, duration: 2.686, ease: "sine.inOut" }, 28.205);
+      tl.fromTo("#dlist3", { yPercent: 0 }, { yPercent: -40.0, duration: 2.686, ease: "sine.inOut" }, 28.205);
+      tl.fromTo("#world-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 66.03);
+      tl.fromTo("#cc0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 66.03);
+      tl.fromTo("#cc1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 66.262);
+      tl.fromTo("#cc2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 66.494);
+      tl.fromTo("#cc3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 66.726);
+      tl.fromTo("#cc4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 66.958);
+      tl.fromTo("#cc5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 67.19);
+      tl.fromTo("#cc6", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 67.422);
+      tl.fromTo("#cc7", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 67.654);
+      tl.fromTo("#cc8", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 67.886);
+      tl.fromTo("#cc9", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 68.118);
+      tl.fromTo("#cc10", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 68.35);
+      tl.fromTo("#cc11", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 68.582);
+      tl.fromTo("#cc12", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 68.814);
+      tl.fromTo("#world-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 67.8);
+      tl.fromTo("#pts-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 49.428);
+      tl.fromTo("#prow0", { opacity: 0, rotationX: -75, y: 22, transformPerspective: 1296 }, { opacity: 1, rotationX: 0, y: 0, transformPerspective: 1296, duration: 0.5, ease: "back.out(1.4)" }, 49.428);
+      tl.fromTo("#prow1", { opacity: 0, rotationX: -75, y: 22, transformPerspective: 1296 }, { opacity: 1, rotationX: 0, y: 0, transformPerspective: 1296, duration: 0.5, ease: "back.out(1.4)" }, 49.892);
+      tl.fromTo("#prow2", { opacity: 0, rotationX: -75, y: 22, transformPerspective: 1296 }, { opacity: 1, rotationX: 0, y: 0, transformPerspective: 1296, duration: 0.5, ease: "back.out(1.4)" }, 50.357);
+      tl.fromTo("#prow3", { opacity: 0, rotationX: -75, y: 22, transformPerspective: 1296 }, { opacity: 1, rotationX: 0, y: 0, transformPerspective: 1296, duration: 0.5, ease: "back.out(1.4)" }, 50.821);
+      tl.fromTo("#pb1_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 49.578);
+      tl.fromTo("#pb1_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 50.042);
+      tl.fromTo("#pb1_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 50.507);
+      tl.fromTo("#pb1_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 50.971);
+      tl.fromTo("#pb2_0", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 51.285);
+      tl.fromTo("#pb2_1", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 51.75);
+      tl.fromTo("#pb2_2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 52.214);
+      tl.fromTo("#pb2_3", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 52.655);
+      { const o = { v: 0 }, el = document.getElementById("pv0"); tl.fromTo(o, { v: 0 }, { v: 38, duration: 2.457, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 49.578); }
+      { const o = { v: 0 }, el = document.getElementById("pv1"); tl.fromTo(o, { v: 0 }, { v: 49, duration: 2.458, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 50.042); }
+      { const o = { v: 0 }, el = document.getElementById("pv2"); tl.fromTo(o, { v: 0 }, { v: 48, duration: 2.457, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 50.507); }
+      { const o = { v: 0 }, el = document.getElementById("pv3"); tl.fromTo(o, { v: 0 }, { v: 31, duration: 2.434, ease: "power1.inOut", onUpdate() { el.textContent = Math.round(o.v); } }, 50.971); }
+      tl.fromTo("#pts-total", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 53.12);
+      tl.fromTo("#heat-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 54.977);
+      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 55.127);
+      tl.fromTo("#heat .hrow:nth-child(1) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 55.327);
+      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 55.527);
+      tl.fromTo("#heat .hrow:nth-child(2) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 55.727);
+      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 55.927);
+      tl.fromTo("#heat .hrow:nth-child(3) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 56.127);
+      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(1) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 56.327);
+      tl.fromTo("#heat .hrow:nth-child(4) .hline:nth-child(2) .hc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "back.out(3)", stagger: 0.035 }, 56.527);
+      tl.fromTo("#heat-legend", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 56.812);
+      tl.fromTo("#fish-h span", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 58.669);
+      tl.fromTo("#fr0", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 58.819);
+      tl.fromTo("#fr1", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 58.919);
+      tl.fromTo("#fr2", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.019);
+      tl.fromTo("#fr3", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.119);
+      tl.fromTo("#fr4", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.219);
+      tl.fromTo("#fr5", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.319);
+      tl.fromTo("#fr6", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.419);
+      tl.fromTo("#fr7", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.519);
+      tl.fromTo("#fr8", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.619);
+      tl.fromTo("#fr9", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.719);
+      tl.fromTo("#fr10", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.819);
+      tl.fromTo("#fr11", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 59.919);
+      tl.fromTo("#fr12", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 60.019);
+      tl.fromTo("#fr13", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 60.119);
+      tl.fromTo("#fr14", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 60.219);
+      tl.fromTo("#fr15", { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 60.319);
+      tl.fromTo("#ff0", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 58.869);
+      tl.fromTo("#ff1", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 58.969);
+      tl.fromTo("#ff2", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.069);
+      tl.fromTo("#ff3", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.169);
+      tl.fromTo("#ff4", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.269);
+      tl.fromTo("#ff5", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.369);
+      tl.fromTo("#ff6", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.469);
+      tl.fromTo("#ff7", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.569);
+      tl.fromTo("#ff8", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.669);
+      tl.fromTo("#ff9", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.769);
+      tl.fromTo("#ff10", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.869);
+      tl.fromTo("#ff11", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 59.969);
+      tl.fromTo("#ff12", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 60.069);
+      tl.fromTo("#ff13", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 60.169);
+      tl.fromTo("#ff14", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 60.269);
+      tl.fromTo("#ff15", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power3.out" }, 60.369);
+      { const o = { v: 0 }, el = document.getElementById("fv0"); tl.fromTo(o, { v: 0 }, { v: 322, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 58.869); }
+      { const o = { v: 0 }, el = document.getElementById("fv1"); tl.fromTo(o, { v: 0 }, { v: 318, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 58.969); }
+      { const o = { v: 0 }, el = document.getElementById("fv2"); tl.fromTo(o, { v: 0 }, { v: 289, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.069); }
+      { const o = { v: 0 }, el = document.getElementById("fv3"); tl.fromTo(o, { v: 0 }, { v: 243, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.169); }
+      { const o = { v: 0 }, el = document.getElementById("fv4"); tl.fromTo(o, { v: 0 }, { v: 231, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.269); }
+      { const o = { v: 0 }, el = document.getElementById("fv5"); tl.fromTo(o, { v: 0 }, { v: 215, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.369); }
+      { const o = { v: 0 }, el = document.getElementById("fv6"); tl.fromTo(o, { v: 0 }, { v: 211, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.469); }
+      { const o = { v: 0 }, el = document.getElementById("fv7"); tl.fromTo(o, { v: 0 }, { v: 206, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.569); }
+      { const o = { v: 0 }, el = document.getElementById("fv8"); tl.fromTo(o, { v: 0 }, { v: 204, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.669); }
+      { const o = { v: 0 }, el = document.getElementById("fv9"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.769); }
+      { const o = { v: 0 }, el = document.getElementById("fv10"); tl.fromTo(o, { v: 0 }, { v: 198, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.869); }
+      { const o = { v: 0 }, el = document.getElementById("fv11"); tl.fromTo(o, { v: 0 }, { v: 193, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 59.969); }
+      { const o = { v: 0 }, el = document.getElementById("fv12"); tl.fromTo(o, { v: 0 }, { v: 185, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 60.069); }
+      { const o = { v: 0 }, el = document.getElementById("fv13"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 60.169); }
+      { const o = { v: 0 }, el = document.getElementById("fv14"); tl.fromTo(o, { v: 0 }, { v: 182, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 60.269); }
+      { const o = { v: 0 }, el = document.getElementById("fv15"); tl.fromTo(o, { v: 0 }, { v: 175, duration: 1.3, ease: "power3.out", onUpdate() { el.textContent = Math.round(o.v); } }, 60.369); }
+      tl.fromTo("#fish .cz", { scale: 1 }, { scale: 1.04, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, 60.504);
+      tl.fromTo("#fish-note", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 60.968);
+      tl.fromTo("#rank-n", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, 62.338);
+      { const o = { v: 16 }, el = document.getElementById("rank-v"); tl.fromTo(o, { v: 16 }, { v: 9, duration: 0.7, ease: "power2.out", onUpdate() { el.textContent = Math.round(o.v); } }, 62.338); }
+      tl.fromTo("#rank-t", { opacity: 0, x: -43 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 62.803);
+      tl.fromTo("#rank-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 63.267);
+      tl.fromTo("#g-pts", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 53.12);
+      tl.fromTo("#g-pts", { opacity: 1 }, { opacity: 0.45, duration: 0.418, ease: "sine.inOut", repeat: 5, yoyo: true, immediateRender: false }, 53.584);
+      tl.fromTo("#g-fish", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 60.968);
+      tl.fromTo("#mk-fish", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 61.433);
+      tl.fromTo("#g-rank", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1.1, duration: 0.6, ease: "power2.out" }, 62.803);
+      tl.fromTo("#g-rank", { opacity: 1 }, { opacity: 0.5, duration: 0.418, ease: "sine.inOut", repeat: 3, yoyo: true, immediateRender: false }, 63.267);
+      tl.fromTo("#roster .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 3.715, ease: "sine.inOut" }, 18.011);
+      tl.fromTo("#swap .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 1.858, ease: "sine.inOut" }, 21.726);
+      tl.fromTo("#sectors .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 1.834, ease: "sine.inOut" }, 25.442);
+      tl.fromTo("#duels .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 3.715, ease: "sine.inOut" }, 27.276);
+      tl.fromTo("#pts .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 5.549, ease: "sine.inOut" }, 49.428);
+      tl.fromTo("#heat .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 3.692, ease: "sine.inOut" }, 54.977);
+      tl.fromTo("#fish .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 3.669, ease: "sine.inOut" }, 58.669);
+      tl.fromTo("#world .panel", { rotationY: 6, rotationX: 2, transformPerspective: 1728 }, { rotationY: -6, rotationX: -1, transformPerspective: 1728, duration: 1.834, ease: "sine.inOut" }, 66.03);
       tl.fromTo("#k1w0", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 30.991);
       tl.fromTo("#k1w1", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 31.456);
       tl.fromTo("#k1w2", {yPercent:110}, {yPercent:0, duration:0.3, ease:"expo.out"}, 31.897);
-      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.83);
-      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.87);
-      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.91);
-      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.95);
-      tl.fromTo("#k-l1", {opacity:1}, {opacity:0.35, duration:0.3, immediateRender:false}, 32.83);
-      tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, 33.736);
-      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:3.673, ease:"none"}, 30.991);
-      tl.fromTo("#flash", {opacity:0.6}, {opacity:0, duration:0.4, ease:"power2.out", immediateRender:false}, 32.83);
-      tl.fromTo("#sh01 .cam", {"scale":1}, {"scale":1.06,"duration":1.857,"ease":"none"}, 10.581);
-      tl.fromTo("#sh01 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 11.510);
-      tl.fromTo("#sh01 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.927999999999999,"ease":"none","immediateRender":false}, 11.510);
-      tl.fromTo("#sh01 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 11.510);
-      tl.fromTo("#sh01 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.927999999999999,"ease":"none","immediateRender":false}, 11.510);
-      tl.fromTo("#sh01 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 11.510);
-      tl.fromTo("#sh01 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.927999999999999,"ease":"none"}, 11.510);
-      tl.fromTo("#sh01 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 11.974);
-      tl.fromTo("#sh02 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 12.438);
-      tl.fromTo("#sh02 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 13.367);
-      tl.fromTo("#sh02 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 13.367);
-      tl.fromTo("#sh02 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 13.367);
-      tl.fromTo("#sh02 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9290000000000003,"ease":"none"}, 13.367);
-      tl.fromTo("#sh02 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 13.831);
-      tl.fromTo("#sh03 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 14.296);
-      tl.fromTo("#sh03 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 15.225);
-      tl.fromTo("#sh03 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 15.225);
-      tl.fromTo("#sh03 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 15.225);
-      tl.fromTo("#sh03 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9290000000000003,"ease":"none","immediateRender":false}, 15.225);
-      tl.fromTo("#sh03 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 15.225);
-      tl.fromTo("#sh03 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9290000000000003,"ease":"none"}, 15.225);
-      tl.fromTo("#sh04 .cam", {"scale":1}, {"scale":1.06,"duration":1.857,"ease":"none"}, 19.869);
-      tl.fromTo("#sh04 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 20.798);
-      tl.fromTo("#sh04 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9280000000000008,"ease":"none","immediateRender":false}, 20.798);
-      tl.fromTo("#sh04 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 20.798);
-      tl.fromTo("#sh04 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9280000000000008,"ease":"none","immediateRender":false}, 20.798);
-      tl.fromTo("#sh04 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 20.798);
-      tl.fromTo("#sh04 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9280000000000008,"ease":"none"}, 20.798);
-      tl.fromTo("#sh04 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 21.030);
-      tl.fromTo("#sh05 .cam", {"scale":1}, {"scale":1.06,"duration":0.928,"ease":"none"}, 25.442);
-      tl.fromTo("#sh05 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 25.906);
-      tl.fromTo("#sh05 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 25.906);
-      tl.fromTo("#sh05 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 25.906);
-      tl.fromTo("#sh05 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 25.906);
-      tl.fromTo("#sh05 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 25.906);
-      tl.fromTo("#sh05 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.4640000000000022,"ease":"none"}, 25.906);
-      tl.fromTo("#sh06 .cam", {"scale":1}, {"scale":1.06,"duration":0.906,"ease":"none"}, 26.370);
-      tl.fromTo("#sh06 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 26.812);
-      tl.fromTo("#sh06 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 26.812);
-      tl.fromTo("#sh06 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 26.812);
-      tl.fromTo("#sh06 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.4640000000000022,"ease":"none","immediateRender":false}, 26.812);
-      tl.fromTo("#sh06 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 26.812);
-      tl.fromTo("#sh06 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.4640000000000022,"ease":"none"}, 26.812);
-      tl.fromTo("#sh07 .cam", {"scale":1}, {"scale":1.06,"duration":0.929,"ease":"none"}, 27.276);
-      tl.fromTo("#sh07 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 27.740);
-      tl.fromTo("#sh07 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 27.740);
-      tl.fromTo("#sh07 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 27.740);
-      tl.fromTo("#sh07 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 27.740);
-      tl.fromTo("#sh07 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 27.740);
-      tl.fromTo("#sh07 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46499999999999986,"ease":"none"}, 27.740);
-      tl.fromTo("#sh08 .cam", {"scale":1}, {"scale":1.06,"duration":0.929,"ease":"none"}, 28.205);
-      tl.fromTo("#sh08 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 28.669);
-      tl.fromTo("#sh08 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 28.669);
-      tl.fromTo("#sh08 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 28.669);
-      tl.fromTo("#sh08 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.46499999999999986,"ease":"none","immediateRender":false}, 28.669);
-      tl.fromTo("#sh08 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 28.669);
-      tl.fromTo("#sh08 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46499999999999986,"ease":"none"}, 28.669);
-      tl.fromTo("#sh09 .cam", {"scale":1}, {"scale":1.06,"duration":0.905,"ease":"none"}, 29.134);
-      tl.fromTo("#sh09 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 29.598);
-      tl.fromTo("#sh09 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.44099999999999895,"ease":"none","immediateRender":false}, 29.598);
-      tl.fromTo("#sh09 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 29.598);
-      tl.fromTo("#sh09 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.44099999999999895,"ease":"none","immediateRender":false}, 29.598);
-      tl.fromTo("#sh09 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 29.598);
-      tl.fromTo("#sh09 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.44099999999999895,"ease":"none"}, 29.598);
-      tl.fromTo("#sh09 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 29.830);
-      tl.fromTo("#sh10 .cam", {"scale":1}, {"scale":1.06,"duration":0.952,"ease":"none"}, 30.039);
-      tl.fromTo("#sh10 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 30.527);
-      tl.fromTo("#sh10 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.46399999999999864,"ease":"none","immediateRender":false}, 30.527);
-      tl.fromTo("#sh10 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 30.527);
-      tl.fromTo("#sh10 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.46399999999999864,"ease":"none"}, 30.527);
-      tl.fromTo("#sh11 .cam", {"scale":1}, {"scale":1.06,"duration":1.858,"ease":"none"}, 45.694);
-      tl.fromTo("#sh11 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 46.623);
-      tl.fromTo("#sh11 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9289999999999949,"ease":"none"}, 46.623);
-      tl.fromTo("#sh11 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 47.087);
-      tl.fromTo("#sh12 .cam", {"scale":1}, {"scale":1.06,"duration":1.811,"ease":"none"}, 47.552);
-      tl.fromTo("#sh12 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 48.457);
-      tl.fromTo("#sh12 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":0.9059999999999988,"ease":"none","immediateRender":false}, 48.457);
-      tl.fromTo("#sh12 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 48.457);
-      tl.fromTo("#sh12 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":0.9059999999999988,"ease":"none","immediateRender":false}, 48.457);
-      tl.fromTo("#sh12 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 48.457);
-      tl.fromTo("#sh12 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":0.9059999999999988,"ease":"none"}, 48.457);
-      tl.fromTo("#sh12 .caption", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out"}, 48.016);
-      tl.fromTo("#sh13 .cam", {"scale":1}, {"scale":1.06,"duration":3.669,"ease":"none"}, 51.197);
-      tl.fromTo("#sh13 .gbg", {"opacity":0,"scale":1.08}, {"opacity":1,"scale":1,"duration":0.35,"ease":"power2.out"}, 52.590);
-      tl.fromTo("#sh13 .gbg", {"xPercent":0}, {"xPercent":-2,"duration":2.2759999999999962,"ease":"none","immediateRender":false}, 52.590);
-      tl.fromTo("#sh13 .gfg", {"opacity":0,"yPercent":3,"scale":0.98}, {"opacity":1,"yPercent":0,"scale":1,"duration":0.3,"ease":"power3.out"}, 52.590);
-      tl.fromTo("#sh13 .gfg", {"xPercent":0}, {"xPercent":1.5,"duration":2.2759999999999962,"ease":"none","immediateRender":false}, 52.590);
-      tl.fromTo("#sh13 .bigword span", {"yPercent":100}, {"yPercent":0,"duration":0.4,"ease":"expo.out"}, 52.590);
-      tl.fromTo("#sh13 .bigword", {"x":0}, {"x":-32.400000000000006,"duration":2.2759999999999962,"ease":"none"}, 52.590);
-      tl.fromTo("#sh13 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.35,"ease":"power3.out"}, 53.054);
+      tl.fromTo("#k2w0", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.826);
+      tl.fromTo("#k2w1", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.866);
+      tl.fromTo("#k2w2", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.906);
+      tl.fromTo("#k2w3", {yPercent:110}, {yPercent:0, duration:0.22, ease:"expo.out"}, 32.946);
+      tl.fromTo("#k-l1", {opacity:1}, {opacity:0.35, duration:0.3, immediateRender:false}, 32.826);
+      tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, 33.754);
+      tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:3.692, ease:"none"}, 30.991);
+      tl.fromTo("#flash", {opacity:0.6}, {opacity:0, duration:0.4, ease:"power2.out", immediateRender:false}, 32.826);
+      tl.fromTo("#sh01 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":3.715,"ease":"none"}, 10.581);
+      tl.fromTo("#sh01 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":3.715,"ease":"none"}, 10.581);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.045);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.510);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.974);
+      tl.fromTo("#sh01 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 12.438);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 12.903);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 13.367);
+      tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 13.832);
+      tl.fromTo("#sh01 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 10.581);
+      tl.fromTo("#sh01 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 11.045);
+      tl.fromTo("#sh01 .bigword", {"x":0}, {"x":-27,"duration":3.2509999999999994,"ease":"none"}, 11.045);
+      tl.fromTo("#sh01 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.4,"ease":"power3.out"}, 11.510);
+      tl.fromTo("#sh02 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8580000000000005,"ease":"none"}, 14.296);
+      tl.fromTo("#sh02 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8580000000000005,"ease":"none"}, 14.296);
+      tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 14.760);
+      tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 15.225);
+      tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 15.689);
+      tl.fromTo("#sh02 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 14.760);
+      tl.fromTo("#sh02 .bigword", {"x":0}, {"x":-27,"duration":1.3940000000000001,"ease":"none"}, 14.760);
+      tl.fromTo("#sh02 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.4,"ease":"power3.out"}, 15.225);
+      tl.fromTo("#sh03 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8569999999999993,"ease":"none"}, 16.154);
+      tl.fromTo("#sh03 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8569999999999993,"ease":"none"}, 16.154);
+      tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 16.618);
+      tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 17.082);
+      tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 17.547);
+      tl.fromTo("#sh03 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 16.154);
+      tl.fromTo("#sh03 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 16.618);
+      tl.fromTo("#sh03 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 16.618);
+      tl.fromTo("#sh04 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8580000000000005,"ease":"none"}, 23.584);
+      tl.fromTo("#sh04 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8580000000000005,"ease":"none"}, 23.584);
+      tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.025);
+      tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.490);
+      tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.954);
+      tl.fromTo("#sh04 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 23.584);
+      tl.fromTo("#sh04 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 24.025);
+      tl.fromTo("#sh04 .bigword", {"x":0}, {"x":-27,"duration":1.4170000000000016,"ease":"none"}, 24.025);
+      tl.fromTo("#sh04 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"power3.out"}, 24.025);
+      tl.fromTo("#sh04 .plate .mk", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power2.inOut"}, 24.490);
+      tl.fromTo("#sh05 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.811,"ease":"none"}, 34.683);
+      tl.fromTo("#sh05 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.811,"ease":"none"}, 34.683);
+      tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.124);
+      tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.589);
+      tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.053);
+      tl.fromTo("#sh05 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 34.683);
+      tl.fromTo("#sh05 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 35.124);
+      tl.fromTo("#sh05 .bigword", {"x":0}, {"x":-27,"duration":1.3699999999999974,"ease":"none"}, 35.124);
+      tl.fromTo("#sh06 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8810000000000002,"ease":"none"}, 36.494);
+      tl.fromTo("#sh06 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8810000000000002,"ease":"none"}, 36.494);
+      tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.982);
+      tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.446);
+      tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.911);
+      tl.fromTo("#sh06 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 36.494);
+      tl.fromTo("#sh06 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 36.982);
+      tl.fromTo("#sh06 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 36.982);
+      tl.fromTo("#sh07 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.858000000000004,"ease":"none"}, 38.375);
+      tl.fromTo("#sh07 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.858000000000004,"ease":"none"}, 38.375);
+      tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 38.840);
+      tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.304);
+      tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.768);
+      tl.fromTo("#sh07 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 38.375);
+      tl.fromTo("#sh07 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 38.840);
+      tl.fromTo("#sh07 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 38.840);
+      tl.fromTo("#sh08 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.833999999999996,"ease":"none"}, 40.233);
+      tl.fromTo("#sh08 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.833999999999996,"ease":"none"}, 40.233);
+      tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 40.674);
+      tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.138);
+      tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.580);
+      tl.fromTo("#sh08 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 40.233);
+      tl.fromTo("#sh08 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 40.674);
+      tl.fromTo("#sh08 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 40.674);
+      tl.fromTo("#sh09 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8340000000000032,"ease":"none"}, 42.067);
+      tl.fromTo("#sh09 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8340000000000032,"ease":"none"}, 42.067);
+      tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 42.532);
+      tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 42.973);
+      tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 43.437);
+      tl.fromTo("#sh09 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 42.532);
+      tl.fromTo("#sh09 .bigword", {"x":0}, {"x":-27,"duration":1.3689999999999998,"ease":"none"}, 42.532);
+      tl.fromTo("#sh10 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.857999999999997,"ease":"none"}, 43.901);
+      tl.fromTo("#sh10 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.857999999999997,"ease":"none"}, 43.901);
+      tl.fromTo("#sh10 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 44.366);
+      tl.fromTo("#sh10 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 44.830);
+      tl.fromTo("#sh10 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 45.295);
+      tl.fromTo("#sh10 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 43.901);
+      tl.fromTo("#sh10 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 44.366);
+      tl.fromTo("#sh10 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 44.366);
+      tl.fromTo("#sh10 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"power3.out"}, 44.366);
+      tl.fromTo("#sh10 .plate .mk", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power2.inOut"}, 44.830);
+      tl.fromTo("#sh11 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8340000000000032,"ease":"none"}, 45.759);
+      tl.fromTo("#sh11 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8340000000000032,"ease":"none"}, 45.759);
+      tl.fromTo("#sh11 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 46.200);
+      tl.fromTo("#sh11 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 46.665);
+      tl.fromTo("#sh11 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 47.129);
+      tl.fromTo("#sh11 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 46.200);
+      tl.fromTo("#sh11 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 46.200);
+      tl.fromTo("#sh12 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8350000000000009,"ease":"none"}, 47.593);
+      tl.fromTo("#sh12 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8350000000000009,"ease":"none"}, 47.593);
+      tl.fromTo("#sh12 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.058);
+      tl.fromTo("#sh12 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.522);
+      tl.fromTo("#sh12 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.987);
+      tl.fromTo("#sh12 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 48.058);
+      tl.fromTo("#sh12 .bigword", {"x":0}, {"x":-27,"duration":1.3700000000000045,"ease":"none"}, 48.058);
+      tl.fromTo("#sh13 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.833999999999996,"ease":"none"}, 64.196);
+      tl.fromTo("#sh13 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.833999999999996,"ease":"none"}, 64.196);
+      tl.fromTo("#sh13 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 64.660);
+      tl.fromTo("#sh13 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 65.125);
+      tl.fromTo("#sh13 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 65.566);
+      tl.fromTo("#sh13 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 64.660);
+      tl.fromTo("#sh13 .bigword", {"x":0}, {"x":-27,"duration":1.3699999999999974,"ease":"none"}, 64.660);
+      tl.fromTo("#sh13 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.4,"ease":"power3.out"}, 65.125);
+      tl.fromTo("#sh14 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8349999999999937,"ease":"none"}, 67.864);
+      tl.fromTo("#sh14 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8349999999999937,"ease":"none"}, 67.864);
+      tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 68.329);
+      tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 68.793);
+      tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 69.234);
+      tl.fromTo("#sh14 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 67.864);
+      tl.fromTo("#sh14 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 68.329);
+      tl.fromTo("#sh14 .bigword", {"x":0}, {"x":-27,"duration":1.3699999999999903,"ease":"none"}, 68.329);
+      tl.fromTo("#sh14 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.4,"ease":"power3.out"}, 68.793);
+      tl.fromTo("#sh15 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8340000000000032,"ease":"none"}, 69.699);
+      tl.fromTo("#sh15 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.8340000000000032,"ease":"none"}, 69.699);
+      tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 70.163);
+      tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 70.628);
+      tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 71.069);
+      tl.fromTo("#sh15 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 69.699);
+      tl.fromTo("#sh15 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 70.163);
+      tl.fromTo("#sh15 .bigword", {"x":0}, {"x":-27,"duration":1.3700000000000045,"ease":"none"}, 70.163);
+      tl.fromTo("#sh15 .caption", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.4,"ease":"power3.out"}, 70.163);
+      tl.fromTo("#sh16 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.858000000000004,"ease":"none"}, 71.533);
+      tl.fromTo("#sh16 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":1.858000000000004,"ease":"none"}, 71.533);
+      tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 71.998);
+      tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 72.462);
+      tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 72.926);
+      tl.fromTo("#sh16 .bigword span", {"yPercent":105,"skewY":8}, {"yPercent":0,"skewY":0,"duration":0.45,"ease":"expo.out"}, 71.998);
+      tl.fromTo("#sh16 .bigword", {"x":0}, {"x":-27,"duration":1.3930000000000007,"ease":"none"}, 71.998);
+      tl.fromTo("#sh16 .sub span", {"yPercent":110}, {"yPercent":0,"duration":0.4,"ease":"power3.out"}, 72.462);
+      tl.fromTo("#sh17 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":7.361000000000004,"ease":"none"}, 73.391);
+      tl.fromTo("#sh17 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":7.361000000000004,"ease":"none"}, 73.391);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 73.855);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 74.296);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 74.761);
+      tl.fromTo("#sh17 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 75.225);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 75.690);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 76.131);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 76.595);
+      tl.fromTo("#sh17 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 77.060);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 77.524);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 77.988);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 78.453);
+      tl.fromTo("#sh17 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 78.894);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 79.358);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 79.823);
+      tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 80.287);
+      tl.fromTo("#sh17 #q0 span", {"yPercent":110}, {"yPercent":0,"duration":0.6,"ease":"expo.out"}, 73.391);
+      tl.fromTo("#sh17 #q1 span", {"yPercent":110}, {"yPercent":0,"duration":0.6,"ease":"expo.out"}, 75.225);
+      tl.fromTo("#sh17 #q2 span", {"yPercent":110}, {"yPercent":0,"duration":0.6,"ease":"expo.out"}, 77.060);
+      tl.fromTo("#sh17 #q3 span", {"yPercent":110}, {"yPercent":0,"duration":0.6,"ease":"expo.out"}, 78.894);
+      tl.fromTo("#sh17 #q3 .mk", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"power2.inOut"}, 79.358);
+      tl.fromTo("#sh17 .pc", {"opacity":1}, {"opacity":0.35,"duration":1.2,"ease":"none"}, 73.391);
+      tl.fromTo("#sh18 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 80.752);
+      tl.fromTo("#sh18 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4409999999999883,"ease":"none"}, 80.752);
+      tl.fromTo("#sh18 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 80.752);
+      tl.fromTo("#sh19 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 81.193);
+      tl.fromTo("#sh19 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 81.193);
+      tl.fromTo("#sh20 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 81.657);
+      tl.fromTo("#sh20 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4650000000000034,"ease":"none"}, 81.657);
+      tl.fromTo("#sh20 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 81.657);
+      tl.fromTo("#sh21 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 82.122);
+      tl.fromTo("#sh21 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4410000000000025,"ease":"none"}, 82.122);
+      tl.fromTo("#sh21 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 82.122);
+      tl.fromTo("#sh22 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 82.563);
+      tl.fromTo("#sh22 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 82.563);
+      tl.fromTo("#sh22 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 82.563);
+      tl.fromTo("#sh23 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 83.027);
+      tl.fromTo("#sh23 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4650000000000034,"ease":"none"}, 83.027);
+      tl.fromTo("#sh23 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 83.027);
+      tl.fromTo("#sh24 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 83.492);
+      tl.fromTo("#sh24 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 83.492);
+      tl.fromTo("#sh25 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 83.956);
+      tl.fromTo("#sh25 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4410000000000025,"ease":"none"}, 83.956);
+      tl.fromTo("#sh25 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 83.956);
+      tl.fromTo("#sh26 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 84.397);
+      tl.fromTo("#sh26 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 84.397);
+      tl.fromTo("#sh27 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 84.861);
+      tl.fromTo("#sh27 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4650000000000034,"ease":"none"}, 84.861);
+      tl.fromTo("#sh27 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 84.861);
+      tl.fromTo("#sh28 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 85.326);
+      tl.fromTo("#sh28 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 85.326);
+      tl.fromTo("#sh28 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 85.326);
+      tl.fromTo("#sh29 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 85.790);
+      tl.fromTo("#sh29 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4410000000000025,"ease":"none"}, 85.790);
+      tl.fromTo("#sh29 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 85.790);
+      tl.fromTo("#sh30 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 86.231);
+      tl.fromTo("#sh30 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4649999999999892,"ease":"none"}, 86.231);
+      tl.fromTo("#sh30 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 86.231);
+      tl.fromTo("#sh31 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 86.696);
+      tl.fromTo("#sh31 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.46399999999999864,"ease":"none"}, 86.696);
+      tl.fromTo("#sh32 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 87.160);
+      tl.fromTo("#sh32 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4650000000000034,"ease":"none"}, 87.160);
+      tl.fromTo("#sh33 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 87.625);
+      tl.fromTo("#sh33 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":0.4410000000000025,"ease":"none"}, 87.625);
+      tl.fromTo("#sh33 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 87.625);
+      tl.fromTo("#sh34 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":6.614000000000004,"ease":"none"}, 88.066);
+      tl.fromTo("#sh34 .blurfill", {"scale":1.25}, {"scale":1.15,"duration":6.614000000000004,"ease":"none"}, 88.066);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 88.530);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 88.995);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 89.459);
+      tl.fromTo("#sh34 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 89.900);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 90.365);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 90.829);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 91.293);
+      tl.fromTo("#sh34 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 91.735);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 92.199);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 92.663);
+      tl.fromTo("#sh34 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 93.128);
+      tl.fromTo("#sh34 .beat", {scale:1.03}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 93.569);
+      tl.fromTo("#sh34 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 88.066);
       tl.fromTo("#chip-prijezd .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 11.045);
-      tl.fromTo("#chip-tym .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 16.618);
-      tl.fromTo("#chip-zmena .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 18.475);
-      tl.fromTo("#chip-losovani .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 22.19);
-      tl.fromTo("#chip-zavod .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 25.906);
-      tl.fromTo("#chip-vysledky .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 35.128);
-      tl.fromTo("#chip-vtip .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 48.016);
-      tl.fromTo("#chip-pratele .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 49.827);
-      tl.fromTo("#out-cam", { scale: 1.08 }, { scale: 1, duration: 6.614, ease: "power2.out" }, 54.866);
-      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 55.795);
-      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 56.7);
+      tl.fromTo("#chip-tym .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 18.475);
+      tl.fromTo("#chip-zmena .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 22.19);
+      tl.fromTo("#chip-losovani .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 25.906);
+      tl.fromTo("#chip-zavod .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 35.147);
+      tl.fromTo("#chip-vysledky .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 49.892);
+      tl.fromTo("#chip-pratele .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 66.494);
+      tl.fromTo("#chip-recap .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 81.216);
+      tl.fromTo("#out-cam", { scale: 1.08 }, { scale: 1, duration: 6.614, ease: "power2.out" }, 88.066);
+      tl.fromTo("#o-quote", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 88.995);
+      tl.fromTo("#o-meta", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 89.9);
       tl.set("#blink", {opacity:0}, 0);
-      tl.set("#blink", {opacity:1}, 57.629);
-      tl.fromTo("#blink .bf", {scale:1.06}, {scale:1, duration:0.14, ease:"none", immediateRender:false}, 57.629);
-      tl.set("#blink", {opacity:0}, 57.769);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut"}, 10.331);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 15.904);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 17.761);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 21.476);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 25.192);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 30.741);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 34.414);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 47.302);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 49.113);
-      tl.fromTo("#wipe", {yPercent:110}, {yPercent:-110, duration:0.5, ease:"power3.inOut", immediateRender:false}, 54.616);
+      tl.set("#blink", {opacity:1}, 90.829);
+      tl.fromTo("#blink .bf", {scale:1.06}, {scale:1, duration:0.14, ease:"none", immediateRender:false}, 90.829);
+      tl.set("#blink", {opacity:0}, 90.969);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 10.581);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 18.011);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 21.726);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 25.442);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 30.991);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 34.683);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 49.428);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 66.03);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 73.391);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 80.752);
+      tl.fromTo("#flash", {opacity:0.28}, {opacity:0, duration:0.22, ease:"power2.out", immediateRender:false}, 88.066);
 
       tl.fromTo("#player", { x: -684.6, y: -440.1, scale: 1.75, opacity: 0 }, { x: -684.6, y: -440.1, scale: 1.75, opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
       tl.to("#player", { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, 1.65);
       tl.fromTo("#arm", { rotation: -20 }, { rotation: 0, duration: 0.75, ease: "power2.inOut" }, 0.3);
       tl.fromTo("#arm svg", { scale: 1.06 }, { scale: 1, duration: 0.15, ease: "power2.in" }, 1.05);
-      tl.to("#arm", { rotation: 9, duration: 59.48, ease: "none" }, 1.2);
-      tl.to("#arm", { rotation: -20, duration: 0.7, ease: "power2.inOut" }, 60.58);
+      tl.to("#arm", { rotation: 9, duration: 92.68, ease: "none" }, 1.2);
+      tl.to("#arm", { rotation: -20, duration: 0.7, ease: "power2.inOut" }, 93.78);
       tl.fromTo("#vinyl", { rotation: 0 }, { rotation: 60, duration: 0.6, ease: "power1.in" }, 1.1);
-      tl.to("#vinyl", { rotation: 11896, duration: 59.18, ease: "none" }, 1.7);
-      tl.to("#vinyl", { rotation: 11966, duration: 0.6, ease: "power2.out" }, 60.88);
-      tl.fromTo("#p-fill", { scaleX: 0 }, { scaleX: 1, duration: 59.68, ease: "none" }, 1.2);
-      const BEATS = [1.44,1.904,2.368,2.856,3.32,3.785,4.249,4.714,5.178,5.642,6.107,6.571,7.036,7.5,7.988,8.452,8.916,9.381,9.845,10.31,10.774,11.238,11.703,12.167,12.632,13.096,13.56,14.025,14.489,14.954,15.418,15.882,16.347,16.811,17.276,17.74,18.204,18.669,19.133,19.598,20.062,20.526,20.991,21.455,21.92,22.384,22.825,23.29,23.754,24.242,24.706,25.17,25.612,26.076,26.54,27.005,27.469,27.934,28.398,28.839,29.327,29.791,30.256,30.697,31.161,31.63,32.095,32.536,33,33.464,33.929,34.393,34.834,35.299,35.763,36.228,36.669,37.133,37.598,38.062,38.526,38.991,39.455,39.896,40.361,40.825,41.29,41.731,42.195,42.66,43.124,43.588,44.053,44.494,44.958,45.423,45.887,46.352,46.793,47.257,47.722,48.163,48.627,49.092,49.556,49.997,50.461,50.926,51.39,51.831,52.296,52.76,53.225,53.666,54.13,54.595,55.059,55.5,55.965,56.429,56.893,57.335,57.799,58.263,58.728,59.169];
+      tl.to("#vinyl", { rotation: 18536, duration: 92.38, ease: "none" }, 1.7);
+      tl.to("#vinyl", { rotation: 18606, duration: 0.6, ease: "power2.out" }, 94.08);
+      tl.fromTo("#p-fill", { scaleX: 0 }, { scaleX: 1, duration: 92.88, ease: "none" }, 1.2);
+      const BEATS = [1.44,1.904,2.368,2.856,3.32,3.785,4.249,4.714,5.178,5.642,6.107,6.571,7.036,7.5,7.988,8.452,8.916,9.381,9.845,10.31,10.774,11.238,11.703,12.167,12.632,13.096,13.56,14.025,14.489,14.954,15.418,15.882,16.347,16.811,17.276,17.74,18.204,18.669,19.133,19.598,20.062,20.526,20.991,21.455,21.92,22.384,22.825,23.29,23.754,24.242,24.706,25.17,25.612,26.076,26.54,27.005,27.469,27.934,28.398,28.839,29.327,29.791,30.256,30.697,31.161,31.626,32.09,32.554,33.019,33.483,33.924,34.389,34.853,35.294,35.782,36.246,36.711,37.175,37.64,38.104,38.568,39.033,39.474,39.938,40.38,40.867,41.332,41.773,42.237,42.701,43.166,43.63,44.095,44.559,45,45.465,45.929,46.393,46.858,47.322,47.787,48.228,48.692,49.157,49.621,50.085,50.55,51.014,51.455,51.92,52.384,52.849,53.313,53.777,54.219,54.683,55.147,55.612,56.076,56.541,57.005,57.469,57.911,58.375,58.839,59.304,59.768,60.233,60.697,61.138,61.603,62.067,62.531,62.996,63.46,63.925,64.366,64.83,65.295,65.736,66.2,66.664,67.129,67.593,68.034,68.499,68.963,69.428,69.869,70.333,70.798,71.262,71.726,72.191,72.655,73.096,73.561,74.025,74.49,74.931,75.395,75.86,76.324,76.788,77.253,77.694,78.158,78.623,79.087,79.552,79.993,80.457,80.922,81.363,81.827,82.292,82.756,83.197,83.661,84.126,84.59,85.031,85.496,85.96,86.425,86.866,87.33,87.795,88.259,88.7,89.165,89.629,90.093,90.535,90.999,91.463,91.928,92.369];
       const pClock = { t: 0 }, pTime = document.getElementById("p-time"), pEq = [...document.querySelectorAll("#p-eq i")];
-      tl.fromTo(pClock, { t: 0 }, { t: 61.48, duration: 61.48, ease: "none", onUpdate() {
+      tl.fromTo(pClock, { t: 0 }, { t: 94.68, duration: 94.68, ease: "none", onUpdate() {
         const s = Math.max(0, pClock.t - 1.2);
         pTime.textContent = Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
         let bi = 0; while (bi < BEATS.length - 1 && BEATS[bi + 1] <= s) bi++;
-        const ph = s >= BEATS[0] ? s - BEATS[bi] : 9, on = pClock.t >= 1.2 && s < 59.38;
+        const ph = s >= BEATS[0] ? s - BEATS[bi] : 9, on = pClock.t >= 1.2 && s < 92.58;
         pEq.forEach((el, i) => { const k = on ? 0.25 + 0.75 * Math.exp(-(6 + i * 2.3) * (ph + i * 0.03)) : 0.12; el.style.transform = "scaleY(" + k.toFixed(3) + ")"; });
       } }, 0);
       window.__timelines["main"] = tl;
@@ -932,7 +1393,7 @@
       const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
       const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
       const lerp = (a, b, t) => a + (b - a) * t;
-      const T0 = 1.2, OUT0 = 53.666, INTRO_END = 9.381;
+      const T0 = 1.2, OUT0 = 86.866, INTRO_END = 9.381;
       function renderAt(tt) {
         const t = tt - T0;
         camera.position.set(Math.sin(t * 0.15) * 0.25, 0, 6.2); camera.lookAt(0, 0, 0);
