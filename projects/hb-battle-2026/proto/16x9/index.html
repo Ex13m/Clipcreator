@@ -56,7 +56,7 @@
       .bigword { position:absolute; left:0; right:0; top:9%; text-align:center; overflow:visible; line-height:1.08; padding-top:.06em; pointer-events:none;
         font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; white-space:nowrap; }
       .bigword span { display:inline-block; color:var(--ice); opacity:.95; }
-      .sub { position:absolute; left:65px; right:65px; bottom:216.0px; font-family:Montserrat; font-weight:600; font-size:30px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      .sub { position:absolute; left:86px; right:50%; bottom:216.0px; font-family:Montserrat; font-weight:600; font-size:30px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
       .sub span { display:inline-block; }
       .plate { position:absolute; left:65px; bottom:205.2px; display:flex; flex-direction:column; gap:4px; }
       .plate b { font-family:Montserrat; font-weight:900; font-size:54px; letter-spacing:-.01em; line-height:1; }
@@ -148,15 +148,15 @@
       #duels-note { margin-top:17px; font-size:19px; color:rgba(238,242,249,.6); }
 
       /* страны */
-      .chips { display:flex; flex-wrap:wrap; gap:17px; margin-top:43px; max-width:1296px; }
-      .chips span { font-family:Montserrat; font-weight:900; font-size:45px; padding:11px 24px; border-radius:17px;
+      .chips { display:flex; flex-wrap:wrap; gap:26px; margin-top:65px; max-width:1836px; }
+      .chips span { font-family:Montserrat; font-weight:900; font-size:76px; padding:11px 24px; border-radius:17px;
         background:rgba(238,242,249,.07); border:1px solid rgba(238,242,249,.16); }
       .chips span.cz { background:var(--red); border-color:var(--red); }
       #world-sub { margin-top:32px; font-family:Montserrat; font-weight:800; font-size:32px; }
       #world-sub em { font-style:normal; color:var(--red); }
 
       /* результаты */
-      .prows { display:flex; flex-direction:column; gap:19px; margin-top:32px; }
+      .prows { display:flex; flex-direction:column; gap:28px; margin-top:43px; width:64%; }
       .prow { display:grid; grid-template-columns:86px 1fr 119px; align-items:center; gap:22px; }
       .pava { position:relative; width:86px; height:86px; border-radius:50%; background:linear-gradient(135deg, #304285, #0b1e42); border:4px solid rgba(238,242,249,.35); display:grid; place-items:center; color:#9fc4f0; }
       .pava .ico { width:62%; height:62%; }
@@ -168,16 +168,16 @@
       .pb1 { left:0; background:linear-gradient(90deg, #304285, #4b6bd1); border-radius:14px 0 0 14px; }
       .pb2 { background:linear-gradient(90deg, #e31e24, #ff5a5f); border-radius:0 14px 14px 0; }
       .pval { text-align:right; } .pval b { font-family:Montserrat; font-weight:900; font-size:65px; font-variant-numeric:tabular-nums; } .pval i { font-style:normal; font-weight:700; color:#9fb4e6; margin-left:4px; }
-      #pts-total { margin-top:28px; display:flex; align-items:baseline; gap:22px; }
-      #pts-total b { font-family:Montserrat; font-weight:900; font-size:86px; color:var(--red); line-height:1; }
+      #pts-total { margin-top:0px; display:flex; align-items:baseline; gap:22px; position:absolute; right:22px; top:238px; width:30%; flex-direction:column; align-items:flex-start; }
+      #pts-total b { font-family:Montserrat; font-weight:900; font-size:238px; color:var(--red); line-height:1; }
       #pts-total span { font-weight:600; font-size:24px; color:#ffd36b; }
       .heat { display:flex; flex-direction:column; gap:19px; margin-top:32px; }
       .hrow { display:flex; flex-direction:row; align-items:center; gap:22px; }
-      .hname { width:238px; font-family:Montserrat; font-weight:800; font-size:28px; text-transform:uppercase; display:flex; align-items:center; gap:11px; }
+      .hname { width:324px; font-family:Montserrat; font-weight:800; font-size:39px; text-transform:uppercase; display:flex; align-items:center; gap:11px; }
       .hno { background:var(--red); border-radius:9px; padding:0 9px; font-weight:900; }
       .hgrid { display:flex; flex-direction:column; gap:6px; }
       .hline { display:flex; align-items:center; gap:6px; } .hline em { font-style:normal; width:59px; font-size:17px; color:#9fb4e6; font-weight:600; }
-      .hc { display:inline-block; width:39px; height:39px; border-radius:9px; }
+      .hc { display:inline-block; width:48px; height:48px; border-radius:9px; }
       .hW { background:#4b6bd1; } .hF { background:#9fb4e6; } .hD { background:rgba(238,242,249,.28); } .hL { background:var(--red); }
       #heat-legend { margin-top:26px; display:flex; flex-wrap:wrap; gap:15px 32px; font-weight:600; font-size:21px; }
       #heat-legend span { display:flex; align-items:center; gap:9px; } #heat-legend .hc { width:22px; height:22px; }
@@ -265,12 +265,13 @@
       
       <section id="sh01" class="clip shot" data-start="10.581" data-duration="1.857" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
+          <div class="pc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
           
-          <div class="fgc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:591.5px; top:324.0px; text-align:left; white-space:nowrap; font-size:137.5px"><span>CESTA</span></div>
+          
+          <div class="fgc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          <div class="bigword over" style="left:86.4px; right:auto; width:795.4px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>CESTA</span></div>
         </div></div>
-        <div class="edge" style="left:569.9px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:838.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         <div class="sub"><span>Na Slovensko</span></div>
         
@@ -279,6 +280,7 @@
       <section id="sh02" class="clip shot" data-start="12.438" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
           
           
           <div class="bigword over" style="font-size:280.8px"><span>PRUŽINA</span></div>
@@ -291,12 +293,13 @@
       </section>
       <section id="sh03" class="clip shot" data-start="14.296" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_fishpen.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_fishpen.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:95.0px"><span>300 KG</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>300 KG</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         <div class="sub"><span>Zarybnění · pstruzi čekají</span></div>
         
@@ -305,6 +308,7 @@
       <section id="sh04" class="clip shot" data-start="16.154" data-duration="1.857" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
+          
           
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_selfie_lake.png)"></div>
           <div class="bigword over" style="font-size:280.8px"><span>RÁNO</span></div>
@@ -317,12 +321,13 @@
       </section>
       <section id="sh05" class="clip shot" data-start="23.584" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:95.0px"><span>ÚLOVEK</span></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>ÚLOVEK</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -330,12 +335,13 @@
       </section>
       <section id="sh06" class="clip shot" data-start="34.683" data-duration="1.811" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_training_plan.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>UZLY</span></div>
+          <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>UZLY</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -343,12 +349,13 @@
       </section>
       <section id="sh07" class="clip shot" data-start="36.494" data-duration="1.881" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
+          <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
+          <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>PLÁN</span></div>
+          <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
+          <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>PLÁN</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         <div class="sub"><span>12 kol tréninku</span></div>
         
@@ -356,12 +363,13 @@
       </section>
       <section id="sh08" class="clip shot" data-start="38.375" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_ms.jpg)"></div>
+          <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_ms.jpg)"></div>
+          <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing1.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_ms.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>KLID</span></div>
+          <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_ms.png)"></div>
+          <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>KLID</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -369,12 +377,13 @@
       </section>
       <section id="sh09" class="clip shot" data-start="40.233" data-duration="1.834" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_reeling.jpg)"></div>
+          <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_reeling.jpg)"></div>
+          <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing2.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_reeling.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:114.0px"><span>ZÁBĚR</span></div>
+          <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_reeling.png)"></div>
+          <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>ZÁBĚR</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -382,12 +391,13 @@
       </section>
       <section id="sh10" class="clip shot" data-start="42.067" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq1.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq1.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:71.3px"><span>PODBĚRÁK</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:100.9px"><span>PODBĚRÁK</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -395,12 +405,13 @@
       </section>
       <section id="sh11" class="clip shot" data-start="42.532" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq2.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq2.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:71.3px"><span>PODBĚRÁK</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:100.9px"><span>PODBĚRÁK</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -408,12 +419,13 @@
       </section>
       <section id="sh12" class="clip shot" data-start="42.973" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq3.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq3.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:71.3px"><span>PODBĚRÁK</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:100.9px"><span>PODBĚRÁK</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -421,12 +433,13 @@
       </section>
       <section id="sh13" class="clip shot" data-start="43.437" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq4.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq4.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:63.3px"><span>PODBĚRÁK!</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:89.7px"><span>PODBĚRÁK!</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -435,6 +448,7 @@
       <section id="sh14" class="clip shot" data-start="43.901" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
+          
           <div class="bigword" style="font-size:280.8px"><span>#23</span></div>
           <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
           
@@ -447,12 +461,13 @@
       </section>
       <section id="sh15" class="clip shot" data-start="45.759" data-duration="1.834" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
           
           
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:95.0px"><span>PSTRUH</span></div>
+          
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>PSTRUH</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -460,12 +475,13 @@
       </section>
       <section id="sh16" class="clip shot" data-start="47.593" data-duration="1.835" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_kucera_lake.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_kucera_lake.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_kucera_lake.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:490.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:114.0px"><span>FOKUS</span></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_kucera_lake.png)"></div>
+          <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>FOKUS</span></div>
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -474,6 +490,7 @@
       <section id="sh17" class="clip shot" data-start="64.196" data-duration="1.834" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:0.0px; top:180.5px; width:1920.0px; height:719.0px; background-image:url(assets/photos/p_podium.jpg)"></div>
+          
           
           
           <div class="bigword over" style="font-size:280.8px"><span>TOP 3</span></div>
@@ -489,6 +506,7 @@
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_team_romania_hi.jpg)"></div>
           
           
+          
           <div class="bigword over" style="font-size:280.8px"><span>PŘÁTELÉ</span></div>
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -501,6 +519,7 @@
         <div class="cam"><div class="beat">
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
           
+          
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
           <div class="bigword over" style="font-size:280.8px"><span>BOJ</span></div>
         </div></div>
@@ -512,12 +531,13 @@
       </section>
       <section id="sh20" class="clip shot" data-start="71.533" data-duration="1.858" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:710.9px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
+          <div class="pc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
           
-          <div class="fgc" style="left:710.9px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
-          <div class="bigword over" style="left:86.4px; right:auto; width:646.1px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>SMÍCH</span></div>
+          
+          <div class="fgc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
+          <div class="bigword over" style="left:86.4px; right:auto; width:850.1px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>SMÍCH</span></div>
         </div></div>
-        <div class="edge" style="left:624.5px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:893.3px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -526,6 +546,7 @@
       <section id="sh21" class="clip shot" data-start="73.391" data-duration="7.361" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
           
           
           
@@ -539,12 +560,13 @@
       </section>
       <section id="sh22" class="clip shot" data-start="80.752" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
+          <div class="pc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
           
-          <div class="fgc" style="left:656.3px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          
+          <div class="fgc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:569.9px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:838.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -553,6 +575,7 @@
       <section id="sh23" class="clip shot" data-start="81.193" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
           
           
           
@@ -565,12 +588,13 @@
       </section>
       <section id="sh24" class="clip shot" data-start="81.657" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_fishpen.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_fishpen.jpg)"></div>
+          
           
           
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -578,12 +602,13 @@
       </section>
       <section id="sh25" class="clip shot" data-start="82.122" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -591,12 +616,13 @@
       </section>
       <section id="sh26" class="clip shot" data-start="82.563" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -604,12 +630,13 @@
       </section>
       <section id="sh27" class="clip shot" data-start="83.027" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq2.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq2.jpg)"></div>
+          
           
           
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -617,12 +644,13 @@
       </section>
       <section id="sh28" class="clip shot" data-start="83.492" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq4.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq4.jpg)"></div>
+          
           
           
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -631,6 +659,7 @@
       <section id="sh29" class="clip shot" data-start="83.956" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
+          
           
           <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
           
@@ -643,12 +672,13 @@
       </section>
       <section id="sh30" class="clip shot" data-start="84.397" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
+          
           
           
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -656,12 +686,13 @@
       </section>
       <section id="sh31" class="clip shot" data-start="84.861" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -669,12 +700,13 @@
       </section>
       <section id="sh32" class="clip shot" data-start="85.326" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
           
-          <div class="fgc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_portrait_dres.png)"></div>
+          
+          <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_portrait_dres.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -683,6 +715,7 @@
       <section id="sh33" class="clip shot" data-start="85.79" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
+          
           
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
           
@@ -699,6 +732,7 @@
           
           
           
+          
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
@@ -708,12 +742,13 @@
       </section>
       <section id="sh35" class="clip shot" data-start="86.696" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:710.9px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
+          <div class="pc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
           
-          <div class="fgc" style="left:710.9px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
+          
+          <div class="fgc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
           
         </div></div>
-        <div class="edge" style="left:624.5px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:893.3px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -721,12 +756,13 @@
       </section>
       <section id="sh36" class="clip shot" data-start="87.16" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
-          <div class="pc" style="left:555.0px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_plaque.jpg)"></div>
+          <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_plaque.jpg)"></div>
+          
           
           
           
         </div></div>
-        <div class="edge" style="left:468.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
+        <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
         
         
@@ -735,6 +771,7 @@
       <section id="sh37" class="clip shot" data-start="87.625" data-duration="0.441" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
+          
           
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_cheers.png)"></div>
           
@@ -748,6 +785,7 @@
       <section id="sh38" class="clip shot" data-start="88.066" data-duration="6.614" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:528.0px; top:270.0px; width:864.0px; height:648.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
+          
           
           <div class="fgc" style="left:528.0px; top:270.0px; width:864.0px; height:648.0px; background-image:url(assets/cut/p_cheers.png)"></div>
           
@@ -1236,6 +1274,7 @@
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.124);
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.589);
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.053);
+      tl.fromTo("#sh06 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 35.589);
       tl.fromTo("#sh06 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 34.683);
       tl.fromTo("#sh06 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 35.124);
       tl.fromTo("#sh06 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3699999999999974,"ease":"none"}, 35.124);
@@ -1244,6 +1283,7 @@
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.982);
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.446);
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.911);
+      tl.fromTo("#sh07 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 37.446);
       tl.fromTo("#sh07 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 36.494);
       tl.fromTo("#sh07 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 36.982);
       tl.fromTo("#sh07 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 36.982);
@@ -1253,6 +1293,7 @@
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 38.840);
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.304);
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.768);
+      tl.fromTo("#sh08 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 39.304);
       tl.fromTo("#sh08 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 38.375);
       tl.fromTo("#sh08 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 38.840);
       tl.fromTo("#sh08 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 38.840);
@@ -1261,6 +1302,7 @@
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 40.674);
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.138);
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.580);
+      tl.fromTo("#sh09 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 41.138);
       tl.fromTo("#sh09 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 40.233);
       tl.fromTo("#sh09 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 40.674);
       tl.fromTo("#sh09 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 40.674);
@@ -1485,7 +1527,7 @@
           hb.visible = ta.visible = true;
           const sc = 0.36;
           ta.scale.setScalar(sc); hb.scale.setScalar(sc);
-          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.75, 0); hb.position.set(lerp(6, 0.5, a), 2.75, 0); }
+          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.3, 0); hb.position.set(lerp(6, 0.5, a), 2.3, 0); }
           else { ta.position.set(lerp(-8, -0.45, a), 1.45, 0); hb.position.set(lerp(8, 0.45, a), 1.45, 0); }
           ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.6)) + Math.sin(lt * 0.8) * 0.06, 0);
           hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.6)) - Math.sin(lt * 0.8) * 0.06, 0);

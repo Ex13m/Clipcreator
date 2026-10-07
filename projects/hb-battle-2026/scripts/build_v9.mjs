@@ -67,10 +67,10 @@ const SHOTS = [
   PH(3, s(7), s(8), 'p_fishpen', { word: '300 kg', sub: 'Zarybnění · pstruzi čekají' }),
   PH(4, s(8), s(9), 'p_selfie_lake', { word: 'Ráno' }),
   PH(5, s(12), s(13), 'p_green_fish', { word: 'Úlovek' }),
-  PH(6, s(18), s(19), 'p_tying_young', { word: 'Uzly' }),
-  PH(7, s(19), s(20), 'p_phone', { word: 'Plán', sub: '12 kol tréninku' }),
-  PH(8, s(20), s(21), 'p_tying_ms', { word: 'Klid' }),
-  PH(9, s(21), s(22), 'p_reeling', { word: 'Záběr' }),
+  PH(6, s(18), s(19), 'p_tying_young', { word: 'Uzly', pair: 'p_training_plan' }),
+  PH(7, s(19), s(20), 'p_phone', { word: 'Plán', sub: '12 kol tréninku', pair: 'p_portrait_dres' }),
+  PH(8, s(20), s(21), 'p_tying_ms', { word: 'Klid', pair: 'p_landing1' }),
+  PH(9, s(21), s(22), 'p_reeling', { word: 'Záběr', pair: 'p_landing2' }),
   // stop-motion: podebírání po dobách
   PH(10, s(22, 0), s(22, 1), 'p_seq1', { flash: true, word: 'Podběrák' }),
   PH(11, s(22, 1), s(22, 2), 'p_seq2', { flash: true, word: 'Podběrák', still: true }),
@@ -118,18 +118,26 @@ function build(W, H, file) {
     const id = `sh${String(sh.n).padStart(2, '0')}`;
     const word = (sh.word || '').toUpperCase();
     const fg = hasFg(sh.img) && !sh.quote;
-    const b = photoBox(sh.img, sh.final), bx = `left:${f(b.x)}; top:${f(b.y)}; width:${f(b.w)}; height:${f(b.h)};`;
+    const b = photoBox(sh.img, sh.final);
+    const portraitL = !P && !sh.final && !sh.quote && b.w < W * 0.6;
+    const pair = portraitL && sh.pair && !sh.flash ? photoBox(sh.pair) : null;
+    if (pair) { b.x = W * 0.29 - b.w / 2; pair.x = W * 0.71 - pair.w / 2; }
+    else if (portraitL) b.x = W * 0.64 - b.w / 2;
+    const bx = `left:${f(b.x)}; top:${f(b.y)}; width:${f(b.w)}; height:${f(b.h)};`;
+    const px2 = pair ? `left:${f(pair.x)}; top:${f(pair.y)}; width:${f(pair.w)}; height:${f(pair.h)};` : '';
     // где слово: на свободном поле (узкое фото), поверх (групповые/без вырезки) или за людьми (глубина)
-    const side = !P && b.w < W * 0.72, above = P && b.h < H * 0.62;
-    const depth = fg && !side && !above && !GROUP.has(sh.img);
+    const side = !P && !pair && b.w < W * 0.72, above = P && b.h < H * 0.62;
+    const depth = fg && !side && !above && !pair && !GROUP.has(sh.img);
     let wstyle = `font-size:${f(wordSize(word))}`;
-    if (side) { const ww = Math.max(b.x - 6 * u, 24 * u); wstyle = `left:${f(8 * u)}; right:auto; width:${f(ww)}; top:${f(H * 0.3)}; text-align:left; white-space:nowrap; font-size:${f(Math.min(13 * u, ww / (Math.max(3, word.length) * 0.86)))}`; }
+    if (pair) wstyle = `top:auto; bottom:${f(SAFE_B + 4 * u)}; font-size:${f(Math.min(14 * u, wordSize(word)))}`;
+    if (side) { const ww = Math.max(b.x - 12 * u, 24 * u); wstyle = `left:${f(8 * u)}; right:auto; width:${f(ww)}; top:${f(H * 0.3)}; text-align:left; white-space:nowrap; font-size:${f(Math.min(13 * u, ww / (Math.max(3, word.length) * 0.86)))}`; }
     if (above) wstyle = `top:${f(Math.max(6 * u, b.y - 22 * u))}; font-size:${f(Math.min(18 * u, wordSize(word)))}`;
     const wordEl = word ? `<div class="bigword${depth ? '' : ' over'}" style="${wstyle}"><span>${word}</span></div>` : '';
     return `
       <section id="${id}" class="clip shot" data-start="${at(sh.a)}" data-duration="${sh.final ? len(at(sh.a), DUR) : sh.d}" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="${bx} background-image:url(assets/photos/${sh.img}.jpg)"></div>
+          ${pair ? `<div class="pc pc2" style="${px2} background-image:url(assets/photos/${sh.pair}.jpg)"></div>` : ''}
           ${depth ? wordEl : ''}
           ${fg ? `<div class="fgc" style="${bx} background-image:url(assets/cut/${sh.img}.png)"></div>` : ''}
           ${depth ? '' : wordEl}
@@ -156,6 +164,7 @@ function build(W, H, file) {
       const strong = G.downbeats.some((db) => Math.abs(db - t) < 0.06);
       out.push(`tl.fromTo("${id} .beat", {scale:${strong ? 1.03 : 1.015}}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, ${at(t).toFixed(3)});`);
     });
+    if (sh.pair && !P) T('.pc2', { opacity: 0, x: 4 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, at(inBeats[1] ?? sh.a + BEAT));
     if (hasFg(sh.img) && !sh.quote) T('.fgc', { opacity: 0, yPercent: 2 }, { opacity: 1, yPercent: 0, duration: sh.flash ? 0.01 : 0.3, ease: 'power3.out' }, at(sh.a));
     if (sh.word && sh.still) out.push(`tl.set("${id} .bigword span", {opacity:1, y:0}, ${at(sh.a)});`);
     if (sh.word && !sh.still) {
@@ -369,7 +378,7 @@ function build(W, H, file) {
       .bigword { position:absolute; left:0; right:0; top:${P ? '13%' : '9%'}; text-align:center; overflow:visible; line-height:1.08; padding-top:.06em; pointer-events:none;
         font-family:Montserrat; font-weight:900; letter-spacing:-.02em; text-transform:uppercase; white-space:nowrap; }
       .bigword span { display:inline-block; color:var(--ice); opacity:.95; }
-      .sub { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(SAFE_B + 4 * u)}; font-family:Montserrat; font-weight:600; font-size:${px(P ? 4 : 2.8)}; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
+      .sub { position:absolute; left:${px(P ? 6 : 8)}; right:${P ? px(6) : '50%'}; bottom:${f(SAFE_B + 4 * u)}; font-family:Montserrat; font-weight:600; font-size:${px(P ? 4 : 2.8)}; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
       .sub span { display:inline-block; }
       .plate { position:absolute; left:${px(6)}; bottom:${f(SAFE_B + 3 * u)}; display:flex; flex-direction:column; gap:${px(0.4)}; }
       .plate b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 7.5 : 5)}; letter-spacing:-.01em; line-height:1; }
@@ -461,15 +470,15 @@ function build(W, H, file) {
       #duels-note { margin-top:${px(1.6)}; font-size:${px(P ? 2.6 : 1.8)}; color:rgba(238,242,249,.6); }
 
       /* страны */
-      .chips { display:flex; flex-wrap:wrap; gap:${px(1.6)}; margin-top:${px(P ? 6 : 4)}; max-width:${px(P ? 88 : 120)}; }
-      .chips span { font-family:Montserrat; font-weight:900; font-size:${px(P ? 6 : 4.2)}; padding:${px(1)} ${px(2.2)}; border-radius:${px(1.6)};
+      .chips { display:flex; flex-wrap:wrap; gap:${px(P ? 1.6 : 2.4)}; margin-top:${px(P ? 6 : 6)}; max-width:${px(P ? 88 : 170)}; }
+      .chips span { font-family:Montserrat; font-weight:900; font-size:${px(P ? 6 : 7)}; padding:${px(1)} ${px(2.2)}; border-radius:${px(1.6)};
         background:rgba(238,242,249,.07); border:1px solid rgba(238,242,249,.16); }
       .chips span.cz { background:var(--red); border-color:var(--red); }
       #world-sub { margin-top:${px(3)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 4.4 : 3)}; }
       #world-sub em { font-style:normal; color:var(--red); }
 
       /* результаты */
-      .prows { display:flex; flex-direction:column; gap:${px(P ? 2.6 : 1.8)}; margin-top:${px(P ? 5 : 3)}; }
+      .prows { display:flex; flex-direction:column; gap:${px(P ? 2.6 : 2.6)}; margin-top:${px(P ? 5 : 4)}; width:${P ? '100%' : '64%'}; }
       .prow { display:grid; grid-template-columns:${px(P ? 12 : 8)} 1fr ${px(P ? 16 : 11)}; align-items:center; gap:${px(2)}; }
       .pava { position:relative; width:${px(P ? 12 : 8)}; height:${px(P ? 12 : 8)}; border-radius:50%; background:linear-gradient(135deg, #304285, #0b1e42); border:${px(0.35)} solid rgba(238,242,249,.35); display:grid; place-items:center; color:#9fc4f0; }
       .pava .ico { width:62%; height:62%; }
@@ -481,16 +490,16 @@ function build(W, H, file) {
       .pb1 { left:0; background:linear-gradient(90deg, #304285, #4b6bd1); border-radius:${px(1.3)} 0 0 ${px(1.3)}; }
       .pb2 { background:linear-gradient(90deg, #e31e24, #ff5a5f); border-radius:0 ${px(1.3)} ${px(1.3)} 0; }
       .pval { text-align:right; } .pval b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 6)}; font-variant-numeric:tabular-nums; } .pval i { font-style:normal; font-weight:700; color:#9fb4e6; margin-left:${px(0.4)}; }
-      #pts-total { margin-top:${px(P ? 4 : 2.6)}; display:flex; align-items:baseline; gap:${px(2)}; }
-      #pts-total b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 13 : 8)}; color:var(--red); line-height:1; }
+      #pts-total { margin-top:${px(P ? 4 : 0)}; display:flex; align-items:baseline; gap:${px(2)}; ${P ? '' : `position:absolute; right:${px(2)}; top:${px(22)}; width:30%; flex-direction:column; align-items:flex-start;`} }
+      #pts-total b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 13 : 22)}; color:var(--red); line-height:1; }
       #pts-total span { font-weight:600; font-size:${px(P ? 3.2 : 2.2)}; color:#ffd36b; }
       .heat { display:flex; flex-direction:column; gap:${px(P ? 3 : 1.8)}; margin-top:${px(P ? 5 : 3)}; }
       .hrow { display:flex; flex-direction:${P ? 'column' : 'row'}; align-items:${P ? 'flex-start' : 'center'}; gap:${px(P ? 1 : 2)}; }
-      .hname { width:${P ? 'auto' : px(22)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.8 : 2.6)}; text-transform:uppercase; display:flex; align-items:center; gap:${px(1)}; }
+      .hname { width:${P ? 'auto' : px(30)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.8 : 3.6)}; text-transform:uppercase; display:flex; align-items:center; gap:${px(1)}; }
       .hno { background:var(--red); border-radius:${px(0.8)}; padding:0 ${px(0.8)}; font-weight:900; }
       .hgrid { display:flex; flex-direction:column; gap:${px(0.6)}; }
       .hline { display:flex; align-items:center; gap:${px(P ? 0.7 : 0.6)}; } .hline em { font-style:normal; width:${px(P ? 8 : 5.5)}; font-size:${px(P ? 2.4 : 1.6)}; color:#9fb4e6; font-weight:600; }
-      .hc { display:inline-block; width:${px(P ? 4.4 : 3.6)}; height:${px(P ? 4.4 : 3.6)}; border-radius:${px(0.8)}; }
+      .hc { display:inline-block; width:${px(P ? 4.4 : 4.4)}; height:${px(P ? 4.4 : 4.4)}; border-radius:${px(0.8)}; }
       .hW { background:#4b6bd1; } .hF { background:#9fb4e6; } .hD { background:rgba(238,242,249,.28); } .hL { background:var(--red); }
       #heat-legend { margin-top:${px(P ? 4 : 2.4)}; display:flex; flex-wrap:wrap; gap:${px(1.4)} ${px(3)}; font-weight:600; font-size:${px(P ? 2.8 : 1.9)}; }
       #heat-legend span { display:flex; align-items:center; gap:${px(0.8)}; } #heat-legend .hc { width:${px(P ? 2.8 : 2)}; height:${px(P ? 2.8 : 2)}; }
@@ -788,7 +797,7 @@ function build(W, H, file) {
           hb.visible = ta.visible = true;
           const sc = 0.36;
           ta.scale.setScalar(sc); hb.scale.setScalar(sc);
-          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.75, 0); hb.position.set(lerp(6, 0.5, a), 2.75, 0); }
+          if (PORTRAIT) { ta.position.set(lerp(-6, -0.5, a), 2.3, 0); hb.position.set(lerp(6, 0.5, a), 2.3, 0); }
           else { ta.position.set(lerp(-8, -0.45, a), 1.45, 0); hb.position.set(lerp(8, 0.45, a), 1.45, 0); }
           ta.rotation.set(0, lerp(2.2, 0, eo(lt / 1.6)) + Math.sin(lt * 0.8) * 0.06, 0);
           hb.rotation.set(0, lerp(-2.2, 0, eo(lt / 1.6)) - Math.sin(lt * 0.8) * 0.06, 0);
