@@ -64,6 +64,13 @@
       .caption { position:absolute; left:65px; right:65px; bottom:205.2px; font-family:Montserrat; font-weight:900; font-size:50px; line-height:1.04; }
       .caption span { display:block; font-family:'Source Sans 3'; font-weight:600; font-size:.5em; margin-top:11px; color:#ffd36b; }
 
+      .fgm { position:absolute; opacity:0; -webkit-mask-image:var(--m); mask-image:var(--m); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+      .fgm.sh { background:#050d1f; filter:blur(10px); }
+      .fgm.r { background:var(--red); mix-blend-mode:screen; }
+      .fgm.b { background:#3f6fe0; mix-blend-mode:screen; }
+      .leak { position:absolute; overflow:hidden; pointer-events:none; mix-blend-mode:screen; }
+      .leak i { position:absolute; top:-30%; bottom:-30%; left:0; width:45%; transform:translateX(-170%) skewX(-16deg); background:linear-gradient(100deg, transparent 0%, rgba(255,170,90,.25) 30%, rgba(255,236,200,.75) 50%, rgba(255,120,80,.3) 65%, transparent 100%); }
+      .iring { position:absolute; width:1188px; height:1188px; margin:-594px 0 0 -594px; border-radius:50%; border:8px solid var(--ice); box-shadow:0 0 0 5px var(--red), 0 0 43px rgba(227,30,36,.6); opacity:0; pointer-events:none; }
       /* фото целиком; край флаговой ленты наезжает на угол фото */
       .edge { position:absolute; height:58px; rotate:-12deg; transform-origin:left center; pointer-events:none; }
       .edge i { position:absolute; left:0; right:0; height:50%; } .edge i:nth-child(1) { top:0; background:#fff; } .edge i:nth-child(2) { top:50%; background:#d7141a; }
@@ -268,7 +275,11 @@
           <div class="pc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
           
           
+          
+          <div class="fgm r" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; --m:url(assets/cut/p_car.png)"></div><div class="fgm b" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; --m:url(assets/cut/p_car.png)"></div>
           <div class="fgc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:795.4px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>CESTA</span></div>
         </div></div>
         <div class="edge" style="left:838.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -282,6 +293,10 @@
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
           
           
+          
+          
+          
+          <div class="leak" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px;"><i></i></div>
           
           <div class="bigword over" style="font-size:280.8px"><span>PRUŽINA</span></div>
         </div></div>
@@ -297,6 +312,10 @@
           
           
           
+          
+          
+          
+          <div class="iring" style="left:1228.8px; top:540.0px"></div>
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>300 KG</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -310,7 +329,11 @@
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_selfie_lake.jpg)"></div>
           
           
+          <div class="fgm sh" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; --m:url(assets/cut/p_selfie_lake.png)"></div>
+          
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_selfie_lake.png)"></div>
+          
+          
           <div class="bigword over" style="font-size:280.8px"><span>RÁNO</span></div>
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -324,7 +347,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
           
           
+          
+          <div class="fgm r" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_green_fish.png)"></div><div class="fgm b" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_green_fish.png)"></div>
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>ÚLOVEK</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -338,7 +365,11 @@
           <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
           <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_training_plan.jpg)"></div>
           
+          
+          
           <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          <div class="leak" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px;"><i></i></div>
+          
           <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>UZLY</span></div>
         </div></div>
         <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -352,7 +383,11 @@
           <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
           <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
           
+          
+          
           <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
+          
+          <div class="iring" style="left:556.8px; top:540.0px"></div>
           <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>PLÁN</span></div>
         </div></div>
         <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -366,7 +401,11 @@
           <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_ms.jpg)"></div>
           <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing1.jpg)"></div>
           
+          <div class="fgm sh" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_tying_ms.png)"></div>
+          
           <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_ms.png)"></div>
+          
+          
           <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>KLID</span></div>
         </div></div>
         <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -380,7 +419,11 @@
           <div class="pc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_reeling.jpg)"></div>
           <div class="pc pc2" style="left:958.2px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_landing2.jpg)"></div>
           
+          
+          <div class="fgm r" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_reeling.png)"></div><div class="fgm b" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_reeling.png)"></div>
           <div class="fgc" style="left:151.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_reeling.png)"></div>
+          
+          
           <div class="bigword over" style="top:auto; bottom:216.0px; font-size:151.2px"><span>ZÁBĚR</span></div>
         </div></div>
         <div class="edge" style="left:65.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -392,6 +435,10 @@
       <section id="sh10" class="clip shot" data-start="42.067" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq1.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -409,6 +456,10 @@
           
           
           
+          
+          
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:100.9px"><span>PODBĚRÁK</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -420,6 +471,10 @@
       <section id="sh12" class="clip shot" data-start="42.973" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq3.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -437,6 +492,10 @@
           
           
           
+          
+          
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:89.7px"><span>PODBĚRÁK!</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -450,7 +509,11 @@
           <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
           
           <div class="bigword" style="font-size:280.8px"><span>#23</span></div>
+          
+          
           <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
+          <div class="leak" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px;"><i></i></div>
+          
           
         </div></div>
         <div class="edge" style="left:-86.4px; top:915.4px; width:324.0px"><i></i><i></i><b></b></div>
@@ -465,6 +528,10 @@
           
           
           
+          
+          
+          
+          <div class="iring" style="left:1228.8px; top:540.0px"></div>
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:134.5px"><span>PSTRUH</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -478,7 +545,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_kucera_lake.jpg)"></div>
           
           
+          <div class="fgm sh" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; --m:url(assets/cut/p_kucera_lake.png)"></div>
+          
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_kucera_lake.png)"></div>
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:694.2px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>FOKUS</span></div>
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -492,6 +563,10 @@
           <div class="pc" style="left:0.0px; top:180.5px; width:1920.0px; height:719.0px; background-image:url(assets/photos/p_podium.jpg)"></div>
           
           
+          
+          
+          
+          <div class="leak" style="left:0.0px; top:180.5px; width:1920.0px; height:719.0px;"><i></i></div>
           
           <div class="bigword over" style="font-size:280.8px"><span>TOP 3</span></div>
         </div></div>
@@ -507,6 +582,10 @@
           
           
           
+          
+          
+          <div class="leak" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px;"><i></i></div>
+          
           <div class="bigword over" style="font-size:280.8px"><span>PŘÁTELÉ</span></div>
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -520,7 +599,11 @@
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
+          
+          <div class="iring" style="left:960.0px; top:540.0px"></div>
           <div class="bigword over" style="font-size:280.8px"><span>BOJ</span></div>
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -534,7 +617,11 @@
           <div class="pc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
           
           
+          <div class="fgm sh" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; --m:url(assets/cut/p_laugh.png)"></div>
+          
           <div class="fgc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
+          
+          
           <div class="bigword over" style="left:86.4px; right:auto; width:850.1px; top:324.0px; text-align:left; white-space:nowrap; font-size:140.4px"><span>SMÍCH</span></div>
         </div></div>
         <div class="edge" style="left:893.3px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -546,6 +633,10 @@
       <section id="sh21" class="clip shot" data-start="73.391" data-duration="7.361" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -563,7 +654,11 @@
           <div class="pc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/photos/p_car.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:925.0px; top:0.0px; width:607.5px; height:1080.0px; background-image:url(assets/cut/p_car.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:838.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -575,6 +670,10 @@
       <section id="sh23" class="clip shot" data-start="81.193" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:150.0px; top:0.0px; width:1620.0px; height:1080.0px; background-image:url(assets/photos/p_lake_mist.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -593,6 +692,10 @@
           
           
           
+          
+          
+          
+          
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
@@ -605,7 +708,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_tying_young.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_tying_young.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -619,7 +726,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_phone.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_phone.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -631,6 +742,10 @@
       <section id="sh27" class="clip shot" data-start="83.027" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_seq2.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -649,6 +764,10 @@
           
           
           
+          
+          
+          
+          
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
         
@@ -661,7 +780,11 @@
           <div class="pc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/photos/p_svub_water.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:0.0px; top:99.8px; width:1920.0px; height:880.3px; background-image:url(assets/cut/p_svub_water.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:-86.4px; top:915.4px; width:324.0px"><i></i><i></i><b></b></div>
@@ -673,6 +796,10 @@
       <section id="sh30" class="clip shot" data-start="84.397" data-duration="0.464" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_net_close.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -689,7 +816,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_green_fish.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_green_fish.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -703,7 +834,11 @@
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_portrait_dres.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/cut/p_portrait_dres.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:737.4px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -717,7 +852,11 @@
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_lunch.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_lunch.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -729,6 +868,10 @@
       <section id="sh34" class="clip shot" data-start="86.231" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_team_romania_hi.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -745,7 +888,11 @@
           <div class="pc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/photos/p_laugh.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:979.7px; top:0.0px; width:498.1px; height:1080.0px; background-image:url(assets/cut/p_laugh.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:893.3px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -757,6 +904,10 @@
       <section id="sh36" class="clip shot" data-start="87.16" data-duration="0.465" data-track-index="2">
         <div class="cam"><div class="beat">
           <div class="pc" style="left:823.8px; top:0.0px; width:810.0px; height:1080.0px; background-image:url(assets/photos/p_plaque.jpg)"></div>
+          
+          
+          
+          
           
           
           
@@ -773,7 +924,11 @@
           <div class="pc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:240.0px; top:0.0px; width:1440.0px; height:1080.0px; background-image:url(assets/cut/p_cheers.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:153.6px; top:1015.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -787,7 +942,11 @@
           <div class="pc" style="left:528.0px; top:270.0px; width:864.0px; height:648.0px; background-image:url(assets/photos/p_cheers.jpg)"></div>
           
           
+          
+          
           <div class="fgc" style="left:528.0px; top:270.0px; width:864.0px; height:648.0px; background-image:url(assets/cut/p_cheers.png)"></div>
+          
+          
           
         </div></div>
         <div class="edge" style="left:441.6px; top:853.2px; width:324.0px"><i></i><i></i><b></b></div>
@@ -1030,7 +1189,7 @@
       </div>
       <div id="grain"></div>
       
-      <div id="proto-badge">DRAFT · v9</div>
+      <div id="proto-badge">DRAFT · v10</div>
 
       <audio id="bgm" src="assets/track_full.wav" data-start="1.2" data-duration="92.88" data-track-index="9" data-volume="1"></audio>
     </div>
@@ -1228,80 +1387,102 @@
       tl.fromTo("#k-en", {opacity:0, y:22}, {opacity:1, y:0, duration:0.3, ease:"power2.out"}, 33.754);
       tl.fromTo("#kin-cam", {scale:1}, {scale:1.06, duration:3.692, ease:"none"}, 30.991);
       tl.fromTo("#flash", {opacity:0.6}, {opacity:0, duration:0.4, ease:"power2.out", immediateRender:false}, 32.826);
-      tl.fromTo("#sh01 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8569999999999993,"ease":"none"}, 10.581);
+      tl.fromTo("#sh01 .cam", {"scale":1.11,"xPercent":2,"yPercent":-1}, {"scale":1,"xPercent":-2,"yPercent":1,"duration":1.8569999999999993,"ease":"sine.inOut"}, 10.581);
       tl.fromTo("#sh01 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 10.581);
       tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.045);
       tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.510);
       tl.fromTo("#sh01 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 11.974);
+      tl.fromTo("#sh01 .fgm.r", {x:-75.6, y:-37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 11.045);
+      tl.fromTo("#sh01 .fgm.b", {x:75.6, y:37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 11.045);
+      tl.fromTo("#sh01 .fgm.r", {x:-32.4, y:-16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 11.974);
+      tl.fromTo("#sh01 .fgm.b", {x:32.4, y:16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 11.974);
       tl.fromTo("#sh01 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 10.581);
       tl.fromTo("#sh01 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 11.045);
       tl.fromTo("#sh01 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.392999999999999,"ease":"none"}, 11.045);
       tl.fromTo("#sh01 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 11.510);
-      tl.fromTo("#sh02 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8580000000000005,"ease":"none"}, 12.438);
+      tl.fromTo("#sh02 .cam", {"scale":1,"xPercent":-1.5,"yPercent":-1.2}, {"scale":1.11,"xPercent":1.5,"yPercent":1.2,"duration":1.8580000000000005,"ease":"sine.inOut"}, 12.438);
       tl.fromTo("#sh02 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 12.438);
       tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 12.903);
       tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 13.367);
       tl.fromTo("#sh02 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 13.832);
+      tl.fromTo("#sh02 .leak i", {xPercent:-170}, {xPercent:200, duration:1.1, ease:"sine.inOut", immediateRender:false}, 12.903);
       tl.fromTo("#sh02 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 12.903);
       tl.fromTo("#sh02 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 12.903);
       tl.fromTo("#sh02 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 13.367);
-      tl.fromTo("#sh03 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8580000000000005,"ease":"none"}, 14.296);
+      tl.fromTo("#sh03 .cam", {"scale":1.11,"xPercent":1.5,"yPercent":0.8}, {"scale":1,"xPercent":-1.5,"yPercent":-0.8,"duration":1.8580000000000005,"ease":"sine.inOut"}, 14.296);
       tl.fromTo("#sh03 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 14.296);
       tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 14.760);
       tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 15.225);
       tl.fromTo("#sh03 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 15.689);
+      tl.fromTo("#sh03 .pc", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.7,"ease":"power3.out"}, 14.296);
+      tl.fromTo("#sh03 .iring", {"scale":0.1,"opacity":1}, {"scale":1.2,"opacity":0,"duration":0.9,"ease":"power2.out"}, 14.296);
       tl.fromTo("#sh03 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 14.760);
       tl.fromTo("#sh03 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3940000000000001,"ease":"none"}, 14.760);
       tl.fromTo("#sh03 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 15.225);
-      tl.fromTo("#sh04 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8569999999999993,"ease":"none"}, 16.154);
+      tl.fromTo("#sh04 .cam", {"scale":1,"xPercent":-2,"yPercent":1}, {"scale":1.11,"xPercent":2,"yPercent":-1,"duration":1.8569999999999993,"ease":"sine.inOut"}, 16.154);
       tl.fromTo("#sh04 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 16.154);
       tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 16.618);
       tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 17.082);
       tl.fromTo("#sh04 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 17.547);
+      tl.fromTo("#sh04 .pc", {"filter":"brightness(1) saturate(1)"}, {"filter":"brightness(0.55) saturate(0.6)","duration":1.1141999999999996,"ease":"power2.inOut"}, 16.618);
+      tl.fromTo("#sh04 .fgm.sh", {"x":0,"y":0,"opacity":0}, {"x":-28.080000000000002,"y":17.28,"opacity":0.7,"duration":1.1141999999999996,"ease":"power2.out"}, 16.618);
       tl.fromTo("#sh04 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 16.154);
       tl.fromTo("#sh04 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 16.618);
       tl.fromTo("#sh04 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 16.618);
-      tl.fromTo("#sh05 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8580000000000005,"ease":"none"}, 23.584);
+      tl.fromTo("#sh05 .cam", {"scale":1.11,"xPercent":2,"yPercent":-1}, {"scale":1,"xPercent":-2,"yPercent":1,"duration":1.8580000000000005,"ease":"sine.inOut"}, 23.584);
       tl.fromTo("#sh05 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 23.584);
       tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.025);
       tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.490);
       tl.fromTo("#sh05 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 24.954);
+      tl.fromTo("#sh05 .fgm.r", {x:-75.6, y:-37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 24.025);
+      tl.fromTo("#sh05 .fgm.b", {x:75.6, y:37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 24.025);
+      tl.fromTo("#sh05 .fgm.r", {x:-32.4, y:-16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 24.954);
+      tl.fromTo("#sh05 .fgm.b", {x:32.4, y:16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 24.954);
       tl.fromTo("#sh05 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 23.584);
       tl.fromTo("#sh05 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 24.025);
       tl.fromTo("#sh05 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.4170000000000016,"ease":"none"}, 24.025);
-      tl.fromTo("#sh06 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.811,"ease":"none"}, 34.683);
+      tl.fromTo("#sh06 .cam", {"scale":1,"xPercent":-1.5,"yPercent":-1.2}, {"scale":1.11,"xPercent":1.5,"yPercent":1.2,"duration":1.811,"ease":"sine.inOut"}, 34.683);
       tl.fromTo("#sh06 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 34.683);
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.124);
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 35.589);
       tl.fromTo("#sh06 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.053);
+      tl.fromTo("#sh06 .leak i", {xPercent:-170}, {xPercent:200, duration:1.1, ease:"sine.inOut", immediateRender:false}, 35.124);
       tl.fromTo("#sh06 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 35.589);
       tl.fromTo("#sh06 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 34.683);
       tl.fromTo("#sh06 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 35.124);
       tl.fromTo("#sh06 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3699999999999974,"ease":"none"}, 35.124);
-      tl.fromTo("#sh07 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8810000000000002,"ease":"none"}, 36.494);
+      tl.fromTo("#sh07 .cam", {"scale":1.11,"xPercent":1.5,"yPercent":0.8}, {"scale":1,"xPercent":-1.5,"yPercent":-0.8,"duration":1.8810000000000002,"ease":"sine.inOut"}, 36.494);
       tl.fromTo("#sh07 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 36.494);
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 36.982);
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.446);
       tl.fromTo("#sh07 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 37.911);
+      tl.fromTo("#sh07 .pc", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.7,"ease":"power3.out"}, 36.494);
+      tl.fromTo("#sh07 .iring", {"scale":0.1,"opacity":1}, {"scale":1.2,"opacity":0,"duration":0.9,"ease":"power2.out"}, 36.494);
       tl.fromTo("#sh07 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 37.446);
       tl.fromTo("#sh07 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 36.494);
       tl.fromTo("#sh07 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 36.982);
       tl.fromTo("#sh07 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 36.982);
       tl.fromTo("#sh07 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 37.446);
-      tl.fromTo("#sh08 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.858000000000004,"ease":"none"}, 38.375);
+      tl.fromTo("#sh08 .cam", {"scale":1,"xPercent":-2,"yPercent":1}, {"scale":1.11,"xPercent":2,"yPercent":-1,"duration":1.858000000000004,"ease":"sine.inOut"}, 38.375);
       tl.fromTo("#sh08 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 38.375);
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 38.840);
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.304);
       tl.fromTo("#sh08 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 39.768);
+      tl.fromTo("#sh08 .pc", {"filter":"brightness(1) saturate(1)"}, {"filter":"brightness(0.55) saturate(0.6)","duration":1.1148000000000025,"ease":"power2.inOut"}, 38.840);
+      tl.fromTo("#sh08 .fgm.sh", {"x":0,"y":0,"opacity":0}, {"x":-28.080000000000002,"y":17.28,"opacity":0.7,"duration":1.1148000000000025,"ease":"power2.out"}, 38.840);
       tl.fromTo("#sh08 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 39.304);
       tl.fromTo("#sh08 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 38.375);
       tl.fromTo("#sh08 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 38.840);
       tl.fromTo("#sh08 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 38.840);
-      tl.fromTo("#sh09 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.833999999999996,"ease":"none"}, 40.233);
+      tl.fromTo("#sh09 .cam", {"scale":1.11,"xPercent":2,"yPercent":-1}, {"scale":1,"xPercent":-2,"yPercent":1,"duration":1.833999999999996,"ease":"sine.inOut"}, 40.233);
       tl.fromTo("#sh09 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 40.233);
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 40.674);
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.138);
       tl.fromTo("#sh09 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 41.580);
+      tl.fromTo("#sh09 .fgm.r", {x:-75.6, y:-37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 40.674);
+      tl.fromTo("#sh09 .fgm.b", {x:75.6, y:37.8, opacity:0.8}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 40.674);
+      tl.fromTo("#sh09 .fgm.r", {x:-32.4, y:-16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 41.580);
+      tl.fromTo("#sh09 .fgm.b", {x:32.4, y:16.2, opacity:0.55}, {x:0, y:0, opacity:0, duration:0.7, ease:"power2.out", immediateRender:false}, 41.580);
       tl.fromTo("#sh09 .pc2", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.3,"ease":"power3.out"}, 41.138);
       tl.fromTo("#sh09 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 40.233);
       tl.fromTo("#sh09 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 40.674);
@@ -1315,65 +1496,76 @@
       tl.set("#sh12 .bigword span", {opacity:1, y:0}, 42.973);
       tl.fromTo("#sh13 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 43.437);
       tl.set("#sh13 .bigword span", {opacity:1, y:0}, 43.437);
-      tl.fromTo("#sh14 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.857999999999997,"ease":"none"}, 43.901);
+      tl.fromTo("#sh14 .cam", {"scale":1,"xPercent":-1.5,"yPercent":-1.2}, {"scale":1.11,"xPercent":1.5,"yPercent":1.2,"duration":1.857999999999997,"ease":"sine.inOut"}, 43.901);
       tl.fromTo("#sh14 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 43.901);
       tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 44.366);
       tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 44.830);
       tl.fromTo("#sh14 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 45.295);
+      tl.fromTo("#sh14 .leak i", {xPercent:-170}, {xPercent:200, duration:1.1, ease:"sine.inOut", immediateRender:false}, 44.366);
       tl.fromTo("#sh14 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 43.901);
       tl.fromTo("#sh14 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 44.366);
       tl.fromTo("#sh14 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 44.366);
       tl.fromTo("#sh14 .plate", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"power3.out"}, 44.366);
       tl.fromTo("#sh14 .plate .mk", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power2.inOut"}, 44.830);
-      tl.fromTo("#sh15 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8340000000000032,"ease":"none"}, 45.759);
+      tl.fromTo("#sh15 .cam", {"scale":1.11,"xPercent":1.5,"yPercent":0.8}, {"scale":1,"xPercent":-1.5,"yPercent":-0.8,"duration":1.8340000000000032,"ease":"sine.inOut"}, 45.759);
       tl.fromTo("#sh15 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 45.759);
       tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 46.200);
       tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 46.665);
       tl.fromTo("#sh15 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 47.129);
+      tl.fromTo("#sh15 .pc", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.7,"ease":"power3.out"}, 45.759);
+      tl.fromTo("#sh15 .iring", {"scale":0.1,"opacity":1}, {"scale":1.2,"opacity":0,"duration":0.9,"ease":"power2.out"}, 45.759);
       tl.fromTo("#sh15 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 46.200);
       tl.fromTo("#sh15 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 46.200);
-      tl.fromTo("#sh16 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8350000000000009,"ease":"none"}, 47.593);
+      tl.fromTo("#sh16 .cam", {"scale":1,"xPercent":-2,"yPercent":1}, {"scale":1.11,"xPercent":2,"yPercent":-1,"duration":1.8350000000000009,"ease":"sine.inOut"}, 47.593);
       tl.fromTo("#sh16 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 47.593);
       tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.058);
       tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.522);
       tl.fromTo("#sh16 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 48.987);
+      tl.fromTo("#sh16 .pc", {"filter":"brightness(1) saturate(1)"}, {"filter":"brightness(0.55) saturate(0.6)","duration":1.1010000000000004,"ease":"power2.inOut"}, 48.058);
+      tl.fromTo("#sh16 .fgm.sh", {"x":0,"y":0,"opacity":0}, {"x":-28.080000000000002,"y":17.28,"opacity":0.7,"duration":1.1010000000000004,"ease":"power2.out"}, 48.058);
       tl.fromTo("#sh16 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 47.593);
       tl.fromTo("#sh16 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 48.058);
       tl.fromTo("#sh16 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3700000000000045,"ease":"none"}, 48.058);
-      tl.fromTo("#sh17 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.833999999999996,"ease":"none"}, 64.196);
+      tl.fromTo("#sh17 .cam", {"scale":1.11,"xPercent":2,"yPercent":-1}, {"scale":1,"xPercent":-2,"yPercent":1,"duration":1.833999999999996,"ease":"sine.inOut"}, 64.196);
       tl.fromTo("#sh17 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 64.196);
       tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 64.660);
       tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 65.125);
       tl.fromTo("#sh17 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 65.566);
+      tl.fromTo("#sh17 .leak i", {xPercent:-170}, {xPercent:200, duration:1.1, ease:"sine.inOut", immediateRender:false}, 64.660);
       tl.fromTo("#sh17 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 64.660);
       tl.fromTo("#sh17 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3699999999999974,"ease":"none"}, 64.660);
       tl.fromTo("#sh17 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 65.125);
-      tl.fromTo("#sh18 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.8349999999999937,"ease":"none"}, 67.864);
+      tl.fromTo("#sh18 .cam", {"scale":1,"xPercent":-1.5,"yPercent":-1.2}, {"scale":1.11,"xPercent":1.5,"yPercent":1.2,"duration":1.8349999999999937,"ease":"sine.inOut"}, 67.864);
       tl.fromTo("#sh18 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 67.864);
       tl.fromTo("#sh18 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 68.329);
       tl.fromTo("#sh18 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 68.793);
       tl.fromTo("#sh18 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 69.234);
+      tl.fromTo("#sh18 .leak i", {xPercent:-170}, {xPercent:200, duration:1.1, ease:"sine.inOut", immediateRender:false}, 68.329);
       tl.fromTo("#sh18 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 68.329);
       tl.fromTo("#sh18 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3699999999999903,"ease":"none"}, 68.329);
       tl.fromTo("#sh18 .sub span", {"y":21.6,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out"}, 68.793);
-      tl.fromTo("#sh19 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":1.8340000000000032,"ease":"none"}, 69.699);
+      tl.fromTo("#sh19 .cam", {"scale":1.11,"xPercent":1.5,"yPercent":0.8}, {"scale":1,"xPercent":-1.5,"yPercent":-0.8,"duration":1.8340000000000032,"ease":"sine.inOut"}, 69.699);
       tl.fromTo("#sh19 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 69.699);
       tl.fromTo("#sh19 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 70.163);
       tl.fromTo("#sh19 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 70.628);
       tl.fromTo("#sh19 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 71.069);
+      tl.fromTo("#sh19 .pc", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.7,"ease":"power3.out"}, 69.699);
+      tl.fromTo("#sh19 .iring", {"scale":0.1,"opacity":1}, {"scale":1.2,"opacity":0,"duration":0.9,"ease":"power2.out"}, 69.699);
       tl.fromTo("#sh19 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 69.699);
       tl.fromTo("#sh19 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 70.163);
       tl.fromTo("#sh19 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3700000000000045,"ease":"none"}, 70.163);
       tl.fromTo("#sh19 .caption", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.4,"ease":"power3.out"}, 70.163);
-      tl.fromTo("#sh20 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":1.858000000000004,"ease":"none"}, 71.533);
+      tl.fromTo("#sh20 .cam", {"scale":1,"xPercent":-2,"yPercent":1}, {"scale":1.11,"xPercent":2,"yPercent":-1,"duration":1.858000000000004,"ease":"sine.inOut"}, 71.533);
       tl.fromTo("#sh20 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 71.533);
       tl.fromTo("#sh20 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 71.998);
       tl.fromTo("#sh20 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 72.462);
       tl.fromTo("#sh20 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 72.926);
+      tl.fromTo("#sh20 .pc", {"filter":"brightness(1) saturate(1)"}, {"filter":"brightness(0.55) saturate(0.6)","duration":1.1148000000000025,"ease":"power2.inOut"}, 71.998);
+      tl.fromTo("#sh20 .fgm.sh", {"x":0,"y":0,"opacity":0}, {"x":-28.080000000000002,"y":17.28,"opacity":0.7,"duration":1.1148000000000025,"ease":"power2.out"}, 71.998);
       tl.fromTo("#sh20 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.3,"ease":"power3.out"}, 71.533);
       tl.fromTo("#sh20 .bigword span", {"y":43.2,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out"}, 71.998);
       tl.fromTo("#sh20 .bigword", {"x":0}, {"x":16.200000000000003,"duration":1.3930000000000007,"ease":"none"}, 71.998);
-      tl.fromTo("#sh21 .cam", {"scale":1,"xPercent":-1}, {"scale":1.07,"xPercent":1,"duration":7.361000000000004,"ease":"none"}, 73.391);
+      tl.fromTo("#sh21 .cam", {"scale":1.11,"xPercent":2,"yPercent":-1}, {"scale":1,"xPercent":-2,"yPercent":1,"duration":7.361000000000004,"ease":"sine.inOut"}, 73.391);
       tl.fromTo("#sh21 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 73.391);
       tl.fromTo("#sh21 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 73.855);
       tl.fromTo("#sh21 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 74.296);
@@ -1421,7 +1613,7 @@
       tl.fromTo("#sh36 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 87.160);
       tl.fromTo("#sh37 .cam", {"scale":1.14}, {"scale":1,"duration":0.35,"ease":"expo.out"}, 87.625);
       tl.fromTo("#sh37 .fgc", {"opacity":0,"yPercent":2}, {"opacity":1,"yPercent":0,"duration":0.01,"ease":"power3.out"}, 87.625);
-      tl.fromTo("#sh38 .cam", {"scale":1,"xPercent":1}, {"scale":1.07,"xPercent":-1,"duration":6.614000000000004,"ease":"none"}, 88.066);
+      tl.fromTo("#sh38 .cam", {"scale":1,"xPercent":-1.5,"yPercent":-1.2}, {"scale":1.05,"xPercent":1.5,"yPercent":1.2,"duration":6.614000000000004,"ease":"sine.inOut"}, 88.066);
       tl.fromTo("#sh38 .edge", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"power3.out"}, 88.066);
       tl.fromTo("#sh38 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 88.530);
       tl.fromTo("#sh38 .beat", {scale:1.015}, {scale:1, duration:0.32, ease:"power2.out", immediateRender:false}, 88.995);
