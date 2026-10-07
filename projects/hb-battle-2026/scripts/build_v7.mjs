@@ -65,7 +65,7 @@ const SHOTS = [
   PH(2, s(6), s(7), 'p_lake_mist', { word: 'Pružina', sub: 'Hofer Lake' }),
   PH(3, s(7), s(8), 'p_fishpen', { word: '300 kg', sub: 'Zarybnění · pstruzi čekají' }),
   PH(4, s(8), s(9), 'p_selfie_lake', { word: 'Ráno' }),
-  PH(5, s(12), s(13), 'p_green_fish', { word: '#55', plate: ['Martin Stoklasa', 'nastupuje · sektor 4'] }),
+  PH(5, s(12), s(13), 'p_green_fish', { word: 'Úlovek' }),
   PH(6, s(18), s(19), 'p_tying_young', { word: 'Uzly' }),
   PH(7, s(19), s(20), 'p_phone', { word: 'Plán', sub: '12 kol tréninku' }),
   PH(8, s(20), s(21), 'p_tying_ms', { word: 'Klid' }),
