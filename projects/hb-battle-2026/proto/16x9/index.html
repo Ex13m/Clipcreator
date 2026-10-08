@@ -232,13 +232,13 @@
       .o-quote { font-family:Montserrat; font-weight:900; font-size:45px; line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; }
       .o-quote .red { color:var(--red); }
       .o-meta { font-family:Montserrat; font-weight:700; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:#ffd36b; }
-      #gh-mark { position:absolute; left:57.6px; bottom:59.4px; display:flex; align-items:center; gap:8px; opacity:0; }
-      #gh-mark .gh-gear { position:relative; width:24px; height:24px; }
-      #gh-mark .gh-gear img { position:absolute; inset:0; width:100%; height:100%; }
-      #gh-mark .gh-by { font-family:'Source Sans 3'; font-weight:600; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ice); opacity:.85; margin-right:2px; }
-      #gh-mark .gh-wl { position:relative; display:block; line-height:0; }
-      #gh-mark .gh-cl { position:absolute; left:0; top:0; clip-path:inset(0 0 0 59%); filter:brightness(2.1); }
-      #gh-mark .gh-word { height:9px; width:auto; }
+      .ghm { position:absolute; left:57.6px; bottom:59.4px; display:flex; align-items:center; gap:8px; opacity:0; }
+      .ghm .gh-gear { position:relative; width:24px; height:24px; }
+      .ghm .gh-gear img { position:absolute; inset:0; width:100%; height:100%; }
+      .ghm .gh-by { font-family:'Source Sans 3'; font-weight:600; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ice); opacity:.85; margin-right:2px; }
+      .ghm .gh-wl { position:relative; display:block; line-height:0; }
+      .ghm .gh-cl { position:absolute; left:0; top:0; clip-path:inset(0 0 0 59%); filter:brightness(2.1); }
+      .ghm .gh-word { height:9px; width:auto; }
       #outro .ph-final { position:absolute; inset:0; background-size:cover; background-position:50% 30%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 50%, transparent 80%); }
       #outro .ph-final.bg { background-image:url(assets/gfx/p_cheers_bg.jpg); opacity:.55; }
       #outro .ph-final.fg { background-image:url(assets/gfx/p_cheers_fgc.png); -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 60%, transparent 85%); }
@@ -1182,9 +1182,12 @@
         <div class="chip"><span class="chip-num">08</span><span class="chip-cz">Takhle to bylo</span><span class="chip-en">That was it</span></div>
       </section>
 
+      <section id="gh-intro-c" class="clip" data-start="0" data-duration="3.2" data-track-index="7">
+        <div id="gh-intro" class="ghm"><span class="gh-by">made by</span><span class="gh-gear"><img class="gh-ring" src="assets/gh/ring.png"><img class="gh-core" src="assets/gh/core.png"></span><span class="gh-wl"><img class="gh-word" src="assets/gh/word-line.png"><img class="gh-word gh-cl" src="assets/gh/word-line.png"></span></div>
+      </section>
       <section id="outro" class="clip" data-start="88.066" data-duration="6.614" data-track-index="3">
         <div id="out-cam" class="clip"></div>
-        <div id="gh-mark"><span class="gh-by">made by</span><span class="gh-gear"><img class="gh-ring" src="assets/gh/ring.png"><img class="gh-core" src="assets/gh/core.png"></span><span class="gh-wl"><img class="gh-word" src="assets/gh/word-line.png"><img class="gh-word gh-cl" src="assets/gh/word-line.png"></span></div>
+        <div id="gh-mark" class="ghm"><span class="gh-by">made by</span><span class="gh-gear"><img class="gh-ring" src="assets/gh/ring.png"><img class="gh-core" src="assets/gh/core.png"></span><span class="gh-wl"><img class="gh-word" src="assets/gh/word-line.png"><img class="gh-word gh-cl" src="assets/gh/word-line.png"></span></div>
         <div class="o-wrap">
           <div id="o-quote" class="o-quote">Nepřijeli jsme bojovat. <span class="red">Přijeli jsme za přáteli.</span></div>
           <div id="o-meta" class="o-meta">Držíme palce, kluci! · Pružina (SK) · <span class="nw">2.–4. 10. 2026</span></div>
@@ -1216,7 +1219,7 @@
       </div>
       <div id="grain"></div>
       
-      <div id="proto-badge">DRAFT · v15</div>
+      <div id="proto-badge">DRAFT · v16</div>
 
       <audio id="bgm" src="assets/track_full.wav" data-start="1.2" data-duration="92.88" data-track-index="9" data-volume="1"></audio>
     </div>
@@ -1671,6 +1674,9 @@
       tl.fromTo("#chip-vysledky .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 49.892);
       tl.fromTo("#chip-pratele .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 66.494);
       tl.fromTo("#chip-recap .chip", {opacity:0, x:-32}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 81.216);
+      tl.fromTo("#gh-intro", { opacity: 0 }, { opacity: 0.6, duration: 0.5, ease: "power1.out" }, 0.4);
+      tl.fromTo("#gh-intro .gh-ring", { rotation: 0 }, { rotation: 70, duration: 2.8, ease: "none" }, 0.4);
+      tl.to("#gh-intro", { opacity: 0, duration: 0.5, ease: "power1.in" }, 2.6);
       tl.fromTo("#gh-mark", { opacity: 0 }, { opacity: 0.6, duration: 0.8, ease: "power1.out" }, 89.18);
       tl.fromTo("#gh-mark .gh-ring", { rotation: 0 }, { rotation: 140, duration: 5.5, ease: "none" }, 89.18);
       tl.fromTo("#out-cam", { scale: 1.08 }, { scale: 1, duration: 6.614, ease: "power2.out" }, 88.066);
