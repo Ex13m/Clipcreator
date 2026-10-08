@@ -14,7 +14,7 @@ const G0 = JSON.parse(fs.readFileSync(path.join(ROOT, '03_MUSIC/Trout_Area.beats
 const G = { beats: G0.beats, downbeats: G0.downbeats, duration: G0.duration, beat: +(G0.beats.slice(1).map((t, i) => t - G0.beats[i]).sort((a, b) => a - b)[Math.floor(G0.beats.length / 2)]).toFixed(4) };
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const NO_CUT = new Set(['p_podium', 'p_trenink_gear', 'p_landing2', 'p_fishpen', 'p_seq1', 'p_seq2', 'p_seq3', 'p_seq4', 'p_plaque']);
-const GROUP = new Set(['p_team_romania', 'p_team_romania_hi', 'p_lunch', 'p_cheers', 'p_selfie_lake', 'p_car', 'p_laugh']);
+const GROUP = new Set(['p_top5', 'p_team_romania', 'p_team_romania_hi', 'p_lunch', 'p_cheers', 'p_selfie_lake', 'p_car', 'p_laugh']);
 
 const T0 = 1.2, SONG = G.duration, DUR = +(T0 + SONG + 0.6).toFixed(2);
 const at = (x) => +(x + T0).toFixed(3);
@@ -80,7 +80,7 @@ const SHOTS = [
   PH(15, s(24), s(25), 'p_net_close', { word: 'Pstruh' }),
   PH(16, s(25), s(26), 'p_kucera_lake', { word: 'Fokus' }),
   PH(17, s(34), s(35), 'p_podium', { word: 'Top 3', sub: '1. Litva · 2. Ukrajina · 3. Bulharsko' }),
-  PH(18, s(36), s(37), 'p_team_romania_hi', { word: 'Přátelé', sub: 'Team Romania' }),
+  PH(18, s(36), s(37), 'p_top5', { word: 'Top 5', sub: 'Jednotlivci · Individual' }),
   PH(19, s(37), s(38), 'p_lunch', { word: 'Boj', caption: ['Takhle vypadá náš „boj“.', 'This is what our “battle” looks like.'] }),
   PH(20, s(38), s(39), 'p_laugh', { word: 'Smích' }),
   PH(21, s(39), s(43), 'p_lake_mist', { quote: true }),
@@ -748,7 +748,7 @@ function build(W, H, file) {
       </div>
       <div id="grain"></div>
       
-      <div id="proto-badge">DRAFT · v13</div>
+      <div id="proto-badge">DRAFT · v14</div>
 
       <audio id="bgm" src="assets/track_full.wav" data-start="${T0}" data-duration="${SONG}" data-track-index="9" data-volume="1"></audio>
     </div>
