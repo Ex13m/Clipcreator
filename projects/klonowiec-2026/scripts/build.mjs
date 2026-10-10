@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v11';
+const VER = process.env.VER || 'v12';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -205,40 +205,42 @@ function build(W, H, file) {
       if (i < 3) T(`#rc${k}`, { opacity: 1 }, { opacity: 0, duration: 0.25, immediateRender: false }, nx - 0.25);
     });
   }
-  // ===== 8) ryby ≠ body: karty se přeskupí z pořadí podle ryb do konečného pořadí (FLIP na takt) =====
+  // ===== 8) ryby ≠ body: bump chart — hladké stuhy z pořadí podle ryb do konečného pořadí =====
   {
     const a = tOf('14:30'), b = tOf('15:00');
     const SEL = [...A].sort((x, y) => y.fish - x.fish || x.rank - y.rank).slice(0, 10);
     const byRank = [...SEL].sort((x, y) => x.rank - y.rank);
-    const rowH = P ? 5.6 * u : 4.4 * u;
-    const sq = (r) => `<i class="q p${r.pts}"></i>`;
-    scene('s-scatter', a, b, `${photo('d1_04', a, b, 'dimx')}<div class="h2"><span>Ryby ≠ body</span><em><b class="sw-h" id="swh0">top 10 podle ryb</b><b class="sw-h" id="swh1">→ konečné pořadí</b></em></div>
-      <div class="sw" style="height:${f(rowH * 10)}">${SEL.map((x, i) => `<div class="swr${x.last === 'Stoklasa' ? ' cz' : ''}" id="sw${i}">
-        <span class="swk"><i id="swa${i}">${i + 1}</i><i id="swb${i}">${x.rank}.</i></span><span class="swn">${x.first[0]}. ${x.last}</span>
-        <span class="sws">${x.rounds.map(sq).join('')}</span><span class="swf"><b>${x.fish}</b> ryb</span><span class="swp"><b id="swp${i}">${x.pts}</b> b.</span>
-        <span class="swd" id="swd${i}">${byRank.indexOf(x) < i ? '▲' : byRank.indexOf(x) > i ? '▼' : '•'}${Math.abs(byRank.indexOf(x) - i) || ''}</span></div>`).join('')}</div>
-      <div class="snote" id="snote"><b>Martin Stoklasa: 91 ryb → 4. místo.</b> Rozhoduje každé kolo, ne součet ryb.</div>`);
+    const CW = P ? 92 * u : W * 0.66, CH = P ? 62 * u : scH * 0.66;
+    const padT = 6 * u, padB = 2 * u, lw = P ? 30 * u : 22 * u, rw = P ? 22 * u : 18 * u;
+    const xl = lw, xr = CW - rw, yy = (i) => padT + (i + 0.5) * ((CH - padT - padB) / 10);
+    const fmin = Math.min(...SEL.map((x) => x.fish)), fmax = Math.max(...SEL.map((x) => x.fish));
+    const sw = (fv) => (0.5 + ((fv - fmin) / (fmax - fmin)) * 1.6) * u;
+    const fs = P ? 2.6 * u : 2 * u;
+    const defs = SEL.map((x, i) => { const d = byRank.indexOf(x) - i, c2 = d > 0 ? '#e31e24' : '#304285';
+      return `<linearGradient id="bg${i}" gradientUnits="userSpaceOnUse" x1="${xl}" x2="${xr}" y1="0" y2="0"><stop offset="0" stop-color="#8ea2d8"/><stop offset="1" stop-color="${c2}"/></linearGradient>`; }).join('');
+    const rib = SEL.map((x, i) => { const y1 = yy(i), y2 = yy(byRank.indexOf(x)), xm = (xl + xr) / 2;
+      return `<path class="rb" id="rb${i}" d="M${xl.toFixed(1)},${y1.toFixed(1)} C${xm.toFixed(1)},${y1.toFixed(1)} ${xm.toFixed(1)},${y2.toFixed(1)} ${xr.toFixed(1)},${y2.toFixed(1)}" stroke="url(#bg${i})" stroke-width="${sw(x.fish).toFixed(1)}" pathLength="1"/>`; }).join('');
+    const lp = SEL.map((x, i) => `<div class="bl" id="bl${i}" style="top:${f(yy(i))}; width:${f(lw - 1.2 * u)}; font-size:${f(fs)}"><span class="bn">${x.first[0]}. ${x.last}</span><b>${x.fish}</b></div>`).join('');
+    const rp = byRank.map((x, j) => `<div class="br" id="br${SEL.indexOf(x)}" style="top:${f(yy(j))}; left:${f(xr + 1.2 * u)}; font-size:${f(fs)}"><b>${x.rank}.</b><span>${x.pts} b.</span></div>`).join('');
+    scene('s-scatter', a, b, `${photo('d1_04', a, b, 'dimx')}<div class="h2"><span>Ryby ≠ body</span><em>top 10 podle ryb → konečné pořadí</em></div>
+      <div class="bump" style="width:${f(CW)}; height:${f(CH)}"><div class="bhd" style="left:0; width:${f(lw)}">ryby</div><div class="bhd" style="left:${f(xr)}; width:${f(rw)}">místo · body</div>
+        <svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}"><defs>${defs}</defs>${rib}</svg>${lp}${rp}</div>
+      <div class="snote" id="snote"><b>Stoklasa: 91 ryb → 4. místo</b> · Švub: 95 ryb → 1. místo</div>`);
     rise('#s-scatter .h2 span', a + 0.1); fade('#s-scatter .h2 em', a + 0.3);
+    T('#s-scatter .bump', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, onBeat(a + 0.3));
+    const bts = G.beats.filter((t) => t > a + 0.8).slice(0, 12);
     SEL.forEach((x, i) => {
-      out.push(`tl.set("#sw${i}", {y:${(i * rowH).toFixed(1)}}, ${a.toFixed(3)});`);
-      T(`#sw${i}`, { opacity: 0, x: -6 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, onBeat(a + 0.5) + i * 0.06);
+      const t = bts[Math.floor(i / 2)] + (i % 2) * BEAT / 2;
+      T(`#bl${i}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, t);
+      T(`#rb${i}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, t + 0.1);
+      T(`#br${i}`, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, t + 0.9);
     });
-    T('#s-scatter .swr .q', { scale: 0 }, { scale: 1, duration: 0.2, ease: 'back.out(3)', stagger: 0.004 }, onBeat(a + 1.2));
-    const tf = G.downbeats.find((t) => t > a + 3.2) ?? a + 3.6;
-    SEL.forEach((x, i) => {
-      out.push(`tl.fromTo("#sw${i}", {y:${(i * rowH).toFixed(1)}}, {y:${(byRank.indexOf(x) * rowH).toFixed(1)}, duration:0.9, ease:"power4.inOut", immediateRender:false}, ${(tf + Math.abs(byRank.indexOf(x) - i) * 0.02).toFixed(3)});`);
-      out.push(`tl.fromTo("#swa${i}", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, ${tf.toFixed(3)});`);
-      out.push(`tl.fromTo("#swb${i}", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, ${(tf + 0.7).toFixed(3)});`);
-      T(`#swd${i}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, tf + 1.0 + i * 0.03);
-    });
-    out.push(`tl.set("#swh0", {opacity:1}, ${a.toFixed(3)}); tl.set("#swh1", {opacity:0.25}, ${a.toFixed(3)});`);
-    out.push(`tl.to("#swh0", {opacity:0.25, duration:0.2}, ${tf.toFixed(3)}); tl.to("#swh1", {opacity:1, duration:0.2}, ${tf.toFixed(3)});`);
-    out.push(`tl.fromTo("#s-scatter .sw", {scale:1}, {scale:1.02, duration:0.12, yoyo:true, repeat:1, ease:"power2.out", immediateRender:false}, ${tf.toFixed(3)});`);
-    const si = SEL.findIndex((x) => x.last === 'Stoklasa');
-    T(`#sw${si}`, { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.5)} rgba(227,30,36,1)`, duration: 0.25, yoyo: true, repeat: 5, immediateRender: false }, tf + 1.6);
-    fade('#snote', tf + 1.4);
-    // pady: řádky „nadupnou“ na doby po přeskupení
-    G.beats.filter((t) => t > tf + 1.9 && t < b - 0.2).forEach((t, k) => out.push(`tl.fromTo("#sw${byRank.indexOf(byRank[k % 10]) >= 0 ? SEL.indexOf(byRank[k % 10]) : 0} .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, ${t.toFixed(3)});`));
+    // fokus: ostatní stuhy ztlumí, Stoklasa a Švub svítí
+    const tf = G.downbeats.find((t) => t > a + 4.6) ?? a + 5;
+    const hi = [SEL.findIndex((x) => x.last === 'Stoklasa'), SEL.findIndex((x) => x.last === 'Švub')];
+    SEL.forEach((_, i) => { if (!hi.includes(i)) { T(`#rb${i}`, { opacity: 1 }, { opacity: 0.18, duration: 0.4, immediateRender: false }, tf); T(`#bl${i}, #br${i}`, { opacity: 1 }, { opacity: 0.35, duration: 0.4, immediateRender: false }, tf); } });
+    hi.forEach((i) => T(`#rb${i}`, { filter: 'drop-shadow(0 0 0px rgba(227,30,36,0))' }, { filter: `drop-shadow(0 0 ${px(1.2)} rgba(227,30,36,.9))`, duration: 0.3, yoyo: true, repeat: 5, immediateRender: false }, tf + 0.1));
+    fade('#snote', tf + 0.2);
   }
   // ===== 9) vyhlášení 15:00–15:30 =====
   {
@@ -483,6 +485,14 @@ function build(W, H, file) {
   .swf, .swp { font-size:${px(P ? 2.2 : 1.6)}; text-align:right; white-space:nowrap; } .swf b, .swp b { font-weight:900; font-size:1.3em; } .swp b { color:#304285; }
   .swd { font-weight:900; font-size:${px(P ? 2.3 : 1.7)}; text-align:center; color:#304285; opacity:0; }
   .sw-h { font-weight:600; transition:none; } .sw-h + .sw-h { margin-left:${px(1.2)}; color:var(--ice); }
+  .bump { position:absolute; left:${px(P ? 4 : 6)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
+  .bump::before { content:''; position:absolute; inset:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(2.2)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); }
+  .bump svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; } .bump .rb { fill:none; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
+  .bhd { position:absolute; top:${px(1)}; font-family:Montserrat; font-weight:700; font-size:${px(P ? 2.2 : 1.6)}; letter-spacing:.14em; text-transform:uppercase; color:#8ea2d8; text-align:center; }
+  .bl { position:absolute; left:0; transform:translateY(-50%); display:flex; justify-content:space-between; align-items:center; gap:${px(1)}; font-family:Montserrat; color:#0b1e42; padding:0 ${px(1)}; }
+  .bl .bn { font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .bl b { font-weight:900; background:#dfe5f1; border-radius:${px(1)}; padding:${px(0.2)} ${px(0.9)}; }
+  .br { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(1)}; font-family:Montserrat; color:#0b1e42; transform-origin:left center; }
+  .br b { font-weight:900; color:#fff; background:#304285; border-radius:${px(1)}; padding:${px(0.2)} ${px(0.9)}; min-width:${px(P ? 4.6 : 3.4)}; text-align:center; } .br span { font-weight:700; opacity:.75; }
   .snote { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}; font-size:${px(P ? 3.6 : 2.6)}; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
   .allw { position:absolute; left:${px(5)}; right:${px(5)}; top:${f(SC.top + (P ? 20 : 16) * u)}; bottom:${f(H - SC.bot + 1 * u)}; overflow:hidden; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%);' : ''} }
   .allw { background:rgba(238,242,249,.96); color:#0b1e42; border-radius:${px(1.6)}; padding:${px(0.8)} ${px(1.6)}; }
