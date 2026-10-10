@@ -100,6 +100,17 @@
   .rk { position:absolute; right:0px; top:615.6px; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:97px; line-height:1; color:var(--red); }
   .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:26px; letter-spacing:.2em; text-transform:uppercase; }
   .slope .sl { stroke-width:4px; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:#0b1e42; font-weight:700; } .slope text.rkt { font-weight:900; }
+  .sw { position:absolute; left:43px; right:43px; top:572.4px; }
+  .sw::before { content:''; position:absolute; left:-17px; right:-17px; top:-15px; bottom:-15px; background:rgba(238,242,249,.96); border-radius:22px; }
+  .swr { position:absolute; left:0; right:0; height:54px; display:grid; grid-template-columns:65px 216px 1fr 108px 86px 65px; align-items:center; gap:11px; padding:0 11px; border-radius:9px; color:#0b1e42; font-family:Montserrat; }
+  .swr.cz { background:rgba(227,30,36,.08); }
+  .swk { position:relative; height:100%; } .swk i { position:absolute; inset:0; display:flex; align-items:center; font-style:normal; font-weight:900; font-size:32px; }
+  .swk i:first-child { color:#8ea2d8; } .swk i:last-child { color:var(--red); opacity:0; }
+  .swn { font-weight:800; font-size:27px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .sws { display:grid; grid-template-columns:repeat(12, 28px); gap:3px; justify-content:center; } .sws .q { width:100%; aspect-ratio:1; border-radius:3px; }
+  .swf, .swp { font-size:24px; text-align:right; white-space:nowrap; } .swf b, .swp b { font-weight:900; font-size:1.3em; } .swp b { color:#304285; }
+  .swd { font-weight:900; font-size:25px; text-align:center; color:#304285; opacity:0; }
+  .sw-h { font-weight:600; transition:none; } .sw-h + .sw-h { margin-left:13px; color:var(--ice); }
   .snote { position:absolute; left:65px; right:65px; bottom:86.4px; font-size:39px; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
   .allw { position:absolute; left:54px; right:54px; top:572.4px; bottom:64.8px; overflow:hidden; -webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%); }
   .allw { background:rgba(238,242,249,.96); color:#0b1e42; border-radius:17px; padding:9px 17px; }
@@ -268,40 +279,39 @@
       <div class="rc-b">Nejvíc: <b>Martin Saska</b> 12 ryb</div></div><div class="rc" id="rc10" style="position:absolute; inset:0"><div class="rc-n"><span>11. kolo</span></div><div class="rc-f"><b>138</b><span>ryb · 6,9 / min</span></div>
       <div class="rc-b">Nejvíc: <b>Kuba Langner</b> 10 ryb</div></div><div class="rc" id="rc11" style="position:absolute; inset:0"><div class="rc-n"><span>12. kolo</span></div><div class="rc-f"><b>115</b><span>ryb · 5,8 / min</span></div>
       <div class="rc-b">Nejvíc: <b>Vít Bardon</b> 11 ryb</div></div></div></section>
-  <section id="s-scatter" class="clip" data-start="112.600" data-duration="9.56" data-track-index="2"><div class="phw dimx" id="ph14"><div class="pb" style="background-image:url(assets/photos/d1_04.jpg)"></div></div><div class="h2"><span>Ryby ≠ body</span><em>top 10 podle ryb → konečné pořadí</em></div>
-      <div class="chart panel slope" style="width:950.4px; height:648.0px"><svg viewBox="0 0 950 648">
-        <text x="342.144" y="32.4" text-anchor="middle" font-size="27" class="ax">ryby</text><text x="608.2560000000001" y="32.4" text-anchor="middle" font-size="27" class="ax">místo</text><line class="sl" id="sl0" x1="342.144" y1="54" x2="608.2560000000001" y2="54" stroke="#304285" pathLength="1"/>
-        <circle cx="342.144" cy="54" r="7.56" fill="#304285"/><circle id="sd0" cx="608.2560000000001" cy="54" r="7.56" fill="#304285"/>
-        <text x="327.024" y="63.45" text-anchor="end" font-size="27" class="nm">Švub · 95</text>
-        <text id="st0" x="623.3760000000001" y="63.45" font-size="27" class="rkt" fill="#304285">1.</text><line class="sl" id="sl1" x1="342.144" y1="84.12631578947368" x2="608.2560000000001" y2="144.37894736842105" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="84.12631578947368" r="7.56" fill="#e31e24"/><circle id="sd1" cx="608.2560000000001" cy="144.37894736842105" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="93.57631578947368" text-anchor="end" font-size="27" class="nm">Stoklasa · 91</text>
-        <text id="st1" x="623.3760000000001" y="153.82894736842104" font-size="27" class="rkt" fill="#e31e24">4.</text><line class="sl" id="sl2" x1="342.144" y1="114.25263157894736" x2="608.2560000000001" y2="566.1473684210526" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="114.25263157894736" r="7.56" fill="#e31e24"/><circle id="sd2" cx="608.2560000000001" cy="566.1473684210526" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="123.70263157894736" text-anchor="end" font-size="27" class="nm">Saska · 82</text>
-        <text id="st2" x="623.3760000000001" y="575.5973684210527" font-size="27" class="rkt" fill="#e31e24">18.</text><line class="sl" id="sl3" x1="342.144" y1="144.37894736842105" x2="608.2560000000001" y2="234.75789473684208" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="144.37894736842105" r="7.56" fill="#e31e24"/><circle id="sd3" cx="608.2560000000001" cy="234.75789473684208" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="153.82894736842104" text-anchor="end" font-size="27" class="nm">Smiejkowski · 79</text>
-        <text id="st3" x="623.3760000000001" y="244.20789473684206" font-size="27" class="rkt" fill="#e31e24">7.</text><line class="sl" id="sl4" x1="342.144" y1="174.50526315789472" x2="608.2560000000001" y2="445.6421052631579" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="174.50526315789472" r="7.56" fill="#e31e24"/><circle id="sd4" cx="608.2560000000001" cy="445.6421052631579" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="183.9552631578947" text-anchor="end" font-size="27" class="nm">Helman · 76</text>
-        <text id="st4" x="623.3760000000001" y="455.09210526315786" font-size="27" class="rkt" fill="#e31e24">14.</text><line class="sl" id="sl5" x1="342.144" y1="204.6315789473684" x2="608.2560000000001" y2="505.89473684210526" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="204.6315789473684" r="7.56" fill="#e31e24"/><circle id="sd5" cx="608.2560000000001" cy="505.89473684210526" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="214.0815789473684" text-anchor="end" font-size="27" class="nm">Bukáček · 76</text>
-        <text id="st5" x="623.3760000000001" y="515.3447368421052" font-size="27" class="rkt" fill="#e31e24">16.</text><line class="sl" id="sl6" x1="342.144" y1="234.75789473684208" x2="608.2560000000001" y2="204.6315789473684" stroke="#304285" pathLength="1"/>
-        <circle cx="342.144" cy="234.75789473684208" r="7.56" fill="#304285"/><circle id="sd6" cx="608.2560000000001" cy="204.6315789473684" r="7.56" fill="#304285"/>
-        <text x="327.024" y="244.20789473684206" text-anchor="end" font-size="27" class="nm">Bardon · 75</text>
-        <text id="st6" x="623.3760000000001" y="214.0815789473684" font-size="27" class="rkt" fill="#304285">6.</text><line class="sl" id="sl7" x1="342.144" y1="264.88421052631577" x2="608.2560000000001" y2="626.4" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="264.88421052631577" r="7.56" fill="#e31e24"/><circle id="sd7" cx="608.2560000000001" cy="626.4" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="274.33421052631576" text-anchor="end" font-size="27" class="nm">Kučera · 74</text>
-        <text id="st7" x="623.3760000000001" y="635.85" font-size="27" class="rkt" fill="#e31e24">24.</text><line class="sl" id="sl8" x1="342.144" y1="295.01052631578943" x2="608.2560000000001" y2="325.13684210526316" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="295.01052631578943" r="7.56" fill="#e31e24"/><circle id="sd8" cx="608.2560000000001" cy="325.13684210526316" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="304.4605263157894" text-anchor="end" font-size="27" class="nm">Novak · 70</text>
-        <text id="st8" x="623.3760000000001" y="334.58684210526314" font-size="27" class="rkt" fill="#e31e24">10.</text><line class="sl" id="sl9" x1="342.144" y1="325.13684210526316" x2="608.2560000000001" y2="355.2631578947368" stroke="#e31e24" pathLength="1"/>
-        <circle cx="342.144" cy="325.13684210526316" r="7.56" fill="#e31e24"/><circle id="sd9" cx="608.2560000000001" cy="355.2631578947368" r="7.56" fill="#e31e24"/>
-        <text x="327.024" y="334.58684210526314" text-anchor="end" font-size="27" class="nm">Tosecký · 70</text>
-        <text id="st9" x="623.3760000000001" y="364.7131578947368" font-size="27" class="rkt" fill="#e31e24">11.</text></svg></div>
-      <div class="snote" id="snote"><b>Saska: 82 ryb → 18. místo.</b> Body rozhoduje každé kolo, ne součet ryb.</div></section>
+  <section id="s-scatter" class="clip" data-start="112.600" data-duration="9.56" data-track-index="2"><div class="phw dimx" id="ph14"><div class="pb" style="background-image:url(assets/photos/d1_04.jpg)"></div></div><div class="h2"><span>Ryby ≠ body</span><em><b class="sw-h" id="swh0">top 10 podle ryb</b><b class="sw-h" id="swh1">→ konečné pořadí</b></em></div>
+      <div class="sw" style="height:604.8px"><div class="swr" id="sw0">
+        <span class="swk"><i id="swa0">1</i><i id="swb0">1.</i></span><span class="swn">D. Švub</span>
+        <span class="sws"><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p2"></i></span><span class="swf"><b>95</b> ryb</span><span class="swp"><b id="swp0">32</b> b.</span>
+        <span class="swd" id="swd0">•</span></div><div class="swr cz" id="sw1">
+        <span class="swk"><i id="swa1">2</i><i id="swb1">4.</i></span><span class="swn">M. Stoklasa</span>
+        <span class="sws"><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i></span><span class="swf"><b>91</b> ryb</span><span class="swp"><b id="swp1">30</b> b.</span>
+        <span class="swd" id="swd1">•</span></div><div class="swr" id="sw2">
+        <span class="swk"><i id="swa2">3</i><i id="swb2">18.</i></span><span class="swn">M. Saska</span>
+        <span class="sws"><i class="q p0"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p2"></i><i class="q p3"></i></span><span class="swf"><b>82</b> ryb</span><span class="swp"><b id="swp2">20</b> b.</span>
+        <span class="swd" id="swd2">▼6</span></div><div class="swr" id="sw3">
+        <span class="swk"><i id="swa3">4</i><i id="swb3">7.</i></span><span class="swn">R. Smiejkowski</span>
+        <span class="sws"><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i><i class="q p2"></i></span><span class="swf"><b>79</b> ryb</span><span class="swp"><b id="swp3">26</b> b.</span>
+        <span class="swd" id="swd3">•</span></div><div class="swr" id="sw4">
+        <span class="swk"><i id="swa4">5</i><i id="swb4">14.</i></span><span class="swn">D. Helman</span>
+        <span class="sws"><i class="q p2"></i><i class="q p0"></i><i class="q p0"></i><i class="q p2"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i></span><span class="swf"><b>76</b> ryb</span><span class="swp"><b id="swp4">22</b> b.</span>
+        <span class="swd" id="swd4">▼2</span></div><div class="swr" id="sw5">
+        <span class="swk"><i id="swa5">6</i><i id="swb5">16.</i></span><span class="swn">P. Bukáček</span>
+        <span class="sws"><i class="q p3"></i><i class="q p0"></i><i class="q p2"></i><i class="q p2"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p2"></i><i class="q p0"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i></span><span class="swf"><b>76</b> ryb</span><span class="swp"><b id="swp5">21</b> b.</span>
+        <span class="swd" id="swd5">▼2</span></div><div class="swr" id="sw6">
+        <span class="swk"><i id="swa6">7</i><i id="swb6">6.</i></span><span class="swn">V. Bardon</span>
+        <span class="sws"><i class="q p0"></i><i class="q p2"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p2"></i><i class="q p3"></i><i class="q p3"></i><i class="q p2"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i></span><span class="swf"><b>75</b> ryb</span><span class="swp"><b id="swp6">27</b> b.</span>
+        <span class="swd" id="swd6">▲4</span></div><div class="swr" id="sw7">
+        <span class="swk"><i id="swa7">8</i><i id="swb7">24.</i></span><span class="swn">M. Kučera</span>
+        <span class="sws"><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i><i class="q p2"></i><i class="q p3"></i><i class="q p0"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p0"></i></span><span class="swf"><b>74</b> ryb</span><span class="swp"><b id="swp7">17</b> b.</span>
+        <span class="swd" id="swd7">▼2</span></div><div class="swr" id="sw8">
+        <span class="swk"><i id="swa8">9</i><i id="swb8">10.</i></span><span class="swn">I. Novak</span>
+        <span class="sws"><i class="q p3"></i><i class="q p0"></i><i class="q p2"></i><i class="q p3"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p3"></i></span><span class="swf"><b>70</b> ryb</span><span class="swp"><b id="swp8">23</b> b.</span>
+        <span class="swd" id="swd8">▲4</span></div><div class="swr" id="sw9">
+        <span class="swk"><i id="swa9">10</i><i id="swb9">11.</i></span><span class="swn">R. Tosecký</span>
+        <span class="sws"><i class="q p3"></i><i class="q p3"></i><i class="q p0"></i><i class="q p2"></i><i class="q p0"></i><i class="q p3"></i><i class="q p0"></i><i class="q p0"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i><i class="q p3"></i></span><span class="swf"><b>70</b> ryb</span><span class="swp"><b id="swp9">23</b> b.</span>
+        <span class="swd" id="swd9">▲4</span></div></div>
+      <div class="snote" id="snote"><b>Martin Stoklasa: 91 ryb → 4. místo.</b> Rozhoduje každé kolo, ne součet ryb.</div></section>
   <section id="s-podium" class="clip" data-start="122.160" data-duration="7.64" data-track-index="2"><div class="phw top" id="ph15"><div class="pb" style="background-image:url(assets/photos/d1_02.jpg)"></div></div>
       <div class="t5"><div class="t5r" id="t50"><span class="lp">1</span><span class="ln">Dominik Švub</span><span class="tf">95 ryb</span><b>32 b</b></div><div class="t5r" id="t51"><span class="lp">2</span><span class="ln">Denis Zaikin</span><span class="tf">69 ryb</span><b>31 b</b></div><div class="t5r" id="t52"><span class="lp">3</span><span class="ln">Petr Fabera</span><span class="tf">68 ryb</span><b>31 b</b></div><div class="t5r" id="t53"><span class="lp">4</span><span class="ln">Martin Stoklasa</span><span class="tf">91 ryb</span><b>30 b</b></div><div class="t5r" id="t54"><span class="lp">5</span><span class="ln">Alexandr Kulaev</span><span class="tf">58 ryb</span><b>27 b</b></div></div></section>
   <section id="s-all" class="clip" data-start="129.800" data-duration="14" data-track-index="2"><div class="phw dimx" id="ph16"><div class="pb" style="background-image:url(assets/photos/d1_05.jpg)"></div></div><div class="h2"><span>Výsledky</span><em>Den 1 · kolo po kole</em></div>
@@ -336,7 +346,7 @@
   <div id="wipe"><i id="wp0"></i><i id="wp1"></i><i id="wp2"></i><i id="wp3"></i><i id="wp4"></i><i id="wp5"></i><i id="wp6"></i><i id="wp7"></i><i id="wp8"></i><i id="wp9"></i><i id="wp10"></i><i id="wp11"></i><i id="wp12"></i><i id="wp13"></i><i id="wp14"></i><i id="wp15"></i></div>
   <div id="flash"></div>
   <div id="grain"></div>
-  <div id="badge">DRAFT · v10</div>
+  <div id="badge">DRAFT · v11</div>
 </div>
 <script>
   window.__timelines = window.__timelines || {};
@@ -1238,39 +1248,79 @@
   tl.fromTo("#ph14 .pb", {scale:1.025}, {scale:1, duration:0.35, ease:"power2.out", immediateRender:false}, 120.256);
   tl.fromTo("#s-scatter .h2 span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 113.081);
   tl.fromTo("#s-scatter .h2 em", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 113.081);
-  tl.fromTo("#s-scatter .chart", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.5,"ease":"power3.out"}, 112.900);
-  tl.fromTo("#sl0", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 113.400);
-  tl.fromTo("#sd0", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.000);
-  tl.fromTo("#st0", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.050);
-  tl.fromTo("#sl1", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 113.560);
-  tl.fromTo("#sd1", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.160);
-  tl.fromTo("#st1", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.210);
-  tl.fromTo("#sl2", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 113.720);
-  tl.fromTo("#sd2", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.320);
-  tl.fromTo("#st2", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.370);
-  tl.fromTo("#sl3", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 113.880);
-  tl.fromTo("#sd3", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.480);
-  tl.fromTo("#st3", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.530);
-  tl.fromTo("#sl4", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.040);
-  tl.fromTo("#sd4", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.640);
-  tl.fromTo("#st4", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.690);
-  tl.fromTo("#sl5", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.200);
-  tl.fromTo("#sd5", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.800);
-  tl.fromTo("#st5", {"opacity":0}, {"opacity":1,"duration":0.25}, 114.850);
-  tl.fromTo("#sl6", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.360);
-  tl.fromTo("#sd6", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 114.960);
-  tl.fromTo("#st6", {"opacity":0}, {"opacity":1,"duration":0.25}, 115.010);
-  tl.fromTo("#sl7", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.520);
-  tl.fromTo("#sd7", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 115.120);
-  tl.fromTo("#st7", {"opacity":0}, {"opacity":1,"duration":0.25}, 115.170);
-  tl.fromTo("#sl8", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.680);
-  tl.fromTo("#sd8", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 115.280);
-  tl.fromTo("#st8", {"opacity":0}, {"opacity":1,"duration":0.25}, 115.330);
-  tl.fromTo("#sl9", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.inOut"}, 114.840);
-  tl.fromTo("#sd9", {"scale":0,"transformOrigin":"50% 50%"}, {"scale":1,"duration":0.25,"ease":"back.out(3)"}, 115.440);
-  tl.fromTo("#st9", {"opacity":0}, {"opacity":1,"duration":0.25}, 115.490);
-  tl.fromTo("#sl2", {"strokeWidth":4.32}, {"strokeWidth":11.880000000000003,"duration":0.3,"yoyo":true,"repeat":3,"immediateRender":false}, 115.800);
-  tl.fromTo("#snote", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 115.960);
+  tl.set("#sw0", {y:0.0}, 112.600);
+  tl.fromTo("#sw0", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.081);
+  tl.set("#sw1", {y:60.5}, 112.600);
+  tl.fromTo("#sw1", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.141);
+  tl.set("#sw2", {y:121.0}, 112.600);
+  tl.fromTo("#sw2", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.201);
+  tl.set("#sw3", {y:181.4}, 112.600);
+  tl.fromTo("#sw3", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.261);
+  tl.set("#sw4", {y:241.9}, 112.600);
+  tl.fromTo("#sw4", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.321);
+  tl.set("#sw5", {y:302.4}, 112.600);
+  tl.fromTo("#sw5", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.381);
+  tl.set("#sw6", {y:362.9}, 112.600);
+  tl.fromTo("#sw6", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.441);
+  tl.set("#sw7", {y:423.4}, 112.600);
+  tl.fromTo("#sw7", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.501);
+  tl.set("#sw8", {y:483.8}, 112.600);
+  tl.fromTo("#sw8", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.561);
+  tl.set("#sw9", {y:544.3}, 112.600);
+  tl.fromTo("#sw9", {"opacity":0,"x":-64.80000000000001}, {"opacity":1,"x":0,"duration":0.35,"ease":"expo.out"}, 113.621);
+  tl.fromTo("#s-scatter .swr .q", {"scale":0}, {"scale":1,"duration":0.2,"ease":"back.out(3)","stagger":0.004}, 114.056);
+  tl.fromTo("#sw0", {y:0.0}, {y:0.0, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.448);
+  tl.fromTo("#swa0", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb0", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd0", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.448);
+  tl.fromTo("#sw1", {y:60.5}, {y:60.5, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.448);
+  tl.fromTo("#swa1", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb1", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd1", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.478);
+  tl.fromTo("#sw2", {y:121.0}, {y:483.8, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.568);
+  tl.fromTo("#swa2", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb2", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd2", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.508);
+  tl.fromTo("#sw3", {y:181.4}, {y:181.4, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.448);
+  tl.fromTo("#swa3", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb3", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd3", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.538);
+  tl.fromTo("#sw4", {y:241.9}, {y:362.9, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.488);
+  tl.fromTo("#swa4", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb4", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd4", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.568);
+  tl.fromTo("#sw5", {y:302.4}, {y:423.4, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.488);
+  tl.fromTo("#swa5", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb5", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd5", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.598);
+  tl.fromTo("#sw6", {y:362.9}, {y:121.0, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.528);
+  tl.fromTo("#swa6", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb6", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd6", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.628);
+  tl.fromTo("#sw7", {y:423.4}, {y:544.3, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.488);
+  tl.fromTo("#swa7", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb7", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd7", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.658);
+  tl.fromTo("#sw8", {y:483.8}, {y:241.9, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.528);
+  tl.fromTo("#swa8", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb8", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd8", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.688);
+  tl.fromTo("#sw9", {y:544.3}, {y:302.4, duration:0.9, ease:"power4.inOut", immediateRender:false}, 116.528);
+  tl.fromTo("#swa9", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 116.448);
+  tl.fromTo("#swb9", {opacity:0, yPercent:60}, {opacity:1, yPercent:0, duration:0.3, ease:"back.out(2)", immediateRender:false}, 117.148);
+  tl.fromTo("#swd9", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(3)"}, 117.718);
+  tl.set("#swh0", {opacity:1}, 112.600); tl.set("#swh1", {opacity:0.25}, 112.600);
+  tl.to("#swh0", {opacity:0.25, duration:0.2}, 116.448); tl.to("#swh1", {opacity:1, duration:0.2}, 116.448);
+  tl.fromTo("#s-scatter .sw", {scale:1}, {scale:1.02, duration:0.12, yoyo:true, repeat:1, ease:"power2.out", immediateRender:false}, 116.448);
+  tl.fromTo("#sw1", {"boxShadow":"0 0 0 0 rgba(227,30,36,0)"}, {"boxShadow":"0 0 0 5px rgba(227,30,36,1)","duration":0.25,"yoyo":true,"repeat":5,"immediateRender":false}, 118.048);
+  tl.fromTo("#snote", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 117.864);
+  tl.fromTo("#sw0 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 118.817);
+  tl.fromTo("#sw1 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 119.281);
+  tl.fromTo("#sw6 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 119.769);
+  tl.fromTo("#sw3 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 120.256);
+  tl.fromTo("#sw8 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 120.721);
+  tl.fromTo("#sw9 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 121.208);
+  tl.fromTo("#sw4 .sws", {filter:"brightness(1.6)"}, {filter:"brightness(1)", duration:0.25, immediateRender:false}, 121.673);
   tl.fromTo("#ph15", {"scale":1.12,"xPercent":1.5}, {"scale":1,"xPercent":-1.5,"duration":7.64,"ease":"sine.inOut"}, 122.160);
   tl.fromTo("#ph15", {"opacity":0}, {"opacity":1,"duration":0.35,"ease":"power2.out","immediateRender":false}, 122.160);
   tl.fromTo("#ph15 .pb", {scale:1.025}, {scale:1, duration:0.35, ease:"power2.out", immediateRender:false}, 124.064);
