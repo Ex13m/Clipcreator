@@ -22,7 +22,7 @@ const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
   return { beats, downbeats, duration: dur };
 })();
 const DUR = +G.duration.toFixed(2);
-const DAYEND_T = HAS_TRACK ? 129.8 : DUR - 25;
+const DAYEND_T = HAS_TRACK ? 133.6 : DUR - 25;
 const TAIL = +(DUR - DAYEND_T).toFixed(3);                     // po 15:30: organizátoři, David, outro
 const DAY0 = 6 * 60, DAY1 = 15 * 60 + 30;
 const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
@@ -30,7 +30,7 @@ const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
 const KN = HAS_TRACK
   ? [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [700, 61.23], [760, 76.46], [870, 112.6], [900, 122.16], [DAY1, DAYEND_T]]
   : [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];
-const TL = HAS_TRACK ? { tab: 14, org: 5, host: 7, mont: 24 } : { tab: 11, org: 4, host: 5, mont: 0 };
+const TL = HAS_TRACK ? { tab: 13, org: 5, host: 7, mont: 20 } : { tab: 11, org: 4, host: 5, mont: 0 };
 const tOf = (hhmm) => { const m = typeof hhmm === 'number' ? hhmm : +hhmm.slice(0, 2) * 60 + +hhmm.slice(3);
   for (let i = 1; i < KN.length; i++) if (m <= KN[i][0]) { const [m0, t0] = KN[i - 1], [m1, t1] = KN[i]; return +(t0 + ((m - m0) / (m1 - m0)) * (t1 - t0)).toFixed(3); }
   return DUR - TAIL; };
