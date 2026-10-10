@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v12';
+const VER = process.env.VER || 'v13';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -145,7 +145,7 @@ function build(W, H, file) {
       <div class="thx" id="thx"><span>Díky, Davide!</span><em>David Helman — zase vřelé přivítání, dobré jídlo a revír plný ryb.</em></div>`);
     rise('#s-lunch .h2 span', a + 0.1); fade('#s-lunch .h2 em', a + 0.3); fade('#mi0', a + 0.5); fade('#mi1', a + 0.5 + BEAT);
     T('#thx', { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, a + 1.4);
-    T('#thx span', { color: '#eef2f9' }, { color: '#ffd36b', duration: 0.25, yoyo: true, repeat: 3 }, a + 2.1);
+    T('#thx span', { color: '#0b1e42' }, { color: '#e31e24', duration: 0.25, yoyo: true, repeat: 3 }, a + 2.1);
     const SEC = D.fish_per_sector, smax = Math.max(...Object.values(SEC)), smin = Math.min(...Object.values(SEC));
     const mix = (t) => { const c0 = [223, 229, 241], c1 = [48, 66, 133]; return `rgb(${c0.map((v, i) => Math.round(v + (c1[i] - v) * t)).join(',')})`; };
     const heat = (v) => mix((v - smin) / (smax - smin));
@@ -248,7 +248,7 @@ function build(W, H, file) {
     scene('s-podium', a, b, `${photo('d1_02', a, b, 'top')}
       <div class="t5">${TOP5.map((x, i) => `<div class="t5r" id="t5${i}"><span class="lp">${i + 1}</span><span class="ln">${name(x)}</span><span class="tf">${x.fish} ryb</span><b>${x.pts} b</b></div>`).join('')}</div>`);
     TOP5.forEach((_, i) => fade(`#t5${4 - i}`, a + 0.4 + i * BEAT, 0.35));
-    T('#t50', { backgroundColor: 'rgba(5,13,34,.84)' }, { backgroundColor: 'rgba(227,30,36,.75)', duration: 0.3, yoyo: true, repeat: 3 }, a + 0.4 + 5 * BEAT);
+    T('#t50', { backgroundColor: 'rgba(238,242,249,.96)' }, { backgroundColor: 'rgba(255,214,216,.98)', duration: 0.3, yoyo: true, repeat: 3 }, a + 0.4 + 5 * BEAT);
   }
   // ===== 10a) výsledky všech 40: 12 čtverců na kolo (barva = body, číslo = ryby) =====
   {
@@ -422,7 +422,7 @@ function build(W, H, file) {
   .clip > .phw.org { left:${P ? '0' : '44%'}; right:${P ? '0' : '4%'}; ${P ? `top:${f(SC.top + 16 * u)}; height:${f(scH * 0.62)};` : ''} }
   .phw.org .pb { background-size:contain; background-repeat:no-repeat; background-position:50% 30%; }
   .aer { position:absolute; inset:0; }
-  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:${f(P ? H * 0.6 : 0)}; height:${f(P ? H * 0.3 : H)}; }
+  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:${f(P ? H * 0.66 : 0)}; height:${f(P ? H * 0.27 : H)}; }
   .aer .phw .pb { ${P ? '' : 'filter:brightness(.42) saturate(.9);'} }
   .h2 { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + 1 * u)}; }
   .h2.low { ${P ? '' : `top:${f(SC.top + 14 * u)}; right:58%;`} }
@@ -494,7 +494,7 @@ function build(W, H, file) {
   .br { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(1)}; font-family:Montserrat; color:#0b1e42; transform-origin:left center; }
   .br b { font-weight:900; color:#fff; background:#304285; border-radius:${px(1)}; padding:${px(0.2)} ${px(0.9)}; min-width:${px(P ? 4.6 : 3.4)}; text-align:center; } .br span { font-weight:700; opacity:.75; }
   .snote { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}; font-size:${px(P ? 3.6 : 2.6)}; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
-  .allw { position:absolute; left:${px(5)}; right:${px(5)}; top:${f(SC.top + (P ? 20 : 16) * u)}; bottom:${f(H - SC.bot + 1 * u)}; overflow:hidden; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%);' : ''} }
+  .allw { position:absolute; left:${px(5)}; right:${px(5)}; top:${f(SC.top + (P ? 22 : 16) * u)}; bottom:${f(H - SC.bot + 1 * u)}; overflow:hidden; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%);' : ''} }
   .allw { background:rgba(238,242,249,.96); color:#0b1e42; border-radius:${px(1.6)}; padding:${px(0.8)} ${px(1.6)}; }
   .allc { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; gap:0 ${px(3)}; }
   .ar { display:grid; grid-template-columns:${px(P ? 4.4 : 3)} ${px(P ? 22 : 15)} 1fr ${px(P ? 5 : 3.4)} ${px(P ? 5 : 3.4)}; align-items:center; gap:${px(1)}; height:${px(P ? 4.15 : 3.0)}; border-bottom:${px(0.1)} solid rgba(238,242,249,.08); font-family:Montserrat; }
@@ -585,6 +585,22 @@ function build(W, H, file) {
   .ghm .gh-by { font-family:'Source Sans 3'; font-weight:600; font-size:${px(P ? 1.35 : 0.95)}; letter-spacing:.22em; text-transform:uppercase; color:var(--ice); opacity:.85; }
   .ghm .gh-c { letter-spacing:.12em; }
   ${process.env.FINAL ? '' : `#badge { position:absolute; right:${px(3)}; ${P ? `bottom:${px(2)}` : `top:${px(2)}`}; font-family:Montserrat; font-weight:600; font-size:${px(1.8)}; letter-spacing:.2em; opacity:.4; z-index:9; }`}
+
+  /* ===== jednotný styl karet podle banerů TA CZ ===== */
+  .tile, .rc, .thx, .menu, .cbars, .t5r, .orgn span, .tag, .plate, .hnote, .snote { --card:rgba(238,242,249,.96); }
+  .tile { background:var(--card); border:none; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); }
+  .tile b { color:var(--red); } .tile b small { color:#0b1e42; } .tile span { color:#304285; }
+  .rc { background:var(--card); backdrop-filter:none; color:#0b1e42; border-left-color:var(--red); box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); }
+  .rc-n span { color:var(--red); } .rc-f b { color:#0b1e42; } .rc-f span { color:#304285; } .rc-b { color:#0b1e42; } .rc-b b { color:#304285; font-weight:800; }
+  .thx { background:var(--card); border-left-color:var(--red); color:#0b1e42; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); } .thx span { color:#0b1e42; } .thx em { color:#304285; }
+  .menu { right:auto; background:var(--card); border-radius:${px(2)}; padding:${px(2)} ${px(3)}; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); } .mi { color:#0b1e42; } .mi b { color:var(--red); }
+  .cbars { background:var(--card); border-radius:${px(2)}; padding:${px(2.4)} ${px(3)}; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); }
+  .cc, .cb b { color:#0b1e42; } .cbar { background:rgba(11,30,66,.1); } .cbar i { background:#304285; } .cb:first-child .cbar i { background:var(--red); }
+  .t5r { background:var(--card); color:#0b1e42; box-shadow:0 ${px(0.5)} ${px(2)} rgba(0,0,0,.25); } .t5r .lp { color:var(--red); } .t5r .tf { color:#304285; } .t5r b { color:#0b1e42; }
+  .orgn span { background:var(--card); color:#0b1e42; border-radius:${px(1)}; padding:${px(0.6)} ${px(1.6)}; }
+  .hnote, .snote { text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); } .hnote b, .snote b { color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
+  .dots i { background:radial-gradient(circle at 35% 35%, #ff7a7e, var(--red)); }
+  .orgn { align-items:${P ? 'center' : 'flex-start'}; gap:${px(1)}; } .thx { ${P ? '' : 'right:auto; max-width:56%;'} }
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
