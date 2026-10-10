@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v9';
+const VER = process.env.VER || 'v10';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -22,10 +22,15 @@ const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
   return { beats, downbeats, duration: dur };
 })();
 const DUR = +G.duration.toFixed(2);
-const TAIL = 25;                     // po 15:30: organizátoři, David, outro
+const DAYEND_T = HAS_TRACK ? 129.8 : DUR - 25;
+const TAIL = +(DUR - DAYEND_T).toFixed(3);                     // po 15:30: organizátoři, David, outro
 const DAY0 = 6 * 60, DAY1 = 15 * 60 + 30;
 const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
-const KN = [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];
+// s trackem: kotvy na strukturu písně (breakdown = oběd/sektory, drop = závod lídrů, 2. breakdown = ryby≠body, finální drop = vyhlášení)
+const KN = HAS_TRACK
+  ? [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [700, 61.23], [760, 76.46], [870, 112.6], [900, 122.16], [DAY1, DAYEND_T]]
+  : [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];
+const TL = HAS_TRACK ? { tab: 14, org: 5, host: 7, mont: 24 } : { tab: 11, org: 4, host: 5, mont: 0 };
 const tOf = (hhmm) => { const m = typeof hhmm === 'number' ? hhmm : +hhmm.slice(0, 2) * 60 + +hhmm.slice(3);
   for (let i = 1; i < KN.length; i++) if (m <= KN[i][0]) { const [m0, t0] = KN[i - 1], [m1, t1] = KN[i]; return +(t0 + ((m - m0) / (m1 - m0)) * (t1 - t0)).toFixed(3); }
   return DUR - TAIL; };
@@ -58,7 +63,7 @@ function build(W, H, file) {
   const T = (sel, from, to, pos) => out.push(`tl.fromTo(${JSON.stringify(sel)}, ${JSON.stringify(from)}, ${JSON.stringify(to)}, ${(+pos).toFixed(3)});`);
   const scenes = [];
   const starts = [];
-  const scene = (id, a, b, html, track = 2) => (starts.push(a), scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`));
+  const scene = (id, a, b, html, track = 2) => ((/^s-m\d/.test(id) ? 0 : starts.push(a)), scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`));
   const onBeat = (t) => G.beats.find((b) => b >= t - 0.04) ?? t;
   const rise = (sel, t, d = 0.5) => T(sel, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease: 'expo.out' }, onBeat(t));
   const fade = (sel, t, d = 0.4) => T(sel, { opacity: 0, y: 2 * u, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: d, ease: 'back.out(2)' }, onBeat(t));
@@ -241,7 +246,7 @@ function build(W, H, file) {
   }
   // ===== 10a) výsledky všech 40: 12 čtverců na kolo (barva = body, číslo = ryby) =====
   {
-    const ta = DUR - TAIL, tb = ta + 11;
+    const ta = DUR - TAIL, tb = ta + TL.tab;
     const S = [...A].sort((x, y) => x.rank - y.rank);
     const cols = P ? [S] : [S.slice(0, 20), S.slice(20)];
     const sq = (r) => `<i class="q p${r.pts}${r.fish >= 10 ? ' hot' : ''}">${r.fish}</i>`;
@@ -257,17 +262,29 @@ function build(W, H, file) {
   }
   // ===== 10) tail: organizátoři · David · outro =====
   {
-    const t0 = DUR - TAIL + 11, t1 = t0 + 4, t2 = t1 + 5, t3 = DUR;
+    const t0 = DUR - TAIL + TL.tab, t1 = t0 + TL.org, t2h = t1 + TL.host, t3 = DUR;
     const ORG = ['Igor Novák', 'Denis Zaikin', 'Stanislav Lukášek', 'Michal Horák'];
     scene('s-org', t0, t1, `${photo('organizers_lowres', t0, t1, 'org')}<div class="h2 low"><span>Organizátoři</span><em>organizers · Trout Area CZ</em></div>
       <div class="orgn">${ORG.map((n, i) => `<span id="on${i}">${n}</span>`).join('')}</div>`);
     rise('#s-org .h2 span', t0 + 0.2); fade('#s-org .h2 em', t0 + 0.4); ORG.forEach((_, i) => fade(`#on${i}`, t0 + 0.8 + i * BEAT));
     const h = A.find((x) => x.last === 'Helman');
-    scene('s-host', t1, t2, `<div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
+    scene('s-host', t1, t2h, `<div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
       <div class="hs" id="hs">Hostitel · a k tomu ${h.rank}. místo a ${h.fish} ryb</div>
       <div class="kp" id="kp"><img src="assets/kolorowe_logo.png" alt="Kolorowe Pstrągi"><div><b>Kolorowe Pstrągi · Łowisko Klonówiec</b><span>Klonowiec 37B, Polsko · +48 539 946 787 · rezervace telefonicky</span></div></div></div>`);
     rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2); fade('#kp', t1 + 0.6 + BEAT * 4, 0.5);
     T('#kp img', { rotation: -90, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, onBeat(t1 + 0.6 + BEAT * 4));
+    // rekapitulace: všechny fotky střihem na doby
+    let t2 = t2h;
+    if (TL.mont) {
+      const MB = G.beats.filter((t) => t >= t2h - 0.05).slice(0, TL.mont + 1);
+      const MP = ['d1_10', 'd1_08', 'd1_09', 'd1_11', 'd1_06', 'd1_07', 'd1_03', 'd1_04', 'd1_12', 'd1_05', 'd1_01', 'd1_02'];
+      const pairs = MP.map((img, i) => [img, MB[i * 2], MB[i * 2 + 2]]).filter(([, a, b]) => a && b);
+      pairs.forEach(([img, a, b], i) => {
+        scene(`s-m${i}`, a, b, `<div class="phw mon" id="mo${i}"><div class="pb" style="background-image:url(assets/photos/${img}.jpg)"></div></div>`);
+        T(`#mo${i} .pb`, { scale: 1.18 }, { scale: 1.04, duration: len(a, b), ease: 'power2.out' }, a);
+      });
+      t2 = pairs.length ? pairs[pairs.length - 1][2] : t2h;
+    }
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">${fmt(TOTAL)}</b><span>ryb za den · ≈ ${Math.round(TOTAL * 0.18)} kg</span></div>
       <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · buďte připraveni!</span></div></div>`);
     fade('#s-out .fv', t2 + 0.1); T('#tap-out', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
@@ -297,7 +314,7 @@ function build(W, H, file) {
     padRun((k) => `#pb${k + 1}`, 40, m + 3.5, b, 2.4, 0.18);
   }
   { // výsledky: světlo jede po kolech (sloupcích) + „horká“ kola (10+ ryb) bijí na každou 2. dobu
-    const ta = DUR - TAIL + 1.8, tb = DUR - TAIL + 11;
+    const ta = DUR - TAIL + 1.8, tb = DUR - TAIL + TL.tab;
     padRun((k) => `#s-all .q:nth-child(${k + 1})`, 12, ta, tb, 2.0, 0.22);
     padHit('#s-all .q.hot', ta, tb, 2, 1.7);
   }
@@ -393,6 +410,7 @@ function build(W, H, file) {
     -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 9%, #000 86%, transparent 100%); }
   .phw .pb { position:absolute; inset:0; background-size:cover; background-position:50% 35%; }
   .phw.dim .pb { filter:brightness(.38) saturate(.8); }
+  .clip > .phw.mon { top:0; height:100%; -webkit-mask-image:none; }
   .phw.dimx .pb { filter:brightness(.26) saturate(.7) blur(${px(0.35)}); }
   .phw.top .pb { background-position:50% 25%; }
   .clip > .phw.org { left:${P ? '0' : '44%'}; right:${P ? '0' : '4%'}; ${P ? `top:${f(SC.top + 16 * u)}; height:${f(scH * 0.62)};` : ''} }
