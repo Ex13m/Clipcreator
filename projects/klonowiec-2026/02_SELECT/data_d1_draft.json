@@ -1,0 +1,16 @@
+{
+  "_source": "screenshots troutareacz.cz (01_RAW/web_screens), 2026-10-10; values marked ? are read from chart, need confirmation",
+  "event": { "name": "Klonowiec Trout Area Cup podzim 2026 – Den 1", "date": "2026-10-10", "place": "Łowisko Klonówiec (PL)", "type": "Bodovaný · Hard baits", "anglers": 40, "max": 60 },
+  "stocking": { "kg_total": 480, "kg_before_each_day": 100, "avg_g": 180 },
+  "fish_per_round": [351, 275, 231, 183, 183, 183, "?", 163, "?", 163, 138, 115],
+  "sectors_without_fish": 0,
+  "top5": [
+    { "rank": 1, "name": "Švub Dominik", "fish": 95, "pts": 32 },
+    { "rank": 2, "name": "Zaikin Denis", "fish": 69, "pts": 31 },
+    { "rank": 3, "name": "Fabera Petr", "fish": 68, "pts": 31 },
+    { "rank": 4, "name": "Stoklasa Martin", "fish": 91, "pts": 30 },
+    { "rank": 5, "name": "Kulaev Alexandr", "fish": 58, "pts": 27 }
+  ],
+  "leaders_pts_after_r10": { "Švub Dominik": 30, "Zaikin Denis": 25, "Fabera Petr": 26, "Stoklasa Martin": 27, "Kulaev Alexandr": 24, "Bardon Vít": 21, "Smiejkowski Radoslaw": 21, "Raus Evžen": 18 },
+  "leaders_final_pts_approx": { "Švub Dominik": 32, "Zaikin Denis": 31, "Fabera Petr": 31, "Stoklasa Martin": 30, "Kulaev Alexandr": 27, "Bardon Vít": "26?", "Smiejkowski Radoslaw": "26?", "Raus Evžen": "24?" }
+}
