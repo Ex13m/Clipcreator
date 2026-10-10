@@ -11,18 +11,18 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v4';
+const VER = process.env.VER || 'v5';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
 const HAS_TRACK = fs.existsSync(BEATS_F) && fs.existsSync(path.join(PROTO, 'assets/track.wav'));
 const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
-  const bpm = 128, b = 60 / bpm, dur = 150, beats = [], downbeats = [];
+  const bpm = 130, b = 60 / bpm, dur = 120, beats = [], downbeats = [];
   for (let t = 0, i = 0; t < dur; t += b, i++) { beats.push(+t.toFixed(4)); if (i % 4 === 0) downbeats.push(+t.toFixed(4)); }
   return { beats, downbeats, duration: dur };
 })();
 const DUR = +G.duration.toFixed(2);
-const TAIL = 29;                     // po 15:30: organizátoři, David, outro
+const TAIL = 25;                     // po 15:30: organizátoři, David, outro
 const DAY0 = 6 * 60, DAY1 = 15 * 60 + 30;
 const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
 const KN = [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];
@@ -237,10 +237,10 @@ function build(W, H, file) {
   }
   // ===== 10a) výsledky všech 40: 12 čtverců na kolo (barva = body, číslo = ryby) =====
   {
-    const ta = DUR - TAIL, tb = ta + 13;
+    const ta = DUR - TAIL, tb = ta + 11;
     const S = [...A].sort((x, y) => x.rank - y.rank);
     const cols = P ? [S] : [S.slice(0, 20), S.slice(20)];
-    const sq = (r) => `<i class="q p${r.pts}">${r.fish}</i>`;
+    const sq = (r) => `<i class="q p${r.pts}${r.fish >= 10 ? ' hot' : ''}">${r.fish}</i>`;
     scene('s-all', ta, tb, `<div class="h2"><span>${P ? 'Výsledky' : 'Výsledky · Den 1'}</span><em>${P ? 'Den 1 · kolo po kole' : 'všech 40 · kolo po kole · ryby v kole'}</em></div>
       <div class="qleg"><span><i class="q p3"></i>výhra 3 b</span><span><i class="q p2"></i>remíza s rybou 2 b</span><span><i class="q p0"></i>prohra 0 b</span></div>
       <div class="allw"><div class="allc" id="allc">${cols.map((c) => `<div class="allcol">${c.map((x) => `<div class="ar" id="ar${x.rank}"><span class="ap">${x.rank}</span><span class="an">${x.first[0]}. ${x.last}<i>${x.country}</i></span><span class="qs">${x.rounds.map(sq).join('')}</span><span class="af">${x.fish}</span><b>${x.pts}</b></div>`).join('')}</div>`).join('')}</div></div>`);
@@ -253,7 +253,7 @@ function build(W, H, file) {
   }
   // ===== 10) tail: organizátoři · David · outro =====
   {
-    const t0 = DUR - TAIL + 13, t1 = t0 + 5.5, t2 = t1 + 5, t3 = DUR;
+    const t0 = DUR - TAIL + 11, t1 = t0 + 4.5, t2 = t1 + 4, t3 = DUR;
     const ORG = ['Igor Novák', 'Denis Zaikin', 'Stanislav Lukášek', 'Michal Horák'];
     scene('s-org', t0, t1, `${photo('organizers_lowres', t0, t1, 'org')}<div class="h2 low"><span>Organizátoři</span><em>organizers · Trout Area CZ</em></div>
       <div class="orgn">${ORG.map((n, i) => `<span id="on${i}">${n}</span>`).join('')}</div>`);
@@ -271,6 +271,33 @@ function build(W, H, file) {
   T('#gh-intro', { opacity: 0 }, { opacity: 0.6, duration: 0.5 }, 0.4);
   T('#gh-intro .gh-ring', { rotation: 0 }, { rotation: 70, duration: 2.8, ease: 'none' }, 0.4);
   out.push(`tl.to("#gh-intro", {opacity:0, duration:0.5}, 2.6);`);
+
+  // ===== DRUM-PAD: běžící světlo po dobách (step sequencer) + údery na „horkých“ datech =====
+  const beatsIn = (a, b) => G.beats.filter((t) => t >= a && t < b - 0.05);
+  const padRun = (selFn, n, a, b, lvl = 2.2, d = 0.22) => beatsIn(a, b).forEach((t, i) =>
+    out.push(`tl.fromTo(${JSON.stringify(selFn(i % n))}, {filter:"brightness(${lvl}) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:${d}, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`));
+  const padHit = (sel, a, b, every = 1, lvl = 1.9) => beatsIn(a, b).filter((_, i) => i % every === 0).forEach((t) =>
+    out.push(`tl.fromTo(${JSON.stringify(sel)}, {filter:"brightness(${lvl})", scale:1.08}, {filter:"brightness(1)", scale:1, duration:0.2, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`));
+  { // zarybnění: sloupce matice
+    const a = tOf('06:30') + 2.4, b = tOf('07:20'), nc = P ? 30 : 45;
+    padRun((c) => `#dots i:nth-child(${nc}n+${c + 1})`, nc, a, b, 2.4, 0.18);
+  }
+  { // sektory: běh přes 20 dlaždic + top sektory bijí na dobu
+    const m = tOf('12:00'), b = tOf('12:40');
+    const SEC = D.fish_per_sector, hot = Object.keys(SEC).filter((k) => SEC[k] >= 150).map((k) => `#hcell${k}`).join(', ');
+    padRun((k) => `#hcell${k + 1}`, 20, m + 2, b, 1.8, 0.24);
+    padHit(hot, m + 2, b, 2, 1.5);
+    padRun((k) => `#pb${k + 1}`, 40, m + 3.5, b, 2.4, 0.18);
+  }
+  { // výsledky: světlo jede po kolech (sloupcích) + „horká“ kola (10+ ryb) bijí na každou 2. dobu
+    const ta = DUR - TAIL + 1.8, tb = DUR - TAIL + 11;
+    padRun((k) => `#s-all .q:nth-child(${k + 1})`, 12, ta, tb, 2.0, 0.22);
+    padHit('#s-all .q.hot', ta, tb, 2, 1.7);
+  }
+  { // HUD: mezi koly krokuje kurzor po 12 sloupcích
+    const idle = [[0, R[0].a], ...R.slice(0, -1).map((r, k) => [r.b, R[k + 1].a]), [R[11].b, DUR - TAIL]];
+    idle.forEach(([a, b]) => padRun((k) => `#hc${k}`, 12, a, b, 2.2, 0.2));
+  }
 
   // ===== HUD: hodiny + počítadlo + 12 sloupců kol (celý den) =====
   const DAYEND = DUR - TAIL, maxR = Math.max(...D.fish_per_round);
@@ -389,6 +416,7 @@ function build(W, H, file) {
   .ap { font-weight:900; font-size:${px(P ? 2.4 : 1.8)}; color:var(--gold); text-align:right; } .an { font-weight:700; font-size:${px(P ? 2.4 : 1.8)}; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:${px(0.8)}; font-size:.8em; }
   .qs { display:grid; grid-template-columns:repeat(12, 1fr); gap:${px(0.35)}; }
   .q { display:flex; align-items:center; justify-content:center; aspect-ratio:1; max-height:${px(P ? 3.6 : 2.6)}; border-radius:${px(0.5)}; font-style:normal; font-weight:800; font-size:${px(P ? 1.75 : 1.3)}; color:#06142e; }
+  .q.hot { box-shadow:0 0 ${px(0.6)} rgba(255,255,255,.35); }
   .q.p3 { background:#3ccf7a; } .q.p2 { background:#f1c24e; } .q.p0 { background:#7a2a33; color:#f3c6c9; }
   .qleg { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + (P ? 15.5 : 12.4) * u)}; display:flex; gap:${px(3)}; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.2 : 1.6)}; letter-spacing:.06em; text-transform:uppercase; }
   .qleg span { display:flex; align-items:center; gap:${px(0.8)}; } .qleg .q { width:${px(P ? 2.6 : 1.9)}; height:${px(P ? 2.6 : 1.9)}; }
@@ -475,7 +503,7 @@ function build(W, H, file) {
   <section id="ghs" class="clip" data-start="0" data-duration="${DUR}" data-track-index="8">${gh('gh-intro')}${gh('gh-end')}</section>
   ${HAS_TRACK ? `<audio id="music" class="clip" data-start="0" data-duration="${DUR}" data-track-index="0" src="assets/track.wav" data-volume="1"></audio>` : ''}
   <div id="grain"></div>
-  ${process.env.FINAL ? '' : `<div id="badge">DRAFT · ${VER}${HAS_TRACK ? '' : ' · 128 BPM placeholder'}</div>`}
+  ${process.env.FINAL ? '' : `<div id="badge">DRAFT · ${VER}${HAS_TRACK ? '' : ' · 130 BPM placeholder'}</div>`}
 </div>
 <script>
   window.__timelines = window.__timelines || {};
