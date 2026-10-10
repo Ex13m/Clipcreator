@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v8';
+const VER = process.env.VER || 'v9';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -257,15 +257,17 @@ function build(W, H, file) {
   }
   // ===== 10) tail: organizátoři · David · outro =====
   {
-    const t0 = DUR - TAIL + 11, t1 = t0 + 4.5, t2 = t1 + 4, t3 = DUR;
+    const t0 = DUR - TAIL + 11, t1 = t0 + 4, t2 = t1 + 5, t3 = DUR;
     const ORG = ['Igor Novák', 'Denis Zaikin', 'Stanislav Lukášek', 'Michal Horák'];
     scene('s-org', t0, t1, `${photo('organizers_lowres', t0, t1, 'org')}<div class="h2 low"><span>Organizátoři</span><em>organizers · Trout Area CZ</em></div>
       <div class="orgn">${ORG.map((n, i) => `<span id="on${i}">${n}</span>`).join('')}</div>`);
     rise('#s-org .h2 span', t0 + 0.2); fade('#s-org .h2 em', t0 + 0.4); ORG.forEach((_, i) => fade(`#on${i}`, t0 + 0.8 + i * BEAT));
     const h = A.find((x) => x.last === 'Helman');
     scene('s-host', t1, t2, `<div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
-      <div class="hs" id="hs">Hostitel · Łowisko Klonówiec · a k tomu ${h.rank}. místo a ${h.fish} ryb</div></div>`);
-    rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2);
+      <div class="hs" id="hs">Hostitel · a k tomu ${h.rank}. místo a ${h.fish} ryb</div>
+      <div class="kp" id="kp"><img src="assets/kolorowe_logo.png" alt="Kolorowe Pstrągi"><div><b>Kolorowe Pstrągi · Łowisko Klonówiec</b><span>Klonowiec 37B, Polsko · +48 539 946 787 · rezervace telefonicky</span></div></div></div>`);
+    rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2); fade('#kp', t1 + 0.6 + BEAT * 4, 0.5);
+    T('#kp img', { rotation: -90, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, onBeat(t1 + 0.6 + BEAT * 4));
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">${fmt(TOTAL)}</b><span>ryb za den · ≈ ${Math.round(TOTAL * 0.18)} kg</span></div>
       <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · see you again</span></div></div>`);
     fade('#s-out .fv', t2 + 0.1); T('#tap-out', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
@@ -505,7 +507,10 @@ function build(W, H, file) {
   .tf { font-weight:600; font-size:${px(P ? 3.2 : 2.2)}; color:var(--gold); text-align:right; }
 
   .orgn { position:absolute; left:${px(6)}; ${P ? `right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}` : `right:58%; top:${f(SC.top + 36 * u)}; flex-direction:column`}; display:flex; flex-wrap:wrap; justify-content:${P ? 'center' : 'flex-start'}; gap:${px(1)} ${px(3)}; font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.8 : 3.4)}; }
-  .host { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + scH * 0.28)}; text-align:center; }
+  .kp { display:inline-flex; align-items:center; gap:${px(2)}; margin-top:${px(P ? 5 : 3)}; background:rgba(238,242,249,.96); color:#0b1e42; border-radius:${px(2)}; padding:${px(1.4)} ${px(2.6)} ${px(1.4)} ${px(1.4)}; text-align:left; }
+  .kp img { width:${px(P ? 13 : 9)}; height:${px(P ? 13 : 9)}; border-radius:50%; }
+  .kp b { display:block; font-family:Montserrat; font-weight:800; font-size:${px(P ? 3 : 2.2)}; } .kp span { display:block; font-size:${px(P ? 2.4 : 1.7)}; margin-top:${px(0.4)}; opacity:.85; }
+  .host { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + scH * (P ? 0.22 : 0.18))}; text-align:center; }
   .hk span { display:inline-block; font-family:Montserrat; font-weight:600; font-size:${px(P ? 4.4 : 3)}; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); }
   .hn span { display:inline-block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 13 : 9)}; letter-spacing:-.02em; line-height:1.05; }
   .hs { font-size:${px(P ? 3.6 : 2.5)}; margin-top:${px(1.6)}; }
