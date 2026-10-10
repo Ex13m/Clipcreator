@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v1';
+const VER = process.env.VER || 'v2';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -22,7 +22,7 @@ const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
   return { beats, downbeats, duration: dur };
 })();
 const DUR = +G.duration.toFixed(2);
-const TAIL = 16;                     // po 15:30: organizátoři, David, outro
+const TAIL = 26;                     // po 15:30: organizátoři, David, outro
 const DAY0 = 6 * 60, DAY1 = 15 * 60 + 30;
 const tOf = (hhmm) => { const m = typeof hhmm === 'number' ? hhmm : +hhmm.slice(0, 2) * 60 + +hhmm.slice(3); return +(((m - DAY0) / (DAY1 - DAY0)) * (DUR - TAIL)).toFixed(3); };
 const snap = (t) => G.beats.reduce((a, b) => (Math.abs(b - t) < Math.abs(a - t) ? b : a), G.beats[0]);
@@ -81,13 +81,14 @@ function build(W, H, file) {
     const a = tOf('06:40'), b = tOf('07:20');
     const tiles = [[480, 'kg', 'pstruhů v revíru'], [2700, '', 'ryb · Ø 180 g'], [100, 'kg', 'navíc před každým dnem']];
     scene('s-stock', a, b, `<div class="h2"><span>Zarybnění</span><em>Stocking</em></div>
-      <div class="tiles">${tiles.map(([v, un, l], i) => `<div class="tile" id="tl${i}"><b><i id="tv${i}">0</i>${un ? `<small>${un}</small>` : ''}</b><span>${i === 1 ? '≈ ' : ''}${l}</span></div>`).join('')}</div>`);
+      <div class="dots" id="dots">${Array.from({ length: 270 }, (_, i) => `<i id="dd${i}"></i>`).join('')}<em>1 tečka = 10 ryb</em></div><div class="tiles">${tiles.map(([v, un, l], i) => `<div class="tile" id="tl${i}"><b><i id="tv${i}">0</i>${un ? `<small>${un}</small>` : ''}</b><span>${i === 1 ? '≈ ' : ''}${l}</span></div>`).join('')}</div>`);
     rise('#s-stock .h2 span', a + 0.1); fade('#s-stock .h2 em', a + 0.3);
     tiles.forEach(([v], i) => {
       const t = a + 0.5 + i * BEAT * 2;
       T(`#tl${i}`, { opacity: 0, y: 4 * u, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, t);
       out.push(`{ const o={v:0}, el=document.getElementById("tv${i}"); tl.fromTo(o,{v:0},{v:${v},duration:1.4,ease:"power2.out",onUpdate(){el.textContent=(${i === 2} ? "+" : "")+Math.round(o.v).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g,"\\u2009");}}, ${(t + 0.1).toFixed(3)}); }`);
     });
+    for (let i = 0; i < 270; i++) out.push(`tl.fromTo("#dd${i}", {scale:0, opacity:0}, {scale:1, opacity:1, duration:0.25, ease:"back.out(3)"}, ${(a + 1.2 + BEAT * 2 + (i % 18) * 0.03 + Math.floor(i / 18) * 0.06).toFixed(3)});`);
     T('#tl0', { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.6)} rgba(227,30,36,.9)`, duration: 0.3, yoyo: true, repeat: 3, ease: 'sine.inOut' }, a + 2.4);
   }
   // ===== 3) startovka 07:20–07:50 =====
@@ -141,60 +142,77 @@ function build(W, H, file) {
       <div class="heat">${order.map((n) => `<div class="hcell" id="hcell${n}" style="background:${heat(SEC[n])}"><em>${n}</em><b>${SEC[n]}</b></div>`).join('')}</div>
       <div class="hnote" id="hnote"><b>Sektor 1: ${SEC[1]} ryb</b> — 4× víc než sektor 17 (${SEC[17]})</div>`);
     rise('#s-mid .h2 span', m + 0.1); fade('#s-mid .h2 em', m + 0.3);
-    order.forEach((n, i) => T(`#hcell${n}`, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)' }, m + 0.6 + i * 0.07));
+    order.forEach((n, i) => T(`#hcell${n}`, { opacity: 0, rotationY: -100, transformPerspective: 600 }, { opacity: 1, rotationY: 0, duration: 0.5, ease: 'back.out(1.6)' }, m + 0.6 + i * 0.07));
     fade('#hnote', m + 2.4);
     T('#hcell1', { boxShadow: '0 0 0 0 rgba(255,211,107,0)' }, { boxShadow: `0 0 0 ${px(0.7)} rgba(255,211,107,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, m + 2.5);
   }
-  // ===== 7) kola 9–12: cesta lídrů (čáry rostou po kolech) =====
+  // ===== 7) kola 9–12: závod lídrů — bar chart race po kolech =====
   {
     const a = tOf('12:40'), b = tOf('14:30');
-    const CW = P ? 88 * u : W * 0.62, CH = P ? 52 * u : scH * 0.7, pl = 5 * u, pr = 2 * u, pt = 2 * u, pb = 5 * u, maxP = 35;
-    const xs = (k) => pl + (k / 11) * (CW - pl - pr), ys = (v) => pt + (1 - v / maxP) * (CH - pt - pb);
     const COL = ['#62d26f', '#a4d65e', '#d4d063', '#f0e05a', '#efc95c', '#efa65a', '#ef8a5d', '#ec6a5c'];
-    const fs = P ? 2.4 * u : 1.7 * u;
-    const lines = LEAD.map((x, j) => `<polyline id="ll${j}" points="${x.rounds.map((_, k) => `${xs(k).toFixed(1)},${ys(cum(x, k)).toFixed(1)}`).join(' ')}" stroke="${COL[j]}" stroke-width="${(j === 0 ? 0.75 : 0.5) * u}" pathLength="1" />`).join('');
-    const grid = [0, 10, 20, 30].map((v) => `<line x1="${pl}" x2="${CW - pr}" y1="${ys(v)}" y2="${ys(v)}" /><text x="${pl - 1 * u}" y="${ys(v) + fs * 0.35}" text-anchor="end" font-size="${fs}">${v}</text>`).join('')
-      + R.map((r, k) => `<text x="${xs(k)}" y="${CH - 1.2 * u}" text-anchor="middle" font-size="${fs}">${k + 1}</text>`).join('');
-    // popisky na konci čar bez překryvu
-    const lab = LEAD.map((x, j) => ({ j, y: ys(cum(x, 11)) })).sort((p, q) => p.y - q.y), gapL = fs * 1.35;
-    lab.forEach((l, i) => { if (i && l.y < lab[i - 1].y + gapL) l.y = lab[i - 1].y + gapL; });
-    const ends = lab.map(({ j, y }) => `<div class="le" id="le${j}" style="left:${f(CW + 1 * u)}; top:${f(y - fs * 0.7)}; font-size:${f(fs)}"><i style="background:${COL[j]}"></i>${LEAD[j].last} <b>${LEAD[j].pts}</b></div>`).join('');
-    scene('s-path', a, b, `<div class="h2"><span>Cesta lídrů</span><em>leaders' path · body po kolech</em></div>
-      <div class="chart panel" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}">${grid}${lines}</svg>${ends}</div>
+    const rowH = P ? 6.4 * u : 5.4 * u, BW = P ? 46 * u : W * 0.4, maxP = 33;
+    // časy stavů: kola 1–8 rychlý replay v první třetině, 9–12 přesně na konci kola
+    const iv = Math.min(0.4, (R[8].b - 0.5 - a - 0.7) / 9);
+    const ts = R.map((r, k) => (k < 8 ? a + 0.7 + k * iv : r.b - 0.5));
+    const rankAt = (k) => [...LEAD].sort((x, y) => cum(y, k) - cum(x, k) || y.fish - x.fish).map((x) => x.last);
+    scene('s-path', a, b, `<div class="h2"><span>Závod lídrů</span><em>leaders' race · body po kolech</em></div>
+      <div class="race" style="height:${f(rowH * 8)}">${LEAD.map((x, j) => `<div class="rr" id="rr${j}" style="top:0">
+        <span class="rn">${x.first[0]}. ${x.last}</span><span class="rb"><i id="rbi${j}" style="background:${COL[j]}; width:${f(BW)}"></i></span><b id="rv${j}">0</b></div>`).join('')}
+        <div class="rk" id="rk"><span id="rkn">1</span><em>kolo</em></div></div>
       <div class="rmini" id="rmini">${[8, 9, 10, 11].map((k) => roundCard(k).replace(`id="rc${k}"`, `id="rc${k}" style="position:absolute; inset:0"`)).join('')}</div>`);
     rise('#s-path .h2 span', a + 0.1); fade('#s-path .h2 em', a + 0.3);
-    T('#s-path .chart', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + 0.3);
-    LEAD.forEach((_, j) => {
-      T(`#ll${j}`, { strokeDashoffset: 1 }, { strokeDashoffset: 1 - 8 / 11, duration: 1.8, ease: 'power2.inOut' }, a + 0.6 + j * 0.06);
-      [8, 9, 10, 11].forEach((k) => out.push(`tl.fromTo("#ll${j}", {strokeDashoffset:${(1 - (k - 1) / 11).toFixed(4)}}, {strokeDashoffset:${(1 - k / 11).toFixed(4)}, duration:0.6, ease:"power2.out", immediateRender:false}, ${(R[k].b - 0.6).toFixed(3)});`));
+    LEAD.forEach((x, j) => { T(`#rr${j}`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, a + 0.3 + j * 0.05);
+      out.push(`tl.set("#rr${j}", {y:${(rankAt(0).indexOf(x.last) * rowH).toFixed(1)}}, ${a.toFixed(3)});`);
+      out.push(`tl.set("#rbi${j}", {scaleX:0}, ${a.toFixed(3)});`); });
+    R.forEach((_, k) => {
+      const t = ts[k], ord = rankAt(k), d = k < 8 ? +(iv * 0.85).toFixed(3) : 0.6;
+      const prevOrd = k ? rankAt(k - 1) : ord;
+      LEAD.forEach((x, j) => {
+        const p0 = k ? cum(x, k - 1) : 0;
+        out.push(`tl.fromTo("#rbi${j}", {scaleX:${(p0 / maxP).toFixed(4)}}, {scaleX:${(cum(x, k) / maxP).toFixed(4)}, duration:${d}, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`);
+        out.push(`tl.fromTo("#rr${j}", {y:${(prevOrd.indexOf(x.last) * rowH).toFixed(1)}}, {y:${(ord.indexOf(x.last) * rowH).toFixed(1)}, duration:${d}, ease:"power3.inOut", immediateRender:false}, ${t.toFixed(3)});`);
+        out.push(`tl.fromTo("#rv${j}", {innerText:${p0}}, {innerText:${cum(x, k)}, snap:{innerText:1}, duration:${d}, ease:"none", immediateRender:false}, ${t.toFixed(3)});`);
+      });
+      out.push(`tl.set("#rkn", {innerText:${k + 1}}, ${t.toFixed(3)});`);
+      out.push(`tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:${Math.min(0.35, k < 8 ? iv * 0.85 : 0.35).toFixed(3)}, ease:"back.out(3)", immediateRender:false}, ${t.toFixed(3)});`);
     });
-    LEAD.forEach((_, j) => fade(`#le${j}`, R[11].b + 0.1 + j * 0.08, 0.3));
+    T('#rr0', { backgroundColor: 'rgba(5,13,34,.0)' }, { backgroundColor: 'rgba(98,210,111,.28)', duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, R[11].b + 0.2);
     [8, 9, 10, 11].forEach((k, i) => {
       const tc = R[k].a + (R[k].b - R[k].a) * 0.3, nx = i < 3 ? R[k + 1].a + (R[k + 1].b - R[k + 1].a) * 0.3 : b;
       T(`#rc${k}`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tc);
       if (i < 3) T(`#rc${k}`, { opacity: 1 }, { opacity: 0, duration: 0.25, immediateRender: false }, nx - 0.25);
     });
-    T('#ll0', { strokeWidth: 0.75 * u }, { strokeWidth: 1.3 * u, duration: 0.3, yoyo: true, repeat: 3, ease: 'sine.inOut', immediateRender: false }, R[11].b + 0.6);
   }
-  // ===== 8) ryby ≠ body 14:30–15:00 =====
+  // ===== 8) ryby ≠ body: slope chart (pořadí podle ryb → konečné pořadí) =====
   {
     const a = tOf('14:30'), b = tOf('15:00');
-    const CW = P ? 88 * u : W * 0.62, CH = P ? 54 * u : scH * 0.7, pl = 6 * u, pr = 3 * u, pt = 3 * u, pb = 6 * u;
-    const fx = (v) => pl + ((v - 25) / 75) * (CW - pl - pr), fy = (r) => pt + ((r - 1) / 39) * (CH - pt - pb);
-    const fs = P ? 2.4 * u : 1.7 * u;
-    const HL = { Švub: 'Švub · 95 ryb → 1.', Stoklasa: 'Stoklasa · 91 ryb → 4.', Saska: 'Saska · 82 ryb → 18.', Zaikin: 'Zaikin · 69 ryb → 2.' };
-    const dots = A.map((x, i) => `<circle id="dt${i}" cx="${fx(x.fish).toFixed(1)}" cy="${fy(x.rank).toFixed(1)}" r="${(HL[x.last] ? 1.1 : 0.7) * u}" class="${HL[x.last] ? 'hl' : ''}"/>`).join('');
-    const axes = `<line x1="${pl}" x2="${CW - pr}" y1="${CH - pb}" y2="${CH - pb}"/><line x1="${pl}" x2="${pl}" y1="${pt}" y2="${CH - pb}"/>`
-      + [25, 50, 75, 100].map((v) => `<text x="${fx(v)}" y="${CH - pb + fs * 1.5}" text-anchor="middle" font-size="${fs}">${v}</text>`).join('')
-      + [1, 10, 20, 30, 40].map((r) => `<text x="${pl - 1 * u}" y="${fy(r) + fs * 0.35}" text-anchor="end" font-size="${fs}">${r}.</text>`).join('')
-      + `<text x="${CW - pr}" y="${CH - pb - 1 * u}" text-anchor="end" font-size="${fs}" class="ax">ryby →</text><text x="${pl + 1 * u}" y="${pt + fs}" font-size="${fs}" class="ax">↑ místo</text>`;
-    const labs = A.filter((x) => HL[x.last]).map((x, i) => { const L = fx(x.fish) > CW * 0.55; return `<div class="dl${L ? ' l' : ''}" id="dl${i}" style="left:${f(fx(x.fish))}; top:${f(fy(x.rank))}"><span style="font-size:${f(fs * 1.1)}">${HL[x.last]}</span></div>`; }).join('');
-    scene('s-scatter', a, b, `<div class="h2"><span>Ryby ≠ body</span><em>fish vs. final rank · bodovaný závod</em></div>
-      <div class="chart panel sc" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}">${axes}${dots}</svg>${labs}</div>`);
+    const byFish = [...A].sort((x, y) => y.fish - x.fish || x.rank - y.rank), fr = (x) => byFish.indexOf(x) + 1;
+    const SEL = byFish.slice(0, 10);
+    const CW = P ? 88 * u : W * 0.6, CH = P ? 60 * u : scH * 0.72, xl = CW * 0.36, xr = CW * 0.64, pt = 5 * u, pb = 2 * u;
+    const yy = (r) => pt + ((r - 1) / 19) * (CH - pt - pb);
+    const fs = P ? 2.5 * u : 1.8 * u;
+    const rows = SEL.map((x, i) => {
+      const up = x.rank < fr(x), c = x.rank === fr(x) ? '#9cc8f0' : up ? '#62d26f' : '#ff5a5f', y2 = yy(Math.min(x.rank, 20));
+      return `<line class="sl" id="sl${i}" x1="${xl}" y1="${yy(fr(x))}" x2="${xr}" y2="${y2}" stroke="${c}" pathLength="1"/>
+        <circle cx="${xl}" cy="${yy(fr(x))}" r="${0.7 * u}" fill="${c}"/><circle id="sd${i}" cx="${xr}" cy="${y2}" r="${0.7 * u}" fill="${c}"/>
+        <text x="${xl - 1.4 * u}" y="${yy(fr(x)) + fs * 0.35}" text-anchor="end" font-size="${fs}" class="nm">${x.last} · ${x.fish}</text>
+        <text id="st${i}" x="${xr + 1.4 * u}" y="${y2 + fs * 0.35}" font-size="${fs}" class="rkt" fill="${c}">${x.rank}.${x.rank > 20 ? '' : ''}</text>`;
+    }).join('');
+    scene('s-scatter', a, b, `<div class="h2"><span>Ryby ≠ body</span><em>top 10 podle ryb → konečné pořadí</em></div>
+      <div class="chart panel slope" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}">
+        <text x="${xl}" y="${pt - 2 * u}" text-anchor="middle" font-size="${fs}" class="ax">ryby</text><text x="${xr}" y="${pt - 2 * u}" text-anchor="middle" font-size="${fs}" class="ax">místo</text>${rows}</svg></div>
+      <div class="snote" id="snote"><b>Saska: 82 ryb → 18. místo.</b> Body rozhoduje každé kolo, ne součet ryb.</div>`);
     rise('#s-scatter .h2 span', a + 0.1); fade('#s-scatter .h2 em', a + 0.3);
     T('#s-scatter .chart', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + 0.3);
-    A.forEach((_, i) => T(`#dt${i}`, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'back.out(3)' }, a + 0.6 + rnd(i) * 1.2));
-    A.filter((x) => HL[x.last]).forEach((_, i) => fade(`#dl${i}`, a + 2.0 + i * BEAT * 2, 0.35));
+    SEL.forEach((x, i) => {
+      const t = a + 0.8 + i * 0.16;
+      T(`#sl${i}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut' }, t);
+      T(`#sd${i}`, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.25, ease: 'back.out(3)' }, t + 0.6);
+      T(`#st${i}`, { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + 0.65);
+    });
+    const si = SEL.findIndex((x) => x.last === 'Saska');
+    if (si >= 0) T(`#sl${si}`, { strokeWidth: 0.4 * u }, { strokeWidth: 1.1 * u, duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, a + 3.2);
+    fade('#snote', a + 3.0);
   }
   // ===== 9) vyhlášení 15:00–15:30 =====
   {
@@ -204,9 +222,21 @@ function build(W, H, file) {
     TOP5.forEach((_, i) => fade(`#t5${4 - i}`, a + 0.4 + i * BEAT, 0.35));
     T('#t50', { backgroundColor: 'rgba(5,13,34,.84)' }, { backgroundColor: 'rgba(227,30,36,.75)', duration: 0.3, yoyo: true, repeat: 3 }, a + 0.4 + 5 * BEAT);
   }
+  // ===== 10a) výsledky všech 40 =====
+  {
+    const ta = DUR - TAIL, tb = ta + 10;
+    const S = [...A].sort((x, y) => x.rank - y.rank), mf = Math.max(...A.map((x) => x.fish));
+    const cols = P ? [S] : [S.slice(0, 20), S.slice(20)];
+    scene('s-all', ta, tb, `<div class="h2"><span>${P ? 'Výsledky' : 'Výsledky · Den 1'}</span><em>${P ? 'Den 1 · místo · ryby · body' : 'všech 40 · místo · ryby · body'}</em></div>
+      <div class="allw"><div class="allc" id="allc">${cols.map((c, ci) => `<div class="allcol">${c.map((x) => `<div class="ar" id="ar${x.rank}"><span class="ap">${x.rank}</span><span class="an">${x.first} ${x.last}<i>${x.country}</i></span><span class="af"><i style="width:${((x.fish / mf) * 100).toFixed(1)}%"></i><em>${x.fish}</em></span><b>${x.pts}</b></div>`).join('')}</div>`).join('')}</div></div>`);
+    rise('#s-all .h2 span', ta + 0.1); fade('#s-all .h2 em', ta + 0.3);
+    S.forEach((x, i) => { T(`#ar${x.rank}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, ta + 0.5 + (P ? i : i % 20) * 0.05 + (P ? 0 : Math.floor(i / 20) * 0.3));
+      out.push(`tl.fromTo("#ar${x.rank} .af i", {scaleX:0}, {scaleX:1, duration:0.6, ease:"power3.out"}, ${(ta + 0.6 + (P ? i : i % 20) * 0.05).toFixed(3)});`); });
+    if (P) { const rowH = 4.15 * u, vis = Math.floor((SC.bot - SC.top - 20 * u) / rowH); T('#allc', { y: 0 }, { y: -(40 - vis) * rowH, duration: tb - ta - 3.2, ease: 'sine.inOut' }, ta + 2.2); }
+  }
   // ===== 10) tail: organizátoři · David · outro =====
   {
-    const t0 = DUR - TAIL, t1 = t0 + 5.5, t2 = t1 + 5, t3 = DUR;
+    const t0 = DUR - TAIL + 10, t1 = t0 + 5.5, t2 = t1 + 5, t3 = DUR;
     const ORG = ['Igor Novák', 'Denis Zaikin', 'Stanislav Lukášek', 'Michal Horák'];
     scene('s-org', t0, t1, `${photo('organizers_lowres', t0, t1, 'org')}<div class="h2 low"><span>Organizátoři</span><em>organizers · Trout Area CZ</em></div>
       <div class="orgn">${ORG.map((n, i) => `<span id="on${i}">${n}</span>`).join('')}</div>`);
@@ -316,6 +346,25 @@ function build(W, H, file) {
   .hcell em { display:block; font-style:normal; font-family:Montserrat; font-weight:700; font-size:${px(P ? 2.4 : 1.6)}; opacity:.7; }
   .hcell b { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 5.4 : 3.6)}; line-height:1.05; }
   .hnote { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 4 * u)}; font-size:${px(P ? 3.8 : 2.6)}; } .hnote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
+  .dots { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 2 * u)}` : `left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}`}; display:grid; grid-template-columns:repeat(${P ? 30 : 45}, 1fr); gap:${px(P ? 0.6 : 0.7)}; }
+  .dots i { display:block; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a8d, var(--red)); }
+  .dots em { grid-column:1 / -1; font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.6 : 1.8)}; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:${px(0.8)}; }
+  .race { position:absolute; left:${px(6)}; right:${px(P ? 6 : 42)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
+  .rr { position:absolute; left:0; right:0; height:${px(P ? 5.4 : 4.6)}; display:grid; grid-template-columns:${px(P ? 27 : 21)} auto ${px(P ? 7 : 5)}; align-items:center; gap:${px(1.4)}; border-radius:${px(1)}; padding:0 ${px(1)}; }
+  .rn { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.2 : 2.4)}; white-space:nowrap; }
+  .rb i { display:block; height:${px(P ? 3.6 : 3)}; border-radius:0 ${px(1)} ${px(1)} 0; transform-origin:left; }
+  .rr b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 4 : 3)}; }
+  .rk { position:absolute; right:${px(P ? 0 : -34)}; top:${P ? f(6.4 * u * 8 + 3 * u) : px(22)}; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 12)}; line-height:1; color:var(--gold); }
+  .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.4 : 2)}; letter-spacing:.2em; text-transform:uppercase; }
+  .slope .sl { stroke-width:${px(0.4)}; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:var(--ice); font-weight:700; } .slope text.rkt { font-weight:900; }
+  .snote { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}; font-size:${px(P ? 3.6 : 2.6)}; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
+  .allw { position:absolute; left:${px(5)}; right:${px(5)}; top:${f(SC.top + (P ? 17 : 13) * u)}; bottom:${f(H - SC.bot + 1 * u)}; overflow:hidden; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%);' : ''} }
+  .allc { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; gap:0 ${px(3)}; }
+  .ar { display:grid; grid-template-columns:${px(P ? 5 : 3.4)} 1fr ${px(P ? 26 : 16)} ${px(P ? 5 : 3.4)}; align-items:center; gap:${px(1.2)}; height:${px(P ? 4.15 : 3.45)}; border-bottom:${px(0.1)} solid rgba(238,242,249,.08); font-family:Montserrat; }
+  .ap { font-weight:900; font-size:${px(P ? 2.6 : 1.9)}; color:var(--gold); text-align:right; } .an { font-weight:700; font-size:${px(P ? 2.6 : 1.9)}; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:${px(1)}; font-size:.8em; }
+  .af { position:relative; height:${px(P ? 2.2 : 1.8)}; } .af i { position:absolute; left:0; top:0; bottom:0; background:linear-gradient(90deg, var(--blue), #6d8ff0); border-radius:${px(0.5)}; transform-origin:left; } .af em { position:absolute; right:0; top:50%; transform:translateY(-50%); font-style:normal; font-weight:800; font-size:${px(P ? 2.2 : 1.6)}; }
+  .ar b { font-weight:900; font-size:${px(P ? 2.8 : 2)}; text-align:right; }
+  .ar:nth-child(-n+3) .ap { color:var(--red); }
   .tag { position:absolute; left:${px(6)}; bottom:${f(H - SC.bot + 4 * u)}; display:flex; align-items:baseline; gap:${px(2)}; }
   .tag b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 12 : 8)}; } .tag span { font-family:Montserrat; font-weight:600; font-size:${px(P ? 3.6 : 2.4)}; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
 
