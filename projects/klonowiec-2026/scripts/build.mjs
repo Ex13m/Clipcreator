@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v14';
+const VER = process.env.VER || 'v15';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -22,7 +22,7 @@ const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
   return { beats, downbeats, duration: dur };
 })();
 const DUR = +G.duration.toFixed(2);
-const DAYEND_T = HAS_TRACK ? 133.6 : DUR - 25;
+const DAYEND_T = HAS_TRACK ? 129.8 : DUR - 25;
 const TAIL = +(DUR - DAYEND_T).toFixed(3);                     // po 15:30: organizátoři, David, outro
 const DAY0 = 6 * 60, DAY1 = 15 * 60 + 30;
 const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
@@ -30,7 +30,7 @@ const PRE = 12;  // 06:00–08:00 zhuštěno do 12 s
 const KN = HAS_TRACK
   ? [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [700, 61.23], [760, 76.46], [870, 112.6], [900, 122.16], [DAY1, DAYEND_T]]
   : [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];
-const TL = HAS_TRACK ? { tab: 13, org: 5, host: 7, mont: 20 } : { tab: 11, org: 4, host: 5, mont: 0 };
+const TL = HAS_TRACK ? { tab: 14, org: 5, host: 7, mont: 24 } : { tab: 11, org: 4, host: 5, mont: 0 };
 const tOf = (hhmm) => { const m = typeof hhmm === 'number' ? hhmm : +hhmm.slice(0, 2) * 60 + +hhmm.slice(3);
   for (let i = 1; i < KN.length; i++) if (m <= KN[i][0]) { const [m0, t0] = KN[i - 1], [m1, t1] = KN[i]; return +(t0 + ((m - m0) / (m1 - m0)) * (t1 - t0)).toFixed(3); }
   return DUR - TAIL; };
@@ -74,8 +74,7 @@ function build(W, H, file) {
     T(`#${id}`, { scale: zin ? 1.0 : 1.12, xPercent: zin ? -1.5 : 1.5 }, { scale: zin ? 1.12 : 1.0, xPercent: zin ? 1.5 : -1.5, duration: len(a, b), ease: 'sine.inOut' }, a);
     T(`#${id}`, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out', immediateRender: false }, a);
     G.downbeats.filter((t) => t > a + 0.1 && t < b - 0.2).forEach((t) => out.push(`tl.fromTo("#${id} .pb", {scale:1.025}, {scale:1, duration:0.35, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`));
-    const por = IMG[img] && IMG[img][1] > IMG[img][0];
-    return `<div class="phw ${cls}" id="${id}"><div class="pb" style="background-image:url(assets/photos/${img}.jpg)${por ? '; background-position:50% 12%' : ''}"></div></div>`;
+    return `<div class="phw ${cls}" id="${id}"><div class="pb" style="background-image:url(assets/photos/${img}.jpg)"></div></div>`;
   };
 
   // ===== 1) intro 06:00–06:40 =====
@@ -120,8 +119,7 @@ function build(W, H, file) {
     fade('#s-brief .tag', a + 0.2);
   }
   // ===== 5) kola 1–8: fotky + callout po každém kole =====
-  const RPH = ['d1_07', 'd1_08', 'd1_09', 'd1_11', 'd1_10', 'd1_06', 'd1_03', 'd1_04'];
-  const RPH2 = ['d1_12', 'd1_05', 'd1_06', 'd1_10', 'd1_09', 'd1_11', 'd1_08', 'd1_12'];
+  const RPH = ['d1_10', 'd1_08', 'd1_09', 'd1_11', 'd1_06', 'd1_07', 'd1_03', 'd1_04'];
   const roundCard = (k) => {
     const best = bestOfRound(k);
     return `<div class="rc" id="rc${k}"><div class="rc-n"><span>${k + 1}. kolo</span></div><div class="rc-f"><b>${R[k].fish}</b><span>ryb · ${(R[k].fish / ((tOf(R[k].to) - tOf(R[k].from)) || 1) * 0 + D.fish_rate_per_min[k]).toFixed(1).replace('.', ',')} / min</span></div>
@@ -130,10 +128,8 @@ function build(W, H, file) {
   for (let k = 0; k < 8; k++) {
     const a = k === 0 ? tOf('08:00') : R[k - 1].b, b = R[k].b + (k === 7 ? 0 : 0);
     const end = k === 7 ? tOf('11:40') : R[k].b;
-    const extra = k === 0 ? `<div class="plate"><b>Jiří Nachlinger</b><i>8 ryb v 1. kole</i></div>` : '';
-    const mid = G.downbeats.find((t) => t > a + (end - a) * 0.5) ?? (a + end) / 2;
-    const two = end - a > 4.5 && k !== 0;
-    scene(`s-r${k}`, a, end, `${photo(RPH[k], a, two ? mid : end)}${two ? photo(RPH2[k], mid, end) : ''}${extra}${roundCard(k)}`);
+    const extra = k === 5 ? `<div class="plate"><b>Jiří Nachlinger</b><i>Trout Area CZ</i></div>` : '';
+    scene(`s-r${k}`, a, end, `${photo(RPH[k], a, end)}${extra}${roundCard(k)}`);
     // karta kola vyjede v polovině kola a drží do konce úseku
     const tc = Math.min(R[k].a + (R[k].b - R[k].a) * 0.35, end - 1.2);
     T(`#rc${k}`, { opacity: 0, x: -5 * u }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, tc);
@@ -249,7 +245,7 @@ function build(W, H, file) {
   // ===== 9) vyhlášení 15:00–15:30 =====
   {
     const a = tOf('15:00'), b = tOf('15:30');
-    scene('s-podium', a, b, `${photo('d1_02', a, b, 'top pod')}
+    scene('s-podium', a, b, `${photo('d1_02', a, b, 'top')}
       <div class="t5">${TOP5.map((x, i) => `<div class="t5r" id="t5${i}"><span class="lp">${i + 1}</span><span class="ln">${name(x)}</span><span class="tf">${x.fish} ryb</span><b>${x.pts} b</b></div>`).join('')}</div>`);
     TOP5.forEach((_, i) => fade(`#t5${4 - i}`, a + 0.4 + i * BEAT, 0.35));
     T('#t50', { backgroundColor: 'rgba(238,242,249,.96)' }, { backgroundColor: 'rgba(255,214,216,.98)', duration: 0.3, yoyo: true, repeat: 3 }, a + 0.4 + 5 * BEAT);
@@ -605,10 +601,6 @@ function build(W, H, file) {
   .hnote, .snote { text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); } .hnote b, .snote b { color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
   .dots i { background:radial-gradient(circle at 35% 35%, #ff7a7e, var(--red)); }
   .orgn { align-items:${P ? 'center' : 'flex-start'}; gap:${px(1)}; } .thx { ${P ? '' : 'right:auto; max-width:56%;'} }
-  .clip > .phw.pod { ${P ? `top:${f(SC.top)}; height:${f(scH * 0.56)};` : 'left:36%;'} -webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%); }
-  .phw.pod .pb { background-position:50% 30%; }
-  .t5 { ${P ? '' : 'right:66%;'} }
-  .plate { background:rgba(238,242,249,.96); border-radius:${px(1.6)}; padding:${px(1.2)} ${px(2.2)}; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); } .plate b { color:#0b1e42; } .plate i { color:var(--red); }
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
