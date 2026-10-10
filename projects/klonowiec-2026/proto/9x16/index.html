@@ -47,7 +47,7 @@
   .clip > .phw.org { left:0; right:0; top:529.2px; height:936.0px; }
   .phw.org .pb { background-size:contain; background-repeat:no-repeat; background-position:50% 30%; }
   .aer { position:absolute; inset:0; }
-  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:960.0px; height:614.4px; }
+  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:1152.0px; height:576.0px; }
   .aer .phw .pb {  }
   .h2 { position:absolute; left:65px; right:65px; top:367.2px; }
   .h2.low {  }
@@ -76,9 +76,9 @@
   .cb:first-child .cbar i { background:linear-gradient(90deg, #b5121a, var(--red)); }
 
   .heat { position:absolute; left:65px; right:65px; top:572.4px; display:grid; grid-template-columns:repeat(4, 1fr); gap:15px; }
-  .hcell { border-radius:11px; padding:15px 9px 9px; text-align:center; color:#0b1e42; }
+  .hcell { border-radius:11px; padding:15px 9px 9px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,.25); }
   .pp { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:6px; }
-  .pp span { border-radius:5px; font-family:Montserrat; font-weight:700; font-size:18px; color:#0b1e42; padding:3px 0; box-shadow:inset 0 0 0 2px rgba(5,13,34,.35); }
+  .pp span { border-radius:5px; font-family:Montserrat; font-weight:700; font-size:18px; padding:3px 0; box-shadow:inset 0 0 0 2px rgba(238,242,249,.35); }
   .pp span i { display:block; font-style:normal; font-weight:900; font-size:1.25em; }
   .pstrip { position:absolute; left:65px; right:65px; bottom:205.2px; height:97px; display:flex; align-items:flex-end; gap:4px; }
   .pstrip i { flex:1; border-radius:3px 3px 0 0; transform-origin:bottom; }
@@ -90,26 +90,28 @@
   .dots i { display:block; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a8d, var(--red)); }
   .dots em { grid-column:1 / -1; font-style:normal; font-family:Montserrat; font-weight:600; font-size:28px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:9px; }
   .race { position:absolute; left:65px; right:65px; top:572.4px; }
-  .rr { position:absolute; left:0; right:0; height:58px; display:grid; grid-template-columns:292px auto 76px; align-items:center; gap:15px; border-radius:11px; padding:0 11px; }
+  .race::before { content:''; position:absolute; left:-22px; right:-22px; top:-17px; bottom:-17px; background:rgba(238,242,249,.96); border-radius:22px; }
+  .race .rr, .race .rn, .race .rr b { color:#0b1e42; }
+  .rr { position:absolute; left:0; right:0; height:52px; display:grid; grid-template-columns:292px auto 76px; align-items:center; gap:15px; border-radius:11px; padding:0 11px; }
   .rn { font-family:Montserrat; font-weight:800; font-size:35px; white-space:nowrap; }
   .rb i { display:block; height:39px; border-radius:0 11px 11px 0; transform-origin:left; }
   .rr b { font-family:Montserrat; font-weight:900; font-size:43px; }
-  .rk { position:absolute; right:0px; top:585.4px; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:97px; line-height:1; color:var(--gold); }
+  .rk { position:absolute; right:0px; top:615.6px; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:97px; line-height:1; color:var(--red); }
   .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:26px; letter-spacing:.2em; text-transform:uppercase; }
-  .slope .sl { stroke-width:4px; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:var(--ice); font-weight:700; } .slope text.rkt { font-weight:900; }
+  .slope .sl { stroke-width:4px; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:#0b1e42; font-weight:700; } .slope text.rkt { font-weight:900; }
   .snote { position:absolute; left:65px; right:65px; bottom:86.4px; font-size:39px; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
   .allw { position:absolute; left:54px; right:54px; top:572.4px; bottom:64.8px; overflow:hidden; -webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%); }
-  .allw { background:rgba(5,13,34,.72); border-radius:17px; padding:9px 17px; }
+  .allw { background:rgba(238,242,249,.96); color:#0b1e42; border-radius:17px; padding:9px 17px; }
   .allc { display:grid; grid-template-columns:1fr; gap:0 32px; }
   .ar { display:grid; grid-template-columns:48px 238px 1fr 54px 54px; align-items:center; gap:11px; height:45px; border-bottom:1px solid rgba(238,242,249,.08); font-family:Montserrat; }
-  .ap { font-weight:900; font-size:26px; color:var(--gold); text-align:right; } .an { font-weight:700; font-size:26px; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:9px; font-size:.8em; }
+  .ap { font-weight:900; font-size:26px; color:#304285; text-align:right; } .an { font-weight:700; font-size:26px; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:9px; font-size:.8em; }
   .qs { display:grid; grid-template-columns:repeat(12, 1fr); gap:4px; }
   .q { display:flex; align-items:center; justify-content:center; aspect-ratio:1; max-height:39px; border-radius:5px; font-style:normal; font-weight:800; font-size:19px; color:#06142e; }
-  .q.hot { box-shadow:0 0 6px rgba(255,255,255,.35); }
-  .q.p3 { background:#3ccf7a; } .q.p2 { background:#f1c24e; } .q.p0 { background:#7a2a33; color:#f3c6c9; }
+  .q.hot { box-shadow:inset 0 0 0 2px rgba(255,255,255,.55); }
+  .q.p3 { background:#304285; color:#eef2f9; } .q.p2 { background:#8ea2d8; color:#0b1e42; } .q.p1 { background:#dfe5f1; color:#0b1e42; } .q.p0 { background:#e31e24; color:#fff; }
   .qleg { position:absolute; left:65px; right:65px; top:523.8px; display:flex; gap:32px; font-family:Montserrat; font-weight:600; font-size:24px; letter-spacing:.06em; text-transform:uppercase; }
   .qleg span { display:flex; align-items:center; gap:9px; } .qleg .q { width:28px; height:28px; }
-  .af { font-weight:800; font-size:26px; text-align:right; color:#9cc8f0; }
+  .af { font-weight:800; font-size:26px; text-align:right; color:#304285; }
   .ar b { font-weight:900; font-size:30px; text-align:right; }
   .ar:nth-child(-n+3) .ap { color:var(--red); }
   .tag { position:absolute; left:65px; bottom:97.2px; display:flex; align-items:baseline; gap:22px; }
@@ -138,9 +140,9 @@
   .lr b, .t5r b { font-weight:900; font-size:48px; text-align:right; }
 
   .chart { position:absolute; left:43px; top:594.0px; }
-  .chart.panel { background:rgba(5,13,34,.82); border-radius:22px; border:2px solid rgba(238,242,249,.1); }
+  .chart.panel { background:rgba(238,242,249,.96); border-radius:22px; border:2px solid rgba(238,242,249,.1); }
   .chart svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-  .chart line { stroke:rgba(238,242,249,.16); stroke-width:2px; } .chart text { fill:rgba(238,242,249,.65); font-family:Montserrat; font-weight:600; } .chart text.ax { fill:var(--gold); }
+  .chart line { stroke:rgba(11,30,66,.14); stroke-width:2px; } .chart text { fill:rgba(11,30,66,.6); font-family:Montserrat; font-weight:600; } .chart text.ax { fill:var(--red); }
   .chart polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
   .le { position:absolute; display:flex; align-items:center; gap:9px; font-family:Montserrat; font-weight:700; white-space:nowrap; }
   .le i { width:15px; height:15px; border-radius:50%; } .le b { color:var(--gold); }
@@ -160,6 +162,9 @@
   .hs { font-size:39px; margin-top:17px; }
   .fin { position:absolute; left:65px; right:65px; top:537.6px; display:flex; flex-direction:column; align-items:center; gap:32px; text-align:center; }
   .fv b { display:block; font-family:Montserrat; font-weight:900; font-size:194px; color:var(--red); line-height:1; } .fv span { font-family:Montserrat; font-weight:700; font-size:41px; letter-spacing:.1em; text-transform:uppercase; }
+  .tap { display:inline-block; background:#fff; border-radius:17px; padding:11px 22px; margin-bottom:22px; box-shadow:0 6px 22px rgba(0,0,0,.35); }
+  .tap img { display:block; height:97px; width:auto; }
+  .tap.big img { height:151px; }
   .ta { width:648px; height:auto; } .fz span { font-family:Montserrat; font-weight:700; font-size:37px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
 
   /* HUD */
@@ -189,7 +194,7 @@
   <div id="stage"><div id="st-bg"></div><div id="st-rays"></div><div id="st-band"><svg class="band" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="-10.0,38.3 -5.4,39.3 -0.8,38.1 3.8,41.6 8.5,38.4 13.1,40.0 17.7,39.8 22.3,37.9 26.9,38.0 31.5,40.9 36.2,41.4 40.8,41.7 45.4,40.2 50.0,40.7 54.6,40.8 59.2,41.9 63.8,40.4 68.5,39.0 73.1,38.1 77.7,40.7 82.3,38.6 86.9,38.3 91.5,40.2 96.2,41.3 100.8,38.9 105.4,41.5 110.0,38.1 110.0,50.7 105.4,50.0 100.8,50.8 96.2,53.2 91.5,53.0 86.9,51.3 82.3,52.3 77.7,53.0 73.1,50.8 68.5,50.9 63.8,53.3 59.2,50.1 54.6,52.7 50.0,51.0 45.4,51.5 40.8,51.4 36.2,50.6 31.5,52.4 26.9,53.4 22.3,51.5 17.7,50.7 13.1,53.2 8.5,51.8 3.8,52.4 -0.8,51.9 -5.4,52.2 -10.0,50.3" fill="#ffffff" opacity=".92"/><polygon points="-10.0,51.3 -5.4,50.1 -0.8,53.6 3.8,50.4 8.5,52.0 13.1,51.8 17.7,49.9 22.3,50.0 26.9,52.9 31.5,53.4 36.2,53.7 40.8,52.2 45.4,52.7 50.0,52.8 54.6,53.9 59.2,52.4 63.8,51.0 68.5,50.1 73.1,52.7 77.7,50.6 82.3,50.3 86.9,52.2 91.5,53.3 96.2,50.9 100.8,53.5 105.4,50.1 110.0,49.9 110.0,64.7 105.4,62.7 100.8,62.0 96.2,62.8 91.5,65.2 86.9,65.0 82.3,63.3 77.7,64.3 73.1,65.0 68.5,62.8 63.8,62.9 59.2,65.3 54.6,62.1 50.0,64.7 45.4,63.0 40.8,63.5 36.2,63.4 31.5,62.6 26.9,64.4 22.3,65.4 17.7,63.5 13.1,62.7 8.5,65.2 3.8,63.8 -0.8,64.4 -5.4,63.9 -10.0,64.2" fill="#d7141a" opacity=".95"/><polygon points="-10,38 22,52 -10,66" fill="#11457e"/></svg></div><div id="st-dots"></div><i class="star" id="star0" style="left:9.4%; top:30.9%; width:34px; height:34px"></i><i class="star" id="star1" style="left:88.6%; top:40.1%; width:23px; height:23px"></i><i class="star" id="star2" style="left:45.2%; top:76.3%; width:29px; height:29px"></i><i class="star" id="star3" style="left:72.1%; top:50.9%; width:15px; height:15px"></i><i class="star" id="star4" style="left:55.4%; top:11.6%; width:11px; height:11px"></i><i class="star" id="star5" style="left:94.6%; top:7.2%; width:33px; height:33px"></i><i class="star" id="star6" style="left:5.5%; top:5.9%; width:32px; height:32px"></i><i class="star" id="star7" style="left:9.5%; top:60.1%; width:25px; height:25px"></i><i class="star" id="star8" style="left:23.2%; top:68.0%; width:32px; height:32px"></i><i class="star" id="star9" style="left:1.0%; top:40.7%; width:21px; height:21px"></i><i class="star" id="star10" style="left:2.0%; top:46.9%; width:31px; height:31px"></i><i class="star" id="star11" style="left:26.2%; top:20.0%; width:15px; height:15px"></i><i class="star" id="star12" style="left:70.2%; top:31.7%; width:12px; height:12px"></i><i class="star" id="star13" style="left:45.9%; top:68.9%; width:11px; height:11px"></i><i class="star" id="star14" style="left:2.4%; top:31.4%; width:18px; height:18px"></i><i class="star" id="star15" style="left:20.7%; top:18.4%; width:32px; height:32px"></i><i class="star" id="star16" style="left:51.8%; top:54.9%; width:23px; height:23px"></i><i class="star" id="star17" style="left:53.7%; top:19.5%; width:11px; height:11px"></i><i class="star" id="star18" style="left:46.4%; top:31.4%; width:32px; height:32px"></i><i class="star" id="star19" style="left:38.0%; top:63.2%; width:20px; height:20px"></i><i class="star" id="star20" style="left:17.8%; top:49.9%; width:15px; height:15px"></i><i class="star" id="star21" style="left:25.0%; top:60.3%; width:24px; height:24px"></i><i class="star" id="star22" style="left:81.1%; top:39.4%; width:31px; height:31px"></i><i class="star" id="star23" style="left:73.9%; top:81.9%; width:26px; height:26px"></i></div>
   <section id="s-intro" class="clip" data-start="0.000" data-duration="3" data-track-index="2">
       <div class="aer"><div class="phw " id="ph0"><div class="pb" style="background-image:url(assets/photos/aerial.jpg)"></div></div></div>
-      <div class="ttl"><div class="l1"><span>OPĚT</span></div><div class="l1 red"><span>POLSKO</span></div>
+      <div class="ttl"><div class="tap" id="tap-in"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="l1"><span>OPĚT</span></div><div class="l1 red"><span>POLSKO</span></div>
         <div class="l2"><span>Klonowiec Trout Area Cup · podzim 2026</span></div><div class="l3"><span>Den 1 · sobota 10. 10. 2026 · Łowisko Klonówiec</span></div><div class="l3 w"><span>9–14 °C · déšť 94 % · vítr 3 m/s</span></div></div></section>
   <section id="s-stock" class="clip" data-start="3.000" data-duration="4.6" data-track-index="2"><div class="h2"><span>Zarybnění</span><em>Stocking</em></div>
       <div class="dots" id="dots"><i id="dd0"></i><i id="dd1"></i><i id="dd2"></i><i id="dd3"></i><i id="dd4"></i><i id="dd5"></i><i id="dd6"></i><i id="dd7"></i><i id="dd8"></i><i id="dd9"></i><i id="dd10"></i><i id="dd11"></i><i id="dd12"></i><i id="dd13"></i><i id="dd14"></i><i id="dd15"></i><i id="dd16"></i><i id="dd17"></i><i id="dd18"></i><i id="dd19"></i><i id="dd20"></i><i id="dd21"></i><i id="dd22"></i><i id="dd23"></i><i id="dd24"></i><i id="dd25"></i><i id="dd26"></i><i id="dd27"></i><i id="dd28"></i><i id="dd29"></i><i id="dd30"></i><i id="dd31"></i><i id="dd32"></i><i id="dd33"></i><i id="dd34"></i><i id="dd35"></i><i id="dd36"></i><i id="dd37"></i><i id="dd38"></i><i id="dd39"></i><i id="dd40"></i><i id="dd41"></i><i id="dd42"></i><i id="dd43"></i><i id="dd44"></i><i id="dd45"></i><i id="dd46"></i><i id="dd47"></i><i id="dd48"></i><i id="dd49"></i><i id="dd50"></i><i id="dd51"></i><i id="dd52"></i><i id="dd53"></i><i id="dd54"></i><i id="dd55"></i><i id="dd56"></i><i id="dd57"></i><i id="dd58"></i><i id="dd59"></i><i id="dd60"></i><i id="dd61"></i><i id="dd62"></i><i id="dd63"></i><i id="dd64"></i><i id="dd65"></i><i id="dd66"></i><i id="dd67"></i><i id="dd68"></i><i id="dd69"></i><i id="dd70"></i><i id="dd71"></i><i id="dd72"></i><i id="dd73"></i><i id="dd74"></i><i id="dd75"></i><i id="dd76"></i><i id="dd77"></i><i id="dd78"></i><i id="dd79"></i><i id="dd80"></i><i id="dd81"></i><i id="dd82"></i><i id="dd83"></i><i id="dd84"></i><i id="dd85"></i><i id="dd86"></i><i id="dd87"></i><i id="dd88"></i><i id="dd89"></i><i id="dd90"></i><i id="dd91"></i><i id="dd92"></i><i id="dd93"></i><i id="dd94"></i><i id="dd95"></i><i id="dd96"></i><i id="dd97"></i><i id="dd98"></i><i id="dd99"></i><i id="dd100"></i><i id="dd101"></i><i id="dd102"></i><i id="dd103"></i><i id="dd104"></i><i id="dd105"></i><i id="dd106"></i><i id="dd107"></i><i id="dd108"></i><i id="dd109"></i><i id="dd110"></i><i id="dd111"></i><i id="dd112"></i><i id="dd113"></i><i id="dd114"></i><i id="dd115"></i><i id="dd116"></i><i id="dd117"></i><i id="dd118"></i><i id="dd119"></i><i id="dd120"></i><i id="dd121"></i><i id="dd122"></i><i id="dd123"></i><i id="dd124"></i><i id="dd125"></i><i id="dd126"></i><i id="dd127"></i><i id="dd128"></i><i id="dd129"></i><i id="dd130"></i><i id="dd131"></i><i id="dd132"></i><i id="dd133"></i><i id="dd134"></i><i id="dd135"></i><i id="dd136"></i><i id="dd137"></i><i id="dd138"></i><i id="dd139"></i><i id="dd140"></i><i id="dd141"></i><i id="dd142"></i><i id="dd143"></i><i id="dd144"></i><i id="dd145"></i><i id="dd146"></i><i id="dd147"></i><i id="dd148"></i><i id="dd149"></i><i id="dd150"></i><i id="dd151"></i><i id="dd152"></i><i id="dd153"></i><i id="dd154"></i><i id="dd155"></i><i id="dd156"></i><i id="dd157"></i><i id="dd158"></i><i id="dd159"></i><i id="dd160"></i><i id="dd161"></i><i id="dd162"></i><i id="dd163"></i><i id="dd164"></i><i id="dd165"></i><i id="dd166"></i><i id="dd167"></i><i id="dd168"></i><i id="dd169"></i><i id="dd170"></i><i id="dd171"></i><i id="dd172"></i><i id="dd173"></i><i id="dd174"></i><i id="dd175"></i><i id="dd176"></i><i id="dd177"></i><i id="dd178"></i><i id="dd179"></i><i id="dd180"></i><i id="dd181"></i><i id="dd182"></i><i id="dd183"></i><i id="dd184"></i><i id="dd185"></i><i id="dd186"></i><i id="dd187"></i><i id="dd188"></i><i id="dd189"></i><i id="dd190"></i><i id="dd191"></i><i id="dd192"></i><i id="dd193"></i><i id="dd194"></i><i id="dd195"></i><i id="dd196"></i><i id="dd197"></i><i id="dd198"></i><i id="dd199"></i><i id="dd200"></i><i id="dd201"></i><i id="dd202"></i><i id="dd203"></i><i id="dd204"></i><i id="dd205"></i><i id="dd206"></i><i id="dd207"></i><i id="dd208"></i><i id="dd209"></i><i id="dd210"></i><i id="dd211"></i><i id="dd212"></i><i id="dd213"></i><i id="dd214"></i><i id="dd215"></i><i id="dd216"></i><i id="dd217"></i><i id="dd218"></i><i id="dd219"></i><i id="dd220"></i><i id="dd221"></i><i id="dd222"></i><i id="dd223"></i><i id="dd224"></i><i id="dd225"></i><i id="dd226"></i><i id="dd227"></i><i id="dd228"></i><i id="dd229"></i><i id="dd230"></i><i id="dd231"></i><i id="dd232"></i><i id="dd233"></i><i id="dd234"></i><i id="dd235"></i><i id="dd236"></i><i id="dd237"></i><i id="dd238"></i><i id="dd239"></i><i id="dd240"></i><i id="dd241"></i><i id="dd242"></i><i id="dd243"></i><i id="dd244"></i><i id="dd245"></i><i id="dd246"></i><i id="dd247"></i><i id="dd248"></i><i id="dd249"></i><i id="dd250"></i><i id="dd251"></i><i id="dd252"></i><i id="dd253"></i><i id="dd254"></i><i id="dd255"></i><i id="dd256"></i><i id="dd257"></i><i id="dd258"></i><i id="dd259"></i><i id="dd260"></i><i id="dd261"></i><i id="dd262"></i><i id="dd263"></i><i id="dd264"></i><i id="dd265"></i><i id="dd266"></i><i id="dd267"></i><i id="dd268"></i><i id="dd269"></i><em>1 tečka = 10 ryb</em></div><div class="tiles"><div class="tile" id="tl0"><b><i id="tv0">0</i><small>kg</small></b><span>pstruhů v revíru</span></div><div class="tile" id="tl1"><b><i id="tv1">0</i></b><span>≈ ryb · Ø 180 g</span></div><div class="tile" id="tl2"><b><i id="tv2">0</i><small>kg</small></b><span>navíc před každým dnem</span></div></div></section>
@@ -218,39 +223,41 @@
       <div class="menu"><div class="mi" id="mi0"><b>1.</b> Polévka</div><div class="mi" id="mi1"><b>2.</b> Kotleta, brambory, salát</div></div>
       <div class="thx" id="thx"><span>Díky, Davide!</span><em>David Helman — zase vřelé přivítání, dobré jídlo a revír plný ryb.</em></div></section>
   <section id="s-mid" class="clip" data-start="56.267" data-duration="7.377" data-track-index="2"><div class="phw dimx" id="ph12"><div class="pb" style="background-image:url(assets/photos/d1_08.jpg)"></div></div><div class="h2"><span>Sektory</span><em>a místa · 20 sektorů · 40 míst</em></div>
-      <div class="heat"><div class="hcell" id="hcell1" style="background:hsl(118 72% 56%)"><em>S1</em><b>280</b>
-        <div class="pp"><span style="background:hsl(86 72% 54%)">1<i>121</i></span><span style="background:hsl(118 72% 56%)">2<i>159</i></span></div></div><div class="hcell" id="hcell2" style="background:hsl(95 72% 55%)"><em>S2</em><b>236</b>
-        <div class="pp"><span style="background:hsl(88 72% 54%)">3<i>123</i></span><span style="background:hsl(79 72% 54%)">4<i>113</i></span></div></div><div class="hcell" id="hcell3" style="background:hsl(70 72% 54%)"><em>S3</em><b>188</b>
-        <div class="pp"><span style="background:hsl(56 72% 53%)">5<i>86</i></span><span style="background:hsl(70 72% 53%)">6<i>102</i></span></div></div><div class="hcell" id="hcell4" style="background:hsl(52 72% 54%)"><em>S4</em><b>153</b>
-        <div class="pp"><span style="background:hsl(49 72% 52%)">7<i>77</i></span><span style="background:hsl(48 72% 52%)">8<i>76</i></span></div></div><div class="hcell" id="hcell5" style="background:hsl(41 72% 53%)"><em>S5</em><b>131</b>
-        <div class="pp"><span style="background:hsl(39 72% 52%)">9<i>66</i></span><span style="background:hsl(38 72% 52%)">10<i>65</i></span></div></div><div class="hcell" id="hcell6" style="background:hsl(17 72% 52%)"><em>S6</em><b>84</b>
-        <div class="pp"><span style="background:hsl(14 72% 50%)">11<i>36</i></span><span style="background:hsl(24 72% 51%)">12<i>48</i></span></div></div><div class="hcell" id="hcell7" style="background:hsl(16 72% 52%)"><em>S7</em><b>83</b>
-        <div class="pp"><span style="background:hsl(24 72% 51%)">13<i>48</i></span><span style="background:hsl(13 72% 50%)">14<i>35</i></span></div></div><div class="hcell" id="hcell8" style="background:hsl(22 72% 53%)"><em>S8</em><b>94</b>
-        <div class="pp"><span style="background:hsl(20 72% 51%)">15<i>43</i></span><span style="background:hsl(27 72% 51%)">16<i>51</i></span></div></div><div class="hcell" id="hcell9" style="background:hsl(24 72% 53%)"><em>S9</em><b>98</b>
-        <div class="pp"><span style="background:hsl(16 72% 50%)">17<i>39</i></span><span style="background:hsl(33 72% 51%)">18<i>59</i></span></div></div><div class="hcell" id="hcell10" style="background:hsl(25 72% 53%)"><em>S10</em><b>100</b>
-        <div class="pp"><span style="background:hsl(25 72% 51%)">19<i>49</i></span><span style="background:hsl(27 72% 51%)">20<i>51</i></span></div></div><div class="hcell" id="hcell11" style="background:hsl(20 72% 52%)"><em>S11</em><b>91</b>
-        <div class="pp"><span style="background:hsl(26 72% 51%)">21<i>50</i></span><span style="background:hsl(18 72% 51%)">22<i>41</i></span></div></div><div class="hcell" id="hcell12" style="background:hsl(38 72% 53%)"><em>S12</em><b>125</b>
-        <div class="pp"><span style="background:hsl(31 72% 51%)">23<i>56</i></span><span style="background:hsl(42 72% 52%)">24<i>69</i></span></div></div><div class="hcell" id="hcell13" style="background:hsl(25 72% 53%)"><em>S13</em><b>99</b>
-        <div class="pp"><span style="background:hsl(28 72% 51%)">25<i>53</i></span><span style="background:hsl(22 72% 51%)">26<i>46</i></span></div></div><div class="hcell" id="hcell14" style="background:hsl(16 72% 52%)"><em>S14</em><b>82</b>
-        <div class="pp"><span style="background:hsl(26 72% 51%)">27<i>50</i></span><span style="background:hsl(11 72% 50%)">28<i>32</i></span></div></div><div class="hcell" id="hcell15" style="background:hsl(16 72% 52%)"><em>S15</em><b>83</b>
-        <div class="pp"><span style="background:hsl(16 72% 50%)">29<i>38</i></span><span style="background:hsl(22 72% 51%)">30<i>45</i></span></div></div><div class="hcell" id="hcell16" style="background:hsl(23 72% 53%)"><em>S16</em><b>96</b>
-        <div class="pp"><span style="background:hsl(26 72% 51%)">31<i>50</i></span><span style="background:hsl(22 72% 51%)">32<i>46</i></span></div></div><div class="hcell" id="hcell17" style="background:hsl(8 72% 52%)"><em>S17</em><b>67</b>
-        <div class="pp"><span style="background:hsl(8 72% 50%)">33<i>29</i></span><span style="background:hsl(16 72% 50%)">34<i>38</i></span></div></div><div class="hcell" id="hcell18" style="background:hsl(23 72% 53%)"><em>S18</em><b>96</b>
-        <div class="pp"><span style="background:hsl(18 72% 51%)">35<i>41</i></span><span style="background:hsl(30 72% 51%)">36<i>55</i></span></div></div><div class="hcell" id="hcell19" style="background:hsl(23 72% 53%)"><em>S19</em><b>96</b>
-        <div class="pp"><span style="background:hsl(29 72% 51%)">37<i>54</i></span><span style="background:hsl(19 72% 51%)">38<i>42</i></span></div></div><div class="hcell" id="hcell20" style="background:hsl(21 72% 52%)"><em>S20</em><b>93</b>
-        <div class="pp"><span style="background:hsl(22 72% 51%)">39<i>46</i></span><span style="background:hsl(23 72% 51%)">40<i>47</i></span></div></div></div>
-      <div class="pstrip" id="pstrip"><i id="pb1" style="height:76.1%; background:hsl(86 72% 54%)"></i><i id="pb2" style="height:100.0%; background:hsl(118 72% 56%)"></i><i id="pb3" style="height:77.4%; background:hsl(88 72% 54%)"></i><i id="pb4" style="height:71.1%; background:hsl(79 72% 54%)"></i><i id="pb5" style="height:54.1%; background:hsl(56 72% 53%)"></i><i id="pb6" style="height:64.2%; background:hsl(70 72% 53%)"></i><i id="pb7" style="height:48.4%; background:hsl(49 72% 52%)"></i><i id="pb8" style="height:47.8%; background:hsl(48 72% 52%)"></i><i id="pb9" style="height:41.5%; background:hsl(39 72% 52%)"></i><i id="pb10" style="height:40.9%; background:hsl(38 72% 52%)"></i><i id="pb11" style="height:22.6%; background:hsl(14 72% 50%)"></i><i id="pb12" style="height:30.2%; background:hsl(24 72% 51%)"></i><i id="pb13" style="height:30.2%; background:hsl(24 72% 51%)"></i><i id="pb14" style="height:22.0%; background:hsl(13 72% 50%)"></i><i id="pb15" style="height:27.0%; background:hsl(20 72% 51%)"></i><i id="pb16" style="height:32.1%; background:hsl(27 72% 51%)"></i><i id="pb17" style="height:24.5%; background:hsl(16 72% 50%)"></i><i id="pb18" style="height:37.1%; background:hsl(33 72% 51%)"></i><i id="pb19" style="height:30.8%; background:hsl(25 72% 51%)"></i><i id="pb20" style="height:32.1%; background:hsl(27 72% 51%)"></i><i id="pb21" style="height:31.4%; background:hsl(26 72% 51%)"></i><i id="pb22" style="height:25.8%; background:hsl(18 72% 51%)"></i><i id="pb23" style="height:35.2%; background:hsl(31 72% 51%)"></i><i id="pb24" style="height:43.4%; background:hsl(42 72% 52%)"></i><i id="pb25" style="height:33.3%; background:hsl(28 72% 51%)"></i><i id="pb26" style="height:28.9%; background:hsl(22 72% 51%)"></i><i id="pb27" style="height:31.4%; background:hsl(26 72% 51%)"></i><i id="pb28" style="height:20.1%; background:hsl(11 72% 50%)"></i><i id="pb29" style="height:23.9%; background:hsl(16 72% 50%)"></i><i id="pb30" style="height:28.3%; background:hsl(22 72% 51%)"></i><i id="pb31" style="height:31.4%; background:hsl(26 72% 51%)"></i><i id="pb32" style="height:28.9%; background:hsl(22 72% 51%)"></i><i id="pb33" style="height:18.2%; background:hsl(8 72% 50%)"></i><i id="pb34" style="height:23.9%; background:hsl(16 72% 50%)"></i><i id="pb35" style="height:25.8%; background:hsl(18 72% 51%)"></i><i id="pb36" style="height:34.6%; background:hsl(30 72% 51%)"></i><i id="pb37" style="height:34.0%; background:hsl(29 72% 51%)"></i><i id="pb38" style="height:26.4%; background:hsl(19 72% 51%)"></i><i id="pb39" style="height:28.9%; background:hsl(22 72% 51%)"></i><i id="pb40" style="height:29.6%; background:hsl(23 72% 51%)"></i><em class="pse">místo 1 → 40</em></div>
+      <div class="heat"><div class="hcell" id="hcell1" style="background:rgb(48,66,133); color:#eef2f9"><em>S1</em><b>280</b>
+        <div class="pp"><span style="background:rgb(99,114,165); color:#eef2f9">1<i>121</i></span><span style="background:rgb(48,66,133); color:#eef2f9">2<i>159</i></span></div></div><div class="hcell" id="hcell2" style="background:rgb(84,100,155); color:#eef2f9"><em>S2</em><b>236</b>
+        <div class="pp"><span style="background:rgb(96,111,163); color:#eef2f9">3<i>123</i></span><span style="background:rgb(110,124,171); color:#eef2f9">4<i>113</i></span></div></div><div class="hcell" id="hcell3" style="background:rgb(124,136,180); color:#eef2f9"><em>S3</em><b>188</b>
+        <div class="pp"><span style="background:rgb(146,158,194); color:#0b1e42">5<i>86</i></span><span style="background:rgb(125,137,180); color:#eef2f9">6<i>102</i></span></div></div><div class="hcell" id="hcell4" style="background:rgb(152,163,197); color:#0b1e42"><em>S4</em><b>153</b>
+        <div class="pp"><span style="background:rgb(158,169,201); color:#0b1e42">7<i>77</i></span><span style="background:rgb(160,170,202); color:#0b1e42">8<i>76</i></span></div></div><div class="hcell" id="hcell5" style="background:rgb(170,180,209); color:#0b1e42"><em>S5</em><b>131</b>
+        <div class="pp"><span style="background:rgb(173,183,210); color:#0b1e42">9<i>66</i></span><span style="background:rgb(175,184,211); color:#0b1e42">10<i>65</i></span></div></div><div class="hcell" id="hcell6" style="background:rgb(209,216,232); color:#0b1e42"><em>S6</em><b>84</b>
+        <div class="pp"><span style="background:rgb(214,220,235); color:#0b1e42">11<i>36</i></span><span style="background:rgb(197,205,225); color:#0b1e42">12<i>48</i></span></div></div><div class="hcell" id="hcell7" style="background:rgb(210,217,233); color:#0b1e42"><em>S7</em><b>83</b>
+        <div class="pp"><span style="background:rgb(197,205,225); color:#0b1e42">13<i>48</i></span><span style="background:rgb(215,221,236); color:#0b1e42">14<i>35</i></span></div></div><div class="hcell" id="hcell8" style="background:rgb(201,208,227); color:#0b1e42"><em>S8</em><b>94</b>
+        <div class="pp"><span style="background:rgb(204,211,229); color:#0b1e42">15<i>43</i></span><span style="background:rgb(193,201,223); color:#0b1e42">16<i>51</i></span></div></div><div class="hcell" id="hcell9" style="background:rgb(198,205,225); color:#0b1e42"><em>S9</em><b>98</b>
+        <div class="pp"><span style="background:rgb(210,216,233); color:#0b1e42">17<i>39</i></span><span style="background:rgb(183,191,216); color:#0b1e42">18<i>59</i></span></div></div><div class="hcell" id="hcell10" style="background:rgb(196,204,224); color:#0b1e42"><em>S10</em><b>100</b>
+        <div class="pp"><span style="background:rgb(196,204,224); color:#0b1e42">19<i>49</i></span><span style="background:rgb(193,201,223); color:#0b1e42">20<i>51</i></span></div></div><div class="hcell" id="hcell11" style="background:rgb(203,211,229); color:#0b1e42"><em>S11</em><b>91</b>
+        <div class="pp"><span style="background:rgb(195,203,224); color:#0b1e42">21<i>50</i></span><span style="background:rgb(207,214,231); color:#0b1e42">22<i>41</i></span></div></div><div class="hcell" id="hcell12" style="background:rgb(175,185,212); color:#0b1e42"><em>S12</em><b>125</b>
+        <div class="pp"><span style="background:rgb(187,195,219); color:#0b1e42">23<i>56</i></span><span style="background:rgb(169,179,208); color:#0b1e42">24<i>69</i></span></div></div><div class="hcell" id="hcell13" style="background:rgb(197,205,225); color:#0b1e42"><em>S13</em><b>99</b>
+        <div class="pp"><span style="background:rgb(191,199,221); color:#0b1e42">25<i>53</i></span><span style="background:rgb(200,208,227); color:#0b1e42">26<i>46</i></span></div></div><div class="hcell" id="hcell14" style="background:rgb(211,218,233); color:#0b1e42"><em>S14</em><b>82</b>
+        <div class="pp"><span style="background:rgb(195,203,224); color:#0b1e42">27<i>50</i></span><span style="background:rgb(219,225,239); color:#0b1e42">28<i>32</i></span></div></div><div class="hcell" id="hcell15" style="background:rgb(210,217,233); color:#0b1e42"><em>S15</em><b>83</b>
+        <div class="pp"><span style="background:rgb(211,218,234); color:#0b1e42">29<i>38</i></span><span style="background:rgb(201,209,228); color:#0b1e42">30<i>45</i></span></div></div><div class="hcell" id="hcell16" style="background:rgb(199,207,226); color:#0b1e42"><em>S16</em><b>96</b>
+        <div class="pp"><span style="background:rgb(195,203,224); color:#0b1e42">31<i>50</i></span><span style="background:rgb(200,208,227); color:#0b1e42">32<i>46</i></span></div></div><div class="hcell" id="hcell17" style="background:rgb(223,229,241); color:#0b1e42"><em>S17</em><b>67</b>
+        <div class="pp"><span style="background:rgb(223,229,241); color:#0b1e42">33<i>29</i></span><span style="background:rgb(211,218,234); color:#0b1e42">34<i>38</i></span></div></div><div class="hcell" id="hcell18" style="background:rgb(199,207,226); color:#0b1e42"><em>S18</em><b>96</b>
+        <div class="pp"><span style="background:rgb(207,214,231); color:#0b1e42">35<i>41</i></span><span style="background:rgb(188,196,219); color:#0b1e42">36<i>55</i></span></div></div><div class="hcell" id="hcell19" style="background:rgb(199,207,226); color:#0b1e42"><em>S19</em><b>96</b>
+        <div class="pp"><span style="background:rgb(189,198,220); color:#0b1e42">37<i>54</i></span><span style="background:rgb(206,213,230); color:#0b1e42">38<i>42</i></span></div></div><div class="hcell" id="hcell20" style="background:rgb(202,209,228); color:#0b1e42"><em>S20</em><b>93</b>
+        <div class="pp"><span style="background:rgb(200,208,227); color:#0b1e42">39<i>46</i></span><span style="background:rgb(199,206,226); color:#0b1e42">40<i>47</i></span></div></div></div>
+      <div class="pstrip" id="pstrip"><i id="pb1" style="height:76.1%; background:rgb(99,114,165)"></i><i id="pb2" style="height:100.0%; background:rgb(48,66,133)"></i><i id="pb3" style="height:77.4%; background:rgb(96,111,163)"></i><i id="pb4" style="height:71.1%; background:rgb(110,124,171)"></i><i id="pb5" style="height:54.1%; background:rgb(146,158,194)"></i><i id="pb6" style="height:64.2%; background:rgb(125,137,180)"></i><i id="pb7" style="height:48.4%; background:rgb(158,169,201)"></i><i id="pb8" style="height:47.8%; background:rgb(160,170,202)"></i><i id="pb9" style="height:41.5%; background:rgb(173,183,210)"></i><i id="pb10" style="height:40.9%; background:rgb(175,184,211)"></i><i id="pb11" style="height:22.6%; background:rgb(214,220,235)"></i><i id="pb12" style="height:30.2%; background:rgb(197,205,225)"></i><i id="pb13" style="height:30.2%; background:rgb(197,205,225)"></i><i id="pb14" style="height:22.0%; background:rgb(215,221,236)"></i><i id="pb15" style="height:27.0%; background:rgb(204,211,229)"></i><i id="pb16" style="height:32.1%; background:rgb(193,201,223)"></i><i id="pb17" style="height:24.5%; background:rgb(210,216,233)"></i><i id="pb18" style="height:37.1%; background:rgb(183,191,216)"></i><i id="pb19" style="height:30.8%; background:rgb(196,204,224)"></i><i id="pb20" style="height:32.1%; background:rgb(193,201,223)"></i><i id="pb21" style="height:31.4%; background:rgb(195,203,224)"></i><i id="pb22" style="height:25.8%; background:rgb(207,214,231)"></i><i id="pb23" style="height:35.2%; background:rgb(187,195,219)"></i><i id="pb24" style="height:43.4%; background:rgb(169,179,208)"></i><i id="pb25" style="height:33.3%; background:rgb(191,199,221)"></i><i id="pb26" style="height:28.9%; background:rgb(200,208,227)"></i><i id="pb27" style="height:31.4%; background:rgb(195,203,224)"></i><i id="pb28" style="height:20.1%; background:rgb(219,225,239)"></i><i id="pb29" style="height:23.9%; background:rgb(211,218,234)"></i><i id="pb30" style="height:28.3%; background:rgb(201,209,228)"></i><i id="pb31" style="height:31.4%; background:rgb(195,203,224)"></i><i id="pb32" style="height:28.9%; background:rgb(200,208,227)"></i><i id="pb33" style="height:18.2%; background:rgb(223,229,241)"></i><i id="pb34" style="height:23.9%; background:rgb(211,218,234)"></i><i id="pb35" style="height:25.8%; background:rgb(207,214,231)"></i><i id="pb36" style="height:34.6%; background:rgb(188,196,219)"></i><i id="pb37" style="height:34.0%; background:rgb(189,198,220)"></i><i id="pb38" style="height:26.4%; background:rgb(206,213,230)"></i><i id="pb39" style="height:28.9%; background:rgb(200,208,227)"></i><i id="pb40" style="height:29.6%; background:rgb(199,206,226)"></i><em class="pse">místo 1 → 40</em></div>
       <div class="hnote" id="hnote"><b>Nejlepší místo 2: 159 ryb</b> · nejslabší místo 33: 29 ryb · Ø 59 na místo</div></section>
   <section id="s-path" class="clip" data-start="63.644" data-duration="20.289" data-track-index="2"><div class="phw dimx" id="ph13"><div class="pb" style="background-image:url(assets/photos/d1_07.jpg)"></div></div><div class="h2"><span>Závod lídrů</span><em>leaders' race · body po kolech</em></div>
-      <div class="race" style="height:553.0px"><div class="rr" id="rr0" style="top:0">
-        <span class="rn">D. Švub</span><span class="rb"><i id="rbi0" style="background:#62d26f; width:496.8px"></i></span><b id="rv0">0</b></div><div class="rr" id="rr1" style="top:0">
-        <span class="rn">D. Zaikin</span><span class="rb"><i id="rbi1" style="background:#a4d65e; width:496.8px"></i></span><b id="rv1">0</b></div><div class="rr" id="rr2" style="top:0">
-        <span class="rn">P. Fabera</span><span class="rb"><i id="rbi2" style="background:#d4d063; width:496.8px"></i></span><b id="rv2">0</b></div><div class="rr" id="rr3" style="top:0">
-        <span class="rn">M. Stoklasa</span><span class="rb"><i id="rbi3" style="background:#f0e05a; width:496.8px"></i></span><b id="rv3">0</b></div><div class="rr" id="rr4" style="top:0">
-        <span class="rn">A. Kulaev</span><span class="rb"><i id="rbi4" style="background:#efc95c; width:496.8px"></i></span><b id="rv4">0</b></div><div class="rr" id="rr5" style="top:0">
-        <span class="rn">V. Bardon</span><span class="rb"><i id="rbi5" style="background:#efa65a; width:496.8px"></i></span><b id="rv5">0</b></div><div class="rr" id="rr6" style="top:0">
-        <span class="rn">R. Smiejkowski</span><span class="rb"><i id="rbi6" style="background:#ef8a5d; width:496.8px"></i></span><b id="rv6">0</b></div><div class="rr" id="rr7" style="top:0">
-        <span class="rn">E. Raus</span><span class="rb"><i id="rbi7" style="background:#ec6a5c; width:496.8px"></i></span><b id="rv7">0</b></div>
+      <div class="race" style="height:583.2px"><div class="rr" id="rr0" style="top:0">
+        <span class="rn">D. Švub</span><span class="rb"><i id="rbi0" style="background:#e31e24; width:496.8px"></i></span><b id="rv0">0</b></div><div class="rr" id="rr1" style="top:0">
+        <span class="rn">D. Zaikin</span><span class="rb"><i id="rbi1" style="background:#304285; width:496.8px"></i></span><b id="rv1">0</b></div><div class="rr" id="rr2" style="top:0">
+        <span class="rn">P. Fabera</span><span class="rb"><i id="rbi2" style="background:#304285; width:496.8px"></i></span><b id="rv2">0</b></div><div class="rr" id="rr3" style="top:0">
+        <span class="rn">M. Stoklasa</span><span class="rb"><i id="rbi3" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv3">0</b></div><div class="rr" id="rr4" style="top:0">
+        <span class="rn">A. Kulaev</span><span class="rb"><i id="rbi4" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv4">0</b></div><div class="rr" id="rr5" style="top:0">
+        <span class="rn">V. Bardon</span><span class="rb"><i id="rbi5" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv5">0</b></div><div class="rr" id="rr6" style="top:0">
+        <span class="rn">R. Smiejkowski</span><span class="rb"><i id="rbi6" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv6">0</b></div><div class="rr" id="rr7" style="top:0">
+        <span class="rn">E. Raus</span><span class="rb"><i id="rbi7" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv7">0</b></div><div class="rr" id="rr8" style="top:0">
+        <span class="rn">S. Lukášek</span><span class="rb"><i id="rbi8" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv8">0</b></div><div class="rr" id="rr9" style="top:0">
+        <span class="rn">I. Novak</span><span class="rb"><i id="rbi9" style="background:#5a6fb8; width:496.8px"></i></span><b id="rv9">0</b></div>
         <div class="rk" id="rk"><span id="rkn">1</span><em>kolo</em></div></div>
       <div class="rmini" id="rmini"><div class="rc" id="rc8" style="position:absolute; inset:0"><div class="rc-n"><span>9. kolo</span></div><div class="rc-f"><b>191</b><span>ryb · 9,6 / min</span></div>
       <div class="rc-b">Nejvíc: <b>Radoslaw Smiejkowski</b> 12 ryb</div></div><div class="rc" id="rc9" style="position:absolute; inset:0"><div class="rc-n"><span>10. kolo</span></div><div class="rc-f"><b>163</b><span>ryb · 8,2 / min</span></div>
@@ -259,49 +266,49 @@
       <div class="rc-b">Nejvíc: <b>Vít Bardon</b> 11 ryb</div></div></div></section>
   <section id="s-scatter" class="clip" data-start="83.933" data-duration="5.534" data-track-index="2"><div class="phw dimx" id="ph14"><div class="pb" style="background-image:url(assets/photos/d1_04.jpg)"></div></div><div class="h2"><span>Ryby ≠ body</span><em>top 10 podle ryb → konečné pořadí</em></div>
       <div class="chart panel slope" style="width:950.4px; height:648.0px"><svg viewBox="0 0 950 648">
-        <text x="342.144" y="32.4" text-anchor="middle" font-size="27" class="ax">ryby</text><text x="608.2560000000001" y="32.4" text-anchor="middle" font-size="27" class="ax">místo</text><line class="sl" id="sl0" x1="342.144" y1="54" x2="608.2560000000001" y2="54" stroke="#9cc8f0" pathLength="1"/>
-        <circle cx="342.144" cy="54" r="7.56" fill="#9cc8f0"/><circle id="sd0" cx="608.2560000000001" cy="54" r="7.56" fill="#9cc8f0"/>
+        <text x="342.144" y="32.4" text-anchor="middle" font-size="27" class="ax">ryby</text><text x="608.2560000000001" y="32.4" text-anchor="middle" font-size="27" class="ax">místo</text><line class="sl" id="sl0" x1="342.144" y1="54" x2="608.2560000000001" y2="54" stroke="#304285" pathLength="1"/>
+        <circle cx="342.144" cy="54" r="7.56" fill="#304285"/><circle id="sd0" cx="608.2560000000001" cy="54" r="7.56" fill="#304285"/>
         <text x="327.024" y="63.45" text-anchor="end" font-size="27" class="nm">Švub · 95</text>
-        <text id="st0" x="623.3760000000001" y="63.45" font-size="27" class="rkt" fill="#9cc8f0">1.</text><line class="sl" id="sl1" x1="342.144" y1="84.12631578947368" x2="608.2560000000001" y2="144.37894736842105" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="84.12631578947368" r="7.56" fill="#ff5a5f"/><circle id="sd1" cx="608.2560000000001" cy="144.37894736842105" r="7.56" fill="#ff5a5f"/>
+        <text id="st0" x="623.3760000000001" y="63.45" font-size="27" class="rkt" fill="#304285">1.</text><line class="sl" id="sl1" x1="342.144" y1="84.12631578947368" x2="608.2560000000001" y2="144.37894736842105" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="84.12631578947368" r="7.56" fill="#e31e24"/><circle id="sd1" cx="608.2560000000001" cy="144.37894736842105" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="93.57631578947368" text-anchor="end" font-size="27" class="nm">Stoklasa · 91</text>
-        <text id="st1" x="623.3760000000001" y="153.82894736842104" font-size="27" class="rkt" fill="#ff5a5f">4.</text><line class="sl" id="sl2" x1="342.144" y1="114.25263157894736" x2="608.2560000000001" y2="566.1473684210526" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="114.25263157894736" r="7.56" fill="#ff5a5f"/><circle id="sd2" cx="608.2560000000001" cy="566.1473684210526" r="7.56" fill="#ff5a5f"/>
+        <text id="st1" x="623.3760000000001" y="153.82894736842104" font-size="27" class="rkt" fill="#e31e24">4.</text><line class="sl" id="sl2" x1="342.144" y1="114.25263157894736" x2="608.2560000000001" y2="566.1473684210526" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="114.25263157894736" r="7.56" fill="#e31e24"/><circle id="sd2" cx="608.2560000000001" cy="566.1473684210526" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="123.70263157894736" text-anchor="end" font-size="27" class="nm">Saska · 82</text>
-        <text id="st2" x="623.3760000000001" y="575.5973684210527" font-size="27" class="rkt" fill="#ff5a5f">18.</text><line class="sl" id="sl3" x1="342.144" y1="144.37894736842105" x2="608.2560000000001" y2="234.75789473684208" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="144.37894736842105" r="7.56" fill="#ff5a5f"/><circle id="sd3" cx="608.2560000000001" cy="234.75789473684208" r="7.56" fill="#ff5a5f"/>
+        <text id="st2" x="623.3760000000001" y="575.5973684210527" font-size="27" class="rkt" fill="#e31e24">18.</text><line class="sl" id="sl3" x1="342.144" y1="144.37894736842105" x2="608.2560000000001" y2="234.75789473684208" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="144.37894736842105" r="7.56" fill="#e31e24"/><circle id="sd3" cx="608.2560000000001" cy="234.75789473684208" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="153.82894736842104" text-anchor="end" font-size="27" class="nm">Smiejkowski · 79</text>
-        <text id="st3" x="623.3760000000001" y="244.20789473684206" font-size="27" class="rkt" fill="#ff5a5f">7.</text><line class="sl" id="sl4" x1="342.144" y1="174.50526315789472" x2="608.2560000000001" y2="445.6421052631579" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="174.50526315789472" r="7.56" fill="#ff5a5f"/><circle id="sd4" cx="608.2560000000001" cy="445.6421052631579" r="7.56" fill="#ff5a5f"/>
+        <text id="st3" x="623.3760000000001" y="244.20789473684206" font-size="27" class="rkt" fill="#e31e24">7.</text><line class="sl" id="sl4" x1="342.144" y1="174.50526315789472" x2="608.2560000000001" y2="445.6421052631579" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="174.50526315789472" r="7.56" fill="#e31e24"/><circle id="sd4" cx="608.2560000000001" cy="445.6421052631579" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="183.9552631578947" text-anchor="end" font-size="27" class="nm">Helman · 76</text>
-        <text id="st4" x="623.3760000000001" y="455.09210526315786" font-size="27" class="rkt" fill="#ff5a5f">14.</text><line class="sl" id="sl5" x1="342.144" y1="204.6315789473684" x2="608.2560000000001" y2="505.89473684210526" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="204.6315789473684" r="7.56" fill="#ff5a5f"/><circle id="sd5" cx="608.2560000000001" cy="505.89473684210526" r="7.56" fill="#ff5a5f"/>
+        <text id="st4" x="623.3760000000001" y="455.09210526315786" font-size="27" class="rkt" fill="#e31e24">14.</text><line class="sl" id="sl5" x1="342.144" y1="204.6315789473684" x2="608.2560000000001" y2="505.89473684210526" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="204.6315789473684" r="7.56" fill="#e31e24"/><circle id="sd5" cx="608.2560000000001" cy="505.89473684210526" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="214.0815789473684" text-anchor="end" font-size="27" class="nm">Bukáček · 76</text>
-        <text id="st5" x="623.3760000000001" y="515.3447368421052" font-size="27" class="rkt" fill="#ff5a5f">16.</text><line class="sl" id="sl6" x1="342.144" y1="234.75789473684208" x2="608.2560000000001" y2="204.6315789473684" stroke="#62d26f" pathLength="1"/>
-        <circle cx="342.144" cy="234.75789473684208" r="7.56" fill="#62d26f"/><circle id="sd6" cx="608.2560000000001" cy="204.6315789473684" r="7.56" fill="#62d26f"/>
+        <text id="st5" x="623.3760000000001" y="515.3447368421052" font-size="27" class="rkt" fill="#e31e24">16.</text><line class="sl" id="sl6" x1="342.144" y1="234.75789473684208" x2="608.2560000000001" y2="204.6315789473684" stroke="#304285" pathLength="1"/>
+        <circle cx="342.144" cy="234.75789473684208" r="7.56" fill="#304285"/><circle id="sd6" cx="608.2560000000001" cy="204.6315789473684" r="7.56" fill="#304285"/>
         <text x="327.024" y="244.20789473684206" text-anchor="end" font-size="27" class="nm">Bardon · 75</text>
-        <text id="st6" x="623.3760000000001" y="214.0815789473684" font-size="27" class="rkt" fill="#62d26f">6.</text><line class="sl" id="sl7" x1="342.144" y1="264.88421052631577" x2="608.2560000000001" y2="626.4" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="264.88421052631577" r="7.56" fill="#ff5a5f"/><circle id="sd7" cx="608.2560000000001" cy="626.4" r="7.56" fill="#ff5a5f"/>
+        <text id="st6" x="623.3760000000001" y="214.0815789473684" font-size="27" class="rkt" fill="#304285">6.</text><line class="sl" id="sl7" x1="342.144" y1="264.88421052631577" x2="608.2560000000001" y2="626.4" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="264.88421052631577" r="7.56" fill="#e31e24"/><circle id="sd7" cx="608.2560000000001" cy="626.4" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="274.33421052631576" text-anchor="end" font-size="27" class="nm">Kučera · 74</text>
-        <text id="st7" x="623.3760000000001" y="635.85" font-size="27" class="rkt" fill="#ff5a5f">24.</text><line class="sl" id="sl8" x1="342.144" y1="295.01052631578943" x2="608.2560000000001" y2="325.13684210526316" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="295.01052631578943" r="7.56" fill="#ff5a5f"/><circle id="sd8" cx="608.2560000000001" cy="325.13684210526316" r="7.56" fill="#ff5a5f"/>
+        <text id="st7" x="623.3760000000001" y="635.85" font-size="27" class="rkt" fill="#e31e24">24.</text><line class="sl" id="sl8" x1="342.144" y1="295.01052631578943" x2="608.2560000000001" y2="325.13684210526316" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="295.01052631578943" r="7.56" fill="#e31e24"/><circle id="sd8" cx="608.2560000000001" cy="325.13684210526316" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="304.4605263157894" text-anchor="end" font-size="27" class="nm">Novak · 70</text>
-        <text id="st8" x="623.3760000000001" y="334.58684210526314" font-size="27" class="rkt" fill="#ff5a5f">10.</text><line class="sl" id="sl9" x1="342.144" y1="325.13684210526316" x2="608.2560000000001" y2="355.2631578947368" stroke="#ff5a5f" pathLength="1"/>
-        <circle cx="342.144" cy="325.13684210526316" r="7.56" fill="#ff5a5f"/><circle id="sd9" cx="608.2560000000001" cy="355.2631578947368" r="7.56" fill="#ff5a5f"/>
+        <text id="st8" x="623.3760000000001" y="334.58684210526314" font-size="27" class="rkt" fill="#e31e24">10.</text><line class="sl" id="sl9" x1="342.144" y1="325.13684210526316" x2="608.2560000000001" y2="355.2631578947368" stroke="#e31e24" pathLength="1"/>
+        <circle cx="342.144" cy="325.13684210526316" r="7.56" fill="#e31e24"/><circle id="sd9" cx="608.2560000000001" cy="355.2631578947368" r="7.56" fill="#e31e24"/>
         <text x="327.024" y="334.58684210526314" text-anchor="end" font-size="27" class="nm">Tosecký · 70</text>
-        <text id="st9" x="623.3760000000001" y="364.7131578947368" font-size="27" class="rkt" fill="#ff5a5f">11.</text></svg></div>
+        <text id="st9" x="623.3760000000001" y="364.7131578947368" font-size="27" class="rkt" fill="#e31e24">11.</text></svg></div>
       <div class="snote" id="snote"><b>Saska: 82 ryb → 18. místo.</b> Body rozhoduje každé kolo, ne součet ryb.</div></section>
   <section id="s-podium" class="clip" data-start="89.467" data-duration="5.533" data-track-index="2"><div class="phw top" id="ph15"><div class="pb" style="background-image:url(assets/photos/d1_02.jpg)"></div></div>
       <div class="t5"><div class="t5r" id="t50"><span class="lp">1</span><span class="ln">Dominik Švub</span><span class="tf">95 ryb</span><b>32 b</b></div><div class="t5r" id="t51"><span class="lp">2</span><span class="ln">Denis Zaikin</span><span class="tf">69 ryb</span><b>31 b</b></div><div class="t5r" id="t52"><span class="lp">3</span><span class="ln">Petr Fabera</span><span class="tf">68 ryb</span><b>31 b</b></div><div class="t5r" id="t53"><span class="lp">4</span><span class="ln">Martin Stoklasa</span><span class="tf">91 ryb</span><b>30 b</b></div><div class="t5r" id="t54"><span class="lp">5</span><span class="ln">Alexandr Kulaev</span><span class="tf">58 ryb</span><b>27 b</b></div></div></section>
   <section id="s-all" class="clip" data-start="95.000" data-duration="11" data-track-index="2"><div class="phw dimx" id="ph16"><div class="pb" style="background-image:url(assets/photos/d1_05.jpg)"></div></div><div class="h2"><span>Výsledky</span><em>Den 1 · kolo po kole</em></div>
-      <div class="qleg"><span><i class="q p3"></i>výhra 3 b</span><span><i class="q p2"></i>remíza s rybou 2 b</span><span><i class="q p0"></i>prohra 0 b</span></div>
+      <div class="qleg"><span><i class="q p3"></i>výhra</span><span><i class="q p2"></i>remíza s rybou</span><span><i class="q p1"></i>0:0</span><span><i class="q p0"></i>prohra</span></div>
       <div class="allw"><div class="allc" id="allc"><div class="allcol"><div class="ar" id="ar1"><span class="ap">1</span><span class="an">D. Švub<i>CZ</i></span><span class="qs"><i class="q p3 hot">22</i><i class="q p3">8</i><i class="q p3">5</i><i class="q p3">8</i><i class="q p3">9</i><i class="q p3">4</i><i class="q p3 hot">16</i><i class="q p3">5</i><i class="q p3">6</i><i class="q p3">6</i><i class="q p0">3</i><i class="q p2">3</i></span><span class="af">95</span><b>32</b></div><div class="ar" id="ar2"><span class="ap">2</span><span class="an">D. Zaikin<i>CZ</i></span><span class="qs"><i class="q p3 hot">10</i><i class="q p3">8</i><i class="q p3">7</i><i class="q p3">4</i><i class="q p3">3</i><i class="q p3">8</i><i class="q p2 hot">14</i><i class="q p2">3</i><i class="q p0">0</i><i class="q p3">5</i><i class="q p3">5</i><i class="q p3">2</i></span><span class="af">69</span><b>31</b></div><div class="ar" id="ar3"><span class="ap">3</span><span class="an">P. Fabera<i>CZ</i></span><span class="qs"><i class="q p2 hot">12</i><i class="q p3">8</i><i class="q p3">7</i><i class="q p2">4</i><i class="q p3">4</i><i class="q p2">3</i><i class="q p3 hot">11</i><i class="q p3">5</i><i class="q p3">1</i><i class="q p2">4</i><i class="q p2">3</i><i class="q p3">6</i></span><span class="af">68</span><b>31</b></div><div class="ar" id="ar4"><span class="ap">4</span><span class="an">M. Stoklasa<i>CZ</i></span><span class="qs"><i class="q p3">8</i><i class="q p3 hot">18</i><i class="q p3">9</i><i class="q p3">7</i><i class="q p3">3</i><i class="q p3">7</i><i class="q p0">2</i><i class="q p3 hot">14</i><i class="q p3 hot">10</i><i class="q p3">6</i><i class="q p0">3</i><i class="q p3">4</i></span><span class="af">91</span><b>30</b></div><div class="ar" id="ar5"><span class="ap">5</span><span class="an">A. Kulaev<i>CZ</i></span><span class="qs"><i class="q p0">3</i><i class="q p3">8</i><i class="q p3">4</i><i class="q p3">6</i><i class="q p3">9</i><i class="q p3">4</i><i class="q p3">3</i><i class="q p0">3</i><i class="q p3">6</i><i class="q p3">4</i><i class="q p3">5</i><i class="q p0">3</i></span><span class="af">58</span><b>27</b></div><div class="ar" id="ar6"><span class="ap">6</span><span class="an">V. Bardon<i>CZ</i></span><span class="qs"><i class="q p0">4</i><i class="q p2">3</i><i class="q p3">9</i><i class="q p3">9</i><i class="q p3 hot">16</i><i class="q p2">3</i><i class="q p3">5</i><i class="q p3">6</i><i class="q p2">2</i><i class="q p0">2</i><i class="q p3">5</i><i class="q p3 hot">11</i></span><span class="af">75</span><b>27</b></div><div class="ar" id="ar7"><span class="ap">7</span><span class="an">R. Smiejkowski<i>PL</i></span><span class="qs"><i class="q p3">9</i><i class="q p3 hot">18</i><i class="q p3 hot">10</i><i class="q p3">5</i><i class="q p3">5</i><i class="q p0">3</i><i class="q p0">3</i><i class="q p3">4</i><i class="q p3 hot">12</i><i class="q p0">1</i><i class="q p3">8</i><i class="q p2">1</i></span><span class="af">79</span><b>26</b></div><div class="ar" id="ar8"><span class="ap">8</span><span class="an">E. Raus<i>CZ</i></span><span class="qs"><i class="q p3">8</i><i class="q p0">3</i><i class="q p0">5</i><i class="q p0">1</i><i class="q p3 hot">10</i><i class="q p3 hot">15</i><i class="q p3">4</i><i class="q p0">0</i><i class="q p3">7</i><i class="q p3">7</i><i class="q p3">2</i><i class="q p3">5</i></span><span class="af">67</span><b>24</b></div><div class="ar" id="ar9"><span class="ap">9</span><span class="an">S. Lukášek<i>CZ</i></span><span class="qs"><i class="q p0">7</i><i class="q p0">7</i><i class="q p2 hot">12</i><i class="q p3">5</i><i class="q p3">6</i><i class="q p3">3</i><i class="q p3">8</i><i class="q p3">3</i><i class="q p0">7</i><i class="q p3">4</i><i class="q p2">3</i><i class="q p2">1</i></span><span class="af">66</span><b>24</b></div><div class="ar" id="ar10"><span class="ap">10</span><span class="an">I. Novak<i>CZ</i></span><span class="qs"><i class="q p3">4</i><i class="q p0">5</i><i class="q p2 hot">12</i><i class="q p3 hot">10</i><i class="q p0">2</i><i class="q p0">6</i><i class="q p3">5</i><i class="q p3">7</i><i class="q p3">3</i><i class="q p3">8</i><i class="q p0">2</i><i class="q p3">6</i></span><span class="af">70</span><b>23</b></div><div class="ar" id="ar11"><span class="ap">11</span><span class="an">R. Tosecký<i>CZ</i></span><span class="qs"><i class="q p3 hot">18</i><i class="q p3">8</i><i class="q p0">2</i><i class="q p2">4</i><i class="q p0">2</i><i class="q p3">2</i><i class="q p0">2</i><i class="q p0 hot">13</i><i class="q p3">5</i><i class="q p3">6</i><i class="q p3">7</i><i class="q p3">1</i></span><span class="af">70</span><b>23</b></div><div class="ar" id="ar12"><span class="ap">12</span><span class="an">M. Horák<i>CZ</i></span><span class="qs"><i class="q p3 hot">12</i><i class="q p3">6</i><i class="q p2 hot">11</i><i class="q p3">4</i><i class="q p3">6</i><i class="q p3">4</i><i class="q p0">1</i><i class="q p3">1</i><i class="q p3">8</i><i class="q p0">7</i><i class="q p0">3</i><i class="q p0">2</i></span><span class="af">65</span><b>23</b></div><div class="ar" id="ar13"><span class="ap">13</span><span class="an">D. Beran<i>CZ</i></span><span class="qs"><i class="q p0">5</i><i class="q p2">4</i><i class="q p2">5</i><i class="q p0">1</i><i class="q p3">3</i><i class="q p0 hot">14</i><i class="q p3">5</i><i class="q p2">2</i><i class="q p2">2</i><i class="q p3">6</i><i class="q p3">5</i><i class="q p3">4</i></span><span class="af">56</span><b>23</b></div><div class="ar" id="ar14"><span class="ap">14</span><span class="an">D. Helman<i>PL</i></span><span class="qs"><i class="q p2">9</i><i class="q p0 hot">14</i><i class="q p0">2</i><i class="q p2">3</i><i class="q p0">2</i><i class="q p3">7</i><i class="q p3">5</i><i class="q p0">4</i><i class="q p3 hot">12</i><i class="q p3">8</i><i class="q p3">4</i><i class="q p3">6</i></span><span class="af">76</span><b>22</b></div><div class="ar" id="ar15"><span class="ap">15</span><span class="an">A. Anpilau<i>BY</i></span><span class="qs"><i class="q p3">7</i><i class="q p0">2</i><i class="q p3">7</i><i class="q p3 hot">11</i><i class="q p3">6</i><i class="q p3">4</i><i class="q p3">5</i><i class="q p3 hot">10</i><i class="q p0">3</i><i class="q p0">1</i><i class="q p0">0</i><i class="q p0">0</i></span><span class="af">56</span><b>21</b></div><div class="ar" id="ar16"><span class="ap">16</span><span class="an">P. Bukáček<i>CZ</i></span><span class="qs"><i class="q p3 hot">11</i><i class="q p0">6</i><i class="q p2 hot">12</i><i class="q p2">3</i><i class="q p0">3</i><i class="q p3">6</i><i class="q p3">6</i><i class="q p2">2</i><i class="q p0">9</i><i class="q p3 hot">11</i><i class="q p0">3</i><i class="q p3">4</i></span><span class="af">76</span><b>21</b></div><div class="ar" id="ar17"><span class="ap">17</span><span class="an">O. Procházka<i>CZ</i></span><span class="qs"><i class="q p0">8</i><i class="q p3">6</i><i class="q p2">5</i><i class="q p0">1</i><i class="q p3">8</i><i class="q p3">6</i><i class="q p2">5</i><i class="q p0">0</i><i class="q p0">4</i><i class="q p2">4</i><i class="q p3">3</i><i class="q p3">3</i></span><span class="af">53</span><b>21</b></div><div class="ar" id="ar18"><span class="ap">18</span><span class="an">M. Saska<i>CZ</i></span><span class="qs"><i class="q p0">8</i><i class="q p0">7</i><i class="q p0">9</i><i class="q p3 hot">14</i><i class="q p0">2</i><i class="q p0">4</i><i class="q p3">8</i><i class="q p3">3</i><i class="q p3">5</i><i class="q p3 hot">12</i><i class="q p2">5</i><i class="q p3">5</i></span><span class="af">82</span><b>20</b></div><div class="ar" id="ar19"><span class="ap">19</span><span class="an">L. Zeman<i>CZ</i></span><span class="qs"><i class="q p3 hot">15</i><i class="q p0">3</i><i class="q p0">2</i><i class="q p0">6</i><i class="q p0">2</i><i class="q p3">3</i><i class="q p2 hot">14</i><i class="q p3">8</i><i class="q p3">5</i><i class="q p3">3</i><i class="q p3">4</i><i class="q p0">1</i></span><span class="af">66</span><b>20</b></div><div class="ar" id="ar20"><span class="ap">20</span><span class="an">M. Solovii<i>UA</i></span><span class="qs"><i class="q p3">9</i><i class="q p3">6</i><i class="q p3">5</i><i class="q p2">3</i><i class="q p0">9</i><i class="q p3">9</i><i class="q p0">3</i><i class="q p3">3</i><i class="q p3">5</i><i class="q p0">3</i><i class="q p0">3</i><i class="q p0">1</i></span><span class="af">59</span><b>20</b></div><div class="ar" id="ar21"><span class="ap">21</span><span class="an">A. GOSCINIAK<i>PL</i></span><span class="qs"><i class="q p0">9</i><i class="q p3">8</i><i class="q p3">2</i><i class="q p3">2</i><i class="q p0">3</i><i class="q p0">0</i><i class="q p3">7</i><i class="q p3 hot">10</i><i class="q p0">1</i><i class="q p2">3</i><i class="q p3">4</i><i class="q p0">3</i></span><span class="af">52</span><b>20</b></div><div class="ar" id="ar22"><span class="ap">22</span><span class="an">L. Filip<i>PL</i></span><span class="qs"><i class="q p0">7</i><i class="q p3 hot">16</i><i class="q p3 hot">10</i><i class="q p3">8</i><i class="q p3">5</i><i class="q p0">2</i><i class="q p0">0</i><i class="q p0">3</i><i class="q p3 hot">11</i><i class="q p3">2</i><i class="q p0">4</i><i class="q p0">2</i></span><span class="af">70</span><b>18</b></div><div class="ar" id="ar23"><span class="ap">23</span><span class="an">M. Vohnout<i>CZ</i></span><span class="qs"><i class="q p0 hot">13</i><i class="q p3">9</i><i class="q p0">3</i><i class="q p2">3</i><i class="q p2">2</i><i class="q p3">5</i><i class="q p2">5</i><i class="q p3">6</i><i class="q p0">4</i><i class="q p0">1</i><i class="q p0">3</i><i class="q p3">3</i></span><span class="af">57</span><b>18</b></div><div class="ar" id="ar24"><span class="ap">24</span><span class="an">M. Kučera<i>CZ</i></span><span class="qs"><i class="q p0 hot">17</i><i class="q p3 hot">10</i><i class="q p3">7</i><i class="q p0">2</i><i class="q p3">4</i><i class="q p2">4</i><i class="q p3">8</i><i class="q p0">8</i><i class="q p0">7</i><i class="q p0">3</i><i class="q p3">3</i><i class="q p0">1</i></span><span class="af">74</span><b>17</b></div><div class="ar" id="ar25"><span class="ap">25</span><span class="an">O. Holas<i>CZ</i></span><span class="qs"><i class="q p0">6</i><i class="q p0">5</i><i class="q p2 hot">12</i><i class="q p0">6</i><i class="q p3">3</i><i class="q p3">5</i><i class="q p3">7</i><i class="q p3">3</i><i class="q p3">4</i><i class="q p0">2</i><i class="q p0">2</i><i class="q p0">3</i></span><span class="af">58</span><b>17</b></div><div class="ar" id="ar26"><span class="ap">26</span><span class="an">P. Zakrzewski<i>PL</i></span><span class="qs"><i class="q p2 hot">12</i><i class="q p0 hot">16</i><i class="q p3">5</i><i class="q p3">4</i><i class="q p0">2</i><i class="q p3">4</i><i class="q p3">3</i><i class="q p0">4</i><i class="q p0">2</i><i class="q p3">4</i><i class="q p0">0</i><i class="q p0">1</i></span><span class="af">57</span><b>17</b></div><div class="ar" id="ar27"><span class="ap">27</span><span class="an">M. Boček<i>CZ</i></span><span class="qs"><i class="q p3">8</i><i class="q p3">9</i><i class="q p0">6</i><i class="q p2">3</i><i class="q p3">6</i><i class="q p3 hot">14</i><i class="q p0">2</i><i class="q p0">0</i><i class="q p0">2</i><i class="q p0">4</i><i class="q p2">5</i><i class="q p0">4</i></span><span class="af">63</span><b>16</b></div><div class="ar" id="ar28"><span class="ap">28</span><span class="an">R. Zapletal<i>CZ</i></span><span class="qs"><i class="q p3">6</i><i class="q p0">9</i><i class="q p2">4</i><i class="q p0">1</i><i class="q p2">2</i><i class="q p0">2</i><i class="q p3">7</i><i class="q p0">4</i><i class="q p0">9</i><i class="q p3">3</i><i class="q p0">1</i><i class="q p3">3</i></span><span class="af">51</span><b>16</b></div><div class="ar" id="ar29"><span class="ap">29</span><span class="an">K. Langner<i>PL</i></span><span class="qs"><i class="q p3">9</i><i class="q p3">6</i><i class="q p0">3</i><i class="q p0">8</i><i class="q p0">2</i><i class="q p2">4</i><i class="q p0">0</i><i class="q p3">3</i><i class="q p0">1</i><i class="q p0">2</i><i class="q p3 hot">10</i><i class="q p0">2</i></span><span class="af">50</span><b>14</b></div><div class="ar" id="ar30"><span class="ap">30</span><span class="an">P. Smirnou<i>PL</i></span><span class="qs"><i class="q p3">5</i><i class="q p2">2</i><i class="q p2">4</i><i class="q p0">3</i><i class="q p0">4</i><i class="q p0">3</i><i class="q p0">6</i><i class="q p3">4</i><i class="q p0">1</i><i class="q p0">4</i><i class="q p0">0</i><i class="q p3">5</i></span><span class="af">41</span><b>13</b></div><div class="ar" id="ar31"><span class="ap">31</span><span class="an">J. Nachlinger<i>CZ</i></span><span class="qs"><i class="q p0">8</i><i class="q p2">4</i><i class="q p0">3</i><i class="q p3">6</i><i class="q p2">2</i><i class="q p0">0</i><i class="q p0">2</i><i class="q p0">2</i><i class="q p0">0</i><i class="q p3">4</i><i class="q p0">4</i><i class="q p3">2</i></span><span class="af">37</span><b>13</b></div><div class="ar" id="ar32"><span class="ap">32</span><span class="an">J. Prax<i>CZ</i></span><span class="qs"><i class="q p2">6</i><i class="q p0">1</i><i class="q p3">4</i><i class="q p0">5</i><i class="q p0">4</i><i class="q p0">7</i><i class="q p0">4</i><i class="q p0">5</i><i class="q p0">3</i><i class="q p0">2</i><i class="q p3">1</i><i class="q p3">3</i></span><span class="af">45</span><b>11</b></div><div class="ar" id="ar33"><span class="ap">33</span><span class="an">O. Kozhan<i>UA</i></span><span class="qs"><i class="q p2">6</i><i class="q p0">3</i><i class="q p2 hot">11</i><i class="q p0">4</i><i class="q p0">3</i><i class="q p0">2</i><i class="q p2">3</i><i class="q p2">3</i><i class="q p0 hot">10</i><i class="q p3">3</i><i class="q p0">0</i><i class="q p0">0</i></span><span class="af">48</span><b>11</b></div><div class="ar" id="ar34"><span class="ap">34</span><span class="an">O. Beznosko<i>CZ</i></span><span class="qs"><i class="q p0 hot">11</i><i class="q p0">7</i><i class="q p0">4</i><i class="q p0">2</i><i class="q p2">9</i><i class="q p0">2</i><i class="q p0">3</i><i class="q p0">0</i><i class="q p3">6</i><i class="q p2">3</i><i class="q p3">5</i><i class="q p0">2</i></span><span class="af">54</span><b>10</b></div><div class="ar" id="ar35"><span class="ap">35</span><span class="an">V. Voroshylo<i>CZ</i></span><span class="qs"><i class="q p0">9</i><i class="q p2">3</i><i class="q p3">5</i><i class="q p3">2</i><i class="q p2">2</i><i class="q p0">4</i><i class="q p0">1</i><i class="q p0">1</i><i class="q p0">3</i><i class="q p0">1</i><i class="q p0">1</i><i class="q p0">0</i></span><span class="af">32</span><b>10</b></div><div class="ar" id="ar36"><span class="ap">36</span><span class="an">V. Targonskiy<i>UA</i></span><span class="qs"><i class="q p0">2</i><i class="q p2">2</i><i class="q p0">3</i><i class="q p2">3</i><i class="q p0">2</i><i class="q p0">3</i><i class="q p0">5</i><i class="q p0">1</i><i class="q p0">2</i><i class="q p0">2</i><i class="q p3">3</i><i class="q p3">2</i></span><span class="af">30</span><b>10</b></div><div class="ar" id="ar37"><span class="ap">37</span><span class="an">B. Hodovanets<i>UA</i></span><span class="qs"><i class="q p0">3</i><i class="q p3">5</i><i class="q p0">0</i><i class="q p0">2</i><i class="q p0">5</i><i class="q p0">1</i><i class="q p0">3</i><i class="q p3">3</i><i class="q p3">5</i><i class="q p0">6</i><i class="q p0">4</i><i class="q p0">1</i></span><span class="af">38</span><b>9</b></div><div class="ar" id="ar38"><span class="ap">38</span><span class="an">M. Hodovanets<i>UA</i></span><span class="qs"><i class="q p2">9</i><i class="q p0">4</i><i class="q p0">3</i><i class="q p0">1</i><i class="q p0">1</i><i class="q p0">3</i><i class="q p0">4</i><i class="q p0">2</i><i class="q p3">2</i><i class="q p0">4</i><i class="q p3">4</i><i class="q p0">4</i></span><span class="af">41</span><b>8</b></div><div class="ar" id="ar39"><span class="ap">39</span><span class="an">Y. Isaiev<i>CZ</i></span><span class="qs"><i class="q p3 hot">10</i><i class="q p0">2</i><i class="q p0">0</i><i class="q p0">4</i><i class="q p0">3</i><i class="q p0">1</i><i class="q p0">1</i><i class="q p0">3</i><i class="q p3">5</i><i class="q p0">2</i><i class="q p0">0</i><i class="q p2">3</i></span><span class="af">34</span><b>8</b></div><div class="ar" id="ar40"><span class="ap">40</span><span class="an">A. Horejsek<i>CZ</i></span><span class="qs"><i class="q p0">6</i><i class="q p0">6</i><i class="q p0">2</i><i class="q p0">5</i><i class="q p2">9</i><i class="q p0">2</i><i class="q p2">3</i><i class="q p0">2</i><i class="q p0">1</i><i class="q p0">0</i><i class="q p3">8</i><i class="q p0">2</i></span><span class="af">46</span><b>7</b></div></div></div></div></section>
   <section id="s-org" class="clip" data-start="106.000" data-duration="4.5" data-track-index="2"><div class="phw org" id="ph17"><div class="pb" style="background-image:url(assets/photos/organizers_lowres.jpg)"></div></div><div class="h2 low"><span>Organizátoři</span><em>organizers · Trout Area CZ</em></div>
       <div class="orgn"><span id="on0">Igor Novák</span><span id="on1">Denis Zaikin</span><span id="on2">Stanislav Lukášek</span><span id="on3">Michal Horák</span></div></section>
   <section id="s-host" class="clip" data-start="110.500" data-duration="4" data-track-index="2"><div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
       <div class="hs" id="hs">Hostitel · Łowisko Klonówiec · a k tomu 14. místo a 76 ryb</div></div></section>
   <section id="s-out" class="clip" data-start="114.500" data-duration="5.5" data-track-index="2"><div class="fin"><div class="fv"><b id="fin-n">2 375</b><span>ryb za den · ≈ 428 kg</span></div>
-      <img class="ta" src="assets/logo-TACR2-ready.png" alt="Trout Area Czech Republic"><div class="fz"><span>Zítra Den 2 · see you again</span></div></div></section>
+      <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · see you again</span></div></div></section>
   <section id="hud" class="clip" data-start="0" data-duration="120" data-track-index="6"><div class="hud">
       <div class="hc"><b id="clk">06:00</b><span id="kolo">prezentace</span></div>
       <div class="hn"><b id="cnt">0</b><span>ulovených ryb · fish caught</span></div>
@@ -312,7 +319,7 @@
   <div id="wipe"><i id="wp0"></i><i id="wp1"></i><i id="wp2"></i><i id="wp3"></i><i id="wp4"></i><i id="wp5"></i><i id="wp6"></i><i id="wp7"></i><i id="wp8"></i><i id="wp9"></i><i id="wp10"></i><i id="wp11"></i><i id="wp12"></i><i id="wp13"></i><i id="wp14"></i><i id="wp15"></i></div>
   <div id="flash"></div>
   <div id="grain"></div>
-  <div id="badge">DRAFT · v7 · 130 BPM placeholder</div>
+  <div id="badge">DRAFT · v8 · 130 BPM placeholder</div>
 </div>
 <script>
   window.__timelines = window.__timelines || {};
@@ -320,8 +327,9 @@
   tl.fromTo("#ph0", {"scale":1,"xPercent":-1.5}, {"scale":1.12,"xPercent":1.5,"duration":3,"ease":"sine.inOut"}, 0.000);
   tl.fromTo("#ph0", {"opacity":0}, {"opacity":1,"duration":0.35,"ease":"power2.out","immediateRender":false}, 0.000);
   tl.fromTo("#ph0 .pb", {scale:1.025}, {scale:1, duration:0.35, ease:"power2.out", immediateRender:false}, 1.846);
-  tl.fromTo("#s-intro .l1:nth-child(1) span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 0.462);
-  tl.fromTo("#s-intro .l1:nth-child(2) span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 0.923);
+  tl.fromTo("#tap-in", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out"}, 0.050);
+  tl.fromTo("#s-intro .l1:nth-child(2) span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 0.462);
+  tl.fromTo("#s-intro .l1:nth-child(3) span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 0.923);
   tl.fromTo("#s-intro .l2 span", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 1.385);
   tl.fromTo("#s-intro .l3 span", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 1.385);
   tl.fromTo("#s-intro .l3.w span", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 1.846);
@@ -754,7 +762,7 @@
   tl.fromTo("#pb40", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 60.467);
   tl.fromTo("#hnote", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 60.923);
   tl.fromTo("#pb2", {"filter":"brightness(1)"}, {"filter":"brightness(1.8)","duration":0.3,"yoyo":true,"repeat":5,"immediateRender":false}, 60.867);
-  tl.fromTo("#hcell1", {"boxShadow":"0 0 0 0 rgba(255,211,107,0)"}, {"boxShadow":"0 0 0 8px rgba(255,211,107,1)","duration":0.3,"yoyo":true,"repeat":5,"ease":"sine.inOut"}, 60.867);
+  tl.fromTo("#hcell1", {"boxShadow":"0 0 0 0 rgba(227,30,36,0)"}, {"boxShadow":"0 0 0 8px rgba(227,30,36,1)","duration":0.3,"yoyo":true,"repeat":5,"ease":"sine.inOut"}, 60.867);
   tl.fromTo("#ph13", {"scale":1.12,"xPercent":1.5}, {"scale":1,"xPercent":-1.5,"duration":20.289,"ease":"sine.inOut"}, 63.644);
   tl.fromTo("#ph13", {"opacity":0}, {"opacity":1,"duration":0.35,"ease":"power2.out","immediateRender":false}, 63.644);
   tl.fromTo("#ph13 .pb", {scale:1.025}, {scale:1, duration:0.35, ease:"power2.out", immediateRender:false}, 64.615);
@@ -774,339 +782,417 @@
   tl.set("#rr0", {y:0.0}, 63.644);
   tl.set("#rbi0", {scaleX:0}, 63.644);
   tl.fromTo("#rr1", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 63.994);
-  tl.set("#rr1", {y:207.4}, 63.644);
+  tl.set("#rr1", {y:233.3}, 63.644);
   tl.set("#rbi1", {scaleX:0}, 63.644);
   tl.fromTo("#rr2", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.044);
-  tl.set("#rr2", {y:345.6}, 63.644);
+  tl.set("#rr2", {y:349.9}, 63.644);
   tl.set("#rbi2", {scaleX:0}, 63.644);
   tl.fromTo("#rr3", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.094);
-  tl.set("#rr3", {y:69.1}, 63.644);
+  tl.set("#rr3", {y:58.3}, 63.644);
   tl.set("#rbi3", {scaleX:0}, 63.644);
   tl.fromTo("#rr4", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.144);
-  tl.set("#rr4", {y:483.8}, 63.644);
+  tl.set("#rr4", {y:524.9}, 63.644);
   tl.set("#rbi4", {scaleX:0}, 63.644);
   tl.fromTo("#rr5", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.194);
-  tl.set("#rr5", {y:414.7}, 63.644);
+  tl.set("#rr5", {y:408.2}, 63.644);
   tl.set("#rbi5", {scaleX:0}, 63.644);
   tl.fromTo("#rr6", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.244);
-  tl.set("#rr6", {y:138.2}, 63.644);
+  tl.set("#rr6", {y:116.6}, 63.644);
   tl.set("#rbi6", {scaleX:0}, 63.644);
   tl.fromTo("#rr7", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.294);
-  tl.set("#rr7", {y:276.5}, 63.644);
+  tl.set("#rr7", {y:291.6}, 63.644);
   tl.set("#rbi7", {scaleX:0}, 63.644);
+  tl.fromTo("#rr8", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.344);
+  tl.set("#rr8", {y:466.6}, 63.644);
+  tl.set("#rbi8", {scaleX:0}, 63.644);
+  tl.fromTo("#rr9", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out"}, 64.394);
+  tl.set("#rr9", {y:175.0}, 63.644);
+  tl.set("#rbi9", {scaleX:0}, 63.644);
   tl.fromTo("#rbi0", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv0", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi1", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr1", {y:233.3}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv1", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi2", {scaleX:0.0000}, {scaleX:0.0606, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr2", {y:345.6}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr2", {y:349.9}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv2", {innerText:0}, {innerText:2, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi3", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv3", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi4", {scaleX:0.0000}, {scaleX:0.0000, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr4", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr4", {y:524.9}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv4", {innerText:0}, {innerText:0, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi5", {scaleX:0.0000}, {scaleX:0.0000, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr5", {y:414.7}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr5", {y:408.2}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv5", {innerText:0}, {innerText:0, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi6", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr6", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr6", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv6", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.fromTo("#rbi7", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
-  tl.fromTo("#rr7", {y:276.5}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rr7", {y:291.6}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
   tl.fromTo("#rv7", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
+  tl.fromTo("#rbi8", {scaleX:0.0000}, {scaleX:0.0000, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
+  tl.fromTo("#rr8", {y:466.6}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rv8", {innerText:0}, {innerText:0, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
+  tl.fromTo("#rbi9", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.344);
+  tl.fromTo("#rr9", {y:175.0}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.344);
+  tl.fromTo("#rv9", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.344);
   tl.set("#rkn", {innerText:1}, 64.344);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 64.344);
   tl.fromTo("#rbi0", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv0", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi1", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr1", {y:233.3}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv1", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi2", {scaleX:0.0606}, {scaleX:0.1515, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr2", {y:345.6}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr2", {y:349.9}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv2", {innerText:2}, {innerText:5, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi3", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv3", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi4", {scaleX:0.0000}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr4", {y:483.8}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr4", {y:524.9}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv4", {innerText:0}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi5", {scaleX:0.0000}, {scaleX:0.0606, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr5", {y:414.7}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr5", {y:408.2}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv5", {innerText:0}, {innerText:2, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi6", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr6", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr6", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv6", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.fromTo("#rbi7", {scaleX:0.0909}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
-  tl.fromTo("#rr7", {y:276.5}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rr7", {y:291.6}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
   tl.fromTo("#rv7", {innerText:3}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
+  tl.fromTo("#rbi8", {scaleX:0.0000}, {scaleX:0.0000, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
+  tl.fromTo("#rr8", {y:466.6}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rv8", {innerText:0}, {innerText:0, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
+  tl.fromTo("#rbi9", {scaleX:0.0909}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.621);
+  tl.fromTo("#rr9", {y:175.0}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.621);
+  tl.fromTo("#rv9", {innerText:3}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.621);
   tl.set("#rkn", {innerText:2}, 64.621);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 64.621);
   tl.fromTo("#rbi0", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv0", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi1", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr1", {y:175.0}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv1", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi2", {scaleX:0.1515}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr2", {y:276.5}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr2", {y:233.3}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv2", {innerText:5}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi3", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv3", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi4", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr4", {y:414.7}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr4", {y:408.2}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv4", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi5", {scaleX:0.0606}, {scaleX:0.1515, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr5", {y:483.8}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr5", {y:466.6}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv5", {innerText:2}, {innerText:5, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi6", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr6", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr6", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv6", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.fromTo("#rbi7", {scaleX:0.0909}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
-  tl.fromTo("#rr7", {y:345.6}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rr7", {y:349.9}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
   tl.fromTo("#rv7", {innerText:3}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
+  tl.fromTo("#rbi8", {scaleX:0.0000}, {scaleX:0.0606, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
+  tl.fromTo("#rr8", {y:524.9}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rv8", {innerText:0}, {innerText:2, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
+  tl.fromTo("#rbi9", {scaleX:0.0909}, {scaleX:0.1515, duration:0.235, ease:"power2.out", immediateRender:false}, 64.897);
+  tl.fromTo("#rr9", {y:291.6}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 64.897);
+  tl.fromTo("#rv9", {innerText:3}, {innerText:5, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 64.897);
   tl.set("#rkn", {innerText:3}, 64.897);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 64.897);
   tl.fromTo("#rbi0", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv0", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi1", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr1", {y:175.0}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv1", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi2", {scaleX:0.2424}, {scaleX:0.3030, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr2", {y:276.5}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr2", {y:233.3}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv2", {innerText:8}, {innerText:10, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi3", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv3", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi4", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr4", {y:345.6}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr4", {y:291.6}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv4", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi5", {scaleX:0.1515}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr5", {y:414.7}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr5", {y:349.9}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv5", {innerText:5}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi6", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr6", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr6", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv6", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.fromTo("#rbi7", {scaleX:0.0909}, {scaleX:0.0909, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rr7", {y:466.6}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
   tl.fromTo("#rv7", {innerText:3}, {innerText:3, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
+  tl.fromTo("#rbi8", {scaleX:0.0606}, {scaleX:0.1515, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
+  tl.fromTo("#rr8", {y:524.9}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rv8", {innerText:2}, {innerText:5, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
+  tl.fromTo("#rbi9", {scaleX:0.1515}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 65.174);
+  tl.fromTo("#rr9", {y:408.2}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.174);
+  tl.fromTo("#rv9", {innerText:5}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.174);
   tl.set("#rkn", {innerText:4}, 65.174);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 65.174);
   tl.fromTo("#rbi0", {scaleX:0.3636}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv0", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi1", {scaleX:0.3636}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr1", {y:175.0}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv1", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi2", {scaleX:0.3030}, {scaleX:0.3939, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr2", {y:276.5}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr2", {y:233.3}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv2", {innerText:10}, {innerText:13, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi3", {scaleX:0.3636}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv3", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi4", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr4", {y:345.6}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr4", {y:291.6}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv4", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi5", {scaleX:0.2424}, {scaleX:0.3333, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr5", {y:414.7}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr5", {y:349.9}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv5", {innerText:8}, {innerText:11, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi6", {scaleX:0.3636}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr6", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr6", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv6", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.fromTo("#rbi7", {scaleX:0.0909}, {scaleX:0.1818, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rr7", {y:524.9}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
   tl.fromTo("#rv7", {innerText:3}, {innerText:6, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
+  tl.fromTo("#rbi8", {scaleX:0.1515}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
+  tl.fromTo("#rr8", {y:466.6}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rv8", {innerText:5}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
+  tl.fromTo("#rbi9", {scaleX:0.2424}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 65.450);
+  tl.fromTo("#rr9", {y:408.2}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.450);
+  tl.fromTo("#rv9", {innerText:8}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.450);
   tl.set("#rkn", {innerText:5}, 65.450);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 65.450);
   tl.fromTo("#rbi0", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv0", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi1", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr1", {y:207.4}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr1", {y:175.0}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv1", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi2", {scaleX:0.3939}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr2", {y:276.5}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr2", {y:233.3}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv2", {innerText:13}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi3", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv3", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi4", {scaleX:0.3636}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr4", {y:345.6}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr4", {y:291.6}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv4", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi5", {scaleX:0.3333}, {scaleX:0.3939, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr5", {y:414.7}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr5", {y:349.9}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv5", {innerText:11}, {innerText:13, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi6", {scaleX:0.4545}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr6", {y:138.2}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr6", {y:116.6}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv6", {innerText:15}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.fromTo("#rbi7", {scaleX:0.1818}, {scaleX:0.2727, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rr7", {y:524.9}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
   tl.fromTo("#rv7", {innerText:6}, {innerText:9, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
+  tl.fromTo("#rbi8", {scaleX:0.2424}, {scaleX:0.3333, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
+  tl.fromTo("#rr8", {y:466.6}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rv8", {innerText:8}, {innerText:11, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
+  tl.fromTo("#rbi9", {scaleX:0.2424}, {scaleX:0.2424, duration:0.235, ease:"power2.out", immediateRender:false}, 65.727);
+  tl.fromTo("#rr9", {y:408.2}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 65.727);
+  tl.fromTo("#rv9", {innerText:8}, {innerText:8, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 65.727);
   tl.set("#rkn", {innerText:6}, 65.727);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 65.727);
   tl.fromTo("#rbi0", {scaleX:0.5455}, {scaleX:0.6364, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv0", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi1", {scaleX:0.5455}, {scaleX:0.6061, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr1", {y:138.2}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr1", {y:116.6}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv1", {innerText:18}, {innerText:20, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi2", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr2", {y:276.5}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr2", {y:233.3}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv2", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi3", {scaleX:0.5455}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr3", {y:69.1}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr3", {y:58.3}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv3", {innerText:18}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi4", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr4", {y:345.6}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr4", {y:291.6}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv4", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi5", {scaleX:0.3939}, {scaleX:0.4848, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr5", {y:414.7}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr5", {y:349.9}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv5", {innerText:13}, {innerText:16, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi6", {scaleX:0.4545}, {scaleX:0.4545, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr6", {y:207.4}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr6", {y:175.0}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv6", {innerText:15}, {innerText:15, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.fromTo("#rbi7", {scaleX:0.2727}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rr7", {y:466.6}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
   tl.fromTo("#rv7", {innerText:9}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
+  tl.fromTo("#rbi8", {scaleX:0.3333}, {scaleX:0.4242, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
+  tl.fromTo("#rr8", {y:408.2}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rv8", {innerText:11}, {innerText:14, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
+  tl.fromTo("#rbi9", {scaleX:0.2424}, {scaleX:0.3333, duration:0.235, ease:"power2.out", immediateRender:false}, 66.003);
+  tl.fromTo("#rr9", {y:524.9}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.003);
+  tl.fromTo("#rv9", {innerText:8}, {innerText:11, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.003);
   tl.set("#rkn", {innerText:7}, 66.003);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 66.003);
   tl.fromTo("#rbi0", {scaleX:0.6364}, {scaleX:0.7273, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv0", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi1", {scaleX:0.6061}, {scaleX:0.6667, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr1", {y:69.1}, {y:69.1, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr1", {y:58.3}, {y:58.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv1", {innerText:20}, {innerText:22, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi2", {scaleX:0.5455}, {scaleX:0.6364, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr2", {y:207.4}, {y:207.4, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr2", {y:175.0}, {y:175.0, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv2", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi3", {scaleX:0.5455}, {scaleX:0.6364, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr3", {y:138.2}, {y:138.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr3", {y:116.6}, {y:116.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv3", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi4", {scaleX:0.5455}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr4", {y:276.5}, {y:414.7, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr4", {y:233.3}, {y:349.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv4", {innerText:18}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi5", {scaleX:0.4848}, {scaleX:0.5758, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr5", {y:345.6}, {y:276.5, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr5", {y:291.6}, {y:233.3, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv5", {innerText:16}, {innerText:19, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi6", {scaleX:0.4545}, {scaleX:0.5455, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr6", {y:414.7}, {y:345.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr6", {y:349.9}, {y:291.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv6", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.fromTo("#rbi7", {scaleX:0.3636}, {scaleX:0.3636, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rr7", {y:466.6}, {y:524.9, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
   tl.fromTo("#rv7", {innerText:12}, {innerText:12, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
+  tl.fromTo("#rbi8", {scaleX:0.4242}, {scaleX:0.5152, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
+  tl.fromTo("#rr8", {y:408.2}, {y:408.2, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rv8", {innerText:14}, {innerText:17, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
+  tl.fromTo("#rbi9", {scaleX:0.3333}, {scaleX:0.4242, duration:0.235, ease:"power2.out", immediateRender:false}, 66.280);
+  tl.fromTo("#rr9", {y:524.9}, {y:466.6, duration:0.235, ease:"power3.inOut", immediateRender:false}, 66.280);
+  tl.fromTo("#rv9", {innerText:11}, {innerText:14, snap:{innerText:1}, duration:0.235, ease:"none", immediateRender:false}, 66.280);
   tl.set("#rkn", {innerText:8}, 66.280);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.235, ease:"back.out(3)", immediateRender:false}, 66.280);
   tl.fromTo("#rbi0", {scaleX:0.7273}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv0", {innerText:24}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi1", {scaleX:0.6667}, {scaleX:0.6667, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr1", {y:69.1}, {y:207.4, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr1", {y:58.3}, {y:175.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv1", {innerText:22}, {innerText:22, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi2", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr2", {y:207.4}, {y:138.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr2", {y:175.0}, {y:116.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv2", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi3", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr3", {y:138.2}, {y:69.1, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr3", {y:116.6}, {y:58.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv3", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi4", {scaleX:0.5455}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr4", {y:414.7}, {y:414.7, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr4", {y:349.9}, {y:349.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv4", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi5", {scaleX:0.5758}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr5", {y:276.5}, {y:345.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr5", {y:233.3}, {y:291.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv5", {innerText:19}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi6", {scaleX:0.5455}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr6", {y:345.6}, {y:276.5, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr6", {y:291.6}, {y:233.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv6", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.fromTo("#rbi7", {scaleX:0.3636}, {scaleX:0.4545, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rr7", {y:524.9}, {y:524.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
   tl.fromTo("#rv7", {innerText:12}, {innerText:15, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
+  tl.fromTo("#rbi8", {scaleX:0.5152}, {scaleX:0.5152, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
+  tl.fromTo("#rr8", {y:408.2}, {y:466.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rv8", {innerText:17}, {innerText:17, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
+  tl.fromTo("#rbi9", {scaleX:0.4242}, {scaleX:0.5152, duration:0.6, ease:"power2.out", immediateRender:false}, 66.833);
+  tl.fromTo("#rr9", {y:466.6}, {y:408.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 66.833);
+  tl.fromTo("#rv9", {innerText:14}, {innerText:17, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 66.833);
   tl.set("#rkn", {innerText:9}, 66.833);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.350, ease:"back.out(3)", immediateRender:false}, 66.833);
   tl.fromTo("#rbi0", {scaleX:0.8182}, {scaleX:0.9091, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv0", {innerText:27}, {innerText:30, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi1", {scaleX:0.6667}, {scaleX:0.7576, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr1", {y:207.4}, {y:207.4, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr1", {y:175.0}, {y:175.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv1", {innerText:22}, {innerText:25, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi2", {scaleX:0.7273}, {scaleX:0.7879, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr2", {y:138.2}, {y:138.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr2", {y:116.6}, {y:116.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv2", {innerText:24}, {innerText:26, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi3", {scaleX:0.7273}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr3", {y:69.1}, {y:69.1, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr3", {y:58.3}, {y:58.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv3", {innerText:24}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi4", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr4", {y:414.7}, {y:276.5, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr4", {y:349.9}, {y:233.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv4", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi5", {scaleX:0.6364}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr5", {y:345.6}, {y:414.7, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr5", {y:291.6}, {y:349.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv5", {innerText:21}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi6", {scaleX:0.6364}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr6", {y:276.5}, {y:345.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr6", {y:233.3}, {y:291.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv6", {innerText:21}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.fromTo("#rbi7", {scaleX:0.4545}, {scaleX:0.5455, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rr7", {y:524.9}, {y:524.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
   tl.fromTo("#rv7", {innerText:15}, {innerText:18, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
+  tl.fromTo("#rbi8", {scaleX:0.5152}, {scaleX:0.6061, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
+  tl.fromTo("#rr8", {y:466.6}, {y:466.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rv8", {innerText:17}, {innerText:20, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
+  tl.fromTo("#rbi9", {scaleX:0.5152}, {scaleX:0.6061, duration:0.6, ease:"power2.out", immediateRender:false}, 72.367);
+  tl.fromTo("#rr9", {y:408.2}, {y:408.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 72.367);
+  tl.fromTo("#rv9", {innerText:17}, {innerText:20, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 72.367);
   tl.set("#rkn", {innerText:10}, 72.367);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.350, ease:"back.out(3)", immediateRender:false}, 72.367);
   tl.fromTo("#rbi0", {scaleX:0.9091}, {scaleX:0.9091, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv0", {innerText:30}, {innerText:30, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi1", {scaleX:0.7576}, {scaleX:0.8485, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr1", {y:207.4}, {y:69.1, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr1", {y:175.0}, {y:58.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv1", {innerText:25}, {innerText:28, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi2", {scaleX:0.7879}, {scaleX:0.8485, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr2", {y:138.2}, {y:138.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr2", {y:116.6}, {y:116.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv2", {innerText:26}, {innerText:28, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi3", {scaleX:0.8182}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr3", {y:69.1}, {y:207.4, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr3", {y:58.3}, {y:175.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv3", {innerText:27}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi4", {scaleX:0.7273}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr4", {y:276.5}, {y:276.5, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr4", {y:233.3}, {y:233.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv4", {innerText:24}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi5", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr5", {y:414.7}, {y:414.7, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr5", {y:349.9}, {y:349.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv5", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi6", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr6", {y:345.6}, {y:345.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr6", {y:291.6}, {y:291.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv6", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.fromTo("#rbi7", {scaleX:0.5455}, {scaleX:0.6364, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rr7", {y:524.9}, {y:466.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
   tl.fromTo("#rv7", {innerText:18}, {innerText:21, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
+  tl.fromTo("#rbi8", {scaleX:0.6061}, {scaleX:0.6667, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
+  tl.fromTo("#rr8", {y:466.6}, {y:408.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rv8", {innerText:20}, {innerText:22, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
+  tl.fromTo("#rbi9", {scaleX:0.6061}, {scaleX:0.6061, duration:0.6, ease:"power2.out", immediateRender:false}, 77.900);
+  tl.fromTo("#rr9", {y:408.2}, {y:524.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 77.900);
+  tl.fromTo("#rv9", {innerText:20}, {innerText:20, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 77.900);
   tl.set("#rkn", {innerText:11}, 77.900);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.350, ease:"back.out(3)", immediateRender:false}, 77.900);
   tl.fromTo("#rbi0", {scaleX:0.9091}, {scaleX:0.9697, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
   tl.fromTo("#rr0", {y:0.0}, {y:0.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv0", {innerText:30}, {innerText:32, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi1", {scaleX:0.8485}, {scaleX:0.9394, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr1", {y:69.1}, {y:69.1, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr1", {y:58.3}, {y:58.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv1", {innerText:28}, {innerText:31, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi2", {scaleX:0.8485}, {scaleX:0.9394, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr2", {y:138.2}, {y:138.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr2", {y:116.6}, {y:116.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv2", {innerText:28}, {innerText:31, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi3", {scaleX:0.8182}, {scaleX:0.9091, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr3", {y:207.4}, {y:207.4, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr3", {y:175.0}, {y:175.0, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv3", {innerText:27}, {innerText:30, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi4", {scaleX:0.8182}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr4", {y:276.5}, {y:345.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr4", {y:233.3}, {y:291.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv4", {innerText:27}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi5", {scaleX:0.7273}, {scaleX:0.8182, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr5", {y:414.7}, {y:276.5, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr5", {y:349.9}, {y:233.3, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv5", {innerText:24}, {innerText:27, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi6", {scaleX:0.7273}, {scaleX:0.7879, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr6", {y:345.6}, {y:414.7, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr6", {y:291.6}, {y:349.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv6", {innerText:24}, {innerText:26, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.fromTo("#rbi7", {scaleX:0.6364}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
-  tl.fromTo("#rr7", {y:483.8}, {y:483.8, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rr7", {y:466.6}, {y:408.2, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
   tl.fromTo("#rv7", {innerText:21}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
+  tl.fromTo("#rbi8", {scaleX:0.6667}, {scaleX:0.7273, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
+  tl.fromTo("#rr8", {y:408.2}, {y:466.6, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rv8", {innerText:22}, {innerText:24, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
+  tl.fromTo("#rbi9", {scaleX:0.6061}, {scaleX:0.6970, duration:0.6, ease:"power2.out", immediateRender:false}, 83.433);
+  tl.fromTo("#rr9", {y:524.9}, {y:524.9, duration:0.6, ease:"power3.inOut", immediateRender:false}, 83.433);
+  tl.fromTo("#rv9", {innerText:20}, {innerText:23, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, 83.433);
   tl.set("#rkn", {innerText:12}, 83.433);
   tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:0.350, ease:"back.out(3)", immediateRender:false}, 83.433);
-  tl.fromTo("#rr0", {"backgroundColor":"rgba(5,13,34,.0)"}, {"backgroundColor":"rgba(98,210,111,.28)","duration":0.3,"yoyo":true,"repeat":3,"immediateRender":false}, 84.133);
+  tl.fromTo("#rr0", {"backgroundColor":"rgba(227,30,36,0)"}, {"backgroundColor":"rgba(227,30,36,.18)","duration":0.3,"yoyo":true,"repeat":3,"immediateRender":false}, 84.133);
   tl.fromTo("#rc8", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out"}, 64.751);
   tl.fromTo("#rc8", {"opacity":1}, {"opacity":0,"duration":0.25,"immediateRender":false}, 70.035);
   tl.fromTo("#rc9", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out"}, 70.285);
@@ -1228,7 +1314,7 @@
   tl.fromTo("#s-all .q:nth-child(10)", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.3,"ease":"back.out(2.5)","stagger":0.012}, 97.460);
   tl.fromTo("#s-all .q:nth-child(11)", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.3,"ease":"back.out(2.5)","stagger":0.012}, 97.600);
   tl.fromTo("#s-all .q:nth-child(12)", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.3,"ease":"back.out(2.5)","stagger":0.012}, 97.740);
-  tl.fromTo("#s-all .ar:nth-child(-n+3) .q.p3", {"boxShadow":"0 0 0 0 rgba(255,211,107,0)"}, {"boxShadow":"0 0 0 3px rgba(255,211,107,.95)","duration":0.3,"yoyo":true,"repeat":3,"immediateRender":false}, 98.400);
+  tl.fromTo("#s-all .ar:nth-child(-n+3) .q.p3", {"boxShadow":"0 0 0 0 rgba(227,30,36,0)"}, {"boxShadow":"0 0 0 3px rgba(227,30,36,.95)","duration":0.3,"yoyo":true,"repeat":3,"immediateRender":false}, 98.400);
   tl.fromTo("#allc", {"y":0}, {"y":-582.6600000000001,"duration":6.6,"ease":"sine.inOut"}, 98.600);
   tl.fromTo("#ph17", {"scale":1.12,"xPercent":1.5}, {"scale":1,"xPercent":-1.5,"duration":4.5,"ease":"sine.inOut"}, 106.000);
   tl.fromTo("#ph17", {"opacity":0}, {"opacity":1,"duration":0.35,"ease":"power2.out","immediateRender":false}, 106.000);
@@ -1244,7 +1330,7 @@
   tl.fromTo("#s-host .hn span", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out"}, 111.231);
   tl.fromTo("#hs", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 112.154);
   tl.fromTo("#s-out .fv", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 114.923);
-  tl.fromTo("#s-out .ta", {"opacity":0,"scale":0.9}, {"opacity":1,"scale":1,"duration":0.6,"ease":"back.out(1.5)"}, 115.362);
+  tl.fromTo("#tap-out", {"opacity":0,"scale":0.9}, {"opacity":1,"scale":1,"duration":0.6,"ease":"back.out(1.5)"}, 115.362);
   tl.fromTo("#s-out .fz", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 116.308);
   tl.fromTo("#gh-end", {"opacity":0}, {"opacity":0.6,"duration":0.8}, 114.500);
   tl.fromTo("#gh-end .gh-ring", {"rotation":0}, {"rotation":140,"duration":5.5,"ease":"none"}, 114.500);

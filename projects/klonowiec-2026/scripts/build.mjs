@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v7';
+const VER = process.env.VER || 'v8';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -40,7 +40,7 @@ const A = D.anglers;
 const name = (a) => `${a.first} ${a.last}`;
 const bestOfRound = (k) => A.reduce((m, a) => (a.rounds[k].fish > m.rounds[k].fish ? a : m), A[0]);
 const cum = (a, k) => a.rounds.slice(0, k + 1).reduce((s, r) => s + r.pts, 0);
-const LEAD = [...A].sort((x, y) => x.rank - y.rank).slice(0, 8);
+const LEAD = [...A].sort((x, y) => x.rank - y.rank).slice(0, 10);
 const TOP5 = LEAD.slice(0, 5);
 const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 const CTRY = Object.entries(A.reduce((m, a) => ((m[a.country] = (m[a.country] || 0) + 1), m), {})).sort((a, b) => b[1] - a[1]);
@@ -77,9 +77,9 @@ function build(W, H, file) {
     const a = 0, b = tOf('06:30');
     scene('s-intro', a, b, `
       <div class="aer">${photo('aerial', a, b)}</div>
-      <div class="ttl"><div class="l1"><span>OPĚT</span></div><div class="l1 red"><span>POLSKO</span></div>
+      <div class="ttl"><div class="tap" id="tap-in"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="l1"><span>OPĚT</span></div><div class="l1 red"><span>POLSKO</span></div>
         <div class="l2"><span>Klonowiec Trout Area Cup · podzim 2026</span></div><div class="l3"><span>Den 1 · sobota 10. 10. 2026 · Łowisko Klonówiec</span></div><div class="l3 w"><span>${D.weather.min}–${D.weather.max} °C · déšť ${D.weather.rain_pct} % · vítr ${D.weather.wind_ms} m/s</span></div></div>`);
-    rise('#s-intro .l1:nth-child(1) span', a + 0.2, 0.5); rise('#s-intro .l1:nth-child(2) span', a + 0.2 + BEAT, 0.5);
+    T('#tap-in', { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, 0.05); rise('#s-intro .l1:nth-child(2) span', a + 0.2, 0.5); rise('#s-intro .l1:nth-child(3) span', a + 0.2 + BEAT, 0.5);
     fade('#s-intro .l2 span', a + BEAT * 2.5); fade('#s-intro .l3 span', a + BEAT * 3); fade('#s-intro .l3.w span', a + BEAT * 3.5);
   }
   // ===== 2) zarybnění 06:40–07:20 =====
@@ -142,15 +142,17 @@ function build(W, H, file) {
     T('#thx', { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, a + 1.4);
     T('#thx span', { color: '#eef2f9' }, { color: '#ffd36b', duration: 0.25, yoyo: true, repeat: 3 }, a + 2.1);
     const SEC = D.fish_per_sector, smax = Math.max(...Object.values(SEC)), smin = Math.min(...Object.values(SEC));
-    const heat = (v) => { const t = (v - smin) / (smax - smin); return `hsl(${(8 + t * 110).toFixed(0)} 72% ${(52 + t * 4).toFixed(0)}%)`; };
+    const mix = (t) => { const c0 = [223, 229, 241], c1 = [48, 66, 133]; return `rgb(${c0.map((v, i) => Math.round(v + (c1[i] - v) * t)).join(',')})`; };
+    const heat = (v) => mix((v - smin) / (smax - smin));
+    const ink = (v, lo, hi) => ((v - lo) / (hi - lo) > 0.45 ? '#eef2f9' : '#0b1e42');
     const order = P ? Array.from({ length: 20 }, (_, i) => i + 1) : [...Array.from({ length: 10 }, (_, i) => 11 + i), ...Array.from({ length: 10 }, (_, i) => 10 - i)];
     const PL = {}; A.forEach((x) => x.rounds.forEach((r) => (PL[r.sec] = (PL[r.sec] || 0) + r.fish)));
     const pmax = Math.max(...Object.values(PL)), pmin = Math.min(...Object.values(PL));
     const best = Object.entries(PL).sort((p, q) => q[1] - p[1])[0], worst = Object.entries(PL).sort((p, q) => p[1] - q[1])[0];
-    const pcol = (v) => { const t = (v - pmin) / (pmax - pmin); return `hsl(${(8 + t * 110).toFixed(0)} 72% ${(50 + t * 6).toFixed(0)}%)`; };
+    const pcol = (v) => mix((v - pmin) / (pmax - pmin));
     scene('s-mid', m, b, `${photo('d1_08', m, b, 'dimx')}<div class="h2"><span>${P ? 'Sektory' : 'Sektory a místa'}</span><em>${P ? 'a místa · 20 sektorů · 40 míst' : '20 sektorů · 40 míst · ryby za 12 kol'}</em></div>
-      <div class="heat">${order.map((n) => `<div class="hcell" id="hcell${n}" style="background:${heat(SEC[n])}"><em>S${n}</em><b>${SEC[n]}</b>
-        <div class="pp"><span style="background:${pcol(PL[2 * n - 1])}">${2 * n - 1}<i>${PL[2 * n - 1]}</i></span><span style="background:${pcol(PL[2 * n])}">${2 * n}<i>${PL[2 * n]}</i></span></div></div>`).join('')}</div>
+      <div class="heat">${order.map((n) => `<div class="hcell" id="hcell${n}" style="background:${heat(SEC[n])}; color:${ink(SEC[n], smin, smax)}"><em>S${n}</em><b>${SEC[n]}</b>
+        <div class="pp"><span style="background:${pcol(PL[2 * n - 1])}; color:${ink(PL[2 * n - 1], pmin, pmax)}">${2 * n - 1}<i>${PL[2 * n - 1]}</i></span><span style="background:${pcol(PL[2 * n])}; color:${ink(PL[2 * n], pmin, pmax)}">${2 * n}<i>${PL[2 * n]}</i></span></div></div>`).join('')}</div>
       <div class="pstrip" id="pstrip">${Array.from({ length: 40 }, (_, i) => `<i id="pb${i + 1}" style="height:${((PL[i + 1] / pmax) * 100).toFixed(1)}%; background:${pcol(PL[i + 1])}"></i>`).join('')}<em class="pse">místo 1 → 40</em></div>
       <div class="hnote" id="hnote"><b>Nejlepší místo ${best[0]}: ${best[1]} ryb</b> · nejslabší místo ${worst[0]}: ${worst[1]} ryb · Ø ${Math.round(TOTAL / 40)} na místo</div>`);
     rise('#s-mid .h2 span', m + 0.1); fade('#s-mid .h2 em', m + 0.3);
@@ -159,19 +161,19 @@ function build(W, H, file) {
     for (let i = 1; i <= 40; i++) T(`#pb${i}`, { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'power3.out' }, m + 3.0 + i * 0.03);
     fade('#hnote', m + 4.4);
     T(`#pb${best[0]}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8)', duration: 0.3, yoyo: true, repeat: 5, immediateRender: false }, m + 4.6);
-    T('#hcell1', { boxShadow: '0 0 0 0 rgba(255,211,107,0)' }, { boxShadow: `0 0 0 ${px(0.7)} rgba(255,211,107,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, m + 4.6);
+    T('#hcell1', { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.7)} rgba(227,30,36,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, m + 4.6);
   }
   // ===== 7) kola 9–12: závod lídrů — bar chart race po kolech =====
   {
     const a = tOf('12:40'), b = tOf('14:30');
-    const COL = ['#62d26f', '#a4d65e', '#d4d063', '#f0e05a', '#efc95c', '#efa65a', '#ef8a5d', '#ec6a5c'];
-    const rowH = P ? 6.4 * u : 5.4 * u, BW = P ? 46 * u : W * 0.4, maxP = 33;
+    const COL = LEAD.map((x, j) => (j === 0 ? '#e31e24' : j < 3 ? '#304285' : '#5a6fb8'));
+    const rowH = P ? 5.4 * u : 4.6 * u, BW = P ? 46 * u : W * 0.4, maxP = 33;
     // časy stavů: kola 1–8 rychlý replay v první třetině, 9–12 přesně na konci kola
     const iv = Math.min(0.4, (R[8].b - 0.5 - a - 0.7) / 9);
     const ts = R.map((r, k) => (k < 8 ? a + 0.7 + k * iv : r.b - 0.5));
     const rankAt = (k) => [...LEAD].sort((x, y) => cum(y, k) - cum(x, k) || y.fish - x.fish).map((x) => x.last);
     scene('s-path', a, b, `${photo('d1_07', a, b, 'dimx')}<div class="h2"><span>Závod lídrů</span><em>leaders' race · body po kolech</em></div>
-      <div class="race" style="height:${f(rowH * 8)}">${LEAD.map((x, j) => `<div class="rr" id="rr${j}" style="top:0">
+      <div class="race" style="height:${f(rowH * 10)}">${LEAD.map((x, j) => `<div class="rr" id="rr${j}" style="top:0">
         <span class="rn">${x.first[0]}. ${x.last}</span><span class="rb"><i id="rbi${j}" style="background:${COL[j]}; width:${f(BW)}"></i></span><b id="rv${j}">0</b></div>`).join('')}
         <div class="rk" id="rk"><span id="rkn">1</span><em>kolo</em></div></div>
       <div class="rmini" id="rmini">${[8, 9, 10, 11].map((k) => roundCard(k).replace(`id="rc${k}"`, `id="rc${k}" style="position:absolute; inset:0"`)).join('')}</div>`);
@@ -191,7 +193,7 @@ function build(W, H, file) {
       out.push(`tl.set("#rkn", {innerText:${k + 1}}, ${t.toFixed(3)});`);
       out.push(`tl.fromTo("#rk", {scale:1.25}, {scale:1, duration:${Math.min(0.35, k < 8 ? iv * 0.85 : 0.35).toFixed(3)}, ease:"back.out(3)", immediateRender:false}, ${t.toFixed(3)});`);
     });
-    T('#rr0', { backgroundColor: 'rgba(5,13,34,.0)' }, { backgroundColor: 'rgba(98,210,111,.28)', duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, R[11].b + 0.2);
+    T('#rr0', { backgroundColor: 'rgba(227,30,36,0)' }, { backgroundColor: 'rgba(227,30,36,.18)', duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, R[11].b + 0.2);
     [8, 9, 10, 11].forEach((k, i) => {
       const tc = R[k].a + (R[k].b - R[k].a) * 0.3, nx = i < 3 ? R[k + 1].a + (R[k + 1].b - R[k + 1].a) * 0.3 : b;
       T(`#rc${k}`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tc);
@@ -203,11 +205,11 @@ function build(W, H, file) {
     const a = tOf('14:30'), b = tOf('15:00');
     const byFish = [...A].sort((x, y) => y.fish - x.fish || x.rank - y.rank), fr = (x) => byFish.indexOf(x) + 1;
     const SEL = byFish.slice(0, 10);
-    const CW = P ? 88 * u : W * 0.6, CH = P ? 60 * u : scH * 0.72, xl = CW * 0.36, xr = CW * 0.64, pt = 5 * u, pb = 2 * u;
+    const CW = P ? 88 * u : W * 0.6, CH = P ? 60 * u : scH * 0.62, xl = CW * 0.36, xr = CW * 0.64, pt = 5 * u, pb = 2 * u;
     const yy = (r) => pt + ((r - 1) / 19) * (CH - pt - pb);
     const fs = P ? 2.5 * u : 1.8 * u;
     const rows = SEL.map((x, i) => {
-      const up = x.rank < fr(x), c = x.rank === fr(x) ? '#9cc8f0' : up ? '#62d26f' : '#ff5a5f', y2 = yy(Math.min(x.rank, 20));
+      const up = x.rank < fr(x), c = x.rank === fr(x) ? '#304285' : up ? '#304285' : '#e31e24', y2 = yy(Math.min(x.rank, 20));
       return `<line class="sl" id="sl${i}" x1="${xl}" y1="${yy(fr(x))}" x2="${xr}" y2="${y2}" stroke="${c}" pathLength="1"/>
         <circle cx="${xl}" cy="${yy(fr(x))}" r="${0.7 * u}" fill="${c}"/><circle id="sd${i}" cx="${xr}" cy="${y2}" r="${0.7 * u}" fill="${c}"/>
         <text x="${xl - 1.4 * u}" y="${yy(fr(x)) + fs * 0.35}" text-anchor="end" font-size="${fs}" class="nm">${x.last} · ${x.fish}</text>
@@ -244,13 +246,13 @@ function build(W, H, file) {
     const cols = P ? [S] : [S.slice(0, 20), S.slice(20)];
     const sq = (r) => `<i class="q p${r.pts}${r.fish >= 10 ? ' hot' : ''}">${r.fish}</i>`;
     scene('s-all', ta, tb, `${photo('d1_05', ta, tb, 'dimx')}<div class="h2"><span>${P ? 'Výsledky' : 'Výsledky · Den 1'}</span><em>${P ? 'Den 1 · kolo po kole' : 'všech 40 · kolo po kole · ryby v kole'}</em></div>
-      <div class="qleg"><span><i class="q p3"></i>výhra 3 b</span><span><i class="q p2"></i>remíza s rybou 2 b</span><span><i class="q p0"></i>prohra 0 b</span></div>
+      <div class="qleg"><span><i class="q p3"></i>výhra${P ? "" : " 3 b."}</span><span><i class="q p2"></i>remíza s rybou${P ? "" : " 2 b."}</span><span><i class="q p1"></i>0:0${P ? "" : " 1 b."}</span><span><i class="q p0"></i>prohra</span></div>
       <div class="allw"><div class="allc" id="allc">${cols.map((c) => `<div class="allcol">${c.map((x) => `<div class="ar" id="ar${x.rank}"><span class="ap">${x.rank}</span><span class="an">${x.first[0]}. ${x.last}<i>${x.country}</i></span><span class="qs">${x.rounds.map(sq).join('')}</span><span class="af">${x.fish}</span><b>${x.pts}</b></div>`).join('')}</div>`).join('')}</div></div>`);
     rise('#s-all .h2 span', ta + 0.1); fade('#s-all .h2 em', ta + 0.3); fade('#s-all .qleg', ta + 0.5);
     S.forEach((x, i) => T(`#ar${x.rank}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, ta + 0.5 + (P ? i : i % 20) * 0.04 + (P ? 0 : Math.floor(i / 20) * 0.25)));
     // čtverce vyskakují vlnou po kolech (sloupcích)
     for (let k = 0; k < 12; k++) T(`#s-all .q:nth-child(${k + 1})`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.5)', stagger: 0.012 }, ta + 1.2 + k * 0.14);
-    T('#s-all .ar:nth-child(-n+3) .q.p3', { boxShadow: '0 0 0 0 rgba(255,211,107,0)' }, { boxShadow: `0 0 0 ${px(0.3)} rgba(255,211,107,.95)`, duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, ta + 3.4);
+    T('#s-all .ar:nth-child(-n+3) .q.p3', { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.3)} rgba(227,30,36,.95)`, duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, ta + 3.4);
     if (P) { const rowH = 4.15 * u, vis = Math.floor((SC.bot - SC.top - 24 * u) / rowH); T('#allc', { y: 0 }, { y: -(40 - vis) * rowH, duration: tb - ta - 4.4, ease: 'sine.inOut' }, ta + 3.6); }
   }
   // ===== 10) tail: organizátoři · David · outro =====
@@ -265,8 +267,8 @@ function build(W, H, file) {
       <div class="hs" id="hs">Hostitel · Łowisko Klonówiec · a k tomu ${h.rank}. místo a ${h.fish} ryb</div></div>`);
     rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2);
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">${fmt(TOTAL)}</b><span>ryb za den · ≈ ${Math.round(TOTAL * 0.18)} kg</span></div>
-      <img class="ta" src="assets/logo-TACR2-ready.png" alt="Trout Area Czech Republic"><div class="fz"><span>Zítra Den 2 · see you again</span></div></div>`);
-    fade('#s-out .fv', t2 + 0.1); T('#s-out .ta', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
+      <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · see you again</span></div></div>`);
+    fade('#s-out .fv', t2 + 0.1); T('#tap-out', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
     T('#gh-end', { opacity: 0 }, { opacity: 0.6, duration: 0.8 }, DUR - 5.5);
     T('#gh-end .gh-ring', { rotation: 0 }, { rotation: 140, duration: 5.5, ease: 'none' }, DUR - 5.5);
   }
@@ -394,7 +396,7 @@ function build(W, H, file) {
   .clip > .phw.org { left:${P ? '0' : '44%'}; right:${P ? '0' : '4%'}; ${P ? `top:${f(SC.top + 16 * u)}; height:${f(scH * 0.62)};` : ''} }
   .phw.org .pb { background-size:contain; background-repeat:no-repeat; background-position:50% 30%; }
   .aer { position:absolute; inset:0; }
-  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:${f(P ? H * 0.5 : 0)}; height:${f(P ? H * 0.32 : H)}; }
+  .aer .phw { position:absolute; left:0; right:0; overflow:hidden; top:${f(P ? H * 0.6 : 0)}; height:${f(P ? H * 0.3 : H)}; }
   .aer .phw .pb { ${P ? '' : 'filter:brightness(.42) saturate(.9);'} }
   .h2 { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + 1 * u)}; }
   .h2.low { ${P ? '' : `top:${f(SC.top + 14 * u)}; right:58%;`} }
@@ -423,9 +425,9 @@ function build(W, H, file) {
   .cb:first-child .cbar i { background:linear-gradient(90deg, #b5121a, var(--red)); }
 
   .heat { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + (P ? 20 : 16) * u)}; display:grid; grid-template-columns:repeat(${P ? 4 : 10}, 1fr); gap:${px(P ? 1.4 : 1)}; }
-  .hcell { border-radius:${px(1)}; padding:${px(P ? 1.4 : 1)} ${px(0.8)} ${px(0.8)}; text-align:center; color:#0b1e42; }
+  .hcell { border-radius:${px(1)}; padding:${px(P ? 1.4 : 1)} ${px(0.8)} ${px(0.8)}; text-align:center; box-shadow:0 ${px(0.4)} ${px(1.4)} rgba(0,0,0,.25); }
   .pp { display:grid; grid-template-columns:1fr 1fr; gap:${px(0.4)}; margin-top:${px(0.6)}; }
-  .pp span { border-radius:${px(0.5)}; font-family:Montserrat; font-weight:700; font-size:${px(P ? 1.7 : 1.25)}; color:#0b1e42; padding:${px(0.3)} 0; box-shadow:inset 0 0 0 ${px(0.15)} rgba(5,13,34,.35); }
+  .pp span { border-radius:${px(0.5)}; font-family:Montserrat; font-weight:700; font-size:${px(P ? 1.7 : 1.25)}; padding:${px(0.3)} 0; box-shadow:inset 0 0 0 ${px(0.15)} rgba(238,242,249,.35); }
   .pp span i { display:block; font-style:normal; font-weight:900; font-size:1.25em; }
   .pstrip { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + (P ? 14 : 11) * u)}; height:${px(P ? 9 : 7)}; display:flex; align-items:flex-end; gap:${px(0.35)}; }
   .pstrip i { flex:1; border-radius:${px(0.3)} ${px(0.3)} 0 0; transform-origin:bottom; }
@@ -437,26 +439,28 @@ function build(W, H, file) {
   .dots i { display:block; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a8d, var(--red)); }
   .dots em { grid-column:1 / -1; font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.6 : 1.8)}; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:${px(0.8)}; }
   .race { position:absolute; left:${px(6)}; right:${px(P ? 6 : 42)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
-  .rr { position:absolute; left:0; right:0; height:${px(P ? 5.4 : 4.6)}; display:grid; grid-template-columns:${px(P ? 27 : 21)} auto ${px(P ? 7 : 5)}; align-items:center; gap:${px(1.4)}; border-radius:${px(1)}; padding:0 ${px(1)}; }
+  .race::before { content:''; position:absolute; left:${px(-2)}; right:${px(-2)}; top:${px(-1.6)}; bottom:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(2)}; }
+  .race .rr, .race .rn, .race .rr b { color:#0b1e42; }
+  .rr { position:absolute; left:0; right:0; height:${px(P ? 4.8 : 4.1)}; display:grid; grid-template-columns:${px(P ? 27 : 21)} auto ${px(P ? 7 : 5)}; align-items:center; gap:${px(1.4)}; border-radius:${px(1)}; padding:0 ${px(1)}; }
   .rn { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.2 : 2.4)}; white-space:nowrap; }
   .rb i { display:block; height:${px(P ? 3.6 : 3)}; border-radius:0 ${px(1)} ${px(1)} 0; transform-origin:left; }
   .rr b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 4 : 3)}; }
-  .rk { position:absolute; right:${px(P ? 0 : -34)}; top:${P ? f(6.4 * u * 8 + 3 * u) : px(22)}; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 12)}; line-height:1; color:var(--gold); }
+  .rk { position:absolute; right:${px(P ? 0 : -34)}; top:${P ? f(5.4 * u * 10 + 3 * u) : px(22)}; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 12)}; line-height:1; color:var(--red); }
   .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.4 : 2)}; letter-spacing:.2em; text-transform:uppercase; }
-  .slope .sl { stroke-width:${px(0.4)}; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:var(--ice); font-weight:700; } .slope text.rkt { font-weight:900; }
+  .slope .sl { stroke-width:${px(0.4)}; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:#0b1e42; font-weight:700; } .slope text.rkt { font-weight:900; }
   .snote { position:absolute; left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}; font-size:${px(P ? 3.6 : 2.6)}; } .snote b { font-family:Montserrat; font-weight:900; color:var(--gold); }
   .allw { position:absolute; left:${px(5)}; right:${px(5)}; top:${f(SC.top + (P ? 20 : 16) * u)}; bottom:${f(H - SC.bot + 1 * u)}; overflow:hidden; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 85%, transparent 100%);' : ''} }
-  .allw { background:rgba(5,13,34,.72); border-radius:${px(1.6)}; padding:${px(0.8)} ${px(1.6)}; }
+  .allw { background:rgba(238,242,249,.96); color:#0b1e42; border-radius:${px(1.6)}; padding:${px(0.8)} ${px(1.6)}; }
   .allc { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; gap:0 ${px(3)}; }
   .ar { display:grid; grid-template-columns:${px(P ? 4.4 : 3)} ${px(P ? 22 : 15)} 1fr ${px(P ? 5 : 3.4)} ${px(P ? 5 : 3.4)}; align-items:center; gap:${px(1)}; height:${px(P ? 4.15 : 3.0)}; border-bottom:${px(0.1)} solid rgba(238,242,249,.08); font-family:Montserrat; }
-  .ap { font-weight:900; font-size:${px(P ? 2.4 : 1.8)}; color:var(--gold); text-align:right; } .an { font-weight:700; font-size:${px(P ? 2.4 : 1.8)}; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:${px(0.8)}; font-size:.8em; }
+  .ap { font-weight:900; font-size:${px(P ? 2.4 : 1.8)}; color:#304285; text-align:right; } .an { font-weight:700; font-size:${px(P ? 2.4 : 1.8)}; white-space:nowrap; overflow:hidden; } .an i { font-style:normal; font-weight:600; opacity:.55; margin-left:${px(0.8)}; font-size:.8em; }
   .qs { display:grid; grid-template-columns:repeat(12, 1fr); gap:${px(0.35)}; }
   .q { display:flex; align-items:center; justify-content:center; aspect-ratio:1; max-height:${px(P ? 3.6 : 2.6)}; border-radius:${px(0.5)}; font-style:normal; font-weight:800; font-size:${px(P ? 1.75 : 1.3)}; color:#06142e; }
-  .q.hot { box-shadow:0 0 ${px(0.6)} rgba(255,255,255,.35); }
-  .q.p3 { background:#3ccf7a; } .q.p2 { background:#f1c24e; } .q.p0 { background:#7a2a33; color:#f3c6c9; }
+  .q.hot { box-shadow:inset 0 0 0 ${px(0.18)} rgba(255,255,255,.55); }
+  .q.p3 { background:#304285; color:#eef2f9; } .q.p2 { background:#8ea2d8; color:#0b1e42; } .q.p1 { background:#dfe5f1; color:#0b1e42; } .q.p0 { background:#e31e24; color:#fff; }
   .qleg { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + (P ? 15.5 : 12.4) * u)}; display:flex; gap:${px(3)}; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.2 : 1.6)}; letter-spacing:.06em; text-transform:uppercase; }
   .qleg span { display:flex; align-items:center; gap:${px(0.8)}; } .qleg .q { width:${px(P ? 2.6 : 1.9)}; height:${px(P ? 2.6 : 1.9)}; }
-  .af { font-weight:800; font-size:${px(P ? 2.4 : 1.8)}; text-align:right; color:#9cc8f0; }
+  .af { font-weight:800; font-size:${px(P ? 2.4 : 1.8)}; text-align:right; color:#304285; }
   .ar b { font-weight:900; font-size:${px(P ? 2.8 : 2)}; text-align:right; }
   .ar:nth-child(-n+3) .ap { color:var(--red); }
   .tag { position:absolute; left:${px(6)}; bottom:${f(H - SC.bot + 4 * u)}; display:flex; align-items:baseline; gap:${px(2)}; }
@@ -485,9 +489,9 @@ function build(W, H, file) {
   .lr b, .t5r b { font-weight:900; font-size:${px(P ? 4.4 : 3)}; text-align:right; }
 
   .chart { position:absolute; left:${px(P ? 4 : 5)}; top:${f(SC.top + (P ? 22 : 16) * u)}; }
-  .chart.panel { background:rgba(5,13,34,.82); border-radius:${px(2)}; border:${px(0.2)} solid rgba(238,242,249,.1); }
+  .chart.panel { background:rgba(238,242,249,.96); border-radius:${px(2)}; border:${px(0.2)} solid rgba(238,242,249,.1); }
   .chart svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-  .chart line { stroke:rgba(238,242,249,.16); stroke-width:${px(0.15)}; } .chart text { fill:rgba(238,242,249,.65); font-family:Montserrat; font-weight:600; } .chart text.ax { fill:var(--gold); }
+  .chart line { stroke:rgba(11,30,66,.14); stroke-width:${px(0.15)}; } .chart text { fill:rgba(11,30,66,.6); font-family:Montserrat; font-weight:600; } .chart text.ax { fill:var(--red); }
   .chart polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
   .le { position:absolute; display:flex; align-items:center; gap:${px(0.8)}; font-family:Montserrat; font-weight:700; white-space:nowrap; }
   .le i { width:${px(1.4)}; height:${px(1.4)}; border-radius:50%; } .le b { color:var(--gold); }
@@ -507,6 +511,9 @@ function build(W, H, file) {
   .hs { font-size:${px(P ? 3.6 : 2.5)}; margin-top:${px(1.6)}; }
   .fin { position:absolute; left:${px(6)}; right:${px(6)}; top:${f(SC.top + scH * 0.12)}; display:flex; flex-direction:column; align-items:center; gap:${px(3)}; text-align:center; }
   .fv b { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 18 : 12)}; color:var(--red); line-height:1; } .fv span { font-family:Montserrat; font-weight:700; font-size:${px(P ? 3.8 : 2.6)}; letter-spacing:.1em; text-transform:uppercase; }
+  .tap { display:inline-block; background:#fff; border-radius:${px(1.6)}; padding:${px(1)} ${px(2)}; margin-bottom:${px(2)}; box-shadow:0 ${px(0.6)} ${px(2)} rgba(0,0,0,.35); }
+  .tap img { display:block; height:${px(P ? 9 : 7)}; width:auto; }
+  .tap.big img { height:${px(P ? 14 : 12)}; }
   .ta { width:${px(P ? 60 : 34)}; height:auto; } .fz span { font-family:Montserrat; font-weight:700; font-size:${px(P ? 3.4 : 2.3)}; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
 
   /* HUD */
