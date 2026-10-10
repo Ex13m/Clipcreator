@@ -120,7 +120,7 @@ function build(W, H, file) {
     fade('#s-brief .tag', a + 0.2);
   }
   // ===== 5) kola 1–8: fotky + callout po každém kole =====
-  const RPH = ['d1_10', 'd1_08', 'd1_09', 'd1_11', 'd1_07', 'd1_06', 'd1_03', 'd1_04'];
+  const RPH = ['d1_07', 'd1_08', 'd1_09', 'd1_11', 'd1_10', 'd1_06', 'd1_03', 'd1_04'];
   const RPH2 = ['d1_12', 'd1_05', 'd1_06', 'd1_10', 'd1_09', 'd1_11', 'd1_08', 'd1_12'];
   const roundCard = (k) => {
     const best = bestOfRound(k);
@@ -130,9 +130,9 @@ function build(W, H, file) {
   for (let k = 0; k < 8; k++) {
     const a = k === 0 ? tOf('08:00') : R[k - 1].b, b = R[k].b + (k === 7 ? 0 : 0);
     const end = k === 7 ? tOf('11:40') : R[k].b;
-    const extra = k === 4 ? `<div class="plate"><b>Vít Bardon</b><i>6. místo · 75 ryb · 16 ryb v 5. kole</i></div>` : '';
+    const extra = k === 0 ? `<div class="plate"><b>Jiří Nachlinger</b><i>8 ryb v 1. kole</i></div>` : '';
     const mid = G.downbeats.find((t) => t > a + (end - a) * 0.5) ?? (a + end) / 2;
-    const two = end - a > 4.5 && k !== 4;
+    const two = end - a > 4.5 && k !== 0;
     scene(`s-r${k}`, a, end, `${photo(RPH[k], a, two ? mid : end)}${two ? photo(RPH2[k], mid, end) : ''}${extra}${roundCard(k)}`);
     // karta kola vyjede v polovině kola a drží do konce úseku
     const tc = Math.min(R[k].a + (R[k].b - R[k].a) * 0.35, end - 1.2);
