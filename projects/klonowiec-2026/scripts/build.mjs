@@ -269,7 +269,7 @@ function build(W, H, file) {
     rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2); fade('#kp', t1 + 0.6 + BEAT * 4, 0.5);
     T('#kp img', { rotation: -90, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, onBeat(t1 + 0.6 + BEAT * 4));
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">${fmt(TOTAL)}</b><span>ryb za den · ≈ ${Math.round(TOTAL * 0.18)} kg</span></div>
-      <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · see you again</span></div></div>`);
+      <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · to be continued</span></div></div>`);
     fade('#s-out .fv', t2 + 0.1); T('#tap-out', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
     T('#gh-end', { opacity: 0 }, { opacity: 0.6, duration: 0.8 }, DUR - 5.5);
     T('#gh-end .gh-ring', { rotation: 0 }, { rotation: 140, duration: 5.5, ease: 'none' }, DUR - 5.5);
