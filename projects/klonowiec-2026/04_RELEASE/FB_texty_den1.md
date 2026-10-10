@@ -19,7 +19,7 @@ Opět Polsko, opět Klonówiec — a opět plno ryb. 40 závodníků ze 4 zemí,
 4. Martin Stoklasa — 91 ryb · 30 b.
 5. Alexandr Kulaev — 58 ryb · 27 b.
 
-Ryby ≠ body: Martin Saska nachytal 82 ryb a skončil 18. — rozhoduje každé kolo, ne součet.
+Ryby ≠ body: v bodovaném závodě rozhoduje každé kolo, ne součet ryb.
 
 Velké díky Davidu Helmanovi a revíru Kolorowe Pstrągi · Łowisko Klonówiec — zase vřelé přivítání, výborné jídlo a revír plný ryb. Díky i organizátorům Igoru Novákovi, Denisu Zaikinovi, Stanislavu Lukáškovi a Michalu Horákovi.
 
