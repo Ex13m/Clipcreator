@@ -1,0 +1,3013 @@
+{
+ "event": {
+  "name": "Klonowiec Trout Area Cup podzim 2026 – Den 2",
+  "date": "2026-10-11",
+  "place": "Łowisko Klonówiec (PL)",
+  "anglers": 38,
+  "rounds": 12,
+  "type": "Bodovaný · Hard baits"
+ },
+ "stocking": {
+  "kg_total": 480,
+  "kg_before_each_day": 100,
+  "avg_g": 180
+ },
+ "fish_per_round": [
+  130,
+  105,
+  94,
+  92,
+  105,
+  114,
+  86,
+  83,
+  95,
+  86,
+  74,
+  67
+ ],
+ "fish_total": 1131,
+ "schedule": {
+  "presentation": [
+   "06:00",
+   "07:00"
+  ],
+  "prep": [
+   "07:00",
+   "07:30"
+  ],
+  "briefing": [
+   "07:30",
+   "07:50"
+  ],
+  "move": [
+   "07:50",
+   "08:00"
+  ],
+  "rounds": [
+   {
+    "n": 1,
+    "from": "08:00",
+    "to": "08:15"
+   },
+   {
+    "n": 2,
+    "from": "08:25",
+    "to": "08:40"
+   },
+   {
+    "n": 3,
+    "from": "08:50",
+    "to": "09:05"
+   },
+   {
+    "n": 4,
+    "from": "09:15",
+    "to": "09:30"
+   },
+   {
+    "n": 5,
+    "from": "09:50",
+    "to": "10:10"
+   },
+   {
+    "n": 6,
+    "from": "10:20",
+    "to": "10:40"
+   },
+   {
+    "n": 7,
+    "from": "10:50",
+    "to": "11:10"
+   },
+   {
+    "n": 8,
+    "from": "11:20",
+    "to": "11:40"
+   },
+   {
+    "n": 9,
+    "from": "12:40",
+    "to": "13:00"
+   },
+   {
+    "n": 10,
+    "from": "13:10",
+    "to": "13:30"
+   },
+   {
+    "n": 11,
+    "from": "13:40",
+    "to": "14:00"
+   },
+   {
+    "n": 12,
+    "from": "14:10",
+    "to": "14:30"
+   }
+  ],
+  "lunch": [
+   "11:40",
+   "12:40"
+  ],
+  "ceremony": [
+   "15:00",
+   "15:30"
+  ]
+ },
+ "organizers": [
+  "Stanislav Lukášek",
+  "Michal Horák",
+  "Igor Novák",
+  "Denis Zaikin"
+ ],
+ "host": "David Helman (Łowisko Klonówiec)",
+ "fish_rate_per_min": [
+  8.7,
+  7.0,
+  6.3,
+  6.1,
+  5.2,
+  5.7,
+  4.3,
+  4.2,
+  4.8,
+  4.3,
+  3.7,
+  3.4
+ ],
+ "fish_per_sector": {
+  "1": 95,
+  "2": 94,
+  "3": 86,
+  "4": 86,
+  "5": 89,
+  "6": 61,
+  "7": 53,
+  "8": 51,
+  "9": 39,
+  "10": 43,
+  "11": 54,
+  "12": 53,
+  "13": 46,
+  "14": 78,
+  "15": 41,
+  "16": 27,
+  "17": 33,
+  "18": 42,
+  "19": 60
+ },
+ "d1_total": 2375,
+ "anglers": [
+  {
+   "card": 18,
+   "last": "Holas",
+   "first": "Ondřej",
+   "country": "CZ",
+   "rank": 1,
+   "pts": 31,
+   "wins": 7,
+   "draws": 5,
+   "fish": 42,
+   "last3": 15,
+   "last6": 21,
+   "rounds": [
+    {
+     "sec": 18,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 6,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 38,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 32,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 26,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 20,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 8,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 2,
+     "fish": 7,
+     "pts": 2
+    },
+    {
+     "sec": 34,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 28,
+     "fish": 4,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 29,
+   "last": "Švub",
+   "first": "Dominik",
+   "country": "CZ",
+   "rank": 2,
+   "pts": 30,
+   "wins": 10,
+   "draws": 0,
+   "fish": 50,
+   "last3": 8,
+   "last6": 23,
+   "rounds": [
+    {
+     "sec": 29,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 35,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 7,
+     "pts": 3
+    },
+    {
+     "sec": 9,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 21,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 33,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 1,
+     "fish": 9,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 13,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 19,
+     "fish": 5,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 38,
+   "last": "Zaikin",
+   "first": "Denis",
+   "country": "CZ",
+   "rank": 3,
+   "pts": 29,
+   "wins": 9,
+   "draws": 1,
+   "fish": 47,
+   "last3": 13,
+   "last6": 26,
+   "rounds": [
+    {
+     "sec": 38,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 32,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 26,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 20,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 8,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 2,
+     "fish": 8,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 28,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 16,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 10,
+     "fish": 8,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 23,
+   "last": "Kučera",
+   "first": "Miroslav",
+   "country": "CZ",
+   "rank": 4,
+   "pts": 28,
+   "wins": 8,
+   "draws": 2,
+   "fish": 51,
+   "last3": 16,
+   "last6": 24,
+   "rounds": [
+    {
+     "sec": 23,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 29,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 35,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 21,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 33,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 1,
+     "fish": 7,
+     "pts": 2
+    },
+    {
+     "sec": 7,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 13,
+     "fish": 3,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 21,
+   "last": "Tosecký",
+   "first": "Radim",
+   "country": "CZ",
+   "rank": 5,
+   "pts": 28,
+   "wins": 8,
+   "draws": 2,
+   "fish": 34,
+   "last3": 7,
+   "last6": 12,
+   "rounds": [
+    {
+     "sec": 21,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 33,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 1,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 10,
+     "pts": 3
+    },
+    {
+     "sec": 13,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 19,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 31,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 37,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 5,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 11,
+     "fish": 2,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 33,
+   "last": "Raus",
+   "first": "Evžen",
+   "country": "CZ",
+   "rank": 6,
+   "pts": 26,
+   "wins": 7,
+   "draws": 2,
+   "fish": 38,
+   "last3": 9,
+   "last6": 18,
+   "rounds": [
+    {
+     "sec": 33,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 1,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 7,
+     "pts": 3
+    },
+    {
+     "sec": 13,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 19,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 25,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 31,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 37,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 11,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 17,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 3,
+     "pts": 2
+    }
+   ]
+  },
+  {
+   "card": 6,
+   "last": "Horejsek",
+   "first": "Aleš",
+   "country": "CZ",
+   "rank": 7,
+   "pts": 25,
+   "wins": 7,
+   "draws": 2,
+   "fish": 32,
+   "last3": 6,
+   "last6": 16,
+   "rounds": [
+    {
+     "sec": 6,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 38,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 26,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 20,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 14,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 8,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 2,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 34,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 28,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 1,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 22,
+   "last": "Kulaev",
+   "first": "Alexandr",
+   "country": "CZ",
+   "rank": 8,
+   "pts": 25,
+   "wins": 6,
+   "draws": 3,
+   "fish": 44,
+   "last3": 6,
+   "last6": 14,
+   "rounds": [
+    {
+     "sec": 22,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 10,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 30,
+     "fish": 8,
+     "pts": 3
+    },
+    {
+     "sec": 24,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 18,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 6,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 38,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 32,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 9,
+   "last": "Boček",
+   "first": "Michael",
+   "country": "CZ",
+   "rank": 9,
+   "pts": 25,
+   "wins": 5,
+   "draws": 5,
+   "fish": 37,
+   "last3": 8,
+   "last6": 15,
+   "rounds": [
+    {
+     "sec": 9,
+     "fish": 7,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 21,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 27,
+     "fish": 4,
+     "pts": 2
+    },
+    {
+     "sec": 33,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 1,
+     "fish": 6,
+     "pts": 0
+    },
+    {
+     "sec": 7,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 13,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 19,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 25,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 31,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 37,
+     "fish": 2,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 35,
+   "last": "GOSCINIAK",
+   "first": "ADAM",
+   "country": "PL",
+   "rank": 10,
+   "pts": 24,
+   "wins": 6,
+   "draws": 3,
+   "fish": 37,
+   "last3": 7,
+   "last6": 9,
+   "rounds": [
+    {
+     "sec": 35,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 3,
+     "fish": 10,
+     "pts": 3
+    },
+    {
+     "sec": 9,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 21,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 1,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 7,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 13,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 19,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 25,
+     "fish": 1,
+     "pts": 2
+    }
+   ]
+  },
+  {
+   "card": 2,
+   "last": "Novak",
+   "first": "Igor",
+   "country": "CZ",
+   "rank": 11,
+   "pts": 23,
+   "wins": 6,
+   "draws": 2,
+   "fish": 36,
+   "last3": 5,
+   "last6": 15,
+   "rounds": [
+    {
+     "sec": 2,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 28,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 16,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 10,
+     "fish": 6,
+     "pts": 2
+    },
+    {
+     "sec": 4,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 30,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 24,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 18,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 0,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 3,
+   "last": "Bukáček",
+   "first": "Pavel",
+   "country": "CZ",
+   "rank": 12,
+   "pts": 21,
+   "wins": 6,
+   "draws": 1,
+   "fish": 37,
+   "last3": 2,
+   "last6": 15,
+   "rounds": [
+    {
+     "sec": 3,
+     "fish": 7,
+     "pts": 3
+    },
+    {
+     "sec": 9,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 21,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 27,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 1,
+     "fish": 9,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 13,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 19,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 25,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 31,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 17,
+   "last": "Beran",
+   "first": "David",
+   "country": "CZ",
+   "rank": 13,
+   "pts": 21,
+   "wins": 6,
+   "draws": 1,
+   "fish": 29,
+   "last3": 6,
+   "last6": 13,
+   "rounds": [
+    {
+     "sec": 17,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 29,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 35,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 6,
+     "pts": 2
+    },
+    {
+     "sec": 15,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 21,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 1,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 3,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 25,
+   "last": "Lukášek",
+   "first": "Stanislav",
+   "country": "CZ",
+   "rank": 14,
+   "pts": 21,
+   "wins": 5,
+   "draws": 3,
+   "fish": 30,
+   "last3": 3,
+   "last6": 11,
+   "rounds": [
+    {
+     "sec": 25,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 31,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 37,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 11,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 17,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 23,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 29,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 35,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 15,
+     "fish": 0,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 14,
+   "last": "Bardon",
+   "first": "Vít",
+   "country": "CZ",
+   "rank": 15,
+   "pts": 20,
+   "wins": 6,
+   "draws": 1,
+   "fish": 33,
+   "last3": 6,
+   "last6": 12,
+   "rounds": [
+    {
+     "sec": 14,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 8,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 2,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 34,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 28,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 10,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 24,
+     "fish": 3,
+     "pts": 2
+    }
+   ]
+  },
+  {
+   "card": 12,
+   "last": "Anpilau",
+   "first": "Andrei",
+   "country": "BY",
+   "rank": 16,
+   "pts": 20,
+   "wins": 5,
+   "draws": 2,
+   "fish": 35,
+   "last3": 5,
+   "last6": 15,
+   "rounds": [
+    {
+     "sec": 12,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 6,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 38,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 26,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 20,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 8,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 2,
+     "fish": 7,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 28,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 0,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 31,
+   "last": "Zapletal",
+   "first": "Roman",
+   "country": "CZ",
+   "rank": 17,
+   "pts": 19,
+   "wins": 5,
+   "draws": 2,
+   "fish": 30,
+   "last3": 7,
+   "last6": 12,
+   "rounds": [
+    {
+     "sec": 31,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 37,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 11,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 17,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 29,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 35,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 3,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 21,
+     "fish": 2,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 26,
+   "last": "Procházka",
+   "first": "Ota",
+   "country": "CZ",
+   "rank": 18,
+   "pts": 19,
+   "wins": 5,
+   "draws": 2,
+   "fish": 26,
+   "last3": 7,
+   "last6": 11,
+   "rounds": [
+    {
+     "sec": 26,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 20,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 8,
+     "fish": 4,
+     "pts": 2
+    },
+    {
+     "sec": 2,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 34,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 28,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 22,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 10,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 2,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 32,
+   "last": "Śmiejkowski",
+   "first": "Radosław",
+   "country": "PL",
+   "rank": 19,
+   "pts": 19,
+   "wins": 4,
+   "draws": 3,
+   "fish": 41,
+   "last3": 4,
+   "last6": 11,
+   "rounds": [
+    {
+     "sec": 32,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 26,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 20,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 8,
+     "fish": 7,
+     "pts": 0
+    },
+    {
+     "sec": 2,
+     "fish": 10,
+     "pts": 3
+    },
+    {
+     "sec": 34,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 28,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 22,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 10,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 4,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 13,
+   "last": "Vohnout",
+   "first": "Martin",
+   "country": "CZ",
+   "rank": 20,
+   "pts": 19,
+   "wins": 4,
+   "draws": 3,
+   "fish": 29,
+   "last3": 5,
+   "last6": 14,
+   "rounds": [
+    {
+     "sec": 13,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 19,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 31,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 37,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 11,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 17,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 29,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 35,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 3,
+     "fish": 3,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 1,
+   "last": "Isaiev",
+   "first": "Yurii",
+   "country": "CZ",
+   "rank": 21,
+   "pts": 19,
+   "wins": 4,
+   "draws": 3,
+   "fish": 20,
+   "last3": 0,
+   "last6": 5,
+   "rounds": [
+    {
+     "sec": 1,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 7,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 13,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 19,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 31,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 37,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 11,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 17,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 29,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 7,
+   "last": "Fabera",
+   "first": "Petr",
+   "country": "CZ",
+   "rank": 22,
+   "pts": 19,
+   "wins": 3,
+   "draws": 5,
+   "fish": 19,
+   "last3": 3,
+   "last6": 8,
+   "rounds": [
+    {
+     "sec": 7,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 13,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 19,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 31,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 37,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 11,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 17,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 23,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 29,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 35,
+     "fish": 1,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 20,
+   "last": "Smirnou",
+   "first": "Pavel",
+   "country": "PL",
+   "rank": 23,
+   "pts": 17,
+   "wins": 4,
+   "draws": 2,
+   "fish": 24,
+   "last3": 3,
+   "last6": 14,
+   "rounds": [
+    {
+     "sec": 20,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 8,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 2,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 28,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 10,
+     "fish": 8,
+     "pts": 3
+    },
+    {
+     "sec": 4,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 30,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 37,
+   "last": "Nachlinger",
+   "first": "Jiří",
+   "country": "CZ",
+   "rank": 24,
+   "pts": 16,
+   "wins": 3,
+   "draws": 3,
+   "fish": 28,
+   "last3": 6,
+   "last6": 11,
+   "rounds": [
+    {
+     "sec": 37,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 5,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 11,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 17,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 29,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 35,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 3,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 9,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 15,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 21,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 16,
+   "last": "Filip",
+   "first": "Lukasz",
+   "country": "PL",
+   "rank": 25,
+   "pts": 16,
+   "wins": 2,
+   "draws": 5,
+   "fish": 27,
+   "last3": 3,
+   "last6": 8,
+   "rounds": [
+    {
+     "sec": 16,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 10,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 36,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 24,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 18,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 6,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 38,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 32,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 26,
+     "fish": 1,
+     "pts": 2
+    }
+   ]
+  },
+  {
+   "card": 15,
+   "last": "Helman",
+   "first": "David",
+   "country": "PL",
+   "rank": 26,
+   "pts": 14,
+   "wins": 4,
+   "draws": 1,
+   "fish": 34,
+   "last3": 10,
+   "last6": 19,
+   "rounds": [
+    {
+     "sec": 15,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 21,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 4,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 1,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 7,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 13,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 19,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 31,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 37,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 5,
+     "fish": 6,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 5,
+   "last": "Stoklasa",
+   "first": "Martin",
+   "country": "CZ",
+   "rank": 27,
+   "pts": 14,
+   "wins": 4,
+   "draws": 1,
+   "fish": 32,
+   "last3": 6,
+   "last6": 16,
+   "rounds": [
+    {
+     "sec": 5,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 11,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 17,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 29,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 35,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 21,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 27,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 2,
+     "pts": 3
+    }
+   ]
+  },
+  {
+   "card": 24,
+   "last": "Zeman",
+   "first": "Luboš",
+   "country": "CZ",
+   "rank": 28,
+   "pts": 14,
+   "wins": 4,
+   "draws": 1,
+   "fish": 26,
+   "last3": 8,
+   "last6": 15,
+   "rounds": [
+    {
+     "sec": 24,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 18,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 6,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 38,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 26,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 20,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 14,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 8,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 2,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 1,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 27,
+   "last": "Hodovanets",
+   "first": "Bohdan",
+   "country": "UA",
+   "rank": 29,
+   "pts": 14,
+   "wins": 3,
+   "draws": 2,
+   "fish": 20,
+   "last3": 6,
+   "last6": 12,
+   "rounds": [
+    {
+     "sec": 27,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 1,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 7,
+     "fish": 4,
+     "pts": 2
+    },
+    {
+     "sec": 13,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 19,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 31,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 37,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 5,
+     "fish": 3,
+     "pts": 2
+    },
+    {
+     "sec": 11,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 17,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 28,
+   "last": "Horák",
+   "first": "Michal",
+   "country": "CZ",
+   "rank": 30,
+   "pts": 13,
+   "wins": 3,
+   "draws": 2,
+   "fish": 25,
+   "last3": 5,
+   "last6": 9,
+   "rounds": [
+    {
+     "sec": 28,
+     "fish": 6,
+     "pts": 3
+    },
+    {
+     "sec": 22,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 10,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 24,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 18,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 12,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 6,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 38,
+     "fish": 1,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 10,
+   "last": "Khachikian",
+   "first": "Artur",
+   "country": "UA",
+   "rank": 31,
+   "pts": 13,
+   "wins": 3,
+   "draws": 2,
+   "fish": 22,
+   "last3": 5,
+   "last6": 10,
+   "rounds": [
+    {
+     "sec": 10,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 36,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 24,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 18,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 12,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 6,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 38,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 26,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 20,
+     "fish": 1,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 34,
+   "last": "Saska",
+   "first": "Martin",
+   "country": "CZ",
+   "rank": 32,
+   "pts": 13,
+   "wins": 2,
+   "draws": 3,
+   "fish": 32,
+   "last3": 11,
+   "last6": 19,
+   "rounds": [
+    {
+     "sec": 34,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 28,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 22,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 16,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 10,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 5,
+     "pts": 3
+    },
+    {
+     "sec": 36,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 30,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 24,
+     "fish": 5,
+     "pts": 2
+    },
+    {
+     "sec": 18,
+     "fish": 7,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 6,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 36,
+   "last": "Targonskiy",
+   "first": "Vadim",
+   "country": "UA",
+   "rank": 33,
+   "pts": 12,
+   "wins": 3,
+   "draws": 1,
+   "fish": 17,
+   "last3": 3,
+   "last6": 6,
+   "rounds": [
+    {
+     "sec": 36,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 30,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 24,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 18,
+     "fish": 3,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 6,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 38,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 26,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 20,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 14,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 8,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 4,
+   "last": "Prax",
+   "first": "Jakub",
+   "country": "CZ",
+   "rank": 34,
+   "pts": 11,
+   "wins": 3,
+   "draws": 1,
+   "fish": 22,
+   "last3": 4,
+   "last6": 12,
+   "rounds": [
+    {
+     "sec": 4,
+     "fish": 5,
+     "pts": 0
+    },
+    {
+     "sec": 36,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 24,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 18,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 12,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 6,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 38,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 26,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 20,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 14,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 8,
+   "last": "Beznosko",
+   "first": "Oleg",
+   "country": "CZ",
+   "rank": 35,
+   "pts": 10,
+   "wins": 1,
+   "draws": 3,
+   "fish": 13,
+   "last3": 2,
+   "last6": 4,
+   "rounds": [
+    {
+     "sec": 8,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 2,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 34,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 28,
+     "fish": 4,
+     "pts": 2
+    },
+    {
+     "sec": 22,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 16,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 10,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 4,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 36,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 30,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 24,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 18,
+     "fish": 0,
+     "pts": 1
+    }
+   ]
+  },
+  {
+   "card": 11,
+   "last": "Hodovanets",
+   "first": "Marian",
+   "country": "UA",
+   "rank": 36,
+   "pts": 9,
+   "wins": 2,
+   "draws": 1,
+   "fish": 19,
+   "last3": 4,
+   "last6": 11,
+   "rounds": [
+    {
+     "sec": 11,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 17,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 29,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 35,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 3,
+     "fish": 3,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 2,
+     "pts": 3
+    },
+    {
+     "sec": 15,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 21,
+     "fish": 4,
+     "pts": 3
+    },
+    {
+     "sec": 27,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 33,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 1,
+     "fish": 2,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 19,
+   "last": "Voroshylo",
+   "first": "Volodymyr",
+   "country": "CZ",
+   "rank": 37,
+   "pts": 8,
+   "wins": 1,
+   "draws": 2,
+   "fish": 13,
+   "last3": 3,
+   "last6": 5,
+   "rounds": [
+    {
+     "sec": 19,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 25,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 31,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 37,
+     "fish": 1,
+     "pts": 2
+    },
+    {
+     "sec": 5,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 11,
+     "fish": 1,
+     "pts": 0
+    },
+    {
+     "sec": 17,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 23,
+     "fish": 2,
+     "pts": 2
+    },
+    {
+     "sec": 29,
+     "fish": 0,
+     "pts": 1
+    },
+    {
+     "sec": 35,
+     "fish": 1,
+     "pts": 3
+    },
+    {
+     "sec": 3,
+     "fish": 2,
+     "pts": 0
+    },
+    {
+     "sec": 9,
+     "fish": 0,
+     "pts": 0
+    }
+   ]
+  },
+  {
+   "card": 30,
+   "last": "Dušín",
+   "first": "Mirek",
+   "country": "CZ",
+   "rank": "-",
+   "pts": 0,
+   "wins": 0,
+   "draws": 0,
+   "fish": 0,
+   "last3": 0,
+   "last6": 0,
+   "rounds": [
+    {
+     "sec": 30,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 24,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 18,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 12,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 6,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 38,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 32,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 26,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 20,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 14,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 8,
+     "fish": 0,
+     "pts": 0
+    },
+    {
+     "sec": 2,
+     "fish": 0,
+     "pts": 0
+    }
+   ]
+  }
+ ]
+}
