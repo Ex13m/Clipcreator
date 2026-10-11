@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v15';
+const VER = process.env.VER || 'v16';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -180,7 +180,7 @@ function build(W, H, file) {
     scene('s-path', a, b, `${photo('d1_07', a, b, 'dimx')}<div class="h2"><span>Závod lídrů</span><em>leaders' race · body po kolech</em></div>
       <div class="race" style="height:${f(rowH * 10)}">${LEAD.map((x, j) => `<div class="rr" id="rr${j}" style="top:0">
         <span class="rn">${x.first[0]}. ${x.last}</span><span class="rb"><i id="rbi${j}" style="background:${COL[j]}; width:${f(BW)}"></i></span><b id="rv${j}">0</b></div>`).join('')}
-        <div class="rk" id="rk"><span id="rkn">1</span><em>kolo</em></div></div>
+        <div class="rk" id="rk"><span id="rkn">1</span><em>po kole</em></div></div>
       <div class="rmini" id="rmini">${[8, 9, 10, 11].map((k) => roundCard(k).replace(`id="rc${k}"`, `id="rc${k}" style="position:absolute; inset:0"`)).join('')}</div>`);
     rise('#s-path .h2 span', a + 0.1); fade('#s-path .h2 em', a + 0.3);
     LEAD.forEach((x, j) => { T(`#rr${j}`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, a + 0.3 + j * 0.05);
@@ -464,14 +464,14 @@ function build(W, H, file) {
   .dots { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 2 * u)}` : `left:${px(6)}; right:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}`}; display:grid; grid-template-columns:repeat(${P ? 30 : 45}, 1fr); gap:${px(P ? 0.6 : 0.7)}; }
   .dots i { display:block; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a8d, var(--red)); }
   .dots em { grid-column:1 / -1; font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.6 : 1.8)}; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:${px(0.8)}; }
-  .race { position:absolute; left:${px(6)}; right:${px(P ? 6 : 42)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
+  .race { position:absolute; left:${px(6)}; right:${px(P ? 6 : 52)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
   .race::before { content:''; position:absolute; left:${px(-2)}; right:${px(-2)}; top:${px(-1.6)}; bottom:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(2)}; }
   .race .rr, .race .rn, .race .rr b { color:#0b1e42; }
   .rr { position:absolute; left:0; right:0; height:${px(P ? 4.8 : 4.1)}; display:grid; grid-template-columns:${px(P ? 27 : 21)} auto ${px(P ? 7 : 5)}; align-items:center; gap:${px(1.4)}; border-radius:${px(1)}; padding:0 ${px(1)}; }
   .rn { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3.2 : 2.4)}; white-space:nowrap; }
   .rb i { display:block; height:${px(P ? 3.6 : 3)}; border-radius:0 ${px(1)} ${px(1)} 0; transform-origin:left; }
   .rr b { font-family:Montserrat; font-weight:900; font-size:${px(P ? 4 : 3)}; }
-  .rk { position:absolute; right:${px(P ? 0 : -34)}; top:${P ? f(5.4 * u * 10 + 3 * u) : px(22)}; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 12)}; line-height:1; color:var(--red); }
+  .rk { position:absolute; right:${px(P ? 0 : -44)}; top:${P ? f(5.4 * u * 10 + 3 * u) : px(0)}; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:${px(P ? 9 : 12)}; line-height:1; color:var(--red); }
   .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:${px(P ? 2.4 : 2)}; letter-spacing:.2em; text-transform:uppercase; }
   .slope .sl { stroke-width:${px(0.4)}; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:#0b1e42; font-weight:700; } .slope text.rkt { font-weight:900; }
   .sw { position:absolute; left:${px(P ? 4 : 6)}; right:${px(P ? 4 : 30)}; top:${f(SC.top + (P ? 20 : 15) * u)}; }
@@ -540,7 +540,7 @@ function build(W, H, file) {
   .chart polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
   .le { position:absolute; display:flex; align-items:center; gap:${px(0.8)}; font-family:Montserrat; font-weight:700; white-space:nowrap; }
   .le i { width:${px(1.4)}; height:${px(1.4)}; border-radius:50%; } .le b { color:var(--gold); }
-  .rmini { position:absolute; ${P ? `left:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}` : `right:${px(5)}; top:${f(SC.top + 16 * u)}`}; width:${px(P ? 74 : 36)}; height:${px(P ? 20 : 16)}; }
+  .rmini { position:absolute; ${P ? `left:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}` : `right:${px(3)}; top:${f(SC.top + 36 * u)}`}; width:${px(P ? 74 : 44)}; height:${px(P ? 20 : 20)}; }
   .rmini .rc { left:0; bottom:auto; padding:${px(1.6)} ${px(2.4)}; }
   .sc circle { fill:rgba(156,200,240,.75); } .sc circle.hl { fill:var(--red); stroke:#fff; stroke-width:${px(0.25)}; }
   .dl { position:absolute; transform:translate(${px(1.6)}, -50%); } .dl.l { transform:translate(calc(-100% - ${px(1.6)}), -50%); } .dl span { display:inline-block; font-family:Montserrat; font-weight:800; background:rgba(5,13,34,.85); padding:${px(0.4)} ${px(1)}; border-radius:${px(0.6)}; white-space:nowrap; }

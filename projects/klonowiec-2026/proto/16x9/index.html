@@ -90,14 +90,14 @@
   .dots { position:absolute; left:65px; right:65px; bottom:216.0px; display:grid; grid-template-columns:repeat(45, 1fr); gap:8px; }
   .dots i { display:block; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ff8a8d, var(--red)); }
   .dots em { grid-column:1 / -1; font-style:normal; font-family:Montserrat; font-weight:600; font-size:19px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:9px; }
-  .race { position:absolute; left:65px; right:454px; top:216.0px; }
+  .race { position:absolute; left:65px; right:562px; top:216.0px; }
   .race::before { content:''; position:absolute; left:-22px; right:-22px; top:-17px; bottom:-17px; background:rgba(238,242,249,.96); border-radius:22px; }
   .race .rr, .race .rn, .race .rr b { color:#0b1e42; }
   .rr { position:absolute; left:0; right:0; height:44px; display:grid; grid-template-columns:227px auto 54px; align-items:center; gap:15px; border-radius:11px; padding:0 11px; }
   .rn { font-family:Montserrat; font-weight:800; font-size:26px; white-space:nowrap; }
   .rb i { display:block; height:32px; border-radius:0 11px 11px 0; transform-origin:left; }
   .rr b { font-family:Montserrat; font-weight:900; font-size:32px; }
-  .rk { position:absolute; right:-367px; top:238px; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:130px; line-height:1; color:var(--red); }
+  .rk { position:absolute; right:-475px; top:0px; text-align:right; } .rk span { display:block; font-family:Montserrat; font-weight:900; font-size:130px; line-height:1; color:var(--red); }
   .rk em { font-style:normal; font-family:Montserrat; font-weight:600; font-size:22px; letter-spacing:.2em; text-transform:uppercase; }
   .slope .sl { stroke-width:4px; stroke-dasharray:1; stroke-dashoffset:1; fill:none; } .slope text.nm { fill:#0b1e42; font-weight:700; } .slope text.rkt { font-weight:900; }
   .sw { position:absolute; left:65px; right:324px; top:216.0px; }
@@ -166,7 +166,7 @@
   .chart polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
   .le { position:absolute; display:flex; align-items:center; gap:9px; font-family:Montserrat; font-weight:700; white-space:nowrap; }
   .le i { width:15px; height:15px; border-radius:50%; } .le b { color:var(--gold); }
-  .rmini { position:absolute; right:54px; top:226.8px; width:389px; height:173px; }
+  .rmini { position:absolute; right:32px; top:442.8px; width:475px; height:216px; }
   .rmini .rc { left:0; bottom:auto; padding:17px 26px; }
   .sc circle { fill:rgba(156,200,240,.75); } .sc circle.hl { fill:var(--red); stroke:#fff; stroke-width:3px; }
   .dl { position:absolute; transform:translate(17px, -50%); } .dl.l { transform:translate(calc(-100% - 17px), -50%); } .dl span { display:inline-block; font-family:Montserrat; font-weight:800; background:rgba(5,13,34,.85); padding:4px 11px; border-radius:6px; white-space:nowrap; }
@@ -297,7 +297,7 @@
         <span class="rn">E. Raus</span><span class="rb"><i id="rbi7" style="background:#5a6fb8; width:768.0px"></i></span><b id="rv7">0</b></div><div class="rr" id="rr8" style="top:0">
         <span class="rn">S. Lukášek</span><span class="rb"><i id="rbi8" style="background:#5a6fb8; width:768.0px"></i></span><b id="rv8">0</b></div><div class="rr" id="rr9" style="top:0">
         <span class="rn">I. Novak</span><span class="rb"><i id="rbi9" style="background:#5a6fb8; width:768.0px"></i></span><b id="rv9">0</b></div>
-        <div class="rk" id="rk"><span id="rkn">1</span><em>kolo</em></div></div>
+        <div class="rk" id="rk"><span id="rkn">1</span><em>po kole</em></div></div>
       <div class="rmini" id="rmini"><div class="rc" id="rc8" style="position:absolute; inset:0"><div class="rc-n"><span>9. kolo</span></div><div class="rc-f"><b>191</b><span>ryb · 9,6 / min</span></div>
       <div class="rc-b">Nejvíc: <b>Radoslaw Smiejkowski</b> 12 ryb</div></div><div class="rc" id="rc9" style="position:absolute; inset:0"><div class="rc-n"><span>10. kolo</span></div><div class="rc-f"><b>163</b><span>ryb · 8,2 / min</span></div>
       <div class="rc-b">Nejvíc: <b>Martin Saska</b> 12 ryb</div></div><div class="rc" id="rc10" style="position:absolute; inset:0"><div class="rc-n"><span>11. kolo</span></div><div class="rc-f"><b>138</b><span>ryb · 6,9 / min</span></div>
@@ -341,7 +341,7 @@
   <div id="wipe"><i id="wp0"></i><i id="wp1"></i><i id="wp2"></i><i id="wp3"></i><i id="wp4"></i><i id="wp5"></i><i id="wp6"></i><i id="wp7"></i><i id="wp8"></i><i id="wp9"></i><i id="wp10"></i><i id="wp11"></i><i id="wp12"></i><i id="wp13"></i><i id="wp14"></i><i id="wp15"></i></div>
   <div id="flash"></div>
   <div id="grain"></div>
-  <div id="badge">DRAFT · v15</div>
+  <div id="badge">DRAFT · v16</div>
 </div>
 <script>
   window.__timelines = window.__timelines || {};
