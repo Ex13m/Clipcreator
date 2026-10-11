@@ -11,7 +11,7 @@ const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const IMG = JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8'));
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, '02_SELECT/data_d1.json'), 'utf8'));
-const VER = process.env.VER || 'v16';
+const VER = process.env.VER || 'v17';
 
 // ---------- čas: track nebo syntetická mřížka ----------
 const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
@@ -294,10 +294,10 @@ function build(W, H, file) {
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">${fmt(TOTAL)}</b><span>ryb za den · ≈ ${Math.round(TOTAL * 0.18)} kg</span></div>
       <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Zítra Den 2 · buďte připraveni!</span></div></div>`);
     fade('#s-out .fv', t2 + 0.1); T('#tap-out', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, t2 + 0.4 + BEAT); fade('#s-out .fz', t2 + 0.6 + BEAT * 2);
-    T('#gh-end', { opacity: 0 }, { opacity: 0.6, duration: 0.8 }, DUR - 5.5);
+    T('#gh-end', { opacity: 0 }, { opacity: P ? 0.6 : 1, duration: 0.8 }, DUR - 5.5);
     T('#gh-end .gh-ring', { rotation: 0 }, { rotation: 140, duration: 5.5, ease: 'none' }, DUR - 5.5);
   }
-  T('#gh-intro', { opacity: 0 }, { opacity: 0.6, duration: 0.5 }, 0.4);
+  T('#gh-intro', { opacity: 0 }, { opacity: P ? 0.6 : 1, duration: 0.5 }, 0.4);
   T('#gh-intro .gh-ring', { rotation: 0 }, { rotation: 70, duration: 2.8, ease: 'none' }, 0.4);
   out.push(`tl.to("#gh-intro", {opacity:0, duration:0.5}, 2.6);`);
 
@@ -601,6 +601,8 @@ function build(W, H, file) {
   .hnote, .snote { text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); } .hnote b, .snote b { color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
   .dots i { background:radial-gradient(circle at 35% 35%, #ff7a7e, var(--red)); }
   .orgn { align-items:${P ? 'center' : 'flex-start'}; gap:${px(1)}; } .thx { ${P ? '' : 'right:auto; max-width:56%;'} }
+  ${P ? '' : `.ghm { left:auto; right:${f(W * 0.025)}; top:${f(H * 0.035)}; gap:${px(1)}; background:rgba(5,13,34,.55); padding:${px(0.8)} ${px(1.6)}; border-radius:${px(1.2)}; }
+  .ghm .gh-gear { width:${px(3.6)}; height:${px(3.6)}; } .ghm .gh-by { font-size:${px(1.5)}; opacity:1; }`}
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">

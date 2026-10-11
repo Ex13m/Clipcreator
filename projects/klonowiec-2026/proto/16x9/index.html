@@ -227,6 +227,8 @@
   .hnote, .snote { text-shadow:0 3px 15px rgba(0,0,0,.8); } .hnote b, .snote b { color:#fff; background:var(--red); padding:0 9px; border-radius:5px; text-shadow:none; }
   .dots i { background:radial-gradient(circle at 35% 35%, #ff7a7e, var(--red)); }
   .orgn { align-items:flex-start; gap:11px; } .thx { right:auto; max-width:56%; }
+  .ghm { left:auto; right:48.0px; top:37.8px; gap:11px; background:rgba(5,13,34,.55); padding:9px 17px; border-radius:13px; }
+  .ghm .gh-gear { width:39px; height:39px; } .ghm .gh-by { font-size:16px; opacity:1; }
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="176.36" data-width="1920" data-height="1080">
@@ -341,7 +343,7 @@
   <div id="wipe"><i id="wp0"></i><i id="wp1"></i><i id="wp2"></i><i id="wp3"></i><i id="wp4"></i><i id="wp5"></i><i id="wp6"></i><i id="wp7"></i><i id="wp8"></i><i id="wp9"></i><i id="wp10"></i><i id="wp11"></i><i id="wp12"></i><i id="wp13"></i><i id="wp14"></i><i id="wp15"></i></div>
   <div id="flash"></div>
   <div id="grain"></div>
-  <div id="badge">DRAFT · v16</div>
+  <div id="badge">DRAFT · v17</div>
 </div>
 <script>
   window.__timelines = window.__timelines || {};
@@ -1399,9 +1401,9 @@
   tl.fromTo("#s-out .fv", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 167.857);
   tl.fromTo("#tap-out", {"opacity":0,"scale":0.9}, {"opacity":1,"scale":1,"duration":0.6,"ease":"back.out(1.5)"}, 168.257);
   tl.fromTo("#s-out .fz", {"opacity":0,"y":21.6,"scale":0.97}, {"opacity":1,"y":0,"scale":1,"duration":0.4,"ease":"back.out(2)"}, 169.273);
-  tl.fromTo("#gh-end", {"opacity":0}, {"opacity":0.6,"duration":0.8}, 170.860);
+  tl.fromTo("#gh-end", {"opacity":0}, {"opacity":1,"duration":0.8}, 170.860);
   tl.fromTo("#gh-end .gh-ring", {"rotation":0}, {"rotation":140,"duration":5.5,"ease":"none"}, 170.860);
-  tl.fromTo("#gh-intro", {"opacity":0}, {"opacity":0.6,"duration":0.5}, 0.400);
+  tl.fromTo("#gh-intro", {"opacity":0}, {"opacity":1,"duration":0.5}, 0.400);
   tl.fromTo("#gh-intro .gh-ring", {"rotation":0}, {"rotation":70,"duration":2.8,"ease":"none"}, 0.400);
   tl.to("#gh-intro", {opacity:0, duration:0.5}, 2.6);
   tl.fromTo("#dots i:nth-child(45n+1)", {filter:"brightness(2.4) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 5.851);
