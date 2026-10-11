@@ -274,10 +274,10 @@ function build(W, H, file) {
       <div class="orgn">${ORG.map((n, i) => `<span id="on${i}">${n}</span>`).join('')}</div>`);
     rise('#s-org .h2 span', t0 + 0.2); fade('#s-org .h2 em', t0 + 0.4); ORG.forEach((_, i) => fade(`#on${i}`, t0 + 0.8 + i * BEAT));
     const h = A.find((x) => x.last === 'Helman');
-    scene('s-host', t1, t2h, `<div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
+    scene('s-host', t1, t2h, `<div class="dav" id="dav"><div class="dvi" style="background-image:url(assets/photos/david.jpg)"></div></div><div class="host"><div class="hk"><span>Děkujeme</span></div><div class="hn"><span>David Helman</span></div>
       <div class="hs" id="hs">Hostitel · a k tomu ${h.rank}. místo a ${h.fish} ryb</div>
       <div class="kp" id="kp"><img src="assets/kolorowe_logo.png" alt="Kolorowe Pstrągi"><div><b>Kolorowe Pstrągi · Łowisko Klonówiec</b><span>Klonowiec 37B, Polsko · +48 539 946 787 · rezervace telefonicky</span></div></div></div>`);
-    rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2); fade('#kp', t1 + 0.6 + BEAT * 4, 0.5);
+    T('#dav', { opacity: 0, scale: 0.85, rotation: -4 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(1.6)' }, onBeat(t1 + 0.05)); T('#dav .dvi', { scale: 1.12 }, { scale: 1, duration: TL.host, ease: 'sine.out' }, t1); rise('#s-host .hk span', t1 + 0.15); rise('#s-host .hn span', t1 + 0.15 + BEAT); fade('#hs', t1 + 0.4 + BEAT * 2); fade('#kp', t1 + 0.6 + BEAT * 4, 0.5);
     T('#kp img', { rotation: -90, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(1.6)' }, onBeat(t1 + 0.6 + BEAT * 4));
     // rekapitulace: všechny fotky střihem na doby
     let t2 = t2h;
@@ -604,6 +604,10 @@ function build(W, H, file) {
   ${P ? '' : `.ghm { left:auto; right:${f(W * 0.025)}; top:${f(H * 0.035)}; gap:${px(1)}; filter:drop-shadow(0 ${px(0.2)} ${px(0.8)} rgba(0,0,0,.7)); }
   .ghm .gh-gear { width:${px(4.4)}; height:${px(4.4)}; } .ghm .gh-by { font-size:${px(1.8)}; font-weight:700; opacity:1; }`}
   ${P ? "" : ".rmini .rc { width:auto; right:0; bottom:auto; box-sizing:border-box; }"}
+  .dav { position:absolute; overflow:hidden; border-radius:${px(2.4)}; border:${px(0.6)} solid #fff; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.45);
+    ${P ? `left:50%; margin-left:${px(-22)}; width:${px(44)}; height:${px(56)}; top:${f(SC.top + 2 * u)};` : `left:${px(6)}; width:${px(30)}; height:${px(38)}; top:${f(SC.top + (scH - 38 * u) / 2)};`} }
+  .dav .dvi { position:absolute; inset:0; background-size:cover; background-position:50% 30%; }
+  ${P ? `.host { top:${f(SC.top + 62 * u)} !important; }` : `.host { left:${px(42)} !important; text-align:left !important; top:${f(SC.top + scH * 0.16)} !important; }`}
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
