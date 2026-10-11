@@ -15,7 +15,7 @@ rep("""const KN = HAS_TRACK
   : [[DAY0, 0], [6 * 60 + 30, 3], [7 * 60 + 20, 7.6], [7 * 60 + 50, 10.6], [8 * 60, PRE], [DAY1, DUR - TAIL]];""",
 """// zkrácená píseň: intro 0–19.5, groove = kola 1–8, breakdown 57.9–65.6 = díky Davide, drop 65.6–113.5 = lídři → ryby≠body → vyhlášení → srovnání, outro 113.5–125
 const KN = [[DAY0, 0], [6 * 60 + 30, 5.6], [7 * 60 + 20, 11.4], [7 * 60 + 50, 15.3], [8 * 60, PRE], [700, 57.95], [760, 65.6], [870, 86.1], [900, 92.4], [DAY1, DAYEND_T]];""")
-rep("const TL = HAS_TRACK ? { tab: 14, org: 5, host: 7, mont: 24 } : { tab: 11, org: 4, host: 5, mont: 0 };","const TL = { cmp1: 6.6, cmp2: 6.6 };")
+rep("const TL = HAS_TRACK ? { tab: 14, org: 5, host: 7, mont: 24 } : { tab: 11, org: 4, host: 5, mont: 0 };","const TL = { cmp1: 6.6, cmp2: 6.6, all: 15.35 };")
 rep('<div class="l1"><span>OPĚT</span></div><div class="l1 red"><span>POLSKO</span></div>','<div class="l1"><span>DEN</span></div><div class="l1 red"><span>DRUHÝ</span></div>')
 rep('<div class="l3"><span>Den 1 · sobota 10. 10. 2026 · Łowisko Klonówiec</span></div><div class="l3 w"><span>${D.weather.min}–${D.weather.max} °C · déšť ${D.weather.rain_pct} % · vítr ${D.weather.wind_ms} m/s</span></div></div>`);',
     '<div class="l3"><span>Den 2 · neděle 11. 10. 2026 · Łowisko Klonówiec</span></div><div class="l3 w"><span>+ srovnání s 1. dnem</span></div></div>`);')
@@ -53,6 +53,11 @@ st=s.index("  { // sektory: běh přes 20 dlaždic"); en=s.index("  { // HUD: me
 s=s[:st]+'''  { // srovnání: okvětní lístky Dne 2 bijí na doby jako pady
     const a = DAYEND_T + 1.6, b = DAYEND_T + TL.cmp1;
     padRun((k) => `#pt2_${k}`, 12, a, b, 1.7, 0.24);
+  }
+  { // výsledky: světlo jede po kolech (sloupcích) + „horká“ kola (10+ ryb) bijí na každou 2. dobu
+    const ta = DAYEND_T + TL.cmp1 + TL.cmp2 + 1.8, tb = DAYEND_T + TL.cmp1 + TL.cmp2 + TL.all;
+    padRun((k) => `#s-all .q:nth-child(${k + 1})`, 12, ta, tb, 2.0, 0.22);
+    padHit('#s-all .q.hot', ta, tb, 2, 1.7);
   }
 '''+s[en:]
 rep("  eq((k) => `#pb${k + 1}`, 40, tOf('12:00') + 4.6, tOf('12:40'), 0.5);\n","")

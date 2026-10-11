@@ -31,7 +31,7 @@ const PRE = 19.5;  // 06:00–08:00 zhuštěno do 12 s
 // s trackem: kotvy na strukturu písně (breakdown = oběd/sektory, drop = závod lídrů, 2. breakdown = ryby≠body, finální drop = vyhlášení)
 // zkrácená píseň: intro 0–19.5, groove = kola 1–8, breakdown 57.9–65.6 = díky Davide, drop 65.6–113.5 = lídři → ryby≠body → vyhlášení → srovnání, outro 113.5–125
 const KN = [[DAY0, 0], [6 * 60 + 30, 5.6], [7 * 60 + 20, 11.4], [7 * 60 + 50, 15.3], [8 * 60, PRE], [700, 57.95], [760, 65.6], [870, 86.1], [900, 92.4], [DAY1, DAYEND_T]];
-const TL = { cmp1: 6.6, cmp2: 6.6 };
+const TL = { cmp1: 6.6, cmp2: 6.6, all: 15.35 };
 const tOf = (hhmm) => { const m = typeof hhmm === 'number' ? hhmm : +hhmm.slice(0, 2) * 60 + +hhmm.slice(3);
   for (let i = 1; i < KN.length; i++) if (m <= KN[i][0]) { const [m0, t0] = KN[i - 1], [m1, t1] = KN[i]; return +(t0 + ((m - m0) / (m1 - m0)) * (t1 - t0)).toFixed(3); }
   return DUR - TAIL; };
@@ -285,9 +285,24 @@ function build(W, H, file) {
     T(`#mv${si}`, { filter: 'drop-shadow(0 0 0px rgba(227,30,36,0))' }, { filter: `drop-shadow(0 0 ${px(1.2)} rgba(227,30,36,.9))`, duration: 0.3, yoyo: true, repeat: 5, immediateRender: false }, a + 4.2);
     fade('#snote2', a + 4.0);
   }
+  // ===== 11a) výsledky všech klasifikovaných: 12 čtverců na kolo (barva = body, číslo = ryby) =====
+  {
+    const ta = DAYEND_T + TL.cmp1 + TL.cmp2, tb = ta + TL.all;
+    const S = A.filter((x) => typeof x.rank === 'number').sort((x, y) => x.rank - y.rank), N = S.length, half = Math.ceil(N / 2);
+    const cols = P ? [S] : [S.slice(0, half), S.slice(half)];
+    const sq = (r) => `<i class="q p${r.pts}${r.fish >= 10 ? ' hot' : ''}">${r.fish}</i>`;
+    scene('s-all', ta, tb, `${photo('d2_05', ta, tb, 'dimx')}<div class="h2"><span>${P ? 'Výsledky' : 'Výsledky · Den 2'}</span><em>${P ? 'Den 2 · kolo po kole' : `všech ${N} · kolo po kole · ryby v kole`}</em></div>
+      <div class="qleg"><span><i class="q p3"></i>výhra${P ? "" : " 3 b."}</span><span><i class="q p2"></i>remíza s rybou${P ? "" : " 2 b."}</span><span><i class="q p1"></i>0:0${P ? "" : " 1 b."}</span><span><i class="q p0"></i>prohra</span></div>
+      <div class="allw"><div class="allc" id="allc">${cols.map((c) => `<div class="allcol">${c.map((x) => `<div class="ar" id="ar${x.rank}"><span class="ap">${x.rank}</span><span class="an">${x.first[0]}. ${x.last}<i>${x.country}</i></span><span class="qs">${x.rounds.map(sq).join('')}</span><span class="af">${x.fish}</span><b>${x.pts}</b></div>`).join('')}</div>`).join('')}</div></div>`);
+    rise('#s-all .h2 span', ta + 0.1); fade('#s-all .h2 em', ta + 0.3); fade('#s-all .qleg', ta + 0.5);
+    S.forEach((x, i) => T(`#ar${x.rank}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, ta + 0.5 + (P ? i : i % half) * 0.04 + (P ? 0 : Math.floor(i / half) * 0.25)));
+    for (let k = 0; k < 12; k++) T(`#s-all .q:nth-child(${k + 1})`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.5)', stagger: 0.012 }, ta + 1.2 + k * 0.14);
+    T('#s-all .ar:nth-child(-n+3) .q.p3', { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.3)} rgba(227,30,36,.95)`, duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, ta + 3.4);
+    if (P) { const rowH = 4.15 * u, vis = Math.floor((SC.bot - SC.top - 24 * u) / rowH); T('#allc', { y: 0 }, { y: -(N - vis) * rowH, duration: tb - ta - 4.4, ease: 'sine.inOut' }, ta + 3.6); }
+  }
   // ===== 12) outro: 2 dny dohromady =====
   {
-    const t2 = DAYEND_T + TL.cmp1 + TL.cmp2, t3 = DUR;
+    const t2 = DAYEND_T + TL.cmp1 + TL.cmp2 + TL.all, t3 = DUR;
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">0</b><span>ryb za 2 dny · ≈ ${Math.round((TOTAL + D.d1_total) * 0.18)} kg</span></div>
       <div class="fsp"><span><b>${fmt(D.d1_total)}</b> Den 1</span><span><b>${fmt(TOTAL)}</b> Den 2</span></div>
       <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Díky, Klonówiec · see you next time!</span></div></div>`);
@@ -313,6 +328,11 @@ function build(W, H, file) {
   { // srovnání: okvětní lístky Dne 2 bijí na doby jako pady
     const a = DAYEND_T + 1.6, b = DAYEND_T + TL.cmp1;
     padRun((k) => `#pt2_${k}`, 12, a, b, 1.7, 0.24);
+  }
+  { // výsledky: světlo jede po kolech (sloupcích) + „horká“ kola (10+ ryb) bijí na každou 2. dobu
+    const ta = DAYEND_T + TL.cmp1 + TL.cmp2 + 1.8, tb = DAYEND_T + TL.cmp1 + TL.cmp2 + TL.all;
+    padRun((k) => `#s-all .q:nth-child(${k + 1})`, 12, ta, tb, 2.0, 0.22);
+    padHit('#s-all .q.hot', ta, tb, 2, 1.7);
   }
   { // HUD: mezi koly krokuje kurzor po 12 sloupcích
     const idle = [[0, R[0].a], ...R.slice(0, -1).map((r, k) => [r.b, R[k + 1].a]), [R[11].b, DUR - TAIL]];

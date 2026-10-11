@@ -54,9 +54,24 @@
     T(`#mv${si}`, { filter: 'drop-shadow(0 0 0px rgba(227,30,36,0))' }, { filter: `drop-shadow(0 0 ${px(1.2)} rgba(227,30,36,.9))`, duration: 0.3, yoyo: true, repeat: 5, immediateRender: false }, a + 4.2);
     fade('#snote2', a + 4.0);
   }
+  // ===== 11a) výsledky všech klasifikovaných: 12 čtverců na kolo (barva = body, číslo = ryby) =====
+  {
+    const ta = DAYEND_T + TL.cmp1 + TL.cmp2, tb = ta + TL.all;
+    const S = A.filter((x) => typeof x.rank === 'number').sort((x, y) => x.rank - y.rank), N = S.length, half = Math.ceil(N / 2);
+    const cols = P ? [S] : [S.slice(0, half), S.slice(half)];
+    const sq = (r) => `<i class="q p${r.pts}${r.fish >= 10 ? ' hot' : ''}">${r.fish}</i>`;
+    scene('s-all', ta, tb, `${photo('d2_05', ta, tb, 'dimx')}<div class="h2"><span>${P ? 'Výsledky' : 'Výsledky · Den 2'}</span><em>${P ? 'Den 2 · kolo po kole' : `všech ${N} · kolo po kole · ryby v kole`}</em></div>
+      <div class="qleg"><span><i class="q p3"></i>výhra${P ? "" : " 3 b."}</span><span><i class="q p2"></i>remíza s rybou${P ? "" : " 2 b."}</span><span><i class="q p1"></i>0:0${P ? "" : " 1 b."}</span><span><i class="q p0"></i>prohra</span></div>
+      <div class="allw"><div class="allc" id="allc">${cols.map((c) => `<div class="allcol">${c.map((x) => `<div class="ar" id="ar${x.rank}"><span class="ap">${x.rank}</span><span class="an">${x.first[0]}. ${x.last}<i>${x.country}</i></span><span class="qs">${x.rounds.map(sq).join('')}</span><span class="af">${x.fish}</span><b>${x.pts}</b></div>`).join('')}</div>`).join('')}</div></div>`);
+    rise('#s-all .h2 span', ta + 0.1); fade('#s-all .h2 em', ta + 0.3); fade('#s-all .qleg', ta + 0.5);
+    S.forEach((x, i) => T(`#ar${x.rank}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, ta + 0.5 + (P ? i : i % half) * 0.04 + (P ? 0 : Math.floor(i / half) * 0.25)));
+    for (let k = 0; k < 12; k++) T(`#s-all .q:nth-child(${k + 1})`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.5)', stagger: 0.012 }, ta + 1.2 + k * 0.14);
+    T('#s-all .ar:nth-child(-n+3) .q.p3', { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.3)} rgba(227,30,36,.95)`, duration: 0.3, yoyo: true, repeat: 3, immediateRender: false }, ta + 3.4);
+    if (P) { const rowH = 4.15 * u, vis = Math.floor((SC.bot - SC.top - 24 * u) / rowH); T('#allc', { y: 0 }, { y: -(N - vis) * rowH, duration: tb - ta - 4.4, ease: 'sine.inOut' }, ta + 3.6); }
+  }
   // ===== 12) outro: 2 dny dohromady =====
   {
-    const t2 = DAYEND_T + TL.cmp1 + TL.cmp2, t3 = DUR;
+    const t2 = DAYEND_T + TL.cmp1 + TL.cmp2 + TL.all, t3 = DUR;
     scene('s-out', t2, t3, `<div class="fin"><div class="fv"><b id="fin-n">0</b><span>ryb za 2 dny · ≈ ${Math.round((TOTAL + D.d1_total) * 0.18)} kg</span></div>
       <div class="fsp"><span><b>${fmt(D.d1_total)}</b> Den 1</span><span><b>${fmt(TOTAL)}</b> Den 2</span></div>
       <div class="tap big" id="tap-out"><img src="assets/ta_logo_h.png" alt="Trout Area Czech Republic"></div><div class="fz"><span>Díky, Klonówiec · see you next time!</span></div></div>`);
