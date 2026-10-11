@@ -601,8 +601,8 @@ function build(W, H, file) {
   .hnote, .snote { text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); } .hnote b, .snote b { color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
   .dots i { background:radial-gradient(circle at 35% 35%, #ff7a7e, var(--red)); }
   .orgn { align-items:${P ? 'center' : 'flex-start'}; gap:${px(1)}; } .thx { ${P ? '' : 'right:auto; max-width:56%;'} }
-  ${P ? '' : `.ghm { left:auto; right:${f(W * 0.025)}; top:${f(H * 0.035)}; gap:${px(1)}; background:rgba(5,13,34,.55); padding:${px(0.8)} ${px(1.6)}; border-radius:${px(1.2)}; }
-  .ghm .gh-gear { width:${px(3.6)}; height:${px(3.6)}; } .ghm .gh-by { font-size:${px(1.5)}; opacity:1; }`}
+  ${P ? '' : `.ghm { left:auto; right:${f(W * 0.025)}; top:${f(H * 0.035)}; gap:${px(1)}; filter:drop-shadow(0 ${px(0.2)} ${px(0.8)} rgba(0,0,0,.7)); }
+  .ghm .gh-gear { width:${px(4.4)}; height:${px(4.4)}; } .ghm .gh-by { font-size:${px(1.8)}; font-weight:700; opacity:1; }`}
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
