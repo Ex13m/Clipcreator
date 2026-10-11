@@ -540,7 +540,7 @@ function build(W, H, file) {
   .chart polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
   .le { position:absolute; display:flex; align-items:center; gap:${px(0.8)}; font-family:Montserrat; font-weight:700; white-space:nowrap; }
   .le i { width:${px(1.4)}; height:${px(1.4)}; border-radius:50%; } .le b { color:var(--gold); }
-  .rmini { position:absolute; ${P ? `left:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}` : `right:${px(3)}; top:${f(SC.top + 36 * u)}`}; width:${px(P ? 74 : 44)}; height:${px(P ? 20 : 20)}; }
+  .rmini { position:absolute; ${P ? `left:${px(6)}; bottom:${f(H - SC.bot + 3 * u)}` : `right:${px(3)}; top:${f(SC.top + 36 * u)}`}; width:${px(P ? 74 : 44)}; height:${px(P ? 25 : 20)}; }
   .rmini .rc { left:0; bottom:auto; padding:${px(1.6)} ${px(2.4)}; }
   .sc circle { fill:rgba(156,200,240,.75); } .sc circle.hl { fill:var(--red); stroke:#fff; stroke-width:${px(0.25)}; }
   .dl { position:absolute; transform:translate(${px(1.6)}, -50%); } .dl.l { transform:translate(calc(-100% - ${px(1.6)}), -50%); } .dl span { display:inline-block; font-family:Montserrat; font-weight:800; background:rgba(5,13,34,.85); padding:${px(0.4)} ${px(1)}; border-radius:${px(0.6)}; white-space:nowrap; }
@@ -603,6 +603,7 @@ function build(W, H, file) {
   .orgn { align-items:${P ? 'center' : 'flex-start'}; gap:${px(1)}; } .thx { ${P ? '' : 'right:auto; max-width:56%;'} }
   ${P ? '' : `.ghm { left:auto; right:${f(W * 0.025)}; top:${f(H * 0.035)}; gap:${px(1)}; filter:drop-shadow(0 ${px(0.2)} ${px(0.8)} rgba(0,0,0,.7)); }
   .ghm .gh-gear { width:${px(4.4)}; height:${px(4.4)}; } .ghm .gh-by { font-size:${px(1.8)}; font-weight:700; opacity:1; }`}
+  ${P ? "" : ".rmini .rc { width:auto; right:0; bottom:auto; box-sizing:border-box; }"}
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
