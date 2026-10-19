@@ -537,15 +537,17 @@
    "block_s": 8,
    "vo_limit_words": 18,
    "vo": {
-    "cs": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
-    "tts": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+    "cs": "Hlavní cena pro vítěze MČR – stojan Revolut 8 od Gausse Holler Custom Lab.",
+    "tts": "Hlavní cena pro vítěze em čé er – stojan Revolut osm od Gaus Holer Kastom Leb.",
     "respell": "Gaus Holer – stojan na pruty Blek Standard Edyšn. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
     "words": 16,
     "spoken_words": 16,
     "est_s": 5.5,
     "in_s": 0.25,
     "end_s": 5.75,
-    "file": "vo/gausseholler.wav"
+    "file": "vo/gausseholler.wav",
+    "cs_old": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+    "_pending": "REGEN: user 19.10 — main prize Revolut 8, GH Custom Lab = partner & information sponsor"
    },
    "onscreen": {
     "name": "Gausse Holler",
