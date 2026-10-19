@@ -209,7 +209,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 0
+   "enclosed_px": 0,
+   "opened_px": 0,
+   "shadow_px": 45,
+   "rim_px": 7548
   },
   "size": [
    1485,
@@ -230,16 +233,16 @@
   "aspect": 1.075,
   "dominant": [
    {
-    "hex": "#f39302",
-    "share": 0.637
+    "hex": "#f49e0b",
+    "share": 0.484
    },
    {
-    "hex": "#f0a326",
-    "share": 0.297
+    "hex": "#f38900",
+    "share": 0.309
    },
    {
-    "hex": "#ecb15e",
-    "share": 0.067
+    "hex": "#eda842",
+    "share": 0.207
    }
   ],
   "glint": [
@@ -256,7 +259,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 1863
+   "enclosed_px": 1863,
+   "opened_px": 0,
+   "shadow_px": 0,
+   "rim_px": 10023
   },
   "size": [
    2077,
@@ -277,16 +283,16 @@
   "aspect": 2.335,
   "dominant": [
    {
-    "hex": "#744546",
-    "share": 0.651
+    "hex": "#734545",
+    "share": 0.642
    },
    {
-    "hex": "#36191b",
-    "share": 0.242
+    "hex": "#34181a",
+    "share": 0.24
    },
    {
-    "hex": "#977372",
-    "share": 0.107
+    "hex": "#977171",
+    "share": 0.118
    }
   ],
   "glint": [
@@ -303,7 +309,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 2997
+   "enclosed_px": 2997,
+   "opened_px": 0,
+   "shadow_px": 0,
+   "rim_px": 10046
   },
   "size": [
    1693,
@@ -313,27 +322,27 @@
    49,
    49,
    1644,
-   980
+   979
   ],
   "pad": [
    0.029,
    0.048,
    0.029,
-   0.048
+   0.049
   ],
-  "aspect": 1.713,
+  "aspect": 1.715,
   "dominant": [
    {
-    "hex": "#101012",
-    "share": 0.713
+    "hex": "#101013",
+    "share": 0.721
    },
    {
-    "hex": "#373738",
-    "share": 0.238
+    "hex": "#39393a",
+    "share": 0.244
    },
    {
-    "hex": "#9b9e9d",
-    "share": 0.049
+    "hex": "#a0a3a2",
+    "share": 0.035
    }
   ],
   "glint": [
@@ -350,7 +359,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 2977
+   "enclosed_px": 2977,
+   "opened_px": 0,
+   "shadow_px": 22,
+   "rim_px": 12789
   },
   "size": [
    2100,
@@ -372,15 +384,15 @@
   "dominant": [
    {
     "hex": "#7a5554",
-    "share": 0.604
+    "share": 0.605
    },
    {
-    "hex": "#f0a846",
-    "share": 0.332
+    "hex": "#f0a845",
+    "share": 0.326
    },
    {
-    "hex": "#cfb09c",
-    "share": 0.064
+    "hex": "#d2af95",
+    "share": 0.069
    }
   ],
   "glint": [
@@ -423,15 +435,15 @@
   "dominant": [
    {
     "hex": "#e35470",
-    "share": 0.4
+    "share": 0.398
    },
    {
-    "hex": "#cc1c44",
-    "share": 0.331
+    "hex": "#cc1d45",
+    "share": 0.34
    },
    {
-    "hex": "#f7839a",
-    "share": 0.269
+    "hex": "#f8839b",
+    "share": 0.263
    }
   ],
   "glint": [
@@ -448,7 +460,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 0
+   "enclosed_px": 0,
+   "opened_px": 0,
+   "shadow_px": 296,
+   "rim_px": 2947
   },
   "size": [
    1189,
@@ -456,29 +471,29 @@
   ],
   "bbox": [
    36,
-   35,
+   36,
    1154,
    746
   ],
   "pad": [
    0.03,
-   0.045,
+   0.046,
    0.029,
    0.045
   ],
-  "aspect": 1.572,
+  "aspect": 1.575,
   "dominant": [
    {
-    "hex": "#d2ba45",
-    "share": 0.649
+    "hex": "#d2ba46",
+    "share": 0.664
    },
    {
-    "hex": "#e99c3c",
-    "share": 0.254
+    "hex": "#ea9d3d",
+    "share": 0.251
    },
    {
-    "hex": "#dec476",
-    "share": 0.097
+    "hex": "#e0c476",
+    "share": 0.085
    }
   ],
   "glint": [
@@ -495,42 +510,45 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 0
+   "enclosed_px": 0,
+   "opened_px": 0,
+   "shadow_px": 323,
+   "rim_px": 2212
   },
   "size": [
    1015,
-   481
+   480
   ],
   "bbox": [
-   30,
-   30,
+   31,
+   29,
    985,
-   451
+   450
   ],
   "pad": [
-   0.03,
-   0.062,
+   0.031,
+   0.06,
    0.03,
    0.062
   ],
-  "aspect": 2.268,
+  "aspect": 2.266,
   "dominant": [
    {
-    "hex": "#c3a57f",
-    "share": 0.383
+    "hex": "#93714c",
+    "share": 0.392
    },
    {
-    "hex": "#95734d",
+    "hex": "#c2a47e",
     "share": 0.38
    },
    {
-    "hex": "#573115",
-    "share": 0.237
+    "hex": "#542e13",
+    "share": 0.227
    }
   ],
   "glint": [
    0.672,
-   0.457
+   0.456
   ]
  },
  "S9_coccon_c02_orange_fluo": {
@@ -542,7 +560,10 @@
   "method": "white_unmix",
   "info": {
    "holes": 0,
-   "enclosed_px": 0
+   "enclosed_px": 0,
+   "opened_px": 0,
+   "shadow_px": 517,
+   "rim_px": 2674
   },
   "size": [
    982,
@@ -564,15 +585,15 @@
   "dominant": [
    {
     "hex": "#d4921a",
-    "share": 0.542
+    "share": 0.536
    },
    {
     "hex": "#eaae37",
-    "share": 0.343
+    "share": 0.353
    },
    {
-    "hex": "#efc469",
-    "share": 0.115
+    "hex": "#f0c669",
+    "share": 0.111
    }
   ],
   "glint": [

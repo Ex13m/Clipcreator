@@ -11,7 +11,8 @@
 //                 everything fades to black except the TA hero and the GH mark
 import * as fx from '../lib/fx.mjs';
 
-export const theme = { bg: '#04060a', bg2: '#0e2233', fg: '#ffffff', accent: '#8fe3ff', accent2: '#ffffff', font: { display: 'Archivo', text: 'Inter' }, wght: 900, upper: true };
+// event world = ink + cold lake teal + ice accent (same family as the intro); deliberately NOT navy (old TA house style)
+export const theme = { bg: '#04060a', bg2: '#0a2325', fg: '#ffffff', accent: '#8fe3ff', accent2: '#ffffff', font: { display: 'Archivo', text: 'Inter' }, wght: 900, upper: true };
 export const meta = { reel: false };
 
 // ---- A: one card per partner (film order). p = index into data.products; bg = radial [centre, edge]; fg = type colour on this card;
@@ -24,15 +25,17 @@ const CARDS = [
   { k: 'jigovky', p: 1, rot: -8, bg: ['#ffe866', '#f4c400'], glow: '#ffffff', go: 0.55, fg: '#0c2414', name: 'jigovky', font: 'Poppins', wght: 900, upper: false, nc: 'rgba(23,110,55,.18)' },
   { k: 'velkaryba', p: 4, rot: -6, bg: ['#22599a', '#0f2541'], glow: '#7fb0e6', go: 0.32, fg: '#ffffff', name: 'VELKÁ RYBA', font: 'Oswald', wght: 700, nc: 'rgba(127,176,230,.18)' },
   { k: 'bosset', trio: [1, 0, 2], bg: ['#ffffff', '#bfe6f8'], glow: '#1b97b1', go: 0.22, fg: '#0b1d24', name: 'bosset', font: 'Outfit', wght: 800, upper: false, nc: 'rgba(27,151,177,.18)' },
-  { k: 'gausseholler', p: 2, h: 700, bg: ['#3a434c', '#0f1113'], glow: '#7fb2c7', go: 0.5, fg: '#e9e6e2', name: 'Gausse Holler', font: 'Playfair Display', wght: 900, italic: true, upper: false, nc: 'rgba(240,144,79,.18)' },
+  { k: 'gausseholler', p: 2, h: 700, bg: ['#56616c', '#0f1113'], glow: '#9cc6d8', go: 0.72, fg: '#e9e6e2', name: 'Gausse Holler', font: 'Playfair Display', wght: 900, italic: true, upper: false, nc: 'rgba(240,144,79,.18)' },
 ];
 // ---- B: products that explode out of the centre on the bar-2 downbeat (every sponsor, other products than in A)
-// they burst out from behind the TA logo and settle into a depth-of-field constellation around it: small + sharp = focal plane
-// (next to the logo), big + blurred = close to the camera (frame edges). [key, product, x, y, box px, blur px, opacity, rot]
+// they burst out from behind the TA logo and settle into a depth-of-field constellation around it: an arc of sharp products
+// (focal plane, alternating colours, 200–300 px so each one reads as a product, not a sticker) + two big, fully opaque,
+// rack-focused foreground pieces cropped by the bottom corners (camera-near bokeh). [key, product, x, y, box px, blur px, opacity, rot]
 const BURST = [
-  ['troutshop', 3, 150, 410, 190, 0, 1, -18], ['moonky', 3, 360, 330, 170, 0, 1, 8], ['bosset', 0, 540, 330, 200, 0, 1, 0], ['jigovky', 2, 720, 330, 170, 0, 1, -6], ['velkaryba', 0, 930, 410, 190, 0, 1, 22],
-  ['activefishing', 1, 110, 650, 150, 0, 1, 12], ['moonky', 2, 975, 650, 170, 0, 1, -14],
-  ['velkaryba', 3, 120, 1580, 420, 9, 0.6, 30], ['troutshop', 2, 980, 1620, 440, 9, 0.6, -20],
+  ['activefishing', 1, 150, 410, 230, 0, 1, -14], ['moonky', 4, 345, 300, 300, 0, 1, -18], ['bosset', 0, 545, 285, 290, 0, 1, 6],
+  ['velkaryba', 0, 752, 310, 260, 0, 1, 22], ['troutshop', 3, 945, 425, 220, 0, 1, 12],
+  ['jigovky', 0, 100, 650, 200, 0, 1, -8], ['moonky', 2, 985, 655, 230, 0, 1, -14],
+  ['velkaryba', 3, 70, 1760, 700, 15, 1, 32], ['activefishing', 2, 1010, 1790, 640, 15, 1, -24],
 ];
 
 export default function finale(ctx) {
@@ -99,14 +102,18 @@ export default function finale(ctx) {
   // =====================================================================================================
   // B · BURST + TA hero + kinetic event poster (bars 2–5)
   // =====================================================================================================
-  const HERO = { scale: 2.2, cy: 600, fly: 0.8 };
-  const PH = ctx.plate.hero(tB, END, HERO);
-  // background for B + C: the actual competition pond, duotone deep water, slow pull-back; aurora + vignette
-  let bg = fx.photo(ctx, { id: 'bph', src: 'assets_prep/libechov/venue/v01_maly_sportacek.jpg', treat: 'duo', d1: '#04060a', d2: '#2f86ad', pos: '50% 60%', kb: { from: { scale: 1.22 }, to: { scale: 1.04 }, t0: tB, t1: tD + 1.4 }, style: 'opacity:.42' });
-  bg += fx.mesh(ctx, { id: 'mesh', colors: ['#0d3550', '#1b4f7a', '#0a5a66', '#26215a'], size: 1000, blur: 160, opacity: 0.55, drift: 240, seed: 9, t0: tB, t1: tD + 1.4 });
+  // anticipation → slam: the corner plate starts growing on the last montage card and LANDS on the bar-2 downbeat (accelerating
+  // ease), so the products explode from behind a logo that is already there — the hit frame is never empty
+  const HERO = { scale: 2.2, cy: 600, fly: 0.46, ease: 'power3.in' };
+  const PH = ctx.plate.hero(tB - HERO.fly, END, HERO);
+  // background for B + C: the actual competition pond, duotone deep lake teal (not navy), slow pull-back; aurora + vignette
+  let bg = fx.photo(ctx, { id: 'bph', src: 'assets_prep/libechov/venue/v01_maly_sportacek.jpg', treat: 'duo', d1: '#04060a', d2: '#2b8f8c', pos: '50% 60%', kb: { from: { scale: 1.22 }, to: { scale: 1.04 }, t0: tB, t1: tD + 1.4 }, style: 'opacity:.4' });
+  bg += fx.mesh(ctx, { id: 'mesh', colors: ['#0b3a3a', '#0f524b', '#0a5866', '#132f2c'], size: 1000, blur: 160, opacity: 0.6, drift: 240, seed: 9, t0: tB, t1: tD + 1.4 });
   bg += `<div class="fx-full" style="background:radial-gradient(90% 60% at 50% 46%,rgba(4,6,10,0) 0%,rgba(4,6,10,.55) 70%,rgba(4,6,10,.9) 100%)"></div>`;
-  bg += fx.glow(ctx, { id: 'hg', x: CX, y: HERO.cy, size: 1300, color: '#1d6f95', opacity: 0.55 });
+  bg += fx.glow(ctx, { id: 'hg', x: CX, y: HERO.cy, size: 1300, color: '#2a9c95', opacity: 0.55 });
   html += fx.scene(ctx, 'sbg', tB, tD + 1.4, bg, { outD: 1.2 });
+  // light bloom behind the logo on the impact (glow over-exposes, then settles into the halo)
+  ctx.tl.fromTo(ctx.sel('hg'), { scale: 0.35, opacity: 1 }, { scale: 1, opacity: 0.55, duration: 0.9, ease: 'expo.out' }, tB);
 
   // burst: products fly out of the centre, past the camera (expo.out), fading as they leave
   let bu = '';
@@ -117,39 +124,47 @@ export default function finale(ctx) {
     const w = Math.min(box, box * ar, nw);
     const P = fx.product(ctx, { id: `bu${j}`, src: p.src, w, cx: x, cy: y, ground: 'none', sweep: !blur, pad: p.pad, maxUp: 1.0 });
     bu += P.html;
-    const d = 1.1 + 0.05 * j;
-    ctx.tl.fromTo(P.sel, { x: BX - x, y: BY - y, scale: 0.15, rotation: rot - 160 }, { x: 0, y: 0, scale: 1, rotation: rot, duration: d, ease: 'expo.out' }, tB + 0.02 * j);
-    ctx.tl.fromTo(P.sel, { opacity: 0 }, { opacity: op, duration: 0.25, ease: 'none' }, tB + 0.02 * j);
-    if (blur) ctx.tl.fromTo(`#${ctx.id(`bu${j}-im`)}`, { filter: 'blur(0px)' }, { filter: `blur(${blur}px)`, duration: 0.9, ease: 'power2.inOut' }, tB + 0.45);
+    const d = 1.0 + 0.04 * j;
+    // start half-size right behind the logo, fully visible after 2 frames → the impact frame already shows products flying
+    ctx.tl.fromTo(P.sel, { x: (BX - x) * 0.85, y: (BY - y) * 0.85, scale: 0.45, rotation: rot - 140 }, { x: 0, y: 0, scale: 1, rotation: rot, duration: d, ease: 'expo.out' }, tB + 0.015 * j);
+    ctx.tl.fromTo(P.sel, { opacity: 0 }, { opacity: op, duration: 0.07, ease: 'none' }, tB + 0.015 * j);
+    if (blur) ctx.tl.fromTo(`#${ctx.id(`bu${j}-im`)}`, { filter: 'blur(0px)' }, { filter: `blur(${blur}px)`, duration: 0.7, ease: 'power2.inOut' }, tB + 0.35);
     else {
       fx.sweep(ctx, `bu${j}`, bar(4) + 0.05 * j, { d: 0.6 });
       [bar(3), bar(4), bar(5)].forEach((t) => fx.punch(ctx, P.sel, t, { scale: 1.14, d: 0.32 }));   // the crown pulses on the downbeats
     }
     fx.float(ctx, P.cam, tB + d, tC, { y: blur ? -26 : -12, rot: blur ? 3 : 2, period: ctx.BAR / (blur ? 1 : 2) });
   });
-  bu = `<i class="fin-ring" id="${ctx.id('ring')}" style="left:${BX - 300}px;top:${BY - 300}px"></i>` + bu;
-  ctx.tl.fromTo(ctx.sel('ring'), { scale: 0.15, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 0.75, ease: 'expo.out' }, tB);
+  // shockwave: two rings (fat + thin echo) from behind the logo
+  bu = `<i class="fin-ring" id="${ctx.id('ring')}" style="left:${BX - 300}px;top:${BY - 300}px"></i><i class="fin-ring fin-ring2" id="${ctx.id('ring2')}" style="left:${BX - 300}px;top:${BY - 300}px"></i>` + bu;
+  ctx.tl.fromTo(ctx.sel('ring'), { scale: 0.45, opacity: 1 }, { scale: 2.8, opacity: 0, duration: 0.7, ease: 'expo.out' }, tB);
+  ctx.tl.fromTo(ctx.sel('ring2'), { scale: 0.45, opacity: 0.8 }, { scale: 2.2, opacity: 0, duration: 0.9, ease: 'expo.out' }, tB + 0.08);
   html += fx.scene(ctx, 'sbu', tB, tC, bu, { outD: 0.35 });
-  fx.flash(ctx, tB, { id: 'pk2', color: '#ffffff', peak: 0.75, d: 0.4 });
+  // cold ice flash in screen mode: punches the hit without washing the frame out to grey
+  fx.flash(ctx, tB, { id: 'pk2', color: T.accent, peak: 0.5, d: 0.3, blend: 'screen' });
 
-  // poster lines (centred under the TA hero), each lands on the beat nearest its VO word
+  // poster lines (centred under the TA hero), each lands on the beat nearest its VO word.
+  // One family, one width (Archivo condensed, like DĚKUJEME / PARTNERŮM): two big lines (title + date) carry the info,
+  // the in-between lines are small caps with tracking → clear 2-level hierarchy instead of five different styles.
   const tTitle = tB + 0.08, tSub = tB + BEAT;
   const tDate = clamp(ctx.snap(voAt('24.', bar(3)), 'beat'), tB + 1.0, bar(4));
   const tPlace = clamp(ctx.snap(voAt('Líheň', bar(4) + BEAT * 2), 'beat'), tDate + 1.3, bar(5));
   const tClose = clamp(ctx.snap(voAt('Uvidíme', bar(5) + BEAT), 'beat'), tPlace + 0.9, tC - 1.2);
-  let yy = PH.y + PH.h + 56;
-  const pT = fx.headline(ctx, { id: 'pt', text: E.title1, x: L, y: yy, w: CW, maxLines: 1, font: 'Archivo', wght: 900, wdth: 75, upper: true, tracking: -0.01, sizes: [132, 126, 120, 112, 104, 96], align: 'center', t: tTitle, reveal: 'lines', d: 0.7, variable: true });
+  const CND = { font: 'Archivo', wdth: 75, upper: true };
+  let yy = PH.y + PH.h + 50;
+  const pT = fx.headline(ctx, { id: 'pt', text: E.title1, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 900, tracking: -0.01, sizes: [150, 142, 136, 132, 126, 120], align: 'center', t: tTitle, reveal: 'lines', d: 0.7, variable: true });
   fx.varType(ctx, pT.sel, tTitle, { from: { wght: 300, wdth: 62, trk: 0.06 }, to: { wght: 900, wdth: 75, trk: -0.01 }, d: 1.1, ease: 'expo.out' });
-  yy += pT.h + 16;
-  const pS = fx.headline(ctx, { id: 'ps', text: E.title2, x: L, y: yy, w: CW, maxLines: 1, font: 'Archivo', wght: 500, wdth: 100, sizes: [66, 62, 58], align: 'center', color: T.accent, t: tSub, reveal: 'lines' });
-  yy += pS.h + 44;
-  const dSize = fitSize(E.date, { font: 'Archivo', wght: 900, sizes: [116, 110, 104, 98, 92, 86] });
-  const pDate = `<div class="fx-abs" id="${ctx.id('pdw')}" style="left:${L}px;top:${yy}px;width:${CW}px">${fx.odometer(ctx, { id: 'pd', value: E.date, x: 0, y: 0, w: CW, align: 'center', size: dSize, font: 'Archivo', wght: 900, t: tDate - 0.05, d: 1.0, spins: 1, stagger: 0.04 })}</div>`;
-  ctx.tl.fromTo(ctx.sel('pdw'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, tDate - 0.05);
-  yy += dSize + 40;
-  const pP = fx.headline(ctx, { id: 'pp', text: E.place, x: L, y: yy, w: CW, maxLines: 1, font: 'Archivo', wght: 800, wdth: 100, sizes: [72, 68, 64], align: 'center', t: tPlace, reveal: 'chars', stagger: 0.02 });
-  yy += pP.h + 50;
-  const pC = fx.headline(ctx, { id: 'pc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: yy, w: CW, maxLines: 1, font: 'Archivo', wght: 900, wdth: 87, upper: true, tracking: -0.02, sizes: [100, 96, 92, 86, 80, 74], align: 'center', color: T.accent, t: tClose, reveal: 'chars', stagger: 0.022 });
+  yy += pT.h + 10;
+  const pS = fx.headline(ctx, { id: 'ps', text: E.title2, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 700, tracking: 0.12, sizes: [54, 50, 46], align: 'center', color: T.accent, t: tSub, reveal: 'lines' });
+  yy += pS.h + 34;
+  const dSize = fitSize(E.date, { ...CND, wght: 900, tracking: 0, maxW: CW - 60, sizes: [176, 168, 160, 152, 144, 136, 128] });
+  // fast roll (≈0.6 s) so the date is never on screen as a wrong number for long
+  const pDate = `<div class="fx-abs" id="${ctx.id('pdw')}" style="left:${L}px;top:${yy}px;width:${CW}px">${fx.odometer(ctx, { id: 'pd', value: E.date, x: 0, y: 0, w: CW, align: 'center', size: dSize, font: 'Archivo', wght: 900, t: tDate - 0.05, d: 0.5, spins: 0, stagger: 0.02, style: 'font-stretch:75%' })}</div>`;
+  ctx.tl.fromTo(ctx.sel('pdw'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'expo.out' }, tDate - 0.05);
+  yy += dSize + 30;
+  const pP = fx.headline(ctx, { id: 'pp', text: E.place, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 800, tracking: 0.04, sizes: [84, 80, 76, 72], align: 'center', t: tPlace, reveal: 'chars', stagger: 0.02 });
+  yy += pP.h + 40;
+  const pC = fx.headline(ctx, { id: 'pc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 900, tracking: 0, sizes: [92, 88, 84, 80], align: 'center', color: T.accent, t: tClose, reveal: 'chars', stagger: 0.022 });
   if (yy + pC.h > ctx.H - ctx.safe.bottom) ctx.warn(`poster runs to y ${Math.round(yy + pC.h)} > safe ${ctx.H - ctx.safe.bottom}`);
   const poster = `<div class="fx-full" id="${ctx.id('pw')}">${pT.html}${pS.html}${pDate}${pP.html}${pC.html}</div>`;
   ctx.tl.fromTo(ctx.sel('pw'), { opacity: 1, y: 0 }, { opacity: 0, y: -70, duration: 0.3, ease: 'power3.in' }, tC - 0.3);
@@ -165,8 +180,11 @@ export default function finale(ctx) {
   const kick = fx.headline(ctx, { id: 'wk', text: E.partnersTitle || 'Partneři mistrovství', x: L, y: kY, w: CW, maxLines: 1, font: 'Inter', wght: 700, size: 30, upper: true, tracking: 0.24, align: 'center', color: T.accent, t: tC, reveal: 'chars', stagger: 0.012 });
   const gTop = kY + 70, gBot = ctx.H - ctx.safe.bottom - 16, gL = L, gR = ctx.W - L;
   const cw = (gR - gL) / cols, ch = (gBot - gTop) / rows;
-  const AREA = 21000, MAXW = 330, MAXH = Math.min(108, ch - 50);
-  const GLOW = { venue: '#17a1c8', troutshop: '#e3000f', activefishing: '#e39025', moonky: '#ff4f8b', jigovky: '#fed700', velkaryba: '#3d7fd0', bosset: '#1b97b1', gausseholler: '#1d8fd5' };
+  // no URL captions (19 px = unreadable on a phone, and they ate 35 px of every cell) → logos get the whole cell; square
+  // marks (Liběchov, GH) were capped by the cell height, now ~125 px instead of 105
+  const AREA = 24000, MAXW = 360, MAXH = Math.min(130, ch - 30);
+  // halo per brand; Jigovky: its green, not yellow (yellow behind the thin white line logo killed the contrast)
+  const GLOW = { venue: '#17a1c8', troutshop: '#e3000f', activefishing: '#e39025', moonky: '#ff4f8b', jigovky: '#1f9a4c', velkaryba: '#3d7fd0', bosset: '#1b97b1', gausseholler: '#1d8fd5' };
   const tWall1 = tD + 0.5;
   let wall = '';
   // hairline grid (draws in from the centre)
@@ -182,10 +200,9 @@ export default function finale(ctx) {
     const rel = dk.logo?.[variant] || dk.logo?.on_dark;
     const [iw, ih] = ctx.dims(rel), ar = iw / ih;
     const bw = Math.floor(Math.min(MAXW, Math.sqrt(AREA * ar), MAXH * ar));
-    const lg = ctx.logo(rel, { box: [bw, Math.ceil(bw / ar)], scale: 1.2, at: [tC, tWall1], label: `wall ${k}` });
+    const lg = ctx.logo(rel, { box: [bw, Math.ceil(bw / ar)], scale: 1.6, at: [tC, tWall1], label: `wall ${k}` });
     const col = i % cols, row = Math.floor(i / cols);
     const cx = gL + cw * (col + 0.5), cy = gTop + ch * (row + 0.5);
-    const lab = k === 'venue' ? 'lihenlibechov.cz' : dk.url || '';
     wall += `<i class="fin-glow" id="${ctx.id(`wg${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px;background:radial-gradient(closest-side,${ctx.rgba(GLOW[k] || T.accent, 0.5)},${ctx.rgba(GLOW[k] || T.accent, 0)})"></i>`;
     wall += `<div class="fx-abs fin-cell" id="${ctx.id(`w${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px">
       <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div>
