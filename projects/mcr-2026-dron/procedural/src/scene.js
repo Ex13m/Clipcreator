@@ -297,7 +297,7 @@ function crownGeometry(detail, seed, kind) {
   return g;
 }
 function foliageMaterial(opts) {
-  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0, envMapIntensity: P.envIntensity * 1.1 });
+  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0, envMapIntensity: P.envIntensity * 1.5 });
   const SHELL = opts.shell ? 1 : 0;
   m.customProgramCacheKey = () => 'fol' + SHELL + (opts.orthoMix > 0 ? 'o' : 'n');
   m.onBeforeCompile = (sh) => {
@@ -350,7 +350,7 @@ function foliageMaterial(opts) {
       vec3 bakedCol = vec3(0.0);
       {
         vec3 inst = diffuseColor.rgb;
-        vec3 alb = mix(inst * (0.82 + 0.36 * fn), oc * (0.92 + 0.16 * fn), wO);
+        vec3 alb = mix(inst * (0.82 + 0.36 * fn), oc * (0.92 + 0.16 * fn), wO) * vec3(1.04, 1.02, 0.9);
         float ao = mix(0.62, 1.0, smoothstep(-0.9, 0.6, vObj.y)) * mix(0.6, 1.0, vCav);
         diffuseColor.rgb = alb * ao * uAlb;
         bakedCol = oc * ao * wO * top;
@@ -365,8 +365,10 @@ function foliageMaterial(opts) {
         float lx = dot(texture(tOrtho, OUV(oxz + vec2(e, 0.0))).rgb, LW);
         float lz = dot(texture(tOrtho, OUV(oxz + vec2(0.0, e))).rgb, LW);
         vec3 g = vec3(lx - l0, 0.0, lz - l0) / e * 3.2 * wO;
-        float px = fol(wp + vec3(0.2,0,0)) - fn, py = fol(wp + vec3(0,0.2,0)) - fn, pz = fol(wp + vec3(0,0,0.2)) - fn;
-        g += vec3(px, py, pz) / 0.2 * 0.5 * (1.0 - wO * 0.6);
+        if (wO < 0.5) {
+          float px = fol(wp + vec3(0.2,0,0)) - fn, py = fol(wp + vec3(0,0.2,0)) - fn, pz = fol(wp + vec3(0,0,0.2)) - fn;
+          g += vec3(px, py, pz) / 0.2 * 0.5;
+        }
         nW = normalize(nW - g);
         normal = normalize(mat3(viewMatrix) * nW);
       }`)
@@ -429,11 +431,14 @@ async function buildTrees(scene) {
     mesh.castShadow = true; mesh.receiveShadow = true;
     mesh.computeBoundingSphere();
     mesh.userData.kind = kind;
+    if (kind === 1 || kind === 2) mesh.layers.set(1);
+    if (kind === 3) mesh.layers.enable(1);
     scene.add(mesh); count += items.length;
     if ((kind === 0 || kind === 3) && !S.opts.noShell) {
       const sh = new THREE.InstancedMesh(geo, shellMat, items.length);
       sh.instanceMatrix = mesh.instanceMatrix; sh.instanceColor = mesh.instanceColor;
       sh.castShadow = false; sh.receiveShadow = true; sh.boundingSphere = mesh.boundingSphere.clone(); sh.boundingSphere.radius += 2.0;
+      sh.layers.set(1); sh.userData.shell = true;
       scene.add(sh);
     }
   }
@@ -681,7 +686,7 @@ function renderReflections(renderer, scene, cam) {
     const pd = w.userData.pond;
     if (!pd.reflect) { w.material.uniforms.uHasRefl.value = 0; continue; }
     const L = pd.level;
-    const rc = S.reflCam; rc.copy(cam);
+    const rc = S.reflCam; rc.copy(cam); rc.layers.set(0);
     const p = cam.position.clone(); p.y = 2 * L - p.y;
     const f = new THREE.Vector3(); cam.getWorldDirection(f); f.y = -f.y;
     const u = new THREE.Vector3(0, 1, 0).applyQuaternion(cam.quaternion); u.y = -u.y;
@@ -713,7 +718,7 @@ window.setup = async (opts) => {
   renderer.setPixelRatio(1); renderer.setSize(outW, outH, false);
   renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   renderer.toneMapping = THREE.NoToneMapping;
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = (S.opts && S.opts.softShadow) ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap; renderer.shadowMap.autoUpdate = false;
   renderer.localClippingEnabled = false;
   S.renderer = renderer;
   S.noise3 = makeNoise3D(4242);
@@ -738,7 +743,7 @@ window.setup = async (opts) => {
   const ext = opts.shadowExtent || 380;
   Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 100, far: 1600 });
   sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.25;
-  scene.add(sun, sun.target);
+  sun.layers.enableAll(); scene.add(sun, sun.target);
   S.sun = sun;
   // content
   for (const m of buildTerrain(hCore, hCtx, orthoCore, orthoCtx)) scene.add(m);
@@ -750,7 +755,7 @@ window.setup = async (opts) => {
   const ssW = Math.round(outW * ss), ssH = Math.round(outH * ss);
   S.ssW = ssW; S.ssH = ssH;
   const camera = new THREE.PerspectiveCamera(opts.vfov, outW / outH, 8, 40000);
-  S.camera = camera; S.reflCam = camera.clone();
+  camera.layers.enableAll(); S.camera = camera; S.reflCam = camera.clone(); S.reflCam.layers.set(0);
   S.sceneRT = new THREE.WebGLRenderTarget(ssW, ssH, { type: THREE.HalfFloatType, samples: opts.msaa ?? 4, depthBuffer: true });
   S.accRT = new THREE.WebGLRenderTarget(ssW, ssH, { type: THREE.FloatType, depthBuffer: false });
   S.midRT = new THREE.WebGLRenderTarget(outW, outH, { type: THREE.HalfFloatType, depthBuffer: false });
@@ -815,6 +820,7 @@ window.setup = async (opts) => {
       }`,
   }));
   S.orthoCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  S.depthMat = new THREE.MeshBasicMaterial({ colorWrite: false, side: THREE.FrontSide });
   // static shadow map, rendered once
   renderer.shadowMap.needsUpdate = true;
   applyCam(camera, camParams(0));
@@ -836,7 +842,13 @@ window.renderFrame = async (f) => {
     if (!S.opts.noRefl) renderReflections(renderer, scene, camera);
     S.sky.position.copy(camera.position);
     renderer.setRenderTarget(S.sceneRT); renderer.clear();
-    renderer.render(scene, camera);
+    if (S.opts.prepass !== false) {
+      const hide = [S.sky, ...S.water]; hide.forEach(o => o.visible = false);
+      const ml = camera.layers.mask; camera.layers.set(0); camera.layers.enable(2);
+      scene.overrideMaterial = S.depthMat; renderer.render(scene, camera); scene.overrideMaterial = null;
+      camera.layers.mask = ml; hide.forEach(o => o.visible = true);
+      renderer.autoClear = false; renderer.render(scene, camera); renderer.autoClear = true;
+    } else renderer.render(scene, camera);
     S.accQuad.mesh.material.uniforms.tSrc.value = S.sceneRT.texture;
     S.accQuad.mesh.material.uniforms.uW.value = 1 / K;
     renderer.setRenderTarget(S.accRT); renderer.render(S.accQuad.scene, S.orthoCam);
