@@ -81,3 +81,38 @@ Every file is 48 kHz mono PCM s16. Loudness is −16.0 to −16.3 LUFS and true 
 
 ## velkaryba take 2 (19. 10., main loop)
 New take ingested via bridge (Drive id 1VhjLck8kNqGIkJ0h1UXWQElP5zk0Xs4H), natural ending (raw cut −51 dBFS), 6.80 s, 1×, −16.3 LUFS / ≤ −1.0 dBTP (−0.05 dB trim). Previous temporary take → vo/prev/velkaryba.take1ext.*
+
+## take 3 (names) — 19. 10.
+
+The operator approved the respelled brand names ("вроде ок"): Traut érija, Traut šop, Ektiv fišing, Múnky, Džigovky/džigy, Boset, Gaus Holer Kastom Lab, em čé er, Revolut osm, hárd bejts, í-šop. New texts for bosset (no exclusive "Ceny pro vítěze věnuje"), gausseholler (main prize Revolut 8, "Lab" read "lab") and finale ("a ceny pro závodníky"). One `create_speech` call per key (Paul – Broadcaster, elevenlabs eleven_v3, cs, speed 1). The text sent = `vo.tts` + " …". Responses are in `raw/tts_responses_take3.json`. Ingest went through the bridge (Zapier → Drive `_zdroje` → Drive download); md5 verified for all 8.
+
+| key | request | raw s | raw cut dBFS | tail fix | 1× s | atempo | final s | limit s | VO ends s | gap to block end s | I LUFS | TP dBTP | last 30 ms dBFS | words | previous → prev/ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| intro | W1IM0GztkN2fAKjSHVOb | 13.949 | -43.9 | — | 13.930 | 1.056 | 13.182 | 13.198 | 13.682 | 1.016 | -16.0 | -1.05 | -49.9 | 22 | `prev/intro.take1.*` |
+| troutshop | 6bsA93gvctyBuwAM3zcw | 6.191 | -47.0 | — | 6.096 | 1 | 6.096 | 7.922 | 6.346 | 2.826 | -16.1 | -1.05 | -82.3 | 9 | `prev/troutshop.take2.*` |
+| activefishing | M0IjSltjSRJnprZUAI0E | 6.609 | -34.7 | — | 6.496 | 1 | 6.496 | 7.899 | 6.746 | 2.403 | -16.1 | -1.05 | -85.6 | 14 | `prev/activefishing.take1.*` |
+| moonky | 4PRb8vFzGNkWLkB6DBmQ | 7.314 | -29.0 | ext 0.08 s (f0 83.5 Hz) | 7.384 | 1 | 7.384 | 7.922 | 7.634 | 1.538 | -16.1 | -1.05 | -76.1 | 14 | `prev/moonky.take1v2.*` |
+| jigovky | FF0E3ou8eK3fl0yzk5hJ | 8.438 | -27.4 | ext 0.08 s (f0 99.3 Hz) | 8.493 | 1.076 | 7.877 | 7.898 | 8.127 | 1.021 | -16.0 | -1.05 | -55.9 | 13 | `prev/jigovky.take1.*` |
+| bosset | fuWj7FYIEWLSJIMGMHVT | 6.844 | -22.3 | ext 0.08 s (f0 80.5 Hz) | 6.899 | 1 | 6.899 | 7.875 | 7.149 | 1.976 | -16.0 | -1.05 | -68.9 | 14 | `prev/bosset.take2.*` |
+| gausseholler | 1ktIQzUbcBebHEOqHtbO | 8.046 | -59.4 | raw cut at 5.92 s (artefact removed), b-release kept | 5.870 | 1 | 5.870 | 7.822 | 6.120 | 2.952 | -16.1 | -1.05 | -81.0 | 13 | `prev/gausseholler.take1.*` |
+| finale | tFZCRdLsCufNkDOB6Euo | 12.669 | -47.8 | — | 12.640 | 1 | 12.640 | 22.733 | 12.890 | 11.093 | -16.0 | -1.05 | -68.5 | 25 | `prev/finale.take2.*` |
+
+All files are 48 kHz mono s16. VO starts at 0.25 s (intro 0.5 s), and every block ends its VO at least 1.0 s before the block end. TP is measured to 0.01 dB (`loudnorm` `input_tp`). The build (`node scripts/build.mjs`, film 119.131 s) prints no VO warnings ("!" / CUT), and all 10 blocks report "aligned words".
+
+Notes:
+- **" …" trick, take 3:** intro, troutshop, finale and activefishing end naturally (intro reaches −44 dBFS at the raw end, and the fade covers the rest). moonky ("-cí", −29 dBFS), jigovky ("Česku", −27) and bosset ("hodin", −22) are cut mid-sound, so each gets an 80 ms synthetic decay (YIN period continuation, −40 dB). There is no click at the join: HF energy there is at or below the surrounding voice. Spectrograms: scratchpad `vo3/viz/tails_raw1.png`, `tails_raw2.png`, `tails_proc.png`.
+- **gausseholler artefact:** after "Lab." HeyGen produced about 2 s of a steady low-frequency rumble (~30–35 Hz, −61 dBFS; the 1–3 kHz band is ~30 dB lower), then the onset of a new loud vocalisation (−10 dBFS, 7.73–8.05 s raw). The raw is truncated at 5.92 s (`raw_end_s`, new option in `process_v2.py`), and the "b" release at 5.82 s is kept (`keep_tail`). Result: 5.87 s at 1×.
+- **activefishing:** the burst after the "p" closure of "přístup" (6.57 s raw) is dropped, as `speech_bounds` does by default. It is cut off by the raw end, and its low zero-crossing rate marks a voiced onset, not aspiration.
+- **atempo:** intro 1.056 (13.930 → 13.182 s, limit 13.198) and jigovky 1.076 (8.493 → 7.877 s, limit 7.898). The 1× originals are `prev/<key>.take3.1x.*`. Word times are divided by the factor.
+- **Alignment:** `process_v2.py` now maps TTS respellings back to the on-screen `vo.cs` tokens (`RESPELL`). One cs token may absorb 1–4 TTS words, e.g. MČR ← "em čé er" and Troutshop ← "Traut šop", and `words[].spoken` keeps what was said. For all 8 keys the token lists equal `vo.cs` and the times are monotonic.
+- **script_cs.json:** `vo.tts` = `vo.respell` = the approved respelled text (without the trailing " …"). `_pending` is removed and the pronunciation table is updated.
+- **Archived:** `prev/intro.take1` (atempo 1.004), `prev/troutshop.take2`, `prev/activefishing.take1`, `prev/moonky.take1v2` (take 1, process_v2 version; `prev/moonky.take1` is the older process.py version), `prev/jigovky.take1` (atempo 1.065), `prev/bosset.take2`, `prev/gausseholler.take1` (atempo 1.071) and `prev/finale.take2`. Raw files went to `prev/raw/<key>.take<N>.mp3`.
+
+### take 3 — independent QA (19. 10.)
+- **Pass, all 8 keys.** Format 48 kHz mono s16. Loudness: ebur128 −16.0…−16.1 LUFS, pyloudnorm −16.05…−16.21 LUFS. True peak (4× oversampled) −1.04…−1.05 dBTP. Durations equal `durations.json` and stay under the plan-A limits (closest: intro 13.182/13.198, jigovky 7.877/7.898).
+- **Tails (last 400–700 ms, envelope + spectrogram).** Every final word is present and ends in a decay or fade, with the last 30 ms between −50 and −86 dBFS. moonky keeps ~190 ms of "-cí", jigovky keeps the k-release plus ~110 ms of "u", and bosset keeps the full "n" murmur. At the 80 ms extension joins, HF (>5 kHz) energy stays between −54 and −65 dB, with no click.
+- **bosset:** at 6.78–6.80 s there is a faint HF tick (≥4 kHz, −50 dB under a −20 dB voice). It is also in the HeyGen raw and was not introduced by processing. Inaudible under music.
+- **`vo.mjs`:** all 10 files load as aligned; tokens equal the `vo.cs` tokens and the times are monotonic. Block cues resolve (`v Trout`, `25`, `1999`, `Přes`, `reprezentací`, `Bezprotihrotové`, `šest`, `24.`, `Revolut`, …). The exception is the **gausseholler placeholder block**: it still queries `Black` / `Ručně` / `karbon` / `limitovaná`, none of which the new text contains, so the block falls back to its default times. Its on-screen copy ("Black Standard Edition", chips) also no longer matches the VO (Revolut 8, Custom Lab). This needs fixing in the block, not in the VO.
+- **Build:** re-run with stderr captured: no `!`/CUT lines, and all 10 blocks report aligned words.
+- **Archives:** `prev/<key>.<take>.*` and `prev/raw/*` are byte-identical to the HEAD versions they replace.
+- **Review file:** `vo/VO_all_take3.m4a` contains all 10 VO files in film order with 0.7 s gaps (AAC 128k, 48 kHz mono, 88.53 s, 0-sample offset against PCM). Segment starts: intro 0.000, venue 13.882, troutshop 23.563, activefishing 30.360, moonky 37.555, jigovky 45.640, velkaryba 54.217, bosset 61.716, gausseholler 69.315, finale 75.886 s.

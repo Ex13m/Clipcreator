@@ -1,0 +1,255 @@
+{
+  "key": "activefishing",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "request_id": "XwzlzEWouknBvyHA61X2",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=92a55aa4-6071-4fce-8b06-38ac4294da04.wav",
+  "cs": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes 1 300 plandavek a osobní přístup.",
+  "tts": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
+  "timebase": "seconds in vo/activefishing.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.06,
+  "raw_duration_s": 7.001,
+  "duration_s": 6.87,
+  "words": [
+    {
+      "word": "Activefishing",
+      "start": 0.0,
+      "end": 0.9
+    },
+    {
+      "word": "e-shop",
+      "start": 1.18,
+      "end": 1.62
+    },
+    {
+      "word": "zrozený",
+      "start": 1.7,
+      "end": 2.18
+    },
+    {
+      "word": "z",
+      "start": 2.22,
+      "end": 2.26
+    },
+    {
+      "word": "vášně",
+      "start": 2.34,
+      "end": 2.74
+    },
+    {
+      "word": "pro",
+      "start": 2.78,
+      "end": 2.9
+    },
+    {
+      "word": "přívlač.",
+      "start": 2.953,
+      "end": 3.54
+    },
+    {
+      "word": "Přes",
+      "start": 3.833,
+      "end": 4.02
+    },
+    {
+      "word": "1",
+      "start": 4.087,
+      "end": 4.42,
+      "spoken": "tisíc"
+    },
+    {
+      "word": "300",
+      "start": 4.48,
+      "end": 4.82,
+      "spoken": "tři sta"
+    },
+    {
+      "word": "plandavek",
+      "start": 4.873,
+      "end": 5.46
+    },
+    {
+      "word": "a",
+      "start": 5.58,
+      "end": 5.7
+    },
+    {
+      "word": "osobní",
+      "start": 5.769,
+      "end": 6.18
+    },
+    {
+      "word": "přístup.",
+      "start": 6.26,
+      "end": 6.82
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Activefishing",
+      "start": 0.0,
+      "end": 0.9
+    },
+    {
+      "word": "e-shop",
+      "start": 1.18,
+      "end": 1.62
+    },
+    {
+      "word": "zrozený",
+      "start": 1.7,
+      "end": 2.18
+    },
+    {
+      "word": "z",
+      "start": 2.22,
+      "end": 2.26
+    },
+    {
+      "word": "vášně",
+      "start": 2.34,
+      "end": 2.74
+    },
+    {
+      "word": "pro",
+      "start": 2.78,
+      "end": 2.9
+    },
+    {
+      "word": "přívlač.",
+      "start": 2.953,
+      "end": 3.54
+    },
+    {
+      "word": "Přes",
+      "start": 3.833,
+      "end": 4.02
+    },
+    {
+      "word": "tisíc",
+      "start": 4.087,
+      "end": 4.42
+    },
+    {
+      "word": "tři",
+      "start": 4.48,
+      "end": 4.66
+    },
+    {
+      "word": "sta",
+      "start": 4.7,
+      "end": 4.82
+    },
+    {
+      "word": "plandavek",
+      "start": 4.873,
+      "end": 5.46
+    },
+    {
+      "word": "a",
+      "start": 5.58,
+      "end": 5.7
+    },
+    {
+      "word": "osobní",
+      "start": 5.769,
+      "end": 6.18
+    },
+    {
+      "word": "přístup.",
+      "start": 6.26,
+      "end": 6.82
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Activefishing",
+      "start": 0.0,
+      "end": 0.96
+    },
+    {
+      "word": "–",
+      "start": 0.96,
+      "end": 0.96
+    },
+    {
+      "word": "e-shop",
+      "start": 1.24,
+      "end": 1.68
+    },
+    {
+      "word": "zrozený",
+      "start": 1.76,
+      "end": 2.24
+    },
+    {
+      "word": "z",
+      "start": 2.28,
+      "end": 2.32
+    },
+    {
+      "word": "vášně",
+      "start": 2.4,
+      "end": 2.8
+    },
+    {
+      "word": "pro",
+      "start": 2.84,
+      "end": 2.96
+    },
+    {
+      "word": "přívlač.",
+      "start": 3.013,
+      "end": 3.5999999999999996
+    },
+    {
+      "word": "Přes",
+      "start": 3.893,
+      "end": 4.08
+    },
+    {
+      "word": "tisíc",
+      "start": 4.147,
+      "end": 4.4799999999999995
+    },
+    {
+      "word": "tři",
+      "start": 4.54,
+      "end": 4.72
+    },
+    {
+      "word": "sta",
+      "start": 4.76,
+      "end": 4.88
+    },
+    {
+      "word": "plandavek",
+      "start": 4.933,
+      "end": 5.52
+    },
+    {
+      "word": "a",
+      "start": 5.64,
+      "end": 5.76
+    },
+    {
+      "word": "osobní",
+      "start": 5.829,
+      "end": 6.24
+    },
+    {
+      "word": "přístup.",
+      "start": 6.32,
+      "end": 6.88
+    },
+    {
+      "word": "<end>",
+      "start": 7.000816326530612,
+      "end": 7.000816326530612
+    }
+  ]
+}

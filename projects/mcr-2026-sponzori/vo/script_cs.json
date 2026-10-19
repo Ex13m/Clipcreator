@@ -1,5 +1,5 @@
 {
- "_note": "Česká VO + texty na obrazovku pro MČR 2026 – partneři. Každé tvrzení má zdroj (research/*.md:řádek + URL). vo.cs = psaný text (počítají se limity), vo.tts = text pro TTS (čísla slovy), vo.respell = záložní přepis výslovnosti bez SSML (jen když TTS čte značky špatně).",
+ "_note": "Česká VO + texty na obrazovku pro MČR 2026 – partneři. Každé tvrzení má zdroj (research/*.md:řádek + URL). vo.cs = psaný text (počítají se limity), vo.tts = text pro TTS (čísla slovy), vo.respell = přepis výslovnosti bez SSML; od take 3 (19. 10.) je vo.tts = vo.respell (značky přepsané foneticky, schváleno). Do TTS se posílá vo.tts + „ …“ (proti useknutí posledního slova).",
  "meta": {
   "version": "v1",
   "date": "2026-10-19",
@@ -49,38 +49,53 @@
  "pronunciation": [
   {
    "term": "Troutshop",
-   "respell": "traut-šop",
-   "note": "zadání"
+   "respell": "traut šop",
+   "note": "zadání; schváleno 19. 10. (take 3)"
   },
   {
    "term": "Activefishing",
-   "respell": "ektiv-fišing",
-   "note": "zadání"
+   "respell": "ektiv fišing",
+   "note": "zadání; schváleno 19. 10. (take 3)"
   },
   {
    "term": "Moonky",
    "respell": "múnky",
-   "note": "zadání"
+   "note": "zadání; schváleno 19. 10. (take 3)"
   },
   {
    "term": "Gausse Holler",
    "respell": "gaus holer",
-   "note": "zadání"
+   "note": "zadání; schváleno 19. 10. (take 3)"
+  },
+  {
+   "term": "Gausse Holler Custom Lab",
+   "respell": "gaus holer kastom lab",
+   "note": "„Lab“ = lab; schváleno 19. 10. (take 3)"
   },
   {
    "term": "Trout Area",
-   "respell": "traut erija",
-   "note": "jen když v3 čte „trout área“"
+   "respell": "traut érija",
+   "note": "schváleno 19. 10. (take 3)"
   },
   {
    "term": "Trout Area Slovakia",
-   "respell": "traut erija slovakija",
+   "respell": "traut érija slovakija",
    "note": ""
+  },
+  {
+   "term": "MČR",
+   "respell": "em čé er",
+   "note": "schváleno 19. 10. (take 3)"
+  },
+  {
+   "term": "Revolut 8",
+   "respell": "revolut osm",
+   "note": "schváleno 19. 10. (take 3)"
   },
   {
    "term": "hard baits",
    "respell": "hárd bejts",
-   "note": ""
+   "note": "schváleno 19. 10. (take 3)"
   },
   {
    "term": "Black Standard Edition",
@@ -90,12 +105,12 @@
   {
    "term": "Bosset",
    "respell": "boset",
-   "note": ""
+   "note": "schváleno 19. 10. (take 3)"
   },
   {
    "term": "Jigovky / jigy",
    "respell": "džigovky / džigy",
-   "note": ""
+   "note": "schváleno 19. 10. (take 3)"
   },
   {
    "term": "Shimano",
@@ -105,7 +120,7 @@
   {
    "term": "e-shop",
    "respell": "í-šop",
-   "note": ""
+   "note": "schváleno 19. 10. (take 3)"
   }
  ],
  "order": [
@@ -131,8 +146,8 @@
    "vo_limit_words": 30,
    "vo": {
     "cs": "Mistrovství České republiky v Trout Area 2026. 24. a 25. října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
-    "tts": "Mistrovství České republiky v Trout Area dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
-    "respell": "Mistrovství České republiky v Traut Erija dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hárd bejts. Seznamte se s partnery mistrovství.",
+    "tts": "Mistrovství České republiky v Traut érija dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hárd bejts. Seznamte se s partnery mistrovství.",
+    "respell": "Mistrovství České republiky v Traut érija dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hárd bejts. Seznamte se s partnery mistrovství.",
     "words": 22,
     "spoken_words": 25,
     "est_s": 8.6,
@@ -240,13 +255,13 @@
    "vo_limit_words": 18,
    "vo": {
     "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999.",
-    "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
-    "respell": "Traut-šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+    "tts": "Traut šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+    "respell": "Traut šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
     "words": 9,
-    "spoken_words": 12,
-    "est_s": 4.1,
+    "spoken_words": 13,
+    "est_s": 4.5,
     "in_s": 0.25,
-    "end_s": 4.35,
+    "end_s": 4.75,
     "file": "vo/troutshop.wav"
    },
    "onscreen": {
@@ -285,13 +300,13 @@
    "vo_limit_words": 18,
    "vo": {
     "cs": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes 1 300 plandavek a osobní přístup.",
-    "tts": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
-    "respell": "Ektiv-fišing – í-šop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
+    "tts": "Ektiv fišing – í-šop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
+    "respell": "Ektiv fišing – í-šop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
     "words": 13,
-    "spoken_words": 15,
-    "est_s": 5.2,
+    "spoken_words": 16,
+    "est_s": 5.5,
     "in_s": 0.25,
-    "end_s": 5.45,
+    "end_s": 5.75,
     "file": "vo/activefishing.wav"
    },
    "onscreen": {
@@ -341,8 +356,8 @@
    "vo_limit_words": 18,
    "vo": {
     "cs": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
-    "tts": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
-    "respell": "Múnky – ručně dělané gumové nástrahy pro Traut Erija. Vyvíjené a testované s českou reprezentací.",
+    "tts": "Múnky – ručně dělané gumové nástrahy pro Traut érija. Vyvíjené a testované s českou reprezentací.",
+    "respell": "Múnky – ručně dělané gumové nástrahy pro Traut érija. Vyvíjené a testované s českou reprezentací.",
     "words": 14,
     "spoken_words": 14,
     "est_s": 4.8,
@@ -393,7 +408,7 @@
    "vo_limit_words": 18,
    "vo": {
     "cs": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od 0,4 gramu, poctivě vyrobené v Česku.",
-    "tts": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
+    "tts": "Džigovky – džigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
     "respell": "Džigovky – džigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
     "words": 13,
     "spoken_words": 15,
@@ -490,16 +505,15 @@
    "vo_limit_words": 18,
    "vo": {
     "cs": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "tts": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "respell": "Ceny pro vítěze věnuje Boset – termosky, které udrží nápoj horký i studený až šest hodin.",
+    "tts": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
+    "respell": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
     "words": 15,
-    "spoken_words": 15,
-    "est_s": 5.2,
+    "spoken_words": 14,
+    "est_s": 4.8,
     "in_s": 0.25,
-    "end_s": 5.45,
+    "end_s": 5.05,
     "file": "vo/bosset.wav",
-    "cs_old": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
-    "_pending": "REGEN: user 19.10 — all sponsors give prizes; drop exclusive 'Ceny pro vítěze věnuje'"
+    "cs_old": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin."
    },
    "onscreen": {
     "name": "Bosset.cz",
@@ -539,15 +553,14 @@
    "vo": {
     "cs": "Hlavní cena pro vítěze MČR – stojan Revolut 8 od Gausse Holler Custom Lab.",
     "tts": "Hlavní cena pro vítěze em čé er – stojan Revolut osm od Gaus Holer Kastom Lab.",
-    "respell": "Gaus Holer – stojan na pruty Blek Standard Edyšn. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+    "respell": "Hlavní cena pro vítěze em čé er – stojan Revolut osm od Gaus Holer Kastom Lab.",
     "words": 16,
-    "spoken_words": 16,
-    "est_s": 5.5,
+    "spoken_words": 15,
+    "est_s": 5.2,
     "in_s": 0.25,
-    "end_s": 5.75,
+    "end_s": 5.45,
     "file": "vo/gausseholler.wav",
-    "cs_old": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
-    "_pending": "REGEN: user 19.10 — main prize Revolut 8, GH Custom Lab = partner & information sponsor"
+    "cs_old": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série."
    },
    "onscreen": {
     "name": "Gausse Holler",
@@ -601,15 +614,14 @@
    "vo": {
     "cs": "Děkujeme všem partnerům za podporu a ceny pro závodníky. Mistrovství České republiky v Trout Area – 24. a 25. října, Líheň Liběchov. Uvidíme se u vody.",
     "tts": "Děkujeme všem partnerům za podporu a ceny pro závodníky. Mistrovství České republiky v Traut érija – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
-    "respell": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Traut Erija – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
+    "respell": "Děkujeme všem partnerům za podporu a ceny pro závodníky. Mistrovství České republiky v Traut érija – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
     "words": 21,
-    "spoken_words": 21,
-    "est_s": 7.2,
+    "spoken_words": 25,
+    "est_s": 8.6,
     "in_s": 0.25,
-    "end_s": 7.45,
+    "end_s": 8.85,
     "file": "vo/finale.wav",
-    "cs_old": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – 24. a 25. října, Líheň Liběchov. Uvidíme se u vody.",
-    "_pending": "REGEN: prizes from all partners + name pronunciation"
+    "cs_old": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – 24. a 25. října, Líheň Liběchov. Uvidíme se u vody."
    },
    "onscreen": {
     "thanks": [

@@ -1,45 +1,214 @@
-// TROUTSHOP.EU · bars 13–16 · PLACEHOLDER (minimal, modern) — the Troutshop agent replaces this file.
-// Brand world (research/troutshop.md): black #000 / red #E3000F / white, logo = trout + red "rising sun" rays.
-// Display: Anton (bold condensed retail). Products: Velvet Arts / Nories / FishUp cut-outs (sold by Troutshop, not its brands).
+// TROUTSHOP.EU · 5 bars (plan A: bars 14–18) · concept A „RISING SUN · SPECIALISTA“ (research/troutshop_ad.md)
+// Brand world = the logo: studio black, red #E3000F „rising sun“ disc + rays, white Anton caps, Roboto Condensed labels.
+// The spoons become the sun's rays (fan of 9 spoons = assortment moment), the sun floods the frame red for the crank,
+// sets again for a beat-cut colour run of 8 spoon faces under a „3 100+ plandavek v nabídce“ counter, rises for the lockup.
+//   bar 0  hero: Nories ROONEY 2,8 g 101 (gold) rises in front of the sun, macro push-in + light sweeps · „SPECIALISTA NA PSTRUHY“ (VO)
+//   bar 1  fan of 9 spoons (8 products, 3 brands) opens on the downbeat, beat punches, light wave · „RODINNÁ FIRMA OD ROKU“ (VO)
+//   bar 2  sun floods red · Nories CRANKIN' PUPA 109 (clear) slides in on a red floor · odometer 1999 on „devatenáct set…“ (VO)
+//   bar 3  sunset → black · 8 spoon faces cut on every 8th note, glow tinted by each spoon · odometer „3 100+ plandavek v nabídce“
+//   bar 4  sunrise lockup: logo (≤ TA plate) + TROUTSHOP.EU + „Generální partner Trout Area Slovakia“ + „Věnuje ceny · MČR 2026“
+// Products: assets_prep/troutshop/ads/ (clean cut-outs, ts_polish). All hard baits (MČR = hard baits); no soft bait shown.
+// Only verified copy (research/troutshop.md Verification, troutshop_ad.md §4). Velvet Arts / Nories / Forest are NOT Troutshop brands:
+// they appear only as product names next to the products.
 import * as fx from '../lib/fx.mjs';
+import * as ts from '../lib/fx_troutshop.mjs';
 
-export const theme = { bg: '#070707', bg2: '#2a0306', fg: '#ffffff', accent: '#e3000f', accent2: '#ffffff', font: { display: 'Anton', text: 'Inter' }, wght: 400, upper: true };
-export const meta = { reel: true, hook: { product: 0, headline: 'Milujeme lov pstruhů', sub: 'troutshop.eu' }, endCard: { logo: 'on_dark' } };
+export const fonts = {
+  'Roboto Condensed': {
+    s: { 400: 'roboto-condensed-{r}-400-normal', 600: 'roboto-condensed-{r}-600-normal', 700: 'roboto-condensed-{r}-700-normal', 800: 'roboto-condensed-{r}-800-normal' },
+    si: { 700: 'roboto-condensed-{r}-700-italic', 800: 'roboto-condensed-{r}-800-italic' },
+    use: 'Troutshop text font (site CSS --wd-text-font); italic = logo wordmark mood',
+  },
+};
+export const theme = { bg: '#050505', bg2: '#2a0306', fg: '#ffffff', accent: '#e3000f', accent2: '#c80411', font: { display: 'Anton', text: 'Roboto Condensed' }, wght: 400, upper: true, light: false };
+export const meta = {
+  reel: true,
+  hook: { headline: 'Milujeme lov pstruhů', sub: 'troutshop.eu' },
+  endCard: { logo: 'on_dark', line: 'Partner MČR v Trout Area 2026' },
+};
+
+const RED = '#e3000f', INK = '#0a0a0a';
+const PIV = [540, 1480];                       // sun centre / fan pivot (bottom centre, under the Reels caption zone)
+// fan = the sun's rays: 9 spoons, colour-sorted, gold ROONEY 101 (the hero) in the centre
+const FAN = [
+  { k: 'miua', th: -72 }, { k: 'rooney002b', th: -54 }, { k: 'forte35b', th: -36 }, { k: 'tulleb', th: -18 }, { k: 'rooney101a', th: 0 },
+  { k: 'sk20a', th: 18 }, { k: 'forte30a', th: 36 }, { k: 'rooney002a', th: 54 }, { k: 'forte32a', th: 72 },
+];
+// beat-cut colour run (bar 3): 8 faces, one per 8th note, ends on the newest product (Velvet Arts Forte 2,1 g 32, back „VA 2.1“)
+const RUN = ['miub', 'sk20b', 'rooney002b', 'forte35a', 'forte30b', 'tulleb', 'rooney101b', 'forte32b'];
 
 export default function troutshop(ctx) {
-  const T = theme, D = ctx.data, { bar } = ctx, P = D.products;
-  const L = ctx.safe.left, CW = ctx.W - L - ctx.safe.right;
-  const at = (q, d) => ctx.snap(ctx.vo.at(q) ?? d, 'beat');
+  const { bar, W } = ctx, S = ctx.S;
+  const L = ctx.safe.left, CW = W - L - ctx.safe.right;
+  const vo = (q, d) => ctx.vo.at(q) ?? d;
+  const t1 = bar(1), t2 = bar(2), t3 = bar(3), t4 = bar(4), END = ctx.dur;
+  const tSpec = vo('specialista', 1.15), tNa = vo('na pstruhy', 1.89), tRod = vo('rodinná', 2.81), tOd = vo('od roku', 3.62), tYear = vo('1999', 4.01);
   let html = '';
-  html += fx.field(ctx, { kind: 'radial', c1: T.bg2, c2: T.bg, at: '50% 58%' });
-  html += fx.rays(ctx, { x: ctx.W / 2, y: 1080, size: 1900, color: T.accent, n: 18, duty: 0.42, opacity: 0.55, spin: 22, hole: 0.1 });
-  html += fx.bigType(ctx, { id: 'big', text: 'Troutshop', font: 'Anton', wght: 400, size: 470, y: 760, x: -40, color: '#ffffff', outline: true, ow: 2, opacity: 0.16, drift: -260 });
-  // hero spoons (float + light sweep), second one joins on bar 2
-  const A = fx.product(ctx, { id: 'pa', src: P[0].src, h: 620, cx: 430, cy: 1030, ground: 'float', pad: P[0].pad, rot: -14 });
-  const B = fx.product(ctx, { id: 'pb', src: P[1].src, h: 600, cx: 690, cy: 1060, ground: 'float', pad: P[1].pad, rot: 12 });
-  html += B.html + A.html;
-  fx.productIn(ctx, 'pa', 0.1, { from: 'rise', d: 0.9 });
-  fx.float(ctx, A.cam, 1.0, ctx.dur, { y: -16, rot: 2 });
-  fx.sweep(ctx, 'pa', bar(0) + 0.6, { d: 0.9 });
-  fx.productIn(ctx, 'pb', bar(2), { from: 'right', d: 0.8 });
-  fx.sweep(ctx, 'pb', bar(2) + 0.7, { d: 0.9 });
-  // headline (on-screen copy) + VO-synced facts
-  const H = fx.headline(ctx, { id: 'h', text: D.copy.headline, x: L, y: 420, w: CW, maxLines: 2, font: 'Anton', wght: 400, upper: true, sizes: [190, 176, 164, 150, 140], lh: 0.92, t: 0.05, reveal: 'chars', stagger: 0.025 });
+
+  // ---------- world: black studio, red glow from below, rotating rays, outline name, the sun ----------
+  html += fx.field(ctx, { kind: 'radial', c1: '#3a0408', c2: theme.bg, at: '50% 92%' });
+  html += fx.bigType(ctx, { id: 'big', text: 'Troutshop', font: 'Anton', wght: 400, size: 430, y: 760, x: -30, color: '#ffffff', outline: true, ow: 2, opacity: 0.1, drift: -300, tracking: 0.01 });
+  html += ts.rays(ctx, { id: 'ry', x: PIV[0], y: PIV[1], size: 2900, color: RED, n: 18, duty: 0.4, opacity: 0.42, spin: 16 });
+  ctx.tl.fromTo(ctx.sel('ry-w'), { scale: 0.55, opacity: 0.3 }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, 0);
+  html += ts.sun(ctx, { id: 'sun', x: PIV[0], y: PIV[1], r: 210 });
+  ctx.tl.fromTo(ctx.sel('sun'), { y: 300, scale: 0.7 }, { y: 0, scale: 1, duration: 0.9, ease: 'expo.out' }, 0);
+  // red world (bar 2): dark rays over the flooded sun
+  html += ts.rays(ctx, { id: 'ry2', x: PIV[0], y: PIV[1], size: 3000, color: '#000000', n: 18, duty: 0.4, opacity: 0.16, spin: -10, style: 'opacity:0' });
+
+  // ---------- bar 1: fan of spoons (assortment) — painted behind the hero ----------
+  const F = ts.fan(ctx, { id: 'fan', items: FAN, x: PIV[0], y: PIV[1], body: 330, r0: 250 });
+  html += F.html;
+  ts.fanOpen(ctx, F, FAN, t1 - 0.14, { d: 0.75, step: 0.035, from: 0 });
+  [ctx.at(1, 1), ctx.at(1, 2), ctx.at(1, 3)].forEach((t) => fx.punch(ctx, F.sel, t, { scale: 1.035, d: 0.3 }));
+  ts.fanSweep(ctx, 'fan', FAN.length, ctx.at(1, 2) - 0.1, { step: 0.045 });
+  ctx.tl.fromTo(F.sel, { y: 0, scale: 1 }, { y: 820, scale: 0.8, duration: 0.34, ease: 'power3.in' }, t2 - 0.34);          // sinks into the sun
+  ctx.tl.fromTo(F.sel, { y: 820, scale: 0.8 }, { y: 170, scale: 0.8, duration: 0.85, ease: 'expo.out' }, t4 - 0.06);      // sunrise lockup
+  ts.fanSweep(ctx, 'fan', FAN.length, t4 + 0.55, { step: 0.04 });
+  const brands = `<div class="ts-brands" id="${ctx.id('brands')}">${ctx.esc(ctx.nb('Nories · Forest · Velvet Arts'))}</div>`;
+  html += fx.scene(ctx, 'brs', t1 + 0.25, t2 - 0.3, brands, { inD: 0.3, outD: 0.2 });
+
+  // ---------- bar 0: hero ROONEY 2,8 g 101 (gold) ----------
+  const hc = [520, 1060];
+  const h1 = ts.spoon(ctx, { id: 'h1', k: 'rooney101a', cx: hc[0], cy: hc[1], body: 760, angle: 30, so: 0.8 });
+  html += `<div class="fx-full" id="${ctx.id('h1cam')}" style="transform-origin:${hc[0]}px ${hc[1]}px">${h1.html}</div>`;
+  ctx.tl.fromTo(h1.sel, { y: 240, scale: 0.9, opacity: 0.4 }, { y: 0, scale: 1, opacity: 1, duration: 0.85, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('h1cam'), { scale: 1, rotation: 0 }, { scale: 1.12, rotation: 3, duration: t1 - 0.4, ease: 'power1.inOut' }, 0.4);
+  ts.sweep(ctx, 'h1', 0.42, { d: 0.8 });
+  ts.sweep(ctx, 'h1', ctx.at(0, 3) - 0.05, { d: 0.6 });
+  ctx.tl.fromTo(h1.sel, { y: 0, scale: 1, opacity: 1 }, { y: 330, scale: 0.36, opacity: 0, duration: 0.34, ease: 'power3.in' }, t1 - 0.3);   // recedes into the fan
+  html += ts.callout(ctx, { id: 'co1', name: 'Nories ROONEY', sub: '2,8 g · 101', x: 940, y: 1250, align: 'r', t: 0.55, t1: t1 - 0.3 });
+
+  // ---------- bar 2: crank in the red sun ----------
+  ctx.tl.fromTo(ctx.sel('sun'), { scale: 1 }, { scale: 8.6, duration: 0.46, ease: 'power2.inOut' }, t2 - 0.26);
+  ctx.tl.fromTo(ctx.sel('ry2-w'), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'none' }, t2);
+  const pu = fx.product(ctx, { id: 'pu', src: ts.PUPA, w: 830, cx: 548, floor: 1330, ground: 'floor', reflect: 0.3, shadow: 0.55, pad: [0.028, 0.052, 0.028, 0.052], sweepOpacity: 0.55 });
+  html += pu.html;
+  ctx.tl.fromTo(pu.sel, { x: -1250, rotation: -12, opacity: 1 }, { x: 0, rotation: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, t2 - 0.06);
+  fx.float(ctx, pu.cam, t2 + 0.5, t3 - 0.4, { y: -12, rot: 1.2, period: ctx.BAR / 2 });
+  fx.sweep(ctx, 'pu', t2 + 0.5, { d: 0.85 });
+  ctx.tl.fromTo(pu.sel, { x: 0, rotation: 0, opacity: 1 }, { x: 1300, rotation: 10, opacity: 1, duration: 0.34, ease: 'power3.in' }, t3 - 0.34);
+  html += ts.callout(ctx, { id: 'co2', name: 'Nories Crankin’ Pupa', sub: '34 mm · 2,6 g · Floating', x: L, y: 1352, t: t2 + 0.45, t1: t3 - 0.32 });
+  // sunset: the red sun shrinks back into the horizon on the bar-3 downbeat
+  ctx.tl.fromTo(ctx.sel('sun'), { scale: 8.6 }, { scale: 0, duration: 0.32, ease: 'power3.in' }, t3 - 0.32);
+  ctx.tl.fromTo(ctx.sel('ry2-w'), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'none' }, t3 - 0.3);
+
+  // ---------- bar 3: beat-cut colour run + counter ----------
+  const runT = Array.from({ length: RUN.length + 1 }, (_, i) => (i % 2 ? ctx.at(3, (i - 1) / 2) + (ctx.at(3, (i + 1) / 2) - ctx.at(3, (i - 1) / 2)) / 2 : ctx.at(3, i / 2)));
+  runT[RUN.length] = t4;
+  html += `<div class="fx-glow" id="${ctx.id('rg')}" style="left:${W / 2 - 560}px;top:${1110 - 560}px;width:1120px;height:1120px;background:radial-gradient(closest-side,currentColor,transparent);color:${ts.GEO[RUN[0]].col};opacity:0"></div>`;
+  ctx.tl.set(ctx.sel('rg'), { opacity: 0.5 }, t3);
+  RUN.forEach((k, i) => {
+    const sp = ts.spoon(ctx, { id: `r${i}`, k, cx: 540, cy: 1110, body: 470, angle: 34, so: 0.75, style: 'opacity:0' });
+    html += sp.html;
+    const a = runT[i], b = runT[i + 1];
+    ctx.tl.set(sp.sel, { opacity: 1 }, a);
+    ctx.tl.fromTo(sp.sel, { scale: 1.16 }, { scale: 1, duration: Math.min(0.26, b - a), ease: 'power3.out' }, a);
+    if (i > 0) ctx.tl.set(ctx.sel('rg'), { color: ts.GEO[k].col }, a);
+    if (i < RUN.length - 1) ctx.tl.set(sp.sel, { opacity: 0 }, b);
+    else { ts.sweep(ctx, `r${i}`, a + 0.02, { d: 0.45 }); ctx.tl.fromTo(sp.sel, { scale: 1, opacity: 1 }, { scale: 1.9, opacity: 0, duration: 0.26, ease: 'power2.in' }, t4 - 0.26); }
+  });
+  ctx.tl.fromTo(ctx.sel('rg'), { opacity: 0.5 }, { opacity: 0, duration: 0.25, ease: 'power1.in' }, t4 - 0.25);
+  let cnt = fx.odometer(ctx, { id: 'cnt', value: '3 100', suffix: '+', x: L - 4, y: 400, size: 250, font: 'Anton', wght: 400, color: '#ffffff', t: t3 + 0.02, d: 0.85, stagger: 0.05 });
+  cnt += `<div class="ts-lbl" style="left:${L}px;top:${400 + 250 + 14}px">${ctx.esc(ctx.nb('plandavek v nabídce'))}</div>`;
+  html += fx.scene(ctx, 'cs', t3, t4 - 0.08, cnt, { inD: 0.001, outD: 0.22 });
+
+  // ---------- kinetic type (VO-synced) ----------
+  const H1 = ts.lines(ctx, { id: 'hl1', lines: [[{ w: 'Specialista' }], [{ w: 'na' }, { w: 'pstruhy', c: RED }]], y: 410, sizes: [176, 164, 152, 140], times: [tSpec - 0.1, Math.min(tNa - 0.1, tSpec + 0.32)], out: tRod - 0.34 });
+  html += H1.html;
+  const H2 = ts.lines(ctx, { id: 'hl2', lines: [[{ w: 'Rodinná firma' }], [{ w: 'od roku' }]], y: 410, sizes: [132, 124, 116, 108], times: [tRod - 0.08, tOd - 0.1], out: t3 - 0.3 });
+  html += H2.html;
+  html += fx.odometer(ctx, { id: 'yr', value: '1999', x: L - 6, y: 410 + H2.h + 6, size: 270, font: 'Anton', wght: 400, color: INK, t: tYear - 0.12, d: 1.15, stagger: 0.07 });
+  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, tYear - 0.14);
+  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 1, y: 0 }, { opacity: 0, y: -60, duration: 0.28, ease: 'power3.in' }, t3 - 0.3);
+  // URL tag (top right, mirrors the TA plate) from the spoken „Troutshop“ until the lockup takes over
+  html += `<div class="ts-tag" id="${ctx.id('tag')}" style="right:${ctx.safe.right}px;top:276px"><i></i>${ctx.esc('troutshop.eu')}</div>`;
+  ctx.tl.fromTo(ctx.sel('tag'), { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, Math.max(0.12, vo('troutshop', 0.25) - 0.05));
+  ctx.tl.fromTo(ctx.sel('tag'), { opacity: 1, x: 0 }, { opacity: 0, x: 40, duration: 0.25, ease: 'power2.in' }, t4 - 0.25);
+
+  // ---------- bar 4: sunrise lockup ----------
+  ctx.tl.fromTo(ctx.sel('sun'), { scale: 0, y: 0 }, { scale: 1, y: 170, duration: 0.8, ease: 'expo.out' }, t4 - 0.06);
+  ctx.tl.fromTo(ctx.sel('ry-w'), { y: 0 }, { y: 170, duration: 0.8, ease: 'expo.out' }, t4 - 0.06);
+  const lg = ctx.logo('on_dark', { box: [300, 150], at: [t4, END], id: 'logo' });
+  const yLogo = 430;
+  html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${(W - lg.w) / 2}px;top:${yLogo}px;width:${lg.w}px;height:${lg.h}px">${lg.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, scale: 0.7, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'back.out(1.8)' }, t4);
+  const U = ts.lines(ctx, { id: 'url', lines: [[{ w: 'troutshop' }, { w: '.eu', c: RED, tight: true }]], y: yLogo + lg.h + 26, align: 'center', sizes: [178, 164, 150, 140], times: [t4 + 0.08], stagger: 0.03 });
+  html += U.html;
+  const yP = yLogo + lg.h + 26 + U.h + 22;
+  html += `<div class="ts-sub" id="${ctx.id('gp')}" style="top:${yP}px"><span class="fx-ln"><span>${ctx.esc(ctx.nb('Generální partner Trout Area Slovakia'))}</span></span></div>`;
+  ctx.tl.fromTo(`${ctx.sel('gp')} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t4 + 0.22);
+  html += ts.pill(ctx, { id: 'pz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y: yP + 62, t: t4 + 0.36 });
+
+  // ---------- accents + transitions ----------
+  fx.flash(ctx, 0, { id: 'f0', color: RED, peak: 0.32, d: 0.45, blend: 'screen' });
+  fx.flash(ctx, t3, { id: 'f3', color: '#ffffff', peak: 0.16, d: 0.22, blend: 'screen' });
+  fx.tIn(ctx, 'cut');
+  fx.tOut(ctx, 'slice', { d: 0.42 });
+
+  const css = `${ts.CSS(S)}
+${S} .ts-brands{position:absolute;left:0;right:0;top:${PIV[1] - 70}px;text-align:center;font-family:'Roboto Condensed';font-weight:700;font-size:32px;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+${S} .ts-lbl{position:absolute;font-family:'Roboto Condensed';font-weight:700;font-size:46px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+${S} .ts-tag{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Roboto Condensed';font-weight:800;font-style:italic;font-size:38px;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
+${S} .ts-tag i{display:block;width:10px;height:30px;background:${RED};transform:skewX(-14deg)}
+${S} .ts-sub{position:absolute;left:0;right:0;text-align:center;font-family:'Roboto Condensed';font-weight:600;font-size:34px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9)}`;
+  return { html, css };
+}
+
+// ---------- Reel hook (1 bar): red world, gold ROONEY macro, „MILUJEME LOV PSTRUHŮ“ readable at 0.3 s ----------
+export function hook(ctx) {
+  const S = ctx.S, M = meta.hook, L = ctx.safe.left;
+  let html = fx.field(ctx, { kind: 'linear', c1: '#e6000f', c2: '#b80410', angle: 180 });
+  html += ts.rays(ctx, { id: 'hry', x: 540, y: 1600, size: 3000, color: '#000000', n: 18, duty: 0.4, opacity: 0.17, spin: 10 });
+  const sp = ts.spoon(ctx, { id: 'hs', k: 'rooney101a', cx: 590, cy: 1270, body: 1000, angle: 32, so: 0.85, shadow: '0 40px 40px rgba(60,0,0,.55)' });
+  html += `<div class="fx-full" id="${ctx.id('hcam')}" style="transform-origin:590px 1270px">${sp.html}</div>`;
+  ctx.tl.fromTo(sp.sel, { scale: 1.22, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('hcam'), { scale: 1, rotation: 0 }, { scale: 1.07, rotation: 2, duration: ctx.dur - 0.5, ease: 'none' }, 0.5);
+  ts.sweep(ctx, 'hs', 0.3, { d: 0.75 });
+  const H = ts.lines(ctx, { id: 'hh', lines: [[{ w: 'Milujeme lov' }], [{ w: 'pstruhů', c: INK }]], y: 400, sizes: [196, 184, 172, 160, 150], times: [], d: 0.45 });
   html += H.html;
-  ctx.downs.slice(1).forEach((t) => fx.punch(ctx, H.sel, t, { scale: 1.03 }));
-  const tY = Math.max(bar(1), at('1999', bar(1) + ctx.BEAT * 2) - 0.5);
-  let f1 = fx.headline(ctx, { id: 'fl', text: 'Rodinná firma od roku', x: L, y: 1300, maxLines: 1, font: 'Inter', wght: 700, upper: true, size: 30, tracking: 0.14, t: tY, reveal: 'lines' }).html;
-  f1 += fx.odometer(ctx, { id: 'yr', value: '1999', x: L - 4, y: 1340, size: 120, font: 'Anton', wght: 400, color: T.accent, t: tY + 0.1, d: 1.2 });
-  html += fx.scene(ctx, 'f1', tY, bar(3), f1, { outD: 0.2 });
-  html += fx.chip(ctx, { id: 'c2', label: 'Generální partner', value: 'Trout Area Slovakia', x: L, y: 1300, tone: 'dark', accent: T.accent, t: bar(3), font: 'Inter', vs: 42 });
-  // lockup on the last beats: logo ≤ TA plate + URL
-  const tL = bar(3) + ctx.BEAT * 2;
-  const lg = ctx.logo('on_dark', { box: [300, 140], at: [tL, ctx.dur], id: 'logo' });
-  html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${ctx.W - ctx.safe.right - lg.w}px;top:${ctx.plate.rect.y - 10}px">${lg.html}</div>`;
-  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, tL);
-  // beat accents: red flash on bars, slices out into the next world
-  ctx.downs.forEach((t, i) => i && fx.flash(ctx, t, { id: `fl${i}`, color: T.accent, peak: 0.14, d: 0.35, blend: 'screen' }));
-  fx.tIn(ctx, 'slice', { d: 0.45 });
-  fx.tOut(ctx, 'slice', { d: 0.4 });
-  return { html };
+  ctx.tl.fromTo(`${H.sel} .fx-ln > span`, { yPercent: 125, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.42, ease: 'expo.out', stagger: 0.06 }, 0);
+  html += `<div class="ts-tag" id="${ctx.id('hsub')}" style="left:${L}px;top:${400 + H.h + 24}px"><i></i>${ctx.esc(M.sub)}</div>`;
+  ctx.tl.fromTo(ctx.sel('hsub'), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, 0.18);
+  const css = `${ts.CSS(S)}
+${S} .ts-tag{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Roboto Condensed';font-weight:800;font-style:italic;font-size:46px;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
+${S} .ts-tag i{display:block;width:12px;height:36px;background:${INK};transform:skewX(-14deg)}`;
+  return { html, css };
+}
+
+// ---------- Reel end card (2 bars): black + sunrise fan, TA plate hero ×1.5, logo ≤ TA, URL, partner line, prize chip ----------
+export function endCard(ctx) {
+  const S = ctx.S, W = ctx.W, M = meta.endCard, END = ctx.dur;
+  const piv = [540, 1690];
+  let html = fx.field(ctx, { kind: 'radial', c1: '#3a0408', c2: theme.bg, at: '50% 95%' });
+  html += ts.rays(ctx, { id: 'ery', x: piv[0], y: piv[1], size: 3000, color: RED, n: 18, duty: 0.4, opacity: 0.38, spin: 12 });
+  ctx.tl.fromTo(ctx.sel('ery-w'), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0);
+  html += ts.sun(ctx, { id: 'esun', x: piv[0], y: piv[1], r: 200 });
+  ctx.tl.fromTo(ctx.sel('esun'), { y: 260, scale: 0.6 }, { y: 0, scale: 1, duration: 0.9, ease: 'expo.out' }, 0.05);
+  const F = ts.fan(ctx, { id: 'efan', items: FAN, x: piv[0], y: piv[1], body: 300, r0: 230 });
+  html += F.html;
+  ts.fanOpen(ctx, F, FAN, 0.15, { d: 0.8, step: 0.04, from: 0 });
+  ts.fanSweep(ctx, 'efan', FAN.length, 1.2, { step: 0.05 });
+  // lockup (own version of fx.endCard: Anton 400 / Roboto Condensed, no faux bold)
+  const scale = 1.5, fly = 0.6, t = 0.05;
+  const P = ctx.plate.hero(t, END, { scale, cx: W / 2, cy: 560, fly });
+  const lg = ctx.logo(M.logo, { box: [760, 300], scale, at: [t + fly, END], id: 'elogo', label: `${ctx.cid} end card` });
+  const tt = t + fly * 0.6;
+  let y = P.y + P.h + 40;
+  html += `<div class="ts-sub" id="${ctx.id('eline')}" style="top:${y}px"><span class="fx-ln"><span>${ctx.esc(ctx.nb(M.line))}</span></span></div>`;
+  ctx.tl.fromTo(`${ctx.sel('eline')} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, tt);
+  y += 34 + 26;
+  html += `<div class="fx-abs" id="${ctx.id('ebar')}" style="left:${W / 2 - 60}px;top:${y}px;width:120px;height:6px;border-radius:3px;background:${RED}"></div>`;
+  ctx.tl.fromTo(ctx.sel('ebar'), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, tt + 0.08);
+  y += 6 + 34;
+  html += `<div class="fx-abs" id="${ctx.id('elw')}" style="left:${(W - lg.w) / 2}px;top:${y}px;width:${lg.w}px;height:${lg.h}px">${lg.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('elw'), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'expo.out' }, tt + 0.14);
+  y += lg.h + 30;
+  const U = ts.lines(ctx, { id: 'eurl', lines: [[{ w: 'troutshop' }, { w: '.eu', c: RED, tight: true }]], y, align: 'center', sizes: [150, 140, 128, 116], times: [tt + 0.26], stagger: 0.03 });
+  html += U.html;
+  y += U.h + 26;
+  html += ts.pill(ctx, { id: 'epz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y, t: tt + 0.5 });
+  fx.tIn(ctx, 'cut');
+  const css = `${ts.CSS(S)}
+${S} .ts-sub{position:absolute;left:0;right:0;text-align:center;font-family:'Roboto Condensed';font-weight:700;font-size:34px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.92)}`;
+  return { html, css };
 }

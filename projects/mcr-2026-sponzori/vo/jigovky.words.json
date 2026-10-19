@@ -1,157 +1,172 @@
 {
   "key": "jigovky",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
-  "request_id": "9bEdEjtBcP4eUl9pruly",
-  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=c76f2e77-9c68-464c-b449-053f63724162.wav",
+  "take": 3,
+  "request_id": "FF0E3ou8eK3fl0yzk5hJ",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=4f9672e0-24af-4929-bd81-8b36be3e14e2.wav",
   "cs": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od 0,4 gramu, poctivě vyrobené v Česku.",
-  "tts": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
-  "timebase": "seconds in vo/jigovky.wav (processed, atempo 1.065); = (raw time - trim_start_s) / 1.065. 1x original: vo/prev/jigovky.1x.wav",
-  "trim_start_s": 0.02,
-  "raw_duration_s": 8.516,
-  "duration_s": 7.897,
+  "tts": "Džigovky – džigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
+  "tts_sent": "Džigovky – džigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku. …",
+  "timebase": "seconds in vo/jigovky.wav (processed, atempo 1.076); = (raw time - trim_start_s) / 1.076. 1x original: vo/prev/jigovky.take3.1x.wav",
+  "trim_start_s": 0.025,
+  "raw_duration_s": 8.438,
+  "duration_s": 7.877,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -27.4,
+    "extension_s": 0.08,
+    "extension": {
+      "T_samples": 444,
+      "f0": 99.3,
+      "periodicity": 0.39
+    }
+  },
   "words": [
     {
       "word": "Jigovky",
       "start": 0.0,
-      "end": 0.657
+      "end": 0.72,
+      "spoken": "Džigovky"
     },
     {
       "word": "jigy,",
-      "start": 1.033,
-      "end": 1.408
+      "start": 0.962,
+      "end": 1.315,
+      "spoken": "džigy,"
     },
     {
       "word": "které",
-      "start": 1.671,
-      "end": 1.859
+      "start": 1.619,
+      "end": 1.836
     },
     {
       "word": "chytají.",
-      "start": 1.885,
-      "end": 2.385
+      "start": 1.861,
+      "end": 2.356
     },
     {
       "word": "Bezprotihrotové",
-      "start": 2.62,
-      "end": 3.437
+      "start": 2.542,
+      "end": 3.546
     },
     {
       "word": "hlavičky",
-      "start": 3.486,
-      "end": 4.038
+      "start": 3.595,
+      "end": 4.215
     },
     {
       "word": "od",
-      "start": 4.162,
-      "end": 4.413
+      "start": 4.314,
+      "end": 4.512
     },
     {
       "word": "0,4",
-      "start": 4.488,
-      "end": 5.315,
+      "start": 4.586,
+      "end": 5.404,
       "spoken": "nula celá čtyři"
     },
     {
       "word": "gramu,",
-      "start": 5.375,
-      "end": 5.765
+      "start": 5.464,
+      "end": 5.85
     },
     {
       "word": "poctivě",
-      "start": 6.066,
-      "end": 6.667
+      "start": 6.123,
+      "end": 6.668
     },
     {
       "word": "vyrobené",
-      "start": 6.716,
-      "end": 7.117
+      "start": 6.717,
+      "end": 7.189
     },
     {
       "word": "v",
-      "start": 7.155,
-      "end": 7.192
+      "start": 7.226,
+      "end": 7.263
     },
     {
       "word": "Česku.",
-      "start": 7.249,
-      "end": 7.643
+      "start": 7.319,
+      "end": 7.709
     }
   ],
   "words_tts": [
     {
-      "word": "Jigovky",
+      "word": "Džigovky",
       "start": 0.0,
-      "end": 0.657
+      "end": 0.72
     },
     {
-      "word": "jigy,",
-      "start": 1.033,
-      "end": 1.408
+      "word": "džigy,",
+      "start": 0.962,
+      "end": 1.315
     },
     {
       "word": "které",
-      "start": 1.671,
-      "end": 1.859
+      "start": 1.619,
+      "end": 1.836
     },
     {
       "word": "chytají.",
-      "start": 1.885,
-      "end": 2.385
+      "start": 1.861,
+      "end": 2.356
     },
     {
       "word": "Bezprotihrotové",
-      "start": 2.62,
-      "end": 3.437
+      "start": 2.542,
+      "end": 3.546
     },
     {
       "word": "hlavičky",
-      "start": 3.486,
-      "end": 4.038
+      "start": 3.595,
+      "end": 4.215
     },
     {
       "word": "od",
-      "start": 4.162,
-      "end": 4.413
+      "start": 4.314,
+      "end": 4.512
     },
     {
       "word": "nula",
-      "start": 4.488,
-      "end": 4.638
+      "start": 4.586,
+      "end": 4.735
     },
     {
       "word": "celá",
-      "start": 4.714,
-      "end": 5.127
+      "start": 4.791,
+      "end": 5.033
     },
     {
       "word": "čtyři",
-      "start": 5.158,
-      "end": 5.315
+      "start": 5.095,
+      "end": 5.404
     },
     {
       "word": "gramu,",
-      "start": 5.375,
-      "end": 5.765
+      "start": 5.464,
+      "end": 5.85
     },
     {
       "word": "poctivě",
-      "start": 6.066,
-      "end": 6.667
+      "start": 6.123,
+      "end": 6.668
     },
     {
       "word": "vyrobené",
-      "start": 6.716,
-      "end": 7.117
+      "start": 6.717,
+      "end": 7.189
     },
     {
       "word": "v",
-      "start": 7.155,
-      "end": 7.192
+      "start": 7.226,
+      "end": 7.263
     },
     {
       "word": "Česku.",
-      "start": 7.249,
-      "end": 7.643
+      "start": 7.319,
+      "end": 7.709
     }
   ],
   "word_timestamps_raw": [
@@ -161,23 +176,23 @@
       "end": 0.0
     },
     {
-      "word": "Jigovky",
+      "word": "Džigovky",
       "start": 0.0,
-      "end": 0.72
+      "end": 0.8
     },
     {
       "word": "–",
-      "start": 0.72,
-      "end": 0.72
+      "start": 0.8,
+      "end": 0.8
     },
     {
-      "word": "jigy,",
-      "start": 1.12,
-      "end": 1.52
+      "word": "džigy,",
+      "start": 1.06,
+      "end": 1.44
     },
     {
       "word": "které",
-      "start": 1.8,
+      "start": 1.767,
       "end": 2.0
     },
     {
@@ -187,65 +202,70 @@
     },
     {
       "word": "Bezprotihrotové",
-      "start": 2.81,
-      "end": 3.68
+      "start": 2.76,
+      "end": 3.84
     },
     {
       "word": "hlavičky",
-      "start": 3.733,
-      "end": 4.32
+      "start": 3.893,
+      "end": 4.56
     },
     {
       "word": "od",
-      "start": 4.453,
-      "end": 4.720000000000001
+      "start": 4.667,
+      "end": 4.88
     },
     {
       "word": "nula",
-      "start": 4.800000000000001,
-      "end": 4.96
+      "start": 4.96,
+      "end": 5.12
     },
     {
       "word": "celá",
-      "start": 5.04,
-      "end": 5.4799999999999995
+      "start": 5.18,
+      "end": 5.4399999999999995
     },
     {
       "word": "čtyři",
-      "start": 5.513,
-      "end": 5.68
+      "start": 5.507,
+      "end": 5.84
     },
     {
       "word": "gramu,",
-      "start": 5.744,
-      "end": 6.16
+      "start": 5.904,
+      "end": 6.32
     },
     {
       "word": "poctivě",
-      "start": 6.48,
-      "end": 7.12
+      "start": 6.6129999999999995,
+      "end": 7.199999999999999
     },
     {
       "word": "vyrobené",
-      "start": 7.173,
-      "end": 7.6
+      "start": 7.252999999999999,
+      "end": 7.76
     },
     {
       "word": "v",
-      "start": 7.640000000000001,
-      "end": 7.68
+      "start": 7.799999999999999,
+      "end": 7.839999999999999
     },
     {
       "word": "Česku.",
-      "start": 7.74,
-      "end": 8.16
+      "start": 7.8999999999999995,
+      "end": 8.32
+    },
+    {
+      "word": "…",
+      "start": 8.32,
+      "end": 8.32
     },
     {
       "word": "<end>",
-      "start": 8.51591836734694,
-      "end": 8.51591836734694
+      "start": 8.437551020408163,
+      "end": 8.437551020408163
     }
   ],
-  "tempo": 1.065,
-  "duration_1x_s": 8.401
+  "tempo": 1.076,
+  "duration_1x_s": 8.493
 }

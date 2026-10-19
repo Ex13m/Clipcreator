@@ -1,173 +1,171 @@
 {
   "key": "bosset",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
-  "take": 2,
-  "request_id": "cU0buq10XvrBJED1gw42",
-  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=fdf17695-919e-42c8-9324-ed7111110d9f.wav",
-  "cs": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
-  "tts": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
-  "tts_sent": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin. …",
+  "take": 3,
+  "request_id": "fuWj7FYIEWLSJIMGMHVT",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=83f85cd4-90dd-40fd-aa14-3d8c6a6f1d9b.wav",
+  "cs": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
+  "tts": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
+  "tts_sent": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin. …",
   "timebase": "seconds in vo/bosset.wav (processed); = raw time - trim_start_s",
-  "trim_start_s": 0.095,
-  "raw_duration_s": 8.516,
-  "duration_s": 6.61,
+  "trim_start_s": 0.025,
+  "raw_duration_s": 6.844,
+  "duration_s": 6.899,
   "tail": {
     "fade_out_s": 0.12,
     "pad_out_s": 0.08,
-    "raw_cut_level_dbfs": -69.1
+    "raw_cut_level_dbfs": -22.3,
+    "extension_s": 0.08,
+    "extension": {
+      "T_samples": 548,
+      "f0": 80.5,
+      "periodicity": 0.76
+    }
   },
   "words": [
     {
-      "word": "Ceny",
-      "start": 0.0,
-      "end": 0.305
-    },
-    {
-      "word": "pro",
-      "start": 0.345,
-      "end": 0.465
-    },
-    {
-      "word": "vítěze",
-      "start": 0.505,
-      "end": 0.945
-    },
-    {
-      "word": "věnuje",
-      "start": 1.025,
-      "end": 1.425
-    },
-    {
       "word": "Bosset",
-      "start": 1.485,
-      "end": 1.985
+      "start": 0.0,
+      "end": 0.535,
+      "spoken": "Boset"
     },
     {
-      "word": "termosky,",
-      "start": 2.193,
-      "end": 2.785
+      "word": "rybářský",
+      "start": 0.835,
+      "end": 1.415
     },
     {
-      "word": "které",
-      "start": 2.972,
-      "end": 3.105
-    },
-    {
-      "word": "udrží",
-      "start": 3.185,
-      "end": 3.585
-    },
-    {
-      "word": "nápoj",
-      "start": 3.665,
-      "end": 3.985
-    },
-    {
-      "word": "horký",
-      "start": 4.025,
-      "end": 4.465
+      "word": "e-shop",
+      "start": 1.535,
+      "end": 2.055,
+      "spoken": "í-šop"
     },
     {
       "word": "i",
-      "start": 4.505,
-      "end": 4.545
+      "start": 2.095,
+      "end": 2.135
+    },
+    {
+      "word": "termosky,",
+      "start": 2.215,
+      "end": 2.935
+    },
+    {
+      "word": "které",
+      "start": 3.082,
+      "end": 3.415
+    },
+    {
+      "word": "udrží",
+      "start": 3.455,
+      "end": 3.815
+    },
+    {
+      "word": "nápoj",
+      "start": 3.895,
+      "end": 4.295
+    },
+    {
+      "word": "horký",
+      "start": 4.335,
+      "end": 4.695
+    },
+    {
+      "word": "i",
+      "start": 4.775,
+      "end": 4.855
     },
     {
       "word": "studený",
-      "start": 4.609,
-      "end": 5.185
+      "start": 4.903,
+      "end": 5.415
     },
     {
       "word": "až",
-      "start": 5.318,
-      "end": 5.585
+      "start": 5.548,
+      "end": 5.815
     },
     {
       "word": "šest",
-      "start": 5.633,
-      "end": 5.825
+      "start": 5.879,
+      "end": 6.135
     },
     {
       "word": "hodin.",
-      "start": 5.918,
-      "end": 6.385
+      "start": 6.228,
+      "end": 6.695
     }
   ],
   "words_tts": [
     {
-      "word": "Ceny",
+      "word": "Boset",
       "start": 0.0,
-      "end": 0.305
+      "end": 0.535
     },
     {
-      "word": "pro",
-      "start": 0.345,
-      "end": 0.465
+      "word": "rybářský",
+      "start": 0.835,
+      "end": 1.415
     },
     {
-      "word": "vítěze",
-      "start": 0.505,
-      "end": 0.945
-    },
-    {
-      "word": "věnuje",
-      "start": 1.025,
-      "end": 1.425
-    },
-    {
-      "word": "Bosset",
-      "start": 1.485,
-      "end": 1.985
-    },
-    {
-      "word": "termosky,",
-      "start": 2.193,
-      "end": 2.785
-    },
-    {
-      "word": "které",
-      "start": 2.972,
-      "end": 3.105
-    },
-    {
-      "word": "udrží",
-      "start": 3.185,
-      "end": 3.585
-    },
-    {
-      "word": "nápoj",
-      "start": 3.665,
-      "end": 3.985
-    },
-    {
-      "word": "horký",
-      "start": 4.025,
-      "end": 4.465
+      "word": "í-šop",
+      "start": 1.535,
+      "end": 2.055
     },
     {
       "word": "i",
-      "start": 4.505,
-      "end": 4.545
+      "start": 2.095,
+      "end": 2.135
+    },
+    {
+      "word": "termosky,",
+      "start": 2.215,
+      "end": 2.935
+    },
+    {
+      "word": "které",
+      "start": 3.082,
+      "end": 3.415
+    },
+    {
+      "word": "udrží",
+      "start": 3.455,
+      "end": 3.815
+    },
+    {
+      "word": "nápoj",
+      "start": 3.895,
+      "end": 4.295
+    },
+    {
+      "word": "horký",
+      "start": 4.335,
+      "end": 4.695
+    },
+    {
+      "word": "i",
+      "start": 4.775,
+      "end": 4.855
     },
     {
       "word": "studený",
-      "start": 4.609,
-      "end": 5.185
+      "start": 4.903,
+      "end": 5.415
     },
     {
       "word": "až",
-      "start": 5.318,
-      "end": 5.585
+      "start": 5.548,
+      "end": 5.815
     },
     {
       "word": "šest",
-      "start": 5.633,
-      "end": 5.825
+      "start": 5.879,
+      "end": 6.135
     },
     {
       "word": "hodin.",
-      "start": 5.918,
-      "end": 6.385
+      "start": 6.228,
+      "end": 6.695
     }
   ],
   "word_timestamps_raw": [
@@ -177,94 +175,89 @@
       "end": 0.0
     },
     {
-      "word": "Ceny",
+      "word": "Boset",
       "start": 0.0,
-      "end": 0.4
-    },
-    {
-      "word": "pro",
-      "start": 0.44,
       "end": 0.56
     },
     {
-      "word": "vítěze",
-      "start": 0.6,
-      "end": 1.04
-    },
-    {
-      "word": "věnuje",
-      "start": 1.12,
-      "end": 1.52
-    },
-    {
-      "word": "Bosset",
-      "start": 1.58,
-      "end": 2.08
-    },
-    {
       "word": "–",
-      "start": 2.08,
+      "start": 0.56,
+      "end": 0.56
+    },
+    {
+      "word": "rybářský",
+      "start": 0.8600000000000001,
+      "end": 1.44
+    },
+    {
+      "word": "í-šop",
+      "start": 1.56,
       "end": 2.08
-    },
-    {
-      "word": "termosky,",
-      "start": 2.2880000000000003,
-      "end": 2.8800000000000003
-    },
-    {
-      "word": "které",
-      "start": 3.067,
-      "end": 3.2
-    },
-    {
-      "word": "udrží",
-      "start": 3.2800000000000002,
-      "end": 3.68
-    },
-    {
-      "word": "nápoj",
-      "start": 3.7600000000000002,
-      "end": 4.08
-    },
-    {
-      "word": "horký",
-      "start": 4.12,
-      "end": 4.5600000000000005
     },
     {
       "word": "i",
-      "start": 4.6,
-      "end": 4.640000000000001
+      "start": 2.12,
+      "end": 2.16
+    },
+    {
+      "word": "termosky,",
+      "start": 2.24,
+      "end": 2.96
+    },
+    {
+      "word": "které",
+      "start": 3.107,
+      "end": 3.44
+    },
+    {
+      "word": "udrží",
+      "start": 3.48,
+      "end": 3.84
+    },
+    {
+      "word": "nápoj",
+      "start": 3.92,
+      "end": 4.32
+    },
+    {
+      "word": "horký",
+      "start": 4.36,
+      "end": 4.72
+    },
+    {
+      "word": "i",
+      "start": 4.8,
+      "end": 4.88
     },
     {
       "word": "studený",
-      "start": 4.704000000000001,
-      "end": 5.28
+      "start": 4.928,
+      "end": 5.4399999999999995
     },
     {
       "word": "až",
-      "start": 5.413,
-      "end": 5.68
+      "start": 5.5729999999999995,
+      "end": 5.84
     },
     {
       "word": "šest",
-      "start": 5.728,
-      "end": 5.92
+      "start": 5.904,
+      "end": 6.16
     },
     {
       "word": "hodin.",
-      "start": 6.013,
-      "end": 6.48
+      "start": 6.253,
+      "end": 6.72
     },
     {
       "word": "…",
-      "start": 6.48,
-      "end": 6.48
+      "start": 6.72,
+      "end": 6.72
     },
     {
       "word": "<end>",
-      "start": 8.51591836734694,
-      "end": 8.51591836734694
+      "start": 6.844081632653062,
+      "end": 6.844081632653062
     }
   ]
 }

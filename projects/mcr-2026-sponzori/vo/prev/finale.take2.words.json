@@ -1,0 +1,362 @@
+{
+  "key": "finale",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": 2,
+  "request_id": "5F4kyv0onhjFJwdLkUt2",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=b2ec7179-7193-425d-892a-c62d46fc8b7d.wav",
+  "cs": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – 24. a 25. října, Líheň Liběchov. Uvidíme se u vody.",
+  "tts": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
+  "tts_sent": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody. …",
+  "timebase": "seconds in vo/finale.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.03,
+  "raw_duration_s": 10.684,
+  "duration_s": 10.654,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -45.4
+  },
+  "words": [
+    {
+      "word": "Děkujeme",
+      "start": 0.0,
+      "end": 0.45
+    },
+    {
+      "word": "všem",
+      "start": 0.514,
+      "end": 0.77
+    },
+    {
+      "word": "partnerům",
+      "start": 0.82,
+      "end": 1.33
+    },
+    {
+      "word": "za",
+      "start": 1.357,
+      "end": 1.41
+    },
+    {
+      "word": "podporu.",
+      "start": 1.48,
+      "end": 1.97
+    },
+    {
+      "word": "Mistrovství",
+      "start": 2.41,
+      "end": 2.93
+    },
+    {
+      "word": "České",
+      "start": 2.997,
+      "end": 3.33
+    },
+    {
+      "word": "republiky",
+      "start": 3.378,
+      "end": 3.81
+    },
+    {
+      "word": "v",
+      "start": 3.85,
+      "end": 3.89
+    },
+    {
+      "word": "Trout",
+      "start": 3.943,
+      "end": 4.21
+    },
+    {
+      "word": "Area",
+      "start": 4.306,
+      "end": 4.69
+    },
+    {
+      "word": "24.",
+      "start": 5.063,
+      "end": 6.05,
+      "spoken": "čtyřiadvacátého"
+    },
+    {
+      "word": "a",
+      "start": 6.17,
+      "end": 6.29
+    },
+    {
+      "word": "25.",
+      "start": 6.35,
+      "end": 7.25,
+      "spoken": "pětadvacátého"
+    },
+    {
+      "word": "října,",
+      "start": 7.317,
+      "end": 7.65
+    },
+    {
+      "word": "Líheň",
+      "start": 8.09,
+      "end": 8.37
+    },
+    {
+      "word": "Liběchov.",
+      "start": 8.43,
+      "end": 9.01
+    },
+    {
+      "word": "Uvidíme",
+      "start": 9.53,
+      "end": 9.89
+    },
+    {
+      "word": "se",
+      "start": 9.943,
+      "end": 10.05
+    },
+    {
+      "word": "u",
+      "start": 10.09,
+      "end": 10.13
+    },
+    {
+      "word": "vody.",
+      "start": 10.194,
+      "end": 10.45
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Děkujeme",
+      "start": 0.0,
+      "end": 0.45
+    },
+    {
+      "word": "všem",
+      "start": 0.514,
+      "end": 0.77
+    },
+    {
+      "word": "partnerům",
+      "start": 0.82,
+      "end": 1.33
+    },
+    {
+      "word": "za",
+      "start": 1.357,
+      "end": 1.41
+    },
+    {
+      "word": "podporu.",
+      "start": 1.48,
+      "end": 1.97
+    },
+    {
+      "word": "Mistrovství",
+      "start": 2.41,
+      "end": 2.93
+    },
+    {
+      "word": "České",
+      "start": 2.997,
+      "end": 3.33
+    },
+    {
+      "word": "republiky",
+      "start": 3.378,
+      "end": 3.81
+    },
+    {
+      "word": "v",
+      "start": 3.85,
+      "end": 3.89
+    },
+    {
+      "word": "Trout",
+      "start": 3.943,
+      "end": 4.21
+    },
+    {
+      "word": "Area",
+      "start": 4.306,
+      "end": 4.69
+    },
+    {
+      "word": "čtyřiadvacátého",
+      "start": 5.063,
+      "end": 6.05
+    },
+    {
+      "word": "a",
+      "start": 6.17,
+      "end": 6.29
+    },
+    {
+      "word": "pětadvacátého",
+      "start": 6.35,
+      "end": 7.25
+    },
+    {
+      "word": "října,",
+      "start": 7.317,
+      "end": 7.65
+    },
+    {
+      "word": "Líheň",
+      "start": 8.09,
+      "end": 8.37
+    },
+    {
+      "word": "Liběchov.",
+      "start": 8.43,
+      "end": 9.01
+    },
+    {
+      "word": "Uvidíme",
+      "start": 9.53,
+      "end": 9.89
+    },
+    {
+      "word": "se",
+      "start": 9.943,
+      "end": 10.05
+    },
+    {
+      "word": "u",
+      "start": 10.09,
+      "end": 10.13
+    },
+    {
+      "word": "vody.",
+      "start": 10.194,
+      "end": 10.45
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Děkujeme",
+      "start": 0.0,
+      "end": 0.48
+    },
+    {
+      "word": "všem",
+      "start": 0.544,
+      "end": 0.8
+    },
+    {
+      "word": "partnerům",
+      "start": 0.8500000000000001,
+      "end": 1.36
+    },
+    {
+      "word": "za",
+      "start": 1.387,
+      "end": 1.44
+    },
+    {
+      "word": "podporu.",
+      "start": 1.51,
+      "end": 2.0
+    },
+    {
+      "word": "Mistrovství",
+      "start": 2.44,
+      "end": 2.96
+    },
+    {
+      "word": "České",
+      "start": 3.027,
+      "end": 3.36
+    },
+    {
+      "word": "republiky",
+      "start": 3.408,
+      "end": 3.84
+    },
+    {
+      "word": "v",
+      "start": 3.88,
+      "end": 3.92
+    },
+    {
+      "word": "Trout",
+      "start": 3.973,
+      "end": 4.24
+    },
+    {
+      "word": "Area",
+      "start": 4.336,
+      "end": 4.72
+    },
+    {
+      "word": "–",
+      "start": 4.72,
+      "end": 4.72
+    },
+    {
+      "word": "čtyřiadvacátého",
+      "start": 5.093,
+      "end": 6.08
+    },
+    {
+      "word": "a",
+      "start": 6.199999999999999,
+      "end": 6.32
+    },
+    {
+      "word": "pětadvacátého",
+      "start": 6.38,
+      "end": 7.279999999999999
+    },
+    {
+      "word": "října,",
+      "start": 7.3469999999999995,
+      "end": 7.679999999999999
+    },
+    {
+      "word": "Líheň",
+      "start": 8.12,
+      "end": 8.399999999999999
+    },
+    {
+      "word": "Liběchov.",
+      "start": 8.459999999999999,
+      "end": 9.04
+    },
+    {
+      "word": "Uvidíme",
+      "start": 9.559999999999999,
+      "end": 9.92
+    },
+    {
+      "word": "se",
+      "start": 9.972999999999999,
+      "end": 10.08
+    },
+    {
+      "word": "u",
+      "start": 10.12,
+      "end": 10.16
+    },
+    {
+      "word": "vody.",
+      "start": 10.224,
+      "end": 10.48
+    },
+    {
+      "word": "…",
+      "start": 10.48,
+      "end": 10.48
+    },
+    {
+      "word": "<end>",
+      "start": 10.684081632653061,
+      "end": 10.684081632653061
+    }
+  ]
+}

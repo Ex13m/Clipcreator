@@ -4,7 +4,7 @@
 //
 //   css(ctx)                                               scoped CSS: film grade, words, letterbox, leak, streak, sweep
 //   blurDefs(ctx, ids[])                                   one SVG directional-blur filter per id (whip smear); returns html
-//   shot(ctx,{id,src,cut,stroke,mono,t0,t1,origin,inn,out,kb}) → {back, front, cam, fcam}
+//   shot(ctx,{id,src,cut,stroke,mono,t0,t1,origin,inn,out,kb,grade}) → {back, front, cam, fcam}   grade = per-shot img filter
 //        back  = graded photo in its own camera (goes UNDER the words)
 //        front = the subject cut-out (+ white sticker stroke) in an identical camera (goes ABOVE the words → text behind subject)
 //        inn   = 'slam' (scale punch-out settle on a downbeat) | 'whipL' | 'whipR' (enter from the right / left with smear) | 'none'
@@ -16,7 +16,9 @@
 //   streak(ctx,{id,y,t,color,d})                           anamorphic light streak across the frame (whip accent)
 //   leak(ctx,{id,t,d,x,y,size,peak,colors})                warm light-leak bloom (screen blend) — dissolves / burns
 //   sweepBand(ctx,{id,t,d,angle,opacity})                  full-frame specular light band (reflection pass)
-//   letterbox(ctx,{id,h,t,d,t1})                           cinema bars closing in on the break (TA plate stays on top of them)
+//   letterbox(ctx,{id,h,t,d,t1,top})                       cinema bars closing in on the break (TA plate stays on top of them);
+//                                                          `top` = html riding inside the top bar (e.g. credit())
+//   credit(ctx,{id,lines:[{text,wght,size,alpha}],x1,yMid,maxW,t})  right-aligned tracked-caps credit block (2nd type level)
 import * as fx from './fx.mjs';
 import { esc, rnd } from './util.mjs';
 
@@ -39,6 +41,7 @@ ${ctx.S} .br-w .fx-c{display:inline-block;white-space:pre}
 ${ctx.S} .br-box{position:absolute;left:0;right:0;background:#000}
 ${ctx.S} .br-leak{position:absolute;border-radius:50%;mix-blend-mode:screen;pointer-events:none;filter:blur(40px)}
 ${ctx.S} .br-streak{position:absolute;left:-10%;width:120%;pointer-events:none;mix-blend-mode:screen}
+${ctx.S} .br-cr{position:absolute;white-space:nowrap;text-align:right;text-transform:uppercase;color:#fff;line-height:1}
 ${ctx.S} .br-sweep{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;background-size:320% 100%;background-repeat:no-repeat}
 `;
 
@@ -50,11 +53,11 @@ export function blurDefs(ctx, ids) {
 // shot: graded photo (+ optional mono copy for a freeze look) and optional subject cut-out in a twin camera
 export function shot(ctx, o) {
   const { id, src, cut = null, stroke = null, mono = false, t0, t1, origin = '50% 50%', inn = 'none', out = 'none', blur = true,
-    kb = {}, inD = 0.18, outD = 0.09, X = 110, slam = 1.34 } = o;
+    kb = {}, inD = 0.18, outD = 0.09, X = 110, slam = 1.34, grade = null } = o;
   const cam = ctx.sel(`${id}-cam`), fcam = ctx.sel(`${id}-fcam`), both = cut ? `${cam}, ${fcam}` : cam;
   const flt = blur ? `filter:url(#${ctx.id(`bf-${id}`)});` : '';
   const img = (rel, cls = '', extra = '') => `<img class="${cls}" ${extra} src="${ctx.asset(rel)}" alt="">`;
-  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src)}${mono ? `<div class="br-mono" id="${ctx.id(`${id}-mono`)}" style="opacity:0;background-image:url(${ctx.asset(src)})"></div>` : ''}</div>`;
+  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src, '', grade ? `style="filter:${grade}"` : '')}${mono ? `<div class="br-mono" id="${ctx.id(`${id}-mono`)}" style="opacity:0;background-image:url(${ctx.asset(src)})"></div>` : ''}</div>`;
   // front: twin camera › #id-sub (extra subject scale = 2.5D parallax pop) › [white sticker stroke, cut-out]
   const front = cut ? `<div class="br-cam" id="${ctx.id(`${id}-fcam`)}" style="transform-origin:${origin};${flt}"><div class="br-cam" id="${ctx.id(`${id}-sub`)}" style="transform-origin:${o.subOrigin || origin}">${stroke ? img(stroke, 'br-stk', `id="${ctx.id(`${id}-stk`)}" style="opacity:0"`) : ''}${img(cut)}</div></div>` : '';
   // camera: entrance → speed-ramp push-in → exit
@@ -133,11 +136,11 @@ export function leak(ctx, { id, t, d = 0.8, x = 760, y = 700, size = 1500, peak 
 
 export function sweepBand(ctx, { id, t, d = 1.2, angle = 112, opacity = 0.9, ease = 'power1.inOut' } = {}) {
   ctx.tl.fromTo(ctx.sel(id), { backgroundPosition: '115% 0%' }, { backgroundPosition: '-15% 0%', duration: d, ease }, t);
-  return `<div class="br-sweep" id="${ctx.id(id)}" style="opacity:${opacity};background-image:linear-gradient(${angle}deg,transparent 38%,rgba(255,226,190,.12) 44%,rgba(255,244,228,.5) 50%,rgba(255,226,190,.12) 56%,transparent 62%);background-position:115% 0%"></div>`;
+  return `<div class="br-sweep" id="${ctx.id(id)}" style="opacity:${opacity};background-image:linear-gradient(${angle}deg,transparent 34%,rgba(255,214,170,.14) 42%,rgba(255,246,232,.62) 50%,rgba(255,214,170,.14) 58%,transparent 66%);background-position:115% 0%"></div>`;
 }
 
 // cinema bars: top bar ends at h (the TA plate sits ON the bar), bottom bar mirrors it
-export function letterbox(ctx, { id = 'lb', h = 372, t = 0, d = 0.6, t1 = null, d1 = 0.4 } = {}) {
+export function letterbox(ctx, { id = 'lb', h = 372, t = 0, d = 0.6, t1 = null, d1 = 0.4, top = '' } = {}) {
   const T = ctx.sel(`${id}-t`), B = ctx.sel(`${id}-b`);
   ctx.tl.fromTo(T, { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'expo.out' }, t);
   ctx.tl.fromTo(B, { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'expo.out' }, t);
@@ -145,5 +148,25 @@ export function letterbox(ctx, { id = 'lb', h = 372, t = 0, d = 0.6, t1 = null, 
     ctx.tl.fromTo(T, { yPercent: 0 }, { yPercent: -100, duration: d1, ease: 'expo.in' }, t1 - d1);
     ctx.tl.fromTo(B, { yPercent: 0 }, { yPercent: 100, duration: d1, ease: 'expo.in' }, t1 - d1);
   }
-  return `<div class="br-box" id="${ctx.id(`${id}-t`)}" style="top:0;height:${h}px"></div><div class="br-box" id="${ctx.id(`${id}-b`)}" style="bottom:0;height:${h}px"></div>`;
+  return `<div class="br-box" id="${ctx.id(`${id}-t`)}" style="top:0;height:${h}px">${top}</div><div class="br-box" id="${ctx.id(`${id}-b`)}" style="bottom:0;height:${h}px"></div>`;
+}
+
+// credit: right-aligned tracked caps (Archivo, same family as the words) — the second type level next to the big word.
+// lines: [{text, wght, size, alpha}] stacked and centred on yMid; each line fitted to maxW; slides in from the right at t.
+export function credit(ctx, { id = 'cr', lines = [], x1 = ctx.W - ctx.safe.right, yMid = 299, maxW = 600, t = 0.5, d = 0.55, wdth = 100, tracking = 0.14, gap = 12 } = {}) {
+  const L = lines.map((l) => {
+    const size = l.size || 34, wght = l.wght || 700;
+    const f = ctx.fit(ctx.nb(l.text), { font: 'Archivo', wght, wdth, upper: true, tracking, maxW, maxLines: 1, sizes: [size, size - 2, size - 4, size - 6] });
+    if (f.overflow) ctx.warn(`credit "${l.text}" does not fit ${maxW}px`);
+    return { ...l, size: f.size, wght };
+  });
+  const H = L.reduce((a, l) => a + l.size, 0) + gap * (L.length - 1);
+  let y = yMid - H / 2, html = '';
+  L.forEach((l, i) => {
+    const lid = `${id}-${i}`;
+    html += `<div class="br-cr" id="${ctx.id(lid)}" style="right:${px(ctx.W - x1)};top:${px(y)};font-family:'Archivo';font-size:${l.size}px;font-weight:${l.wght};font-stretch:${wdth}%;letter-spacing:${tracking}em;margin-right:-${tracking}em;opacity:0">${esc(ctx.nb(l.text)).replace(/^(.*)$/, (m) => (l.alpha != null ? `<span style="opacity:${l.alpha}">${m}</span>` : m))}</div>`;
+    ctx.tl.fromTo(ctx.sel(lid), { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: d, ease: 'expo.out' }, t + i * 0.09);
+    y += l.size + gap;
+  });
+  return html;
 }

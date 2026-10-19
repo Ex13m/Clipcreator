@@ -1,176 +1,170 @@
 {
   "key": "gausseholler",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
-  "request_id": "pVvDGwsgDlpWHJc56HAZ",
-  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=e566e286-6c7f-4839-82ef-1da0323402fe.wav",
-  "cs": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
-  "tts": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
-  "timebase": "seconds in vo/gausseholler.wav (processed, atempo 1.071); = (raw time - trim_start_s) / 1.071. 1x original: vo/prev/gausseholler.1x.wav",
-  "trim_start_s": 0.0,
-  "raw_duration_s": 8.359,
-  "duration_s": 7.812,
+  "take": 3,
+  "request_id": "1ktIQzUbcBebHEOqHtbO",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=88886650-4efb-46e8-b703-d106255bd1f6.wav",
+  "cs": "Hlavní cena pro vítěze MČR – stojan Revolut 8 od Gausse Holler Custom Lab.",
+  "tts": "Hlavní cena pro vítěze em čé er – stojan Revolut osm od Gaus Holer Kastom Lab.",
+  "tts_sent": "Hlavní cena pro vítěze em čé er – stojan Revolut osm od Gaus Holer Kastom Lab. …",
+  "timebase": "seconds in vo/gausseholler.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.05,
+  "raw_duration_s": 8.046,
+  "duration_s": 5.87,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -59.4,
+    "raw_end_s": 5.92,
+    "kept_trailing_burst": true
+  },
   "words": [
     {
-      "word": "Gausse",
+      "word": "Hlavní",
       "start": 0.0,
-      "end": 0.373
+      "end": 0.27
     },
     {
-      "word": "Holler",
-      "start": 0.448,
-      "end": 0.822
+      "word": "cena",
+      "start": 0.334,
+      "end": 0.59
+    },
+    {
+      "word": "pro",
+      "start": 0.65,
+      "end": 0.83
+    },
+    {
+      "word": "vítěze",
+      "start": 0.87,
+      "end": 1.39
+    },
+    {
+      "word": "MČR",
+      "start": 1.497,
+      "end": 2.11,
+      "spoken": "em čé er"
     },
     {
       "word": "stojan",
-      "start": 1.12,
-      "end": 1.494
+      "start": 2.537,
+      "end": 2.99
     },
     {
-      "word": "na",
-      "start": 1.543,
-      "end": 1.643
+      "word": "Revolut",
+      "start": 3.07,
+      "end": 3.55
     },
     {
-      "word": "pruty",
-      "start": 1.693,
-      "end": 2.017
+      "word": "8",
+      "start": 3.65,
+      "end": 3.95,
+      "spoken": "osm"
     },
     {
-      "word": "Black",
-      "start": 2.066,
-      "end": 2.316
+      "word": "od",
+      "start": 4.057,
+      "end": 4.27
     },
     {
-      "word": "Standard",
-      "start": 2.373,
-      "end": 2.838
+      "word": "Gausse",
+      "start": 4.31,
+      "end": 4.59,
+      "spoken": "Gaus"
     },
     {
-      "word": "Edition.",
-      "start": 2.923,
-      "end": 3.511
+      "word": "Holler",
+      "start": 4.63,
+      "end": 4.91,
+      "spoken": "Holer"
     },
     {
-      "word": "Ručně",
-      "start": 3.635,
-      "end": 3.959
+      "word": "Custom",
+      "start": 4.99,
+      "end": 5.39,
+      "spoken": "Kastom"
     },
     {
-      "word": "stavěný",
-      "start": 4.019,
-      "end": 4.407
-    },
-    {
-      "word": "v",
-      "start": 4.444,
-      "end": 4.482
-    },
-    {
-      "word": "Česku:",
-      "start": 4.556,
-      "end": 4.93
-    },
-    {
-      "word": "karbon,",
-      "start": 5.079,
-      "end": 5.602
-    },
-    {
-      "word": "hliník,",
-      "start": 5.77,
-      "end": 6.275
-    },
-    {
-      "word": "limitovaná",
-      "start": 6.412,
-      "end": 7.021
-    },
-    {
-      "word": "série.",
-      "start": 7.121,
-      "end": 7.619
+      "word": "Lab.",
+      "start": 5.47,
+      "end": 5.71
     }
   ],
   "words_tts": [
     {
-      "word": "Gausse",
+      "word": "Hlavní",
       "start": 0.0,
-      "end": 0.373
+      "end": 0.27
     },
     {
-      "word": "Holler",
-      "start": 0.448,
-      "end": 0.822
+      "word": "cena",
+      "start": 0.334,
+      "end": 0.59
+    },
+    {
+      "word": "pro",
+      "start": 0.65,
+      "end": 0.83
+    },
+    {
+      "word": "vítěze",
+      "start": 0.87,
+      "end": 1.39
+    },
+    {
+      "word": "em",
+      "start": 1.497,
+      "end": 1.71
+    },
+    {
+      "word": "čé",
+      "start": 1.75,
+      "end": 1.95
+    },
+    {
+      "word": "er",
+      "start": 2.003,
+      "end": 2.11
     },
     {
       "word": "stojan",
-      "start": 1.12,
-      "end": 1.494
+      "start": 2.537,
+      "end": 2.99
     },
     {
-      "word": "na",
-      "start": 1.543,
-      "end": 1.643
+      "word": "Revolut",
+      "start": 3.07,
+      "end": 3.55
     },
     {
-      "word": "pruty",
-      "start": 1.693,
-      "end": 2.017
+      "word": "osm",
+      "start": 3.65,
+      "end": 3.95
     },
     {
-      "word": "Black",
-      "start": 2.066,
-      "end": 2.316
+      "word": "od",
+      "start": 4.057,
+      "end": 4.27
     },
     {
-      "word": "Standard",
-      "start": 2.373,
-      "end": 2.838
+      "word": "Gaus",
+      "start": 4.31,
+      "end": 4.59
     },
     {
-      "word": "Edition.",
-      "start": 2.923,
-      "end": 3.511
+      "word": "Holer",
+      "start": 4.63,
+      "end": 4.91
     },
     {
-      "word": "Ručně",
-      "start": 3.635,
-      "end": 3.959
+      "word": "Kastom",
+      "start": 4.99,
+      "end": 5.39
     },
     {
-      "word": "stavěný",
-      "start": 4.019,
-      "end": 4.407
-    },
-    {
-      "word": "v",
-      "start": 4.444,
-      "end": 4.482
-    },
-    {
-      "word": "Česku:",
-      "start": 4.556,
-      "end": 4.93
-    },
-    {
-      "word": "karbon,",
-      "start": 5.079,
-      "end": 5.602
-    },
-    {
-      "word": "hliník,",
-      "start": 5.77,
-      "end": 6.275
-    },
-    {
-      "word": "limitovaná",
-      "start": 6.412,
-      "end": 7.021
-    },
-    {
-      "word": "série.",
-      "start": 7.121,
-      "end": 7.619
+      "word": "Lab.",
+      "start": 5.47,
+      "end": 5.71
     }
   ],
   "word_timestamps_raw": [
@@ -180,96 +174,94 @@
       "end": 0.0
     },
     {
-      "word": "Gausse",
+      "word": "Hlavní",
       "start": 0.0,
-      "end": 0.4
+      "end": 0.32
     },
     {
-      "word": "Holler",
-      "start": 0.48,
+      "word": "cena",
+      "start": 0.384,
+      "end": 0.64
+    },
+    {
+      "word": "pro",
+      "start": 0.7,
       "end": 0.88
     },
     {
-      "word": "–",
-      "start": 0.88,
-      "end": 0.88
+      "word": "vítěze",
+      "start": 0.92,
+      "end": 1.44
     },
     {
-      "word": "stojan",
-      "start": 1.2000000000000002,
-      "end": 1.6
-    },
-    {
-      "word": "na",
-      "start": 1.653,
+      "word": "em",
+      "start": 1.5470000000000002,
       "end": 1.76
     },
     {
-      "word": "pruty",
-      "start": 1.8130000000000002,
+      "word": "čé",
+      "start": 1.8,
+      "end": 2.0
+    },
+    {
+      "word": "er",
+      "start": 2.053,
       "end": 2.16
     },
     {
-      "word": "Black",
-      "start": 2.213,
-      "end": 2.48
+      "word": "–",
+      "start": 2.16,
+      "end": 2.16
     },
     {
-      "word": "Standard",
-      "start": 2.5420000000000003,
+      "word": "stojan",
+      "start": 2.587,
       "end": 3.04
     },
     {
-      "word": "Edition.",
-      "start": 3.13,
-      "end": 3.76
+      "word": "Revolut",
+      "start": 3.12,
+      "end": 3.5999999999999996
     },
     {
-      "word": "Ručně",
-      "start": 3.893,
-      "end": 4.24
+      "word": "osm",
+      "start": 3.6999999999999997,
+      "end": 4.0
     },
     {
-      "word": "stavěný",
-      "start": 4.304,
-      "end": 4.72
+      "word": "od",
+      "start": 4.107,
+      "end": 4.32
     },
     {
-      "word": "v",
-      "start": 4.76,
-      "end": 4.8
+      "word": "Gaus",
+      "start": 4.359999999999999,
+      "end": 4.64
     },
     {
-      "word": "Česku:",
-      "start": 4.88,
-      "end": 5.28
+      "word": "Holer",
+      "start": 4.68,
+      "end": 4.96
     },
     {
-      "word": "karbon,",
-      "start": 5.4399999999999995,
-      "end": 6.0
+      "word": "Kastom",
+      "start": 5.04,
+      "end": 5.4399999999999995
     },
     {
-      "word": "hliník,",
-      "start": 6.18,
-      "end": 6.720000000000001
+      "word": "Lab.",
+      "start": 5.52,
+      "end": 5.76
     },
     {
-      "word": "limitovaná",
-      "start": 6.867,
-      "end": 7.5200000000000005
-    },
-    {
-      "word": "série.",
-      "start": 7.627,
-      "end": 8.16
+      "word": "…",
+      "start": 5.76,
+      "end": 5.76
     },
     {
       "word": "<end>",
-      "start": 8.359183673469389,
-      "end": 8.359183673469389
+      "start": 8.045714285714286,
+      "end": 8.045714285714286
     }
-  ],
-  "tempo": 1.071,
-  "duration_1x_s": 8.359
+  ]
 }

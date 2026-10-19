@@ -1,0 +1,212 @@
+{
+  "key": "troutshop",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": 2,
+  "request_id": "EGvbeb75jECco0m6mXJA",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=fb842358-fbfb-4fca-8436-f025cc690888.wav",
+  "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999.",
+  "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+  "tts_sent": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět. …",
+  "timebase": "seconds in vo/troutshop.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.04,
+  "raw_duration_s": 5.642,
+  "duration_s": 5.603,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -41.3,
+    "kept_trailing_burst": true
+  },
+  "words": [
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.6
+    },
+    {
+      "word": "specialista",
+      "start": 0.9,
+      "end": 1.56
+    },
+    {
+      "word": "na",
+      "start": 1.64,
+      "end": 1.8
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.86,
+      "end": 2.28
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.56,
+      "end": 2.92
+    },
+    {
+      "word": "firma",
+      "start": 2.987,
+      "end": 3.32
+    },
+    {
+      "word": "od",
+      "start": 3.373,
+      "end": 3.48
+    },
+    {
+      "word": "roku",
+      "start": 3.528,
+      "end": 3.72
+    },
+    {
+      "word": "1999.",
+      "start": 3.76,
+      "end": 5.36,
+      "spoken": "devatenáct set devadesát devět."
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.6
+    },
+    {
+      "word": "specialista",
+      "start": 0.9,
+      "end": 1.56
+    },
+    {
+      "word": "na",
+      "start": 1.64,
+      "end": 1.8
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.86,
+      "end": 2.28
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.56,
+      "end": 2.92
+    },
+    {
+      "word": "firma",
+      "start": 2.987,
+      "end": 3.32
+    },
+    {
+      "word": "od",
+      "start": 3.373,
+      "end": 3.48
+    },
+    {
+      "word": "roku",
+      "start": 3.528,
+      "end": 3.72
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.76,
+      "end": 4.36
+    },
+    {
+      "word": "set",
+      "start": 4.38,
+      "end": 4.44
+    },
+    {
+      "word": "devadesát",
+      "start": 4.46,
+      "end": 4.92
+    },
+    {
+      "word": "devět.",
+      "start": 5.0,
+      "end": 5.36
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.64
+    },
+    {
+      "word": "–",
+      "start": 0.64,
+      "end": 0.64
+    },
+    {
+      "word": "specialista",
+      "start": 0.94,
+      "end": 1.6
+    },
+    {
+      "word": "na",
+      "start": 1.6800000000000002,
+      "end": 1.84
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.9000000000000001,
+      "end": 2.3200000000000003
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.6000000000000005,
+      "end": 2.9600000000000004
+    },
+    {
+      "word": "firma",
+      "start": 3.0270000000000006,
+      "end": 3.3600000000000003
+    },
+    {
+      "word": "od",
+      "start": 3.4130000000000003,
+      "end": 3.5200000000000005
+    },
+    {
+      "word": "roku",
+      "start": 3.5680000000000005,
+      "end": 3.7600000000000007
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.8000000000000003,
+      "end": 4.4
+    },
+    {
+      "word": "set",
+      "start": 4.42,
+      "end": 4.48
+    },
+    {
+      "word": "devadesát",
+      "start": 4.5,
+      "end": 4.96
+    },
+    {
+      "word": "devět.",
+      "start": 5.04,
+      "end": 5.4
+    },
+    {
+      "word": "…",
+      "start": 5.4,
+      "end": 5.4
+    },
+    {
+      "word": "<end>",
+      "start": 5.642448979591837,
+      "end": 5.642448979591837
+    }
+  ]
+}

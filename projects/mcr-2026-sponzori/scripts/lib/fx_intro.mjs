@@ -76,11 +76,14 @@ export function photoType(ctx, o) {
   const url = ctx.asset(src);
   const x = ho.x ?? ctx.safe.left, y = ho.y ?? 700, w = ho.w ?? ctx.W - ctx.safe.left - ctx.safe.right, align = ho.align || 'left';
   let css = '';
+  // capital accents (Í Ň Ě Č) rise above the line box; background-clip:text only paints inside the span's box, so without
+  // this headroom the accents came out hollow (stroke only). Padding above + equal negative margin = same layout, taller paint box.
+  const pad = Math.round(H.size * 0.32);
   H.lines.forEach((ln, i) => {
     const lw = ctx.measure(ctx.nb(ln), { font, size: H.size, wght, wdth, upper, tracking });
-    const L = x + (align === 'center' ? (w - lw) / 2 : align === 'right' ? w - lw : 0), T = y + i * H.size * lh;
+    const L = x + (align === 'center' ? (w - lw) / 2 : align === 'right' ? w - lw : 0), T = y + i * H.size * lh - pad;
     const ls = `${ctx.sel(`${ho.id}-l${i}`)}>span`;
-    css += `${ls}{background-image:url(${url});background-size:${ctx.W}px ${ctx.H}px;background-position:${px(-L)} ${px(-T)};filter:${filter}}\n`;
+    css += `${ls}{padding-top:${pad}px;margin-top:-${pad}px;background-image:url(${url});background-size:${ctx.W}px ${ctx.H}px;background-position:${px(-L)} ${px(-T)};filter:${filter}}\n`;
     if (kb) ctx.tl.fromTo(ls, { backgroundPosition: `${px(-L)} ${px(-T)}` }, { backgroundPosition: `${px(-L + kb.dx)} ${px(-T + kb.dy)}`, duration: Math.max(0.1, kb.t1 - kb.t0), ease: 'none' }, kb.t0);
   });
   return { ...H, css };
