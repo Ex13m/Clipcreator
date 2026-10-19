@@ -1,0 +1,25 @@
+[
+ {
+  "file": "libechov/venue/v01_maly_sportacek.jpg",
+  "source": "assets/libechov/maly_sportacek_photo.jpg",
+  "what": "Malý Sporťáček (MČR pond), winter, aerator",
+  "upscaled": null
+ },
+ {
+  "file": "libechov/venue/v02_velky_sportak.jpg",
+  "source": "assets/libechov/velky_sportak.jpg",
+  "what": "Velký Sporťák, winter, calm water",
+  "upscaled": 1.67
+ },
+ {
+  "file": "libechov/venue/v03_trout_in_net.jpg",
+  "source": "assets/libechov/nasazeni_trofejnich_pstruhu.jpg",
+  "what": "trophy brown trout in the net (stocking, 2022)",
+  "upscaled": 1.6
+ },
+ {
+  "file": "libechov/venue/v04_mcr_poster_fit.jpg",
+  "source": "assets/libechov/mcr_news_poster.png",
+  "what": "official MČR 2026 poster (pond photo + cup + 24.–25.10.), full poster on blurred fill; poster centre at y=42 %"
+ }
+]

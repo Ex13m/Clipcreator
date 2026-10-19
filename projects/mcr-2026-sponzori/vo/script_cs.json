@@ -1,0 +1,685 @@
+{
+  "_note": "Česká VO + texty na obrazovku pro MČR 2026 – partneři. Každé tvrzení má zdroj (research/*.md:řádek + URL). vo.cs = psaný text (počítají se limity), vo.tts = text pro TTS (čísla slovy), vo.respell = záložní přepis výslovnosti bez SSML (jen když TTS čte značky špatně).",
+  "meta": {
+    "version": "v1",
+    "date": "2026-10-19",
+    "voice": {
+      "name": "Paul – Broadcaster",
+      "voiceId": "02733a92a0db457aadf63b235d2aa457",
+      "engine": "elevenlabs",
+      "model": "eleven_v3",
+      "language": "cs"
+    },
+    "pace_wps": 2.9,
+    "est_rule": "est_s = spoken_words / 2.9",
+    "vo_offset_s": 0.25,
+    "grid": {
+      "bpm": 120,
+      "beat_s": 0.5,
+      "bar_s": 2.0,
+      "block_bars": 4,
+      "block_s": 8,
+      "source": "syntetická mřížka; po dodání tracku audio/track.beats.json"
+    },
+    "counting": "slova = tokeny oddělené mezerou; pomlčky a „·“ se nepočítají; číslo s nezlomitelnou mezerou (1 300) = 1 slovo",
+    "limits": {
+      "sponsor": 18,
+      "intro": 30,
+      "venue": 24,
+      "finale": 26,
+      "oneliner": 6,
+      "fact": 4
+    },
+    "tone": "prezentační, sebejistý, vřelý, prémiový; ne prodejní"
+  },
+  "rules": {
+    "ta_logo": "Logo TA CZ vidět vždy: pevná plaketa v rohu (safe zóna) v každém bloku i banneru; hero v intru a finále; logo sponzora nikdy větší ani přes naše.",
+    "never_say": [
+      "Malý Sporťáček NENÍ „chyť a pusť“ (od 23. 6. 2026 „chyť a vem“) – libechov.md:110",
+      "„nejníže položené pstruhařství v Evropě“ jen s „donedávna“ – libechov.md:60",
+      "Rozlohu Velkého Sporťáku neuvádět jako 2,5 ha (web uvádí 2,4 i 2,5) – libechov.md:102",
+      "Troutshop: ne „vítězové v SK, CZ, PL i UA“; Velvet Arts/Nories nejsou jeho značky – troutshop.md Verification #3",
+      "Activefishing / Troutshop / Velka-ryba / Bosset: nevydávat cizí značky za vlastní",
+      "Moonky: ne „nejlepší“, ne „8 let“ ve VO (nedatováno) – moonky.md Verification #3",
+      "Jigovky: ne „největší výběr“, „vlastní výroba“, „+1300 druhů“ jako naše tvrzení",
+      "Bosset: nic o původu Zojirushi (bosset.md:75)"
+    ],
+    "banners": "8 s banner = blok s vlastní VO (in 0,25 s, konec ≤ 6,5 s). 6 s loop = bez VO (jen hudba + texty), texty stejné."
+  },
+  "pronunciation": [
+    {
+      "term": "Troutshop",
+      "respell": "traut-šop",
+      "note": "zadání"
+    },
+    {
+      "term": "Activefishing",
+      "respell": "ektiv-fišing",
+      "note": "zadání"
+    },
+    {
+      "term": "Moonky",
+      "respell": "múnky",
+      "note": "zadání"
+    },
+    {
+      "term": "Gausse Holler",
+      "respell": "gaus holer",
+      "note": "zadání"
+    },
+    {
+      "term": "Trout Area",
+      "respell": "traut erija",
+      "note": "jen když v3 čte „trout área“"
+    },
+    {
+      "term": "Trout Area Slovakia",
+      "respell": "traut erija slovakija",
+      "note": ""
+    },
+    {
+      "term": "hard baits",
+      "respell": "hárd bejts",
+      "note": ""
+    },
+    {
+      "term": "Black Standard Edition",
+      "respell": "blek standard edyšn",
+      "note": ""
+    },
+    {
+      "term": "Bosset",
+      "respell": "boset",
+      "note": ""
+    },
+    {
+      "term": "Jigovky / jigy",
+      "respell": "džigovky / džigy",
+      "note": ""
+    },
+    {
+      "term": "Shimano",
+      "respell": "šimano",
+      "note": ""
+    },
+    {
+      "term": "e-shop",
+      "respell": "í-šop",
+      "note": ""
+    }
+  ],
+  "order": [
+    "intro",
+    "venue",
+    "broll1",
+    "troutshop",
+    "activefishing",
+    "broll2",
+    "moonky",
+    "jigovky",
+    "broll3",
+    "velkaryba",
+    "bosset",
+    "broll4",
+    "gausseholler",
+    "finale"
+  ],
+  "blocks": {
+    "intro": {
+      "type": "intro",
+      "block_s": 16,
+      "vo_limit_words": 30,
+      "vo": {
+        "cs": "Mistrovství České republiky v Trout Area 2026. 24. a 25. října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
+        "tts": "Mistrovství České republiky v Trout Area dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
+        "respell": "Mistrovství České republiky v Traut Erija dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hárd bejts. Seznamte se s partnery mistrovství.",
+        "words": 22,
+        "spoken_words": 25,
+        "est_s": 8.6,
+        "in_s": 0.25,
+        "end_s": 8.85,
+        "file": "vo/intro.wav"
+      },
+      "onscreen": {
+        "hero": "TA CZ logo (hero, velké)",
+        "title": [
+          "Mistrovství ČR",
+          "v Trout Area 2026"
+        ],
+        "date": "24.–25. 10. 2026",
+        "place": "Líheň Liběchov",
+        "stats": "40 závodníků · hard baits",
+        "oneliner": "Partneři mistrovství"
+      },
+      "sources": [
+        {
+          "claim": "Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
+          "ref": "BRIEF.md:15; research/mcr_tournament.md:4–5",
+          "url": "https://www.troutareacz.cz/tournaments/6aaaf5fd24c8e2804242764b ; https://www.lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek"
+        },
+        {
+          "claim": "40 závodníků (max 40, obsazeno 40/40), formát hard baits",
+          "ref": "research/mcr_tournament.md:6",
+          "url": "https://www.troutareacz.cz/tournaments/6aaafdd124c8e28042428a49"
+        }
+      ],
+      "notes": [
+        "VO může začít později (např. po 2taktovém nástupu, t = 4,0 s); i tak skončí před 16 s."
+      ]
+    },
+    "venue": {
+      "type": "venue",
+      "block_s": 8,
+      "vo_limit_words": 24,
+      "vo": {
+        "cs": "Hostí nás Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
+        "tts": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+        "respell": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+        "words": 15,
+        "spoken_words": 18,
+        "est_s": 6.2,
+        "in_s": 0.25,
+        "end_s": 6.45,
+        "file": "vo/venue.wav"
+      },
+      "onscreen": {
+        "kicker": "Místo konání",
+        "name": "Líheň Liběchov",
+        "oneliner": "Pstruží líheň od roku 1934",
+        "facts": [
+          "Malý Sporťáček · 24.–25. 10.",
+          "Pramen Boží Voda"
+        ],
+        "extra": [
+          "164 m n. m. + popisek „donedávna nejníže v Evropě“ (jen spolu, nikdy bez „donedávna“)",
+          "90+ let tradice"
+        ],
+        "url": "lihenlibechov.cz"
+      },
+      "sources": [
+        {
+          "claim": "Dějiště MČR, rybník Malý Sporťáček, 24.–25. 10. 2026",
+          "ref": "research/libechov.md:26–28, Verification #1 (ř. 98)",
+          "url": "https://www.lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek"
+        },
+        {
+          "claim": "Pstruží líheň od roku 1934, 90+ let tradice (2026 = 92 let)",
+          "ref": "research/libechov.md:30–32, Verification #2 (ř. 99), opravený one-liner ř. 105",
+          "url": "https://www.lihenlibechov.cz/cs/historie"
+        },
+        {
+          "claim": "Donedávna nejníže položené pstruhařství v Evropě, 164 m n. m.",
+          "ref": "research/libechov.md:34–36, ř. 60 („donedávna“ musí zůstat)",
+          "url": "https://www.lihenlibechov.cz/cs/o-nas"
+        },
+        {
+          "claim": "Pramen Boží Voda",
+          "ref": "research/libechov.md:38–40, Verification #4 (ř. 101)",
+          "url": "https://www.lihenlibechov.cz/cs/o-nas"
+        }
+      ],
+      "notes": [
+        "Základ je pro 8 s blok (content.json: bars 4). Build ořízne VO na konci bloku, takže delší verzi použít jen při bars 5 (10 s).",
+        "NEŘÍKAT „chyť a pusť“ u Malého Sporťáčku (od 23. 6. 2026 „chyť a vem“, libechov.md:110). Neuvádět 2,5 ha."
+      ],
+      "vo_alt": {
+        "label": "venue_10s (5 taktů = 10 s)",
+        "block_s": 10,
+        "cs": "Hostí nás Líheň Liběchov u pramene Boží Voda. Pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
+        "tts": "Hostí nás Líheň Liběchov u pramene Boží Voda. Pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+        "respell": "Hostí nás Líheň Liběchov u pramene Boží Voda. Pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+        "words": 19,
+        "spoken_words": 22,
+        "est_s": 7.6,
+        "end_s": 7.85
+      }
+    },
+    "troutshop": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999 a generální partner Trout Area Slovakia.",
+        "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět a generální partner Trout Area Slovakia.",
+        "respell": "Traut-šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět a generální partner Traut Erija Slovakija.",
+        "words": 15,
+        "spoken_words": 18,
+        "est_s": 6.2,
+        "in_s": 0.25,
+        "end_s": 6.45,
+        "file": "vo/troutshop.wav"
+      },
+      "onscreen": {
+        "name": "Troutshop.eu",
+        "oneliner": "Milujeme lov pstruhů",
+        "facts": [
+          "Rodinná firma od 1999",
+          "Generální partner TA Slovakia"
+        ],
+        "url": "troutshop.eu"
+      },
+      "sources": [
+        {
+          "claim": "„Specialista na pstruhy“ ← „The trout fishing SPECIALIST!“; „Milujeme lov pstruhů“ ← SK hero „Milujeme lov pstruhov“",
+          "ref": "research/troutshop.md:11–12, Verification ř. 95",
+          "url": "https://troutshop.eu/ ; https://troutshop.eu/sk/"
+        },
+        {
+          "claim": "Rodinná firma, v oboru od roku 1999",
+          "ref": "research/troutshop.md:18, Verification #1 (ř. 89)",
+          "url": "https://troutshop.eu/en/about-us/"
+        },
+        {
+          "claim": "Generální partner Trout Area Slovakia",
+          "ref": "research/troutshop.md:20, Verification #2 (ř. 90)",
+          "url": "https://troutshop.eu/pc/spoons/velvet-arts-2/"
+        }
+      ],
+      "notes": [
+        "Nepoužívat „vítězové v SK, CZ, PL i UA“ (Verification #3 ZAMÍTNUTO). Velvet Arts/Nories nejsou vlastní značky Troutshopu."
+      ]
+    },
+    "activefishing": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes 1 300 plandavek a osobní přístup.",
+        "tts": "Activefishing – e-shop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
+        "respell": "Ektiv-fišing – í-šop zrozený z vášně pro přívlač. Přes tisíc tři sta plandavek a osobní přístup.",
+        "words": 13,
+        "spoken_words": 15,
+        "est_s": 5.2,
+        "in_s": 0.25,
+        "end_s": 5.45,
+        "file": "vo/activefishing.wav"
+      },
+      "onscreen": {
+        "name": "Activefishing.cz",
+        "oneliner": "Pro všechny, kdo milují přívlač",
+        "facts": [
+          "1 300+ plandavek",
+          "777 woblerů"
+        ],
+        "url": "activefishing.cz"
+      },
+      "sources": [
+        {
+          "claim": "E-shop vznikl z vášně zakladatele pro přívlač („vášeň“ = přijatelné zesílení „záliby“)",
+          "ref": "research/activefishing.md:27, Verification #2 (ř. 77)",
+          "url": "https://www.activefishing.cz/o-nas/"
+        },
+        {
+          "claim": "Pro všechny, kdo milují přívlač (převyprávěno ve 3. osobě)",
+          "ref": "research/activefishing.md:23, Verification #1 (ř. 76)",
+          "url": "https://www.activefishing.cz/"
+        },
+        {
+          "claim": "Přes 1 300 plandavek (1340 položek k 19. 10. 2026)",
+          "ref": "research/activefishing.md:31, Verification #3 (ř. 78)",
+          "url": "https://www.activefishing.cz/plandavky/"
+        },
+        {
+          "claim": "777 woblerů (k 19. 10. 2026)",
+          "ref": "research/activefishing.md:35, Verification #4 (ř. 79)",
+          "url": "https://www.activefishing.cz/woblery/"
+        },
+        {
+          "claim": "Osobní přístup (benefit na homepage)",
+          "ref": "research/activefishing.md:8, Verification ř. 85",
+          "url": "https://www.activefishing.cz/"
+        }
+      ],
+      "notes": [
+        "Počty 1 300+ / 777 jsou živá čísla k 19. 10. 2026; před finálním renderem ověřit.",
+        "Neříkat „vlastní značka“ ani „jen japonské nástrahy“."
+      ]
+    },
+    "moonky": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
+        "tts": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
+        "respell": "Múnky – ručně dělané gumové nástrahy pro Traut Erija. Vyvíjené a testované s českou reprezentací.",
+        "words": 14,
+        "spoken_words": 14,
+        "est_s": 4.8,
+        "in_s": 0.25,
+        "end_s": 5.05,
+        "file": "vo/moonky.wav"
+      },
+      "onscreen": {
+        "name": "Moonky",
+        "oneliner": "Ručně dělané gumové nástrahy",
+        "facts": [
+          "Vlastní CNC formy",
+          "Vývoj s reprezentací ČR"
+        ],
+        "url": "moonky.cz",
+        "alt_oneliner": "Nástrahy, které pstruzi milují (jen z banneru na fotce u03 od uživatele, na webu není)"
+      },
+      "sources": [
+        {
+          "claim": "Gumové nástrahy pro lov Trout Area",
+          "ref": "research/moonky.md:15, 26–27, Verification #1 (ř. 90)",
+          "url": "https://www.moonky.cz/"
+        },
+        {
+          "claim": "Ručně dělané (HANDMADE LURES)",
+          "ref": "research/moonky.md:17, Verification #5 (ř. 94)",
+          "url": "https://www.moonky.cz/ (banner) + u02"
+        },
+        {
+          "claim": "Vývoj a testování s českou reprezentací (v lovu pstruhů ze břehu)",
+          "ref": "research/moonky.md:23, 31, Verification #3 (ř. 92)",
+          "url": "https://www.moonky.cz/o-nas/"
+        },
+        {
+          "claim": "Vlastní formy na CNC strojích",
+          "ref": "research/moonky.md:21, 29, Verification #2 (ř. 91)",
+          "url": "https://www.moonky.cz/o-nas/"
+        }
+      ],
+      "notes": [
+        "„8 let“ záměrně vynecháno: stránka není datovaná, číslo může být zastaralé (Verification #3).",
+        "Neříkat „nejlepší nástrahy“ (superlativ = marketing)."
+      ]
+    },
+    "jigovky": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od 0,4 gramu, poctivě vyrobené v Česku.",
+        "tts": "Jigovky – jigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
+        "respell": "Džigovky – džigy, které chytají. Bezprotihrotové hlavičky od nula celá čtyři gramu, poctivě vyrobené v Česku.",
+        "words": 13,
+        "spoken_words": 15,
+        "est_s": 5.2,
+        "in_s": 0.25,
+        "end_s": 5.45,
+        "file": "vo/jigovky.wav"
+      },
+      "onscreen": {
+        "name": "Jigovky.cz",
+        "oneliner": "Jigy, které chytají!",
+        "facts": [
+          "Barbless 0,4–3 g",
+          "Poctivě vyrobeno v ČR"
+        ],
+        "url": "jigovky.cz"
+      },
+      "sources": [
+        {
+          "claim": "„Jigy, které chytají!“ (slogan v logu)",
+          "ref": "research/jigovky.md:10",
+          "url": "https://www.jigovky.cz/ (logo)"
+        },
+        {
+          "claim": "Bezprotihrotové TroutJigy 0,4–3 g",
+          "ref": "research/jigovky.md:23",
+          "url": "https://www.jigovky.cz/jig-trout/"
+        },
+        {
+          "claim": "Poctivě vyrobeno v ČR (USP ikona v HTML homepage)",
+          "ref": "research/jigovky.md:21, 67",
+          "url": "https://www.jigovky.cz/"
+        }
+      ],
+      "notes": [
+        "„Největší výběr“, „vlastní výroba“, „+1300 druhů“ nepoužito (vlastní superlativ / jen text v obrázku banneru).",
+        "jigovky.md zatím nemá sekci Verification."
+      ]
+    },
+    "velkaryba": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Shimano vyzkoušíte přímo u vody.",
+        "tts": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Shimano vyzkoušíte přímo u vody.",
+        "respell": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Šimano vyzkoušíte přímo u vody.",
+        "words": 16,
+        "spoken_words": 16,
+        "est_s": 5.5,
+        "in_s": 0.25,
+        "end_s": 5.75,
+        "file": "vo/velkaryba.wav"
+      },
+      "onscreen": {
+        "name": "Velka-ryba.cz",
+        "oneliner": "Vše na přívlač",
+        "facts": [
+          "Olomouc · od 2011",
+          "Shimano Rod Test Center"
+        ],
+        "url": "velka-ryba.cz"
+      },
+      "sources": [
+        {
+          "claim": "„Vše na přívlač“ (title/H1), „přívlačová speciálka“ (logo)",
+          "ref": "research/velkaryba.md:6",
+          "url": "https://www.velka-ryba.cz/"
+        },
+        {
+          "claim": "Olomouc, e-shop i prodejna",
+          "ref": "research/velkaryba.md:26",
+          "url": "https://www.velka-ryba.cz/"
+        },
+        {
+          "claim": "Od roku 2011",
+          "ref": "research/velkaryba.md:29",
+          "url": "https://www.velka-ryba.cz/cs/content/48-o-nas"
+        },
+        {
+          "claim": "Shimano Rod Test Center: pruty si půjčíte a vyzkoušíte u vody (od 2025)",
+          "ref": "research/velkaryba.md:35",
+          "url": "https://www.velka-ryba.cz/cs/content/48-o-nas"
+        }
+      ],
+      "notes": [
+        "„Nejdéle provozovaná speciálka“ nepoužito (platí jen s celou výhradou o e-shopu i prodejně).",
+        "velkaryba.md zatím nemá sekci Verification."
+      ]
+    },
+    "bosset": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
+        "tts": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
+        "respell": "Ceny pro vítěze věnuje Boset – termosky, které udrží nápoj horký i studený až šest hodin.",
+        "words": 15,
+        "spoken_words": 15,
+        "est_s": 5.2,
+        "in_s": 0.25,
+        "end_s": 5.45,
+        "file": "vo/bosset.wav"
+      },
+      "onscreen": {
+        "name": "Bosset.cz",
+        "oneliner": "Ceny pro vítěze",
+        "facts": [
+          "Termosky 0,5–0,7 l",
+          "Horké až 6 hodin"
+        ],
+        "url": "bosset.cz"
+      },
+      "sources": [
+        {
+          "claim": "Termosky Bosset 0,5–0,7 l jako ceny (rozhodnutí uživatele)",
+          "ref": "BRIEF.md:11",
+          "url": "—"
+        },
+        {
+          "claim": "Horké i studené až 6 hodin (vakuová izolace)",
+          "ref": "research/bosset.md:33, 42, 53–54",
+          "url": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-green/"
+        },
+        {
+          "claim": "Rozsah 0,5–0,7 l: skladem 0,52 l a 0,6 l",
+          "ref": "research/bosset.md:13",
+          "url": "https://www.bosset.cz/termosky/"
+        }
+      ],
+      "notes": [
+        "„až 6 hodin“ platí pro modely 0,6 l (SM-SR/VB/SHE/SF) i pro 0,52 l SW-KA (jídlo, 6 h). Předpoklad: ceny jsou z řady termosek na bosset.cz.",
+        "Neříkat nic o původu Zojirushi (bosset.md:75). bosset.md zatím nemá sekci Verification."
+      ]
+    },
+    "gausseholler": {
+      "type": "sponsor",
+      "block_s": 8,
+      "vo_limit_words": 18,
+      "vo": {
+        "cs": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+        "tts": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+        "respell": "Gaus Holer – stojan na pruty Blek Standard Edyšn. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
+        "words": 16,
+        "spoken_words": 16,
+        "est_s": 5.5,
+        "in_s": 0.25,
+        "end_s": 5.75,
+        "file": "vo/gausseholler.wav"
+      },
+      "onscreen": {
+        "name": "Gausse Holler",
+        "oneliner": "Stojan na pruty Black Standard Edition",
+        "facts": [
+          "Ručně stavěno v Česku",
+          "Série 5 kusů · číslováno"
+        ],
+        "url": "gausseholler.com",
+        "extra": [
+          "Revolut 8 (malý popisek u produktu)",
+          "8 karbonových tubusů"
+        ],
+        "mark": "MADE BY ⚙ © 2026 Gausse Holler"
+      },
+      "sources": [
+        {
+          "claim": "Stojan Black Standard Edition = Revolut 8 Standard Edition, varianta Black",
+          "ref": "BRIEF.md:12; research/gausseholler.md:80",
+          "url": "https://gausseholler.com/products/rod-stand-v2"
+        },
+        {
+          "claim": "Ručně stavěné v Česku; karbon, hliník, limitovaná série",
+          "ref": "research/gausseholler.md:11–13, 21–23",
+          "url": "https://gausseholler.com/"
+        },
+        {
+          "claim": "Série pěti kusů, každý číslovaný",
+          "ref": "research/gausseholler.md:29",
+          "url": "https://gausseholler.com/products/rod-stand-v2"
+        },
+        {
+          "claim": "8 karbonových tubusů na radiálních hliníkových ramenech",
+          "ref": "research/gausseholler.md:13, 27",
+          "url": "https://gausseholler.com/"
+        },
+        {
+          "claim": "Autorská značka „MADE BY ⚙ © 2026 Gausse Holler“",
+          "ref": "BRIEF.md:12; research/gausseholler.md:17",
+          "url": "—"
+        }
+      ],
+      "notes": [
+        "gausseholler.md zatím nemá sekci Verification."
+      ]
+    },
+    "finale": {
+      "type": "finale",
+      "block_s": 16,
+      "vo_limit_words": 26,
+      "vo": {
+        "cs": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – 24. a 25. října, Líheň Liběchov. Uvidíme se u vody.",
+        "tts": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Trout Area – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
+        "respell": "Děkujeme všem partnerům za podporu. Mistrovství České republiky v Traut Erija – čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Uvidíme se u vody.",
+        "words": 21,
+        "spoken_words": 21,
+        "est_s": 7.2,
+        "in_s": 0.25,
+        "end_s": 7.45,
+        "file": "vo/finale.wav"
+      },
+      "onscreen": {
+        "thanks": [
+          "Děkujeme",
+          "partnerům"
+        ],
+        "wall": "Líheň Liběchov · Troutshop.eu · Activefishing.cz · Moonky · Jigovky.cz · Velka-ryba.cz · Bosset.cz · Gausse Holler (žádné větší než TA)",
+        "hero": "TA CZ logo (velké)",
+        "event": "Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
+        "closer": "Uvidíme se u vody",
+        "mark": "MADE BY ⚙ © 2026 Gausse Holler"
+      },
+      "sources": [
+        {
+          "claim": "Název, datum a místo MČR",
+          "ref": "BRIEF.md:15; research/mcr_tournament.md:4–5",
+          "url": "https://www.troutareacz.cz/tournaments/6aaaf5fd24c8e2804242764b"
+        },
+        {
+          "claim": "Diváci mohou přijít 24.–25. 10. (opora pro „Uvidíme se u vody“)",
+          "ref": "research/libechov.md:7, 28",
+          "url": "https://www.lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek"
+        },
+        {
+          "claim": "Značka MADE BY ⚙ © 2026 Gausse Holler",
+          "ref": "BRIEF.md:12",
+          "url": "—"
+        }
+      ],
+      "notes": [
+        "VO lze rozdělit na 2 soubory: A „Děkujeme všem partnerům za podporu.“ (≈ 1,7 s) a B zbytek. Mezera mezi nimi pro výkřik „Trout Area!“ z hudby."
+      ]
+    },
+    "broll1": {
+      "type": "broll",
+      "block_s": 2,
+      "vo": null,
+      "onscreen": {
+        "note": "bez textu; TA plaketa zůstává"
+      },
+      "notes": [
+        "jen hudba, bez VO"
+      ]
+    },
+    "broll2": {
+      "type": "broll",
+      "block_s": 2,
+      "vo": null,
+      "onscreen": {
+        "note": "bez textu; TA plaketa zůstává"
+      },
+      "notes": [
+        "jen hudba, bez VO"
+      ]
+    },
+    "broll3": {
+      "type": "broll",
+      "block_s": 2,
+      "vo": null,
+      "onscreen": {
+        "note": "bez textu; TA plaketa zůstává"
+      },
+      "notes": [
+        "jen hudba, bez VO"
+      ]
+    },
+    "broll4": {
+      "type": "broll",
+      "block_s": 2,
+      "vo": null,
+      "onscreen": {
+        "note": "bez textu; TA plaketa zůstává"
+      },
+      "notes": [
+        "jen hudba, bez VO"
+      ]
+    }
+  }
+}

@@ -1,0 +1,257 @@
+[
+ {
+  "file": "broll/br01_fight_splash.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261003-WA0018.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.42,
+   0.5
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "fish fighting at the bank, splash",
+  "event": "H-BATTLE 2026, Hofer Lake SK",
+  "duotone_navy": "broll/duo_navy/br01_fight_splash.jpg"
+ },
+ {
+  "file": "broll/br02_netting_sunrays.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261004-WA0019.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.52,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "netting a trout, sun rays over the lake",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br02_netting_sunrays.jpg"
+ },
+ {
+  "file": "broll/br03_fish_in_net.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0032.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.42,
+   0.5
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "trout in the landing net, unhooking",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br03_fish_in_net.jpg"
+ },
+ {
+  "file": "broll/br04_net_with_fish.jpg",
+  "source": "hb-battle-2026/02_SELECT/refs_2026-10-03/p_green_fish.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.42,
+   0.42
+  ],
+  "zoom": 1.25,
+  "upscaled": null,
+  "moment": "angler lifts net with trout (finger blur at bottom cropped out)",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br04_net_with_fish.jpg"
+ },
+ {
+  "file": "broll/br05_reeling_portrait.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0051.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.55,
+   0.5
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "angler reeling, spinning reel close",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br05_reeling_portrait.jpg"
+ },
+ {
+  "file": "broll/br07_landing_rod_up.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0080.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.55,
+   0.52
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "rod raised, landing the fish",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br07_landing_rod_up.jpg"
+ },
+ {
+  "file": "broll/br08_landing_ripples.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261002-WA0042.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.62,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "trout slides into the net, ripples",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br08_landing_ripples.jpg"
+ },
+ {
+  "file": "broll/br09_landing_rods_flare.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261003-WA0021.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.55,
+   0.6
+  ],
+  "zoom": 1.15,
+  "upscaled": null,
+  "moment": "netting next to a rack of rods, morning flare",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br09_landing_rods_flare.jpg"
+ },
+ {
+  "file": "broll/br10_lake_mist.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/FB_IMG_1790972317861.jpg",
+  "source_size": [
+   1620,
+   1080
+  ],
+  "crop_focus": [
+   0.56,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": 1.78,
+  "moment": "morning mist on the lake (atmosphere)",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br10_lake_mist.jpg"
+ },
+ {
+  "file": "broll/br11_lake_sunflare.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261004-WA0010.jpg",
+  "source_size": [
+   4032,
+   3024
+  ],
+  "crop_focus": [
+   0.47,
+   0.5
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "lake panorama, sun flare (atmosphere)",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br11_lake_sunflare.jpg"
+ },
+ {
+  "file": "broll/br12_keepnet_trout.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0036.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.55,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "trout school in the holding pen",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br12_keepnet_trout.jpg"
+ },
+ {
+  "file": "broll/br13_lure_check.jpg",
+  "source": "hb-battle-2026/02_SELECT/refs_2026-10-03/p_tying_young.jpg",
+  "source_size": [
+   3840,
+   5120
+  ],
+  "crop_focus": [
+   0.55,
+   0.5
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "young angler rigging a lure, autumn trees",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br13_lure_check.jpg"
+ },
+ {
+  "file": "broll/br14_crouch_net.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0072.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.62,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "crouched angler with net and rod at the edge",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br14_crouch_net.jpg"
+ },
+ {
+  "file": "broll/br15_net_splash.jpg",
+  "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261002-WA0040.jpg",
+  "source_size": [
+   3024,
+   4032
+  ],
+  "crop_focus": [
+   0.45,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "fish splashing in the net",
+  "event": "H-BATTLE 2026",
+  "duotone_navy": "broll/duo_navy/br15_net_splash.jpg"
+ },
+ {
+  "file": "broll/br16_dock_gear.jpg",
+  "source": "klonowiec-2026/01_RAW/photos_d1/d1_09.jpg",
+  "source_size": [
+   4032,
+   2268
+  ],
+  "crop_focus": [
+   0.4,
+   0.55
+  ],
+  "zoom": 1.0,
+  "upscaled": null,
+  "moment": "rods, tackle box and net on the dock (no faces)",
+  "event": "Klonówiec 2026, PL",
+  "duotone_navy": "broll/duo_navy/br16_dock_gear.jpg"
+ }
+]

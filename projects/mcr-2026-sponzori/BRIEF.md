@@ -16,7 +16,7 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 
 ## Sponzoři (pořadí zatím neurčeno)
 Troutshop.eu · Activefishing.cz · Moonky · Jigovky.cz · Velka-ryba.cz · Gausse Holler (Igor) · Bosset.cz · Líheň Liběchov (místo konání)
-Otevřené: Fandovy plandavky (přes Luboše) — sponzor ano/ne?
+Fandovy plandavky: NE (rozhodnutí uživatele) — nezařazovat.
 
 ## Chybí
 - Moonky: web nemají → FB stránka (ruční výroba gumových nástrah, „Handmade lures“), logo vyříznuto z FB; fotky nástrah dodány (assets/moonky/u01–u05), viz research/moonky_user.md.

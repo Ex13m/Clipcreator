@@ -79,3 +79,38 @@ Snap 8 SE `4077cb8fe5244d59a60e96d6ffb5dd7f`, Army Green `b5907b102594415d8a73a5
 ## Poznámky k použití ve filmu
 - „Black Standard Edition“ = **Revolut 8 — Standard Edition, varianta Black** (černý elox, černé karbonové tubusy, oranžové logo). Hlavní záběr je `p05_revolut8_panel_hero.jpg` (nejvyšší rozlišení) nebo `p01`; pro 9:16 je `p03_revolut8_black_side.jpg`.
 - Logo je ve třech vrstvách. Na webu se prstenec (`gh-logo__ring`) animuje samostatně, takže ve filmu se dá točit ring kolem statického jádra a pak odkrýt wordmark.
+
+## Verification (adversarial check, 2026-10-19)
+Znovu staženo přes bridge: https://gausseholler.com/, https://gausseholler.com/products/rod-stand-v2, https://gausseholler.com/products.json. Soubory otevřeny přes PIL a vizuálně zkontrolovány.
+
+### Fakta
+| # | Fakt (CZ) | Verdikt | Důvod |
+|---|---|---|---|
+| 1 | Stojany na pruty ručně stavěné v Česku: karbon, hliník, limitovaná série. | OK | Hero homepage doslova „Hand-built rod stands. Carbon, aluminium, limited series.“ Citace sama Česko neobsahuje, to je z lišty oznámení na téže stránce („hand-built in Czechia“). |
+| 2 | Gausse Holler Custom Lab: ruční výroba v Česku, dodání po celé EU. | OK | Lišta oznámení doslova na homepage i na stránce produktu. |
+| 3 | Revolut 8 je druhá generace stojanu Gausse Holler, stavěná pro **závody** v trout area. | **ZAMÍTNUTO** | Zdroj říká „for trout area **sessions**“, ne závody ani soutěže. „Stavěná pro závody“ je přikrášlení. Opraveno: „Revolut 8 je druhá generace stojanu Gausse Holler pro rybaření na trout area.“ |
+| 4 | Osm karbonových tubusů na radiálních hliníkových ramenech. | OK | Homepage doslova (panel Revolut 8). Totéž stojí v popisu produktu. |
+| 5 | Limitovaná série pěti kusů, každý stojan je číslovaný. | OK | Stránka produktu doslova: „Series / Limited series of five. Each stand is numbered.“ Stejná věta je u Snap 8 a u edic Black & White, Grey Arms a Nevergreen (platí tedy pro každou edici zvlášť). |
+
+- **One-liner:** „karbonové stojany“ je zjednodušení, protože stojan je z karbonu, eloxovaného hliníku a 3D tištěného PETG-HF. Opraveno: „Česká dílna, která ručně staví stojany na pruty z karbonu a hliníku pro trout area.“
+- **Slogan** „Hand-built rod stands. Carbon, aluminium, limited series.“ je ověřený doslova.
+- **Oprava v sekci rezervních faktů výše:** Revolut 8 SE má na stránce produktu **8** variant hliníku (Black, Blue, Orange, Red, Purple, Tiffany, **Light Green, Bronze**), ne 6. Homepage přitom píše „Five colourways“. Web si odporuje, proto počet barev ve filmu neuvádět.
+- **Barvy:** #0F1113, #16191C, #282D33, #E9E6E2 a #7FB2C7 jsou ověřené v CSS webu (--color-background, --color-border, --color-foreground, --color-primary). #1D8FD5 odpovídá vrstvě ring. #F0904F je odhad.
+
+### Soubory
+| Soubor | Verdikt | Poznámka |
+|---|---|---|
+| `p05_revolut8_panel_hero.jpg` 2752×1536 | OK, hero | Render Revolut 8 Black. URL je v HTML homepage. Ve spodních rozích světlá podlaha (~#C5C0BA), pozadí tedy není jednolitě tmavé. |
+| `p01_revolut8_black_hero.jpg` 2048×1143 | Duplikát | Totožný render jako p05 (průměrný rozdíl 0,35/255), jen menší. Nepoužívat zvlášť. |
+| `p02_revolut8_black_threeq.jpg` 2048×1529 | OK, hero | Render ze 3/4, oranžová loga na madle i ose. |
+| `p03_revolut8_black_side.jpg` 1529×2048 | OK pro 9:16, s výhradou | **Není to render, ale fotka** reálného kusu: na dílech jsou vidět vrstvy 3D tisku a logo na madle je bledě broskvové, ne sytě oranžové. Při střihu s rendery bude vypadat jinak. |
+| `p04_revolut8_black_top.jpg` 2048×2048 | OK, hero | Pohled shora, hvězdice ramen. Ideální na rotaci a zoom. |
+| `p06_snap8_black_hero.jpg` 2048×1529 | OK, s výhradou | Snap 8, spíš retušovaná fotka než render. Na karbonu a nápisech na nohách jsou stopy AI upscalu. Nedělat extrémní detail. |
+| `p07_aluset_revolut8_orange.jpg` 2048×1529 | Jen detail/b-roll | Sada náhradních dílů (Aluminium Set), ne stojan. Na hero se nehodí. |
+| `p08_revolut8_black_white_hero.jpg` 2048×1529 | OK jako sekundární | Bílé díly jsou přepálené do čisté bílé a logo na ose je rozmazané. |
+| `v01_revolut8_standard_reel.mp4` 606×1080, 13,6 s | Jen b-roll/reference | Oficiální reel (ověřen na stránce produktu). Pro 1080×1920 je nízké rozlišení (upscale ×1,78) a má vypálené titulky i logo. |
+| `logo.png` 1200×1139 RGBA | OK | Správné logo (ozubené kolo s klíčem a „GAUSSE HOLLER / CUSTOM LAB“), čitelné. Je přesně složené ze 3 vrstev z hlavičky webu (gh-logo__ring ověřen v HTML). Průhledné pozadí, světlý text, takže jen na tmavý podklad. |
+
+- Žádný produktový soubor nemá průhledné pozadí.
+- Tvrzení „every product image is a render“ neplatí, p03 a p06 jsou fotky.
+- Nestaženo, ale použitelné: hero video homepage „Gausse Holler rod stands presentation“ (`66e3d79b827e4bfeb44a1bba817099a4`).

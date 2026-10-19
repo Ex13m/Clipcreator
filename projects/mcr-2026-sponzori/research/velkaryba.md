@@ -82,3 +82,40 @@ Notes:
 - The p02 packshot embosses "CE 4.5g" on the spoon. That is the image the shop uses for this product listing.
 - PrestaShop original-image pattern: `/img/p/<digits of id split by />/<id>.jpg`. The listings use `<id>-home_default/<slug>.jpg` at small size.
 - All files are in `projects/mcr-2026-sponzori/assets/velkaryba/`. The Drive copies are in folder 1VlabddjjydMD4Mpkg2Utd7K4-hYxb5JT.
+
+## Verification (adversarial re-check, 2026-10-19)
+
+Method: every source page was re-fetched through the WebHook bridge (homepage, O nás, 1874-cardiff-roll-swimmer, 1616-plandavky-berkley, 1722-plandavky-na-pstruhy, the Power Flail product page and the theme CSS). Quotes were matched in the extracted page text, and every asset was opened with PIL and viewed.
+
+### Facts
+| # | Verdict | Notes |
+|---|---|---|
+| 1 | OK | The quote appears verbatim on the homepage (H1 block under "VELKA-RYBA.CZ - vše na přívlač"). That quote does not mention a "kamenná prodejna". The store is confirmed by the O nás page ("e-shop i kamennou prodejnu") and by the footer ("Naše prodejna Olomouc"). |
+| 2 | OK, with a flag | The quote is verbatim on O nás. **Self-claimed superlative** ("nejdéle provozovaná … v ČR"), which cannot be checked independently and is narrowed to shops with both an e-shop and a store. If it goes on screen, keep the qualifier or attribute it to the shop ("podle vlastních slov"). The safer line is "Od roku 2011". |
+| 3 | OK, with a flag | The quote is verbatim on O nás. The "30+ let" is the team's personal fishing experience, **not** the shop's age (the shop dates from 2011). Do not put "30 let" next to the shop name in a way that suggests the shop is 30 years old. |
+| 4 | OK | The quote is verbatim on O nás ("Od roku 2025 … SHIMANO ROD TEST CENTER … půjčit si … pruty Shimano … vyzkoušet přímo u vody"). The rental is at the Olomouc store. |
+| 5 | OK | The quote is verbatim on category 1874 (the site's own grammar error "pro pstruhů" is kept in the quote). This is Shimano's product description repeated by the shop, so it says nothing distinctive about the sponsor. Category 1722 "Plandavky na pstruhy" exists under Programy > Lov pstruhů and lists Illex Native Spoon and Daiwa Presso ADM ("Všestranná pstruhová plandavka"). |
+| 6 | OK, weak | The quote is verbatim (category meta and description of 1616). It is Berkley's manufacturer copy ("pět nových typů"), but the category currently lists **only 1 product** (Berkley SUKOSHI 3,5 g Splat Pel). Low value as a headline. Prefer facts 1, 2 and 4. |
+
+### Slogan, colors, one-liner
+- "Vše na přívlač" is confirmed (homepage title "Vše na přívlač \| VELKA-RYBA.CZ" and the H1). "PŘÍVLAČOVÁ SPECIÁLKA" is confirmed in the logo and in the category page titles ("… \| Přívlačová speciálka - VELKA-RYBA.CZ").
+- Colors are confirmed. The logo's opaque pixels are dominated by #143D6B, then #FFFFFF and #2F2F2F/#231F20. In the theme CSS, #183C6B is the most used brand color (40 uses). #DA0F00 is used for prices and `.label-danger`. #0F2541 appears in the homepage inline styles.
+- The one-liner "Přívlačová speciálka z Olomouce – e-shop i prodejna od roku 2011" is supported by the O nás page and the homepage.
+
+### Logo
+- `logo.png` (798×369 RGBA, 65% transparent) is the correct brand logo and is legible. **Issue:** the fish interior is fully transparent, and the fish outline and the "PŘÍVLAČOVÁ SPECIÁLKA" tagline are charcoal #2F2F2F/#231F20. On a dark or navy background they disappear, and only the white-filled "Velká ryba.cz" lettering stays readable. Use the logo on a light or white plate (or `logo_facebook.png`), or recolor the charcoal parts to white for dark scenes.
+- `logo_facebook.png` (798×417) is the same logo flattened on white (RGBA, alpha fully opaque).
+
+### Products (all confirmed as listed on velka-ryba.cz with matching image ids)
+All of them are **third-party brand packshots** (Shimano, Daiwa, Illex, Berkley). The sponsor is a retailer with no own lure brand, so any on-screen text must not imply that Velká ryba makes them. All are JPEG RGB on pure #FFFFFF with no alpha, so background removal is needed. Crops are tight (margins of about 1–20 px).
+| File | Verdict | Notes |
+|---|---|---|
+| p01 Cardiff Roll Swimmer CE Orange Gold (1000×748) | usable | Back and front views with "BACK"/"FRONT" text labels; crop the labels out. Image id 31312 matches the category listing. |
+| p02 Cardiff Roll Swimmer Camo 2,5g Military Pink (1000×741) | usable, with a caveat | BACK/FRONT labels. The spoon shown is **embossed "CE 4.5g"**, but the listing name says Camo **2,5 g**. Do not caption it with the gramáž. Image id 32441 matches the listing. |
+| p03 Cardiff Roll Swimmer CE Lime Gold (1000×750) | usable | BACK/FRONT labels; crop them out. |
+| p04 Daiwa Presso ADM 2,2 g Manhattan (928×1000) | usable | Clean, two views. Listed in 1722 (id 33507). |
+| p05 Illex Native Spoon 2,5 g Pink Yamame (894×1000) | usable | Clean single spoon. A few small paint specks are visible near the lower edge of the body (id 26067). |
+| p06 Illex Native Spoon 3,5 g Copper Trout (904×1000) | usable | Clean (id 26071). |
+| p07 Berkley SUKOSHI 3,5 g Splat Pel (1000×605) | usable, minor | The hook bend touches or clips the bottom image edge (row 604). Leave room or mask it in a cut-out. |
+| p08 Berkley Power Flail 5 cm Trout Pellet (1000×348) | secondary only | A real product (id 34444; page says "vhodné na pstruhy, okouny, parmy", garlic scent). Dull brown, wide strip, weak as a hero shot. |
+| p09 Daiwa Presso ADM 3,8 g Flashing Green (962×1000) | usable | Clean, two views (id 33516). |

@@ -80,3 +80,48 @@ Produktové fotky jsou ORIGINÁLY (Shoptet `/user/shop/orig/`) na **bílém (nep
 Další soubory ve složce (nestahoval jsem je já, jsou od uživatele / z FB): `logo_from_fb.png`, `fb_screen_profile.png`, `u01–u05_*.jpg` (viz moonky_user.md).
 
 Další obrázky na webu, které by se daly dotáhnout: `user/banners/moonky.jpg`, `user/banners/moonky_2_(1).jpg` (1680×550, další bannery homepage), miniatury kategorií `user/categories/thumb/*` (Gamer, Kukla, Long Worm, Sweet, Worm, jigové hlavičky „hands_*“), Instagram feed `user/system/instagram/658_*.jpg`.
+
+## Verification (adversarial check, 2026-10-19)
+Re-fetched through the bridge: https://www.moonky.cz/, https://www.moonky.cz/o-nas/ and https://www.moonky.cz/gumove-nastrahy/. Each quote below was found by text extraction from the fetched HTML.
+
+### Facts
+| # | Fact (CZ) | Verdict | Why |
+|---|---|---|---|
+| 1 | Speciální gumové nástrahy pro lov Trout Area. | **OK** | Exact text in the header info bar `div.site-msg.information`, a link to /gumove-nastrahy/, on the homepage. It is a site message bar, not a formal tagline, but the wording is the brand's own. |
+| 2 | Od návrhu až po vlastní formy na CNC strojích. | **OK** | Verbatim on /o-nas/ (also in the homepage meta description). The CNC part refers to the moulds, and the CZ fact says exactly that. |
+| 3 | Už 8 let vyvíjí a testuje nástrahy s českou reprezentací v lovu pstruhů ze břehu. | **OK, with a caveat** | Verbatim on /o-nas/: „Již 8 let úzce spolupracujeme s českou reprezentací … podílejí na vývoji a testování produktů“. The page is undated, so „8 let“ may be stale; use it as their claim. The marketing tail („proto jsou naše nástrahy výjimečné…“) was correctly left out. |
+| 4 | Moderní guma bez ftalátů a škodlivých změkčovadel. | **OK** | Verbatim on /o-nas/. This is the brand's own claim with no certification cited; don't present it as independently tested. |
+| 5 | Ručně dělané nástrahy, testované na stojatých i tekoucích vodách. | **OK, with a caveat** | The testing part is verbatim on /o-nas/. The source says „ručně gumové nástrahy“, a typo with no verb. „Ručně dělané“ is supported by „HANDMADE LURES“ on the homepage banner image (banner_pc.png, viewed) and on the jar caps in user photo u02. The hype phrase „s extrémní účinností ve všech podmínkách“ was correctly left out. |
+
+One-liner: **OK**. Corrected wording: „Český výrobce ručně dělaných gumových nástrah pro lov pstruhů a Trout Area.“ The site has no literal „český/česká výroba“ text. Czech origin rests on the .cz shop, the Czech-language site and phone number, the cooperation with the Czech national team, and the Czech flag plus 859 (CZ) EAN prefix on the jar labels in u02.
+
+Slogans:
+- „Nejlepší gumové nástrahy pro lov pstruhů“ (title/H1) is verified. It is a superlative, so treat it as marketing and don't state it as fact.
+- „Nástrahy, které pstruzi milují“ is not on the site; it comes only from the user photo.
+
+### Products
+All 9 Shoptet image IDs (2083, 2188, 1831, 2437, 2521, 2032, 1996, 2146, 2305) appear on the homepage product list. Their alt text or product titles match the names given (2521 is „Master C05 White - Cheese (10ks)“, 2305 is „Coccon 42mm DC04 Yellow/Orange fluo - Olihen(8ks)“). p10 is the og:image of /gumove-nastrahy/. Every file was opened in PIL and viewed.
+
+| File | Size | BG | Verdict |
+|---|---|---|---|
+| p01_savory_c06_green_crop.png | 2129×770, lure ≈1890 px | pure white #FFF | usable |
+| p02_coccon_c02_orange_fluo_crop.png | 1041×691, lure ≈925 px (from a 1200 px JPEG) | white | usable; the colour photographs as pale apricot, not punchy fluo |
+| p03_scelet_c01_pink_bubblegum_crop.png | 1200×539, lure ≈1100 px (JPEG) | white | usable; the left margin is only ~25 px |
+| p04_coccon_jr_c04_black_crop.png | 2484×1561, lure ≈2140 px | white | usable (best contrast for cutout) |
+| p05_master_c05_white_crop.png | 2545×1243, lure ≈2280 px | white | usable, but a white lure on white makes the cutout hard: check the mask by hand |
+| p06_savory_c01_pink_bubblegum_crop.png | 2188×1086, lure ≈2010 px | white | usable; the tail sits ~10 px from the left edge (the original is just as tight), so pad before cutout |
+| p07_scelet_jr_c08_coffee_milk_crop.png | 1074×574, lure ≈955 px (JPEG) | white | usable |
+| p08_savory_dc03_brown_orange_crop.png | 2187×1900, lure ≈1980 px | white | usable |
+| p09_coccon_dc04_yellow_orange_crop.png | 1277×889, lure ≈1120 px (JPEG) | white | usable |
+| p10_gumove_nastrahy_category.png | 1024×768, lure 845×223 | **transparent** | usable; a real lure photo cut out, but the model and colour are not named |
+| banner_pc.png | 1680×550 | opaque | not a product. It is a team photo with the MOONKY HANDMADE LURES banner, fine for an atmosphere or B-roll still. Below 1920 px, so it needs upscaling for a full-HD background. |
+
+The „~8 % margin“ claim does not hold horizontally for p03 and p06, because the crops are limited by the original frame width.
+
+### Logo and colours
+- logo.png is the correct brand mark. It matches the og:image, the banner and the jar caps. It is pure white on transparent, and the visible content is 825×210 px. It is legible on dark backgrounds and invisible on white. The web version has no „HANDMADE LURES“ subline; the FB and packaging lock-up does.
+- `#000000` and `#E2E2E2` are verified as Shoptet template variables (--color-primary and --color-tertiary).
+- `#6883BA` is verified, but only as the desktop-only (`min-width: 992px`) custom body background. It is a weak brand signal.
+- The brand's own colour on its physical items (banner, jar caps) is a dark navy close to `#141C24`. Use that plus white as the primary pair.
+- The not-verified parts of the notes (moonky.eu DNS and the moonky.com parking page) were not re-checked; they don't matter for the film.
+- BRIEF.md line 22 („web nemají“) is confirmed wrong: www.moonky.cz is live.

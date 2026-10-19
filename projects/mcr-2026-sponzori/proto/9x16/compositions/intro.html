@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>intro · MČR 2026 blok</title></head>
+<body><template>
+<div id="b-intro" data-composition-id="intro" data-width="1080" data-height="1920" data-duration="16.000">
+  <div id="bw-intro" class="blk intro">
+        <div class="ibg" id="intro-bg"><div class="ibi" id="intro-bgi"><img class="im" src="assets/broll/p_lake_mist.jpg" alt="" style="object-fit:cover; object-position:50% 60%;"></div></div>
+        <div class="ph" id="intro-p0"><div class="ln k"><span>uvádí</span></div></div>
+        <div class="ph" id="intro-p1">
+          <div class="ln a"><span>Mistrovství</span></div>
+          <div class="ln b"><span>ČR</span></div>
+          <div class="ln c"><span>v Trout Area 2026</span></div></div>
+        <div class="ph" id="intro-p2">
+          <div class="ln d"><span>24.–25. 10.</span></div>
+          <div class="ln e"><span>2026</span><em>sobota + neděle</em></div>
+          <div class="ln f"><span>Líheň Liběchov</span></div>
+          <div class="ln g"><span>rybník Malý Sporťáček</span></div></div>
+        <div class="ph" id="intro-p3"><div class="stats"><div class="stp" id="intro-st0"><b id="intro-sv0">40</b><span>závodníků</span><i class="pl" id="intro-sl0"></i></div><div class="stp" id="intro-st1"><b id="intro-sv1">hard</b><span>baits</span><i class="pl" id="intro-sl1"></i></div><div class="stp" id="intro-st2"><b id="intro-sv2">12</b><span>kol</span><i class="pl" id="intro-sl2"></i></div><div class="stp" id="intro-st3"><b id="intro-sv3">2</b><span>dny</span><i class="pl" id="intro-sl3"></i></div></div></div>
+        <div class="ph" id="intro-p4"><div class="ln h"><span>Partneři</span></div><div class="ln i"><span>mistrovství</span></div>
+          <div class="names"><span>Líheň Liběchov</span><span>Troutshop.eu</span><span>Activefishing.cz</span><span>Moonky</span><span>Jigovky.cz</span><span>Velka-ryba.cz</span><span>Bosset.cz</span><span>Gausse Holler</span></div></div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#intro-bg", {"opacity":0}, {"opacity":1,"duration":0.8,"ease":"none"}, 0.000);
+  tl.fromTo("#intro-bgi", {"scale":1.18}, {"scale":1,"duration":16,"ease":"none"}, 0.000);
+  tl.fromTo("#intro-p0 .k span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 1.500);
+  tl.fromTo("#intro-p0", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.15,"ease":"power3.in","immediateRender":false}, 1.850);
+  tl.fromTo("#intro-p1 .a span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 2.000);
+  tl.fromTo("#intro-p1 .b span", {"scale":2.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out"}, 3.000);
+  tl.fromTo("#intro-p1 .c span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 4.000);
+  tl.fromTo("#intro-p1 .b span", {"scale":1.08}, {"scale":1,"duration":0.32,"ease":"power2.out","immediateRender":false}, 4.000);
+  tl.fromTo("#intro-p1 .b span", {"scale":1.08}, {"scale":1,"duration":0.32,"ease":"power2.out","immediateRender":false}, 5.000);
+  tl.fromTo("#intro-p1", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.32,"ease":"power3.in","immediateRender":false}, 5.780);
+  tl.fromTo("#intro-p2 .d span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 6.000);
+  tl.fromTo("#intro-p2 .e span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 6.500);
+  tl.fromTo("#intro-p2 .e em", {"opacity":0,"x":-30}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out"}, 7.000);
+  tl.fromTo("#intro-p2 .f span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 8.000);
+  tl.fromTo("#intro-p2 .g span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 8.500);
+  tl.fromTo("#intro-p2", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.32,"ease":"power3.in","immediateRender":false}, 9.780);
+  tl.fromTo("#intro-st0", {"opacity":0,"scale":0.86,"y":24}, {"opacity":1,"scale":1,"y":0,"duration":0.45,"ease":"back.out(1.8)"}, 10.000);
+  tl.fromTo("#intro-st1", {"opacity":0,"scale":0.86,"y":24}, {"opacity":1,"scale":1,"y":0,"duration":0.45,"ease":"back.out(1.8)"}, 10.250);
+  tl.fromTo("#intro-st2", {"opacity":0,"scale":0.86,"y":24}, {"opacity":1,"scale":1,"y":0,"duration":0.45,"ease":"back.out(1.8)"}, 10.500);
+  tl.fromTo("#intro-st3", {"opacity":0,"scale":0.86,"y":24}, {"opacity":1,"scale":1,"y":0,"duration":0.45,"ease":"back.out(1.8)"}, 10.750);
+  tl.fromTo("#intro-sl0", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 11.000);
+  tl.fromTo("#intro-st0", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 11.000);
+  tl.fromTo("#intro-sl1", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 11.500);
+  tl.fromTo("#intro-st1", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 11.500);
+  tl.fromTo("#intro-sl2", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 12.000);
+  tl.fromTo("#intro-st2", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 12.000);
+  tl.fromTo("#intro-sl3", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 12.500);
+  tl.fromTo("#intro-st3", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 12.500);
+  tl.fromTo("#intro-sl0", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 13.000);
+  tl.fromTo("#intro-st0", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 13.000);
+  tl.fromTo("#intro-sl1", {"opacity":0.9}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 13.500);
+  tl.fromTo("#intro-st1", {"scale":1.05}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 13.500);
+  tl.fromTo("#intro-p3", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.32,"ease":"power3.in","immediateRender":false}, 13.780);
+  tl.fromTo("#intro-p4 .h span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 14.000);
+  tl.fromTo("#intro-p4 .i span", {"yPercent":112,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out"}, 14.250);
+  tl.fromTo("#intro-p4 .names span", {"opacity":0,"y":20}, {"opacity":1,"y":0,"duration":0.3,"ease":"expo.out","stagger":0.125}, 14.500);
+  tl.set({}, {}, 16.000);
+  window.__timelines["intro"] = tl;
+</script>
+</template></body></html>

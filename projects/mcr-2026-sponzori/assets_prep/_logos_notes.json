@@ -1,0 +1,272 @@
+{
+ "ta_cz": {
+  "logo_h_plate.png": {
+   "size": [
+    1900,
+    622
+   ],
+   "note": "MANDATORY corner plate (horizontal logo on white plate). Source _shared/brand/ta_logo_h.png 950x311, Lanczos 2x + light unsharp."
+  },
+  "logo_h_on_dark.png": {
+   "size": [
+    2079,
+    679
+   ],
+   "note": "white TROUT + red AREA, transparent. Source hb-battle-2026/_brand/11.png 1009x302, Lanczos 2x."
+  },
+  "logo_h_on_light.png": {
+   "size": [
+    2079,
+    679
+   ],
+   "note": "navy TROUT + red AREA, transparent. Source _brand/logo-TACR2-reseceady.png 1009x302, Lanczos 2x."
+  },
+  "logo_round.png": {
+   "size": [
+    1700,
+    1702
+   ],
+   "note": "HERO round badge (intro/finale), works on dark+light. Source logo-TACR2-ready.png 884x885, Lanczos ~1.9x."
+  },
+  "logo_stacked.png": {
+   "size": [
+    1663,
+    1202
+   ],
+   "note": "stacked TROUT/AREA with flag speed-lines, for light bg. Source _brand/lolo.png 797x566, Lanczos 2x."
+  },
+  "logo_round_dark.png": {
+   "size": [
+    1100,
+    1100
+   ],
+   "note": "dark round label variant. Source proto/assets/ta_label.png only 504 px -> Lanczos 2.2x, use <= 500 px on screen."
+  }
+ },
+ "gausseholler": {
+  "logo_on_dark.png": {
+   "size": [
+    1664,
+    1558
+   ],
+   "note": "gear + GAUSSE HOLLER / CUSTOM LAB (light wordmark). Source gausseholler.com layers 1200 px canvas (content 786 px) -> Lanczos 2x."
+  },
+  "logo_on_light.png": {
+   "size": [
+    1664,
+    1558
+   ],
+   "note": "wordmark recoloured to #16191C, gear stays #1D8FD5."
+  },
+  "logo_plate.png": {
+   "size": [
+    1976,
+    1870
+   ]
+  },
+  "gear_ring.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "note": "square 1024 canvas shared by ring+core (stack them, rotate ring around centre). Traced from _shared/brand/gh 512 px."
+  },
+  "gear_core.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "note": "square 1024 canvas shared by ring+core (stack them, rotate ring around centre). Traced from _shared/brand/gh 512 px."
+  },
+  "gear.png": {
+   "size": [
+    1024,
+    1024
+   ],
+   "note": "ring+core composite, 1024 square."
+  },
+  "wordline_on_dark.png": {
+   "size": [
+    2040,
+    145
+   ],
+   "note": "one-line GAUSSE HOLLER · CUSTOM LAB wordmark (light). Source _shared/brand/gh/word-line.png 1392 px."
+  },
+  "wordline_on_light.png": {
+   "size": [
+    2040,
+    145
+   ]
+  },
+  "madeby_on_dark.png": {
+   "size": [
+    4041,
+    413
+   ],
+   "note": "static lockup MADE BY [gear] © 2026 GAUSSE HOLLER (text as paths, Source Sans 3 600). In the film build it live (ring rotates); this PNG is for standalone banners."
+  },
+  "madeby_on_light.png": {
+   "size": [
+    4041,
+    413
+   ],
+   "note": "static lockup MADE BY [gear] © 2026 GAUSSE HOLLER (text as paths, Source Sans 3 600). In the film build it live (ring rotates); this PNG is for standalone banners."
+  }
+ },
+ "troutshop": {
+  "logo_on_light.png": {
+   "size": [
+    2011,
+    993
+   ],
+   "note": "VECTORISED from the only available raster (troutshop.eu logo.png 408x201): per-colour unmix + trace (black/red #E3000F/white), rendered 2000 px."
+  },
+  "logo_on_dark.png": {
+   "size": [
+    2011,
+    993
+   ],
+   "note": "same artwork: thin red keyline outlines the black fish, reads on navy; on pure black use logo_plate.png."
+  },
+  "logo_plate.png": {
+   "size": [
+    2249,
+    1231
+   ]
+  }
+ },
+ "activefishing": {
+  "logo_on_dark.png": {
+   "size": [
+    1663,
+    730
+   ],
+   "note": "orange gradient fish, white lettering knocked inside. Source Shoptet logo 1000x425 (content 972 px) -> Lanczos 1.65x."
+  },
+  "logo_on_light.png": {
+   "size": [
+    1663,
+    730
+   ],
+   "note": "same artwork works on light."
+  },
+  "logo_plate.png": {
+   "size": [
+    1839,
+    906
+   ]
+  }
+ },
+ "moonky": {
+  "logo_on_dark.png": {
+   "size": [
+    2078,
+    589
+   ],
+   "note": "symbol + MOONKY, white. Traced from moonky.cz logo 1000x372 -> 2000 px."
+  },
+  "logo_on_light.png": {
+   "size": [
+    2078,
+    589
+   ],
+   "note": "mono recolour #0E1424 (badge navy)."
+  },
+  "mark_on_dark.png": {
+   "size": [
+    1248,
+    1248
+   ],
+   "note": "fish/moon symbol only, white."
+  },
+  "mark_on_light.png": {
+   "size": [
+    1248,
+    1248
+   ]
+  },
+  "badge.png": {
+   "size": [
+    2000,
+    2000
+   ],
+   "note": "clean replica of the FB avatar (navy disc). Symbol+MOONKY traced from site logo; \"HANDMADE LURES\" set in Montserrat Light (font approximated). Works on any bg."
+  }
+ },
+ "jigovky": {
+  "logo_on_dark.png": {
+   "size": [
+    1872,
+    967
+   ],
+   "note": "white line logo JIGOVKY.CZ + \"Jigy, které chytají!\". Source Shoptet 1051x512 -> Lanczos 1.9x."
+  },
+  "logo_on_light.png": {
+   "size": [
+    1872,
+    967
+   ],
+   "note": "mono recolour #111111."
+  },
+  "logo_plate.png": {
+   "size": [
+    2066,
+    1161
+   ]
+  }
+ },
+ "velkaryba": {
+  "logo_on_light.png": {
+   "size": [
+    1872,
+    895
+   ],
+   "note": "navy script + charcoal fish line art, transparent. Source velka-ryba.cz logo 798x369 -> Lanczos 2.3x."
+  },
+  "logo_plate.png": {
+   "size": [
+    2086,
+    1109
+   ],
+   "note": "use this on dark/photo backgrounds (charcoal fish lines vanish on dark)."
+  },
+  "logo_on_dark.png": {
+   "size": [
+    2086,
+    1109
+   ],
+   "note": "plate version (original colours need a light ground)."
+  }
+ },
+ "bosset": {
+  "logo_on_light.png": {
+   "size": [
+    2080,
+    402
+   ],
+   "note": "teal #1B97B1 B-mark + BOSSET / FISHING. Traced from bosset.cz e-shop logo 1000x200 (cdn.myshoptet.com/usr/www.bosset.cz/user/logos/bosset_logo_eshop_bez_pozadi.png)."
+  },
+  "logo_on_dark.png": {
+   "size": [
+    2080,
+    402
+   ],
+   "note": "mono white (teal is low-contrast on navy)."
+  },
+  "logo_plate.png": {
+   "size": [
+    2224,
+    546
+   ]
+  }
+ },
+ "libechov": {
+  "logo.png": {
+   "size": [
+    2000,
+    2000
+   ],
+   "note": "round white badge with trout drawing, rendered from original SVG (lihenlibechov.cz/images/logo.svg). Works on dark+light."
+  }
+ }
+}

@@ -65,3 +65,44 @@ Počty 1340 a 777 platí ke dni stažení, 19. 10. 2026. Na webu je překlep „
 | p09_luckycraft-wah33f.png | Wobler Lucky Craft x Tiemco WAH 33F 002 33mm | crank | 1024×768 | bílé | https://www.activefishing.cz/wobler-lucky-craft-x-tiemco-wah-33f-002-33mm/ |
 
 Obrázky jsou z CDN `cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/big/…`, ve velikosti „big“, což je největší varianta, kterou web nabízí. p06, p07 a p09 jsou originální JPG převedené beze ztráty do PNG přes images.weserv.nl. Šlo jen o konverzi formátu kvůli přenosu, obsah obrázků je beze změny.
+
+## Verification (nezávislá kontrola, 19. 10. 2026)
+
+Všechny zdrojové stránky jsem znovu stáhl (homepage, /o-nas/, /plandavky/, /woblery/, /varivas/ a 7 produktových stránek) a citace jsem hledal v čistém textu stránky.
+
+### Fakta
+| # | Fakt | Verdikt | Poznámka |
+|---|---|---|---|
+| 1 | Active Fishing: kvalitní vybavení pro všechny, kdo milují přívlač. | OK | Citace je doslovně na homepage (blok vedle „Prozkoumat značku“, je i v meta description). Věta je v 1. osobě („Mým cílem…“), ve VO ji převyprávět ve 3. osobě. „Kvalitní“ je vlastní tvrzení obchodu. |
+| 2 | E-shop vznikl z vášně zakladatele Stanislava Lukáška pro přívlač a zkoušení nových nástrah. | OK | Citace je doslovně na /o-nas/, „[…]“ vynechává jen větu o začátcích s plavanou. Slovo „vášeň“ je mírné zesílení originálu („záliba“), přijatelné. |
+| 3 | Přes 1 300 plandavek předních japonských značek pro trout area, i do turnajových podmínek. | OK, s výhradou | Text i „1340 položek celkem“ sedí. Součet filtru značek je přesně 1340. „Předních japonských značek“ je ale marketing obchodu. U Nomadic Code (102 ks) a FOCUS (15 ks) jsem japonský původ neověřil. Bezpečnější znění: „Přes 1 300 plandavek pro trout area, včetně předních japonských značek.“ |
+| 4 | 777 woblerů pro trout area a rybářské soutěže. | OK | Citace i „777 položek celkem“ sedí. Jde o živé číslo k 19. 10. 2026, které se může změnit. |
+| 5 | Široká nabídka špičkových japonských produktů Varivas. | OK | Doslovně z hero carouselu (H2 VARIVAS). Kategorie /varivas/ má 249 položek, takže „široká“ je podložená. „Špičkových“ je marketing. Varivas je cizí značka (šňůry, vlasce), ve videu ji podávat jako „u nás najdete“, ne jako vlastní produkt. |
+
+**One-liner:** „…s japonskými nástrahami…“ je zobecnění. Obchod prodává i nejaponské značky (Mepps, Fish Up, Libra v karuselu) a také pruty, vlasce a příslušenství. Opravené znění: **„Český e-shop pro přívlač a trout area s nabídkou japonských plandavek a woblerů“**.
+
+**Ověřeno navíc:**
+- Benefity „RYCHLOST DORUČENÍ / UNIKÁTNÍ SORTIMENT / OSOBNÍ PŘÍSTUP“ jsou na webu.
+- Odkaz „Prozkoumat značku“ vede na `/varivas`.
+- FB `activefishing.cz` a IG `activefishingshop` sedí.
+- CSS proměnné `--color-primary #000000` a `--color-tertiary #E2E2E2` i písmo Nunito sedí.
+- Gradient loga naměřený na pixelech: #E39224 → #E27C37 → #DF5942, odpovídá výzkumu.
+
+### Logo
+- `logo.png` (1000×425 RGBA) je správné logo (stejný soubor jako og:image webu) a je čitelné na světlém i tmavém pozadí.
+- **Oprava:** bílé písmo NENÍ výřez. Je to neprůhledná bílá (#FFFFFF, alpha 255) uvnitř oranžové ryby. Funguje to i tak, protože písmo nepřesahuje siluetu.
+- Web odkazuje i na vektorovou verzi `https://cdn.myshoptet.com/usr/www.activefishing.cz/user/documents/upload/kodovani/logo-activefishing.svg`, která nebyla stažena. Pro ostré zvětšení ve videu by byla lepší.
+
+### Produkty
+| Soubor | Verdikt | Poznámka |
+|---|---|---|
+| p01 | NEPOUŽÍT jako hero | Bílý obdélník na průhledném plátně, produkt jen ~467×312 px a měkký. Je u něj vložená ikonka barvy (malá červená plandavka). |
+| p02 | OK | Bílý panel (ne skutečný výřez) a malá ikonka barvy vpravo nahoře. Produkt ~664 px. |
+| p03 | NEPOUŽÍT bez ořezu | Nahoře jsou 2 plandavky jako čistý průhledný výřez. Dole (řádky ~390–650) je ale černý panel „glow“ s japonským štítkem „グロー“. Po ořezu y≈150–375 vznikne čistý výřez ~660×215. |
+| p04 | OK (bez gramáže v titulku) | Bílý panel. Na plandavce je vyraženo „frea 0.9“, produkt je přitom 0,7g, protože obchod sdílí foto 0,9g (i popis zmiňuje 0,9g). Na obrazovce gramáž neuvádět. |
+| p06 | OK | Bílé pozadí, mírně měkčí (ostrost ~165 proti ~400–500 u ostatních). **Oprava source_url:** https://www.activefishing.cz/plandavka-nories-sofia-1-2g-sk017-hot-mango-101/ |
+| p07 | OK | Bílé pozadí, ostré, produkt ~711 px. |
+| p08 | OK | Jediný skutečný průhledný výřez. Produkt ~501×184 px, ostrý. |
+| p09 | OK | Bílé pozadí, ostré, produkt ~694 px. |
+
+`has_transparent_bg: true` u p01, p02 a p04 je zavádějící: alfa kanál mají, ale produkt leží na bílém obdélníku.

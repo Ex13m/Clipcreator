@@ -79,3 +79,33 @@ Z logo.png (převládající barvy pixelů):
 - Tvrzení o „vlastní značce“ ze zadání se nepotvrdilo: Velvet Arts je japonská značka (za ní stojí Yudai Ito), Troutshop ji jen prodává.
 - Seznam úspěchů na about-us patří Jaroslavu Petríčkovi osobně, ne firmě.
 - Logo je jen malé PNG (408×201), SVG ani větší verzi jsme nenašli. Pro velké plochy logo překreslit/vektorizovat, nebo ho dávat jen malé.
+
+## Verification (adversariální kontrola, 2026-10-19)
+Zdroje znovu staženy přes bridge: https://troutshop.eu/en/about-us/, https://troutshop.eu/pc/spoons/velvet-arts-2/ (+ /page/2/), https://troutshop.eu/, https://troutshop.eu/sk/, https://troutshop.eu/pc/woblers/nories-en-2/nories-crankin-pupa-2/, https://troutshop.eu/pc/soft-baits/fishup-en/.
+
+### Fakta
+| # | Fakt (CZ) | Verdikt | Proč |
+|---|---|---|---|
+| 1 | Rodinná firma, v oboru už od roku 1999. | OK | Citace doslova na about-us („we are a reliable family company that works in this area since 1999.“). Je to vlastní tvrzení firmy, nezávisle jsme ho neověřili. |
+| 2 | Generální partner Trout Area Slovakia. | OK | Doslova na velvet-arts-2 i na stránkách Crankin Pupa a FishUp („Troutshop.eu - General partner of Trout Area Slovakia“). Na SK homepage to není. Jde o vlastní tvrzení. |
+| 3 | Závodníci, kteří vyhrávali na Slovensku, v Česku, Polsku i na Ukrajině. | ZAMÍTNUTO (přehnané) | Citace na about-us sice je, ale podrobný seznam úspěchů na stejné stránce ukazuje výhry (1. místa) jen na Slovensku (Velká cena Čerenca) a na VARIVAS CUP (účastníci z Japonska a Polska). V Česku je jen 3. místo (DAIWA CUP Polovousí 2015) a na Ukrajině jen „multiple participation“ (TROUTMANIA). Bezpečná verze: „Závodníci s úspěchy na Slovensku, v Polsku i v Česku.“ |
+| 4 | Exkluzivní partner renomovaných japonských značek. | OK s výhradou | Citace doslova („We are exclusive partners of some well known Japanese companies“). Originál ale říká „some“ a značky ani území exkluzivity nejmenuje, takže se to nedá ověřit. Lepší je „Exkluzivní partner několika japonských značek.“ |
+| 5 | Tváří závodního týmu je Jaroslav Petríček – vítěz VARIVAS CUP 2019 a Velké ceny Čerenca 2019. | OK | Všechny tři části citace doslova na about-us. „Face of our competitive efforts“ je volně přeloženo jako „tvář závodního týmu“, což je přijatelné. Výhry patří Petríčkovi osobně, ne firmě. Místo konání VARIVAS CUP z textu není jasné („with participants from Japan – Poland“), proto zemi neuvádět. |
+
+Ověřeno navíc: slogan „The trout fishing SPECIALIST!“ (EN homepage) i „Prívlačový Eshop / Milujeme lov pstruhov“ (SK homepage), SK meta description s „Doručenie Česko - Slovensko do pár dní.“, adresa Rázusova 7, 921 01 Piešťany, Slovakia (patička) a popis Velvet Arts jako japonské značky (Yudai Ito). Všech 9 názvů produktů sedí s výpisy na webu. Forte 2.1g 32 a 35 jsou na /page/2/ a na homepage, Crankin' Pupa je na webu jako „CRANKIN’ PUPA 2,6g 109“ a Baffi Fly jako „Baffi Fly 1,5 Hot Pink“ v kategorii FishUp.
+
+Opravený one-liner: „Slovenský rodinný e-shop specializovaný na Trout Area a přívlač na pstruhy.“ („přívlač pstruhů“ je česky neobratné.)
+
+### Assety
+- **logo.png:** správné logo (stejný soubor jako v hlavičce webu, alt „TroutShop“), čitelné. Barvy jsou podle počtu pixelů #000000, #E3000F a #FFFFFF, takže sedí. Má jen 408×201, víc než asi 2× nezvětšovat. Na černém pozadí splývá černá silueta pstruha s pozadím a drží ji jen červená kontura. Pro velké plochy a tmavé pozadí logo vektorizovat nebo dát na světlý či červený podklad.
+- **Vodoznak:** „TROUTSHOP.EU“ je vpečený přímo do pixelů výrobků. U průhledných PNG (p01, p02, p03, p05) je alfa pozadí čistá (na černé se pozadí nic neukáže), ale přes těla plandavek jsou při detailu vidět tmavé „duchy“ písmen „UTSHOP“. U JPG (p04, p07, p09) je vodoznak na bílém pozadí a přechází přes nástrahy. Do hero detailu s velkým zvětšením je potřeba retuš, nebo nástrahy držet menší či v pohybu.
+- **Vlastní značka:** žádný z výrobků není výrobkem Troutshopu. Velvet Arts a Nories jsou japonské značky, FishUp je cizí značka. Titulky nesmí naznačovat, že jde o vlastní značku.
+- **Bílé pozadí** (p04, p06, p07, p08, p09): pro tmavý fashion look je potřeba odstranit pozadí. U p06 (čirý plastový crank) to bude obtížné.
+- **p06:** nahoře je velké logo NORIES (cizí značka), nutno ořezat. Rozlišení 2048 px je v pořádku.
+- **p05:** jen 600 px, dvě plandavky položené na sobě v bočním pohledu. Hraniční, jen pro menší záběr.
+- **p07:** obrázek je u produktu „Daisy 0.4g 34 – Glow Orange Band“ na webu, ale vizuálně ukazuje tmavě hnědou přední stranu a oranžovou zadní s modrými tečkami. Název barvy v titulku raději nepoužívat.
+- **p08:** 720 px, ocásky nástrahy jsou na levém okraji oříznuté.
+- **x01:** koláž s identifikovatelnými lidmi (pohár, úlovky), nejde o packshot. Pro hero ZAMÍTNUTO, nanejvýš jako krátký dokumentární střih se souhlasem.
+- **x02:** 1200×800, tmavá moodová fotka plandavek na větvi s malým logem Troutshop. Je to skutečný brandovaný snímek výrobků a nejlíp sedí k tmavému fashion stylu, jako pozadí nebo úvodní záběr. Nejde o čistý packshot. Originál plandavky-spoons-1.jpg (homepage používá variantu 600×400).
+
+**Použitelné pro hero:** p01, p02, p03 (nejlepší: 1500 px, průhledné), p04, p07, p09, p06 (po ořezu), p08, p05 (menší), x02 (mood). **Nepoužitelné:** x01.

@@ -1,0 +1,2029 @@
+{
+ "project": "MČR Trout Area 2026 · prezentace sponzorů (9:16)",
+ "generated": "2026-10-19",
+ "root": "projects/mcr-2026-sponzori/assets_prep",
+ "paths_are_relative_to": "assets_prep/",
+ "reproduce": {
+  "logos": "python scripts/assets_prep/prep_logos.py",
+  "heroes": "python scripts/assets_prep/prep_heroes.py all  (bg removal: npm @imgly/background-removal-node@1.4.5, model \"medium\", weights ship inside the npm package; runner scripts/assets_prep/rmbg.mjs)",
+  "broll": "python scripts/assets_prep/prep_broll.py",
+  "venue": "python scripts/assets_prep/prep_venue.py",
+  "manifest": "python scripts/assets_prep/prep_manifest.py",
+  "python_env": "PIL, numpy, scipy, vtracer 0.6.11, fonttools+brotli; SVG→PNG via playwright headless_shell (scripts/assets_prep/render_svg.mjs)"
+ },
+ "conventions": {
+  "logo_variants": {
+   "logo_on_dark.png": "readable on navy #0b1e42 / black",
+   "logo_on_light.png": "readable on white / #eef2f9",
+   "logo_plate.png": "logo on white rounded plate — safe on photos and any background",
+   "logo.svg": "vector (only where the source was flat-colour and got traced)"
+  },
+  "heroes": "transparent PNG cut-outs, trimmed with 3 % pad, luminance-levelled (no hue shift) + sat ×1.06–1.08 + light sharpen, long side ≤ 2000 px, never upscaled. Originals copied unchanged to <key>/orig/ (use them with mix-blend-mode:multiply on light sets as fallback).",
+  "hero_metadata": "per hero: size, bbox (px, alpha>0.5), aspect, dominant[3] (k-means hex + share, for swatches), glint [x,y] normalised (brightest spot, for light sweeps), method (how it was cut).",
+  "cutout_methods": "ml_isnet = @imgly ISNet medium; shop_alpha = the shop PNG alpha; classic silhouette / luma key for pastel bottles and hairline jigs. Every cut-out was checked on checker/navy/light; rejects are listed in sponsor notes.",
+  "broll_duotone": "broll/duo_navy/*.jpg = baked NAVY DUO gradient map #050d22→#304285→#8ea2d8 (q85), from design drafts; re-run prep_broll.py with other stops if DESIGN.md changes.",
+  "broll": "1080x1920 JPEG q92, subject-aware crop (focus set by eye), half-strength levels + sat ×1.05. Subjects kept in the middle band (Reels/TikTok UI covers ~top 14 % and bottom ~25 %).",
+  "logo_size_rule": "TA CZ plate must stay the largest logo in frame; sponsor logos never exceed its on-screen area."
+ },
+ "ta_cz": {
+  "corner_plate": {
+   "file": "ta_cz/logo_h_plate.png",
+   "size": [
+    1900,
+    622
+   ],
+   "note": "MANDATORY corner plate (horizontal logo on white plate). Source _shared/brand/ta_logo_h.png 950x311, Lanczos 2x + light unsharp."
+  },
+  "h_on_dark": {
+   "file": "ta_cz/logo_h_on_dark.png",
+   "size": [
+    2079,
+    679
+   ],
+   "note": "white TROUT + red AREA, transparent. Source hb-battle-2026/_brand/11.png 1009x302, Lanczos 2x."
+  },
+  "h_on_light": {
+   "file": "ta_cz/logo_h_on_light.png",
+   "size": [
+    2079,
+    679
+   ],
+   "note": "navy TROUT + red AREA, transparent. Source _brand/logo-TACR2-reseceady.png 1009x302, Lanczos 2x."
+  },
+  "round_hero": {
+   "file": "ta_cz/logo_round.png",
+   "size": [
+    1700,
+    1702
+   ],
+   "note": "HERO round badge (intro/finale), works on dark+light. Source logo-TACR2-ready.png 884x885, Lanczos ~1.9x."
+  },
+  "round_dark": {
+   "file": "ta_cz/logo_round_dark.png",
+   "size": [
+    1100,
+    1100
+   ],
+   "note": "dark round label variant. Source proto/assets/ta_label.png only 504 px -> Lanczos 2.2x, use <= 500 px on screen."
+  },
+  "stacked": {
+   "file": "ta_cz/logo_stacked.png",
+   "size": [
+    1663,
+    1202
+   ],
+   "note": "stacked TROUT/AREA with flag speed-lines, for light bg. Source _brand/lolo.png 797x566, Lanczos 2x."
+  },
+  "colors": {
+   "navy": "#304285",
+   "deep": "#0b1e42",
+   "card": "#eef2f9",
+   "red": "#e31e24",
+   "light_blue": "#8ea2d8"
+  },
+  "note": "No vector TA logo exists in the repo; all TA variants are careful Lanczos 2x upscales of the best rasters (≈1000 px sources). Fine for the corner plate and for heroes up to ~1000 px on screen."
+ },
+ "sponsors": {
+  "troutshop": {
+   "name": "Troutshop.eu",
+   "web": "troutshop.eu",
+   "colors": {
+    "red": "#E3000F",
+    "black": "#000000",
+    "white": "#FFFFFF"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "troutshop/logo_on_dark.png",
+     "size": [
+      2011,
+      993
+     ],
+     "note": "same artwork: thin red keyline outlines the black fish, reads on navy; on pure black use logo_plate.png."
+    },
+    "on_light": {
+     "file": "troutshop/logo_on_light.png",
+     "size": [
+      2011,
+      993
+     ],
+     "note": "VECTORISED from the only available raster (troutshop.eu logo.png 408x201): per-colour unmix + trace (black/red #E3000F/white), rendered 2000 px."
+    },
+    "plate": {
+     "file": "troutshop/logo_plate.png",
+     "size": [
+      2249,
+      1231
+     ]
+    },
+    "svg": "troutshop/logo.svg"
+   },
+   "logo_on_dark_ok": true,
+   "heroes": [
+    {
+     "file": "troutshop/heroes/h01_velvetarts_forte_glow_pink.png",
+     "product": "Velvet Arts Forte 2.1g 32 Glow Fluorescent Pink",
+     "source": "assets/troutshop/p01_velvet-arts-forte-2-1g-32-glow-pink.png",
+     "size": [
+      730,
+      1380
+     ],
+     "method": "shop_alpha (watermark layer dropped)",
+     "bbox": [
+      40,
+      40,
+      690,
+      1340
+     ],
+     "aspect": 0.529,
+     "dominant": [
+      {
+       "hex": "#f72c56",
+       "share": 0.609
+      },
+      {
+       "hex": "#fc6773",
+       "share": 0.3
+      },
+      {
+       "hex": "#322320",
+       "share": 0.09
+      }
+     ],
+     "glint": [
+      0.73,
+      0.572
+     ]
+    },
+    {
+     "file": "troutshop/heroes/h02_velvetarts_forte_yellow_red.png",
+     "product": "Velvet Arts Forte 2.1g 35 Yellow-Red/Brown",
+     "source": "assets/troutshop/p02_velvet-arts-forte-2-1g-35-yellow-red.png",
+     "size": [
+      734,
+      1419
+     ],
+     "method": "shop_alpha (watermark layer dropped)",
+     "bbox": [
+      41,
+      41,
+      693,
+      1377
+     ],
+     "aspect": 0.517,
+     "dominant": [
+      {
+       "hex": "#2f2823",
+       "share": 0.533
+      },
+      {
+       "hex": "#e4be1c",
+       "share": 0.304
+      },
+      {
+       "hex": "#954915",
+       "share": 0.163
+      }
+     ],
+     "glint": [
+      0.839,
+      0.524
+     ]
+    },
+    {
+     "file": "troutshop/heroes/h04_nories_crankin_pupa.png",
+     "product": "Nories Crankin' Pupa 2.6g 109",
+     "source": "assets/troutshop/p06_nories-crankin-pupa-109.jpg",
+     "size": [
+      1518,
+      832
+     ],
+     "method": "ml_isnet (logo cropped off)",
+     "bbox": [
+      47,
+      45,
+      1470,
+      784
+     ],
+     "aspect": 1.825,
+     "dominant": [
+      {
+       "hex": "#e7dfd6",
+       "share": 0.54
+      },
+      {
+       "hex": "#b0a080",
+       "share": 0.351
+      },
+      {
+       "hex": "#4b3f30",
+       "share": 0.109
+      }
+     ],
+     "glint": [
+      0.392,
+      0.114
+     ]
+    },
+    {
+     "file": "troutshop/heroes/h05_fishup_baffi_fly_pink.png",
+     "product": "FishUp Baffi Fly 1.5 Hot Pink",
+     "source": "assets/troutshop/p08_fishup-baffi-fly-hot-pink.jpg",
+     "size": [
+      732,
+      575
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      22,
+      22,
+      709,
+      553
+     ],
+     "aspect": 1.273,
+     "dominant": [
+      {
+       "hex": "#ff34c2",
+       "share": 0.584
+      },
+      {
+       "hex": "#ff0f9c",
+       "share": 0.382
+      },
+      {
+       "hex": "#ffa3e7",
+       "share": 0.034
+      }
+     ],
+     "glint": [
+      0.653,
+      0.755
+     ]
+    }
+   ],
+   "originals_dir": "troutshop/orig/",
+   "notes": "Logo only existed as a 408 px raster → vectorised (logo.svg, rendered 2000 px). Packshots carry a TROUTSHOP.EU watermark: h01/h02 use the shop's own alpha (watermark layer dropped, clean at normal contrast); Rooney, Tulle, Daisy and Forte Glow Gold were REJECTED because the mark is visible on the lure; Forte Mustard Gold rejected (lure only ~320 px). 4 heroes."
+  },
+  "activefishing": {
+   "name": "Activefishing.cz",
+   "web": "activefishing.cz",
+   "colors": {
+    "orange_top": "#E39025",
+    "orange_bottom": "#DF5942",
+    "white": "#FFFFFF"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "activefishing/logo_on_dark.png",
+     "size": [
+      1663,
+      730
+     ],
+     "note": "orange gradient fish, white lettering knocked inside. Source Shoptet logo 1000x425 (content 972 px) -> Lanczos 1.65x."
+    },
+    "on_light": {
+     "file": "activefishing/logo_on_light.png",
+     "size": [
+      1663,
+      730
+     ],
+     "note": "same artwork works on light."
+    },
+    "plate": {
+     "file": "activefishing/logo_plate.png",
+     "size": [
+      1839,
+      906
+     ]
+    },
+    "svg": null
+   },
+   "logo_on_dark_ok": true,
+   "heroes": [
+    {
+     "file": "activefishing/heroes/h01_nories_sofia.png",
+     "product": "Nories Sofia 1.2g SK017 Hot Mango 101",
+     "source": "assets/activefishing/p06_nories-sofia-sk017.png",
+     "size": [
+      718,
+      521
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      21,
+      21,
+      698,
+      500
+     ],
+     "aspect": 1.378,
+     "dominant": [
+      {
+       "hex": "#f79f6f",
+       "share": 0.373
+      },
+      {
+       "hex": "#e5e106",
+       "share": 0.355
+      },
+      {
+       "hex": "#c03626",
+       "share": 0.272
+      }
+     ],
+     "glint": [
+      0.689,
+      0.33
+     ]
+    },
+    {
+     "file": "activefishing/heroes/h02_khor_frea.png",
+     "product": "Khor FREA 0.7g FC09",
+     "source": "assets/activefishing/p04_khor-frea-fc09.png",
+     "size": [
+      386,
+      527
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      17,
+      17,
+      369,
+      511
+     ],
+     "aspect": 0.732,
+     "dominant": [
+      {
+       "hex": "#514b5c",
+       "share": 0.438
+      },
+      {
+       "hex": "#fecb19",
+       "share": 0.379
+      },
+      {
+       "hex": "#f83e10",
+       "share": 0.183
+      }
+     ],
+     "glint": [
+      0.233,
+      0.535
+     ]
+    },
+    {
+     "file": "activefishing/heroes/h03_velvetarts_forte_06.png",
+     "product": "Velvet Arts Forte 0.6g No.31",
+     "source": "assets/activefishing/p02_velvet-arts-forte-06-no31.png",
+     "size": [
+      706,
+      357
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      21,
+      22,
+      684,
+      335
+     ],
+     "aspect": 1.978,
+     "dominant": [
+      {
+       "hex": "#e6c916",
+       "share": 0.379
+      },
+      {
+       "hex": "#584718",
+       "share": 0.371
+      },
+      {
+       "hex": "#ded57e",
+       "share": 0.25
+      }
+     ],
+     "glint": [
+      0.225,
+      0.269
+     ]
+    },
+    {
+     "file": "activefishing/heroes/h04_luckycraft_wah33f.png",
+     "product": "Lucky Craft x Tiemco WAH 33F 002",
+     "source": "assets/activefishing/p09_luckycraft-wah33f.png",
+     "size": [
+      738,
+      348
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      23,
+      22,
+      717,
+      325
+     ],
+     "aspect": 2.121,
+     "dominant": [
+      {
+       "hex": "#977a7a",
+       "share": 0.543
+      },
+      {
+       "hex": "#c3b0b2",
+       "share": 0.255
+      },
+      {
+       "hex": "#4e3a3b",
+       "share": 0.203
+      }
+     ],
+     "glint": [
+      0.112,
+      0.503
+     ]
+    },
+    {
+     "file": "activefishing/heroes/h05_timon_chibi_futten.png",
+     "product": "Timon Chibi Futten FS Hologram Bait 51mm",
+     "source": "assets/activefishing/p07_timon-chibi-futten-hologram.png",
+     "size": [
+      756,
+      350
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      22,
+      22,
+      734,
+      328
+     ],
+     "aspect": 2.16,
+     "dominant": [
+      {
+       "hex": "#a9895b",
+       "share": 0.444
+      },
+      {
+       "hex": "#503c29",
+       "share": 0.295
+      },
+      {
+       "hex": "#d6c3ab",
+       "share": 0.261
+      }
+     ],
+     "glint": [
+      0.778,
+      0.426
+     ]
+    }
+   ],
+   "originals_dir": "activefishing/orig/",
+   "notes": "Source packshots are small (lures ~400–700 px wide inside 1024x768 frames) → heroes are 600–900 px; keep them ≤ ~45 % of frame width."
+  },
+  "moonky": {
+   "name": "Moonky",
+   "web": "moonky.cz",
+   "colors": {
+    "navy_badge": "#0E1424",
+    "blue_web": "#6883BA",
+    "white": "#FFFFFF"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "moonky/logo_on_dark.png",
+     "size": [
+      2078,
+      589
+     ],
+     "note": "symbol + MOONKY, white. Traced from moonky.cz logo 1000x372 -> 2000 px."
+    },
+    "on_light": {
+     "file": "moonky/logo_on_light.png",
+     "size": [
+      2078,
+      589
+     ],
+     "note": "mono recolour #0E1424 (badge navy)."
+    },
+    "plate": null,
+    "svg": "moonky/logo.svg",
+    "badge": {
+     "file": "moonky/badge.png",
+     "size": [
+      2000,
+      2000
+     ],
+     "note": "clean replica of the FB avatar (navy disc). Symbol+MOONKY traced from site logo; \"HANDMADE LURES\" set in Montserrat Light (font approximated). Works on any bg."
+    },
+    "badge_svg": "moonky/badge.svg",
+    "mark_on_dark": {
+     "file": "moonky/mark_on_dark.png",
+     "size": [
+      1248,
+      1248
+     ],
+     "note": "fish/moon symbol only, white."
+    },
+    "mark_on_light": {
+     "file": "moonky/mark_on_light.png",
+     "size": [
+      1248,
+      1248
+     ]
+    }
+   },
+   "logo_on_dark_ok": true,
+   "heroes": [
+    {
+     "file": "moonky/heroes/h01_coccon_yellow_orange.png",
+     "product": "Coccon 42mm DC04 Yellow/Orange fluo",
+     "source": "assets/moonky/p09_coccon_dc04_yellow_orange.jpg",
+     "size": [
+      1187,
+      779
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      35,
+      34,
+      1152,
+      745
+     ],
+     "aspect": 1.524,
+     "dominant": [
+      {
+       "hex": "#d4ae05",
+       "share": 0.605
+      },
+      {
+       "hex": "#f47c01",
+       "share": 0.238
+      },
+      {
+       "hex": "#ba8e14",
+       "share": 0.157
+      }
+     ],
+     "glint": [
+      0.762,
+      0.421
+     ]
+    },
+    {
+     "file": "moonky/heroes/h02_savory_brown_orange.png",
+     "product": "Savory 43mm DC03 Brown metalic/Orange fluo",
+     "source": "assets/moonky/p08_savory_dc03_brown_orange.png",
+     "size": [
+      1257,
+      1021
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      36,
+      36,
+      1221,
+      985
+     ],
+     "aspect": 1.231,
+     "dominant": [
+      {
+       "hex": "#835553",
+       "share": 0.402
+      },
+      {
+       "hex": "#f7ab41",
+       "share": 0.384
+      },
+      {
+       "hex": "#582f30",
+       "share": 0.215
+      }
+     ],
+     "glint": [
+      0.068,
+      0.166
+     ]
+    },
+    {
+     "file": "moonky/heroes/h03_savory_green.png",
+     "product": "Savory 43mm C06 Green",
+     "source": "assets/moonky/p01_savory_c06_green.png",
+     "size": [
+      1199,
+      350
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      34,
+      35,
+      1164,
+      316
+     ],
+     "aspect": 3.426,
+     "dominant": [
+      {
+       "hex": "#8acc01",
+       "share": 0.767
+      },
+      {
+       "hex": "#5cab01",
+       "share": 0.208
+      },
+      {
+       "hex": "#c2e172",
+       "share": 0.024
+      }
+     ],
+     "glint": [
+      0.205,
+      0.591
+     ]
+    },
+    {
+     "file": "moonky/heroes/h04_scelet_pink_bubblegum.png",
+     "product": "Scelet C01 Pink Bubblegum",
+     "source": "assets/moonky/p03_scelet_c01_pink_bubblegum.jpg",
+     "size": [
+      1165,
+      427
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      33,
+      33,
+      1132,
+      394
+     ],
+     "aspect": 2.728,
+     "dominant": [
+      {
+       "hex": "#f34769",
+       "share": 0.407
+      },
+      {
+       "hex": "#da0a33",
+       "share": 0.349
+      },
+      {
+       "hex": "#fb7d99",
+       "share": 0.245
+      }
+     ],
+     "glint": [
+      0.948,
+      0.721
+     ]
+    },
+    {
+     "file": "moonky/heroes/h05_gradient_blue_pink.png",
+     "product": "Moonky soft lure (category image, blue→pink)",
+     "source": "assets/moonky/p10_gumove_nastrahy_category.png",
+     "size": [
+      892,
+      270
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      27,
+      25,
+      867,
+      244
+     ],
+     "aspect": 3.304,
+     "dominant": [
+      {
+       "hex": "#0c78bd",
+       "share": 0.582
+      },
+      {
+       "hex": "#c138a1",
+       "share": 0.228
+      },
+      {
+       "hex": "#aac0ed",
+       "share": 0.19
+      }
+     ],
+     "glint": [
+      0.772,
+      0.289
+     ]
+    },
+    {
+     "file": "moonky/heroes/h06_coccon_jr_black.png",
+     "product": "Coccon Jr. 34mm C04 Black",
+     "source": "assets/moonky/p04_coccon_jr_c04_black.png",
+     "size": [
+      1362,
+      807
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      39,
+      40,
+      1323,
+      767
+     ],
+     "aspect": 1.688,
+     "dominant": [
+      {
+       "hex": "#09080c",
+       "share": 0.672
+      },
+      {
+       "hex": "#323538",
+       "share": 0.256
+      },
+      {
+       "hex": "#8e9092",
+       "share": 0.072
+      }
+     ],
+     "glint": [
+      0.753,
+      0.207
+     ]
+    }
+   ],
+   "originals_dir": "moonky/orig/",
+   "notes": "badge.svg/png = clean replica of the FB avatar (navy disc + symbol + MOONKY + HANDMADE LURES; subtitle font approximated with Montserrat Light). Site logo is white-on-transparent → logo_on_light is a mono navy recolour."
+  },
+  "jigovky": {
+   "name": "Jigovky.cz",
+   "web": "jigovky.cz",
+   "colors": {
+    "yellow": "#FED700",
+    "green": "#176E37",
+    "cta_green": "#00AB4D"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "jigovky/logo_on_dark.png",
+     "size": [
+      1872,
+      967
+     ],
+     "note": "white line logo JIGOVKY.CZ + \"Jigy, které chytají!\". Source Shoptet 1051x512 -> Lanczos 1.9x."
+    },
+    "on_light": {
+     "file": "jigovky/logo_on_light.png",
+     "size": [
+      1872,
+      967
+     ],
+     "note": "mono recolour #111111."
+    },
+    "plate": {
+     "file": "jigovky/logo_plate.png",
+     "size": [
+      2066,
+      1161
+     ]
+    },
+    "svg": null
+   },
+   "logo_on_dark_ok": true,
+   "heroes": [
+    {
+     "file": "jigovky/heroes/h01_troutjig_barbless.png",
+     "product": "Jig TroutJig Barbless #6 2 g",
+     "source": "assets/jigovky/p01_troutjig-barbless.jpg",
+     "size": [
+      661,
+      430
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      19,
+      20,
+      641,
+      410
+     ],
+     "aspect": 1.537,
+     "dominant": [
+      {
+       "hex": "#d1d1d1",
+       "share": 0.451
+      },
+      {
+       "hex": "#6d6d6d",
+       "share": 0.284
+      },
+      {
+       "hex": "#252525",
+       "share": 0.266
+      }
+     ],
+     "glint": [
+      0.104,
+      0.767
+     ]
+    },
+    {
+     "file": "jigovky/heroes/h02_sickle_classic.png",
+     "product": "Jigová hlavička SICKLE Classic #2",
+     "source": "assets/jigovky/p08_sickle-classic-2.jpg",
+     "size": [
+      1021,
+      422
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      30,
+      30,
+      991,
+      391
+     ],
+     "aspect": 2.419,
+     "dominant": [
+      {
+       "hex": "#636363",
+       "share": 0.593
+      },
+      {
+       "hex": "#121212",
+       "share": 0.333
+      },
+      {
+       "hex": "#c7c7c7",
+       "share": 0.074
+      }
+     ],
+     "glint": [
+      0.159,
+      0.457
+     ]
+    },
+    {
+     "file": "jigovky/heroes/h03_hd_barbless_red_detail.png",
+     "product": "HD BARBLESS #6 RED 1.3 g (head detail)",
+     "source": "assets/jigovky/p07_hd-barbless-red-1-3g.jpg",
+     "size": [
+      540,
+      242
+     ],
+     "method": "classic white luma key + shank fade",
+     "bbox": [
+      136,
+      15,
+      525,
+      227
+     ],
+     "aspect": 2.231,
+     "dominant": [
+      {
+       "hex": "#a80000",
+       "share": 0.39
+      },
+      {
+       "hex": "#ec0102",
+       "share": 0.377
+      },
+      {
+       "hex": "#575455",
+       "share": 0.233
+      }
+     ],
+     "glint": [
+      0.824,
+      0.136
+     ]
+    },
+    {
+     "file": "jigovky/heroes/h04_hd_barbless_fluo_detail.png",
+     "product": "HD BARBLESS #2 FLUO 0.4 g (head detail)",
+     "source": "assets/jigovky/p02_hd-barbless-fluo-0-4g.jpg",
+     "size": [
+      503,
+      195
+     ],
+     "method": "classic white luma key + shank fade",
+     "bbox": [
+      127,
+      14,
+      489,
+      181
+     ],
+     "aspect": 2.579,
+     "dominant": [
+      {
+       "hex": "#76892a",
+       "share": 0.382
+      },
+      {
+       "hex": "#242423",
+       "share": 0.35
+      },
+      {
+       "hex": "#cde641",
+       "share": 0.268
+      }
+     ],
+     "glint": [
+      0.891,
+      0.497
+     ]
+    },
+    {
+     "file": "jigovky/heroes/h05_hd_barbless_pink_detail.png",
+     "product": "HD BARBLESS #2 PINK 0.4 g (head detail)",
+     "source": "assets/jigovky/p03_hd-barbless-pink-0-4g.jpg",
+     "size": [
+      498,
+      200
+     ],
+     "method": "classic white luma key + shank fade",
+     "bbox": [
+      125,
+      14,
+      484,
+      186
+     ],
+     "aspect": 2.49,
+     "dominant": [
+      {
+       "hex": "#552f4b",
+       "share": 0.59
+      },
+      {
+       "hex": "#df0aa1",
+       "share": 0.295
+      },
+      {
+       "hex": "#d8d2d5",
+       "share": 0.115
+      }
+     ],
+     "glint": [
+      0.876,
+      0.505
+     ]
+    }
+   ],
+   "originals_dir": "jigovky/orig/",
+   "notes": "Coloured HD BARBLESS photos have a tying vise clamped on the hook bend → h03–h05 are head-detail crops (luma-key cut-out keeps the hairline wire) with the shank faded out by an alpha ramp; nothing painted in. They are small (~500 px) → show ≤ 500 px or use orig/ with multiply on light. h01/h02 are complete clean packshots."
+  },
+  "velkaryba": {
+   "name": "Velka-ryba.cz",
+   "web": "velka-ryba.cz",
+   "colors": {
+    "navy": "#143D6B",
+    "red": "#DA0F00",
+    "charcoal": "#2F2F2F"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "velkaryba/logo_on_dark.png",
+     "size": [
+      2086,
+      1109
+     ],
+     "note": "plate version (original colours need a light ground)."
+    },
+    "on_light": {
+     "file": "velkaryba/logo_on_light.png",
+     "size": [
+      1872,
+      895
+     ],
+     "note": "navy script + charcoal fish line art, transparent. Source velka-ryba.cz logo 798x369 -> Lanczos 2.3x."
+    },
+    "plate": {
+     "file": "velkaryba/logo_plate.png",
+     "size": [
+      2086,
+      1109
+     ],
+     "note": "use this on dark/photo backgrounds (charcoal fish lines vanish on dark)."
+    },
+    "svg": null
+   },
+   "logo_on_dark_ok": false,
+   "heroes": [
+    {
+     "file": "velkaryba/heroes/h01_illex_native_pink_yamame.png",
+     "product": "Illex Native Spoon 2.5 g Pink Yamame",
+     "source": "assets/velkaryba/p05_illex-native-spoon-pink-yamame.jpg",
+     "size": [
+      946,
+      1052
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      31,
+      32,
+      914,
+      1020
+     ],
+     "aspect": 0.899,
+     "dominant": [
+      {
+       "hex": "#ad7a79",
+       "share": 0.444
+      },
+      {
+       "hex": "#942a4c",
+       "share": 0.352
+      },
+      {
+       "hex": "#d4b2b4",
+       "share": 0.203
+      }
+     ],
+     "glint": [
+      0.384,
+      0.553
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h02_illex_native_copper_trout.png",
+     "product": "Illex Native Spoon 3.5 g Copper Trout",
+     "source": "assets/velkaryba/p06_illex-native-spoon-copper-trout.jpg",
+     "size": [
+      956,
+      1053
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      31,
+      32,
+      924,
+      1021
+     ],
+     "aspect": 0.908,
+     "dominant": [
+      {
+       "hex": "#c37a26",
+       "share": 0.558
+      },
+      {
+       "hex": "#bea574",
+       "share": 0.24
+      },
+      {
+       "hex": "#53401f",
+       "share": 0.202
+      }
+     ],
+     "glint": [
+      0.363,
+      0.548
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h03_daiwa_presso_manhattan.png",
+     "product": "Daiwa Presso ADM 2.2 g Manhattan",
+     "source": "assets/velkaryba/p04_daiwa-presso-adm-manhattan.jpg",
+     "size": [
+      977,
+      1048
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      31,
+      33,
+      945,
+      1016
+     ],
+     "aspect": 0.932,
+     "dominant": [
+      {
+       "hex": "#353b43",
+       "share": 0.55
+      },
+      {
+       "hex": "#b1b19d",
+       "share": 0.308
+      },
+      {
+       "hex": "#025a92",
+       "share": 0.143
+      }
+     ],
+     "glint": [
+      0.562,
+      0.452
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h04_daiwa_presso_flashing_green.png",
+     "product": "Daiwa Presso ADM 3.8 g Flashing Green",
+     "source": "assets/velkaryba/p09_daiwa-presso-adm-flashing-green.jpg",
+     "size": [
+      1013,
+      1047
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      32,
+      32,
+      981,
+      1016
+     ],
+     "aspect": 0.968,
+     "dominant": [
+      {
+       "hex": "#ab904a",
+       "share": 0.454
+      },
+      {
+       "hex": "#36361d",
+       "share": 0.336
+      },
+      {
+       "hex": "#03ab3a",
+       "share": 0.21
+      }
+     ],
+     "glint": [
+      0.307,
+      0.336
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange.png",
+     "product": "Shimano Cardiff Roll Swimmer CE 4.5 g Orange Gold",
+     "source": "assets/velkaryba/p01_cardiff-roll-swimmer-ce-orange-gold.jpg",
+     "size": [
+      1028,
+      785
+     ],
+     "method": "ml_isnet + label removal",
+     "bbox": [
+      32,
+      31,
+      997,
+      754
+     ],
+     "aspect": 1.31,
+     "dominant": [
+      {
+       "hex": "#fd961b",
+       "share": 0.477
+      },
+      {
+       "hex": "#d0bf80",
+       "share": 0.403
+      },
+      {
+       "hex": "#5e3b21",
+       "share": 0.119
+      }
+     ],
+     "glint": [
+      0.481,
+      0.183
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange_back.png",
+     "product": "Shimano Cardiff Roll Swimmer CE 4.5 g Orange Gold — back face",
+     "source": "assets/velkaryba/p01_cardiff-roll-swimmer-ce-orange-gold.jpg",
+     "size": [
+      617,
+      318
+     ],
+     "bbox": [
+      19,
+      19,
+      598,
+      298
+     ],
+     "aspect": 1.94,
+     "dominant": [
+      {
+       "hex": "#b8a868",
+       "share": 0.494
+      },
+      {
+       "hex": "#eddc9b",
+       "share": 0.389
+      },
+      {
+       "hex": "#66401d",
+       "share": 0.117
+      }
+     ],
+     "glint": [
+      0.676,
+      0.415
+     ]
+    },
+    {
+     "file": "velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange_front.png",
+     "product": "Shimano Cardiff Roll Swimmer CE 4.5 g Orange Gold — front face",
+     "source": "assets/velkaryba/p01_cardiff-roll-swimmer-ce-orange-gold.jpg",
+     "size": [
+      1028,
+      538
+     ],
+     "bbox": [
+      32,
+      31,
+      997,
+      507
+     ],
+     "aspect": 1.911,
+     "dominant": [
+      {
+       "hex": "#fca72f",
+       "share": 0.519
+      },
+      {
+       "hex": "#fa7f09",
+       "share": 0.367
+      },
+      {
+       "hex": "#4f382b",
+       "share": 0.113
+      }
+     ],
+     "glint": [
+      0.079,
+      0.771
+     ]
+    }
+   ],
+   "originals_dir": "velkaryba/orig/",
+   "notes": "Original logo needs a light ground (charcoal fish line-art) → on dark/photo use logo_plate.png. Cardiff Roll Swimmer: \"BACK/FRONT\" labels removed; also split into h05_…_back.png / h05_…_front.png for a spoon flip."
+  },
+  "bosset": {
+   "name": "Bosset.cz",
+   "web": "bosset.cz",
+   "colors": {
+    "teal": "#1B97B1",
+    "accent_yellow": "#FFC500",
+    "light_blue": "#C5EBFC",
+    "black": "#000000"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "bosset/logo_on_dark.png",
+     "size": [
+      2080,
+      402
+     ],
+     "note": "mono white (teal is low-contrast on navy)."
+    },
+    "on_light": {
+     "file": "bosset/logo_on_light.png",
+     "size": [
+      2080,
+      402
+     ],
+     "note": "teal #1B97B1 B-mark + BOSSET / FISHING. Traced from bosset.cz e-shop logo 1000x200 (cdn.myshoptet.com/usr/www.bosset.cz/user/logos/bosset_logo_eshop_bez_pozadi.png)."
+    },
+    "plate": {
+     "file": "bosset/logo_plate.png",
+     "size": [
+      2224,
+      546
+     ]
+    },
+    "svg": "bosset/logo.svg"
+   },
+   "logo_on_dark_ok": false,
+   "heroes": [
+    {
+     "file": "bosset/heroes/h01_zojirushi_orange.png",
+     "product": "Zojirushi SM-SHE 0.6 l orange",
+     "source": "assets/bosset/p07_zojirushi-sm-she-0-6l-orange.jpg",
+     "size": [
+      392,
+      1272
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      45,
+      36,
+      354,
+      1236
+     ],
+     "aspect": 0.308,
+     "dominant": [
+      {
+       "hex": "#ee712e",
+       "share": 0.411
+      },
+      {
+       "hex": "#fd9956",
+       "share": 0.379
+      },
+      {
+       "hex": "#b62c07",
+       "share": 0.21
+      }
+     ],
+     "glint": [
+      0.778,
+      0.218
+     ]
+    },
+    {
+     "file": "bosset/heroes/h02_zojirushi_black.png",
+     "product": "Zojirushi SM-VB 0.6 l black",
+     "source": "assets/bosset/p04_zojirushi-sm-vb-0-6l-black.jpg",
+     "size": [
+      551,
+      1590
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      52,
+      48,
+      505,
+      1539
+     ],
+     "aspect": 0.347,
+     "dominant": [
+      {
+       "hex": "#615a60",
+       "share": 0.503
+      },
+      {
+       "hex": "#413a41",
+       "share": 0.46
+      },
+      {
+       "hex": "#b1acb0",
+       "share": 0.037
+      }
+     ],
+     "glint": [
+      0.61,
+      0.142
+     ]
+    },
+    {
+     "file": "bosset/heroes/h03_zojirushi_mint.png",
+     "product": "Zojirushi SM-SR 0.6 l green",
+     "source": "assets/bosset/p01_zojirushi-sm-sr-0-6l-green.jpg",
+     "size": [
+      480,
+      1584
+     ],
+     "method": "classic silhouette (threshold+fill)",
+     "bbox": [
+      47,
+      47,
+      433,
+      1537
+     ],
+     "aspect": 0.303,
+     "dominant": [
+      {
+       "hex": "#a8d5cc",
+       "share": 0.905
+      },
+      {
+       "hex": "#d1eae5",
+       "share": 0.084
+      },
+      {
+       "hex": "#0f4f3d",
+       "share": 0.011
+      }
+     ],
+     "glint": [
+      0.631,
+      0.208
+     ]
+    },
+    {
+     "file": "bosset/heroes/h04_zojirushi_pink.png",
+     "product": "Zojirushi SM-SR 0.6 l pink",
+     "source": "assets/bosset/p02_zojirushi-sm-sr-0-6l-pink.jpg",
+     "size": [
+      483,
+      1584
+     ],
+     "method": "classic silhouette (threshold+fill)",
+     "bbox": [
+      47,
+      47,
+      436,
+      1537
+     ],
+     "aspect": 0.305,
+     "dominant": [
+      {
+       "hex": "#e4c9e1",
+       "share": 0.644
+      },
+      {
+       "hex": "#d4b5d0",
+       "share": 0.347
+      },
+      {
+       "hex": "#31112a",
+       "share": 0.008
+      }
+     ],
+     "glint": [
+      0.509,
+      0.227
+     ]
+    },
+    {
+     "file": "bosset/heroes/h05_zojirushi_green_vb.png",
+     "product": "Zojirushi SM-VB 0.6 l green",
+     "source": "assets/bosset/p05_zojirushi-sm-vb-0-6l-green.jpg",
+     "size": [
+      546,
+      1579
+     ],
+     "method": "classic silhouette (threshold+fill)",
+     "bbox": [
+      47,
+      46,
+      499,
+      1532
+     ],
+     "aspect": 0.346,
+     "dominant": [
+      {
+       "hex": "#c2e4c6",
+       "share": 0.539
+      },
+      {
+       "hex": "#afd5b2",
+       "share": 0.455
+      },
+      {
+       "hex": "#19461b",
+       "share": 0.007
+      }
+     ],
+     "glint": [
+      0.403,
+      0.131
+     ]
+    }
+   ],
+   "originals_dir": "bosset/orig/",
+   "notes": "Logo traced from assets/bosset/logo.png (1000x200) → logo.svg. Prizes = Zojirushi thermoses sold by Bosset; all chosen heroes are 0,6 l models from research/bosset.md (in the 0,5–0,7 l range; the 0,52 l SW-KA is a food jar, left out). Do not claim anything about Zojirushi origin (research note)."
+  },
+  "gausseholler": {
+   "name": "Gausse Holler",
+   "web": "gausseholler.com",
+   "colors": {
+    "blue": "#1D8FD5",
+    "bg": "#0F1113",
+    "word": "#E8E5E1",
+    "orange_logo": "#F0904F",
+    "ice": "#7FB2C7"
+   },
+   "logo": {
+    "on_dark": {
+     "file": "gausseholler/logo_on_dark.png",
+     "size": [
+      1664,
+      1558
+     ],
+     "note": "gear + GAUSSE HOLLER / CUSTOM LAB (light wordmark). Source gausseholler.com layers 1200 px canvas (content 786 px) -> Lanczos 2x."
+    },
+    "on_light": {
+     "file": "gausseholler/logo_on_light.png",
+     "size": [
+      1664,
+      1558
+     ],
+     "note": "wordmark recoloured to #16191C, gear stays #1D8FD5."
+    },
+    "plate": {
+     "file": "gausseholler/logo_plate.png",
+     "size": [
+      1976,
+      1870
+     ]
+    },
+    "svg": null,
+    "gear": {
+     "file": "gausseholler/gear.png",
+     "size": [
+      1024,
+      1024
+     ],
+     "note": "ring+core composite, 1024 square."
+    },
+    "gear_ring": {
+     "file": "gausseholler/gear_ring.png",
+     "size": [
+      1024,
+      1024
+     ],
+     "note": "square 1024 canvas shared by ring+core (stack them, rotate ring around centre). Traced from _shared/brand/gh 512 px."
+    },
+    "gear_core": {
+     "file": "gausseholler/gear_core.png",
+     "size": [
+      1024,
+      1024
+     ],
+     "note": "square 1024 canvas shared by ring+core (stack them, rotate ring around centre). Traced from _shared/brand/gh 512 px."
+    },
+    "wordline_on_dark": {
+     "file": "gausseholler/wordline_on_dark.png",
+     "size": [
+      2040,
+      145
+     ],
+     "note": "one-line GAUSSE HOLLER · CUSTOM LAB wordmark (light). Source _shared/brand/gh/word-line.png 1392 px."
+    },
+    "wordline_on_light": {
+     "file": "gausseholler/wordline_on_light.png",
+     "size": [
+      2040,
+      145
+     ]
+    },
+    "madeby_on_dark": {
+     "file": "gausseholler/madeby_on_dark.png",
+     "size": [
+      4041,
+      413
+     ],
+     "note": "static lockup MADE BY [gear] © 2026 GAUSSE HOLLER (text as paths, Source Sans 3 600). In the film build it live (ring rotates); this PNG is for standalone banners."
+    },
+    "madeby_on_light": {
+     "file": "gausseholler/madeby_on_light.png",
+     "size": [
+      4041,
+      413
+     ],
+     "note": "static lockup MADE BY [gear] © 2026 GAUSSE HOLLER (text as paths, Source Sans 3 600). In the film build it live (ring rotates); this PNG is for standalone banners."
+    }
+   },
+   "logo_on_dark_ok": true,
+   "heroes": [
+    {
+     "file": "gausseholler/heroes/h01_revolut8_black_front.png",
+     "product": "Revolut 8 Standard Edition · Black (front render)",
+     "source": "assets/gausseholler/p05_revolut8_panel_hero.jpg",
+     "size": [
+      1315,
+      1216
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      39,
+      38,
+      1276,
+      1174
+     ],
+     "aspect": 1.081,
+     "dominant": [
+      {
+       "hex": "#0d0e0d",
+       "share": 0.686
+      },
+      {
+       "hex": "#4d4c4b",
+       "share": 0.252
+      },
+      {
+       "hex": "#c9c3bb",
+       "share": 0.061
+      }
+     ],
+     "glint": [
+      0.771,
+      0.332
+     ]
+    },
+    {
+     "file": "gausseholler/heroes/h02_revolut8_black_side.png",
+     "product": "Revolut 8 Standard Edition · Black (portrait render)",
+     "source": "assets/gausseholler/p03_revolut8_black_side.jpg",
+     "size": [
+      1464,
+      1609
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      48,
+      48,
+      1416,
+      1560
+     ],
+     "aspect": 0.91,
+     "dominant": [
+      {
+       "hex": "#131212",
+       "share": 0.565
+      },
+      {
+       "hex": "#3c3c3b",
+       "share": 0.333
+      },
+      {
+       "hex": "#787471",
+       "share": 0.102
+      }
+     ],
+     "glint": [
+      0.498,
+      0.045
+     ]
+    },
+    {
+     "file": "gausseholler/heroes/h03_revolut8_black_threeq.png",
+     "product": "Revolut 8 Standard Edition · Black (3/4 render)",
+     "source": "assets/gausseholler/p02_revolut8_black_threeq.jpg",
+     "size": [
+      1321,
+      1440
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      42,
+      43,
+      1278,
+      1387
+     ],
+     "aspect": 0.917,
+     "dominant": [
+      {
+       "hex": "#0f0f0f",
+       "share": 0.716
+      },
+      {
+       "hex": "#3f3e3e",
+       "share": 0.246
+      },
+      {
+       "hex": "#b8a8a1",
+       "share": 0.038
+      }
+     ],
+     "glint": [
+      0.535,
+      0.389
+     ]
+    },
+    {
+     "file": "gausseholler/heroes/h04_revolut8_black_top.png",
+     "product": "Revolut 8 Standard Edition · Black (top render)",
+     "source": "assets/gausseholler/p04_revolut8_black_top.jpg",
+     "size": [
+      1558,
+      1937
+     ],
+     "method": "ml_isnet",
+     "bbox": [
+      57,
+      57,
+      1501,
+      1881
+     ],
+     "aspect": 0.804,
+     "dominant": [
+      {
+       "hex": "#111011",
+       "share": 0.653
+      },
+      {
+       "hex": "#3b3a3b",
+       "share": 0.29
+      },
+      {
+       "hex": "#93796c",
+       "share": 0.057
+      }
+     ],
+     "glint": [
+      0.429,
+      0.126
+     ]
+    }
+   ],
+   "originals_dir": "gausseholler/orig/",
+   "notes": "Black Standard Edition = Revolut 8 Standard Edition · Black. Renders are on a dark studio floor; cut-outs drop the floor shadow → add a soft CSS ellipse shadow under the stand. gear_ring/gear_core share one 1024 canvas (stack, rotate ring). madeby_*.png = static MADE BY ⚙ © 2026 GAUSSE HOLLER lockup."
+  }
+ },
+ "order_default": [
+  "intro",
+  "venue:libechov",
+  "troutshop",
+  "activefishing",
+  "moonky",
+  "jigovky",
+  "velkaryba",
+  "bosset",
+  "gausseholler",
+  "finale"
+ ],
+ "venue": {
+  "libechov": {
+   "name": "Líheň Liběchov (Sportovní rybaření Boží Voda – Liběchov)",
+   "web": "lihenlibechov.cz",
+   "logo": {
+    "any_bg": {
+     "file": "libechov/logo.png",
+     "size": [
+      2000,
+      2000
+     ],
+     "note": "round white badge with trout drawing, rendered from original SVG (lihenlibechov.cz/images/logo.svg). Works on dark+light."
+    },
+    "svg": "libechov/logo.svg"
+   },
+   "colors": {
+    "turquoise": "#17a1c8",
+    "navy": "#1a212e",
+    "aqua": "#9ae7e8",
+    "gold": "#d8af64"
+   },
+   "placeholders_9x16": [
+    {
+     "file": "libechov/venue/v01_maly_sportacek.jpg",
+     "source": "assets/libechov/maly_sportacek_photo.jpg",
+     "what": "Malý Sporťáček (MČR pond), winter, aerator",
+     "upscaled": null
+    },
+    {
+     "file": "libechov/venue/v02_velky_sportak.jpg",
+     "source": "assets/libechov/velky_sportak.jpg",
+     "what": "Velký Sporťák, winter, calm water",
+     "upscaled": 1.67
+    },
+    {
+     "file": "libechov/venue/v03_trout_in_net.jpg",
+     "source": "assets/libechov/nasazeni_trofejnich_pstruhu.jpg",
+     "what": "trophy brown trout in the net (stocking, 2022)",
+     "upscaled": 1.6
+    },
+    {
+     "file": "libechov/venue/v04_mcr_poster_fit.jpg",
+     "source": "assets/libechov/mcr_news_poster.png",
+     "what": "official MČR 2026 poster (pond photo + cup + 24.–25.10.), full poster on blurred fill; poster centre at y=42 %"
+    }
+   ],
+   "drone_clip": "drone/final/flyover_9x16.mp4 (not present on 2026-10-19 → use venue/v01_maly_sportacek.jpg or v04_mcr_poster_fit.jpg)",
+   "facts_reminder": "keep \"donedávna\" in the lowest-trout-farm claim; Malý Sporťáček is NOT \"chyť a pusť\" (since 23. 6. 2026 \"chyť a vem\")."
+  }
+ },
+ "broll": [
+  {
+   "file": "broll/br01_fight_splash.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261003-WA0018.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.42,
+    0.5
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "fish fighting at the bank, splash",
+   "event": "H-BATTLE 2026, Hofer Lake SK",
+   "duotone_navy": "broll/duo_navy/br01_fight_splash.jpg"
+  },
+  {
+   "file": "broll/br02_netting_sunrays.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261004-WA0019.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.52,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "netting a trout, sun rays over the lake",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br02_netting_sunrays.jpg"
+  },
+  {
+   "file": "broll/br03_fish_in_net.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0032.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.42,
+    0.5
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "trout in the landing net, unhooking",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br03_fish_in_net.jpg"
+  },
+  {
+   "file": "broll/br04_net_with_fish.jpg",
+   "source": "hb-battle-2026/02_SELECT/refs_2026-10-03/p_green_fish.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.42,
+    0.42
+   ],
+   "zoom": 1.25,
+   "upscaled": null,
+   "moment": "angler lifts net with trout (finger blur at bottom cropped out)",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br04_net_with_fish.jpg"
+  },
+  {
+   "file": "broll/br05_reeling_portrait.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0051.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.55,
+    0.5
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "angler reeling, spinning reel close",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br05_reeling_portrait.jpg"
+  },
+  {
+   "file": "broll/br07_landing_rod_up.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0080.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.55,
+    0.52
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "rod raised, landing the fish",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br07_landing_rod_up.jpg"
+  },
+  {
+   "file": "broll/br08_landing_ripples.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261002-WA0042.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.62,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "trout slides into the net, ripples",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br08_landing_ripples.jpg"
+  },
+  {
+   "file": "broll/br09_landing_rods_flare.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261003-WA0021.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.55,
+    0.6
+   ],
+   "zoom": 1.15,
+   "upscaled": null,
+   "moment": "netting next to a rack of rods, morning flare",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br09_landing_rods_flare.jpg"
+  },
+  {
+   "file": "broll/br10_lake_mist.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/FB_IMG_1790972317861.jpg",
+   "source_size": [
+    1620,
+    1080
+   ],
+   "crop_focus": [
+    0.56,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": 1.78,
+   "moment": "morning mist on the lake (atmosphere)",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br10_lake_mist.jpg"
+  },
+  {
+   "file": "broll/br11_lake_sunflare.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261004-WA0010.jpg",
+   "source_size": [
+    4032,
+    3024
+   ],
+   "crop_focus": [
+    0.47,
+    0.5
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "lake panorama, sun flare (atmosphere)",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br11_lake_sunflare.jpg"
+  },
+  {
+   "file": "broll/br12_keepnet_trout.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0036.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.55,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "trout school in the holding pen",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br12_keepnet_trout.jpg"
+  },
+  {
+   "file": "broll/br13_lure_check.jpg",
+   "source": "hb-battle-2026/02_SELECT/refs_2026-10-03/p_tying_young.jpg",
+   "source_size": [
+    3840,
+    5120
+   ],
+   "crop_focus": [
+    0.55,
+    0.5
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "young angler rigging a lure, autumn trees",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br13_lure_check.jpg"
+  },
+  {
+   "file": "broll/br14_crouch_net.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_zip1/IMG-20261002-WA0072.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.62,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "crouched angler with net and rod at the edge",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br14_crouch_net.jpg"
+  },
+  {
+   "file": "broll/br15_net_splash.jpg",
+   "source": "hb-battle-2026/01_RAW/hb_battle_drive2/IMG-20261002-WA0040.jpg",
+   "source_size": [
+    3024,
+    4032
+   ],
+   "crop_focus": [
+    0.45,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "fish splashing in the net",
+   "event": "H-BATTLE 2026",
+   "duotone_navy": "broll/duo_navy/br15_net_splash.jpg"
+  },
+  {
+   "file": "broll/br16_dock_gear.jpg",
+   "source": "klonowiec-2026/01_RAW/photos_d1/d1_09.jpg",
+   "source_size": [
+    4032,
+    2268
+   ],
+   "crop_focus": [
+    0.4,
+    0.55
+   ],
+   "zoom": 1.0,
+   "upscaled": null,
+   "moment": "rods, tackle box and net on the dock (no faces)",
+   "event": "Klonówiec 2026, PL",
+   "duotone_navy": "broll/duo_navy/br16_dock_gear.jpg"
+  }
+ ],
+ "broll_notes": [
+  "All b-roll except br16 is H-BATTLE 2026 (Hofer Lake, SK) — no readable foreign event names as hero; tents/flags in soft background only. Award-ceremony and team-poster photos were excluded.",
+  "Saska: not identifiable from the photos. H-BATTLE Team CZ was Hrabalík, Švub, Kučera, Stoklasa (+ coach Zaikin), so H-BATTLE frames should not feature him; the only Klonówiec frame (br16) shows gear only, no people.",
+  "br10_lake_mist source is 1620x1080 → 1.78x upscale; use as soft/background plate.",
+  "br04_net_with_fish: fish sits in the lower third (finger blur in the source had to be cropped out) → use a slow upward pan or as background.",
+  "Videos from the operator still to come; slots are the same 1080x1920."
+ ]
+}

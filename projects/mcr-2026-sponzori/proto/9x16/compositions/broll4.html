@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>broll4 · MČR 2026 blok</title></head>
+<body><template>
+<div id="b-broll4" data-composition-id="broll4" data-width="1080" data-height="1920" data-duration="2.000">
+  <div id="bw-broll4" class="blk broll"><div class="bp" id="broll4-bp0" style="opacity:1"><div class="bpi"><img class="im" src="assets/broll/p_lake_sun.jpg" alt="" style="object-fit:cover; object-position:50% 40%;"></div></div><div class="bp" id="broll4-bp1"><div class="bpi"><img class="im" src="assets/broll/p_hands.jpg" alt="" style="object-fit:cover; object-position:50% 40%;"></div></div><div class="bp" id="broll4-bp2"><div class="bpi"><img class="im" src="assets/broll/p_landing2.jpg" alt="" style="object-fit:cover; object-position:50% 40%;"></div></div><div class="bp" id="broll4-bp3"><div class="bpi"><img class="im" src="assets/broll/p_seq4.jpg" alt="" style="object-fit:cover; object-position:50% 40%;"></div></div><div class="bshade"></div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#broll4-bp0 .bpi", {"scale":1.16}, {"scale":1.04,"duration":0.5,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.set("#broll4-bp0", {"opacity":0}, 0.500);
+  tl.set("#broll4-bp1", {"opacity":1}, 0.500);
+  tl.fromTo("#broll4-bp1 .bpi", {"scale":1.16}, {"scale":1.04,"duration":0.5,"ease":"power2.out","immediateRender":false}, 0.500);
+  tl.set("#broll4-bp1", {"opacity":0}, 1.000);
+  tl.set("#broll4-bp2", {"opacity":1}, 1.000);
+  tl.fromTo("#broll4-bp2 .bpi", {"scale":1.16}, {"scale":1.04,"duration":0.5,"ease":"power2.out","immediateRender":false}, 1.000);
+  tl.set("#broll4-bp2", {"opacity":0}, 1.500);
+  tl.set("#broll4-bp3", {"opacity":1}, 1.500);
+  tl.fromTo("#broll4-bp3 .bpi", {"scale":1.16}, {"scale":1.04,"duration":0.5,"ease":"power2.out","immediateRender":false}, 1.500);
+  tl.set({}, {}, 2.000);
+  window.__timelines["broll4"] = tl;
+</script>
+</template></body></html>

@@ -1,0 +1,797 @@
+{
+ "project": "MCR 2026 Trout Area - Liben Libechov drone flyover (4.0 s @ 30 fps = 120 frames)",
+ "crs": "EPSG:32633 (WGS 84 / UTM 33N). Grid convergence here ~-0.4 deg, i.e. raster up = grid north ~= true north.",
+ "vertical_datum": "Heights in metres Bpv (Baltic after adjustment, normal heights, EPSG:5705/8357). Ellipsoidal WGS84 h ~= H_bpv + 44.7 m (only needed if mixing with GNSS).",
+ "pixel_convention": "PixelIsArea: bbox = outer edges; pixel (row i, col j) centre = (xmin+(j+0.5)*res, ymax-(i+0.5)*res). Row 0 = north.",
+ "core_bbox_utm": [
+  461150,
+  5584450,
+  461950,
+  5585250
+ ],
+ "context_bbox_utm": [
+  460050,
+  5583350,
+  463050,
+  5586350
+ ],
+ "sources": {
+  "ortho": "CUZK ORTOFOTO MapServer (current national orthophoto, summer, native 0.125 m); compressionQuality>85 ignored by server (served q85).",
+  "dsm": "CUZK DMP 1G (lidar 2009-2013, 2 m)",
+  "dtm": "CUZK DMR 5G (lidar 2009-2013, 2 m, TIN)",
+  "transport": "Zapier GoogleDrive upload-from-URL + Google Drive download (container has no direct internet)."
+ },
+ "alignment_qa": {
+  "reprojection": "Server UTM outputs verified against local pyproj warp of native EPSG:5514 exports using \"S-JTSK to WGS 84 (1)\" (EPSG Czechia 7-param, 1 m accuracy): DMP 1G offset 0.01-0.03 m; ortho at full res 0.003/0.005 m (N/E). PROJ default op \"(3)\" would be off by ~10 m - do NOT use pyproj default for 5514<->32633.",
+  "ortho_tiles": "4 tiles seamless (seam gradient 4.1 vs 3.5 interior, JPEG-block level).",
+  "context_vs_core": "orto_context vs downsampled core: 0.19 m N / -0.13 m E; DMP context vs core: 0.04 m, median dz 0.00 m.",
+  "ortho_vs_dem": "Small pond: ortho water mask vs DMR5G flat basin IoU 0.885 at zero shift (best 0.893 at E-0.75/N-0.5 m), centroid offset 0.36/0.26 m -> co-registration better than ~1 m (< half DEM native pixel). nDSM>3 m outlines coincide with ortho buildings/tree crowns (check_overlay.jpg). Ortho is not true-ortho: tall objects lean a few metres radially."
+ },
+ "ponds": {
+  "velky_sportak_big": {
+   "label": 1,
+   "name": "Velky Sportak (big pond)",
+   "area_m2": 19590.8,
+   "centroid_utm": [
+    461580.7,
+    5584855.05
+   ],
+   "centroid_lonlat": [
+    14.459255,
+    50.414473
+   ],
+   "bbox_utm": [
+    461497.31,
+    5584738.56,
+    461650.94,
+    5584981.69
+   ],
+   "major_axis_bearing_deg": 21.4,
+   "approx_length_m": 248.1,
+   "approx_width_m": 108.9,
+   "water_level_est_m_bpv": 169.79,
+   "bank_dtm_median_m_bpv": 170.2,
+   "dsm_over_water_median": 170.44,
+   "water_level_used_m_bpv": 169.85
+  },
+  "maly_sportacek_small_HERO": {
+   "label": 2,
+   "name": "Maly Sportacek (small pond, hero)",
+   "area_m2": 1854.3,
+   "centroid_utm": [
+    461451.67,
+    5584691.84
+   ],
+   "centroid_lonlat": [
+    14.457456,
+    50.412997
+   ],
+   "bbox_utm": [
+    461422.69,
+    5584665.06,
+    461480.94,
+    5584719.44
+   ],
+   "major_axis_bearing_deg": 43.6,
+   "approx_length_m": 58.5,
+   "approx_width_m": 41.5,
+   "water_level_est_m_bpv": 167.1,
+   "bank_dtm_median_m_bpv": 167.54,
+   "dsm_over_water_median": 167.38,
+   "water_level_used_m_bpv": 167.19
+  },
+  "north_pond_bozi_voda": {
+   "label": 3,
+   "name": "north pond (Bozi Voda)",
+   "area_m2": 4572.9,
+   "centroid_utm": [
+    461659.79,
+    5585160.94
+   ],
+   "centroid_lonlat": [
+    14.460337,
+    50.417229
+   ],
+   "bbox_utm": [
+    461625.31,
+    5585098.81,
+    461689.44,
+    5585218.19
+   ],
+   "major_axis_bearing_deg": 11.5,
+   "approx_length_m": 131.5,
+   "approx_width_m": 48.7,
+   "water_level_est_m_bpv": 172.07,
+   "bank_dtm_median_m_bpv": 172.41,
+   "dsm_over_water_median": 176.29,
+   "water_level_used_m_bpv": 172.06
+  },
+  "hatchery_rearing_ponds": {
+   "label": 4,
+   "name": "hatchery rearing ponds",
+   "area_m2": 874.3,
+   "centroid_utm": [
+    461411.56,
+    5584753.93
+   ],
+   "centroid_lonlat": [
+    14.456885,
+    50.413552
+   ],
+   "bbox_utm": [
+    461348.06,
+    5584727.56,
+    461487.69,
+    5584774.06
+   ],
+   "water_level_est_m_bpv": 166.67,
+   "bank_dtm_median_m_bpv": 167.21,
+   "dsm_over_water_median": 167.38,
+   "water_level_used_m_bpv": 166.86,
+   "polygons_utm": [
+    [
+     [
+      461466.9,
+      5584761.93
+     ],
+     [
+      461455.65,
+      5584734.74
+     ],
+     [
+      461460.73,
+      5584732.64
+     ],
+     [
+      461471.98,
+      5584759.82
+     ]
+    ],
+    [
+     [
+      461483.64,
+      5584763.63
+     ],
+     [
+      461463.95,
+      5584729.88
+     ],
+     [
+      461468.05,
+      5584727.49
+     ],
+     [
+      461487.74,
+      5584761.24
+     ]
+    ],
+    [
+     [
+      461348.06,
+      5584761.81
+     ],
+     [
+      461352.44,
+      5584764.94
+     ],
+     [
+      461364.56,
+      5584746.5
+     ],
+     [
+      461359.94,
+      5584744.19
+     ]
+    ],
+    [
+     [
+      461354.12,
+      5584768.38
+     ],
+     [
+      461357.88,
+      5584771.19
+     ],
+     [
+      461372.06,
+      5584753.19
+     ],
+     [
+      461367.06,
+      5584749.56
+     ]
+    ],
+    [
+     [
+      461362.06,
+      5584772.56
+     ],
+     [
+      461365.38,
+      5584774.0
+     ],
+     [
+      461378.31,
+      5584756.94
+     ],
+     [
+      461374.44,
+      5584754.19
+     ]
+    ],
+    [
+     [
+      461376.0,
+      5584765.88
+     ],
+     [
+      461380.69,
+      5584768.06
+     ],
+     [
+      461398.19,
+      5584757.12
+     ],
+     [
+      461393.81,
+      5584748.06
+     ],
+     [
+      461388.19,
+      5584752.44
+     ],
+     [
+      461382.88,
+      5584757.56
+     ]
+    ]
+   ],
+   "note": "6 rectangular rearing ponds hand-digitised from the 0.125 m ortho (+-1 m); centroid/axis are of the group."
+  }
+ },
+ "big_pond_utm": [
+  461580.7,
+  5584855.05
+ ],
+ "small_pond_utm": [
+  461451.67,
+  5584691.84
+ ],
+ "readme_correction": "The earlier README estimate for Maly Sportacek (50.4138 N, 14.4592 E) was ~140 m off (it came from the Krovak-rotated scout). Correct centroid: 50.412996 N, 14.457456 E = UTM 461451.7 E, 5584691.8 N. Velky Sportak centroid: 50.414473 N, 14.459255 E.",
+ "flight_paths": {
+  "recommended": "arrow_full",
+  "arrow_full": {
+   "name": "arrow_full",
+   "length_m": 246.9,
+   "avg_speed_mps": 61.7,
+   "max_speed_mps": 85.2,
+   "end_speed_mps": 42.2,
+   "min_clearance_above_dsm_m": 39.9,
+   "easing": "linear_out",
+   "waypoints_utm": [
+    [
+     461548,
+     5585009
+    ],
+    [
+     461527,
+     5584878
+    ],
+    [
+     461485,
+     5584772
+    ]
+   ],
+   "agl_m": [
+    95,
+    75,
+    55
+   ],
+   "look_at_start": [
+    461510,
+    5584800,
+    169.85
+   ],
+   "look_at_end": [
+    461451.67,
+    5584691.84,
+    167.19
+   ],
+   "start": {
+    "f": 0,
+    "t": 0.0,
+    "e": 461548.0,
+    "n": 5585009.0,
+    "z_bpv": 264.33,
+    "agl": 95.0,
+    "ground": 169.33,
+    "yaw_deg": 190.3,
+    "pitch_deg": -23.98,
+    "look_at": [
+     461510.0,
+     5584800.0,
+     169.85
+    ]
+   },
+   "end": {
+    "f": 119,
+    "t": 3.9667,
+    "e": 461485.0,
+    "n": 5584772.0,
+    "z_bpv": 223.38,
+    "agl": 55.0,
+    "ground": 168.38,
+    "yaw_deg": 202.58,
+    "pitch_deg": -32.91,
+    "look_at": [
+     461451.67,
+     5584691.84,
+     167.19
+    ]
+   },
+   "description": "Matches the user arrow: starts over the village road just NW of the big pond north tip, flies SSW along the big pond west shore (dam path), descends 95->55 m AGL, ends ~87 m NNE of Maly Sportacek with the camera locked on it (pitch -33 deg). Average ground speed ~62 m/s = a ~3x speed-ramped DJI sport-mode pass; if it reads too fast, use compact_realistic or extend duration."
+  },
+  "compact_realistic": {
+   "name": "compact_realistic",
+   "length_m": 140.6,
+   "avg_speed_mps": 35.2,
+   "max_speed_mps": 48.1,
+   "end_speed_mps": 23.9,
+   "min_clearance_above_dsm_m": 34.7,
+   "easing": "linear_out",
+   "waypoints_utm": [
+    [
+     461530,
+     5584905
+    ],
+    [
+     461512,
+     5584840
+    ],
+    [
+     461485,
+     5584772
+    ]
+   ],
+   "agl_m": [
+    70,
+    60,
+    50
+   ],
+   "look_at_start": [
+    461490,
+    5584760,
+    168.0
+   ],
+   "look_at_end": [
+    461451.67,
+    5584691.84,
+    167.19
+   ],
+   "start": {
+    "f": 0,
+    "t": 0.0,
+    "e": 461530.0,
+    "n": 5584905.0,
+    "z_bpv": 238.64,
+    "agl": 70.0,
+    "ground": 168.64,
+    "yaw_deg": 195.42,
+    "pitch_deg": -25.16,
+    "look_at": [
+     461490.0,
+     5584760.0,
+     168.0
+    ]
+   },
+   "end": {
+    "f": 119,
+    "t": 3.9667,
+    "e": 461485.0,
+    "n": 5584772.0,
+    "z_bpv": 218.38,
+    "agl": 50.0,
+    "ground": 168.38,
+    "yaw_deg": 202.58,
+    "pitch_deg": -30.53,
+    "look_at": [
+     461451.67,
+     5584691.84,
+     167.19
+    ]
+   },
+   "description": "Same direction/ending, starts over the mid west shore of the big pond, 70->50 m AGL, ~35 m/s (FPV/speed-ramped Mavic plausible)."
+  },
+  "camera_notes": "DJI Mavic 3 look: 24 mm-equiv (HFOV ~73.7 deg for 16:9; for 9:16 render a vertical crop or a 9:16 frustum with VFOV ~73.7 deg). Keep roll 0, smooth yaw 190->203 deg, gimbal pitch -24 -> -33 deg. Sun in the ortho is from the south (tree shadows fall northwards onto the big pond south end) - place key light accordingly; late-summer palette, slight haze toward the context horizon.",
+  "frames_file": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/flight_path.json"
+ },
+ "files": [
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_6400.jpg",
+   "kind": "ortho_core",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 6400,
+   "h": 6400,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 12115414,
+   "desc": "Core ortho mosaic of the 4 tiles, native LOD 0.125 m/px, JPEG q93 4:4:4 (world file .jgw + .prj)."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_4096.jpg",
+   "kind": "ortho_core",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 4096,
+   "h": 4096,
+   "m_per_px": 0.195312,
+   "crs": "EPSG:32633",
+   "bytes": 6777804,
+   "desc": "Core ortho Lanczos-downsampled to 4096 px (0.1953 m/px)."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_NW.jpg",
+   "kind": "ortho_core_tile",
+   "bbox_utm": [
+    461150,
+    5584850,
+    461550,
+    5585250
+   ],
+   "w": 3200,
+   "h": 3200,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 2172708,
+   "desc": "Original server tile NW (JPEG q85 as served).",
+   "source": "https://ags.cuzk.cz/arcgis1/rest/services/ORTOFOTO/MapServer/export?bbox=461150,5584850,461550,5585250&bboxSR=32633&imageSR=32633&size=3200,3200&format=jpg&compressionQuality=92&f=image"
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_NE.jpg",
+   "kind": "ortho_core_tile",
+   "bbox_utm": [
+    461550,
+    5584850,
+    461950,
+    5585250
+   ],
+   "w": 3200,
+   "h": 3200,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 2076560,
+   "desc": "Original server tile NE (JPEG q85 as served).",
+   "source": "https://ags.cuzk.cz/arcgis1/rest/services/ORTOFOTO/MapServer/export?bbox=461550,5584850,461950,5585250&bboxSR=32633&imageSR=32633&size=3200,3200&format=jpg&compressionQuality=92&f=image"
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_SW.jpg",
+   "kind": "ortho_core_tile",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461550,
+    5584850
+   ],
+   "w": 3200,
+   "h": 3200,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 2260487,
+   "desc": "Original server tile SW (JPEG q85 as served).",
+   "source": "https://ags.cuzk.cz/arcgis1/rest/services/ORTOFOTO/MapServer/export?bbox=461150,5584450,461550,5584850&bboxSR=32633&imageSR=32633&size=3200,3200&format=jpg&compressionQuality=92&f=image"
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_SE.jpg",
+   "kind": "ortho_core_tile",
+   "bbox_utm": [
+    461550,
+    5584450,
+    461950,
+    5584850
+   ],
+   "w": 3200,
+   "h": 3200,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 2281809,
+   "desc": "Original server tile SE (JPEG q85 as served).",
+   "source": "https://ags.cuzk.cz/arcgis1/rest/services/ORTOFOTO/MapServer/export?bbox=461550,5584450,461950,5584850&bboxSR=32633&imageSR=32633&size=3200,3200&format=jpg&compressionQuality=92&f=image"
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_context_3000.jpg",
+   "kind": "ortho_context",
+   "bbox_utm": [
+    460050,
+    5583350,
+    463050,
+    5586350
+   ],
+   "w": 3000,
+   "h": 3000,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 2693036,
+   "desc": "Context ortho 3x3 km for horizon, 1 m/px.",
+   "source": "https://ags.cuzk.cz/arcgis1/rest/services/ORTOFOTO/MapServer/export?bbox=460050,5583350,463050,5586350&bboxSR=32633&imageSR=32633&size=3000,3000&format=jpg&compressionQuality=92&f=image"
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dmp1g_core_1m.tif",
+   "kind": "dsm_core",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 3212775,
+   "desc": "DMP 1G surface model (trees+buildings), Float32 GeoTIFF, heights m Bpv. NOTE: values over water are lidar-interpolation garbage (up to +6 m over the NW part of the big pond) -> use dsm_core_1m_render.tif.",
+   "source": "https://ags.cuzk.cz/arcgis2/rest/services/dmp1g/ImageServer/exportImage?bbox=461150,5584450,461950,5585250&bboxSR=32633&imageSR=32633&size=800,800&format=tiff&pixelType=F32&interpolation=RSP_BilinearInterpolation&f=image",
+   "native_res_m": 2.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dmr5g_core_1m.tif",
+   "kind": "dtm_core",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 3212775,
+   "desc": "DMR 5G bare terrain, Float32 GeoTIFF, m Bpv.",
+   "source": "https://ags.cuzk.cz/arcgis2/rest/services/dmr5g/ImageServer/exportImage?bbox=461150,5584450,461950,5585250&bboxSR=32633&imageSR=32633&size=800,800&format=tiff&pixelType=F32&interpolation=RSP_BilinearInterpolation&f=image",
+   "native_res_m": 2.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dsm_core_1m_render.tif",
+   "kind": "dsm_core_render",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 2561088,
+   "desc": "DMP 1G with all water bodies flattened to estimated water level (see ponds[].water_level_used_m_bpv). Use this for the 3D mesh."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dtm_core_1m_render.tif",
+   "kind": "dtm_core_render",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 2561088,
+   "desc": "DMR 5G with water bodies flattened to water level."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dmp1g_context_3m.tif",
+   "kind": "dsm_context",
+   "bbox_utm": [
+    460050,
+    5583350,
+    463050,
+    5586350
+   ],
+   "w": 1000,
+   "h": 1000,
+   "m_per_px": 3.0,
+   "crs": "EPSG:32633",
+   "bytes": 4195935,
+   "desc": "DMP 1G context 3x3 km, 3 m/px, Float32 GeoTIFF m Bpv.",
+   "source": "https://ags.cuzk.cz/arcgis2/rest/services/dmp1g/ImageServer/exportImage?bbox=460050,5583350,463050,5586350&bboxSR=32633&imageSR=32633&size=1000,1000&format=tiff&pixelType=F32&interpolation=RSP_BilinearInterpolation&f=image",
+   "native_res_m": 2.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/dmr5g_context_3m.tif",
+   "kind": "dtm_context",
+   "bbox_utm": [
+    460050,
+    5583350,
+    463050,
+    5586350
+   ],
+   "w": 1000,
+   "h": 1000,
+   "m_per_px": 3.0,
+   "crs": "EPSG:32633",
+   "bytes": 4195935,
+   "desc": "DMR 5G context 3x3 km, 3 m/px.",
+   "source": "https://ags.cuzk.cz/arcgis2/rest/services/dmr5g/ImageServer/exportImage?bbox=460050,5583350,463050,5586350&bboxSR=32633&imageSR=32633&size=1000,1000&format=tiff&pixelType=F32&interpolation=RSP_BilinearInterpolation&f=image",
+   "native_res_m": 2.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/hm_core_dsm_1m.png",
+   "kind": "heightmap_png16",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 885112,
+   "desc": "16-bit grayscale heightmap: z_bpv = 163.0 + v/65535*(250.0-163.0). Pixel-is-area, row 0 = north.",
+   "z_min": 163.0,
+   "z_max": 250.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/hm_core_dtm_1m.png",
+   "kind": "heightmap_png16",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 809328,
+   "desc": "16-bit grayscale heightmap: z_bpv = 162.0 + v/65535*(235.0-162.0). Pixel-is-area, row 0 = north.",
+   "z_min": 162.0,
+   "z_max": 235.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/hm_context_dsm_3m.png",
+   "kind": "heightmap_png16",
+   "bbox_utm": [
+    460050,
+    5583350,
+    463050,
+    5586350
+   ],
+   "w": 1000,
+   "h": 1000,
+   "m_per_px": 3.0,
+   "crs": "EPSG:32633",
+   "bytes": 1484522,
+   "desc": "16-bit grayscale heightmap: z_bpv = 152.0 + v/65535*(287.0-152.0). Pixel-is-area, row 0 = north.",
+   "z_min": 152.0,
+   "z_max": 287.0
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/water_mask.png",
+   "kind": "water_mask",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 6400,
+   "h": 6400,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 65566,
+   "desc": "Binary water mask (255=water) pixel-aligned with orto_core_6400.jpg / tiles (0.125 m). Includes big pond, small pond, north pond and hatchery rearing ponds."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/water_labels.png",
+   "kind": "water_labels",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 6400,
+   "h": 6400,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 65729,
+   "desc": "Label image aligned with orto_core_6400.jpg: 0 land, 1 Velky Sportak, 2 Maly Sportacek (hero), 3 north pond, 4 hatchery rearing ponds (hand-digitised rectangles, +-1 m)."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/water_mask_4096.png",
+   "kind": "water_mask",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 4096,
+   "h": 4096,
+   "m_per_px": 0.195312,
+   "crs": "EPSG:32633",
+   "bytes": 40614,
+   "desc": "Soft (area-averaged) water mask aligned with orto_core_4096.jpg."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/water_mask_1m.png",
+   "kind": "water_mask",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 800,
+   "h": 800,
+   "m_per_px": 1.0,
+   "crs": "EPSG:32633",
+   "bytes": 6555,
+   "desc": "Water fraction (0-255) aligned with the 1 m DEM grid."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/check_overlay.jpg",
+   "kind": "qa",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 3200,
+   "h": 1700,
+   "m_per_px": null,
+   "crs": "EPSG:32633",
+   "bytes": 1599182,
+   "desc": "QA: left = ortho x DSM hillshade + water outline; right = 200 m zoom with ortho water mask (cyan), DMR5G pond basin (yellow), nDSM>3 m outlines (red)."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/flight_path_preview.jpg",
+   "kind": "qa",
+   "bbox_utm": [
+    461330,
+    5584630,
+    461720,
+    5585070
+   ],
+   "w": 1997,
+   "h": 2253,
+   "m_per_px": 0.1953,
+   "crs": "EPSG:32633",
+   "bytes": 1120025,
+   "desc": "Proposed flight paths drawn on the ortho."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/flight_path.json",
+   "kind": "flight_path",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 120,
+   "h": 1,
+   "m_per_px": null,
+   "crs": "EPSG:32633",
+   "bytes": 46490,
+   "desc": "Per-frame camera (30 fps x 120) for both proposed paths: e,n,z_bpv,agl,yaw,pitch,look_at."
+  }
+ ]
+}

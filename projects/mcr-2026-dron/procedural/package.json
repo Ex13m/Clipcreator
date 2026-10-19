@@ -1,0 +1,11 @@
+{
+  "name": "mcr2026-drone-procedural",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Approach B: game-engine realism drone flyover of Liben Libechov (offline three.js render)",
+  "type": "module",
+  "dependencies": {
+    "playwright-core": "^1.55.0",
+    "three": "^0.169.0"
+  }
+}

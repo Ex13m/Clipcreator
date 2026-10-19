@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>venue · MČR 2026 blok</title></head>
+<body><template>
+<div id="b-venue" data-composition-id="venue" data-width="1080" data-height="1920" data-duration="6.000">
+  <div id="bw-venue" class="blk sp venue" style="--acc:#17a1c8; --acc2:#d8af64; --tile:#0b1e42">
+        <div class="vbg" id="venue-bg"><div class="vph" id="venue-vph"><img class="im" src="assets/libechov/velky_sportak.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div>
+        <div class="vshade"></div>
+        <div class="kick" id="venue-kick"><b>Místo konání · MČR 2026</b></div>
+        <div class="vlogo" id="venue-lcard"><img src="assets/libechov/logo.png" alt="Líheň Liběchov" style="width:180px; height:180px"></div>
+        <div class="lmeta vname" id="venue-lmeta" style="left:278px; width:738px"><b>Líheň Liběchov</b><span>lihenlibechov.cz</span></div>
+        <div class="msgs" id="venue-msgs"><div class="msg" id="venue-m0" style="opacity:1"><div class="t" style="font-size:72px"><span>Dějiště MČR v Trout Area 2026</span></div><div class="s">rybník Malý Sporťáček</div></div><div class="msg" id="venue-m1"><div class="t" style="font-size:72px"><span>Pstruží líheň s tradicí od roku 1934</span></div><div class="s">u pramene Boží Voda</div></div><div class="msg" id="venue-m2"><div class="t" style="font-size:72px"><span>Přijďte se podívat</span></div><div class="s">24.–25. 10. 2026 · lihenlibechov.cz</div></div></div>
+        <div class="vplace" id="venue-place"><i></i><span>Rybník Malý Sporťáček · Boží Voda 289, Liběchov</span></div>
+        <div class="pads" id="venue-pads"><div class="pd" id="venue-pd0" style="width:207.0px"><div class="pdi"><img class="im" src="assets/thumbs/libechov_velky_sportak.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div><em>01</em><i class="pl" id="venue-pl0"></i></div><div class="pd" id="venue-pd1" style="width:207.0px"><div class="pdi"><img class="im" src="assets/thumbs/libechov_maly_sportacek_photo.jpg" alt="" style="object-fit:cover; object-position:50% 60%;"></div><em>02</em><i class="pl" id="venue-pl1"></i></div><div class="pd" id="venue-pd2" style="width:207.0px"><div class="pdi"><img class="im" src="assets/thumbs/libechov_nasazeni_trofejnich_pstruhu.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div><em>03</em><i class="pl" id="venue-pl2"></i></div><div class="pd" id="venue-pd3" style="width:207.0px"><div class="pdi"><img class="im" src="assets/thumbs/libechov_mcr_news_poster.png" alt="" style="object-fit:cover; object-position:50% 40%;"></div><em>04</em><i class="pl" id="venue-pl3"></i></div></div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#venue-vph", {"scale":1.22,"xPercent":-3}, {"scale":1.04,"xPercent":3,"duration":6,"ease":"none"}, 0.000);
+  tl.fromTo("#venue-m0 .t, #venue-m0 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.set("#venue-m0", {"opacity":0}, 2.000);
+  tl.set("#venue-m1", {"opacity":1}, 2.000);
+  tl.fromTo("#venue-m1 .t, #venue-m1 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 2.000);
+  tl.set("#venue-m1", {"opacity":0}, 4.000);
+  tl.set("#venue-m2", {"opacity":1}, 4.000);
+  tl.fromTo("#venue-m2 .t, #venue-m2 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.000);
+  tl.set("#venue-pd0", {"--on":1}, 0.000);
+  tl.fromTo("#venue-pl0", {"opacity":1}, {"opacity":0.18,"duration":0.45,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-pd0", {"scale":1.08}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 0.000);
+  tl.set("#venue-pd0", {"--on":0}, 1.500);
+  tl.set("#venue-pd1", {"--on":1}, 1.500);
+  tl.fromTo("#venue-pl1", {"opacity":1}, {"opacity":0.18,"duration":0.45,"ease":"power2.out","immediateRender":false}, 1.500);
+  tl.fromTo("#venue-pd1", {"scale":1.08}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 1.500);
+  tl.set("#venue-pd1", {"--on":0}, 3.000);
+  tl.set("#venue-pd2", {"--on":1}, 3.000);
+  tl.fromTo("#venue-pl2", {"opacity":1}, {"opacity":0.18,"duration":0.45,"ease":"power2.out","immediateRender":false}, 3.000);
+  tl.fromTo("#venue-pd2", {"scale":1.08}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 3.000);
+  tl.set("#venue-pd2", {"--on":0}, 4.500);
+  tl.set("#venue-pd3", {"--on":1}, 4.500);
+  tl.fromTo("#venue-pl3", {"opacity":1}, {"opacity":0.18,"duration":0.45,"ease":"power2.out","immediateRender":false}, 4.500);
+  tl.fromTo("#venue-pd3", {"scale":1.08}, {"scale":1,"duration":0.3,"ease":"back.out(1.8)","immediateRender":false}, 4.500);
+  tl.fromTo("#venue-lcard", {"rotation":-8,"scale":1.06}, {"rotation":0,"scale":1,"duration":0.45,"ease":"back.out(1.8)","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-lcard", {"rotation":-8,"scale":1.06}, {"rotation":0,"scale":1,"duration":0.45,"ease":"back.out(1.8)","immediateRender":false}, 2.000);
+  tl.fromTo("#venue-lcard", {"rotation":-8,"scale":1.06}, {"rotation":0,"scale":1,"duration":0.45,"ease":"back.out(1.8)","immediateRender":false}, 4.000);
+  tl.set({}, {}, 6.000);
+  window.__timelines["venue"] = tl;
+</script>
+</template></body></html>

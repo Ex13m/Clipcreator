@@ -1,0 +1,14 @@
+{
+  "name": "mcr2026-drone-mesh",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Approach A photogrammetry-look drone flyover (DSM mesh + ortho) rendered offline in headless Chromium",
+  "scripts": {
+    "render": "node src/render.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "^1.56.1",
+    "three": "^0.169.0"
+  }
+}
