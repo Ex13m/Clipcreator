@@ -12,7 +12,10 @@ Only public web images (lihenlibechov.cz, ČÚZK ORTOFOTO export) were imported.
 | 5 | 2026-10-19 16:5x | upscale_image 4k | trout (#2) | job 0528c9f5-543d-4266-926a-91daabf0f65a | 2 | 4 |
 | 6 | 2026-10-19 16:5x | upscale_image 4k | ortho Malý Sporťáček (#3) | job 49363abd-5d59-4184-8aa5-ef2fed114427 | 2 | 6 |
 
-Results (all 4096 px long side, 2.83× poster/ortho… see sizes) — brought to disk via Zapier→Drive bridge. The PNG results were 17–29 MB (> 10 MB Drive MCP limit), so the Drive copy was re-fetched through its own thumbnail URL with `=s4096-rj-l95` (Google image server → JPEG q95, full 4096 px) and that JPEG was downloaded. Drive files stay private (buffer folder `_zdroje`).
+Results (4096 px long side; poster ×2.83, trout ×2.56, ortho ×3.28) — brought to disk via Zapier→Drive bridge. The PNG results were 17–29 MB (> 10 MB Drive MCP limit), so the Drive copy was re-fetched through its own thumbnail URL with `=s4096-rj-l95` (Google image server → JPEG q95, full 4096 px) and that JPEG was downloaded. Drive files stay private (buffer folder `_zdroje`).
 - `src/hf_poster_up4k.jpg` 4096×3072 ← job 28d0aa2e… (result https://d8j0ntlcm91z4.cloudfront.net/user_2vVGC2DWe2MM7XDhdxjTNwWTi4E/hf_20261019_165407_28d0aa2e-1c5c-490e-ad04-853857880a8e.png)
 - `src/hf_trout_up4k.jpg` 4096×3072 ← job 0528c9f5… (…/hf_20261019_165410_0528c9f5-543d-4266-926a-91daabf0f65a.png)
 - `src/hf_orto_sportacek_up4k.jpg` 4096×4096 ← job 49363abd… (…/hf_20261019_165412_49363abd-5d59-4184-8aa5-ef2fed114427.png)
+
+**Total spent: 6 credits of 12** (3 × upscale 4k; no remove_background — local ISNet + manual fixes were clean). Balance after ≈ 483.28.
+Cut-outs made from these: `ads/h3_mcr_trophy.png`, `ads/h2_trout_potocak.png`, `ads/h1_arena_disc.png`, `ads/h1_pond_island*.png`.

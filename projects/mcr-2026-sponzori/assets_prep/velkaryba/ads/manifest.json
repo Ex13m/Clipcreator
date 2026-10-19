@@ -22,7 +22,14 @@
     "loziska": "11 + 1",
     "brzda": "3 kg",
     "navin": "69 cm"
-   }
+   },
+   "pad": [
+    0.0087,
+    0.008,
+    0.0092,
+    0.0075
+   ],
+   "aspect": 0.866
   },
   {
    "file": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_front.png",
@@ -39,7 +46,14 @@
    "shadow": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_front_shadow.png",
    "spec_verified_19_10": {
     "gramaz": "4,5 g"
-   }
+   },
+   "pad": [
+    0.007,
+    0.0139,
+    0.007,
+    0.0139
+   ],
+   "aspect": 1.988
   },
   {
    "file": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_back.png",
@@ -52,7 +66,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/19519-plandavka-shimano-cardiff-roll-swimmer-ce-45g-orange-gold-4969363440464.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/1/3/1/2/31312.jpg",
-   "method": "same source as front; use for spoon flip"
+   "method": "same source as front; use for spoon flip",
+   "pad": [
+    0.0117,
+    0.0235,
+    0.0117,
+    0.0235
+   ],
+   "aspect": 2.011
   },
   {
    "file": "velkaryba/ads/H3_illex_native_spoon_pink_yamame.png",
@@ -69,7 +90,14 @@
    "shadow": "velkaryba/ads/H3_illex_native_spoon_pink_yamame_shadow.png",
    "spec_verified_19_10": {
     "gramaz": "2,5 g"
-   }
+   },
+   "pad": [
+    0.0095,
+    0.008,
+    0.0089,
+    0.008
+   ],
+   "aspect": 0.895
   },
   {
    "file": "velkaryba/ads/S1_illex_native_spoon_copper_trout.png",
@@ -82,7 +110,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/12652-plandavka-illex-native-spoon-35-g-copper-trout-3297830618896.html",
    "source_image": "https://www.velka-ryba.cz/img/p/2/6/0/7/1/26071.jpg",
-   "method": "local cut-out (native res)"
+   "method": "local cut-out (native res)",
+   "pad": [
+    0.0131,
+    0.0118,
+    0.0131,
+    0.0118
+   ],
+   "aspect": 0.905
   },
   {
    "file": "velkaryba/ads/S2_daiwa_presso_adm_manhattan_pair.png",
@@ -95,7 +130,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/20841-plandavka-daiwa-presso-adm-22-g-manhattan-4066466001926.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/0/7/33507.jpg",
-   "method": "local cut-out"
+   "method": "local cut-out",
+   "pad": [
+    0.0128,
+    0.0119,
+    0.0128,
+    0.0119
+   ],
+   "aspect": 0.932
   },
   {
    "file": "velkaryba/ads/S3_daiwa_presso_adm_flashing_green_pair.png",
@@ -108,7 +150,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/20850-plandavka-daiwa-presso-adm-38-g-flashing-green-4066466002015.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/1/6/33516.jpg",
-   "method": "local cut-out"
+   "method": "local cut-out",
+   "pad": [
+    0.0133,
+    0.0119,
+    0.0123,
+    0.0119
+   ],
+   "aspect": 0.966
   },
   {
    "file": "velkaryba/ads/S4_shimano_cardiff_roll_swimmer_ce_lime_front.png",
@@ -121,7 +170,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/19518-plandavka-shimano-cardiff-roll-swimmer-ce-45g-lime-gold-4969363440440.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/1/3/1/1/31311.jpg",
-   "method": "local cut-out, front only"
+   "method": "local cut-out, front only",
+   "pad": [
+    0.0121,
+    0.0239,
+    0.0121,
+    0.0239
+   ],
+   "aspect": 1.972
   },
   {
    "file": "velkaryba/ads/S5_shimano_cardiff_roll_swimmer_camo_military_pink_front.png",
@@ -134,7 +190,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/plandavky/20321-plandavka-shimano-cardiff-roll-swimmer-camo-25g-military-pink-4969363625106.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/2/4/4/1/32441.jpg",
-   "method": "local cut-out; embossed CE 4.5g vs listing 2,5 g -> never caption gramáž"
+   "method": "local cut-out; embossed CE 4.5g vs listing 2,5 g -> never caption gramáž",
+   "pad": [
+    0.012,
+    0.0223,
+    0.012,
+    0.0223
+   ],
+   "aspect": 1.866
   },
   {
    "file": "velkaryba/ads/S6_berkley_powerbait_power_flail_trout_pellet.png",
@@ -147,7 +210,14 @@
    ],
    "product_page": "https://www.velka-ryba.cz/cs/gumove-nastrahy/21281-cerv-berkley-powerbait-power-flail-5-cm-trout-pellet-12-ks-028632012680.html",
    "source_image": "https://www.velka-ryba.cz/img/p/3/4/4/4/4/34444.jpg",
-   "method": "local cut-out"
+   "method": "local cut-out",
+   "pad": [
+    0.012,
+    0.0338,
+    0.012,
+    0.0338
+   ],
+   "aspect": 2.808
   },
   {
    "file": "velkaryba/ads/S7_shimano_cardiff_exlead_competition_rod.png",
@@ -166,7 +236,14 @@
     "vrhaci_zatez": "0,4–4,5 g",
     "hmotnost": "60 g",
     "dily": "2"
-   }
+   },
+   "pad": [
+    0.0118,
+    0.0118,
+    0.0118,
+    0.0118
+   ],
+   "aspect": 0.998
   }
  ],
  "logo_reverse": {
@@ -187,5 +264,6 @@
    "source_image": "https://www.velka-ryba.cz/img/p/3/6/7/7/0/36770.jpg"
   }
  ],
- "shadow_usage": "shadow PNG width = 1.4 × product width; centre horizontally under the product, vertical centre at the product bottom (scale with the product)."
+ "shadow_usage": "shadow PNG width = 1.4 × product width; centre horizontally under the product, vertical centre at the product bottom (scale with the product).",
+ "pad_note": "pad = [l,t,r,b] transparent margin fractions (fx.product convention)"
 }
