@@ -34,9 +34,21 @@ obj = ndsm > 2.2
 bld = obj & (exg < 0.035) & ~water1
 bld = ndi.binary_opening(bld, np.ones((3, 3)))
 lab, n = ndi.label(bld)
-sizes = ndi.sum(bld, lab, range(1, n + 1))
-med = np.array([np.median(ndsm[lab == i]) for i in range(1, n + 1)]) if n else np.zeros(0)
-keep = np.zeros(n + 1, bool); keep[1:] = (sizes >= 30) & (med > 3.0)
+keep = np.zeros(n + 1, bool)
+red = (R > G * 1.12) & (R > Bc * 1.15)
+for i, sl in enumerate(ndi.find_objects(lab), start=1):
+    m = lab[sl] == i
+    area = m.sum()
+    if area < 30: continue
+    nd = ndsm[sl][m]
+    if np.median(nd) < 3.0: continue
+    yy_, xx_ = np.nonzero(m)
+    cov = np.cov(np.vstack([xx_, yy_])) if area > 2 else np.eye(2)
+    ev = np.sort(np.linalg.eigvalsh(cov))
+    elong = np.sqrt(ev[1] / max(ev[0], 1e-3))
+    lmean = lum[sl][m].mean(); redfrac = red[sl][m].mean(); nstd = nd.std()
+    ok = (elong < 4.5) and ((lmean > 0.24) or (redfrac > 0.3) or (nstd < 1.4))
+    keep[i] = ok
 bld = keep[lab]
 bld = ndi.binary_closing(bld, np.ones((3, 3)))
 bld = ndi.binary_fill_holes(bld)
