@@ -124,43 +124,49 @@
   }
  ],
  "copy": {
-  "headline": "Stojan na pruty Black Standard Edition",
+  "headline": "Hlavní cena pro vítěze MČR",
   "facts": [
-   "Ručně stavěno v Česku",
+   "Stojan na pruty Revolut 8 · Standard Edition · Black",
+   "Ručně stavěno v Česku · karbon + hliník",
    "Série 5 kusů · číslováno"
   ],
   "url": "gausseholler.com",
-  "extra": [
-   "Revolut 8 (malý popisek u produktu)",
-   "8 karbonových tubusů"
-  ],
+  "role": "Partner a informační sponzor",
+  "prize": "Věnuje hlavní cenu · MČR 2026",
   "lines": [
    {
-    "t": "Revolut 8 · Black Standard Edition",
-    "s": "stojan na pruty pro trout area",
+    "t": "Hlavní cena",
+    "s": "pro vítěze MČR",
+    "cta": false,
+    "src": "BRIEF (uživatel 19. 10.) + VO take 3"
+   },
+   {
+    "t": "Stojan na pruty Revolut 8",
+    "s": "Standard Edition · Black",
     "cta": false,
     "src": "gausseholler.com/products/rod-stand-v2"
    },
    {
-    "t": "Ručně stavěné v Česku",
-    "s": "karbon · hliník · limitovaná série",
+    "t": "Gausse Holler Custom Lab",
+    "s": "partner a informační sponzor",
     "cta": false,
-    "src": "gausseholler.com hero + announcement bar"
+    "src": "BRIEF (uživatel 19. 10.)"
    },
    {
-    "t": "Osm karbonových tubusů na radiálních ramenech",
-    "s": "série pěti kusů, každý číslovaný",
+    "t": "Ručně stavěno v Česku",
+    "s": "karbon · hliník · série 5 kusů, číslováno",
     "cta": false,
-    "src": "gausseholler.com + /products/rod-stand-v2"
+    "src": "gausseholler.com hero + /products/rod-stand-v2 (Verification #1, #5)"
    },
    {
     "t": "gausseholler.com",
-    "s": "Gausse Holler Custom Lab",
+    "s": "Věnuje hlavní cenu · MČR 2026",
     "cta": true,
-    "src": "gausseholler.com patička"
+    "src": "BRIEF"
    }
   ],
-  "mark": "MADE BY ⚙ © 2026 Gausse Holler"
+  "mark": "MADE BY ⚙ © 2026 Gausse Holler",
+  "_vo": "VO take 3: „Hlavní cena pro vítěze MČR – stojan Revolut 8 od Gausse Holler Custom Lab.“ (on-screen copy follows it; integration 19. 10.)"
  },
  "notes": [
   "Black Standard Edition = Revolut 8 Standard Edition · Black. Počet barev neuvádět (web si odporuje). Ozubené kolo = značka (logo pravidlo platí)."

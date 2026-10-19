@@ -288,7 +288,7 @@ export function endCard(ctx) {
   let html = world(ctx, { id: 'ew', glowX: 760, glowY: 1220 });
   const SC = 1.5, FLY = 0.42;
   const P = ctx.plate.hero(-FLY, END, { scale: SC, cx: W / 2, cy: 446, fly: FLY, ease: 'power3.inOut' });
-  const lg = ctx.logo(M.logo, { box: [760, 300], scale: SC, at: [0, END], id: 'elogo', label: `${ctx.cid} end card` });
+  const lg = ctx.logo(M.logo, { box: [760, 300], scale: SC / 1.05, at: [0, END], id: 'elogo', label: `${ctx.cid} end card` });   // ÷ the lockup settle 1.05 → 1: never larger than the TA plate, even on frame 1
   const lnS = ctx.fit(ctx.nb(M.line), { font: 'Nunito', wght: 900, upper: true, tracking: 0.12, maxW: CW, maxLines: 1, sizes: [36, 34, 32, 30] }).size;
   const yLine = Math.round(P.y + P.h + 30), yBar = yLine + lnS + 20, yLogo = yBar + 6 + 26, yUrl = yLogo + lg.h + 22;
   const uf = ctx.fit('activefishing.cz', { font: 'Nunito', wght: 1000, maxW: 860, maxLines: 1, sizes: [116, 112, 108, 104, 100] });

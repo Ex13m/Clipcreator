@@ -215,24 +215,26 @@ export function endCard(ctx) {
   ctx.tl.fromTo(ctx.sel('esun'), { y: 120, scale: 0.85 }, { y: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, 0);
   ts.fanSweep(ctx, 'efan', FAN.length, 1.2, { step: 0.05 });
   // lockup (own version of fx.endCard: Anton 400 / Roboto Condensed, no faux bold)
-  const scale = 1.5, fly = 0.6, t = 0.05;
-  const P = ctx.plate.hero(t, END, { scale, cx: W / 2, cy: 470, fly });
+  // integration seam fix (same pattern as the other Reel end cards): the TA plate flies OVER the block's slice-out (from −0.42 s)
+  // and lands on the downbeat; the lockup builds within the first beat instead of ~1.4 s after a plate fly from the corner
+  const scale = 1.5, fly = 0.42, t = -fly;
+  const P = ctx.plate.hero(t, END, { scale, cx: W / 2, cy: 470, fly, ease: 'power3.inOut' });
   const lg = ctx.logo(M.logo, { box: [760, 300], scale, at: [t + fly, END], id: 'elogo', label: `${ctx.cid} end card` });
-  const tt = t + fly * 0.6;
+  const tt = 0;
   let y = P.y + P.h + 40;
   html += `<div class="ts-sub" id="${ctx.id('eline')}" style="top:${y}px"><span class="fx-ln"><span>${ctx.esc(ctx.nb(M.line))}</span></span></div>`;
   ctx.tl.fromTo(`${ctx.sel('eline')} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, tt);
   y += 34 + 26;
   html += `<div class="fx-abs" id="${ctx.id('ebar')}" style="left:${W / 2 - 60}px;top:${y}px;width:120px;height:6px;border-radius:3px;background:${RED}"></div>`;
-  ctx.tl.fromTo(ctx.sel('ebar'), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, tt + 0.08);
+  ctx.tl.fromTo(ctx.sel('ebar'), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, tt + 0.04);
   y += 6 + 34;
   html += `<div class="fx-abs" id="${ctx.id('elw')}" style="left:${(W - lg.w) / 2}px;top:${y}px;width:${lg.w}px;height:${lg.h}px">${lg.html}</div>`;
-  ctx.tl.fromTo(ctx.sel('elw'), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'expo.out' }, tt + 0.14);
+  ctx.tl.fromTo(ctx.sel('elw'), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' }, tt + 0.06);
   y += lg.h + 30;
-  const U = ts.lines(ctx, { id: 'eurl', lines: [[{ w: 'troutshop' }, { w: '.eu', c: RED, tight: true }]], y, align: 'center', sizes: [150, 140, 128, 116], times: [tt + 0.26], stagger: 0.03 });
+  const U = ts.lines(ctx, { id: 'eurl', lines: [[{ w: 'troutshop' }, { w: '.eu', c: RED, tight: true }]], y, align: 'center', sizes: [150, 140, 128, 116], times: [tt + 0.1], stagger: 0.03 });
   html += U.html;
   y += U.h + 26;
-  html += ts.pill(ctx, { id: 'epz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y, t: tt + 0.5 });
+  html += ts.pill(ctx, { id: 'epz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y, t: tt + 0.24 });
   fx.tIn(ctx, 'cut');
   const css = `${ts.CSS(S)}
 ${S} .ts-sub{position:absolute;left:0;right:0;text-align:center;font-family:'Roboto Condensed';font-weight:700;font-size:34px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.92)}`;

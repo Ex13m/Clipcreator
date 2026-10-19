@@ -1,0 +1,38 @@
+{
+ "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_reel_activefishing.wav",
+ "dur": 14.666,
+ "music": {
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
+  "start": 33.042,
+  "fadeIn": 0.12,
+  "fadeOut": 0.9
+ },
+ "vo": [
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
+   "at": 2.084,
+   "dur": 6.496
+  }
+ ],
+ "duck": {
+  "depth": -7,
+  "depthRange": [
+   -8,
+   -6
+  ],
+  "voOver": 9.5,
+  "attack": 0.12,
+  "release": 0.3,
+  "hold": 0.22,
+  "lookahead": 0.12,
+  "thresh": -42,
+  "carve": -2.5,
+  "carveMax": -4.5,
+  "voLiftMax": 1.5
+ },
+ "master": {
+  "lufs": -14,
+  "tp": -2
+ },
+ "voGain": 0
+}

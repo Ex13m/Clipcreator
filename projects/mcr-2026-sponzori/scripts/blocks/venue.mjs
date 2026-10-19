@@ -101,11 +101,12 @@ export function endCard(ctx) {
   ctx.tl.fromTo(ctx.sel('eet'), { x: 0, y: 0 }, { x: -40, y: -30, duration: ctx.dur, ease: 'sine.inOut' }, 0);
   V.reveal(ctx, 'eet', 0, { d: 0.9, dir: 'up', ease: 'expo.out' });                 // the etching draws itself on the downbeat
   html += V.bubbles(ctx, { id: 'eb', n: 8, t0: 0, t1: ctx.dur, box: [80, 1000, 920, 700], seed: 9, op: 0.6 });
-  fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.22 });
-  // lockup starts on the downbeat with a short plate fly (0.6 s expo.inOut left ~0.45 s of empty water on the card's first beat)
-  const E = fx.endCard(ctx, { t: 0, plateFly: 0.45, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
+  // integration seam fix (like the other sponsors' end cards): hard cut, no flash; the TA plate flies OVER the block's blob-out
+  // (plate.hero from −0.42 s) and lands on the downbeat, the lockup is complete on frame 1 and only settles — was ~0.3 s of navy
+  // (blob) + 0.22 s navy flash + ~0.3 s of empty water before the lockup faded in
+  const E = fx.endCard(ctx, { t: 0, plateT: -0.42, plateFly: 0.42, ease: 'power3.inOut', settle: true, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
   html += E.html;
-  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.58, reveal: 'fade', d: 0.5 }).html;
+  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.12, reveal: 'fade', d: 0.4 }).html;
   return { html, css: V.css(ctx) };
 }
 

@@ -563,16 +563,18 @@
     "cs_old": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série."
    },
    "onscreen": {
-    "name": "Gausse Holler",
-    "oneliner": "Stojan na pruty Black Standard Edition",
+    "name": "Gausse Holler Custom Lab",
+    "oneliner": "Hlavní cena pro vítěze MČR",
+    "product": "Stojan na pruty Revolut 8 (Standard Edition · Black)",
+    "role": "Partner a informační sponzor",
     "facts": [
      "Ručně stavěno v Česku",
      "Série 5 kusů · číslováno"
     ],
     "url": "gausseholler.com",
+    "prize": "Věnuje hlavní cenu · MČR 2026",
     "extra": [
-     "Revolut 8 (malý popisek u produktu)",
-     "8 karbonových tubusů"
+     "8 karbonových tubusů · Ø 32 mm · 200 mm"
     ],
     "mark": "MADE BY ⚙ © 2026 Gausse Holler"
    },

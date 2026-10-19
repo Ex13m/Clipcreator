@@ -286,7 +286,7 @@ export function endCard(ctx) {
   for (let i = 0; i < O.n; i++) fx.sweep(ctx, `eo-p${i}`, ctx.beat(2) + i * 0.06, { d: 0.45 });
   // lockup (same geometry as fx.endCard at cy 760), complete on frame 1, settles with the hit
   const P = ctx.plate.hero(-FLY, END, { scale: SC, cx: W / 2, cy: 430, fly: FLY, ease: 'power3.inOut' });
-  const LG = ctx.logo('on_dark', { box: [760, 300], scale: SC, at: [0, END], id: 'ec-logo', label: `${ctx.cid} end card` });
+  const LG = ctx.logo('on_dark', { box: [760, 300], scale: SC / 1.06, at: [0, END], id: 'ec-logo', label: `${ctx.cid} end card` });   // ÷ the lockup settle 1.06 → 1 (logo rule on frame 1)
   const url = ctx.data.url || 'moonky.cz';
   const fU = ctx.fit(url, { font: 'Exo 2', wght: 800, italic: true, maxW: 900, maxLines: 1, sizes: [96, 88, 80, 72] });
   const gap = 46, yLine = Math.round(P.y + P.h + gap);

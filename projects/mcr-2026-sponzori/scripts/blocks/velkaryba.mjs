@@ -335,7 +335,7 @@ export function endCard(ctx) {
   html += fx.marquee(ctx, { id: 'emq', text: 'Vše na přívlač', y: 1585, size: 150, font: 'Nunito', wght: 900, italic: true, color: '#ffffff', outline: true, ow: 2, speed: 90, style: 'opacity:.2' });
   const FLY = 0.42, SC = 1.5;
   const P = ctx.plate.hero(-FLY, ctx.dur, { scale: SC, cx: W / 2, cy: 640, fly: FLY, ease: 'power3.inOut' });
-  const LG = ctx.logo(LOGO, { box: [760, 300], scale: SC, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });
+  const LG = ctx.logo(LOGO, { box: [760, 300], scale: SC / 1.05, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });   // ÷ the lockup settle 1.05 → 1 (logo rule on frame 1)
   const fU = ctx.fit('velka-ryba.cz', { ...DISP, maxW: 860, maxLines: 1, sizes: [100, 96, 92, 88, 84] });
   const y0 = Math.round(P.y + P.h + 34);
   const yBar = y0 + 46, yLogo = yBar + 30, yURL = yLogo + LG.h + 28, yPz = yURL + Math.round(fU.size * 0.96) + 24, pzS = 32;

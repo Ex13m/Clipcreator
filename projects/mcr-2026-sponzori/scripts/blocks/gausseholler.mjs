@@ -25,7 +25,7 @@ export const theme = { bg: C.bg, bg2: C.panel, fg: C.bone, accent: C.orange, acc
 export const meta = {
   reel: true,
   hook: { headline: 'Hlavní cena', sub: 'MČR v Trout Area 2026' },
-  endCard: { logo: 'on_dark', line: 'Partner MČR v Trout Area 2026' },
+  endCard: { logo: 'on_dark', line: 'Partner a informační sponzor' },   // GH = partner + information sponsor of MČR (BRIEF); prize pill below
 };
 
 const px = (n) => `${Math.round(n * 10) / 10}px`;

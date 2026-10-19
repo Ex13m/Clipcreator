@@ -354,9 +354,11 @@ export function endCard(ctx) {
   let html = fx.field(ctx, { id: 'bg', bg: J.WORLD });
   html += fx.mesh(ctx, { id: 'fog', colors: [C.leaf, '#0a5c2c', C.forest], size: 900, blur: 150, opacity: 0.3, drift: 90, seed: 6 });
   // hard cut on the downbeat (the block's slice-out already ends on our deep green): the hero is THERE on frame 1, no flat-green flash
-  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 760 });
+  // integration seam fix: the TA plate flies over the block's slice-out (−0.42 s) and lands on the downbeat, the lockup is complete on
+  // frame 1 and settles (was ~0.7 s of green with only the jig before the plate + lockup faded in)
+  const E = fx.endCard(ctx, { t: 0, plateT: -0.42, plateFly: 0.42, ease: 'power3.inOut', settle: true, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 760 });
   html += E.html;
-  html += J.prize(ctx, { id: 'pz', cx: 540, y: 1012, t: 0.9 }).html;
+  html += J.prize(ctx, { id: 'pz', cx: 540, y: 1012, t: 0.12 }).html;
   // the hero product floats under the lockup (slam on the downbeat, light sweep + glint)
   {
     const k = ctx.dims(PR.tj.src)[0] / 2400, s = 500 / ((TJ_VIS[2] - TJ_VIS[0]) * k);

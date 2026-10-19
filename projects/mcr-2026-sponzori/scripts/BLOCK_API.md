@@ -119,7 +119,7 @@ blocks. The fx classes (`.fx-*`) are global.
 | split-screen grid assemble | `grid({src \| cells:[{src, fit, bg, pad}], cols, rows, mode:'cols'\|'scatter'\|'scale', t})` | |
 | colour flash on a downbeat | `flash(t, {color, peak, d, blend})` | |
 | transitions | `tIn(type, {color, d, dir})` / `tOut(type, …)`: `cut`, `wipe`, `iris`, `slice`, `whip` (directional blur and skew), `zoom` (zoom-through), `blob` (liquid mask: 8 drops fused by an SVG goo filter), `grid`, `flash` | |
-| end-card lockup | `endCard({t, logo, url, line, scale})` | flies the TA plate into the lockup (`ctx.plate.hero`) and fits the sponsor logo ≤ the TA logo |
+| end-card lockup | `endCard({t, logo, url, line, scale, plateT, plateFly, settle})` | flies the TA plate into the lockup (`ctx.plate.hero`) and fits the sponsor logo ≤ the TA logo. Reel end cards: `plateT: -0.42, plateFly: 0.42, settle: true` → the plate flies over the block's out-transition, lands on the downbeat, the lockup is complete on frame 1 |
 
 **Transition handoff contract.** Each block owns its own in and out. At a boundary the two sides either **hard-cut on the downbeat** or
 **meet at a solid colour**: `tOut` covers the frame with `ctx.next.theme.bg` by default, and `tIn` starts covered by your own
@@ -158,7 +158,7 @@ Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on
 ## 8. Reels
 `BLOCK=<key> REEL=1` builds: **hook** (the bar before the block; `meta.hook` or your `hook(ctx)`) → **your block** (unchanged) → **end
 card** (2 bars after it; `meta.endCard` or your `endCard(ctx)`). The music is the matching slice of `track.wav` with a 0.12 s fade-in and
-a 0.9 s fade-out, and the VO is included. The hook must sell in one bar: strongest product shot + headline, readable at 0.3 s. The default hook fits the product into the free box under the
+a 0.9 s fade-out, and the VO is included (see §12: every output gets ONE pre-mixed, ducked and mastered audio track). The hook must sell in one bar: strongest product shot + headline, readable at 0.3 s. The default hook fits the product into the free box under the
 headline (max 920 × 760 px, never > 1.25× natural size), so wide lures do not run off the frame. The end
 card is the lockup sponsor logo + URL + „Partner MČR v Trout Area 2026“ + TA logo (`fx.endCard` does it and respects the logo rule).
 Your block must not depend on what comes before or after it: use `ctx.prev` / `ctx.next` only for transition colours.
@@ -186,3 +186,25 @@ kickers, „01 / 08“ counters, logo cards in TA style, TA-blue/red colouring o
 3. Texts are verified and readable (≥ 1.2 s per message, inside the safe zone), and Czech NBSP rules are respected.
 4. Logo rule OK (build log `OK logo …`), and the TA plate is never covered.
 5. Transitions meet the handoff contract, and the block looks right as the first and last thing in its Reel.
+
+## 12. Audio mix (integration 19. 10.)
+- The build writes ONE audio track per output: `proto/assets/audio/mix_<film|block_<key>|reel_<key>>.wav` (`scripts/lib/mix.py`,
+  numpy, deterministic, cached by a stamp of the spec + input mtimes). `<audio id="mix">` replaces the separate music / VO elements
+  (`STEMS=1` brings the old separate tracks back for editing in the studio).
+- Music is ducked by a sidechain envelope from the VO bus: speech = 10 ms RMS over −42 dBFS, 220 ms hold, 120 ms look-ahead,
+  **120 ms attack / 300 ms release**, depth per VO clip adaptive in **−6…−8 dB** (aim: VO ≥ 9.5 LU over the music under it) + a
+  presence dip 1–4 kHz (−2.5 dB, up to −4.5 dB) on the same envelope; if the deepest duck is not enough the VO clip is lifted ≤ 1.5 dB.
+  Music runs at full level wherever there is no VO.
+- Master: **−14 LUFS integrated** (BS.1770-4) and a 4× oversampled true-peak limiter at **−2 dBTP**: ffmpeg's native AAC at 192 kbit/s
+  (what the renderer uses) overshoots by 0.1–0.6 dB and on near-mono passages at −1.5 dBTP glitched to +1.5 dBTP (velkaryba Reel).
+- After rendering run `node scripts/deliver.mjs`: it re-muxes the pre-mix into each rendered MP4 (video copied, AAC 256 kbit/s once,
+  intensity stereo / PNS off) and fails unless −14 ±0.5 LUFS and true peak ≤ −1.0 dBTP.
+- Every output length is rounded UP to whole video frames (`FPS`, default 30): otherwise the renderer pads/trims the AAC by re-encoding
+  it (2nd AAC generation: +1.3 dB true peak) and then lowers the whole mix by 1.5 dB to get back under −1 dBTP.
+  The build log prints `MIX …` with LUFS / dBTP / limiter GR / VO-over-music; per-clip values are in `mix_*.wav.stamp`.
+- Settings: `MIX` in `build.mjs` (override with `"mix": {…}` in `data/content.json`). Blocks never touch audio.
+- Logo rule, motion part: any `scale > 1` tween on a sponsor logo or one of its ancestors (a lockup „settle 1.05 → 1“) is checked at
+  its peak against the plate scale at that moment (`XX logo motion …` throws). Fit such a logo to `scale ÷ settle`.
+- Build rules added: `PRIZE CHIP` (every sponsor block + its Reel end card shows „Věnuje ceny · MČR 2026“ / GH „Věnuje hlavní cenu“,
+  the venue never does) throws like the logo rule; duplicate `<img>` of one file in a sub-composition get a `#d2…` URL fragment
+  (lint `duplicate_media_discovery_risk`; the browser still loads the one cached file).

@@ -470,7 +470,14 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
     const [ax, v] = wipeAxis(dir);
     ctx.tl.fromTo(ctx.sel(`${oid}b`), { [ax]: 0 }, { [ax]: -v, duration: d * 0.8, ease: 'power3.inOut' }, t);
     if (lead && lead !== color) ctx.tl.fromTo(ctx.sel(`${oid}a`), { [ax]: 0 }, { [ax]: -v, duration: d * 0.8, ease: 'power3.inOut' }, t + d * 0.2);
-  } else if (type === 'iris') { ctx.tl.fromTo(o, { '--r': '0%' }, { '--r': '78%', duration: d, ease: 'power3.out' }, t); ctx.tl.set(o, { webkitMaskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))', maskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))' }, 0); }
+  } else if (type === 'iris') {
+    // the hole grows past the farthest corner (radial-gradient 100% = farthest-corner; the 1 % soft edge must clear it too),
+    // then the overlay is hidden — the old 78 % end left the four corners covered in `color` for the rest of the block
+    const m = 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))';
+    ctx.tl.set(o, { webkitMaskImage: m, maskImage: m }, 0);
+    ctx.tl.fromTo(o, { '--r': '0%' }, { '--r': '102%', duration: d, ease: 'power3.out' }, t);
+    ctx.tl.set(o, { opacity: 0 }, t + d + 0.001);
+  }
   else if (type === 'flash') ctx.tl.fromTo(o, { opacity: 1 }, { opacity: 0, duration: d, ease: 'power2.out' }, t);
   else if (type === 'slice') for (let i = 0; i < 7; i++) ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { xPercent: 0 }, { xPercent: i % 2 ? 101 : -101, duration: d * 0.75, ease: 'power3.inOut' }, t + i * d * 0.035);
   else if (type === 'grid') for (let i = 0; i < 28; i++) { const c = i % 4, r = Math.floor(i / 4); ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { scale: 1.02 }, { scale: 0, duration: d * 0.6, ease: 'power2.out' }, t + (Math.abs(c - 1.5) + Math.abs(r - 3)) * d * 0.06); }
@@ -481,9 +488,13 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
 // END CARD — sponsor logo + URL + "Partner MČR v Trout Area 2026" + TA logo (the persistent plate flies into the lockup)
 // t: start (block-local), holds to `t1` (default block end). scale = TA plate scale in the lockup (sponsor logo ≤ that).
 // ======================================================================================
-export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark', url = ctx.data?.url, line = 'Partner MČR v Trout Area 2026', tone = 'dark', fg = ctx.theme.fg || '#fff', accent = ctx.theme.accent || '#fff', font = ctx.theme.font?.display || 'Inter', textFont = ctx.theme.font?.text || 'Inter', scale = 1.5, cy = 1010, gap = 46, plateFly = 0.6 } = {}) {
-  const P = ctx.plate.hero(t, t1, { scale, cx: ctx.W / 2, cy: cy - 330, fly: plateFly });
-  const L = ctx.logo(logo, { box: [760, 300], scale, at: [t + plateFly, t1], id: `${id}-logo`, label: `${ctx.cid} end card` });
+// plateT: when the plate starts flying (default t). Reel end cards pass plateT = −plateFly so the TA plate flies OVER the block's
+// out-transition and lands on the downbeat; settle: true → the lockup is complete on frame 1 and only settles (no fade-in from an
+// empty frame — the first frame of a Reel end card must already be the finished lockup).
+export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark', url = ctx.data?.url, line = 'Partner MČR v Trout Area 2026', tone = 'dark', fg = ctx.theme.fg || '#fff', accent = ctx.theme.accent || '#fff', font = ctx.theme.font?.display || 'Inter', textFont = ctx.theme.font?.text || 'Inter', scale = 1.5, cy = 1010, gap = 46, plateFly = 0.6, plateT = t, settle = false, ease } = {}) {
+  const P = ctx.plate.hero(plateT, t1, { scale, cx: ctx.W / 2, cy: cy - 330, fly: plateFly, ...(ease ? { ease } : {}) });
+  const SET = settle ? 1.05 : 1;   // the settle scales the whole lockup 1.05 → 1: fit the logo to scale ÷ 1.05 so frame 1 obeys the logo rule
+  const L = ctx.logo(logo, { box: [760, 300], scale: scale / SET, at: [Math.max(t, plateT + plateFly), t1], id: `${id}-logo`, label: `${ctx.cid} end card` });
   const urlFit = ctx.fit(url || '', { font, wght: 800, maxW: 900, maxLines: 1, sizes: [96, 88, 80, 72, 64, 56] });
   const html = `<div class="fx-ec" id="${ctx.id(id)}" style="top:${px(P.y + P.h + gap)}">
     <div id="${ctx.id(`${id}-line`)}" style="font-family:'${textFont}';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:${fg};opacity:.85">${esc(nb(line))}</div>
@@ -491,6 +502,12 @@ export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark',
     <div id="${ctx.id(`${id}-lw`)}">${L.html}</div>
     <div id="${ctx.id(`${id}-url`)}" style="margin-top:${gap}px;font-family:'${font}';font-weight:800;font-size:${urlFit.size}px;color:${fg};letter-spacing:-.01em">${esc(url || '')}</div>
   </div>`;
+  if (settle) {
+    ctx.tl.set(ctx.sel(id), { transformOrigin: '50% 0%' }, 0);
+    ctx.tl.fromTo(ctx.sel(id), { scale: SET }, { scale: 1, duration: 0.7, ease: 'expo.out' }, t);
+    ctx.tl.fromTo(ctx.sel(`${id}-bar`), { scaleX: 0.3 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t);
+    return { html, logo: L, plate: P };
+  }
   const tt = t + plateFly * 0.6;
   ctx.tl.fromTo(ctx.sel(`${id}-line`), { opacity: 0, y: 20 }, { opacity: 0.85, y: 0, duration: 0.5, ease: 'expo.out' }, tt);
   ctx.tl.fromTo(ctx.sel(`${id}-bar`), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, tt + 0.08);

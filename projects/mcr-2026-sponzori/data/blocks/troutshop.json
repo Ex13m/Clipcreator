@@ -18,104 +18,204 @@
  },
  "products": [
   {
-   "src": "assets_prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png",
+   "src": "assets_prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink.png",
    "name": "Velvet Arts Forte 2.1g 32 Glow Fluorescent Pink",
    "size": [
-    730,
-    1380
+    731,
+    1382
    ],
    "pad": [
-    0.055,
-    0.029,
-    0.055,
+    0.053,
+    0.028,
+    0.053,
     0.029
    ],
    "aspect": 0.529,
    "glint": [
-    0.73,
-    0.572
+    0.728,
+    0.571
    ],
    "dominant": [
-    "#f72c56",
-    "#fc6773",
-    "#322320"
+    "#e7405c",
+    "#c12a3d",
+    "#291e1c"
    ],
-   "cut": "shop_alpha (watermark layer dropped)"
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
   },
   {
-   "src": "assets_prep/troutshop/heroes/h02_velvetarts_forte_yellow_red.png",
+   "src": "assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png",
    "name": "Velvet Arts Forte 2.1g 35 Yellow-Red/Brown",
    "size": [
     734,
     1419
    ],
    "pad": [
-    0.056,
-    0.029,
-    0.056,
-    0.03
+    0.054,
+    0.028,
+    0.054,
+    0.028
    ],
    "aspect": 0.517,
    "glint": [
-    0.839,
+    0.841,
     0.524
    ],
    "dominant": [
-    "#2f2823",
-    "#e4be1c",
-    "#954915"
+    "#2e2823",
+    "#d4b227",
+    "#88481a"
    ],
-   "cut": "shop_alpha (watermark layer dropped)"
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
   },
   {
-   "src": "assets_prep/troutshop/heroes/h04_nories_crankin_pupa.png",
+   "src": "assets_prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png",
    "name": "Nories Crankin' Pupa 2.6g 109",
    "size": [
-    1518,
-    832
+    1512,
+    831
    ],
    "pad": [
-    0.031,
-    0.054,
-    0.032,
-    0.058
+    0.028,
+    0.052,
+    0.029,
+    0.052
    ],
-   "aspect": 1.825,
+   "aspect": 1.819,
    "glint": [
     0.392,
-    0.114
+    0.113
    ],
    "dominant": [
     "#e7dfd6",
-    "#b0a080",
-    "#4b3f30"
+    "#af9f80",
+    "#4b3e2f"
    ],
-   "cut": "ml_isnet (logo cropped off)"
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
   },
   {
-   "src": "assets_prep/troutshop/heroes/h05_fishup_baffi_fly_pink.png",
+   "src": "assets_prep/troutshop/ads/sec_06_fishup_baffi_fly_hot_pink.png",
    "name": "FishUp Baffi Fly 1.5 Hot Pink",
    "size": [
-    732,
+    731,
     575
    ],
    "pad": [
-    0.03,
-    0.038,
-    0.031,
-    0.038
+    0.029,
+    0.037,
+    0.029,
+    0.037
    ],
-   "aspect": 1.273,
+   "aspect": 1.271,
    "glint": [
-    0.653,
+    0.654,
     0.755
    ],
    "dominant": [
-    "#ff34c2",
-    "#ff0f9c",
-    "#ffa3e7"
+    "#ff24bb",
+    "#ff0e98",
+    "#ff42c7"
    ],
-   "cut": "ml_isnet"
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
+  },
+  {
+   "src": "assets_prep/troutshop/ads/hero_01_nories_rooney_2-8g_101.png",
+   "name": "Nories Rooney 2.8g 101",
+   "size": [
+    1123,
+    2078
+   ],
+   "pad": [
+    0.053,
+    0.028,
+    0.053,
+    0.028
+   ],
+   "aspect": 0.54,
+   "glint": [
+    0.324,
+    0.424
+   ],
+   "dominant": [
+    "#8f3417",
+    "#c8b471",
+    "#f3e00a"
+   ],
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
+  },
+  {
+   "src": "assets_prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold.png",
+   "name": "Velvet Arts Forte 2.1g 30 Glow Gold",
+   "size": [
+    734,
+    1421
+   ],
+   "pad": [
+    0.054,
+    0.028,
+    0.054,
+    0.029
+   ],
+   "aspect": 0.517,
+   "glint": [
+    0.764,
+    0.434
+   ],
+   "dominant": [
+    "#c8c8b2",
+    "#643c17",
+    "#ca901b"
+   ],
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
+  },
+  {
+   "src": "assets_prep/troutshop/ads/sec_03_forest_miu_ts4_limited.png",
+   "name": "Forest Miu TS4 Limited",
+   "size": [
+    775,
+    1460
+   ],
+   "pad": [
+    0.053,
+    0.028,
+    0.053,
+    0.028
+   ],
+   "aspect": 0.531,
+   "glint": [
+    0.795,
+    0.434
+   ],
+   "dominant": [
+    "#1d5a2f",
+    "#e5e71d",
+    "#f31326"
+   ],
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
+  },
+  {
+   "src": "assets_prep/troutshop/ads/sec_05_nories_tulle_3g_101.png",
+   "name": "Nories Tulle 3g 101",
+   "size": [
+    530,
+    1055
+   ],
+   "pad": [
+    0.057,
+    0.028,
+    0.057,
+    0.028
+   ],
+   "aspect": 0.502,
+   "glint": [
+    0.343,
+    0.334
+   ],
+   "dominant": [
+    "#a92b1d",
+    "#d2c698",
+    "#e1ce0e"
+   ],
+   "cut": "ads (polished cut-out, scripts/assets_prep/ts_polish.py; meta assets_prep/troutshop/ads/_ads.json)"
   }
  ],
  "copy": {
@@ -156,5 +256,6 @@
  "notes": [
   "Nepoužívat „vítězové v SK, CZ, PL i UA“. Velvet Arts/Nories nejsou vlastní značky Troutshopu (jen prodává).",
   "Logo: na černé jen logo_plate nebo on_dark (červená kontura)."
- ]
+ ],
+ "_products_note": "products[] = the polished ads/* cut-outs the block itself uses (integration 19. 10.: the old heroes/h0* refs were stale). Index order kept compatible with finale.mjs (card / burst indices)."
 }

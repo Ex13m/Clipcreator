@@ -24,10 +24,10 @@ export const meta = { reel: false };
 // partner teaser (film order). Colours follow each partner's own block theme when that module loads; fallback = brand colours.
 const TEASE = [
   { key: 'venue', photo: 'assets_prep/libechov/venue/v03_trout_in_net.jpg', bg: '#1a212e', accent: '#17a1c8', dark: true },
-  { key: 'troutshop', src: 'assets_prep/troutshop/heroes/h02_velvetarts_forte_yellow_red.png', bg: '#070707', accent: '#e3000f' },
+  { key: 'troutshop', src: 'assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png', bg: '#070707', accent: '#e3000f' },
   { key: 'activefishing', src: 'assets_prep/activefishing/heroes/h02_khor_frea.png', bg: '#f1f1ef', accent: '#e2812d' },
   { key: 'moonky', src: 'assets_prep/moonky/heroes/h04_scelet_pink_bubblegum.png', bg: '#0e1424', accent: '#b8ff2e' },
-  { key: 'jigovky', src: 'assets_prep/jigovky/heroes/h02_sickle_classic.png', bg: '#060807', accent: '#fed700' },
+  { key: 'jigovky', src: 'assets_prep/jigovky/ads/hero_sickle.png', bg: '#060807', accent: '#fed700' },
   { key: 'velkaryba', src: 'assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png', bg: '#0f2541', accent: '#da0f00' },
   { key: 'bosset', src: 'assets_prep/bosset/heroes/h01_zojirushi_orange.png', bg: '#c5ebfc', accent: '#1b97b1' },
   { key: 'gausseholler', src: 'assets_prep/gausseholler/heroes/h01_revolut8_black_front.png', bg: '#0f1113', accent: '#f0904f' },
@@ -195,9 +195,9 @@ export default function intro(ctx) {
   const YH = Math.round(905 - sHa * 0.88);
   const HB = [   // [src, pad, w, cx, cy, rot, layer] — near layer kept left of the right UI column (x ≤ 940 below y 900)
     ['assets_prep/velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange.png', [0.031, 0.039, 0.03, 0.039], 400, 830, 500, 16, 'far'],
-    ['assets_prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png', [0.055, 0.029, 0.055, 0.029], 260, 215, 650, -14, 'far'],
+    ['assets_prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink.png', [0.053, 0.028, 0.053, 0.029], 260, 215, 650, -14, 'far'],
     ['assets_prep/activefishing/heroes/h04_luckycraft_wah33f.png', [0.031, 0.063, 0.028, 0.066], 600, 372, 1345, -8, 'near'],
-    ['assets_prep/troutshop/heroes/h04_nories_crankin_pupa.png', [0.031, 0.054, 0.032, 0.058], 400, 735, 1300, 12, 'near'],
+    ['assets_prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png', [0.028, 0.052, 0.029, 0.052], 400, 735, 1300, 12, 'near'],
   ];
   let far = '', near = '';
   HB.forEach(([src, pad, w, cx, cy, rot, layer], i) => {

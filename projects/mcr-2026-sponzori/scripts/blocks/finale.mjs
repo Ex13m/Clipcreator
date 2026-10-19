@@ -94,7 +94,9 @@ export default function finale(ctx) {
     if (i) { ctx.tl.set(H1.sel, { color: c.fg }, t0); ctx.tl.set(H2.sel, { color: c.fg }, t0); }
   });
   html += fx.scene(ctx, 'sA', 0, tB, H1.html + H2.html, { outD: 0.001 });
-  fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.4 });                    // gausseholler hands over on white (zoom-through)
+  // gausseholler hands over on white (zoom-through). 0.16 s (was 0.4): one white frame on the kick, the trout reads from frame 3 —
+  // the long fade left ~0.3 s of milky, washed-out frames on the peak downbeat (same treatment as intro → venue)
+  fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.16 });
   fx.flash(ctx, bar(1), { id: 'pk1', color: '#ffffff', peak: 0.45, d: 0.28 });
   fx.chroma(ctx, H1.sel, bar(1), { amt: 12, d: 0.35 });
   fx.chroma(ctx, H2.sel, bar(1), { amt: 12, d: 0.35 });

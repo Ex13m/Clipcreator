@@ -18,129 +18,129 @@
  },
  "products": [
   {
-   "src": "assets_prep/jigovky/heroes/h01_troutjig_barbless.png",
+   "src": "assets_prep/jigovky/ads/hero_troutjig_barbless.png",
    "name": "Jig TroutJig Barbless #6 2 g",
    "size": [
-    661,
-    430
+    2400,
+    1571
    ],
    "pad": [
-    0.029,
-    0.047,
-    0.03,
-    0.047
+    0.037,
+    0.057,
+    0.038,
+    0.057
    ],
-   "aspect": 1.537,
+   "aspect": 1.528,
    "glint": [
-    0.104,
-    0.767
+    0.115,
+    0.751
    ],
    "dominant": [
     "#d1d1d1",
-    "#6d6d6d",
-    "#252525"
+    "#2c2c2b",
+    "#6a6a6a"
    ],
-   "cut": "ml_isnet"
+   "cut": "ads (4k upscale + white key; heads polished by scripts/assets_prep/polish_jigovky_heads.py; meta assets_prep/jigovky/ads/_meta.json)"
   },
   {
-   "src": "assets_prep/jigovky/heroes/h02_sickle_classic.png",
-   "name": "Jigová hlavička SICKLE Classic #2",
+   "src": "assets_prep/jigovky/ads/hero_sickle.png",
+   "name": "Jigová hlavička SICKLE #2",
    "size": [
-    1021,
-    422
+    2600,
+    1098
    ],
    "pad": [
-    0.029,
-    0.071,
-    0.029,
-    0.073
+    0.037,
+    0.088,
+    0.037,
+    0.087
    ],
-   "aspect": 2.419,
+   "aspect": 2.368,
    "glint": [
-    0.159,
-    0.457
+    0.162,
+    0.46
    ],
    "dominant": [
-    "#636363",
-    "#121212",
-    "#c7c7c7"
+    "#606060",
+    "#141413",
+    "#c5c5c5"
    ],
-   "cut": "ml_isnet"
+   "cut": "ads (4k upscale + white key; heads polished by scripts/assets_prep/polish_jigovky_heads.py; meta assets_prep/jigovky/ads/_meta.json)"
   },
   {
-   "src": "assets_prep/jigovky/heroes/h03_hd_barbless_red_detail.png",
-   "name": "HD BARBLESS #6 RED 1.3 g (head detail)",
+   "src": "assets_prep/jigovky/ads/pol/head_red.png",
+   "name": "HD BARBLESS #6 RED 1,3 g (head macro)",
    "size": [
-    540,
-    242
+    1249,
+    547
    ],
    "pad": [
-    0.252,
-    0.062,
-    0.028,
-    0.062
+    0.037,
+    0.002,
+    0.005,
+    0.007
    ],
-   "aspect": 2.231,
+   "aspect": 2.283,
    "glint": [
-    0.824,
-    0.136
+    0.838,
+    0.088
    ],
    "dominant": [
-    "#a80000",
-    "#ec0102",
-    "#575455"
+    "#db0315",
+    "#a3010d",
+    "#4f4e4e"
    ],
-   "cut": "classic white luma key + shank fade"
+   "cut": "ads (4k upscale + white key; heads polished by scripts/assets_prep/polish_jigovky_heads.py; meta assets_prep/jigovky/ads/_meta.json)"
   },
   {
-   "src": "assets_prep/jigovky/heroes/h04_hd_barbless_fluo_detail.png",
-   "name": "HD BARBLESS #2 FLUO 0.4 g (head detail)",
+   "src": "assets_prep/jigovky/ads/pol/head_fluo.png",
+   "name": "HD BARBLESS #10 FLUO 0,4 g (head macro)",
    "size": [
-    503,
-    195
+    1097,
+    439
    ],
    "pad": [
-    0.252,
-    0.072,
-    0.028,
-    0.072
+    0.036,
+    0.0,
+    0.006,
+    0.016
    ],
-   "aspect": 2.579,
+   "aspect": 2.499,
    "glint": [
-    0.891,
-    0.497
+    0.881,
+    0.458
    ],
    "dominant": [
-    "#76892a",
-    "#242423",
-    "#cde641"
+    "#d3f70a",
+    "#9bb70b",
+    "#2d2d2c"
    ],
-   "cut": "classic white luma key + shank fade"
+   "cut": "ads (4k upscale + white key; heads polished by scripts/assets_prep/polish_jigovky_heads.py; meta assets_prep/jigovky/ads/_meta.json)"
   },
   {
-   "src": "assets_prep/jigovky/heroes/h05_hd_barbless_pink_detail.png",
-   "name": "HD BARBLESS #2 PINK 0.4 g (head detail)",
+   "src": "assets_prep/jigovky/ads/pol/head_pink.png",
+   "name": "HD BARBLESS #2 PINK 0,4 g (head macro)",
    "size": [
-    498,
-    200
+    1081,
+    440
    ],
    "pad": [
-    0.251,
-    0.07,
-    0.028,
-    0.07
+    0.037,
+    0.0,
+    0.003,
+    0.005
    ],
-   "aspect": 2.49,
+   "aspect": 2.457,
    "glint": [
-    0.876,
-    0.505
+    0.915,
+    0.082
    ],
    "dominant": [
-    "#552f4b",
-    "#df0aa1",
-    "#d8d2d5"
+    "#623c58",
+    "#d625a2",
+    "#a3a1a3"
    ],
-   "cut": "classic white luma key + shank fade"
+   "cut": "ads (4k upscale + white key; heads polished by scripts/assets_prep/polish_jigovky_heads.py; meta assets_prep/jigovky/ads/_meta.json)"
   }
  ],
  "copy": {
@@ -180,5 +180,6 @@
  },
  "notes": [
   "Ne „největší výběr“, „vlastní výroba“, „+1300 druhů“. Detaily h03–h05 jsou malé (~500 px)."
- ]
+ ],
+ "_products_note": "products[] = the polished ads/* cut-outs the block itself uses (integration 19. 10.: the old heroes/h0* refs were stale). Index order kept compatible with finale.mjs (card / burst indices)."
 }

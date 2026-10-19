@@ -345,7 +345,7 @@ export function endCard(ctx) {
   let html = `<div class="fx-field" style="background:radial-gradient(90% 60% at 50% 48%, #137d93 0%, ${DEEP} 52%, ${ABYSS} 100%)"></div>`;
   const FLY = 0.42, SC = 1.5;
   const Pl = ctx.plate.hero(-FLY, ctx.dur, { scale: SC, cx: W / 2, cy: 610, fly: FLY, ease: 'power3.inOut' });
-  const LG = ctx.logo('on_dark', { box: [760, 300], scale: SC, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });
+  const LG = ctx.logo('on_dark', { box: [760, 300], scale: SC / 1.04, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });   // ÷ the lockup settle 1.04 → 1 (logo rule on frame 1)
   const y0 = Math.round(Pl.y + Pl.h + 34), yBar = y0 + 52, yLogo = yBar + 34, yURL = yLogo + LG.h + 30;
   const US = Math.min(sz(ctx, 'bosset.cz', 860, [104, 96, 88, 80], { wght: 800, upper: false }), 96);
   const yDist = yURL + Math.round(US * 0.98) + 30, yPz = yDist + 58;

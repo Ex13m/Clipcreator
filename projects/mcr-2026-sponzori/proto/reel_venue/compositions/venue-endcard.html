@@ -20,11 +20,11 @@
     <div id="venue-endcard-stage" class="blk-stage"><div class="fx-full" style="background:linear-gradient(180deg,#22aed5 0%,#0f6f8c 34%,#0e3a52 70%,#1a212e 100%)"></div><div class="vn-caus" id="venue-endcard-ewc" style="left:0px;top:0px;width:1080px;height:1920px;opacity:0.24;mix-blend-mode:screen;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.7) 35%,transparent 72%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.7) 35%,transparent 72%);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;"><i id="venue-endcard-ewc-a" style="background-image:url(assets/prep/venue/ads/fx_caustics.png);background-size:700px 700px"></i><i id="venue-endcard-ewc-b" style="background-image:url(assets/prep/venue/ads/fx_caustics.png);background-size:1029px 1029px;opacity:.65"></i></div><div class="vn-shafts" id="venue-endcard-ews" style="opacity:0.9"><div class="vn-shaft" style="left:136.8px;width:206.1px;transform:rotate(-2.2deg)"><i id="venue-endcard-ews0" style="--a:0.24"></i></div><div class="vn-shaft" style="left:326.4px;width:284.6px;transform:rotate(-1.4deg)"><i id="venue-endcard-ews1" style="--a:0.17"></i></div><div class="vn-shaft" style="left:605.1px;width:332px;transform:rotate(5.5deg)"><i id="venue-endcard-ews2" style="--a:0.24"></i></div><div class="vn-shaft" style="left:819.5px;width:170.7px;transform:rotate(11.2deg)"><i id="venue-endcard-ews3" style="--a:0.21"></i></div></div><div class="fx-abs" id="venue-endcard-eet" style="left:430px;top:760px;width:877.1px;height:1000px;opacity:0.14;"><div class="fx-abs" id="venue-endcard-eet-rv" style="inset:0;overflow:hidden"><div class="fx-abs" id="venue-endcard-eet-in" style="inset:0"><div class="vn-tint" style="background:#9ae7e8;-webkit-mask-image:url(assets/prep/venue/ads/s2_etched_trout_ink.png);mask-image:url(assets/prep/venue/ads/s2_etched_trout_ink.png)"></div></div></div></div><div class="fx-full" id="venue-endcard-eb" style="pointer-events:none"><i class="vn-bub" id="venue-endcard-eb0" style="left:391.2px;top:1075px;width:10.2px;height:10.2px"></i><i class="vn-bub" id="venue-endcard-eb1" style="left:957.6px;top:1470.7px;width:25.3px;height:25.3px"></i><i class="vn-bub" id="venue-endcard-eb2" style="left:121.6px;top:1357.5px;width:25.1px;height:25.1px"></i><i class="vn-bub" id="venue-endcard-eb3" style="left:501.3px;top:1686.8px;width:8.7px;height:8.7px"></i><i class="vn-bub" id="venue-endcard-eb4" style="left:295.1px;top:1219.7px;width:14.4px;height:14.4px"></i><i class="vn-bub" id="venue-endcard-eb5" style="left:212.9px;top:1528.6px;width:12.4px;height:12.4px"></i><i class="vn-bub" id="venue-endcard-eb6" style="left:94.5px;top:1539.4px;width:21px;height:21px"></i><i class="vn-bub" id="venue-endcard-eb7" style="left:643.1px;top:1470.7px;width:16.4px;height:16.4px"></i></div><div class="fx-ec" id="venue-endcard-ec" style="top:799.5px">
     <div id="venue-endcard-ec-line" style="font-family:'Montserrat';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
     <div id="venue-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#d8af64;margin:32.199999999999996px 0"></div>
-    <div id="venue-endcard-ec-lw"><img id="venue-endcard-ec-logo" class="fx-logo " src="assets/prep/libechov/logo.png" alt="Líheň Liběchov" style="width:230px; height:230px;"></div>
+    <div id="venue-endcard-ec-lw"><img id="venue-endcard-ec-logo" class="fx-logo " src="assets/prep/libechov/logo.png" alt="Líheň Liběchov" style="width:219px; height:219px;"></div>
     <div id="venue-endcard-ec-url" style="margin-top:46px;font-family:'Bitter';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">lihenlibechov.cz</div>
   </div><div class="fx-t " id="venue-endcard-ex" style="left:64px;top:1318px;width:952px;font-family:'Montserrat';font-weight:800;font-style:italic;font-size:34px;line-height:0.98;letter-spacing:0.1em;color:#9ae7e8;text-align:center;text-transform:uppercase;"><span class="fx-ln" id="venue-endcard-ex-l0" style=""><span>Místo konání MČR · 24.–25. 10. 2026</span></span></div>
     </div>
-    <div class="fx-ov" id="venue-endcard-tin" style="background:#1a212e"></div>
+    
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
@@ -45,12 +45,10 @@
   gsap.set("#venue-endcard-eb5", {"x":0,"y":0,"opacity":0});
   gsap.set("#venue-endcard-eb6", {"x":0,"y":0,"opacity":0});
   gsap.set("#venue-endcard-eb7", {"x":0,"y":0,"opacity":0});
-  gsap.set("#venue-endcard-tin", {"opacity":1});
-  gsap.set("#venue-endcard-ec-line", {"opacity":0,"y":20});
-  gsap.set("#venue-endcard-ec-bar", {"scaleX":0});
-  gsap.set("#venue-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
-  gsap.set("#venue-endcard-ec-url", {"opacity":0,"y":30});
+  gsap.set("#venue-endcard-ec", {"scale":1.05});
+  gsap.set("#venue-endcard-ec-bar", {"scaleX":0.3});
   gsap.set("#venue-endcard-ex", {"opacity":0,"y":24});
+  gsap.set("#venue-endcard-ec", {"transformOrigin":"50% 0%"});
   tl.fromTo("#venue-endcard-ewc-a", {"backgroundPosition":"0px 0px"}, {"backgroundPosition":"-168.8px 75.9px","duration":3.669,"ease":"none","immediateRender":false}, 0.000);
   tl.fromTo("#venue-endcard-ewc-b", {"backgroundPosition":"0px 0px"}, {"backgroundPosition":"104.6px 50.6px","duration":3.669,"ease":"none","immediateRender":false}, 0.000);
   tl.fromTo("#venue-endcard-ews0", {"x":0,"opacity":0.55}, {"x":24.50416179432068,"opacity":1,"duration":3.669,"ease":"sine.inOut","immediateRender":false}, 0.000);
@@ -84,12 +82,9 @@
   tl.fromTo("#venue-endcard-eb7", {"x":0,"y":0}, {"x":-11.651738266227767,"y":-460.6459735762022,"duration":2.2632545507804025,"ease":"power1.in","immediateRender":false}, 0.423);
   tl.fromTo("#venue-endcard-eb7", {"opacity":0}, {"opacity":0.5163442777446472,"duration":0.25,"ease":"none","immediateRender":false}, 0.423);
   tl.fromTo("#venue-endcard-eb7", {"opacity":0.5163442777446472}, {"opacity":0,"duration":0.3,"ease":"none","immediateRender":false}, 2.387);
-  tl.fromTo("#venue-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.22,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#venue-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.270);
-  tl.fromTo("#venue-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.350);
-  tl.fromTo("#venue-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.410);
-  tl.fromTo("#venue-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.530);
-  tl.fromTo("#venue-endcard-ex", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.580);
+  tl.fromTo("#venue-endcard-ec", {"scale":1.05}, {"scale":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-endcard-ec-bar", {"scaleX":0.3}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-endcard-ex", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 0.120);
   tl.set({}, {}, 3.669);
   window.__timelines["venue-endcard"] = tl;
   </script>

@@ -1,0 +1,83 @@
+{
+ "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_film.wav",
+ "dur": 119.133,
+ "music": {
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
+  "start": 0,
+  "fadeIn": 0,
+  "fadeOut": 0
+ },
+ "vo": [
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/intro.wav",
+   "at": 0.5,
+   "dur": 13.182
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/venue.wav",
+   "at": 14.948,
+   "dur": 8.981
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
+   "at": 25.954,
+   "dur": 6.096
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
+   "at": 35.126,
+   "dur": 6.496
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
+   "at": 44.275,
+   "dur": 7.384
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/jigovky.wav",
+   "at": 53.447,
+   "dur": 7.877
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/velkaryba.wav",
+   "at": 68.075,
+   "dur": 6.799
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/bosset.wav",
+   "at": 77.201,
+   "dur": 6.899
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/gausseholler.wav",
+   "at": 86.326,
+   "dur": 5.87
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/finale.wav",
+   "at": 95.398,
+   "dur": 12.64
+  }
+ ],
+ "duck": {
+  "depth": -7,
+  "depthRange": [
+   -8,
+   -6
+  ],
+  "voOver": 9.5,
+  "attack": 0.12,
+  "release": 0.3,
+  "hold": 0.22,
+  "lookahead": 0.12,
+  "thresh": -42,
+  "carve": -2.5,
+  "carveMax": -4.5,
+  "voLiftMax": 1.5
+ },
+ "master": {
+  "lufs": -14,
+  "tp": -2
+ },
+ "voGain": 0
+}
