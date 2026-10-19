@@ -9,6 +9,10 @@ OX,ON=461550.0,5584850.0   # local origin (X=E-OX, Z=-(N-ON))
 rng=np.random.default_rng(20261024)
 z=np.load(B+'cls_inputs.npz'); ndsm=z['ndsm']; exg=z['exg']; water1=z['water']; dtm=z['dtm']; dsm=z['dsm']
 cls=np.load(B+'cls.npz'); tree=cls['tree']; shrub=cls['shrub']
+_lab=np.asarray(Image.open(D+'water_labels.png'))
+_w1=cv2.resize((_lab>0).astype(np.uint8),(800,800),interpolation=cv2.INTER_AREA)>0
+_w1=ndi.binary_dilation(_w1,iterations=1)
+tree=tree&~_w1; shrub=shrub&~_w1
 bfoot=np.load(B+'bld_final_mask.npy') if __import__('os').path.exists(B+'bld_final_mask.npy') else cls['bld']
 labels=np.asarray(Image.open(D+'water_labels.png'))  # 6400
 # ---------------- terrain core ----------------
@@ -37,7 +41,7 @@ o6b=o6*(1-fe[...,None])+np.where(bm[...,None],o6b,fill*0+o6b)*fe[...,None]
 # understory darkening under tree canopy (keeps the ortho colour but darker/desaturated)
 tm=up8(ndi.binary_erosion(tree,iterations=1),3.0)
 lum=o6b.mean(axis=2,keepdims=True)
-dark=(o6b*0.78+lum*0.06)*0.70
+dark=o6b*0.62
 o6c=o6b*(1-tm[...,None])+dark*tm[...,None]
 Image.fromarray(np.clip(o6c,0,255).astype(np.uint8)).save(B+'ortho_core.jpg',quality=93,subsampling=0)
 # ---------------- water masks (RGBA 4096): R big, G small, B rearing, A north ----------------
@@ -162,7 +166,7 @@ terrc.astype('<f4').tofile(B+'terrain_ctx.f32')
 # context ortho: darken under canopy
 tmc=cv2.GaussianBlur(cv2.resize(ndi.binary_erosion(vegc).astype(np.float32),(3000,3000),interpolation=cv2.INTER_LINEAR),(0,0),1.5)
 lumc=oc.mean(axis=2,keepdims=True)
-ocd=oc*(1-tmc[...,None])+((oc*0.78+lumc*0.06)*0.70)*tmc[...,None]
+ocd=oc*(1-tmc[...,None])+(oc*0.62)*tmc[...,None]
 Image.fromarray(np.clip(ocd,0,255).astype(np.uint8)).save(B+'ortho_ctx.jpg',quality=92)
 # context trees: 3 m CHM, wedge visible from the flight
 chc=np.where(vegc&~core,nc,0)
