@@ -3,3 +3,12 @@ node_modules/
 /.chrome-profile-copy/
 *.log
 .DS_Store
+# intermediate render/build artefacts
+projects/**/tmp/
+projects/**/build/
+projects/**/frames/
+*.rgba
+*.npy
+*.npz
+*.f32
+projects/**/_work/snap*/
