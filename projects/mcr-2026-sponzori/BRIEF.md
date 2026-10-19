@@ -18,7 +18,8 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Každý sponzor = vlastní vizuální svět podle JEHO značky (barvy/typografie z jeho loga a webu), produkty jako hrdinové (čisté výřezy, světelné přejezdy, odlesky, stíny, parallax, makro, kinetická typografie…). Fotky správně vyříznout, možné AI vylepšení (upscale) a efekty.
 - Film musí jít rozřezat na **samostatné Reels pro každého sponzora** (blok + hook + end card se sponzorem a logem TA).
 - Prodejci/výrobci nástrah: ukázat HODNĚ nástrah — min. 6–8 položek z jejich sortimentu (vějíř/mřížka/karusel/rychlé střihy) + 1–2 hero záběry (uživatel 19. 10.).
-- Hudba: track 3 (129 BPM), sestřih audio/track.wav (1:46), grid audio/track.beats.json.
+- Hudba: track 3 (129 BPM). **PLÁN A (uživatel 19. 10.)**: sestřih audio/track_A.wav (1:59), grid audio/track_A.beats.json, rozvržení data/block_plan_A.json — intro 8 taktů, venue 6, sponzoři po 5 taktech (~9,15 s), broll 3, finále 13. VO (schváleno „ok“): vo/<key>.wav, start 0,25 s (intro 0,5 s), konec ≥ 1,0 s před koncem bloku.
+- Gausse Holler produkt: **Revolut 8 · Standard Edition · Black (oranžové logo)**, ručně stavěný v Česku, karbon + hliník (gausseholler.com/products/rod-stand-v2). VO říká „Black Standard Edition“ — na obrazovce psát „REVOLUT 8 · Standard Edition“.
 
 ## Akce (ověřeno z lihenlibechov.cz)
 **Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček** (Boží Voda 289, Liběchov). Zdroj: lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek + plakát MČR (assets/libechov/mcr_news_poster.png). Detaily partnera: research/libechov.md.

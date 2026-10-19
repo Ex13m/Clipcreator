@@ -11,6 +11,7 @@ E0, N0, Z0 = 461450.0, 5584700.0, 160.0
 CORE = [461150.0, 5584450.0, 461950.0, 5585250.0]
 CTX = [460050.0, 5583350.0, 463050.0, 5586350.0]
 RES = 0.5
+ORTHO_DET = os.environ.get('ORTHO_DET', 'orto_core_6400_nowires.png')   # v1 used 'orto_core_6400.jpg'
 man = json.load(open(D + 'manifest.json'))
 ponds = man['ponds']
 LEVEL = {1: ponds['velky_sportak_big']['water_level_used_m_bpv'],
@@ -178,7 +179,9 @@ print('ctx range', ctx2.min(), ctx2.max(), 'edge mean', np.mean(np.r_[ctx2[0], c
 
 
 # ---------------- crown detail height from the ortho (0.25 m): bright crown tops bulge, dark gaps sink ------
-o25 = np.asarray(Image.open(D + 'orto_core_6400.jpg').convert('L').resize((3200, 3200), Image.BOX)).astype(np.float64) / 255
+# v2: crown detail from the wire-free ortho (py/clean_wires.py) - the power-line wires over the forest otherwise
+# become a 1-2 m ridge in the displaced canopy along the line
+o25 = np.asarray(Image.open(D + ORTHO_DET).convert('L').resize((3200, 3200), Image.BOX)).astype(np.float64) / 255
 det = ndi.gaussian_filter(o25, 1.6) - ndi.gaussian_filter(o25, 10.0)
 tree25 = ndi.zoom(ndi.gaussian_filter(tree.astype(np.float64), 1.0), 4, order=1)
 det = np.clip(det * 14.0, -2.0, 2.0) * np.clip(tree25, 0, 1)
