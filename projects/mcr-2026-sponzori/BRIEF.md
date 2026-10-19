@@ -11,6 +11,14 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Termosky Bosset 0,5–0,7 l jako ceny.
 - Gausse Holler: stojan na pruty Black Standard Edition (render z webu) + značka „MADE BY ⚙ © 2026 Gausse Holler“ (gausseholler.com) na konci.
 
+
+## ZMĚNA SMĚRU (19. 10., uživatel) — platí přednostně
+- NE „náš TA styl“. Je to **reklamní film produktů a sponzorů** — nejmodernější techniky reklamního designu 2025/26, všechny triky povoleny.
+- Z našeho stylu zůstává **jen logo TA CZ** (vždy viditelné, malý roh). Žádné drum-pady/EQ/ticker/navy šablona.
+- Každý sponzor = vlastní vizuální svět podle JEHO značky (barvy/typografie z jeho loga a webu), produkty jako hrdinové (čisté výřezy, světelné přejezdy, odlesky, stíny, parallax, makro, kinetická typografie…). Fotky správně vyříznout, možné AI vylepšení (upscale) a efekty.
+- Film musí jít rozřezat na **samostatné Reels pro každého sponzora** (blok + hook + end card se sponzorem a logem TA).
+- Hudba: track 3 (129 BPM), sestřih audio/track.wav (1:46), grid audio/track.beats.json.
+
 ## Akce (ověřeno z lihenlibechov.cz)
 **Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček** (Boží Voda 289, Liběchov). Zdroj: lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek + plakát MČR (assets/libechov/mcr_news_poster.png). Detaily partnera: research/libechov.md.
 

@@ -37,12 +37,12 @@ async function loadTex(url, srgb = true, aniso = 8) {
 // ---------------------------------------------------------------- global look parameters
 const P = {
   sunAz: 230, sunEl: 45,
-  sunColor: new THREE.Color(1.0, 0.955, 0.88), sunIntensity: 3.1,
-  envIntensity: 0.95,
+  sunColor: new THREE.Color(1.0, 0.95, 0.86), sunIntensity: 7.0,
+  envIntensity: 0.6,
   exposure: 1.0,
   hazeDensity: 1.7e-4, hazeFalloff: 1 / 420, hazeBase: 150,
-  hazeColor: [0.86, 0.93, 1.05], hazeSunColor: [1.25, 1.18, 1.02],
-  zenith: [0.30, 0.47, 0.82], horizon: [0.92, 0.99, 1.10],
+  hazeColor: [0.90, 0.94, 1.0], hazeSunColor: [1.25, 1.16, 1.0],
+  zenith: [0.36, 0.50, 0.78], horizon: [0.95, 0.99, 1.05],
   groundShadow: 0.55,
 };
 function sunDir() {
@@ -274,8 +274,8 @@ function crownGeometry(detail, seed, kind) {
       if (disc >= 0) best = Math.max(best, b + Math.sqrt(disc));
     }
     const a = prl(v.x * 2.2 + o1[0], v.y * 2.2 + o1[1], v.z * 2.2 + o1[2]);
-    const c2 = prl(v.x * 5.5 + o2[0], v.y * 5.5 + o2[1], v.z * 5.5 + o2[2]);
-    let r = best * (1 + 0.06 * a + 0.035 * c2);
+    const c2 = prl(v.x * 8.0 + o2[0], v.y * 8.0 + o2[1], v.z * 8.0 + o2[2]);
+    let r = best * (1 + 0.07 * a + 0.06 * c2 + 0.035 * prl(v.x * 17.0 + o1[2], v.y * 17.0 + o2[0], v.z * 17.0 + o1[1]));
     if (v.y < 0) r *= 1 - 0.22 * v.y * v.y;
     rr[i] = r;
   }
@@ -296,52 +296,72 @@ function crownGeometry(detail, seed, kind) {
   return g;
 }
 function foliageMaterial(opts) {
-  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.82, metalness: 0, envMapIntensity: P.envIntensity });
+  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0, envMapIntensity: P.envIntensity * 1.1 });
   m.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, {
       uShadowK: { value: 1.0 }, tNoise: { value: S.noise3 }, tOrtho: { value: S.orthoOrig }, uOrthoMix: { value: opts.orthoMix },
-      uAlb: { value: opts.albedo ?? 1.0 }, uBaked: { value: opts.baked ?? 1.6 }, uSun: { value: sunDir() }, uSunCol: { value: P.sunColor.clone().multiplyScalar(P.sunIntensity) },
+      uAlb: { value: opts.albedo ?? 1.0 }, uBaked: { value: opts.baked ?? 0.5 }, uSun: { value: sunDir() }, uSunCol: { value: P.sunColor.clone().multiplyScalar(P.sunIntensity) },
+      uClump: { value: opts.clump ?? 0.75 },
     });
     sh.vertexShader = sh.vertexShader.replace('#include <common>', `#include <common>
-      attribute float aCav; attribute vec2 aInst; varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst;`)
+      attribute float aCav; attribute vec2 aInst; varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst; varying vec3 vNW;`)
       .replace('#include <fog_vertex>', `#include <fog_vertex>
-      vWP = (modelMatrix * instanceMatrix * vec4(transformed,1.0)).xyz; vObj = position; vCav = aCav; vInst = aInst;`);
+      vWP = (modelMatrix * instanceMatrix * vec4(transformed,1.0)).xyz; vObj = position; vCav = aCav; vInst = aInst;
+      { mat3 im = mat3(instanceMatrix); vec3 nn = objectNormal / vec3(dot(im[0],im[0]), dot(im[1],im[1]), dot(im[2],im[2])); vNW = normalize(mat3(modelMatrix) * im * nn); }`);
     sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
-      varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst;
-      uniform float uShadowK; uniform highp sampler3D tNoise; uniform sampler2D tOrtho; uniform float uOrthoMix; uniform float uAlb; uniform float uBaked;
+      varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst; varying vec3 vNW;
+      uniform float uShadowK; uniform highp sampler3D tNoise; uniform sampler2D tOrtho; uniform float uOrthoMix; uniform float uAlb; uniform float uBaked; uniform float uClump;
       uniform vec3 uSun; uniform vec3 uSunCol;
+      vec3 hash33(vec3 p){ p = fract(p * vec3(0.1031, 0.1030, 0.0973)); p += dot(p, p.yxz + 33.33); return fract((p.xxy + p.yxx) * p.zyx); }
+      // cellular clumps: returns F1, F2-F1, vector surface->nearest feature, cell hash
+      void worley(vec3 p, out float f1, out float edge, out vec3 vfeat, out float cid){
+        vec3 i = floor(p), f = fract(p); float d1 = 9.0, d2 = 9.0; vec3 v1 = vec3(0.0); vec3 c1 = vec3(0.0);
+        for (int z = -1; z <= 1; z++) for (int y = -1; y <= 1; y++) for (int x = -1; x <= 1; x++) {
+          vec3 g = vec3(float(x), float(y), float(z)); vec3 o = hash33(i + g); vec3 r = g + o - f; float d = dot(r, r);
+          if (d < d1) { d2 = d1; d1 = d; v1 = r; c1 = i + g; } else if (d < d2) d2 = d;
+        }
+        f1 = sqrt(d1); edge = sqrt(d2) - f1; vfeat = v1; cid = hash33(c1 * 1.37).x;
+      }
       float fol(vec3 p){ return texture(tNoise, p*0.11).b*0.45 + texture(tNoise, p*0.23).a*0.35 + texture(tNoise, p*0.53).a*0.20; }`)
       .replace('#include <color_fragment>', `#include <color_fragment>
-      vec3 wp = vWP * 1.15 + vec3(vInst.y*13.0);
+      vec3 wp = vWP * 1.15 + vec3(vInst.y*13.0, 0.0, vInst.y*7.0);
       float fn = fol(wp);
+      float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
+      float top = smoothstep(0.2, 0.75, normalize(vNW).y);
+      vec2 jit = (texture(tNoise, vWP * 0.31).rg - 0.5) * 2.4 * (1.0 - top);
+      vec2 oxz = vWP.xz + jit;
+      #define OUV(p) vec2(((p).x + 400.0) / 800.0, (400.0 - (p).y) / 800.0)
+      vec3 oc = texture(tOrtho, OUV(oxz)).rgb;
+      float veg = smoothstep(0.0, 0.02, oc.g - 0.5 * (oc.r + oc.b)) * (1.0 - smoothstep(0.22, 0.40, dot(oc, vec3(0.33))));
+      float wO = uOrthoMix * inCore * veg;
       vec3 bakedCol = vec3(0.0);
       {
         vec3 inst = diffuseColor.rgb;
-        float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
-        vec2 ouv = vec2((vWP.x + 400.0) / 800.0, (400.0 - vWP.z) / 800.0);
-        vec3 oc = texture(tOrtho, ouv).rgb;
-        float veg = smoothstep(0.0, 0.02, oc.g - 0.5 * (oc.r + oc.b)) * (1.0 - smoothstep(0.22, 0.40, dot(oc, vec3(0.33))));
-        vec3 nW = normalize(cross(dFdx(vWP), dFdy(vWP)));
-        float top = smoothstep(0.25, 0.75, abs(nW.y));
-        float w = uOrthoMix * inCore * veg * top;
-        vec3 alb = inst * (0.86 + 0.30 * fn);
-        float ao = mix(0.62, 1.0, smoothstep(-0.9, 0.6, vObj.y)) * mix(0.55, 1.0, vCav);
-        diffuseColor.rgb = alb * ao * uAlb * (1.0 - 0.55 * w);
-        bakedCol = oc * (0.80 + 0.25 * fn) * mix(0.75, 1.0, vCav) * w;
+        vec3 alb = mix(inst * (0.82 + 0.36 * fn), oc * (0.92 + 0.16 * fn), wO);
+        float ao = mix(0.62, 1.0, smoothstep(-0.9, 0.6, vObj.y)) * mix(0.6, 1.0, vCav);
+        diffuseColor.rgb = alb * ao * uAlb;
+        bakedCol = oc * ao * wO * top;
       }`)
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
       {
-        float e = 0.18;
-        float gx = fol(wp + vec3(e,0,0)) - fn, gy = fol(wp + vec3(0,e,0)) - fn, gz = fol(wp + vec3(0,0,e)) - fn;
-        vec3 gw = vec3(gx, gy, gz) / e;
-        normal = normalize(normal - mat3(viewMatrix) * gw * 0.55);
+        vec3 nW = normalize((vec4(normal, 0.0) * viewMatrix).xyz);
+        nW = normalize(mix(nW, vec3(0.0, 1.0, 0.0), 0.35 * top + 0.15));
+        float e = 0.16;
+        vec3 LW = vec3(0.3, 0.6, 0.1);
+        float l0 = dot(oc, LW);
+        float lx = dot(texture(tOrtho, OUV(oxz + vec2(e, 0.0))).rgb, LW);
+        float lz = dot(texture(tOrtho, OUV(oxz + vec2(0.0, e))).rgb, LW);
+        vec3 g = vec3(lx - l0, 0.0, lz - l0) / e * 3.2 * wO;
+        float px = fol(wp + vec3(0.2,0,0)) - fn, py = fol(wp + vec3(0,0.2,0)) - fn, pz = fol(wp + vec3(0,0,0.2)) - fn;
+        g += vec3(px, py, pz) / 0.2 * 0.5 * (1.0 - wO * 0.6);
+        nW = normalize(nW - g);
+        normal = normalize(mat3(viewMatrix) * nW);
       }`)
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
       {
-        // thin-leaf translucency when looking towards the sun
         vec3 V = normalize(vWP - cameraPosition);
         float tr = pow(clamp(dot(V, uSun), 0.0, 1.0), 4.0);
-        totalEmissiveRadiance += diffuseColor.rgb * uSunCol * 0.16 * tr;
+        totalEmissiveRadiance += diffuseColor.rgb * uSunCol * 0.14 * tr;
         totalEmissiveRadiance += bakedCol * uBaked;
       }`);
     sh.fragmentShader = withShadowK(sh.fragmentShader);
@@ -356,7 +376,7 @@ async function buildTrees(scene) {
   variants[3] = lo0;
   for (let i = 0; i < 4; i++) variants[1].push(crownGeometry(2, 201 + i, 1));
   for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(2, 301 + i, 2));
-  const mats = { 0: foliageMaterial({ orthoMix: 0.85, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.6, albedo: 1.0 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
+  const mats = { 0: foliageMaterial({ orthoMix: 0.85, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.6, albedo: 1.0, clump: 0.6 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
   mats[3] = mats[0];
   const camEnd = S.cam.frames[S.cam.frames.length - 1].pos;
   const groups = new Map();
@@ -384,7 +404,7 @@ async function buildTrees(scene) {
       const edge = a[o + 8];
       if (kind === 1) { cv = Math.max(h * 0.55, 0.45); cy = g + h - cv; }
       else if (kind === 2) { cv = THREE.MathUtils.clamp(0.42 * h, 0.8 * r, 1.4 * r); cy = g + h - cv; }
-      else { cv = THREE.MathUtils.clamp((0.40 + 0.12 * edge) * h, 0.85 * r, (1.3 + 0.5 * edge) * r); cy = g + h - cv; rx *= 1.0; rz *= 1.0; }
+      else { cv = THREE.MathUtils.clamp((0.40 + 0.12 * edge) * h, 0.85 * r, (1.3 + 0.5 * edge) * r); cy = g + h - cv; rx *= 0.95; rz *= 0.95; }
       ps.set(x, cy, z); q.setFromAxisAngle(up, seed * Math.PI * 2 * 7.0); sc.set(rx, cv, rz);
       m4.compose(ps, q, sc); mesh.setMatrixAt(k, m4);
       col.setRGB(a[o + 5], a[o + 6], a[o + 7], THREE.SRGBColorSpace);
