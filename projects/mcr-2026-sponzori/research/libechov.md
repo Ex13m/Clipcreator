@@ -87,3 +87,47 @@ Pozor:
 | web_fbshare_screenshot.jpg | Screenshot hlavičky webu (og:image), slouží jen jako reference | reference | 1200×630 | https://www.lihenlibechov.cz/images/fbshare.jpg |
 
 Doporučení pro film: jako hero záběr použít `mcr_news_poster.png` (přímo MČR 2026). Atmosféru vody dává `velky_sportak.jpg`, rybu `nasazeni_trofejnich_pstruhu.jpg` a závodní tradici `libechovsky_pstruh_iv.jpg`. Logo je `logo.png`. Na webu není letecký snímek ani galerie, proto nemáme ani dron, ani fotky z TA závodů.
+
+## Verification (adversariální kontrola, 19. 10. 2026)
+
+Všechny zdrojové stránky byly znovu staženy (aktualita MČR, Historie, O nás, Sportovní rybolov, Kontakt, výpis Aktualit, `/css/index.css`, `/images/logo.svg`). Každý obrázek byl otevřen v PIL a vizuálně zkontrolován.
+
+### Fakta
+| # | Fakt | Verdikt | Poznámka |
+|---|---|---|---|
+| 1 | Dějiště MČR v Trout Area 2026 (Malý Sporťáček, 24.–25. 10. 2026) | **OK** | Citace sedí doslova. Plakát v aktualitě (nahrán 19. 10. 2026) nese text „TROUT AREA · MISTROVSTVÍ ČESKÉ REPUBLIKY · 2026 · 24.–25.10.“ |
+| 2 | 90letá tradice, 1934, Karel Stutzig | **OK** | Historie doslova: „V roce 2024 uplynulo 90 let … založené panem Karlem Stutzigem (r.1934)“ a „Pstruhárnu založil Karel Stutzig“. |
+| 3 | Donedávna nejníže položené pstruhařství v Evropě, 164 m n. m. | **OK, s podmínkou** | O nás doslova. Jde o tvrzení samotného webu. Ve VO nechat „donedávna“. |
+| 4 | Boží Voda + Liběchovka; siven, pstruh duhový, pstruh potoční | **OK** | Drobné zjednodušení: web píše „prameny, z nichž nejsilnější je BOŽÍ VODA“. |
+| 5 | Dva rybníky „v režimu chyť a pusť“: Velký Sporťák 2,5 ha + Malý Sporťáček 0,2 ha | **ZAMÍTNUTO v tomto znění** | (a) 2,5 ha je jen v ceníku. Na webu jsou 4 místa s **2,4 ha**: O nás, Historie, aktualita „Nasadili jsme 21.9.“ (2022) a pozvánka „Liběchovský pstruh 11.3.2023“. (b) Aktualita z 23. 6. 2026 říká: „na malém Sporťáčku rybolov pouze **chyť a vem**“ (do odvolání). Odvolání ve výpisu aktualit chybí. Ryby si navíc lze ponechat za úplatu. |
+| 5' | **Náhrada:** „Dva sportovní rybníky: Velký Sporťák (přes 2 hektary) a pstruhový Malý Sporťáček (0,2 ha).“ | **OK** | Platí podle O nás (2,4 ha / 0,2 ha) i podle ceníku (2,5 ha / 0,2 ha). |
+
+**Opravený one-liner:** „Líheň Liběchov – pstruží líheň s více než devadesátiletou tradicí u pramene Boží Voda a dějiště Mistrovství ČR v Trout Area 2026.“ (V roce 2026 je to 92 let od založení.)
+
+### Opravy ostatních tvrzení v této poznámce
+- **E-mail je na webu.** Tvrzení, že info@lihenlibechov.cz je jen na FB, **neplatí**. Stránka /cs/kontakt ho má jako `mailto:` hned třikrát. Kontakt dále uvádí: vlastník ČRS z. s. MO Mělník, IČ firmy Líheň Liběchov s.r.o. 14332663, jednatelé Marek Macholda a Pavel Novák. Polední pauza 12:00–12:30 je potvrzena.
+- **TA závody na Malém Sporťáčku platí až od 2025.** Malý Sporťáček byl otevřen 4. 1. 2025 (aktualita „Malý Sporťáček“, rozměr 50×40 m). Trout Area Masters 30. 11. 2024 tedy proběhl na (velkém) Sporťáku. Winter Trout Cup 18. 1. 2025 a TA Tour 7. 3. 2026 už byly na Sporťáčku.
+- **Malý Sporťáček je od 23. 6. 2026 „chyť a vem“ do odvolání.** Ve VO proto neuvádět u něj „chyť a pusť“.
+- **velky_sportak.jpg je zima, ne jaro.** Holé stromy, šedé nebe, nahráno 28. 1. 2025 k aktualitě „Velký Sporťák“.
+- **maly_sportacek_photo.jpg nemá EXIF.** Lokální soubor je bez EXIF, takže GPS ani datum z něj ověřit nejde. Datum nahrání (4. 1. 2025) a aktualita „Malý Sporťáček“ ale s popisem souhlasí.
+- **libechovsky_pstruh_iv.jpg nejsou ceny IV. ročníku.** Korbely jsou rytě popsané „Liběchovský pstruh 21.10.2023“, tedy z roku 2023, i když foto vyšlo u aktuality IV. ročníku (31. 10. 2024).
+- **Logo SVG je shodné s živým souborem.** 482 path, 5 clipPath, 16 g.
+- **Barvy a písmo potvrzeny v CSS:** #17a1c8, #1a212e, #9ae7e8, #d8af64, pozadí #f8f8f8, Montserrat.
+
+### Obrázky (PIL + vizuální kontrola, žádný není poškozený)
+| Soubor | Rozměr | Skutečný záběr areálu / logo? | Hero (≥800 px) | Verdikt |
+|---|---|---|---|---|
+| logo.png | 2000×2000 RGBA | ano, logo shodné s webem i FB | ano | **použít** |
+| logo.svg | vektor | ano | ano | **použít** |
+| mcr_news_poster.png | 1448×1086 | reálná fotka rybníka + grafika poháru a vypálený text | ano | **použít** jako hero MČR. Formát 4:3: ořez na 16:9 odřízne buď rybu nahoře, nebo datum dole, proto raději celý snímek s rozmazaným pozadím. |
+| velky_sportak.jpg | 2048×1152 | ano, Velký Sporťák v zimě | ano | **použít** |
+| maly_sportacek_photo.jpg | 3024×4032 | ano, Malý Sporťáček v zimě, provzdušňovač | ano (na výšku, ořez na 16:9 jde) | **použít** |
+| nasazeni_trofejnich_pstruhu.jpg | 1600×1200 | ano, pstruzi obecní v podběráku (2022) | ano | **použít** |
+| libechovsky_pstruh_iv.jpg | 2048×1536 | ano, ceny místního závodu (2023) | ano | **použít**, ale bez popisku „IV. ročník“ |
+| nasazeni_jeseteru.jpg | 1244×1659 | ano, identifikovatelná osoba | ano | **jen se souhlasem** osoby |
+| ta_zavod_sportacek.jpg | 1920×1005 | ne, plakát, ryba vypadá na AI/stock | ano | jen jako doplňková grafika „historie závodů“ |
+| zavody_sportak_2024.jpg | 1200×628 | ne, plakát s AI/stock rybou a logem Trout Area Czech | ano | nepoužívat jako záběr areálu |
+| winter_trout_cup_2025.jpg | 1200×628 | ne, plakát s AI ilustrací | ano | nepoužívat jako záběr areálu |
+| siven_americky.jpg | 1000×507 | ne, obecná ilustrace (licence neznámá) | hraniční | nepoužívat |
+| web_fbshare_screenshot.jpg | 1200×630 | ne, screenshot webu; v hlavičce je zámek Liběchov, ne líheň | — | jen reference |
+| fb_screen_info.png / fb_screen_profile.png | 768×1713 | screenshoty FB od uživatele | — | jen reference |

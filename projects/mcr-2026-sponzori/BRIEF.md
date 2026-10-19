@@ -11,11 +11,13 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Termosky Bosset 0,5–0,7 l jako ceny.
 - Gausse Holler: stojan na pruty Black Standard Edition (render z webu) + značka „MADE BY ⚙ © 2026 Gausse Holler“ (gausseholler.com) na konci.
 
+## Akce (ověřeno z lihenlibechov.cz)
+**Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček** (Boží Voda 289, Liběchov). Zdroj: lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek + plakát MČR (assets/libechov/mcr_news_poster.png). Detaily partnera: research/libechov.md.
+
 ## Sponzoři (pořadí zatím neurčeno)
 Troutshop.eu · Activefishing.cz · Moonky · Jigovky.cz · Velka-ryba.cz · Gausse Holler (Igor) · Bosset.cz · Líheň Liběchov (místo konání)
 Otevřené: Fandovy plandavky (přes Luboše) — sponzor ano/ne?
 
 ## Chybí
-- Přesný název, datum a místo MČR (místo pravděpodobně Liběchov).
 - Moonky: web nemají → FB stránka (ruční výroba gumových nástrah, „Handmade lures“), logo vyříznuto z FB; fotky nástrah dodány (assets/moonky/u01–u05), viz research/moonky_user.md.
 - Videa z rybaření.
