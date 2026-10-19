@@ -1,0 +1,215 @@
+{
+ "src": "/home/user/Clipcreator/projects/mcr-2026-dron/data/orto_core_6400.jpg",
+ "out": "/home/user/Clipcreator/projects/mcr-2026-dron/data/orto_core_6400_nowires.png",
+ "mask": "/home/user/Clipcreator/projects/mcr-2026-dron/data/orto_core_6400_wiremask.png",
+ "passes": [
+  {
+   "pass_": 1,
+   "spans": [
+    {
+     "name": "main_P1_P4",
+     "n_wires": 11,
+     "mask_px": 155284,
+     "wires": [
+      {
+       "u": [
+        0,
+        1216
+       ],
+       "v": [
+        123.1,
+        95.6
+       ],
+       "strength": 0.0253
+      },
+      {
+       "u": [
+        32,
+        5216
+       ],
+       "v": [
+        106.4,
+        114.2
+       ],
+       "strength": 0.0342
+      },
+      {
+       "u": [
+        0,
+        5216
+       ],
+       "v": [
+        116.4,
+        114.2
+       ],
+       "strength": 0.0338
+      },
+      {
+       "u": [
+        640,
+        2880
+       ],
+       "v": [
+        30.5,
+        36.2
+       ],
+       "strength": 0.0092
+      },
+      {
+       "u": [
+        672,
+        2944
+       ],
+       "v": [
+        65.9,
+        85.4
+       ],
+       "strength": 0.0105
+      },
+      {
+       "u": [
+        0,
+        5216
+       ],
+       "v": [
+        100.5,
+        114.2
+       ],
+       "strength": 0.0353
+      },
+      {
+       "u": [
+        672,
+        2944
+       ],
+       "v": [
+        71.2,
+        85.4
+       ],
+       "strength": 0.0136
+      },
+      {
+       "u": [
+        0,
+        5216
+       ],
+       "v": [
+        100.5,
+        108.9
+       ],
+       "strength": 0.0777
+      },
+      {
+       "u": [
+        0,
+        5216
+       ],
+       "v": [
+        100.5,
+        114.2
+       ],
+       "strength": 0.0353
+      },
+      {
+       "u": [
+        1504,
+        5216
+       ],
+       "v": [
+        124.2,
+        138.7
+       ],
+       "strength": 0.0855
+      },
+      {
+       "u": [
+        1760,
+        5216
+       ],
+       "v": [
+        117.2,
+        132.6
+       ],
+       "strength": 0.0394
+      }
+     ]
+    },
+    {
+     "name": "west_from_P1",
+     "n_wires": 3,
+     "mask_px": 17277,
+     "wires": [
+      {
+       "u": [
+        0,
+        896
+       ],
+       "v": [
+        92.2,
+        118.3
+       ],
+       "strength": 0.0308
+      },
+      {
+       "u": [
+        0,
+        896
+       ],
+       "v": [
+        109.1,
+        130.4
+       ],
+       "strength": 0.0449
+      },
+      {
+       "u": [
+        0,
+        896
+       ],
+       "v": [
+        85.9,
+        110.0
+       ],
+       "strength": 0.0567
+      }
+     ]
+    },
+    {
+     "name": "sse_from_P4",
+     "n_wires": 0,
+     "mask_px": 0,
+     "wires": []
+    }
+   ],
+   "mask_px": 171916
+  },
+  {
+   "pass_": 2,
+   "spans": [
+    {
+     "name": "main_P1_P4",
+     "n_wires": 0,
+     "mask_px": 0,
+     "wires": []
+    },
+    {
+     "name": "west_from_P1",
+     "n_wires": 0,
+     "mask_px": 0,
+     "wires": []
+    },
+    {
+     "name": "sse_from_P4",
+     "n_wires": 0,
+     "mask_px": 0,
+     "wires": []
+    }
+   ],
+   "mask_px": 0
+  }
+ ],
+ "mask_px": 171916,
+ "changed_px": 171715,
+ "changed_frac": 0.0041922607421875,
+ "sec": 40.6
+}

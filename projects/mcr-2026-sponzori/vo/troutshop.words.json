@@ -1,59 +1,67 @@
 {
   "key": "troutshop",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
-  "request_id": "ga4hfzXePJtba0hrdfgX",
-  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=50757970-c4d2-4ea0-8db7-d179506dcacb.wav",
+  "take": 2,
+  "request_id": "EGvbeb75jECco0m6mXJA",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=fb842358-fbfb-4fca-8436-f025cc690888.wav",
   "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999.",
   "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
-  "timebase": "seconds in vo/troutshop.wav (processed, atempo 1.026); = (raw time - trim_start_s) / 1.026. 1x original: vo/troutshop_1x.wav",
-  "trim_start_s": 0.0,
-  "raw_duration_s": 5.721,
-  "duration_s": 5.582,
+  "tts_sent": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět. …",
+  "timebase": "seconds in vo/troutshop.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.04,
+  "raw_duration_s": 5.642,
+  "duration_s": 5.603,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -41.3,
+    "kept_trailing_burst": true
+  },
   "words": [
     {
       "word": "Troutshop",
       "start": 0.0,
-      "end": 0.546
+      "end": 0.6
     },
     {
       "word": "specialista",
-      "start": 0.77,
-      "end": 1.481
+      "start": 0.9,
+      "end": 1.56
     },
     {
       "word": "na",
-      "start": 1.533,
-      "end": 1.637
+      "start": 1.64,
+      "end": 1.8
     },
     {
       "word": "pstruhy.",
-      "start": 1.676,
-      "end": 2.105
+      "start": 1.86,
+      "end": 2.28
     },
     {
       "word": "Rodinná",
-      "start": 2.378,
-      "end": 2.729
+      "start": 2.56,
+      "end": 2.92
     },
     {
       "word": "firma",
-      "start": 2.82,
-      "end": 3.275
+      "start": 2.987,
+      "end": 3.32
     },
     {
       "word": "od",
-      "start": 3.379,
-      "end": 3.587
+      "start": 3.373,
+      "end": 3.48
     },
     {
       "word": "roku",
-      "start": 3.634,
-      "end": 3.821
+      "start": 3.528,
+      "end": 3.72
     },
     {
       "word": "1999.",
-      "start": 3.879,
-      "end": 5.458,
+      "start": 3.76,
+      "end": 5.36,
       "spoken": "devatenáct set devadesát devět."
     }
   ],
@@ -61,62 +69,62 @@
     {
       "word": "Troutshop",
       "start": 0.0,
-      "end": 0.546
+      "end": 0.6
     },
     {
       "word": "specialista",
-      "start": 0.77,
-      "end": 1.481
+      "start": 0.9,
+      "end": 1.56
     },
     {
       "word": "na",
-      "start": 1.533,
-      "end": 1.637
+      "start": 1.64,
+      "end": 1.8
     },
     {
       "word": "pstruhy.",
-      "start": 1.676,
-      "end": 2.105
+      "start": 1.86,
+      "end": 2.28
     },
     {
       "word": "Rodinná",
-      "start": 2.378,
-      "end": 2.729
+      "start": 2.56,
+      "end": 2.92
     },
     {
       "word": "firma",
-      "start": 2.82,
-      "end": 3.275
+      "start": 2.987,
+      "end": 3.32
     },
     {
       "word": "od",
-      "start": 3.379,
-      "end": 3.587
+      "start": 3.373,
+      "end": 3.48
     },
     {
       "word": "roku",
-      "start": 3.634,
-      "end": 3.821
+      "start": 3.528,
+      "end": 3.72
     },
     {
       "word": "devatenáct",
-      "start": 3.879,
-      "end": 4.444
+      "start": 3.76,
+      "end": 4.36
     },
     {
       "word": "set",
-      "start": 4.483,
-      "end": 4.6
+      "start": 4.38,
+      "end": 4.44
     },
     {
       "word": "devadesát",
-      "start": 4.62,
-      "end": 5.068
+      "start": 4.46,
+      "end": 4.92
     },
     {
       "word": "devět.",
-      "start": 5.127,
-      "end": 5.458
+      "start": 5.0,
+      "end": 5.36
     }
   ],
   "word_timestamps_raw": [
@@ -128,74 +136,77 @@
     {
       "word": "Troutshop",
       "start": 0.0,
-      "end": 0.56
+      "end": 0.64
     },
     {
       "word": "–",
-      "start": 0.56,
-      "end": 0.56
+      "start": 0.64,
+      "end": 0.64
     },
     {
       "word": "specialista",
-      "start": 0.79,
-      "end": 1.52
+      "start": 0.94,
+      "end": 1.6
     },
     {
       "word": "na",
-      "start": 1.573,
-      "end": 1.68
+      "start": 1.6800000000000002,
+      "end": 1.84
     },
     {
       "word": "pstruhy.",
-      "start": 1.72,
-      "end": 2.16
+      "start": 1.9000000000000001,
+      "end": 2.3200000000000003
     },
     {
       "word": "Rodinná",
-      "start": 2.44,
-      "end": 2.8
+      "start": 2.6000000000000005,
+      "end": 2.9600000000000004
     },
     {
       "word": "firma",
-      "start": 2.893,
-      "end": 3.36
+      "start": 3.0270000000000006,
+      "end": 3.3600000000000003
     },
     {
       "word": "od",
-      "start": 3.4669999999999996,
-      "end": 3.6799999999999997
+      "start": 3.4130000000000003,
+      "end": 3.5200000000000005
     },
     {
       "word": "roku",
-      "start": 3.7279999999999998,
-      "end": 3.92
+      "start": 3.5680000000000005,
+      "end": 3.7600000000000007
     },
     {
       "word": "devatenáct",
-      "start": 3.9799999999999995,
-      "end": 4.56
+      "start": 3.8000000000000003,
+      "end": 4.4
     },
     {
       "word": "set",
-      "start": 4.6,
-      "end": 4.72
+      "start": 4.42,
+      "end": 4.48
     },
     {
       "word": "devadesát",
-      "start": 4.74,
-      "end": 5.2
+      "start": 4.5,
+      "end": 4.96
     },
     {
       "word": "devět.",
-      "start": 5.26,
-      "end": 5.6
+      "start": 5.04,
+      "end": 5.4
+    },
+    {
+      "word": "…",
+      "start": 5.4,
+      "end": 5.4
     },
     {
       "word": "<end>",
-      "start": 5.7208163265306125,
-      "end": 5.7208163265306125
+      "start": 5.642448979591837,
+      "end": 5.642448979591837
     }
-  ],
-  "tempo": 1.026,
-  "duration_1x_s": 5.721
+  ]
 }

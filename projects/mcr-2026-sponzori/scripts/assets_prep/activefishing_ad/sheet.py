@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 P = '/home/user/Clipcreator/projects/mcr-2026-sponzori'
 D = f'{P}/assets_prep/activefishing/ads'
 files = sorted(f for f in glob.glob(f'{D}/[HS]*.png') if not f.endswith('_shadow.png'))
-files.append(f'{P}/assets_prep/activefishing/logo_on_dark.png')
+files.append(f'{P}/assets_prep/activefishing/logo_on_dark.png'); files.append(f'{D}/logo_white_knockout.png')
 F = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 font = ImageFont.truetype(F, 20) if os.path.exists(F) else ImageFont.load_default()
 small = ImageFont.truetype(F, 13) if os.path.exists(F) else ImageFont.load_default()

@@ -219,7 +219,7 @@ export async function init(opts) {
   U._dummyF = { value: dummyF };
 
   const [orthoCore, orthoCtx, orthoCtxM, cls, wmask, coreH, ctxH, dtmH, det, clsCtx, dtmCtxH] = await Promise.all([
-    loadTex(DATA + 'orto_core_6400.jpg'),
+    loadTex(DATA + (cfg.orthoCore || 'orto_core_6400_nowires.png')),   // v2: power-line wires removed (py/clean_wires.py)
     loadTex(DATA + 'orto_context_3000.jpg'),
     loadTex(DATA + 'orto_context_3000.jpg', { wrap: THREE.MirroredRepeatWrapping }),
     loadTex(BUILD + 'cls_core_1m.png', { srgb: false, aniso: 1 }),

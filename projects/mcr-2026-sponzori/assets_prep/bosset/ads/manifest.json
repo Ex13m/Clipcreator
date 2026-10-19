@@ -1,0 +1,445 @@
+{
+ "sponsor": "bosset",
+ "generated": "2026-10-19",
+ "note": "Bosset.cz is a retailer/distributor (official distributor of Keitech and YGK X-Braid for CZ). Zojirushi, Keitech, YGK are third-party brands: never imply Bosset makes them; say nothing about Zojirushi origin. Prices change - not for on-screen use.",
+ "files": [
+  {
+   "file": "bosset/ads/H1_zojirushi_sm-vb_0-6l_black.png",
+   "role": "hero",
+   "product": "Termoska Zojirushi SM-VB 0,6l Black",
+   "code": "SM-VB60BM",
+   "price_19_10": "1 485 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-vb-0-6l-black/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11298-1_termoska-zojirushi-sm-vb-0-6l-black.jpg",
+   "method": "local darkness cut (paper-white 255) + rim decontamination",
+   "size": [
+    503,
+    1537
+   ],
+   "pad": [
+    0.0477,
+    0.0163,
+    0.0517,
+    0.0169
+   ],
+   "aspect": 0.304,
+   "dominant": [
+    "#403b40",
+    "#555055",
+    "#696468"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l",
+    "note": "No. 1 of TERMOSKY sorted by \"Nejprodávanější\" (19 Oct)"
+   },
+   "shadow": "bosset/ads/H1_zojirushi_sm-vb_0-6l_black_shadow.png"
+  },
+  {
+   "file": "bosset/ads/H2_zojirushi_sm-sr_0-6l_green.png",
+   "role": "hero",
+   "product": "Termoska Zojirushi SM-SR 0,6l Green",
+   "code": "SM-SR60EGP",
+   "price_19_10": "1 200 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-green/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11283_termoska-zojirushi-sm-sr-0-6l-green.jpg",
+   "method": "local darkness cut + rim decontamination",
+   "size": [
+    440,
+    1544
+   ],
+   "pad": [
+    0.0591,
+    0.0168,
+    0.0591,
+    0.0168
+   ],
+   "aspect": 0.26,
+   "dominant": [
+    "#b7dbd4",
+    "#acd1c9",
+    "#c5e1db"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l",
+    "note": "colour param \"Zelená\" (reads mint); call it \"zelená\", never \"mint\" on screen"
+   },
+   "shadow": "bosset/ads/H2_zojirushi_sm-sr_0-6l_green_shadow.png"
+  },
+  {
+   "file": "bosset/ads/H2m_zojirushi_sm-sr_green_lid_open_macro.png",
+   "role": "hero-macro",
+   "product": "Termoska Zojirushi SM-SR 0,6l Green (gallery: lid open, DOUBLE LOCK)",
+   "code": "SM-SR60EGP",
+   "price_19_10": "1 200 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-green/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11283-3_termoska-zojirushi-sm-sr-0-6l-green.jpg",
+   "method": "ISNet trimap + white unmixing (cutout3); body is CROPPED at the bottom edge -> always let it bleed off the frame",
+   "size": [
+    1500,
+    1188
+   ],
+   "pad": [
+    0.004,
+    0.0051,
+    0.0,
+    0.0
+   ],
+   "aspect": 1.264,
+   "dominant": [
+    "#c1e0db",
+    "#aec4bc",
+    "#d5e7e2"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   }
+  },
+  {
+   "file": "bosset/ads/H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t.png",
+   "role": "hero",
+   "product": "Gumová Nástraha Keitech Easy Shiner 4'' 10cm Ice Chartreuse PAL03T (7ks)",
+   "code": "PAL03T",
+   "price_19_10": "189 Kč",
+   "product_page": "https://www.bosset.cz/gumove-nastrahy-keitech-easy-shiner--4-10cm/gumova-nastraha-keitech-easy-shiner--4-10cm-ice-chartreuse-pal03t--7ks/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/2035-1_gumova-nastraha-keitech-easy-shiner.jpg",
+   "method": "Higgsfield upscale 4k (bytedance, 2 cr) + smoothed ISNet∪darkness contour, rim colours from 6 px inside (upscaler leaves white dust on the rim); 2400 px",
+   "size": [
+    2400,
+    463
+   ],
+   "pad": [
+    0.01,
+    0.0518,
+    0.01,
+    0.0518
+   ],
+   "aspect": 5.679,
+   "dominant": [
+    "#81ed3f",
+    "#76c979",
+    "#9df559"
+   ],
+   "facts": {
+    "params": {
+     "délka": "10 cm",
+     "hmotnost": "3–5 g",
+     "tvar": "shadový ocásek",
+     "UV": "UV gumové nástrahy"
+    },
+    "note": "No. 1 of the WHOLE shop (/znacky/?order=bestseller): the 12 best-selling items are all Keitech Easy Shiner",
+    "quote": "„zřejmě tou nejznámější nástrahou z dílny Japonské značky Keitech“ (product page)"
+   },
+   "shadow": "bosset/ads/H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S1_zojirushi_sm-she_0-6l_orange.png",
+   "role": "secondary",
+   "product": "Termoska Zojirushi SM-SHE 0,6l Orange",
+   "code": "SM-SHE60DV",
+   "price_19_10": "1 347 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-she-0-6l-orange/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11235_termoska-zojirushi-sm-she-0-6l-orange.jpg",
+   "method": "local darkness cut (source 1200 px)",
+   "size": [
+    362,
+    1248
+   ],
+   "pad": [
+    0.0663,
+    0.0192,
+    0.0691,
+    0.0192
+   ],
+   "aspect": 0.26,
+   "dominant": [
+    "#ec8c50",
+    "#ca5b31",
+    "#f5a166"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA"
+    ],
+    "claims_NOT_on_page": [
+     "jednou rukou",
+     "jako telefon"
+    ],
+    "volume": "0,6 l"
+   },
+   "shadow": "bosset/ads/S1_zojirushi_sm-she_0-6l_orange_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S1m_zojirushi_sm-she_orange_lid_open_macro.png",
+   "role": "secondary-macro",
+   "product": "Termoska Zojirushi SM-SHE 0,6l Orange (gallery: lid open)",
+   "code": "SM-SHE60DV",
+   "price_19_10": "1 347 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-she-0-6l-orange/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11235-5_termoska-zojirushi-sm-she-0-6l-orange.jpg",
+   "method": "cutout3; cropped at left + bottom -> bleed",
+   "size": [
+    955,
+    1200
+   ],
+   "pad": [
+    0.0021,
+    0.0042,
+    0.0052,
+    0.0
+   ],
+   "aspect": 0.793,
+   "dominant": [
+    "#9d2f21",
+    "#d66a4c",
+    "#e0a48f"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA"
+    ],
+    "claims_NOT_on_page": [
+     "jednou rukou",
+     "jako telefon"
+    ],
+    "volume": "0,6 l"
+   }
+  },
+  {
+   "file": "bosset/ads/S2_zojirushi_sm-sr_0-6l_pink.png",
+   "role": "secondary",
+   "product": "Termoska Zojirushi SM-SR 0,6l Pink",
+   "code": "SM-SR60EVP",
+   "price_19_10": "1 200 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-pink/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11280_termoska-zojirushi-sm-sr-0-6l-pink.jpg",
+   "method": "local darkness cut",
+   "size": [
+    441,
+    1542
+   ],
+   "pad": [
+    0.059,
+    0.0162,
+    0.059,
+    0.0162
+   ],
+   "aspect": 0.26,
+   "dominant": [
+    "#e3cde1",
+    "#d8bfd5",
+    "#e9d6e7"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   },
+   "shadow": "bosset/ads/S2_zojirushi_sm-sr_0-6l_pink_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S2m_zojirushi_sm-sr_pink_lid_open_macro.png",
+   "role": "secondary-macro",
+   "product": "Termoska Zojirushi SM-SR 0,6l Pink (gallery: lid open)",
+   "code": "SM-SR60EVP",
+   "price_19_10": "1 200 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-pink/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11280-3_termoska-zojirushi-sm-sr-0-6l-pink.jpg",
+   "method": "cutout3; cropped at the bottom -> bleed",
+   "size": [
+    1500,
+    1444
+   ],
+   "pad": [
+    0.004,
+    0.0048,
+    0.0047,
+    0.0
+   ],
+   "aspect": 1.035,
+   "dominant": [
+    "#e4cfdf",
+    "#c9adbe",
+    "#ecdce7"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   }
+  },
+  {
+   "file": "bosset/ads/S3_zojirushi_sm-sr_0-6l_white.png",
+   "role": "secondary",
+   "product": "Termoska Zojirushi SM-SR 0,6l White",
+   "code": "SM-SR60EWA",
+   "price_19_10": "1 200 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-sr-0-6l-white/",
+   "source_image": "p03 (assets/bosset)",
+   "method": "local darkness cut (thr 6, white on white) – use on dark / teal, not on the light-blue set",
+   "size": [
+    440,
+    1543
+   ],
+   "pad": [
+    0.0568,
+    0.0162,
+    0.0568,
+    0.0169
+   ],
+   "aspect": 0.261,
+   "dominant": [
+    "#dfdcdd",
+    "#d1cdd0",
+    "#e5e3e4"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   },
+   "shadow": "bosset/ads/S3_zojirushi_sm-sr_0-6l_white_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S4_zojirushi_sm-vb_0-6l_green.png",
+   "role": "secondary",
+   "product": "Termoska Zojirushi SM-VB 0,6l Green",
+   "code": "SM-VB60GM",
+   "price_19_10": "1 485 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-vb-0-6l-green/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/11262-1_termoska-zojirushi-sm-vb-0-6l-green.jpg",
+   "method": "local darkness cut",
+   "size": [
+    503,
+    1537
+   ],
+   "pad": [
+    0.0477,
+    0.0163,
+    0.0497,
+    0.0169
+   ],
+   "aspect": 0.305,
+   "dominant": [
+    "#cae3cd",
+    "#c3d9c5",
+    "#d1e6d4"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   },
+   "shadow": "bosset/ads/S4_zojirushi_sm-vb_0-6l_green_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S5_zojirushi_sm-vb_0-6l_beige.png",
+   "role": "secondary",
+   "product": "Termoska Zojirushi SM-VB 0,6l Beige",
+   "code": "SM-VB60CM",
+   "price_19_10": "1 485 Kč",
+   "product_page": "https://www.bosset.cz/termosky/termoska-zojirushi-sm-vb-0-6l-beige/",
+   "source_image": "p06 (assets/bosset)",
+   "method": "local darkness cut",
+   "size": [
+    501,
+    1538
+   ],
+   "pad": [
+    0.0499,
+    0.0163,
+    0.0499,
+    0.0163
+   ],
+   "aspect": 0.303,
+   "dominant": [
+    "#dfd6c4",
+    "#e8e1cf",
+    "#ebe6d5"
+   ],
+   "facts": {
+    "claims_ok": [
+     "až 6 hodin horké i studené (vakuová izolace)",
+     "nerezová ocel a ekologický plast bez BPA",
+     "DOUBLE LOCK – otevřeš jednou rukou",
+     "plastová tryska chrání rty před spálením",
+     "váží téměř stejně jako telefon"
+    ],
+    "volume": "0,6 l"
+   },
+   "shadow": "bosset/ads/S5_zojirushi_sm-vb_0-6l_beige_shadow.png"
+  },
+  {
+   "file": "bosset/ads/S6_ygk_x-braid_upgrade_x8_150m.png",
+   "role": "secondary",
+   "product": "Pletená šňůra YGK X-Braid Upgrade X8 150m (line image)",
+   "code": "—",
+   "price_19_10": "759 Kč (#PE1,0)",
+   "product_page": "https://www.bosset.cz/pletene-snury-x-braid-ygk/",
+   "source_image": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/shop/orig/46146_pletena-snura-ygk-x-braid-upgrade-x8.jpg",
+   "method": "cutout3 (spool + box); 1200 px source, keep ≤ 1169 px",
+   "size": [
+    1169,
+    1030
+   ],
+   "pad": [
+    0.0171,
+    0.0204,
+    0.018,
+    0.0204
+   ],
+   "aspect": 1.142,
+   "dominant": [
+    "#271c1a",
+    "#687c33",
+    "#b2bf87"
+   ],
+   "facts": {
+    "note": "shop image shows the #1.5 / 30 lb box while the listing item is #PE1,0 10 kg -> never caption a strength; caption \"YGK X-Braid Upgrade X8\" only"
+   },
+   "shadow": "bosset/ads/S6_ygk_x-braid_upgrade_x8_150m_shadow.png"
+  }
+ ]
+}

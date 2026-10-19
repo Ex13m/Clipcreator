@@ -5,250 +5,250 @@
   "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=b5311606-5746-4c27-b4bb-da3aa8ca9031.wav",
   "cs": "Mistrovství České republiky v Trout Area 2026. 24. a 25. října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
   "tts": "Mistrovství České republiky v Trout Area dva tisíce dvacet šest. Čtyřiadvacátého a pětadvacátého října, Líheň Liběchov. Čtyřicet závodníků, hard baits. Seznamte se s partnery mistrovství.",
-  "timebase": "seconds in vo/intro.wav (processed); = raw time - trim_start_s",
+  "timebase": "seconds in vo/intro.wav (processed, atempo 1.004); = (raw time - trim_start_s) / 1.004. 1x original: vo/prev/intro.1x.wav",
   "trim_start_s": 0.0,
   "raw_duration_s": 13.244,
-  "duration_s": 13.244,
+  "duration_s": 13.185,
   "words": [
     {
       "word": "Mistrovství",
       "start": 0.0,
-      "end": 0.56
+      "end": 0.558
     },
     {
       "word": "České",
-      "start": 0.613,
-      "end": 0.88
+      "start": 0.611,
+      "end": 0.876
     },
     {
       "word": "republiky",
-      "start": 0.936,
-      "end": 1.44
+      "start": 0.932,
+      "end": 1.434
     },
     {
       "word": "v",
-      "start": 1.48,
-      "end": 1.52
+      "start": 1.474,
+      "end": 1.514
     },
     {
       "word": "Trout",
-      "start": 1.587,
-      "end": 1.92
+      "start": 1.581,
+      "end": 1.912
     },
     {
       "word": "Area",
-      "start": 2.0,
-      "end": 2.32
+      "start": 1.992,
+      "end": 2.311
     },
     {
       "word": "2026.",
-      "start": 2.36,
-      "end": 3.68,
+      "start": 2.351,
+      "end": 3.665,
       "spoken": "dva tisíce dvacet šest."
     },
     {
       "word": "24.",
-      "start": 4.2,
-      "end": 5.12,
+      "start": 4.183,
+      "end": 5.1,
       "spoken": "Čtyřiadvacátého"
     },
     {
       "word": "a",
-      "start": 5.28,
-      "end": 5.44
+      "start": 5.259,
+      "end": 5.418
     },
     {
       "word": "25.",
-      "start": 5.48,
-      "end": 6.32,
+      "start": 5.458,
+      "end": 6.295,
       "spoken": "pětadvacátého"
     },
     {
       "word": "října,",
-      "start": 6.4,
-      "end": 6.8
+      "start": 6.375,
+      "end": 6.773
     },
     {
       "word": "Líheň",
-      "start": 7.08,
-      "end": 7.36
+      "start": 7.052,
+      "end": 7.331
     },
     {
       "word": "Liběchov.",
-      "start": 7.42,
-      "end": 8.08
+      "start": 7.39,
+      "end": 8.048
     },
     {
       "word": "Čtyřicet",
-      "start": 8.68,
-      "end": 9.04
+      "start": 8.645,
+      "end": 9.004
     },
     {
       "word": "závodníků,",
-      "start": 9.107,
-      "end": 9.84
+      "start": 9.071,
+      "end": 9.801
     },
     {
       "word": "hard",
-      "start": 10.0,
-      "end": 10.32
+      "start": 9.96,
+      "end": 10.279
     },
     {
       "word": "baits.",
-      "start": 10.4,
-      "end": 10.8
+      "start": 10.359,
+      "end": 10.757
     },
     {
       "word": "Seznamte",
-      "start": 11.063,
-      "end": 11.681
+      "start": 11.019,
+      "end": 11.634
     },
     {
       "word": "se",
-      "start": 11.733,
-      "end": 11.84
+      "start": 11.686,
+      "end": 11.793
     },
     {
       "word": "s",
-      "start": 11.88,
-      "end": 11.92
+      "start": 11.833,
+      "end": 11.873
     },
     {
       "word": "partnery",
-      "start": 11.968,
-      "end": 12.32
+      "start": 11.92,
+      "end": 12.271
     },
     {
       "word": "mistrovství.",
-      "start": 12.368,
-      "end": 13.04
+      "start": 12.319,
+      "end": 12.988
     }
   ],
   "words_tts": [
     {
       "word": "Mistrovství",
       "start": 0.0,
-      "end": 0.56
+      "end": 0.558
     },
     {
       "word": "České",
-      "start": 0.613,
-      "end": 0.88
+      "start": 0.611,
+      "end": 0.876
     },
     {
       "word": "republiky",
-      "start": 0.936,
-      "end": 1.44
+      "start": 0.932,
+      "end": 1.434
     },
     {
       "word": "v",
-      "start": 1.48,
-      "end": 1.52
+      "start": 1.474,
+      "end": 1.514
     },
     {
       "word": "Trout",
-      "start": 1.587,
-      "end": 1.92
+      "start": 1.581,
+      "end": 1.912
     },
     {
       "word": "Area",
-      "start": 2.0,
-      "end": 2.32
+      "start": 1.992,
+      "end": 2.311
     },
     {
       "word": "dva",
-      "start": 2.36,
-      "end": 2.48
+      "start": 2.351,
+      "end": 2.47
     },
     {
       "word": "tisíce",
-      "start": 2.544,
-      "end": 2.96
+      "start": 2.534,
+      "end": 2.948
     },
     {
       "word": "dvacet",
-      "start": 3.013,
-      "end": 3.36
+      "start": 3.001,
+      "end": 3.347
     },
     {
       "word": "šest.",
-      "start": 3.424,
-      "end": 3.68
+      "start": 3.41,
+      "end": 3.665
     },
     {
       "word": "Čtyřiadvacátého",
-      "start": 4.2,
-      "end": 5.12
+      "start": 4.183,
+      "end": 5.1
     },
     {
       "word": "a",
-      "start": 5.28,
-      "end": 5.44
+      "start": 5.259,
+      "end": 5.418
     },
     {
       "word": "pětadvacátého",
-      "start": 5.48,
-      "end": 6.32
+      "start": 5.458,
+      "end": 6.295
     },
     {
       "word": "října,",
-      "start": 6.4,
-      "end": 6.8
+      "start": 6.375,
+      "end": 6.773
     },
     {
       "word": "Líheň",
-      "start": 7.08,
-      "end": 7.36
+      "start": 7.052,
+      "end": 7.331
     },
     {
       "word": "Liběchov.",
-      "start": 7.42,
-      "end": 8.08
+      "start": 7.39,
+      "end": 8.048
     },
     {
       "word": "Čtyřicet",
-      "start": 8.68,
-      "end": 9.04
+      "start": 8.645,
+      "end": 9.004
     },
     {
       "word": "závodníků,",
-      "start": 9.107,
-      "end": 9.84
+      "start": 9.071,
+      "end": 9.801
     },
     {
       "word": "hard",
-      "start": 10.0,
-      "end": 10.32
+      "start": 9.96,
+      "end": 10.279
     },
     {
       "word": "baits.",
-      "start": 10.4,
-      "end": 10.8
+      "start": 10.359,
+      "end": 10.757
     },
     {
       "word": "Seznamte",
-      "start": 11.063,
-      "end": 11.681
+      "start": 11.019,
+      "end": 11.634
     },
     {
       "word": "se",
-      "start": 11.733,
-      "end": 11.84
+      "start": 11.686,
+      "end": 11.793
     },
     {
       "word": "s",
-      "start": 11.88,
-      "end": 11.92
+      "start": 11.833,
+      "end": 11.873
     },
     {
       "word": "partnery",
-      "start": 11.968,
-      "end": 12.32
+      "start": 11.92,
+      "end": 12.271
     },
     {
       "word": "mistrovství.",
-      "start": 12.368,
-      "end": 13.04
+      "start": 12.319,
+      "end": 12.988
     }
   ],
   "word_timestamps_raw": [
@@ -387,5 +387,7 @@
       "start": 13.244081632653062,
       "end": 13.244081632653062
     }
-  ]
+  ],
+  "tempo": 1.004,
+  "duration_1x_s": 13.244
 }

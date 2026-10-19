@@ -17,6 +17,9 @@ const frames = args.frames ? args.frames.split(',').flatMap(s => { if (s.include
 const opts = { w: W, h: H, vfov, ss: Number(args.ss || 2), sub: Number(args.sub || 2), reflScale: Number(args.refl || 0.5) };
 for (const k of ['shutter', 'disp', 'reflBoost', 'haze', 'exposure', 'postExposure', 'sat', 'contrast', 'grain', 'sharpen', 'vignette', 'ca', 'sunAz', 'sunEl']) if (args[k] !== undefined) opts[k] = Number(args[k]);
 if (args.debugWater) opts.debugWater = 1;
+if (args.ortho) opts.orthoCore = args.ortho;   // e.g. --ortho=orto_core_6400.jpg reproduces v1
+const OUT = path.join(ROOT, args.out || 'out');
+fs.mkdirSync(OUT, { recursive: true });
 if (args.path) opts.path = JSON.parse(fs.readFileSync(args.path, 'utf8'));
 const tag = args.tag || aspect;
 const outDir = path.join(ROOT, args.outdir || 'tmp/frames', tag);
@@ -65,13 +68,13 @@ server.close();
 const stills = (args.stills || '').split(',').filter(Boolean).map(Number);
 const toPng = (f, out) => spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-i', path.join(outDir, `f${String(f).padStart(4, '0')}.rgba`), '-vf', 'vflip', out], { stdio: 'inherit' });
 if (args.pngall) for (const f of frames) toPng(f, path.join(outDir, `f${String(f).padStart(4, '0')}.png`));
-for (const f of stills) if (frames.includes(f)) toPng(f, path.join(ROOT, 'out', `flyover_${aspect}_f${String(f).padStart(3, '0')}.png`));
+for (const f of stills) if (frames.includes(f)) toPng(f, path.join(OUT, `flyover_${aspect}_f${String(f).padStart(3, '0')}.png`));
 if (args.encode) {
   const list = frames.map(f => path.join(outDir, `f${String(f).padStart(4, '0')}.rgba`));
   const cat = path.join(outDir, 'all.raw');
   fs.writeFileSync(cat, '');
   for (const l of list) fs.appendFileSync(cat, fs.readFileSync(l));
-  const mp4 = path.join(ROOT, 'out', `flyover_${aspect}.mp4`);
+  const mp4 = path.join(OUT, `flyover_${aspect}.mp4`);
   const r = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', '30', '-i', cat,
     '-vf', 'vflip,format=yuv420p', '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart',
     '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', mp4], { stdio: 'inherit' });

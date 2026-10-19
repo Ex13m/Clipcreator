@@ -1,156 +1,162 @@
 {
   "key": "moonky",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": 1,
   "request_id": "6oVHJzAam1zHcroqJ4CV",
   "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=96fb5c16-b8c7-443f-846c-8a310974a5db.wav",
   "cs": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
   "tts": "Moonky – ručně dělané gumové nástrahy pro Trout Area. Vyvíjené a testované s českou reprezentací.",
-  "timebase": "seconds in vo/moonky.wav (processed, atempo 1.08); = (raw time - trim_start_s) / 1.08. 1x original: vo/moonky_1x.wav",
+  "timebase": "seconds in vo/moonky.wav (processed); = raw time - trim_start_s",
   "trim_start_s": 0.0,
   "raw_duration_s": 7.236,
-  "duration_s": 6.716,
+  "duration_s": 7.236,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -40.7
+  },
   "words": [
     {
       "word": "Moonky",
       "start": 0.0,
-      "end": 0.519
+      "end": 0.56
     },
     {
       "word": "ručně",
-      "start": 0.815,
-      "end": 1.185
+      "start": 0.88,
+      "end": 1.28
     },
     {
       "word": "dělané",
-      "start": 1.234,
-      "end": 1.556
+      "start": 1.333,
+      "end": 1.68
     },
     {
       "word": "gumové",
-      "start": 1.611,
-      "end": 2.0
+      "start": 1.74,
+      "end": 2.16
     },
     {
       "word": "nástrahy",
-      "start": 2.099,
-      "end": 2.593
+      "start": 2.267,
+      "end": 2.8
     },
     {
       "word": "pro",
-      "start": 2.648,
-      "end": 2.815
+      "start": 2.86,
+      "end": 3.04
     },
     {
       "word": "Trout",
-      "start": 2.877,
-      "end": 3.185
+      "start": 3.107,
+      "end": 3.44
     },
     {
       "word": "Area.",
-      "start": 3.274,
-      "end": 3.63
+      "start": 3.536,
+      "end": 3.92
     },
     {
       "word": "Vyvíjené",
-      "start": 3.901,
-      "end": 4.444
+      "start": 4.213,
+      "end": 4.8
     },
     {
       "word": "a",
-      "start": 4.481,
-      "end": 4.519
+      "start": 4.84,
+      "end": 4.88
     },
     {
       "word": "testované",
-      "start": 4.578,
-      "end": 5.185
+      "start": 4.944,
+      "end": 5.6
     },
     {
       "word": "s",
-      "start": 5.222,
-      "end": 5.259
+      "start": 5.64,
+      "end": 5.68
     },
     {
       "word": "českou",
-      "start": 5.319,
-      "end": 5.704
+      "start": 5.744,
+      "end": 6.16
     },
     {
       "word": "reprezentací.",
-      "start": 5.753,
-      "end": 6.519
+      "start": 6.213,
+      "end": 7.04
     }
   ],
   "words_tts": [
     {
       "word": "Moonky",
       "start": 0.0,
-      "end": 0.519
+      "end": 0.56
     },
     {
       "word": "ručně",
-      "start": 0.815,
-      "end": 1.185
+      "start": 0.88,
+      "end": 1.28
     },
     {
       "word": "dělané",
-      "start": 1.234,
-      "end": 1.556
+      "start": 1.333,
+      "end": 1.68
     },
     {
       "word": "gumové",
-      "start": 1.611,
-      "end": 2.0
+      "start": 1.74,
+      "end": 2.16
     },
     {
       "word": "nástrahy",
-      "start": 2.099,
-      "end": 2.593
+      "start": 2.267,
+      "end": 2.8
     },
     {
       "word": "pro",
-      "start": 2.648,
-      "end": 2.815
+      "start": 2.86,
+      "end": 3.04
     },
     {
       "word": "Trout",
-      "start": 2.877,
-      "end": 3.185
+      "start": 3.107,
+      "end": 3.44
     },
     {
       "word": "Area.",
-      "start": 3.274,
-      "end": 3.63
+      "start": 3.536,
+      "end": 3.92
     },
     {
       "word": "Vyvíjené",
-      "start": 3.901,
-      "end": 4.444
+      "start": 4.213,
+      "end": 4.8
     },
     {
       "word": "a",
-      "start": 4.481,
-      "end": 4.519
+      "start": 4.84,
+      "end": 4.88
     },
     {
       "word": "testované",
-      "start": 4.578,
-      "end": 5.185
+      "start": 4.944,
+      "end": 5.6
     },
     {
       "word": "s",
-      "start": 5.222,
-      "end": 5.259
+      "start": 5.64,
+      "end": 5.68
     },
     {
       "word": "českou",
-      "start": 5.319,
-      "end": 5.704
+      "start": 5.744,
+      "end": 6.16
     },
     {
       "word": "reprezentací.",
-      "start": 5.753,
-      "end": 6.519
+      "start": 6.213,
+      "end": 7.04
     }
   ],
   "word_timestamps_raw": [
@@ -239,7 +245,5 @@
       "start": 7.2359183673469385,
       "end": 7.2359183673469385
     }
-  ],
-  "tempo": 1.08,
-  "duration_1x_s": 7.236
+  ]
 }

@@ -1,176 +1,184 @@
 {
   "key": "velkaryba",
   "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
-  "request_id": "4aFnl2Dki5lsz9PA9wgB",
-  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=b14ac144-ced3-4098-938b-57f7f95fd980.wav",
+  "take": 2,
+  "request_id": "AxmCfpYsdOaYJZy2xWpy",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=745628c0-938a-4ac1-9aff-76adc75ebfa9.wav",
   "cs": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Shimano vyzkoušíte přímo u vody.",
   "tts": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Shimano vyzkoušíte přímo u vody.",
-  "timebase": "seconds in vo/velkaryba.wav (processed, atempo 1.08); = (raw time - trim_start_s) / 1.08. 1x original: vo/velkaryba_1x.wav",
-  "trim_start_s": 0.025,
-  "raw_duration_s": 7.236,
-  "duration_s": 6.685,
+  "tts_sent": "Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si pruty Shimano vyzkoušíte přímo u vody. …",
+  "timebase": "seconds in vo/velkaryba.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.045,
+  "raw_duration_s": 6.844,
+  "duration_s": 6.799,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -51.1,
+    "kept_trailing_burst": true
+  },
   "words": [
     {
       "word": "Velká",
       "start": 0.0,
-      "end": 0.273
+      "end": 0.275
     },
     {
       "word": "ryba",
-      "start": 0.347,
-      "end": 0.718
+      "start": 0.328,
+      "end": 0.675
     },
     {
       "word": "vše",
-      "start": 0.921,
-      "end": 1.088
+      "start": 0.895,
+      "end": 1.075
     },
     {
       "word": "na",
-      "start": 1.137,
-      "end": 1.236
+      "start": 1.128,
+      "end": 1.235
     },
     {
       "word": "přívlač.",
-      "start": 1.285,
-      "end": 1.829
+      "start": 1.288,
+      "end": 1.875
     },
     {
       "word": "Speciálka",
-      "start": 2.021,
-      "end": 2.866
+      "start": 2.051,
+      "end": 2.755
     },
     {
       "word": "z",
-      "start": 2.94,
-      "end": 3.014
+      "start": 2.795,
+      "end": 2.835
     },
     {
       "word": "Olomouce,",
-      "start": 3.063,
-      "end": 3.681
+      "start": 2.888,
+      "end": 3.555
     },
     {
       "word": "kde",
-      "start": 3.884,
-      "end": 4.051
+      "start": 3.695,
+      "end": 3.875
     },
     {
       "word": "si",
-      "start": 4.1,
-      "end": 4.199
+      "start": 3.928,
+      "end": 4.035
     },
     {
       "word": "pruty",
-      "start": 4.248,
-      "end": 4.569
+      "start": 4.088,
+      "end": 4.435
     },
     {
       "word": "Shimano",
-      "start": 4.614,
-      "end": 5.014
+      "start": 4.483,
+      "end": 4.915
     },
     {
       "word": "vyzkoušíte",
-      "start": 5.069,
-      "end": 5.755
+      "start": 4.975,
+      "end": 5.715
     },
     {
       "word": "přímo",
-      "start": 5.817,
-      "end": 6.125
+      "start": 5.795,
+      "end": 6.195
     },
     {
       "word": "u",
-      "start": 6.162,
-      "end": 6.199
+      "start": 6.235,
+      "end": 6.275
     },
     {
       "word": "vody.",
-      "start": 6.273,
-      "end": 6.569
+      "start": 6.339,
+      "end": 6.595
     }
   ],
   "words_tts": [
     {
       "word": "Velká",
       "start": 0.0,
-      "end": 0.273
+      "end": 0.275
     },
     {
       "word": "ryba",
-      "start": 0.347,
-      "end": 0.718
+      "start": 0.328,
+      "end": 0.675
     },
     {
       "word": "vše",
-      "start": 0.921,
-      "end": 1.088
+      "start": 0.895,
+      "end": 1.075
     },
     {
       "word": "na",
-      "start": 1.137,
-      "end": 1.236
+      "start": 1.128,
+      "end": 1.235
     },
     {
       "word": "přívlač.",
-      "start": 1.285,
-      "end": 1.829
+      "start": 1.288,
+      "end": 1.875
     },
     {
       "word": "Speciálka",
-      "start": 2.021,
-      "end": 2.866
+      "start": 2.051,
+      "end": 2.755
     },
     {
       "word": "z",
-      "start": 2.94,
-      "end": 3.014
+      "start": 2.795,
+      "end": 2.835
     },
     {
       "word": "Olomouce,",
-      "start": 3.063,
-      "end": 3.681
+      "start": 2.888,
+      "end": 3.555
     },
     {
       "word": "kde",
-      "start": 3.884,
-      "end": 4.051
+      "start": 3.695,
+      "end": 3.875
     },
     {
       "word": "si",
-      "start": 4.1,
-      "end": 4.199
+      "start": 3.928,
+      "end": 4.035
     },
     {
       "word": "pruty",
-      "start": 4.248,
-      "end": 4.569
+      "start": 4.088,
+      "end": 4.435
     },
     {
       "word": "Shimano",
-      "start": 4.614,
-      "end": 5.014
+      "start": 4.483,
+      "end": 4.915
     },
     {
       "word": "vyzkoušíte",
-      "start": 5.069,
-      "end": 5.755
+      "start": 4.975,
+      "end": 5.715
     },
     {
       "word": "přímo",
-      "start": 5.817,
-      "end": 6.125
+      "start": 5.795,
+      "end": 6.195
     },
     {
       "word": "u",
-      "start": 6.162,
-      "end": 6.199
+      "start": 6.235,
+      "end": 6.275
     },
     {
       "word": "vody.",
-      "start": 6.273,
-      "end": 6.569
+      "start": 6.339,
+      "end": 6.595
     }
   ],
   "word_timestamps_raw": [
@@ -186,90 +194,93 @@
     },
     {
       "word": "ryba",
-      "start": 0.4,
-      "end": 0.8
+      "start": 0.373,
+      "end": 0.72
     },
     {
       "word": "–",
-      "start": 0.8,
-      "end": 0.8
+      "start": 0.72,
+      "end": 0.72
     },
     {
       "word": "vše",
-      "start": 1.02,
-      "end": 1.2000000000000002
+      "start": 0.94,
+      "end": 1.12
     },
     {
       "word": "na",
-      "start": 1.2530000000000001,
-      "end": 1.36
+      "start": 1.173,
+      "end": 1.28
     },
     {
       "word": "přívlač.",
-      "start": 1.413,
-      "end": 2.0
+      "start": 1.333,
+      "end": 1.9200000000000002
     },
     {
       "word": "Speciálka",
-      "start": 2.208,
-      "end": 3.12
+      "start": 2.096,
+      "end": 2.8
     },
     {
       "word": "z",
-      "start": 3.2,
-      "end": 3.2800000000000002
+      "start": 2.84,
+      "end": 2.88
     },
     {
       "word": "Olomouce,",
-      "start": 3.333,
-      "end": 4.0
+      "start": 2.933,
+      "end": 3.6
     },
     {
       "word": "kde",
-      "start": 4.220000000000001,
-      "end": 4.4
+      "start": 3.74,
+      "end": 3.92
     },
     {
       "word": "si",
-      "start": 4.453,
-      "end": 4.5600000000000005
+      "start": 3.9730000000000003,
+      "end": 4.08
     },
     {
       "word": "pruty",
-      "start": 4.613,
-      "end": 4.96
+      "start": 4.133,
+      "end": 4.48
     },
     {
       "word": "Shimano",
-      "start": 5.008,
-      "end": 5.4399999999999995
+      "start": 4.5280000000000005,
+      "end": 4.960000000000001
     },
     {
       "word": "vyzkoušíte",
-      "start": 5.5,
-      "end": 6.24
+      "start": 5.0200000000000005,
+      "end": 5.760000000000001
     },
     {
       "word": "přímo",
-      "start": 6.307,
-      "end": 6.64
+      "start": 5.840000000000001,
+      "end": 6.24
     },
     {
       "word": "u",
-      "start": 6.68,
-      "end": 6.72
+      "start": 6.280000000000001,
+      "end": 6.32
     },
     {
       "word": "vody.",
-      "start": 6.8,
-      "end": 7.12
+      "start": 6.384,
+      "end": 6.640000000000001
+    },
+    {
+      "word": "…",
+      "start": 6.640000000000001,
+      "end": 6.640000000000001
     },
     {
       "word": "<end>",
-      "start": 7.2359183673469385,
-      "end": 7.2359183673469385
+      "start": 6.844081632653062,
+      "end": 6.844081632653062
     }
-  ],
-  "tempo": 1.08,
-  "duration_1x_s": 7.211
+  ]
 }

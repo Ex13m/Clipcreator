@@ -10,9 +10,10 @@ are confirmed in `transactions`. Only public product packshots from cdn.myshopte
 | 3 | 18:33 | upscale_image get_cost 4k | media 14fe9a39… | — | 0 | 0 | quote 2 credits |
 | 4 | 18:33:05 | upscale_image 4k (bytedance) | media 14fe9a39… (Chibi Futten) | job a0e1fc81-7fa8-4776-94f9-79c5b8dfa300 | 2 | 2 | ok → 4096×3072 → `ads/_src/af_chibi_tropchartpink_hf4k.png` |
 | 5 | 18:33:07 | upscale_image 4k (bytedance) | media 76d1a164… (Sofia) | job e6c49ed4-b7a5-4aa0-a265-59a4dd94daef | 2 → refunded | 2 | job **failed**; refund +2 at 18:36:03 (transactions) |
-| 6 | 18:36 | upscale_image 4k (bytedance), retry | media 76d1a164… (Sofia) | job c670c9fb-e799-4dd8-9f23-3509c897d992 | 2 | 4 | ok → 4096×3072 → `ads/_src/af_sofia_sk017_hf4k.png` |
+| 6 | 18:36:57 | upscale_image 4k (bytedance), retry | media 76d1a164… (Sofia) | job c670c9fb-e799-4dd8-9f23-3509c897d992 | 2 | 4 | ok → 4096×3072 → `ads/_src/af_sofia_sk017_hf4k.png` |
 
 ## Summary
+- Confirmed in `transactions`: −2 at 18:33:05, −2 at 18:33:07, refund +2 at 18:36:03, −2 at 18:36:57. Other upscale lines in the same minutes, such as 18:37:01 and 18:54:42, belong to parallel sponsor agents.
 - **Spent: 4 credits of 12** (2 × upscale_image 4k; the failed job was refunded; imports and get_cost are free).
 - `remove_background` was **not** used (0 credits): all sources are retouched pure-white (255) packshots, and the local
   ISNet trimap + white unmixing keeps the hook wire, line-tie holes and the translucent lips better (see MEMORY.md lessons).

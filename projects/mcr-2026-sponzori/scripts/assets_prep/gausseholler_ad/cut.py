@@ -23,16 +23,25 @@ def bg_plate(im, bgmask, scales=(6, 16, 40, 100, 250)):
     """Smooth background plate from known-background pixels (coarse -> fine blend)."""
     med = np.median(im[bgmask], 0) if bgmask.any() else np.array([40, 40, 40], np.float32)
     B = np.broadcast_to(med, im.shape).astype(np.float32).copy()
+    H, W = bgmask.shape
+    k = 4
+    ims = cv2.resize(im, (W // k, H // k), interpolation=cv2.INTER_AREA)
+    ms = cv2.resize(bgmask.astype(np.float32), (W // k, H // k), interpolation=cv2.INTER_AREA) > 0.999
     for s in reversed(scales):
-        e, den = _nconv(im, bgmask, s)
+        if s >= 16:                       # coarse scales on a 1/4 grid (same result, 50x faster)
+            e, den = _nconv(ims, ms, s / k)
+            e = cv2.resize(e, (W, H), interpolation=cv2.INTER_LINEAR)
+            den = cv2.resize(den, (W, H), interpolation=cv2.INTER_LINEAR)
+        else:
+            e, den = _nconv(im, bgmask, s)
         w = np.clip(den / 0.25, 0, 1)[..., None]
         B = w * e + (1 - w) * B
     return B
 
 
-def cutout_dark(rgb, isn, sil_thr=0.5, band=3, hole_min=300, hole_d=9.0, minF=14.0,
+def cutout_dark(rgb, isn, sil_thr=0.5, band=3, hole_min=300, hole_d=9.0, minF=22.0,
                 min_frac=0.0004, keep_largest=False, fill=None, open_boxes=None, drop_boxes=None,
-                peel_d=6.0, open_it=1):
+                peel_d=6.0, open_it=1, force_ellipses=None):
     """fill / open_boxes / drop_boxes: lists of (x0,y0,x1,y1) to force-fill holes, force-open holes,
     or delete (floor shadow smears)."""
     im = rgb.astype(np.float32)
@@ -45,11 +54,11 @@ def cutout_dark(rgb, isn, sil_thr=0.5, band=3, hole_min=300, hole_d=9.0, minF=14
     B = bg_plate(im, (ia < 0.04) & ~obj_loose)
     d = np.sqrt(np.sum((im - B) ** 2, 2))
     ds = cv2.GaussianBlur(d, (0, 0), 1.0)
-    solid = ia > sil_thr
+    solid = cv2.GaussianBlur(ia, (0, 0), 1.5) > sil_thr    # smoothed: no jaggies where ISNet hesitates
     # peel ISNet "ghost" lobes: plate-coloured pixels connected to the outside background
     for _ in range(2):
         outside = ~ndi.binary_fill_holes(solid)
-        cand = solid & (ds < peel_d)
+        cand = solid & (ds < peel_d) & (ia < 0.95)        # never peel where ISNet is certain (dark tube on dark floor)
         cl, cn = ndi.label(cand)
         if cn:
             touch = np.unique(cl[ndi.binary_dilation(outside, iterations=1) & cand])
@@ -109,6 +118,12 @@ def cutout_dark(rgb, isn, sil_thr=0.5, band=3, hole_min=300, hole_d=9.0, minF=14
     a = np.where(obj & (a < soft), np.maximum(a, soft * 0.98), a)
     a = np.where(~obj, np.minimum(a, soft), a)  # outside the mask: never more than the feathered mask
     alpha = np.where(inner, 1.0, np.where(edge, a, 0.0)).astype(np.float32)
+    if force_ellipses:   # discs whose rim equals the plate colour (end caps) -> geometric alpha, 4x supersampled
+        m = np.zeros((H * 4, W * 4), np.uint8)
+        for (cx, cy), (ew, eh), ang in force_ellipses:
+            cv2.ellipse(m, ((cx * 4 + 1.5, cy * 4 + 1.5), (ew * 4 - 2, eh * 4 - 2), ang), 255, -1)
+        e = cv2.resize(m, (W, H), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
+        alpha = np.maximum(alpha, e)
     aa = alpha[..., None]
     Fc = (im - (1 - aa) * B) / np.maximum(aa, 1e-3)
     Fc = np.where(aa > 0.15, Fc, F)

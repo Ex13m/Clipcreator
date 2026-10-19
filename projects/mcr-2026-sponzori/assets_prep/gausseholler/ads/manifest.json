@@ -1,0 +1,728 @@
+{
+ "sponsor": "gausseholler",
+ "generated": "2026-10-19",
+ "note": "Own production (Gausse Holler Custom Lab, hand-built in Czechia). Shop renders 2048 px on a dark studio set; cut locally (no AI upscale, no watermark on the sources). Prices are snapshots - not for on-screen use. Do not caption the number of colours (web says \"Five colourways\" and lists 8 variants).",
+ "files": [
+  {
+   "file": "gausseholler/ads/H1_revolut8_black_threeq.png",
+   "role": "hero",
+   "product": "Revolut 8 — Standard Edition · Black (3/4 render) = \"Black Standard Edition\"",
+   "size": [
+    1316,
+    1425
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-black.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0304,
+    0.0295,
+    0.0312,
+    0.0295
+   ],
+   "aspect": 0.924,
+   "glint": [
+    0.536,
+    0.392
+   ],
+   "dominant": [
+    {
+     "hex": "#0b0b0b",
+     "share": 0.562
+    },
+    {
+     "hex": "#222121",
+     "share": 0.267
+    },
+    {
+     "hex": "#434242",
+     "share": 0.132
+    },
+    {
+     "hex": "#9f928c",
+     "share": 0.038
+    }
+   ],
+   "accent": "#9f928c"
+  },
+  {
+   "file": "gausseholler/ads/H1b_revolut8_black_front.png",
+   "role": "hero-angle",
+   "product": "Revolut 8 — Standard Edition · Black (front render, homepage panel)",
+   "size": [
+    1505,
+    1389
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://gausseholler.com/cdn/shop/files/panel-r8-hero.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0299,
+    0.0317,
+    0.0292,
+    0.0324
+   ],
+   "aspect": 1.084,
+   "glint": [
+    0.771,
+    0.333
+   ],
+   "dominant": [
+    {
+     "hex": "#0b0b0b",
+     "share": 0.575
+    },
+    {
+     "hex": "#313030",
+     "share": 0.234
+    },
+    {
+     "hex": "#61605f",
+     "share": 0.138
+    },
+    {
+     "hex": "#ccc7bf",
+     "share": 0.053
+    }
+   ],
+   "accent": "#ccc7bf"
+  },
+  {
+   "file": "gausseholler/ads/H1c_revolut8_black_top.png",
+   "role": "hero-angle",
+   "product": "Revolut 8 — Standard Edition · Black (top view)",
+   "size": [
+    1554,
+    1936
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-black-top.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0367,
+    0.0294,
+    0.036,
+    0.0294
+   ],
+   "aspect": 0.803,
+   "glint": [
+    0.429,
+    0.126
+   ],
+   "dominant": [
+    {
+     "hex": "#080707",
+     "share": 0.405
+    },
+    {
+     "hex": "#191919",
+     "share": 0.346
+    },
+    {
+     "hex": "#353435",
+     "share": 0.2
+    },
+    {
+     "hex": "#786257",
+     "share": 0.049
+    }
+   ],
+   "accent": "#a8664b"
+  },
+  {
+   "file": "gausseholler/ads/H3_snap8_black.png",
+   "role": "hero",
+   "product": "Snap 8 — Standard Edition · Black",
+   "size": [
+    1284,
+    1226
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v1",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/snap8-alu-black.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0288,
+    0.031,
+    0.0288,
+    0.031
+   ],
+   "aspect": 1.047,
+   "glint": [
+    0.663,
+    0.04
+   ],
+   "dominant": [
+    {
+     "hex": "#0b0b0b",
+     "share": 0.426
+    },
+    {
+     "hex": "#222021",
+     "share": 0.358
+    },
+    {
+     "hex": "#3c3838",
+     "share": 0.179
+    },
+    {
+     "hex": "#988d84",
+     "share": 0.037
+    }
+   ],
+   "accent": "#988d84"
+  },
+  {
+   "file": "gausseholler/ads/S1_aluset_revolut8_orange.png",
+   "role": "secondary",
+   "product": "Aluminium Set · Revolut 8 — Orange · Black Logo (legs, axle, top nut, star knob)",
+   "size": [
+    1780,
+    1166
+   ],
+   "product_page": "https://gausseholler.com/products/alu-set-revolut-8",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/alu-set-orange-threeq.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0287,
+    0.0446,
+    0.0292,
+    0.0437
+   ],
+   "aspect": 1.527,
+   "glint": [
+    0.126,
+    0.117
+   ],
+   "dominant": [
+    {
+     "hex": "#de9377",
+     "share": 0.422
+    },
+    {
+     "hex": "#c86f49",
+     "share": 0.325
+    },
+    {
+     "hex": "#a85020",
+     "share": 0.175
+    },
+    {
+     "hex": "#7a4429",
+     "share": 0.078
+    }
+   ],
+   "accent": "#c87249"
+  },
+  {
+   "file": "gausseholler/ads/S2_aluset_revolut8_black.png",
+   "role": "secondary",
+   "product": "Aluminium Set · Revolut 8 — Black · Orange Logo",
+   "size": [
+    1780,
+    1184
+   ],
+   "product_page": "https://gausseholler.com/products/alu-set-revolut-8",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/alu-set-black-threeq.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0292,
+    0.0431,
+    0.0287,
+    0.0439
+   ],
+   "aspect": 1.503,
+   "glint": [
+    0.144,
+    0.082
+   ],
+   "dominant": [
+    {
+     "hex": "#040404",
+     "share": 0.597
+    },
+    {
+     "hex": "#151515",
+     "share": 0.293
+    },
+    {
+     "hex": "#312f2f",
+     "share": 0.084
+    },
+    {
+     "hex": "#dfae9c",
+     "share": 0.026
+    }
+   ],
+   "accent": "#dfae9c"
+  },
+  {
+   "file": "gausseholler/ads/S3_carbon_tube_set_red.png",
+   "role": "secondary",
+   "product": "Carbon Tube Set · 8 pcs — Red (Ø 32 mm, 200 mm)",
+   "size": [
+    1553,
+    1281
+   ],
+   "product_page": "https://gausseholler.com/products/carbon-tube-set-8",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/carbon-tube-set-red.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0296,
+    0.0359,
+    0.0296,
+    0.0359
+   ],
+   "aspect": 1.212,
+   "glint": [
+    0.831,
+    0.226
+   ],
+   "dominant": [
+    {
+     "hex": "#1e0a0c",
+     "share": 0.548
+    },
+    {
+     "hex": "#401b1f",
+     "share": 0.307
+    },
+    {
+     "hex": "#66393d",
+     "share": 0.125
+    },
+    {
+     "hex": "#c1acb1",
+     "share": 0.021
+    }
+   ],
+   "accent": "#54282c"
+  },
+  {
+   "file": "gausseholler/ads/S4_carbon_tube_black.png",
+   "role": "secondary",
+   "product": "Carbon Tube Ø32 · Black (single tube, 200 mm)",
+   "size": [
+    325,
+    1261
+   ],
+   "product_page": "https://gausseholler.com/products/carbon-tube-black",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/carbon-tube-black.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.1169,
+    0.0301,
+    0.1169,
+    0.0301
+   ],
+   "aspect": 0.258,
+   "glint": [
+    0.148,
+    0.062
+   ],
+   "dominant": [
+    {
+     "hex": "#0f0f0f",
+     "share": 0.561
+    },
+    {
+     "hex": "#222222",
+     "share": 0.282
+    },
+    {
+     "hex": "#3f3e3f",
+     "share": 0.136
+    },
+    {
+     "hex": "#acaaab",
+     "share": 0.021
+    }
+   ],
+   "accent": "#acaaab"
+  },
+  {
+   "file": "gausseholler/ads/S5_revolut8_nevergreen.png",
+   "role": "secondary",
+   "product": "Revolut 8 — Standard Edition · Nevergreen",
+   "size": [
+    1073,
+    1333
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2-nevergreen",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/rod-stand-v2-nevergreen-hero.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0363,
+    0.03,
+    0.0363,
+    0.03
+   ],
+   "aspect": 0.805,
+   "glint": [
+    0.245,
+    0.801
+   ],
+   "dominant": [
+    {
+     "hex": "#202619",
+     "share": 0.399
+    },
+    {
+     "hex": "#919b80",
+     "share": 0.262
+    },
+    {
+     "hex": "#526239",
+     "share": 0.204
+    },
+    {
+     "hex": "#c4d4ac",
+     "share": 0.135
+    }
+   ],
+   "accent": "#6f9530"
+  },
+  {
+   "file": "gausseholler/ads/S6_revolut8_black_white.png",
+   "role": "secondary",
+   "product": "Revolut 8 — Standard Edition · Black & White",
+   "size": [
+    1141,
+    1421
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2-black-white",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/rod-stand-v2-black-white-hero-muyn16cg.jpg",
+   "method": "local: ISNet silhouette + plate-unmix cut-out (cut.py), no upscale",
+   "pad": [
+    0.0351,
+    0.0289,
+    0.0368,
+    0.0296
+   ],
+   "aspect": 0.803,
+   "glint": [
+    0.68,
+    0.213
+   ],
+   "dominant": [
+    {
+     "hex": "#0f0e0f",
+     "share": 0.328
+    },
+    {
+     "hex": "#faf9f9",
+     "share": 0.292
+    },
+    {
+     "hex": "#313132",
+     "share": 0.287
+    },
+    {
+     "hex": "#747373",
+     "share": 0.093
+    }
+   ],
+   "accent": "#747373"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_1_blue.png",
+   "role": "hero-colourway",
+   "colour": "blue",
+   "product": "Revolut 8 — Standard Edition · Blue aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-blue.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.038,
+    0.03
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.492,
+    0.391
+   ],
+   "dominant": [
+    {
+     "hex": "#0f1011",
+     "share": 0.555
+    },
+    {
+     "hex": "#323337",
+     "share": 0.285
+    },
+    {
+     "hex": "#a1badc",
+     "share": 0.088
+    },
+    {
+     "hex": "#507296",
+     "share": 0.072
+    }
+   ],
+   "accent": "#2367b0"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_2_orange.png",
+   "role": "hero-colourway",
+   "colour": "orange",
+   "product": "Revolut 8 — Standard Edition · Orange aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-orange.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.038,
+    0.03
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.487,
+    0.395
+   ],
+   "dominant": [
+    {
+     "hex": "#111010",
+     "share": 0.557
+    },
+    {
+     "hex": "#373434",
+     "share": 0.276
+    },
+    {
+     "hex": "#dfaf98",
+     "share": 0.097
+    },
+    {
+     "hex": "#a96636",
+     "share": 0.07
+    }
+   ],
+   "accent": "#cb5f0f"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_3_red.png",
+   "role": "hero-colourway",
+   "colour": "red",
+   "product": "Revolut 8 — Standard Edition · Red aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-red.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.0371,
+    0.03
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.486,
+    0.395
+   ],
+   "dominant": [
+    {
+     "hex": "#111010",
+     "share": 0.562
+    },
+    {
+     "hex": "#383536",
+     "share": 0.278
+    },
+    {
+     "hex": "#d18d89",
+     "share": 0.11
+    },
+    {
+     "hex": "#ac140f",
+     "share": 0.049
+    }
+   ],
+   "accent": "#dd403a"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_4_purple.png",
+   "role": "hero-colourway",
+   "colour": "purple",
+   "product": "Revolut 8 — Standard Edition · Purple aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-purple.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.038,
+    0.0308
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.5,
+    0.386
+   ],
+   "dominant": [
+    {
+     "hex": "#101011",
+     "share": 0.557
+    },
+    {
+     "hex": "#343236",
+     "share": 0.286
+    },
+    {
+     "hex": "#c2a8cc",
+     "share": 0.086
+    },
+    {
+     "hex": "#7a6683",
+     "share": 0.07
+    }
+   ],
+   "accent": "#6e3f82"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_5_tiffany.png",
+   "role": "hero-colourway",
+   "colour": "tiffany",
+   "product": "Revolut 8 — Standard Edition · Tiffany aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-tiffany.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.038,
+    0.03
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.499,
+    0.386
+   ],
+   "dominant": [
+    {
+     "hex": "#0f1011",
+     "share": 0.549
+    },
+    {
+     "hex": "#313437",
+     "share": 0.282
+    },
+    {
+     "hex": "#9dc4d0",
+     "share": 0.092
+    },
+    {
+     "hex": "#407b89",
+     "share": 0.076
+    }
+   ],
+   "accent": "#0a7c96"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_6_lightgreen.png",
+   "role": "hero-colourway",
+   "colour": "light-green",
+   "product": "Revolut 8 — Standard Edition · Light Green aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-light-green.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.0371,
+    0.03,
+    0.038,
+    0.03
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.498,
+    0.386
+   ],
+   "dominant": [
+    {
+     "hex": "#101010",
+     "share": 0.557
+    },
+    {
+     "hex": "#343732",
+     "share": 0.286
+    },
+    {
+     "hex": "#b9ca9f",
+     "share": 0.088
+    },
+    {
+     "hex": "#748558",
+     "share": 0.069
+    }
+   ],
+   "accent": "#628823"
+  },
+  {
+   "file": "gausseholler/ads/H2_revolut8_colourway_7_bronze.png",
+   "role": "hero-colourway",
+   "colour": "bronze",
+   "product": "Revolut 8 — Standard Edition · Bronze aluminium",
+   "size": [
+    1106,
+    1365
+   ],
+   "product_page": "https://gausseholler.com/products/rod-stand-v2",
+   "source_image": "https://cdn.shopify.com/s/files/1/0994/1775/1900/files/r8-alu-bronze.jpg",
+   "method": "local cut-out; shared crop box for all 7 colourways (same render camera) -> swap in place",
+   "pad": [
+    0.038,
+    0.03,
+    0.038,
+    0.0308
+   ],
+   "aspect": 0.81,
+   "glint": [
+    0.501,
+    0.386
+   ],
+   "dominant": [
+    {
+     "hex": "#0e0e0e",
+     "share": 0.502
+    },
+    {
+     "hex": "#2c2a2a",
+     "share": 0.266
+    },
+    {
+     "hex": "#55483f",
+     "share": 0.12
+    },
+    {
+     "hex": "#b79985",
+     "share": 0.111
+    }
+   ],
+   "accent": "#945b33"
+  }
+ ]
+}

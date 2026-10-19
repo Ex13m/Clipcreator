@@ -1,0 +1,260 @@
+{
+  "key": "bosset",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "request_id": "n3giRJT85rXHuzIOs2Rc",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=e23dfb54-6605-47dd-bec2-d5dd4d70c8d6.wav",
+  "cs": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
+  "tts": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
+  "timebase": "seconds in vo/bosset.wav (processed, atempo 1.08); = (raw time - trim_start_s) / 1.08. 1x original: vo/bosset_1x.wav",
+  "trim_start_s": 0.0,
+  "raw_duration_s": 6.531,
+  "duration_s": 6.058,
+  "words": [
+    {
+      "word": "Ceny",
+      "start": 0.0,
+      "end": 0.37
+    },
+    {
+      "word": "pro",
+      "start": 0.407,
+      "end": 0.519
+    },
+    {
+      "word": "vítěze",
+      "start": 0.556,
+      "end": 1.037
+    },
+    {
+      "word": "věnuje",
+      "start": 1.086,
+      "end": 1.407
+    },
+    {
+      "word": "Bosset",
+      "start": 1.463,
+      "end": 1.926
+    },
+    {
+      "word": "termosky,",
+      "start": 2.193,
+      "end": 2.667
+    },
+    {
+      "word": "které",
+      "start": 2.79,
+      "end": 3.037
+    },
+    {
+      "word": "udrží",
+      "start": 3.074,
+      "end": 3.407
+    },
+    {
+      "word": "nápoj",
+      "start": 3.481,
+      "end": 3.778
+    },
+    {
+      "word": "horký",
+      "start": 3.815,
+      "end": 4.222
+    },
+    {
+      "word": "i",
+      "start": 4.296,
+      "end": 4.37
+    },
+    {
+      "word": "studený",
+      "start": 4.43,
+      "end": 4.889
+    },
+    {
+      "word": "až",
+      "start": 4.988,
+      "end": 5.185
+    },
+    {
+      "word": "šest",
+      "start": 5.244,
+      "end": 5.481
+    },
+    {
+      "word": "hodin.",
+      "start": 5.544,
+      "end": 5.852
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Ceny",
+      "start": 0.0,
+      "end": 0.37
+    },
+    {
+      "word": "pro",
+      "start": 0.407,
+      "end": 0.519
+    },
+    {
+      "word": "vítěze",
+      "start": 0.556,
+      "end": 1.037
+    },
+    {
+      "word": "věnuje",
+      "start": 1.086,
+      "end": 1.407
+    },
+    {
+      "word": "Bosset",
+      "start": 1.463,
+      "end": 1.926
+    },
+    {
+      "word": "termosky,",
+      "start": 2.193,
+      "end": 2.667
+    },
+    {
+      "word": "které",
+      "start": 2.79,
+      "end": 3.037
+    },
+    {
+      "word": "udrží",
+      "start": 3.074,
+      "end": 3.407
+    },
+    {
+      "word": "nápoj",
+      "start": 3.481,
+      "end": 3.778
+    },
+    {
+      "word": "horký",
+      "start": 3.815,
+      "end": 4.222
+    },
+    {
+      "word": "i",
+      "start": 4.296,
+      "end": 4.37
+    },
+    {
+      "word": "studený",
+      "start": 4.43,
+      "end": 4.889
+    },
+    {
+      "word": "až",
+      "start": 4.988,
+      "end": 5.185
+    },
+    {
+      "word": "šest",
+      "start": 5.244,
+      "end": 5.481
+    },
+    {
+      "word": "hodin.",
+      "start": 5.544,
+      "end": 5.852
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Ceny",
+      "start": 0.0,
+      "end": 0.4
+    },
+    {
+      "word": "pro",
+      "start": 0.44,
+      "end": 0.56
+    },
+    {
+      "word": "vítěze",
+      "start": 0.6,
+      "end": 1.12
+    },
+    {
+      "word": "věnuje",
+      "start": 1.173,
+      "end": 1.52
+    },
+    {
+      "word": "Bosset",
+      "start": 1.58,
+      "end": 2.08
+    },
+    {
+      "word": "–",
+      "start": 2.08,
+      "end": 2.08
+    },
+    {
+      "word": "termosky,",
+      "start": 2.368,
+      "end": 2.88
+    },
+    {
+      "word": "které",
+      "start": 3.013,
+      "end": 3.2800000000000002
+    },
+    {
+      "word": "udrží",
+      "start": 3.3200000000000003,
+      "end": 3.68
+    },
+    {
+      "word": "nápoj",
+      "start": 3.7600000000000002,
+      "end": 4.08
+    },
+    {
+      "word": "horký",
+      "start": 4.12,
+      "end": 4.5600000000000005
+    },
+    {
+      "word": "i",
+      "start": 4.640000000000001,
+      "end": 4.720000000000001
+    },
+    {
+      "word": "studený",
+      "start": 4.784000000000001,
+      "end": 5.280000000000001
+    },
+    {
+      "word": "až",
+      "start": 5.3870000000000005,
+      "end": 5.6000000000000005
+    },
+    {
+      "word": "šest",
+      "start": 5.664000000000001,
+      "end": 5.920000000000001
+    },
+    {
+      "word": "hodin.",
+      "start": 5.987,
+      "end": 6.32
+    },
+    {
+      "word": "<end>",
+      "start": 6.530612244897959,
+      "end": 6.530612244897959
+    }
+  ],
+  "tempo": 1.08,
+  "duration_1x_s": 6.531
+}

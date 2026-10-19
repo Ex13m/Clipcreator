@@ -28,7 +28,8 @@ COLOURWAYS = ['blue', 'orange', 'red', 'purple', 'tiffany', 'light-green', 'bron
 JOBS = [
     # out name, source file, isnet name, role, product, product page, source image URL, kwargs
     ('H1_revolut8_black_threeq', 'ads_src/r8-alu-black.jpg', 'r8-alu-black', 'hero',
-     'Revolut 8 — Standard Edition · Black (3/4 render) = "Black Standard Edition"', 'rod-stand-v2', 'r8-alu-black.jpg', {}),
+     'Revolut 8 — Standard Edition · Black (3/4 render) = "Black Standard Edition"', 'rod-stand-v2', 'r8-alu-black.jpg',
+     {'force_ellipses': [((1022.28, 163.69), (92.64, 117.59), 154.28)]}),   # grip end cap: rim = plate grey
     ('H1b_revolut8_black_front', 'p05_revolut8_panel_hero.jpg', 'p05', 'hero-angle',
      'Revolut 8 — Standard Edition · Black (front render, homepage panel)', 'rod-stand-v2',
      'https://gausseholler.com/cdn/shop/files/panel-r8-hero.jpg', {}),
@@ -75,9 +76,15 @@ def stats(rgba):
     share = np.bincount(lab, minlength=4) / len(lab)
     order = np.argsort(-share)
     dom = [{'hex': '#%02x%02x%02x' % tuple(int(v) for v in c[k]), 'share': round(float(share[k]), 3)} for k in order]
-    # most saturated cluster = accent
-    sat = [(max(c[k]) - min(c[k])) for k in range(4)]
-    acc = '#%02x%02x%02x' % tuple(int(v) for v in c[int(np.argmax(sat))])
+    # accent = median of the clearly saturated opaque pixels (anodised parts / logo), else most saturated cluster
+    mx, mn = px.max(1), px.min(1)
+    satm = (mx - mn) / np.maximum(mx, 1)
+    sel = (satm > 0.45) & (mx > 70)
+    if sel.sum() > 300:
+        acc = '#%02x%02x%02x' % tuple(int(v) for v in np.median(px[sel], 0))
+    else:
+        sat = [(max(c[k]) - min(c[k])) for k in range(4)]
+        acc = '#%02x%02x%02x' % tuple(int(v) for v in c[int(np.argmax(sat))])
     return pad, [round(gx / W, 3), round(gy / H, 3)], dom, acc
 
 

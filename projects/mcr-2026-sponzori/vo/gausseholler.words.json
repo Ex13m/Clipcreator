@@ -5,172 +5,172 @@
   "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=e566e286-6c7f-4839-82ef-1da0323402fe.wav",
   "cs": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
   "tts": "Gausse Holler – stojan na pruty Black Standard Edition. Ručně stavěný v Česku: karbon, hliník, limitovaná série.",
-  "timebase": "seconds in vo/gausseholler.wav (processed, atempo 1.08); = (raw time - trim_start_s) / 1.08. 1x original: vo/gausseholler_1x.wav",
+  "timebase": "seconds in vo/gausseholler.wav (processed, atempo 1.071); = (raw time - trim_start_s) / 1.071. 1x original: vo/prev/gausseholler.1x.wav",
   "trim_start_s": 0.0,
   "raw_duration_s": 8.359,
-  "duration_s": 7.738,
+  "duration_s": 7.812,
   "words": [
     {
       "word": "Gausse",
       "start": 0.0,
-      "end": 0.37
+      "end": 0.373
     },
     {
       "word": "Holler",
-      "start": 0.444,
-      "end": 0.815
+      "start": 0.448,
+      "end": 0.822
     },
     {
       "word": "stojan",
-      "start": 1.111,
-      "end": 1.481
+      "start": 1.12,
+      "end": 1.494
     },
     {
       "word": "na",
-      "start": 1.531,
-      "end": 1.63
+      "start": 1.543,
+      "end": 1.643
     },
     {
       "word": "pruty",
-      "start": 1.679,
-      "end": 2.0
+      "start": 1.693,
+      "end": 2.017
     },
     {
       "word": "Black",
-      "start": 2.049,
-      "end": 2.296
+      "start": 2.066,
+      "end": 2.316
     },
     {
       "word": "Standard",
-      "start": 2.354,
-      "end": 2.815
+      "start": 2.373,
+      "end": 2.838
     },
     {
       "word": "Edition.",
-      "start": 2.898,
-      "end": 3.481
+      "start": 2.923,
+      "end": 3.511
     },
     {
       "word": "Ručně",
-      "start": 3.605,
-      "end": 3.926
+      "start": 3.635,
+      "end": 3.959
     },
     {
       "word": "stavěný",
-      "start": 3.985,
-      "end": 4.37
+      "start": 4.019,
+      "end": 4.407
     },
     {
       "word": "v",
-      "start": 4.407,
-      "end": 4.444
+      "start": 4.444,
+      "end": 4.482
     },
     {
       "word": "Česku:",
-      "start": 4.519,
-      "end": 4.889
+      "start": 4.556,
+      "end": 4.93
     },
     {
       "word": "karbon,",
-      "start": 5.037,
-      "end": 5.556
+      "start": 5.079,
+      "end": 5.602
     },
     {
       "word": "hliník,",
-      "start": 5.722,
-      "end": 6.222
+      "start": 5.77,
+      "end": 6.275
     },
     {
       "word": "limitovaná",
-      "start": 6.358,
-      "end": 6.963
+      "start": 6.412,
+      "end": 7.021
     },
     {
       "word": "série.",
-      "start": 7.062,
-      "end": 7.556
+      "start": 7.121,
+      "end": 7.619
     }
   ],
   "words_tts": [
     {
       "word": "Gausse",
       "start": 0.0,
-      "end": 0.37
+      "end": 0.373
     },
     {
       "word": "Holler",
-      "start": 0.444,
-      "end": 0.815
+      "start": 0.448,
+      "end": 0.822
     },
     {
       "word": "stojan",
-      "start": 1.111,
-      "end": 1.481
+      "start": 1.12,
+      "end": 1.494
     },
     {
       "word": "na",
-      "start": 1.531,
-      "end": 1.63
+      "start": 1.543,
+      "end": 1.643
     },
     {
       "word": "pruty",
-      "start": 1.679,
-      "end": 2.0
+      "start": 1.693,
+      "end": 2.017
     },
     {
       "word": "Black",
-      "start": 2.049,
-      "end": 2.296
+      "start": 2.066,
+      "end": 2.316
     },
     {
       "word": "Standard",
-      "start": 2.354,
-      "end": 2.815
+      "start": 2.373,
+      "end": 2.838
     },
     {
       "word": "Edition.",
-      "start": 2.898,
-      "end": 3.481
+      "start": 2.923,
+      "end": 3.511
     },
     {
       "word": "Ručně",
-      "start": 3.605,
-      "end": 3.926
+      "start": 3.635,
+      "end": 3.959
     },
     {
       "word": "stavěný",
-      "start": 3.985,
-      "end": 4.37
+      "start": 4.019,
+      "end": 4.407
     },
     {
       "word": "v",
-      "start": 4.407,
-      "end": 4.444
+      "start": 4.444,
+      "end": 4.482
     },
     {
       "word": "Česku:",
-      "start": 4.519,
-      "end": 4.889
+      "start": 4.556,
+      "end": 4.93
     },
     {
       "word": "karbon,",
-      "start": 5.037,
-      "end": 5.556
+      "start": 5.079,
+      "end": 5.602
     },
     {
       "word": "hliník,",
-      "start": 5.722,
-      "end": 6.222
+      "start": 5.77,
+      "end": 6.275
     },
     {
       "word": "limitovaná",
-      "start": 6.358,
-      "end": 6.963
+      "start": 6.412,
+      "end": 7.021
     },
     {
       "word": "série.",
-      "start": 7.062,
-      "end": 7.556
+      "start": 7.121,
+      "end": 7.619
     }
   ],
   "word_timestamps_raw": [
@@ -270,6 +270,6 @@
       "end": 8.359183673469389
     }
   ],
-  "tempo": 1.08,
+  "tempo": 1.071,
   "duration_1x_s": 8.359
 }

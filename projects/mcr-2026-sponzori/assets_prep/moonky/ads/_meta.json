@@ -1,0 +1,722 @@
+{
+ "H1_gamer_big_dc03_brown_orange": {
+  "product": "Gamer Big 46mm DC03 Brown Metalic / Orange Fluo",
+  "role": "hero",
+  "file": "assets_prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png",
+  "source": "assets_prep/moonky/ads/_src/hf4k_gamer_big_dc03.png (Higgsfield 4k of https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/289_gamer-big-brown-orange.png) + alpha assets_prep/moonky/ads/_src/w289_gamer_big_dc03_brown_orange.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/289_gamer-big-brown-orange.png",
+  "method": "shop_alpha_hf",
+  "info": {
+   "scale": 4.0
+  },
+  "size": [
+   2544,
+   1011
+  ],
+  "bbox": [
+   77,
+   76,
+   2468,
+   935
+  ],
+  "pad": [
+   0.03,
+   0.075,
+   0.03,
+   0.075
+  ],
+  "aspect": 2.783,
+  "dominant": [
+   {
+    "hex": "#6b3643",
+    "share": 0.57
+   },
+   {
+    "hex": "#d19c98",
+    "share": 0.221
+   },
+   {
+    "hex": "#f7950c",
+    "share": 0.209
+   }
+  ],
+  "glint": [
+   0.369,
+   0.183
+  ]
+ },
+ "H2_savory_c06_green": {
+  "product": "Savory 43mm C06 Green",
+  "role": "hero",
+  "file": "assets_prep/moonky/ads/H2_savory_c06_green.png",
+  "source": "assets/moonky/p01_savory_c06_green.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2083_gumova-nastraha-moonky-savory-43mm-c06-green-olihen-12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 810,
+   "opened_px": 0,
+   "shadow_px": 23,
+   "rim_px": 10024
+  },
+  "size": [
+   2005,
+   586
+  ],
+  "bbox": [
+   60,
+   59,
+   1946,
+   528
+  ],
+  "pad": [
+   0.03,
+   0.101,
+   0.029,
+   0.099
+  ],
+  "aspect": 4.021,
+  "dominant": [
+   {
+    "hex": "#9cc903",
+    "share": 0.715
+   },
+   {
+    "hex": "#7bb101",
+    "share": 0.179
+   },
+   {
+    "hex": "#a9c955",
+    "share": 0.106
+   }
+  ],
+  "glint": [
+   0.208,
+   0.59
+  ]
+ },
+ "H3_coccon_jr_c04_black": {
+  "product": "Coccon Jr. 34mm C04 Black",
+  "role": "hero",
+  "file": "assets_prep/moonky/ads/H3_coccon_jr_c04_black.png",
+  "source": "assets/moonky/p04_coccon_jr_c04_black.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2437_gumova-nastraha-moonky-coccon-jr--34mm-c04-black-olihen-10ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 28953,
+   "ghost_px": 19800,
+   "opened_px": 0,
+   "shadow_px": 0,
+   "rim_px": 5457,
+   "smoothed_px": 997,
+   "erased_px": 636
+  },
+  "size": [
+   2268,
+   1330
+  ],
+  "bbox": [
+   65,
+   65,
+   2203,
+   1256
+  ],
+  "pad": [
+   0.029,
+   0.049,
+   0.029,
+   0.056
+  ],
+  "aspect": 1.795,
+  "dominant": [
+   {
+    "hex": "#0d0d0f",
+    "share": 0.795
+   },
+   {
+    "hex": "#494a4d",
+    "share": 0.154
+   },
+   {
+    "hex": "#f0f2f3",
+    "share": 0.051
+   }
+  ],
+  "glint": [
+   0.427,
+   0.212
+  ]
+ },
+ "S1_savory_c01_pink_bubblegum": {
+  "product": "Savory 43mm C01 Pink Bubblegum",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S1_savory_c01_pink_bubblegum.png",
+  "source": "assets/moonky/p06_savory_c01_pink_bubblegum.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2032_gumova-nastraha-moonky-savory-43mm-c01-pink-bubblegum-cheese--12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0,
+   "ghost_px": 25913,
+   "opened_px": 0,
+   "shadow_px": 32,
+   "rim_px": 6050,
+   "smoothed_px": 91
+  },
+  "size": [
+   2089,
+   885
+  ],
+  "bbox": [
+   60,
+   61,
+   2028,
+   824
+  ],
+  "pad": [
+   0.029,
+   0.069,
+   0.029,
+   0.069
+  ],
+  "aspect": 2.579,
+  "dominant": [
+   {
+    "hex": "#ee7ea1",
+    "share": 0.443
+   },
+   {
+    "hex": "#ec638b",
+    "share": 0.4
+   },
+   {
+    "hex": "#e32f65",
+    "share": 0.157
+   }
+  ],
+  "glint": [
+   0.074,
+   0.287
+  ]
+ },
+ "S2_savory_c02_orange_fluo": {
+  "product": "Savory 43mm C02 Orange fluo",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S2_savory_c02_orange_fluo.png",
+  "source": "assets_prep/moonky/ads/_src/w2038_savory_c02_orange_fluo.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2038_gumova-nastraha-moonky-savory-43mm-c02-orange-fluo-banana-12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0
+  },
+  "size": [
+   1485,
+   1385
+  ],
+  "bbox": [
+   45,
+   43,
+   1441,
+   1342
+  ],
+  "pad": [
+   0.03,
+   0.031,
+   0.03,
+   0.031
+  ],
+  "aspect": 1.075,
+  "dominant": [
+   {
+    "hex": "#f39302",
+    "share": 0.637
+   },
+   {
+    "hex": "#f0a326",
+    "share": 0.297
+   },
+   {
+    "hex": "#ecb15e",
+    "share": 0.067
+   }
+  ],
+  "glint": [
+   0.233,
+   0.236
+  ]
+ },
+ "S3_savory_c03_brown_metalic": {
+  "product": "Savory 43mm C03 Brown metalic",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S3_savory_c03_brown_metalic.png",
+  "source": "assets_prep/moonky/ads/_src/w2047_savory_c03_brown_metalic.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2047_gumova-nastraha-moonky-savory-43mm-c03-brown-metalic-banana-12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 1863
+  },
+  "size": [
+   2077,
+   958
+  ],
+  "bbox": [
+   60,
+   60,
+   2017,
+   898
+  ],
+  "pad": [
+   0.029,
+   0.063,
+   0.029,
+   0.063
+  ],
+  "aspect": 2.335,
+  "dominant": [
+   {
+    "hex": "#744546",
+    "share": 0.651
+   },
+   {
+    "hex": "#36191b",
+    "share": 0.242
+   },
+   {
+    "hex": "#977372",
+    "share": 0.107
+   }
+  ],
+  "glint": [
+   0.113,
+   0.312
+  ]
+ },
+ "S4_savory_c04_black": {
+  "product": "Savory 43mm C04 Black",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S4_savory_c04_black.png",
+  "source": "assets_prep/moonky/ads/_src/w2059_savory_c04_black.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2059_gumova-nastraha-moonky-savory-43mm-c04-black-banana-12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 2997
+  },
+  "size": [
+   1693,
+   1029
+  ],
+  "bbox": [
+   49,
+   49,
+   1644,
+   980
+  ],
+  "pad": [
+   0.029,
+   0.048,
+   0.029,
+   0.048
+  ],
+  "aspect": 1.713,
+  "dominant": [
+   {
+    "hex": "#101012",
+    "share": 0.713
+   },
+   {
+    "hex": "#373738",
+    "share": 0.238
+   },
+   {
+    "hex": "#9b9e9d",
+    "share": 0.049
+   }
+  ],
+  "glint": [
+   0.138,
+   0.363
+  ]
+ },
+ "S5_savory_dc03_brown_orange": {
+  "product": "Savory 43mm DC03 Brown metalic / Orange fluo",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S5_savory_dc03_brown_orange.png",
+  "source": "assets/moonky/p08_savory_dc03_brown_orange.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2146_gumova-nastraha-moonky-savory-43mm-dc-03-brown-metalic-orange-fluo-cheese-12ks-.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 2977
+  },
+  "size": [
+   2100,
+   1703
+  ],
+  "bbox": [
+   63,
+   61,
+   2039,
+   1642
+  ],
+  "pad": [
+   0.03,
+   0.036,
+   0.029,
+   0.036
+  ],
+  "aspect": 1.25,
+  "dominant": [
+   {
+    "hex": "#7a5554",
+    "share": 0.604
+   },
+   {
+    "hex": "#f0a846",
+    "share": 0.332
+   },
+   {
+    "hex": "#cfb09c",
+    "share": 0.064
+   }
+  ],
+  "glint": [
+   0.184,
+   0.102
+  ]
+ },
+ "S6_scelet_c01_pink_bubblegum": {
+  "product": "Scelet C01 Pink Bubblegum",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png",
+  "source": "assets/moonky/p03_scelet_c01_pink_bubblegum.jpg",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/1831_gumova-nastraha-moonky-scelet-c01-pink-bubblegum-banana-8ks-.jpg",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 34,
+   "opened_px": 0,
+   "shadow_px": 131,
+   "rim_px": 4105,
+   "erased_px": 175
+  },
+  "size": [
+   1168,
+   430
+  ],
+  "bbox": [
+   34,
+   34,
+   1133,
+   395
+  ],
+  "pad": [
+   0.029,
+   0.079,
+   0.03,
+   0.081
+  ],
+  "aspect": 3.044,
+  "dominant": [
+   {
+    "hex": "#e35470",
+    "share": 0.4
+   },
+   {
+    "hex": "#cc1c44",
+    "share": 0.331
+   },
+   {
+    "hex": "#f7839a",
+    "share": 0.269
+   }
+  ],
+  "glint": [
+   0.93,
+   0.726
+  ]
+ },
+ "S7_coccon_dc04_yellow_orange": {
+  "product": "Coccon 42mm DC04 Yellow / Orange fluo",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S7_coccon_dc04_yellow_orange.png",
+  "source": "assets/moonky/p09_coccon_dc04_yellow_orange.jpg",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2305_dc04.jpg",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0
+  },
+  "size": [
+   1189,
+   781
+  ],
+  "bbox": [
+   36,
+   35,
+   1154,
+   746
+  ],
+  "pad": [
+   0.03,
+   0.045,
+   0.029,
+   0.045
+  ],
+  "aspect": 1.572,
+  "dominant": [
+   {
+    "hex": "#d2ba45",
+    "share": 0.649
+   },
+   {
+    "hex": "#e99c3c",
+    "share": 0.254
+   },
+   {
+    "hex": "#dec476",
+    "share": 0.097
+   }
+  ],
+  "glint": [
+   0.897,
+   0.721
+  ]
+ },
+ "S8_scelet_jr_c08_coffee_milk": {
+  "product": "Scelet Jr. C08 Coffee milk",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png",
+  "source": "assets/moonky/p07_scelet_jr_c08_coffee_milk.jpg",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/1996_gumova-nastraha-moonky-scelet-jr--c08-coffee-milk-banana-12ks-.jpg",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0
+  },
+  "size": [
+   1015,
+   481
+  ],
+  "bbox": [
+   30,
+   30,
+   985,
+   451
+  ],
+  "pad": [
+   0.03,
+   0.062,
+   0.03,
+   0.062
+  ],
+  "aspect": 2.268,
+  "dominant": [
+   {
+    "hex": "#c3a57f",
+    "share": 0.383
+   },
+   {
+    "hex": "#95734d",
+    "share": 0.38
+   },
+   {
+    "hex": "#573115",
+    "share": 0.237
+   }
+  ],
+  "glint": [
+   0.672,
+   0.457
+  ]
+ },
+ "S9_coccon_c02_orange_fluo": {
+  "product": "Coccon 42mm C02 Orange fluo",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S9_coccon_c02_orange_fluo.png",
+  "source": "assets/moonky/p02_coccon_c02_orange_fluo.jpg",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2188_gumova-nastraha-moonky-coccon-42mm-c02-orange-fluo-banana-8ks-.jpg",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0
+  },
+  "size": [
+   982,
+   600
+  ],
+  "bbox": [
+   30,
+   28,
+   953,
+   571
+  ],
+  "pad": [
+   0.031,
+   0.047,
+   0.03,
+   0.048
+  ],
+  "aspect": 1.7,
+  "dominant": [
+   {
+    "hex": "#d4921a",
+    "share": 0.542
+   },
+   {
+    "hex": "#eaae37",
+    "share": 0.343
+   },
+   {
+    "hex": "#efc469",
+    "share": 0.115
+   }
+  ],
+  "glint": [
+   0.768,
+   0.42
+  ]
+ },
+ "S10_master_c05_white": {
+  "product": "Master C05 White",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S10_master_c05_white.png",
+  "source": "assets/moonky/p05_master_c05_white.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/2521_master-bila.png",
+  "method": "white_unmix",
+  "info": {
+   "holes": 0,
+   "enclosed_px": 0,
+   "ghost_px": 12457,
+   "opened_px": 94,
+   "dark_rim_px": 628,
+   "smoothed_px": 1893
+  },
+  "size": [
+   2120,
+   895
+  ],
+  "bbox": [
+   61,
+   61,
+   2058,
+   834
+  ],
+  "pad": [
+   0.029,
+   0.068,
+   0.029,
+   0.068
+  ],
+  "aspect": 2.583,
+  "dominant": [
+   {
+    "hex": "#becbd3",
+    "share": 0.435
+   },
+   {
+    "hex": "#acb8c0",
+    "share": 0.419
+   },
+   {
+    "hex": "#8f9da8",
+    "share": 0.145
+   }
+  ],
+  "glint": [
+   0.334,
+   0.556
+  ]
+ },
+ "S11_gamer_big_c01_pink_bubblegum": {
+  "product": "Gamer Big 46mm C01 Pink Bubblegum",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png",
+  "source": "assets_prep/moonky/ads/_src/w223_gamer_big_c01_pink.png",
+  "source_url": "https://cdn.myshoptet.com/usr/www.moonky.cz/user/shop/orig/223_gamer-big-pink.png",
+  "method": "shop_alpha",
+  "info": {},
+  "size": [
+   914,
+   342
+  ],
+  "bbox": [
+   28,
+   27,
+   887,
+   315
+  ],
+  "pad": [
+   0.031,
+   0.079,
+   0.03,
+   0.079
+  ],
+  "aspect": 2.983,
+  "dominant": [
+   {
+    "hex": "#e0277f",
+    "share": 0.598
+   },
+   {
+    "hex": "#f054a0",
+    "share": 0.282
+   },
+   {
+    "hex": "#fcadd1",
+    "share": 0.12
+   }
+  ],
+  "glint": [
+   0.708,
+   0.155
+  ]
+ },
+ "S12_gradient_blue_pink": {
+  "product": "Moonky soft lure (category image /gumove-nastrahy/, blue → pink, model not named)",
+  "role": "secondary",
+  "file": "assets_prep/moonky/ads/S12_gradient_blue_pink.png",
+  "source": "assets/moonky/p10_gumove_nastrahy_category.png",
+  "source_url": "https://www.moonky.cz/user/categories/orig/gumove_nastrahy_moonky.png",
+  "method": "shop_alpha",
+  "info": {},
+  "size": [
+   895,
+   273
+  ],
+  "bbox": [
+   28,
+   27,
+   869,
+   246
+  ],
+  "pad": [
+   0.031,
+   0.099,
+   0.029,
+   0.099
+  ],
+  "aspect": 3.84,
+  "dominant": [
+   {
+    "hex": "#0f83b7",
+    "share": 0.544
+   },
+   {
+    "hex": "#bd55a4",
+    "share": 0.247
+   },
+   {
+    "hex": "#a1b9de",
+    "share": 0.208
+   }
+  ],
+  "glint": [
+   0.829,
+   0.341
+  ]
+ }
+}
