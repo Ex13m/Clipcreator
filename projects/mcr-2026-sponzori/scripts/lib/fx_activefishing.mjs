@@ -31,7 +31,7 @@ export const P = {
   mukai: { f: `${AD}S7_mukai_upward_zanmu_35s_6ck.png`, bb: [0.008, 0.991, 0.015, 0.984], ms: 1800 },
   scheila: { f: `${AD}S8_valkein_scheila_1-8g_no80_delicious_peach.png`, bb: [0.03, 0.968, 0.047, 0.95] },
   khor: { f: `${HE}h02_khor_frea.png`, bb: [0.044, 0.956, 0.03, 0.968] },
-  forte06: { f: `${HE}h03_velvetarts_forte_06.png`, bb: [0.03, 0.967, 0.062, 0.936] },
+  forte06: { f: `${AD}S9_velvet_arts_forte_0-6g_no31_clean.png`, bb: [0.03, 0.967, 0.062, 0.936] },   // h03 minus the cut-off hook stub (CD review)
   wah: { f: `${HE}h04_luckycraft_wah33f.png`, bb: [0.03, 0.97, 0.063, 0.934] },
 };
 // register every product once with its staging size BEFORE anything else refs it (the first ref decides maxSide)
@@ -127,11 +127,16 @@ export function words(ctx, { id, lines, x = ctx.safe.left, y, w = ctx.W - ctx.sa
 // Handoff contract: the frame is fully covered by `color` (= next block's bg) at the block end.
 export function tilesOut(ctx, { color = ctx.next?.theme?.bg || ctx.theme.bg || '#000', d = 0.46, cols = 4, rows = 7, radius = 30 } = {}) {
   const end = ctx.dur, t0 = end - d, tw = ctx.W / cols, th = ctx.H / rows, span = cols - 1 + rows - 1, td = d * 0.55;
+  // soft card shadow only on a light handoff colour (paper → paper in the bare block / Reel: the tiles read as cards, not as erasing);
+  // on a dark colour (film → Moonky navy) the shadows draw seams
+  const hx = /^#?([0-9a-f]{6})$/i.exec(color), n = hx ? parseInt(hx[1], 16) : 0;
+  const light = !!hx && (0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)) / 255 > 0.6;
   let h = '';
   for (let r = 0, k = 0; r < rows; r++) for (let c = 0; c < cols; c++, k++) {
-    h += `<i id="${ctx.id(`to${k}`)}" style="position:absolute;left:${px(c * tw)};top:${px(r * th)};width:${px(tw)};height:${px(th)};border-radius:${radius}px;background:${color}"></i>`;
+    h += `<i id="${ctx.id(`to${k}`)}" style="position:absolute;left:${px(c * tw)};top:${px(r * th)};width:${px(tw)};height:${px(th)};border-radius:${radius}px;background:${color};${light ? 'box-shadow:0 18px 44px rgba(40,20,0,.16)' : ''}"></i>`;
     const delay = ((c + (rows - 1 - r)) / span) * (d - td);
-    ctx.tl.fromTo(ctx.sel(`to${k}`), { scale: 0 }, { scale: 1.26, duration: td, ease: 'power2.in' }, t0 + delay);
+    // power3.out: a tile is ~half size on its first frame and grows fast (power2.in left tiny dark specks all over the frame)
+    ctx.tl.fromTo(ctx.sel(`to${k}`), { scale: 0 }, { scale: 1.2, duration: td, ease: 'power3.out' }, t0 + delay);
   }
   ctx.overlay(`<div class="fx-ov" id="${ctx.id('tout')}">${h}</div><div class="fx-ov" id="${ctx.id('toutf')}" style="background:${color};opacity:0"></div>`);
   ctx.tl.set(ctx.sel('toutf'), { opacity: 1 }, end - 0.03);
@@ -156,11 +161,13 @@ ${S} .af-pill.ol{background:#fff;color:${C.ink};box-shadow:inset 0 0 0 3px ${C.w
 ${S} .af-pill.wht{background:#fff;color:${C.ink};box-shadow:0 14px 30px rgba(110,30,0,.25)}
 ${S} .af-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;color:${C.ink}}
 ${S} .af-tag i{display:block;flex-shrink:0;width:8px;height:1.05em;border-radius:4px;background:${GRAD}}
-${S} .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:27px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
-${S} .af-cwl i{display:block;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+${S} .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:32px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
+${S} .af-cwl i{display:block;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
 ${S} .af-card{position:absolute;border-radius:38px;background:#fff;box-shadow:0 40px 80px rgba(110,30,0,.30)}
 ${S} .af-tile{position:absolute;border-radius:26px;background:#fff;box-shadow:0 14px 30px rgba(60,40,20,.10),0 0 0 1px rgba(0,0,0,.04)}
 ${S} .af-tile i{position:absolute;display:block;background:center/100% 100% no-repeat}
 ${S} .af-url{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:1000;letter-spacing:-.02em;line-height:1;color:${C.ink};white-space:nowrap}
 ${S} .af-url .o{color:${C.web}}
+${S} .af-num{position:absolute;font-family:'${SAIRA}';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;letter-spacing:.01em;word-spacing:.12em;color:${C.ink}}
+${S} .af-num .af-grad{display:inline-block}
 `;

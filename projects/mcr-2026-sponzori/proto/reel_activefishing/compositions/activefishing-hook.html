@@ -24,13 +24,15 @@
 #b-activefishing-hook .af-pill.wht{background:#fff;color:#111111;box-shadow:0 14px 30px rgba(110,30,0,.25)}
 #b-activefishing-hook .af-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;color:#111111}
 #b-activefishing-hook .af-tag i{display:block;flex-shrink:0;width:8px;height:1.05em;border-radius:4px;background:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%)}
-#b-activefishing-hook .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:27px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
-#b-activefishing-hook .af-cwl i{display:block;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+#b-activefishing-hook .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:32px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
+#b-activefishing-hook .af-cwl i{display:block;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
 #b-activefishing-hook .af-card{position:absolute;border-radius:38px;background:#fff;box-shadow:0 40px 80px rgba(110,30,0,.30)}
 #b-activefishing-hook .af-tile{position:absolute;border-radius:26px;background:#fff;box-shadow:0 14px 30px rgba(60,40,20,.10),0 0 0 1px rgba(0,0,0,.04)}
 #b-activefishing-hook .af-tile i{position:absolute;display:block;background:center/100% 100% no-repeat}
 #b-activefishing-hook .af-url{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:1000;letter-spacing:-.02em;line-height:1;color:#111111;white-space:nowrap}
 #b-activefishing-hook .af-url .o{color:#F28A27}
+#b-activefishing-hook .af-num{position:absolute;font-family:'Saira Extra Condensed';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;letter-spacing:.01em;word-spacing:.12em;color:#111111}
+#b-activefishing-hook .af-num .af-grad{display:inline-block}
   </style>
   <div id="bw-activefishing-hook" class="blk blk-activefishing" style="--bg:#f4f3f1;--fg:#111111;--acc:#f28a27;--acc2:#df5942">
     <div id="activefishing-hook-stage" class="blk-stage"><div class="fx-field" id="activefishing-hook-hwf" style="background:radial-gradient(130% 85% at 50% 40%, #ffffff 0%, #f5f4f1 52%, #e6e3de 100%)"></div><div class="fx-glow" id="activefishing-hook-hwg" style="left:60px;top:520px;width:1400px;height:1400px;background:radial-gradient(closest-side, rgba(245,155,16,.30), rgba(242,138,39,.10) 55%, rgba(242,138,39,0))"></div><div class="fx-t" id="activefishing-hook-hn" style="left:58px;top:388px;width:952px;font-family:'Saira Extra Condensed';font-weight:900;font-size:360px;line-height:1;word-spacing:.14em"><span class="fx-ln"><span class="af-grad">1 300+</span></span></div><div class="fx-t" id="activefishing-hook-hp" style="left:64px;top:740.8px;width:952px;font-family:'Saira Extra Condensed';font-weight:900;font-size:176px;line-height:1;letter-spacing:.02em;color:#111111"><span class="fx-ln"><span>PLANDAVEK</span></span></div><div class="af-tag" id="activefishing-hook-hs" style="left:64px;top:932.8px;font-size:40px;letter-spacing:.02em;text-transform:none"><i></i><span class="fx-ln"><span>activefishing<span style="color:#F28A27">.cz</span></span></span></div><div class="af-p" id="activefishing-hook-hsp" style="left:206.5px;top:970.9px;width:707.1px;height:502.6px;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-hook-hsp-cam" style="inset:0;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-hook-hsp-r" style="inset:0;transform-origin:50% 50%"><img src="assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png" alt="" style="filter:drop-shadow(0 30px 34px rgba(90,40,10,.22))"><i class="fx-prod-sweep" id="activefishing-hook-hsp-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png);mask-image:url(assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png);--sa:105deg;--so:0.8"></i></div></div></div>
@@ -42,7 +44,7 @@
   gsap.set("#activefishing-hook-hn", {"scale":1.16,"x":-10});
   gsap.set("#activefishing-hook-hp", {"scale":1.12,"x":-8});
   gsap.set("#activefishing-hook-hs .fx-ln > span", {"yPercent":115,"opacity":0});
-  gsap.set("#activefishing-hook-hsp", {"x":240,"rotation":18,"filter":"blur(8px)"});
+  gsap.set("#activefishing-hook-hsp", {"x":130,"rotation":10,"filter":"blur(2px)"});
   gsap.set("#activefishing-hook-hsp-cam", {"scale":1});
   gsap.set("#activefishing-hook-hsp-sw", {"backgroundPosition":"110% 0%"});
   gsap.set("#activefishing-hook-tout", {"opacity":0});
@@ -53,8 +55,8 @@
   tl.fromTo("#activefishing-hook-hn", {"scale":1.16,"x":-10}, {"scale":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#activefishing-hook-hp", {"scale":1.12,"x":-8}, {"scale":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#activefishing-hook-hs .fx-ln > span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 0.060);
-  tl.fromTo("#activefishing-hook-hsp", {"x":240,"rotation":18,"filter":"blur(8px)"}, {"x":0,"rotation":0,"filter":"blur(0px)","duration":0.45,"ease":"expo.out","immediateRender":false}, 0.000);
-  tl.set("#activefishing-hook-hsp", {"filter":"none"}, 0.470);
+  tl.fromTo("#activefishing-hook-hsp", {"x":130,"rotation":10,"filter":"blur(2px)"}, {"x":0,"rotation":0,"filter":"blur(0px)","duration":0.42,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.set("#activefishing-hook-hsp", {"filter":"none"}, 0.440);
   tl.fromTo("#activefishing-hook-hsp-cam", {"scale":1}, {"scale":1.07,"duration":1.334,"ease":"power1.inOut","immediateRender":false}, 0.500);
   tl.fromTo("#activefishing-hook-hsp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 0.400);
   tl.fromTo("#activefishing-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.714);

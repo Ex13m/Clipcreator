@@ -12,7 +12,8 @@
 //   specBar(ctx,{id,x,y,w,cells,label,t,times})       glass spec row (Apple-style cells divided by hairlines), cells land on beats
 //   pill(ctx,{id,text,cx,y,t})                        outlined lime pill („Věnuje ceny · MČR 2026")
 //   orbit(ctx,{id,items,cx,cy,R,tilt,len,persp})      3D carousel ring (CSS perspective, billboarded lures) around the moon
-//   irisOut(ctx,{cx,cy,color,d})                      block exit: a disc of the next block's colour grows from the moon (with a moonlight rim)
+//   irisOut(ctx,{cx,cy,color,d})                      block exit: a disc of the next block's colour grows from the moon (with a moonlight rim);
+//                                                     put (cx, cy) on the bare moon face, never on the hero (a dark dot growing on the lure = a hole)
 import fs from 'node:fs';
 import path from 'node:path';
 import { esc, nb, rnd, ROOT } from './util.mjs';
@@ -142,7 +143,7 @@ export function stars(ctx, { id = 'stars', n = 54, seed = 11, y0 = 60, y1 = 1700
 // WORD-SYNCED TYPE — explicit lines [{text, color, sizes, wght, italic, tracking, font}], every word revealed at times[k] (k = word
 // index over all lines). Czech NBSP typography first (nb), so „s českou" is one word. Returns {html, h, words, sel, lines}.
 // ======================================================================================================
-export function vtype(ctx, { id, lines, times = [], x = ctx.safe.left, y = 404, w = 952, align = 'left', lh = 1.0, gap = 0, d = 0.5, ease = 'expo.out', from = { yPercent: 118, opacity: 0 }, upper = true }) {
+export function vtype(ctx, { id, lines, times = [], x = ctx.safe.left, y = 404, w = 952, align = 'left', lh = 1.0, gap = 0, d = 0.5, ease = 'expo.out', from = { yPercent: 118, opacity: 0 }, upper = true, still = false }) {
   let k = 0, yy = 0, out = '';
   const words = [], fitted = [];
   lines.forEach((ln, li) => {
@@ -158,7 +159,8 @@ export function vtype(ctx, { id, lines, times = [], x = ctx.safe.left, y = 404, 
   });
   const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(yy)}">${out}</div>`;
   const T = Object.fromEntries(Object.keys(from).map((p) => [p, p === 'opacity' || p === 'scale' ? 1 : 0]));
-  words.forEach((wid, i) => ctx.tl.fromTo(ctx.sel(wid), from, { ...T, duration: d, ease }, times[Math.min(i, times.length - 1)] ?? 0));
+  // still = the words are on screen from frame 1 (animate the container instead, e.g. a settle) — Reels hook / end card
+  if (!still) words.forEach((wid, i) => ctx.tl.fromTo(ctx.sel(wid), from, { ...T, duration: d, ease }, times[Math.min(i, times.length - 1)] ?? 0));
   return { html, h: yy, words, sel: ctx.sel(id), lines: fitted };
 }
 export function vtypeOut(ctx, V, t, { d = 0.26, stagger = 0.03, to = { yPercent: -118, opacity: 0 } } = {}) {

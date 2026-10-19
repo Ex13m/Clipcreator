@@ -36,6 +36,53 @@ export function stage(ctx) {
   for (const k of [...Object.values(IMG), ...COLS.map((c) => c.k)]) ctx.asset(src(k), { maxSide: 2048 });
 }
 
+// ---------- staging in the renders' own perspective ----------
+// The shop renders look down on the four-leg stands from ~35° (3/4), ~44° (colourway crop) and ~11° (front). A flat podium
+// (top ellipse 7:1) or a horizon hairline at leg height made the stands hover (back legs 100–170 px above the podium top).
+// FOOT = the floor ellipse through the leg tips, fitted from the alpha (two opposite tips + the front tip → conjugate
+// semi-diameters → axes). Units: fractions of the displayed PNG width w, centre measured from the PNG top-left.
+export const FOOT = {
+  threeq: { cx: 0.4975, cy: 0.789, a: 0.473, b: 0.265, tips: [[0.034, 0.837], [0.961, 0.741], [0.592, 1.05]] },
+  front: { cx: 0.493, cy: 0.805, a: 0.453, b: 0.087, tips: [[0.04, 0.805], [0.946, 0.803], [0.486, 0.892]] },
+  cw: { cx: 0.5095, cy: 0.87, a: 0.526, b: 0.365, tips: [[0.058, 1.036], [0.961, 0.704], [0.778, 1.196]] },
+};
+export function foot(kind, P) {
+  const f = FOOT[kind];
+  return { x: P.x + f.cx * P.w, y: P.y + f.cy * P.w, a: f.a * P.w, b: f.b * P.w, tips: f.tips.map(([x, y]) => [P.x + x * P.w, P.y + y * P.w]), back: P.y + Math.min(...f.tips.map((t) => t[1])) * P.w };
+}
+// product cut-out with the fx.product layer contract (#id › #id-cam › #id-tl › #id-rot › image + #id-sw, so fx.sweep works);
+// bg:true paints the image as a background (a second <img> of the same file in one composition → lint duplicate_media_discovery_risk)
+export function prod(ctx, { id, k, w, cx, top, sweepOpacity = 0.6, bg = false, style = '' }) {
+  const s = src(k), [nw, nh] = ctx.dims(s), ww = Math.min(w, nw), h = ww / (nw / nh), url = ctx.asset(s), x = cx - ww / 2;
+  const im = bg ? `<div class="fx-prod-img" id="${ctx.id(`${id}-im`)}" style="background:url(${url}) center/100% 100% no-repeat"></div>` : `<img class="fx-prod-img" id="${ctx.id(`${id}-im`)}" src="${url}" alt="">`;
+  const sw = `<i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:105deg;--so:${sweepOpacity}"></i>`;
+  const html = `<div class="fx-prod" id="${ctx.id(id)}" style="left:${px(x)};top:${px(top)};width:${px(ww)};height:${px(h)};${style}"><div class="fx-abs" id="${ctx.id(`${id}-cam`)}" style="inset:0"><div class="fx-prod-tilt" id="${ctx.id(`${id}-tl`)}"><div class="fx-abs" id="${ctx.id(`${id}-rot`)}" style="inset:0">${im}${sw}</div></div></div></div>`;
+  return { html, x, y: top, w: ww, h, sel: ctx.sel(id), cam: ctx.sel(`${id}-cam`) };
+}
+// contact shadows for a stand standing on the floor: ambient occlusion over the footprint + a dark core under the hub
+// + a tight contact blot under every visible leg tip (paint it BEFORE the product)
+export function footShadow(ctx, { id, F, ao = 0.5, tip = 0.8 }) {
+  const el = (n, x, y, rx, ry, bgc) => `<i class="gh-sh" id="${ctx.id(`${id}-${n}`)}" style="left:${px(x - rx)};top:${px(y - ry)};width:${px(2 * rx)};height:${px(2 * ry)};background:${bgc}"></i>`;
+  let h = el('ao', F.x, F.y, F.a * 1.14, Math.max(12, F.b * 1.14), `radial-gradient(closest-side,rgba(0,0,0,${ao}),rgba(0,0,0,${ao * 0.45}) 58%,rgba(0,0,0,0))`);
+  h += el('co', F.x, F.y, F.a * 0.42, Math.max(8, F.b * 0.42), `radial-gradient(closest-side,rgba(0,0,0,${ao + 0.15}),rgba(0,0,0,0))`);
+  const r = Math.max(14, F.a * 0.085), q = Math.max(5, r * Math.max(0.3, F.b / F.a));
+  F.tips.forEach(([x, y], i) => { h += el(`t${i}`, x, y - q * 0.25, r, q, `radial-gradient(closest-side,rgba(0,0,0,${tip}),rgba(0,0,0,0))`); });
+  return `<div class="fx-full" id="${ctx.id(id)}">${h}</div>`;
+}
+// display plinth in the SAME perspective as the stand on it: top ellipse = footprint × m (axes ratio b/a of the render),
+// front face h px, orange hairline on the front rim, optional engraved label centred on the front face
+export function plinth(ctx, { id, F, m = 1.16, h = 80, accent = C.orange, label = '', labelT = null, labelSize = 26 }) {
+  const A = F.a * m, B = F.b * m, e = 2 * B;
+  const lab = label ? `<div class="gh-pl" id="${ctx.id(`${id}-lb`)}" style="top:${px(e + (h - labelSize * 1.15) / 2 + 2)};font-size:${labelSize}px">${esc(nb(label))}</div>` : '';
+  if (label && labelT != null) ctx.tl.fromTo(ctx.sel(`${id}-lb`), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, labelT);
+  const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:${px(F.x - A)};top:${px(F.y - B)};width:${px(2 * A)};height:${px(e + h)}">
+    <i class="gh-pf" style="top:${px(B)};height:${px(B + h)};border-radius:0 0 50% 50% / 0 0 ${px(B)} ${px(B)}"></i>
+    <i class="gh-pt gh-pt2" style="height:${px(e)}"></i>
+    <i class="gh-pr" style="top:${px(B - 1)};height:${px(B + 3)};border-color:${accent}"></i>${lab}
+  </div>`;
+  return { html, top: F.y - B, rim: F.y + B, bottom: F.y + B + h, A, B };
+}
+
 // ---------- logo: the site's own three layers (ring / core / word, shared 1200×1139 canvas) stacked so the ring can turn
 // like on gausseholler.com (.gh-logo__ring). Size + logo rule from ctx.logo('on_dark') (= the same artwork, Lanczos 2×).
 const LAY = { ring: 'assets/gausseholler/logo_layer_ring.png', core: 'assets/gausseholler/logo_layer_core.png', word: 'assets/gausseholler/logo_layer_word.png' };
@@ -123,17 +170,19 @@ export function callouts(ctx, { id, items }) {
 }
 
 // ---------- spec row (Apple-style tech specs): hairline + rolling numerals + unit + 2-line caps label per column ----------
-// cols: [{value:'8', prefix:'', unit:'', label:['karbonových','tubusů']}]; x0 + colW*i; numerals roll with fx.odometer (≤ 0.7 s)
-export function spec(ctx, { id, x0, y, colW, cols, size = 96, t, stagger = 0.14, odo }) {
+// cols: [{value:'8', prefix:'', unit:'', label:['karbonových','tubusů']}]; x0 + colW*i. Numerals rise char by char out of a mask
+// (no odometer: a rolling 8 / 32 / 200 shows false specs mid-roll — „5 karbonových tubusů“, „Ø17 mm“)
+export function spec(ctx, { id, x0, y, colW, cols, size = 96, t, stagger = 0.14 }) {
   let h = `<i class="gh-hr" id="${ctx.id(`${id}-hr`)}" style="left:${px(x0)};top:${px(y)};width:${px(colW * cols.length - 24)}"></i>`;
   ctx.tl.fromTo(ctx.sel(`${id}-hr`), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t - 0.1);
   cols.forEach((c, i) => {
     const x = x0 + i * colW, tt = t + i * stagger, nid = `${id}-n${i}`;
-    h += odo({ id: nid, value: c.value, prefix: c.prefix || '', x, y: y + 16, size, font: 'Inter', wght: 800, color: C.white, t: tt, d: 0.6, spins: 1 });
+    const digits = [...((c.prefix || '') + c.value)].map((ch) => `<span class="fx-c">${esc(ch)}</span>`).join('');
+    h += `<div class="gh-num" id="${ctx.id(nid)}" style="left:${px(x)};top:${px(y + 16)};font-size:${size}px"><span class="fx-ln"><span>${digits}</span></span></div>`;
+    ctx.tl.fromTo(`${ctx.sel(nid)} .fx-c`, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out', stagger: 0.05 }, tt);
     const nw = ctx.measure((c.prefix || '') + c.value, { font: 'Inter', wght: 800, size }) + 6;
     if (c.unit) h += `<div class="gh-un" id="${ctx.id(`${id}-u${i}`)}" style="left:${px(x + nw)};top:${px(y + 16 + size * 0.5)}">${esc(c.unit)}</div>`;
     h += `<div class="gh-sl" id="${ctx.id(`${id}-l${i}`)}" style="left:${px(x)};top:${px(y + 16 + size + 8)}">${c.label.map((l) => `<span class="fx-ln"><span>${esc(nb(l))}</span></span>`).join('')}</div>`;
-    ctx.tl.fromTo(ctx.sel(nid), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tt);
     if (c.unit) ctx.tl.fromTo(ctx.sel(`${id}-u${i}`), { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tt + 0.3);
     ctx.tl.fromTo(`${ctx.sel(`${id}-l${i}`)} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'expo.out', stagger: 0.06 }, tt + 0.12);
   });
@@ -156,11 +205,11 @@ export function still(ctx, { id, k, w, cx, floor: fy, style = '' }) {
 
 // ---------- colourway stack: the 7 Revolut 8 SE colours in one shared box, swapped in place on 8th notes ----------
 // times[i] = when colour i appears. Returns sel / cam. A single sweep (masked by the first colour's alpha, same silhouette).
-export function stack(ctx, { id, w, cx, floor: fy, times, sweepA = 0.55 }) {
+export function stack(ctx, { id, w, cx, floor: fy, times, sweepA = 0.55, shadow = false }) {
   const k0 = COLS[0].k, [nw, nh] = ctx.dims(src(k0)), ar = nw / nh, p = pad(k0);
   const h = w / ar, top = fy - h * (1 - p[3]), vw = w * (1 - p[0] - p[2]);
   const imgs = COLS.map((c, i) => `<img class="fx-prod-img" id="${ctx.id(`${id}-i${i}`)}" src="${ctx.asset(src(c.k))}" alt="" style="opacity:${i ? 0 : 1}">`).join('');
-  const sh = `<i class="fx-prod-shadow" style="left:${px(w * p[0] + vw * 0.06)};width:${px(vw * 0.88)};top:${px(h * (1 - p[3]) - vw * 0.05)};height:${px(vw * 0.1)};--sho:.8"></i>`;
+  const sh = shadow ? `<i class="fx-prod-shadow" style="left:${px(w * p[0] + vw * 0.06)};width:${px(vw * 0.88)};top:${px(h * (1 - p[3]) - vw * 0.05)};height:${px(vw * 0.1)};--sho:.8"></i>` : '';
   const u0 = ctx.asset(src(k0));
   const sw = `<i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="-webkit-mask-image:url(${u0});mask-image:url(${u0});--sa:105deg;--so:${sweepA}"></i>`;
   times.forEach((t, i) => {
@@ -192,7 +241,7 @@ export function stamp(ctx, { id, x, y, size = 210, l1, l2, t, rot = -8 }) {
 // pill chip (prize line)
 export function pill(ctx, { id, text, cx, y, t, size = 30 }) {
   const w = ctx.measure(text, { font: 'Inter', wght: 700, size, upper: true, tracking: 0.14 }) + 96;
-  ctx.tl.fromTo(ctx.sel(id), { opacity: 0, y: 24, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, t);
+  if (t != null) ctx.tl.fromTo(ctx.sel(id), { opacity: 0, y: 24, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, t);
   return `<div class="gh-pill" id="${ctx.id(id)}" style="left:${px(cx - w / 2)};top:${px(y)};width:${px(w)};font-size:${size}px"><i></i>${esc(nb(text))}</div>`;
 }
 
@@ -210,6 +259,9 @@ ${S} .gh-gl i{position:absolute;left:0;top:50%;width:100%;height:4px;margin-top:
 ${S} .gh-gl i.v{transform:rotate(90deg) scaleX(.62)}
 ${S} .gh-gl b{position:absolute;left:38%;top:38%;width:24%;height:24%;border-radius:50%;background:radial-gradient(closest-side,var(--gc),rgba(255,255,255,0))}
 ${S} .gh-st{position:absolute;display:block}
+${S} .gh-sh{position:absolute;border-radius:50%;pointer-events:none}
+${S} .gh-pt2{background:radial-gradient(70% 62% at 50% 34%,#30363c 0%,#1d2125 48%,#121417 78%,#0c0e10 100%);box-shadow:inset 0 3px 0 rgba(233,230,226,.16),inset 0 -2px 0 rgba(0,0,0,.6)}
+${S} .gh-num{position:absolute;font-family:'Inter';font-weight:800;line-height:1;color:${C.white};white-space:nowrap}
 ${S} .fx-prod-sweep{background-image:linear-gradient(var(--sa,105deg),transparent 45.5%,rgba(255,255,255,.35) 48.6%,rgba(255,255,255,.95) 50%,rgba(255,255,255,.35) 51.4%,transparent 54.5%)}
 ${S} .gh-hr{position:absolute;height:2px;background:linear-gradient(90deg,rgba(233,230,226,.55),rgba(233,230,226,.08));transform-origin:0 50%}
 ${S} .gh-un{position:absolute;font-family:'Inter';font-weight:700;font-size:38px;letter-spacing:.02em;color:${C.orange};line-height:1}

@@ -57,12 +57,14 @@ const CSS = (S) => `
   ${S} .bs-tile{position:absolute}
   ${S} .bs-card{position:absolute;inset:0;display:block;border-radius:28px;background:linear-gradient(165deg,#ffffff 0%,#eef9fe 55%,#d9f1fc 100%);box-shadow:0 20px 44px rgba(2,24,30,.38),inset 0 0 0 1.5px rgba(255,255,255,.9)}
   ${S} .bs-beam{position:absolute;transform:rotate(-12deg)}
-  ${S} .bs-beam i{position:absolute;inset:0;display:block;transform-origin:100% 50%}
+  ${S} .bs-beam i{position:absolute;inset:0;display:block;transform-origin:100% 50%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 34%,#000 80%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 34%,#000 80%,transparent 100%)}
   ${S} .bs-panel{position:absolute;top:0;bottom:0;width:540px}
   ${S} .bs-panel i{position:absolute;inset:0;display:block}
   ${S} .bs-cap{position:absolute;white-space:nowrap;text-transform:uppercase}
   ${S} .bs-page{position:absolute;left:0;top:0;width:1080px;height:3840px}
   ${S} .bs-sec{position:absolute;left:0;width:1080px;height:1920px;overflow:hidden}
+  ${S} .bs-win{position:absolute;overflow:hidden}
+  ${S} .bs-win>div{position:absolute;left:0;white-space:nowrap;line-height:1}
 `;
 
 // rounded pill (yellow plate + ink text by default); x = left (or cx = centre)
@@ -72,7 +74,7 @@ function pill(ctx, id, text, { x = 0, cx = null, y, size = 22, bg = YEL, fg = IN
   const left = Math.round(cx != null ? cx - W / 2 : x);
   if (t != null) {
     ctx.tl.fromTo(ctx.sel(`${id}-b`), { scaleX: 0 }, { scaleX: 1, duration: d, ease: 'expo.out' }, t);
-    ctx.tl.fromTo(ctx.sel(`${id}-t`), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: d, ease: 'expo.out' }, t + 0.05);
+    ctx.tl.fromTo(ctx.sel(`${id}-t`), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: d, ease: 'expo.out' }, t + 0.09);   // text after the plate has grown (no letters outside the yellow)
   }
   return { w: W, h: H, x: left, html: `<div class="bs-pill" style="left:${left}px;top:${Math.round(y)}px;width:${W}px;height:${H}px"><i id="${ctx.id(`${id}-b`)}" style="background:${bg}"></i><span id="${ctx.id(`${id}-t`)}" style="font-family:'Saira';font-weight:${wght};font-stretch:${wdth}%;font-size:${size}px;letter-spacing:${tracking}em;color:${fg};line-height:${H}px;padding-left:${padX}px">${ctx.esc(ctx.nb(text))}</span></div>` };
 }
@@ -89,8 +91,10 @@ function card(ctx, id, { x, y, w, h, src, brand, rot = -3, t, padX = 26, padTop 
   const pw = Math.min(bw / (c + s / ar), bh / (s + c / ar), nw);
   const P = fx.product(ctx, { id: `${id}p`, src, w: pw, cx: w / 2, cy: padTop + bh / 2, ground: 'none', pad: pad(src), rot, sweepOpacity: 0.55, maxUp: 1 });
   const pl = pill(ctx, `${id}l`, brand, { x: 14, y: 12, size: 21, t: t + 0.1, tracking: 0.1 });
-  ctx.tl.fromTo(ctx.sel(id), { scale: 0.72, opacity: 0, y: 70 }, { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.4)' }, t);
-  ctx.tl.fromTo(P.sel, { x: 60 }, { x: 0, duration: 0.6, ease: 'expo.out' }, t + 0.04);
+  // CD fix: solid card (opacity snaps in one frame) that pops on the 32nds — no grey half-transparent ghost cards over the teal
+  ctx.tl.fromTo(ctx.sel(id), { scale: 0.8, y: 46 }, { scale: 1, y: 0, duration: 0.36, ease: 'back.out(1.6)' }, t);
+  ctx.tl.fromTo(ctx.sel(id), { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none' }, t);
+  ctx.tl.fromTo(P.sel, { x: 60 }, { x: 0, duration: 0.5, ease: 'expo.out' }, t + 0.03);
   return { P, html: `<div class="bs-tile" id="${ctx.id(id)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><i class="bs-card"></i>${P.html}${pl.html}</div>` };
 }
 // Bosset logo bug, top right, vertically centred on the TA plate (never larger than the TA logo: ctx.logo)
@@ -112,7 +116,11 @@ function lineup(ctx, id, { cx = 540, floor = 1420, hC = 760, scale = 1, t = null
     const [nw, nh] = ctx.dims(src), h = Math.min(H[a] * scale, nh);
     const p = fx.product(ctx, { id: `${id}${k + 3}`, src, h, cx: cx + sg * DX[a] * scale, floor: floor + DF[a] * scale, ground: 'floor', reflect, shadow, pad: pad(src), sweepOpacity: 0.6, maxUp: 1 });
     html += p.html; P.push({ k, p, id: `${id}${k + 3}` });
-    if (t != null) ctx.tl.fromTo(p.sel, { y: 220, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, t + a * stagger);
+    // CD fix: bottles rise solid (opacity snaps in 0.1 s) — no translucent ghost bottles mid-rise
+    if (t != null) {
+      ctx.tl.fromTo(p.sel, { y: 220 }, { y: 0, duration: 0.7, ease: 'expo.out' }, t + a * stagger);
+      ctx.tl.fromTo(p.sel, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: 'none' }, t + a * stagger);
+    }
   });
   return { html, P };
 }
@@ -129,7 +137,7 @@ export default function bosset(ctx) {
   const t1 = bar(1), t2 = bar(2), t3 = bar(3), t4 = bar(4);
   const tLogo = Math.max(0.1, (ctx.vo.at('Bosset') ?? 0.25) - 0.1);           // logo bug a hair before the name
   const tRyb = vs('rybářský', ctx.at(0, 2), ctx.at(0, 2), ctx.at(0, 2));       // 0.92 hero → grid
-  const tShop = ctx.at(0, 3);                                                   // E-SHOP a beat after RYBÁŘSKÝ (≥ 1 s on screen), punched on bar 1
+  const tShop = tRyb + ctx.BEAT / 2;                                            // CD fix: E-SHOP an 8th after RYBÁŘSKÝ → the 2-word claim reads as one unit for ~1 s before the scroll
   const tScroll = vs('termosky', ctx.at(1, 1), ctx.at(1, 1), ctx.at(1, 1));    // 2.29 page scroll („i termosky“ 2.35)
   const tHot = vs('horký', ctx.at(2, 2), ctx.at(2, 1), ctx.at(2, 2));          // 4.59
   const tCold = vs('studený', ctx.at(2, 3), ctx.at(2, 3), ctx.at(2, 3));       // 5.04
@@ -143,7 +151,8 @@ export default function bosset(ctx) {
   let s0 = `<div class="fx-field" style="background:radial-gradient(90% 60% at 50% 56%, #137d93 0%, ${DEEP} 48%, ${ABYSS} 100%)"></div>`;
   // teal light beam behind the hero (collapses into the grid)
   s0 += `<div class="bs-beam" style="left:-260px;top:${1010 - 170}px;width:1600px;height:340px"><i id="${ctx.id('beam')}" style="background:linear-gradient(180deg,rgba(27,151,177,0) 0%,rgba(27,151,177,.85) 26%,#3cc3dc 50%,rgba(27,151,177,.85) 74%,rgba(27,151,177,0) 100%)"></i></div>`;
-  ctx.tl.fromTo(ctx.sel('beam'), { scaleX: 0.08, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, 0);
+  // CD fix: the beam is a feathered light streak (mask on the scaled element) — its leading end used to be a hard slanted edge
+  ctx.tl.fromTo(ctx.sel('beam'), { scaleX: 0.22, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, 0);
   ctx.tl.fromTo(ctx.sel('beam'), { scaleX: 1, opacity: 1 }, { scaleX: 1, opacity: 0, duration: 0.3, ease: 'power2.in' }, tRyb);
   // bento grid geometry (x 64–1016, y 682–1452)
   const GX = SL, GY = 680, GAP = 14, RA = 204, RB = 168, HW = (CW - GAP) / 2, QW = (HW - GAP) / 2;
@@ -161,10 +170,11 @@ export default function bosset(ctx) {
   ctx.tl.fromTo(hero.sel, { scale: 1, y: 0 }, { scale: flipS, y: flipY, duration: 0.5, ease: 'expo.inOut' }, tRyb - 0.1);
   ctx.tl.fromTo(ctx.sel('hero-rot'), { rotation: -10 }, { rotation: -2, duration: 0.5, ease: 'expo.inOut' }, tRyb - 0.1);
   ctx.tl.fromTo(ctx.sel('hero-sh'), { opacity: 1 }, { opacity: 0, duration: 0.25, ease: 'power1.out' }, tRyb - 0.1);
-  fx.chroma(ctx, hero.sel, 0, { amt: 6, d: 0.28, kind: 'img' });
+  // CD fix: no RGB-split on the hero at the kick — on the chartreuse body it read as a red/cyan halo around the cut-out
   // card A (behind the hero) + its brand pill
   s0 += `<div class="bs-tile" id="${ctx.id('cA')}" style="left:${cardA.x}px;top:${cardA.y}px;width:${cardA.w}px;height:${cardA.h}px"><i class="bs-card"></i></div>`;
-  ctx.tl.fromTo(ctx.sel('cA'), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'expo.out' }, tRyb + 0.12);
+  ctx.tl.fromTo(ctx.sel('cA'), { scale: 0.9 }, { scale: 1, duration: 0.4, ease: 'expo.out' }, tRyb + 0.14);
+  ctx.tl.fromTo(ctx.sel('cA'), { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none' }, tRyb + 0.14);
   const pA = pill(ctx, 'pA', 'Keitech', { x: GX + 14, y: rows[0] + 12, size: 21, t: tRyb + 0.3, tracking: 0.1 });
   // the other 7 cards snap in on the 16ths (5 brands, real items of bosset.cz on 19. 10.)
   const cards = [
@@ -176,8 +186,9 @@ export default function bosset(ctx) {
     { id: 'c6', x: GX, y: rows[3], w: HW, h: RB, src: PR.L7, brand: 'Select', rot: -4 },
     { id: 'c7', x: GX + HW + GAP, y: rows[3], w: HW, h: RB, src: PR.L1, brand: 'Keitech', rot: -3 },
   ];
-  const s16 = ctx.BEAT / 4;
-  const C = cards.map((c, i) => card(ctx, c.id, { ...c, t: tRyb + 0.08 + i * s16 * 0.72 }));
+  // CD fix: cards start once the shrinking hero has cleared row 1 and land on the 32nds → the whole page stands BEFORE the bar-1 punch
+  const s32 = ctx.BEAT / 8;
+  const C = cards.map((c, i) => card(ctx, c.id, { ...c, t: tRyb + 0.18 + i * s32 * 0.9 }));
   s0 += C.map((c) => c.html).join('') + pA.html;
   // grid accents: punch on the bar-1 downbeat, sweep across the cards
   ctx.tl.hit(ctx.sel('grid'), { scale: 1.025 }, { scale: 1, duration: 0.32, ease: 'power2.out' }, t1);
@@ -189,7 +200,7 @@ export default function bosset(ctx) {
   const hA = line(ctx, 'hA', 'Rybářský', { x: SL, y: HY, w: CW, size: HS, color: '#ffffff', t: tRyb - 0.04, d: 0.5 });
   const eW = wOf(ctx, 'E-shop', HS);
   s0 += `<div class="bs-slab" style="left:${SL - 16}px;top:${HY2 + Math.round(HS * 0.02)}px;width:${Math.round(eW + 34)}px;height:${Math.round(HS * 0.98)}px"><i id="${ctx.id('slab')}" style="background:${YEL}"></i></div>`;
-  ctx.tl.fromTo(ctx.sel('slab'), { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: 'expo.out' }, tShop - 0.1);
+  ctx.tl.fromTo(ctx.sel('slab'), { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: 'expo.out' }, tShop - 0.07);
   const hB = line(ctx, 'hB', 'E-shop', { x: SL, y: HY2, w: CW, size: HS, color: INK, t: tShop - 0.04, d: 0.42 });
   s0 += hA.html + hB.html;
   s0 += bug(ctx, 'bug0', 'on_dark', tLogo, tScroll + 0.2, { inT: tLogo });
@@ -219,7 +230,7 @@ export default function bosset(ctx) {
   ctx.tl.fromTo(`#${ctx.id('vbg')}`, { attr: { stdDeviation: '0 46' } }, { attr: { stdDeviation: '0 0' }, duration: SCD / 2, ease: 'power2.out' }, SC0 + SCD / 2);
   ctx.tl.set(ctx.sel('page'), { filter: 'none' }, SC0 + SCD + 0.02);
   html += scene('scA', 0, t2, `<div class="bs-page" id="${ctx.id('page')}">${sec0}${sec1}</div>`);
-  fx.flash(ctx, t1, { id: 'fl1', color: '#ffffff', peak: 0.16, d: 0.26, blend: 'screen' });
+  fx.flash(ctx, t1, { id: 'fl1', color: '#ffffff', peak: 0.1, d: 0.22, blend: 'screen' });
 
   // =============== bar 2 · macro: DOUBLE LOCK, warm | cold split on „horký“ / „studený“ ===============
   let s2 = `<div class="fx-field" style="background:radial-gradient(80% 55% at 50% 62%, #12707f 0%, ${DEEP} 55%, ${ABYSS} 100%)"></div>`;
@@ -230,7 +241,8 @@ export default function bosset(ctx) {
   const MW = 1300;
   const [mw, mh] = ctx.dims(PR.H2m);
   const mH = MW / (mw / mh);
-  const mac = fx.product(ctx, { id: 'mac', src: PR.H2m, w: MW, cx: 556, cy: 1935 - mH / 2, ground: 'none', pad: pad(PR.H2m), sweepAngle: 115, sweepOpacity: 0.7, maxUp: 1 });
+  // CD fix: sweepOpacity .7 → .34 — on the pale mint body the screen sweep blew the macro out to white
+  const mac = fx.product(ctx, { id: 'mac', src: PR.H2m, w: MW, cx: 556, cy: 1935 - mH / 2, ground: 'none', pad: pad(PR.H2m), sweepAngle: 115, sweepOpacity: 0.34, maxUp: 1 });
   s2 += mac.html;
   ctx.tl.fromTo(mac.sel, { y: 180, opacity: 1 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, t2);
   fx.pushIn(ctx, mac.cam, t2, t3, { from: 1, to: 1.15, origin: '40% 42%', ease: 'power1.inOut' });
@@ -242,32 +254,41 @@ export default function bosset(ctx) {
   s2 += line(ctx, 'cld', 'Studené', { x: W - ctx.safe.right - tw2, y: 400, w: tw2, size: HS2, wdth: 100, color: '#ffffff', align: 'right', t: tCold - 0.03, d: 0.45 }).html;
   fx.chroma(ctx, ctx.sel('hot'), tHot, { amt: 6, d: 0.3 });
   fx.chroma(ctx, ctx.sel('cld'), tCold, { amt: 6, d: 0.3 });
-  // „které udrží nápoj“: the feature first (DOUBLE LOCK headline), it hands its line over to HORKÉ | STUDENÉ on „horký“
-  const DLS = Math.min(sz(ctx, 'Double lock', CW, [120, 112, 104, 96, 90, 84]), 112);
-  s2 += line(ctx, 'dlh', 'Double lock', { x: SL, y: 400, w: CW, size: DLS, color: '#ffffff', t: t2 + 0.02, d: 0.5, out: tHot - 0.2, outD: 0.2 }).html;
-  s2 += cap(ctx, 'dl', 'Otevřeš jednou rukou', { x: SL, y: 400 + Math.max(HS2, DLS) + 30, w: CW, align: 'left', size: 29, tracking: 0.12, t: t2 + 0.16 });
+  // CD fix — headline line = the VO, word for word („…které UDRŽÍ NÁPOJ | HORKÝ | i STUDENÝ“): UDRŽÍ NÁPOJ on the bar-2 hit
+  // (VO „udrží“ 3.70), handed over to HORKÉ | STUDENÉ on „horký“. The product feature is NOT a sub-headline any more (it used to
+  // stay orphaned under HORKÉ): it is a spec tag pinned above the open lid — yellow DOUBLE LOCK plate + „otevřeš jednou rukou“,
+  // on screen for the whole bar (≈ 1.7 s), verified for SM-SR / SM-VB only (research/bosset.md, Verification 5) = the lid shown.
+  const tUd = vs('udrží', t2, t2, t2 + ctx.BEAT);
+  const UDS = Math.min(sz(ctx, 'Udrží nápoj', CW, [120, 112, 104, 96, 90, 84]), 112);
+  s2 += line(ctx, 'udh', 'Udrží nápoj', { x: SL, y: 400, w: CW, size: UDS, color: '#ffffff', t: tUd - 0.02, d: 0.45, out: tHot - 0.2, outD: 0.2 }).html;
+  const yTag = 730, tTag = t2 + ctx.BEAT / 2;                                 // just above the lid (top ≈ 840 at full push-in), clear of the headline
+  const tg = pill(ctx, 'dlp', 'Double lock', { x: SL, y: yTag, size: 34, wght: 900, wdth: 125, tracking: 0.03, t: tTag });
+  s2 += tg.html;
+  s2 += cap(ctx, 'dl', 'otevřeš jednou rukou', { x: SL + tg.w + 22, y: yTag + Math.round((tg.h - 34) / 2) - 1, size: 30, wght: 800, wdth: 100, tracking: 0.1, t: tTag + 0.08, op: 1 });
+  ctx.report(`spec tag DOUBLE LOCK x ${SL}–${Math.round(SL + tg.w + 22 + ctx.measure(ctx.nb('otevřeš jednou rukou'), { font: 'Saira', size: 30, wght: 800, wdth: 100, upper: true, tracking: 0.1 }))} (≤ ${W - ctx.safe.right}), ${tTag.toFixed(2)}–${t3.toFixed(2)} s; UDRŽÍ NÁPOJ ${UDS}px at ${tUd.toFixed(2)}`);
   html += scene('scB', t2, t3, s2);
-  fx.flash(ctx, tHot, { id: 'flH', color: '#ff9a4d', peak: 0.22, d: 0.3, blend: 'screen' });
-  fx.flash(ctx, tCold, { id: 'flC', color: '#8fe3f5', peak: 0.2, d: 0.3, blend: 'screen' });
+  // (CD fix: the orange / cyan screen flashes on „horký“ / „studený“ muddied the teal to olive-grey → removed; the panels are the hit)
 
   // =============== bar 3 · AŽ 6 HODIN (SM-VB black hero) ===============
   let s3 = `<div class="fx-field" style="background:radial-gradient(85% 60% at 72% 52%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
   s3 += fx.glow(ctx, { id: 'g3', x: 818, y: 900, size: 980, color: 'rgba(60,195,220,.9)', opacity: 0.45 });
-  const b3 = fx.product(ctx, { id: 'b3', src: PR.H1, h: 990, cx: 818, floor: 1446, ground: 'floor', reflect: 0.2, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, sweepOpacity: 0.85, maxUp: 1 });
+  const b3 = fx.product(ctx, { id: 'b3', src: PR.H1, h: 990, cx: 818, floor: 1446, ground: 'floor', reflect: 0.2, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, sweepOpacity: 0.6, maxUp: 1 });
   s3 += b3.html;
   ctx.tl.fromTo(b3.sel, { scale: 1.16, y: -40, opacity: 1 }, { scale: 1, y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, t3);
   fx.sweep(ctx, 'b3', tSix + 0.1, { d: 0.8 });
   fx.float(ctx, b3.cam, t3 + 0.6, t4, { y: -10, period: ctx.BAR / 2 });
   s3 += pill(ctx, 'az', 'Až', { x: SL, y: 418, size: 54, wght: 900, wdth: 125, tracking: 0.04, t: tAz }).html;
-  const SIX = 760;
-  s3 += fx.odometer(ctx, { id: 'six', value: '6', x: SL - 22, y: 470, size: SIX, font: 'Saira', wght: 900, color: '#ffffff', t: tSix - 0.06, d: 0.5, spins: 1, style: 'font-stretch:125%' });
-  ctx.tl.fromTo(ctx.sel('six'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tSix - 0.06);
+  // CD fix: no rolling odometer for a single digit — it flashed a 760 px „5“ across the AŽ plate („až 5 hodin“ for a frame or
+  // three). The 6 now rises out of its own window (y 560–1160, below the plate) and settles on „šest“: only the true number is ever shown.
+  const SIX = 760, WY = 560, WH = 600;
+  s3 += `<div class="bs-win" style="left:${SL - 22}px;top:${WY}px;width:${Math.round(SIX * 0.9)}px;height:${WH}px"><div id="${ctx.id('six')}" style="top:${470 - WY}px;transform-origin:50% 85%;font-family:'Saira';font-weight:900;font-stretch:125%;font-size:${SIX}px;color:#ffffff">6</div></div>`;
+  ctx.tl.fromTo(ctx.sel('six'), { y: WH + 220, scaleY: 1.14 }, { y: 0, scaleY: 1, duration: 0.42, ease: 'expo.out' }, tSix - 0.08);   // parked fully below the window (the stretched top must not peek in)
   const HOD = Math.min(sz(ctx, 'hodin', 560, [132, 124, 116, 108, 100]), 124);
   s3 += line(ctx, 'hod', 'hodin', { x: SL, y: 1196, w: 600, size: HOD, color: '#ffffff', t: tHod - 0.04, d: 0.42 }).html;
   s3 += cap(ctx, 'hc', 'horké i studené', { x: SL + 2, y: 1196 + HOD + 22, size: 30, color: SKY, tracking: 0.2, t: tHod + 0.18, op: 1 });
   s3 += bug(ctx, 'bug3', 'on_dark', t3, t4);
   html += scene('scC', t3, t4, s3);
-  fx.flash(ctx, tSix + 0.2, { id: 'flS', color: '#ffffff', peak: 0.14, d: 0.28, blend: 'screen' });
+  // (CD fix: the white screen flash after „šest“ greyed the whole teal frame → removed; the rising 6 is the hit)
 
   // =============== bar 4 · lockup: logo + bosset.cz + Věnuje ceny over the prize line-up ===============
   let s4 = `<div class="fx-field" style="background:radial-gradient(90% 55% at 50% 70%, #137d93 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
@@ -282,51 +303,69 @@ export default function bosset(ctx) {
   ctx.tl.fromTo(ctx.sel('lg'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, t4 - LEAD);
   const US = Math.min(sz(ctx, 'bosset.cz', CW, [112, 104, 96, 88], { wght: 800, upper: false }), 104);
   s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: 430 + LG.h + 40, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t4 + 0.04, d: 0.45 }).html;
-  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: 430 + LG.h + 40 + US + 36, size: 30, t: ctx.at(4, 1) }).html;
+  // CD fix: prize plate on the first 8th of the lockup (was beat 2 → only ~0.9 s before the out-wipe started to cover it)
+  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: 430 + LG.h + 40 + US + 36, size: 30, t: t4 + ctx.BEAT / 2 }).html;
   html += scene('scD', t4, END, s4);
-  fx.flash(ctx, t4, { id: 'fl4', color: '#ffffff', peak: 0.14, d: 0.24, blend: 'screen' });
+  fx.flash(ctx, t4, { id: 'fl4', color: '#ffffff', peak: 0.1, d: 0.22, blend: 'screen' });
 
   fx.tOut(ctx, 'wipe', { d: OUT_D, dir: 'up' });
   return { html, css: CSS(ctx.S) };
 }
 
-// ---------- Reel hook (1 bar): the prize bottle + the claim, readable at 0.3 s ----------
+// ---------- Reel hook (1 bar): the prize bottle + the claim, readable on frame 1 ----------
+// CD fix: frame 1 of a Reel is its thumbnail / autoplay frame → everything is already in place (headline, plate, bottle) and only
+// SETTLES (scale 1.05 → 1 from the text's left edge, bottle 1.04 → 1 from its foot — the lid never touches „STUDENÉ“); no mask reveal / drop from off-frame.
 export function hook(ctx) {
   const { W } = ctx, SL = ctx.safe.left, CW = W - SL - ctx.safe.right;
   let html = `<div class="fx-field" style="background:radial-gradient(85% 60% at 60% 60%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
   html += fx.glow(ctx, { id: 'hg', x: 770, y: 1080, size: 1000, color: 'rgba(60,195,220,.9)', opacity: 0.45 });
   const P = fx.product(ctx, { id: 'hp', src: PR.H1, h: 760, cx: 780, floor: 1450, ground: 'floor', reflect: 0.2, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, maxUp: 1 });
   html += P.html;
-  ctx.tl.fromTo(P.sel, { y: -260, opacity: 1 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0);
-  ctx.tl.fromTo(ctx.sel('hp-sh'), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power1.out' }, 0.15);
-  fx.sweep(ctx, 'hp', 0.5, { d: 0.8 });
+  ctx.tl.set(P.sel, { transformOrigin: '50% 100%' }, 0);
+  ctx.tl.fromTo(P.sel, { scale: 1.04, y: -8 }, { scale: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 0);
+  fx.sweep(ctx, 'hp', 0.3, { d: 0.8 });
   fx.pushIn(ctx, P.cam, 0.5, ctx.dur, { from: 1, to: 1.05, origin: '50% 100%' });
   const S = Math.min(sz(ctx, 'i studené', CW, [140, 132, 124, 116, 108]), 120);
-  html += line(ctx, 'h1', 'Horké', { x: SL, y: 400, w: CW, size: S, color: '#ffffff', t: 0.02, d: 0.34 }).html;
-  html += line(ctx, 'h2', 'i studené', { x: SL, y: 400 + Math.round(S * 1.0), w: CW, size: S, color: '#ffffff', t: 0.08, d: 0.34 }).html;
-  html += pill(ctx, 'hz', 'až 6 hodin', { x: SL, y: 400 + Math.round(S * 2.0) + 34, size: 44, wght: 900, wdth: 125, tracking: 0.03, t: 0.22 }).html;
-  html += cap(ctx, 'hu', 'bosset.cz', { x: SL + 2, y: 1366, size: 32, color: SKY, wght: 700, tracking: 0.12, t: 0.45, op: 1 });
+  let g = line(ctx, 'h1', 'Horké', { x: SL, y: 400, w: CW, size: S, color: '#ffffff' }).html;
+  g += line(ctx, 'h2', 'i studené', { x: SL, y: 400 + Math.round(S * 1.0), w: CW, size: S, color: '#ffffff' }).html;
+  g += pill(ctx, 'hz', 'až 6 hodin', { x: SL, y: 400 + Math.round(S * 2.0) + 34, size: 44, wght: 900, wdth: 125, tracking: 0.03 }).html;
+  html += `<div class="fx-full" id="${ctx.id('hgrp')}" style="transform-origin:${SL}px 400px">${g}</div>`;
+  ctx.tl.fromTo(ctx.sel('hgrp'), { scale: 1.05 }, { scale: 1, duration: 0.55, ease: 'expo.out' }, 0);
+  html += cap(ctx, 'hu', 'bosset.cz', { x: SL + 2, y: 1366, size: 32, color: SKY, wght: 700, tracking: 0.12, t: 0.3, op: 1 });
   fx.tOut(ctx, 'flash', { color: DEEP, d: 0.12 });
   return { html, css: CSS(ctx.S), timeline: ctx.tl };
 }
 
 // ---------- Reel end card (2 bars): lockup + the shop's own distributor claim + Keitech cameo ----------
+// CD fix: the old card opened with ~0.5 s of empty teal (tIn flash + a lockup that built itself from t 0.05 while the TA plate
+// was still in its corner). Now the TA plate flies in OVER the block's out-wipe (plate.hero from −0.42 s) and lands on the
+// downbeat, and the whole lockup is complete on frame 1 (settles 1.04 → 1); only the prize plate and the light sweep come later.
 export function endCard(ctx) {
   const { W } = ctx, SL = ctx.safe.left, CW = W - SL - ctx.safe.right;
   let html = `<div class="fx-field" style="background:radial-gradient(90% 60% at 50% 48%, #137d93 0%, ${DEEP} 52%, ${ABYSS} 100%)"></div>`;
-  fx.tIn(ctx, 'flash', { color: DEEP, d: 0.2 });
-  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url || 'bosset.cz', line: 'Partner MČR v Trout Area 2026', fg: '#ffffff', accent: YEL, font: 'Saira', textFont: 'Saira', scale: 1.5, cy: 940 });
-  html += E.html;
-  // below the lockup: distributor line (footer banner of bosset.cz) + prize pill + the best-selling Keitech gliding through
-  const y0 = 1150;
-  html += cap(ctx, 'ed', 'Oficiální distributor Keitech a YGK X-Braid pro ČR', { x: SL, y: y0, w: CW, align: 'center', size: 25, wght: 600, tracking: 0.08, color: SKY, t: 0.75, op: 1 });
-  html += pill(ctx, 'ez', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: y0 + 56, size: 28, t: 0.95 }).html;
-  const K = fx.product(ctx, { id: 'ek', src: PR.H3, w: 620, cx: W / 2, cy: 1380, ground: 'none', pad: pad(PR.H3), sweepAngle: 100, maxUp: 1 });
+  const FLY = 0.42, SC = 1.5;
+  const Pl = ctx.plate.hero(-FLY, ctx.dur, { scale: SC, cx: W / 2, cy: 610, fly: FLY, ease: 'power3.inOut' });
+  const LG = ctx.logo('on_dark', { box: [760, 300], scale: SC, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });
+  const y0 = Math.round(Pl.y + Pl.h + 34), yBar = y0 + 52, yLogo = yBar + 34, yURL = yLogo + LG.h + 30;
+  const US = Math.min(sz(ctx, 'bosset.cz', 860, [104, 96, 88, 80], { wght: 800, upper: false }), 96);
+  const yDist = yURL + Math.round(US * 0.98) + 30, yPz = yDist + 58;
+  let g = cap(ctx, 'ec-line', 'Partner MČR v Trout Area 2026', { x: SL, y: y0, w: CW, align: 'center', size: 28, wght: 700, wdth: 110, tracking: 0.18, color: '#ffffff', op: 0.92 });
+  g += `<i class="fx-abs" id="${ctx.id('ec-bar')}" style="left:${W / 2 - 60}px;top:${yBar}px;width:120px;height:6px;border-radius:3px;background:${YEL}"></i>`;
+  g += `<div class="fx-abs" style="left:${Math.round((W - LG.w) / 2)}px;top:${yLogo}px;width:${LG.w}px;height:${LG.h}px">${LG.html}</div>`;
+  g += line(ctx, 'ec-url', 'bosset.cz', { x: SL, y: yURL, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff' }).html;
+  g += cap(ctx, 'ed', 'Oficiální distributor Keitech a YGK X-Braid pro ČR', { x: SL, y: yDist, w: CW, align: 'center', size: 26, wght: 700, tracking: 0.07, color: SKY, op: 1 });
+  html += `<div class="fx-full" id="${ctx.id('ecg')}" style="transform-origin:50% ${yLogo + LG.h / 2}px">${g}</div>`;
+  ctx.tl.fromTo(ctx.sel('ecg'), { scale: 1.04 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('ec-bar'), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.02);
+  html += pill(ctx, 'ez', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: yPz, size: 30, t: ctx.at(0, 1) - 0.04 }).html;
+  // the shop's best-selling Keitech: in frame on the downbeat, glides and levels out (sweep on beat 3)
+  const kCY = yPz + 48 + 150;
+  const K = fx.product(ctx, { id: 'ek', src: PR.H3, w: 640, cx: W / 2, cy: kCY, ground: 'float', shadow: 0.45, pad: pad(PR.H3), sweepAngle: 100, maxUp: 1 });
   html += K.html;
-  // the Keitech is already gliding in on the downbeat (no empty first frame while the TA plate flies into the lockup)
-  ctx.tl.fromTo(K.sel, { x: 560, opacity: 1 }, { x: 0, opacity: 1, duration: 0.95, ease: 'expo.out' }, 0);
-  ctx.tl.fromTo(K.cam, { x: 0 }, { x: -40, duration: ctx.dur - 0.95, ease: 'none' }, 0.95);
-  ctx.tl.fromTo(ctx.sel('ek-rot'), { rotation: -9 }, { rotation: -2, duration: ctx.dur, ease: 'sine.out' }, 0);
-  fx.sweep(ctx, 'ek', 1.6, { d: 0.8 });
+  ctx.tl.fromTo(K.sel, { x: 150 }, { x: 0, duration: 0.8, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(K.cam, { x: 0 }, { x: -36, duration: ctx.dur - 0.8, ease: 'none' }, 0.8);
+  ctx.tl.fromTo(ctx.sel('ek-rot'), { rotation: -9 }, { rotation: -3, duration: ctx.dur, ease: 'sine.out' }, 0);
+  fx.sweep(ctx, 'ek', ctx.at(0, 2), { d: 0.8 });
+  ctx.report(`end card: plate ${Math.round(Pl.y)}–${Math.round(Pl.y + Pl.h)}, line ${y0}, logo ${yLogo}–${yLogo + LG.h}, URL ${yURL} (${US}px), distributor ${yDist}, prize ${yPz}, Keitech cy ${Math.round(kCY)} (≤ ${ctx.H - ctx.safe.bottom})`);
   return { html, css: CSS(ctx.S), timeline: ctx.tl };
 }

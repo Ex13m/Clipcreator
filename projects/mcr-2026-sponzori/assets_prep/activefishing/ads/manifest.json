@@ -1,371 +1,383 @@
 {
- "sponsor": "activefishing",
- "generated": "2026-10-19",
- "scripts": "scripts/assets_prep/activefishing_ad/",
- "hf_log": "assets_prep/activefishing/hf_log.md",
- "research": "research/activefishing_ad.md",
- "logo_variants": {
-  "on_dark": "assets_prep/activefishing/logo_on_dark.png",
-  "white_knockout (derived, confirm with sponsor)": "assets_prep/activefishing/ads/logo_white_knockout.png"
- },
- "items": [
-  {
-   "file": "assets_prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png",
-   "role": "hero",
-   "product": "Wobler Timon Chibi Futten FS Tropical Chart Pink 51mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-tropical-chart-pink-51mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23817_tropical-chart-pink.jpg",
-   "method": "Higgsfield 4k upscale (800×600 → 4096×3072) + local ISNet trimap / white unmix",
-   "size": [
-    2400,
-    949
-   ],
-   "pad": [
-    0.005,
-    0.012,
-    0.005,
-    0.012
-   ],
-   "dominant": [
-    {
-     "hex": "#d2a30d",
-     "share": 0.513
-    },
-    {
-     "hex": "#f7385c",
-     "share": 0.392
-    },
-    {
-     "hex": "#2f271e",
-     "share": 0.096
-    }
-   ],
-   "shadow": "assets_prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink_shadow.png",
-   "onscreen": "chip: Timon · Chibi Futten FS · 51 mm"
+  "sponsor": "activefishing",
+  "generated": "2026-10-19",
+  "scripts": "scripts/assets_prep/activefishing_ad/",
+  "hf_log": "assets_prep/activefishing/hf_log.md",
+  "research": "research/activefishing_ad.md",
+  "logo_variants": {
+    "on_dark": "assets_prep/activefishing/logo_on_dark.png",
+    "white_knockout (derived, confirm with sponsor)": "assets_prep/activefishing/ads/logo_white_knockout.png"
   },
-  {
-   "file": "assets_prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png",
-   "role": "hero",
-   "product": "Plandavka Nories Sofia 1,2g SK017 Hot Mango 101",
-   "product_url": "https://www.activefishing.cz/plandavka-nories-sofia-1-2g-sk017-hot-mango-101/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23480_sk017.jpg",
-   "method": "Higgsfield 4k upscale (800×600 → 4096×3072) + local cut; two spoons + hook (pair)",
-   "size": [
-    2400,
-    1706
-   ],
-   "pad": [
-    0.005,
-    0.006,
-    0.005,
-    0.006
-   ],
-   "dominant": [
+  "items": [
     {
-     "hex": "#f57954",
-     "share": 0.57
+      "file": "assets_prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png",
+      "role": "hero",
+      "product": "Wobler Timon Chibi Futten FS Tropical Chart Pink 51mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-tropical-chart-pink-51mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23817_tropical-chart-pink.jpg",
+      "method": "Higgsfield 4k upscale (800×600 → 4096×3072) + local ISNet trimap / white unmix",
+      "size": [
+        2400,
+        949
+      ],
+      "pad": [
+        0.005,
+        0.012,
+        0.005,
+        0.012
+      ],
+      "dominant": [
+        {
+          "hex": "#d2a30d",
+          "share": 0.513
+        },
+        {
+          "hex": "#f7385c",
+          "share": 0.392
+        },
+        {
+          "hex": "#2f271e",
+          "share": 0.096
+        }
+      ],
+      "shadow": "assets_prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink_shadow.png",
+      "onscreen": "chip: Timon · Chibi Futten FS · 51 mm"
     },
     {
-     "hex": "#d9d60b",
-     "share": 0.344
+      "file": "assets_prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png",
+      "role": "hero",
+      "product": "Plandavka Nories Sofia 1,2g SK017 Hot Mango 101",
+      "product_url": "https://www.activefishing.cz/plandavka-nories-sofia-1-2g-sk017-hot-mango-101/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23480_sk017.jpg",
+      "method": "Higgsfield 4k upscale (800×600 → 4096×3072) + local cut; two spoons + hook (pair)",
+      "size": [
+        2400,
+        1706
+      ],
+      "pad": [
+        0.005,
+        0.006,
+        0.005,
+        0.006
+      ],
+      "dominant": [
+        {
+          "hex": "#f57954",
+          "share": 0.57
+        },
+        {
+          "hex": "#d9d60b",
+          "share": 0.344
+        },
+        {
+          "hex": "#2b2722",
+          "share": 0.085
+        }
+      ],
+      "shadow": "assets_prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair_shadow.png",
+      "onscreen": "chip: Nories · Sofia · 1,2 g"
     },
     {
-     "hex": "#2b2722",
-     "share": 0.085
+      "file": "assets_prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural.png",
+      "role": "hero",
+      "product": "Vlasec VARIVAS Super Trout Area ES2 Ester Natural (80 m)",
+      "product_url": "https://www.activefishing.cz/vlasec-varivas-super-trout-area-es2-ester-natural--0-4-80m-0-104mm-1-04kg/",
+      "source": "shop CDN orig 1500×1500 (ES2 Natural listing image; fetched 19 Oct 17:25)",
+      "method": "local cut, label pockets filled, see-through lower flange kept transparent",
+      "size": [
+        1149,
+        886
+      ],
+      "pad": [
+        0.014,
+        0.018,
+        0.014,
+        0.018
+      ],
+      "dominant": [
+        {
+          "hex": "#f8f8f8",
+          "share": 0.582
+        },
+        {
+          "hex": "#2b576d",
+          "share": 0.215
+        },
+        {
+          "hex": "#b1b2b9",
+          "share": 0.203
+        }
+      ],
+      "shadow": "assets_prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural_shadow.png",
+      "onscreen": "chip: VARIVAS · ES2 Ester · 80 m"
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png",
+      "role": "secondary",
+      "product": "Wobler Timon Chibi Futten FS UV Cobalt Blue 51mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-uv-cobalt-blue-51mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23790_uv-cobalt-blue.jpg",
+      "method": "native 800×600, local cut",
+      "size": [
+        723,
+        313
+      ],
+      "pad": [
+        0.022,
+        0.054,
+        0.022,
+        0.051
+      ],
+      "dominant": [
+        {
+          "hex": "#1b2a4d",
+          "share": 0.496
+        },
+        {
+          "hex": "#034a9e",
+          "share": 0.357
+        },
+        {
+          "hex": "#2b91d5",
+          "share": 0.146
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png",
+      "role": "secondary",
+      "product": "Wobler Timon Chibi Futten FS Red Black Glitter 51mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-red-black-glitter-51mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23787_red-black-glitter.jpg",
+      "method": "native, local cut (black tail: needs a light/graphite bg, not pure black)",
+      "size": [
+        728,
+        317
+      ],
+      "pad": [
+        0.022,
+        0.054,
+        0.022,
+        0.05
+      ],
+      "dominant": [
+        {
+          "hex": "#2b1b1d",
+          "share": 0.492
+        },
+        {
+          "hex": "#682829",
+          "share": 0.385
+        },
+        {
+          "hex": "#beafa0",
+          "share": 0.123
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png",
+      "role": "secondary",
+      "product": "Wobler Timon Chibi Futten FS Gold Shower 51mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-gold-shower-51mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23814_gold-shower.jpg",
+      "method": "native, local cut",
+      "size": [
+        761,
+        329
+      ],
+      "pad": [
+        0.021,
+        0.049,
+        0.021,
+        0.049
+      ],
+      "dominant": [
+        {
+          "hex": "#5e4820",
+          "share": 0.423
+        },
+        {
+          "hex": "#282215",
+          "share": 0.381
+        },
+        {
+          "hex": "#927842",
+          "share": 0.196
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png",
+      "role": "secondary",
+      "product": "Wobler Timon Chibi Futten FS Hologram Bait 51mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-hologram-bait-51mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23784_hologram-bait.jpg (fetched 17:25)",
+      "method": "native, local cut (clear lip kept milky-opaque)",
+      "size": [
+        745,
+        338
+      ],
+      "pad": [
+        0.023,
+        0.047,
+        0.021,
+        0.047
+      ],
+      "dominant": [
+        {
+          "hex": "#a98c63",
+          "share": 0.44
+        },
+        {
+          "hex": "#584736",
+          "share": 0.311
+        },
+        {
+          "hex": "#cebca5",
+          "share": 0.25
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png",
+      "role": "secondary",
+      "product": "Plandavka Velvet Arts Forte 1,5g No.1",
+      "product_url": "https://www.activefishing.cz/plandavka-velvet-arts-forte-1-5g-no-1/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23826_15forte-1.png (600×450, fetched 17:25)",
+      "method": "native, soft source → keep ≤ 500 px on screen",
+      "size": [
+        500,
+        316
+      ],
+      "pad": [
+        0.032,
+        0.051,
+        0.032,
+        0.051
+      ],
+      "dominant": [
+        {
+          "hex": "#e5472d",
+          "share": 0.422
+        },
+        {
+          "hex": "#bdc492",
+          "share": 0.389
+        },
+        {
+          "hex": "#2d291b",
+          "share": 0.19
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png",
+      "role": "secondary",
+      "product": "Wobler Timon Micro PaniCra MR-F Rattle Yazy Pellet San 20mm",
+      "product_url": "https://www.activefishing.cz/wobler-timon-micro-panicra-mr-f-rattle-yazy-pellet-san-20mm/",
+      "source": "assets/activefishing/p08 (shop transparent PNG)",
+      "method": "shop alpha, trimmed + decontaminated",
+      "size": [
+        534,
+        217
+      ],
+      "pad": [
+        0.03,
+        0.074,
+        0.03,
+        0.074
+      ],
+      "dominant": [
+        {
+          "hex": "#3c332e",
+          "share": 0.47
+        },
+        {
+          "hex": "#63584b",
+          "share": 0.385
+        },
+        {
+          "hex": "#978d52",
+          "share": 0.145
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png",
+      "role": "secondary",
+      "product": "Wobler Mukai UpWard Zanmu 35 S 6CK 35mm",
+      "product_url": "https://www.activefishing.cz/wobler-mukai-upward-zanmu-35-s-6ck-35mm/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/21785-1_upward-zanmu-6ck.png (2560×1878)",
+      "method": "local cut from 2560 px source (hero-grade size)",
+      "size": [
+        1800,
+        931
+      ],
+      "pad": [
+        0.007,
+        0.014,
+        0.008,
+        0.014
+      ],
+      "dominant": [
+        {
+          "hex": "#452e16",
+          "share": 0.457
+        },
+        {
+          "hex": "#ab890e",
+          "share": 0.343
+        },
+        {
+          "hex": "#b8ab87",
+          "share": 0.2
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png",
+      "role": "secondary",
+      "product": "Plandavka ValkeIN Scheila 1,8g No.80 Delicious Peach",
+      "product_url": "https://www.activefishing.cz/plandavka-valkein-scheila-1-8g-no-80-delicious-peach/",
+      "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/21945-1_plandavka-valkein-scheila-1-8g-no-80-delicious-peach.png (640×480)",
+      "method": "native, front + back pair",
+      "size": [
+        571,
+        362
+      ],
+      "pad": [
+        0.028,
+        0.044,
+        0.028,
+        0.047
+      ],
+      "dominant": [
+        {
+          "hex": "#cdc58f",
+          "share": 0.461
+        },
+        {
+          "hex": "#1c1d16",
+          "share": 0.418
+        },
+        {
+          "hex": "#e4334f",
+          "share": 0.121
+        }
+      ]
+    },
+    {
+      "file": "assets_prep/activefishing/ads/S9_velvet_arts_forte_0-6g_no31_clean.png",
+      "role": "secondary",
+      "product": "Plandavka Velvet Arts Forte 0,6g No.31",
+      "product_url": "https://www.activefishing.cz/plandavka-velvet-arts-forte-0-6g-no-31/",
+      "source": "assets_prep/activefishing/heroes/h03_velvetarts_forte_06.png",
+      "method": "h03 cut-out with the cut-off hook stub (lower-left, cropped in the shop photo) erased below the body edge, 2 px feather (CD review 19. 10.)",
+      "size": [
+        706,
+        357
+      ]
     }
-   ],
-   "shadow": "assets_prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair_shadow.png",
-   "onscreen": "chip: Nories · Sofia · 1,2 g"
-  },
-  {
-   "file": "assets_prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural.png",
-   "role": "hero",
-   "product": "Vlasec VARIVAS Super Trout Area ES2 Ester Natural (80 m)",
-   "product_url": "https://www.activefishing.cz/vlasec-varivas-super-trout-area-es2-ester-natural--0-4-80m-0-104mm-1-04kg/",
-   "source": "shop CDN orig 1500×1500 (ES2 Natural listing image; fetched 19 Oct 17:25)",
-   "method": "local cut, label pockets filled, see-through lower flange kept transparent",
-   "size": [
-    1149,
-    886
-   ],
-   "pad": [
-    0.014,
-    0.018,
-    0.014,
-    0.018
-   ],
-   "dominant": [
-    {
-     "hex": "#f8f8f8",
-     "share": 0.582
-    },
-    {
-     "hex": "#2b576d",
-     "share": 0.215
-    },
-    {
-     "hex": "#b1b2b9",
-     "share": 0.203
-    }
-   ],
-   "shadow": "assets_prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural_shadow.png",
-   "onscreen": "chip: VARIVAS · ES2 Ester · 80 m"
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png",
-   "role": "secondary",
-   "product": "Wobler Timon Chibi Futten FS UV Cobalt Blue 51mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-uv-cobalt-blue-51mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23790_uv-cobalt-blue.jpg",
-   "method": "native 800×600, local cut",
-   "size": [
-    723,
-    313
-   ],
-   "pad": [
-    0.022,
-    0.054,
-    0.022,
-    0.051
-   ],
-   "dominant": [
-    {
-     "hex": "#1b2a4d",
-     "share": 0.496
-    },
-    {
-     "hex": "#034a9e",
-     "share": 0.357
-    },
-    {
-     "hex": "#2b91d5",
-     "share": 0.146
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png",
-   "role": "secondary",
-   "product": "Wobler Timon Chibi Futten FS Red Black Glitter 51mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-red-black-glitter-51mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23787_red-black-glitter.jpg",
-   "method": "native, local cut (black tail: needs a light/graphite bg, not pure black)",
-   "size": [
-    728,
-    317
-   ],
-   "pad": [
-    0.022,
-    0.054,
-    0.022,
-    0.05
-   ],
-   "dominant": [
-    {
-     "hex": "#2b1b1d",
-     "share": 0.492
-    },
-    {
-     "hex": "#682829",
-     "share": 0.385
-    },
-    {
-     "hex": "#beafa0",
-     "share": 0.123
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png",
-   "role": "secondary",
-   "product": "Wobler Timon Chibi Futten FS Gold Shower 51mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-gold-shower-51mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23814_gold-shower.jpg",
-   "method": "native, local cut",
-   "size": [
-    761,
-    329
-   ],
-   "pad": [
-    0.021,
-    0.049,
-    0.021,
-    0.049
-   ],
-   "dominant": [
-    {
-     "hex": "#5e4820",
-     "share": 0.423
-    },
-    {
-     "hex": "#282215",
-     "share": 0.381
-    },
-    {
-     "hex": "#927842",
-     "share": 0.196
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png",
-   "role": "secondary",
-   "product": "Wobler Timon Chibi Futten FS Hologram Bait 51mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-chibi-futten-fs-hologram-bait-51mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23784_hologram-bait.jpg (fetched 17:25)",
-   "method": "native, local cut (clear lip kept milky-opaque)",
-   "size": [
-    745,
-    338
-   ],
-   "pad": [
-    0.023,
-    0.047,
-    0.021,
-    0.047
-   ],
-   "dominant": [
-    {
-     "hex": "#a98c63",
-     "share": 0.44
-    },
-    {
-     "hex": "#584736",
-     "share": 0.311
-    },
-    {
-     "hex": "#cebca5",
-     "share": 0.25
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png",
-   "role": "secondary",
-   "product": "Plandavka Velvet Arts Forte 1,5g No.1",
-   "product_url": "https://www.activefishing.cz/plandavka-velvet-arts-forte-1-5g-no-1/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/23826_15forte-1.png (600×450, fetched 17:25)",
-   "method": "native, soft source → keep ≤ 500 px on screen",
-   "size": [
-    500,
-    316
-   ],
-   "pad": [
-    0.032,
-    0.051,
-    0.032,
-    0.051
-   ],
-   "dominant": [
-    {
-     "hex": "#e5472d",
-     "share": 0.422
-    },
-    {
-     "hex": "#bdc492",
-     "share": 0.389
-    },
-    {
-     "hex": "#2d291b",
-     "share": 0.19
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png",
-   "role": "secondary",
-   "product": "Wobler Timon Micro PaniCra MR-F Rattle Yazy Pellet San 20mm",
-   "product_url": "https://www.activefishing.cz/wobler-timon-micro-panicra-mr-f-rattle-yazy-pellet-san-20mm/",
-   "source": "assets/activefishing/p08 (shop transparent PNG)",
-   "method": "shop alpha, trimmed + decontaminated",
-   "size": [
-    534,
-    217
-   ],
-   "pad": [
-    0.03,
-    0.074,
-    0.03,
-    0.074
-   ],
-   "dominant": [
-    {
-     "hex": "#3c332e",
-     "share": 0.47
-    },
-    {
-     "hex": "#63584b",
-     "share": 0.385
-    },
-    {
-     "hex": "#978d52",
-     "share": 0.145
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png",
-   "role": "secondary",
-   "product": "Wobler Mukai UpWard Zanmu 35 S 6CK 35mm",
-   "product_url": "https://www.activefishing.cz/wobler-mukai-upward-zanmu-35-s-6ck-35mm/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/21785-1_upward-zanmu-6ck.png (2560×1878)",
-   "method": "local cut from 2560 px source (hero-grade size)",
-   "size": [
-    1800,
-    931
-   ],
-   "pad": [
-    0.007,
-    0.014,
-    0.008,
-    0.014
-   ],
-   "dominant": [
-    {
-     "hex": "#452e16",
-     "share": 0.457
-    },
-    {
-     "hex": "#ab890e",
-     "share": 0.343
-    },
-    {
-     "hex": "#b8ab87",
-     "share": 0.2
-    }
-   ]
-  },
-  {
-   "file": "assets_prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png",
-   "role": "secondary",
-   "product": "Plandavka ValkeIN Scheila 1,8g No.80 Delicious Peach",
-   "product_url": "https://www.activefishing.cz/plandavka-valkein-scheila-1-8g-no-80-delicious-peach/",
-   "source": "https://cdn.myshoptet.com/usr/www.activefishing.cz/user/shop/orig/21945-1_plandavka-valkein-scheila-1-8g-no-80-delicious-peach.png (640×480)",
-   "method": "native, front + back pair",
-   "size": [
-    571,
-    362
-   ],
-   "pad": [
-    0.028,
-    0.044,
-    0.028,
-    0.047
-   ],
-   "dominant": [
-    {
-     "hex": "#cdc58f",
-     "share": 0.461
-    },
-    {
-     "hex": "#1c1d16",
-     "share": 0.418
-    },
-    {
-     "hex": "#e4334f",
-     "share": 0.121
-    }
-   ]
-  }
- ]
+  ]
 }
