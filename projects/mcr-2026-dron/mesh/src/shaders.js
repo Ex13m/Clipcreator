@@ -61,6 +61,7 @@ uniform mat4 modelMatrix; uniform mat4 viewMatrix; uniform mat4 projectionMatrix
 uniform sampler2D uCls; uniform vec4 uClsBox; uniform float uHasCls;
 uniform sampler2D uDtm; uniform float uHasDtm;
 uniform float uDisp; uniform vec3 uCam;
+uniform sampler2D uDet; uniform float uHasDet; uniform vec4 uBox;
 out vec3 vW; out vec3 vN; out float vTreeK;
 float h12(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * .1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
 float vn2(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
@@ -72,9 +73,15 @@ void main(){
     vec2 uvc = vec2((w.x - uClsBox.x) / uClsBox.z, (uClsBox.y - w.z) / uClsBox.w);
     float tree = textureLod(uCls, uvc, 0.0).g;
     float hg = w.y - textureLod(uDtm, uvc, 0.0).r;
-    float k = tree * smoothstep(2.0, 7.0, hg) * (1.0 - smoothstep(260.0, 420.0, distance(w.xyz, uCam)));
-    float nz = vn2(w.xz / 2.4) * 0.55 + vn2(w.xz / 1.05 + 5.3) * 0.30 + vn2(w.xz / 5.5 + 1.7) * 0.15;
-    w.xyz += normalize(normal) * (nz - 0.5) * 2.0 * uDisp * k;
+    float k = tree * smoothstep(2.0, 7.0, hg) * (1.0 - smoothstep(280.0, 430.0, distance(w.xyz, uCam)));
+    vec3 nn = normalize(normal);
+    float det = 0.0;
+    if (uHasDet > 0.5) {
+      vec2 uv = vec2((w.x - uBox.x) / uBox.z, (uBox.y - w.z) / uBox.w);
+      det = (textureLod(uDet, uv, 1.0).r - 0.502) * 4.0;
+    }
+    float nz = vn2(w.xz / 2.2) * 0.6 + vn2(w.xz / 0.9 + 5.3) * 0.4;
+    w.xyz += nn * (det * 0.9 + (nz - 0.5) * 1.2) * uDisp * k;
     vTreeK = k;
   }
   vW = w.xyz; vN = normal;
@@ -116,11 +123,17 @@ void main(){
     // fold the ortho onto steep faces: height above ground -> horizontal distance into the object,
     // so crown / roof texture is laid on the wall at true scale instead of being stretched vertically
     vec2 nh = n.xz; float nl = length(nh); nh = nl > 1e-4 ? nh / nl : vec2(0.0);
-    // trees & buildings: fold inward (crown / roof texture); other walls (embankments, bridges, cut
-    // slopes): take the colour of the ground at the wall foot, outward
-    vec2 qIn = vW.xz - nh * (hg * 0.85 + 0.6);
+    // trees & buildings: oblique-project the ortho onto the wall along the (axis-snapped) inward
+    // direction: height above ground -> distance into the object, so crown / roof texture lies on the
+    // wall at plausible scale (hanging-foliage look) instead of 1-texel vertical streaks.
+    // other walls (embankments, bridges, cut slopes): colour of the ground at the wall foot, outward.
+    vec2 ax = vec2(nh.x >= 0.0 ? 1.0 : -1.0, 0.0), az = vec2(0.0, nh.y >= 0.0 ? 1.0 : -1.0);
+    float wx = pow(abs(nh.x), 4.0), wz = pow(abs(nh.y), 4.0); float ws = wx + wz + 1e-4; wx /= ws; wz /= ws;
+    float dIn = hg * 0.55 + 0.8;
+    vec3 cX = texture(uOrtho, toUV(vW.xz - ax * dIn, uBox), uBias + 0.4).rgb;
+    vec3 cZ = texture(uOrtho, toUV(vW.xz - az * dIn, uBox), uBias + 0.4).rgb;
+    vec3 albIn = cX * wx + cZ * wz;
     vec2 qOut = vW.xz + nh * (1.5 + 0.25 * hg);
-    vec3 albIn = texture(uOrtho, toUV(qIn, uBox), uBias + 0.3).rgb;
     vec3 albOut = texture(uOrtho, toUV(qOut, uBox), uBias + 1.5).rgb * 0.8;
     float objk = clamp(tree + bld, 0.0, 1.0);
     alb = mix(alb, mix(albOut, albIn, objk), wall);
