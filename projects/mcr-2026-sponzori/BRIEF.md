@@ -8,7 +8,7 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Úroveň: „ultracode“ — nejlepší designové animace, náš styl, ale cool fashion.
 - **Místo konání = partner Líheň Liběchov / Sportovní rybaření Boží Voda – Liběchov** (Boží Voda 289, Liběchov 277 21, lihenlibechov.cz, +420 774 730 622, info@lihenlibechov.cz) → samostatný reklamní blok „místo konání“ (venue ad), ne jen logo.
 - Přidat **záběry z rybaření trout area** z fotek a videí uživatele (b-roll mezi bloky / pozadí). Zatím k dispozici fotky: H-BATTLE 2026 (../hb-battle-2026/01_RAW, 02_SELECT) a Klonówiec 2026 (../klonowiec-2026/01_RAW, proto/assets/photos). Videa uživatel dodá.
-- Termosky Bosset 0,5–0,7 l jako ceny.
+- **Ceny věnují VŠICHNI sponzoři** (uživatel 19. 10.), ne jen Bosset. Každý sponzorský blok + jeho Reels end card nese decentní chip „Věnuje ceny · MČR 2026“ (nebo „Partner a dárce cen“); u Bosset neříkat, že ceny věnuje jen on. Bosset = rybářský e-shop (Keitech, YGK…) + termosky Zojirushi 0,6 l mezi cenami.
 - Gausse Holler: stojan na pruty Black Standard Edition (render z webu) + značka „MADE BY ⚙ © 2026 Gausse Holler“ (gausseholler.com) na konci.
 
 
