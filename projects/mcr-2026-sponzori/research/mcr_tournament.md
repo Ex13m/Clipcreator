@@ -1,5 +1,5 @@
 # MČR Trout Area 2026 — troutareacz.cz (stránka Den 2)
-Zdroj: https://www.troutareacz.cz/tournaments/6aaafdd124c8e28042428a49 (staženo 19. 10. 2026)
+Zdroj: Den 1 https://www.troutareacz.cz/tournaments/6aaaf5fd24c8e2804242764b · Den 2 https://www.troutareacz.cz/tournaments/6aaafdd124c8e28042428a49 (staženo 19. 10. 2026; obsah obou stránek shodný kromě data)
 
 - Název: **Mistrovství České republiky Trout Area 2026 🏆** — Den 1 sobota 24. 10., Den 2 neděle 25. 10. 2026
 - Místo: **Sportovní rybník Líheň – Liběchov**
