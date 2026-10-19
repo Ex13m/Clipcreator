@@ -5,7 +5,7 @@
 //   bar 0  MACRO      chrome TroutJig head at ~1:1, push-in + light sweep + glint; "Jigy, které chytají!" word-synced to the VO
 //   bar 1  PULL-BACK  camera pulls back to the whole TroutJig (same native image, scale only goes down); loupe on the barbless point
 //                     at 1:1 native pixels + callout + pill „BEZ PROTIHROTU" (the slogan holds under it)
-//   bar 2  COLOUR     the loupe grows into a big lens: FLUO → PINK → RED heads on the beat, colour selector (7 colourways), „od 0,4 g" odometer
+//   bar 2  COLOUR     the loupe grows into a big lens: FLUO → PINK → RED heads on the beat, colour selector (7 colourways), „od 0,4 g" slam on the VO
 //   bar 3  RANGE      bento wall of 10 own-brand products assembling on 16ths (assortment moment) + band „Poctivě vyrobeno v ČR"
 //   bar 4  LOCKUP     TroutJig hero + SICKLE in depth, the logo travels from the corner into logo | jigovky.cz; slice out
 //
@@ -185,8 +185,8 @@ export default function jigovky(ctx) {
       if (i) ctx.tl.hit(ctx.sel('lnr'), { scale: 1.05 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t);
     });
     // exit: zoom-through (lens + ring blow up and vanish) ACROSS the downbeat, the first wall tiles land over it → the kick frame is never empty
-    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.7, duration: 0.28, ease: 'power2.in' }, B3 - 0.16);
-    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.85, duration: 0.28, ease: 'power2.in' }, B3 - 0.16);
+    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.7, duration: 0.24, ease: 'power2.in' }, B3 - 0.2);
+    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.85, duration: 0.24, ease: 'power2.in' }, B3 - 0.2);
   }
   // colour selector: 7 colourways of Tungsten HD BARBLESS, the ring sits on the colour in the lens
   {
@@ -200,19 +200,20 @@ export default function jigovky(ctx) {
     swaps.slice(1).forEach((t, i) => ctx.tl.fromTo(ctx.sel('swr'), { x: swatchIx[i] * (dD + gap) }, { x: swatchIx[i + 1] * (dD + gap), duration: 0.3, ease: 'expo.out' }, t));
     ctx.tl.fromTo(ctx.sel('swg'), { opacity: 1 }, { opacity: 0, duration: 0.18, ease: 'power1.in' }, B3 - 0.22);
   }
-  // „od 0,4 g": „od" lands on the spoken „od", the digits roll in ≈ 0.4 s and land on „nula celá čtyři"
-  // (a 0.7 s roll parked readable wrong weights like „5,2 g" on screen for several frames)
+  // „od 0,4 g": „od" lands on the spoken „od", „0,4 g" SLAMS in on „nula celá čtyři" (scale 1.6 → 1).
+  // (it was an odometer: a slot-machine roll to 0,4 parked readable wrong weights — „5,2 g", „2,0 g" — on screen; a counter is for big numbers)
   {
     const size = 176, od = 'od', odS = 84;
     const numW = ctx.measure('0,4 g', { font: 'Roboto Slab', size, wght: 900 });
     const odW = ctx.measure(od, { font: 'PT Sans Narrow', size: odS, wght: 700, tracking: 0.02 });
     const gx = 26, tot = odW + gx + numW, x0 = 540 - tot / 2, y0 = LN.cy + LN.r + 150;
-    const tRoll = clamp(tOd - 0.06, B2 + 0.25, t04 - 0.3);                   // ≈ 4.35
+    const tOdIn = clamp(tOd - 0.06, B2 + 0.25, t04 - 0.3);                   // ≈ 4.35
+    const tNum = clamp(t04 - 0.08, tOdIn + 0.12, B3 - 0.75);                  // ≈ 4.66
     html += `<div class="jg-lbl" id="${ctx.id('od')}" style="left:${px(x0)};top:${px(y0 + size * 0.84 - odS * 0.9)};${J.FN};font-size:${odS}px;line-height:1;color:#fff;text-transform:none;letter-spacing:.02em">${od}</div>`;
-    ctx.tl.fromTo(ctx.sel('od'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, tRoll);
-    html += fx.odometer(ctx, { id: 'odo', value: '0,4', suffix: '\u00a0g', x: x0 + odW + gx, y: y0, size, font: 'Roboto Slab', wght: 900, color: C.yellow, t: tRoll, d: t04 + 0.06 - tRoll, spins: 1, ease: 'power3.out' });
-    ctx.tl.fromTo(ctx.sel('odo'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, tRoll);
-    ctx.tl.hit(ctx.sel('odo'), { scale: 1.08 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, t04 + 0.06);
+    ctx.tl.fromTo(ctx.sel('od'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, tOdIn);
+    html += `<div class="fx-abs" id="${ctx.id('odo')}" style="left:${px(x0 + odW + gx)};top:${px(y0)};${J.FD};font-weight:900;font-size:${size}px;line-height:1;color:${C.yellow};white-space:nowrap">${ctx.esc(ctx.nb('0,4 g'))}</div>`;
+    ctx.tl.set(ctx.sel('odo'), { transformOrigin: '0% 80%' }, 0);
+    ctx.tl.fromTo(ctx.sel('odo'), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.42, ease: 'expo.out' }, tNum);
     for (const s of ['od', 'odo']) ctx.tl.fromTo(ctx.sel(s), { opacity: 1, y: 0 }, { opacity: 0, y: -26, duration: 0.2, ease: 'power2.in' }, B3 - 0.22);
   }
 
@@ -256,7 +257,7 @@ export default function jigovky(ctx) {
     const lbl = `<div class="jg-lbl" style="${J.FN}"><span style="display:block;font-size:24px;opacity:.82;letter-spacing:.1em">${ctx.esc(ctx.nb(p.label[0]))}</span><span style="display:block;font-size:38px;line-height:1.05;color:${C.yellow};letter-spacing:.04em;margin-top:2px;${/\d\s?g$/.test(p.label[1]) ? 'text-transform:none;' : ''}">${ctx.esc(ctx.nb(p.label[1]))}</span></div>`;
     html += `<div class="jg-tile" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}">${prod}${lbl}</div>`;
     tiles.push({ id, cx: x + w / 2, cy: y + h / 2 });
-    const t = tWall - 0.1 + i * 0.04;                                     // first tiles already up ON the downbeat, all 10 in ≈ 0.45 s
+    const t = tWall - 0.07 + i * 0.04;                                    // first tiles already up ON the downbeat, all 10 in ≈ 0.45 s
     ctx.tl.fromTo(ctx.sel(id), { opacity: 0, scale: 0.84, y: 46 }, { opacity: 1, scale: 1, y: 0, duration: 0.36, ease: 'expo.out' }, t);
     ctx.tl.fromTo(ctx.sel(`${id}p`), { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t + 0.05);
   });
@@ -325,18 +326,19 @@ export function hook(ctx) {
   const S = fx.headline(ctx, { id: 's', text: 'Bez protihrotu.', x: L, y: 400 + H.h + 8, w: R - L, maxLines: 1, sizes: [118, 110, 104, 96], font: 'Roboto Slab', wght: 900, color: '#fff', tracking: -0.015, lh: 1.02 });
   for (const q of [H.sel, S.sel]) ctx.tl.set(q, { transformOrigin: '0% 50%' }, 0);
   ctx.tl.fromTo(H.sel, { scale: 1.12 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, 0);
-  ctx.tl.fromTo(S.sel, { scale: 1.1, opacity: 0.0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(S.sel, { scale: 1.1 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
   const heads = [PR.fluo, PR.pink, PR.red];
-  // diagonal with air between the heads (eyes no longer poke into the shank above); red stays above the Reels UI zone (y < 1460)
-  const pos = [[852, 912], [636, 1128], [420, 1344]];
+  // staircase DOWN-RIGHT: each eye loop rises right of the ball above it and each shank runs under it → nothing crosses;
+  // red stays left of the Reels UI column (x < 940 below y 900) and above the caption zone (y < 1460)
+  const pos = [[400, 905], [610, 1115], [820, 1325]];
   heads.forEach((p, i) => {
     const hp = 200, s = Math.min(1.13, hp / p.hpx);
     const P = J.place(ctx, { id: `p${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: pos[i][0], y: pos[i][1], ground: 'none', sweepOpacity: 0.32 });
     html += P.html;
     const t = Math.max(0, (ctx.beats[i] ?? i * ctx.BEAT) - 0.02);
     // the first head is on screen on frame 1 (slam settle), the next two slam in on beats 2 and 3
-    if (i === 0) ctx.tl.fromTo(P.sel, { scale: 1.35, x: 60 }, { scale: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0);
-    else ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: 140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, t);
+    if (i === 0) ctx.tl.fromTo(P.sel, { scale: 1.2, x: -40 }, { scale: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+    else ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: -140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, t);
     fx.sweep(ctx, `p${i}`, t + 0.12, { d: 0.55 });
   });
   html += H.html + S.html;
@@ -357,8 +359,8 @@ export function endCard(ctx) {
   html += J.prize(ctx, { id: 'pz', cx: 540, y: 1012, t: 0.9 }).html;
   // the hero product floats under the lockup (slam on the downbeat, light sweep + glint)
   {
-    const k = ctx.dims(PR.tj.src)[0] / 2400, s = 520 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
-    const P = J.place(ctx, { id: 'tj', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 540, y: 1288, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.7, shadow: 0.55, rot: -6 });
+    const k = ctx.dims(PR.tj.src)[0] / 2400, s = 500 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
+    const P = J.place(ctx, { id: 'tj', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 540, y: 1300, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.7, shadow: 0.55, rot: -6 });
     html += P.html;
     ctx.tl.fromTo(P.sel, { y: -60, scale: 1.22 }, { y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 0);
     ctx.tl.fromTo(P.cam, { y: 0 }, { y: -14, duration: ctx.dur - 1.3, ease: 'sine.inOut' }, 1.2);
