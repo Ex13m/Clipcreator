@@ -5,30 +5,76 @@
   <style>
   #bw-brollbreak { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #brollbreak-stage { position:absolute; inset:0; overflow:hidden; }
-  
+  #b-brollbreak .br-shot{position:absolute;inset:0;overflow:hidden}
+#b-brollbreak .br-cam{position:absolute;inset:0;will-change:transform}
+#b-brollbreak .br-cam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.2) saturate(.74) brightness(.9) hue-rotate(-12deg) sepia(.12)}
+#b-brollbreak .br-cam img.br-mono{filter:grayscale(1) contrast(1.35) brightness(.62)}
+#b-brollbreak .br-cam img.br-stk{filter:none}
+#b-brollbreak .br-grade{position:absolute;inset:0;pointer-events:none}
+#b-brollbreak .br-w{position:absolute;left:0;width:1080px;text-align:center;white-space:nowrap;line-height:.92;text-transform:uppercase;font-family:'Archivo';color:#fff;filter:drop-shadow(0 10px 34px rgba(0,0,0,.42))}
+#b-brollbreak .br-w>div{position:absolute;left:0;right:0;top:0}
+#b-brollbreak .br-w .br-e{color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.9)}
+#b-brollbreak .br-w .fx-c{display:inline-block;white-space:pre}
+#b-brollbreak .br-box{position:absolute;left:0;right:0;background:#000}
+#b-brollbreak .br-leak{position:absolute;border-radius:50%;mix-blend-mode:screen;pointer-events:none;filter:blur(40px)}
+#b-brollbreak .br-streak{position:absolute;left:-10%;width:120%;pointer-events:none;mix-blend-mode:screen}
+#b-brollbreak .br-sweep{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;background-size:320% 100%;background-repeat:no-repeat}
   </style>
-  <div id="bw-brollbreak" class="blk blk-broll" style="--bg:#000000;--fg:#ffffff;--acc:#8fe3ff;--acc2:#8fe3ff">
-    <div id="brollbreak-stage" class="blk-stage"><div class="fx-photo fx-duo" id="brollbreak-a" style="left:0px;top:0px;width:1080px;height:1920px;--d1:#05080c;--d2:#9fd8ee;--hs:12px;border-radius:0px;"><div class="fx-photo-in" id="brollbreak-a-in"><img class="fx-img " src="assets/prep/broll/br11_lake_sunflare.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div><div class="fx-full" id="brollbreak-sb" style=""><div class="fx-photo fx-half" id="brollbreak-b" style="left:0px;top:0px;width:1080px;height:1920px;--d1:#05080c;--d2:#2f7fa3;--hs:10px;border-radius:0px;"><div class="fx-photo-in" id="brollbreak-b-in"><img class="fx-img " src="assets/prep/broll/br13_lure_check.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div></div><div class="fx-full" style="background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 30%, transparent 62%, rgba(0,0,0,.6))"></div><div class="fx-t fx-var " id="brollbreak-l" style="left:64px;top:1180px;width:952px;font-family:'Archivo';font-weight:300;font-size:72px;line-height:0.98;letter-spacing:0.02em;color:#ffffff;text-align:left;--wght:300;--wdth:100;--trk:0.02;"><span class="fx-ln" id="brollbreak-l-l0" style=""><span>24.–25. 10. 2026 · Líheň</span></span><span class="fx-ln" id="brollbreak-l-l1" style=""><span>Liběchov</span></span></div>
+  <div id="bw-brollbreak" class="blk blk-broll" style="--bg:#000000;--fg:#ffffff;--acc:#ffb067;--acc2:#8fe3ff">
+    <div id="brollbreak-stage" class="blk-stage"><div class="fx-full" id="brollbreak-rig"><div class="fx-full" id="brollbreak-bv" style=""><div class="br-cam" id="brollbreak-b-cam" style="transform-origin:46% 40%;"><img class=""  src="assets/prep/broll/br03_fish_in_net.jpg" alt=""></div><div class="br-sweep" id="brollbreak-sw" style="opacity:0.85;background-image:linear-gradient(112deg,transparent 40%,rgba(255,236,210,.0) 42%,rgba(255,240,220,.95) 50%,rgba(255,236,210,0) 58%,transparent 60%);background-position:115% 0%"></div></div><div class="fx-full" id="brollbreak-av" style=""><div class="br-cam" id="brollbreak-a-cam" style="transform-origin:32% 42%;"><img class=""  src="assets/prep/broll/br01_fight_splash.jpg" alt=""><img class="br-mono" id="brollbreak-a-mono" style="opacity:0" src="assets/prep/broll/br01_fight_splash.jpg" alt=""></div></div><div class="br-grade" style="background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.32) 22%,rgba(0,0,0,.06) 44%,transparent 56%,rgba(0,0,0,.28) 100%)"></div><div class="fx-full" id="brollbreak-w1v" style=""><div class="br-w" id="brollbreak-w1" style="top:422px;height:240px;font-size:240px;font-weight:900;font-stretch:62%;letter-spacing:-0.01em;"><div id="brollbreak-w1-m" class="fx-var" style="--wght:120;--wdth:62;--trk:0.07;"><span class="fx-c">S</span><span class="fx-c">O</span><span class="fx-c">U</span><span class="fx-c">B</span><span class="fx-c">O</span><span class="fx-c">J</span><span class="fx-c">.</span></div></div></div><div class="fx-full" id="brollbreak-w2v" style=""><div class="br-w" id="brollbreak-w2" style="top:422px;height:280px;font-size:280px;font-weight:900;font-stretch:62%;letter-spacing:-0.01em;"><div id="brollbreak-w2-m" class="fx-var fx-of" style="--wght:500;--wdth:62;--trk:0.03;--ofc:#fff;--ofw:3px;"><span class="fx-c">P</span><span class="fx-c">S</span><span class="fx-c">T</span><span class="fx-c">R</span><span class="fx-c">U</span><span class="fx-c">H</span><span class="fx-c">.</span></div></div></div><div class="fx-full" id="brollbreak-af" style=""><div class="br-cam" id="brollbreak-a-fcam" style="transform-origin:32% 42%;"><div class="br-cam" id="brollbreak-a-sub" style="transform-origin:30% 46%"><img class="br-stk" id="brollbreak-a-stk" style="opacity:0" src="assets/prep/broll/cut/br01_stroke.png" alt=""><img class=""  src="assets/prep/broll/cut/br01_cut.png" alt=""></div></div></div><div class="br-grade" style="background:#0b3a48;mix-blend-mode:soft-light;opacity:.7"></div><div class="br-grade" style="background:radial-gradient(80% 55% at 68% 22%,rgba(255,168,92,.55),transparent 70%);mix-blend-mode:soft-light"></div><div class="br-grade" style="background:radial-gradient(120% 78% at 50% 46%,transparent 52%,rgba(0,0,0,.58) 100%)"></div></div><div class="br-leak" id="brollbreak-lk1" style="left:20px;top:-40px;width:1600px;height:1600px;background:radial-gradient(closest-side,#ffe3b8 0%,#ffb067 34%,#ff6a3d 58%,transparent 100%)"></div><div class="br-leak" id="brollbreak-lk2" style="left:-360px;top:-100px;width:2000px;height:2000px;background:radial-gradient(closest-side,#ffe3b8 0%,#ffb067 34%,#ff6a3d 58%,transparent 100%)"></div><div class="br-box" id="brollbreak-lb-t" style="top:0;height:372px"></div><div class="br-box" id="brollbreak-lb-b" style="bottom:0;height:372px"></div>
     </div>
-    <div class="fx-ov" id="brollbreak-tin" style="background:#000000"></div>
+    <div class="fx-ov" id="brollbreak-fl0" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="brollbreak-tout" style="background:#000000"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#brollbreak-a-in", {"scale":1.04,"x":0,"y":0});
-  gsap.set("#brollbreak-b-in", {"scale":1.12,"x":0,"y":0});
-  gsap.set("#brollbreak-sb", {"opacity":0});
-  gsap.set("#brollbreak-l .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#brollbreak-l", {"--wght":300,"--wdth":100,"--trk":0.02});
-  gsap.set("#brollbreak-tin", {"opacity":1});
-  gsap.set("#brollbreak-tout", {"clipPath":"circle(0% at 50% 50%)"});
-  tl.fromTo("#brollbreak-a-in", {"scale":1.04,"x":0,"y":0}, {"scale":1.16,"x":0,"y":0,"duration":3.645,"ease":"sine.inOut","immediateRender":false}, 0.000);
-  tl.fromTo("#brollbreak-b-in", {"scale":1.12,"x":0,"y":0}, {"scale":1,"x":0,"y":0,"duration":1.811,"ease":"sine.out","immediateRender":false}, 1.834);
-  tl.fromTo("#brollbreak-sb", {"opacity":0}, {"opacity":1,"duration":0.5,"ease":"none","immediateRender":false}, 1.834);
-  tl.fromTo("#brollbreak-l .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":1,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.464);
-  tl.fromTo("#brollbreak-l", {"--wght":300,"--wdth":100,"--trk":0.02}, {"--wght":700,"--wdth":100,"--trk":0.12,"duration":2.4400000000000004,"ease":"sine.inOut","immediateRender":false}, 0.905);
-  tl.fromTo("#brollbreak-tin", {"opacity":1}, {"opacity":0,"duration":0.6,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#brollbreak-tout", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.45,"ease":"power3.in","immediateRender":false}, 3.195);
+  gsap.set("#brollbreak-a-cam, #brollbreak-a-fcam", {"scale":1});
+  gsap.set("#brollbreak-a-sub", {"scale":1});
+  gsap.set("#brollbreak-a-stk", {"opacity":0});
+  gsap.set("#brollbreak-a-mono", {"opacity":0});
+  gsap.set("#brollbreak-b-cam", {"scale":1.1});
+  gsap.set("#brollbreak-sw", {"backgroundPosition":"115% 0%"});
+  gsap.set("#brollbreak-w1-m .fx-c", {"opacity":0,"yPercent":14});
+  gsap.set("#brollbreak-w1-m", {"--wght":120,"--wdth":62,"--trk":0.07});
+  gsap.set("#brollbreak-w2-m .fx-c", {"opacity":0,"yPercent":14});
+  gsap.set("#brollbreak-w2-m", {"--wght":500,"--wdth":62,"--trk":0.03,"backgroundPosition":"100% 0%"});
+  gsap.set("#brollbreak-w1", {"opacity":1,"filter":"blur(0px)"});
+  gsap.set("#brollbreak-av", {"opacity":1});
+  gsap.set("#brollbreak-af", {"opacity":1});
+  gsap.set("#brollbreak-bv", {"opacity":0});
+  gsap.set("#brollbreak-w1v", {"opacity":1});
+  gsap.set("#brollbreak-w2v", {"opacity":0});
+  gsap.set("#brollbreak-lk1", {"opacity":0,"scale":0.7,"x":0});
+  gsap.set("#brollbreak-lk2", {"opacity":0,"scale":0.7,"x":0});
+  gsap.set("#brollbreak-lb-t", {"yPercent":-100});
+  gsap.set("#brollbreak-lb-b", {"yPercent":100});
+  gsap.set("#brollbreak-tout", {"opacity":0});
+  tl.fromTo("#brollbreak-a-cam, #brollbreak-a-fcam", {"scale":1}, {"scale":1.13,"duration":2.194,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-a-sub", {"scale":1}, {"scale":1.065,"duration":1.834,"ease":"expo.out","immediateRender":false}, 0.020);
+  tl.fromTo("#brollbreak-a-stk", {"opacity":0}, {"opacity":1,"duration":0.1,"ease":"none","immediateRender":false}, 0.040);
+  tl.fromTo("#brollbreak-a-stk", {"opacity":1}, {"opacity":0,"duration":0.3,"ease":"power1.in","immediateRender":false}, 1.534);
+  tl.fromTo("#brollbreak-a-mono", {"opacity":0}, {"opacity":0.92,"duration":0.16,"ease":"power2.out","immediateRender":false}, 0.020);
+  tl.fromTo("#brollbreak-a-mono", {"opacity":0.92}, {"opacity":0.6,"duration":1.534,"ease":"sine.inOut","immediateRender":false}, 0.200);
+  tl.fromTo("#brollbreak-b-cam", {"scale":1.1}, {"scale":1.24,"duration":2.171,"ease":"sine.inOut","immediateRender":false}, 1.474);
+  tl.fromTo("#brollbreak-sw", {"backgroundPosition":"115% 0%"}, {"backgroundPosition":"-15% 0%","duration":1.15,"ease":"power1.inOut","immediateRender":false}, 2.254);
+  tl.fromTo("#brollbreak-w1-m .fx-c", {"opacity":0,"yPercent":14}, {"opacity":1,"yPercent":0,"duration":0.7,"ease":"expo.out","stagger":0.045,"immediateRender":false}, 0.060);
+  tl.fromTo("#brollbreak-w1-m", {"--wght":120,"--wdth":62,"--trk":0.07}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.624,"ease":"power2.inOut","immediateRender":false}, 0.060);
+  tl.fromTo("#brollbreak-w2-m .fx-c", {"opacity":0,"yPercent":14}, {"opacity":1,"yPercent":0,"duration":0.7,"ease":"expo.out","stagger":0.045,"immediateRender":false}, 1.884);
+  tl.fromTo("#brollbreak-w2-m", {"--wght":500,"--wdth":62,"--trk":0.03}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.3110000000000002,"ease":"power2.inOut","immediateRender":false}, 1.884);
+  tl.fromTo("#brollbreak-w2-m", {"backgroundPosition":"100% 0%"}, {"backgroundPosition":"0% 0%","duration":0.69,"ease":"power1.inOut","immediateRender":false}, 2.542);
+  tl.fromTo("#brollbreak-w1", {"opacity":1,"filter":"blur(0px)"}, {"opacity":0,"filter":"blur(14px)","duration":0.32,"ease":"power2.in","immediateRender":false}, 1.534);
+  tl.fromTo("#brollbreak-av", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.474);
+  tl.fromTo("#brollbreak-af", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.474);
+  tl.fromTo("#brollbreak-bv", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.474);
+  tl.fromTo("#brollbreak-w1v", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 1.833);
+  tl.fromTo("#brollbreak-w2v", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.834);
+  tl.fromTo("#brollbreak-lk1", {"opacity":0,"scale":0.7,"x":0}, {"opacity":0.9,"scale":1.15,"x":-160,"duration":0.5,"ease":"power2.in","immediateRender":false}, 1.334);
+  tl.fromTo("#brollbreak-lk1", {"opacity":0.9,"scale":1.15,"x":-160}, {"opacity":0,"scale":1.35,"x":-300,"duration":0.5,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#brollbreak-lk2", {"opacity":0,"scale":0.7,"x":0}, {"opacity":1,"scale":1.15,"x":-160,"duration":0.375,"ease":"power2.in","immediateRender":false}, 2.895);
+  tl.fromTo("#brollbreak-lb-t", {"yPercent":-100}, {"yPercent":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-lb-b", {"yPercent":100}, {"yPercent":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-fl0", {"opacity":0.9}, {"opacity":0,"duration":0.55,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-tout", {"opacity":0}, {"opacity":1,"duration":0.4,"ease":"power2.in","immediateRender":false}, 3.245);
   tl.set({}, {}, 3.645);
   window.__timelines["brollbreak"] = tl;
   </script>

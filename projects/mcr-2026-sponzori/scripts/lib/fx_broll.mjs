@@ -60,7 +60,7 @@ export function shot(ctx, o) {
   // camera: entrance → speed-ramp push-in → exit
   const s1 = kb.from ?? 1.08, s2 = kb.to ?? 1.2;
   let tm = t0;
-  if (inn === 'slam') { ctx.tl.fromTo(both, { scale: slam }, { scale: s1, duration: 0.3, ease: 'expo.out' }, t0); tm = t0 + 0.3; }
+  if (inn === 'slam') { const sd = Math.min(0.3, (t1 - t0) * 0.85); ctx.tl.fromTo(both, { scale: slam }, { scale: s1, duration: sd, ease: 'expo.out' }, t0); tm = t0 + sd; }
   else if (inn === 'whipL' || inn === 'whipR') {
     const sx = inn === 'whipL' ? 1 : -1;      // whipL = the move goes to the left → the new shot enters from the right
     ctx.tl.fromTo(both, { scale: 1.26, x: sx * X }, { scale: s1, x: 0, duration: inD, ease: 'expo.out' }, t0);
