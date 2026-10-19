@@ -239,14 +239,14 @@
       "block_s": 8,
       "vo_limit_words": 18,
       "vo": {
-        "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999 a generální partner Trout Area Slovakia.",
-        "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět a generální partner Trout Area Slovakia.",
-        "respell": "Traut-šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět a generální partner Traut Erija Slovakija.",
-        "words": 15,
-        "spoken_words": 18,
-        "est_s": 6.2,
+        "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999.",
+        "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+        "respell": "Traut-šop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+        "words": 9,
+        "spoken_words": 12,
+        "est_s": 4.1,
         "in_s": 0.25,
-        "end_s": 6.45,
+        "end_s": 4.35,
         "file": "vo/troutshop.wav"
       },
       "onscreen": {

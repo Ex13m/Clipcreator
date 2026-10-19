@@ -5,7 +5,9 @@ import http from 'http'; import fs from 'fs'; import path from 'path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');   // .../drone
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, arr) => (v.startsWith('--') ? a.concat([[v.slice(2), arr[i + 1] && !arr[i + 1].startsWith('--') ? arr[i + 1] : true]]) : a), []));
 const aspect = args.aspect || '16x9';
-const [outW, outH] = aspect === '16x9' ? [1920, 1080] : [1080, 1920];
+// 'sq' = square master (1920x1920, 73.7 deg both ways): its centred 1920x1080 crop is the 16:9 shot (VFOV 45.6)
+// and its centred 1080x1920 crop is the 9:16 shot (HFOV 45.6) -> one render serves both deliverables.
+const [outW, outH] = aspect === '16x9' ? [1920, 1080] : aspect === '9x16' ? [1080, 1920] : [1920, 1920];
 const vfov = aspect === '16x9' ? 45.6 : 73.7;
 const scale = parseFloat(args.scale || '1');   // preview downscale
 let frames;
@@ -37,6 +39,8 @@ const t0 = Date.now();
 const info = await page.evaluate(o => window.setup(o), opts);
 console.log('setup', JSON.stringify(info), 'wall', Date.now() - t0, 'ms');
 for (const f of frames) {
+  const fn = path.join(outDir, `f${String(f).padStart(3, '0')}.png`);
+  if (args.skip && fs.existsSync(fn)) continue;
   const t = Date.now();
   const r = await page.evaluate(f => window.renderFrame(f), f);
   const buf = Buffer.from(r.url.split(',')[1], 'base64');

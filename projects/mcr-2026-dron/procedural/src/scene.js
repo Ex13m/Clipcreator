@@ -299,6 +299,7 @@ function crownGeometry(detail, seed, kind) {
 function foliageMaterial(opts) {
   const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0, envMapIntensity: P.envIntensity * 1.5 });
   const SHELL = opts.shell ? 1 : 0;
+  if (SHELL) { m.alphaToCoverage = true; m.transparent = false; }
   m.customProgramCacheKey = () => 'fol' + SHELL + (opts.orthoMix > 0 ? 'o' : 'n');
   m.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, {
@@ -334,10 +335,10 @@ function foliageMaterial(opts) {
       vec3 wp = vWP * 1.15 + vec3(vInst.y*13.0, 0.0, vInst.y*7.0);
       float fn = fol(wp);
       #if ${SHELL}
-      {
-        float hn = texture(tNoise, vWP * 0.62 + vInst.y * 3.0).a * 0.6 + texture(tNoise, vWP * 0.23).b * 0.4;
-        if (hn < 0.53) discard;
-      }
+      float hn = texture(tNoise, vWP * 0.15 + vInst.y * 3.0).b * 0.65 + texture(tNoise, vWP * 0.11 + 0.37).g * 0.35;
+      float graze = abs(dot(normalize(vNW), normalize(cameraPosition - vWP)));
+      diffuseColor.a = smoothstep(0.47, 0.60, hn) * smoothstep(0.12, 0.45, graze);
+      if (diffuseColor.a < 0.01) discard;
       #endif
       float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
       float top = smoothstep(0.2, 0.75, normalize(vNW).y);
@@ -492,7 +493,7 @@ async function buildBuildings(scene) {
       winMask = 0.0; glassMask = 0.0;
       if (vKind < 0.5) {
         vec2 ouv = vec2((vWP.x + 400.0) / 800.0, (400.0 - vWP.z) / 800.0);
-        diffuseColor.rgb = texture(tOrtho, ouv).rgb * 0.95;
+        diffuseColor.rgb = texture(tOrtho, ouv).rgb * 0.82;
       } else if (vKind < 1.5) {
         bool hall = vBld >= 2.0;
         float r = fract(vBld);
@@ -511,8 +512,7 @@ async function buildBuildings(scene) {
         c *= mix(0.62, 1.0, smoothstep(0.25, 0.7, v));      // plinth
         if (hall) {
           c *= 0.95 + 0.05 * sin(u * 31.4);                   // corrugated cladding
-          float band = step(2.4, v) * step(v, 3.3) * step(0.4, fract(u / 3.0)) * step(fract(u/3.0), 0.92);
-          winMask = band;
+          winMask = 0.0;
         } else {
           float sp = 2.7 + 1.1 * h11(r * 13.0);
           float fu = fract((u + h11(r*7.0) * sp) / sp);
@@ -591,7 +591,7 @@ function waterMaterial(pond) {
         float Fs = 0.02 + 0.98 * pow(1.0 - max(dot(H, V), 0.0), 5.0);
         col += uSunCol * spec * Fs;
         col = hazeApply(col, vWP - cameraPosition, cameraPosition);
-        gl_FragColor = vec4(col, smoothstep(0.02, 0.9, a));
+        gl_FragColor = vec4(col, smoothstep(0.02, 0.55, a));
       }`,
   });
 }
@@ -801,9 +801,9 @@ window.setup = async (opts) => {
       vec3 toSRGB(vec3 c){ return mix(c*12.92, 1.055*pow(c, vec3(1.0/2.4))-0.055, step(0.0031308, c)); }
       void main(){
         vec2 px = 1.0 / uSize;
-        vec2 cc = vUv - 0.5; float r2 = dot(cc*vec2(uSize.x/uSize.y,1.0), cc*vec2(uSize.x/uSize.y,1.0));
+        vec2 cc = vUv - 0.5; vec2 dpx = (gl_FragCoord.xy - 0.5 * uSize) / 1101.0; float r2 = dot(dpx, dpx);
         // subtle lateral chromatic aberration
-        vec2 ca = cc * 0.0012;
+        vec2 ca = dpx * 0.0011 * vec2(1101.0 / uSize.x, 1101.0 / uSize.y);
         vec3 c;
         c.r = texture(tSrc, vUv - ca).r; c.g = texture(tSrc, vUv).g; c.b = texture(tSrc, vUv + ca).b;
         vec3 bl = (texture(tSrc, vUv + vec2(px.x,0)).rgb + texture(tSrc, vUv - vec2(px.x,0)).rgb + texture(tSrc, vUv + vec2(0,px.y)).rgb + texture(tSrc, vUv - vec2(0,px.y)).rgb) * 0.25;
@@ -812,8 +812,9 @@ window.setup = async (opts) => {
         float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
         c = mix(vec3(l), c, 1.14);
         c *= vec3(1.02, 1.0, 0.965);
-        c *= 1.0 - 0.10 * r2;                     // vignette
+        c *= 1.0 - 0.16 * r2;                     // vignette (normalised to the 16:9 / 9:16 crop corners)
         vec3 s = toSRGB(clamp(c, 0.0, 1.0));
+        s = mix(s, s * s * (3.0 - 2.0 * s), 0.22);              // gentle S-curve
         float g = (hash(vec3(gl_FragCoord.xy, uFrame)) + hash(vec3(gl_FragCoord.xy + 17.0, uFrame + 3.0)) - 1.0);
         s += g * uGrain * (0.6 + 0.4 * (1.0 - abs(dot(s, vec3(0.333)) * 2.0 - 1.0)));
         gl_FragColor = vec4(s, 1.0);

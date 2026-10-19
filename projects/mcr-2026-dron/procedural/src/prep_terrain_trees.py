@@ -10,15 +10,16 @@ rng=np.random.default_rng(20261024)
 z=np.load(B+'cls_inputs.npz'); ndsm=z['ndsm']; exg=z['exg']; water1=z['water']; dtm=z['dtm']; dsm=z['dsm']
 cls=np.load(B+'cls.npz'); tree=cls['tree']; shrub=cls['shrub']
 _lab=np.asarray(Image.open(D+'water_labels.png'))
-_w1=cv2.resize((_lab>0).astype(np.uint8),(800,800),interpolation=cv2.INTER_AREA)>0
-_w1=ndi.binary_dilation(_w1,iterations=1)
-tree=tree&~_w1; shrub=shrub&~_w1
+_w1=cv2.resize((_lab>0).astype(np.float32),(800,800),interpolation=cv2.INTER_AREA)>0.6
+shrub=shrub&~ndi.binary_dilation(_w1,iterations=3)
 bfoot=np.load(B+'bld_final_mask.npy') if __import__('os').path.exists(B+'bld_final_mask.npy') else cls['bld']
 labels=np.asarray(Image.open(D+'water_labels.png'))  # 6400
 # ---------------- terrain core ----------------
 wm=water1.astype(np.float32)
-inner=ndi.gaussian_filter(ndi.binary_erosion(water1,iterations=1).astype(np.float32),1.0)
-terr=dtm-0.7*inner
+_wl=np.asarray(Image.open(D+'water_labels.png'))
+_wall=cv2.resize((_wl>0).astype(np.float32),(800,800),interpolation=cv2.INTER_AREA)
+inner=np.clip(ndi.gaussian_filter(ndi.binary_dilation(_wall>0.3,iterations=1).astype(np.float32),0.8)*1.6,0,1)
+terr=dtm-1.0*inner
 terr.astype('<f4').tofile(B+'terrain_core.f32')
 # ---------------- ortho core (6400) ----------------
 o6=np.asarray(Image.open(D+'orto_core_6400.jpg').convert('RGB')).astype(np.float32)
@@ -85,7 +86,8 @@ for i in range(npk):
     # colour from ortho (0.25 m), disc of 0.55 r
     rr=max(1,int(r*0.55*4)); yy=int(ry*4+2); xx=int(rx*4+2)
     patch=o32[max(0,yy-rr):yy+rr+1,max(0,xx-rr):xx+rr+1].reshape(-1,3)
-    col=np.median(patch,axis=0) if len(patch) else np.array([0.2,0.3,0.15])
+    vg=patch[(2*patch[:,1]-patch[:,0]-patch[:,2])/(patch.sum(1)+1e-3)>0.05] if len(patch) else patch
+    col=np.median(vg,axis=0) if len(vg)>4 else np.array([0.20,0.27,0.13])
     bright=np.percentile(patch.mean(axis=1),85) if len(patch) else 0.3
     trees.append([E-OX,g,-(N-ON),r,h,col[0],col[1],col[2],float(bright),float(rng.random())])
 # ---- gap filling: add crowns where canopy pixels are not covered by any crown
@@ -115,10 +117,12 @@ for it in range(5):
         E=461150+x+0.5+rng.normal(0,0.2); N=5585250-y-0.5+rng.normal(0,0.2)
         rr=max(1,int(r*0.55*4)); yy4=y*4+2; xx4=x*4+2
         patch=o32[max(0,yy4-rr):yy4+rr+1,max(0,xx4-rr):xx4+rr+1].reshape(-1,3)
-        col=np.median(patch,axis=0); bright=np.percentile(patch.mean(axis=1),85)
+        vg=patch[(2*patch[:,1]-patch[:,0]-patch[:,2])/(patch.sum(1)+1e-3)>0.05]
+        col=np.median(vg,axis=0) if len(vg)>4 else np.array([0.20,0.27,0.13]); bright=0.0
         trees.append([E-OX,float(terr[y,x]),-(N-ON),r,min(h,float(chm[y,x])+1.5) if chm[y,x]>0 else h,col[0],col[1],col[2],float(bright),float(rng.random())])
         added+=1
 print('filler crowns',added,'final uncovered',int((canopy&~cover_of(trees)).sum()))
+trees=[t for t in trees if not _w1[int(np.clip(round(5585250-(ON-t[2])-0.5),0,799)), int(np.clip(round(t[0]+OX-461150-0.5),0,799))]]
 trees=np.array(trees,np.float32)
 open_=~ndi.binary_dilation(canopy,iterations=1)
 openfrac=ndi.uniform_filter(open_.astype(np.float32),9)
@@ -153,7 +157,7 @@ bldc=ndi.binary_opening(bldc,np.ones((2,2)))
 xc=460050+np.arange(1000)*3+1.5; yc=5586350-np.arange(1000)*3-1.5
 incx=(xc>461150)&(xc<461950); incy=(yc>5584450)&(yc<5585250)
 core=np.outer(incy,incx)
-terrc=dtc+np.where(bldc,ndi.gaussian_filter(nc*bldc,0.6),0)
+terrc=dtc.copy()
 # water in context: flatten using context ortho? keep dtm
 # replace core cells with core terrain (bilinear) - 0.25 m so the core mesh sits on top
 from scipy.interpolate import RegularGridInterpolator
