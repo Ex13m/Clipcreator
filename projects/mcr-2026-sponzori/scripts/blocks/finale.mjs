@@ -205,8 +205,7 @@ export default function finale(ctx) {
     const cx = gL + cw * (col + 0.5), cy = gTop + ch * (row + 0.5);
     wall += `<i class="fin-glow" id="${ctx.id(`wg${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px;background:radial-gradient(closest-side,${ctx.rgba(GLOW[k] || T.accent, 0.5)},${ctx.rgba(GLOW[k] || T.accent, 0)})"></i>`;
     wall += `<div class="fx-abs fin-cell" id="${ctx.id(`w${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px">
-      <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div>
-      <span>${ctx.esc(lab)}</span></div>`;
+      <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div></div>`;
     const t = tC + 0.12 + i * BEAT * 0.5;
     ctx.tl.fromTo(ctx.sel(`w${i}`), { opacity: 0, y: 34, filter: 'blur(14px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.1, duration: 0.3, ease: 'power2.out' }, t);
@@ -224,7 +223,8 @@ export default function finale(ctx) {
   let d = fx.photo(ctx, { id: 'dph', src: 'assets_prep/broll/br10_lake_mist.jpg', pos: '50% 55%', kb: { from: { scale: 1.16 }, to: { scale: 1.02 }, t0: tD, t1: END, ease: 'sine.out' } });
   d += `<div class="fx-full" style="background:linear-gradient(180deg,rgba(4,6,10,.9) 0%,rgba(4,6,10,.6) 28%,rgba(4,6,10,.58) 50%,rgba(4,6,10,.8) 72%,rgba(4,6,10,.96) 100%)"></div>`;
   const dY = PH.y + PH.h + 70;
-  const dC = fx.headline(ctx, { id: 'dc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: dY, w: CW, maxLines: 2, font: 'Archivo', wght: 900, wdth: 100, upper: true, tracking: -0.03, lh: 0.92, sizes: [160, 150, 140, 130, 120, 110], align: 'center', t: tD + 0.2, reveal: 'lines', d: 1.0, stagger: 0.14 });
+  // condensed like every other display line of the finale → the tagline can be ~40 % bigger in the same width
+  const dC = fx.headline(ctx, { id: 'dc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: dY, w: CW, maxLines: 2, font: 'Archivo', wght: 900, wdth: 75, upper: true, tracking: -0.01, lh: 0.9, sizes: [240, 228, 216, 204, 192, 180, 168, 160], align: 'center', t: tD + 0.2, reveal: 'lines', d: 1.0, stagger: 0.14 });
   const eY = dY + dC.h + 56;
   const dE1 = fx.headline(ctx, { id: 'de1', text: `${E.title1} ${E.title2}`, x: L, y: eY, w: CW, maxLines: 1, font: 'Archivo', wght: 700, wdth: 100, sizes: [46, 44, 42, 40, 38], align: 'center', t: tD + 0.9, reveal: 'fade', d: 0.9 });
   const dE2 = fx.headline(ctx, { id: 'de2', text: `${E.date} · ${E.place}`, x: L, y: eY + dE1.h + 14, w: CW, maxLines: 1, font: 'Inter', wght: 600, sizes: [36, 34, 32], align: 'center', color: T.accent, t: tD + 1.1, reveal: 'fade', d: 0.9 });
@@ -244,7 +244,8 @@ export default function finale(ctx) {
   ${ctx.S} .fin-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
   ${ctx.S} .fin-lg { position:relative; flex-shrink:0; }
   ${ctx.S} .fin-glow { position:absolute; display:block; pointer-events:none; }
-  ${ctx.S} .fin-ring { position:absolute; display:block; width:600px; height:600px; border-radius:50%; box-shadow:inset 0 0 0 5px ${T.accent}, 0 0 40px ${ctx.rgba(T.accent, 0.5)}; pointer-events:none; }
+  ${ctx.S} .fin-ring { position:absolute; display:block; width:600px; height:600px; border-radius:50%; box-shadow:inset 0 0 0 14px ${T.accent}, 0 0 60px ${ctx.rgba(T.accent, 0.6)}; pointer-events:none; }
+  ${ctx.S} .fin-ring2 { box-shadow:inset 0 0 0 3px #ffffff; }
   ${ctx.S} #${ctx.id('dc')}, ${ctx.S} #${ctx.id('de1')}, ${ctx.S} #${ctx.id('de2')} { text-shadow:0 4px 30px rgba(0,0,0,.55); }
   ${ctx.S} .fin-lg .fx-logo { display:block; }
   ${ctx.S} .fin-cell span { font:600 19px/1 'Inter'; letter-spacing:.16em; text-transform:uppercase; color:#fff; opacity:.55; white-space:nowrap; }
