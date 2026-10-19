@@ -54,6 +54,82 @@ def bottle_fill(im, rgb0, ia):
     return Image.fromarray(np.dstack([col, a2 * 255]).round().clip(0, 255).astype(np.uint8), 'RGBA')
 
 
+def dark_cut(rgb0, thr=10.0, floor=3.0):
+    """Packshot on pure paper white (255): object = row-filled (darkness > thr); 1–2 px anti-aliased rim from a darkness
+    ramp against the local rim darkness (= 1-D unmixing). Colours on the rim are decontaminated by edge_clean()."""
+    d = ndi.gaussian_filter(np.max(255.0 - rgb0, axis=2), 0.6)
+    m = d > thr
+    m = ndi.binary_opening(m, iterations=1)
+    lab, n = ndi.label(m)
+    if n > 1:
+        sz = ndi.sum(np.ones_like(d), lab, np.arange(1, n + 1))
+        m = lab == (1 + int(np.argmax(sz)))
+    fill = np.zeros_like(m)
+    for y in np.where(m.any(1))[0]:
+        xs = np.where(m[y])[0]
+        fill[y, xs[0]:xs[-1] + 1] = True
+    inner = ndi.binary_erosion(fill, iterations=3)
+    ring = ndi.binary_erosion(fill, iterations=2) & ~ndi.binary_erosion(fill, iterations=6)
+    # local rim darkness: nearest ring pixel's darkness (median-ish via grey opening)
+    dist, (iy, ix) = ndi.distance_transform_edt(~ring, return_indices=True)
+    rim_d = ndi.median_filter(np.where(ring, d, 0), size=5)[iy, ix]
+    rim_d = np.maximum(rim_d, thr + 6)
+    ramp = np.clip((d - floor) / (rim_d - floor), 0, 1)
+    band = ndi.binary_dilation(fill, iterations=1) & ~inner
+    alpha = np.where(inner, 1.0, np.where(band, ramp, 0.0))
+    alpha = np.where(fill & ~inner, np.maximum(alpha, 0.35), alpha)   # never punch holes into the rim
+    return Image.fromarray(np.dstack([rgb0, alpha * 255]).round().clip(0, 255).astype(np.uint8), 'RGBA')
+
+
+def smooth_cut(rgb0, ia, d_thr=40, smooth=3.0, erode=2, aa=1.2, inset=6):
+    """Soft bait from an AI upscale: the upscaler leaves a speckled white rim -> smooth contour (ISNet ∪ darkness, blurred and
+    re-thresholded), pulled in by `erode` px, anti-aliased; rim colours come from `inset` px inside (no white dust)."""
+    d = ndi.gaussian_filter(np.max(255.0 - rgb0, axis=2), 1.5)
+    m = (ia > 128) | (d > d_thr)
+    m = ndi.binary_fill_holes(m)
+    lab, n = ndi.label(m)
+    if n > 1:
+        sz = ndi.sum(np.ones_like(d), lab, np.arange(1, n + 1))
+        m = lab == (1 + int(np.argmax(sz)))
+    m = ndi.gaussian_filter(m.astype(np.float32), smooth) > 0.5
+    if erode:
+        m = ndi.binary_erosion(m, iterations=erode)
+    alpha = np.clip(ndi.gaussian_filter(m.astype(np.float32), aa) * 1.0, 0, 1)
+    core = ndi.binary_erosion(m, iterations=inset)
+    _, (iy, ix) = ndi.distance_transform_edt(~core, return_indices=True)
+    col = np.where(core[..., None], rgb0, rgb0[iy, ix])
+    return Image.fromarray(np.dstack([col, alpha * 255]).round().clip(0, 255).astype(np.uint8), 'RGBA')
+
+
+def template_bottom(im, tpl, rows=60):
+    """SM-VB green/beige photos have a floor reflection under the base -> take the base silhouette from the clean SM-VB black
+    cut-out (same model, same packshot framing), aligned by centre line, body width and top of the lid."""
+    a = np.asarray(im)[..., 3].astype(np.float32) / 255
+    t = np.asarray(tpl)[..., 3].astype(np.float32) / 255
+    def geo(al):
+        ys = np.where((al > 0.5).any(1))[0]; top, bot = ys[0], ys[-1]
+        y = top + int((bot - top) * 0.8)
+        xs = np.where(al[y] > 0.5)[0]
+        return top, bot, (xs[0] + xs[-1]) / 2, (xs[-1] - xs[0]) / 2, y
+    tt, tb, tcx, tw, _ = geo(t)
+    at, ab, acx, aw, _ = geo(a)
+    k = aw / tw
+    ybot = at + (tb - tt) * k                          # expected base row of the target
+    out = a.copy()
+    H, Wd = a.shape
+    xx = np.arange(Wd)
+    for y in range(int(ybot - rows * k), H):
+        ty = tt + (y - at) / k
+        if ty >= t.shape[0] - 1:
+            out[y] = 0; continue
+        tx = tcx + (xx - acx) / k
+        row = np.interp(tx, np.arange(t.shape[1]), t[int(round(ty))], left=0, right=0)
+        out[y] = row
+    arr = np.asarray(im).copy()
+    arr[..., 3] = (out * 255).round().astype(np.uint8)
+    return Image.fromarray(arr, 'RGBA')
+
+
 def edge_clean(im, rad=1):
     """Decontaminate the 1–2 px rim: colour of semi-transparent pixels = nearest opaque colour (no white fringe)."""
     arr = np.asarray(im).astype(np.float32)
@@ -87,15 +163,24 @@ def run(names):
         'S3_zojirushi_sm-sr_0-6l_white': 'p03', 'S4_zojirushi_sm-vb_0-6l_green': 'p05',
         'S5_zojirushi_sm-vb_0-6l_beige': 'p06',
     }
+    tpl_vb = None
     for out, src in bottles.items():
+        if names and src in ('p05', 'p06') and tpl_vb is None:
+            raise SystemExit('build H1 (p04) together with S4/S5: it is their base template')
         if names and not any(n in out for n in names):
             continue
         rgb, ia = load(src)
         kw = dict(min_frac=0.002, dark_seed=45, bg_dark_max=18, vfloor=28, haze=0.08)
         if src == 'p03':
             kw.update(dark_seed=22, bg_dark_max=8, vfloor=12, fg_isnet=0.6)
-        im, info = cutout3(rgb, ia, **kw)
-        im = edge_clean(bottle_fill(im, rgb, ia))
+        if True:                                            # all bottles: darkness cut (ISNet bites pastel highlights; unmixed rim)
+            im = dark_cut(rgb, thr=6.0 if src == 'p03' else 10.0)
+        else:
+            im, info = cutout3(rgb, ia, **kw)
+            im = bottle_fill(im, rgb, ia)
+        im = edge_clean(im)
+        if src == 'p04':
+            tpl_vb = im
         save(trim_pad(im, 24), out, meta)
     macros = {'H2m_zojirushi_sm-sr_green_lid_open_macro': 'smsr_green_g3',
               'S2m_zojirushi_sm-sr_pink_lid_open_macro': 'smsr_pink_g3',
@@ -114,9 +199,8 @@ def run(names):
     if not names or any('keitech' in n for n in names):
         up = np.asarray(Image.open(f'{W}/dl/hf_keitech_es4_4k.png').convert('RGB')).astype(np.float32)
         ia = clean_isnet(up, np.asarray(Image.open(f'{W}/isnet/hf_keitech_es4_4k.png').convert('RGBA').resize((up.shape[1], up.shape[0])))[..., 3])
-        im, info = cutout3(up, ia, min_frac=0.002, dark_seed=40, bg_dark_max=14, vfloor=26, haze=0.08)
-        im = edge_clean(im)
-        im = trim_pad(im, 24)
+        im = smooth_cut(up, ia)
+        im = trim_pad(im, 40)
         if max(im.size) > 2400:                          # 4k source → 2400 px long side is plenty for 1080 × 1920
             s = 2400 / max(im.size)
             im = im.convert('RGBa').resize((round(im.width * s), round(im.height * s)), Image.LANCZOS).convert('RGBA')

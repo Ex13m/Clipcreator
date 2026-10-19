@@ -22,7 +22,7 @@ E-shop běží na WooCommerce s motivem WoodMart. Počty jsou z výpisu kategori
 
 Řazení „podle oblíbenosti“ (`?orderby=popularity`, ve WooCommerce podle počtu prodaných kusů), prvních 36 položek:
 - **Plandavky** (`https://troutshop.eu/pc/spoons/?orderby=popularity`): první tři místa drží **Nories ROONEY 101** (2,8 g, 2,2 g, 1,8 g). Z 36 položek je 24 ROONEY a 31 Nories (ROONEY, SOFIA, TULLE). Zbylých 5 je Forest MIU (NATIVE 10 a TS4 Limited Color).
-- **Woblery** (`https://troutshop.eu/pc/woblers/?orderby=popularity`): 33 z 36 je Nories (MEET 29DR-SS, RUSH BELL, RICE, CRANKIN' PUPA, SPISH, Pelican Minnow). Na 1. místě je Nories MEET 29DR-SS 2,2 g **109**. Barva **109** (čirá) se v žebříčku opakuje (MEET, RUSH BELL a CRANKIN' PUPA 109 je v kategorii první podle názvu).
+- **Woblery** (`https://troutshop.eu/pc/woblers/?orderby=popularity`): 33 z 36 je Nories (MEET 29DR-SS, RUSH BELL, RICE, CRANKIN' PUPA, SPISH, Pelican Minnow). Na 1. místě je Nories MEET 29DR-SS 2,2 g **109**. Barva **109** (čirá) se v žebříčku opakuje: MEET 29DR-SS 109 (1.), RUSH BELL 33 109 (2.), MEET 33MR-F 109 (4.). CRANKIN' PUPA je v top 36 dvakrát (44M, 114M).
 - **Gumy** (`https://troutshop.eu/pc/soft-baits/?orderby=popularity`): dominuje FishUp Tanta a Pupa. Sedí to s textem na webu: „The best selling product are Tanta and Pupa.“
 
 Menu kategorií ukazuje šíři sortimentu: Accessories, Boxes and Storage, Clothing (vč. „Brand caps“), Fishing lines (Varivas…), Fishing rods, Hooks (Vanfook, Rodio Craft, Varivas), Landing nets, Reels, Spinners, Spoons (vč. podsérií Nories ROONEY 1,5 / 1,8 / 2,2 / 2,8 g a Forest MIU 1,4–7 g), Wobblers (vč. „Hand Made Slovakia – 3STAN“), Gift certificates a Special Offer.
@@ -51,7 +51,7 @@ Všechny cut-outy jsou průhledné PNG bez vodoznaku. Okraj (pad) je 3 %, `pad` 
 - Proč: nejnovější přírůstek (upload 10/2026), japonská značka (Yudai Ito), „The maximum impact in a spoon. Compact Size, Big Performance“. Hodí se na **otočku líc/rub** (`fx.flip`) a na „glow“ moment. Velvet Arts je cizí značka, nikdy ji neprezentovat jako Troutshop.
 
 ### HERO 3: Nories CRANKIN' PUPA 2,6 g 109 (čirý crank, hard bait)
-- `hero_03_nories_crankin_pupa_109.png` 1518 × 832. Zdroj `…/uploads/2022/03/crankin-pupa-109-2048x2048.jpg` (bez vodoznaku) → Higgsfield `remove_background` (lokální ISNet dělal z čirého těla neprůhledné bílé). Alfa je záměrně poloprůhledná (≈ 254), tělo propouští pozadí, a proto se **nepolishuje**. Produkt: `https://troutshop.eu/p/crankin-pupa-26g-109/`, 14,90 €.
+- `hero_03_nories_crankin_pupa_109.png` 1512 × 831. Zdroj `…/uploads/2022/03/crankin-pupa-109-2048x2048.jpg` je bez vodoznaku a s logem NORIES nahoře, které je ořezané. Cut-out `heroes/h04` byl porovnán s Higgsfield `remove_background` (`ads/src/ts_pupa_109_hf_rmbg.png`). HF verze má průhlednější lopatku, ale nese v obraze logo NORIES (nutný ořez). ISNet+klíč (`_work/…/cut_pupa_109.png`) měl bílý stín pod tělem. Vybrán je h04 a dočištěný přes `ts_polish.clear_lure`: kolem háčků byla bělavá „záře“ (10–15 px), háčky byly poloprůhledné a obrys těla a lopatky měl 6–8 px rozmazaný lem. Teď jsou háčky plné a bez záře a obrys má asi 3 px. Průsvitnost těla zůstala (alfa ≈ 254, lopatka částečně průhledná). Produkt: `https://troutshop.eu/p/crankin-pupa-26g-109/`, 14,90 €.
 - Proč: woblery Nories ovládají žebříček oblíbenosti a barva 109 se v něm opakuje. Je to druhý typ hard baitu (vedle plandavek) a čiré tělo umožní lom světla / caustics na barevném pozadí. Spec čip je ověřený: „Floating / Silent · 1,8 m · 34 mm · 2,6 g“ (`research/troutshop.md`).
 
 ### Vedlejší (vějíř / mřížka / swatch)
@@ -65,7 +65,7 @@ Všechny cut-outy jsou průhledné PNG bez vodoznaku. Okraj (pad) je 3 %, `pad` 
 | `sec_07_velvetarts_forte_2-1g_30_glow_gold` | Velvet Arts Forte 2,1 g 30 Glow Gold | 734 × 1421 | vějíř, glow |
 | `sec_06_fishup_baffi_fly_hot_pink` | FishUp Baffi Fly 1,5 Hot Pink (guma) | 731 × 575 | nanejvýš „v nabídce také gumy“, ne hard bait |
 
-Starší `assets_prep/troutshop/heroes/h0*` jsou nahrazené (h01 = hero_02, h02 = sec_04, h04 = hero_03 ve verzi bez HF, h05 = sec_06).
+Starší `assets_prep/troutshop/heroes/h0*` jsou nahrazené (h01 = hero_02, h02 = sec_04, h04 = zdroj hero_03 (bez `clear_lure`), h05 = sec_06).
 
 ### Pipeline a QA
 - `python3 -I scripts/assets_prep/ts_ads_finalize.py` → polish → trim → split → `_ads.json` → `_sheet.jpg`.
@@ -73,6 +73,7 @@ Starší `assets_prep/troutshop/heroes/h0*` jsou nahrazené (h01 = hero_02, h02 
   1. *Refit oček.* Jen kulaté očko celé obklopené tělem plandavky, bez drátu kroužku. Bílý kroužek po pozadí se přičte k díře, díra se přepasuje jako vyhlazená elipsa a dostane 1,5 px tmavší hranu.
   2. *Defringe.* 1–2 px světlý lem na tělech se nahradí barvou okolního interiéru. Silnější bílý lem (3–5 px) se opraví jen na sytých tělech. Na tenkých drátech (háček, kroužek) bělavé okrajové pixely ztratí alfu.
   Bílá a stříbrná těla zůstanou beze změny. Refit proběhl u očka zlatého ROONEY 101 a ROONEY 002. Úzké mezery mezi kroužkem a plandavkou se záměrně nepřepasovávají (elipsa by prořízla drát) a čistí je jen defringe.
+  3. *clear_lure* (jen čirý crank). Alfa háčků se znovu sestaví z jasu (lum ≤ 140 → plná, ≥ 188 → 0), zrcadlový odlesk mezi okraji drátu zůstane plný, odstraní se drobné ostrůvky a obrys těla se zaostří. Stříbrná karabinka u lopatky se nemění (filtr na tmavé komponenty).
 - **Kontrola v sheetu:** `_sheet.jpg` ukazuje každou položku na černé `#0A0A0A`, světlé `#F2F2F2` a značkové červené `#E3000F`, s kontaktním stínem. Zkontrolováno přes Read plus zoomy všech 30 oček (před a po). Halo ani vodoznak nejsou vidět. Zbytky: tenký narůžovělý lem v očku TULLE `_b` (kroužkem prostrčené očko) a nepatrné duchy „TO“ ve fluo žluté ROONEY `_b`, viditelné až při 4× high-passu, v běžném kontrastu ne. Obojí je v pořádku pro pohyb a pro ≤ 1,3×.
 - **Higgsfield: 3 z 12 kreditů** (1× upscale 2k = 2, 1× remove_background = 1). Další útrata nebyla potřeba: Forte je 1500 px se čistou alfou a ostatní jsou vedlejší. Detail je v `hf_log.md`.
 
@@ -89,7 +90,7 @@ Starší `assets_prep/troutshop/heroes/h0*` jsou nahrazené (h01 = hero_02, h02 
 | ink | `#242424` | `--wd-title-color` | text na světlé |
 | grey | `#777777` | `--wd-text-color` | jen drobné popisky na světlé |
 | white | `#FFFFFF` | logo (text, paprsky), text v hlavičce | titulky na černé |
-| (brown `#422C1C`, blue `#145F82`) | drobné UI prvky | nepoužívat |
+| (brown / blue) | `#422C1C` / `#145F82` | tlačítko „edit“ v účtu / rozbalovací kategorie hledání | nepoužívat |
 
 Barvy produktů (z `_ads.json`): ROONEY 101 zlatá `#BAA360` / `#574122`, fluo žlutá `#F1E80F`, červeno-oranžová `#F32F07`; Forte 32 růžová `#EC2D5A`; ROONEY 002 růžová `#FA026E` / limetková `#C9DE02`; SK20 oranžová `#F8A112`; MIU TS4 zelená `#1B9544`; Crankin' Pupa čirá + žluté oči.
 
@@ -135,7 +136,7 @@ VO (hotové, `vo/troutshop.wav`, 5,58 s, offset 0,25 s): „Troutshop – specia
 
 ## 5. Dva koncepty
 
-Společné: 1080 × 1920, texty v Reels safe zóně (x 64–1016, y 240–1460, vpravo od y 900 nechat 140 px volných). **Plaketa TA CZ** je pevně v rohu (64, 250), nikdy překrytá a nikdy menší než logo Troutshopu. Hudba track 3, 129 BPM. Hard cut nebo předávka přes barvu podle BLOCK_API §4.
+Společné: **pravidlo BRIEF (19. 10.): prodejce nástrah = min. 6–8 nástrah ze sortimentu + 1–2 hero záběry.** Máme 9 hard baitů (17 samostatných plandavek po rozdělení párů) + gumu. 1080 × 1920, texty v Reels safe zóně (x 64–1016, y 240–1460, vpravo od y 900 nechat 140 px volných). **Plaketa TA CZ** je pevně v rohu (64, 250), nikdy překrytá a nikdy menší než logo Troutshopu. Hudba track 3, 129 BPM. Hard cut nebo předávka přes barvu podle BLOCK_API §4.
 
 ### A) „RISING SUN · SPECIALISTA“: produktový film ve stylu Shimano Japan / Apple macro (DOPORUČENO)
 Svět: studiová černá `#050505`, za produktem pomalu rotující **červené paprsky** jako jejich logo (`fx.rays`, `#E3000F`, duty 0,4, opacity ≤ 0,55) a hluboká červená záře `#2A0306` zespodu. Bílé titulky v Anton, červené čipy v Roboto Condensed.
@@ -147,6 +148,7 @@ Svět: studiová černá `#050505`, za produktem pomalu rotující **červené p
 | 3 (3,67–5,50) | Crankin' Pupa 109 prolétne zleva doprava (čiré tělo s červenými paprsky za sebou = lom světla), zastaví se na downbeat s kontaktním stínem | „RODINNÁ FIRMA OD ROKU“ + **odometer 1999** (červený) přesně na *1999* (4,13) |
 | 4 (5,50–7,34) | Velvet Arts Forte 32 se **otočí líc → rub** (`fx.flip`) s glow pulzem. Lockup: logo `on_dark` (≤ plaketa) + troutshop.eu | čip „Generální partner Trout Area Slovakia“, URL Roboto Condensed 700. Ven přes `slice` / `wipe` v červené |
 
+- Počet nástrah v záběru: **9 produktů** (ROONEY 101, ROONEY 002, SK20, MIU TS4, Forte 30, Forte 35, TULLE 101, Crankin' Pupa 109, Forte 32). Hero záběry jsou dva: makro ROONEY 101 a průlet Crankin' Pupa. Rozšíření, kdyby vějíř nestačil: na beaty 3–4 taktu 2 rychlé střihy přes `_a/_b` strany (17 samostatných plandavek).
 - Techniky: specular sweep maskovaný alfou, macro push-in, depth parallax, vějíř na beat, flip, odometer, glass čipy, lokální červené záblesky na downbeatech (≤ 0,15, bez full-frame strobů).
 - **REEL (`BLOCK=troutshop REEL=1`):** hook (1 takt) = makro zlaté ROONEY 101 se sweepem + „MILUJEME LOV PSTRUHŮ“ (Anton, bílá, „PSTRUHŮ“ červeně), sub troutshop.eu. Pak blok a 2-taktový end card na černé s paprsky: `logo_on_dark` + **troutshop.eu** + „Partner MČR v Trout Area 2026“ + plaketa TA (≥ logo Troutshopu, `fx.endCard`).
 - Plusy: přesně „produkty jako hrdinové“. Svět je čistě jejich (černá, červená a paprsky z loga). Japonský „rising sun“ motiv propojuje logo se sortimentem japonských značek. Všechny tři hrdiny jsou hard baits (= MČR). Mínusy: 4 takty jsou hustý střih a vějíř musí být rychlý (6 položek za 1 takt).

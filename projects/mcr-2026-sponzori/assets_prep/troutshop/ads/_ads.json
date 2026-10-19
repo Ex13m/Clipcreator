@@ -205,31 +205,31 @@
   "file": "troutshop/ads/hero_03_nories_crankin_pupa_109.png",
   "product": "Nories CRANKIN' PUPA 2,6g 109",
   "size": [
-   1518,
-   832
+   1512,
+   831
   ],
   "kind": "single",
   "role": "hero",
   "src_url": "https://troutshop.eu/wp-content/uploads/2022/03/crankin-pupa-109-2048x2048.jpg (Higgsfield remove_background)",
   "page": "https://troutshop.eu/p/crankin-pupa-26g-109/",
-  "polished": false,
+  "polished": true,
   "dominant": [
    {
     "hex": "#e6ded5",
-    "share": 0.554
+    "share": 0.546
    },
    {
-    "hex": "#b0a07f",
-    "share": 0.34
+    "hex": "#ae9e7f",
+    "share": 0.344
    },
    {
-    "hex": "#493d2d",
-    "share": 0.106
+    "hex": "#4a3d2e",
+    "share": 0.11
    }
   ],
   "glint": [
    0.392,
-   0.114
+   0.113
   ],
   "pad": [
    0.028,

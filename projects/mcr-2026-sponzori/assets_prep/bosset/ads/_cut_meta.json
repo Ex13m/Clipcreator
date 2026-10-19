@@ -1,56 +1,56 @@
 {
  "H1_zojirushi_sm-vb_0-6l_black": {
   "size": [
-   502,
-   1536
+   503,
+   1537
   ],
   "bbox": [
-   25,
    24,
-   477,
-   1511
+   25,
+   476,
+   1510
   ]
  },
  "H2_zojirushi_sm-sr_0-6l_green": {
   "size": [
-   438,
-   1543
+   440,
+   1544
   ],
   "bbox": [
-   25,
-   24,
-   412,
+   26,
+   26,
+   413,
    1517
   ]
  },
  "S1_zojirushi_sm-she_0-6l_orange": {
   "size": [
-   359,
+   362,
    1248
   ],
   "bbox": [
-   25,
    24,
-   333,
+   24,
+   336,
    1223
   ]
  },
  "S2_zojirushi_sm-sr_0-6l_pink": {
   "size": [
-   439,
-   1532
+   441,
+   1542
   ],
   "bbox": [
+   26,
    25,
-   25,
-   413,
-   1507
+   414,
+   1516
   ]
  },
  "S3_zojirushi_sm-sr_0-6l_white": {
   "size": [
    440,
-   1542
+   1543
   ],
   "bbox": [
    25,
@@ -61,26 +61,26 @@
  },
  "S4_zojirushi_sm-vb_0-6l_green": {
   "size": [
-   501,
+   503,
    1537
   ],
   "bbox": [
-   25,
    24,
-   475,
-   1512
+   25,
+   477,
+   1510
   ]
  },
  "S5_zojirushi_sm-vb_0-6l_beige": {
   "size": [
-   498,
-   1526
+   501,
+   1538
   ],
   "bbox": [
    25,
-   24,
-   473,
-   1501
+   25,
+   475,
+   1512
   ]
  },
  "H2m_zojirushi_sm-sr_green_lid_open_macro": {

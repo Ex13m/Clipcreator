@@ -156,6 +156,8 @@ JOBS = {
     'chibi_red': dict(stem='af_chibi_redblackglitter_orig', ext='jpg', name='S2_timon_chibi_futten_fs_red_black_glitter', long=800, min_frac=0.0002, holes={'min_px': 20}),
     'chibi_gold': dict(stem='af_chibi_goldshower_orig', ext='jpg', name='S3_timon_chibi_futten_fs_gold_shower', long=800, min_frac=0.0002, holes={'min_px': 20}),
     'chibi_holo': dict(stem='chibi_hologram_orig', ext='jpg', name='S4_timon_chibi_futten_fs_hologram_bait', long=800, min_frac=0.0002, holes={'min_px': 20}),
+    'mukai': dict(stem='af_mukai_zanmu_6ck_orig', ext='png', name='S7_mukai_upward_zanmu_35s_6ck', long=1800, min_frac=0.0001, holes={'min_px': 40}),
+    'scheila': dict(stem='af_valkein_scheila_80_orig', ext='png', name='S8_valkein_scheila_1-8g_no80_delicious_peach', long=640, min_frac=0.0005, holes={'min_px': 30}),
     'forte': dict(stem='forte15_no1_orig', ext='png', name='S5_velvet_arts_forte_1-5g_no1', long=600, min_frac=0.0005, holes={'skip': [(196, 226)]}),
 }
 

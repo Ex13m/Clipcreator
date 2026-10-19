@@ -1,0 +1,86 @@
+{
+ "track": "audio/track_A.wav",
+ "beats": "audio/track_A.beats.json",
+ "source_segments_bars": [
+  [
+   10,
+   62
+  ],
+  [
+   87,
+   95
+  ],
+  [
+   101,
+   "end"
+  ]
+ ],
+ "blocks": {
+  "intro": {
+   "start_bar": 0,
+   "bars": 8,
+   "t0": 0.0,
+   "t1": 14.698
+  },
+  "venue": {
+   "start_bar": 8,
+   "bars": 6,
+   "t0": 14.698,
+   "t1": 25.704
+  },
+  "troutshop": {
+   "start_bar": 14,
+   "bars": 5,
+   "t0": 25.704,
+   "t1": 34.876
+  },
+  "activefishing": {
+   "start_bar": 19,
+   "bars": 5,
+   "t0": 34.876,
+   "t1": 44.025
+  },
+  "moonky": {
+   "start_bar": 24,
+   "bars": 5,
+   "t0": 44.025,
+   "t1": 53.197
+  },
+  "jigovky": {
+   "start_bar": 29,
+   "bars": 5,
+   "t0": 53.197,
+   "t1": 62.345
+  },
+  "broll": {
+   "start_bar": 34,
+   "bars": 3,
+   "t0": 62.345,
+   "t1": 67.825
+  },
+  "velkaryba": {
+   "start_bar": 37,
+   "bars": 5,
+   "t0": 67.825,
+   "t1": 76.951
+  },
+  "bosset": {
+   "start_bar": 42,
+   "bars": 5,
+   "t0": 76.951,
+   "t1": 86.076
+  },
+  "gausseholler": {
+   "start_bar": 47,
+   "bars": 5,
+   "t0": 86.076,
+   "t1": 95.148
+  },
+  "finale": {
+   "start_bar": 52,
+   "bars": 13,
+   "t0": 95.148,
+   "t1": 119.131
+  }
+ }
+}

@@ -12,3 +12,8 @@ Balance before: 459.53 credits (2026-10-19).
 Balance after #4: 456.53 (−3.00).
 
 Running total: 3 / 12
+
+## Status 2026-10-19 (assortment & heroes step, re-run)
+- No further Higgsfield spend. Forte 32 (hero 2) is a 1500 px shop PNG with clean alpha, so it does not qualify (rule: only hero images with visible cut-out defects or a source < 1000 px). Secondaries are not heroes.
+- Hero 3 uses the local cut `heroes/h04` cleaned with `ts_polish.clear_lure`. The HF remove_background result (#4) was kept for reference only: it has a more transparent lip but still carries the NORIES logo in frame.
+- **Final total: 3 / 12 credits.**
