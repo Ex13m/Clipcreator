@@ -12,3 +12,4 @@ projects/**/frames/
 *.npz
 *.f32
 projects/**/_work/snap*/
+projects/mcr-2026-dron/data/*_nowires*.png

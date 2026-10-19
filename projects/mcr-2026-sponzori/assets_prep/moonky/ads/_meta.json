@@ -110,7 +110,7 @@
    "shadow_px": 0,
    "rim_px": 5457,
    "smoothed_px": 997,
-   "erased_px": 636
+   "erased_px": 665
   },
   "size": [
    2268,
@@ -131,15 +131,15 @@
   "aspect": 1.795,
   "dominant": [
    {
-    "hex": "#0d0d0f",
-    "share": 0.795
+    "hex": "#0d0d10",
+    "share": 0.803
    },
    {
-    "hex": "#494a4d",
-    "share": 0.154
+    "hex": "#4b4c4f",
+    "share": 0.146
    },
    {
-    "hex": "#f0f2f3",
+    "hex": "#eef1f1",
     "share": 0.051
    }
   ],

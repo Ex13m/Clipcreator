@@ -55,7 +55,9 @@ def main(keys):
         a = a * m
         # 1 px erode + soft edge: MinFilter(3) then a light blur
         A = Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.8))
-        cut = ph.copy().convert('RGBA')
+        rgb = np.asarray(ph, dtype=np.uint8).copy()
+        rgb[np.asarray(A) == 0] = 0                      # empty pixels → black: PNG compresses ~5× smaller
+        cut = Image.fromarray(rgb).convert('RGBA')
         cut.putalpha(A)
         cut.save(CUT / f'{key}_cut.png', optimize=True)
         # stroke: dilated silhouette, anti-aliased
