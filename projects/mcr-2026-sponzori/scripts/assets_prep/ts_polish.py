@@ -124,6 +124,14 @@ def clear_lure(a, report=None, lo=140.0, hi=188.0):
         if m.sum() > 200 and np.percentile(lum[m & (al > 0.3)] if (m & (al > 0.3)).any() else [255], 30) < 120: wire |= m
     t = np.clip((hi - lum) / (hi - lo), 0, 1); a_l = t * t * (3 - 2 * t)
     al_w = np.where(wire, a_l, al)
+    # specular streak along the wire (lighter than lo) lies between opaque wire edges -> keep it opaque
+    inside = cv2.morphologyEx((a_l > 0.5).astype(np.uint8), cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))) > 0
+    al_w = np.where(wire & inside & (al > 0.45), np.maximum(al_w, 1.0), al_w)
+    # drop specks (< 25 px islands) left by the threshold, then re-antialias the wire edge a little
+    n2, lab2, st2, _ = cv2.connectedComponentsWithStats((wire & (al_w > 0.08)).astype(np.uint8), 8)
+    speck = np.isin(lab2, [k for k in range(1, n2) if st2[k, cv2.CC_STAT_AREA] < 25])
+    al_w = np.where(wire & (speck | (al_w <= 0.08)), 0, al_w)
+    al_w = np.where(wire, np.minimum(cv2.GaussianBlur(al_w, (0, 0), 0.6) * 1.15, 1), al_w)
     ae = np.maximum(al_w, 0.3)[..., None]
     fg = np.clip((rgb - (1 - ae) * 255) / ae, 0, 255)
     rgb = np.where((wire & (al_w > 0) & (al_w < 0.98))[..., None], fg, rgb)
@@ -135,8 +143,10 @@ def clear_lure(a, report=None, lo=140.0, hi=188.0):
     return a
 
 
-def polish(im, holes=True, report=None):
+def polish(im, holes=True, report=None, clear=False):
     a = np.array(im.convert('RGBA'))
+    if clear:                      # translucent lure: only hook glow + silhouette feather
+        return Image.fromarray(clear_lure(a, report), 'RGBA')
     if holes: a = hole_fix(a, report)
     a = defringe(a, report)
     return Image.fromarray(a, 'RGBA')

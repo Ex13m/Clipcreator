@@ -59,11 +59,12 @@ def pad_of(path):
     return [round(xs.min() / W, 3), round(ys.min() / H, 3), round((W - 1 - xs.max()) / W, 3), round((H - 1 - ys.max()) / H, 3)]
 
 meta = []
-NO_POLISH = {'hero_03_nories_crankin_pupa_109'}   # clear plastic crank: its light rim is real, keep HF alpha as is
+NO_POLISH = set()
+CLEAR = {'hero_03_nories_crankin_pupa_109'}   # clear plastic crank: body translucency is real -> only hook glow + edge feather (clear_lure)
 for name, src, kind, label in ITEMS:
     im = Image.open(src).convert('RGBA')
     if name not in NO_POLISH:
-        rep = []; im = ts_polish.polish(im, report=rep); print('  polish', name, '|', '; '.join(rep))
+        rep = []; im = ts_polish.polish(im, report=rep, clear=name in CLEAR); print('  polish', name, '|', '; '.join(rep))
     t = trim(im); t.save(OUT + name + '.png', optimize=True)
     e = dict(file='troutshop/ads/' + name + '.png', product=label, size=list(t.size), kind=kind, role=SRC[name][2], src_url=SRC[name][0], page=SRC[name][1], polished=name not in NO_POLISH)
     if kind == 'pair':

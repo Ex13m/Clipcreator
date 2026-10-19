@@ -95,7 +95,7 @@ def open_white(im, min_px=30, skip=(), boxes=(), thr=22, soft=40):
         bm = np.zeros_like(reg); bm[y0:y1, x0:x1] = True
         reg |= bm & (dark < 120)
         reg |= ndi.binary_dilation(bm & (dark < thr), iterations=4) & bm
-    na = np.clip((dark - 10) / soft, 0, 1)
+    na = ndi.gaussian_filter(np.clip((dark - 10) / soft, 0, 1), 1.2)
     new_a = np.where(reg, np.minimum(al, na), al)
     col = np.clip((a[..., :3] - (1 - new_a[..., None]) * 255) / np.maximum(new_a[..., None], 1e-3), 0, 255)
     rgb = np.where(reg[..., None], col, a[..., :3])
@@ -159,8 +159,15 @@ JOBS = {
     'forte': dict(stem='forte15_no1_orig', ext='png', name='S5_velvet_arts_forte_1-5g_no1', long=600, min_frac=0.0005, holes={'skip': [(196, 226)]}),
 }
 
+def micro_panicra():
+    """S6: the shop's own transparent PNG (p08) — only trimmed + decontaminated, native size."""
+    im = Image.open(f'{P}/assets/activefishing/p08_timon-micro-panicra-yazy.png').convert('RGBA')
+    im = decontaminate(trim_pad(im, 16), erode=1, reach=3, choke=0.04)
+    save(im, 'S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san')
+
+
 if __name__ == '__main__':
-    which = sys.argv[2:] or list(JOBS)
+    which = sys.argv[2:] or list(JOBS) + ['panicra']
     for k in which:
         print('==', k)
-        run(**JOBS[k])
+        micro_panicra() if k == 'panicra' else run(**JOBS[k])
