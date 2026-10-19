@@ -1,3 +1,5 @@
+> **⚠ ČÁSTEČNĚ NAHRAZENO (19. 10.):** uživatel odmítl „náš TA styl“ — platí BRIEF.md › „ZMĚNA SMĚRU“: moderní reklama produktů, každý sponzor ve svém vlastním vizuálním světě (barvy/typo jeho značky), z TA zůstává jen logo. Z tohoto dokumentu převzít jen **choreografii produktů podle materiálu** (vějíř plandavek, mřížka barev gumových nástrah, otočka plandavky ve světle, pódium pro termosky, spec-sheet stojanu GH), strobe/světelné přejezdy, číslování „Look 01–08“, pravidla loopů a banner exportů. Ignorovat: navy paletu, Montserrat-only, runway světla v TA barvách.
+
 # STORYBOARD: „KOLEKCE PARTNERŮ MČR 26"
 
 Master: **75.0 s**, 1080 × 1920, 30 fps, 120 BPM (beat 0.5 s, bar 2.0 s).
