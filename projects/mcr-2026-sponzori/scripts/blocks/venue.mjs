@@ -115,9 +115,9 @@ export default function venue(ctx) {
   let s0 = fx.field(ctx, { id: 'f0', kind: 'radial', c1: '#34bde2', c2: DEEP, at: '50% 60%' });
   s0 += V.caustics(ctx, { id: 'c0', opacity: 0.1, size: 620, t0: 0, t1: B1, speed: 60 });
   s0 += fx.glow(ctx, { id: 'g0', x: W / 2, y: 1110, size: 1200, color: AQUA, opacity: 0.5 });
-  s0 += `<div class="vn-ring" id="${ctx.id('shk')}" style="left:${px(W / 2 - 420)};top:${px(1150 - 230)};width:840px;height:460px;--rc:#ffffff"></div>`;
+  s0 += `<div class="vn-ring" id="${ctx.id('shk')}" style="left:${px(W / 2 - 420)};top:${px(1190 - 230)};width:840px;height:460px;--rc:#ffffff"></div>`;
   ctx.tl.fromTo(ctx.sel('shk'), { scale: 0.35, opacity: 0.9 }, { scale: 1.9, opacity: 0, duration: 0.85, ease: 'power2.out' }, 0.02);
-  const I = V.island(ctx, { id: 'isl', cx: W / 2, cy: 1105, w: 790, t0: 0, t1: B1 });
+  const I = V.island(ctx, { id: 'isl', cx: W / 2, cy: 1150, w: 770, t0: 0, t1: B1 });
   s0 += I.html;
   ctx.tl.fromTo(I.sel, { scale: 1.24, y: -50 }, { scale: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 0);
   ctx.tl.fromTo(I.tl, { rotationX: 38, rotationZ: -8 }, { rotationX: 20, rotationZ: 2, duration: 1.45, ease: 'power2.out' }, 0);
@@ -174,10 +174,11 @@ export default function venue(ctx) {
   ctx.tl.set(ctx.sel('et'), { transformOrigin: '30% 30%' }, 0);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1 }, { scale: 1.06, duration: B3 - 0.32 - B2, ease: 'sine.inOut' }, B2);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1.06, opacity: 0.3 }, { scale: 2.6, opacity: 0, duration: 0.32, ease: 'power3.in' }, B3 - 0.32);
-  const tYr = vo('1934', B2, B2, ctx.at(2, 1));
+  const tYr = B2 + 0.02;                                                                     // lands (~4.3 s) while the VO says „1934“ (3.9–5.4 s)
   const ySz = Math.min(360, Math.floor(880 / Math.max(1e-3, ctx.measure('1934', { font: 'Bitter', wght: 900, size: 1 }))));
   let hx = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 46, tracking: 0.1, color: AQUA, t: B2 - 0.06, reveal: 'chars', stagger: 0.014, d: 0.45 }).html;
   hx += fx.odometer(ctx, { id: 'yr', value: '1934', x: L - 8, y: 712, size: ySz, font: 'Bitter', wght: 900, color: GOLD, t: tYr, d: 0.6, spins: 1, style: 'text-shadow:0 18px 50px rgba(0,0,0,.35)' });
+  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tYr);
   hx += `<div class="fx-abs" id="${ctx.id('rule')}" style="left:${L}px;top:${712 + ySz * 1.02}px;width:420px;height:6px;border-radius:3px;background:${GOLD};transform-origin:0 50%"></div>`;
   ctx.tl.fromTo(ctx.sel('rule'), { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, tYr + 0.35);
   hx += fx.headline(ctx, { id: 'cap', text: 'Založil Karel Stutzig', x: L, y: 712 + ySz * 1.02 + 34, maxLines: 1, font: 'Montserrat', wght: 600, italic: true, size: 40, color: '#ffffff', t: tYr + 0.45, reveal: 'lines', d: 0.5 }).html;
@@ -194,7 +195,8 @@ export default function venue(ctx) {
   ctx.tl.fromTo(ctx.sel('gl'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, B5 - 0.1);
   // the trout: macro swim-through, tail kept off-frame (blunt in the source)
   const TR = fx.product(ctx, { id: 'tr', src: V.A.trout, w: 1500, cx: 30 + 750, cy: 1035, ground: 'none', sweep: true, sweepAngle: 98, sweepOpacity: 0.5, pad: [0.019, 0.037, 0.019, 0.037] });
-  s3 += TR.html;
+  const trUrl = ctx.asset(V.A.trout);
+  s3 += TR.html.replace(`id="${ctx.id('tr-im')}" src="${trUrl}" alt="">`, `id="${ctx.id('tr-im')}" src="${trUrl}" alt="">${V.skin(ctx, { id: 'trs', src: V.A.trout, caus: 0.2, tintO: 0.32, size: 560, t0: B3, t1: END })}`);
   ctx.tl.fromTo(TR.sel, { x: 1050 }, { x: 0, duration: 1.15, ease: 'expo.out' }, B3 + 0.02);
   ctx.tl.fromTo(TR.cam, { x: 0, y: 0, rotation: 0 }, { x: -60, y: -18, rotation: -1.6, duration: B5 - 0.3 - (B3 + 0.6), ease: 'sine.inOut' }, B3 + 0.6);
   ctx.tl.set(TR.cam, { transformOrigin: '22% 42%' }, 0);
@@ -212,9 +214,10 @@ export default function venue(ctx) {
   // 164 m n. m. (joins on bar 4, under the claim)
   const t164 = B4 - 0.02, aSz = 230, aY = 1196;
   let al = fx.odometer(ctx, { id: 'alt', value: '164', x: L - 6, y: aY, size: aSz, font: 'Bitter', wght: 900, color: GOLD, t: t164, d: 0.6, spins: 1 });
-  const aW = ctx.measure('164', { font: 'Bitter', wght: 900, size: aSz });
-  al += fx.headline(ctx, { id: 'altu', text: 'm n. m.', x: L + aW + 14, y: aY + aSz * 0.56, w: 400, maxLines: 1, ...KICK, size: 64, color: AQUA, t: t164 + 0.18, reveal: 'lines', d: 0.5 }).html;
+  const aW = V.odoW(ctx, '164', { font: 'Bitter', wght: 900, size: aSz });
+  al += fx.headline(ctx, { id: 'altu', text: 'm n. m.', x: L - 6 + aW + 22, y: aY + aSz * 0.5, w: 400, maxLines: 1, font: 'Montserrat', wght: 800, italic: true, size: 66, color: AQUA, t: t164 + 0.18, reveal: 'lines', d: 0.5 }).html;
   s3 += `<div class="fx-full" id="${ctx.id('al')}">${al}</div>`;
+  ctx.tl.fromTo(ctx.sel('al'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, t164);
   ctx.tl.fromTo(ctx.sel('al'), { opacity: 1, y: 0 }, { opacity: 0, y: 40, duration: 0.25, ease: 'power2.in' }, B5 - 0.3);
   // the trophy rises from the water (bar 5)
   const CUP = fx.product(ctx, { id: 'cup', src: V.A.trophy, h: 720, cx: W / 2, floor: 1196, ground: 'none', sweep: true, sweepAngle: 115, sweepOpacity: 0.85, pad: [0.027, 0.019, 0.027, 0.019] });
@@ -226,7 +229,7 @@ export default function venue(ctx) {
   s3 += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: 1232, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 88, align: 'center', color: '#ffffff', t: tD, reveal: 'lines', d: 0.55, style: 'text-shadow:0 6px 26px rgba(0,0,0,.35)' }).html;
   // lockup: venue badge (≤ TA logo) + URL
   const tLk = ctx.at(5, 2) - 0.1;
-  const LG = ctx.logo('on_dark', { box: [104, 104], at: [tLk, END], id: 'logo', label: 'venue lockup badge' });
+  const LG = ctx.logo('on_dark', { box: [128, 128], at: [tLk, END], id: 'logo', label: 'venue lockup badge' });
   const uSz = 54, uW = ctx.measure(D.url, { font: 'Montserrat', wght: 800, italic: true, size: uSz });
   const rowW = LG.w + 22 + uW, rx = (W - rowW) / 2;
   s3 += `<div class="fx-abs" id="${ctx.id('lk')}" style="left:${px(rx)};top:1346px;width:${px(rowW + 10)};height:${LG.h}px;display:flex;align-items:center;gap:22px">${LG.html}<span style="font:italic 800 ${uSz}px/1 'Montserrat';color:#fff;white-space:nowrap;text-shadow:0 4px 18px rgba(0,0,0,.35)">${ctx.esc(D.url)}</span></div>`;
@@ -235,7 +238,7 @@ export default function venue(ctx) {
 
   // =============== title layer: LÍHEŇ LIBĚCHOV rides across the drop and the first cut ===============
   const tName = Math.min(0.42, vo('Líheň', 0.93, 0.3, 1.0) - 0.5);
-  const N = fx.headline(ctx, { id: 'nm', text: D.name, x: L, y: 480, w: CW, maxLines: 2, font: 'Bitter', wght: 900, upper: true, lh: 0.92, sizes: [176, 164, 152, 144, 136], t: tName, reveal: 'chars', stagger: 0.03, d: 0.55, out: ctx.at(1, 1) - 0.14, outD: 0.3, style: 'text-shadow:0 8px 34px rgba(16,40,60,.38)' });
+  const N = fx.headline(ctx, { id: 'nm', text: D.name, x: L, y: 480, w: CW, maxLines: 2, font: 'Bitter', wght: 900, upper: true, lh: 0.92, sizes: [160, 152, 144, 136], t: tName, reveal: 'chars', stagger: 0.03, d: 0.55, out: ctx.at(1, 1) - 0.14, outD: 0.3, style: 'text-shadow:0 8px 34px rgba(16,40,60,.38)' });
   html += fx.scene(ctx, 'ttl', 0, ctx.at(1, 1) + 0.25, N.html, { outD: 0.05 });
   fx.chroma(ctx, N.sel, B1, { amt: 9, d: 0.4 });
 

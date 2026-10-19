@@ -52,7 +52,7 @@ export function caustics(ctx, { id = 'cau', x = 0, y = 0, w = ctx.W, h = ctx.H, 
 
 // ---------------------------------------------------------------- 3D island (H1b)
 // layers: #id (entrance) > #id-cam (float / dive scale) > shadow + #id-p (perspective) > #id-tl (rotationX/Z) > img + water caustics + sweep
-export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, shadow = 0.75, caus = 0.32, t0 = 0, t1 = ctx.dur } = {}) {
+export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, shadow = 0.75, caus = 0.15, t0 = 0, t1 = ctx.dur } = {}) {
   const [nw, nh] = ctx.dims(A.island); const h = (w * nh) / nw;
   const url = ctx.asset(A.island), wurl = ctx.asset(A.islandWater), surl = ctx.asset(A.islandShadow);
   const pw = (168 / 1863) * w, ph = (168 / 1870) * h;                    // shadow PNG = island canvas + 168 px pad (source px)
@@ -69,12 +69,24 @@ export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, sh
   return { html, w, h, x: cx - w / 2, y: cy - h / 2, sel: ctx.sel(id), cam: ctx.sel(`${id}-cam`), tl: ctx.sel(`${id}-tl`) };
 }
 
+// underwater skin for a cut-out (inserted right after its <img>): caustic light + deep-water tint, both masked by the cut-out's alpha
+export function skin(ctx, { id = 'skin', src, caus = 0.22, tint = C.DEEP, tintO = 0.3, size = 520, t0 = 0, t1 = ctx.dur, speed = 40 } = {}) {
+  const url = ctx.asset(src);
+  const m = `-webkit-mask-image:url(${url});mask-image:url(${url});-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;`;
+  return `<i class="fx-abs" style="inset:0;background:${tint};mix-blend-mode:soft-light;opacity:${tintO};${m}"></i>${caustics(ctx, { id, opacity: caus, size, t0, t1, speed, mask: `url(${url})` })}`;
+}
+// rendered width of fx.odometer digits (tabular columns = widest digit + .02em padding each)
+export function odoW(ctx, value, { font = 'Bitter', wght = 900, size = 200 } = {}) {
+  const dw = Math.max(...'0123456789'.split('').map((d) => ctx.measure(d, { font, wght, size })));
+  return [...String(value)].reduce((a, c) => a + (/\d/.test(c) ? dw + 0.02 * size : ctx.measure(c, { font, wght, size })), 0);
+}
+
 // ---------------------------------------------------------------- map pin
 // wrapper origin = pin tip. Animate the wrapper with track(); drop the marker with ctx.tl on `${id}-m`, pulse the ring `${id}-r`.
 export function pin(ctx, { id = 'pin', color = C.GOLD, dot = '#ffffff', ring = C.AQUA, size = 70 } = {}) {
   const w = size, h = size * 1.2;
   return `<div class="fx-abs vn-pin" id="${ctx.id(id)}" style="left:0;top:0;width:0;height:0">
-    <div class="vn-ring" id="${ctx.id(`${id}-r`)}" style="left:-70px;top:-38px;width:140px;height:76px;--rc:${ring}"></div>
+    <div class="vn-ring" id="${ctx.id(`${id}-r`)}" style="left:-70px;top:-38px;width:140px;height:76px;--rc:${ring};opacity:0"></div>
     <div class="fx-abs" id="${ctx.id(`${id}-m`)}" style="left:${px(-w / 2)};top:${px(-h)};width:${px(w)};height:${px(h)};transform-origin:50% 100%">
       <svg viewBox="0 0 100 120" width="${w}" height="${h}" style="left:0;top:0;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))"><path d="M50 2C23 2 2 23 2 50c0 33 48 68 48 68s48-35 48-68C98 23 77 2 50 2z" fill="${color}"/><circle cx="50" cy="48" r="17" fill="${dot}"/></svg>
     </div></div>`;
