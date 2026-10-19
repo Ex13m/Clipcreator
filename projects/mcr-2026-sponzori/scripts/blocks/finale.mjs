@@ -208,7 +208,7 @@ export default function finale(ctx) {
       <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div></div>`;
     const t = tC + 0.12 + i * BEAT * 0.5;
     ctx.tl.fromTo(ctx.sel(`w${i}`), { opacity: 0, y: 34, filter: 'blur(14px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, t);
-    ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.1, duration: 0.3, ease: 'power2.out' }, t);
+    ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.1, duration: 0.29, ease: 'power2.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 1, scale: 1.1 }, { opacity: 0.32, scale: 1, duration: 0.9, ease: 'power2.out' }, t + 0.3);
     ctx.tl.set(ctx.sel(`w${i}`), { filter: 'none' }, t + 0.62);
     glints.forEach((g) => ctx.tl.fromTo(ctx.sel(`w${i}-sw`), { backgroundPosition: '110% 0%' }, { backgroundPosition: '-10% 0%', duration: 0.75, ease: 'power2.inOut' }, g + (col * 0.06 + row * 0.07)));
@@ -248,7 +248,6 @@ export default function finale(ctx) {
   ${ctx.S} .fin-ring2 { box-shadow:inset 0 0 0 3px #ffffff; }
   ${ctx.S} #${ctx.id('dc')}, ${ctx.S} #${ctx.id('de1')}, ${ctx.S} #${ctx.id('de2')} { text-shadow:0 4px 30px rgba(0,0,0,.55); }
   ${ctx.S} .fin-lg .fx-logo { display:block; }
-  ${ctx.S} .fin-cell span { font:600 19px/1 'Inter'; letter-spacing:.16em; text-transform:uppercase; color:#fff; opacity:.55; white-space:nowrap; }
   `;
   return { html, css };
 }

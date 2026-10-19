@@ -58,11 +58,24 @@ ITEMS = [
      SHOP + '2521_master-bila.png', dict(maxlong=2000, white_body=True, sat=1.0, ghost='dark_on_white', smooth_r=6)),
     ('S11_gamer_big_c01_pink_bubblegum', 'shop_alpha',
      dict(alpha='assets_prep/moonky/ads/_src/w223_gamer_big_c01_pink.png'), 'Gamer Big 46mm C01 Pink Bubblegum',
-     SHOP + '223_gamer-big-pink.png', dict(maxlong=2000)),
+     SHOP + '223_gamer-big-pink.png', dict(maxlong=2000, contour_sigma=1.2, choke=0.7)),
     ('S12_gradient_blue_pink', 'shop_alpha', dict(alpha='assets/moonky/p10_gumove_nastrahy_category.png'),
      'Moonky soft lure (category image /gumove-nastrahy/, blue → pink, model not named)',
-     'https://www.moonky.cz/user/categories/orig/gumove_nastrahy_moonky.png', dict(maxlong=2000, erode=1)),
+     'https://www.moonky.cz/user/categories/orig/gumove_nastrahy_moonky.png', dict(maxlong=2000, erode=1, contour_sigma=1.2, choke=0.5)),
 ]
+
+
+def clean_contour(al, sigma=3.0, choke=1.0):
+    """Opaque product: rebuild the contour geometrically. Binary mask → Gaussian → re-threshold (removes jaggies and
+    upscaled stair-steps) → choke by `choke` px → 1 px anti-alias."""
+    m = ndi.gaussian_filter((al > 0.5).astype(np.float32), sigma) > 0.5
+    if choke:
+        d_in = ndi.distance_transform_edt(m)
+        d_out = ndi.distance_transform_edt(~m)
+        sd = np.where(m, d_in, -d_out) - choke          # signed distance (px), >0 inside
+    else:
+        sd = np.where(m, ndi.distance_transform_edt(m), -ndi.distance_transform_edt(~m))
+    return np.clip(sd + 0.5, 0, 1).astype(np.float32)
 
 
 def decontaminate(rgb, alpha, band_px=3):
@@ -309,7 +322,12 @@ for name, method, src, product, url, o in ITEMS:
         a0 = np.asarray(sa.resize((hf.shape[1], hf.shape[0]), Image.LANCZOS)).astype(np.float32) / 255
         a0 = np.clip(a0, 0, 1)
         al, F, unknown = fb_unmix(hf, a0, band=int(3 * k))
-        col = np.where((al < 0.98)[..., None], F * 0.65 + hf * 0.35, hf)
+        al = clean_contour(al, sigma=o.get('contour_sigma', 3.0), choke=o.get('choke', 1.0))
+        # edge colour: body colour from ≥ 4 px inside (no grey studio fringe)
+        core = ndi.distance_transform_edt(al > 0.5) >= 4
+        _, (iy, ix) = ndi.distance_transform_edt(~core, return_indices=True)
+        Fi = ndi.uniform_filter(hf, size=(5, 5, 1))[iy, ix]
+        col = np.where((~core)[..., None], Fi * 0.8 + hf * 0.2, hf)
         rgba = np.dstack([col, al * 255]).round().clip(0, 255).astype(np.uint8)
         info = dict(scale=round(k, 3))
         srcdesc = f"{src['rgb']} (Higgsfield 4k of {url}) + alpha {src['alpha']}"
@@ -319,6 +337,8 @@ for name, method, src, product, url, o in ITEMS:
         if o.get('erode'):
             al = np.clip(ndi.grey_erosion(al, size=(2 * o['erode'] + 1,) * 2) * 0.5 + al * 0.5, 0, 1)
             al = np.where(al < 0.04, 0, al)
+        if o.get('contour_sigma'):
+            al = clean_contour(al, sigma=o['contour_sigma'], choke=o.get('choke', 0.5))
         col = decontaminate(s[..., :3], al)
         rgba = np.dstack([col, al * 255]).round().clip(0, 255).astype(np.uint8)
         info = {}

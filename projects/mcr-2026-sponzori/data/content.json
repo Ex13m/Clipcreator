@@ -41,17 +41,18 @@
   "thanks2": "partnerům"
  },
  "music": {
-  "track": "audio/track.wav",
-  "beats": "audio/track.beats.json",
+  "track": "audio/track_A.wav",
+  "beats": "audio/track_A.beats.json",
   "beatsPerBar": 4,
   "bpm": 129,
-  "volume": 1
+  "volume": 1,
+  "_planA": "operator plan A 19.10 — sponsor blocks 5 bars, venue 6, see data/block_plan_A.json"
  },
  "vo": {
   "dir": "vo",
   "offset": 0.25,
   "volume": 1,
-  "tailMin": 0.9,
+  "tailMin": 0.95,
   "_note": "vo/<key>.wav (+ volitelně vo/<key>.words.json se zarovnanými slovy) → automaticky do filmu, bloků i Reels"
  },
  "plan": [
@@ -61,56 +62,49 @@
     0,
     7
    ],
-   "voOffset": 1.2,
+   "voOffset": 0.5,
    "_": "build-up, bez kicku"
   },
   {
    "key": "venue",
    "bars": [
     8,
-    12
+    13
    ],
    "_": "drop na taktu 8"
   },
   {
    "key": "troutshop",
    "bars": [
-    13,
-    16
+    14,
+    18
    ]
   },
   {
    "key": "activefishing",
    "bars": [
-    17,
-    20
+    19,
+    23
    ]
   },
   {
    "key": "moonky",
    "bars": [
-    21,
-    24
+    24,
+    28
    ]
   },
   {
    "key": "jigovky",
    "bars": [
-    25,
-    28
-   ]
-  },
-  {
-   "key": "velkaryba",
-   "bars": [
     29,
-    32
+    33
    ]
   },
   {
    "key": "broll",
    "bars": [
-    33,
+    34,
     34
    ],
    "vo": null
@@ -126,24 +120,31 @@
    "_": "hudební break"
   },
   {
-   "key": "bosset",
+   "key": "velkaryba",
    "bars": [
     37,
-    40
+    41
+   ]
+  },
+  {
+   "key": "bosset",
+   "bars": [
+    42,
+    46
    ]
   },
   {
    "key": "gausseholler",
    "bars": [
-    41,
-    44
+    47,
+    51
    ]
   },
   {
    "key": "finale",
    "bars": [
-    45,
-    55
+    52,
+    64
    ],
    "tail": true,
    "_": "peak + doznění do konce tracku"

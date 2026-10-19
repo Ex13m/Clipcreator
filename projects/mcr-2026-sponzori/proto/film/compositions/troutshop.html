@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>troutshop · MČR 2026</title></head>
 <body><template>
-<div id="b-troutshop" data-composition-id="troutshop" data-width="1080" data-height="1920" data-duration="7.337">
+<div id="b-troutshop" data-composition-id="troutshop" data-width="1080" data-height="1920" data-duration="9.172">
   <style>
   #bw-troutshop { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #troutshop-stage { position:absolute; inset:0; overflow:hidden; }
@@ -13,6 +13,7 @@
     <div class="fx-ov" id="troutshop-fl1" style="background:#e3000f;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="troutshop-fl2" style="background:#e3000f;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="troutshop-fl3" style="background:#e3000f;opacity:0;mix-blend-mode:screen"></div>
+    <div class="fx-ov" id="troutshop-fl4" style="background:#e3000f;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="troutshop-tin" style="overflow:hidden"><div class="fx-ov-sl"><i id="troutshop-tin0" style="background:#070707"></i><i id="troutshop-tin1" style="background:#070707"></i><i id="troutshop-tin2" style="background:#070707"></i><i id="troutshop-tin3" style="background:#070707"></i><i id="troutshop-tin4" style="background:#070707"></i><i id="troutshop-tin5" style="background:#070707"></i><i id="troutshop-tin6" style="background:#070707"></i></div></div>
     <div class="fx-ov" id="troutshop-tout" style="overflow:hidden"><div class="fx-ov-sl"><i id="troutshop-tout0" style="background:#f1f1ef"></i><i id="troutshop-tout1" style="background:#f1f1ef"></i><i id="troutshop-tout2" style="background:#f1f1ef"></i><i id="troutshop-tout3" style="background:#f1f1ef"></i><i id="troutshop-tout4" style="background:#f1f1ef"></i><i id="troutshop-tout5" style="background:#f1f1ef"></i><i id="troutshop-tout6" style="background:#f1f1ef"></i></div></div>
   </div>
@@ -50,17 +51,18 @@
   gsap.set("#troutshop-tout6", {"xPercent":101});
   gsap.set("#troutshop-pa-rot", {"rotation":-14});
   gsap.set("#troutshop-pb-rot", {"rotation":12});
-  tl.fromTo("#troutshop-rays", {"rotation":0}, {"rotation":22,"duration":7.337,"ease":"none","immediateRender":false}, 0.000);
-  tl.fromTo("#troutshop-big", {"x":0}, {"x":-260,"duration":7.337,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-rays", {"rotation":0}, {"rotation":22,"duration":9.172,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-big", {"x":0}, {"x":-260,"duration":9.172,"ease":"none","immediateRender":false}, 0.000);
   tl.fromTo("#troutshop-pa", {"y":260,"opacity":0}, {"y":0,"opacity":1,"duration":0.9,"ease":"expo.out","immediateRender":false}, 0.100);
-  tl.fromTo("#troutshop-pa-cam", {"y":0,"rotation":0}, {"y":-16,"rotation":2,"duration":0.9279999999999973,"ease":"sine.inOut","repeat":5,"yoyo":true,"immediateRender":false}, 1.000);
+  tl.fromTo("#troutshop-pa-cam", {"y":0,"rotation":0}, {"y":-16,"rotation":2,"duration":0.9279999999999973,"ease":"sine.inOut","repeat":7,"yoyo":true,"immediateRender":false}, 1.000);
   tl.fromTo("#troutshop-pa-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.9,"ease":"power2.inOut","immediateRender":false}, 0.600);
   tl.fromTo("#troutshop-pb", {"x":650,"opacity":0}, {"x":0,"opacity":1,"duration":0.8,"ease":"expo.out","immediateRender":false}, 3.669);
   tl.fromTo("#troutshop-pb-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.9,"ease":"power2.inOut","immediateRender":false}, 4.369);
   tl.fromTo("#troutshop-h .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.025,"immediateRender":false}, 0.050);
-  tl.fromTo("#troutshop-h", {"scale":1.03}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#troutshop-h", {"scale":1.03}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.835);
   tl.fromTo("#troutshop-h", {"scale":1.03}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 3.669);
   tl.fromTo("#troutshop-h", {"scale":1.03}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 5.503);
+  tl.fromTo("#troutshop-h", {"scale":1.03}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 7.338);
   tl.fromTo("#troutshop-fl .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 3.633);
   tl.fromTo("#troutshop-yr-s0", {"yPercent":0}, {"yPercent":-95.45454545454545,"duration":1.38,"ease":"expo.out","immediateRender":false}, 3.733);
   tl.fromTo("#troutshop-yr-s1", {"yPercent":0}, {"yPercent":-96.66666666666667,"duration":1.3199999999999998,"ease":"expo.out","immediateRender":false}, 3.763);
@@ -71,9 +73,10 @@
   tl.fromTo("#troutshop-c2", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 5.503);
   tl.set("#troutshop-c2", {"filter":"none"}, 6.123);
   tl.fromTo("#troutshop-lw", {"opacity":0,"scale":0.6}, {"opacity":1,"scale":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 6.431);
-  tl.fromTo("#troutshop-fl1", {"opacity":0.14}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#troutshop-fl1", {"opacity":0.14}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 1.835);
   tl.fromTo("#troutshop-fl2", {"opacity":0.14}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 3.669);
   tl.fromTo("#troutshop-fl3", {"opacity":0.14}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 5.503);
+  tl.fromTo("#troutshop-fl4", {"opacity":0.14}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 7.338);
   tl.fromTo("#troutshop-tin0", {"xPercent":0}, {"xPercent":-101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.000);
   tl.fromTo("#troutshop-tin1", {"xPercent":0}, {"xPercent":101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.016);
   tl.fromTo("#troutshop-tin2", {"xPercent":0}, {"xPercent":-101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.032);
@@ -81,14 +84,14 @@
   tl.fromTo("#troutshop-tin4", {"xPercent":0}, {"xPercent":-101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.063);
   tl.fromTo("#troutshop-tin5", {"xPercent":0}, {"xPercent":101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.079);
   tl.fromTo("#troutshop-tin6", {"xPercent":0}, {"xPercent":-101,"duration":0.3375,"ease":"power3.inOut","immediateRender":false}, 0.095);
-  tl.fromTo("#troutshop-tout0", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 6.937);
-  tl.fromTo("#troutshop-tout1", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 6.951);
-  tl.fromTo("#troutshop-tout2", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 6.965);
-  tl.fromTo("#troutshop-tout3", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 6.979);
-  tl.fromTo("#troutshop-tout4", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 6.993);
-  tl.fromTo("#troutshop-tout5", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 7.007);
-  tl.fromTo("#troutshop-tout6", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 7.021);
-  tl.set({}, {}, 7.337);
+  tl.fromTo("#troutshop-tout0", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.772);
+  tl.fromTo("#troutshop-tout1", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.786);
+  tl.fromTo("#troutshop-tout2", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.800);
+  tl.fromTo("#troutshop-tout3", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.814);
+  tl.fromTo("#troutshop-tout4", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.828);
+  tl.fromTo("#troutshop-tout5", {"xPercent":-101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.842);
+  tl.fromTo("#troutshop-tout6", {"xPercent":101}, {"xPercent":0,"duration":0.30000000000000004,"ease":"power3.inOut","immediateRender":false}, 8.856);
+  tl.set({}, {}, 9.172);
   window.__timelines["troutshop"] = tl;
   </script>
 </div>

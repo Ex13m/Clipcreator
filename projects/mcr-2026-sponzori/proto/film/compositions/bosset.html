@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>bosset · MČR 2026</title></head>
 <body><template>
-<div id="b-bosset" data-composition-id="bosset" data-width="1080" data-height="1920" data-duration="7.315">
+<div id="b-bosset" data-composition-id="bosset" data-width="1080" data-height="1920" data-duration="9.125">
   <style>
   #bw-bosset { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #bosset-stage { position:absolute; inset:0; overflow:hidden; }
@@ -13,6 +13,7 @@
     <div class="fx-ov" id="bosset-fl1" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="bosset-fl2" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="bosset-fl3" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
+    <div class="fx-ov" id="bosset-fl4" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="bosset-tin" style="background:#c5ebfc"></div>
     <div class="fx-ov" id="bosset-tout" style="overflow:hidden"><i class="fx-ov-wp" id="bosset-touta" style="background:#f0904f"></i><i class="fx-ov-wp" id="bosset-toutb" style="background:#0f1113"></i></div>
   </div>
@@ -42,29 +43,30 @@
   tl.fromTo("#bosset-k .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
   tl.fromTo("#bosset-k2 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.02,"immediateRender":false}, 0.300);
   tl.fromTo("#bosset-t0", {"y":200,"opacity":0}, {"y":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.764);
-  tl.fromTo("#bosset-t0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.835);
+  tl.fromTo("#bosset-t0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.834);
   tl.fromTo("#bosset-t1", {"y":200,"opacity":0}, {"y":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.532);
-  tl.fromTo("#bosset-t1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.915);
+  tl.fromTo("#bosset-t1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.914);
   tl.fromTo("#bosset-t2", {"y":200,"opacity":0}, {"y":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.300);
-  tl.fromTo("#bosset-t2-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.995);
+  tl.fromTo("#bosset-t2-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 1.994);
   tl.fromTo("#bosset-t3", {"y":200,"opacity":0}, {"y":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.532);
-  tl.fromTo("#bosset-t3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 2.075);
+  tl.fromTo("#bosset-t3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 2.074);
   tl.fromTo("#bosset-t4", {"y":200,"opacity":0}, {"y":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.764);
-  tl.fromTo("#bosset-t4-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 2.155);
-  tl.fromTo("#bosset-t2-cam", {"scale":1.06}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.835);
-  tl.fromTo("#bosset-c1", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 2.276);
-  tl.set("#bosset-c1", {"filter":"none"}, 2.896);
-  tl.fromTo("#bosset-h6-s0", {"yPercent":0}, {"yPercent":-94.11764705882352,"duration":0.9,"ease":"expo.out","immediateRender":false}, 5.345);
-  tl.fromTo("#bosset-h6l .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 5.545);
-  tl.fromTo("#bosset-s2", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 5.345);
+  tl.fromTo("#bosset-t4-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.7,"ease":"power2.inOut","immediateRender":false}, 2.154);
+  tl.fromTo("#bosset-t2-cam", {"scale":1.06}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#bosset-c1", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 2.275);
+  tl.set("#bosset-c1", {"filter":"none"}, 2.895);
+  tl.fromTo("#bosset-h6-s0", {"yPercent":0}, {"yPercent":-94.11764705882352,"duration":0.9,"ease":"expo.out","immediateRender":false}, 5.344);
+  tl.fromTo("#bosset-h6l .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 5.544);
+  tl.fromTo("#bosset-s2", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 5.344);
   tl.fromTo("#bosset-lw", {"opacity":0,"x":40}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.480);
-  tl.fromTo("#bosset-fl1", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.835);
-  tl.fromTo("#bosset-fl2", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 3.646);
+  tl.fromTo("#bosset-fl1", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#bosset-fl2", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 3.645);
   tl.fromTo("#bosset-fl3", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 5.480);
+  tl.fromTo("#bosset-fl4", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 7.314);
   tl.fromTo("#bosset-tin", {"--r":"0%"}, {"--r":"78%","duration":0.6,"ease":"power3.out","immediateRender":false}, 0.000);
-  tl.fromTo("#bosset-touta", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 6.915);
-  tl.fromTo("#bosset-toutb", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 6.995);
-  tl.set({}, {}, 7.315);
+  tl.fromTo("#bosset-touta", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 8.725);
+  tl.fromTo("#bosset-toutb", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 8.805);
+  tl.set({}, {}, 9.125);
   window.__timelines["bosset"] = tl;
   </script>
 </div>
