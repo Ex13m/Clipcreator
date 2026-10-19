@@ -10,9 +10,9 @@ yy=5585250-np.arange(800)-0.5; xx=461150+np.arange(800)+0.5
 gi=RegularGridInterpolator((yy[::-1],xx),dtm[::-1]); si=RegularGridInterpolator((yy[::-1],xx),dsm[::-1])
 POND=np.array([461451.67,5584691.84,167.19])
 # --- keyframes (UTM E, N, height Bpv) ---
-P_end=np.array([461483.0,5584751.0,226.0])
-P_mid=np.array([461498.5,5584775.5,236.0])
-P_start=np.array([461517.0,5584802.0,247.5])
+P_end=np.array([461486.0,5584755.0,227.5])
+P_mid=np.array([461498.6,5584782.0,236.3])
+P_start=np.array([461513.5,5584809.2,245.6])
 ctrl=[2*P_start-P_mid, P_start, P_mid, P_end, 2*P_end-P_mid]
 def catmull(p0,p1,p2,p3,t,alpha=0.5):
     # centripetal Catmull-Rom
@@ -41,9 +41,9 @@ def prog(u):
     k1,k2=0.22,0.18
     # v = 1 + k1*sin(pi*u)^2*... keep simple: smootherstep blend
     lin=u; e=u*u*(3-2*u)
-    return 0.68*lin+0.32*e
+    return 0.78*lin+0.22*e
 # look-at target: from a point SE of the pond (frames big pond + forest) easing onto the pond centre
-T_start=np.array([461521.0,5584676.0,168.0])
+T_start=np.array([461506.0,5584728.0,169.0])
 T_end=POND.copy()
 def ease(u): return u*u*(3-2*u)
 rngp=np.random.default_rng(1957)

@@ -93,7 +93,7 @@ cnd = np.clip(ctx - ctx_dtm, 0, 40)
 veg = (cexg > 0.02) & (cnd > 1.0)
 cbld = (cnd > 2.0) & ~veg
 canopy = ndi.gaussian_filter(np.where(veg, cnd, 0.0), 1.6) * 0.95
-houses = ndi.gaussian_filter(np.where(cbld, np.minimum(cnd, 8.0), 0.0), 1.4) * 0.5
+houses = ndi.gaussian_filter(np.where(cbld, np.minimum(cnd, 8.0), 0.0), 1.1) * 0.35
 ctx_s = ndi.gaussian_filter(ctx_dtm, 0.5) + np.maximum(canopy, houses)
 
 # ---------------- upsample to 0.5 m ----------------

@@ -29,9 +29,9 @@ vec3 skyRadiance(vec3 d){
   float y = d.y;
   float mu = dot(d, uSunDir);
   float yy = max(y, 0.0);
-  vec3 zen = vec3(0.085, 0.205, 0.560);
-  vec3 hor = vec3(0.600, 0.715, 0.890);
-  float t = exp(-yy * 7.0);
+  vec3 zen = vec3(0.075, 0.200, 0.600);
+  vec3 hor = vec3(0.640, 0.760, 0.940);
+  float t = exp(-yy * 6.0);
   vec3 c = mix(zen, hor, t);
   c = mix(c, hor * vec3(0.90, 0.91, 0.93), smoothstep(0.0, -0.10, y));
   float g = 0.78;
@@ -47,8 +47,8 @@ vec3 hazeApply(vec3 col, vec3 wp){
   float hAvg = 0.5 * (wp.y + uCam.y) + 160.0;
   float dens = uHaze * exp(-(hAvg - 175.0) / 1100.0);
   float T = exp(-dens * d);
-  vec3 hdir = normalize(vec3(dir.x, max(dir.y, 0.0) * 0.25 + 0.03, dir.z));
-  vec3 ins = skyRadiance(hdir) * 0.93;
+  vec3 hdir = normalize(vec3(dir.x, max(dir.y, 0.0) * 0.25 + 0.005, dir.z));
+  vec3 ins = skyRadiance(hdir) * mix(0.90, 1.0, 1.0 - T);
   return col * T + ins * (1.0 - T);
 }
 `;
@@ -142,24 +142,31 @@ void main(){
   float side = smoothstep(0.10, 0.50, steep);
   if (tree > 0.01) {
     float nz = vnoise3(vW * vec3(1.6, 1.1, 1.6)) * 0.55 + vnoise3(vW * 3.9 + 7.1) * 0.45;
-    float under = mix(0.50, 1.0, smoothstep(1.0, 11.0, hg));
+    float under = mix(0.62, 1.0, smoothstep(1.0, 11.0, hg));
     alb *= mix(1.0, (0.62 + 0.76 * nz) * under, tree * side);
   }
   // building walls: plaster, darker plinth (only true building pixels, only up to eave height)
   vec3 plaster = vec3(0.47, 0.44, 0.39) * (0.9 + 0.2 * vnoise3(vW * vec3(0.7, 0.15, 0.7)));
   float plinth = mix(0.72, 1.0, smoothstep(0.0, 2.5, hg));
   float bw = smoothstep(0.55, 0.85, bld) * wall * (1.0 - smoothstep(9.0, 13.0, hg)) * (1.0 - tree);
-  alb = mix(alb, mix(alb, plaster, 0.6) * plinth, bw);
+  alb = mix(alb, mix(alb, plaster, 0.85) * plinth, bw);
   // crowns: shade with the displaced facet normal (lumpy crown-scale light/shadow)
   n = normalize(mix(n, gn, 0.55 * vTreeK));
 #endif
   // relight steep faces with the scene sun (the ortho's baked shading is valid only for top surfaces)
   float ndl = max(dot(n, uSunDir), 0.0);
   float skyv = 0.55 + 0.45 * n.y;
-  float amb = 0.45;
+  float amb = 0.55;
   float relit = (ndl + amb * skyv) / (uSunDir.y + amb);
   float shade = mix(1.0, relit, smoothstep(0.10, 0.60, steep));
   float aoF = mix(1.0, 0.30 + 0.70 * ao, 0.5);
+#ifndef REFL
+  // close-range micro detail (the 12.5 cm ortho is magnified near the bottom of frame): fine luminance
+  // grain on ground / crowns, faded out with distance
+  float dcam = distance(vW, uCam);
+  float md = (vnoise3(vW * 9.0) - 0.5) * 0.6 + (vnoise3(vW * 23.0 + 3.7) - 0.5) * 0.4;
+  alb *= 1.0 + md * 0.16 * (1.0 - smoothstep(90.0, 190.0, dcam));
+#endif
   vec3 col = alb * shade * aoF * uExposure;
   col = hazeApply(col, vW);
   outColor = vec4(col, 1.0);
@@ -295,13 +302,18 @@ void main(){
   col.b = texture(uSrc, vUv + ca).b;
   vec3 blur = 0.25 * (texture(uSrc, vUv + vec2(px.x, 0.0)).rgb + texture(uSrc, vUv - vec2(px.x, 0.0)).rgb + texture(uSrc, vUv + vec2(0.0, px.y)).rgb + texture(uSrc, vUv - vec2(0.0, px.y)).rgb);
   col = max(col + (col - blur) * uSharpen, 0.0);
-  col *= vec3(1.035, 1.0, 0.945) * uPostExposure;
+  // late-summer grade: warm white balance, greens nudged towards olive/yellow
+  col.r += 0.10 * max(col.g - col.r, 0.0);
+  col.b *= 0.96;
+  col *= vec3(1.045, 1.0, 0.93) * uPostExposure;
   col = ACESOut * rrt(ACESIn * (col / 0.6));
   col = clamp(col, 0.0, 1.0);
   col = toSRGB(col);
   float l = dot(col, vec3(0.2126, 0.7152, 0.0722));
   col = mix(vec3(l), col, uSat);
   col = (col - 0.45) * uContrast + 0.45;
+  // gentle split toning: cooler deep shadows, warmer highlights
+  col += vec3(-0.010, 0.000, 0.012) * (1.0 - smoothstep(0.0, 0.35, l)) + vec3(0.012, 0.004, -0.012) * smoothstep(0.55, 1.0, l);
   vec2 cc = c * vec2(aspect, 1.0); float rn = length(cc) / length(vec2(aspect, 1.0) * 0.5);
   col *= 1.0 - uVignette * pow(rn, 2.4);
   float g = hash12(gl_FragCoord.xy + uFrame * 37.17) + hash12(gl_FragCoord.xy * 1.37 + uFrame * 11.31) - 1.0;

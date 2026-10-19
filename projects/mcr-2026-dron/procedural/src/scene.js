@@ -249,38 +249,50 @@ function buildTerrain(hCore, hCtx, orthoCore, orthoCtx) {
 
 // ---------------------------------------------------------------- trees
 function crownGeometry(detail, seed, kind) {
+  // star-shaped union of sub-blobs ("cauliflower" deciduous crown), plus fine lumps
   let g = new THREE.IcosahedronGeometry(1, detail);
   g.deleteAttribute('normal'); g.deleteAttribute('uv');
   g = mergeVertices(g);
   const prl = makePerlin(seed), rnd = mulberry32(seed * 7 + 3);
-  const pos = g.attributes.position, n = pos.count, cav = new Float32Array(n);
-  const o1 = [rnd() * 50, rnd() * 50, rnd() * 50], o2 = [rnd() * 50, rnd() * 50, rnd() * 50], o3 = [rnd() * 50, rnd() * 50, rnd() * 50];
-  // a few lobes (sub-crowns) to give clumpy silhouettes
-  const nl = kind === 1 ? 2 : 3 + Math.floor(rnd() * 4);
-  const lobes = [];
-  for (let i = 0; i < nl; i++) {
-    const th = rnd() * Math.PI * 2, ph = (kind === 1 ? 0.3 : 0.15) + rnd() * 0.75;
-    lobes.push([Math.cos(th) * Math.sin(ph), Math.cos(ph), Math.sin(th) * Math.sin(ph), 0.25 + rnd() * 0.25]);
+  const pos = g.attributes.position, n = pos.count, cav = new Float32Array(n), rr = new Float32Array(n);
+  const blobs = [];
+  const nb = kind === 1 ? 4 + Math.floor(rnd() * 3) : 9 + Math.floor(rnd() * 7);
+  blobs.push([0, 0.05, 0, 0.62]);
+  for (let i = 0; i < nb; i++) {
+    let x, y, z; do { x = rnd() * 2 - 1; y = rnd() * 2 - 1; z = rnd() * 2 - 1; } while (x * x + y * y + z * z > 1);
+    y = y * 0.75 + 0.22;                                   // upper-heavy
+    const d = 0.32 + 0.30 * rnd(), L = Math.hypot(x, y, z) || 1;
+    blobs.push([x / L * d, y / L * d, z / L * d, 0.30 + 0.20 * rnd()]);
   }
-  let maxr = 0; const v = new THREE.Vector3(); const rr = new Float32Array(n);
+  const o1 = [rnd() * 50, rnd() * 50, rnd() * 50], o2 = [rnd() * 50, rnd() * 50, rnd() * 50];
+  const v = new THREE.Vector3();
   for (let i = 0; i < n; i++) {
     v.fromBufferAttribute(pos, i).normalize();
-    const a = prl(v.x * 1.4 + o1[0], v.y * 1.4 + o1[1], v.z * 1.4 + o1[2]);
-    const b = prl(v.x * 3.3 + o2[0], v.y * 3.3 + o2[1], v.z * 3.3 + o2[2]);
-    const c = prl(v.x * 7.1 + o3[0], v.y * 7.1 + o3[1], v.z * 7.1 + o3[2]);
-    let lob = 0; for (const L of lobes) { const d = v.x * L[0] + v.y * L[1] + v.z * L[2]; lob += L[3] * Math.pow(Math.max(d, 0), 6); }
-    let r = 0.82 + 0.20 * a + 0.13 * b + 0.06 * c + lob;
-    if (v.y < 0) r *= 1 - 0.28 * v.y * v.y;       // flatter underside
-    rr[i] = r; cav[i] = 0.12 * b + 0.06 * c;
+    let best = 0.35;
+    for (const [cx, cy, cz, R] of blobs) {
+      const b = v.x * cx + v.y * cy + v.z * cz, c = cx * cx + cy * cy + cz * cz - R * R, disc = b * b - c;
+      if (disc >= 0) best = Math.max(best, b + Math.sqrt(disc));
+    }
+    const a = prl(v.x * 2.2 + o1[0], v.y * 2.2 + o1[1], v.z * 2.2 + o1[2]);
+    const c2 = prl(v.x * 5.5 + o2[0], v.y * 5.5 + o2[1], v.z * 5.5 + o2[2]);
+    let r = best * (1 + 0.06 * a + 0.035 * c2);
+    if (v.y < 0) r *= 1 - 0.22 * v.y * v.y;
+    rr[i] = r;
   }
-  { const srt = Array.from(rr).sort((p, q) => p - q); maxr = srt[Math.floor(srt.length * 0.8)]; }
+  const srt = Array.from(rr).sort((p, q) => p - q), norm = srt[Math.floor(srt.length * 0.85)];
   for (let i = 0; i < n; i++) {
-    v.fromBufferAttribute(pos, i).normalize().multiplyScalar(rr[i] / maxr);
+    v.fromBufferAttribute(pos, i).normalize().multiplyScalar(rr[i] / norm);
     pos.setXYZ(i, v.x, v.y, v.z);
-    cav[i] = THREE.MathUtils.clamp(0.5 + cav[i] * 3.0, 0, 1);
   }
-  g.setAttribute('aCav', new THREE.BufferAttribute(cav, 1));
   g.computeVertexNormals();
+  // cavity: compare radius to the mean radius of the neighbourhood (concave creases between blobs -> dark)
+  const idx = g.index.array, sum = new Float32Array(n), cnt = new Float32Array(n);
+  for (let t = 0; t < idx.length; t += 3) for (let k = 0; k < 3; k++) {
+    const a = idx[t + k], b = idx[t + (k + 1) % 3];
+    sum[a] += rr[b]; cnt[a]++; sum[b] += rr[a]; cnt[b]++;
+  }
+  for (let i = 0; i < n; i++) cav[i] = THREE.MathUtils.clamp(0.6 + (rr[i] - sum[i] / cnt[i]) / norm * 9.0, 0, 1);
+  g.setAttribute('aCav', new THREE.BufferAttribute(cav, 1));
   return g;
 }
 function foliageMaterial(opts) {
@@ -298,35 +310,35 @@ function foliageMaterial(opts) {
       varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst;
       uniform float uShadowK; uniform highp sampler3D tNoise; uniform sampler2D tOrtho; uniform float uOrthoMix; uniform float uAlb;
       uniform vec3 uSun; uniform vec3 uSunCol;
-      float fol(vec3 p){ return texture(tNoise, p*0.30).g*0.45 + texture(tNoise, p*0.62).b*0.35 + texture(tNoise, p*1.3).a*0.20; }`)
+      float fol(vec3 p){ return texture(tNoise, p*0.11).b*0.45 + texture(tNoise, p*0.23).a*0.35 + texture(tNoise, p*0.53).a*0.20; }`)
       .replace('#include <color_fragment>', `#include <color_fragment>
-      vec3 fp = vObj * 1.0 + vec3(vInst.y*17.0, vInst.y*5.0, vInst.y*11.0);
-      vec3 wp = vWP * 0.55 + vec3(vInst.y*13.0);
+      vec3 wp = vWP * 1.15 + vec3(vInst.y*13.0);
       float fn = fol(wp);
       {
         vec3 inst = diffuseColor.rgb;
         float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
         vec2 ouv = vec2((vWP.x + 400.0) / 800.0, (400.0 - vWP.z) / 800.0);
         vec3 oc = texture(tOrtho, ouv).rgb;
-        oc = mix(oc, inst, 0.3);
-        vec3 alb = mix(inst, oc, uOrthoMix * inCore);
-        alb *= 0.70 + 0.62 * fn;
-        float ao = mix(0.50, 1.0, smoothstep(-0.95, 0.55, vObj.y)) * mix(0.55, 1.05, vCav);
+        float veg = smoothstep(0.0, 0.025, oc.g - 0.5 * (oc.r + oc.b)) * (1.0 - smoothstep(0.25, 0.45, dot(oc, vec3(0.33))));
+        oc = mix(oc, inst, 0.25);
+        vec3 alb = mix(inst, oc, uOrthoMix * inCore * veg);
+        alb *= 0.86 + 0.30 * fn;
+        float ao = mix(0.62, 1.0, smoothstep(-0.9, 0.6, vObj.y)) * mix(0.55, 1.0, vCav);
         diffuseColor.rgb = alb * ao * uAlb;
       }`)
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
       {
-        float e = 0.35;
+        float e = 0.18;
         float gx = fol(wp + vec3(e,0,0)) - fn, gy = fol(wp + vec3(0,e,0)) - fn, gz = fol(wp + vec3(0,0,e)) - fn;
         vec3 gw = vec3(gx, gy, gz) / e;
-        normal = normalize(normal - mat3(viewMatrix) * gw * 1.6);
+        normal = normalize(normal - mat3(viewMatrix) * gw * 0.55);
       }`)
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
       {
         // thin-leaf translucency when looking towards the sun
         vec3 V = normalize(vWP - cameraPosition);
         float tr = pow(clamp(dot(V, uSun), 0.0, 1.0), 4.0);
-        totalEmissiveRadiance += diffuseColor.rgb * uSunCol * 0.10 * tr;
+        totalEmissiveRadiance += diffuseColor.rgb * uSunCol * 0.16 * tr;
       }`);
     sh.fragmentShader = withShadowK(sh.fragmentShader);
   };
@@ -340,7 +352,7 @@ async function buildTrees(scene) {
   variants[3] = lo0;
   for (let i = 0; i < 4; i++) variants[1].push(crownGeometry(2, 201 + i, 1));
   for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(2, 301 + i, 2));
-  const mats = { 0: foliageMaterial({ orthoMix: 0.6, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.45, albedo: 1.0 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
+  const mats = { 0: foliageMaterial({ orthoMix: 0.7, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.45, albedo: 1.0 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
   mats[3] = mats[0];
   const camEnd = S.cam.frames[S.cam.frames.length - 1].pos;
   const groups = new Map();
@@ -365,9 +377,10 @@ async function buildTrees(scene) {
       const x = a[o], g = a[o + 1], z = a[o + 2], r = a[o + 3], h = a[o + 4], seed = a[o + 9];
       const rnd = mulberry32(Math.floor(seed * 1e6) + 17);
       let cv, cy, rx = r * (0.92 + 0.16 * rnd()), rz = r * (0.92 + 0.16 * rnd());
+      const edge = a[o + 8];
       if (kind === 1) { cv = Math.max(h * 0.55, 0.45); cy = g + h - cv; }
       else if (kind === 2) { cv = THREE.MathUtils.clamp(0.42 * h, 0.8 * r, 1.4 * r); cy = g + h - cv; }
-      else { cv = THREE.MathUtils.clamp(0.33 * h, 0.75 * r, 1.2 * r); cy = g + h - cv; }
+      else { cv = THREE.MathUtils.clamp((0.36 + 0.12 * edge) * h, 0.8 * r, (1.25 + 0.5 * edge) * r); cy = g + h - cv; rx *= 1.12; rz *= 1.12; }
       ps.set(x, cy, z); q.setFromAxisAngle(up, seed * Math.PI * 2 * 7.0); sc.set(rx, cv, rz);
       m4.compose(ps, q, sc); mesh.setMatrixAt(k, m4);
       col.setRGB(a[o + 5], a[o + 6], a[o + 7], THREE.SRGBColorSpace);
@@ -385,7 +398,7 @@ async function buildTrees(scene) {
   for (let i = 0; i < meta.count; i++) {
     const o = i * st, kind = a[o + 10]; if (kind !== 0) continue;
     const g = a[o + 1], r = a[o + 3], h = a[o + 4];
-    const cv = THREE.MathUtils.clamp(0.33 * h, 0.75 * r, 1.2 * r), base = g + h - 2 * cv * 0.8;
+    const e8 = a[o + 8], cv = THREE.MathUtils.clamp((0.36 + 0.12 * e8) * h, 0.8 * r, (1.25 + 0.5 * e8) * r), base = g + h - 2 * cv * 0.8;
     if (base - g > 1.5) tr.push([a[o], g, a[o + 2], base - g + cv * 0.6, 0.08 + 0.012 * h]);
   }
   const tg = new THREE.CylinderGeometry(0.75, 1.0, 1, 6, 1, true); tg.translate(0, 0.5, 0);

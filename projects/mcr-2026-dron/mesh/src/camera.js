@@ -5,12 +5,12 @@ import * as THREE from 'three';
 
 export const DEFAULT_PATH = {
   // UTM 33N E, N, H (m Bpv). Flies SSW (bearing ~200 deg) along the big pond's west shore.
-  pts: [[461500.0, 5584850.0, 264.0], [461489.0, 5584820.0, 256.5], [461478.0, 5584790.0, 249.0]],
-  tgtStart: [461523.0, 5584687.0, 168.0],   // aim over the big pond's south half (pond fills lower-left)
-  tgtEnd: [461447.0, 5584683.0, 167.4],     // Maly Sportacek (hero), slightly beyond its centroid
+  pts: [[461497.0, 5584848.0, 283.0], [461487.5, 5584821.5, 272.5], [461478.0, 5584795.0, 262.0]],
+  tgtStart: [461528.0, 5584660.0, 168.0],   // aim over the big pond's south part / forest beyond (pond lower-left)
+  tgtEnd: [461441.0, 5584681.0, 167.4],     // Maly Sportacek (hero), slightly beyond its centroid
   duration: 119 / 30,
   // speed profile v(u) ~ 1 + a*sin(pi u) - b*u^2  (gentle ease-in peak, ease-out towards the pond)
-  va: 0.25, vb: 0.38,
+  va: 0.20, vb: 0.38,
   aimEase: 'smootherstep',
   drift: 1.0,
 };

@@ -15,7 +15,7 @@ const [W, H] = aspect === '16x9' ? [1920, 1080] : [1080, 1920];
 const vfov = aspect === '16x9' ? 45.7 : 73.7;   // 24 mm-equivalent lens, true-vertical for 9:16
 const frames = args.frames ? args.frames.split(',').flatMap(s => { if (s.includes('-')) { const [a, b] = s.split('-').map(Number); return Array.from({ length: b - a + 1 }, (_, i) => a + i); } return [Number(s)]; }) : Array.from({ length: 120 }, (_, i) => i);
 const opts = { w: W, h: H, vfov, ss: Number(args.ss || 2), sub: Number(args.sub || 2), reflScale: Number(args.refl || 0.5) };
-for (const k of ['haze', 'exposure', 'postExposure', 'sat', 'contrast', 'grain', 'sharpen', 'vignette', 'ca', 'sunAz', 'sunEl']) if (args[k] !== undefined) opts[k] = Number(args[k]);
+for (const k of ['shutter', 'disp', 'reflBoost', 'haze', 'exposure', 'postExposure', 'sat', 'contrast', 'grain', 'sharpen', 'vignette', 'ca', 'sunAz', 'sunEl']) if (args[k] !== undefined) opts[k] = Number(args[k]);
 if (args.debugWater) opts.debugWater = 1;
 if (args.path) opts.path = JSON.parse(fs.readFileSync(args.path, 'utf8'));
 const tag = args.tag || aspect;

@@ -116,7 +116,12 @@ for it in range(5):
         added+=1
 print('filler crowns',added,'final uncovered',int((canopy&~cover_of(trees)).sum()))
 trees=np.array(trees,np.float32)
-print('core trees',len(trees),'mean r',trees[:,3].mean(),'mean h',trees[:,4].mean())
+open_=~ndi.binary_dilation(canopy,iterations=1)
+openfrac=ndi.uniform_filter(open_.astype(np.float32),9)
+for t in trees:
+    y=int(np.clip(round(5585250-(ON-t[2])-0.5),0,799)); x=int(np.clip(round(t[0]+OX-461150-0.5),0,799))
+    t[8]=float(np.clip(openfrac[y,x]*2.5,0,1))
+print('core trees',len(trees),'mean r',trees[:,3].mean(),'mean h',trees[:,4].mean(),'edge>0.5',(trees[:,8]>0.5).sum())
 # ---------------- shrubs ----------------
 sh=[]
 ys,xs=np.nonzero(shrub)

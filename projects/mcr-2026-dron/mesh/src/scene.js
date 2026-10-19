@@ -175,7 +175,7 @@ function boxUniform(bbox) { // [Emin,Nmin,Emax,Nmax] -> (a,b,w,h): u=(x-a)/w, v=
   return new THREE.Vector4(bbox[0] - meta.E0, meta.N0 - bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]);
 }
 
-function terrainMaterial({ ortho, box, cls, clsBox, dtm, bias = 0, isRing = 0, refl = false }) {
+function terrainMaterial({ ortho, box, cls, clsBox, dtm, det, disp = true, bias = 0, isRing = 0, refl = false }) {
   const m = new THREE.RawShaderMaterial({
     glslVersion: THREE.GLSL3,
     vertexShader: TERRAIN_VS,
@@ -185,7 +185,8 @@ function terrainMaterial({ ortho, box, cls, clsBox, dtm, bias = 0, isRing = 0, r
       uOrtho: { value: ortho }, uBox: { value: box },
       uCls: { value: cls || U._dummy.value }, uClsBox: { value: clsBox || box }, uHasCls: { value: cls ? 1 : 0 },
       uDtm: { value: dtm || U._dummyF.value }, uHasDtm: { value: dtm ? 1 : 0 },
-      uBias: { value: bias }, uIsRing: { value: isRing }, uDisp: { value: refl ? 0.0 : (cfg.disp ?? 1.1) },
+      uBias: { value: bias }, uIsRing: { value: isRing }, uDisp: { value: (refl || !disp) ? 0.0 : (cfg.disp ?? 1.0) },
+      uDet: { value: det || U._dummy.value }, uHasDet: { value: det ? 1 : 0 },
     },
   });
   terrainMats.push(m);
@@ -217,7 +218,7 @@ export async function init(opts) {
   const dummyF = new THREE.DataTexture(new Float32Array([0]), 1, 1, THREE.RedFormat, THREE.FloatType); dummyF.needsUpdate = true;
   U._dummyF = { value: dummyF };
 
-  const [orthoCore, orthoCtx, orthoCtxM, cls, wmask, coreH, ctxH, dtmH] = await Promise.all([
+  const [orthoCore, orthoCtx, orthoCtxM, cls, wmask, coreH, ctxH, dtmH, det, clsCtx, dtmCtxH] = await Promise.all([
     loadTex(DATA + 'orto_core_6400.jpg'),
     loadTex(DATA + 'orto_context_3000.jpg'),
     loadTex(DATA + 'orto_context_3000.jpg', { wrap: THREE.MirroredRepeatWrapping }),
@@ -226,12 +227,19 @@ export async function init(opts) {
     loadF32(BUILD + 'core_h_05.f32'),
     loadF32(BUILD + 'ctx_h_3m.f32'),
     loadF32(BUILD + 'dtm_1m.f32'),
+    loadTex(BUILD + 'crown_det_025.png', { srgb: false, aniso: 1 }),
+    loadTex(BUILD + 'cls_ctx_3m.png', { srgb: false, aniso: 1 }),
+    loadF32(BUILD + 'dtm_ctx_3m.f32'),
   ]);
   // DTM as float texture (flip rows: data row 0 = north, GL v=0 = south)
   const dflip = new Float32Array(800 * 800);
   for (let i = 0; i < 800; i++) dflip.set(dtmH.subarray(i * 800, (i + 1) * 800), (799 - i) * 800);
   const dtmTex = new THREE.DataTexture(dflip, 800, 800, THREE.RedFormat, THREE.FloatType);
   dtmTex.minFilter = dtmTex.magFilter = THREE.LinearFilter; dtmTex.needsUpdate = true;
+  const cflip = new Float32Array(1000 * 1000);
+  for (let i = 0; i < 1000; i++) cflip.set(dtmCtxH.subarray(i * 1000, (i + 1) * 1000), (999 - i) * 1000);
+  const dtmCtxTex = new THREE.DataTexture(cflip, 1000, 1000, THREE.RedFormat, THREE.FloatType);
+  dtmCtxTex.minFilter = dtmCtxTex.magFilter = THREE.LinearFilter; dtmCtxTex.needsUpdate = true;
   for (const t of [orthoCtx, orthoCtxM]) t.anisotropy = 4;
   orthoCore.anisotropy = cfg.aniso ?? 8;
 
@@ -249,7 +257,7 @@ export async function init(opts) {
   const x0 = meta.core[0] + res / 2 - meta.E0, z0 = -(meta.core[3] - res / 2 - meta.N0);
   const coreN = heightNormals(coreH, nr, nc, res, res, 2);
   const coreBox = boxUniform(meta.core);
-  const coreMat = terrainPair({ ortho: orthoCore, box: coreBox, cls, clsBox: coreBox, dtm: dtmTex });
+  const coreMat = terrainPair({ ortho: orthoCore, box: coreBox, cls, clsBox: coreBox, dtm: dtmTex, det });
   for (const c of lodChunks(coreH, nr, nc, x0, z0, res, res, 100, [1, 2, 4, 8], null, coreN, 1.2)) {
     const m = new THREE.Mesh(c.levels[0], coreMat.main); m.userData = { lod: c, mats: coreMat, kind: 'core' }; sceneMain.add(m); lodMeshes.push(m);
   }
@@ -266,13 +274,13 @@ export async function init(opts) {
     return xa > meta.core[0] - meta.E0 + m && xb < meta.core[2] - meta.E0 - m && za > -(meta.core[3] - meta.N0) + m && zb < -(meta.core[1] - meta.N0) - m;
   };
   const ctxBox = boxUniform(meta.ctx);
-  const ctxMat = terrainPair({ ortho: orthoCtx, box: ctxBox, bias: 0.0 });
+  const ctxMat = terrainPair({ ortho: orthoCtx, box: ctxBox, cls: clsCtx, clsBox: ctxBox, dtm: dtmCtxTex, disp: false, bias: 0.0 });
   for (const c of lodChunks(ctxH, cn, cn, cx0, cz0, cr, cr, 100, [1, 2, 4], inCore, ctxN, 3.0)) {
     const m = new THREE.Mesh(c.levels[0], ctxMat.main); m.userData = { lod: c, mats: ctxMat, kind: 'ctx' }; sceneMain.add(m); lodMeshes.push(m);
   }
 
   // far ring
-  const ringMat = terrainPair({ ortho: orthoCtxM, box: ctxBox, bias: 1.5, isRing: 1 });
+  const ringMat = terrainPair({ ortho: orthoCtxM, box: ctxBox, bias: 1.5, isRing: 1, disp: false });
   const ring = new THREE.Mesh(ringGeometry(ctxH, meta), ringMat.main); ring.frustumCulled = false;
   ring.userData = { mats: ringMat }; matMeshes.push(ring);
   sceneMain.add(ring);
@@ -320,7 +328,7 @@ export async function init(opts) {
     blending: THREE.CustomBlending, blendSrc: THREE.OneFactor, blendDst: THREE.OneFactor, blendEquation: THREE.AddEquation, depthTest: false, depthWrite: false });
   postMat = new THREE.RawShaderMaterial({ glslVersion: THREE.GLSL3, vertexShader: FS_VS, fragmentShader: POST_FS,
     uniforms: { uSrc: { value: rtAcc.texture }, uSize: { value: new THREE.Vector2(cfg.w, cfg.h) }, uFrame: { value: 0 },
-      uGrain: { value: cfg.grain ?? 0.018 }, uVignette: { value: cfg.vignette ?? 0.22 }, uSharpen: { value: cfg.sharpen ?? 0.35 },
+      uGrain: { value: cfg.grain ?? 0.018 }, uVignette: { value: cfg.vignette ?? 0.15 }, uSharpen: { value: cfg.sharpen ?? 0.35 },
       uCA: { value: cfg.ca ?? 0.7 }, uPostExposure: { value: cfg.postExposure ?? 1.08 }, uSat: { value: cfg.sat ?? 1.16 }, uContrast: { value: cfg.contrast ?? 1.12 } },
     depthTest: false, depthWrite: false });
   fsScene.add(new THREE.Mesh(tri, downMat));
@@ -399,7 +407,7 @@ export function renderFrame(f, { readback = true } = {}) {
   const SW = rtSS.width, SH = rtSS.height;
   R.setRenderTarget(rtAcc); R.setClearColor(0x000000, 1); R.clear();
   const K = cfg.sub;
-  const shutter = cfg.shutter ?? 0.5; // fraction of frame interval (180 deg)
+  const shutter = cfg.shutter ?? 0.2; // fraction of frame interval (72 deg: bright-sun DJI without ND)
   for (let s = 0; s < K; s++) {
     const tFrame = f / 30;
     const ts = tFrame + ((s + 0.5) / K - 0.5) * shutter / 30;

@@ -573,7 +573,11 @@ function build({ block = null, loop = false } = {}) {
     const vo = p.B.type === 'broll' || mode === 'loop' ? null : ['wav', 'mp3', 'm4a'].map((e) => path.join(ROOT, C.vo.dir, `${p.key}.${e}`)).find(exists);
     if (vo) {
       const dst = `assets/vo/${path.basename(vo)}`; copyIfNewer(vo, path.join(PROTO, dst));
-      const d = Math.min(ffDur(vo), p.t1 - p.t0 - C.vo.offset);
+      const vd = ffDur(vo), d = Math.min(vd, p.t1 - p.t0 - C.vo.offset);
+      // script_cs: VO končí ≤ 1,5 s před koncem bloku (8 s banner → 6,5 s), jinak běží přes odchod/fadery; delší VO se usekne
+      const voEnd = C.vo.offset + vd, voLim = p.t1 - p.t0 - 1.5;
+      if (voEnd > p.t1 - p.t0 - 1e-3) console.warn(`  !! VO ${p.key}: ${vd}s se nevejde do bloku (${f3(p.t1 - p.t0)} s) → USEKNUTO na ${d.toFixed(2)} s`);
+      else if (voEnd > voLim + 1e-3) console.warn(`  ! VO ${p.key}: konec ${voEnd.toFixed(2)} s > limit ${voLim.toFixed(2)} s (běží přes odchod bloku)`);
       audio.push(`<audio id="vo-${p.key}" src="${dst}" data-start="${f3(p.t0 + C.vo.offset)}" data-duration="${f3(d)}" data-track-index="${11 + (i % 2)}" data-volume="${C.vo.volume}"></audio>`);
       report.push(`VO ${p.key}: ${path.basename(vo)} ${d.toFixed(2)} s`);
     } else if (p.B.type !== 'broll' && mode !== 'loop') report.push(`VO ${p.key}: — (slot vo/${p.key}.wav)`);
