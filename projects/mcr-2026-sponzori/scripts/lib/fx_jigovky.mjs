@@ -19,6 +19,8 @@ const px = (n) => `${Math.round(n * 10) / 10}px`;
 // shop CSS (https://cdn.myshoptet.com/usr/506750.myshoptet.com/user/documents/smUpravy/code-2.css) — research/jigovky_ad.md §3
 export const C = { forest: '#006F33', deep: '#01431F', night: '#00210F', leaf: '#00AB4E', btn: '#006633', yellow: '#FFD600', price: '#FF6600', paper: '#F7F7F7' };
 // Tungsten HD BARBLESS colourways (jigovky.cz/tungsten-hd-barbless/), swatch hex measured from the cut-outs
+// the forest "lightbox" world: soft centre light, many stops so no Mach bands / visible ellipse edges
+export const WORLD = 'radial-gradient(95% 62% at 50% 44%, #0f8a47 0%, #0b8040 10%, #067536 22%, #006F33 32%, #01642e 44%, #015628 56%, #014a22 68%, #013d1c 80%, #013016 90%, #00260f 100%)';
 export const SW = [['FLUO', '#D3FC02'], ['PINK', '#DF0AA1'], ['RED', '#EC0102'], ['ORANGE', '#FE5F00'], ['BLACK', '#2F2F2F'], ['SILVER', '#D6D6D6'], ['GOLD', '#C9A13B']];
 
 // font families go INLINE (the @font-face rules live in the root page; a <style> in the sub-composition that names them fails lint)
