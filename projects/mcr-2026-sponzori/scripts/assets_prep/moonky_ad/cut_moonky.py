@@ -35,7 +35,7 @@ ITEMS = [
      SHOP + '2083_gumova-nastraha-moonky-savory-43mm-c06-green-olihen-12ks-.png', dict(maxlong=2400)),
     ('H3_coccon_jr_c04_black', 'white_unmix', 'coccon_jr_c04_black', 'Coccon Jr. 34mm C04 Black',
      SHOP + '2437_gumova-nastraha-moonky-coccon-jr--34mm-c04-black-olihen-10ks-.png', dict(maxlong=2400, sat=1.0, ghost='auto', smooth_r=7,
-          erase_thin=[(1880, 1120, 2268, 1330, 16), (60, 430, 560, 560, 10)])),
+          erase_thin=[(1880, 1120, 2268, 1330, 16), (60, 430, 560, 560, 18)])),
     ('S1_savory_c01_pink_bubblegum', 'white_unmix', 'savory_c01_pink', 'Savory 43mm C01 Pink Bubblegum',
      SHOP + '2032_gumova-nastraha-moonky-savory-43mm-c01-pink-bubblegum-cheese--12ks-.png', dict(maxlong=2000, ghost='auto', smooth_r=4)),
     ('S2_savory_c02_orange_fluo', 'white_unmix', 'savory_c02_orange_fluo', 'Savory 43mm C02 Orange fluo',
