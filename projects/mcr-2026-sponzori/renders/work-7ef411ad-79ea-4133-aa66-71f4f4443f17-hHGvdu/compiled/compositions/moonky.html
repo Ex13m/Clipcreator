@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>moonky · MČR 2026</title></head>
+<body><template>
+<div id="b-moonky" data-composition-id="moonky" data-width="1080" data-height="1920" data-duration="9.172">
+  <style>
+  #bw-moonky { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #moonky-stage { position:absolute; inset:0; overflow:hidden; }
+  #b-moonky .mk-vt{position:absolute;margin:0;white-space:nowrap}
+#b-moonky .mk-vt .fx-ln{padding:.16em .16em .08em 0;margin:-.16em -.16em -.08em 0}
+#b-moonky .mk-moon{position:absolute;border-radius:50%}
+#b-moonky .mk-glass{position:absolute;border-radius:26px;background:rgba(255,255,255,.085);-webkit-backdrop-filter:blur(20px) saturate(1.45);backdrop-filter:blur(20px) saturate(1.45);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22),inset 0 1.5px 0 rgba(255,255,255,.28),0 26px 54px rgba(2,4,10,.42)}
+#b-moonky .mk-cell{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#b-moonky .mk-cell>div{white-space:nowrap;line-height:1}
+#b-moonky .mk-sep{position:absolute;top:22%;bottom:22%;width:1.5px;background:rgba(255,255,255,.28)}
+#b-moonky .mk-lbl{position:absolute;white-space:nowrap;line-height:1;text-transform:uppercase}
+#b-moonky .mk-pill{position:absolute;display:flex;align-items:center;gap:16px;white-space:nowrap;border-radius:999px;box-sizing:border-box;line-height:1;text-transform:uppercase}
+#b-moonky .mk-3d{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
+#b-moonky .mk-pop{position:absolute}
+#b-moonky .mk-flip{position:absolute;overflow:hidden}
+  </style>
+  <div id="bw-moonky" class="blk blk-moonky" style="--bg:#0E1424;--fg:#FFFFFF;--acc:#9CC903;--acc2:#6883BA">
+    <div id="moonky-stage" class="blk-stage"><div class="fx-field" id="moonky-bg" style="background:radial-gradient(105% 62% at 50% 47%, #1d2a47 0%, #1a2541 12%, #16203a 24%, #121b31 36%, #0E1424 50%, #0b1020 64%, #080c19 78%, #060912 90%, #04060c 100%);"></div><div class="fx-abs" id="moonky-st" style="left:0;top:0;width:2px;height:2px;border-radius:50%;box-shadow:888px 355px 0 0.8px rgba(220,230,255,0.28),352px 654px 0 0.2px rgba(220,230,255,0.66),787px 372px 0 0.8px rgba(220,230,255,0.45),497px 1102px 0 0.2px rgba(220,230,255,0.39),775px 792px 0 0.2px rgba(220,230,255,0.48),259px 1481px 0 0.2px rgba(220,230,255,0.78),448px 545px 0 1.6px rgba(220,230,255,0.80),312px 335px 0 0.2px rgba(220,230,255,0.34),619px 642px 0 0.8px rgba(220,230,255,0.65),857px 1309px 0 0.2px rgba(220,230,255,0.80),852px 848px 0 0.8px rgba(220,230,255,0.53),1045px 1085px 0 0.2px rgba(220,230,255,0.63),965px 1132px 0 0.2px rgba(220,230,255,0.61),646px 1076px 0 0.2px rgba(220,230,255,0.68),641px 155px 0 0.2px rgba(220,230,255,0.36),273px 1503px 0 1.6px rgba(220,230,255,0.27),184px 1259px 0 0.8px rgba(220,230,255,0.46),437px 1329px 0 0.2px rgba(220,230,255,0.48),102px 1194px 0 0.8px rgba(220,230,255,0.80),694px 1414px 0 0.2px rgba(220,230,255,0.64),782px 579px 0 0.2px rgba(220,230,255,0.36),156px 148px 0 0.2px rgba(220,230,255,0.29),92px 1051px 0 1.6px rgba(220,230,255,0.77),397px 240px 0 0.8px rgba(220,230,255,0.52),458px 863px 0 0.2px rgba(220,230,255,0.62),998px 1481px 0 0.2px rgba(220,230,255,0.66),970px 658px 0 0.2px rgba(220,230,255,0.35),113px 1329px 0 0.8px rgba(220,230,255,0.70),803px 396px 0 0.2px rgba(220,230,255,0.35),121px 1445px 0 0.2px rgba(220,230,255,0.65),566px 1119px 0 0.2px rgba(220,230,255,0.80),29px 680px 0 0.2px rgba(220,230,255,0.75),1030px 1583px 0 0.8px rgba(220,230,255,0.36),592px 147px 0 0.2px rgba(220,230,255,0.62),1035px 683px 0 0.2px rgba(220,230,255,0.40),491px 1413px 0 1.6px rgba(220,230,255,0.58),697px 1155px 0 0.2px rgba(220,230,255,0.54),741px 635px 0 0.2px rgba(220,230,255,0.63),551px 1127px 0 0.2px rgba(220,230,255,0.49),682px 1485px 0 0.2px rgba(220,230,255,0.65),471px 615px 0 0.2px rgba(220,230,255,0.29),387px 1081px 0 0.2px rgba(220,230,255,0.71),882px 685px 0 0.8px rgba(220,230,255,0.58),836px 1372px 0 0.2px rgba(220,230,255,0.70),811px 845px 0 0.2px rgba(220,230,255,0.31),121px 1436px 0 0.2px rgba(220,230,255,0.58),21px 243px 0 0.2px rgba(220,230,255,0.68),576px 460px 0 0.2px rgba(220,230,255,0.84),546px 820px 0 0.8px rgba(220,230,255,0.25),434px 1624px 0 0.8px rgba(220,230,255,0.82),603px 1540px 0 0.2px rgba(220,230,255,0.47),419px 1140px 0 0.8px rgba(220,230,255,0.29),72px 1634px 0 0.2px rgba(220,230,255,0.71),454px 385px 0 0.2px rgba(220,230,255,0.52)"></div><div class="fx-abs" id="moonky-mn" style="left:0;top:0;width:1080px;height:1920px">
+    <div class="fx-glow" id="moonky-mn-g" style="left:-210px;top:180px;width:1500px;height:1500px;background:radial-gradient(closest-side,rgba(150,172,222,.55),rgba(104,131,186,.26) 34%,rgba(104,131,186,.08) 62%,rgba(104,131,186,0));opacity:0.5"></div>
+    <div class="mk-moon" id="moonky-mn-e" style="left:300px;top:690px;width:480px;height:480px;background:radial-gradient(circle at 40% 38%,rgba(150,170,214,.15),rgba(104,131,186,.07));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16)"></div>
+    <div class="mk-moon" id="moonky-mn-d" style="left:300px;top:690px;width:480px;height:480px;background:radial-gradient(circle at 63% 37%, rgba(104,131,186,.30) 0, rgba(104,131,186,.20) 7%, transparent 12%),radial-gradient(circle at 44% 63%, rgba(104,131,186,.26) 0, rgba(104,131,186,.16) 10%, transparent 17%),radial-gradient(circle at 70% 69%, rgba(104,131,186,.20) 0, transparent 9%),radial-gradient(circle at 30% 34%, rgba(104,131,186,.14) 0, transparent 8%),radial-gradient(circle at 40% 35%, #ffffff 0%, #f1f4fb 26%, #d6def0 56%, #a9badd 84%, #8399c8 100%);box-shadow:0 0 70px rgba(170,190,235,.28);--sx:139.2px;-webkit-mask-image:radial-gradient(circle 247px at var(--sx) 50%, transparent 233px, #000 247px);mask-image:radial-gradient(circle 247px at var(--sx) 50%, transparent 233px, #000 247px)"></div>
+  </div><div class="fx-glow" id="moonky-tint" style="left:-80px;top:310px;width:1240px;height:1240px;background:radial-gradient(closest-side,currentColor,transparent);color:#9CC903;opacity:0"></div><div class="fx-abs" id="moonky-d2w" style="inset:0;filter:blur(10px) brightness(.7)"><div class="fx-prod" id="moonky-d2" style="left:585.6px;top:665px;width:456.9px;height:133.5px;"><div class="fx-abs" id="moonky-d2-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-d2-tl"><div class="fx-abs" id="moonky-d2-rot" style="inset:0;transform:rotate(-11.70deg);transform-origin:244.4px 71px;"><img class="fx-prod-img" id="moonky-d2-im" src="assets/prep/moonky/ads/H2_savory_c06_green.png" alt="" style=""></div></div></div></div></div><div class="fx-prod" id="moonky-h1" style="left:-1075px;top:611px;width:2416.8px;height:955.7px;"><div class="fx-abs" id="moonky-h1-cam" style="inset:0"><i class="fx-prod-shadow" id="moonky-h1-sh" style="left:373.9px;width:1828.6px;top:1091.7px;height:201.3px;--sho:0.6;filter:blur(12px)"></i><div class="fx-prod-tilt" id="moonky-h1-tl"><div class="fx-abs" id="moonky-h1-rot" style="inset:0;"><img class="fx-prod-img" id="moonky-h1-im" src="assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-h1-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);--sa:105deg;--so:0.82"></i></div></div></div></div><i class="fx-prod-shadow" id="moonky-svsh" style="left:210px;top:1108px;width:660px;height:44px;--sho:.6;filter:blur(14px);opacity:0"></i><div class="fx-prod" id="moonky-sv0" style="left:51.1px;top:815.9px;width:913.8px;height:267.1px;"><div class="fx-abs" id="moonky-sv0-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv0-tl"><div class="fx-abs" id="moonky-sv0-rot" style="inset:0;transform:rotate(-3.70deg);transform-origin:488.9px 142.1px;"><img class="fx-prod-img" id="moonky-sv0-im" src="assets/prep/moonky/ads/H2_savory_c06_green.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv0-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="fx-prod" id="moonky-sv1" style="left:55.9px;top:731.4px;width:908.3px;height:384.8px;"><div class="fx-abs" id="moonky-sv1-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv1-tl"><div class="fx-abs" id="moonky-sv1-rot" style="inset:0;transform:rotate(-16.90deg);transform-origin:484.1px 226.6px;"><img class="fx-prod-img" id="moonky-sv1-im" src="assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv1-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="fx-prod" id="moonky-sv2" style="left:111.9px;top:638px;width:720.7px;height:672.2px;"><div class="fx-abs" id="moonky-sv2-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv2-tl"><div class="fx-abs" id="moonky-sv2-rot" style="inset:0;transform:rotate(-47.40deg);transform-origin:428.1px 320px;"><img class="fx-prod-img" id="moonky-sv2-im" src="assets/prep/moonky/ads/S2_savory_c02_orange_fluo.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv2-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S2_savory_c02_orange_fluo.png);mask-image:url(assets/prep/moonky/ads/S2_savory_c02_orange_fluo.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="fx-prod" id="moonky-sv3" style="left:57.3px;top:714.5px;width:904px;height:416.9px;"><div class="fx-abs" id="moonky-sv3-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv3-tl"><div class="fx-abs" id="moonky-sv3-rot" style="inset:0;transform:rotate(-20.30deg);transform-origin:482.7px 243.5px;"><img class="fx-prod-img" id="moonky-sv3-im" src="assets/prep/moonky/ads/S3_savory_c03_brown_metalic.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv3-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S3_savory_c03_brown_metalic.png);mask-image:url(assets/prep/moonky/ads/S3_savory_c03_brown_metalic.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="fx-prod" id="moonky-sv4" style="left:54.4px;top:741.1px;width:847.5px;height:515.1px;"><div class="fx-abs" id="moonky-sv4-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv4-tl"><div class="fx-abs" id="moonky-sv4-rot" style="inset:0;transform:rotate(-27.20deg);transform-origin:485.6px 216.9px;"><img class="fx-prod-img" id="moonky-sv4-im" src="assets/prep/moonky/ads/S4_savory_c04_black.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv4-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S4_savory_c04_black.png);mask-image:url(assets/prep/moonky/ads/S4_savory_c04_black.png);--sa:105deg;--so:0.85"></i></div></div></div></div><div class="fx-prod" id="moonky-sv5" style="left:97.1px;top:703.4px;width:745.7px;height:604.7px;"><div class="fx-abs" id="moonky-sv5-cam" style="inset:0"><div class="fx-prod-tilt" id="moonky-sv5-tl"><div class="fx-abs" id="moonky-sv5-rot" style="inset:0;transform:rotate(-40.30deg);transform-origin:442.9px 254.6px;"><img class="fx-prod-img" id="moonky-sv5-im" src="assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-sv5-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-lbl" id="moonky-svk" style="left:68px;top:1236px;font-family:'Source Sans 3';font-weight:700;font-size:30px;letter-spacing:.2em;text-transform:none;color:#9CC903">SAVORY · 43 mm · 1,05 g</div><div class="mk-flip" id="moonky-svf" style="left:64px;top:1280px;width:876px;height:74px"><div class="fx-abs" id="moonky-svfc" style="left:0;top:0;width:100%"><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#9cc903;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">C06 · Green</span></div><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#ee7ea1;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">C01 · Pink Bubblegum</span></div><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#f49e0b;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">C02 · Orange fluo</span></div><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#734545;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">C03 · Brown metalic</span></div><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#101013;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">C04 · Black</span></div><div style="height:74px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),#7a5554;box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">DC03 · Brown / Orange</span></div></div></div><div class="mk-3d" id="moonky-orb" style="left:540px;top:944px;perspective:1500px"><div class="mk-3d" style="transform:rotateX(63deg)"><div class="mk-3d" id="moonky-orb-spin"><div class="mk-3d" id="moonky-orb-i0" style="left:0px;top:336px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p0" style="left:-119.5px;top:-42.4px;width:224.2px;height:88.6px;transform-origin:119.5px 42.4px"><div class="fx-abs" style="inset:0;transform:rotate(-8.0deg);transform-origin:119.5px 42.4px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p0-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i1" style="left:-168px;top:291px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p1" style="left:-131.4px;top:-38.5px;width:225.3px;height:82.9px;transform-origin:131.4px 38.5px"><div class="fx-abs" style="inset:0;transform:rotate(-14.0deg);transform-origin:131.4px 38.5px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p1-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i2" style="left:-291px;top:168px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p2" style="left:-120.5px;top:-35px;width:225.3px;height:65.8px;transform-origin:120.5px 35px"><div class="fx-abs" style="inset:0;transform:rotate(-8.3deg);transform-origin:120.5px 35px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H2_savory_c06_green.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p2-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i3" style="left:-336px;top:0px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p3" style="left:-127px;top:-41.9px;width:227.2px;height:95.9px;transform-origin:127px 41.9px"><div class="fx-abs" style="inset:0;transform:rotate(1.7deg);transform-origin:127px 41.9px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S10_master_c05_white.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p3-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S10_master_c05_white.png);mask-image:url(assets/prep/moonky/ads/S10_master_c05_white.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i4" style="left:-291px;top:-168px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p4" style="left:-122.5px;top:-51.5px;width:214.1px;height:125.5px;transform-origin:122.5px 51.5px"><div class="fx-abs" style="inset:0;transform:rotate(-17.0deg);transform-origin:122.5px 51.5px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H3_coccon_jr_c04_black.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p4-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H3_coccon_jr_c04_black.png);mask-image:url(assets/prep/moonky/ads/H3_coccon_jr_c04_black.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i5" style="left:-168px;top:-291px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p5" style="left:-119.9px;top:-41.1px;width:224.1px;height:83.6px;transform-origin:119.9px 41.1px"><div class="fx-abs" style="inset:0;transform:rotate(-4.9deg);transform-origin:119.9px 41.1px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p5-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i6" style="left:0px;top:-336px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p6" style="left:-120.1px;top:-54.3px;width:205.3px;height:134.8px;transform-origin:120.1px 54.3px"><div class="fx-abs" style="inset:0;transform:rotate(-24.9deg);transform-origin:120.1px 54.3px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p6-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png);mask-image:url(assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i7" style="left:168px;top:-291px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p7" style="left:-116.9px;top:-37.3px;width:224.9px;height:67.9px;transform-origin:116.9px 37.3px"><div class="fx-abs" style="inset:0;transform:rotate(12.6deg);transform-origin:116.9px 37.3px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S12_gradient_blue_pink.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p7-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S12_gradient_blue_pink.png);mask-image:url(assets/prep/moonky/ads/S12_gradient_blue_pink.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i8" style="left:291px;top:-168px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p8" style="left:-119.3px;top:-55.9px;width:223.9px;height:94.9px;transform-origin:119.3px 55.9px"><div class="fx-abs" style="inset:0;transform:rotate(-3.9deg);transform-origin:119.3px 55.9px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p8-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i9" style="left:336px;top:0px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p9" style="left:-126.8px;top:-48.5px;width:212px;height:100.3px;transform-origin:126.8px 48.5px"><div class="fx-abs" style="inset:0;transform:rotate(-34.0deg);transform-origin:126.8px 48.5px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p9-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png);mask-image:url(assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i10" style="left:291px;top:168px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p10" style="left:-120.9px;top:-52.3px;width:211.4px;height:129.1px;transform-origin:120.9px 52.3px"><div class="fx-abs" style="inset:0;transform:rotate(-21.2deg);transform-origin:120.9px 52.3px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p10-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png);mask-image:url(assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-orb-i11" style="left:168px;top:291px"><div class="mk-3d" style="transform:rotateX(-63deg)"><div class="mk-pop" id="moonky-orb-p11" style="left:-109.2px;top:-62.8px;width:183.8px;height:149.1px;transform-origin:109.2px 62.8px"><div class="fx-abs" style="inset:0;transform:rotate(-38.2deg);transform-origin:109.2px 62.8px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-orb-p11-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div></div></div></div><div class="mk-glass" id="moonky-sb2" style="left:64px;top:1290px;width:876px;height:128px"><div class="mk-cell" style="left:30px;width:396px"><div id="moonky-sb2-l0" style="font-family:'Source Sans 3';font-weight:700;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-bottom:12px">Formy</div><div style="overflow:hidden;padding:.12em .14em .1em 0;margin:-.12em -.14em -.1em 0"><div id="moonky-sb2-v0" style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;">Vlastní CNC</div></div></div><i class="mk-sep" id="moonky-sb2-s1" style="left:438px"></i><div class="mk-cell" style="left:468px;width:396px"><div id="moonky-sb2-l1" style="font-family:'Source Sans 3';font-weight:700;font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-bottom:12px">Výroba</div><div style="overflow:hidden;padding:.12em .14em .1em 0;margin:-.12em -.14em -.1em 0"><div id="moonky-sb2-v1" style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;">Ručně v ČR</div></div></div><i class="fx-abs" style="left:0;top:26%;bottom:26%;width:6px;border-radius:0 6px 6px 0;background:#9CC903"></i></div><div class="mk-lbl" id="moonky-sb1-k" style="left:68px;top:1244px;font-family:'Source Sans 3';font-weight:700;font-size:28px;letter-spacing:.2em;color:#9CC903">Gamer Big</div><div class="mk-glass" id="moonky-sb1" style="left:64px;top:1290px;width:876px;height:128px"><div class="mk-cell" style="left:30px;width:193.3px"><div style="overflow:hidden;padding:.12em .14em .1em 0;margin:-.12em -.14em -.1em 0"><div id="moonky-sb1-v0" style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;">46 mm</div></div></div><i class="mk-sep" id="moonky-sb1-s1" style="left:235.3px"></i><div class="mk-cell" style="left:265.3px;width:206.4px"><div style="overflow:hidden;padding:.12em .14em .1em 0;margin:-.12em -.14em -.1em 0"><div id="moonky-sb1-v1" style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;">2,12 g</div></div></div><i class="mk-sep" id="moonky-sb1-s2" style="left:483.8px"></i><div class="mk-cell" style="left:513.8px;width:350.2px"><div style="overflow:hidden;padding:.12em .14em .1em 0;margin:-.12em -.14em -.1em 0"><div id="moonky-sb1-v2" style="font-family:'Exo 2';font-weight:800;font-style:italic;font-size:44px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;">extra měkká</div></div></div><i class="fx-abs" style="left:0;top:26%;bottom:26%;width:6px;border-radius:0 6px 6px 0;background:#9CC903"></i></div><div class="fx-prod" id="moonky-lk" style="left:55.3px;top:778.1px;width:909.3px;height:359.6px;"><div class="fx-abs" id="moonky-lk-cam" style="inset:0"><i class="fx-prod-shadow" id="moonky-lk-sh" style="left:140.7px;width:688px;top:410.8px;height:75.7px;--sho:0.62;filter:blur(12px)"></i><div class="fx-prod-tilt" id="moonky-lk-tl"><div class="fx-abs" id="moonky-lk-rot" style="inset:0;transform:rotate(-2.80deg);transform-origin:484.7px 171.9px;"><img class="fx-prod-img" id="moonky-lk-im" src="assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png" alt="" style=""><i class="fx-prod-sweep" id="moonky-lk-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);--sa:105deg;--so:0.85"></i></div></div></div></div><div class="fx-abs" id="moonky-lw" style="left:748px;top:265px;width:268px;height:68px"><img id="moonky-logo" class="fx-logo " src="assets/prep/moonky/logo_on_dark.png" alt="Moonky" style="width:268px; height:68px;"></div><div class="mk-lbl" id="moonky-hm" style="left:0;width:1080px;top:512px;text-align:center;font-family:'Exo 2';font-weight:300;font-size:30px;letter-spacing:.48em;padding-left:.48em;color:rgba(255,255,255,.86)">Handmade lures</div><div class="fx-abs" id="moonky-url" style="left:64px;top:1196px;width:952px;height:100px"><div class="mk-vt" style="left:0;top:0px;width:952px;font-family:'Exo 2';font-weight:800;font-style:italic;font-size:100px;line-height:1;letter-spacing:-0.01em;color:#fff;text-align:center;"><span class="fx-ln" id="moonky-url-l0"><span><span class="fx-c" id="moonky-url-w0">moonky.cz</span></span></span></div></div><div class="mk-pill" id="moonky-pz" style="left:268px;top:1330px;width:543.9px;height:72px;padding:0 34px;border:2.5px solid #9CC903;background:rgba(14,20,36,.55);font-family:'Source Sans 3';font-weight:700;font-size:32px;letter-spacing:.14em;color:#fff"><i style="display:block;width:12px;height:12px;border-radius:50%;background:#9CC903;flex-shrink:0"></i><span>Věnuje ceny · MČR 2026</span></div><div class="fx-abs" id="moonky-ha" style="left:64px;top:404px;width:952px;height:224px"><div class="mk-vt" style="left:0;top:0px;width:952px;font-family:'Exo 2';font-weight:900;font-style:italic;font-size:124px;line-height:1;letter-spacing:-0.01em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-ha-l0"><span><span class="fx-c" id="moonky-ha-w0">Ručně</span> <span class="fx-c" id="moonky-ha-w1">dělané</span></span></span></div><div class="mk-vt" style="left:0;top:132px;width:952px;font-family:'Exo 2';font-weight:900;font-style:italic;font-size:92px;line-height:1;letter-spacing:-0.01em;color:#9CC903;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-ha-l1"><span><span class="fx-c" id="moonky-ha-w2">gumové</span> <span class="fx-c" id="moonky-ha-w3">nástrahy</span></span></span></div></div><div class="fx-abs" id="moonky-hc" style="left:64px;top:404px;width:952px;height:234px"><div class="mk-vt" style="left:0;top:0px;width:952px;font-family:'Exo 2';font-weight:300;font-style:italic;font-size:84px;line-height:1;letter-spacing:-0.01em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-hc-l0"><span><span class="fx-c" id="moonky-hc-w0">pro</span></span></span></div><div class="mk-vt" style="left:0;top:84px;width:952px;font-family:'Exo 2';font-weight:900;font-style:italic;font-size:150px;line-height:1;letter-spacing:-0.01em;color:#9CC903;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-hc-l1"><span><span class="fx-c" id="moonky-hc-w1">Trout</span> <span class="fx-c" id="moonky-hc-w2">Area</span></span></span></div></div><div class="fx-abs" id="moonky-hd" style="left:64px;top:404px;width:952px;height:176px"><div class="mk-vt" style="left:0;top:0px;width:952px;font-family:'Exo 2';font-weight:900;font-style:italic;font-size:78px;line-height:1;letter-spacing:-0.01em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-hd-l0"><span><span class="fx-c" id="moonky-hd-w0">Vyvíjené</span> <span class="fx-c" id="moonky-hd-w1">a testované</span></span></span></div><div class="mk-vt" style="left:0;top:88px;width:952px;font-family:'Exo 2';font-weight:900;font-style:italic;font-size:78px;line-height:1;letter-spacing:-0.01em;color:#9CC903;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="moonky-hd-l1"><span><span class="fx-c" id="moonky-hd-w2">s českou</span> <span class="fx-c" id="moonky-hd-w3">reprezentací</span></span></span></div></div>
+    </div>
+    <div class="fx-ov" id="moonky-fl0" style="background:#6883BA;opacity:0;mix-blend-mode:screen"></div>
+    <div class="fx-ov" id="moonky-fl3" style="background:#6883BA;opacity:0;mix-blend-mode:screen"></div>
+    <div class="fx-ov" id="moonky-irs" style="background:#01431F;clip-path:circle(0px at 540px 930px)"></div><i class="fx-ov" id="moonky-irs-rg" style="inset:auto;left:-617.7px;top:-227.7px;width:2315.4px;height:2315.4px;border-radius:50%;border:4px solid rgba(214,224,246,.9);box-shadow:0 0 30px rgba(170,190,235,.5)"></i>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#moonky-st", {"y":0});
+  gsap.set("#moonky-mn-d", {"--sx":"139.2px"});
+  gsap.set("#moonky-mn-g", {"opacity":0.5});
+  gsap.set("#moonky-d2w", {"opacity":0});
+  gsap.set("#moonky-d2-cam", {"x":40,"y":0,"scale":1});
+  gsap.set("#moonky-h1-cam", {"scale":1.13,"x":0,"y":0});
+  gsap.set("#moonky-h1-sh", {"opacity":0});
+  gsap.set("#moonky-h1-tl", {"rotationY":0,"rotationX":0});
+  gsap.set("#moonky-h1-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-h1", {"x":0,"opacity":1});
+  gsap.set("#moonky-svsh", {"opacity":0});
+  gsap.set("#moonky-sv0", {"opacity":0,"scale":1.1});
+  gsap.set("#moonky-sv0-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv1-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv2-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv3-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv4-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv5-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-sv5", {"scale":1});
+  gsap.set("#moonky-tint", {"opacity":0});
+  gsap.set("#moonky-svk", {"opacity":0,"x":-24});
+  gsap.set("#moonky-svf", {"opacity":0,"y":30});
+  gsap.set("#moonky-svfc", {"y":0});
+  gsap.set("#moonky-mn", {"scale":1});
+  gsap.set("#moonky-orb-p0", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p1", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p2", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p3", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p4", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p5", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p6", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p7", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p8", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p9", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p10", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-p11", {"scale":0,"opacity":0});
+  gsap.set("#moonky-orb-spin", {"rotation":-85});
+  gsap.set("#moonky-orb-i0", {"rotation":85});
+  gsap.set("#moonky-orb-i1", {"rotation":85});
+  gsap.set("#moonky-orb-i2", {"rotation":85});
+  gsap.set("#moonky-orb-i3", {"rotation":85});
+  gsap.set("#moonky-orb-i4", {"rotation":85});
+  gsap.set("#moonky-orb-i5", {"rotation":85});
+  gsap.set("#moonky-orb-i6", {"rotation":85});
+  gsap.set("#moonky-orb-i7", {"rotation":85});
+  gsap.set("#moonky-orb-i8", {"rotation":85});
+  gsap.set("#moonky-orb-i9", {"rotation":85});
+  gsap.set("#moonky-orb-i10", {"rotation":85});
+  gsap.set("#moonky-orb-i11", {"rotation":85});
+  gsap.set("#moonky-orb-p0-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p1-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p2-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p3-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p4-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p5-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p6-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p7-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p8-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p9-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p10-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb-p11-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-orb", {"scale":1,"opacity":1});
+  gsap.set("#moonky-sb2", {"scaleX":0,"opacity":0,"y":0});
+  gsap.set("#moonky-sb2-v0", {"yPercent":115,"opacity":0});
+  gsap.set("#moonky-sb2-l0", {"opacity":0});
+  gsap.set("#moonky-sb2-v1", {"yPercent":115,"opacity":0});
+  gsap.set("#moonky-sb2-l1", {"opacity":0});
+  gsap.set("#moonky-sb2-s1", {"scaleY":0});
+  gsap.set("#moonky-sb1-k", {"opacity":0,"x":-24});
+  gsap.set("#moonky-sb1", {"scaleX":0,"opacity":0,"y":0});
+  gsap.set("#moonky-sb1-v0", {"yPercent":115,"opacity":0});
+  gsap.set("#moonky-sb1-v1", {"yPercent":115,"opacity":0});
+  gsap.set("#moonky-sb1-s1", {"scaleY":0});
+  gsap.set("#moonky-sb1-v2", {"yPercent":115,"opacity":0});
+  gsap.set("#moonky-sb1-s2", {"scaleY":0});
+  gsap.set("#moonky-lk", {"opacity":0,"scale":1.55});
+  gsap.set("#moonky-lk-cam", {"y":0,"rotation":0});
+  gsap.set("#moonky-lk-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-lw", {"opacity":0,"x":30,"y":0});
+  gsap.set("#moonky-hm", {"opacity":0,"scaleX":1.3});
+  gsap.set("#moonky-url-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-pz", {"opacity":0,"scale":0.86});
+  gsap.set("#moonky-ha-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-ha-w1", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-ha-w2", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-ha-w3", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hc-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hc-w1", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hc-w2", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hd-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hd-w1", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hd-w2", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-hd-w3", {"yPercent":118,"opacity":0});
+  gsap.set("#moonky-irs", {"clipPath":"circle(0px at 540px 930px)"});
+  gsap.set("#moonky-irs-rg", {"scale":0.001,"opacity":0});
+  gsap.set("#moonky-h1-cam", {"transformOrigin":"1615px 399px"});
+  gsap.set("#moonky-tint", {"color":"#9cc903"});
+  gsap.set("#moonky-sv1", {"opacity":0});
+  gsap.set("#moonky-sv2", {"opacity":0});
+  gsap.set("#moonky-sv3", {"opacity":0});
+  gsap.set("#moonky-sv4", {"opacity":0});
+  gsap.set("#moonky-sv5", {"opacity":0});
+  gsap.set("#moonky-mn", {"transformOrigin":"540px 930px"});
+  gsap.set("#moonky-sb2", {"transformOrigin":"0% 50%"});
+  gsap.set("#moonky-sb2-s1", {"transformOrigin":"50% 50%"});
+  gsap.set("#moonky-sb1", {"transformOrigin":"0% 50%"});
+  gsap.set("#moonky-sb1-s1", {"transformOrigin":"50% 50%"});
+  gsap.set("#moonky-sb1-s2", {"transformOrigin":"50% 50%"});
+  gsap.set("#moonky-hc-l1", {"transformOrigin":"0% 60%"});
+  tl.fromTo("#moonky-st", {"y":0}, {"y":-46,"duration":9.172,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-mn-d", {"--sx":"139.2px"}, {"--sx":"43.2px","duration":0.6,"ease":"expo.out","immediateRender":false}, 1.794);
+  tl.fromTo("#moonky-mn-d", {"--sx":"43.2px"}, {"--sx":"-43.2px","duration":0.6,"ease":"expo.out","immediateRender":false}, 3.629);
+  tl.fromTo("#moonky-mn-d", {"--sx":"-43.2px"}, {"--sx":"-139.2px","duration":0.6,"ease":"expo.out","immediateRender":false}, 5.463);
+  tl.fromTo("#moonky-mn-d", {"--sx":"-139.2px"}, {"--sx":"-312px","duration":0.6,"ease":"expo.out","immediateRender":false}, 7.297);
+  tl.fromTo("#moonky-mn-g", {"opacity":0.5}, {"opacity":0.66,"duration":0.8,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-mn-g", {"opacity":0.66}, {"opacity":0.85,"duration":0.7,"ease":"power2.out","immediateRender":false}, 7.297);
+  tl.fromTo("#moonky-mn-d", {"scale":1.035}, {"scale":1,"duration":0.45,"ease":"power2.out","immediateRender":false}, 3.669);
+  tl.fromTo("#moonky-mn-d", {"scale":1.035}, {"scale":1,"duration":0.45,"ease":"power2.out","immediateRender":false}, 5.503);
+  tl.fromTo("#moonky-mn-d", {"scale":1.035}, {"scale":1,"duration":0.45,"ease":"power2.out","immediateRender":false}, 7.337);
+  tl.fromTo("#moonky-d2w", {"opacity":0}, {"opacity":0.5,"duration":0.6,"ease":"power1.out","immediateRender":false}, 2.084);
+  tl.fromTo("#moonky-d2-cam", {"x":40,"y":0,"scale":1}, {"x":-50,"y":10,"scale":1,"duration":1.185,"ease":"sine.inOut","immediateRender":false}, 2.084);
+  tl.fromTo("#moonky-d2-cam", {"x":-50,"y":10,"scale":1}, {"x":-340,"y":224,"scale":1.9,"duration":0.4,"ease":"power2.in","immediateRender":false}, 3.269);
+  tl.fromTo("#moonky-d2w", {"opacity":0.5}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 3.569);
+  tl.fromTo("#moonky-h1-cam", {"scale":1.13,"x":0,"y":0}, {"scale":1,"x":0,"y":0,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-h1-cam", {"scale":1,"x":0,"y":0}, {"scale":1.05,"x":-20,"y":0,"duration":1.234,"ease":"sine.inOut","immediateRender":false}, 0.550);
+  tl.fromTo("#moonky-h1-cam", {"scale":1.05,"x":-20,"y":0}, {"scale":0.3850024062650392,"x":125.83634247714053,"y":-74.26261014131342,"duration":0.88,"ease":"expo.inOut","immediateRender":false}, 1.784);
+  tl.fromTo("#moonky-h1-sh", {"opacity":0}, {"opacity":1,"duration":0.4,"ease":"power1.out","immediateRender":false}, 2.434);
+  tl.fromTo("#moonky-h1-tl", {"rotationY":0,"rotationX":0}, {"rotationY":11,"rotationX":-3,"duration":0.6349999999999998,"ease":"sine.inOut","immediateRender":false}, 2.634);
+  tl.fromTo("#moonky-h1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.95,"ease":"power2.inOut","immediateRender":false}, 0.300);
+  tl.fromTo("#moonky-h1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.75,"ease":"power2.inOut","immediateRender":false}, 2.734);
+  tl.fromTo("#moonky-h1", {"x":0,"opacity":1}, {"x":-1250,"opacity":0.2,"duration":0.34,"ease":"power3.in","immediateRender":false}, 3.309);
+  tl.set("#moonky-h1", {"opacity":0}, 3.659);
+  tl.fromTo("#moonky-svsh", {"opacity":0}, {"opacity":1,"duration":0.3,"ease":"power1.out","immediateRender":false}, 3.619);
+  tl.fromTo("#moonky-svsh", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 5.263);
+  tl.fromTo("#moonky-sv0", {"opacity":0,"scale":1.1}, {"opacity":1,"scale":1,"duration":0.24,"ease":"power2.out","immediateRender":false}, 3.549);
+  tl.set("#moonky-sv0", {"opacity":0}, 4.133);
+  tl.fromTo("#moonky-sv0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 3.689);
+  tl.set("#moonky-sv1", {"opacity":1}, 4.133);
+  tl.set("#moonky-sv1", {"opacity":0}, 4.354);
+  tl.fromTo("#moonky-sv1-cam", {"scale":1.08,"x":46}, {"scale":1,"x":0,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.133);
+  tl.fromTo("#moonky-sv1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.3,"ease":"power2.inOut","immediateRender":false}, 4.153);
+  tl.set("#moonky-tint", {"color":"#ee7ea1"}, 4.133);
+  tl.set("#moonky-sv2", {"opacity":1}, 4.354);
+  tl.set("#moonky-sv2", {"opacity":0}, 4.574);
+  tl.fromTo("#moonky-sv2-cam", {"scale":1.08,"x":-46}, {"scale":1,"x":0,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.354);
+  tl.fromTo("#moonky-sv2-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.3,"ease":"power2.inOut","immediateRender":false}, 4.373);
+  tl.set("#moonky-tint", {"color":"#f49e0b"}, 4.354);
+  tl.set("#moonky-sv3", {"opacity":1}, 4.574);
+  tl.set("#moonky-sv3", {"opacity":0}, 4.806);
+  tl.fromTo("#moonky-sv3-cam", {"scale":1.08,"x":46}, {"scale":1,"x":0,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.574);
+  tl.fromTo("#moonky-sv3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.3,"ease":"power2.inOut","immediateRender":false}, 4.594);
+  tl.set("#moonky-tint", {"color":"#734545"}, 4.574);
+  tl.set("#moonky-sv4", {"opacity":1}, 4.806);
+  tl.set("#moonky-sv4", {"opacity":0}, 5.039);
+  tl.fromTo("#moonky-sv4-cam", {"scale":1.08,"x":-46}, {"scale":1,"x":0,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.806);
+  tl.fromTo("#moonky-sv4-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.3,"ease":"power2.inOut","immediateRender":false}, 4.826);
+  tl.set("#moonky-tint", {"color":"#101013"}, 4.806);
+  tl.set("#moonky-sv5", {"opacity":1}, 5.039);
+  tl.fromTo("#moonky-sv5-cam", {"scale":1.08,"x":46}, {"scale":1,"x":0,"duration":0.3,"ease":"expo.out","immediateRender":false}, 5.039);
+  tl.fromTo("#moonky-sv5-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.3,"ease":"power2.inOut","immediateRender":false}, 5.059);
+  tl.set("#moonky-tint", {"color":"#7a5554"}, 5.039);
+  tl.fromTo("#moonky-sv5", {"scale":1,"opacity":1}, {"scale":0.3,"opacity":0,"duration":0.24,"ease":"power2.in","immediateRender":false}, 5.283);
+  tl.fromTo("#moonky-tint", {"opacity":0}, {"opacity":0.3,"duration":0.3,"ease":"power1.out","immediateRender":false}, 3.609);
+  tl.fromTo("#moonky-tint", {"opacity":0.3}, {"opacity":0,"duration":0.3,"ease":"power1.in","immediateRender":false}, 5.303);
+  tl.fromTo("#moonky-svk", {"opacity":0,"x":-24}, {"opacity":1,"x":0,"duration":0.45,"ease":"expo.out","immediateRender":false}, 3.689);
+  tl.fromTo("#moonky-svf", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.45,"ease":"expo.out","immediateRender":false}, 3.729);
+  tl.fromTo("#moonky-svfc", {"y":0}, {"y":-74,"duration":0.2,"ease":"expo.out","immediateRender":false}, 4.113);
+  tl.fromTo("#moonky-svfc", {"y":-74}, {"y":-148,"duration":0.2,"ease":"expo.out","immediateRender":false}, 4.334);
+  tl.fromTo("#moonky-svfc", {"y":-148}, {"y":-222,"duration":0.2,"ease":"expo.out","immediateRender":false}, 4.554);
+  tl.fromTo("#moonky-svfc", {"y":-222}, {"y":-296,"duration":0.2,"ease":"expo.out","immediateRender":false}, 4.787);
+  tl.fromTo("#moonky-svfc", {"y":-296}, {"y":-370,"duration":0.2,"ease":"expo.out","immediateRender":false}, 5.019);
+  tl.fromTo("#moonky-svk", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 5.263);
+  tl.fromTo("#moonky-svf", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 5.263);
+  tl.fromTo("#moonky-mn", {"scale":1}, {"scale":0.8,"duration":0.7,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-mn", {"scale":0.8}, {"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 7.237);
+  tl.fromTo("#moonky-orb-p0", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-p1", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.257);
+  tl.fromTo("#moonky-orb-p2", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.271);
+  tl.fromTo("#moonky-orb-p3", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.285);
+  tl.fromTo("#moonky-orb-p4", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.299);
+  tl.fromTo("#moonky-orb-p5", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.313);
+  tl.fromTo("#moonky-orb-p6", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.327);
+  tl.fromTo("#moonky-orb-p7", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.341);
+  tl.fromTo("#moonky-orb-p8", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.355);
+  tl.fromTo("#moonky-orb-p9", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.369);
+  tl.fromTo("#moonky-orb-p10", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.383);
+  tl.fromTo("#moonky-orb-p11", {"scale":0,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.397);
+  tl.fromTo("#moonky-orb-spin", {"rotation":-85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i0", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i1", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i2", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i3", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i4", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i5", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i6", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i7", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i8", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i9", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i10", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-i11", {"rotation":85}, {"rotation":0,"duration":1.1,"ease":"expo.out","immediateRender":false}, 5.243);
+  tl.fromTo("#moonky-orb-spin", {"rotation":0}, {"rotation":20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i0", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i1", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i2", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i3", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i4", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i5", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i6", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i7", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i8", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i9", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i10", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-i11", {"rotation":0}, {"rotation":-20,"duration":0.694,"ease":"none","immediateRender":false}, 6.343);
+  tl.fromTo("#moonky-orb-p0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.003);
+  tl.fromTo("#moonky-orb-p1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.073);
+  tl.fromTo("#moonky-orb-p2-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.143);
+  tl.fromTo("#moonky-orb-p3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.213);
+  tl.fromTo("#moonky-orb-p4-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.283);
+  tl.fromTo("#moonky-orb-p5-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.353);
+  tl.fromTo("#moonky-orb-p6-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.423);
+  tl.fromTo("#moonky-orb-p7-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.493);
+  tl.fromTo("#moonky-orb-p8-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.563);
+  tl.fromTo("#moonky-orb-p9-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.633);
+  tl.fromTo("#moonky-orb-p10-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.703);
+  tl.fromTo("#moonky-orb-p11-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 6.773);
+  tl.fromTo("#moonky-orb", {"scale":1.035}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 5.967);
+  tl.fromTo("#moonky-orb", {"scale":1,"opacity":1}, {"scale":2.5,"opacity":0,"duration":0.3,"ease":"power3.in","immediateRender":false}, 7.037);
+  tl.fromTo("#moonky-sb2", {"scaleX":0,"opacity":0}, {"scaleX":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 5.663);
+  tl.fromTo("#moonky-sb2-v0", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.763);
+  tl.fromTo("#moonky-sb2-l0", {"opacity":0}, {"opacity":1,"duration":0.4,"ease":"power1.out","immediateRender":false}, 5.763);
+  tl.fromTo("#moonky-sb2-v1", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.987);
+  tl.fromTo("#moonky-sb2-l1", {"opacity":0}, {"opacity":1,"duration":0.4,"ease":"power1.out","immediateRender":false}, 5.987);
+  tl.fromTo("#moonky-sb2-s1", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 5.947);
+  tl.fromTo("#moonky-sb2", {"y":0}, {"y":40,"duration":0.24,"ease":"power2.in","immediateRender":false}, 7.077);
+  tl.fromTo("#moonky-sb2", {"scaleX":1,"opacity":1}, {"scaleX":1,"opacity":0,"duration":0.22,"ease":"power1.in","immediateRender":false}, 7.097);
+  tl.fromTo("#moonky-sb1-k", {"opacity":0,"x":-24}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.954);
+  tl.fromTo("#moonky-sb1", {"scaleX":0,"opacity":0}, {"scaleX":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 1.954);
+  tl.fromTo("#moonky-sb1-v0", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.054);
+  tl.fromTo("#moonky-sb1-v1", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.254);
+  tl.fromTo("#moonky-sb1-s1", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 2.214);
+  tl.fromTo("#moonky-sb1-v2", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.259);
+  tl.fromTo("#moonky-sb1-s2", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 2.219);
+  tl.fromTo("#moonky-sb1", {"y":0}, {"y":40,"duration":0.24,"ease":"power2.in","immediateRender":false}, 3.369);
+  tl.fromTo("#moonky-sb1", {"scaleX":1,"opacity":1}, {"scaleX":1,"opacity":0,"duration":0.22,"ease":"power1.in","immediateRender":false}, 3.389);
+  tl.fromTo("#moonky-sb1-k", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 3.369);
+  tl.fromTo("#moonky-lk", {"opacity":0,"scale":1.55}, {"opacity":1,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 7.137);
+  tl.fromTo("#moonky-lk-cam", {"y":0,"rotation":0}, {"y":-16,"rotation":-1.2,"duration":1.3350000000000009,"ease":"sine.inOut","immediateRender":false}, 7.837);
+  tl.fromTo("#moonky-lk-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.85,"ease":"power2.inOut","immediateRender":false}, 7.755);
+  tl.fromTo("#moonky-lw", {"opacity":0,"x":30}, {"opacity":1,"x":0,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.200);
+  tl.fromTo("#moonky-lw", {"x":0,"y":0}, {"x":-342,"y":153,"duration":0.6,"ease":"expo.inOut","immediateRender":false}, 7.137);
+  tl.fromTo("#moonky-hm", {"opacity":0,"scaleX":1.3}, {"opacity":1,"scaleX":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 7.637);
+  tl.fromTo("#moonky-url-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 7.657);
+  tl.fromTo("#moonky-pz", {"opacity":0,"scale":0.86}, {"opacity":1,"scale":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 7.887);
+  tl.fromTo("#moonky-ha-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.033);
+  tl.fromTo("#moonky-ha-w1", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.433);
+  tl.fromTo("#moonky-ha-w2", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.840);
+  tl.fromTo("#moonky-ha-w3", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.340);
+  tl.fromTo("#moonky-ha-w0", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 2.840);
+  tl.fromTo("#moonky-ha-w1", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 2.870);
+  tl.fromTo("#moonky-ha-w2", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 2.900);
+  tl.fromTo("#moonky-ha-w3", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 2.930);
+  tl.fromTo("#moonky-hc-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 3.020);
+  tl.fromTo("#moonky-hc-w1", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 3.200);
+  tl.fromTo("#moonky-hc-w2", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 3.480);
+  tl.fromTo("#moonky-hc-l1", {"scale":1.05}, {"scale":1,"duration":0.35,"ease":"power2.out","immediateRender":false}, 3.669);
+  tl.fromTo("#moonky-hc-w0", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 4.313);
+  tl.fromTo("#moonky-hc-w1", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 4.343);
+  tl.fromTo("#moonky-hc-w2", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 4.373);
+  tl.fromTo("#moonky-hd-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 4.553);
+  tl.fromTo("#moonky-hd-w1", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.180);
+  tl.fromTo("#moonky-hd-w2", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.900);
+  tl.fromTo("#moonky-hd-w3", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 6.473);
+  tl.fromTo("#moonky-hd-w0", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 7.017);
+  tl.fromTo("#moonky-hd-w1", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 7.042);
+  tl.fromTo("#moonky-hd-w2", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 7.067);
+  tl.fromTo("#moonky-hd-w3", {"yPercent":0,"opacity":1}, {"yPercent":-118,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 7.092);
+  tl.fromTo("#moonky-fl0", {"opacity":0.2}, {"opacity":0,"duration":0.4,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-fl3", {"opacity":0.12}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 5.503);
+  tl.fromTo("#moonky-irs", {"clipPath":"circle(0px at 540px 930px)"}, {"clipPath":"circle(1158px at 540px 930px)","duration":0.46,"ease":"power3.in","immediateRender":false}, 8.712);
+  tl.fromTo("#moonky-irs-rg", {"scale":0.001,"opacity":0}, {"scale":1,"opacity":1,"duration":0.46,"ease":"power3.in","immediateRender":false}, 8.712);
+  tl.set({}, {}, 9.172);
+  window.__timelines["moonky"] = tl;
+  </script>
+</div>
+</template></body></html>

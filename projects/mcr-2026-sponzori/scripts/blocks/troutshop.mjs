@@ -106,7 +106,7 @@ export default function troutshop(ctx) {
   fx.float(ctx, pu.cam, t2 + 0.5, t3 - 0.4, { y: -12, rot: 1.2, period: ctx.BAR / 2 });
   fx.sweep(ctx, 'pu', t2 + 0.5, { d: 0.85 });
   ctx.tl.fromTo(pu.sel, { x: 0, rotation: 0, opacity: 1 }, { x: 1300, rotation: 10, opacity: 1, duration: 0.34, ease: 'power3.in' }, t3 - 0.34);
-  html += ts.callout(ctx, { id: 'co2', name: 'Nories Crankin’ Pupa', sub: 'Floating · 34 mm · 2,6 g', x: L, y: 1350, t: t2 + 0.45, t1: t3 - 0.32 });
+  html += ts.callout(ctx, { id: 'co2', name: 'Nories Crankin’ Pupa', sub: 'Floating · 34 mm · 2,6 g', x: L, y: 1350, t: t2 + 0.45, t1: t3 - 0.4 });
   // sunset: the red sun shrinks back into the horizon on the bar-3 downbeat
   ctx.tl.fromTo(ctx.sel('sun'), { scale: 7.6 }, { scale: 0, duration: 0.32, ease: 'power3.in' }, t3 - 0.32);
   ctx.tl.fromTo(ctx.sel('ry2-w'), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'none' }, t3 - 0.3);
@@ -138,11 +138,11 @@ export default function troutshop(ctx) {
   // ---------- kinetic type (VO-synced) ----------
   const H1 = ts.lines(ctx, { id: 'hl1', lines: [[{ w: 'Specialista' }], [{ w: 'na' }, { w: 'pstruhy', c: RED }]], y: 410, sizes: [176, 164, 152, 140], times: [tSpec - 0.1, Math.min(tNa - 0.1, tSpec + 0.32)], out: tRod - 0.34 });
   html += H1.html;
-  const H2 = ts.lines(ctx, { id: 'hl2', lines: [[{ w: 'Rodinná firma' }], [{ w: 'od roku' }]], y: 410, sizes: [132, 124, 116, 108], times: [tRod - 0.08, tOd - 0.1], out: t3 - 0.3 });
+  const H2 = ts.lines(ctx, { id: 'hl2', lines: [[{ w: 'Rodinná firma' }], [{ w: 'od roku' }]], y: 410, sizes: [132, 124, 116, 108], times: [tRod - 0.08, tOd - 0.1], out: t3 - 0.4 });   // gone before the bar-3 downbeat
   html += H2.html;
   html += fx.odometer(ctx, { id: 'yr', value: '1999', x: L - 6, y: 410 + H2.h + 6, size: 270, font: 'Anton', wght: 400, color: INK, t: tYear - 0.1, d: 0.7, stagger: 0.06 });
   ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, tYear - 0.14);
-  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 1, y: 0 }, { opacity: 0, y: -60, duration: 0.28, ease: 'power3.in' }, t3 - 0.3);
+  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 1, y: 0 }, { opacity: 0, y: -60, duration: 0.26, ease: 'power3.in' }, t3 - 0.34);
   // URL tag (top right, mirrors the TA plate) from the spoken „Troutshop“ until the lockup takes over
   html += `<div class="ts-tag" id="${ctx.id('tag')}" style="right:${ctx.safe.right}px;top:276px"><i></i>${ctx.esc('troutshop.eu')}</div>`;
   ctx.tl.fromTo(ctx.sel('tag'), { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, Math.max(0.12, vo('troutshop', 0.25) - 0.05));

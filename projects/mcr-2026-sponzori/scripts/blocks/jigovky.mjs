@@ -184,9 +184,9 @@ export default function jigovky(ctx) {
       fx.sweep(ctx, `lh${i}`, t + 0.04, { d: 0.42 });
       if (i) ctx.tl.hit(ctx.sel('lnr'), { scale: 1.05 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t);
     });
-    // exit: zoom-through (lens + ring blow up and vanish) ACROSS the downbeat, the first wall tiles land over it → the kick frame is never empty
-    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.7, duration: 0.24, ease: 'power2.in' }, B3 - 0.2);
-    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.85, duration: 0.24, ease: 'power2.in' }, B3 - 0.2);
+    // exit: zoom-through (lens + ring blow up and vanish) INTO the downbeat while the first wall tiles already land → the kick frame is never empty
+    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.7, duration: 0.2, ease: 'power2.in' }, B3 - 0.2);
+    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.85, duration: 0.2, ease: 'power2.in' }, B3 - 0.2);
   }
   // colour selector: 7 colourways of Tungsten HD BARBLESS, the ring sits on the colour in the lens
   {
@@ -257,7 +257,7 @@ export default function jigovky(ctx) {
     const lbl = `<div class="jg-lbl" style="${J.FN}"><span style="display:block;font-size:24px;opacity:.82;letter-spacing:.1em">${ctx.esc(ctx.nb(p.label[0]))}</span><span style="display:block;font-size:38px;line-height:1.05;color:${C.yellow};letter-spacing:.04em;margin-top:2px;${/\d\s?g$/.test(p.label[1]) ? 'text-transform:none;' : ''}">${ctx.esc(ctx.nb(p.label[1]))}</span></div>`;
     html += `<div class="jg-tile" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}">${prod}${lbl}</div>`;
     tiles.push({ id, cx: x + w / 2, cy: y + h / 2 });
-    const t = tWall - 0.07 + i * 0.04;                                    // first tiles already up ON the downbeat, all 10 in ≈ 0.45 s
+    const t = tWall - 0.12 + i * 0.04;                                    // first tiles already up ON the downbeat, all 10 in ≈ 0.45 s
     ctx.tl.fromTo(ctx.sel(id), { opacity: 0, scale: 0.84, y: 46 }, { opacity: 1, scale: 1, y: 0, duration: 0.36, ease: 'expo.out' }, t);
     ctx.tl.fromTo(ctx.sel(`${id}p`), { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t + 0.05);
   });
@@ -330,14 +330,14 @@ export function hook(ctx) {
   const heads = [PR.fluo, PR.pink, PR.red];
   // staircase DOWN-RIGHT: each eye loop rises right of the ball above it and each shank runs under it → nothing crosses;
   // red stays left of the Reels UI column (x < 940 below y 900) and above the caption zone (y < 1460)
-  const pos = [[400, 905], [610, 1115], [820, 1325]];
+  const pos = [[400, 945], [610, 1150], [820, 1355]];
   heads.forEach((p, i) => {
     const hp = 200, s = Math.min(1.13, hp / p.hpx);
     const P = J.place(ctx, { id: `p${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: pos[i][0], y: pos[i][1], ground: 'none', sweepOpacity: 0.32 });
     html += P.html;
     const t = Math.max(0, (ctx.beats[i] ?? i * ctx.BEAT) - 0.02);
     // the first head is on screen on frame 1 (slam settle), the next two slam in on beats 2 and 3
-    if (i === 0) ctx.tl.fromTo(P.sel, { scale: 1.2, x: -40 }, { scale: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+    if (i === 0) ctx.tl.fromTo(P.sel, { scale: 1.12, x: -40 }, { scale: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0);
     else ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: -140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, t);
     fx.sweep(ctx, `p${i}`, t + 0.12, { d: 0.55 });
   });

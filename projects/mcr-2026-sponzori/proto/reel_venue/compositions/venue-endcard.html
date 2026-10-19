@@ -35,6 +35,8 @@
   gsap.set("#venue-endcard-ews2", {"x":0,"opacity":0.55});
   gsap.set("#venue-endcard-ews3", {"x":0,"opacity":0.55});
   gsap.set("#venue-endcard-eet", {"x":0,"y":0});
+  gsap.set("#venue-endcard-eet-rv", {"yPercent":100});
+  gsap.set("#venue-endcard-eet-in", {"yPercent":-100});
   gsap.set("#venue-endcard-eb0", {"x":0,"y":0,"opacity":0});
   gsap.set("#venue-endcard-eb1", {"x":0,"y":0,"opacity":0});
   gsap.set("#venue-endcard-eb2", {"x":0,"y":0,"opacity":0});
@@ -56,6 +58,8 @@
   tl.fromTo("#venue-endcard-ews2", {"x":0,"opacity":0.55}, {"x":-48.68796307069715,"opacity":1,"duration":3.669,"ease":"sine.inOut","immediateRender":false}, 0.000);
   tl.fromTo("#venue-endcard-ews3", {"x":0,"opacity":0.55}, {"x":-39.3504425289575,"opacity":1,"duration":3.669,"ease":"sine.inOut","immediateRender":false}, 0.000);
   tl.fromTo("#venue-endcard-eet", {"x":0,"y":0}, {"x":-40,"y":-30,"duration":3.669,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-endcard-eet-rv", {"yPercent":100}, {"yPercent":0,"duration":0.9,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-endcard-eet-in", {"yPercent":-100}, {"yPercent":0,"duration":0.9,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#venue-endcard-eb0", {"x":0,"y":0}, {"x":13.617803959641606,"y":-364.535016544473,"duration":2.072658225201303,"ease":"power1.in","immediateRender":false}, 1.074);
   tl.fromTo("#venue-endcard-eb0", {"opacity":0}, {"opacity":0.45604120582836916,"duration":0.25,"ease":"none","immediateRender":false}, 1.074);
   tl.fromTo("#venue-endcard-eb0", {"opacity":0.45604120582836916}, {"opacity":0,"duration":0.3,"ease":"none","immediateRender":false}, 2.847);
@@ -80,12 +84,12 @@
   tl.fromTo("#venue-endcard-eb7", {"x":0,"y":0}, {"x":-11.651738266227767,"y":-460.6459735762022,"duration":2.2632545507804025,"ease":"power1.in","immediateRender":false}, 0.423);
   tl.fromTo("#venue-endcard-eb7", {"opacity":0}, {"opacity":0.5163442777446472,"duration":0.25,"ease":"none","immediateRender":false}, 0.423);
   tl.fromTo("#venue-endcard-eb7", {"opacity":0.5163442777446472}, {"opacity":0,"duration":0.3,"ease":"none","immediateRender":false}, 2.387);
-  tl.fromTo("#venue-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.25,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#venue-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
-  tl.fromTo("#venue-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
-  tl.fromTo("#venue-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
-  tl.fromTo("#venue-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
-  tl.fromTo("#venue-endcard-ex", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.750);
+  tl.fromTo("#venue-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.22,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.270);
+  tl.fromTo("#venue-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.350);
+  tl.fromTo("#venue-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.410);
+  tl.fromTo("#venue-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.530);
+  tl.fromTo("#venue-endcard-ex", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.580);
   tl.set({}, {}, 3.669);
   window.__timelines["venue-endcard"] = tl;
   </script>

@@ -100,7 +100,7 @@ export default function velkaryba(ctx) {
   const tWhip = vs('Shimano', ctx.at(2, 2), ctx.at(2, 2), ctx.at(2, 2));        // 4.58 (rod lands on „Shimano“)
   const tTry = vs('vyzkoušíte', ctx.at(2, 3), ctx.at(2, 3), t3);               // 5.02
   const tWater = vs('přímo', ctx.at(3, 1), ctx.at(3, 1), ctx.at(3, 2));         // 5.95
-  const OUT_D = 0.44;
+  const OUT_D = 0.4;
 
   // =============== bar 0 · VŠE NA PŘÍVLAČ · spoon strobe on the 8ths ===============
   let s0 = fx.field(ctx, { id: 'f0', kind: 'radial', c1: '#1f4f8a', c2: DEEP, at: '50% 62%' });
@@ -142,7 +142,7 @@ export default function velkaryba(ctx) {
   ctx.tl.set(ctx.sel('slam'), { transformOrigin: `50% ${Y0}px` }, 0);
   ctx.tl.fromTo(ctx.sel('slam'), { scale: 1.08 }, { scale: 1, duration: 0.42, ease: 'expo.out' }, 0);
   html += scene('sc0', 0, t1, `<div class="fx-full" id="${ctx.id('slam')}">${s0}</div>`);
-  fx.flash(ctx, 0, { id: 'fl0', color: '#9cc4f0', peak: 0.26, d: 0.26, blend: 'screen' });
+  fx.flash(ctx, 0, { id: 'fl0', color: '#9cc4f0', peak: 0.18, d: 0.24, blend: 'screen' });
 
   // =============== bars 1–2½ · SPECIÁLKA Z OLOMOUCE · Shimano Vanquish FA CE studio ===============
   let s1 = `<div class="fx-field" id="${ctx.id('f1')}" style="background:radial-gradient(90% 62% at 55% 60%, #21528f 0%, ${DEEP} 56%, ${INK} 100%)"></div>`;
@@ -251,7 +251,8 @@ export default function velkaryba(ctx) {
     const lx = (tw - f.w) / 2, ly = (th - 40 - f.h) / 2 + 4;
     wall += `<div class="vr-tile" id="${ctx.id(`tile${i}`)}" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;width:${tw.toFixed(1)}px;height:${th}px">`
       + `<i class="vr-tglow" style="background:linear-gradient(0deg,${ctx.rgba(lu.glow, 0.42)} 0%,${ctx.rgba(lu.glow, 0)} 62%)"></i>`
-      + `<img class="vr-lure" id="${ctx.id(`lu${i}`)}" src="${ctx.asset(lu.src)}" alt="" style="left:${lx.toFixed(1)}px;top:${ly.toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px">`
+      // background-image, not <img>: the same PNGs are <img> in the strobe (lint duplicate_media_discovery_risk)
+      + `<i class="vr-lure" id="${ctx.id(`lu${i}`)}" style="left:${lx.toFixed(1)}px;top:${ly.toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px;background:url(${ctx.asset(lu.src)}) center/100% 100% no-repeat"></i>`
       + `<div class="vr-lbl" style="bottom:12px;font-size:23px;letter-spacing:.1em;color:rgba(255,255,255,.88)">${ctx.esc(lu.brand)}</div></div>`;
     ctx.tl.fromTo(ctx.sel(`tile${i}`), { opacity: 0 }, { opacity: 1, duration: 0.07, ease: 'none' }, t);
     ctx.tl.fromTo(ctx.sel(`tile${i}`), { scale: 0.82 }, { scale: 1, duration: 0.36, ease: 'back.out(1.7)' }, t);
@@ -266,14 +267,14 @@ export default function velkaryba(ctx) {
   const gridB = GY + rows * th + (rows - 1) * gap;                       // 1120
   const fU = ctx.fit('velka-ryba.cz', { ...DISP, maxW: 840, maxLines: 1, sizes: [104, 100, 96, 92, 88, 84] });
   const UY = gridB + 132;                                                // logo 1136–1239, URL 1252–1348
-  const hu = fx.headline(ctx, { ...DISP, id: 'url', text: 'velka-ryba.cz', x: SL, y: UY, w: CW, size: fU.size, maxLines: 1, lh: 0.96, align: 'center', t: t4 + 0.1, reveal: 'lines', d: 0.45 });
+  const hu = fx.headline(ctx, { ...DISP, id: 'url', text: 'velka-ryba.cz', x: SL, y: UY, w: CW, size: fU.size, maxLines: 1, lh: 0.96, align: 'center', t: t4 + 0.06, reveal: 'lines', d: 0.45 });
   s3 += hu.html;
-  const pzS = 34, pzTxt = 'Věnuje ceny · MČR 2026', pzW = widthOf(ctx, pzTxt, pzS) + 48, pzY = UY + Math.round(fU.size * 0.96) + 26, tPz = q(4, 0, 0.5);
+  const pzS = 34, pzTxt = 'Věnuje ceny · MČR 2026', pzW = widthOf(ctx, pzTxt, pzS) + 48, pzY = UY + Math.round(fU.size * 0.96) + 26, tPz = t4 + 0.16;
   s3 += slab(ctx, 'pz', { x: (W - pzW) / 2, y: pzY, w: pzW, h: pzS * 1.42, t: tPz });
   s3 += `<div class="vr-tag" id="${ctx.id('pzt')}" style="left:${Math.round((W - pzW) / 2 + 24)}px;top:${Math.round(pzY + pzS * 0.2)}px;font-size:${pzS}px">${ctx.esc(ctx.nb(pzTxt))}</div>`;
   ctx.tl.fromTo(ctx.sel('pzt'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tPz + 0.05);
   html += scene('sc3', t4, END, s3);
-  fx.flash(ctx, t4, { id: 'fl4', color: '#cfe2ff', peak: 0.16, d: 0.28, blend: 'screen' });
+  fx.flash(ctx, t4, { id: 'fl4', color: '#cfe2ff', peak: 0.08, d: 0.22, blend: 'screen' });
 
   // =============== the sponsor logo bug (top right, opposite the TA plate) → lockup ===============
   const lg = ctx.logo(LOGO, { box: [240, ctx.plate.rect.h + 6], id: 'logo', label: 'velkaryba logo bug' });

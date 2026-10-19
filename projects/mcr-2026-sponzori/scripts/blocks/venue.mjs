@@ -6,7 +6,7 @@
 //            MÍSTO KONÁNÍ · MČR 2026 / LÍHEŇ LIBĚCHOV (VO „Hostí nás Líheň Liběchov“) → camera dives into the pond
 //   bar 1    real drone flyover (drone/final → newest draft) arriving at the pond; gold pin glued to the pond + chip
 //            „Malý Sporťáček · 24.–25. 10.“; push-in into the pond
-//   bar 2    heritage: the logo's etched trout engraves itself on navy, PSTRUŽÍ LÍHEŇ OD ROKU + gold 1934 odometer (VO „1934“),
+//   bar 2    heritage: the logo's etched trout engraves itself on navy, PSTRUŽÍ LÍHEŇ OD ROKU + gold 1934 (digits rise from the mask, VO „1934“),
 //            „Založil Karel Stutzig“; the etching dives at the camera
 //   bar 3–4  underwater: caustics, light shafts, bubbles; the brown trout (pstruh obecný) swims in as a macro, light sweeps
 //            along the spots; claim words light up with the VO; 164 m n. m. joins (never without „donedávna“)
@@ -40,11 +40,13 @@ const pondAt = (m) => {
   return [POND[POND.length - 1][1], POND[POND.length - 1][2]];
 };
 
-// drone: final delivery (data.video) wins; until it lands, the newest draft render drone/mesh/out/v<N>/ (reported as DRAFT)
+// drone: final delivery (data.video) wins; until it lands, the newest draft render drone/mesh/out/v<N>/ (reported as DRAFT).
+// A file that is still being encoded (no moov atom → ffprobe 0 s) is skipped, so a half-written v<N+1> never blanks bar 1.
 function droneOf(ctx) {
   const D = ctx.data;
-  const draft = () => { try { return fs.readdirSync(ctx.srcOf('drone/mesh/out')).filter((v) => /^v\d+$/.test(v)).sort((a, b) => +b.slice(1) - +a.slice(1)).map((v) => `drone/mesh/out/${v}/${path.basename(D.video || 'flyover_9x16.mp4')}`).find((r) => ctx.has(r)) || null; } catch { return null; } };
-  const video = D.video && ctx.has(D.video) ? D.video : draft();
+  const ok = (r) => ctx.has(r) && ffDur(ctx.srcOf(r)) > 0.5;
+  const draft = () => { try { return fs.readdirSync(ctx.srcOf('drone/mesh/out')).filter((v) => /^v\d+$/.test(v)).sort((a, b) => +b.slice(1) - +a.slice(1)).map((v) => `drone/mesh/out/${v}/${path.basename(D.video || 'flyover_9x16.mp4')}`).find(ok) || null; } catch { return null; } };
+  const video = D.video && ok(D.video) ? D.video : draft();
   if (!video) return null;
   return { video, vdur: ffDur(ctx.srcOf(video)), draft: video !== D.video };
 }
@@ -71,17 +73,20 @@ export function hook(ctx) {
   html += fx.field(ctx, { kind: 'radial', c1: '#2bb6dc', c2: DEEP, at: '50% 62%' });
   html += V.caustics(ctx, { id: 'hc', opacity: 0.12, size: 640, speed: 50 });
   html += fx.glow(ctx, { id: 'hg', x: ctx.W / 2, y: 1140, size: 1150, color: AQUA, opacity: 0.45 });
-  // question first (its height decides where the arena lens sits)
-  const H = fx.headline(ctx, { id: 'hh', text: ctx.module.meta.hook.headline, x: L, y: 400, w: CW, maxLines: 3, font: 'Bitter', wght: 900, upper: true, lh: 0.94, sizes: [124, 116, 108, 100, 92, 84], t: 0.02, d: 0.42, reveal: 'lines', stagger: 0.05, style: 'filter:drop-shadow(0 6px 16px rgba(16,40,60,.35))' });
-  const yS = 400 + H.h + 20, top = yS + 44 + 56;
+  // question first (its height decides where the arena lens sits). Frame 0 is the Reel thumbnail → the question and the lens are
+  // already there and only SETTLE (scale), nothing slides in from an empty frame.
+  const H = fx.headline(ctx, { id: 'hh', text: ctx.module.meta.hook.headline, x: L, y: 400, w: CW, maxLines: 3, font: 'Bitter', wght: 900, upper: true, lh: 0.94, sizes: [124, 116, 108, 100, 92, 84], style: 'filter:drop-shadow(0 6px 16px rgba(16,40,60,.35))' });
+  ctx.tl.set(H.sel, { transformOrigin: '0% 50%' }, 0);
+  ctx.tl.fromTo(H.sel, { scale: 1.08 }, { scale: 1, duration: 0.7, ease: 'expo.out' }, 0);
+  const yS = 400 + H.h + 34, top = yS + 44 + 52;
   const D = Math.min(760, 1700 - top), cx = ctx.W / 2, cy = top + D / 2;
   html += `<div class="fx-abs" id="${ctx.id('hd')}" style="left:${px(cx - D / 2)};top:${px(cy - D / 2)};width:${D}px;height:${D}px;border-radius:50%;box-shadow:0 40px 90px rgba(10,30,45,.45),0 0 0 6px rgba(255,255,255,.9),0 0 0 14px rgba(154,231,232,.35)"><img class="fx-img" src="${ctx.asset(V.A.disc)}" alt="" style="object-fit:contain"></div>`;
-  ctx.tl.fromTo(ctx.sel('hd'), { scale: 1.22, rotation: -16, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('hd'), { scale: 1.22, rotation: -16 }, { scale: 1, rotation: 0, duration: 0.8, ease: 'expo.out' }, 0);
   html += `<div class="fx-abs" id="${ctx.id('hpw')}" style="left:${px(cx)};top:${px(cy + 10)}">${V.pin(ctx, { id: 'hp', size: 76 })}</div>`;
   ctx.tl.fromTo(ctx.sel('hp-m'), { y: -160, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, ctx.beat(1) - 0.12);
   [ctx.beat(1), ctx.beat(2), ctx.beat(3)].forEach((t) => ctx.tl.hit(ctx.sel('hp-r'), { scale: 0.3, opacity: 1 }, { scale: 1.7, opacity: 0, duration: 0.42, ease: 'power2.out' }, t));
   html += H.html;
-  html += fx.headline(ctx, { id: 'hs', text: ctx.module.meta.hook.sub, x: L, y: yS, w: CW, maxLines: 1, ...KICK, size: 40, tracking: 0.12, color: NAVY, t: 0.2, reveal: 'fade', d: 0.35 }).html;
+  html += fx.headline(ctx, { id: 'hs', text: ctx.module.meta.hook.sub, x: L, y: yS, w: CW, maxLines: 1, ...KICK, size: 40, tracking: 0.12, color: NAVY, t: 0.08, reveal: 'fade', d: 0.35 }).html;
   fx.tOut(ctx, 'flash', { color: '#ffffff', d: 0.14 });
   return { html, css };
 }
@@ -94,11 +99,13 @@ export function endCard(ctx) {
   const E0 = V.etch(ctx, { id: 'eet', x: 430, y: 760, h: 1000, color: AQUA, opacity: 0.14 });
   html += E0.html;
   ctx.tl.fromTo(ctx.sel('eet'), { x: 0, y: 0 }, { x: -40, y: -30, duration: ctx.dur, ease: 'sine.inOut' }, 0);
+  V.reveal(ctx, 'eet', 0, { d: 0.9, dir: 'up', ease: 'expo.out' });                 // the etching draws itself on the downbeat
   html += V.bubbles(ctx, { id: 'eb', n: 8, t0: 0, t1: ctx.dur, box: [80, 1000, 920, 700], seed: 9, op: 0.6 });
-  fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.25 });
-  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
+  fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.22 });
+  // lockup starts on the downbeat with a short plate fly (0.6 s expo.inOut left ~0.45 s of empty water on the card's first beat)
+  const E = fx.endCard(ctx, { t: 0, plateFly: 0.45, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
   html += E.html;
-  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.75, reveal: 'fade', d: 0.5 }).html;
+  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.58, reveal: 'fade', d: 0.5 }).html;
   return { html, css: V.css(ctx) };
 }
 
@@ -177,11 +184,13 @@ export default function venue(ctx) {
   ctx.tl.set(ctx.sel('et'), { transformOrigin: '30% 30%' }, 0);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1 }, { scale: 1.06, duration: B3 - 0.32 - B2, ease: 'sine.inOut' }, B2);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1.06, opacity: 0.3 }, { scale: 2.6, opacity: 0, duration: 0.32, ease: 'power3.in' }, B3 - 0.32);
-  const tYr = B2 + 0.02;                                                                     // lands (~4.3 s) while the VO says „1934“ (3.9–5.4 s)
+  // 1934: digits rise out of their line mask (stagger) — no rolling counter: an odometer shows 4–5 frames of digit soup („5500“,
+  // „9613“) on the cut. Starts 0.12 s before the cut, so the downbeat frame already shows „19“ rising (cut into motion);
+  // fully set ~4.1 s while the VO says „1934“ (3.9–5.4 s).
+  const tYr = B2 - 0.12;
   const ySz = Math.min(360, Math.floor(880 / Math.max(1e-3, ctx.measure('1934', { font: 'Bitter', wght: 900, size: 1 }))));
-  let hx = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 46, tracking: 0.1, color: AQUA, t: B2 - 0.06, reveal: 'chars', stagger: 0.014, d: 0.45 }).html;
-  hx += fx.odometer(ctx, { id: 'yr', value: '1934', x: L - 8, y: 712, size: ySz, font: 'Bitter', wght: 900, color: GOLD, t: tYr, d: 0.6, spins: 0, style: 'filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))' });
-  ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tYr);
+  let hx = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 46, tracking: 0.1, color: AQUA, t: B2 - 0.1, reveal: 'chars', stagger: 0.012, d: 0.4 }).html;
+  hx += fx.headline(ctx, { id: 'yr', text: '1934', x: L - 8, y: 712, w: CW + 8, maxLines: 1, size: ySz, font: 'Bitter', wght: 900, lh: 1, color: GOLD, t: tYr, reveal: 'chars', stagger: 0.06, d: 0.5, style: 'filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))' }).html;
   hx += `<div class="fx-abs" id="${ctx.id('rule')}" style="left:${L}px;top:${712 + ySz * 1.02}px;width:420px;height:6px;border-radius:3px;background:${GOLD};transform-origin:0 50%"></div>`;
   ctx.tl.fromTo(ctx.sel('rule'), { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, tYr + 0.35);
   hx += fx.headline(ctx, { id: 'cap', text: 'Založil Karel Stutzig', x: L, y: 712 + ySz * 1.02 + 34, maxLines: 1, font: 'Montserrat', wght: 600, italic: true, size: 40, color: '#ffffff', t: tYr + 0.45, reveal: 'lines', d: 0.5 }).html;
@@ -200,43 +209,47 @@ export default function venue(ctx) {
   const TR = fx.product(ctx, { id: 'tr', src: V.A.trout, w: 1500, cx: 30 + 750, cy: 1035, ground: 'none', sweep: true, sweepAngle: 98, sweepOpacity: 0.5, pad: [0.019, 0.037, 0.019, 0.037] });
   const trUrl = ctx.asset(V.A.trout);
   s3 += TR.html.replace(`id="${ctx.id('tr-im')}" src="${trUrl}" alt="">`, `id="${ctx.id('tr-im')}" src="${trUrl}" alt="">${V.skin(ctx, { id: 'trs', src: V.A.trout, w: TR.w, h: TR.h, caus: 0.22, tintO: 0.32, size: 560, t0: B3, t1: END })}`);
-  ctx.tl.fromTo(TR.sel, { x: 1050 }, { x: 0, duration: 1.15, ease: 'expo.out' }, B3 + 0.02);
+  ctx.tl.fromTo(TR.sel, { x: 1050 }, { x: 0, duration: 1.15, ease: 'expo.out' }, B3 - 0.16);     // head already in frame on the cut
   ctx.tl.fromTo(TR.cam, { x: 0, y: 0, rotation: 0 }, { x: -60, y: -18, rotation: -1.6, duration: B5 - 0.3 - (B3 + 0.6), ease: 'sine.inOut' }, B3 + 0.6);
   ctx.tl.set(TR.cam, { transformOrigin: '22% 42%' }, 0);
   ctx.tl.fromTo(TR.cam, { scale: 1 }, { scale: 1.07, duration: B5 - 0.3 - (B3 + 0.6), ease: 'sine.inOut' }, B3 + 0.6);
   fx.tilt(ctx, 'tr', B3, B5, { ry: 7, rx: 2 });
   fx.sweep(ctx, 'tr', B3 + 0.85, { d: 1.0 });
   fx.sweep(ctx, 'tr', B4 + 0.25, { d: 1.0 });
-  ctx.tl.fromTo(TR.sel, { x: 0 }, { x: -1950, duration: 0.42, ease: 'power3.in' }, B5 - 0.3);       // darts off as the trophy rises
-  ctx.tl.set(ctx.sel('tr-im'), { filter: 'blur(6px)' }, B5 - 0.2);
+  ctx.tl.fromTo(TR.sel, { x: 0 }, { x: -1950, duration: 0.44, ease: 'power3.in' }, B5 - 0.5);       // darts off → gone before the beat
+  ctx.tl.set(ctx.sel('tr-im'), { filter: 'blur(6px)' }, B5 - 0.36);
   // claim: words light up with the VO (both parts of the fact always together, „donedávna“ first)
   const tClaim = Math.min(B3 + 0.1, vo('donedávna', B3, B3 - 0.1, B3 + 0.5) - 0.12);
-  const K = V.karaoke(ctx, { id: 'kl', text: 'Donedávna nejníže položené pstruhařství v Evropě', x: L, y: 418, w: CW, maxLines: 3, sizes: [104, 98, 92, 86, 80], font: 'Bitter', wght: 800, lh: 1.0, t: tClaim, dim: 0.32, times: (tok) => V.voTimes(ctx, tok, { from: B3 - 0.4, fallback: tok.map((_, i) => B3 + 0.2 + i * 0.6) }), style: 'filter:drop-shadow(0 6px 18px rgba(8,30,44,.45))' });
+  // dim words at .32 vanished into the caustics → .5 keeps the whole sentence readable, the spoken word still lights up
+  const K = V.karaoke(ctx, { id: 'kl', text: 'Donedávna nejníže položené pstruhařství v Evropě', x: L, y: 418, w: CW, maxLines: 3, sizes: [104, 98, 92, 86, 80], font: 'Bitter', wght: 800, lh: 1.0, t: tClaim, dim: 0.5, times: (tok) => V.voTimes(ctx, tok, { from: B3 - 0.4, fallback: tok.map((_, i) => B3 + 0.2 + i * 0.6) }), style: 'filter:drop-shadow(0 6px 18px rgba(8,30,44,.5))' });
   s3 += K.html;
-  ctx.tl.fromTo(`${K.sel} .fx-ln > span`, { yPercent: 0, opacity: 1 }, { yPercent: -125, opacity: 0, duration: 0.3, ease: 'power3.in', stagger: 0.04 }, B5 - 0.32);
-  // 164 m n. m. (joins on bar 4, under the claim)
-  const t164 = B4 - 0.02, aSz = 230, aY = 1196;
-  let al = fx.odometer(ctx, { id: 'alt', value: '164', x: L - 6, y: aY, size: aSz, font: 'Bitter', wght: 900, color: GOLD, t: t164, d: 0.5, spins: 0 });
-  const aW = V.odoW(ctx, '164', { font: 'Bitter', wght: 900, size: aSz });
-  al += fx.headline(ctx, { id: 'altu', text: 'm n. m.', x: L - 6 + aW + 22, y: aY + aSz * 0.5, w: 400, maxLines: 1, font: 'Montserrat', wght: 800, italic: true, size: 66, color: AQUA, t: t164 + 0.18, reveal: 'lines', d: 0.5 }).html;
+  ctx.tl.fromTo(`${K.sel} .fx-ln > span`, { yPercent: 0, opacity: 1 }, { yPercent: -125, opacity: 0, duration: 0.3, ease: 'power3.in', stagger: 0.04 }, B5 - 0.4);
+  // 164 m n. m. (joins on bar 4, under the claim) — digits rise from the mask (no rolling counter), set on the downbeat
+  const t164 = B4 - 0.1, aSz = 230, aY = 1196;
+  const aW = ctx.measure('164', { font: 'Bitter', wght: 900, size: aSz });
+  let al = fx.headline(ctx, { id: 'alt', text: '164', x: L - 6, y: aY, w: aW + 40, maxLines: 1, size: aSz, font: 'Bitter', wght: 900, lh: 1, color: GOLD, t: t164, reveal: 'chars', stagger: 0.06, d: 0.5 }).html;
+  al += fx.headline(ctx, { id: 'altu', text: 'm n. m.', x: L - 6 + aW + 22, y: aY + aSz * 0.5, w: 400, maxLines: 1, font: 'Montserrat', wght: 800, italic: true, size: 66, color: AQUA, t: t164 + 0.2, reveal: 'lines', d: 0.5 }).html;
   s3 += `<div class="fx-full" id="${ctx.id('al')}">${al}</div>`;
-  ctx.tl.fromTo(ctx.sel('al'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, t164);
-  ctx.tl.fromTo(ctx.sel('al'), { opacity: 1, y: 0 }, { opacity: 0, y: 40, duration: 0.25, ease: 'power2.in' }, B5 - 0.3);
-  // the trophy rises from the water (bar 5)
-  const CUP = fx.product(ctx, { id: 'cup', src: V.A.trophy, h: 770, cx: W / 2, floor: 1178, ground: 'none', sweep: true, sweepAngle: 115, sweepOpacity: 0.85, pad: [0.027, 0.019, 0.027, 0.019] });
+  ctx.tl.fromTo(ctx.sel('al'), { opacity: 1, y: 0 }, { opacity: 0, y: 40, duration: 0.25, ease: 'power2.in' }, B5 - 0.4);
+  // the trophy rises from the water (bar 5): starts before the beat → solid and in place ON the downbeat (was half-transparent
+  // behind the departing trout = a muddy dissolve frame on the hit)
+  // gold glint: the stock sweep band (72 % of the width, .85 screen) bleached the whole cup for ~0.4 s right on the lockup →
+  // narrow band (44–56 %), .6, timed on the arrival so the finished poster is clean
+  const CUP = fx.product(ctx, { id: 'cup', src: V.A.trophy, h: 770, cx: W / 2, floor: 1178, ground: 'none', sweep: true, sweepAngle: 115, sweepOpacity: 0.6, pad: [0.027, 0.019, 0.027, 0.019] });
+  css += `${ctx.S} ${ctx.sel('cup-sw')}{background-image:linear-gradient(var(--sa,105deg),transparent 44%,rgba(255,255,255,.95) 50%,transparent 56%)}`;
   s3 += CUP.html;
-  fx.productIn(ctx, 'cup', B5 - 0.06, { from: 'rise', d: 0.95, dist: 820 });
-  fx.sweep(ctx, 'cup', B5 + 0.62, { d: 1.0 });
+  fx.productIn(ctx, 'cup', B5 - 0.22, { from: 'rise', d: 0.8, dist: 820 });
+  fx.sweep(ctx, 'cup', B5 + 0.12, { d: 0.85 });
   ctx.tl.fromTo(CUP.cam, { y: 0 }, { y: -12, duration: END - (B5 + 0.9), ease: 'sine.inOut' }, B5 + 0.9);
-  const tD = ctx.at(5, 1) - 0.08;
-  s3 += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: 1206, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 88, align: 'center', color: '#ffffff', t: tD, reveal: 'lines', d: 0.55, style: 'filter:drop-shadow(0 6px 16px rgba(0,0,0,.35))' }).html;
-  // lockup: venue badge (≤ TA logo) + URL
-  const tLk = ctx.at(5, 2) - 0.1;
+  const tD = ctx.at(5, 1) - 0.16;
+  s3 += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: 1206, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 88, align: 'center', color: '#ffffff', t: tD, reveal: 'lines', d: 0.5, style: 'filter:drop-shadow(0 6px 16px rgba(0,0,0,.35))' }).html;
+  // lockup: venue badge (≤ TA logo) + URL — lands one beat after the date, so the finished poster holds ≥ 0.6 s before the blob
+  const tLk = ctx.at(5, 1) + 0.06;
   const LG = ctx.logo('on_dark', { box: [128, 128], at: [tLk, END], id: 'logo', label: 'venue lockup badge' });
   const uSz = 54, uW = ctx.measure(D.url, { font: 'Montserrat', wght: 800, italic: true, size: uSz });
   const rowW = LG.w + 22 + uW, rx = (W - rowW) / 2;
   s3 += `<div class="fx-abs" id="${ctx.id('lk')}" style="left:${px(rx)};top:1312px;width:${px(rowW + 10)};height:${LG.h}px;display:flex;align-items:center;gap:22px">${LG.html}<span style="font:italic 800 ${uSz}px/1 'Montserrat';color:#fff;white-space:nowrap;text-shadow:0 4px 18px rgba(0,0,0,.35)">${ctx.esc(D.url)}</span></div>`;
-  ctx.tl.fromTo(ctx.sel('lk'), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, tLk);
+  ctx.tl.fromTo(ctx.sel('lk'), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tLk);
   html += fx.scene(ctx, 's3', B3 - 0.003, END, s3, { inD: 0.001 });
 
   // =============== title layer: LÍHEŇ LIBĚCHOV rides across the drop and the first cut ===============
@@ -246,12 +259,13 @@ export default function venue(ctx) {
   fx.chroma(ctx, N.sel, B1, { amt: 9, d: 0.4 });
 
   // =============== accents + transitions ===============
-  fx.flash(ctx, B1, { id: 'fl1', color: '#ffffff', peak: 0.5, d: 0.3 });
-  fx.flash(ctx, B2, { id: 'fl2', color: AQUA, peak: 0.3, d: 0.26, blend: 'screen' });
-  fx.flash(ctx, B3, { id: 'fl3', color: AQUA, peak: 0.75, d: 0.5, blend: 'screen' });
-  fx.flash(ctx, B4, { id: 'fl4', color: AQUA, peak: 0.16, d: 0.35, blend: 'screen' });
-  fx.flash(ctx, B5, { id: 'fl5', color: GOLD, peak: 0.26, d: 0.5, blend: 'screen' });
-  fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.32 });            // the intro zooms through to white → the drop lands on white
-  fx.tOut(ctx, 'blob', { d: 0.45 });                              // liquid out into the next world
+  // Every downbeat must show the new picture, not a wash: the old flashes (white .5 normal on the drone cut, aqua .75 screen
+  // into the water, gold .26 on the trophy) and the .32 s white tIn turned the drop and three cuts into grey/pale empty frames.
+  fx.flash(ctx, B1, { id: 'fl1', color: '#ffffff', peak: 0.2, d: 0.14, blend: 'screen' });
+  fx.flash(ctx, B3, { id: 'fl3', color: AQUA, peak: 0.28, d: 0.3, blend: 'screen' });
+  fx.flash(ctx, B4, { id: 'fl4', color: AQUA, peak: 0.14, d: 0.3, blend: 'screen' });
+  fx.flash(ctx, B5, { id: 'fl5', color: GOLD, peak: 0.12, d: 0.4, blend: 'screen' });
+  fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.12 });            // the intro zooms through to white → 1 white frame, the island hits by frame 3
+  fx.tOut(ctx, 'blob', { d: 0.4 });                               // liquid out into the next world
   return { html, css };
 }
