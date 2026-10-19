@@ -77,7 +77,7 @@ function build(mode, blockKey = null) {
   const inst = [];   // {P, part, gT0, dur, mod, prev, next}
   let DUR, music;
   if (mode === 'film') {
-    PLAN.forEach((P, i) => inst.push({ P, part: 'main', gT0: P.t0, dur: r3(P.t1 - P.t0), prev: PLAN[i - 1], next: PLAN[i + 1] }));
+    PLAN.forEach((P, i) => inst.push({ P, part: 'main', gT0: P.t0, tT0: P.t0, dur: r3(P.t1 - P.t0), prev: PLAN[i - 1], next: PLAN[i + 1] }));
     DUR = FILM_DUR;
     copyIfNewer(G.track, path.join(A.PA, 'audio/track.wav'));
     music = { src: 'assets/audio/track.wav', mediaStart: 0 };
@@ -85,7 +85,7 @@ function build(mode, blockKey = null) {
     const P = PLAN.find((p) => p.key === blockKey);
     if (!P) throw new Error(`unknown block ${blockKey} (plan keys: ${PLAN.map((p) => p.key).join(', ')})`);
     if (mode === 'block') {
-      inst.push({ P, part: 'main', gT0: 0, dur: r3(P.t1 - P.t0), prev: null, next: null });
+      inst.push({ P, part: 'main', gT0: 0, tT0: P.t0, dur: r3(P.t1 - P.t0), prev: null, next: null });
       DUR = r3(P.t1 - P.t0);
       music = { src: sliceTrack(`block_${P.key}`, P.t0, P.t1, { fadeIn: 0.04, fadeOut: 0.25 }) };
     } else {
@@ -95,9 +95,9 @@ function build(mode, blockKey = null) {
       if (P.tail) eb = 0;
       const g1 = P.tail ? P.t1 : G.downbeats[P.bar1 + 1 + eb];
       const self = { key: P.key, block: P.block };
-      if (hb) inst.push({ P, part: 'hook', gT0: 0, dur: r3(P.t0 - g0), prev: null, next: self });
-      inst.push({ P, part: 'main', gT0: r3(P.t0 - g0), dur: r3(P.t1 - P.t0), prev: hb ? self : null, next: eb ? self : null });
-      if (eb) inst.push({ P, part: 'endcard', gT0: r3(P.t1 - g0), dur: r3(g1 - P.t1), prev: self, next: null });
+      if (hb) inst.push({ P, part: 'hook', gT0: 0, tT0: g0, dur: r3(P.t0 - g0), prev: null, next: self });
+      inst.push({ P, part: 'main', gT0: r3(P.t0 - g0), tT0: P.t0, dur: r3(P.t1 - P.t0), prev: hb ? self : null, next: eb ? self : null });
+      if (eb) inst.push({ P, part: 'endcard', gT0: r3(P.t1 - g0), tT0: P.t1, dur: r3(g1 - P.t1), prev: self, next: null });
       DUR = r3(g1 - g0);
       music = { src: sliceTrack(`reel_${P.key}`, g0, g1) };
     }
@@ -109,7 +109,7 @@ function build(mode, blockKey = null) {
     const { P } = I, mod = MODS[P.block];
     const data = dataOf(P.data);
     const voInfo = I.part === 'main' && P.vo ? voFor(P.vo, { offset: P.opt.voOffset ?? C.vo.offset, dur: I.dur }) : voFor(null);
-    const ctx = makeCtx({ key: P.key, part: I.part, P, gT0: I.gT0, dur: I.dur, data, event: C.event, C, theme: mod.theme, prev: themeOf(I.prev), next: themeOf(I.next), voInfo, mod, dataOf });
+    const ctx = makeCtx({ key: P.key, part: I.part, P, gT0: I.gT0, tT0: I.tT0, dur: I.dur, data, event: C.event, C, theme: mod.theme, prev: themeOf(I.prev), next: themeOf(I.next), voInfo, mod, dataOf });
     const fn = I.part === 'hook' ? (mod.hook || defaultHook) : I.part === 'endcard' ? (mod.endCard || defaultEndCard) : mod.default;
     const r = fn(ctx) || {};
     const tlCode = typeof r.timeline === 'string' ? r.timeline : (r.timeline || ctx.tl).code('  ');

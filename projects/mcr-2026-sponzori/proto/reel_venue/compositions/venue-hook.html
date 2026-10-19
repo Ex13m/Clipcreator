@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>venue-hook · MČR 2026</title></head>
+<body><template>
+<div id="b-venue-hook" data-composition-id="venue-hook" data-width="1080" data-height="1920" data-duration="1.834">
+  <style>
+  #bw-venue-hook { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #venue-hook-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-venue-hook" class="blk blk-venue" style="--bg:#1a212e;--fg:#ffffff;--acc:#17a1c8;--acc2:#d8af64">
+    <div id="venue-hook-stage" class="blk-stage"><div class="fx-photo" id="venue-hook-hph" style="left:0px;top:0px;width:1080px;height:1920px;--d1:#000;--d2:#fff;--hs:12px;border-radius:0px;"><div class="fx-photo-in" id="venue-hook-hph-in"><img class="fx-img " src="assets/prep/libechov/venue/v01_maly_sportacek.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div><div class="fx-full" style="background:linear-gradient(180deg, rgba(26,33,46,.75), rgba(26,33,46,.1) 45%, rgba(26,33,46,.65))"></div><div class="fx-t " id="venue-hook-hh" style="left:64px;top:430px;width:952px;font-family:'Montserrat';font-weight:900;font-style:italic;font-size:92px;line-height:0.98;letter-spacing:0em;color:#9ae7e8;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="venue-hook-hh-l0" style=""><span>Místo konání</span></span></div><div class="fx-t " id="venue-hook-hn" style="left:64px;top:540px;width:952px;font-family:'Montserrat';font-weight:900;font-style:italic;font-size:150px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="venue-hook-hn-l0" style=""><span><span class="fx-c">L</span><span class="fx-c">í</span><span class="fx-c">h</span><span class="fx-c">e</span><span class="fx-c">ň</span></span></span><span class="fx-ln" id="venue-hook-hn-l1" style=""><span><span class="fx-c">L</span><span class="fx-c">i</span><span class="fx-c">b</span><span class="fx-c">ě</span><span class="fx-c">c</span><span class="fx-c">h</span><span class="fx-c">o</span><span class="fx-c">v</span></span></span></div>
+    </div>
+    <div class="fx-ov" id="venue-hook-tout" style="background:#ffffff"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#venue-hook-hph-in", {"scale":1.25,"x":0,"y":0});
+  gsap.set("#venue-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#venue-hook-hn .fx-c", {"yPercent":110,"opacity":0});
+  gsap.set("#venue-hook-tout", {"opacity":0});
+  tl.fromTo("#venue-hook-hph-in", {"scale":1.25,"x":0,"y":0}, {"scale":1.08,"x":0,"y":0,"duration":1.834,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#venue-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#venue-hook-hn .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.022,"immediateRender":false}, 0.200);
+  tl.fromTo("#venue-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.1,"ease":"power2.in","immediateRender":false}, 1.734);
+  tl.set({}, {}, 1.834);
+  window.__timelines["venue-hook"] = tl;
+  </script>
+</div>
+</template></body></html>

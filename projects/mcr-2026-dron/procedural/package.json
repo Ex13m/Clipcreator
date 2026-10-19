@@ -7,5 +7,10 @@
   "dependencies": {
     "playwright-core": "^1.55.0",
     "three": "^0.169.0"
+  },
+  "scripts": {
+    "prep": "python3 src/prep_classify.py && python3 src/prep_cls2.py && python3 src/prep_cls3.py && python3 src/prep_buildings.py && python3 src/prep_terrain_trees.py && python3 src/camera.py",
+    "render": "node render.mjs --aspect sq --frames 0-119 --ss 1 --sub 1 --msaa 4 --shadow 8192 --norefl --noprepass --skip --out frames/master",
+    "encode": "./encode.sh"
   }
 }

@@ -281,8 +281,8 @@ def run():
     # ---------- HERO 3: macro heads (tungsten colourway) from vise shots
     heads = [
         ('head_fluo', srcs.get('hd10_fluo_hf4k', f'{SRC}/p10_hd-barbless-10-fluo-0-4g.jpg'), 'HD BARBLESS #10 FLUO 0,4 g', 'https://www.jigovky.cz/hd-barbless--10--5-ks--fluo--0-4-g/', 'hero'),
-        ('head_red', srcs.get('hd_red_hf4k', f'{SRC}/p07_hd-barbless-red-1-3g.jpg'), 'HD BARBLESS #6 RED 1,3 g', 'https://www.jigovky.cz/hd-barbless/', 'swatch'),
-        ('head_pink', srcs.get('hd_pink_hf4k', f'{SRC}/p03_hd-barbless-pink-0-4g.jpg'), 'HD BARBLESS #2 PINK 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/', 'swatch'),
+        ('head_red', srcs.get('hd_red_hf4k', f'{SRC}/p07_hd-barbless-red-1-3g.jpg'), 'HD BARBLESS #6 RED 1,3 g', 'https://www.jigovky.cz/hd-barbless/', 'hero'),
+        ('head_pink', srcs.get('hd_pink_hf4k', f'{SRC}/p03_hd-barbless-pink-0-4g.jpg'), 'HD BARBLESS #2 PINK 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/', 'hero'),
         ('head_fluo2', f'{SRC}/p02_hd-barbless-fluo-0-4g.jpg', 'HD BARBLESS #2 FLUO 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--fluo--0-4-g/', 'swatch'),
         ('head_gold', f'{SRC}/p04_tungsten-h360bl-gold-0-4g.jpg', 'Tungsten H 360 BL #6 GOLD 0,4 g', 'https://www.jigovky.cz/h-360-bl--6--5-ks--gold--0-4-g/', 'swatch'),
         ('head_orange', f'{SRC}/p05_tungsten-h360bl-orange-0-4g.jpg', 'Tungsten H 360 BL #6 ORANGE 0,4 g', 'https://www.jigovky.cz/h-360-bl--6--5-ks--orange--0-4-g/', 'swatch'),

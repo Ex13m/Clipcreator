@@ -33,10 +33,10 @@ export function plateScaleAt(plate, g) {
   return 1;
 }
 
-export function makeCtx({ key, part = 'main', P, gT0, dur, data, event, C, theme, prev, next, voInfo, mod, dataOf }) {
+export function makeCtx({ key, part = 'main', P, gT0, tT0 = gT0, dur, data, event, C, theme, prev, next, voInfo, mod, dataOf }) {
   const { TK, G, plate } = OUT;
   const W = TK.canvas.w, H = TK.canvas.h, SF = TK.safe;
-  const lg = localGrid(G, gT0, gT0 + dur);
+  const lg = localGrid(G, tT0, tT0 + dur);          // beat grid in TRACK time (tT0) → block-local; gT0 = start in the OUTPUT (film / block / reel)
   const BEAT = G.beat, BAR = G.bar;
   const tl = createTL();
   const overlays = [];
@@ -46,7 +46,7 @@ export function makeCtx({ key, part = 'main', P, gT0, dur, data, event, C, theme
     data, event, C, theme: theme || {}, prev: prev || null, next: next || null, dataOf,   // dataOf(key) = another block's data (read-only)
     W, H, safe: SF, tokens: TK,
     // ---- time (block-local seconds; 0 = first downbeat of the block) ----
-    t0: 0, dur: r3(dur), gT0: r3(gT0), BEAT, BAR, beats: lg.beats, downs: lg.downs, nBars: Math.round(dur / BAR) || lg.downs.length,
+    t0: 0, dur: r3(dur), gT0: r3(gT0), tT0: r3(tT0), BEAT, BAR, beats: lg.beats, downs: lg.downs, nBars: Math.round(dur / BAR) || lg.downs.length,
     bar: (i) => (i < lg.downs.length ? lg.downs[i] : i === lg.downs.length ? r3(dur) : r3(i * BAR)),
     beat: (i) => (i < lg.beats.length ? lg.beats[i] : r3(i * BEAT)),
     at: (bar, beat = 0) => { const t0 = ctx.bar(bar); const bi = lg.beats.findIndex((b) => b >= t0 - 1e-3); return bi >= 0 && bi + beat < lg.beats.length ? lg.beats[bi + beat] : r3(t0 + beat * BEAT); },

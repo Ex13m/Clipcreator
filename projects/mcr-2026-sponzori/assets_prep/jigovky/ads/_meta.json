@@ -82,7 +82,7 @@
    ]
   },
   {
-   "role": "swatch",
+   "role": "hero",
    "product": "HD BARBLESS #6 RED 1,3 g",
    "source": "assets_prep/jigovky/ads/_src/hd_red_hf4k.png",
    "url": "https://www.jigovky.cz/hd-barbless/",
@@ -104,7 +104,7 @@
    ]
   },
   {
-   "role": "swatch",
+   "role": "hero",
    "product": "HD BARBLESS #2 PINK 0,4 g",
    "source": "assets_prep/jigovky/ads/_src/hd_pink_hf4k.png",
    "url": "https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/",
@@ -267,5 +267,15 @@
     677
    ]
   }
- ]
+ ],
+ "heroes": {
+  "H1": "hero_troutjig_barbless.png",
+  "H2 (colour trio)": [
+   "head_fluo.png",
+   "head_pink.png",
+   "head_red.png"
+  ],
+  "H3": "hero_sickle.png"
+ },
+ "display_rule": "never show a head larger than ~1.15x its head_px; swatch crops (≈100 px heads) only as chips ≤ 200 px"
 }

@@ -17,5 +17,5 @@ Results (4096 px long side; poster ×2.83, trout ×2.56, ortho ×3.28) — broug
 - `src/hf_trout_up4k.jpg` 4096×3072 ← job 0528c9f5… (…/hf_20261019_165410_0528c9f5-543d-4266-926a-91daabf0f65a.png)
 - `src/hf_orto_sportacek_up4k.jpg` 4096×4096 ← job 49363abd… (…/hf_20261019_165412_49363abd-5d59-4184-8aa5-ef2fed114427.png)
 
-**Total spent: 6 credits of 12** (3 × upscale 4k; no remove_background — local ISNet + manual fixes were clean). Balance after ≈ 483.28.
+**Total spent: 6 credits of 12** (3 × upscale 4k; no remove_background — local ISNet + manual fixes were clean). Account balance is shared with the other sponsor agents (489.28 before → 456.53 at 17:2x incl. their spend); this sponsor: 6.
 Cut-outs made from these: `ads/h3_mcr_trophy.png`, `ads/h2_trout_potocak.png`, `ads/h1_arena_disc.png`, `ads/h1_pond_island*.png`.

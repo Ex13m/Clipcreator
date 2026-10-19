@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>moonky-endcard · MČR 2026</title></head>
+<body><template>
+<div id="b-moonky-endcard" data-composition-id="moonky-endcard" data-width="1080" data-height="1920" data-duration="3.669">
+  <style>
+  #bw-moonky-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #moonky-endcard-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-moonky-endcard" class="blk blk-moonky" style="--bg:#0e1424;--fg:#ffffff;--acc:#b8ff2e;--acc2:#ff4f8b">
+    <div id="moonky-endcard-stage" class="blk-stage"><div class="fx-field" id="moonky-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #1a2442 0%, #0e1424 100%);"></div><div class="fx-mq ol" id="moonky-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#ffffff;--ow:2px;opacity:.18"><div class="fx-mq-in" id="moonky-endcard-emq-in" style="font-family:'Unbounded';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Moonky · </span><span>Moonky · </span><span>Moonky · </span></div></div><div class="fx-ec" id="moonky-endcard-ec" style="top:799.5px">
+    <div id="moonky-endcard-ec-line" style="font-family:'Inter';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
+    <div id="moonky-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#b8ff2e;margin:32.199999999999996px 0"></div>
+    <div id="moonky-endcard-ec-lw"><img id="moonky-endcard-ec-logo" class="fx-logo " src="assets/prep/moonky/logo_on_dark.png" alt="Moonky" style="width:423px; height:107px;"></div>
+    <div id="moonky-endcard-ec-url" style="margin-top:46px;font-family:'Unbounded';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">moonky.cz</div>
+  </div>
+    </div>
+    <div class="fx-ov" id="moonky-endcard-tin" style="background:#0e1424"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#moonky-endcard-emq-in", {"x":0});
+  gsap.set("#moonky-endcard-tin", {"opacity":1});
+  gsap.set("#moonky-endcard-ec-line", {"opacity":0,"y":20});
+  gsap.set("#moonky-endcard-ec-bar", {"scaleX":0});
+  gsap.set("#moonky-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
+  gsap.set("#moonky-endcard-ec-url", {"opacity":0,"y":30});
+  tl.fromTo("#moonky-endcard-emq-in", {"x":0}, {"x":-330.21,"duration":3.669,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
+  tl.fromTo("#moonky-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
+  tl.fromTo("#moonky-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
+  tl.fromTo("#moonky-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
+  tl.set({}, {}, 3.669);
+  window.__timelines["moonky-endcard"] = tl;
+  </script>
+</div>
+</template></body></html>

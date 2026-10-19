@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>activefishing-hook · MČR 2026</title></head>
+<body><template>
+<div id="b-activefishing-hook" data-composition-id="activefishing-hook" data-width="1080" data-height="1920" data-duration="1.834">
+  <style>
+  #bw-activefishing-hook { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #activefishing-hook-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-activefishing-hook" class="blk blk-activefishing" style="--bg:#f1f1ef;--fg:#111111;--acc:#e2812d;--acc2:#df5942">
+    <div id="activefishing-hook-stage" class="blk-stage"><div class="fx-field" id="activefishing-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #ffffff 0%, #f1f1ef 100%);"></div><div class="fx-glow" id="activefishing-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #e2812d, transparent);opacity:0.35;"></div><div class="fx-prod" id="activefishing-hook-hp" style="left:91.3px;top:714.4px;width:897.5px;height:651.3px;"><div class="fx-abs" id="activefishing-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="activefishing-hook-hp-sh" style="left:127.6px;width:643.2px;top:664.3px;height:65.1px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="activefishing-hook-hp-tl"><div class="fx-abs" id="activefishing-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="activefishing-hook-hp-im" src="assets/prep/activefishing/heroes/h01_nories_sofia.png" alt=""><i class="fx-prod-sweep" id="activefishing-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/activefishing/heroes/h01_nories_sofia.png);mask-image:url(assets/prep/activefishing/heroes/h01_nories_sofia.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="activefishing-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Nunito';font-weight:900;font-size:140px;line-height:0.98;letter-spacing:0em;color:#111111;text-align:left;"><span class="fx-ln" id="activefishing-hook-hh-l0" style=""><span>Přes 1 300</span></span><span class="fx-ln" id="activefishing-hook-hh-l1" style=""><span>plandavek</span></span></div><div class="fx-t " id="activefishing-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Nunito';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#e2812d;text-align:left;"><span class="fx-ln" id="activefishing-hook-hs-l0" style=""><span>activefishing.cz</span></span></div>
+    </div>
+    <div class="fx-ov" id="activefishing-hook-tout" style="background:#f1f1ef"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#activefishing-hook-hp", {"scale":1.8,"opacity":0});
+  gsap.set("#activefishing-hook-hp-cam", {"scale":1});
+  gsap.set("#activefishing-hook-hp-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#activefishing-hook-hs", {"opacity":0,"y":24});
+  gsap.set("#activefishing-hook-tout", {"opacity":0});
+  gsap.set("#activefishing-hook-hp-rot", {"rotation":-8});
+  gsap.set("#activefishing-hook-hp-cam", {"transformOrigin":"50% 50%"});
+  tl.fromTo("#activefishing-hook-hp", {"scale":1.8,"opacity":0}, {"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#activefishing-hook-hp-cam", {"scale":1}, {"scale":1.08,"duration":1.1340000000000001,"ease":"power1.inOut","immediateRender":false}, 0.700);
+  tl.fromTo("#activefishing-hook-hp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.450);
+  tl.fromTo("#activefishing-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#activefishing-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
+  tl.fromTo("#activefishing-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.714);
+  tl.set({}, {}, 1.834);
+  window.__timelines["activefishing-hook"] = tl;
+  </script>
+</div>
+</template></body></html>

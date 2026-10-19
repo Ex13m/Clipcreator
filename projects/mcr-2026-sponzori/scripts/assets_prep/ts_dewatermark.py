@@ -1,6 +1,6 @@
 """Remove the TROUTSHOP.EU watermark (black text at 7.84 % opacity, same relative
 geometry on every square product photo) by exact inverse blending:
-orig = obs / (1 - A).  Template: ts_watermark_alpha_1500.npy (1500 px geometry),
+orig = obs / (1 - A).  Template: ts_watermark_alpha_1500_band.png (1500 px geometry),
 built by ts_wm_build.py from 7 shop images + Montserrat 800 fit for hidden glyphs.
 Each glyph is then re-aligned per image (shift/strength that minimise residual
 edge energy), and a thin residual edge band on the product is median-cleaned.
@@ -8,7 +8,9 @@ Usage: python3 ts_dewatermark.py in.jpg|png out.png"""
 import sys, os, numpy as np, cv2
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-TPL = np.load(os.path.join(HERE, 'ts_watermark_alpha_1500.npy')).astype(np.float32)
+# template stored as a 16-bit PNG of the text band (rows 660-850, cols 150-1350 of a 1500 px image)
+TPL = np.zeros((1500, 1500), np.float32)
+TPL[660:850, 150:1350] = cv2.imread(os.path.join(HERE, 'ts_watermark_alpha_1500_band.png'), cv2.IMREAD_UNCHANGED).astype(np.float32) / 65535 * 0.0784
 
 def shift(A, dx, dy):
     return cv2.warpAffine(A, np.float32([[1, 0, dx], [0, 1, dy]]), A.shape[::-1], flags=cv2.INTER_LINEAR)

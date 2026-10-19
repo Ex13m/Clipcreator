@@ -726,7 +726,7 @@ window.setup = async (opts) => {
   const [hCore, hCtx, cam] = await Promise.all([fetchF32(BUILD + 'terrain_core.f32'), fetchF32(BUILD + 'terrain_ctx.f32'), fetchJSON(BUILD + 'camera.json')]);
   S.cam = cam;
   const [orthoCore, orthoCtx, orthoOrig, waterMask] = await Promise.all([
-    loadTex(BUILD + 'ortho_core.jpg'), loadTex(BUILD + 'ortho_ctx.jpg'), loadTex(DATA + 'orto_core_6400.jpg'), loadTex(BUILD + 'water_mask.png', false, 1)]);
+    loadTex(BUILD + 'ortho_core.jpg', true, 4), loadTex(BUILD + 'ortho_ctx.jpg', true, 4), loadTex(DATA + 'orto_core_6400.jpg', true, 4), loadTex(BUILD + 'water_mask.png', false, 1)]);
   S.orthoOrig = orthoOrig; S.waterMask = waterMask;
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(new THREE.Color(...P.hazeColor), P.hazeDensity);

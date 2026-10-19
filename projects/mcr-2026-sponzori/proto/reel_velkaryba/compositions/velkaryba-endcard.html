@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>velkaryba-endcard · MČR 2026</title></head>
+<body><template>
+<div id="b-velkaryba-endcard" data-composition-id="velkaryba-endcard" data-width="1080" data-height="1920" data-duration="3.669">
+  <style>
+  #bw-velkaryba-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #velkaryba-endcard-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-velkaryba-endcard" class="blk blk-velkaryba" style="--bg:#0f2541;--fg:#ffffff;--acc:#da0f00;--acc2:#7fb0e6">
+    <div id="velkaryba-endcard-stage" class="blk-stage"><div class="fx-field" id="velkaryba-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #183c6b 0%, #0f2541 100%);"></div><div class="fx-mq ol" id="velkaryba-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#ffffff;--ow:2px;opacity:.18"><div class="fx-mq-in" id="velkaryba-endcard-emq-in" style="font-family:'Oswald';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Velka-ryba.cz · </span><span>Velka-ryba.cz · </span><span>Velka-ryba.cz · </span></div></div><div class="fx-ec" id="velkaryba-endcard-ec" style="top:799.5px">
+    <div id="velkaryba-endcard-ec-line" style="font-family:'Inter';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
+    <div id="velkaryba-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#da0f00;margin:32.199999999999996px 0"></div>
+    <div id="velkaryba-endcard-ec-lw"><img id="velkaryba-endcard-ec-logo" class="fx-logo " src="assets/prep/velkaryba/logo_plate.png" alt="Velka-ryba.cz" style="width:316px; height:167px;"></div>
+    <div id="velkaryba-endcard-ec-url" style="margin-top:46px;font-family:'Oswald';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">velka-ryba.cz</div>
+  </div>
+    </div>
+    <div class="fx-ov" id="velkaryba-endcard-tin" style="background:#0f2541"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#velkaryba-endcard-emq-in", {"x":0});
+  gsap.set("#velkaryba-endcard-tin", {"opacity":1});
+  gsap.set("#velkaryba-endcard-ec-line", {"opacity":0,"y":20});
+  gsap.set("#velkaryba-endcard-ec-bar", {"scaleX":0});
+  gsap.set("#velkaryba-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
+  gsap.set("#velkaryba-endcard-ec-url", {"opacity":0,"y":30});
+  tl.fromTo("#velkaryba-endcard-emq-in", {"x":0}, {"x":-330.21,"duration":3.669,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#velkaryba-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#velkaryba-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
+  tl.fromTo("#velkaryba-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
+  tl.fromTo("#velkaryba-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
+  tl.fromTo("#velkaryba-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
+  tl.set({}, {}, 3.669);
+  window.__timelines["velkaryba-endcard"] = tl;
+  </script>
+</div>
+</template></body></html>

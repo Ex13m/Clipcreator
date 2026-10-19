@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>brollbreak · MČR 2026</title></head>
+<body><template>
+<div id="b-brollbreak" data-composition-id="brollbreak" data-width="1080" data-height="1920" data-duration="3.645">
+  <style>
+  #bw-brollbreak { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #brollbreak-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-brollbreak" class="blk blk-broll" style="--bg:#000000;--fg:#ffffff;--acc:#8fe3ff;--acc2:#8fe3ff">
+    <div id="brollbreak-stage" class="blk-stage"><div class="fx-photo fx-duo" id="brollbreak-a" style="left:0px;top:0px;width:1080px;height:1920px;--d1:#05080c;--d2:#9fd8ee;--hs:12px;border-radius:0px;"><div class="fx-photo-in" id="brollbreak-a-in"><img class="fx-img " src="assets/prep/broll/br11_lake_sunflare.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div><div class="fx-full" id="brollbreak-sb" style=""><div class="fx-photo fx-half" id="brollbreak-b" style="left:0px;top:0px;width:1080px;height:1920px;--d1:#05080c;--d2:#2f7fa3;--hs:10px;border-radius:0px;"><div class="fx-photo-in" id="brollbreak-b-in"><img class="fx-img " src="assets/prep/broll/br13_lure_check.jpg" alt="" style="object-fit:cover; object-position:50% 50%;"></div></div></div><div class="fx-full" style="background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 30%, transparent 62%, rgba(0,0,0,.6))"></div><div class="fx-t fx-var " id="brollbreak-l" style="left:64px;top:1180px;width:952px;font-family:'Archivo';font-weight:300;font-size:72px;line-height:0.98;letter-spacing:0.02em;color:#ffffff;text-align:left;--wght:300;--wdth:100;--trk:0.02;"><span class="fx-ln" id="brollbreak-l-l0" style=""><span>24.–25. 10. 2026 · Líheň</span></span><span class="fx-ln" id="brollbreak-l-l1" style=""><span>Liběchov</span></span></div>
+    </div>
+    <div class="fx-ov" id="brollbreak-tin" style="background:#000000"></div>
+    <div class="fx-ov" id="brollbreak-tout" style="background:#000000"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#brollbreak-a-in", {"scale":1.04,"x":0,"y":0});
+  gsap.set("#brollbreak-b-in", {"scale":1.12,"x":0,"y":0});
+  gsap.set("#brollbreak-sb", {"opacity":0});
+  gsap.set("#brollbreak-l .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#brollbreak-l", {"--wght":300,"--wdth":100,"--trk":0.02});
+  gsap.set("#brollbreak-tin", {"opacity":1});
+  gsap.set("#brollbreak-tout", {"clipPath":"circle(0% at 50% 50%)"});
+  tl.fromTo("#brollbreak-a-in", {"scale":1.04,"x":0,"y":0}, {"scale":1.16,"x":0,"y":0,"duration":3.645,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-b-in", {"scale":1.12,"x":0,"y":0}, {"scale":1,"x":0,"y":0,"duration":1.811,"ease":"sine.out","immediateRender":false}, 1.834);
+  tl.fromTo("#brollbreak-sb", {"opacity":0}, {"opacity":1,"duration":0.5,"ease":"none","immediateRender":false}, 1.834);
+  tl.fromTo("#brollbreak-l .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":1,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.464);
+  tl.fromTo("#brollbreak-l", {"--wght":300,"--wdth":100,"--trk":0.02}, {"--wght":700,"--wdth":100,"--trk":0.12,"duration":2.4400000000000004,"ease":"sine.inOut","immediateRender":false}, 0.905);
+  tl.fromTo("#brollbreak-tin", {"opacity":1}, {"opacity":0,"duration":0.6,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-tout", {"clipPath":"circle(0% at 50% 50%)"}, {"clipPath":"circle(75% at 50% 50%)","duration":0.45,"ease":"power3.in","immediateRender":false}, 3.195);
+  tl.set({}, {}, 3.645);
+  window.__timelines["brollbreak"] = tl;
+  </script>
+</div>
+</template></body></html>

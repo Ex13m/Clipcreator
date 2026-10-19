@@ -1,3 +1,7 @@
+"""Build the final watermark template: observed alpha (wm_union.npy from ts_watermark_template.py)
+where known, Montserrat 800 glyphs (fit by ts_wm_fit_font.py / ts_wm_fit_glyphs.py -> wm_glyphs.json)
+where every sample image hides the letter. Run in a work dir holding wm_union.npy, wm_glyphs.json, mont800.ttf
+(fontTools-converted from @fontsource/montserrat 800 woff)."""
 import numpy as np, cv2, json
 from PIL import Image, ImageDraw, ImageFont
 T=np.load('wm_union.npy'); H,W=T.shape
@@ -28,6 +32,6 @@ F=F*cv2.GaussianBlur(lm,(0,0),1.0)
 # full-size 1500 template (alpha)
 full=np.zeros((1500,1500),np.float32)
 full[660:850,150:1350]=F*0.0784
-np.save('/home/user/Clipcreator/projects/mcr-2026-sponzori/scripts/assets_prep/ts_watermark_alpha_1500.npy',full.astype(np.float16))
+cv2.imwrite('/home/user/Clipcreator/projects/mcr-2026-sponzori/scripts/assets_prep/ts_watermark_alpha_1500_band.png',np.round(np.clip(F,0,1)*65535).astype(np.uint16))
 Image.fromarray(np.clip(F*255,0,255).astype(np.uint8)).save('view/wm_final.png')
 print('done', full.max())

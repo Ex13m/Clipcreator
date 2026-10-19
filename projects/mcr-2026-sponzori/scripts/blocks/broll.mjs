@@ -13,7 +13,7 @@ export default function broll(ctx) {
     // two slow plates: duotone → halftone, long push-in, one mask-revealed line, letter-spacing breathing
     const ph = D.photos;
     html += fx.photo(ctx, { id: 'a', src: ph[0], treat: 'duo', d1: '#05080c', d2: '#9fd8ee', kb: { from: { scale: 1.04 }, to: { scale: 1.16 }, t0: 0, t1: ctx.dur, ease: 'sine.inOut' } });
-    html += fx.scene(ctx, 'sb', ctx.bar(1), ctx.dur, fx.photo(ctx, { id: 'b', src: ph[1], treat: 'halftone', d1: '#05080c', d2: '#8fe3ff', halftone: 11, kb: { from: { scale: 1.12 }, to: { scale: 1.0 }, t0: ctx.bar(1), t1: ctx.dur, ease: 'sine.out' } }), { inD: 0.5 });
+    html += fx.scene(ctx, 'sb', ctx.bar(1), ctx.dur, fx.photo(ctx, { id: 'b', src: ph[1], treat: 'halftone', d1: '#05080c', d2: '#2f7fa3', halftone: 10, kb: { from: { scale: 1.12 }, to: { scale: 1.0 }, t0: ctx.bar(1), t1: ctx.dur, ease: 'sine.out' } }), { inD: 0.5 });
     html += `<div class="fx-full" style="background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 30%, transparent 62%, rgba(0,0,0,.6))"></div>`;
     const H = fx.headline(ctx, { id: 'l', text: D.copy.line, x: L, y: 1180, w: CW, maxLines: 2, font: 'Archivo', wght: 300, wdth: 100, sizes: [72, 64, 58, 52], tracking: 0.02, color: '#ffffff', t: ctx.beat(1), reveal: 'lines', d: 1.0, variable: true });
     html += H.html;

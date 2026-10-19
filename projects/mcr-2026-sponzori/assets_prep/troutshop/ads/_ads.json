@@ -1,0 +1,688 @@
+[
+ {
+  "file": "troutshop/ads/hero_01_nories_rooney_2-8g_101.png",
+  "product": "Nories ROONEY 2,8g 101 (top product)",
+  "size": [
+   1123,
+   2078
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png",
+    "size": [
+     931,
+     1332
+    ],
+    "dominant": [
+     {
+      "hex": "#baa360",
+      "share": 0.458
+     },
+     {
+      "hex": "#574122",
+      "share": 0.411
+     },
+     {
+      "hex": "#eee4ae",
+      "share": 0.131
+     }
+    ],
+    "glint": [
+     0.369,
+     0.646
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/hero_01_nories_rooney_2-8g_101_b.png",
+    "size": [
+     891,
+     1300
+    ],
+    "dominant": [
+     {
+      "hex": "#f1e80f",
+      "share": 0.571
+     },
+     {
+      "hex": "#f32f07",
+      "share": 0.365
+     },
+     {
+      "hex": "#221917",
+      "share": 0.064
+     }
+    ],
+    "glint": [
+     0.935,
+     0.097
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#decf42",
+    "share": 0.554
+   },
+   {
+    "hex": "#564124",
+    "share": 0.27
+   },
+   {
+    "hex": "#f42f06",
+    "share": 0.177
+   }
+  ],
+  "glint": [
+   0.325,
+   0.424
+  ]
+ },
+ {
+  "file": "troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink.png",
+  "product": "Velvet Arts Forte 2.1g 32 Glow Fluorescent Pink (new)",
+  "size": [
+   731,
+   1382
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_a.png",
+    "size": [
+     695,
+     752
+    ],
+    "dominant": [
+     {
+      "hex": "#ec2d5a",
+      "share": 0.637
+     },
+     {
+      "hex": "#d21e43",
+      "share": 0.285
+     },
+     {
+      "hex": "#3c2f2a",
+      "share": 0.077
+     }
+    ],
+    "glint": [
+     0.318,
+     0.71
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_b.png",
+    "size": [
+     670,
+     840
+    ],
+    "dominant": [
+     {
+      "hex": "#e2555d",
+      "share": 0.591
+     },
+     {
+      "hex": "#b73338",
+      "share": 0.327
+     },
+     {
+      "hex": "#231b1a",
+      "share": 0.082
+     }
+    ],
+    "glint": [
+     0.613,
+     0.313
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#e73f5b",
+    "share": 0.622
+   },
+   {
+    "hex": "#c12b3d",
+    "share": 0.301
+   },
+   {
+    "hex": "#2b221f",
+    "share": 0.077
+   }
+  ],
+  "glint": [
+   0.59,
+   0.572
+  ]
+ },
+ {
+  "file": "troutshop/ads/hero_03_nories_crankin_pupa_109.png",
+  "product": "Nories CRANKIN' PUPA 2,6g 109",
+  "size": [
+   1518,
+   832
+  ],
+  "kind": "single",
+  "dominant": [
+   {
+    "hex": "#e6ded5",
+    "share": 0.554
+   },
+   {
+    "hex": "#b0a07f",
+    "share": 0.34
+   },
+   {
+    "hex": "#493d2d",
+    "share": 0.106
+   }
+  ],
+  "glint": [
+   0.392,
+   0.114
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_01_nories_rooney_002.png",
+  "product": "Nories ROONEY 002",
+  "size": [
+   809,
+   1434
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_01_nories_rooney_002_a.png",
+    "size": [
+     708,
+     899
+    ],
+    "dominant": [
+     {
+      "hex": "#fa026e",
+      "share": 0.853
+     },
+     {
+      "hex": "#d49675",
+      "share": 0.082
+     },
+     {
+      "hex": "#463833",
+      "share": 0.065
+     }
+    ],
+    "glint": [
+     0.623,
+     0.597
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_01_nories_rooney_002_b.png",
+    "size": [
+     684,
+     906
+    ],
+    "dominant": [
+     {
+      "hex": "#c9de02",
+      "share": 0.899
+     },
+     {
+      "hex": "#302c22",
+      "share": 0.072
+     },
+     {
+      "hex": "#c5c782",
+      "share": 0.029
+     }
+    ],
+    "glint": [
+     0.836,
+     0.056
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#cadb0b",
+    "share": 0.485
+   },
+   {
+    "hex": "#fa056e",
+    "share": 0.442
+   },
+   {
+    "hex": "#40382f",
+    "share": 0.073
+   }
+  ],
+  "glint": [
+   0.843,
+   0.393
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_02_nories_rooney_sk20_magma.png",
+  "product": "Nories ROONEY SK20 Magma (limited)",
+  "size": [
+   780,
+   1464
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_02_nories_rooney_sk20_magma_a.png",
+    "size": [
+     654,
+     890
+    ],
+    "dominant": [
+     {
+      "hex": "#f8a112",
+      "share": 0.479
+     },
+     {
+      "hex": "#503422",
+      "share": 0.289
+     },
+     {
+      "hex": "#a8642b",
+      "share": 0.232
+     }
+    ],
+    "glint": [
+     0.479,
+     0.537
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_02_nories_rooney_sk20_magma_b.png",
+    "size": [
+     618,
+     931
+    ],
+    "dominant": [
+     {
+      "hex": "#292a26",
+      "share": 0.412
+     },
+     {
+      "hex": "#c99327",
+      "share": 0.31
+     },
+     {
+      "hex": "#67603d",
+      "share": 0.278
+     }
+    ],
+    "glint": [
+     0.638,
+     0.478
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#eb9b16",
+    "share": 0.371
+   },
+   {
+    "hex": "#383026",
+    "share": 0.368
+   },
+   {
+    "hex": "#8b6836",
+    "share": 0.261
+   }
+  ],
+  "glint": [
+   0.422,
+   0.337
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_03_forest_miu_ts4_limited.png",
+  "product": "Forest MIU TS4 – Limited Color",
+  "size": [
+   775,
+   1460
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_03_forest_miu_ts4_limited_a.png",
+    "size": [
+     725,
+     872
+    ],
+    "dominant": [
+     {
+      "hex": "#143b1f",
+      "share": 0.553
+     },
+     {
+      "hex": "#1b9544",
+      "share": 0.343
+     },
+     {
+      "hex": "#90b78a",
+      "share": 0.104
+     }
+    ],
+    "glint": [
+     0.273,
+     0.65
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_03_forest_miu_ts4_limited_b.png",
+    "size": [
+     707,
+     930
+    ],
+    "dominant": [
+     {
+      "hex": "#ebe815",
+      "share": 0.552
+     },
+     {
+      "hex": "#f31427",
+      "share": 0.363
+     },
+     {
+      "hex": "#382e2a",
+      "share": 0.085
+     }
+    ],
+    "glint": [
+     0.779,
+     0.116
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#1d5b30",
+    "share": 0.508
+   },
+   {
+    "hex": "#e4e523",
+    "share": 0.31
+   },
+   {
+    "hex": "#f31326",
+    "share": 0.182
+   }
+  ],
+  "glint": [
+   0.779,
+   0.427
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png",
+  "product": "Velvet Arts Forte 2.1g 35 Yellow-Red/Brown",
+  "size": [
+   734,
+   1419
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_a.png",
+    "size": [
+     688,
+     793
+    ],
+    "dominant": [
+     {
+      "hex": "#28231f",
+      "share": 0.537
+     },
+     {
+      "hex": "#37312c",
+      "share": 0.414
+     },
+     {
+      "hex": "#645c4f",
+      "share": 0.049
+     }
+    ],
+    "glint": [
+     0.349,
+     0.641
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_b.png",
+    "size": [
+     679,
+     852
+    ],
+    "dominant": [
+     {
+      "hex": "#d4b226",
+      "share": 0.617
+     },
+     {
+      "hex": "#8b4413",
+      "share": 0.296
+     },
+     {
+      "hex": "#281d19",
+      "share": 0.086
+     }
+    ],
+    "glint": [
+     0.851,
+     0.224
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#2e2924",
+    "share": 0.529
+   },
+   {
+    "hex": "#d4b227",
+    "share": 0.306
+   },
+   {
+    "hex": "#88471a",
+    "share": 0.165
+   }
+  ],
+  "glint": [
+   0.841,
+   0.523
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_05_nories_tulle_3g_101.png",
+  "product": "Nories TULLE 3.0g 101",
+  "size": [
+   530,
+   1055
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_05_nories_tulle_3g_101_a.png",
+    "size": [
+     412,
+     656
+    ],
+    "dominant": [
+     {
+      "hex": "#bdae7b",
+      "share": 0.486
+     },
+     {
+      "hex": "#524127",
+      "share": 0.276
+     },
+     {
+      "hex": "#f7f1ca",
+      "share": 0.238
+     }
+    ],
+    "glint": [
+     0.42,
+     0.52
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_05_nories_tulle_3g_101_b.png",
+    "size": [
+     403,
+     682
+    ],
+    "dominant": [
+     {
+      "hex": "#e1d115",
+      "share": 0.517
+     },
+     {
+      "hex": "#f71a12",
+      "share": 0.417
+     },
+     {
+      "hex": "#382f2d",
+      "share": 0.066
+     }
+    ],
+    "glint": [
+     0.762,
+     0.139
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#d8cb60",
+    "share": 0.61
+   },
+   {
+    "hex": "#f71d12",
+    "share": 0.214
+   },
+   {
+    "hex": "#4f402a",
+    "share": 0.177
+   }
+  ],
+  "glint": [
+   0.347,
+   0.334
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_06_fishup_baffi_fly_hot_pink.png",
+  "product": "FishUp Baffi Fly 1,5 Hot Pink",
+  "size": [
+   732,
+   575
+  ],
+  "kind": "single",
+  "dominant": [
+   {
+    "hex": "#ff26bd",
+    "share": 0.414
+   },
+   {
+    "hex": "#ff0e99",
+    "share": 0.336
+   },
+   {
+    "hex": "#ff48c9",
+    "share": 0.25
+   }
+  ],
+  "glint": [
+   0.656,
+   0.772
+  ]
+ },
+ {
+  "file": "troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold.png",
+  "product": "Velvet Arts Forte 2.1g 30 Glow Gold",
+  "size": [
+   734,
+   1421
+  ],
+  "kind": "pair",
+  "split": {
+   "a": {
+    "file": "troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_a.png",
+    "size": [
+     696,
+     780
+    ],
+    "dominant": [
+     {
+      "hex": "#a66616",
+      "share": 0.577
+     },
+     {
+      "hex": "#543017",
+      "share": 0.233
+     },
+     {
+      "hex": "#f2be18",
+      "share": 0.19
+     }
+    ],
+    "glint": [
+     0.283,
+     0.751
+    ]
+   },
+   "b": {
+    "file": "troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_b.png",
+    "size": [
+     687,
+     873
+    ],
+    "dominant": [
+     {
+      "hex": "#d5d5c0",
+      "share": 0.612
+     },
+     {
+      "hex": "#a9a58d",
+      "share": 0.299
+     },
+     {
+      "hex": "#27231f",
+      "share": 0.088
+     }
+    ],
+    "glint": [
+     0.769,
+     0.097
+    ]
+   }
+  },
+  "dominant": [
+   {
+    "hex": "#c8c8b2",
+    "share": 0.443
+   },
+   {
+    "hex": "#693f17",
+    "share": 0.301
+   },
+   {
+    "hex": "#cc921b",
+    "share": 0.256
+   }
+  ],
+  "glint": [
+   0.763,
+   0.435
+  ]
+ }
+]
