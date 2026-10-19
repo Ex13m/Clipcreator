@@ -60,9 +60,9 @@ export default function gausseholler(ctx) {
   const t8 = Math.max(tB + ctx.BEAT * 2, v('Revolut', 3.32) - 0.12);
   const s8 = 1180, w8 = ctx.measure('8', { font: 'Inter', wght: 800, size: s8 });
   html += fx.bigType(ctx, { id: 'b8', text: '8', font: 'Inter', wght: 800, size: s8, x: (W - w8) / 2, y: 470, color: C.bone, outline: true, ow: 3, drift: 0, tracking: 0, style: 'opacity:0' });
-  ctx.tl.fromTo(ctx.sel('b8'), { opacity: 0, scale: 1.3 }, { opacity: 0.2, scale: 1, duration: 0.9, ease: 'expo.out' }, t8);
-  // the outline 8 backs „REVOLUT 8“ only; it leaves on the match cut (its loops crossed the spec row in bar 2 as stray rings)
-  ctx.tl.fromTo(ctx.sel('b8'), { opacity: 0.2 }, { opacity: 0, duration: 0.18, ease: 'none' }, tC - 0.18);
+  const t8out = ctx.at(2, 1) - 0.26;                   // gone before the spec row (its loops crossed the numbers as stray rings)
+  ctx.tl.fromTo(ctx.sel('b8'), { opacity: 0, scale: 1.3 }, { opacity: 0.2, scale: 1, duration: Math.min(0.7, t8out - t8 - 0.02), ease: 'expo.out' }, t8);
+  ctx.tl.fromTo(ctx.sel('b8'), { opacity: 0.2 }, { opacity: 0, duration: 0.2, ease: 'none' }, t8out);
 
   // ================= B · PODIUM (Revolut 8 Black) =================
   // plinth in the render's own perspective (top ellipse = leg-tip footprint × 1.16) → all four legs stand on it
@@ -143,14 +143,14 @@ export default function gausseholler(ctx) {
   let e = gh.cone(ctx, { id: 'econe', x: 540, top: -60, wTop: 340, wBot: 1250, h: 1600, a: 0.12 });
   e += gh.pool(ctx, { id: 'eglow', x: 540, y: 1080, w: 1150, h: 900, color: '#323941' });
   e += gh.floor(ctx, { id: 'efl', y: PLE.top - 70 });
-  const fam = [gh.still(ctx, { id: 'e1', k: IMG.never, w: 214, cx: 146, floor: 1168, style: 'filter:brightness(.78) blur(.7px)' }),
+  const fam = [gh.still(ctx, { id: 'e1', k: IMG.never, w: 196, cx: 146, floor: 1196, style: 'filter:brightness(.78) blur(.7px)' }),
     gh.still(ctx, { id: 'e2', k: IMG.snap, w: 280, cx: 930, floor: 1168, style: 'filter:brightness(.72) blur(.7px)' })];
-  e += fam.map((s, i) => `<i class="gh-sh" style="left:${px((i ? 930 : 146) - s.w * 0.46)};top:${px(1168 - s.w * 0.1)};width:${px(s.w * 0.92)};height:${px(s.w * 0.2)};background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,0))"></i>${s.html}`).join('');
+  e += gh.blots(ctx, { id: 'efsh', list: fam.map((s, i) => ({ x: i ? 930 : 146, y: i ? 1166 : 1194, rx: s.w * 0.46, ry: s.w * 0.1 })) }) + fam.map((s) => s.html).join('');
   e += `<div class="fx-full" id="${ctx.id('egrp')}">${PLE.html}${gh.footShadow(ctx, { id: 'esh', F: FE })}${HE.html}</div>`;
   ctx.tl.fromTo(ctx.sel('egrp'), { y: 70, scale: 1.04 }, { y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, tE - 0.1);
   fam.forEach((s, i) => ctx.tl.fromTo(s.sel, { x: (i ? 1 : -1) * 120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, tE - 0.06));
   fx.sweep(ctx, 'h1e', tE + 0.3, { d: 0.85 });
-  e += gh.stamp(ctx, { id: 'stp', x: 182, y: 880, size: 184, l1: 'Série 5 ks', l2: 'číslováno', t: ctx.at(4, 1) - 0.04 });
+  e += gh.stamp(ctx, { id: 'stp', x: 178, y: 874, size: 178, l1: 'Série 5 ks', l2: 'číslováno', t: ctx.at(4, 1) - 0.04 });
   // lockup: logo (site layers, ring turns; logo rule ×1) + URL + role + prize pill — URL lands ON the downbeat
   const M = gh.mark(ctx, { id: 'mk', cx: W / 2, y: 372, box: [300, 300], at: [tE, END], label: 'gausseholler lockup' });
   e += M.html;
@@ -170,8 +170,9 @@ export default function gausseholler(ctx) {
   // on screen from the downbeat frame (hard cut on the kick; VO „Hlavní“ follows at 0.25 s): settle instead of a mask reveal
   const T1 = fx.headline(ctx, { id: 't1', text: 'Hlavní cena', x: L, y: T0, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: true, tracking: -0.01, sizes: [156, 148, 140, 132, 124, 116], color: C.white });
   html += T1.html;
-  ctx.tl.set(`${ctx.sel('t1')} .fx-ln > span`, { transformOrigin: '0% 100%' }, 0);
-  ctx.tl.fromTo(`${ctx.sel('t1')} .fx-ln > span`, { scale: 1.1, opacity: 1 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0);
+  // settle on the container (scaling the inner span clipped the last „A“ against the line mask)
+  ctx.tl.set(ctx.sel('t1'), { transformOrigin: '0% 50%' }, 0);
+  ctx.tl.fromTo(ctx.sel('t1'), { scale: 1.05 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
   const y1b = T0 + T1.size * 0.98 + 20;
   html += gh.words(ctx, { id: 't1b', x: L, y: y1b, size: 50, wght: 700, track: 0.16, words: [{ w: 'pro', t: v('pro', 0.9) - 0.08 }, { w: 'vítěze', t: v('vítěze', 1.12) - 0.08 }, { w: 'MČR', t: v('MČR', 1.75) - 0.1, c: C.orange }] });
   const o1 = Math.min(tB + ctx.BEAT * 1.6, v('stojan', 2.79) - 0.22);
@@ -239,8 +240,8 @@ export function hook(ctx) {
   html += gh.glint(ctx, { id: 'hgl', x: BK.x + 0.505 * BK.w, y: BK.y + 0.068 * BK.h, size: 280, t: tBk + 0.01, d: Math.max(0.12, ctx.dur - tBk - 0.03), color: '#ffd8bd' });
   const H = fx.headline(ctx, { id: 'hh', text: meta.hook.headline, x: L, y: 400, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: true, tracking: -0.01, sizes: [156, 148, 140, 132, 124], color: C.white });
   html += H.html;
-  ctx.tl.set(`${ctx.sel('hh')} .fx-ln > span`, { transformOrigin: '0% 100%' }, 0);
-  ctx.tl.fromTo(`${ctx.sel('hh')} .fx-ln > span`, { scale: 1.12, opacity: 1 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' }, 0);
+  ctx.tl.set(ctx.sel('hh'), { transformOrigin: '0% 50%' }, 0);
+  ctx.tl.fromTo(ctx.sel('hh'), { scale: 1.05 }, { scale: 1, duration: 0.45, ease: 'expo.out' }, 0);
   const y2 = 400 + H.size * 0.98 + 18;
   html += gh.kicker(ctx, { id: 'hs', text: meta.hook.sub, x: L, y: y2, size: 40, wght: 700, track: 0.12, color: C.white });
   html += gh.kicker(ctx, { id: 'hk', text: 'Stojan Revolut 8 · Gausse Holler', x: L, y: y2 + 62, size: 30 });
@@ -265,9 +266,9 @@ export function endCard(ctx) {
   html += gh.cone(ctx, { id: 'xcone', x: 540, top: 700, wTop: 280, wBot: 1000, h: 1300, a: 0.1 });
   html += gh.pool(ctx, { id: 'xglow', x: 540, y: 1280, w: 1000, h: 700, color: '#30373e' });
   html += gh.floor(ctx, { id: 'xfl', y: PLX.top - 60 });
-  const famF = 1300;
-  const fam = [gh.still(ctx, { id: 'x1', k: IMG.never, w: 214, cx: 196, floor: famF, style: 'filter:brightness(.72) blur(.5px)' }), gh.still(ctx, { id: 'x2', k: IMG.bw, w: 214, cx: 884, floor: famF, style: 'filter:brightness(.72) blur(.5px)' })];
-  html += fam.map((s, i) => `<i class="gh-sh" style="left:${px((i ? 884 : 196) - s.w * 0.46)};top:${px(famF - s.w * 0.1)};width:${px(s.w * 0.92)};height:${px(s.w * 0.2)};background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,0))"></i>${s.html}`).join('');
+  const famF = 1346;                                   // handles clear the prize pill
+  const fam = [gh.still(ctx, { id: 'x1', k: IMG.never, w: 200, cx: 190, floor: famF, style: 'filter:brightness(.72) blur(.5px)' }), gh.still(ctx, { id: 'x2', k: IMG.bw, w: 200, cx: 890, floor: famF, style: 'filter:brightness(.72) blur(.5px)' })];
+  html += gh.blots(ctx, { id: 'xfsh', list: fam.map((s, i) => ({ x: i ? 890 : 190, y: famF - 2, rx: s.w * 0.46, ry: s.w * 0.1 })) }) + fam.map((s) => s.html).join('');
   html += `<div class="fx-full" id="${ctx.id('xgrp')}">${PLX.html}${gh.footShadow(ctx, { id: 'xsh', F: FX })}${HX.html}</div>`;
   ctx.tl.fromTo(ctx.sel('xgrp'), { y: 26 }, { y: 0, duration: 0.7, ease: 'expo.out' }, 0);
   fam.forEach((s, i) => ctx.tl.fromTo(s.sel, { x: (i ? 1 : -1) * 36 }, { x: 0, duration: 0.8, ease: 'expo.out' }, 0));

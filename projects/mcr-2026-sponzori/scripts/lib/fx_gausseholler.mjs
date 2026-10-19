@@ -74,6 +74,11 @@ export function footShadow(ctx, { id, F, ao = 0.5, tip = 0.8, extra = [] }) {
   ];
   return `<div class="fx-full" id="${ctx.id(id)}" style="background:${layers.join(',')}"></div>`;
 }
+// soft floor blots under secondary stands, one element: list [{x, y, rx, ry, a}]
+export function blots(ctx, { id, list }) {
+  const g = (o) => `radial-gradient(${px(o.rx)} ${px(o.ry)} at ${px(o.x)} ${px(o.y)},rgba(0,0,0,${o.a ?? 0.6}),rgba(0,0,0,0))`;
+  return `<div class="fx-full" id="${ctx.id(id)}" style="background:${list.map(g).join(',')}"></div>`;
+}
 // display plinth in the SAME perspective as the stand on it: top ellipse = footprint × m (axes ratio b/a of the render),
 // front face h px, orange hairline on the front rim, optional engraved label centred on the front face
 export function plinth(ctx, { id, F, m = 1.16, h = 80, accent = C.orange, label = '', labelT = null, labelSize = 26 }) {
