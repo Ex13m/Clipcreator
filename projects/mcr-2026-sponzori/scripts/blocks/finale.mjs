@@ -104,7 +104,7 @@ export default function finale(ctx) {
   // =====================================================================================================
   // anticipation → slam: the corner plate starts growing on the last montage card and LANDS on the bar-2 downbeat (accelerating
   // ease), so the products explode from behind a logo that is already there — the hit frame is never empty
-  const HERO = { scale: 2.2, cy: 600, fly: 0.46, ease: 'power3.in' };
+  const HERO = { scale: 2.2, cy: 600, fly: 0.5, ease: 'power2.in' };
   const PH = ctx.plate.hero(tB - HERO.fly, END, HERO);
   // background for B + C: the actual competition pond, duotone deep lake teal (not navy), slow pull-back; aurora + vignette
   let bg = fx.photo(ctx, { id: 'bph', src: 'assets_prep/libechov/venue/v01_maly_sportacek.jpg', treat: 'duo', d1: '#04060a', d2: '#2b8f8c', pos: '50% 60%', kb: { from: { scale: 1.22 }, to: { scale: 1.04 }, t0: tB, t1: tD + 1.4 }, style: 'opacity:.4' });
@@ -134,12 +134,14 @@ export default function finale(ctx) {
       [bar(3), bar(4), bar(5)].forEach((t) => fx.punch(ctx, P.sel, t, { scale: 1.14, d: 0.32 }));   // the crown pulses on the downbeats
     }
     fx.float(ctx, P.cam, tB + d, tC, { y: blur ? -26 : -12, rot: blur ? 3 : 2, period: ctx.BAR / (blur ? 1 : 2) });
+    // exit INTO the bar-6 downbeat: everything blows outward past the camera (no dead fade-to-empty before the wall)
+    ctx.tl.fromTo(P.sel, { x: 0, y: 0, scale: 1, opacity: op }, { x: (x - BX) * 0.9, y: (y - BY) * 0.9, scale: blur ? 1.4 : 1.9, opacity: 0, duration: 0.34, ease: 'power3.in' }, tC - 0.34);
   });
   // shockwave: two rings (fat + thin echo) from behind the logo
   bu = `<i class="fin-ring" id="${ctx.id('ring')}" style="left:${BX - 300}px;top:${BY - 300}px"></i><i class="fin-ring fin-ring2" id="${ctx.id('ring2')}" style="left:${BX - 300}px;top:${BY - 300}px"></i>` + bu;
   ctx.tl.fromTo(ctx.sel('ring'), { scale: 0.45, opacity: 1 }, { scale: 2.8, opacity: 0, duration: 0.7, ease: 'expo.out' }, tB);
   ctx.tl.fromTo(ctx.sel('ring2'), { scale: 0.45, opacity: 0.8 }, { scale: 2.2, opacity: 0, duration: 0.9, ease: 'expo.out' }, tB + 0.08);
-  html += fx.scene(ctx, 'sbu', tB, tC, bu, { outD: 0.35 });
+  html += fx.scene(ctx, 'sbu', tB, tC, bu, { outD: 0.001 });
   // cold ice flash in screen mode: punches the hit without washing the frame out to grey
   fx.flash(ctx, tB, { id: 'pk2', color: T.accent, peak: 0.5, d: 0.3, blend: 'screen' });
 
@@ -206,7 +208,7 @@ export default function finale(ctx) {
     wall += `<i class="fin-glow" id="${ctx.id(`wg${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px;background:radial-gradient(closest-side,${ctx.rgba(GLOW[k] || T.accent, 0.5)},${ctx.rgba(GLOW[k] || T.accent, 0)})"></i>`;
     wall += `<div class="fx-abs fin-cell" id="${ctx.id(`w${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px">
       <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div></div>`;
-    const t = tC + 0.12 + i * BEAT * 0.5;
+    const t = tC + 0.02 + i * BEAT * 0.5;            // first logo ON the bar-6 downbeat, then one per half-beat
     ctx.tl.fromTo(ctx.sel(`w${i}`), { opacity: 0, y: 34, filter: 'blur(14px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.1, duration: 0.29, ease: 'power2.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 1, scale: 1.1 }, { opacity: 0.32, scale: 1, duration: 0.9, ease: 'power2.out' }, t + 0.3);

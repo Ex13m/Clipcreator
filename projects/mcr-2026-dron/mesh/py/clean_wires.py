@@ -1,6 +1,6 @@
 """v2 fix: remove the overhead power-line wires baked into the 0.125 m CUZK ortho (orto_core_6400.jpg).
 
-Defect (operator, v1): "одна полоса криво идёт через дорожку". The 22 kV line crosses the core NW->SE (meadow
+Defect (operator, v1): "одна полоса криво идёт через дорожку". The overhead power line crosses the core NW->SE (meadow
 west of the gravel path -> the path -> the bank between Maly Sportacek and the rearing ponds -> the forest).
 Its 3-4 conductors are imaged as thin bright lines. The ortho mosaic seamline runs along the gravel path and
 the two source photos lean the (elevated) wires differently, so the wire bundle jumps ~3 m sideways exactly at
@@ -10,6 +10,8 @@ Method, per straight span (pylon to pylon), in a rotated strip where the span is
   1. thin-bright-line ridge response (2-3 px side offsets), averaged 31 px along the span;
   2. block profiles (64 px, step 32) -> sub-pixel peaks -> linked block to block (|dv| <= 3 px) into chains;
      a wire = chain >= 10 blocks (~40 m), locally straight, median strength > 0.008 (texture never qualifies);
+     each wire is then extended along its linear prediction through low-contrast stretches (bushes, the
+     seam at the path) with looser peaks (<= 10 blocks, <= 3 misses in a row);
   3. per column: every ridge maximum within +-5 px of a chain centre -> mask +-2 px (wire core + JPEG halo);
   4. fill: Telea inpaint (low frequencies) + high-pass grain transplanted from 7 px beside the wire
      (perpendicular), so the filled pixels keep the surrounding grass / gravel / canopy texture;

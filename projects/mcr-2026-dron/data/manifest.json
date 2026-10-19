@@ -792,6 +792,38 @@
    "crs": "EPSG:32633",
    "bytes": 46490,
    "desc": "Per-frame camera (30 fps x 120) for both proposed paths: e,n,z_bpv,agl,yaw,pitch,look_at."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_6400_nowires.png",
+   "kind": "ortho_core",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 6400,
+   "h": 6400,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 56054739,
+   "desc": "v2 (2026-10-19): orto_core_6400.jpg with the overhead power-line wires removed (mesh/py/clean_wires.py; lossless PNG, pixels outside the wire mask identical to the JPEG decode). Used by the renderer and for crown_det. The wires jumped ~3 m at the mosaic seam along the gravel path -> 'crooked stripe across the path' in v1."
+  },
+  {
+   "path": "/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/data/orto_core_6400_wiremask.png",
+   "kind": "mask",
+   "bbox_utm": [
+    461150,
+    5584450,
+    461950,
+    5585250
+   ],
+   "w": 6400,
+   "h": 6400,
+   "m_per_px": 0.125,
+   "crs": "EPSG:32633",
+   "bytes": 78142,
+   "desc": "255 = pixels replaced by clean_wires.py (wire mask, all passes). Report: orto_core_6400_nowires.json."
   }
  ]
 }

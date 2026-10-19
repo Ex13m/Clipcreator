@@ -55,8 +55,8 @@ BANDS = [('black #000000 (moonky.cz header)', (0, 0, 0), (225, 225, 225)),
          ('Moonky night #0E1424 (logo badge)', (14, 20, 36), (230, 235, 245)),
          ('moonky.cz web blue #6883BA', (104, 131, 186), (255, 255, 255))]
 SW = [('#0E1424', 'night (badge, labels)'), ('#FFFFFF', 'logo'), ('#6883BA', 'web bg (moonlight)'), ('#000000', 'web header'),
-      ('#B8F000', 'lime fluo C06*'), ('#FF4F8B', 'bubblegum C01*'), ('#FF8A00', 'orange fluo C02*'), ('#F2E33A', 'jar cap yellow*'),
-      ('#7A4A55', 'brown metalic C03*'), ('#1C9BE0', 'ultra blue DC01*')]
+      ('#9CC903', 'C06 green (lime)*'), ('#EC638B', 'C01 pink bubblegum*'), ('#F49E0B', 'C02 orange fluo*'), ('#D2BA46', 'DC04 yellow*'),
+      ('#734545', 'C03 brown metalic*'), ('#1184B8', 'blue (category lure)*')]
 
 W = 1800
 heroes = [k for k in meta if k.startswith('H')]
@@ -73,13 +73,14 @@ logo = Image.open(f'{ROOT}/assets_prep/moonky/logo_on_dark.png').convert('RGBA')
 sheet.paste(logo, (40, 30), logo)
 MixFont(SS_400, 22).draw(d, (40, 165), 'Moonky — ads cut-outs + brand world (MČR 2026) · * = product colours sampled from cut-outs', (170, 180, 200))
 for i, (hx, lab) in enumerate(SW):
-    x = 40 + (i % 5) * 172; y = 210 + (i // 5) * 110
+    x = 40 + (i % 5) * 176; y = 210 + (i // 5) * 110
     c = tuple(int(hx[j:j + 2], 16) for j in (1, 3, 5))
     d.rounded_rectangle((x, y, x + 60, y + 60), 10, fill=c, outline=(80, 90, 110))
     MixFont(SS_600, 18).draw(d, (x + 70, y + 6), hx, (235, 238, 245))
-    MixFont(SS_400, 15).draw(d, (x + 70, y + 32), lab, (160, 170, 190))
+    MixFont(SS_400, 13).draw(d, (x + 70, y + 32), lab[:14], (160, 170, 190))
+    MixFont(SS_400, 13).draw(d, (x + 70, y + 48), lab[14:30], (160, 170, 190))
 MixFont(EXO_BLACK_I, 76).draw(d, (930, 30), 'RUČNĚ DĚLANÉ', (255, 255, 255))
-MixFont(EXO_800, 44).draw(d, (930, 125), 'Gumové nástrahy pro Trout Area', (184, 240, 0))
+MixFont(EXO_800, 44).draw(d, (930, 125), 'Gumové nástrahy pro Trout Area', (156, 201, 3))
 MixFont(EXO_300, 30).draw(d, (930, 185), 'H A N D M A D E   L U R E S', (200, 210, 230), track=2)
 MixFont(SS_600, 30).draw(d, (930, 240), '46 mm · 2,12 g · extra měkká · ruční výroba · ČR', (230, 235, 245))
 MixFont(SS_400, 24).draw(d, (930, 290), 'Exo 2 (moonky.cz headings) 900 italic / 800 / 300 · Source Sans 3 (web body) 600 / 400', (150, 160, 180))
@@ -95,7 +96,7 @@ def place(band, im, box, label, fg, hero=False):
     canvas.alpha_composite(sh, (max(0, px + t.width // 2 - sh.width // 2), max(0, sy)))
     canvas.alpha_composite(t, (px, py))
     f1 = MixFont(SS_600, 17 if hero else 14)
-    f1.draw(dd, (x0 + 10, y0 + h - 44), label[:60], fg)
+    f1.draw(dd, (x0 + 10, y0 + h - 44), label[:60] if hero else label[:38], fg)
     MixFont(SS_400, 14 if hero else 12).draw(dd, (x0 + 10, y0 + h - 22), f'{im.width}×{im.height} px', fg)
 
 

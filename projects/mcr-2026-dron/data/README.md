@@ -13,3 +13,7 @@
 - DMP 1G is unreliable over water (interpolated; up to +6 m over the big pond) -> use dsm_core_1m_render.tif (ponds flattened).
 - Proposed flight: flight_path.json (arrow_full = user's arrow, 95->55 m AGL, ~247 m in 4 s; compact_realistic = ~141 m). Preview: flight_path_preview.jpg. QA: check_overlay.jpg.
 - pyproj: for 5514<->32633 use "S-JTSK to WGS 84 (1)"; PROJ's default op is ~10 m off here.
+
+## v2 (2026-10-19): power-line wires removed from the ortho
+- The overhead power line (pylon P1 ~461254/5584829 -> P4 ~461820/5584532, UTM) is baked into orto_core_6400.jpg as 3-4 thin bright lines; the mosaic seamline runs along the gravel path west of the rearing ponds and the two source photos lean the wires differently, so the bundle jumps ~3 m at the path. In the v1 flyover this read as "a strip crossing the path crookedly". DSM/DTM are clean there (nDSM ~0).
+- orto_core_6400_nowires.png = cleaned ortho (mesh/py/clean_wires.py, lossless; only 0.35 % of pixels changed, all inside orto_core_6400_wiremask.png). Renderer and preprocess (crown_det) now use it; `--ortho=orto_core_6400.jpg` reproduces v1.

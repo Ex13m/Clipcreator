@@ -244,6 +244,132 @@
     0.0118
    ],
    "aspect": 0.998
+  },
+  {
+   "file": "velkaryba/ads/S2b_daiwa_presso_adm_manhattan_single.png",
+   "role": "assortment",
+   "product": "Plandavka Daiwa Presso ADM 2,2 g Manhattan (1 pohled, modrá)",
+   "type": "spoon",
+   "size": [
+    843,
+    899
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/20841-plandavka-daiwa-presso-adm-22-g-manhattan-4066466001926.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/0/7/33507.jpg",
+   "method": "S2 pair split by connected component (blue view)",
+   "pad": [
+    0.0142,
+    0.0133,
+    0.0142,
+    0.0133
+   ],
+   "aspect": 0.938,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
+  },
+  {
+   "file": "velkaryba/ads/S3b_daiwa_presso_adm_flashing_green_single.png",
+   "role": "assortment",
+   "product": "Plandavka Daiwa Presso ADM 3,8 g Flashing Green (1 pohled, zelená)",
+   "type": "spoon",
+   "size": [
+    884,
+    926
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/20850-plandavka-daiwa-presso-adm-38-g-flashing-green-4066466002015.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/1/6/33516.jpg",
+   "method": "S3 pair split by connected component (green view)",
+   "pad": [
+    0.0136,
+    0.013,
+    0.0136,
+    0.013
+   ],
+   "aspect": 0.955,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
+  },
+  {
+   "file": "velkaryba/ads/S8_lucky_john_eos_003.png",
+   "role": "assortment",
+   "product": "Plandavka Lucky John EOS 2,4 g 003",
+   "type": "spoon",
+   "size": [
+    597,
+    611
+   ],
+   "product_page": "listing 1722 (Plandavky na pstruhy), product id 31895",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/1/8/9/5/31895.jpg",
+   "method": "bridge (weserv PNG) + local ISNet trimap/unmix cutout3; Lucky John logo in packshot dropped by keep box",
+   "pad": [
+    0.0201,
+    0.0196,
+    0.0201,
+    0.0196
+   ],
+   "aspect": 0.977,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
+  },
+  {
+   "file": "velkaryba/ads/S9_westin_fidusen_slim_pink_yellow_clown.png",
+   "role": "assortment",
+   "product": "Plandavka Westin Fidusen Slim 3,3 cm 3 g Pink/Yellow Clown (pink side)",
+   "type": "spoon",
+   "size": [
+    1022,
+    258
+   ],
+   "product_page": "listing 1722 (Plandavky na pstruhy), image id 34441",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/4/4/4/1/34441.jpg",
+   "method": "bridge + cutout3; upper (pink) view only",
+   "pad": [
+    0.0117,
+    0.0465,
+    0.0117,
+    0.0465
+   ],
+   "aspect": 3.961,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
+  },
+  {
+   "file": "velkaryba/ads/S10_vanpla_pink_black.png",
+   "role": "assortment",
+   "product": "Plandavka Vanpla 4 cm růžová/černá",
+   "type": "spoon",
+   "size": [
+    888,
+    1024
+   ],
+   "product_page": "listing 1722 (Plandavky na pstruhy), image id 32531",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/2/5/3/1/32531.jpg",
+   "method": "bridge + cutout3",
+   "pad": [
+    0.0135,
+    0.0117,
+    0.0135,
+    0.0117
+   ],
+   "aspect": 0.867,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
+  },
+  {
+   "file": "velkaryba/ads/S11_berkley_sukoshi_splat_pel.png",
+   "role": "assortment",
+   "product": "Plandavka Berkley SUKOSHI 3,5 g Splat Pel",
+   "type": "spoon",
+   "size": [
+    1021,
+    628
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/16469-plandavka-berkley-sukoshi-35-g-splat-pel-028632907108.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/2/5/9/4/1/25941.jpg",
+   "method": "assets/velkaryba/p07 + cutout3 + fix_hole (line-tie hole opened)",
+   "pad": [
+    0.0118,
+    0.0191,
+    0.0118,
+    0.0191
+   ],
+   "aspect": 1.626,
+   "added": "2026-10-19 block build (assortment wall: 7 trout-spoon brands of listing 1722)"
   }
  ],
  "logo_reverse": {

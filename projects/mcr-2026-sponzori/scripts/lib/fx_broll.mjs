@@ -29,17 +29,17 @@ export const css = (ctx) => `
 ${ctx.S} .br-shot{position:absolute;inset:0;overflow:hidden}
 ${ctx.S} .br-cam{position:absolute;inset:0;will-change:transform}
 ${ctx.S} .br-cam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:${GRADE}}
-${ctx.S} .br-cam img.br-mono{filter:grayscale(1) contrast(1.35) brightness(.62)}
+${ctx.S} .br-cam .br-mono{position:absolute;inset:0;background-size:cover;background-position:50% 50%;filter:grayscale(1) contrast(1.4) brightness(.5)}
 ${ctx.S} .br-cam img.br-stk{filter:none}
 ${ctx.S} .br-grade{position:absolute;inset:0;pointer-events:none}
-${ctx.S} .br-w{position:absolute;left:0;width:${ctx.W}px;text-align:center;white-space:nowrap;line-height:.92;text-transform:uppercase;font-family:'Archivo';color:#fff;filter:drop-shadow(0 10px 34px rgba(0,0,0,.42))}
+${ctx.S} .br-w{position:absolute;left:0;width:${ctx.W}px;text-align:center;white-space:nowrap;line-height:.92;text-transform:uppercase;color:#fff;filter:drop-shadow(0 10px 34px rgba(0,0,0,.42))}
 ${ctx.S} .br-w>div{position:absolute;left:0;right:0;top:0}
 ${ctx.S} .br-w .br-e{color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.9)}
 ${ctx.S} .br-w .fx-c{display:inline-block;white-space:pre}
 ${ctx.S} .br-box{position:absolute;left:0;right:0;background:#000}
 ${ctx.S} .br-leak{position:absolute;border-radius:50%;mix-blend-mode:screen;pointer-events:none;filter:blur(40px)}
 ${ctx.S} .br-streak{position:absolute;left:-10%;width:120%;pointer-events:none;mix-blend-mode:screen}
-${ctx.S} .br-sweep{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;background-size:320% 100%;background-repeat:no-repeat}
+${ctx.S} .br-sweep{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;background-size:320% 100%;background-repeat:no-repeat}
 `;
 
 // one horizontal-blur filter per id (stdDeviation 'X 0' = smear along x)
@@ -54,7 +54,7 @@ export function shot(ctx, o) {
   const cam = ctx.sel(`${id}-cam`), fcam = ctx.sel(`${id}-fcam`), both = cut ? `${cam}, ${fcam}` : cam;
   const flt = blur ? `filter:url(#${ctx.id(`bf-${id}`)});` : '';
   const img = (rel, cls = '', extra = '') => `<img class="${cls}" ${extra} src="${ctx.asset(rel)}" alt="">`;
-  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src)}${mono ? img(src, 'br-mono', `id="${ctx.id(`${id}-mono`)}" style="opacity:0"`) : ''}</div>`;
+  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src)}${mono ? `<div class="br-mono" id="${ctx.id(`${id}-mono`)}" style="opacity:0;background-image:url(${ctx.asset(src)})"></div>` : ''}</div>`;
   // front: twin camera › #id-sub (extra subject scale = 2.5D parallax pop) › [white sticker stroke, cut-out]
   const front = cut ? `<div class="br-cam" id="${ctx.id(`${id}-fcam`)}" style="transform-origin:${origin};${flt}"><div class="br-cam" id="${ctx.id(`${id}-sub`)}" style="transform-origin:${o.subOrigin || origin}">${stroke ? img(stroke, 'br-stk', `id="${ctx.id(`${id}-stk`)}" style="opacity:0"`) : ''}${img(cut)}</div></div>` : '';
   // camera: entrance → speed-ramp push-in → exit
@@ -82,21 +82,22 @@ export function shot(ctx, o) {
 // one bold word. in: 'slam' (chars stretch-drop in, echo burst) | 'breath' (thin → heavy variable weight over [t, t1]) | 'none'
 export function word(ctx, o) {
   const { id, text, y = 400, t = 0, t1 = ctx.dur, wght = 900, wdth = 62, tracking = -0.01, echo = true, inn = 'slam', outline = false,
-    sizes = [420, 400, 380, 360, 340, 320, 300, 280, 260, 240], maxW = ctx.W - ctx.safe.left - ctx.safe.right, from = null } = o;
+    sizes = [420, 400, 380, 360, 340, 320, 300, 280, 260, 240], maxW = ctx.W - ctx.safe.left - ctx.safe.right, from = null, split = true, ofw = 4 } = o;
   const f = ctx.fit(text, { font: 'Archivo', wght: Math.max(wght, from?.wght ?? 0), wdth: Math.max(wdth, from?.wdth ?? 0), upper: true, tracking: Math.max(tracking, from?.trk ?? -1), maxW, maxLines: 1, sizes });
   if (f.overflow) ctx.warn(`word "${text}" does not fit ${maxW}px`);
   const size = f.size;
   const base = `font-size:${size}px;font-weight:${wght};font-stretch:${wdth}%;letter-spacing:${tracking}em;`;
   const vv = from ? `--wght:${from.wght};--wdth:${from.wdth ?? wdth};--trk:${from.trk ?? tracking};` : '';
-  const chars = [...text].map((c) => `<span class="fx-c">${esc(c)}</span>`).join('');
+  const chars = split ? [...text].map((c) => `<span class="fx-c">${esc(c)}</span>`).join('') : esc(text);   // outline words stay unsplit (background-clip:text needs one text run)
   const e = echo ? [0, 1].map((k) => `<div class="br-e" id="${ctx.id(`${id}-e${k}`)}" style="opacity:0">${esc(text)}</div>`).join('') : '';
   const m = ctx.sel(`${id}-m`);
-  const html = `<div class="br-w" id="${ctx.id(id)}" style="top:${px(y)};height:${size}px;${base}">${e}<div id="${ctx.id(`${id}-m`)}" class="${from ? 'fx-var' : ''}${outline ? ' fx-of' : ''}" style="${vv}${outline ? '--ofc:#fff;--ofw:3px;' : ''}">${chars}</div></div>`;
+  const html = `<div class="br-w" id="${ctx.id(id)}" style="top:${px(y)};height:${size}px;font-family:'Archivo';${base}">${e}<div id="${ctx.id(`${id}-m`)}" class="${from ? 'fx-var' : ''}${outline ? ' fx-of' : ''}" style="${vv}${outline ? `--ofc:#fff;--ofw:${ofw}px;` : ''}">${chars}</div></div>`;
   if (inn === 'slam') {
     ctx.tl.fromTo(`${m} .fx-c`, { yPercent: -38, scaleY: 1.9, opacity: 0 }, { yPercent: 0, scaleY: 1, opacity: 1, duration: 0.34, ease: 'expo.out', stagger: 0.028 }, t);
     if (echo) echoBurst(ctx, id, t + 0.04);
   } else if (inn === 'breath') {
-    ctx.tl.fromTo(`${m} .fx-c`, { opacity: 0, yPercent: 14 }, { opacity: 1, yPercent: 0, duration: 0.7, ease: 'expo.out', stagger: 0.045 }, t);
+    if (split) ctx.tl.fromTo(`${m} .fx-c`, { opacity: 0, yPercent: 14 }, { opacity: 1, yPercent: 0, duration: 0.7, ease: 'expo.out', stagger: 0.045 }, t);
+    else ctx.tl.fromTo(m, { opacity: 0, y: 40, filter: 'blur(18px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, t);
     if (from) fx.varType(ctx, m, t, { from, to: { wght, wdth, trk: tracking }, d: Math.max(0.3, t1 - t - 0.15), ease: 'power2.inOut' });
   }
   return { html, sel: ctx.sel(id), m, size, h: size * 0.92 };
@@ -132,7 +133,7 @@ export function leak(ctx, { id, t, d = 0.8, x = 760, y = 700, size = 1500, peak 
 
 export function sweepBand(ctx, { id, t, d = 1.2, angle = 112, opacity = 0.9, ease = 'power1.inOut' } = {}) {
   ctx.tl.fromTo(ctx.sel(id), { backgroundPosition: '115% 0%' }, { backgroundPosition: '-15% 0%', duration: d, ease }, t);
-  return `<div class="br-sweep" id="${ctx.id(id)}" style="opacity:${opacity};background-image:linear-gradient(${angle}deg,transparent 40%,rgba(255,236,210,.0) 42%,rgba(255,240,220,.95) 50%,rgba(255,236,210,0) 58%,transparent 60%);background-position:115% 0%"></div>`;
+  return `<div class="br-sweep" id="${ctx.id(id)}" style="opacity:${opacity};background-image:linear-gradient(${angle}deg,transparent 38%,rgba(255,226,190,.12) 44%,rgba(255,244,228,.5) 50%,rgba(255,226,190,.12) 56%,transparent 62%);background-position:115% 0%"></div>`;
 }
 
 // cinema bars: top bar ends at h (the TA plate sits ON the bar), bottom bar mirrors it
