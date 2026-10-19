@@ -436,8 +436,23 @@ export function renderFrame(f, { readback = true } = {}) {
   return px;
 }
 
+export function pick(f, pts) {
+  const st = path.at(f / 30);
+  setCamera(cam, st, null, 1, 1);
+  selectLOD(st.pos, 'main');
+  const rc = new THREE.Raycaster();
+  const objs = lodMeshes;
+  return pts.map(([px, py]) => {
+    const ndc = new THREE.Vector2(px / cfg.w * 2 - 1, -(py / cfg.h * 2 - 1));
+    rc.setFromCamera(ndc, cam);
+    const hit = rc.intersectObjects(objs, false)[0];
+    if (!hit) return null;
+    const p = hit.point;
+    return { E: p.x + meta.E0, N: meta.N0 - p.z, H: p.y + meta.Z0, d: hit.distance, kind: hit.object.userData.kind };
+  });
+}
 export function camInfo(f) { const st = path.at(f / 30); return { pos: st.pos.toArray(), yaw: st.yaw, pitch: st.pitch, speed: st.speed, agl: st.agl }; }
 
 // expose for the driver
-window.__scene = { init, renderFrame, camInfo, TIMES };
+window.__scene = { init, renderFrame, camInfo, TIMES, pick };
 window.__ready = true;

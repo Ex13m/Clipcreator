@@ -1,0 +1,16 @@
+import { chromium } from 'playwright-core';
+import http from 'http'; import fs from 'fs'; import path from 'path';
+const ROOT = '/home/user/Clipcreator/projects/mcr-2026-sponzori/drone/mesh', DATA = path.resolve(ROOT, '../data');
+const [aspect, f, ptsJson, pathFile] = process.argv.slice(2);
+const server = http.createServer((req, res) => { const u = decodeURIComponent(req.url.split('?')[0]); const fp = u.startsWith('/data/') ? path.join(DATA, u.slice(6)) : path.join(ROOT, u.slice(1)); fs.readFile(fp, (e, b) => { if (e) { res.writeHead(404); return res.end(); } res.writeHead(200, { 'Content-Type': fp.endsWith('.js') ? 'text/javascript' : fp.endsWith('.html') ? 'text/html' : 'application/octet-stream' }); res.end(b); }); });
+await new Promise(r => server.listen(0, '127.0.0.1', r));
+const exe = fs.readdirSync('/opt/pw-browsers/chromium_headless_shell-1194').map(d => `/opt/pw-browsers/chromium_headless_shell-1194/${d}/headless_shell`).find(p => fs.existsSync(p));
+const browser = await chromium.launch({ executablePath: exe, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--use-gl=angle'] });
+const page = await browser.newPage();
+await page.goto(`http://127.0.0.1:${server.address().port}/src/index.html`);
+await page.waitForFunction(() => window.__ready === true);
+const [W, H, vfov] = aspect === '16x9' ? [1920, 1080, 45.7] : [1080, 1920, 73.7];
+await page.evaluate(async (o) => window.__scene.init(o), { w: W, h: H, vfov, ss: 1, sub: 1, path: pathFile ? JSON.parse(fs.readFileSync(pathFile, 'utf8')) : undefined });
+const r = await page.evaluate(([f, pts]) => window.__scene.pick(f, pts), [Number(f), JSON.parse(ptsJson)]);
+console.log(JSON.stringify(r));
+await browser.close(); server.close();
