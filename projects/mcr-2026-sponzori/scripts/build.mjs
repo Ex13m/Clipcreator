@@ -27,8 +27,8 @@ const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').
 const rnd = (seed) => { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
 // česká typografie: jednopísmenné předložky/spojky a čísla s jednotkou nezůstanou na konci řádku (NBSP)
 const nb = (s) => String(s ?? '')
-  .replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g, '$1$2 ').replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g, '$1$2 ')
-  .replace(/(\d)\s(?=\d{3}\b)/g, '$1 ').replace(/(\d)\s(?=(m|g|l|h|ha|s|ks|Kč)\b)/g, '$1 ').replace(/\bn\.\s(?=m\.)/g, 'n. ');
+  .replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g, '$1$2\u00a0').replace(/(^|[\s(„])([vkszouaiVKSZOUAI])\s+/g, '$1$2\u00a0')
+  .replace(/(\d)\s(?=\d{3}\b)/g, '$1\u00a0').replace(/(\d)\s(?=(m|g|l|h|ha|s|ks|Kč|gramů?|gramy|hodin|let|litru)(?![\p{L}\d]))/gu, '$1\u00a0').replace(/\bn\.\s(?=m\.)/g, 'n.\u00a0');
 
 // ======================================================================================
 // TOKENS (jediné místo pro vzhled) + volitelný přepis z design panelu
@@ -182,7 +182,7 @@ function build({ block = null, loop = false } = {}) {
   };
 
   // ---------- text fit (odhad šířky Montserrat 900) ----------
-  const chW = (c, up) => (c === ' ' || c === ' ' ? 0.28 : /[.,:;·!'’]/.test(c) ? 0.3 : /[0-9]/.test(c) ? 0.66 : /[–—-]/.test(c) ? 0.5 : up || /[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/.test(c) ? (/[MWŠ]/.test(c) ? 0.98 : /[IÍ]/.test(c) ? 0.36 : 0.8) : /[mw]/.test(c) ? 0.92 : /[ijlí]/.test(c) ? 0.3 : 0.64);
+  const chW = (c, up) => (c === ' ' || c === '\u00a0' ? 0.28 : /[.,:;·!'’]/.test(c) ? 0.3 : /[0-9]/.test(c) ? 0.66 : /[–—-]/.test(c) ? 0.5 : up || /[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/.test(c) ? (/[MWŠ]/.test(c) ? 0.98 : /[IÍ]/.test(c) ? 0.36 : 0.8) : /[mw]/.test(c) ? 0.92 : /[ijlí]/.test(c) ? 0.3 : 0.64);
   const textW = (s, size, up) => [...s].reduce((a, c) => a + chW(up ? c.toUpperCase() : c, up), 0) * size;
   const lines = (s, size, maxW, up) => { const ws = s.split(' '); let n = 1, cur = 0; for (const w of ws) { const ww = textW(w, size, up), sp = 0.28 * size; if (cur && cur + sp + ww > maxW) { n++; cur = ww; } else cur += (cur ? sp : 0) + ww; if (ww > maxW) return 99; } return n; };
   const fit = (s, maxW, maxLines, sizes, up = true) => sizes.find((z) => lines(s, z, maxW, up) <= maxLines) || sizes[sizes.length - 1];
@@ -243,7 +243,8 @@ function build({ block = null, loop = false } = {}) {
       const s = `#${ctx.id(`m${j}`)}`, tin = j === 0 ? (ctx.loop ? ctx.t0 : ctx.beat(1)) : ctx.bar(j), tout = j < msgs.length - 1 ? ctx.bar(j + 1) : null;
       if (ctx.loop) {
         if (j > 0) S(s, { opacity: 1 }, tin);
-        R(`${s} .t, ${s} .chips`, { y: 34, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.3, ease: EA.in }, tin);
+        // tvrdý střih na dobu + punch (bez posunu): snímek 0 smyčky = čistý plakát, titulek nepřekrývá podtitulek
+        R(`${s} .t, ${s} .chips`, { scale: 1.04, opacity: 0.85 }, { scale: 1, opacity: 1, duration: 0.3, ease: EA.punch }, tin);
         if (tout != null) S(s, { opacity: 0 }, tout);
       } else {
         T(s, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tin);

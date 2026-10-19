@@ -41,6 +41,6 @@ for (const f of frames) {
   const r = await page.evaluate(f => window.renderFrame(f), f);
   const buf = Buffer.from(r.url.split(',')[1], 'base64');
   fs.writeFileSync(path.join(outDir, `f${String(f).padStart(3, '0')}.png`), buf);
-  console.log(`frame ${f} gpu ${r.ms} ms wall ${Date.now() - t} ms`);
+  console.log(`frame ${f} render ${r.ms} ms read ${r.readMs} ms wall ${Date.now() - t} ms`);
 }
 await browser.close(); server.close();

@@ -37,7 +37,7 @@ o6b=o6*(1-fe[...,None])+np.where(bm[...,None],o6b,fill*0+o6b)*fe[...,None]
 # understory darkening under tree canopy (keeps the ortho colour but darker/desaturated)
 tm=up8(ndi.binary_erosion(tree,iterations=1),3.0)
 lum=o6b.mean(axis=2,keepdims=True)
-dark=(o6b*0.55+lum*0.12)*0.62
+dark=(o6b*0.78+lum*0.06)*0.70
 o6c=o6b*(1-tm[...,None])+dark*tm[...,None]
 Image.fromarray(np.clip(o6c,0,255).astype(np.uint8)).save(B+'ortho_core.jpg',quality=93,subsampling=0)
 # ---------------- water masks (RGBA 4096): R big, G small, B rearing, A north ----------------
@@ -84,6 +84,37 @@ for i in range(npk):
     col=np.median(patch,axis=0) if len(patch) else np.array([0.2,0.3,0.15])
     bright=np.percentile(patch.mean(axis=1),85) if len(patch) else 0.3
     trees.append([E-OX,g,-(N-ON),r,h,col[0],col[1],col[2],float(bright),float(rng.random())])
+# ---- gap filling: add crowns where canopy pixels are not covered by any crown
+from scipy.ndimage import distance_transform_edt
+bmask=ndi.binary_dilation(bfoot,iterations=1)
+trees=[t for t in trees if not bmask[int(np.clip(round(-t[2]+ON-5584450),0,799)) if False else int(np.clip(round(5585250-(ON-t[2])-0.5),0,799)), int(np.clip(round(t[0]+OX-461150-0.5),0,799))]]
+canopy=tree&~bmask
+yy_,xx_=np.mgrid[0:800,0:800]
+def cover_of(ts):
+    cov=np.zeros((800,800),bool)
+    for t in ts:
+        cx=t[0]+OX-461150-0.5; cy=5585250-(ON-t[2])-0.5; r=t[3]*0.8
+        x0=int(max(cx-r-1,0)); x1=int(min(cx+r+2,800)); y0=int(max(cy-r-1,0)); y1=int(min(cy+r+2,800))
+        sub=(xx_[y0:y1,x0:x1]-cx)**2+(yy_[y0:y1,x0:x1]-cy)**2<=r*r
+        cov[y0:y1,x0:x1]|=sub
+    return cov
+added=0
+for it in range(5):
+    cov=cover_of(trees)
+    unc=canopy&~cov
+    if unc.sum()<50: break
+    dt=distance_transform_edt(unc)
+    pk=(dt>=1.2)&(dt>=ndi.maximum_filter(dt,size=5))
+    ys,xs=np.nonzero(pk)
+    for y,x in zip(ys,xs):
+        r=float(np.clip(dt[y,x]*1.25,1.4,5.0)); h=float(max(ndsm[max(0,y-2):y+3,max(0,x-2):x+3].max(),2.6))
+        E=461150+x+0.5+rng.normal(0,0.2); N=5585250-y-0.5+rng.normal(0,0.2)
+        rr=max(1,int(r*0.55*4)); yy4=y*4+2; xx4=x*4+2
+        patch=o32[max(0,yy4-rr):yy4+rr+1,max(0,xx4-rr):xx4+rr+1].reshape(-1,3)
+        col=np.median(patch,axis=0); bright=np.percentile(patch.mean(axis=1),85)
+        trees.append([E-OX,float(terr[y,x]),-(N-ON),r,min(h,float(chm[y,x])+1.5) if chm[y,x]>0 else h,col[0],col[1],col[2],float(bright),float(rng.random())])
+        added+=1
+print('filler crowns',added,'final uncovered',int((canopy&~cover_of(trees)).sum()))
 trees=np.array(trees,np.float32)
 print('core trees',len(trees),'mean r',trees[:,3].mean(),'mean h',trees[:,4].mean())
 # ---------------- shrubs ----------------
@@ -126,7 +157,7 @@ terrc.astype('<f4').tofile(B+'terrain_ctx.f32')
 # context ortho: darken under canopy
 tmc=cv2.GaussianBlur(cv2.resize(ndi.binary_erosion(vegc).astype(np.float32),(3000,3000),interpolation=cv2.INTER_LINEAR),(0,0),1.5)
 lumc=oc.mean(axis=2,keepdims=True)
-ocd=oc*(1-tmc[...,None])+((oc*0.55+lumc*0.12)*0.62)*tmc[...,None]
+ocd=oc*(1-tmc[...,None])+((oc*0.78+lumc*0.06)*0.70)*tmc[...,None]
 Image.fromarray(np.clip(ocd,0,255).astype(np.uint8)).save(B+'ortho_ctx.jpg',quality=92)
 # context trees: 3 m CHM, wedge visible from the flight
 chc=np.where(vegc&~core,nc,0)

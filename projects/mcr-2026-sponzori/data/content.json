@@ -70,7 +70,7 @@
         { "src": "assets_prep/troutshop/heroes/h05_fishup_baffi_fly_pink.png", "fit": "contain" }
       ],
       "messages": [
-        { "t": "Milujeme lov pstruhů", "s": "specialista na lov pstruhů", "src": "troutshop.eu/sk/ hero „Milujeme lov pstruhov“ + EN hero „The trout fishing SPECIALIST!“ (CZ na obrazovce, viz script_cs)" },
+        { "t": "Milujeme lov pstruhů", "s": "přívlačový e-shop · specialista na pstruhy", "src": "troutshop.eu/sk/ hero „Milujeme lov pstruhov“ + EN hero „The trout fishing SPECIALIST!“ (CZ na obrazovce, viz script_cs)" },
         { "t": "Rodinná firma v oboru od roku 1999", "s": "Piešťany · Slovensko", "src": "troutshop.eu/en/about-us/ + patička webu" },
         { "t": "Generální partner Trout Area Slovakia", "s": "partner několika japonských značek", "src": "troutshop.eu/pc/spoons/velvet-arts-2/ + about-us („some well known Japanese companies“ → Verification #4: „několika“)" },
         { "t": "troutshop.eu", "s": "do Česka do pár dní", "cta": true, "src": "troutshop.eu/sk/ meta description" }
@@ -129,7 +129,7 @@
       "messages": [
         { "t": "Jigy, které chytají!", "s": "jigové a wolframové hlavičky", "src": "logo jigovky.cz (slogan); meta description homepage (fakt 4)" },
         { "t": "Poctivě vyrobeno v ČR", "s": "od UL po vertikální přívlač", "src": "jigovky.cz – USP ikona homepage + meta description (fakt 4); „největší výběr“ vynecháno dle script_cs" },
-        { "t": "Bezprotihrotové TroutJigy 0,4–3 g", "s": "barbless pro trout area", "src": "jigovky.cz/jig-trout/" },
+        { "t": "Bezprotihrotové TroutJigy", "s": "0,4–3 g · barbless pro trout area", "src": "jigovky.cz/jig-trout/" },
         { "t": "jigovky.cz", "s": "jigy · rotačky · háčky", "cta": true, "src": "jigovky.cz menu" }
       ]
     },
@@ -167,7 +167,7 @@
         { "t": "Termosky do cen", "s": "Zojirushi · 0,5–0,7 l", "src": "brief (ceny) + research/bosset.md (kategorie Termosky)" },
         { "t": "Horké i studené až 6 hodin", "s": "nerez a plast bez BPA", "src": "bosset.cz – popis SM-SR 0,6 l" },
         { "t": "Oficiální distributor Keitech a YGK X-Braid", "s": "přívlači se věnují víc než 20 let", "src": "bosset.cz meta + /o-nas/" },
-        { "t": "bosset.cz", "s": "expedujeme do 24 h", "cta": true, "src": "bosset.cz – banner v patičce" }
+        { "t": "bosset.cz", "s": "expedice do 24 h", "cta": true, "src": "bosset.cz – banner v patičce „Expedujeme do 24h“ (3. osoba, ať to neříká TA)" }
       ]
     },
     "gausseholler": {

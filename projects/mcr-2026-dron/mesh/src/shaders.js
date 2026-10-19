@@ -116,9 +116,14 @@ void main(){
     // fold the ortho onto steep faces: height above ground -> horizontal distance into the object,
     // so crown / roof texture is laid on the wall at true scale instead of being stretched vertically
     vec2 nh = n.xz; float nl = length(nh); nh = nl > 1e-4 ? nh / nl : vec2(0.0);
-    vec2 q = vW.xz - nh * (hg * 0.85 + 0.6);
-    vec3 albF = texture(uOrtho, toUV(q, uBox), uBias + 0.3).rgb;
-    alb = mix(alb, albF, wall);
+    // trees & buildings: fold inward (crown / roof texture); other walls (embankments, bridges, cut
+    // slopes): take the colour of the ground at the wall foot, outward
+    vec2 qIn = vW.xz - nh * (hg * 0.85 + 0.6);
+    vec2 qOut = vW.xz + nh * (1.5 + 0.25 * hg);
+    vec3 albIn = texture(uOrtho, toUV(qIn, uBox), uBias + 0.3).rgb;
+    vec3 albOut = texture(uOrtho, toUV(qOut, uBox), uBias + 1.5).rgb * 0.8;
+    float objk = clamp(tree + bld, 0.0, 1.0);
+    alb = mix(alb, mix(albOut, albIn, objk), wall);
   }
   // crown sides / forest edges: leafy breakup + under-canopy shade towards the ground
   float side = smoothstep(0.10, 0.50, steep);

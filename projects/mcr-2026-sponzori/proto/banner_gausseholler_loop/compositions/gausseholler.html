@@ -16,13 +16,13 @@
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
-  tl.fromTo("#gausseholler-m0 .t, #gausseholler-m0 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#gausseholler-m0 .t, #gausseholler-m0 .chips", {"scale":1.04,"opacity":0.85}, {"scale":1,"opacity":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 0.000);
   tl.set("#gausseholler-m0", {"opacity":0}, 2.000);
   tl.set("#gausseholler-m1", {"opacity":1}, 2.000);
-  tl.fromTo("#gausseholler-m1 .t, #gausseholler-m1 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 2.000);
+  tl.fromTo("#gausseholler-m1 .t, #gausseholler-m1 .chips", {"scale":1.04,"opacity":0.85}, {"scale":1,"opacity":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 2.000);
   tl.set("#gausseholler-m1", {"opacity":0}, 4.000);
   tl.set("#gausseholler-m2", {"opacity":1}, 4.000);
-  tl.fromTo("#gausseholler-m2 .t, #gausseholler-m2 .chips", {"y":34,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.3,"ease":"expo.out","immediateRender":false}, 4.000);
+  tl.fromTo("#gausseholler-m2 .t, #gausseholler-m2 .chips", {"scale":1.04,"opacity":0.85}, {"scale":1,"opacity":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 4.000);
   tl.fromTo("#gausseholler-pr0 .pi", {"scale":1.07}, {"scale":1,"duration":0.8,"ease":"power2.out","immediateRender":false}, 0.000);
   tl.fromTo("#gausseholler-hl", {"opacity":0.32}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 0.000);
   tl.set("#gausseholler-pd0", {"--on":1}, 0.000);

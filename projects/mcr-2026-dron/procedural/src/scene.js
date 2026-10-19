@@ -60,7 +60,7 @@ function hazeGLSL() {
   vec3 hazeApply(vec3 col, vec3 toP, vec3 camPos) {
     float dist = max(length(toP), 1e-3); vec3 rd = toP / dist;
     float b = ${P.hazeFalloff.toFixed(7)};
-    float h0 = camPos.y - ${P.hazeBase.toFixed(2)};
+    float h0 = max(camPos.y - ${P.hazeBase.toFixed(2)}, 0.0);
     float k = ${P.hazeDensity.toExponential(4)} * exp(-h0 * b);
     float ry = rd.y;
     float optical = (abs(ry * b * dist) > 1e-4) ? k * (1.0 - exp(-dist * ry * b)) / (ry * b) : k * dist;
@@ -198,11 +198,17 @@ function terrainMaterial(map, opts = {}) {
 }
 
 function buildTerrain(hCore, hCtx, orthoCore, orthoCtx) {
-  const gCore = gridGeometry(hCore, 800, 800, -399.5, -399.5, 1, (X, Z) => [(X + 400) / 800, (400 - Z) / 800]);
+  // decimate: core 2 m (native DTM resolution), context 6 m
+  const dec = (h, n, f) => { const m = Math.floor(n / f), o = new Float32Array(m * m);
+    for (let i = 0; i < m; i++) for (let j = 0; j < m; j++) { let s = 0; for (let a = 0; a < f; a++) for (let b = 0; b < f; b++) s += h[(i * f + a) * n + j * f + b]; o[i * m + j] = s / (f * f); } return o; };
+  const cs = S.opts.coreStep || 2, xs = S.opts.ctxStep || 2;
+  const hc = cs > 1 ? dec(hCore, 800, cs) : hCore, nc = 800 / cs;
+  const gCore = gridGeometry(hc, nc, nc, -400 + cs / 2, -400 + cs / 2, cs, (X, Z) => [(X + 400) / 800, (400 - Z) / 800]);
   const core = new THREE.Mesh(gCore, terrainMaterial(orthoCore));
   core.receiveShadow = true; core.castShadow = true;
-  const inside = (X, Z, d) => Math.abs(X) < 396 && Math.abs(Z) < 396 && Math.abs(X + d) < 396 && Math.abs(Z + d) < 396;
-  const gCtx = gridGeometry(hCtx, 1000, 1000, -1498.5, -1498.5, 3, (X, Z) => [(X + 1500) / 3000, (1500 - Z) / 3000], inside);
+  const inside = (X, Z, d) => Math.abs(X) < 394 && Math.abs(Z) < 394 && Math.abs(X + d) < 394 && Math.abs(Z + d) < 394;
+  const hx = xs > 1 ? dec(hCtx, 1000, xs) : hCtx, nx = 1000 / xs, dx = 3 * xs;
+  const gCtx = gridGeometry(hx, nx, nx, -1500 + dx / 2, -1500 + dx / 2, dx, (X, Z) => [(X + 1500) / 3000, (1500 - Z) / 3000], inside);
   const ctx = new THREE.Mesh(gCtx, terrainMaterial(orthoCtx, { detail: 0.6 }));
   ctx.receiveShadow = true; ctx.castShadow = true;
   // far ring: from the context border outwards, heights blend to a smooth valley floor
@@ -266,8 +272,8 @@ function crownGeometry(detail, seed, kind) {
     let r = 0.82 + 0.20 * a + 0.13 * b + 0.06 * c + lob;
     if (v.y < 0) r *= 1 - 0.28 * v.y * v.y;       // flatter underside
     rr[i] = r; cav[i] = 0.12 * b + 0.06 * c;
-    maxr = Math.max(maxr, r);
   }
+  { const srt = Array.from(rr).sort((p, q) => p - q); maxr = srt[Math.floor(srt.length * 0.8)]; }
   for (let i = 0; i < n; i++) {
     v.fromBufferAttribute(pos, i).normalize().multiplyScalar(rr[i] / maxr);
     pos.setXYZ(i, v.x, v.y, v.z);
@@ -330,13 +336,19 @@ async function buildTrees(scene) {
   const meta = await fetchJSON(BUILD + 'trees.json'), a = await fetchF32(BUILD + 'trees.f32'), st = meta.stride;
   const variants = { 0: [], 1: [], 2: [] };
   for (let i = 0; i < 8; i++) variants[0].push(crownGeometry(3, 101 + i, 0));
+  const lo0 = []; for (let i = 0; i < 8; i++) lo0.push(crownGeometry(2, 101 + i, 0));
+  variants[3] = lo0;
   for (let i = 0; i < 4; i++) variants[1].push(crownGeometry(2, 201 + i, 1));
   for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(2, 301 + i, 2));
   const mats = { 0: foliageMaterial({ orthoMix: 0.6, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.45, albedo: 1.0 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
+  mats[3] = mats[0];
+  const camEnd = S.cam.frames[S.cam.frames.length - 1].pos;
   const groups = new Map();
-  const cell = { 0: 100, 1: 100, 2: 400 };
+  const cell = { 0: 80, 1: 100, 2: 400, 3: 120 };
   for (let i = 0; i < meta.count; i++) {
-    const o = i * st, kind = a[o + 10], seed = a[o + 9];
+    const o = i * st, seed = a[o + 9];
+    let kind = a[o + 10];
+    if (kind === 0 && (a[o + 3] < 2.8 || Math.hypot(a[o] - camEnd[0], a[o + 2] - camEnd[2]) > (S.opts.lodDist || 200))) kind = 3;
     const nv = variants[kind].length, vi = Math.min(nv - 1, Math.floor(seed * nv));
     const cx = Math.floor(a[o] / cell[kind]), cz = Math.floor(a[o + 2] / cell[kind]);
     const key = `${kind}|${vi}|${cx}|${cz}`;
@@ -354,6 +366,7 @@ async function buildTrees(scene) {
       const rnd = mulberry32(Math.floor(seed * 1e6) + 17);
       let cv, cy, rx = r * (0.92 + 0.16 * rnd()), rz = r * (0.92 + 0.16 * rnd());
       if (kind === 1) { cv = Math.max(h * 0.55, 0.45); cy = g + h - cv; }
+      else if (kind === 2) { cv = THREE.MathUtils.clamp(0.42 * h, 0.8 * r, 1.4 * r); cy = g + h - cv; }
       else { cv = THREE.MathUtils.clamp(0.33 * h, 0.75 * r, 1.2 * r); cy = g + h - cv; }
       ps.set(x, cy, z); q.setFromAxisAngle(up, seed * Math.PI * 2 * 7.0); sc.set(rx, cv, rz);
       m4.compose(ps, q, sc); mesh.setMatrixAt(k, m4);
@@ -367,6 +380,20 @@ async function buildTrees(scene) {
     mesh.userData.kind = kind;
     scene.add(mesh); count += items.length;
   }
+  // trunks for trees whose crown base is clearly above ground
+  const tr = [];
+  for (let i = 0; i < meta.count; i++) {
+    const o = i * st, kind = a[o + 10]; if (kind !== 0) continue;
+    const g = a[o + 1], r = a[o + 3], h = a[o + 4];
+    const cv = THREE.MathUtils.clamp(0.33 * h, 0.75 * r, 1.2 * r), base = g + h - 2 * cv * 0.8;
+    if (base - g > 1.5) tr.push([a[o], g, a[o + 2], base - g + cv * 0.6, 0.08 + 0.012 * h]);
+  }
+  const tg = new THREE.CylinderGeometry(0.75, 1.0, 1, 6, 1, true); tg.translate(0, 0.5, 0);
+  const tm = new THREE.MeshStandardMaterial({ color: new THREE.Color(0.11, 0.095, 0.08), roughness: 0.95, envMapIntensity: P.envIntensity });
+  const tmesh = new THREE.InstancedMesh(tg, tm, tr.length);
+  tr.forEach(([x, g, z, len, rad], k) => { m4.compose(ps.set(x, g - 0.3, z), q.identity(), sc.set(rad, len, rad)); tmesh.setMatrixAt(k, m4); });
+  tmesh.castShadow = true; tmesh.receiveShadow = true; tmesh.computeBoundingSphere();
+  scene.add(tmesh);
   return count;
 }
 
@@ -483,7 +510,7 @@ function waterMaterial(pond) {
         vec3 w1 = texture(tWave, p / 4.7 + uTime * vec2(0.011, 0.006)).xyz * 2.0 - 1.0;
         vec3 w2 = texture(tWave, p / 1.9 + uTime * vec2(-0.017, 0.021)).xyz * 2.0 - 1.0;
         vec3 w3 = texture(tWave, p / 0.8 + uTime * vec2(0.031, -0.012)).xyz * 2.0 - 1.0;
-        vec3 n = normalize(vec3(0.0, 1.0, 0.0) + vec3(w1.x + w2.x * 0.8 + w3.x * 0.5, 0.0, w1.z + w2.z * 0.8 + w3.z * 0.5) * 0.11);
+        vec3 n = normalize(vec3(0.0, 1.0, 0.0) + vec3(w1.x + w2.x * 0.8 + w3.x * 0.5, 0.0, w1.z + w2.z * 0.8 + w3.z * 0.5) * 0.045);
         vec3 V = normalize(cameraPosition - vWP);
         float ndv = clamp(dot(n, V), 0.0, 1.0);
         float F = 0.02 + 0.98 * pow(1.0 - ndv, 5.0);
@@ -498,7 +525,7 @@ function waterMaterial(pond) {
         vec3 col = mix(body, refl, F);
         vec3 H = normalize(V + uSunDir);
         float nh = max(dot(n, H), 0.0);
-        float spec = pow(nh, 1800.0) * 60.0 + pow(nh, 220.0) * 1.2;
+        float spec = pow(nh, 2600.0) * 22.0 + pow(nh, 300.0) * 0.35;
         float Fs = 0.02 + 0.98 * pow(1.0 - max(dot(H, V), 0.0), 5.0);
         col += uSunCol * spec * Fs;
         col = hazeApply(col, vWP - cameraPosition, cameraPosition);
@@ -759,8 +786,10 @@ window.renderFrame = async (f) => {
   renderer.setRenderTarget(S.midRT); renderer.render(S.downQuad.scene, S.orthoCam);
   S.finQuad.mesh.material.uniforms.uFrame.value = f;
   renderer.setRenderTarget(null); renderer.render(S.finQuad.scene, S.orthoCam);
+  const gl = renderer.getContext(); gl.finish();
   const ms = performance.now() - t0;
+  const t1 = performance.now();
   const url = renderer.domElement.toDataURL('image/png');
-  return { url, ms: Math.round(ms) };
+  return { url, ms: Math.round(ms), readMs: Math.round(performance.now() - t1) };
 };
 window.__ready = true;

@@ -274,11 +274,22 @@ def earclip(P):
     if len(idx)==3: out.append(tuple(idx))
     return out
 meta=[]
-for bid,b in enumerate(buildings):
+kept=[]
+for b in buildings:
     rf=fit_roof(b)
     if b.get('forced'):
         f=b['forced']; rf['eave']=rf['ground']+f['eave']; rf['ridge']=rf['ground']+f['ridge']; rf['model']=f['model']
     b['roof']=rf
+    er=rf['eave']-rf['ground']; rr=rf['ridge']-rf['ground']
+    if b['source'].startswith('lidar'):
+        if er>8.5: continue
+        if b['W']<4.2 and er>5.0: continue
+        if b['L']*b['W']<22 and er>6.0: continue
+        if rr-er>0.62*b['W']: rf['ridge']=rf['eave']+0.62*b['W']
+    kept.append(b)
+buildings=kept
+for bid,b in enumerate(buildings):
+    rf=b['roof']
     build_rect(b,float(rng.random())+(2.0 if (b['L']>22 or b['source'].startswith('ortho_white')) else 0.0))
     meta.append(dict(src=b['source'],c=[float(b['c'][0]),float(b['c'][1])],L=b['L'],W=b['W'],**rf))
 for bp in poly_bld:
