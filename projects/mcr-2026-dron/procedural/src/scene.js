@@ -39,10 +39,11 @@ const P = {
   sunAz: 230, sunEl: 45,
   sunColor: new THREE.Color(1.0, 0.95, 0.86), sunIntensity: 7.0,
   envIntensity: 0.6,
-  exposure: 1.0,
+  exposure: 0.62,
   hazeDensity: 1.7e-4, hazeFalloff: 1 / 420, hazeBase: 150,
   hazeColor: [0.90, 0.94, 1.0], hazeSunColor: [1.25, 1.16, 1.0],
   zenith: [0.36, 0.50, 0.78], horizon: [0.95, 0.99, 1.05],
+  envZenith: [0.58, 0.64, 0.74], envHorizon: [0.92, 0.93, 0.94], envGround: [0.22, 0.24, 0.16],
   groundShadow: 0.55,
 };
 function sunDir() {
@@ -297,6 +298,8 @@ function crownGeometry(detail, seed, kind) {
 }
 function foliageMaterial(opts) {
   const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0, envMapIntensity: P.envIntensity * 1.1 });
+  const SHELL = opts.shell ? 1 : 0;
+  m.customProgramCacheKey = () => 'fol' + SHELL + (opts.orthoMix > 0 ? 'o' : 'n');
   m.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, {
       uShadowK: { value: 1.0 }, tNoise: { value: S.noise3 }, tOrtho: { value: S.orthoOrig }, uOrthoMix: { value: opts.orthoMix },
@@ -305,6 +308,10 @@ function foliageMaterial(opts) {
     });
     sh.vertexShader = sh.vertexShader.replace('#include <common>', `#include <common>
       attribute float aCav; attribute vec2 aInst; varying vec3 vWP; varying vec3 vObj; varying float vCav; varying vec2 vInst; varying vec3 vNW;`)
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+      #if ${SHELL}
+      transformed *= 1.06 + 0.03 * aCav;
+      #endif`)
       .replace('#include <fog_vertex>', `#include <fog_vertex>
       vWP = (modelMatrix * instanceMatrix * vec4(transformed,1.0)).xyz; vObj = position; vCav = aCav; vInst = aInst;
       { mat3 im = mat3(instanceMatrix); vec3 nn = objectNormal / vec3(dot(im[0],im[0]), dot(im[1],im[1]), dot(im[2],im[2])); vNW = normalize(mat3(modelMatrix) * im * nn); }`);
@@ -326,6 +333,12 @@ function foliageMaterial(opts) {
       .replace('#include <color_fragment>', `#include <color_fragment>
       vec3 wp = vWP * 1.15 + vec3(vInst.y*13.0, 0.0, vInst.y*7.0);
       float fn = fol(wp);
+      #if ${SHELL}
+      {
+        float hn = texture(tNoise, vWP * 0.62 + vInst.y * 3.0).a * 0.6 + texture(tNoise, vWP * 0.23).b * 0.4;
+        if (hn < 0.53) discard;
+      }
+      #endif
       float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
       float top = smoothstep(0.2, 0.75, normalize(vNW).y);
       vec2 jit = (texture(tNoise, vWP * 0.31).rg - 0.5) * 2.4 * (1.0 - top);
@@ -378,6 +391,7 @@ async function buildTrees(scene) {
   for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(2, 301 + i, 2));
   const mats = { 0: foliageMaterial({ orthoMix: 0.85, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.6, albedo: 1.0, clump: 0.6 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
   mats[3] = mats[0];
+  const shellMat = foliageMaterial({ orthoMix: 0.85, albedo: 1.0, shell: true });
   const camEnd = S.cam.frames[S.cam.frames.length - 1].pos;
   const groups = new Map();
   const cell = { 0: 80, 1: 100, 2: 400, 3: 120 };
@@ -416,6 +430,12 @@ async function buildTrees(scene) {
     mesh.computeBoundingSphere();
     mesh.userData.kind = kind;
     scene.add(mesh); count += items.length;
+    if ((kind === 0 || kind === 3) && !S.opts.noShell) {
+      const sh = new THREE.InstancedMesh(geo, shellMat, items.length);
+      sh.instanceMatrix = mesh.instanceMatrix; sh.instanceColor = mesh.instanceColor;
+      sh.castShadow = false; sh.receiveShadow = true; sh.boundingSphere = mesh.boundingSphere.clone(); sh.boundingSphere.radius += 2.0;
+      scene.add(sh);
+    }
   }
   // trunks for trees whose crown base is clearly above ground
   const tr = [];
@@ -612,8 +632,8 @@ function buildEnv(renderer) {
     side: THREE.BackSide, uniforms: { uSunDir: { value: s } },
     vertexShader: `varying vec3 vDir; void main(){ vDir = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
     fragmentShader: `varying vec3 vDir; uniform vec3 uSunDir; void main(){ vec3 d=normalize(vDir); float h=d.y;
-      vec3 zen=vec3(${P.zenith.join(',')}), hor=vec3(${P.horizon.join(',')});
-      vec3 c = h>0.0 ? mix(hor, zen, pow(h,0.48)) : mix(vec3(0.20,0.22,0.16), vec3(0.11,0.13,0.08), smoothstep(0.0,-0.4,h));
+      vec3 zen=vec3(${P.envZenith.join(',')}), hor=vec3(${P.envHorizon.join(',')}), gnd=vec3(${P.envGround.join(',')});
+      vec3 c = h>0.0 ? mix(hor, zen, pow(h,0.48)) : mix(gnd*1.3, gnd, smoothstep(0.0,-0.4,h));
       c += vec3(1.0,0.95,0.85)*0.25*pow(max(dot(d,uSunDir),0.0),8.0);
       gl_FragColor=vec4(c,1.0);}`,
   });
