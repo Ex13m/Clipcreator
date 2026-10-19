@@ -303,8 +303,8 @@ export default function jigovky(ctx) {
   html += fx.headline(ctx, { id: 'url', text: ctx.data.url, x: rowX + LG.w + 34 + 3 + 34, y: rowY, w: urlW + 40, maxLines: 1, size: urlSize, font: 'Roboto Slab', wght: 900, color: C.yellow, tracking: -0.01, t: tLock + 0.38, reveal: 'chars', stagger: 0.025, d: 0.5 }).html;
   html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${px(lgX)};top:${px(lgY)};width:${LG.w}px;height:${LG.h}px">${LG.html}</div>`;
 
-  // ---------- transitions: iris in from our green (lens motif), slice out on the downbeat ----------
-  fx.tIn(ctx, 'iris', { d: 0.5 });
+  // ---------- transitions: lens-iris in from our green, slice out on the downbeat ----------
+  J.irisIn(ctx, { cx: 560, cy: 880, d: 0.46, ease: 'power2.out' });                             // opens on the chrome head (fx 'iris' leaves the corners covered)
   fx.tOut(ctx, 'slice', { d: 0.42 });
   return { html, css: css.join('\n') };
 }
@@ -315,15 +315,15 @@ export default function jigovky(ctx) {
 export function hook(ctx) {
   stage(ctx);
   const L = ctx.safe.left, R = ctx.W - ctx.safe.right;
-  let html = fx.field(ctx, { id: 'bg', bg: `radial-gradient(80% 50% at 55% 62%, #0b7f40 0%, ${C.forest} 30%, ${C.deep} 66%, ${C.night} 100%)` });
+  let html = fx.field(ctx, { id: 'bg', bg: J.WORLD });
   html += fx.glow(ctx, { id: 'g', x: 640, y: 1110, size: 1200, color: 'rgba(211,252,2,.42)', opacity: 0.6 });
   const H = fx.headline(ctx, { id: 'h', text: 'Od 0,4 g.', x: L, y: 400, w: R - L, maxLines: 1, sizes: [210, 196, 184], font: 'Roboto Slab', wght: 900, color: C.yellow, t: 0.0, reveal: 'lines', d: 0.32, tracking: -0.02, lh: 1 });
   const S = fx.headline(ctx, { id: 's', text: 'Bez protihrotu.', x: L, y: 400 + H.h + 8, w: R - L, maxLines: 1, sizes: [118, 110, 104, 96], font: 'Roboto Slab', wght: 900, color: '#fff', t: 0.08, reveal: 'lines', d: 0.34, tracking: -0.015, lh: 1.02 });
   const heads = [PR.fluo, PR.pink, PR.red];
-  const pos = [[820, 980], [650, 1170], [480, 1360]];
+  const pos = [[846, 930], [640, 1130], [434, 1330]];
   heads.forEach((p, i) => {
-    const hp = 210, s = Math.min(1.13, hp / p.hpx);
-    const P = J.place(ctx, { id: `p${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: pos[i][0], y: pos[i][1], ground: 'none', sweepOpacity: 0.8 });
+    const hp = 232, s = Math.min(1.13, hp / p.hpx);
+    const P = J.place(ctx, { id: `p${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: pos[i][0], y: pos[i][1], ground: 'none', sweepOpacity: 0.32 });
     html += P.html;
     const t = (ctx.beats[i] ?? i * ctx.BEAT) - 0.02;
     ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: 140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, Math.max(0, t));
@@ -339,21 +339,21 @@ export function hook(ctx) {
 // ======================================================================================================
 export function endCard(ctx) {
   stage(ctx);
-  let html = fx.field(ctx, { id: 'bg', bg: `radial-gradient(80% 52% at 50% 40%, #0b7f40 0%, ${C.forest} 28%, ${C.deep} 64%, ${C.night} 100%)` });
+  let html = fx.field(ctx, { id: 'bg', bg: J.WORLD });
   html += fx.mesh(ctx, { id: 'fog', colors: [C.leaf, '#0a5c2c', C.forest], size: 900, blur: 150, opacity: 0.3, drift: 90, seed: 6 });
   fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.22 });
-  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 880 });
+  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 800 });
   html += E.html;
-  // colourways lined up under the lockup (heads ~120 px, shanks fade to the left)
-  const row = [PR.fluo, PR.pink, PR.red, PR.chrome];
-  const y = 1330, x0 = 300, dx = 190;
-  row.forEach((p, i) => {
-    const hp = 124, s = Math.min(1.13, hp / p.hpx);
-    const P = J.place(ctx, { id: `r${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: x0 + i * dx, y, ground: 'none', sweepOpacity: 0.75 });
+  // the hero product floats under the lockup (light sweep + glint)
+  {
+    const k = ctx.dims(PR.tj.src)[0] / 2400, s = 600 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
+    const P = J.place(ctx, { id: 'tj', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 540, y: 1268, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.85, shadow: 0.55, rot: -6 });
     html += P.html;
-    const t = 0.55 + i * ctx.BEAT / 2;
-    ctx.tl.fromTo(P.sel, { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, t);
-    fx.sweep(ctx, `r${i}`, ctx.beats[4 + i] ?? 2 + i * 0.46, { d: 0.6 });
-  });
-  return { html, css: J.css(ctx) };
+    ctx.tl.fromTo(P.sel, { opacity: 0, y: 80, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+    ctx.tl.fromTo(P.cam, { y: 0 }, { y: -14, duration: ctx.dur - 1.3, ease: 'sine.inOut' }, 1.2);
+    fx.sweep(ctx, 'tj', 1.45, { d: 0.9 });
+    const [gx, gy] = P.at(PR.tj.head[0] - 0.035, PR.tj.head[1] - 0.06);
+    html += J.glint(ctx, { id: 'gl', x: gx, y: gy, size: 200, t: 1.75, d: 0.75 });
+  }
+  return { html, css: `${J.css(ctx)}\n${ctx.S} ${ctx.sel('ec-url')}{color:${C.yellow} !important}` };
 }

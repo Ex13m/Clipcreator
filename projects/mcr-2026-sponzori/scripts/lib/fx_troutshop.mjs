@@ -33,16 +33,22 @@ export const GEO = {
 export const srcOf = (k) => `${AD}${GEO[k].f}.png`;
 export const PUPA = `${AD}hero_03_nories_crankin_pupa_109.png`;
 
-export const CSS = (S) => `
+// @font-face for Roboto Condensed inside the sub-composition too (the root page declares it as well; lint checks per file)
+const RC = [['400', 'normal'], ['600', 'normal'], ['700', 'normal'], ['800', 'normal'], ['700', 'italic'], ['800', 'italic']];
+const LAT = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+const EXT = 'U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF';
+export const FACES = RC.flatMap(([w, st]) => [['latin', LAT], ['latin-ext', EXT]].map(([r, u]) => `@font-face{font-family:'Roboto Condensed';font-style:${st};font-weight:${w};font-display:block;src:url(assets/fonts/roboto-condensed-${r}-${w}-${st}.woff2) format('woff2');unicode-range:${u};}`)).join('\n');
+
+export const CSS = (S) => `${FACES}
 ${S} .ts-arm{position:absolute;width:0;height:0;transform-origin:0 0}
 ${S} .ts-sp{position:absolute}
 ${S} .ts-sp img{position:absolute;inset:0;width:100%;height:100%;display:block}
 ${S} .ts-sp .fx-prod-sweep{inset:0}
-${S} .ts-sun{position:absolute;border-radius:50%;background:linear-gradient(180deg,#ff1a24 0%,#e3000f 38%,#c80411 100%);box-shadow:0 0 120px 30px rgba(227,0,15,.35)}
+${S} .ts-sun{position:absolute;border-radius:50%;background:radial-gradient(circle at 50% 28%,#ff3a40 0%,#e3000f 42%,#b5030f 100%);box-shadow:0 0 140px 36px rgba(227,0,15,.38)}
 ${S} .ts-co{position:absolute;display:flex;flex-direction:column;gap:6px;white-space:nowrap}
 ${S} .ts-co i{display:block;height:4px;width:64px;background:#e3000f;border-radius:2px;transform-origin:0 50%}
 ${S} .ts-co b{font-family:'Roboto Condensed';font-weight:800;font-size:34px;letter-spacing:.08em;text-transform:uppercase;line-height:1.05;color:#fff}
-${S} .ts-co>span{font-family:'Roboto Condensed';font-weight:600;font-size:28px;letter-spacing:.12em;text-transform:uppercase;line-height:1.1;color:rgba(255,255,255,.78)}
+${S} .ts-co>span{font-family:'Roboto Condensed';font-weight:600;font-size:29px;letter-spacing:.06em;line-height:1.1;color:rgba(255,255,255,.78)}
 ${S} .ts-co.r{align-items:flex-end;text-align:right}
 ${S} .ts-co.r i{transform-origin:100% 50%}
 ${S} .ts-pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 26px 13px;border-radius:999px;background:#e3000f;color:#fff;font-family:'Roboto Condensed';font-weight:700;font-size:32px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.35)}

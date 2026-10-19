@@ -82,8 +82,9 @@ export function pin(ctx, { id = 'pin', color = C.GOLD, dot = '#ffffff', ring = C
 export function track(ctx, sel, keys, { ease = 'none' } = {}) {
   for (let i = 0; i + 1 < keys.length; i++) {
     const [ta, xa, ya] = keys[i], [tb, xb, yb] = keys[i + 1];
-    if (tb - ta < 1e-3) continue;
-    ctx.tl.fromTo(sel, { x: xa, y: ya }, { x: xb, y: yb, duration: tb - ta, ease }, ta);
+    const d = +(tb - ta).toFixed(3) - 0.001;
+    if (d < 1e-3) continue;
+    ctx.tl.fromTo(sel, { x: xa, y: ya }, { x: xb, y: yb, duration: d, ease }, ta);
   }
 }
 

@@ -9,6 +9,9 @@
 //          (rod and all) pops forward with a white sticker outline (2.5D parallax, speed ramp into slow motion) and the word
 //          grows from hairline to black weight behind him; light-leak dissolve to the trout, macro push-in, a light sweep fills
 //          the outlined word; zoom-through into the next block.
+//          Second type level: event credit (tracked caps) in the top cinema bar, right of the TA plate.
+// CD pass (19. 10.): every downbeat lands on an image (no zoom-through out of black, flash screen ≤ .5), no face under the
+//          word on non-cut-out shots, trout regraded lighter (teal layer .7 → .3) and pushed in from below the hand.
 // Works for any bar count (cut: one word per bar, shots per beat; break: 2 bars). Subject cut-outs: assets_prep/broll/cut/
 // <id>_cut.png + _stroke.png (scripts/assets_prep/broll_cut.py). No VO.
 import * as fx from '../lib/fx.mjs';

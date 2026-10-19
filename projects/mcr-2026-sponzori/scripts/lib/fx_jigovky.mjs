@@ -117,3 +117,14 @@ export function callout(ctx, { id = 'co', pts, t = 0, d = 0.4, color = C.yellow,
   const [x0, y0] = pts[0];
   return `<svg class="jg-co" id="${ctx.id(id)}" viewBox="0 0 ${ctx.W} ${ctx.H}"><path id="${ctx.id(`${id}-p`)}" d="${dPath}" pathLength="1" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:1 1"/></svg><i class="jg-dot" id="${ctx.id(`${id}-d`)}" style="left:${px(x0 - dot)};top:${px(y0 - dot)};width:${px(dot * 2)};height:${px(dot * 2)};background:${color};box-shadow:0 0 0 4px rgba(1,67,31,.55)"></i>`;
 }
+
+// lens-iris block entrance: own bg covers the frame, a circular window opens from (cx,cy) past the farthest corner,
+// a thin yellow ring rides the edge; the cover is hidden after the move (fx.tIn('iris') stops at 78 % → corners stay covered)
+export function irisIn(ctx, { id = 'iris', color = ctx.theme.bg, cx = 540, cy = 880, d = 0.55, t = 0, ring = C.yellow, ease = 'power3.inOut' } = {}) {
+  const R = Math.hypot(Math.max(cx, ctx.W - cx), Math.max(cy, ctx.H - cy)) + 40;     // past the farthest corner
+  const m = `radial-gradient(circle at ${px(cx)} ${px(cy)}, transparent var(--r), #000 calc(var(--r) + 2px))`;
+  ctx.overlay(`<div class="fx-ov" id="${ctx.id(id)}" style="background:${color};--r:0px;-webkit-mask-image:${m};mask-image:${m}"></div><i class="fx-ov" id="${ctx.id(`${id}-rg`)}" style="inset:auto;left:${px(cx - R)};top:${px(cy - R)};width:${px(R * 2)};height:${px(R * 2)};border-radius:50%;border:5px solid ${ring}"></i>`);
+  ctx.tl.fromTo(ctx.sel(id), { '--r': '0px' }, { '--r': `${Math.round(R)}px`, duration: d, ease }, t);
+  ctx.tl.fromTo(ctx.sel(`${id}-rg`), { scale: 0.001, opacity: 1 }, { scale: 1, opacity: 0.0, duration: d, ease }, t);
+  ctx.tl.set(ctx.sel(id), { opacity: 0 }, t + d + 0.02);
+}
