@@ -61,13 +61,18 @@ export function prod(ctx, { id, k, w, cx, top, sweepOpacity = 0.6, bg = false, s
 }
 // contact shadows for a stand standing on the floor: ambient occlusion over the footprint + a dark core under the hub
 // + a tight contact blot under every visible leg tip (paint it BEFORE the product)
-export function footShadow(ctx, { id, F, ao = 0.5, tip = 0.8 }) {
-  const el = (n, x, y, rx, ry, bgc) => `<i class="gh-sh" id="${ctx.id(`${id}-${n}`)}" style="left:${px(x - rx)};top:${px(y - ry)};width:${px(2 * rx)};height:${px(2 * ry)};background:${bgc}"></i>`;
-  let h = el('ao', F.x, F.y, F.a * 1.14, Math.max(12, F.b * 1.14), `radial-gradient(closest-side,rgba(0,0,0,${ao}),rgba(0,0,0,${ao * 0.45}) 58%,rgba(0,0,0,0))`);
-  h += el('co', F.x, F.y, F.a * 0.42, Math.max(8, F.b * 0.42), `radial-gradient(closest-side,rgba(0,0,0,${ao + 0.15}),rgba(0,0,0,0))`);
+// ONE element with stacked radial-gradients (every extra radial/blur element counts toward lint composition_heavy_overlay_count_high)
+// extra: [{x, y, rx, ry, a}] more blots (e.g. under the family stands)
+export function footShadow(ctx, { id, F, ao = 0.5, tip = 0.8, extra = [] }) {
+  const g = (x, y, rx, ry, stops) => `radial-gradient(${px(rx)} ${px(ry)} at ${px(x)} ${px(y)},${stops},rgba(0,0,0,0))`;
   const r = Math.max(14, F.a * 0.085), q = Math.max(5, r * Math.max(0.3, F.b / F.a));
-  F.tips.forEach(([x, y], i) => { h += el(`t${i}`, x, y - q * 0.25, r, q, `radial-gradient(closest-side,rgba(0,0,0,${tip}),rgba(0,0,0,0))`); });
-  return `<div class="fx-full" id="${ctx.id(id)}">${h}</div>`;
+  const layers = [
+    ...F.tips.map(([x, y]) => g(x, y - q * 0.25, r, q, `rgba(0,0,0,${tip})`)),
+    ...extra.map((o) => g(o.x, o.y, o.rx, o.ry, `rgba(0,0,0,${o.a ?? 0.6})`)),
+    g(F.x, F.y, F.a * 0.42, Math.max(8, F.b * 0.42), `rgba(0,0,0,${ao + 0.15})`),
+    g(F.x, F.y, F.a * 1.14, Math.max(12, F.b * 1.14), `rgba(0,0,0,${ao}),rgba(0,0,0,${ao * 0.45}) 58%`),
+  ];
+  return `<div class="fx-full" id="${ctx.id(id)}" style="background:${layers.join(',')}"></div>`;
 }
 // display plinth in the SAME perspective as the stand on it: top ellipse = footprint × m (axes ratio b/a of the render),
 // front face h px, orange hairline on the front rim, optional engraved label centred on the front face
