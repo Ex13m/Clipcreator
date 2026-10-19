@@ -16,5 +16,5 @@ Otevřené: Fandovy plandavky (přes Luboše) — sponzor ano/ne?
 
 ## Chybí
 - Přesný název, datum a místo MČR (místo pravděpodobně Liběchov).
-- Web Moonky.
+- Moonky: web nemají → FB stránka (ruční výroba gumových nástrah, „Handmade lures“), logo vyříznuto z FB; potřeba fotky nástrah od uživatele.
 - Videa z rybaření.
