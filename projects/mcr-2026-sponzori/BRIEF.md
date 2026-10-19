@@ -17,6 +17,7 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Z našeho stylu zůstává **jen logo TA CZ** (vždy viditelné, malý roh). Žádné drum-pady/EQ/ticker/navy šablona.
 - Každý sponzor = vlastní vizuální svět podle JEHO značky (barvy/typografie z jeho loga a webu), produkty jako hrdinové (čisté výřezy, světelné přejezdy, odlesky, stíny, parallax, makro, kinetická typografie…). Fotky správně vyříznout, možné AI vylepšení (upscale) a efekty.
 - Film musí jít rozřezat na **samostatné Reels pro každého sponzora** (blok + hook + end card se sponzorem a logem TA).
+- Prodejci/výrobci nástrah: ukázat HODNĚ nástrah — min. 6–8 položek z jejich sortimentu (vějíř/mřížka/karusel/rychlé střihy) + 1–2 hero záběry (uživatel 19. 10.).
 - Hudba: track 3 (129 BPM), sestřih audio/track.wav (1:46), grid audio/track.beats.json.
 
 ## Akce (ověřeno z lihenlibechov.cz)

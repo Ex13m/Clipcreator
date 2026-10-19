@@ -109,6 +109,8 @@ export const CSS = `
 .fx-ov-sl{position:absolute;left:-40%;top:-40%;width:180%;height:180%;transform:rotate(-24deg);display:flex;flex-direction:column}
 .fx-ov-sl i{flex:1;margin:-1px 0}
 .fx-ov-gr{display:grid}
+.fx-ov-bl{inset:-90px}
+.fx-ov-wp{position:absolute;inset:0;display:block}
 .fx-ov-bl i{position:absolute;inset:0}
 .fx-ec{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
 .fx-defs{position:absolute;width:0;height:0;overflow:hidden}
@@ -395,15 +397,22 @@ export function flash(ctx, t, { id = null, color = '#fff', peak = 0.85, d = 0.32
 // `color` = own theme.bg). 'whip' / 'zoom' move the block stage itself (never animate ctx.stage yourself).
 // ======================================================================================
 const defsFor = (ctx) => (ctx._mbDefs ? '' : (ctx._mbDefs = true, `<svg class="fx-defs" aria-hidden="true"><filter id="${ctx.id('mb')}" x="-30%" y="-5%" width="160%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur id="${ctx.id('mbg')}" stdDeviation="0 0"/></filter></svg>`));
-function overlayFor(ctx, type, oid, color, dir, n = 7) {
+// [x%, y%, final radius %, delay (× d)] — 5 main drops + 3 satellites that the goo filter fuses into the main mass
+const BLOBS = [[22, 30, 70, 0], [78, 24, 70, 0.03], [50, 62, 95, 0.06], [18, 82, 70, 0.09], [84, 78, 70, 0.12], [50, 14, 30, 0.02], [64, 44, 26, 0.1], [34, 52, 24, 0.16]];
+const gooFor = (ctx) => (ctx._gooDefs ? '' : (ctx._gooDefs = true, `<svg class="fx-defs" aria-hidden="true"><filter id="${ctx.id('goo')}" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" stdDeviation="34" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -11"/></filter></svg>`));
+function overlayFor(ctx, type, oid, color, dir, n = 7, lead = null) {
   if (type === 'slice') return `<div class="fx-ov" id="${ctx.id(oid)}" style="overflow:hidden"><div class="fx-ov-sl">${Array.from({ length: n }, (_, i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color}"></i>`).join('')}</div></div>`;
   if (type === 'grid') { const c = 4, r = 7; return `<div class="fx-ov fx-ov-gr" id="${ctx.id(oid)}" style="grid-template-columns:repeat(${c},1fr);grid-template-rows:repeat(${r},1fr)">${Array.from({ length: c * r }, (_, i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color};display:block;margin:-1px"></i>`).join('')}</div>`; }
-  if (type === 'blob') return `<div class="fx-ov fx-ov-bl" id="${ctx.id(oid)}">${[[22, 30], [78, 24], [50, 62], [18, 82], [84, 78]].map(([x, y], i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color};clip-path:circle(0% at ${x}% ${y}%)"></i>`).join('')}</div>`;
+  // liquid blob: circles merged by an SVG "goo" filter (blur + alpha threshold) → one organic, melting mask; container is
+  // larger than the frame so the blur never thins the frame edges
+  if (type === 'wipe') return `<div class="fx-ov" id="${ctx.id(oid)}" style="overflow:hidden">${lead ? `<i class="fx-ov-wp" id="${ctx.id(`${oid}a`)}" style="background:${lead}"></i>` : ''}<i class="fx-ov-wp" id="${ctx.id(`${oid}b`)}" style="background:${color}"></i></div>`;
+  if (type === 'blob') return `${gooFor(ctx)}<div class="fx-ov fx-ov-bl" id="${ctx.id(oid)}" style="filter:url(#${ctx.id('goo')})">${BLOBS.map(([x, y], i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color};clip-path:circle(0% at ${x}% ${y}%)"></i>`).join('')}</div>`;
   return `<div class="fx-ov" id="${ctx.id(oid)}" style="background:${color}"></div>`;
 }
-const BLOBS = [[22, 30], [78, 24], [50, 62], [18, 82], [84, 78]];
-const wipeClip = (dir, k) => { const p = `${((1 - k) * 100).toFixed(1)}%`; return dir === 'left' ? `inset(0% 0% 0% ${p})` : dir === 'up' ? `inset(${p} 0% 0% 0%)` : dir === 'down' ? `inset(0% 0% ${p} 0%)` : `inset(0% ${p} 0% 0%)`; };
-const wipeOff = (dir, k) => { const p = `${(k * 100).toFixed(1)}%`; return dir === 'left' ? `inset(0% ${p} 0% 0%)` : dir === 'up' ? `inset(0% 0% ${p} 0%)` : dir === 'down' ? `inset(${p} 0% 0% 0%)` : `inset(0% 0% 0% ${p})`; };
+// wipe = solid panels sliding in (tOut) / out (tIn) on x/yPercent — a moving hard edge, identical to an inset() wipe for a solid
+// colour but transform-only (an inset() clip-path tween jumps: Chrome's computed value collapses equal sides, GSAP can't match it)
+const WIPE = { right: ['xPercent', -100], left: ['xPercent', 100], up: ['yPercent', 100], down: ['yPercent', -100] };
+const wipeAxis = (dir) => WIPE[dir] || WIPE.right;
 
 export function tOut(ctx, type = 'cut', { color = ctx.next?.theme?.bg || ctx.theme.bg || '#000', d = 0.4, dir = 'right', end = ctx.dur } = {}) {
   const t = Math.max(0, end - d), oid = 'tout', o = ctx.sel(oid);
@@ -423,13 +432,18 @@ export function tOut(ctx, type = 'cut', { color = ctx.next?.theme?.bg || ctx.the
     }
     return;
   }
-  ctx.overlay(overlayFor(ctx, type, oid, color, dir));
-  if (type === 'wipe') ctx.tl.fromTo(o, { clipPath: wipeClip(dir, 0) }, { clipPath: wipeClip(dir, 1), duration: d, ease: 'power3.inOut' }, t);
-  else if (type === 'iris') ctx.tl.fromTo(o, { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: d, ease: 'power3.in' }, t);
+  const lead = type === 'wipe' ? (ctx.next?.theme?.accent || null) : null;
+  ctx.overlay(overlayFor(ctx, type, oid, color, dir, 7, lead && lead !== color ? lead : null));
+  if (type === 'wipe') {   // accent panel leads, the next block's bg follows (stacked wipe); covered at `end`
+    const [ax, v] = wipeAxis(dir);
+    if (lead && lead !== color) ctx.tl.fromTo(ctx.sel(`${oid}a`), { [ax]: v }, { [ax]: 0, duration: d * 0.8, ease: 'power3.inOut' }, t);
+    ctx.tl.fromTo(ctx.sel(`${oid}b`), { [ax]: v }, { [ax]: 0, duration: d * 0.8, ease: 'power3.inOut' }, t + d * 0.2);
+  }
+  if (type === 'iris') ctx.tl.fromTo(o, { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: d, ease: 'power3.in' }, t);
   else if (type === 'flash') ctx.tl.fromTo(o, { opacity: 0 }, { opacity: 1, duration: d, ease: 'power2.in' }, t);
   else if (type === 'slice') for (let i = 0; i < 7; i++) ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { xPercent: i % 2 ? -101 : 101 }, { xPercent: 0, duration: d * 0.75, ease: 'power3.inOut' }, t + i * d * 0.035);
   else if (type === 'grid') for (let i = 0; i < 28; i++) { const c = i % 4, r = Math.floor(i / 4); ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { scale: 0 }, { scale: 1.02, duration: d * 0.6, ease: 'power2.in' }, t + (Math.abs(c - 1.5) + Math.abs(r - 3)) * d * 0.06); }
-  else if (type === 'blob') BLOBS.forEach(([x, y], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(0% at ${x}% ${y}%)` }, { clipPath: `circle(${i === 2 ? 95 : 70}% at ${x}% ${y}%)`, duration: d * 0.85, ease: 'power2.in' }, t + i * d * 0.03));
+  else if (type === 'blob') BLOBS.forEach(([x, y, r, dl], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(0% at ${x}% ${y}%)` }, { clipPath: `circle(${r}% at ${x}% ${y}%)`, duration: d * (0.84 - dl), ease: 'power2.in' }, t + dl * d));
 }
 export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.45, dir = 'right', start = 0 } = {}) {
   const t = start, oid = 'tin', o = ctx.sel(oid);
@@ -450,13 +464,17 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
     }
     return;
   }
-  ctx.overlay(overlayFor(ctx, type, oid, color, dir));
-  if (type === 'wipe') ctx.tl.fromTo(o, { clipPath: wipeOff(dir, 0) }, { clipPath: wipeOff(dir, 1), duration: d, ease: 'power3.inOut' }, t);
-  else if (type === 'iris') { ctx.tl.fromTo(o, { '--r': '0%' }, { '--r': '78%', duration: d, ease: 'power3.out' }, t); ctx.tl.set(o, { webkitMaskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))', maskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))' }, 0); }
+  const lead = type === 'wipe' ? (ctx.theme.accent || null) : null;
+  ctx.overlay(overlayFor(ctx, type, oid, color, dir, 7, lead && lead !== color ? lead : null));
+  if (type === 'wipe') {   // starts covered by own bg; the bg panel leaves first, the accent panel trails it (stacked wipe)
+    const [ax, v] = wipeAxis(dir);
+    ctx.tl.fromTo(ctx.sel(`${oid}b`), { [ax]: 0 }, { [ax]: -v, duration: d * 0.8, ease: 'power3.inOut' }, t);
+    if (lead && lead !== color) ctx.tl.fromTo(ctx.sel(`${oid}a`), { [ax]: 0 }, { [ax]: -v, duration: d * 0.8, ease: 'power3.inOut' }, t + d * 0.2);
+  } else if (type === 'iris') { ctx.tl.fromTo(o, { '--r': '0%' }, { '--r': '78%', duration: d, ease: 'power3.out' }, t); ctx.tl.set(o, { webkitMaskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))', maskImage: 'radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))' }, 0); }
   else if (type === 'flash') ctx.tl.fromTo(o, { opacity: 1 }, { opacity: 0, duration: d, ease: 'power2.out' }, t);
   else if (type === 'slice') for (let i = 0; i < 7; i++) ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { xPercent: 0 }, { xPercent: i % 2 ? 101 : -101, duration: d * 0.75, ease: 'power3.inOut' }, t + i * d * 0.035);
   else if (type === 'grid') for (let i = 0; i < 28; i++) { const c = i % 4, r = Math.floor(i / 4); ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { scale: 1.02 }, { scale: 0, duration: d * 0.6, ease: 'power2.out' }, t + (Math.abs(c - 1.5) + Math.abs(r - 3)) * d * 0.06); }
-  else if (type === 'blob') BLOBS.forEach(([x, y], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(${i === 2 ? 95 : 70}% at ${x}% ${y}%)` }, { clipPath: `circle(0% at ${x}% ${y}%)`, duration: d * 0.85, ease: 'power2.out' }, t + i * d * 0.03));
+  else if (type === 'blob') BLOBS.forEach(([x, y, r, dl], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(${r}% at ${x}% ${y}%)` }, { clipPath: `circle(0% at ${x}% ${y}%)`, duration: d * (0.84 - dl), ease: 'power2.out' }, t + dl * d));
 }
 
 // ======================================================================================

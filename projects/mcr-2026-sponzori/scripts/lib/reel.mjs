@@ -12,16 +12,24 @@ export function defaultHook(ctx) {
   const BAR = ctx.dur;
   let html = fx.field(ctx, { kind: 'radial', c1: T.bg2 || T.accent || T.bg, c2: T.bg, at: '50% 55%' });
   html += fx.glow(ctx, { x: ctx.W / 2, y: 1000, size: 1100, color: T.accent || '#fff', opacity: 0.35 });
+  // headline first (its height decides where the product sits), painted above the product
+  const H = fx.headline(ctx, { id: 'hh', text: M.headline || ctx.data.copy?.headline || ctx.data.name, x: ctx.safe.left, y: 420, maxLines: 3, upper: T.upper ?? true, font: T.font?.display, wght: T.wght ?? 900, color: T.fg, t: 0.05, reveal: 'lines', sizes: [140, 124, 112, 100, 92, 84, 76, 68] });
+  const S = M.sub ? fx.headline(ctx, { id: 'hs', text: M.sub, x: ctx.safe.left, y: 420 + H.h + 26, maxLines: 1, font: T.font?.text, wght: 700, color: T.accent || T.fg, t: 0.3, reveal: 'fade', sizes: [40, 36, 32] }) : null;
+  const textBottom = 420 + H.h + (S ? 26 + 48 : 0);
   if (pr) {
-    const P = fx.product(ctx, { id: 'hp', src: pr.src, h: Math.min(760, (pr.size?.[1] || 700) * 1.25), cy: 1040, ground: 'float', pad: pr.pad, rot: M.rot ?? -8 });
+    // fit the product into the free box under the text (wide lures must not run off the frame; never upscale > 1.25×)
+    const [nw, nh] = ctx.dims(pr.src), ar = nw / nh;
+    const boxW = 920, boxH = Math.min(760, ctx.H - ctx.safe.bottom - textBottom - 80);
+    const w = Math.min(boxW, boxH * ar, nw * 1.25), h = w / ar;
+    const cy = Math.min(ctx.H - ctx.safe.bottom - h / 2 - 20, Math.max(textBottom + 60 + h / 2, 1040));
+    const P = fx.product(ctx, { id: 'hp', src: pr.src, w, cy, ground: 'float', pad: pr.pad, rot: M.rot ?? -8, maxUp: 1.25 });
     html += P.html;
     fx.productIn(ctx, 'hp', 0, { from: 'zoom', d: 0.7 });
     fx.pushIn(ctx, P.cam, 0.7, BAR, { from: 1, to: 1.08 });
     fx.sweep(ctx, 'hp', 0.45, { d: 0.8 });
   }
-  const H = fx.headline(ctx, { id: 'hh', text: M.headline || ctx.data.copy?.headline || ctx.data.name, x: ctx.safe.left, y: 420, maxLines: 3, upper: T.upper ?? true, font: T.font?.display, wght: T.wght ?? 900, color: T.fg, t: 0.05, reveal: 'lines', sizes: [140, 124, 112, 100, 92, 84, 76, 68] });
   html += H.html;
-  if (M.sub) html += fx.headline(ctx, { id: 'hs', text: M.sub, x: ctx.safe.left, y: 420 + H.h + 26, maxLines: 1, font: T.font?.text, wght: 700, color: T.accent || T.fg, t: 0.3, reveal: 'fade', sizes: [40, 36, 32] }).html;
+  if (S) html += S.html;
   fx.tOut(ctx, 'flash', { color: T.bg, d: 0.12 });
   return { html, css: '', timeline: ctx.tl };
 }

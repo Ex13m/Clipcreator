@@ -8,25 +8,25 @@
   
   </style>
   <div id="bw-jigovky-hook" class="blk blk-jigovky" style="--bg:#060807;--fg:#ffffff;--acc:#fed700;--acc2:#176e37">
-    <div id="jigovky-hook-stage" class="blk-stage"><div class="fx-field" id="jigovky-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #0f3a1f 0%, #060807 100%);"></div><div class="fx-glow" id="jigovky-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #fed700, transparent);opacity:0.35;"></div><div class="fx-prod" id="jigovky-hook-hp" style="left:126.9px;top:771.3px;width:826.3px;height:537.5px;"><div class="fx-abs" id="jigovky-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="jigovky-hook-hp-sh" style="left:117.3px;width:590.9px;top:544.5px;height:53.8px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="jigovky-hook-hp-tl"><div class="fx-abs" id="jigovky-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="jigovky-hook-hp-im" src="assets/prep/jigovky/heroes/h01_troutjig_barbless.png" alt=""><i class="fx-prod-sweep" id="jigovky-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/jigovky/heroes/h01_troutjig_barbless.png);mask-image:url(assets/prep/jigovky/heroes/h01_troutjig_barbless.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="jigovky-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Poppins';font-weight:900;font-size:140px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;"><span class="fx-ln" id="jigovky-hook-hh-l0" style=""><span>Jigy, které</span></span><span class="fx-ln" id="jigovky-hook-hh-l1" style=""><span>chytají!</span></span></div><div class="fx-t " id="jigovky-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Poppins';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#fed700;text-align:left;"><span class="fx-ln" id="jigovky-hook-hs-l0" style=""><span>jigovky.cz</span></span></div>
+    <div id="jigovky-hook-stage" class="blk-stage"><div class="fx-field" id="jigovky-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #0f3a1f 0%, #060807 100%);"></div><div class="fx-glow" id="jigovky-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #fed700, transparent);opacity:0.35;"></div><div class="fx-prod" id="jigovky-hook-hp" style="left:126.9px;top:828.4px;width:826.3px;height:537.5px;"><div class="fx-abs" id="jigovky-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="jigovky-hook-hp-sh" style="left:117.3px;width:590.9px;top:544.5px;height:53.8px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="jigovky-hook-hp-tl"><div class="fx-abs" id="jigovky-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="jigovky-hook-hp-im" src="assets/prep/jigovky/heroes/h01_troutjig_barbless.png" alt=""><i class="fx-prod-sweep" id="jigovky-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/jigovky/heroes/h01_troutjig_barbless.png);mask-image:url(assets/prep/jigovky/heroes/h01_troutjig_barbless.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="jigovky-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Poppins';font-weight:900;font-size:140px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;"><span class="fx-ln" id="jigovky-hook-hh-l0" style=""><span>Jigy, které</span></span><span class="fx-ln" id="jigovky-hook-hh-l1" style=""><span>chytají!</span></span></div><div class="fx-t " id="jigovky-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Poppins';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#fed700;text-align:left;"><span class="fx-ln" id="jigovky-hook-hs-l0" style=""><span>jigovky.cz</span></span></div>
     </div>
     <div class="fx-ov" id="jigovky-hook-tout" style="background:#060807"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
+  gsap.set("#jigovky-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#jigovky-hook-hs", {"opacity":0,"y":24});
   gsap.set("#jigovky-hook-hp", {"scale":1.8,"opacity":0});
   gsap.set("#jigovky-hook-hp-cam", {"scale":1});
   gsap.set("#jigovky-hook-hp-sw", {"backgroundPosition":"110% 0%"});
-  gsap.set("#jigovky-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#jigovky-hook-hs", {"opacity":0,"y":24});
   gsap.set("#jigovky-hook-tout", {"opacity":0});
   gsap.set("#jigovky-hook-hp-rot", {"rotation":-8});
   gsap.set("#jigovky-hook-hp-cam", {"transformOrigin":"50% 50%"});
+  tl.fromTo("#jigovky-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#jigovky-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#jigovky-hook-hp", {"scale":1.8,"opacity":0}, {"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#jigovky-hook-hp-cam", {"scale":1}, {"scale":1.08,"duration":1.1340000000000001,"ease":"power1.inOut","immediateRender":false}, 0.700);
   tl.fromTo("#jigovky-hook-hp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.450);
-  tl.fromTo("#jigovky-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
-  tl.fromTo("#jigovky-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#jigovky-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.714);
   tl.set({}, {}, 1.834);
   window.__timelines["jigovky-hook"] = tl;

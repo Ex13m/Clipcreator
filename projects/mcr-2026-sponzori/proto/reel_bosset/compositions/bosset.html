@@ -14,7 +14,7 @@
     <div class="fx-ov" id="bosset-fl2" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="bosset-fl3" style="background:#ffffff;opacity:0;mix-blend-mode:normal"></div>
     <div class="fx-ov" id="bosset-tin" style="background:#c5ebfc"></div>
-    <div class="fx-ov" id="bosset-tout" style="background:#c5ebfc"></div>
+    <div class="fx-ov" id="bosset-tout" style="overflow:hidden"><i class="fx-ov-wp" id="bosset-touta" style="background:#1b97b1"></i><i class="fx-ov-wp" id="bosset-toutb" style="background:#c5ebfc"></i></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
@@ -36,7 +36,8 @@
   gsap.set("#bosset-s2", {"opacity":0});
   gsap.set("#bosset-lw", {"opacity":0,"x":40});
   gsap.set("#bosset-tin", {"--r":"0%"});
-  gsap.set("#bosset-tout", {"clipPath":"inset(100.0% 0% 0% 0%)"});
+  gsap.set("#bosset-touta", {"yPercent":100});
+  gsap.set("#bosset-toutb", {"yPercent":100});
   gsap.set("#bosset-tin", {"webkitMaskImage":"radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))","maskImage":"radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1%))"});
   tl.fromTo("#bosset-k .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
   tl.fromTo("#bosset-k2 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.02,"immediateRender":false}, 0.300);
@@ -61,7 +62,8 @@
   tl.fromTo("#bosset-fl2", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 3.646);
   tl.fromTo("#bosset-fl3", {"opacity":0.25}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 5.480);
   tl.fromTo("#bosset-tin", {"--r":"0%"}, {"--r":"78%","duration":0.6,"ease":"power3.out","immediateRender":false}, 0.000);
-  tl.fromTo("#bosset-tout", {"clipPath":"inset(100.0% 0% 0% 0%)"}, {"clipPath":"inset(0.0% 0% 0% 0%)","duration":0.4,"ease":"power3.inOut","immediateRender":false}, 6.915);
+  tl.fromTo("#bosset-touta", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 6.915);
+  tl.fromTo("#bosset-toutb", {"yPercent":100}, {"yPercent":0,"duration":0.32000000000000006,"ease":"power3.inOut","immediateRender":false}, 6.995);
   tl.set({}, {}, 7.315);
   window.__timelines["bosset"] = tl;
   </script>

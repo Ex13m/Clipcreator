@@ -118,7 +118,7 @@ blocks. The fx classes (`.fx-*`) are global.
 | duotone / mono / halftone photo | `photo({src, treat:'duo'\|'mono'\|'halftone', d1, d2, kb:{from, to, t0, t1}})` | Ken Burns built in |
 | split-screen grid assemble | `grid({src \| cells:[{src, fit, bg, pad}], cols, rows, mode:'cols'\|'scatter'\|'scale', t})` | |
 | colour flash on a downbeat | `flash(t, {color, peak, d, blend})` | |
-| transitions | `tIn(type, {color, d, dir})` / `tOut(type, …)`: `cut`, `wipe`, `iris`, `slice`, `whip` (directional blur and skew), `zoom` (zoom-through), `blob` (liquid circles), `grid`, `flash` | |
+| transitions | `tIn(type, {color, d, dir})` / `tOut(type, …)`: `cut`, `wipe`, `iris`, `slice`, `whip` (directional blur and skew), `zoom` (zoom-through), `blob` (liquid mask: 8 drops fused by an SVG goo filter), `grid`, `flash` | |
 | end-card lockup | `endCard({t, logo, url, line, scale})` | flies the TA plate into the lockup (`ctx.plate.hero`) and fits the sponsor logo ≤ the TA logo |
 
 **Transition handoff contract.** Each block owns its own in and out. At a boundary the two sides either **hard-cut on the downbeat** or
@@ -158,7 +158,8 @@ Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on
 ## 8. Reels
 `BLOCK=<key> REEL=1` builds: **hook** (the bar before the block; `meta.hook` or your `hook(ctx)`) → **your block** (unchanged) → **end
 card** (2 bars after it; `meta.endCard` or your `endCard(ctx)`). The music is the matching slice of `track.wav` with a 0.12 s fade-in and
-a 0.9 s fade-out, and the VO is included. The hook must sell in one bar: strongest product shot + headline, readable at 0.3 s. The end
+a 0.9 s fade-out, and the VO is included. The hook must sell in one bar: strongest product shot + headline, readable at 0.3 s. The default hook fits the product into the free box under the
+headline (max 920 × 760 px, never > 1.25× natural size), so wide lures do not run off the frame. The end
 card is the lockup sponsor logo + URL + „Partner MČR v Trout Area 2026“ + TA logo (`fx.endCard` does it and respects the logo rule).
 Your block must not depend on what comes before or after it: use `ctx.prev` / `ctx.next` only for transition colours.
 
@@ -168,7 +169,8 @@ Your block must not depend on what comes before or after it: use `ctx.prev` / `c
 - Small packshots (Activefishing 386–756 px, Jigovky details about 500 px) must not be blown up. `fx.product` caps them at 1.3× and warns.
   Show them smaller, in grids or as macro crops with motion.
 - B-roll: `assets_prep/broll/*.jpg` (1080 × 1920). Venue: `assets_prep/libechov/venue/*`. Drone: `drone/final/flyover_9x16.mp4` (venue
-  picks it up automatically when it exists).
+  picks it up automatically when it exists; until then it uses the newest draft `drone/mesh/out/v<N>/flyover_9x16.mp4` and the build
+  log says `DRAFT`). The held last frame is written to `assets_prep/libechov/venue/_drone_<dir>_last.jpg`.
 - Fonts: families in `lib/fonts.mjs → FONTS` (Archivo, Bricolage Grotesque, Inter, Inter Tight, Montserrat (+italic), Nunito, Unbounded, Oswald,
   Outfit, Space Grotesk, Anton, Poppins, Playfair Display, …). To add one: put the woff2 files (latin + latin-ext) in `fonts/` and declare it in
   **your** module with `export const fonts = {…}`. Measuring converts it to `fonts/_ttf/` automatically.

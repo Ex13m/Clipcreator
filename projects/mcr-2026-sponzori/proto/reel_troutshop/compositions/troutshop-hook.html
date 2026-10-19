@@ -8,25 +8,25 @@
   
   </style>
   <div id="bw-troutshop-hook" class="blk blk-troutshop" style="--bg:#070707;--fg:#ffffff;--acc:#e3000f;--acc2:#ffffff">
-    <div id="troutshop-hook-stage" class="blk-stage"><div class="fx-field" id="troutshop-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #2a0306 0%, #070707 100%);"></div><div class="fx-glow" id="troutshop-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #e3000f, transparent);opacity:0.35;"></div><div class="fx-prod" id="troutshop-hook-hp" style="left:339px;top:660px;width:402px;height:760px;"><div class="fx-abs" id="troutshop-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="troutshop-hook-hp-sh" style="left:65px;width:271.9px;top:783.6px;height:76px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="troutshop-hook-hp-tl"><div class="fx-abs" id="troutshop-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="troutshop-hook-hp-im" src="assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png" alt=""><i class="fx-prod-sweep" id="troutshop-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png);mask-image:url(assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="troutshop-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Anton';font-weight:400;font-size:140px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="troutshop-hook-hh-l0" style=""><span>Milujeme lov</span></span><span class="fx-ln" id="troutshop-hook-hh-l1" style=""><span>pstruhů</span></span></div><div class="fx-t " id="troutshop-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Inter';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#e3000f;text-align:left;"><span class="fx-ln" id="troutshop-hook-hs-l0" style=""><span>troutshop.eu</span></span></div>
+    <div id="troutshop-hook-stage" class="blk-stage"><div class="fx-field" id="troutshop-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #2a0306 0%, #070707 100%);"></div><div class="fx-glow" id="troutshop-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #e3000f, transparent);opacity:0.35;"></div><div class="fx-prod" id="troutshop-hook-hp" style="left:378.2px;top:828.4px;width:323.5px;height:611.6px;"><div class="fx-abs" id="troutshop-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="troutshop-hook-hp-sh" style="left:52.3px;width:218.8px;top:630.6px;height:61.2px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="troutshop-hook-hp-tl"><div class="fx-abs" id="troutshop-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="troutshop-hook-hp-im" src="assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png" alt=""><i class="fx-prod-sweep" id="troutshop-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png);mask-image:url(assets/prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="troutshop-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Anton';font-weight:400;font-size:140px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="troutshop-hook-hh-l0" style=""><span>Milujeme lov</span></span><span class="fx-ln" id="troutshop-hook-hh-l1" style=""><span>pstruhů</span></span></div><div class="fx-t " id="troutshop-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Inter';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#e3000f;text-align:left;"><span class="fx-ln" id="troutshop-hook-hs-l0" style=""><span>troutshop.eu</span></span></div>
     </div>
     <div class="fx-ov" id="troutshop-hook-tout" style="background:#070707"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
+  gsap.set("#troutshop-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#troutshop-hook-hs", {"opacity":0,"y":24});
   gsap.set("#troutshop-hook-hp", {"scale":1.8,"opacity":0});
   gsap.set("#troutshop-hook-hp-cam", {"scale":1});
   gsap.set("#troutshop-hook-hp-sw", {"backgroundPosition":"110% 0%"});
-  gsap.set("#troutshop-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#troutshop-hook-hs", {"opacity":0,"y":24});
   gsap.set("#troutshop-hook-tout", {"opacity":0});
   gsap.set("#troutshop-hook-hp-rot", {"rotation":-8});
   gsap.set("#troutshop-hook-hp-cam", {"transformOrigin":"50% 50%"});
+  tl.fromTo("#troutshop-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#troutshop-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#troutshop-hook-hp", {"scale":1.8,"opacity":0}, {"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#troutshop-hook-hp-cam", {"scale":1}, {"scale":1.08,"duration":1.1340000000000001,"ease":"power1.inOut","immediateRender":false}, 0.700);
   tl.fromTo("#troutshop-hook-hp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.450);
-  tl.fromTo("#troutshop-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
-  tl.fromTo("#troutshop-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#troutshop-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.714);
   tl.set({}, {}, 1.834);
   window.__timelines["troutshop-hook"] = tl;

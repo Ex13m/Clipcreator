@@ -8,25 +8,25 @@
   
   </style>
   <div id="bw-bosset-hook" class="blk blk-bosset" style="--bg:#c5ebfc;--fg:#0b1d24;--acc:#1b97b1;--acc2:#ffc500">
-    <div id="bosset-hook-stage" class="blk-stage"><div class="fx-field" id="bosset-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #f4fbff 0%, #c5ebfc 100%);"></div><div class="fx-glow" id="bosset-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #1b97b1, transparent);opacity:0.35;"></div><div class="fx-prod" id="bosset-hook-hp" style="left:422.9px;top:660px;width:234.2px;height:760px;"><div class="fx-abs" id="bosset-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="bosset-hook-hp-sh" style="left:49.1px;width:140.3px;top:784.3px;height:76px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="bosset-hook-hp-tl"><div class="fx-abs" id="bosset-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="bosset-hook-hp-im" src="assets/prep/bosset/heroes/h01_zojirushi_orange.png" alt=""><i class="fx-prod-sweep" id="bosset-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/bosset/heroes/h01_zojirushi_orange.png);mask-image:url(assets/prep/bosset/heroes/h01_zojirushi_orange.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="bosset-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Outfit';font-weight:800;font-size:140px;line-height:0.98;letter-spacing:0em;color:#0b1d24;text-align:left;"><span class="fx-ln" id="bosset-hook-hh-l0" style=""><span>Ceny pro</span></span><span class="fx-ln" id="bosset-hook-hh-l1" style=""><span>vítěze</span></span></div><div class="fx-t " id="bosset-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Outfit';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#1b97b1;text-align:left;"><span class="fx-ln" id="bosset-hook-hs-l0" style=""><span>termosky od Bosset.cz</span></span></div>
+    <div id="bosset-hook-stage" class="blk-stage"><div class="fx-field" id="bosset-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #f4fbff 0%, #c5ebfc 100%);"></div><div class="fx-glow" id="bosset-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #1b97b1, transparent);opacity:0.35;"></div><div class="fx-prod" id="bosset-hook-hp" style="left:445.8px;top:828.4px;width:188.5px;height:611.6px;"><div class="fx-abs" id="bosset-hook-hp-cam" style="inset:0"><i class="fx-prod-shadow" id="bosset-hook-hp-sh" style="left:39.5px;width:112.9px;top:631.2px;height:61.2px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="bosset-hook-hp-tl"><div class="fx-abs" id="bosset-hook-hp-rot" style="inset:0"><img class="fx-prod-img" id="bosset-hook-hp-im" src="assets/prep/bosset/heroes/h01_zojirushi_orange.png" alt=""><i class="fx-prod-sweep" id="bosset-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/bosset/heroes/h01_zojirushi_orange.png);mask-image:url(assets/prep/bosset/heroes/h01_zojirushi_orange.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-t " id="bosset-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Outfit';font-weight:800;font-size:140px;line-height:0.98;letter-spacing:0em;color:#0b1d24;text-align:left;"><span class="fx-ln" id="bosset-hook-hh-l0" style=""><span>Ceny pro</span></span><span class="fx-ln" id="bosset-hook-hh-l1" style=""><span>vítěze</span></span></div><div class="fx-t " id="bosset-hook-hs" style="left:64px;top:720.4px;width:952px;font-family:'Outfit';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#1b97b1;text-align:left;"><span class="fx-ln" id="bosset-hook-hs-l0" style=""><span>termosky od Bosset.cz</span></span></div>
     </div>
     <div class="fx-ov" id="bosset-hook-tout" style="background:#c5ebfc"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
+  gsap.set("#bosset-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#bosset-hook-hs", {"opacity":0,"y":24});
   gsap.set("#bosset-hook-hp", {"scale":1.8,"opacity":0});
   gsap.set("#bosset-hook-hp-cam", {"scale":1});
   gsap.set("#bosset-hook-hp-sw", {"backgroundPosition":"110% 0%"});
-  gsap.set("#bosset-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#bosset-hook-hs", {"opacity":0,"y":24});
   gsap.set("#bosset-hook-tout", {"opacity":0});
   gsap.set("#bosset-hook-hp-rot", {"rotation":-8});
   gsap.set("#bosset-hook-hp-cam", {"transformOrigin":"50% 50%"});
+  tl.fromTo("#bosset-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#bosset-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#bosset-hook-hp", {"scale":1.8,"opacity":0}, {"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#bosset-hook-hp-cam", {"scale":1}, {"scale":1.08,"duration":1.111,"ease":"power1.inOut","immediateRender":false}, 0.700);
   tl.fromTo("#bosset-hook-hp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.450);
-  tl.fromTo("#bosset-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
-  tl.fromTo("#bosset-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
   tl.fromTo("#bosset-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.691);
   tl.set({}, {}, 1.811);
   window.__timelines["bosset-hook"] = tl;

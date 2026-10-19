@@ -27,19 +27,22 @@ export default function venue(ctx) {
   const at = (q, d) => ctx.snap(ctx.vo.at(q) ?? d, 'beat');
   let html = '';
   // ---- background: drone or photo ----
-  const vid = D.video && ctx.has(D.video);
+  // final delivery (data.video = drone/final/…) wins; until it lands, use the newest draft render drone/mesh/out/v<N>/ (reported as DRAFT)
+  const draft = () => { try { return fs.readdirSync(ctx.srcOf('drone/mesh/out')).filter((v) => /^v\d+$/.test(v)).sort((a, b) => +b.slice(1) - +a.slice(1)).map((v) => `drone/mesh/out/${v}/${path.basename(D.video || 'flyover_9x16.mp4')}`).find((r) => ctx.has(r)) || null; } catch { return null; } };
+  const video = D.video && ctx.has(D.video) ? D.video : draft();
+  const vid = !!video;
   let vdur = 0, still = null;
   if (vid) {
-    vdur = ffDur(ctx.srcOf(D.video));
+    vdur = ffDur(ctx.srcOf(video));
     if (vdur > 0 && vdur < ctx.dur - 0.05) {        // hold the drone's last frame instead of cutting to a photo
-      const rel = `drone/final/${path.basename(D.video).replace(/\.[^.]+$/, '')}_last.jpg`;
+      const rel = `assets_prep/libechov/venue/_drone_${video.split('/').slice(-2, -1)[0]}_last.jpg`;
       const dst = ctx.srcOf(rel);
-      try { if (!exists(dst) || fs.statSync(dst).mtimeMs < fs.statSync(ctx.srcOf(D.video)).mtimeMs) execFileSync('ffmpeg', ['-v', 'error', '-y', '-sseof', '-0.15', '-i', ctx.srcOf(D.video), '-frames:v', '1', '-q:v', '2', dst]); still = rel; } catch { still = null; }
+      try { if (!exists(dst) || fs.statSync(dst).mtimeMs < fs.statSync(ctx.srcOf(video)).mtimeMs) execFileSync('ffmpeg', ['-v', 'error', '-y', '-sseof', '-0.15', '-i', ctx.srcOf(video), '-frames:v', '1', '-q:v', '2', dst]); still = rel; } catch { still = null; }
     }
-    ctx.report(`drone ${D.video} ${vdur}s${still ? ' + held last frame' : ''}`);
+    ctx.report(`drone ${video}${video !== D.video ? ' (DRAFT — final drone/final/ missing)' : ''} ${vdur}s${still ? ' + held last frame' : ''}`);
   } else ctx.report(`drone missing → photo ${path.basename(D.photos[0])}`);
   const bgPhoto = still || D.photos[0];
-  html += `<div class="fx-full" id="${ctx.id('bgw')}">${fx.photo(ctx, { id: 'bg', src: bgPhoto, kb: { from: { scale: vid ? 1.0 : 1.3 }, to: { scale: vid ? 1.05 : 1.06 }, t0: vid ? vdur : 0, t1: ctx.dur, ease: 'power2.out' } })}${vid ? ctx.video(D.video, { id: 'drone', start: 0, dur: Math.min(vdur, ctx.dur), style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover' }) : ''}</div>`;
+  html += `<div class="fx-full" id="${ctx.id('bgw')}">${fx.photo(ctx, { id: 'bg', src: bgPhoto, kb: { from: { scale: vid ? 1.0 : 1.3 }, to: { scale: vid ? 1.05 : 1.06 }, t0: vid ? vdur : 0, t1: ctx.dur, ease: 'power2.out' } })}${vid ? ctx.video(video, { id: 'drone', start: 0, dur: Math.min(vdur, ctx.dur), style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover' }) : ''}</div>`;
   html += `<div class="fx-full" style="background:linear-gradient(180deg, rgba(26,33,46,.82) 0%, rgba(26,33,46,.25) 30%, rgba(26,33,46,.1) 52%, rgba(18,60,85,.55) 75%, rgba(26,33,46,.92) 100%)"></div>`;
 
   // ---- bar 0 (drop): kicker + LÍHEŇ LIBĚCHOV + round badge ----

@@ -13,8 +13,8 @@
     <div class="fx-ov" id="moonky-fl1" style="background:#ff4f8b;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="moonky-fl2" style="background:#b8ff2e;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="moonky-fl3" style="background:#ff4f8b;opacity:0;mix-blend-mode:screen"></div>
-    <div class="fx-ov fx-ov-bl" id="moonky-tin"><i id="moonky-tin0" style="background:#0e1424;clip-path:circle(0% at 22% 30%)"></i><i id="moonky-tin1" style="background:#0e1424;clip-path:circle(0% at 78% 24%)"></i><i id="moonky-tin2" style="background:#0e1424;clip-path:circle(0% at 50% 62%)"></i><i id="moonky-tin3" style="background:#0e1424;clip-path:circle(0% at 18% 82%)"></i><i id="moonky-tin4" style="background:#0e1424;clip-path:circle(0% at 84% 78%)"></i></div>
-    <div class="fx-ov fx-ov-bl" id="moonky-tout"><i id="moonky-tout0" style="background:#060807;clip-path:circle(0% at 22% 30%)"></i><i id="moonky-tout1" style="background:#060807;clip-path:circle(0% at 78% 24%)"></i><i id="moonky-tout2" style="background:#060807;clip-path:circle(0% at 50% 62%)"></i><i id="moonky-tout3" style="background:#060807;clip-path:circle(0% at 18% 82%)"></i><i id="moonky-tout4" style="background:#060807;clip-path:circle(0% at 84% 78%)"></i></div>
+    <svg class="fx-defs" aria-hidden="true"><filter id="moonky-goo" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" stdDeviation="34" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -11"/></filter></svg><div class="fx-ov fx-ov-bl" id="moonky-tin" style="filter:url(#moonky-goo)"><i id="moonky-tin0" style="background:#0e1424;clip-path:circle(0% at 22% 30%)"></i><i id="moonky-tin1" style="background:#0e1424;clip-path:circle(0% at 78% 24%)"></i><i id="moonky-tin2" style="background:#0e1424;clip-path:circle(0% at 50% 62%)"></i><i id="moonky-tin3" style="background:#0e1424;clip-path:circle(0% at 18% 82%)"></i><i id="moonky-tin4" style="background:#0e1424;clip-path:circle(0% at 84% 78%)"></i><i id="moonky-tin5" style="background:#0e1424;clip-path:circle(0% at 50% 14%)"></i><i id="moonky-tin6" style="background:#0e1424;clip-path:circle(0% at 64% 44%)"></i><i id="moonky-tin7" style="background:#0e1424;clip-path:circle(0% at 34% 52%)"></i></div>
+    <div class="fx-ov fx-ov-bl" id="moonky-tout" style="filter:url(#moonky-goo)"><i id="moonky-tout0" style="background:#060807;clip-path:circle(0% at 22% 30%)"></i><i id="moonky-tout1" style="background:#060807;clip-path:circle(0% at 78% 24%)"></i><i id="moonky-tout2" style="background:#060807;clip-path:circle(0% at 50% 62%)"></i><i id="moonky-tout3" style="background:#060807;clip-path:circle(0% at 18% 82%)"></i><i id="moonky-tout4" style="background:#060807;clip-path:circle(0% at 84% 78%)"></i><i id="moonky-tout5" style="background:#060807;clip-path:circle(0% at 50% 14%)"></i><i id="moonky-tout6" style="background:#060807;clip-path:circle(0% at 64% 44%)"></i><i id="moonky-tout7" style="background:#060807;clip-path:circle(0% at 34% 52%)"></i></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
@@ -53,11 +53,17 @@
   gsap.set("#moonky-tin2", {"clipPath":"circle(95% at 50% 62%)"});
   gsap.set("#moonky-tin3", {"clipPath":"circle(70% at 18% 82%)"});
   gsap.set("#moonky-tin4", {"clipPath":"circle(70% at 84% 78%)"});
+  gsap.set("#moonky-tin5", {"clipPath":"circle(30% at 50% 14%)"});
+  gsap.set("#moonky-tin6", {"clipPath":"circle(26% at 64% 44%)"});
+  gsap.set("#moonky-tin7", {"clipPath":"circle(24% at 34% 52%)"});
   gsap.set("#moonky-tout0", {"clipPath":"circle(0% at 22% 30%)"});
   gsap.set("#moonky-tout1", {"clipPath":"circle(0% at 78% 24%)"});
   gsap.set("#moonky-tout2", {"clipPath":"circle(0% at 50% 62%)"});
   gsap.set("#moonky-tout3", {"clipPath":"circle(0% at 18% 82%)"});
   gsap.set("#moonky-tout4", {"clipPath":"circle(0% at 84% 78%)"});
+  gsap.set("#moonky-tout5", {"clipPath":"circle(0% at 50% 14%)"});
+  gsap.set("#moonky-tout6", {"clipPath":"circle(0% at 64% 44%)"});
+  gsap.set("#moonky-tout7", {"clipPath":"circle(0% at 34% 52%)"});
   gsap.set("#moonky-l0-rot", {"rotation":-18});
   gsap.set("#moonky-l1-rot", {"rotation":14});
   gsap.set("#moonky-l2-rot", {"rotation":-8});
@@ -118,16 +124,22 @@
   tl.fromTo("#moonky-fl1", {"opacity":0.12}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 1.811);
   tl.fromTo("#moonky-fl2", {"opacity":0.12}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 3.669);
   tl.fromTo("#moonky-fl3", {"opacity":0.12}, {"opacity":0,"duration":0.35,"ease":"power2.out","immediateRender":false}, 5.480);
-  tl.fromTo("#moonky-tin0", {"clipPath":"circle(70% at 22% 30%)"}, {"clipPath":"circle(0% at 22% 30%)","duration":0.4675,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#moonky-tin1", {"clipPath":"circle(70% at 78% 24%)"}, {"clipPath":"circle(0% at 78% 24%)","duration":0.4675,"ease":"power2.out","immediateRender":false}, 0.017);
-  tl.fromTo("#moonky-tin2", {"clipPath":"circle(95% at 50% 62%)"}, {"clipPath":"circle(0% at 50% 62%)","duration":0.4675,"ease":"power2.out","immediateRender":false}, 0.033);
-  tl.fromTo("#moonky-tin3", {"clipPath":"circle(70% at 18% 82%)"}, {"clipPath":"circle(0% at 18% 82%)","duration":0.4675,"ease":"power2.out","immediateRender":false}, 0.050);
-  tl.fromTo("#moonky-tin4", {"clipPath":"circle(70% at 84% 78%)"}, {"clipPath":"circle(0% at 84% 78%)","duration":0.4675,"ease":"power2.out","immediateRender":false}, 0.066);
-  tl.fromTo("#moonky-tout0", {"clipPath":"circle(0% at 22% 30%)"}, {"clipPath":"circle(70% at 22% 30%)","duration":0.3825,"ease":"power2.in","immediateRender":false}, 6.864);
-  tl.fromTo("#moonky-tout1", {"clipPath":"circle(0% at 78% 24%)"}, {"clipPath":"circle(70% at 78% 24%)","duration":0.3825,"ease":"power2.in","immediateRender":false}, 6.877);
-  tl.fromTo("#moonky-tout2", {"clipPath":"circle(0% at 50% 62%)"}, {"clipPath":"circle(95% at 50% 62%)","duration":0.3825,"ease":"power2.in","immediateRender":false}, 6.891);
-  tl.fromTo("#moonky-tout3", {"clipPath":"circle(0% at 18% 82%)"}, {"clipPath":"circle(70% at 18% 82%)","duration":0.3825,"ease":"power2.in","immediateRender":false}, 6.904);
-  tl.fromTo("#moonky-tout4", {"clipPath":"circle(0% at 84% 78%)"}, {"clipPath":"circle(70% at 84% 78%)","duration":0.3825,"ease":"power2.in","immediateRender":false}, 6.918);
+  tl.fromTo("#moonky-tin0", {"clipPath":"circle(70% at 22% 30%)"}, {"clipPath":"circle(0% at 22% 30%)","duration":0.462,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-tin1", {"clipPath":"circle(70% at 78% 24%)"}, {"clipPath":"circle(0% at 78% 24%)","duration":0.4455,"ease":"power2.out","immediateRender":false}, 0.017);
+  tl.fromTo("#moonky-tin2", {"clipPath":"circle(95% at 50% 62%)"}, {"clipPath":"circle(0% at 50% 62%)","duration":0.42900000000000005,"ease":"power2.out","immediateRender":false}, 0.033);
+  tl.fromTo("#moonky-tin3", {"clipPath":"circle(70% at 18% 82%)"}, {"clipPath":"circle(0% at 18% 82%)","duration":0.41250000000000003,"ease":"power2.out","immediateRender":false}, 0.050);
+  tl.fromTo("#moonky-tin4", {"clipPath":"circle(70% at 84% 78%)"}, {"clipPath":"circle(0% at 84% 78%)","duration":0.396,"ease":"power2.out","immediateRender":false}, 0.066);
+  tl.fromTo("#moonky-tin5", {"clipPath":"circle(30% at 50% 14%)"}, {"clipPath":"circle(0% at 50% 14%)","duration":0.451,"ease":"power2.out","immediateRender":false}, 0.011);
+  tl.fromTo("#moonky-tin6", {"clipPath":"circle(26% at 64% 44%)"}, {"clipPath":"circle(0% at 64% 44%)","duration":0.40700000000000003,"ease":"power2.out","immediateRender":false}, 0.055);
+  tl.fromTo("#moonky-tin7", {"clipPath":"circle(24% at 34% 52%)"}, {"clipPath":"circle(0% at 34% 52%)","duration":0.374,"ease":"power2.out","immediateRender":false}, 0.088);
+  tl.fromTo("#moonky-tout0", {"clipPath":"circle(0% at 22% 30%)"}, {"clipPath":"circle(70% at 22% 30%)","duration":0.378,"ease":"power2.in","immediateRender":false}, 6.864);
+  tl.fromTo("#moonky-tout1", {"clipPath":"circle(0% at 78% 24%)"}, {"clipPath":"circle(70% at 78% 24%)","duration":0.3645,"ease":"power2.in","immediateRender":false}, 6.877);
+  tl.fromTo("#moonky-tout2", {"clipPath":"circle(0% at 50% 62%)"}, {"clipPath":"circle(95% at 50% 62%)","duration":0.35100000000000003,"ease":"power2.in","immediateRender":false}, 6.891);
+  tl.fromTo("#moonky-tout3", {"clipPath":"circle(0% at 18% 82%)"}, {"clipPath":"circle(70% at 18% 82%)","duration":0.3375,"ease":"power2.in","immediateRender":false}, 6.904);
+  tl.fromTo("#moonky-tout4", {"clipPath":"circle(0% at 84% 78%)"}, {"clipPath":"circle(70% at 84% 78%)","duration":0.324,"ease":"power2.in","immediateRender":false}, 6.918);
+  tl.fromTo("#moonky-tout5", {"clipPath":"circle(0% at 50% 14%)"}, {"clipPath":"circle(30% at 50% 14%)","duration":0.369,"ease":"power2.in","immediateRender":false}, 6.873);
+  tl.fromTo("#moonky-tout6", {"clipPath":"circle(0% at 64% 44%)"}, {"clipPath":"circle(26% at 64% 44%)","duration":0.333,"ease":"power2.in","immediateRender":false}, 6.909);
+  tl.fromTo("#moonky-tout7", {"clipPath":"circle(0% at 34% 52%)"}, {"clipPath":"circle(24% at 34% 52%)","duration":0.306,"ease":"power2.in","immediateRender":false}, 6.936);
   tl.set({}, {}, 7.314);
   window.__timelines["moonky"] = tl;
   </script>
