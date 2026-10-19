@@ -1,0 +1,176 @@
+{
+ "_note": "Data bloku (jen ověřená fakta + assety). Vzhled = scripts/blocks/gausseholler.mjs. Zdroje: research/gausseholler.md, vo/script_cs.json.",
+ "key": "gausseholler",
+ "name": "Gausse Holler",
+ "url": "gausseholler.com",
+ "brand": {
+  "colors": {
+   "blue": "#1D8FD5",
+   "bg": "#0F1113",
+   "word": "#E8E5E1",
+   "orange_logo": "#F0904F",
+   "ice": "#7FB2C7"
+  },
+  "research": "research/gausseholler.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/gausseholler/logo_on_dark.png",
+  "on_light": "assets_prep/gausseholler/logo_on_light.png",
+  "plate": "assets_prep/gausseholler/logo_plate.png",
+  "gear": "assets_prep/gausseholler/gear.png",
+  "gear_ring": "assets_prep/gausseholler/gear_ring.png",
+  "gear_core": "assets_prep/gausseholler/gear_core.png"
+ },
+ "products": [
+  {
+   "src": "assets_prep/gausseholler/heroes/h01_revolut8_black_front.png",
+   "name": "Revolut 8 Standard Edition · Black (front render)",
+   "size": [
+    1315,
+    1216
+   ],
+   "pad": [
+    0.03,
+    0.031,
+    0.03,
+    0.035
+   ],
+   "aspect": 1.081,
+   "glint": [
+    0.771,
+    0.332
+   ],
+   "dominant": [
+    "#0d0e0d",
+    "#4d4c4b",
+    "#c9c3bb"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/gausseholler/heroes/h02_revolut8_black_side.png",
+   "name": "Revolut 8 Standard Edition · Black (portrait render)",
+   "size": [
+    1464,
+    1609
+   ],
+   "pad": [
+    0.033,
+    0.03,
+    0.033,
+    0.03
+   ],
+   "aspect": 0.91,
+   "glint": [
+    0.498,
+    0.045
+   ],
+   "dominant": [
+    "#131212",
+    "#3c3c3b",
+    "#787471"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/gausseholler/heroes/h03_revolut8_black_threeq.png",
+   "name": "Revolut 8 Standard Edition · Black (3/4 render)",
+   "size": [
+    1321,
+    1440
+   ],
+   "pad": [
+    0.032,
+    0.03,
+    0.033,
+    0.037
+   ],
+   "aspect": 0.917,
+   "glint": [
+    0.535,
+    0.389
+   ],
+   "dominant": [
+    "#0f0f0f",
+    "#3f3e3e",
+    "#b8a8a1"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/gausseholler/heroes/h04_revolut8_black_top.png",
+   "name": "Revolut 8 Standard Edition · Black (top render)",
+   "size": [
+    1558,
+    1937
+   ],
+   "pad": [
+    0.037,
+    0.029,
+    0.037,
+    0.029
+   ],
+   "aspect": 0.804,
+   "glint": [
+    0.429,
+    0.126
+   ],
+   "dominant": [
+    "#111011",
+    "#3b3a3b",
+    "#93796c"
+   ],
+   "cut": "ml_isnet"
+  }
+ ],
+ "copy": {
+  "headline": "Stojan na pruty Black Standard Edition",
+  "facts": [
+   "Ručně stavěno v Česku",
+   "Série 5 kusů · číslováno"
+  ],
+  "url": "gausseholler.com",
+  "extra": [
+   "Revolut 8 (malý popisek u produktu)",
+   "8 karbonových tubusů"
+  ],
+  "lines": [
+   {
+    "t": "Revolut 8 · Black Standard Edition",
+    "s": "stojan na pruty pro trout area",
+    "cta": false,
+    "src": "gausseholler.com/products/rod-stand-v2"
+   },
+   {
+    "t": "Ručně stavěné v Česku",
+    "s": "karbon · hliník · limitovaná série",
+    "cta": false,
+    "src": "gausseholler.com hero + announcement bar"
+   },
+   {
+    "t": "Osm karbonových tubusů na radiálních ramenech",
+    "s": "série pěti kusů, každý číslovaný",
+    "cta": false,
+    "src": "gausseholler.com + /products/rod-stand-v2"
+   },
+   {
+    "t": "gausseholler.com",
+    "s": "Gausse Holler Custom Lab",
+    "cta": true,
+    "src": "gausseholler.com patička"
+   }
+  ],
+  "mark": "MADE BY ⚙ © 2026 Gausse Holler"
+ },
+ "notes": [
+  "Black Standard Edition = Revolut 8 Standard Edition · Black. Počet barev neuvádět (web si odporuje). Ozubené kolo = značka (logo pravidlo platí)."
+ ],
+ "madeby": {
+  "on_dark": "assets_prep/gausseholler/madeby_on_dark.png",
+  "on_light": "assets_prep/gausseholler/madeby_on_light.png"
+ },
+ "wordline": {
+  "on_dark": "assets_prep/gausseholler/wordline_on_dark.png"
+ },
+ "studio_bg": "assets_prep/gausseholler/orig/p05_revolut8_panel_hero.jpg"
+}

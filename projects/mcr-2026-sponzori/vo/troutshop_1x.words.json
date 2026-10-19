@@ -1,0 +1,199 @@
+{
+  "key": "troutshop",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "request_id": "ga4hfzXePJtba0hrdfgX",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=50757970-c4d2-4ea0-8db7-d179506dcacb.wav",
+  "cs": "Troutshop – specialista na pstruhy. Rodinná firma od roku 1999.",
+  "tts": "Troutshop – specialista na pstruhy. Rodinná firma od roku devatenáct set devadesát devět.",
+  "timebase": "seconds in vo/troutshop.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.0,
+  "raw_duration_s": 5.721,
+  "duration_s": 5.721,
+  "words": [
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.56
+    },
+    {
+      "word": "specialista",
+      "start": 0.79,
+      "end": 1.52
+    },
+    {
+      "word": "na",
+      "start": 1.573,
+      "end": 1.68
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.72,
+      "end": 2.16
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.44,
+      "end": 2.8
+    },
+    {
+      "word": "firma",
+      "start": 2.893,
+      "end": 3.36
+    },
+    {
+      "word": "od",
+      "start": 3.467,
+      "end": 3.68
+    },
+    {
+      "word": "roku",
+      "start": 3.728,
+      "end": 3.92
+    },
+    {
+      "word": "1999.",
+      "start": 3.98,
+      "end": 5.6,
+      "spoken": "devatenáct set devadesát devět."
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.56
+    },
+    {
+      "word": "specialista",
+      "start": 0.79,
+      "end": 1.52
+    },
+    {
+      "word": "na",
+      "start": 1.573,
+      "end": 1.68
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.72,
+      "end": 2.16
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.44,
+      "end": 2.8
+    },
+    {
+      "word": "firma",
+      "start": 2.893,
+      "end": 3.36
+    },
+    {
+      "word": "od",
+      "start": 3.467,
+      "end": 3.68
+    },
+    {
+      "word": "roku",
+      "start": 3.728,
+      "end": 3.92
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.98,
+      "end": 4.56
+    },
+    {
+      "word": "set",
+      "start": 4.6,
+      "end": 4.72
+    },
+    {
+      "word": "devadesát",
+      "start": 4.74,
+      "end": 5.2
+    },
+    {
+      "word": "devět.",
+      "start": 5.26,
+      "end": 5.6
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Troutshop",
+      "start": 0.0,
+      "end": 0.56
+    },
+    {
+      "word": "–",
+      "start": 0.56,
+      "end": 0.56
+    },
+    {
+      "word": "specialista",
+      "start": 0.79,
+      "end": 1.52
+    },
+    {
+      "word": "na",
+      "start": 1.573,
+      "end": 1.68
+    },
+    {
+      "word": "pstruhy.",
+      "start": 1.72,
+      "end": 2.16
+    },
+    {
+      "word": "Rodinná",
+      "start": 2.44,
+      "end": 2.8
+    },
+    {
+      "word": "firma",
+      "start": 2.893,
+      "end": 3.36
+    },
+    {
+      "word": "od",
+      "start": 3.4669999999999996,
+      "end": 3.6799999999999997
+    },
+    {
+      "word": "roku",
+      "start": 3.7279999999999998,
+      "end": 3.92
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.9799999999999995,
+      "end": 4.56
+    },
+    {
+      "word": "set",
+      "start": 4.6,
+      "end": 4.72
+    },
+    {
+      "word": "devadesát",
+      "start": 4.74,
+      "end": 5.2
+    },
+    {
+      "word": "devět.",
+      "start": 5.26,
+      "end": 5.6
+    },
+    {
+      "word": "<end>",
+      "start": 5.7208163265306125,
+      "end": 5.7208163265306125
+    }
+  ]
+}

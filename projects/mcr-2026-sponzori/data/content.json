@@ -1,219 +1,152 @@
 {
-  "_note": "Obsah filmu. Cesty jsou relativní ke kořeni projektu (mcr-2026-sponzori/). Texty jen z ověřených faktů (research/*.md, sekce Verification). 'src' u zpráv = zdroj, nerenderuje se. Pořadí bloků: 'order' (nebo env ORDER=a,b,c). Délka bloků v taktech (120 bpm: 1 takt = 2 s).",
-  "meta": { "title": "MČR 2026 Trout Area – partneři", "version": "v1" },
-  "event": {
-    "title1": "Mistrovství ČR",
-    "title2": "v Trout Area 2026",
-    "date": "24.–25. 10. 2026",
-    "dateBig": "24.–25. 10.",
-    "year": "2026",
-    "days": "sobota + neděle",
-    "place": "Líheň Liběchov",
-    "pond": "rybník Malý Sporťáček",
-    "web": "troutareacz.cz",
-    "stats": [
-      { "v": 40, "l": "závodníků", "src": "troutareacz.cz – max 40, obsazeno 40/40" },
-      { "v": "hard", "l": "baits", "src": "troutareacz.cz – formát hard baits" },
-      { "v": 12, "l": "kol", "src": "troutareacz.cz – 12 kol" },
-      { "v": 2, "l": "dny", "src": "Den 1 so 24. 10., Den 2 ne 25. 10." }
-    ],
-    "partnersTitle": "Partneři mistrovství",
-    "thanks1": "Děkujeme",
-    "thanks2": "partnerům"
+ "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
+ "meta": {
+  "title": "MČR 2026 Trout Area – partneři (reklamní film)",
+  "version": "v5"
+ },
+ "event": {
+  "title1": "Mistrovství ČR",
+  "title2": "v Trout Area 2026",
+  "date": "24.–25. 10. 2026",
+  "dateBig": "24.–25. 10.",
+  "year": "2026",
+  "days": "sobota + neděle",
+  "place": "Líheň Liběchov",
+  "pond": "rybník Malý Sporťáček",
+  "web": "troutareacz.cz",
+  "stats": [
+   {
+    "v": 40,
+    "l": "závodníků",
+    "src": "troutareacz.cz – max 40, obsazeno 40/40"
+   },
+   {
+    "v": "hard",
+    "l": "baits",
+    "src": "troutareacz.cz – formát hard baits"
+   },
+   {
+    "v": 12,
+    "l": "kol",
+    "src": "troutareacz.cz – 12 kol"
+   },
+   {
+    "v": 2,
+    "l": "dny",
+    "src": "Den 1 so 24. 10., Den 2 ne 25. 10."
+   }
+  ],
+  "partnersTitle": "Partneři mistrovství",
+  "thanks1": "Děkujeme",
+  "thanks2": "partnerům"
+ },
+ "music": {
+  "track": "audio/track.wav",
+  "beats": "audio/track.beats.json",
+  "beatsPerBar": 4,
+  "bpm": 129,
+  "volume": 1
+ },
+ "vo": {
+  "dir": "vo",
+  "offset": 0.25,
+  "volume": 1,
+  "tailMin": 0.9,
+  "_note": "vo/<key>.wav (+ volitelně vo/<key>.words.json se zarovnanými slovy) → automaticky do filmu, bloků i Reels"
+ },
+ "plan": [
+  {
+   "key": "intro",
+   "bars": [
+    0,
+    7
+   ],
+   "voOffset": 1.2,
+   "_": "build-up, bez kicku"
   },
-  "music": {
-    "_note": "Až bude track: audio/track.wav + audio/track.beats.json (scripts/analyze_track.py z hb-battle-2026). Bez něj syntetická mřížka.",
-    "bpm": 120,
-    "beatsPerBar": 4,
-    "track": "audio/track.wav",
-    "beats": "audio/track.beats.json",
-    "offsetBars": 0,
-    "volume": 1
+  {
+   "key": "venue",
+   "bars": [
+    8,
+    12
+   ],
+   "_": "drop na taktu 8"
   },
-  "vo": { "dir": "vo", "offset": 0.25, "volume": 1 },
-  "order": ["intro", "venue", "broll1", "troutshop", "activefishing", "broll2", "moonky", "jigovky", "broll3", "velkaryba", "bosset", "broll4", "gausseholler", "finale"],
-  "blocks": {
-    "intro": {
-      "type": "intro", "bars": 8,
-      "bg": "../hb-battle-2026/proto/assets/photos/p_lake_mist.jpg"
-    },
-    "venue": {
-      "type": "venue", "bars": 4,
-      "name": "Líheň Liběchov", "url": "lihenlibechov.cz", "kicker": "Místo konání",
-      "logo": "assets/libechov/logo.png", "logoCard": "none",
-      "video": "drone/final/flyover_9x16.mp4",
-      "fallback": "assets/libechov/velky_sportak.jpg",
-      "fallbackAlt": "drone/data/orto_scout.jpg",
-      "place": "Rybník Malý Sporťáček · Boží Voda 289, Liběchov",
-      "photos": [
-        { "src": "assets/libechov/velky_sportak.jpg", "pos": "50% 50%" },
-        { "src": "assets/libechov/maly_sportacek_photo.jpg", "pos": "50% 60%" },
-        { "src": "assets/libechov/nasazeni_trofejnich_pstruhu.jpg", "pos": "50% 50%" },
-        { "src": "assets/libechov/mcr_news_poster.png", "pos": "50% 40%" }
-      ],
-      "messages": [
-        { "t": "Dějiště MČR v Trout Area 2026", "s": "rybník Malý Sporťáček", "src": "lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek" },
-        { "t": "Pstruží líheň s tradicí od roku 1934", "s": "u pramene Boží Voda", "src": "lihenlibechov.cz/cs/historie; opravený one-liner (Verification)" },
-        { "t": "Donedávna nejníže položené pstruhařství v Evropě", "s": "jen 164 m n. m.", "src": "lihenlibechov.cz/cs/o-nas – 'donedávna' musí zůstat" },
-        { "t": "Přijďte se podívat", "s": "24.–25. 10. 2026 · lihenlibechov.cz", "src": "aktualita: 'pokud se budete chtít přijít podívat 24.-25.10. můžete'" }
-      ]
-    },
-    "troutshop": {
-      "type": "sponsor", "bars": 4, "fn": "troutshop",
-      "name": "Troutshop.eu", "url": "troutshop.eu",
-      "logo": "assets/troutshop/logo.png", "logoCard": "light",
-      "accent": "#e3000f", "tileBg": "#ffffff",
-      "products": [
-        { "src": "assets_prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png", "fit": "contain" },
-        { "src": "assets_prep/troutshop/heroes/h04_nories_crankin_pupa.png", "fit": "contain" },
-        { "src": "assets_prep/troutshop/heroes/h02_velvetarts_forte_yellow_red.png", "fit": "contain" },
-        { "src": "assets_prep/troutshop/heroes/h05_fishup_baffi_fly_pink.png", "fit": "contain" }
-      ],
-      "messages": [
-        { "t": "Milujeme lov pstruhů", "s": "přívlačový e-shop · specialista na pstruhy", "src": "troutshop.eu/sk/ hero „Milujeme lov pstruhov“ + EN hero „The trout fishing SPECIALIST!“ (CZ na obrazovce, viz script_cs)" },
-        { "t": "Rodinná firma v oboru od roku 1999", "s": "Piešťany · Slovensko", "src": "troutshop.eu/en/about-us/ + patička webu" },
-        { "t": "Generální partner Trout Area Slovakia", "s": "partner několika japonských značek", "src": "troutshop.eu/pc/spoons/velvet-arts-2/ + about-us („some well known Japanese companies“ → Verification #4: „několika“)" },
-        { "t": "troutshop.eu", "s": "do Česka do pár dní", "cta": true, "src": "troutshop.eu/sk/ meta description" }
-      ]
-    },
-    "activefishing": {
-      "type": "sponsor", "bars": 4, "fn": "activefishing",
-      "name": "Activefishing.cz", "url": "activefishing.cz",
-      "logo": "assets/activefishing/logo.png", "logoCard": "dark",
-      "accent": "#e2812d", "tileBg": "#ffffff",
-      "products": [
-        { "src": "assets_prep/activefishing/heroes/h01_nories_sofia.png", "fit": "contain" },
-        { "src": "assets_prep/activefishing/heroes/h04_luckycraft_wah33f.png", "fit": "contain" },
-        { "src": "assets_prep/activefishing/heroes/h03_velvetarts_forte_06.png", "fit": "contain" },
-        { "src": "assets_prep/activefishing/heroes/h05_timon_chibi_futten.png", "fit": "contain" }
-      ],
-      "benefits": ["Rychlost doručení", "Unikátní sortiment", "Osobní přístup"],
-      "messages": [
-        { "t": "Kvalitní vybavení pro všechny, kdo milují přívlač", "s": "e-shop Stanislava Lukáška", "src": "activefishing.cz homepage + /o-nas/" },
-        { "t": "Přes 1 300 plandavek pro trout area", "s": "včetně předních japonských značek", "src": "activefishing.cz/plandavky/ – 1340 položek k 19. 10. 2026; bezpečné znění dle Verification #3" },
-        { "t": "Rychlost doručení · Unikátní sortiment · Osobní přístup", "s": "", "benefits": true, "src": "activefishing.cz homepage – benefity" },
-        { "t": "activefishing.cz", "s": "plandavky · woblery · pruty", "cta": true, "src": "activefishing.cz menu" }
-      ]
-    },
-    "moonky": {
-      "type": "sponsor", "bars": 4, "fn": "moonky",
-      "name": "Moonky", "url": "moonky.cz",
-      "logo": "assets/moonky/logo.png", "logoCard": "dark",
-      "accent": "#6883ba", "tileBg": "#ffffff",
-      "bg": "assets/moonky/u04_gamer_big_macro.jpg",
-      "products": [
-        { "src": "assets/moonky/p01_savory_c06_green_crop.png", "fit": "contain" },
-        { "src": "assets/moonky/p06_savory_c01_pink_bubblegum_crop.png", "fit": "contain" },
-        { "src": "assets/moonky/p09_coccon_dc04_yellow_orange_crop.png", "fit": "contain" },
-        { "src": "assets/moonky/p08_savory_dc03_brown_orange_crop.png", "fit": "contain" }
-      ],
-      "messages": [
-        { "t": "Speciální gumové nástrahy pro lov Trout Area", "s": "ručně dělané", "src": "moonky.cz hlavička + banner „HANDMADE LURES“ (Verification #5)" },
-        { "t": "Od návrhu až po vlastní formy na CNC strojích", "s": "guma bez ftalátů", "src": "moonky.cz/o-nas/" },
-        { "t": "Vyvíjeno s českou reprezentací", "s": "v lovu pstruhů ze břehu", "src": "moonky.cz/o-nas/ – „8 let“ vynecháno (nedatováno, Verification #3, script_cs)" },
-        { "t": "moonky.cz", "s": "vyrobeno v České republice", "cta": true, "src": "web + obal (u02, moonky_user.md)" }
-      ]
-    },
-    "jigovky": {
-      "type": "sponsor", "bars": 4, "fn": "jigovky",
-      "name": "Jigovky.cz", "url": "jigovky.cz",
-      "logo": "assets/jigovky/logo.png", "logoCard": "dark",
-      "accent": "#fed700", "accent2": "#176e37", "tileBg": "#ffffff",
-      "products": [
-        { "src": "assets_prep/jigovky/heroes/h01_troutjig_barbless.png", "fit": "contain" },
-        { "src": "assets_prep/jigovky/heroes/h03_hd_barbless_red_detail.png", "fit": "contain" },
-        { "src": "assets_prep/jigovky/heroes/h02_sickle_classic.png", "fit": "contain" },
-        { "src": "assets_prep/jigovky/heroes/h04_hd_barbless_fluo_detail.png", "fit": "contain" }
-      ],
-      "colors": ["#c9ff3a", "#ff3fa8", "#ff7a1a", "#e31e24", "#d8a93a"],
-      "messages": [
-        { "t": "Jigy, které chytají!", "s": "jigové a wolframové hlavičky", "src": "logo jigovky.cz (slogan); meta description homepage (fakt 4)" },
-        { "t": "Poctivě vyrobeno v ČR", "s": "od UL po vertikální přívlač", "src": "jigovky.cz – USP ikona homepage + meta description (fakt 4); „největší výběr“ vynecháno dle script_cs" },
-        { "t": "Bezprotihrotové TroutJigy", "s": "0,4–3 g · barbless pro trout area", "src": "jigovky.cz/jig-trout/" },
-        { "t": "jigovky.cz", "s": "jigy · rotačky · háčky", "cta": true, "src": "jigovky.cz menu" }
-      ]
-    },
-    "velkaryba": {
-      "type": "sponsor", "bars": 4, "fn": "velkaryba",
-      "name": "Velka-ryba.cz", "url": "velka-ryba.cz",
-      "logo": "assets/velkaryba/logo.png", "logoCard": "light",
-      "accent": "#143d6b", "tileBg": "#ffffff",
-      "products": [
-        { "src": "assets_prep/velkaryba/heroes/h01_illex_native_pink_yamame.png", "fit": "contain" },
-        { "src": "assets_prep/velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange.png", "fit": "contain" },
-        { "src": "assets_prep/velkaryba/heroes/h02_illex_native_copper_trout.png", "fit": "contain" },
-        { "src": "assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png", "fit": "contain" }
-      ],
-      "messages": [
-        { "t": "Vše na přívlač", "s": "přívlačová speciálka · Olomouc", "src": "velka-ryba.cz title/H1 + homepage" },
-        { "t": "Přívlačová speciálka od roku 2011", "s": "e-shop i kamenná prodejna v Olomouci", "src": "velka-ryba.cz/cs/content/48-o-nas" },
-        { "t": "Partner Shimano Rod Test Center", "s": "pruty si půjčíte a vyzkoušíte u vody", "src": "velka-ryba.cz/cs/content/48-o-nas" },
-        { "t": "velka-ryba.cz", "s": "plandavky pro pstruhy a Trout Areu", "cta": true, "src": "velka-ryba.cz/cs/1874-cardiff-roll-swimmer" }
-      ]
-    },
-    "bosset": {
-      "type": "sponsor", "bars": 4, "fn": "bosset",
-      "name": "Bosset.cz", "url": "bosset.cz",
-      "logo": "assets/bosset/logo.png", "logoCard": "light",
-      "accent": "#1b97b1", "accent2": "#ffc500", "tileBg": "#ffffff",
-      "products": [
-        { "src": "assets_prep/bosset/heroes/h01_zojirushi_orange.png", "fit": "contain" },
-        { "src": "assets_prep/bosset/heroes/h02_zojirushi_black.png", "fit": "contain" },
-        { "src": "assets_prep/bosset/heroes/h03_zojirushi_mint.png", "fit": "contain" },
-        { "src": "assets_prep/bosset/heroes/h04_zojirushi_pink.png", "fit": "contain" },
-        { "src": "assets_prep/bosset/heroes/h05_zojirushi_green_vb.png", "fit": "contain" }
-      ],
-      "messages": [
-        { "t": "Termosky do cen", "s": "Zojirushi · 0,5–0,7 l", "src": "brief (ceny) + research/bosset.md (kategorie Termosky)" },
-        { "t": "Horké i studené až 6 hodin", "s": "nerez a plast bez BPA", "src": "bosset.cz – popis SM-SR 0,6 l" },
-        { "t": "Oficiální distributor Keitech a YGK X-Braid", "s": "přívlači se věnují víc než 20 let", "src": "bosset.cz meta + /o-nas/" },
-        { "t": "bosset.cz", "s": "expedice do 24 h", "cta": true, "src": "bosset.cz – banner v patičce „Expedujeme do 24h“ (3. osoba, ať to neříká TA)" }
-      ]
-    },
-    "gausseholler": {
-      "type": "sponsor", "bars": 4, "fn": "gausseholler",
-      "name": "Gausse Holler", "url": "gausseholler.com",
-      "logo": "assets/gausseholler/logo.png", "logoCard": "dark",
-      "ring": "assets_prep/gausseholler/gear_ring.png",
-      "accent": "#f0904f", "accent2": "#1d8fd5", "tileBg": "#16191c", "dark": true,
-      "products": [
-        { "src": "assets/gausseholler/p03_revolut8_black_side.jpg", "fit": "cover", "pos": "50% 45%" },
-        { "src": "assets/gausseholler/p05_revolut8_panel_hero.jpg", "fit": "cover", "pos": "50% 55%" },
-        { "src": "assets/gausseholler/p04_revolut8_black_top.jpg", "fit": "cover", "pos": "50% 45%" },
-        { "src": "assets/gausseholler/p02_revolut8_black_threeq.jpg", "fit": "cover", "pos": "50% 50%" }
-      ],
-      "messages": [
-        { "t": "Revolut 8 · Black Standard Edition", "s": "stojan na pruty pro trout area", "src": "gausseholler.com/products/rod-stand-v2" },
-        { "t": "Ručně stavěné v Česku", "s": "karbon · hliník · limitovaná série", "src": "gausseholler.com hero + announcement bar" },
-        { "t": "Osm karbonových tubusů na radiálních ramenech", "s": "série pěti kusů, každý číslovaný", "src": "gausseholler.com + /products/rod-stand-v2" },
-        { "t": "gausseholler.com", "s": "Gausse Holler Custom Lab", "cta": true, "src": "gausseholler.com patička" }
-      ]
-    },
-    "broll1": { "type": "broll", "bars": 1, "photos": [
-      "assets_prep/broll/br01_fight_splash.jpg",
-      "assets_prep/broll/br08_landing_ripples.jpg",
-      "assets_prep/broll/br03_fish_in_net.jpg",
-      "assets_prep/broll/br14_crouch_net.jpg" ] },
-    "broll2": { "type": "broll", "bars": 1, "photos": [
-      "assets_prep/broll/br05_reeling_portrait.jpg",
-      "assets_prep/broll/br15_net_splash.jpg",
-      "assets_prep/broll/br12_keepnet_trout.jpg",
-      "assets_prep/broll/br07_landing_rod_up.jpg" ] },
-    "broll3": { "type": "broll", "bars": 1, "photos": [
-      "assets_prep/broll/br13_lure_check.jpg",
-      "assets_prep/broll/br09_landing_rods_flare.jpg",
-      "assets_prep/broll/br04_net_with_fish.jpg",
-      "assets_prep/broll/br02_netting_sunrays.jpg" ] },
-    "broll4": { "type": "broll", "bars": 1, "photos": [
-      "assets_prep/broll/br16_dock_gear.jpg",
-      "assets_prep/broll/br10_lake_mist.jpg",
-      "assets_prep/broll/br11_lake_sunflare.jpg",
-      "assets_prep/broll/br03_fish_in_net.jpg" ] },
-    "finale": {
-      "type": "finale", "bars": 8,
-      "bg": "../hb-battle-2026/proto/assets/photos/p_lake_sun.jpg",
-      "wall": ["venue", "troutshop", "activefishing", "moonky", "jigovky", "velkaryba", "bosset", "gausseholler"],
-      "made": { "by": "Made by", "name": "Gausse Holler", "c": "© 2026" }
-    }
+  {
+   "key": "troutshop",
+   "bars": [
+    13,
+    16
+   ]
+  },
+  {
+   "key": "activefishing",
+   "bars": [
+    17,
+    20
+   ]
+  },
+  {
+   "key": "moonky",
+   "bars": [
+    21,
+    24
+   ]
+  },
+  {
+   "key": "jigovky",
+   "bars": [
+    25,
+    28
+   ]
+  },
+  {
+   "key": "velkaryba",
+   "bars": [
+    29,
+    32
+   ]
+  },
+  {
+   "key": "broll",
+   "bars": [
+    33,
+    34
+   ],
+   "vo": null
+  },
+  {
+   "key": "brollbreak",
+   "block": "broll",
+   "bars": [
+    35,
+    36
+   ],
+   "vo": null,
+   "_": "hudební break"
+  },
+  {
+   "key": "bosset",
+   "bars": [
+    37,
+    40
+   ]
+  },
+  {
+   "key": "gausseholler",
+   "bars": [
+    41,
+    44
+   ]
+  },
+  {
+   "key": "finale",
+   "bars": [
+    45,
+    55
+   ],
+   "tail": true,
+   "_": "peak + doznění do konce tracku"
   }
+ ]
 }

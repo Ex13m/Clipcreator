@@ -280,7 +280,7 @@ function crownGeometry(detail, seed, kind) {
     if (v.y < 0) r *= 1 - 0.22 * v.y * v.y;
     rr[i] = r;
   }
-  const srt = Array.from(rr).sort((p, q) => p - q), norm = srt[Math.floor(srt.length * 0.85)];
+  const srt = Array.from(rr).sort((p, q) => p - q), norm = srt[Math.floor(srt.length * 0.95)];
   for (let i = 0; i < n; i++) {
     v.fromBufferAttribute(pos, i).normalize().multiplyScalar(rr[i] / norm);
     pos.setXYZ(i, v.x, v.y, v.z);
@@ -337,7 +337,7 @@ function foliageMaterial(opts) {
       #if ${SHELL}
       float hn = texture(tNoise, vWP * 0.15 + vInst.y * 3.0).b * 0.65 + texture(tNoise, vWP * 0.11 + 0.37).g * 0.35;
       float graze = abs(dot(normalize(vNW), normalize(cameraPosition - vWP)));
-      diffuseColor.a = smoothstep(0.47, 0.60, hn) * smoothstep(0.12, 0.45, graze);
+      diffuseColor.a = smoothstep(0.47, 0.60, hn) * smoothstep(0.04, 0.25, graze);
       if (diffuseColor.a < 0.01) discard;
       #endif
       float inCore = step(abs(vWP.x), 399.0) * step(abs(vWP.z), 399.0);
@@ -359,7 +359,7 @@ function foliageMaterial(opts) {
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
       {
         vec3 nW = normalize((vec4(normal, 0.0) * viewMatrix).xyz);
-        nW = normalize(mix(nW, vec3(0.0, 1.0, 0.0), 0.35 * top + 0.15));
+        nW = normalize(mix(nW, vec3(0.0, 1.0, 0.0), 0.5 * top + 0.2));
         float e = 0.16;
         vec3 LW = vec3(0.3, 0.6, 0.1);
         float l0 = dot(oc, LW);
@@ -387,11 +387,11 @@ function foliageMaterial(opts) {
 async function buildTrees(scene) {
   const meta = await fetchJSON(BUILD + 'trees.json'), a = await fetchF32(BUILD + 'trees.f32'), st = meta.stride;
   const variants = { 0: [], 1: [], 2: [] };
-  for (let i = 0; i < 8; i++) variants[0].push(crownGeometry(3, 101 + i, 0));
-  const lo0 = []; for (let i = 0; i < 8; i++) lo0.push(crownGeometry(2, 101 + i, 0));
+  for (let i = 0; i < 8; i++) variants[0].push(crownGeometry(S.opts.nearDetail ?? 2, 101 + i, 0));
+  const lo0 = []; for (let i = 0; i < 8; i++) lo0.push(crownGeometry(S.opts.farDetail ?? 2, 101 + i, 0));
   variants[3] = lo0;
-  for (let i = 0; i < 4; i++) variants[1].push(crownGeometry(2, 201 + i, 1));
-  for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(2, 301 + i, 2));
+  for (let i = 0; i < 4; i++) variants[1].push(crownGeometry(1, 201 + i, 1));
+  for (let i = 0; i < 5; i++) variants[2].push(crownGeometry(1, 301 + i, 2));
   const mats = { 0: foliageMaterial({ orthoMix: 0.85, albedo: 1.0 }), 1: foliageMaterial({ orthoMix: 0.6, albedo: 1.0, clump: 0.6 }), 2: foliageMaterial({ orthoMix: 0.0, albedo: 1.0 }) };
   mats[3] = mats[0];
   const shellMat = foliageMaterial({ orthoMix: 0.85, albedo: 1.0, shell: true });
@@ -401,7 +401,7 @@ async function buildTrees(scene) {
   for (let i = 0; i < meta.count; i++) {
     const o = i * st, seed = a[o + 9];
     let kind = a[o + 10];
-    if (kind === 0 && (a[o + 3] < 2.8 || Math.hypot(a[o] - camEnd[0], a[o + 2] - camEnd[2]) > (S.opts.lodDist || 200))) kind = 3;
+    if (kind === 0 && (a[o + 3] < 2.0 || Math.hypot(a[o] - camEnd[0], a[o + 2] - camEnd[2]) > (S.opts.lodDist || 260))) kind = 3;
     const nv = variants[kind].length, vi = Math.min(nv - 1, Math.floor(seed * nv));
     const cx = Math.floor(a[o] / cell[kind]), cz = Math.floor(a[o + 2] / cell[kind]);
     const key = `${kind}|${vi}|${cx}|${cz}`;
@@ -435,7 +435,7 @@ async function buildTrees(scene) {
     if (kind === 1 || kind === 2) mesh.layers.set(1);
     if (kind === 3) mesh.layers.enable(1);
     scene.add(mesh); count += items.length;
-    if ((kind === 0 || kind === 3) && !S.opts.noShell) {
+    if ((kind === 0 || (kind === 3 && S.opts.shellLod)) && !S.opts.noShell) {
       const sh = new THREE.InstancedMesh(geo, shellMat, items.length);
       sh.instanceMatrix = mesh.instanceMatrix; sh.instanceColor = mesh.instanceColor;
       sh.castShadow = false; sh.receiveShadow = true; sh.boundingSphere = mesh.boundingSphere.clone(); sh.boundingSphere.radius += 2.0;
@@ -575,7 +575,7 @@ function waterMaterial(pond) {
         vec3 n = normalize(vec3(0.0, 1.0, 0.0) + vec3(w1.x + w2.x * 0.8 + w3.x * 0.5, 0.0, w1.z + w2.z * 0.8 + w3.z * 0.5) * 0.045);
         vec3 V = normalize(cameraPosition - vWP);
         float ndv = clamp(dot(n, V), 0.0, 1.0);
-        float F = 0.02 + 0.98 * pow(1.0 - ndv, 5.0);
+        float F = 0.035 + 0.965 * pow(1.0 - ndv, 5.0);
         vec3 R = reflect(-V, n);
         vec3 refl = sky(R);
         if (uHasRefl > 0.5) {
@@ -583,7 +583,7 @@ function waterMaterial(pond) {
           vec2 ruv = rc.xy / rc.w * 0.5 + 0.5;
           if (ruv.x > 0.0 && ruv.x < 1.0 && ruv.y > 0.0 && ruv.y < 1.0) refl = texture(tReflect, ruv).rgb;
         }
-        vec3 body = texture(tOrtho, ouv).rgb * 0.92;
+        vec3 body = texture(tOrtho, ouv).rgb * 1.0;
         vec3 col = mix(body, refl, F);
         vec3 H = normalize(V + uSunDir);
         float nh = max(dot(n, H), 0.0);
@@ -843,7 +843,7 @@ window.renderFrame = async (f) => {
     if (!S.opts.noRefl) renderReflections(renderer, scene, camera);
     S.sky.position.copy(camera.position);
     renderer.setRenderTarget(S.sceneRT); renderer.clear();
-    if (S.opts.prepass !== false) {
+    if (!S.opts.noPrepass) {
       const hide = [S.sky, ...S.water]; hide.forEach(o => o.visible = false);
       const ml = camera.layers.mask; camera.layers.set(0); camera.layers.enable(2);
       scene.overrideMaterial = S.depthMat; renderer.render(scene, camera); scene.overrideMaterial = null;

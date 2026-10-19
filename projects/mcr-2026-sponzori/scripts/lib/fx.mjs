@@ -9,6 +9,7 @@
 //   • fx.CSS (generic .fx-* classes) is injected once into the root page; per-instance values go through CSS custom props.
 //
 // Index (one-line usage — see BLOCK_API.md for a cookbook)
+//   scene(ctx,id,t0,t1,html,{inD,outD})                     full-frame group shown t0→t1 (fade in/out)
 //   field(ctx,{id,bg,c1,c2,kind,at})                         colour field (solid / radial / linear / conic gradient)
 //   mesh(ctx,{id,colors,blur,t0,t1})                         drifting blurred gradient mesh (aurora) behind products
 //   rays(ctx,{id,x,y,size,color,n,spin,opacity})             conic sunburst, slow spin
@@ -21,7 +22,8 @@
 //   outlineFill(ctx,sel,t,{d,ease})                          outline → solid fill sweep (.fx-of element)
 //   bigType(ctx,{id,text,font,size,y,x,color,outline,opacity,drift})   oversized cropped type behind the product
 //   marquee(ctx,{id,text,y,size,font,color,bg,rot,speed,dir,outline})  endless typography band (seamless, linear)
-//   product(ctx,{id,src,w,cx,cy|floor,ground:'floor'|'float'|'none',reflect,sweep,tilt,rot,pad})  product hero cut-out
+//   product(ctx,{id,src,w|h,cx,cy|floor,ground:'floor'|'float'|'none',reflect,sweep,rot,pad}) → {html,sel,cam,…}  product hero cut-out
+//        layers: sel = entrance/exit · cam = float/parallax/pushIn/ramp · '#…-tl' = tilt/flip (helpers know which to use)
 //   productIn(ctx,id,t,{from:'rise'|'drop'|'scale'|'left'|'right'|'spin',d})   product entrance
 //   sweep(ctx,id,t,{d,angle})                                specular light sweep over the product (masked by its alpha)
 //   tilt(ctx,id,t0,t1,{ry,rx})                               slow 3D tilt (CSS perspective)
@@ -30,12 +32,12 @@
 //   flip(ctx,frontId,backId,t,{d})                           two-sided product flip (front → back)
 //   parallax(ctx,layers[{sel,depth}],t0,t1,{x,y})            depth stack: bg / product / fg move at different speeds
 //   ramp(ctx,sel,t0,t1,{from,to,ease})                       speed-ramp (slow → fast into the hit, CustomEase fxRampIn)
-//   punch(ctx,sel,t,{scale,d})  ·  pulse(ctx,sel,{t0,t1,every,scale})   beat accents
+//   punch(ctx,sel,t,{scale,d})  ·  pulse(ctx,sel,{t0,t1,every,scale})   beat accents (tl.hit → no initial state)
 //   odometer(ctx,{id,value,suffix,prefix,x,y,size,font,wght,color,t,d,spins})   rolling digit counter ("1 300+")
 //   sticker(ctx,{id,text,sub,x,y,size,color,fg,shape,rot,t,font})      badge / sticker burst
 //   chip(ctx,{id,label,value,x,y,w,tone,accent,t,from,font})            glass UI chip (price tag / spec)
 //   chroma(ctx,sel,t,{amt,d,kind})                           subtle chromatic-aberration hit (text or image)
-//   grid(ctx,{id,src|cells,cols,rows,x,y,w,h,gap,t,mode,stagger,radius})   split-screen grid assemble
+//   grid(ctx,{id,src|cells[{src,pos,fit,bg,pad}],cols,rows,x,y,w,h,gap,t,mode,stagger,radius})   split-screen grid assemble
 //   flash(ctx,t,{color,peak,d,blend})                        colour flash on a downbeat
 //   tIn(ctx,type,{color,d,dir}) / tOut(ctx,type,{color,d,dir})   block transitions: cut|wipe|iris|slice|whip|zoom|blob|grid|flash
 //   endCard(ctx,{t,logo,url,line,tone,scale,cy})             end-card lockup: TA plate hero + sponsor logo + URL + line
@@ -64,8 +66,8 @@ export const CSS = `
 .fx-half .fx-photo-in{filter:contrast(18) grayscale(1)}
 .fx-half .fx-photo-in img{filter:grayscale(1) blur(1.6px) brightness(1.05)}
 .fx-half .fx-photo-in::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#000 0,#fff 72%) 0 0/var(--hs,12px) var(--hs,12px);mix-blend-mode:screen}
-.fx-half::after{content:'';position:absolute;inset:0;background:var(--d2,#000);mix-blend-mode:lighten;pointer-events:none}
-.fx-half::before{content:'';position:absolute;inset:0;background:var(--d1,#fff);mix-blend-mode:darken;z-index:1;pointer-events:none}
+.fx-half::before{content:'';position:absolute;inset:0;background:var(--d2,#fff);mix-blend-mode:multiply;z-index:1;pointer-events:none}
+.fx-half::after{content:'';position:absolute;inset:0;background:var(--d1,#000);mix-blend-mode:lighten;z-index:1;pointer-events:none}
 .fx-t{position:absolute;margin:0}
 .fx-ln{display:block;overflow:hidden;padding:.14em 0 .06em;margin:-.14em 0 -.06em;white-space:nowrap}
 .fx-ln>span{display:inline-block;white-space:nowrap}
@@ -84,7 +86,7 @@ export const CSS = `
 .fx-prod-sweep{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;background-image:linear-gradient(var(--sa,105deg),transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%);background-size:300% 100%;background-position:110% 0;mix-blend-mode:screen;opacity:var(--so,.75);pointer-events:none}
 .fx-prod-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,var(--sho,.55)),rgba(0,0,0,0));pointer-events:none}
 .fx-prod-refl{position:absolute;left:0;right:0;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,var(--rfo,.32)) 0%,transparent 55%);mask-image:linear-gradient(180deg,rgba(0,0,0,var(--rfo,.32)) 0%,transparent 55%);pointer-events:none}
-.fx-prod-refl img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:scaleY(-1)}
+.fx-prod-refl i{position:absolute;inset:0;background:center/contain no-repeat;transform:scaleY(-1)}
 .fx-odo{position:absolute;display:flex;align-items:flex-start;white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1}
 .fx-odo-d{display:inline-block;height:1em;overflow:hidden;padding:0 .01em}
 .fx-odo-s{display:block}
@@ -118,6 +120,17 @@ export const EASES = {
   fxRampOut: 'M0,0 C0.05,0.38 0.12,0.66 0.24,0.8 0.38,0.94 0.58,1 1,1',  // hit → long settle
   fxWhip: 'M0,0 C0.5,0 0.55,0.05 0.7,0.3 0.82,0.52 0.86,1 1,1',
 };
+
+// ======================================================================================
+// SCENES — a full-frame group visible from t0 to t1 (fade in/out). Put any html inside.
+//   html += fx.scene(ctx, 'sc2', ctx.bar(2), ctx.bar(4), inner, { inD: 0, outD: 0.25 })
+// ======================================================================================
+export function scene(ctx, id, t0, t1, html = '', { inD = 0.001, outD = 0.25, style = '' } = {}) {
+  const s = ctx.sel(id);
+  if (t0 > 1e-3) ctx.tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: Math.max(0.001, inD), ease: 'none' }, t0);
+  if (t1 < ctx.dur - 1e-3) ctx.tl.fromTo(s, { opacity: 1 }, { opacity: 0, duration: Math.max(0.001, outD), ease: 'power1.in' }, Math.max(t0, t1 - outD));
+  return `<div class="fx-full" id="${ctx.id(id)}" style="${style}">${html}</div>`;
+}
 
 // ======================================================================================
 // BACKGROUNDS
@@ -188,12 +201,13 @@ export function headline(ctx, o) {
   const html = `<div class="fx-t${variable ? ' fx-var' : ''} ${cls}" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};font-family:'${font}';font-weight:${wght};${wdth !== 100 ? `font-stretch:${wdth}%;` : ''}${italic ? 'font-style:italic;' : ''}font-size:${size}px;line-height:${lh};letter-spacing:${tracking}em;color:${color};text-align:${align};${upper ? 'text-transform:uppercase;' : ''}${variable ? `--wght:${wght};--wdth:${wdth};--trk:${tracking};` : ''}${style}">${lines.map((l, i) => `<span class="fx-ln" id="${ctx.id(`${id}-l${i}`)}" style="${lineStyle}"><span>${inner(l)}</span></span>`).join('')}</div>`;
   const sel = ctx.sel(id);
   if (t != null) {
-    if (reveal === 'lines') ctx.tl.fromTo(`${sel} .fx-ln > span`, { yPercent: 115 }, { yPercent: 0, duration: d, ease, stagger: stagger ?? 0.09 }, t);
+    // opacity too: accents (Č, Ě, Í) stick out above the line box and would peek through the mask while the line waits below
+    if (reveal === 'lines') ctx.tl.fromTo(`${sel} .fx-ln > span`, { yPercent: 125, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease, stagger: stagger ?? 0.09 }, t);
     else if (reveal === 'chars' || reveal === 'words') typeIn(ctx, sel, t, { d, ease, stagger: stagger ?? (reveal === 'chars' ? 0.022 : 0.06) });
     else if (reveal === 'fade') ctx.tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: d, ease }, t);
     else if (reveal === 'scale') ctx.tl.fromTo(sel, { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: d, ease }, t);
   }
-  if (out != null) ctx.tl.fromTo(`${sel} .fx-ln > span`, { yPercent: 0 }, { yPercent: -115, duration: outD, ease: 'power3.in', stagger: 0.04 }, out);
+  if (out != null) ctx.tl.fromTo(`${sel} .fx-ln > span`, { yPercent: 0, opacity: 1 }, { yPercent: -125, opacity: 0, duration: outD, ease: 'power3.in', stagger: 0.04 }, out);
   return { html, size, lines, h: lines.length * size * lh, sel };
 }
 // variable font tween on an element that has class fx-var (headline({variable:true}) or bigType({variable:true}))
@@ -240,11 +254,12 @@ export function product(ctx, o) {
   const sh = ground === 'floor'
     ? `<i class="fx-prod-shadow" id="${ctx.id(`${id}-sh`)}" style="left:${px(w * pad[0] + vw * 0.08)};width:${px(vw * 0.84)};top:${px(visB - Math.max(10, vw * 0.05))};height:${px(Math.max(20, vw * 0.1))};--sho:${shadow}"></i>`
     : ground === 'float' ? `<i class="fx-prod-shadow" id="${ctx.id(`${id}-sh`)}" style="left:${px(w * pad[0] + vw * 0.12)};width:${px(vw * 0.76)};top:${px(visB + h * 0.06)};height:${px(Math.max(24, h * 0.1))};--sho:${shadow * 0.8};filter:blur(10px)"></i>` : '';
-  const rf = ground === 'floor' && reflect > 0 ? `<div class="fx-prod-refl" id="${ctx.id(`${id}-rf`)}" style="top:${px(visB * 2 - h)};height:${px(h)};--rfo:${reflect}"><img src="${url}" alt=""></div>` : '';
+  const rf = ground === 'floor' && reflect > 0 ? `<div class="fx-prod-refl" id="${ctx.id(`${id}-rf`)}" style="top:${px(visB * 2 - h)};height:${px(h)};--rfo:${reflect}"><i style="background-image:url(${url})"></i></div>` : '';
   const sw = sweep ? `<i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:${sweepAngle}deg;--so:${sweepOpacity}"></i>` : '';
-  const html = `<div class="fx-prod" id="${ctx.id(id)}" style="left:${px(left)};top:${px(top)};width:${px(w)};height:${px(h)};${style}">${sh}${rf}<div class="fx-prod-tilt" id="${ctx.id(`${id}-tl`)}"><div class="fx-abs" id="${ctx.id(`${id}-rot`)}" style="inset:0"><img class="fx-prod-img" id="${ctx.id(`${id}-im`)}" src="${url}" alt="">${sw}</div></div></div>`;
+  // layers: #id (entrance/exit: productIn/Out) > #id-cam (float / parallax / pushIn / ramp) > shadow+reflection + #id-tl (tilt/flip) > #id-rot (static rotation) > img + sweep
+  const html = `<div class="fx-prod" id="${ctx.id(id)}" style="left:${px(left)};top:${px(top)};width:${px(w)};height:${px(h)};${style}"><div class="fx-abs" id="${ctx.id(`${id}-cam`)}" style="inset:0">${sh}${rf}<div class="fx-prod-tilt" id="${ctx.id(`${id}-tl`)}"><div class="fx-abs" id="${ctx.id(`${id}-rot`)}" style="inset:0"><img class="fx-prod-img" id="${ctx.id(`${id}-im`)}" src="${url}" alt="">${sw}</div></div></div></div>`;
   if (rot) ctx.tl.set(ctx.sel(`${id}-rot`), { rotation: rot }, 0);
-  return { html, w, h, x: left, y: top, bottom: top + visB, sel: ctx.sel(id) };
+  return { html, w, h, x: left, y: top, bottom: top + visB, sel: ctx.sel(id), cam: ctx.sel(`${id}-cam`) };
 }
 export function productIn(ctx, id, t, { from = 'rise', d = 0.9, ease = 'expo.out', dist = 260 } = {}) {
   const s = ctx.sel(id);
@@ -284,13 +299,17 @@ export function flip(ctx, frontId, backId, t, { d = 0.6 } = {}) {
 // CAMERA / RHYTHM
 // ======================================================================================
 export function parallax(ctx, layers, t0, t1, { x = -120, y = 0, scale = 0, ease = 'sine.inOut' } = {}) {
-  for (const L of layers) ctx.tl.fromTo(L.sel, { x: 0, y: 0, scale: 1 }, { x: x * L.depth, y: y * L.depth, scale: 1 + scale * L.depth, duration: Math.max(0.1, t1 - t0), ease }, t0);
+  for (const L of layers) {
+    const F = { x: 0, y: 0 }, T = { x: x * L.depth, y: y * L.depth };
+    if (scale) { F.scale = 1; T.scale = 1 + scale * L.depth; }
+    ctx.tl.fromTo(L.sel, F, { ...T, duration: Math.max(0.1, t1 - t0), ease }, t0);
+  }
 }
 export function ramp(ctx, sel, t0, t1, { from = { scale: 1 }, to = { scale: 1.35 }, ease = 'fxRampIn' } = {}) {
   ctx.tl.fromTo(sel, from, { ...to, duration: Math.max(0.05, t1 - t0), ease }, t0);
 }
 export function punch(ctx, sel, t, { scale = 1.06, d = 0.3, ease = 'power2.out' } = {}) {
-  ctx.tl.fromTo(sel, { scale }, { scale: 1, duration: d, ease }, t);
+  ctx.tl.hit(sel, { scale }, { scale: 1, duration: d, ease }, t);
 }
 export function pulse(ctx, sel, { t0 = 0, t1 = ctx.dur, every = 'beat', scale = 1.04, d = 0.25 } = {}) {
   const arr = every === 'bar' ? ctx.downs : ctx.beats;
@@ -326,9 +345,9 @@ export function sticker(ctx, { id = 'stk', text, sub = '', x = 760, y = 700, siz
   ctx.tl.fromTo(ctx.sel(id), { scale: 0, rotation: rot - 40 }, { scale: 1, rotation: rot, duration: d, ease: 'back.out(2.2)' }, t);
   if (rays) for (let i = 0; i < 10; i++) {
     const a = (i / 10) * 360;
-    ctx.tl.set(ctx.sel(`${id}-r${i}`), { rotation: a, transformOrigin: '50% 0%' }, 0);
+    ctx.tl.set(ctx.sel(`${id}-r${i}`), { rotation: a, transformOrigin: '50% 0%', opacity: 0 }, 0);
     ctx.tl.fromTo(ctx.sel(`${id}-r${i}`), { y: size * 0.32, scaleY: 0.2 }, { y: size * 0.78, scaleY: 1, duration: 0.5, ease: 'power2.out' }, t + 0.05);
-    ctx.tl.fromTo(ctx.sel(`${id}-r${i}`), { opacity: 1 }, { opacity: 0, duration: 0.45, ease: 'power1.in' }, t + 0.05);
+    ctx.tl.hit(ctx.sel(`${id}-r${i}`), { opacity: 1 }, { opacity: 0, duration: 0.45, ease: 'power1.in' }, t + 0.05);
   }
   return `<div class="fx-stk" id="${ctx.id(id)}" style="left:${px(x - w / 2)};top:${px(y - h / 2)};width:${px(w)};height:${px(h)};${style}">${rr}${svg}<div class="fx-stk-t" style="font-family:'${font}';font-weight:${wght};color:${fg};font-size:${ts}px;text-transform:uppercase"><span>${esc(nb(text))}</span>${sub ? `<span style="font-size:${Math.round(ts * 0.5)}px;margin-top:.25em;letter-spacing:.08em">${esc(nb(sub))}</span>` : ''}</div></div>`;
 }
@@ -342,8 +361,8 @@ export function chip(ctx, { id = 'chip', label = '', value, x = ctx.safe.left, y
 }
 // RGB-split hit that decays (kind 'text' → text-shadow, 'img' → drop-shadow filter)
 export function chroma(ctx, sel, t, { amt = 8, d = 0.35, kind = 'text' } = {}) {
-  if (kind === 'text') ctx.tl.fromTo(sel, { textShadow: `${-amt}px 0 0 rgba(255,0,72,.85), ${amt}px 0 0 rgba(0,220,255,.85)` }, { textShadow: '0px 0 0 rgba(255,0,72,0), 0px 0 0 rgba(0,220,255,0)', duration: d, ease: 'power2.out' }, t);
-  else ctx.tl.fromTo(sel, { filter: `drop-shadow(${-amt}px 0 0 rgba(255,0,72,.8)) drop-shadow(${amt}px 0 0 rgba(0,220,255,.8))` }, { filter: 'drop-shadow(0px 0 0 rgba(255,0,72,0)) drop-shadow(0px 0 0 rgba(0,220,255,0))', duration: d, ease: 'power2.out' }, t);
+  if (kind === 'text') ctx.tl.hit(sel, { textShadow: `${-amt}px 0 0 rgba(255,0,72,.85), ${amt}px 0 0 rgba(0,220,255,.85)` }, { textShadow: '0px 0 0 rgba(255,0,72,0), 0px 0 0 rgba(0,220,255,0)', duration: d, ease: 'power2.out' }, t);
+  else ctx.tl.hit(sel, { filter: `drop-shadow(${-amt}px 0 0 rgba(255,0,72,.8)) drop-shadow(${amt}px 0 0 rgba(0,220,255,.8))` }, { filter: 'drop-shadow(0px 0 0 rgba(255,0,72,0)) drop-shadow(0px 0 0 rgba(0,220,255,0))', duration: d, ease: 'power2.out' }, t);
 }
 // split-screen grid assemble. src = one image split across tiles, or cells = [{src,pos}] one image per tile.
 // mode: 'scatter' (tiles fly in from seeded offsets) | 'cols' (alternate up/down) | 'scale'
@@ -355,7 +374,7 @@ export function grid(ctx, { id = 'grid', src = null, cells = null, cols = 2, row
     const lx = c * (tw + gap), ly = r * (th + gap);
     const cell = cells ? cells[k % cells.length] : null;
     const bg = url ? `background-image:url(${url});background-size:${px(w)} ${px(h)};background-position:${px(-lx)} ${px(-ly)};` : '';
-    html += `<div id="${ctx.id(`${id}-${k}`)}" style="left:${px(lx)};top:${px(ly)};width:${px(tw)};height:${px(th)};border-radius:${radius}px;${bg}">${cell ? ctx.img(cell.src, { pos: cell.pos || pos }) : ''}</div>`;
+    html += `<div id="${ctx.id(`${id}-${k}`)}" style="left:${px(lx)};top:${px(ly)};width:${px(tw)};height:${px(th)};border-radius:${radius}px;${cell?.bg ? `background:${cell.bg};` : ''}${bg}">${cell ? ctx.img(cell.src, { pos: cell.pos || pos, fit: cell.fit || 'cover', style: cell.pad ? `inset:${cell.pad}px;width:auto;height:auto;` : '' }) : ''}</div>`;
     const F = mode === 'scatter' ? { x: (rnd(seed + k * 7) - 0.5) * 900, y: (rnd(seed + k * 13) - 0.5) * 1400, rotation: (rnd(seed + k) - 0.5) * 50, scale: 0.6, opacity: 0 }
       : mode === 'scale' ? { scale: 0, opacity: 0 } : { yPercent: c % 2 ? -110 : 110, opacity: 1 };
     const T = Object.fromEntries(Object.keys(F).map((kk) => [kk, kk === 'opacity' || kk === 'scale' ? 1 : 0]));
@@ -367,7 +386,7 @@ export function grid(ctx, { id = 'grid', src = null, cells = null, cols = 2, row
 export function flash(ctx, t, { id = null, color = '#fff', peak = 0.85, d = 0.32, blend = 'normal' } = {}) {
   const fid = id || `fl${Math.round(t * 1000)}`;
   ctx.overlay(`<div class="fx-ov" id="${ctx.id(fid)}" style="background:${color};opacity:0;mix-blend-mode:${blend}"></div>`);
-  ctx.tl.fromTo(ctx.sel(fid), { opacity: peak }, { opacity: 0, duration: d, ease: 'power2.out' }, t);
+  ctx.tl.hit(ctx.sel(fid), { opacity: peak }, { opacity: 0, duration: d, ease: 'power2.out' }, t);
 }
 
 // ======================================================================================
@@ -397,6 +416,7 @@ export function tOut(ctx, type = 'cut', { color = ctx.next?.theme?.bg || ctx.the
       ctx.tl.fromTo(`#${ctx.id('mbg')}`, { attr: { stdDeviation: '0 0' } }, { attr: { stdDeviation: '60 0' }, duration: d, ease: 'power2.in' }, t);
       ctx.tl.fromTo(ctx.stage, { x: 0, skewX: 0 }, { x: sx * ctx.W * 0.75, skewX: -sx * 14, duration: d, ease: 'fxWhip' }, t);
     } else {
+      ctx.tl.set(ctx.stage, { filter: 'blur(0px)' }, t);
       ctx.tl.fromTo(ctx.stage, { scale: 1, filter: 'blur(0px)' }, { scale: 2.6, filter: 'blur(18px)', duration: d, ease: 'power3.in' }, t);
       ctx.overlay(overlayFor(ctx, 'flash', oid, color));
       ctx.tl.fromTo(o, { opacity: 0 }, { opacity: 1, duration: d * 0.45, ease: 'power1.in' }, end - d * 0.45);
@@ -424,6 +444,7 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
       ctx.tl.set(ctx.stage, { filter: 'none' }, t + d + 0.02);
     } else {
       ctx.tl.fromTo(ctx.stage, { scale: 1.7, filter: 'blur(16px)' }, { scale: 1, filter: 'blur(0px)', duration: d, ease: 'expo.out' }, t);
+      ctx.tl.set(ctx.stage, { filter: 'none' }, t + d + 0.02);
       ctx.overlay(overlayFor(ctx, 'flash', oid, color));
       ctx.tl.fromTo(o, { opacity: 1 }, { opacity: 0, duration: d * 0.5, ease: 'power1.out' }, t);
     }

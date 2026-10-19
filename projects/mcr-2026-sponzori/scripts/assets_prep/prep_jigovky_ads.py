@@ -35,8 +35,13 @@ def load_rgb(p):
     return ImageOps.exif_transpose(Image.open(p)).convert('RGB')
 
 
-def white_key(rgb_im: Image.Image, lo: float = 4, span: float = 40, solid_close: int = 0, guard: int = 3):
-    """Alpha from distance to white (darkest channel); colour un-mixed from white (no halo).
+def white_key(rgb_im: Image.Image, lo: float = 4, span: float = 40, solid_close: int = 0, guard: int = 3,
+              body: str = 'sphere', small_hole: float = 2.5e-4, matte: bool = True):
+    """Cut-out from a pure-white sweep.
+    Alpha from the darkest channel, colour un-mixed from white.
+    matte=True : in a thin band along every boundary with background, alpha is measured RELATIVE to the
+                 local core darkness (max filter), so anti-aliased pixels of a dark wire get partial alpha and
+                 un-mix to dark (no light rim). Interiors keep the absolute key, so light chrome stays opaque.
     guard: alpha survives only within `guard` px of the solid core (kills upscaler paper texture / haze)."""
     a = np.asarray(rgb_im.convert('RGB')).astype(np.float32)
     d = 255.0 - a.min(-1)
@@ -52,18 +57,87 @@ def white_key(rgb_im: Image.Image, lo: float = 4, span: float = 40, solid_close:
     lab, _ = ndi.label(near)
     border = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
     outside = np.isin(lab, border[border > 0])
-    obj = ~outside
-    if solid_close:
-        obj = ndi.binary_closing(obj, structure=np.ones((3, 3)), iterations=solid_close)
-    filled = ndi.binary_fill_holes(obj)
-    inner = ndi.binary_erosion(filled, iterations=2)
-    al = np.where(outside & ~filled, 0, al)
-    al = np.where(inner, np.maximum(al, 1.0), al)
+    al = np.where(outside, 0, al)
+    # Protect the SOLID body only.
+    #  body='sphere': jig head = circle fitted to the head silhouette (median boundary radius around the
+    #                 largest inscribed circle) -> chrome rim highlights stay opaque, the eye hole (outside
+    #                 the circle) stays transparent.
+    #  body='open'  : morphological opening of the hole-filled mask (spool etc.).
+    protected = np.zeros(al.shape, bool)
+    filled = ndi.binary_fill_holes(ndi.binary_closing(al > 0.5, structure=np.ones((3, 3)), iterations=2 + solid_close))
+    dt = ndi.distance_transform_edt(filled)
+    H, W = al.shape
+    if body == 'sphere':
+        cy, cx = np.unravel_index(np.argmax(dt), dt.shape)
+        r_in = dt[cy, cx]
+        edge = filled & ~ndi.binary_erosion(filled)
+        ys, xs = np.where(edge)
+        rr = np.hypot(xs - cx, ys - cy)
+        sel = (rr > 0.8 * r_in) & (rr < 1.35 * r_in)
+        ang = np.arctan2(ys[sel] - cy, xs[sel] - cx)
+        rads = []
+        for k in range(36):  # per 10 deg sector take the nearest boundary point, then the median
+            m = (ang >= -np.pi + k * np.pi / 18) & (ang < -np.pi + (k + 1) * np.pi / 18)
+            if m.any():
+                rads.append(rr[sel][m].min())
+        r = float(np.median(rads)) if rads else r_in
+        yy, xx = np.ogrid[:H, :W]
+        solid = (np.hypot(xx - cx, yy - cy) <= r - 1.5)
+        # never extend the disc beyond the real silhouette (oval heads): clip to the loose object mask
+        loose = ndi.binary_fill_holes(ndi.binary_closing(al > 0.08, structure=np.ones((3, 3)), iterations=3))
+        solid &= ndi.binary_erosion(loose, iterations=1)
+        al = np.where(solid, 1.0, al)
+        protected |= solid
+    elif body == 'open':
+        R = 0.4 * dt.max()
+        seed = dt > R
+        solid = ndi.distance_transform_edt(~seed) <= R
+        solid = ndi.binary_erosion(solid & filled, iterations=2)
+        al = np.where(solid, 1.0, al)
+        protected |= solid
+    # small enclosed light areas = metal highlights (wire collar, eye ring), not background -> opaque
+    holes = filled & (al < 0.5)
+    lab, n = ndi.label(holes)
+    if n:
+        sizes = ndi.sum(holes, lab, range(1, n + 1))
+        small = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s < small_hole * H * W])
+        al = np.where(small, np.maximum(al, 1.0), al)
+        protected |= small
+    if matte:
+        bw = max(2, int(round(0.0012 * max(H, W))))
+        bgish = al < 0.03
+        band = ndi.binary_dilation(bgish, iterations=bw) & ~bgish & ~protected
+        k = 2 * bw + 3
+        dcore = np.maximum(ndi.maximum_filter(d, size=k), lo + span)
+        al_rel = np.clip((d - lo) / (dcore - lo), 0, 1)
+        al = np.where(band, np.minimum(al, al_rel), al)
     safe = np.maximum(al, 1e-3)[..., None]
     rgb = np.clip((a - (1 - al[..., None]) * 255.0) / safe, 0, 255)
     rgb = np.where(al[..., None] > 0.004, rgb, 0)
     out = np.dstack([rgb, al * 255]).astype(np.uint8)
     return Image.fromarray(out, 'RGBA')
+
+
+def despeck(im: Image.Image, k_frac: float = 0.012, thr: float = 32, max_area_frac: float = 2e-5):
+    """Retouch dust specks on the chrome head (upscaler made them crisp): small dark blobs inside the
+    opaque body that are much darker than their local median -> OpenCV Telea inpaint. Body only."""
+    import cv2
+    a = np.array(im)
+    rgb = a[..., :3].copy()
+    body = ndi.binary_erosion(a[..., 3] > 250, iterations=6)
+    lum = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32)
+    k = max(5, int(k_frac * max(im.size)) | 1)
+    med = cv2.medianBlur(lum.astype(np.uint8), k).astype(np.float32)
+    cand = ((lum - med) < -thr) & body
+    lab, n = ndi.label(cand)
+    if n == 0:
+        return im, 0
+    sizes = ndi.sum(cand, lab, range(1, n + 1))
+    keep = [i + 1 for i, s in enumerate(sizes) if s <= max_area_frac * im.width * im.height]
+    mask = ndi.binary_dilation(np.isin(lab, keep), iterations=2).astype(np.uint8) * 255
+    out = cv2.inpaint(rgb, mask, 5, cv2.INPAINT_TELEA)
+    a[..., :3] = np.where(mask[..., None] > 0, out, rgb)
+    return Image.fromarray(a, 'RGBA'), len(keep)
 
 
 def drop_specks(im: Image.Image, frac: float = 0.002):
@@ -140,7 +214,7 @@ def head_detail(rgb_im: Image.Image, shank_d: float = 3.2, left_min: float = 0.4
     cx, cy, d = head_box(rgb_im)
     W, H = rgb_im.size
     x0 = int(max(cx - d / 2 - shank_d * d, left_min * W))
-    box = (x0, int(cy - 1.35 * d), int(min(cx + 0.95 * d, W)), int(min(cy + 0.85 * d, H)))
+    box = (x0, int(max(cy - 1.75 * d, 0)), int(min(cx + 0.95 * d, W)), int(min(cy + 0.85 * d, H)))
     return rgb_im.crop(box), (cx - box[0], cy - box[1], d)
 
 
@@ -155,12 +229,23 @@ def save(name, im, meta):
 
 
 def anchors_full_jig(im):
-    """Head centre (thickest point), hook point (top-most pixel of the right/left hook) and eye (top of the head area)."""
+    """Normalised anchors for choreography: head centre/radius (thickest point), eye top (top-most pixel in the
+    left 30 %), hook point (left-most pixel of the top 4 % band in the right 70 %: the tip of the bend)."""
     a = np.asarray(im.getchannel('A')) > 128
+    H, W = a.shape
     dt = ndi.distance_transform_edt(a)
     hy, hx = np.unravel_index(np.argmax(dt), dt.shape)
-    W, H = im.size
-    return {'head': [round(hx / W, 4), round(hy / H, 4)], 'head_r': round(float(dt.max()) / W, 4)}
+    ys, xs = np.where(a)
+    sel = xs < 0.3 * W
+    ey = ys[sel].min()
+    ex = xs[sel & (ys < ey + 3)].mean()
+    sel = xs > 0.3 * W
+    ty = ys[sel].min()
+    band = sel & (ys < ty + 0.04 * H)
+    i = int(np.argmin(np.where(band, xs, 10 ** 9)))
+    r = lambda v: round(float(v), 4)
+    return {'head': [r(hx / W), r(hy / H)], 'head_r': r(dt.max() / W), 'eye_top': [r(ex / W), r(ey / H)],
+            'hook_point': [r(xs[i] / W), r(ys[i] / H)]}
 
 
 def run():
@@ -171,6 +256,8 @@ def run():
     p = srcs.get('troutjig_hf4k', f'{SRC}/p01_troutjig-barbless.jpg')
     im = drop_specks(white_key(load_rgb(p), lo=10 if "hf4k" in p else 6, span=46, guard=6 if "hf4k" in p else 3))
     im = trim(im)
+    im, nspk = despeck(im)
+    print('troutjig specks retouched', nspk)
     im = fit_long(im, 2400) if max(im.size) > 2400 else im
     meta = {'role': 'hero', 'product': 'Jig TroutJig Barbless #6, 2 g (značka Jigovky.cz)',
             'source': p.replace(PROJ + '/', ''), 'url': 'https://www.jigovky.cz/jig-troutjig-barbless--6-5-ks--2-g/',
@@ -195,7 +282,7 @@ def run():
     heads = [
         ('head_fluo', srcs.get('hd10_fluo_hf4k', f'{SRC}/p10_hd-barbless-10-fluo-0-4g.jpg'), 'HD BARBLESS #10 FLUO 0,4 g', 'https://www.jigovky.cz/hd-barbless--10--5-ks--fluo--0-4-g/', 'hero'),
         ('head_red', srcs.get('hd_red_hf4k', f'{SRC}/p07_hd-barbless-red-1-3g.jpg'), 'HD BARBLESS #6 RED 1,3 g', 'https://www.jigovky.cz/hd-barbless/', 'swatch'),
-        ('head_pink', f'{SRC}/p03_hd-barbless-pink-0-4g.jpg', 'HD BARBLESS #2 PINK 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/', 'swatch'),
+        ('head_pink', srcs.get('hd_pink_hf4k', f'{SRC}/p03_hd-barbless-pink-0-4g.jpg'), 'HD BARBLESS #2 PINK 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/', 'swatch'),
         ('head_fluo2', f'{SRC}/p02_hd-barbless-fluo-0-4g.jpg', 'HD BARBLESS #2 FLUO 0,4 g', 'https://www.jigovky.cz/hd-barbless--2--5-ks--fluo--0-4-g/', 'swatch'),
         ('head_gold', f'{SRC}/p04_tungsten-h360bl-gold-0-4g.jpg', 'Tungsten H 360 BL #6 GOLD 0,4 g', 'https://www.jigovky.cz/h-360-bl--6--5-ks--gold--0-4-g/', 'swatch'),
         ('head_orange', f'{SRC}/p05_tungsten-h360bl-orange-0-4g.jpg', 'Tungsten H 360 BL #6 ORANGE 0,4 g', 'https://www.jigovky.cz/h-360-bl--6--5-ks--orange--0-4-g/', 'swatch'),
@@ -205,7 +292,8 @@ def run():
     for name, p, prod, url, role in heads:
         rgb = load_rgb(p)
         crop, (hx, hy, d) = head_detail(rgb)
-        im = drop_specks(white_key(crop, lo=6, span=46), frac=0.01)
+        hf = 'hf4k' in p
+        im = drop_specks(white_key(crop, lo=10 if hf else 6, span=46, guard=6 if hf else 3), frac=0.01)
         im = fade_left(im, frac=0.45)
         x0, y0, x1, y1 = bbox(im, thr=4)
         im = im.crop((x0, y0, x1, y1))
@@ -223,7 +311,7 @@ def run():
 
     # ---------- secondary: VARIVAS Trout Nylon Orange (reseller, Japanese brand)
     p = f'{SRC}/p12_varivas-trout-nylon-orange.jpg'
-    im = drop_specks(white_key(load_rgb(p), lo=5, span=40, solid_close=2))
+    im = drop_specks(white_key(load_rgb(p), lo=5, span=40, solid_close=2, body='open', matte=False))
     im = trim(im)
     save('sec_varivas_trout_nylon_orange', im, {
         'role': 'secondary', 'product': 'Vlasec VARIVAS Trout Nylon Orange 100 m (značka VARIVAS, prodej Jigovky.cz)',
@@ -266,39 +354,34 @@ def contact_shadow(size, w_frac=0.7):
 
 def sheet():
     names = [it['file'].split('/')[-1][:-4] for it in ITEMS]
-    cell = 420
-    cols = len(names)
+    cw, ch = 440, 300
     try:
-        font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 15)
+        font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 16)
     except Exception:
         font = ImageFont.load_default()
-    rows = []
-    for bgname, col in BGS:
-        row = Image.new('RGB', (cell * cols, cell + 26), col)
-        dr = ImageDraw.Draw(row)
-        for i, (n, it) in enumerate(zip(names, ITEMS)):
+    half = (len(names) + 1) // 2
+    panels = [list(range(0, half)), list(range(half, len(names)))]
+    out = Image.new('RGB', (2 * 3 * cw + 20, half * ch), (60, 60, 60))
+    for pi, idxs in enumerate(panels):
+        for ri, i in enumerate(idxs):
+            n, it = names[i], ITEMS[i]
             im = Image.open(f'{OUT}/{n}.png').convert('RGBA')
-            f = min((cell - 50) / im.width, (cell - 90) / im.height)
+            f = min((cw - 40) / im.width, (ch - 70) / im.height)
             sm = resize_premult(im, (max(1, round(im.width * f)), max(1, round(im.height * f))))
-            x = i * cell + (cell - sm.width) // 2
-            y = (cell - 40 - sm.height) // 2 + 10
-            # contact shadow (ellipse under the object, multiplied)
-            sh = contact_shadow((sm.width, 40))
-            shadow_col = (0, 0, 0) if bgname != 'brand' else (0, 30, 12)
-            row.paste(Image.new('RGB', sh.size, shadow_col), (x, y + sm.height - 22), sh.point(lambda v: int(v * (0.55 if bgname == 'light' else 0.9))))
-            row.paste(sm, (x, y), sm)
-            tcol = (230, 230, 230) if bgname != 'light' else (40, 40, 40)
-            dr.text((i * cell + 10, cell + 4), f'{n}  {it["size"][0]}x{it["size"][1]}', fill=tcol, font=font)
-        rows.append(row)
-    W = cell * cols
-    out = Image.new('RGB', (W, sum(r.height for r in rows)), (0, 0, 0))
-    y = 0
-    for r in rows:
-        out.paste(r, (0, y))
-        y += r.height
-    if out.width > 4200:
-        f = 4200 / out.width
-        out = out.resize((4200, round(out.height * f)), LANCZOS)
+            for bi, (bgname, col) in enumerate(BGS):
+                cell = Image.new('RGB', (cw, ch), col)
+                x = (cw - sm.width) // 2
+                y = (ch - 40 - sm.height) // 2 + 4
+                sh = contact_shadow((sm.width, 40))
+                shadow_col = (0, 0, 0) if bgname != 'brand' else (0, 30, 12)
+                cell.paste(Image.new('RGB', sh.size, shadow_col), (x, y + sm.height - 22),
+                           sh.point(lambda v: int(v * (0.55 if bgname == 'light' else 0.9))))
+                cell.paste(sm, (x, y), sm)
+                dr = ImageDraw.Draw(cell)
+                tcol = (230, 230, 230) if bgname != 'light' else (40, 40, 40)
+                if bi == 0:
+                    dr.text((10, ch - 26), f'{n}  {it["size"][0]}x{it["size"][1]}  [{it["role"]}]', fill=tcol, font=font)
+                out.paste(cell, (pi * (3 * cw + 20) + bi * cw, ri * ch))
     out.save(f'{OUT}/_sheet.jpg', quality=88)
     print('sheet', out.size)
 

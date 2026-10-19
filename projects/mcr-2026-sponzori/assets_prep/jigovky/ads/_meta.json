@@ -1,0 +1,271 @@
+{
+ "generated": "2026-10-19",
+ "items": [
+  {
+   "role": "hero",
+   "product": "Jig TroutJig Barbless #6, 2 g (značka Jigovky.cz)",
+   "source": "assets_prep/jigovky/ads/_src/troutjig_hf4k.png",
+   "url": "https://www.jigovky.cz/jig-troutjig-barbless--6-5-ks--2-g/",
+   "method": "higgsfield 4k upscale + white-distance key (border flood), un-mix from white",
+   "material": "chrome ball head + dark hook wire",
+   "sheen_blend": "screen",
+   "anchors": {
+    "head": [
+     0.1483,
+     0.7721
+    ],
+    "head_r": 0.1081,
+    "eye_top": [
+     0.0968,
+     0.3934
+    ],
+    "hook_point": [
+     0.6362,
+     0.0974
+    ]
+   },
+   "file": "jigovky/ads/hero_troutjig_barbless.png",
+   "size": [
+    2400,
+    1571
+   ]
+  },
+  {
+   "role": "hero",
+   "product": "Jigová hlavička SICKLE #2 (značka Jigovky.cz)",
+   "source": "assets_prep/jigovky/ads/_src/sickle_hf4k.png",
+   "url": "https://www.jigovky.cz/sickle--4-5-ks--2-g/",
+   "method": "higgsfield 4k upscale + white-distance key (border flood), un-mix from white",
+   "material": "dark lead ball head + sickle-bend hook",
+   "sheen_blend": "screen",
+   "anchors": {
+    "head": [
+     0.1612,
+     0.602
+    ],
+    "head_r": 0.1206,
+    "eye_top": [
+     0.1979,
+     0.0893
+    ],
+    "hook_point": [
+     0.7196,
+     0.1703
+    ]
+   },
+   "file": "jigovky/ads/hero_sickle.png",
+   "size": [
+    2600,
+    1098
+   ]
+  },
+  {
+   "role": "hero",
+   "product": "HD BARBLESS #10 FLUO 0,4 g",
+   "source": "assets_prep/jigovky/ads/_src/hd10_fluo_hf4k.png",
+   "url": "https://www.jigovky.cz/hd-barbless--10--5-ks--fluo--0-4-g/",
+   "method": "higgsfield 4k upscale + head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 325,
+   "anchors": {
+    "head": [
+     0.8432,
+     0.6128
+    ],
+    "head_r": 0.1482
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_fluo.png",
+   "size": [
+    1097,
+    439
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "HD BARBLESS #6 RED 1,3 g",
+   "source": "assets_prep/jigovky/ads/_src/hd_red_hf4k.png",
+   "url": "https://www.jigovky.cz/hd-barbless/",
+   "method": "higgsfield 4k upscale + head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 414,
+   "anchors": {
+    "head": [
+     0.8167,
+     0.6088
+    ],
+    "head_r": 0.1657
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_red.png",
+   "size": [
+    1249,
+    547
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "HD BARBLESS #2 PINK 0,4 g",
+   "source": "assets_prep/jigovky/ads/_src/hd_pink_hf4k.png",
+   "url": "https://www.jigovky.cz/hd-barbless--2--5-ks--pink--0-4-g/",
+   "method": "higgsfield 4k upscale + head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 268,
+   "anchors": {
+    "head": [
+     0.8714,
+     0.6864
+    ],
+    "head_r": 0.1237
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_pink.png",
+   "size": [
+    1081,
+    440
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "HD BARBLESS #2 FLUO 0,4 g",
+   "source": "assets/jigovky/p02_hd-barbless-fluo-0-4g.jpg",
+   "url": "https://www.jigovky.cz/hd-barbless--2--5-ks--fluo--0-4-g/",
+   "method": "head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 102,
+   "anchors": {
+    "head": [
+     0.8671,
+     0.6886
+    ],
+    "head_r": 0.1232
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_fluo2.png",
+   "size": [
+    414,
+    167
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "Tungsten H 360 BL #6 GOLD 0,4 g",
+   "source": "assets/jigovky/p04_tungsten-h360bl-gold-0-4g.jpg",
+   "url": "https://www.jigovky.cz/h-360-bl--6--5-ks--gold--0-4-g/",
+   "method": "head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 93,
+   "anchors": {
+    "head": [
+     0.788,
+     0.4896
+    ],
+    "head_r": 0.1118
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_gold.png",
+   "size": [
+    415,
+    96
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "Tungsten H 360 BL #6 ORANGE 0,4 g",
+   "source": "assets/jigovky/p05_tungsten-h360bl-orange-0-4g.jpg",
+   "url": "https://www.jigovky.cz/h-360-bl--6--5-ks--orange--0-4-g/",
+   "method": "head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 98,
+   "anchors": {
+    "head": [
+     0.789,
+     0.4951
+    ],
+    "head_r": 0.112
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_orange.png",
+   "size": [
+    436,
+    103
+   ]
+  },
+  {
+   "role": "swatch",
+   "product": "HD BARBLESS #2 SILVER 2 g",
+   "source": "assets/jigovky/p11_hd-barbless-2-silver-2g.jpg",
+   "url": "https://www.jigovky.cz/hd-barbless--2--5-ks--silver--2-g/",
+   "method": "head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 106,
+   "anchors": {
+    "head": [
+     0.797,
+     0.7264
+    ],
+    "head_r": 0.113
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_silver.png",
+   "size": [
+    468,
+    212
+   ]
+  },
+  {
+   "role": "macro",
+   "product": "HD BARBLESS #4 3 g",
+   "source": "assets/jigovky/p09_hd-barbless-4-3g.jpg",
+   "url": "https://www.jigovky.cz/hd-barbless--4-5-ks--3-g/",
+   "method": "head-detail crop right of vise + white key + shank alpha fade (left 45 %)",
+   "head_px": 449,
+   "anchors": {
+    "head": [
+     0.8016,
+     0.6623
+    ],
+    "head_r": 0.1939
+   },
+   "sheen_blend": "screen",
+   "note": "shank fades out to the left; never show the left edge as a hard cut",
+   "file": "jigovky/ads/head_chrome_macro.png",
+   "size": [
+    1159,
+    684
+   ]
+  },
+  {
+   "role": "secondary",
+   "product": "Vlasec VARIVAS Trout Nylon Orange 100 m (značka VARIVAS, prodej Jigovky.cz)",
+   "source": "assets/jigovky/p12_varivas-trout-nylon-orange.jpg",
+   "url": "https://www.jigovky.cz/vlasec-varivas-trout-nylon-orange-100m-0-128mm-1-13kg/",
+   "method": "white-distance key + closing (clear spool rim stays semi-transparent)",
+   "note": "third-party brand: show only as \"v nabídce\" / assortment, never as Jigovky own product",
+   "file": "jigovky/ads/sec_varivas_trout_nylon_orange.png",
+   "size": [
+    1320,
+    907
+   ]
+  },
+  {
+   "role": "secondary",
+   "product": "LL BARBLESS #6 2 g (nelakovaná hlavička)",
+   "source": "assets/jigovky/p06_ll-barbless-2g.jpg",
+   "url": "https://www.jigovky.cz/ll-barbless/",
+   "method": "head-detail crop + white key + shank fade",
+   "head_px": 454,
+   "anchors": {
+    "head": [
+     0.7997,
+     0.6544
+    ]
+   },
+   "file": "jigovky/ads/sec_head_ll_raw.png",
+   "size": [
+    1163,
+    677
+   ]
+  }
+ ]
+}

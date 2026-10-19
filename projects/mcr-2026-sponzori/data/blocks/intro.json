@@ -1,0 +1,26 @@
+{
+ "_note": "Úvod (build-up bez kicku, takty 0–7). Texty z data/content.json → event. Fotky = b-roll (H-BATTLE, nejsou z Liběchova → jen krátce a stylizovaně).",
+ "key": "intro",
+ "name": "MČR v Trout Area 2026",
+ "photos": [
+  "assets_prep/broll/br10_lake_mist.jpg",
+  "assets_prep/broll/br02_netting_sunrays.jpg",
+  "assets_prep/broll/br01_fight_splash.jpg",
+  "assets_prep/broll/br08_landing_ripples.jpg",
+  "assets_prep/broll/br12_keepnet_trout.jpg",
+  "assets_prep/broll/br05_reeling_portrait.jpg",
+  "assets_prep/broll/br14_crouch_net.jpg",
+  "assets_prep/broll/br11_lake_sunflare.jpg"
+ ],
+ "copy": {
+  "hero": "TA CZ logo (hero, velké)",
+  "title": [
+   "Mistrovství ČR",
+   "v Trout Area 2026"
+  ],
+  "date": "24.–25. 10. 2026",
+  "place": "Líheň Liběchov",
+  "stats": "40 závodníků · hard baits",
+  "oneliner": "Partneři mistrovství"
+ }
+}

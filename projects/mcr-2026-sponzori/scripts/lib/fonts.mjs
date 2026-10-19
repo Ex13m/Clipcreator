@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import { execFileSync } from 'node:child_process';
 import { ROOT, PROJ, exists } from './util.mjs';
 
 const FDIR = path.join(ROOT, 'fonts');
@@ -17,7 +18,8 @@ export const FONTS = {
   Inter: { v: 'inter-{r}-wght-normal', weight: '100 900', axes: ['wght'], use: 'neutral text; Gausse Holler web font' },
   'Inter Tight': { v: 'inter-tight-{r}-wght-normal', weight: '100 900', axes: ['wght'], use: 'tight neutral display' },
   Montserrat: { v: 'montserrat-{r}-wght-normal', vi: 'montserrat-{r}-wght-italic', weight: '100 900', axes: ['wght'], use: 'Líheň Liběchov web font (italic uppercase in header)' },
-  Nunito: { v: 'nunito-{r}-wght-normal', weight: '200 1000', axes: ['wght'], use: 'Activefishing web font (Shoptet)' },
+  Bitter: { v: 'bitter-{r}-wght-normal', vi: 'bitter-{r}-wght-italic', weight: '100 900', axes: ['wght'], use: 'Líheň Liběchov logo lettering (slab serif, heritage 1934) — @fontsource-variable/bitter 5.3.0, OFL' },
+  Nunito: { v: 'nunito-{r}-wght-normal', vi: 'nunito-{r}-wght-italic', weight: '200 1000', axes: ['wght'], use: 'Activefishing web font (Shoptet); Velká ryba web font (velka-ryba.cz loads Nunito 300–800; italic 900 for its ad display) — italic: @fontsource-variable/nunito 5.2.6, OFL' },
   Unbounded: { v: 'unbounded-{r}-wght-normal', weight: '200 900', axes: ['wght'], use: 'Moonky display (wide, soft-lure fun)' },
   Oswald: { v: 'oswald-{r}-wght-normal', weight: '200 700', axes: ['wght'], use: 'Velká ryba display (condensed sport)' },
   Outfit: { v: 'outfit-{r}-wght-normal', weight: '100 900', axes: ['wght'], use: 'Bosset display (clean geometric product)' },
@@ -26,6 +28,9 @@ export const FONTS = {
   Poppins: { s: { 400: 'poppins-{r}-400-normal', 600: 'poppins-{r}-600-normal', 800: 'poppins-{r}-800-normal', 900: 'poppins-{r}-900-normal' }, use: 'Jigovky web font (Shoptet)' },
   'Playfair Display': { s: { 700: 'playfair-display-{r}-700-normal', 900: 'playfair-display-{r}-900-normal' }, si: { 700: 'playfair-display-{r}-700-italic', 900: 'playfair-display-{r}-900-italic' }, use: 'serif accent (Gausse Holler wordmark feel)' },
 };
+// a block module may declare its own families (export const fonts = { Name: { v|s|vi|si, … } }, files in fonts/) — merged here by build.mjs,
+// so block agents never have to edit this shared file
+export function registerFonts(obj = {}) { for (const [k, v] of Object.entries(obj || {})) if (!FONTS[k]) FONTS[k] = v; }
 const files = (stem) => [['latin', LATIN], ['latin-ext', EXT]].map(([r, range]) => ({ file: stem.replace('{r}', r), range }));
 
 // @font-face CSS for all families (url prefix = staged dir, e.g. 'assets/fonts/')
@@ -62,7 +67,11 @@ function faces(fam, { wght = 700, wdth = 100, italic = false } = {}) {
   const key = stem + JSON.stringify(vari);
   if (!cache.has(key)) {
     const pair = files(stem).map(({ file }) => {
-      const p = path.join(FDIR, '_ttf', file + '.ttf'); if (!exists(p)) return null;
+      const p = path.join(FDIR, '_ttf', file + '.ttf');
+      if (!exists(p) && exists(path.join(FDIR, file + '.woff2'))) {   // measuring needs TTF (fontkit cannot vary WOFF2) → convert once (python fontTools)
+        try { fs.mkdirSync(path.dirname(p), { recursive: true }); execFileSync('python3', ['-c', 'import sys;from fontTools.ttLib import TTFont;t=TTFont(sys.argv[1]);t.flavor=None;t.save(sys.argv[2])', path.join(FDIR, file + '.woff2'), p], { stdio: 'ignore' }); } catch { /* fallback estimate */ }
+      }
+      if (!exists(p)) return null;
       let f = fontkit.openSync(p); if (vari) { try { f = f.getVariation(vari); } catch { /* static fallback */ } } return f;
     });
     cache.set(key, pair);

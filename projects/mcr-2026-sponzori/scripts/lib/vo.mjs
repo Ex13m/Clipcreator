@@ -12,6 +12,8 @@ const SCRIPT = path.join(ROOT, 'vo/script_cs.json');
 const VOW = /[aeiouyáéěíóúůý]+/gi;
 const NUM_SYL = (s) => { const d = s.replace(/\D/g, ''); return d.length ? Math.max(2, d.length * 2) : 0; };
 const syl = (w) => { const n = (w.toLowerCase().match(VOW) || []).length; return Math.max(1, n + NUM_SYL(w) - (/\d/.test(w) ? (w.match(VOW) || []).length : 0)); };
+// "24." before "a 25. října" is an ordinal, not a sentence end: end = punctuation + (next word capitalised or none)
+const sentEnd = (w, next) => /[.!?]$/.test(w) && (!next || /^[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ„"0-9]/.test(next));
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 let script = null;
@@ -33,7 +35,7 @@ export function voFor(key, { offset = 0.25, dur = 8, syllPerSec = 6.0 } = {}) {
     // estimate: syllables + pauses after punctuation
     const toks = text.split(/\s+/).filter((w) => w && !/^[–—-]$/.test(w));
     const raw = []; let t = 0;
-    for (const w of toks) { const d = syl(w) / syllPerSec; raw.push({ w, t0: t, t1: t + d }); t += d + (/[.!?]$/.test(w) ? 0.32 : /[,;:]$/.test(w) ? 0.16 : 0.03); }
+    toks.forEach((w, i) => { const d = syl(w) / syllPerSec; raw.push({ w, t0: t, t1: t + d }); t += d + (sentEnd(w, toks[i + 1]) ? 0.32 : /[,;:]$/.test(w) ? 0.16 : 0.03); });
     const est = t;
     const k = audioDur ? (audioDur - 0.05) / est : 1;
     words = raw.map((x) => ({ w: x.w, t0: r3(offset + x.t0 * k), t1: r3(offset + x.t1 * k) }));
@@ -42,13 +44,13 @@ export function voFor(key, { offset = 0.25, dur = 8, syllPerSec = 6.0 } = {}) {
   const phrases = []; let cur = null;
   const toksAll = text.split(/\s+/).filter(Boolean);
   let wi = 0;
-  for (const tok of toksAll) {
-    if (/^[–—-]$/.test(tok)) { if (cur) { phrases.push(cur); cur = null; } continue; }
-    const w = words[wi++]; if (!w) break;
+  toksAll.forEach((tok, i) => {
+    if (/^[–—-]$/.test(tok)) { if (cur) { phrases.push(cur); cur = null; } return; }
+    const w = words[wi++]; if (!w) return;
     if (!cur) cur = { text: '', t0: w.t0, t1: w.t1 };
     cur.text += (cur.text ? ' ' : '') + tok; cur.t1 = w.t1;
-    if (/[.,;:!?]$/.test(tok)) { phrases.push(cur); cur = null; }
-  }
+    if (sentEnd(tok, toksAll[i + 1]) || /[,;:]$/.test(tok)) { phrases.push(cur); cur = null; }
+  });
   if (cur) phrases.push(cur);
   const start = words.length ? words[0].t0 : offset, end = words.length ? words[words.length - 1].t1 : offset;
   const at = (q) => {

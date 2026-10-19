@@ -1,0 +1,185 @@
+{
+ "_note": "Data bloku (jen ověřená fakta + assety). Vzhled = scripts/blocks/bosset.mjs. Zdroje: research/bosset.md, vo/script_cs.json.",
+ "key": "bosset",
+ "name": "Bosset.cz",
+ "url": "bosset.cz",
+ "brand": {
+  "colors": {
+   "teal": "#1B97B1",
+   "accent_yellow": "#FFC500",
+   "light_blue": "#C5EBFC",
+   "black": "#000000"
+  },
+  "research": "research/bosset.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/bosset/logo_on_dark.png",
+  "on_light": "assets_prep/bosset/logo_on_light.png",
+  "plate": "assets_prep/bosset/logo_plate.png"
+ },
+ "products": [
+  {
+   "src": "assets_prep/bosset/heroes/h01_zojirushi_orange.png",
+   "name": "Zojirushi SM-SHE 0.6 l orange",
+   "size": [
+    392,
+    1272
+   ],
+   "pad": [
+    0.115,
+    0.028,
+    0.097,
+    0.028
+   ],
+   "aspect": 0.308,
+   "glint": [
+    0.778,
+    0.218
+   ],
+   "dominant": [
+    "#ee712e",
+    "#fd9956",
+    "#b62c07"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/bosset/heroes/h02_zojirushi_black.png",
+   "name": "Zojirushi SM-VB 0.6 l black",
+   "size": [
+    551,
+    1590
+   ],
+   "pad": [
+    0.094,
+    0.03,
+    0.083,
+    0.032
+   ],
+   "aspect": 0.347,
+   "glint": [
+    0.61,
+    0.142
+   ],
+   "dominant": [
+    "#615a60",
+    "#413a41",
+    "#b1acb0"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/bosset/heroes/h03_zojirushi_mint.png",
+   "name": "Zojirushi SM-SR 0.6 l green",
+   "size": [
+    480,
+    1584
+   ],
+   "pad": [
+    0.098,
+    0.03,
+    0.098,
+    0.03
+   ],
+   "aspect": 0.303,
+   "glint": [
+    0.631,
+    0.208
+   ],
+   "dominant": [
+    "#a8d5cc",
+    "#d1eae5",
+    "#0f4f3d"
+   ],
+   "cut": "classic silhouette (threshold+fill)"
+  },
+  {
+   "src": "assets_prep/bosset/heroes/h04_zojirushi_pink.png",
+   "name": "Zojirushi SM-SR 0.6 l pink",
+   "size": [
+    483,
+    1584
+   ],
+   "pad": [
+    0.097,
+    0.03,
+    0.097,
+    0.03
+   ],
+   "aspect": 0.305,
+   "glint": [
+    0.509,
+    0.227
+   ],
+   "dominant": [
+    "#e4c9e1",
+    "#d4b5d0",
+    "#31112a"
+   ],
+   "cut": "classic silhouette (threshold+fill)"
+  },
+  {
+   "src": "assets_prep/bosset/heroes/h05_zojirushi_green_vb.png",
+   "name": "Zojirushi SM-VB 0.6 l green",
+   "size": [
+    546,
+    1579
+   ],
+   "pad": [
+    0.086,
+    0.029,
+    0.086,
+    0.03
+   ],
+   "aspect": 0.346,
+   "glint": [
+    0.403,
+    0.131
+   ],
+   "dominant": [
+    "#c2e4c6",
+    "#afd5b2",
+    "#19461b"
+   ],
+   "cut": "classic silhouette (threshold+fill)"
+  }
+ ],
+ "copy": {
+  "headline": "Ceny pro vítěze",
+  "facts": [
+   "Termosky 0,5–0,7 l",
+   "Horké až 6 hodin"
+  ],
+  "url": "bosset.cz",
+  "extra": [],
+  "lines": [
+   {
+    "t": "Termosky do cen",
+    "s": "Zojirushi · 0,5–0,7 l",
+    "cta": false,
+    "src": "brief (ceny) + research/bosset.md (kategorie Termosky)"
+   },
+   {
+    "t": "Horké i studené až 6 hodin",
+    "s": "nerez a plast bez BPA",
+    "cta": false,
+    "src": "bosset.cz – popis SM-SR 0,6 l"
+   },
+   {
+    "t": "Oficiální distributor Keitech a YGK X-Braid",
+    "s": "přívlači se věnují víc než 20 let",
+    "cta": false,
+    "src": "bosset.cz meta + /o-nas/"
+   },
+   {
+    "t": "bosset.cz",
+    "s": "expedice do 24 h",
+    "cta": true,
+    "src": "bosset.cz – banner v patičce „Expedujeme do 24h“ (3. osoba, ať to neříká TA)"
+   }
+  ]
+ },
+ "notes": [
+  "Nic o původu Zojirushi. Ceny = termosky 0,6 l (rozsah 0,5–0,7 l dle briefu). VO „Ceny pro vítěze“ — L3 v REVIEW čeká na potvrzení."
+ ]
+}

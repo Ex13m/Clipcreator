@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>troutshop-endcard · MČR 2026</title></head>
+<body><template>
+<div id="b-troutshop-endcard" data-composition-id="troutshop-endcard" data-width="1080" data-height="1920" data-duration="3.669">
+  <style>
+  #bw-troutshop-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #troutshop-endcard-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-troutshop-endcard" class="blk blk-troutshop" style="--bg:#070707;--fg:#ffffff;--acc:#e3000f;--acc2:#ffffff">
+    <div id="troutshop-endcard-stage" class="blk-stage"><div class="fx-field" id="troutshop-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #2a0306 0%, #070707 100%);"></div><div class="fx-mq ol" id="troutshop-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#ffffff;--ow:2px;opacity:.18"><div class="fx-mq-in" id="troutshop-endcard-emq-in" style="font-family:'Anton';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Troutshop.eu · </span><span>Troutshop.eu · </span><span>Troutshop.eu · </span><span>Troutshop.eu · </span></div></div><div class="fx-ec" id="troutshop-endcard-ec" style="top:799.5px">
+    <div id="troutshop-endcard-ec-line" style="font-family:'Inter';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
+    <div id="troutshop-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#e3000f;margin:32.199999999999996px 0"></div>
+    <div id="troutshop-endcard-ec-lw"><img id="troutshop-endcard-ec-logo" class="fx-logo " src="assets/prep/troutshop/logo_on_dark.png" alt="Troutshop.eu" style="width:335px; height:158px;"></div>
+    <div id="troutshop-endcard-ec-url" style="margin-top:46px;font-family:'Anton';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">troutshop.eu</div>
+  </div>
+    </div>
+    <div class="fx-ov" id="troutshop-endcard-tin" style="background:#070707"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#troutshop-endcard-emq-in", {"x":0});
+  gsap.set("#troutshop-endcard-tin", {"opacity":1});
+  gsap.set("#troutshop-endcard-ec-line", {"opacity":0,"y":20});
+  gsap.set("#troutshop-endcard-ec-bar", {"scaleX":0});
+  gsap.set("#troutshop-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
+  gsap.set("#troutshop-endcard-ec-url", {"opacity":0,"y":30});
+  tl.fromTo("#troutshop-endcard-emq-in", {"x":0}, {"x":-330.21,"duration":3.669,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
+  tl.fromTo("#troutshop-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
+  tl.fromTo("#troutshop-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
+  tl.fromTo("#troutshop-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
+  tl.set({}, {}, 3.669);
+  window.__timelines["troutshop-endcard"] = tl;
+  </script>
+</div>
+</template></body></html>

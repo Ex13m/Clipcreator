@@ -1,0 +1,32 @@
+{
+ "_note": "Finále (takty 45–55 + doznění do konce tracku): peak → logo wall → TA hero + akce + Uvidíme se u vody + MADE BY GH. Logo wall: každé logo ≤ TA logo.",
+ "key": "finale",
+ "wall": [
+  "venue",
+  "troutshop",
+  "activefishing",
+  "moonky",
+  "jigovky",
+  "velkaryba",
+  "bosset",
+  "gausseholler"
+ ],
+ "madeby": {
+  "on_dark": "assets_prep/gausseholler/madeby_on_dark.png"
+ },
+ "copy": {
+  "thanks": [
+   "Děkujeme",
+   "partnerům"
+  ],
+  "wall": "Líheň Liběchov · Troutshop.eu · Activefishing.cz · Moonky · Jigovky.cz · Velka-ryba.cz · Bosset.cz · Gausse Holler (žádné větší než TA)",
+  "hero": "TA CZ logo (velké)",
+  "event": "Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
+  "closer": "Uvidíme se u vody",
+  "mark": "MADE BY ⚙ © 2026 Gausse Holler"
+ },
+ "photos": [
+  "assets_prep/broll/br11_lake_sunflare.jpg",
+  "assets_prep/broll/br02_netting_sunrays.jpg"
+ ]
+}

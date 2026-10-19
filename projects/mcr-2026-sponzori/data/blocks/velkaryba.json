@@ -1,0 +1,188 @@
+{
+ "_note": "Data bloku (jen ověřená fakta + assety). Vzhled = scripts/blocks/velkaryba.mjs. Zdroje: research/velkaryba.md, vo/script_cs.json.",
+ "key": "velkaryba",
+ "name": "Velka-ryba.cz",
+ "url": "velka-ryba.cz",
+ "brand": {
+  "colors": {
+   "navy": "#143D6B",
+   "red": "#DA0F00",
+   "charcoal": "#2F2F2F"
+  },
+  "research": "research/velkaryba.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/velkaryba/logo_on_dark.png",
+  "on_light": "assets_prep/velkaryba/logo_on_light.png",
+  "plate": "assets_prep/velkaryba/logo_plate.png"
+ },
+ "products": [
+  {
+   "src": "assets_prep/velkaryba/heroes/h01_illex_native_pink_yamame.png",
+   "name": "Illex Native Spoon 2.5 g Pink Yamame",
+   "size": [
+    946,
+    1052
+   ],
+   "pad": [
+    0.033,
+    0.03,
+    0.034,
+    0.03
+   ],
+   "aspect": 0.899,
+   "glint": [
+    0.384,
+    0.553
+   ],
+   "dominant": [
+    "#ad7a79",
+    "#942a4c",
+    "#d4b2b4"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/velkaryba/heroes/h02_illex_native_copper_trout.png",
+   "name": "Illex Native Spoon 3.5 g Copper Trout",
+   "size": [
+    956,
+    1053
+   ],
+   "pad": [
+    0.032,
+    0.03,
+    0.033,
+    0.03
+   ],
+   "aspect": 0.908,
+   "glint": [
+    0.363,
+    0.548
+   ],
+   "dominant": [
+    "#c37a26",
+    "#bea574",
+    "#53401f"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/velkaryba/heroes/h03_daiwa_presso_manhattan.png",
+   "name": "Daiwa Presso ADM 2.2 g Manhattan",
+   "size": [
+    977,
+    1048
+   ],
+   "pad": [
+    0.032,
+    0.031,
+    0.033,
+    0.031
+   ],
+   "aspect": 0.932,
+   "glint": [
+    0.562,
+    0.452
+   ],
+   "dominant": [
+    "#353b43",
+    "#b1b19d",
+    "#025a92"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png",
+   "name": "Daiwa Presso ADM 3.8 g Flashing Green",
+   "size": [
+    1013,
+    1047
+   ],
+   "pad": [
+    0.032,
+    0.031,
+    0.032,
+    0.03
+   ],
+   "aspect": 0.968,
+   "glint": [
+    0.307,
+    0.336
+   ],
+   "dominant": [
+    "#ab904a",
+    "#36361d",
+    "#03ab3a"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange.png",
+   "name": "Shimano Cardiff Roll Swimmer CE 4.5 g Orange Gold",
+   "size": [
+    1028,
+    785
+   ],
+   "pad": [
+    0.031,
+    0.039,
+    0.03,
+    0.039
+   ],
+   "aspect": 1.31,
+   "glint": [
+    0.481,
+    0.183
+   ],
+   "dominant": [
+    "#fd961b",
+    "#d0bf80",
+    "#5e3b21"
+   ],
+   "cut": "ml_isnet + label removal"
+  }
+ ],
+ "copy": {
+  "headline": "Vše na přívlač",
+  "facts": [
+   "Olomouc · od 2011",
+   "Shimano Rod Test Center"
+  ],
+  "url": "velka-ryba.cz",
+  "extra": [],
+  "lines": [
+   {
+    "t": "Vše na přívlač",
+    "s": "přívlačová speciálka · Olomouc",
+    "cta": false,
+    "src": "velka-ryba.cz title/H1 + homepage"
+   },
+   {
+    "t": "Přívlačová speciálka od roku 2011",
+    "s": "e-shop i kamenná prodejna v Olomouci",
+    "cta": false,
+    "src": "velka-ryba.cz/cs/content/48-o-nas"
+   },
+   {
+    "t": "Partner Shimano Rod Test Center",
+    "s": "pruty si půjčíte a vyzkoušíte u vody",
+    "cta": false,
+    "src": "velka-ryba.cz/cs/content/48-o-nas"
+   },
+   {
+    "t": "velka-ryba.cz",
+    "s": "plandavky pro pstruhy a Trout Areu",
+    "cta": true,
+    "src": "velka-ryba.cz/cs/1874-cardiff-roll-swimmer"
+   }
+  ]
+ },
+ "notes": [
+  "Prodejce, ne výrobce: Shimano/Daiwa/Illex nejsou jeho značky. Logo na tmavém jen logo_plate / on_dark (destička)."
+ ],
+ "flip": {
+  "front": "assets_prep/velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange_front.png",
+  "back": "assets_prep/velkaryba/heroes/h05_shimano_cardiff_roll_swimmer_orange_back.png"
+ }
+}

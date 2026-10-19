@@ -1,0 +1,18 @@
+{
+ "_note": "B-roll střih (takty 33–34, bez VO). Fotky 1080×1920 z assets_prep/broll (H-BATTLE + Klonówiec, ne Liběchov). Videa od uživatele přijdou do stejných slotů.",
+ "key": "broll",
+ "mode": "cut",
+ "photos": [
+  "assets_prep/broll/br01_fight_splash.jpg",
+  "assets_prep/broll/br15_net_splash.jpg",
+  "assets_prep/broll/br07_landing_rod_up.jpg",
+  "assets_prep/broll/br03_fish_in_net.jpg",
+  "assets_prep/broll/br09_landing_rods_flare.jpg",
+  "assets_prep/broll/br14_crouch_net.jpg",
+  "assets_prep/broll/br05_reeling_portrait.jpg",
+  "assets_prep/broll/br12_keepnet_trout.jpg"
+ ],
+ "copy": {
+  "line": "Mistrovství ČR v Trout Area 2026"
+ }
+}

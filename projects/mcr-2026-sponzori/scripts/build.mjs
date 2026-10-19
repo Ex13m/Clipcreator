@@ -14,7 +14,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { ROOT, rd, exists, J, f3, r3, esc, ffDur, copyIfNewer } from './lib/util.mjs';
 import * as A from './lib/assets.mjs';
-import { fontCss, stageFonts } from './lib/fonts.mjs';
+import { fontCss, stageFonts, registerFonts } from './lib/fonts.mjs';
 import { loadGrid, planFilm } from './lib/grid.mjs';
 import { voFor } from './lib/vo.mjs';
 import { initOutput, makeCtx, plateGeom } from './lib/ctx.mjs';
@@ -43,11 +43,13 @@ A.ref(TK.plate.src, { trim: false, maxSide: 1400 }); A.flush();
 
 // ---------- block modules ----------
 const MODS = {};
-for (const p of PLAN) {
+const needed = ENV.BLOCK && ENV.BLOCK !== 'all' ? PLAN.filter((p) => p.key === ENV.BLOCK) : PLAN;
+for (const p of needed) {
   if (MODS[p.block]) continue;
   const f = path.join(ROOT, 'scripts/blocks', `${p.block}.mjs`);
   if (!exists(f)) throw new Error(`missing block module scripts/blocks/${p.block}.mjs`);
   MODS[p.block] = await import(pathToFileURL(f).href + `?v=${fs.statSync(f).mtimeMs}`);
+  registerFonts(MODS[p.block].fonts);
 }
 const themeOf = (p) => (p ? { key: p.key, theme: MODS[p.block]?.theme || {} } : null);
 
@@ -107,11 +109,11 @@ function build(mode, blockKey = null) {
     const { P } = I, mod = MODS[P.block];
     const data = dataOf(P.data);
     const voInfo = I.part === 'main' && P.vo ? voFor(P.vo, { offset: P.opt.voOffset ?? C.vo.offset, dur: I.dur }) : voFor(null);
-    const ctx = makeCtx({ key: P.key, part: I.part, P, gT0: I.gT0, dur: I.dur, data, event: C.event, C, theme: mod.theme, prev: themeOf(I.prev), next: themeOf(I.next), voInfo, mod });
+    const ctx = makeCtx({ key: P.key, part: I.part, P, gT0: I.gT0, dur: I.dur, data, event: C.event, C, theme: mod.theme, prev: themeOf(I.prev), next: themeOf(I.next), voInfo, mod, dataOf });
     const fn = I.part === 'hook' ? (mod.hook || defaultHook) : I.part === 'endcard' ? (mod.endCard || defaultEndCard) : mod.default;
     const r = fn(ctx) || {};
     const tlCode = typeof r.timeline === 'string' ? r.timeline : (r.timeline || ctx.tl).code('  ');
-    const end = ctx.tl.end(); if (end > I.dur + 0.05) ctx.warn(`timeline runs to ${end.toFixed(2)} s > block ${I.dur} s (cut off)`);
+    const end = ctx.tl.end(); if (end.t > I.dur + 0.05) ctx.warn(`timeline runs to ${end.t.toFixed(2)} s > block ${I.dur} s (${end.sel} is cut off)`);
     const T = mod.theme || {};
     const vars = `--bg:${T.bg || '#000'};--fg:${T.fg || '#fff'};--acc:${T.accent || '#fff'};--acc2:${T.accent2 || T.accent || '#fff'}`;
     const cid = ctx.cid;

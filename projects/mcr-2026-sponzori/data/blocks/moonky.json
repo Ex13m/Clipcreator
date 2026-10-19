@@ -1,0 +1,214 @@
+{
+ "_note": "Data bloku (jen ověřená fakta + assety). Vzhled = scripts/blocks/moonky.mjs. Zdroje: research/moonky.md, vo/script_cs.json.",
+ "key": "moonky",
+ "name": "Moonky",
+ "url": "moonky.cz",
+ "brand": {
+  "colors": {
+   "navy_badge": "#0E1424",
+   "blue_web": "#6883BA",
+   "white": "#FFFFFF"
+  },
+  "research": "research/moonky.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/moonky/logo_on_dark.png",
+  "on_light": "assets_prep/moonky/logo_on_light.png",
+  "badge": "assets_prep/moonky/badge.png",
+  "mark_on_dark": "assets_prep/moonky/mark_on_dark.png",
+  "mark_on_light": "assets_prep/moonky/mark_on_light.png"
+ },
+ "products": [
+  {
+   "src": "assets_prep/moonky/heroes/h01_coccon_yellow_orange.png",
+   "name": "Coccon 42mm DC04 Yellow/Orange fluo",
+   "size": [
+    1187,
+    779
+   ],
+   "pad": [
+    0.029,
+    0.044,
+    0.029,
+    0.044
+   ],
+   "aspect": 1.524,
+   "glint": [
+    0.762,
+    0.421
+   ],
+   "dominant": [
+    "#d4ae05",
+    "#f47c01",
+    "#ba8e14"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/moonky/heroes/h02_savory_brown_orange.png",
+   "name": "Savory 43mm DC03 Brown metalic/Orange fluo",
+   "size": [
+    1257,
+    1021
+   ],
+   "pad": [
+    0.029,
+    0.035,
+    0.029,
+    0.035
+   ],
+   "aspect": 1.231,
+   "glint": [
+    0.068,
+    0.166
+   ],
+   "dominant": [
+    "#835553",
+    "#f7ab41",
+    "#582f30"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/moonky/heroes/h03_savory_green.png",
+   "name": "Savory 43mm C06 Green",
+   "size": [
+    1199,
+    350
+   ],
+   "pad": [
+    0.028,
+    0.1,
+    0.029,
+    0.097
+   ],
+   "aspect": 3.426,
+   "glint": [
+    0.205,
+    0.591
+   ],
+   "dominant": [
+    "#8acc01",
+    "#5cab01",
+    "#c2e172"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/moonky/heroes/h04_scelet_pink_bubblegum.png",
+   "name": "Scelet C01 Pink Bubblegum",
+   "size": [
+    1165,
+    427
+   ],
+   "pad": [
+    0.028,
+    0.077,
+    0.028,
+    0.077
+   ],
+   "aspect": 2.728,
+   "glint": [
+    0.948,
+    0.721
+   ],
+   "dominant": [
+    "#f34769",
+    "#da0a33",
+    "#fb7d99"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/moonky/heroes/h05_gradient_blue_pink.png",
+   "name": "Moonky soft lure (category image, blue→pink)",
+   "size": [
+    892,
+    270
+   ],
+   "pad": [
+    0.03,
+    0.093,
+    0.028,
+    0.096
+   ],
+   "aspect": 3.304,
+   "glint": [
+    0.772,
+    0.289
+   ],
+   "dominant": [
+    "#0c78bd",
+    "#c138a1",
+    "#aac0ed"
+   ],
+   "cut": "ml_isnet"
+  },
+  {
+   "src": "assets_prep/moonky/heroes/h06_coccon_jr_black.png",
+   "name": "Coccon Jr. 34mm C04 Black",
+   "size": [
+    1362,
+    807
+   ],
+   "pad": [
+    0.029,
+    0.05,
+    0.029,
+    0.05
+   ],
+   "aspect": 1.688,
+   "glint": [
+    0.753,
+    0.207
+   ],
+   "dominant": [
+    "#09080c",
+    "#323538",
+    "#8e9092"
+   ],
+   "cut": "ml_isnet"
+  }
+ ],
+ "copy": {
+  "headline": "Ručně dělané gumové nástrahy",
+  "facts": [
+   "Vlastní CNC formy",
+   "Vývoj s reprezentací ČR"
+  ],
+  "url": "moonky.cz",
+  "extra": [],
+  "lines": [
+   {
+    "t": "Speciální gumové nástrahy pro lov Trout Area",
+    "s": "ručně dělané",
+    "cta": false,
+    "src": "moonky.cz hlavička + banner „HANDMADE LURES“ (Verification #5)"
+   },
+   {
+    "t": "Od návrhu až po vlastní formy na CNC strojích",
+    "s": "guma bez ftalátů",
+    "cta": false,
+    "src": "moonky.cz/o-nas/"
+   },
+   {
+    "t": "Vyvíjeno s českou reprezentací",
+    "s": "v lovu pstruhů ze břehu",
+    "cta": false,
+    "src": "moonky.cz/o-nas/ – „8 let“ vynecháno (nedatováno, Verification #3, script_cs)"
+   },
+   {
+    "t": "moonky.cz",
+    "s": "vyrobeno v České republice",
+    "cta": true,
+    "src": "web + obal (u02, moonky_user.md)"
+   }
+  ]
+ },
+ "notes": [
+  "Ne „nejlepší“, ne „8 let“. Na pozadí žádný čitelný nápis MOONKY větší než TA logo."
+ ],
+ "macro_bg": [
+  "assets/moonky/u04_gamer_big_macro.jpg"
+ ]
+}

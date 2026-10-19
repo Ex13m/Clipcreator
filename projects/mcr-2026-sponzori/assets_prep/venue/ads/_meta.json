@@ -1,0 +1,159 @@
+{
+ "generated": "2026-10-19",
+ "sponsor": "venue (Líheň Liběchov)",
+ "colors": {
+  "turquoise": "#17a1c8",
+  "navy": "#1a212e",
+  "aqua": "#9ae7e8",
+  "gold": "#d8af64",
+  "paper": "#f8f8f8",
+  "deep": "#0f6f8c"
+ },
+ "fonts": {
+  "display": "Bitter (slab, logo lettering) 700–900",
+  "web": "Montserrat 300 / 800 italic uppercase (site header)"
+ },
+ "items": [
+  {
+   "role": "hero",
+   "key": "H1",
+   "what": "Malý Sporťáček — the MČR pond, real ČÚZK orthophoto (summer), AI-upscaled 4k",
+   "file": "venue/ads/h1_arena_disc.png",
+   "size": [
+    2000,
+    2000
+   ],
+   "source": "ČÚZK ORTOFOTO export bbox 461375,5584610,461531,5584766 EPSG:32633 (0.125 m/px) → Higgsfield upscale 4k (job 49363abd…) → circle lens",
+   "scale_m_per_px": 0.0514,
+   "anchors": {
+    "pond_centroid": [
+     0.5,
+     0.5
+    ],
+    "north": "up"
+   },
+   "companions": {
+    "water_mask": "venue/ads/h1_arena_disc_watermask.png (same canvas; water only → caustics/shimmer inside the pond)",
+    "full_square_jpg": "venue/ads/h1_arena_aerial.jpg (2048², same framing, for Ken Burns / dive-in)"
+   },
+   "notes": "hall roof bottom-left = líheň/rybárna building; two raceways top = odchovné nádrže (hatchery). No people visible."
+  },
+  {
+   "role": "hero",
+   "key": "H1b",
+   "what": "Malý Sporťáček as a floating 3D island (pond + ~4 m bank, extruded soil side)",
+   "file": "venue/ads/h1_pond_island_3d.png",
+   "size": [
+    1863,
+    1870
+   ],
+   "flat": "venue/ads/h1_pond_island.png",
+   "water_mask": "venue/ads/h1_pond_island_watermask.png (aligned with the flat island and with the top 1760 px of the 3D one)",
+   "shadow": "venue/ads/h1_pond_island_3d_shadow.png (pad 168 px)",
+   "anchors": {
+    "pond_centroid_flat": [
+     0.4974,
+     0.5049
+    ],
+    "extrusion_px": 110
+   },
+   "notes": "Good with CSS perspective rotateX 35–55° + slow rotateZ; the pond is ~58×42 m (0,2 ha)."
+  },
+  {
+   "role": "hero",
+   "key": "H2",
+   "what": "Pstruh obecný (brown trout) — trophy fish from the 2022 stocking photo; the shop sells this species as 'Liběchovský potočák'",
+   "file": "venue/ads/h2_trout_potocak.png",
+   "size": [
+    2154,
+    1122
+   ],
+   "source": "lihenlibechov.cz/uploads/images/632b618a081b8172055605.jpg (1600×1200) → Higgsfield upscale 4k (job 0528c9f5…) → ISNet + GrabCut (second fish + third tail removed) + 1.5 px edge shrink + colour decontamination",
+   "anchors": {
+    "eye": [
+     0.159,
+     0.398
+    ]
+   },
+   "shadow": "venue/ads/h2_trout_potocak_shadow.png (pad 193 px)",
+   "sheen_blend": "soft-light",
+   "notes": "Curled body, tail partly hidden in the source (tail ends blunt) → best in motion (swim-through, macro push-in on the spots/eye), not as a static full-frame packshot. Do not call it 'Liběchovský potočák' on screen without context: the photo is from stocking trophy brown trout (aktualita 'Nasadili jsme 21.9.')."
+  },
+  {
+   "role": "hero",
+   "key": "H3",
+   "what": "MČR 2026 trophy key visual (cup + jumping rainbow trout + 'TROUT AREA · MISTROVSTVÍ ČESKÉ REPUBLIKY · 2026')",
+   "file": "venue/ads/h3_mcr_trophy.png",
+   "size": [
+    1623,
+    2290
+   ],
+   "source": "official MČR poster on lihenlibechov.cz (uploads/images/6ad6194b0611c422794668.png) → Higgsfield upscale 4k (job 28d0aa2e…) → ISNet; handle holes cleared; plinth bottom strip rebuilt (date banner painted over it in the poster) by mirroring",
+   "anchors": {
+    "axis_x": 0.5,
+    "floor_y": 0.981
+   },
+   "shadow": "venue/ads/h3_mcr_trophy_shadow.png (pad 137 px)",
+   "sheen_blend": "screen",
+   "notes": "Graphic (not a photo) — TA event mark; never larger than / covering the TA CZ plate. Gold = metallic sweep target."
+  },
+  {
+   "role": "secondary",
+   "key": "S1",
+   "what": "Uzení pstruzi — two smoked trout hanging (prodejna: smoking every Thursday)",
+   "file": "venue/ads/s1_smoked_trout_pair.png",
+   "size": [
+    1207,
+    2103
+   ],
+   "source": "lihenlibechov.cz/uploads/images/6780e234b779d813431240.jpg (1536×2048, aktualita 'Uzení pstruzi – KAŽDÝ ČTVRTEK PO 15hod') → local ISNet + wood gap removed + shadow wisps removed",
+   "shadow": "venue/ads/s1_smoked_trout_pair_shadow.png (pad 126 px)",
+   "sheen_blend": "soft-light"
+  },
+  {
+   "role": "secondary",
+   "key": "S2",
+   "what": "Etched trout line-art from the venue logo (vector, 4000 px render)",
+   "file": "venue/ads/s2_etched_trout_ink.png",
+   "size": [
+    2235,
+    2548
+   ],
+   "sticker": "venue/ads/s2_etched_trout_sticker.png (white fill + navy ink)",
+   "notes": "ink = navy #1a212e lines on transparent → tint with CSS mask-image (white on navy, navy on turquoise, gold line-draw). Brand device, not a product."
+  },
+  {
+   "role": "secondary",
+   "key": "S3",
+   "what": "Líheň — sturgeon fry in a blue hatchery tank (top-down, full frame 3:4)",
+   "file": "venue/ads/s3_hatchery_sturgeon_fry.jpg",
+   "size": [
+    1536,
+    2048
+   ],
+   "source": "lihenlibechov.cz/uploads/images/6425c53585101612729992.jpeg (aktualita 'Jeseter', 2023: jezírkoví jeseteři 15–30 cm)",
+   "notes": "photo, not a cut-out; strong colour (blue tank) → great 9:16 background/transition plate for 'líheň/chov'."
+  },
+  {
+   "role": "secondary",
+   "key": "existing",
+   "what": "Logo badge (white disc, etched trout, slab lettering)",
+   "file": "libechov/logo.png",
+   "size": [
+    2000,
+    2000
+   ]
+  },
+  {
+   "role": "secondary",
+   "key": "existing",
+   "what": "Pond photos 9:16 (winter): Malý Sporťáček (aerator), Velký Sporťák; trout in net; full MČR poster",
+   "files": [
+    "libechov/venue/v01_maly_sportacek.jpg",
+    "libechov/venue/v02_velky_sportak.jpg",
+    "libechov/venue/v03_trout_in_net.jpg",
+    "libechov/venue/v04_mcr_poster_fit.jpg"
+   ]
+  }
+ ]
+}

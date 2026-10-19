@@ -31,7 +31,7 @@ vec3 skyRadiance(vec3 d){
   float yy = max(y, 0.0);
   vec3 zen = vec3(0.075, 0.200, 0.600);
   vec3 hor = vec3(0.640, 0.760, 0.940);
-  float t = exp(-yy * 6.0);
+  float t = exp(-yy * 9.0);
   vec3 c = mix(zen, hor, t);
   c = mix(c, hor * vec3(0.90, 0.91, 0.93), smoothstep(0.0, -0.10, y));
   float g = 0.78;
@@ -95,6 +95,7 @@ uniform sampler2D uOrtho; uniform vec4 uBox;
 uniform sampler2D uCls; uniform vec4 uClsBox; uniform float uHasCls;
 uniform sampler2D uDtm; uniform float uHasDtm;
 uniform float uBias; uniform float uIsRing;
+uniform sampler2D uDet; uniform float uHasDet;
 in float vTreeK;
 vec2 toUV(vec2 xz, vec4 b){ return vec2((xz.x - b.x) / b.z, (b.y - xz.y) / b.w); }
 void main(){
@@ -141,9 +142,13 @@ void main(){
   // crown sides / forest edges: leafy breakup + under-canopy shade towards the ground
   float side = smoothstep(0.10, 0.50, steep);
   if (tree > 0.01) {
-    float nz = vnoise3(vW * vec3(1.6, 1.1, 1.6)) * 0.55 + vnoise3(vW * 3.9 + 7.1) * 0.45;
+    float c1 = vnoise3(vW * vec3(0.9, 0.7, 0.9));
+    float c2 = vnoise3(vW * vec3(2.6, 2.0, 2.6) + 7.1);
+    float c3 = vnoise3(vW * 6.5 + 3.3);
+    float clump = smoothstep(0.25, 0.75, c1 * 0.5 + c2 * 0.35 + c3 * 0.15);
+    float leaf = mix(0.42, 1.22, clump) * (0.85 + 0.3 * c3);
     float under = mix(0.62, 1.0, smoothstep(1.0, 11.0, hg));
-    alb *= mix(1.0, (0.62 + 0.76 * nz) * under, tree * side);
+    alb *= mix(1.0, leaf * under, tree * side);
   }
   // building walls: plaster, darker plinth (only true building pixels, only up to eave height)
   vec3 plaster = vec3(0.47, 0.44, 0.39) * (0.9 + 0.2 * vnoise3(vW * vec3(0.7, 0.15, 0.7)));
@@ -152,6 +157,15 @@ void main(){
   alb = mix(alb, mix(alb, plaster, 0.85) * plinth, bw);
   // crowns: shade with the displaced facet normal (lumpy crown-scale light/shadow)
   n = normalize(mix(n, gn, 0.55 * vTreeK));
+  if (uHasDet > 0.5 && tree > 0.05) {
+    float e = 0.6 / uBox.z;
+    float dxp = texture(uDet, uv + vec2(e, 0.0)).r - texture(uDet, uv - vec2(e, 0.0)).r;
+    float dzp = texture(uDet, uv + vec2(0.0, e)).r - texture(uDet, uv - vec2(0.0, e)).r;
+    // det encodes +-2 m in [0,1]; v axis points north (= -z)
+    vec3 bn = normalize(vec3(-dxp * 4.0 / 1.2, 1.0, dzp * 4.0 / 1.2));
+    float bshade = (max(dot(bn, uSunDir), 0.0) + 0.5) / (uSunDir.y + 0.5);
+    alb *= mix(1.0, clamp(bshade, 0.6, 1.3), 0.45 * tree * (1.0 - side));
+  }
 #endif
   // relight steep faces with the scene sun (the ortho's baked shading is valid only for top surfaces)
   float ndl = max(dot(n, uSunDir), 0.0);

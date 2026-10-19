@@ -1,0 +1,191 @@
+{
+ "sponsor": "velkaryba",
+ "generated": "2026-10-19",
+ "note": "All products are third-party brands sold by Velka-ryba.cz (retailer, no own lure brand). Never imply Velká ryba makes them. Prices change - not for on-screen use.",
+ "files": [
+  {
+   "file": "velkaryba/ads/H1_shimano_vanquish_fa_ce_c2000s.png",
+   "role": "hero",
+   "product": "Naviják Shimano Vanquish FA Competition Edition C2000S",
+   "type": "reel",
+   "size": [
+    1732,
+    2000
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/privlacove-navijaky/22205-navijak-shimano-vanquish-fa-competition-edition-c2000s-4969363091994.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/6/6/3/3/36633.jpg",
+   "method": "Higgsfield upscale 2k (bytedance) + rotor screws patched from Lanczos original + local ISNet-trimap/unmix cut-out",
+   "shadow": "velkaryba/ads/H1_shimano_vanquish_fa_ce_c2000s_shadow.png",
+   "spec_verified_19_10": {
+    "hmotnost": "145 g",
+    "prevod": "5,1:1",
+    "loziska": "11 + 1",
+    "brzda": "3 kg",
+    "navin": "69 cm"
+   }
+  },
+  {
+   "file": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_front.png",
+   "role": "hero",
+   "product": "Plandavka Shimano Cardiff Roll Swimmer CE 4,5 g Orange Gold (líc)",
+   "type": "spoon",
+   "size": [
+    2000,
+    1006
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/19519-plandavka-shimano-cardiff-roll-swimmer-ce-45g-orange-gold-4969363440464.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/1/3/1/2/31312.jpg",
+   "method": "Higgsfield upscale 2k + local cut-out; BACK/FRONT labels removed; hole slivers cleared",
+   "shadow": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_front_shadow.png",
+   "spec_verified_19_10": {
+    "gramaz": "4,5 g"
+   }
+  },
+  {
+   "file": "velkaryba/ads/H2_shimano_cardiff_roll_swimmer_ce_orange_back.png",
+   "role": "hero-pair",
+   "product": "Plandavka Shimano Cardiff Roll Swimmer CE 4,5 g Orange Gold (rub, zlatá)",
+   "type": "spoon",
+   "size": [
+    1713,
+    852
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/19519-plandavka-shimano-cardiff-roll-swimmer-ce-45g-orange-gold-4969363440464.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/1/3/1/2/31312.jpg",
+   "method": "same source as front; use for spoon flip"
+  },
+  {
+   "file": "velkaryba/ads/H3_illex_native_spoon_pink_yamame.png",
+   "role": "hero",
+   "product": "Plandavka Illex Native Spoon 2,5 g Pink Yamame",
+   "type": "spoon",
+   "size": [
+    1790,
+    2000
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/13870-plandavka-illex-native-spoon-25-g-pink-yamame-3297830614881.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/2/6/0/6/7/26067.jpg",
+   "method": "Higgsfield upscale 2k + local cut-out",
+   "shadow": "velkaryba/ads/H3_illex_native_spoon_pink_yamame_shadow.png",
+   "spec_verified_19_10": {
+    "gramaz": "2,5 g"
+   }
+  },
+  {
+   "file": "velkaryba/ads/S1_illex_native_spoon_copper_trout.png",
+   "role": "secondary",
+   "product": "Plandavka Illex Native Spoon 3,5 g Copper Trout",
+   "type": "spoon",
+   "size": [
+    919,
+    1015
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/12652-plandavka-illex-native-spoon-35-g-copper-trout-3297830618896.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/2/6/0/7/1/26071.jpg",
+   "method": "local cut-out (native res)"
+  },
+  {
+   "file": "velkaryba/ads/S2_daiwa_presso_adm_manhattan_pair.png",
+   "role": "secondary",
+   "product": "Plandavka Daiwa Presso ADM 2,2 g Manhattan (2 pohledy)",
+   "type": "spoon",
+   "size": [
+    940,
+    1009
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/20841-plandavka-daiwa-presso-adm-22-g-manhattan-4066466001926.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/0/7/33507.jpg",
+   "method": "local cut-out"
+  },
+  {
+   "file": "velkaryba/ads/S3_daiwa_presso_adm_flashing_green_pair.png",
+   "role": "secondary",
+   "product": "Plandavka Daiwa Presso ADM 3,8 g Flashing Green (2 pohledy)",
+   "type": "spoon",
+   "size": [
+    977,
+    1011
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/20850-plandavka-daiwa-presso-adm-38-g-flashing-green-4066466002015.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/3/5/1/6/33516.jpg",
+   "method": "local cut-out"
+  },
+  {
+   "file": "velkaryba/ads/S4_shimano_cardiff_roll_swimmer_ce_lime_front.png",
+   "role": "secondary",
+   "product": "Plandavka Shimano Cardiff Roll Swimmer CE 4,5 g Lime Gold (líc)",
+   "type": "spoon",
+   "size": [
+    992,
+    503
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/19518-plandavka-shimano-cardiff-roll-swimmer-ce-45g-lime-gold-4969363440440.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/1/3/1/1/31311.jpg",
+   "method": "local cut-out, front only"
+  },
+  {
+   "file": "velkaryba/ads/S5_shimano_cardiff_roll_swimmer_camo_military_pink_front.png",
+   "role": "secondary",
+   "product": "Plandavka Shimano Cardiff Roll Swimmer Camo Military Pink (líc)",
+   "type": "spoon",
+   "size": [
+    1004,
+    538
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/plandavky/20321-plandavka-shimano-cardiff-roll-swimmer-camo-25g-military-pink-4969363625106.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/2/4/4/1/32441.jpg",
+   "method": "local cut-out; embossed CE 4.5g vs listing 2,5 g -> never caption gramáž"
+  },
+  {
+   "file": "velkaryba/ads/S6_berkley_powerbait_power_flail_trout_pellet.png",
+   "role": "secondary",
+   "product": "Červ Berkley PowerBait Power Flail 5 cm Trout Pellet",
+   "type": "soft",
+   "size": [
+    997,
+    355
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/gumove-nastrahy/21281-cerv-berkley-powerbait-power-flail-5-cm-trout-pellet-12-ks-028632012680.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/4/4/4/4/34444.jpg",
+   "method": "local cut-out"
+  },
+  {
+   "file": "velkaryba/ads/S7_shimano_cardiff_exlead_competition_rod.png",
+   "role": "secondary",
+   "product": "Prut Shimano Cardiff Exlead Competition 60UL 1,83 m 0,4–4,5 g",
+   "type": "rod",
+   "size": [
+    1015,
+    1017
+   ],
+   "product_page": "https://www.velka-ryba.cz/cs/privlacove-pruty/21165-prut-shimano-cardiff-exlead-competition-60ul-183m-04-45g-8717009884792.html",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/4/2/1/0/34210.jpg",
+   "method": "local cut-out; black rod -> needs light/rim light on dark sets",
+   "spec_verified_19_10": {
+    "delka": "1,83 m",
+    "vrhaci_zatez": "0,4–4,5 g",
+    "hmotnost": "60 g",
+    "dily": "2"
+   }
+  }
+ ],
+ "logo_reverse": {
+  "file": "velkaryba/ads/logo_reverse_on_navy.png",
+  "size": [
+   1872,
+   895
+  ],
+  "note": "derived from logo_on_light.png: charcoal fish lines + tagline recoloured to white; for navy/dark sets"
+ },
+ "plates": [
+  {
+   "file": "velkaryba/ads/plate_vanquish_box_water_1.jpg",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/6/7/6/9/36769.jpg"
+  },
+  {
+   "file": "velkaryba/ads/plate_vanquish_box_water_2.jpg",
+   "source_image": "https://www.velka-ryba.cz/img/p/3/6/7/7/0/36770.jpg"
+  }
+ ],
+ "shadow_usage": "shadow PNG width = 1.4 × product width; centre horizontally under the product, vertical centre at the product bottom (scale with the product)."
+}

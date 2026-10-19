@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<title>MČR 2026 · block intro</title>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/CustomEase.min.js"></script>
+<script>gsap.registerPlugin(CustomEase); CustomEase.create("fxRampIn", "M0,0 C0.42,0 0.62,0.06 0.76,0.2 0.88,0.34 0.95,0.62 1,1"); CustomEase.create("fxRampOut", "M0,0 C0.05,0.38 0.12,0.66 0.24,0.8 0.38,0.94 0.58,1 1,1"); CustomEase.create("fxWhip", "M0,0 C0.5,0 0.55,0.05 0.7,0.3 0.82,0.52 0.86,1 1,1");</script>
+<style>
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:block;src:url(assets/fonts/archivo-latin-wdth-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:block;src:url(assets/fonts/archivo-latin-ext-wdth-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:200 800;font-stretch:75% 100%;font-display:block;src:url(assets/fonts/bricolage-grotesque-latin-wdth-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:200 800;font-stretch:75% 100%;font-display:block;src:url(assets/fonts/bricolage-grotesque-latin-ext-wdth-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/inter-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/inter-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/inter-tight-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/inter-tight-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/montserrat-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/montserrat-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:100 900;font-display:block;src:url(assets/fonts/montserrat-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:100 900;font-display:block;src:url(assets/fonts/montserrat-latin-ext-wght-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:200 1000;font-display:block;src:url(assets/fonts/nunito-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:200 1000;font-display:block;src:url(assets/fonts/nunito-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:block;src:url(assets/fonts/unbounded-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:block;src:url(assets/fonts/unbounded-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:200 700;font-display:block;src:url(assets/fonts/oswald-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:200 700;font-display:block;src:url(assets/fonts/oswald-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/outfit-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:block;src:url(assets/fonts/outfit-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:block;src:url(assets/fonts/space-grotesk-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:block;src:url(assets/fonts/space-grotesk-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/anton-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/anton-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/poppins-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/poppins-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/poppins-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/poppins-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/poppins-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/poppins-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/poppins-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/poppins-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/playfair-display-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/playfair-display-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/playfair-display-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/playfair-display-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:block;src:url(assets/fonts/playfair-display-latin-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:block;src:url(assets/fonts/playfair-display-latin-ext-700-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:900;font-display:block;src:url(assets/fonts/playfair-display-latin-900-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:900;font-display:block;src:url(assets/fonts/playfair-display-latin-ext-900-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+* { box-sizing:border-box; }
+html, body { margin:0; background:#000; }
+body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antialiased; }
+#root { position:relative; width:100%; height:100%; overflow:hidden; background:#000; }
+.host { position:absolute; inset:0; }
+.blk { position:absolute; inset:0; }
+
+.fx-img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fx-abs{position:absolute}
+.fx-full,.fx-field{position:absolute;inset:0}
+.fx-mesh{position:absolute;inset:-14%;overflow:hidden}
+.fx-mesh i{position:absolute;border-radius:50%;filter:blur(var(--b,120px))}
+.fx-rays{position:absolute;border-radius:50%;pointer-events:none}
+.fx-glow{position:absolute;border-radius:50%;pointer-events:none}
+.fx-photo{position:absolute;overflow:hidden}
+.fx-photo-in{position:absolute;inset:0}
+.fx-duo .fx-photo-in img{filter:grayscale(1) contrast(1.12) brightness(1.04)}
+.fx-duo::before{content:'';position:absolute;inset:0;background:var(--d2);mix-blend-mode:multiply;z-index:1;pointer-events:none}
+.fx-duo::after{content:'';position:absolute;inset:0;background:var(--d1);mix-blend-mode:lighten;z-index:1;pointer-events:none}
+.fx-mono .fx-photo-in img{filter:grayscale(1) contrast(1.15)}
+.fx-half{background:#fff}
+.fx-half .fx-photo-in{filter:contrast(18) grayscale(1)}
+.fx-half .fx-photo-in img{filter:grayscale(1) blur(1.6px) brightness(1.05)}
+.fx-half .fx-photo-in::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#000 0,#fff 72%) 0 0/var(--hs,12px) var(--hs,12px);mix-blend-mode:screen}
+.fx-half::after{content:'';position:absolute;inset:0;background:var(--d2,#000);mix-blend-mode:lighten;pointer-events:none}
+.fx-half::before{content:'';position:absolute;inset:0;background:var(--d1,#fff);mix-blend-mode:darken;z-index:1;pointer-events:none}
+.fx-t{position:absolute;margin:0}
+.fx-ln{display:block;overflow:hidden;padding:.14em 0 .06em;margin:-.14em 0 -.06em;white-space:nowrap}
+.fx-ln>span{display:inline-block;white-space:nowrap}
+.fx-c{display:inline-block;white-space:pre}
+.fx-var{font-variation-settings:'wght' var(--wght,700),'wdth' var(--wdth,100);letter-spacing:calc(var(--trk,0) * 1em)}
+.fx-of{color:transparent;-webkit-text-stroke:var(--ofw,2px) var(--ofc,#fff);background-image:linear-gradient(90deg,var(--ofc,#fff) 0 50%,transparent 50% 100%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text}
+.fx-big{position:absolute;white-space:nowrap;line-height:.86;pointer-events:none}
+.fx-big.ol{color:transparent;-webkit-text-stroke:var(--ow,3px) var(--oc,#fff)}
+.fx-mq{position:absolute;left:-12%;width:124%;overflow:hidden;display:flex;align-items:center}
+.fx-mq-in{display:flex;white-space:nowrap;will-change:transform}
+.fx-mq-in span{flex-shrink:0;padding-right:.5em}
+.fx-mq.ol .fx-mq-in span{color:transparent;-webkit-text-stroke:var(--ow,2px) var(--oc,#fff)}
+.fx-prod{position:absolute;perspective:1400px}
+.fx-prod-tilt{position:absolute;inset:0;transform-style:preserve-3d}
+.fx-prod-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.fx-prod-sweep{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;background-image:linear-gradient(var(--sa,105deg),transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%);background-size:300% 100%;background-position:110% 0;mix-blend-mode:screen;opacity:var(--so,.75);pointer-events:none}
+.fx-prod-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,var(--sho,.55)),rgba(0,0,0,0));pointer-events:none}
+.fx-prod-refl{position:absolute;left:0;right:0;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,var(--rfo,.32)) 0%,transparent 55%);mask-image:linear-gradient(180deg,rgba(0,0,0,var(--rfo,.32)) 0%,transparent 55%);pointer-events:none}
+.fx-prod-refl i{position:absolute;inset:0;background:center/contain no-repeat;transform:scaleY(-1)}
+.fx-odo{position:absolute;display:flex;align-items:flex-start;white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1}
+.fx-odo-d{display:inline-block;height:1em;overflow:hidden;padding:0 .01em}
+.fx-odo-s{display:block}
+.fx-odo-s i{display:block;height:1em;line-height:1em;font-style:normal;text-align:center}
+.fx-odo-x{display:inline-block;height:1em;line-height:1em}
+.fx-stk{position:absolute}
+.fx-stk svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fx-stk-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:.95}
+.fx-stk-r{position:absolute;left:50%;top:50%;width:0;height:0}
+.fx-stk-r i{position:absolute;left:-3px;top:0;width:6px;border-radius:3px}
+.fx-chip{position:absolute;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:20px 28px;border-radius:26px;box-sizing:border-box}
+.fx-chip.dark{background:rgba(255,255,255,.13);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.32),0 24px 50px rgba(0,0,0,.28);color:#fff}
+.fx-chip.light{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.9),0 24px 50px rgba(0,0,0,.14);color:#111}
+.fx-chip span{font-size:var(--ls,22px);letter-spacing:.14em;text-transform:uppercase;opacity:.78;font-weight:700}
+.fx-chip b{font-size:var(--vs,46px);line-height:1.02;font-weight:800}
+.fx-chip i{position:absolute;left:0;top:22%;bottom:22%;width:6px;border-radius:0 6px 6px 0;background:var(--acc,#fff)}
+.fx-grid{position:absolute}
+.fx-grid>div{position:absolute;overflow:hidden;background-repeat:no-repeat}
+.fx-ov{position:absolute;inset:0;pointer-events:none}
+.fx-ov-sl{position:absolute;left:-40%;top:-40%;width:180%;height:180%;transform:rotate(-24deg);display:flex;flex-direction:column}
+.fx-ov-sl i{flex:1;margin:-1px 0}
+.fx-ov-gr{display:grid}
+.fx-ov-bl i{position:absolute;inset:0}
+.fx-ec{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.fx-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* the ONLY persistent layer: TA CZ plate (top-left, inside the Reels safe zone; never covered — highest z) */
+#ta-plate { position:absolute; left:64px; top:250px; width:300px; height:98px; z-index:1000; transform-origin:0 0; border-radius:12px; overflow:hidden; box-shadow:0 10px 28px rgba(0,0,0,.30), 0 1px 0 rgba(0,0,0,.06); background:#fff; }
+#ta-plate img { display:block; width:100%; height:100%; }
+#badge { position:absolute; left:64px; bottom:28px; z-index:1001; font:600 18px/1 'Inter', sans-serif; letter-spacing:.2em; color:#fff; opacity:.5; text-shadow:0 1px 3px rgba(0,0,0,.8); }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="14.698" data-width="1080" data-height="1920">
+  <div id="el-intro" class="host" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0.000" data-duration="14.698" data-track-index="2" data-width="1080" data-height="1920"></div>
+  <audio id="music" src="assets/audio/block_intro.wav" data-start="0" data-duration="14.698" data-track-index="10" data-volume="1"></audio>
+  <div id="ta-plate"><img src="assets/prep/ta_cz/logo_h_plate.png" alt="Trout Area Czech Republic"></div>
+  <div id="badge">DRAFT · v5 · block intro</div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#ta-plate", {"x":0,"y":0,"scale":1});
+  tl.fromTo("#ta-plate", {"x":0,"y":0,"scale":1}, {"x":116,"y":452.4,"scale":2.4,"duration":0.75,"ease":"expo.inOut","immediateRender":false}, 0.100);
+  tl.fromTo("#ta-plate", {"x":116,"y":452.4,"scale":2.4}, {"x":0,"y":0,"scale":1,"duration":0.75,"ease":"expo.inOut","immediateRender":false}, 1.107);
+  tl.set({}, {}, 14.698);
+  window.__timelines["main"] = tl;
+</script>
+</body></html>

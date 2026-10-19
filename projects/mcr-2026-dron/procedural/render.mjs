@@ -32,7 +32,7 @@ page.setDefaultTimeout(0);
 await page.goto(`http://127.0.0.1:${port}/procedural/src/index.html`);
 await page.waitForFunction(() => window.__ready === true);
 const opts = { outW: Math.round(outW * scale), outH: Math.round(outH * scale), vfov, ss: parseFloat(args.ss || '2'), subframes: parseInt(args.sub || '1'),
-  msaa: parseInt(args.msaa ?? '4'), shadowSize: parseInt(args.shadow || '8192'), reflScale: parseFloat(args.refl || '0.33'), noRefl: !!args.norefl, noTrees: !!args.notrees,
+  msaa: parseInt(args.msaa ?? '4'), shadowSize: parseInt(args.shadow || '8192'), reflScale: parseFloat(args.refl || '0.33'), noRefl: !!args.norefl, noTrees: !!args.notrees, noPrepass: !!args.noprepass, noShell: !!args.noshell, nearDetail: args.near ? parseInt(args.near) : 2, farDetail: args.far ? parseInt(args.far) : 2,
   grain: args.grain !== undefined ? parseFloat(args.grain) : 0.010, sharpen: args.sharpen !== undefined ? parseFloat(args.sharpen) : 0.2,
   params: args.params ? JSON.parse(args.params) : {} };
 const t0 = Date.now();

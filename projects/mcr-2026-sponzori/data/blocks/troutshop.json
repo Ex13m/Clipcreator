@@ -1,0 +1,160 @@
+{
+ "_note": "Data bloku (jen ověřená fakta + assety). Vzhled = scripts/blocks/troutshop.mjs. Zdroje: research/troutshop.md, vo/script_cs.json.",
+ "key": "troutshop",
+ "name": "Troutshop.eu",
+ "url": "troutshop.eu",
+ "brand": {
+  "colors": {
+   "red": "#E3000F",
+   "black": "#000000",
+   "white": "#FFFFFF"
+  },
+  "research": "research/troutshop.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/troutshop/logo_on_dark.png",
+  "on_light": "assets_prep/troutshop/logo_on_light.png",
+  "plate": "assets_prep/troutshop/logo_plate.png"
+ },
+ "products": [
+  {
+   "src": "assets_prep/troutshop/heroes/h01_velvetarts_forte_glow_pink.png",
+   "name": "Velvet Arts Forte 2.1g 32 Glow Fluorescent Pink",
+   "size": [
+    730,
+    1380
+   ],
+   "pad": [
+    0.055,
+    0.029,
+    0.055,
+    0.029
+   ],
+   "aspect": 0.529,
+   "glint": [
+    0.73,
+    0.572
+   ],
+   "dominant": [
+    "#f72c56",
+    "#fc6773",
+    "#322320"
+   ],
+   "cut": "shop_alpha (watermark layer dropped)"
+  },
+  {
+   "src": "assets_prep/troutshop/heroes/h02_velvetarts_forte_yellow_red.png",
+   "name": "Velvet Arts Forte 2.1g 35 Yellow-Red/Brown",
+   "size": [
+    734,
+    1419
+   ],
+   "pad": [
+    0.056,
+    0.029,
+    0.056,
+    0.03
+   ],
+   "aspect": 0.517,
+   "glint": [
+    0.839,
+    0.524
+   ],
+   "dominant": [
+    "#2f2823",
+    "#e4be1c",
+    "#954915"
+   ],
+   "cut": "shop_alpha (watermark layer dropped)"
+  },
+  {
+   "src": "assets_prep/troutshop/heroes/h04_nories_crankin_pupa.png",
+   "name": "Nories Crankin' Pupa 2.6g 109",
+   "size": [
+    1518,
+    832
+   ],
+   "pad": [
+    0.031,
+    0.054,
+    0.032,
+    0.058
+   ],
+   "aspect": 1.825,
+   "glint": [
+    0.392,
+    0.114
+   ],
+   "dominant": [
+    "#e7dfd6",
+    "#b0a080",
+    "#4b3f30"
+   ],
+   "cut": "ml_isnet (logo cropped off)"
+  },
+  {
+   "src": "assets_prep/troutshop/heroes/h05_fishup_baffi_fly_pink.png",
+   "name": "FishUp Baffi Fly 1.5 Hot Pink",
+   "size": [
+    732,
+    575
+   ],
+   "pad": [
+    0.03,
+    0.038,
+    0.031,
+    0.038
+   ],
+   "aspect": 1.273,
+   "glint": [
+    0.653,
+    0.755
+   ],
+   "dominant": [
+    "#ff34c2",
+    "#ff0f9c",
+    "#ffa3e7"
+   ],
+   "cut": "ml_isnet"
+  }
+ ],
+ "copy": {
+  "headline": "Milujeme lov pstruhů",
+  "facts": [
+   "Rodinná firma od 1999",
+   "Generální partner TA Slovakia"
+  ],
+  "url": "troutshop.eu",
+  "extra": [],
+  "lines": [
+   {
+    "t": "Milujeme lov pstruhů",
+    "s": "přívlačový e-shop · specialista na pstruhy",
+    "cta": false,
+    "src": "troutshop.eu/sk/ hero „Milujeme lov pstruhov“ + EN hero „The trout fishing SPECIALIST!“ (CZ na obrazovce, viz script_cs)"
+   },
+   {
+    "t": "Rodinná firma v oboru od roku 1999",
+    "s": "Piešťany · Slovensko",
+    "cta": false,
+    "src": "troutshop.eu/en/about-us/ + patička webu"
+   },
+   {
+    "t": "Generální partner Trout Area Slovakia",
+    "s": "partner několika japonských značek",
+    "cta": false,
+    "src": "troutshop.eu/pc/spoons/velvet-arts-2/ + about-us („some well known Japanese companies“ → Verification #4: „několika“)"
+   },
+   {
+    "t": "troutshop.eu",
+    "s": "do Česka do pár dní",
+    "cta": true,
+    "src": "troutshop.eu/sk/ meta description"
+   }
+  ]
+ },
+ "notes": [
+  "Nepoužívat „vítězové v SK, CZ, PL i UA“. Velvet Arts/Nories nejsou vlastní značky Troutshopu (jen prodává).",
+  "Logo: na černé jen logo_plate nebo on_dark (červená kontura)."
+ ]
+}

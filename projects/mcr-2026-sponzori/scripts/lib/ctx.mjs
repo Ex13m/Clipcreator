@@ -33,7 +33,7 @@ export function plateScaleAt(plate, g) {
   return 1;
 }
 
-export function makeCtx({ key, part = 'main', P, gT0, dur, data, event, C, theme, prev, next, voInfo, mod }) {
+export function makeCtx({ key, part = 'main', P, gT0, dur, data, event, C, theme, prev, next, voInfo, mod, dataOf }) {
   const { TK, G, plate } = OUT;
   const W = TK.canvas.w, H = TK.canvas.h, SF = TK.safe;
   const lg = localGrid(G, gT0, gT0 + dur);
@@ -43,7 +43,7 @@ export function makeCtx({ key, part = 'main', P, gT0, dur, data, event, C, theme
   const cid = part === 'main' ? key : `${key}-${part}`;
   const ctx = {
     key, cid, part, mode: OUT.mode, reel: OUT.mode === 'reel', film: OUT.mode === 'film', module: mod,
-    data, event, C, theme: theme || {}, prev: prev || null, next: next || null,
+    data, event, C, theme: theme || {}, prev: prev || null, next: next || null, dataOf,   // dataOf(key) = another block's data (read-only)
     W, H, safe: SF, tokens: TK,
     // ---- time (block-local seconds; 0 = first downbeat of the block) ----
     t0: 0, dur: r3(dur), gT0: r3(gT0), BEAT, BAR, beats: lg.beats, downs: lg.downs, nBars: Math.round(dur / BAR) || lg.downs.length,

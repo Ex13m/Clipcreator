@@ -1,0 +1,66 @@
+{
+ "_note": "Místo konání (partner). Fakta: research/libechov.md (Verification). „donedávna“ u nejníže položeného pstruhařství nikdy nevynechat; Malý Sporťáček NENÍ „chyť a pusť“; 2,5 ha neuvádět.",
+ "key": "venue",
+ "name": "Líheň Liběchov",
+ "url": "lihenlibechov.cz",
+ "kicker": "Místo konání",
+ "brand": {
+  "colors": {
+   "turquoise": "#17a1c8",
+   "navy": "#1a212e",
+   "aqua": "#9ae7e8",
+   "gold": "#d8af64"
+  },
+  "font": "Montserrat (italic uppercase v hlavičce webu)",
+  "research": "research/libechov.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/libechov/logo.png",
+  "on_light": "assets_prep/libechov/logo.png"
+ },
+ "video": "drone/final/flyover_9x16.mp4",
+ "photos": [
+  "assets_prep/libechov/venue/v01_maly_sportacek.jpg",
+  "assets_prep/libechov/venue/v02_velky_sportak.jpg",
+  "assets_prep/libechov/venue/v03_trout_in_net.jpg",
+  "assets_prep/libechov/venue/v04_mcr_poster_fit.jpg"
+ ],
+ "place": "Rybník Malý Sporťáček · Boží Voda 289, Liběchov",
+ "copy": {
+  "headline": "Pstruží líheň od roku 1934",
+  "facts": [
+   "Malý Sporťáček · 24.–25. 10.",
+   "Pramen Boží Voda"
+  ],
+  "extra": [
+   "164 m n. m. + popisek „donedávna nejníže v Evropě“ (jen spolu, nikdy bez „donedávna“)",
+   "90+ let tradice"
+  ],
+  "url": "lihenlibechov.cz",
+  "lines": [
+   {
+    "t": "Dějiště MČR v Trout Area 2026",
+    "s": "rybník Malý Sporťáček",
+    "src": "lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek"
+   },
+   {
+    "t": "Pstruží líheň s tradicí od roku 1934",
+    "s": "u pramene Boží Voda",
+    "src": "lihenlibechov.cz/cs/historie; opravený one-liner (Verification)"
+   },
+   {
+    "t": "Donedávna nejníže položené pstruhařství v Evropě",
+    "s": "jen 164 m n. m.",
+    "src": "lihenlibechov.cz/cs/o-nas – 'donedávna' musí zůstat"
+   },
+   {
+    "t": "Přijďte se podívat",
+    "s": "24.–25. 10. 2026 · lihenlibechov.cz",
+    "src": "aktualita: 'pokud se budete chtít přijít podívat 24.-25.10. můžete'"
+   }
+  ]
+ },
+ "notes": [
+  "dron chybí (drone/final/flyover_9x16.mp4) → foto v01 Malý Sporťáček; jakmile dorazí, blok ho použije sám (a podrží poslední snímek, když je kratší)."
+ ]
+}

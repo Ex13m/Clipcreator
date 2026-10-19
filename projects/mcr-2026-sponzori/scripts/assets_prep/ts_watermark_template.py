@@ -12,7 +12,8 @@ PNGS = ['assets/troutshop/p01_velvet-arts-forte-2-1g-32-glow-pink.png',
 JPGS = ['assets/troutshop/p07_velvet-arts-daisy-0-4g-34-glow-orange.jpg',
         'assets_prep/troutshop/ads/src/ts_rooney_002_1500.jpg',
         'assets_prep/troutshop/ads/src/ts_rooney_sk20_1500.jpg',
-        'assets_prep/troutshop/ads/src/ts_forest_miu_ts4_1500.jpg']
+        'assets_prep/troutshop/ads/src/ts_forest_miu_ts4_1500.jpg',
+        'assets_prep/troutshop/ads/src/wmref/snap1_1200.jpg']  # 1200 px: same relative geometry (verified, scale 0.80)
 Y0, Y1, X0, X1 = 660, 850, 150, 1350
 obs = []
 for p in PNGS:
@@ -21,7 +22,9 @@ for p in PNGS:
     A = np.where(known, a[..., 3] / 255.0, np.nan)
     obs.append(A)
 for p in JPGS:
-    a = np.array(Image.open(ROOT + p).convert('RGB')).astype(float)[Y0:Y1, X0:X1]
+    im = Image.open(ROOT + p).convert('RGB')
+    if im.size != (1500, 1500): im = im.resize((1500, 1500), Image.LANCZOS)
+    a = np.array(im).astype(float)[Y0:Y1, X0:X1]
     lum = a.mean(2); sat = a.max(2) - a.min(2)
     known = (a.min(2) > 205) & (sat < 14)
     # dilate the product mask a bit (exclude antialiased product edges)
