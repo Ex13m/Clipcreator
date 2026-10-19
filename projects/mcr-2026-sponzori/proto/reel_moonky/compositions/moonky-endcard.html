@@ -1,37 +1,132 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>moonky-endcard · MČR 2026</title></head>
 <body><template>
-<div id="b-moonky-endcard" data-composition-id="moonky-endcard" data-width="1080" data-height="1920" data-duration="3.669">
+<div id="b-moonky-endcard" data-composition-id="moonky-endcard" data-width="1080" data-height="1920" data-duration="3.668">
   <style>
   #bw-moonky-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #moonky-endcard-stage { position:absolute; inset:0; overflow:hidden; }
-  
+  #b-moonky-endcard .mk-vt{position:absolute;margin:0;white-space:nowrap}
+#b-moonky-endcard .mk-vt .fx-ln{padding:.16em .16em .08em 0;margin:-.16em -.16em -.08em 0}
+#b-moonky-endcard .mk-moon{position:absolute;border-radius:50%}
+#b-moonky-endcard .mk-glass{position:absolute;border-radius:26px;background:rgba(255,255,255,.085);-webkit-backdrop-filter:blur(20px) saturate(1.45);backdrop-filter:blur(20px) saturate(1.45);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22),inset 0 1.5px 0 rgba(255,255,255,.28),0 26px 54px rgba(2,4,10,.42)}
+#b-moonky-endcard .mk-cell{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#b-moonky-endcard .mk-cell>div{white-space:nowrap;line-height:1}
+#b-moonky-endcard .mk-sep{position:absolute;top:22%;bottom:22%;width:1.5px;background:rgba(255,255,255,.28)}
+#b-moonky-endcard .mk-lbl{position:absolute;white-space:nowrap;line-height:1;text-transform:uppercase}
+#b-moonky-endcard .mk-pill{position:absolute;display:flex;align-items:center;gap:16px;white-space:nowrap;border-radius:999px;box-sizing:border-box;line-height:1;text-transform:uppercase}
+#b-moonky-endcard .mk-3d{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
+#b-moonky-endcard .mk-pop{position:absolute}
+#b-moonky-endcard .mk-flip{position:absolute;overflow:hidden}
+
+#b-moonky-endcard #moonky-endcard-ec-url{font-style:italic}
   </style>
-  <div id="bw-moonky-endcard" class="blk blk-moonky" style="--bg:#0e1424;--fg:#ffffff;--acc:#b8ff2e;--acc2:#ff4f8b">
-    <div id="moonky-endcard-stage" class="blk-stage"><div class="fx-field" id="moonky-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #1a2442 0%, #0e1424 100%);"></div><div class="fx-mq ol" id="moonky-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#ffffff;--ow:2px;opacity:.18"><div class="fx-mq-in" id="moonky-endcard-emq-in" style="font-family:'Unbounded';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Moonky · </span><span>Moonky · </span><span>Moonky · </span></div></div><div class="fx-ec" id="moonky-endcard-ec" style="top:799.5px">
-    <div id="moonky-endcard-ec-line" style="font-family:'Inter';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
-    <div id="moonky-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#b8ff2e;margin:32.199999999999996px 0"></div>
+  <div id="bw-moonky-endcard" class="blk blk-moonky" style="--bg:#0E1424;--fg:#FFFFFF;--acc:#9CC903;--acc2:#6883BA">
+    <div id="moonky-endcard-stage" class="blk-stage"><div class="fx-field" id="moonky-endcard-bg" style="background:radial-gradient(105% 62% at 50% 47%, #1d2a47 0%, #1a2541 12%, #16203a 24%, #121b31 36%, #0E1424 50%, #0b1020 64%, #080c19 78%, #060912 90%, #04060c 100%);"></div><div class="fx-abs" id="moonky-endcard-st" style="left:0;top:0;width:2px;height:2px;border-radius:50%;box-shadow:55px 683px 0 0.2px rgba(220,230,255,0.27),181px 521px 0 0.2px rgba(220,230,255,0.75),520px 542px 0 0.8px rgba(220,230,255,0.42),218px 949px 0 0.8px rgba(220,230,255,0.45),107px 360px 0 0.2px rgba(220,230,255,0.60),893px 1458px 0 0.2px rgba(220,230,255,0.41),537px 1104px 0 0.2px rgba(220,230,255,0.63),534px 1029px 0 0.2px rgba(220,230,255,0.52),37px 1691px 0 0.2px rgba(220,230,255,0.79),157px 443px 0 0.8px rgba(220,230,255,0.44),497px 615px 0 0.8px rgba(220,230,255,0.56),281px 64px 0 0.2px rgba(220,230,255,0.69),970px 750px 0 0.2px rgba(220,230,255,0.74),49px 1105px 0 0.2px rgba(220,230,255,0.58),699px 360px 0 0.2px rgba(220,230,255,0.47),152px 117px 0 0.2px rgba(220,230,255,0.61),589px 1689px 0 0.8px rgba(220,230,255,0.33),271px 747px 0 0.2px rgba(220,230,255,0.75),976px 178px 0 0.2px rgba(220,230,255,0.50),794px 855px 0 0.2px rgba(220,230,255,0.42),611px 710px 0 0.2px rgba(220,230,255,0.59),631px 479px 0 0.8px rgba(220,230,255,0.27),579px 69px 0 0.8px rgba(220,230,255,0.30),63px 845px 0 1.6px rgba(220,230,255,0.50),733px 1054px 0 0.2px rgba(220,230,255,0.58),466px 1423px 0 0.2px rgba(220,230,255,0.63),642px 171px 0 0.8px rgba(220,230,255,0.36),203px 1246px 0 0.8px rgba(220,230,255,0.35),773px 834px 0 0.8px rgba(220,230,255,0.76),838px 922px 0 0.2px rgba(220,230,255,0.56),616px 1131px 0 1.6px rgba(220,230,255,0.68),390px 734px 0 0.2px rgba(220,230,255,0.46),598px 673px 0 0.2px rgba(220,230,255,0.31),187px 867px 0 0.2px rgba(220,230,255,0.68),680px 1212px 0 1.6px rgba(220,230,255,0.39),122px 1593px 0 0.8px rgba(220,230,255,0.57),1011px 865px 0 0.2px rgba(220,230,255,0.39),902px 1279px 0 0.2px rgba(220,230,255,0.59),68px 413px 0 0.2px rgba(220,230,255,0.54),754px 208px 0 0.2px rgba(220,230,255,0.45),384px 1248px 0 0.2px rgba(220,230,255,0.58),446px 1197px 0 0.8px rgba(220,230,255,0.67),52px 685px 0 0.8px rgba(220,230,255,0.46),662px 541px 0 0.2px rgba(220,230,255,0.56),23px 1030px 0 0.2px rgba(220,230,255,0.61),106px 668px 0 0.2px rgba(220,230,255,0.72),451px 1332px 0 0.8px rgba(220,230,255,0.39),1046px 1331px 0 1.6px rgba(220,230,255,0.56),294px 570px 0 0.2px rgba(220,230,255,0.79),625px 1629px 0 0.8px rgba(220,230,255,0.80),479px 898px 0 0.8px rgba(220,230,255,0.83),825px 156px 0 0.2px rgba(220,230,255,0.27),586px 674px 0 0.8px rgba(220,230,255,0.59),704px 387px 0 0.2px rgba(220,230,255,0.70)"></div><div class="fx-abs" id="moonky-endcard-mn" style="left:0;top:0;width:1080px;height:1920px">
+    <div class="fx-glow" id="moonky-endcard-mn-g" style="left:-10px;top:582px;width:1100px;height:1100px;background:radial-gradient(closest-side,rgba(150,172,222,.55),rgba(104,131,186,.26) 34%,rgba(104,131,186,.08) 62%,rgba(104,131,186,0));opacity:0.7"></div>
+    <div class="mk-moon" id="moonky-endcard-mn-e" style="left:372px;top:964px;width:336px;height:336px;background:radial-gradient(circle at 40% 38%,rgba(150,170,214,.15),rgba(104,131,186,.07));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16)"></div>
+    <div class="mk-moon" id="moonky-endcard-mn-d" style="left:372px;top:964px;width:336px;height:336px;background:radial-gradient(circle at 63% 37%, rgba(104,131,186,.30) 0, rgba(104,131,186,.20) 7%, transparent 12%),radial-gradient(circle at 44% 63%, rgba(104,131,186,.26) 0, rgba(104,131,186,.16) 10%, transparent 17%),radial-gradient(circle at 70% 69%, rgba(104,131,186,.20) 0, transparent 9%),radial-gradient(circle at 30% 34%, rgba(104,131,186,.14) 0, transparent 8%),radial-gradient(circle at 40% 35%, #ffffff 0%, #f1f4fb 26%, #d6def0 56%, #a9badd 84%, #8399c8 100%);box-shadow:0 0 70px rgba(170,190,235,.28);--sx:-218.4px;-webkit-mask-image:radial-gradient(circle 175px at var(--sx) 50%, transparent 161px, #000 175px);mask-image:radial-gradient(circle 175px at var(--sx) 50%, transparent 161px, #000 175px)"></div>
+  </div><div class="mk-3d" id="moonky-endcard-eo" style="left:540px;top:1142px;perspective:1300px"><div class="mk-3d" style="transform:rotateX(72deg)"><div class="mk-3d" id="moonky-endcard-eo-spin"><div class="mk-3d" id="moonky-endcard-eo-i0" style="left:0px;top:262px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p0" style="left:-100.8px;top:-45.6px;width:172.3px;height:113.2px;transform-origin:100.8px 45.6px"><div class="fx-abs" style="inset:0;transform:rotate(-40.7deg);transform-origin:100.8px 45.6px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p0-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png);mask-image:url(assets/prep/moonky/ads/S7_coccon_dc04_yellow_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i1" style="left:-154px;top:212px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p1" style="left:-101.2px;top:-29.4px;width:189.1px;height:55.3px;transform-origin:101.2px 29.4px"><div class="fx-abs" style="inset:0;transform:rotate(1.1deg);transform-origin:101.2px 29.4px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H2_savory_c06_green.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p1-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);mask-image:url(assets/prep/moonky/ads/H2_savory_c06_green.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i2" style="left:-249.2px;top:81px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p2" style="left:-100.6px;top:-34.5px;width:188.1px;height:70.2px;transform-origin:100.6px 34.5px"><div class="fx-abs" style="inset:0;transform:rotate(3.9deg);transform-origin:100.6px 34.5px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p2-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S11_gamer_big_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i3" style="left:-249.2px;top:-81px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p3" style="left:-106.4px;top:-40.7px;width:178px;height:84.2px;transform-origin:106.4px 40.7px"><div class="fx-abs" style="inset:0;transform:rotate(-33.4deg);transform-origin:106.4px 40.7px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p3-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png);mask-image:url(assets/prep/moonky/ads/S8_scelet_jr_c08_coffee_milk.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i4" style="left:-154px;top:-212px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p4" style="left:-100.3px;top:-35.6px;width:188.2px;height:74.4px;transform-origin:100.3px 35.6px"><div class="fx-abs" style="inset:0;transform:rotate(-0.1deg);transform-origin:100.3px 35.6px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p4-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/H1_gamer_big_dc03_brown_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i5" style="left:0px;top:-262px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p5" style="left:-110.3px;top:-32.3px;width:189.2px;height:69.6px;transform-origin:110.3px 32.3px"><div class="fx-abs" style="inset:0;transform:rotate(-15.7deg);transform-origin:110.3px 32.3px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p5-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S6_scelet_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i6" style="left:154px;top:-212px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p6" style="left:-101.5px;top:-43.9px;width:177.5px;height:108.4px;transform-origin:101.5px 43.9px"><div class="fx-abs" style="inset:0;transform:rotate(-15.0deg);transform-origin:101.5px 43.9px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p6-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png);mask-image:url(assets/prep/moonky/ads/S9_coccon_c02_orange_fluo.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i7" style="left:249.2px;top:-81px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p7" style="left:-100.2px;top:-46.9px;width:188px;height:79.6px;transform-origin:100.2px 46.9px"><div class="fx-abs" style="inset:0;transform:rotate(-10.1deg);transform-origin:100.2px 46.9px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p7-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);mask-image:url(assets/prep/moonky/ads/S1_savory_c01_pink_bubblegum.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i8" style="left:249.2px;top:81px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p8" style="left:-102.8px;top:-43.2px;width:179.7px;height:105.4px;transform-origin:102.8px 43.2px"><div class="fx-abs" style="inset:0;transform:rotate(-29.4deg);transform-origin:102.8px 43.2px"><img class="fx-prod-img" src="assets/prep/moonky/ads/H3_coccon_jr_c04_black.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p8-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/H3_coccon_jr_c04_black.png);mask-image:url(assets/prep/moonky/ads/H3_coccon_jr_c04_black.png);--sa:105deg;--so:0.6"></i></div></div></div></div><div class="mk-3d" id="moonky-endcard-eo-i9" style="left:154px;top:212px"><div class="mk-3d" style="transform:rotateX(-72deg)"><div class="mk-pop" id="moonky-endcard-eo-p9" style="left:-91.7px;top:-52.7px;width:154.3px;height:125.2px;transform-origin:91.7px 52.7px"><div class="fx-abs" style="inset:0;transform:rotate(-44.0deg);transform-origin:91.7px 52.7px"><img class="fx-prod-img" src="assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png" alt=""><i class="fx-prod-sweep" id="moonky-endcard-eo-p9-sw" style="-webkit-mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);mask-image:url(assets/prep/moonky/ads/S5_savory_dc03_brown_orange.png);--sa:105deg;--so:0.6"></i></div></div></div></div></div></div></div><div class="fx-ec" id="moonky-endcard-ec" style="top:549.5px">
+    <div id="moonky-endcard-ec-line" style="font-family:'Source Sans 3';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#fff;opacity:.85">Partner MČR v Trout Area 2026</div>
+    <div id="moonky-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#9CC903;margin:32.199999999999996px 0"></div>
     <div id="moonky-endcard-ec-lw"><img id="moonky-endcard-ec-logo" class="fx-logo " src="assets/prep/moonky/logo_on_dark.png" alt="Moonky" style="width:423px; height:107px;"></div>
-    <div id="moonky-endcard-ec-url" style="margin-top:46px;font-family:'Unbounded';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">moonky.cz</div>
-  </div>
+    <div id="moonky-endcard-ec-url" style="margin-top:46px;font-family:'Exo 2';font-weight:800;font-size:96px;color:#fff;letter-spacing:-.01em">moonky.cz</div>
+  </div><div class="mk-pill" id="moonky-endcard-pz" style="left:268px;top:1372px;width:543.9px;height:72px;padding:0 34px;border:2.5px solid #9CC903;background:rgba(14,20,36,.55);font-family:'Source Sans 3';font-weight:700;font-size:32px;letter-spacing:.14em;color:#fff"><i style="display:block;width:12px;height:12px;border-radius:50%;background:#9CC903;flex-shrink:0"></i><span>Věnuje ceny · MČR 2026</span></div>
     </div>
-    <div class="fx-ov" id="moonky-endcard-tin" style="background:#0e1424"></div>
+    <div class="fx-ov" id="moonky-endcard-tin" style="background:#0E1424"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#moonky-endcard-emq-in", {"x":0});
+  gsap.set("#moonky-endcard-st", {"y":0});
+  gsap.set("#moonky-endcard-mn", {"scale":1.25});
   gsap.set("#moonky-endcard-tin", {"opacity":1});
+  gsap.set("#moonky-endcard-eo-p0", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p1", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p2", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p3", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p4", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p5", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p6", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p7", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p8", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-p9", {"scale":0.2,"opacity":0});
+  gsap.set("#moonky-endcard-eo-spin", {"rotation":-90});
+  gsap.set("#moonky-endcard-eo-i0", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i1", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i2", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i3", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i4", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i5", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i6", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i7", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i8", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-i9", {"rotation":90});
+  gsap.set("#moonky-endcard-eo-p0-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p1-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p2-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p3-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p4-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p5-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p6-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p7-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p8-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#moonky-endcard-eo-p9-sw", {"backgroundPosition":"110% 0%"});
   gsap.set("#moonky-endcard-ec-line", {"opacity":0,"y":20});
   gsap.set("#moonky-endcard-ec-bar", {"scaleX":0});
   gsap.set("#moonky-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
   gsap.set("#moonky-endcard-ec-url", {"opacity":0,"y":30});
-  tl.fromTo("#moonky-endcard-emq-in", {"x":0}, {"x":-330.21,"duration":3.669,"ease":"none","immediateRender":false}, 0.000);
-  tl.fromTo("#moonky-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
+  gsap.set("#moonky-endcard-pz", {"opacity":0,"scale":0.86});
+  gsap.set("#moonky-endcard-mn", {"transformOrigin":"540px 1132px"});
+  tl.fromTo("#moonky-endcard-st", {"y":0}, {"y":-46,"duration":3.668,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-mn", {"scale":1.25}, {"scale":1,"duration":0.8,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.16,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-p0", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.020);
+  tl.fromTo("#moonky-endcard-eo-p1", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.040);
+  tl.fromTo("#moonky-endcard-eo-p2", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.060);
+  tl.fromTo("#moonky-endcard-eo-p3", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.080);
+  tl.fromTo("#moonky-endcard-eo-p4", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.100);
+  tl.fromTo("#moonky-endcard-eo-p5", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.120);
+  tl.fromTo("#moonky-endcard-eo-p6", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.140);
+  tl.fromTo("#moonky-endcard-eo-p7", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.160);
+  tl.fromTo("#moonky-endcard-eo-p8", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.180);
+  tl.fromTo("#moonky-endcard-eo-p9", {"scale":0.2,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.200);
+  tl.fromTo("#moonky-endcard-eo-spin", {"rotation":-90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i0", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i1", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i2", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i3", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i4", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i5", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i6", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i7", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i8", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-i9", {"rotation":90}, {"rotation":0,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#moonky-endcard-eo-spin", {"rotation":0}, {"rotation":26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i0", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i1", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i2", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i3", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i4", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i5", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i6", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i7", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i8", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-i9", {"rotation":0}, {"rotation":-26,"duration":2.458,"ease":"none","immediateRender":false}, 1.210);
+  tl.fromTo("#moonky-endcard-eo-p0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.500);
+  tl.fromTo("#moonky-endcard-eo-p1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.580);
+  tl.fromTo("#moonky-endcard-eo-p2-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.660);
+  tl.fromTo("#moonky-endcard-eo-p3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.740);
+  tl.fromTo("#moonky-endcard-eo-p4-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.820);
+  tl.fromTo("#moonky-endcard-eo-p5-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.900);
+  tl.fromTo("#moonky-endcard-eo-p6-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 1.980);
+  tl.fromTo("#moonky-endcard-eo-p7-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 2.060);
+  tl.fromTo("#moonky-endcard-eo-p8-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 2.140);
+  tl.fromTo("#moonky-endcard-eo-p9-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 2.220);
   tl.fromTo("#moonky-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
   tl.fromTo("#moonky-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
   tl.fromTo("#moonky-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
   tl.fromTo("#moonky-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
-  tl.set({}, {}, 3.669);
+  tl.fromTo("#moonky-endcard-pz", {"opacity":0,"scale":0.86}, {"opacity":1,"scale":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 0.950);
+  tl.set({}, {}, 3.668);
   window.__timelines["moonky-endcard"] = tl;
   </script>
 </div>

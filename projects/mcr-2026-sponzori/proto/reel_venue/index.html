@@ -130,20 +130,20 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
 #badge { position:absolute; left:64px; bottom:28px; z-index:1001; font:600 18px/1 'Inter', sans-serif; letter-spacing:.2em; color:#fff; opacity:.5; text-shadow:0 1px 3px rgba(0,0,0,.8); }
 </style></head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="14.675" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="16.509" data-width="1080" data-height="1920">
   <div id="el-venue-hook" class="host" data-composition-id="venue-hook" data-composition-src="compositions/venue-hook.html" data-start="0.000" data-duration="1.834" data-track-index="2" data-width="1080" data-height="1920"></div>
-  <div id="el-venue" class="host" data-composition-id="venue" data-composition-src="compositions/venue.html" data-start="1.834" data-duration="9.172" data-track-index="3" data-width="1080" data-height="1920"></div>
-  <div id="el-venue-endcard" class="host" data-composition-id="venue-endcard" data-composition-src="compositions/venue-endcard.html" data-start="11.006" data-duration="3.669" data-track-index="2" data-width="1080" data-height="1920"></div>
-  <audio id="music" src="assets/audio/reel_venue.wav" data-start="0" data-duration="14.675" data-track-index="10" data-volume="1"></audio>
-  <audio id="vo-venue" src="assets/vo/venue.wav" data-start="2.084" data-duration="8.060" data-track-index="12" data-volume="1"></audio>
+  <div id="el-venue" class="host" data-composition-id="venue" data-composition-src="compositions/venue.html" data-start="1.834" data-duration="11.006" data-track-index="3" data-width="1080" data-height="1920"></div>
+  <div id="el-venue-endcard" class="host" data-composition-id="venue-endcard" data-composition-src="compositions/venue-endcard.html" data-start="12.840" data-duration="3.669" data-track-index="2" data-width="1080" data-height="1920"></div>
+  <audio id="music" src="assets/audio/reel_venue.wav" data-start="0" data-duration="16.509" data-track-index="10" data-volume="1"></audio>
+  <audio id="vo-venue" src="assets/vo/venue.wav" data-start="2.084" data-duration="8.981" data-track-index="12" data-volume="1"></audio>
   <div id="ta-plate"><img src="assets/prep/ta_cz/logo_h_plate.png" alt="Trout Area Czech Republic"></div>
   <div id="badge">DRAFT · v5 · reel venue</div>
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
   gsap.set("#ta-plate", {"x":0,"y":0,"scale":1});
-  tl.fromTo("#ta-plate", {"x":0,"y":0,"scale":1}, {"x":251,"y":356.5,"scale":1.5,"duration":0.6,"ease":"expo.inOut","immediateRender":false}, 11.056);
-  tl.set({}, {}, 14.675);
+  tl.fromTo("#ta-plate", {"x":0,"y":0,"scale":1}, {"x":251,"y":356.5,"scale":1.5,"duration":0.6,"ease":"expo.inOut","immediateRender":false}, 12.890);
+  tl.set({}, {}, 16.509);
   window.__timelines["main"] = tl;
 </script>
 </body></html>

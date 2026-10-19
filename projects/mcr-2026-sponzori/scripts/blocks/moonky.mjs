@@ -1,48 +1,279 @@
-// MOONKY · bars 21–24 · PLACEHOLDER (minimal, modern) — the Moonky agent replaces this file.
-// Brand world (research/moonky.md, moonky_user.md): handmade soft lures; dark navy #0E1424/#141C24 + white logo,
-// the colour comes from the lures themselves (fluo lime, bubblegum pink, orange, blue→pink). Display: Unbounded (wide, soft).
+// MOONKY · plan A bars 24–28 (5 bars ≈ 9.17 s) · concept A „MOONLIGHT MACRO" (research/moonky_ad.md §5, recommended)
+// Brand world: Moonky night navy #0E1424 + white logo, moonky.cz web blue #6883BA as cold moonlight, lime #9CC903 (Savory C06) as the accent,
+// Exo 2 900 italic caps (moonky.cz headings) + Source Sans 3 (moonky.cz body). The only light is the moon; it waxes one phase per bar.
+// Products: own-brand handmade soft lures, clean cut-outs assets_prep/moonky/ads/ (H1 = 4k Gamer Big).
+//
+//   bar 0  MACRO      Gamer Big DC03 at ~1:1 (segments + the three „legs"), slam on the downbeat, moonlight sweep · „RUČNĚ DĚLANÉ" (VO)
+//   bar 1  PULL-BACK  the same native image pulls back to the whole lure, 3D tilt, lime Savory soft in depth · glass spec row
+//                     GAMER BIG 46 mm | 2,12 g | EXTRA MĚKKÁ · „GUMOVÉ NÁSTRAHY" → „PRO TROUT AREA" (VO)
+//   bar 2  COLOURWAY  rack focus to Savory C06, then beat/half-beat cuts C01 → C02 → C03 → C04 → DC03, scene tinted by each colour,
+//                     colour code flips · „VYVÍJENÉ A TESTOVANÉ" (VO)
+//   bar 3  ORBIT      assortment: 12 lures (8 models) bloom out of the moon into a tilted 3D carousel ring that orbits it, moonlight
+//                     chases round the ring · „S ČESKOU REPREZENTACÍ" (VO) · glass row FORMY Vlastní CNC | VÝROBA Ručně v ČR
+//   bar 4  LOCKUP     full moon, Gamer Big hero, logo (≤ TA logo) travels from its corner into the lockup + HANDMADE LURES,
+//                     moonky.cz, „Věnuje ceny · MČR 2026"; exit = moon iris in the next block's colour
+//
+// Facts (research/moonky.md › Verification, research/moonky_ad.md §4): ručně dělané gumové nástrahy pro Trout Area, vyvíjené a testované
+// s českou reprezentací, vlastní CNC formy, ruční výroba · ČR, Gamer Big 46 mm · 2,12 g · extra měkká, Savory 43 mm · 1,05 g.
+// Not used: „nejlepší", „8 let", counts of colours / items, Jigovky.cz jig heads (resold, other partner), a name for S12.
 import * as fx from '../lib/fx.mjs';
+import * as M from '../lib/fx_moonky.mjs';
 
-export const theme = { bg: '#0e1424', bg2: '#1a2442', fg: '#ffffff', accent: '#b8ff2e', accent2: '#ff4f8b', font: { display: 'Unbounded', text: 'Inter' }, wght: 800, upper: true };
-export const meta = { reel: true, hook: { product: 2, headline: 'Ručně dělané gumové nástrahy', sub: 'moonky.cz' }, endCard: { logo: 'on_dark' } };
+const { C } = M;
+export const fonts = {
+  'Exo 2': { v: 'exo-2-{r}-wght-normal', vi: 'exo-2-{r}-wght-italic', weight: '100 900', axes: ['wght'], use: 'Moonky display (moonky.cz headings) — @fontsource-variable/exo-2 5.3.0, OFL' },
+  'Source Sans 3': { v: 'source-sans-3-{r}-wght-normal', vi: 'source-sans-3-{r}-wght-italic', weight: '200 900', axes: ['wght'], use: 'Moonky text (moonky.cz body) — @fontsource-variable/source-sans-3 5.3.1, OFL' },
+};
+export const theme = { bg: C.night, bg2: '#1B2742', fg: '#FFFFFF', accent: C.lime, accent2: C.moonlight, font: { display: 'Exo 2', text: 'Source Sans 3' }, wght: 900, upper: true, light: false };
+export const meta = {
+  reel: true,
+  hook: { product: M.src('h1'), headline: 'Ručně dělané. Pro Trout Area.', sub: 'moonky.cz' },   // custom hook() below
+  endCard: { logo: 'on_dark', line: 'Partner MČR v Trout Area 2026' },                            // custom endCard() below
+};
+
+const MO = { cx: 540, cy: 930, r: 240 };                 // the moon (light source, orbit centre, lockup centre)
+const PHASE = [0.42, 0.82, 1.18, 1.58, 2.3];             // waxing per bar (0 new … 2.3 full)
+const SAV = ['h2', 's1', 's2', 's3', 's4', 's5'];        // Savory colourway run (bar 2)
+const RING = ['h1', 's6', 'h2', 's10', 'h3', 's11', 's7', 's12', 's1', 's8', 's9', 's5'];   // orbit (bar 3): Gamer Big ×2, Savory ×3, Scelet, Scelet Jr., Coccon ×2, Coccon Jr., Master, (category lure)
+const ECRING = ['s7', 'h2', 's11', 's8', 'h1', 's6', 's9', 's1', 'h3', 's5'];
+
+// H1 is staged at its native 2544 px (macro ≈ 1:1); must run before any ctx.dims() of it in this process
+function stage(ctx) { ctx.asset(M.src('h1'), { maxSide: 2560 }); }
+const px = (n) => `${Math.round(n * 10) / 10}px`;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 export default function moonky(ctx) {
-  const T = theme, D = ctx.data, { bar } = ctx, P = D.products;
-  const L = ctx.safe.left, CW = ctx.W - L - ctx.safe.right;
-  const at = (q, d) => ctx.snap(ctx.vo.at(q) ?? d, 'beat');
-  let html = fx.field(ctx, { kind: 'radial', c1: T.bg2, c2: T.bg, at: '50% 50%' });
-  html += fx.mesh(ctx, { id: 'mesh', colors: ['#8acc01', '#f34769', '#0c78bd', '#f7ab41', '#c138a1'], size: 760, blur: 170, opacity: 0.42, drift: 220, seed: 4 });
-  html += fx.marquee(ctx, { id: 'mq1', text: 'Ručně dělané · Handmade lures', y: 1520, size: 120, font: 'Unbounded', wght: 800, color: '#ffffff', outline: true, ow: 2, speed: 140, rot: -6, style: 'opacity:.22' });
-  // depth stack of lures (parallax): far (small, blurred) → near (big)
-  const lay = [
-    { p: P[4], id: 'l0', w: 520, cx: 300, cy: 760, rot: -18, depth: 0.35, blur: 3, t: 0.2 },
-    { p: P[3], id: 'l1', w: 640, cx: 720, cy: 900, rot: 14, depth: 0.6, blur: 0, t: 0.35 },
-    { p: P[2], id: 'l2', w: 840, cx: 520, cy: 1090, rot: -8, depth: 1.0, blur: 0, t: 0.5 },
-  ];
-  for (const l of lay) {
-    const pr = fx.product(ctx, { id: l.id, src: l.p.src, w: l.w, cx: l.cx, cy: l.cy, ground: 'float', pad: l.p.pad, rot: l.rot, maxUp: 1.0, style: l.blur ? `filter:blur(${l.blur}px)` : '' });
-    html += pr.html; l.cam = pr.cam;
-    fx.productIn(ctx, l.id, l.t, { from: 'scale', d: 0.8, ease: 'back.out(1.6)' });
-    fx.float(ctx, pr.cam, 1.2, bar(2), { y: -14 * l.depth, period: ctx.BAR / 2 });
+  stage(ctx);
+  const { bar, W } = ctx, L = ctx.safe.left, R = W - ctx.safe.right, UIR = W - ctx.safe.uiRight;
+  const B1 = bar(1), B2 = bar(2), B3 = bar(3), B4 = bar(4), END = ctx.dur, BT = ctx.BEAT;
+  const beatAfter = (t) => ctx.beats.find((b) => b > t + 1e-3) ?? t + BT;
+  // VO word times (block-local; fallbacks = take 3) — type lands ~0.06 s before the word, clamped into its bar
+  const vw = (re, d) => { const w = ctx.vo.words.find((x) => re.test(x.w)); return w ? w.t0 : d; };
+  const E = 0.06;
+  const tName = vw(/^moonky/i, 0.25), tRuc = vw(/^ručně/i, 1.09), tDel = vw(/^dělané/i, 1.49), tGum = vw(/^gumové/i, 1.9), tNas = vw(/^nástrahy/i, 2.4);
+  const tPro = vw(/^pro$/i, 3.08), tTrout = vw(/^trout/i, 3.26), tArea = vw(/^area/i, 3.68), tVyv = vw(/^vyvíjené/i, 4.61), tA = vw(/^a$/i, 5.24);
+  const tS = vw(/^s$/i, 5.96), tRep = vw(/^reprezentac/i, 6.53);
+  let html = '';
+
+  // ===================================================================================================
+  // WORLD: night sky, stars, the moon (waxes one phase per downbeat, glow breathes on the hits)
+  // ===================================================================================================
+  html += fx.field(ctx, { id: 'bg', bg: M.WORLD });
+  html += M.stars(ctx, { id: 'st' });
+  html += M.moon(ctx, { id: 'mn', ...MO, ph: PHASE[0], glow: 0.5 });
+  [B1, B2, B3, B4].forEach((t, i) => M.phase(ctx, 'mn', t - 0.04, PHASE[i], PHASE[i + 1], { r: MO.r, d: 0.6 }));
+  ctx.tl.fromTo(ctx.sel('mn-g'), { opacity: 0.5 }, { opacity: 0.66, duration: 0.8, ease: 'power2.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('mn-g'), { opacity: 0.66 }, { opacity: 0.85, duration: 0.7, ease: 'power2.out' }, B4 - 0.04);
+  [B2, B3, B4].forEach((t) => ctx.tl.hit(ctx.sel('mn-d'), { scale: 1.035 }, { scale: 1, duration: 0.45, ease: 'power2.out' }, t));
+  // colour tint of the scene (bar 2: each Savory colour washes the night ~20 %)
+  html += `<div class="fx-glow" id="${ctx.id('tint')}" style="left:${px(MO.cx - 620)};top:${px(MO.cy - 620)};width:1240px;height:1240px;background:radial-gradient(closest-side,currentColor,transparent);color:${C.lime};opacity:0"></div>`;
+
+  // ===================================================================================================
+  // BAR 1 depth layer: lime Savory, soft, behind the hero (it becomes the bar-2 rack focus)
+  // ===================================================================================================
+  const D2 = M.lure(ctx, { id: 'd2', k: 'h2', len: 430, cx: 830, cy: 736, angle: -13, sweep: false });
+  html += `<div class="fx-abs" id="${ctx.id('d2w')}" style="inset:0;filter:blur(10px) brightness(.7)">${D2.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('d2w'), { opacity: 0 }, { opacity: 0.5, duration: 0.6, ease: 'power1.out' }, B1 + 0.25);
+  ctx.tl.fromTo(D2.cam, { x: 40, y: 0, scale: 1 }, { x: -50, y: 10, scale: 1, duration: B2 - 0.4 - (B1 + 0.25), ease: 'sine.inOut' }, B1 + 0.25);
+  // rack focus: the soft lure flies to the centre and dissolves while the sharp one lands (bar 2)
+  ctx.tl.fromTo(D2.cam, { x: -50, y: 10, scale: 1 }, { x: 540 - 830 - 50, y: 960 - 736, scale: 1.9, duration: 0.4, ease: 'power2.in' }, B2 - 0.4);
+  ctx.tl.fromTo(ctx.sel('d2w'), { opacity: 0.5 }, { opacity: 0, duration: 0.1, ease: 'none' }, B2 - 0.1);
+
+  // ===================================================================================================
+  // BAR 0–1 · MACRO → PULL-BACK (one native 2544 px image; the camera only scales down — no soft upscale)
+  // ===================================================================================================
+  const A = { u: 1700 / 2544, v: 420 / 1006 };            // macro point: back segments + the three „legs" (native px)
+  const HX = 540, HY = 1010, sM = 0.95;
+  const P1 = M.lure(ctx, { id: 'h1', k: 'h1', len: 2406 * sM, anchor: { ...A, x: HX, y: HY }, angle: null, ground: 'float', shadow: 0.6, sweepOpacity: 0.82, maxUp: 1.02 });
+  html += P1.html;
+  const sF = 880 / 2406, kF = sF / sM;                     // full shot: visible lure 880 px
+  const cen = M.LURES.h1.cen, wF = 2544 * sF, hF = 1006 * sF;
+  const Hf = [540 + (A.u - cen[0]) * wF, 958 + (A.v - cen[1]) * hF];
+  ctx.tl.set(P1.cam, { transformOrigin: `${px(A.u * P1.w)} ${px(A.v * P1.h)}` }, 0);
+  ctx.tl.fromTo(P1.cam, { scale: 1.13, x: 0, y: 0 }, { scale: 1, x: 0, y: 0, duration: 0.55, ease: 'expo.out' }, 0);            // slam on the downbeat
+  ctx.tl.fromTo(P1.cam, { scale: 1, x: 0, y: 0 }, { scale: 1.05, x: -20, y: 0, duration: B1 - 0.6, ease: 'sine.inOut' }, 0.55);  // slow macro push
+  ctx.tl.fromTo(P1.cam, { scale: 1.05, x: -20, y: 0 }, { scale: kF, x: Hf[0] - HX, y: Hf[1] - HY, duration: 0.88, ease: 'expo.inOut' }, B1 - 0.05);
+  ctx.tl.fromTo(ctx.sel('h1-sh'), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power1.out' }, B1 + 0.6);
+  ctx.tl.fromTo(ctx.sel('h1-tl'), { rotationY: 0, rotationX: 0 }, { rotationY: 11, rotationX: -3, duration: B2 - 0.4 - (B1 + 0.8), ease: 'sine.inOut' }, B1 + 0.8);
+  fx.sweep(ctx, 'h1', 0.3, { d: 0.95 });
+  fx.sweep(ctx, 'h1', B1 + 0.9, { d: 0.75 });
+  // thrown out of frame to the left into the bar-2 downbeat
+  ctx.tl.fromTo(P1.sel, { x: 0, opacity: 1 }, { x: -1250, opacity: 0.2, duration: 0.34, ease: 'power3.in' }, B2 - 0.36);
+  ctx.tl.set(P1.sel, { opacity: 0 }, B2 - 0.01);
+
+  // ===================================================================================================
+  // BAR 2 · SAVORY COLOURWAY (same place, same light, cut on the beat / half-beat)
+  // ===================================================================================================
+  const half = (a, b) => a + (b - a) / 2;
+  const bb = [B2, beatAfter(B2), beatAfter(beatAfter(B2)), beatAfter(beatAfter(beatAfter(B2)))];   // 3.669 · 4.133 · 4.574 · 5.039
+  const cuts = [B2, bb[1], half(bb[1], bb[2]), bb[2], half(bb[2], bb[3]), bb[3]];
+  const SC = { cx: 540, cy: 958, len: 860 };
+  html += `<i class="fx-prod-shadow" id="${ctx.id('svsh')}" style="left:${px(SC.cx - 330)};top:${px(SC.cy + 150)};width:660px;height:44px;--sho:.6;filter:blur(14px);opacity:0"></i>`;
+  ctx.tl.fromTo(ctx.sel('svsh'), { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power1.out' }, B2 - 0.05);
+  ctx.tl.fromTo(ctx.sel('svsh'), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, B3 - 0.24);
+  SAV.forEach((k, i) => {
+    const P = M.lure(ctx, { id: `sv${i}`, k, len: SC.len, cx: SC.cx, cy: SC.cy, angle: -5, ground: 'none', sweepOpacity: k === 's4' ? 0.85 : 0.6 });
+    html += P.html;
+    const t = cuts[i];
+    if (i === 0) ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.24, ease: 'power2.out' }, t - 0.12);
+    else { ctx.tl.set(P.sel, { opacity: 0 }, 0); ctx.tl.set(P.sel, { opacity: 1 }, t); }
+    if (i < SAV.length - 1) ctx.tl.set(P.sel, { opacity: 0 }, cuts[i + 1]);
+    if (i) ctx.tl.hit(P.cam, { scale: 1.08, x: i % 2 ? 46 : -46 }, { scale: 1, x: 0, duration: 0.3, ease: 'expo.out' }, t);
+    fx.sweep(ctx, `sv${i}`, t + 0.02, { d: i ? 0.3 : 0.6 });
+    ctx.tl.set(ctx.sel('tint'), { color: M.LURES[k].dom[0] || C.lime }, i ? t : 0);
+    if (i === SAV.length - 1) {                                    // the last colour shrinks into the moon as the orbit blooms
+      ctx.tl.fromTo(P.sel, { scale: 1, opacity: 1 }, { scale: 0.3, opacity: 0, duration: 0.24, ease: 'power2.in' }, B3 - 0.22);
+    }
+  });
+  ctx.tl.fromTo(ctx.sel('tint'), { opacity: 0 }, { opacity: 0.3, duration: 0.3, ease: 'power1.out' }, B2 - 0.06);
+  ctx.tl.fromTo(ctx.sel('tint'), { opacity: 0.3 }, { opacity: 0, duration: 0.3, ease: 'power1.in' }, B3 - 0.2);
+  // colour code flip (lower lane) + model line
+  {
+    const y0 = 1236, LH = 74;
+    const names = SAV.map((k) => `${M.LURES[k].code} · ${M.LURES[k].col}`);
+    const col = names.map((n, i) => `<div style="height:${LH}px;display:flex;align-items:center;gap:22px"><i style="display:block;width:30px;height:30px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),${M.LURES[SAV[i]].dom[0]};box-shadow:0 0 0 2px rgba(255,255,255,.35)"></i><span style="${M.FD};font-weight:800;font-style:italic;font-size:54px;letter-spacing:-.005em;color:#fff;text-transform:uppercase;white-space:nowrap">${ctx.esc(ctx.nb(n))}</span></div>`).join('');
+    html += `<div class="mk-lbl" id="${ctx.id('svk')}" style="left:${L + 4}px;top:${y0}px;${M.FT};font-weight:700;font-size:30px;letter-spacing:.2em;text-transform:none;color:${C.lime}">${ctx.esc(ctx.nb('SAVORY · 43 mm · 1,05 g'))}</div>`;
+    html += `<div class="mk-flip" id="${ctx.id('svf')}" style="left:${L}px;top:${y0 + 44}px;width:${UIR - L}px;height:${LH}px"><div class="fx-abs" id="${ctx.id('svfc')}" style="left:0;top:0;width:100%">${col}</div></div>`;
+    ctx.tl.fromTo(ctx.sel('svk'), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, B2 + 0.02);
+    ctx.tl.fromTo(ctx.sel('svf'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, B2 + 0.06);
+    cuts.slice(1).forEach((t, i) => ctx.tl.fromTo(ctx.sel('svfc'), { y: -i * LH }, { y: -(i + 1) * LH, duration: 0.2, ease: 'expo.out' }, t - 0.02));
+    for (const s of ['svk', 'svf']) ctx.tl.fromTo(ctx.sel(s), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, B3 - 0.24);
   }
-  fx.sweep(ctx, 'l2', bar(1), { d: 0.9 });
-  // headline with outline → fill
-  const H = fx.headline(ctx, { id: 'h', text: 'Ručně dělané', x: L, y: 400, w: CW, maxLines: 1, font: 'Unbounded', wght: 900, upper: true, sizes: [116, 104, 96, 88, 80], t: 0.05, reveal: 'lines', cls: 'fx-of', style: `--ofc:${T.accent};--ofw:3px` });
+
+  // ===================================================================================================
+  // BAR 3 · ORBIT — 12 lures bloom out of the moon into a tilted 3D ring that orbits it (assortment moment)
+  // ===================================================================================================
+  const O = M.orbit(ctx, { id: 'orb', items: RING, cx: MO.cx, cy: MO.cy + 14, R: 336, tilt: 63, len: 212, persp: 1500, phi0: 90 });
+  html += O.html;
+  // the moon steps back while the ring orbits it, returns full-size for the lockup
+  ctx.tl.set(ctx.sel('mn'), { transformOrigin: `${MO.cx}px ${MO.cy}px` }, 0);
+  ctx.tl.fromTo(ctx.sel('mn'), { scale: 1 }, { scale: 0.8, duration: 0.7, ease: 'expo.out' }, B3 - 0.26);
+  ctx.tl.fromTo(ctx.sel('mn'), { scale: 0.8 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, B4 - 0.1);
+  const tB = B3 - 0.26;
+  for (let i = 0; i < O.n; i++) ctx.tl.fromTo(O.pop(i), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, tB + i * 0.014);
+  M.orbitSpin(ctx, O, tB, -85, 0, { d: 1.1, ease: 'expo.out' });
+  M.orbitSpin(ctx, O, tB + 1.1, 0, 20, { d: B4 - 0.3 - (tB + 1.1), ease: 'none' });
+  for (let i = 0; i < O.n; i++) fx.sweep(ctx, `orb-p${i}`, B3 + 0.5 + i * 0.07, { d: 0.42 });
+  ctx.tl.hit(O.sel, { scale: 1.035 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, beatAfter(B3 + 0.2));
+  ctx.tl.fromTo(O.sel, { scale: 1, opacity: 1 }, { scale: 2.5, opacity: 0, duration: 0.3, ease: 'power3.in' }, B4 - 0.3);   // flies past the camera
+  // glass row: own CNC moulds · handmade in CZ
+  const SB2 = M.specBar(ctx, { id: 'sb2', x: L, y: 1290, w: UIR - L, h: 128, cells: [{ label: 'Formy', value: 'Vlastní CNC' }, { label: 'Výroba', value: 'Ručně v ČR' }], t: B3 + 0.16, times: [B3 + 0.26, beatAfter(B3 + 0.2) + 0.02] });
+  html += SB2.html;
+  ctx.tl.fromTo(SB2.sel, { y: 0 }, { y: 40, duration: 0.24, ease: 'power2.in' }, B4 - 0.26);
+  ctx.tl.fromTo(SB2.sel, { scaleX: 1, opacity: 1 }, { scaleX: 1, opacity: 0, duration: 0.22, ease: 'power1.in' }, B4 - 0.24);
+
+  // ===================================================================================================
+  // BAR 1 · glass spec row for the hero (Gamer Big DC03 product page: 46 mm · 2,12 g · extra měkká)
+  // ===================================================================================================
+  const tSb1 = B1 + 0.12;
+  const SB1 = M.specBar(ctx, { id: 'sb1', x: L, y: 1290, w: UIR - L, h: 128, label: 'Gamer Big', cells: [{ value: '46 mm', w: 0.9 }, { value: '2,12 g', w: 0.95 }, { value: 'extra měkká', w: 1.5, upper: true, vs: 44 }], t: tSb1, times: [tSb1 + 0.1, tSb1 + 0.3, beatAfter(tSb1 + 0.3) - 0.04] });
+  html += SB1.html;
+  ctx.tl.fromTo(SB1.sel, { y: 0 }, { y: 40, duration: 0.24, ease: 'power2.in' }, B2 - 0.3);
+  ctx.tl.fromTo(SB1.sel, { scaleX: 1, opacity: 1 }, { scaleX: 1, opacity: 0, duration: 0.22, ease: 'power1.in' }, B2 - 0.28);
+  ctx.tl.fromTo(SB1.ksel, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, B2 - 0.3);
+
+  // ===================================================================================================
+  // BAR 4 · LOCKUP — Gamer Big hero in front of the full moon, logo + HANDMADE LURES, moonky.cz, prize pill
+  // ===================================================================================================
+  const tL = B4;
+  const LK = M.lure(ctx, { id: 'lk', k: 'h1', len: 860, cx: 540, cy: MO.cy + 20, angle: -5, ground: 'float', shadow: 0.62, sweepOpacity: 0.85 });
+  html += LK.html;
+  ctx.tl.fromTo(LK.sel, { opacity: 0, scale: 1.55 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'expo.out' }, tL - 0.2);
+  ctx.tl.fromTo(LK.cam, { y: 0, rotation: 0 }, { y: -16, rotation: -1.2, duration: END - tL - 0.5, ease: 'sine.inOut' }, tL + 0.5);
+  fx.sweep(ctx, 'lk', tL + BT * 0.9, { d: 0.85 });
+  // logo: top-right bug from „Moonky", travels into the lockup at the bar-4 downbeat
+  const LG = ctx.logo('on_dark', { box: [268, 80], at: [Math.max(0.1, tName - 0.05), END], id: 'logo' });
+  const lgX = R - LG.w, lgY = Math.round(ctx.plate.rect.y + ctx.plate.rect.h / 2 - LG.h / 2);
+  const lkX = Math.round(540 - LG.w / 2), lkY = 418;
+  html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${lgX}px;top:${lgY}px;width:${LG.w}px;height:${LG.h}px">${LG.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.55, ease: 'expo.out' }, Math.max(0.1, tName - 0.05));
+  ctx.tl.fromTo(ctx.sel('lw'), { x: 0, y: 0 }, { x: lkX - lgX, y: lkY - lgY, duration: 0.6, ease: 'expo.inOut' }, tL - 0.2);
+  // HANDMADE LURES (their packaging / banner subline) in Exo 2 300, wide tracking
+  const hmY = lkY + LG.h + 26;
+  html += `<div class="mk-lbl" id="${ctx.id('hm')}" style="left:0;width:${W}px;top:${hmY}px;text-align:center;${M.FD};font-weight:300;font-size:30px;letter-spacing:.48em;padding-left:.48em;color:rgba(255,255,255,.86)">Handmade lures</div>`;
+  ctx.tl.fromTo(ctx.sel('hm'), { opacity: 0, scaleX: 1.3 }, { opacity: 1, scaleX: 1, duration: 0.7, ease: 'expo.out' }, tL + 0.3);
+  // moonky.cz
+  const U = M.vtype(ctx, { id: 'url', lines: [{ text: ctx.data.url || 'moonky.cz', color: '#fff', wght: 800, sizes: [100, 96, 92], tracking: -0.01 }], times: [tL + 0.32], x: 64, y: 1196, w: W - 128, align: 'center', upper: false, d: 0.5 });
+  html += U.html;
+  // all partners give prizes (BRIEF 19. 10.)
+  const PZ = M.pill(ctx, { id: 'pz', text: 'Věnuje ceny · MČR 2026', cx: 540, y: 1330, t: tL + 0.55 });
+  html += PZ.html;
+
+  // ===================================================================================================
+  // HEADLINES (top lane, word-synced to the VO)
+  // ===================================================================================================
+  const HY0 = 404;
+  const HA = M.vtype(ctx, { id: 'ha', y: HY0, lines: [{ text: 'Ručně dělané', sizes: [140, 132, 124, 116] }, { text: 'gumové nástrahy', color: C.lime, sizes: [104, 98, 92, 86, 80], gap: 0 }], gap: 8, times: [tRuc - E, tDel - E, tGum - E, tNas - E] });
+  html += HA.html;
+  const tHAout = clamp(tPro - 0.24, B1 + 0.7, B2 - 0.7);
+  M.vtypeOut(ctx, HA, tHAout, { d: 0.24 });
+  const HC = M.vtype(ctx, { id: 'hc', y: HY0, lines: [{ text: 'pro', wght: 300, sizes: [84, 80, 76] }, { text: 'Trout Area', color: C.lime, sizes: [196, 184, 172, 160, 150] }], gap: 0, times: [Math.max(tHAout + 0.12, tPro - E), tTrout - E, Math.min(tArea - 0.2, B2 - 0.16)] });
+  html += HC.html;
+  ctx.tl.set(ctx.sel('hc-l1'), { transformOrigin: '0% 60%' }, 0);
+  ctx.tl.hit(ctx.sel('hc-l1'), { scale: 1.05 }, { scale: 1, duration: 0.35, ease: 'power2.out' }, B2);
+  const tHCout = clamp(tVyv - 0.3, B2 + 0.5, B3 - 0.8);
+  M.vtypeOut(ctx, HC, tHCout, { d: 0.24 });
+  const HD = M.vtype(ctx, { id: 'hd', y: HY0, lines: [{ text: 'Vyvíjené a testované', sizes: [104, 96, 90, 84, 78] }, { text: 's českou reprezentací', color: C.lime, sizes: [104, 96, 90, 84, 78, 72] }], gap: 10, times: [Math.max(tHCout + 0.14, tVyv - E), tA - E, tS - E, tRep - E] });
+  html += HD.html;
+  M.vtypeOut(ctx, HD, B4 - 0.32, { d: 0.24, stagger: 0.025 });
+
+  // ---------- light accents on the downbeats (moonlight, screen, ≤ 0.3) ----------
+  fx.flash(ctx, 0, { id: 'fl0', color: C.moonlight, peak: 0.2, d: 0.4, blend: 'screen' });
+  fx.flash(ctx, B3, { id: 'fl3', color: C.moonlight, peak: 0.12, d: 0.35, blend: 'screen' });
+
+  // ---------- transitions: hard cut in (the macro slams on the downbeat), moon iris out in the next block's colour ----------
+  M.irisOut(ctx, { cx: MO.cx, cy: MO.cy, d: 0.46 });
+  return { html, css: M.css(ctx) };
+}
+
+// ======================================================================================================
+// REEL HOOK (1 bar): „RUČNĚ DĚLANÉ. PRO TROUT AREA." + Gamer Big in front of the full moon, two more lures land on the beats
+// ======================================================================================================
+export function hook(ctx) {
+  stage(ctx);
+  let html = fx.field(ctx, { id: 'bg', bg: M.WORLD });
+  html += M.stars(ctx, { id: 'st', seed: 5 });
+  html += M.moon(ctx, { id: 'mn', cx: 540, cy: 1020, r: 250, ph: 2.3, glow: 0.75 });
+  const d1 = M.lure(ctx, { id: 'd1', k: 'h2', len: 460, cx: 300, cy: 1300, angle: -26, sweep: false });
+  const d2 = M.lure(ctx, { id: 'd2', k: 's11', len: 420, cx: 790, cy: 770, angle: 18, sweep: false });
+  html += `<div class="fx-abs" id="${ctx.id('dw')}" style="inset:0;filter:blur(2.5px) brightness(.9)">${d1.html}${d2.html}</div>`;
+  const b1 = ctx.beats[1] ?? ctx.BEAT, b2 = ctx.beats[2] ?? ctx.BEAT * 2;
+  ctx.tl.fromTo(d1.sel, { opacity: 0, x: -260, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.45, ease: 'expo.out' }, b1 - 0.04);
+  ctx.tl.fromTo(d2.sel, { opacity: 0, x: 260, y: -40 }, { opacity: 1, x: 0, y: 0, duration: 0.45, ease: 'expo.out' }, b2 - 0.04);
+  const P = M.lure(ctx, { id: 'hp', k: 'h1', len: 900, cx: 540, cy: 1030, angle: -6, ground: 'float', shadow: 0.6, sweepOpacity: 0.85 });
+  html += P.html;
+  ctx.tl.fromTo(P.sel, { scale: 1.3 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(P.cam, { scale: 1 }, { scale: 1.07, duration: ctx.dur - 0.6, ease: 'none' }, 0.6);
+  fx.sweep(ctx, 'hp', 0.38, { d: 0.8 });
+  const H = M.vtype(ctx, { id: 'h', y: 404, lines: [{ text: 'Ručně dělané.', sizes: [140, 132, 124, 116] }, { text: 'Pro Trout Area.', color: C.lime, sizes: [120, 112, 104, 98, 92] }], gap: 8, times: [0, 0.05, 0.1, 0.14], d: 0.3 });
   html += H.html;
-  fx.outlineFill(ctx, H.sel, 0.5, { d: 0.9 });
-  html += fx.headline(ctx, { id: 'h2', text: 'gumové nástrahy', x: L, y: 400 + H.h + 10, w: CW, maxLines: 1, font: 'Unbounded', wght: 500, sizes: [76, 68, 60], t: 0.35, reveal: 'chars', stagger: 0.02 }).html;
-  // bar 2: lures fly to the side, facts arrive (VO "Vyvíjené a testované s českou reprezentací")
-  for (const l of lay) ctx.tl.fromTo(ctx.sel(l.id), { x: 0, y: 0 }, { x: -110 * l.depth, y: -90 * l.depth, duration: 0.7, ease: 'expo.inOut' }, bar(2) - 0.2);
-  const tR = Math.max(bar(2), at('reprezentací', bar(2) + ctx.BEAT * 2) - 0.6);
-  html += fx.sticker(ctx, { id: 'cnc', text: 'CNC', sub: 'vlastní formy', x: 820, y: 1060, size: 250, color: T.accent, fg: T.bg, rot: 10, t: bar(2), font: 'Unbounded' });
-  html += fx.chip(ctx, { id: 'c1', label: 'Vyvíjeno a testováno', value: 's reprezentací ČR', x: L, y: 1200, tone: 'dark', accent: T.accent2, t: tR, font: 'Inter', vs: 46 });
-  // logo + url, last bar
-  const lg = ctx.logo('on_dark', { box: [300, 100], at: [bar(3), ctx.dur], id: 'logo' });
-  html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${ctx.W - ctx.safe.right - lg.w}px;top:${ctx.plate.rect.y + 14}px">${lg.html}</div>`;
-  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, bar(3));
-  html += fx.headline(ctx, { id: 'u', text: D.url, x: L, y: 1340, maxLines: 1, font: 'Unbounded', wght: 700, size: 52, color: T.fg, t: bar(3) + ctx.BEAT, reveal: 'chars', stagger: 0.02 }).html;
-  ctx.downs.forEach((t, i) => i && fx.flash(ctx, t, { id: `fl${i}`, color: i % 2 ? T.accent2 : T.accent, peak: 0.12, d: 0.35, blend: 'screen' }));
-  fx.tIn(ctx, 'blob', { d: 0.55 });
-  fx.tOut(ctx, 'blob', { d: 0.45 });
-  return { html };
+  fx.tOut(ctx, 'flash', { color: theme.bg, d: 0.12 });
+  return { html, css: M.css(ctx) };
+}
+
+// ======================================================================================================
+// REEL END CARD (2 bars): TA plate hero ×1.5 + „Partner MČR v Trout Area 2026" + logo (≤ TA) + moonky.cz (fx.endCard),
+// the assortment orbiting the full moon below it, prize pill
+// ======================================================================================================
+export function endCard(ctx) {
+  stage(ctx);
+  const END = ctx.dur;
+  let html = fx.field(ctx, { id: 'bg', bg: M.WORLD });
+  html += M.stars(ctx, { id: 'st', seed: 9 });
+  const EM = { cx: 540, cy: 1132, r: 168 };
+  html += M.moon(ctx, { id: 'mn', ...EM, ph: 2.3, glow: 0.7, glowSize: 1100 });
+  ctx.tl.set(ctx.sel('mn'), { transformOrigin: `${EM.cx}px ${EM.cy}px` }, 0);
+  ctx.tl.fromTo(ctx.sel('mn'), { scale: 1.25 }, { scale: 1, duration: 0.8, ease: 'expo.out' }, 0);
+  fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.16 });
+  const O = M.orbit(ctx, { id: 'eo', items: ECRING, cx: EM.cx, cy: EM.cy + 10, R: 262, tilt: 72, len: 178, persp: 1300, phi0: 90, seed: 9 });
+  html += O.html;
+  for (let i = 0; i < O.n; i++) ctx.tl.fromTo(O.pop(i), { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: 'expo.out' }, 0.02 + i * 0.02);
+  M.orbitSpin(ctx, O, 0.0, -90, 0, { d: 1.2, ease: 'expo.out' });
+  M.orbitSpin(ctx, O, 1.21, 0, 26, { d: END - 1.21, ease: 'none' });
+  for (let i = 0; i < O.n; i++) fx.sweep(ctx, `eo-p${i}`, 1.5 + i * 0.08, { d: 0.45 });
+  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#fff', accent: C.lime, font: 'Exo 2', textFont: 'Source Sans 3', scale: 1.5, cy: 760 });
+  html += E.html;
+  const PZ = M.pill(ctx, { id: 'pz', text: 'Věnuje ceny · MČR 2026', cx: 540, y: 1372, t: 0.95 });
+  html += PZ.html;
+  return { html, css: `${M.css(ctx)}\n${ctx.S} ${ctx.sel('ec-url')}{font-style:italic}` };
 }

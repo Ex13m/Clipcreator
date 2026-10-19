@@ -62,6 +62,7 @@ export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, sh
   <div class="fx-abs" id="${ctx.id(`${id}-cam`)}" style="inset:0">${sh}
     <div class="fx-abs" style="inset:0;perspective:1700px"><div class="fx-abs" id="${ctx.id(`${id}-tl`)}" style="inset:0;transform-style:preserve-3d">
       <img class="fx-prod-img" src="${url}" alt="">
+      <i class="fx-abs" style="inset:0;background:${C.TURQ};mix-blend-mode:soft-light;opacity:.55;-webkit-mask-image:${wm};mask-image:${wm};-webkit-mask-size:100% 100%;mask-size:100% 100%"></i>
       ${caustics(ctx, { id: `${id}-cw`, w, h, opacity: caus, size: Math.round(w * 0.42), t0, t1, speed: 26, mask: wm })}
       <i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:112deg;--so:.55"></i>
     </div></div>
@@ -70,10 +71,10 @@ export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, sh
 }
 
 // underwater skin for a cut-out (inserted right after its <img>): caustic light + deep-water tint, both masked by the cut-out's alpha
-export function skin(ctx, { id = 'skin', src, caus = 0.22, tint = C.DEEP, tintO = 0.3, size = 520, t0 = 0, t1 = ctx.dur, speed = 40 } = {}) {
+export function skin(ctx, { id = 'skin', src, w, h, caus = 0.22, tint = C.DEEP, tintO = 0.3, size = 520, t0 = 0, t1 = ctx.dur, speed = 40 } = {}) {
   const url = ctx.asset(src);
   const m = `-webkit-mask-image:url(${url});mask-image:url(${url});-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;`;
-  return `<i class="fx-abs" style="inset:0;background:${tint};mix-blend-mode:soft-light;opacity:${tintO};${m}"></i>${caustics(ctx, { id, opacity: caus, size, t0, t1, speed, mask: `url(${url})` })}`;
+  return `<i class="fx-abs" style="inset:0;background:${tint};mix-blend-mode:soft-light;opacity:${tintO};${m}"></i>${caustics(ctx, { id, w, h, opacity: caus, size, t0, t1, speed, mask: `url(${url})` })}`;
 }
 // rendered width of fx.odometer digits (tabular columns = widest digit + .02em padding each)
 export function odoW(ctx, value, { font = 'Bitter', wght = 900, size = 200 } = {}) {

@@ -1,37 +1,62 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>bosset-endcard · MČR 2026</title></head>
 <body><template>
-<div id="b-bosset-endcard" data-composition-id="bosset-endcard" data-width="1080" data-height="1920" data-duration="3.645">
+<div id="b-bosset-endcard" data-composition-id="bosset-endcard" data-width="1080" data-height="1920" data-duration="3.646">
   <style>
   #bw-bosset-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #bosset-endcard-stage { position:absolute; inset:0; overflow:hidden; }
-  
+  #b-bosset-endcard .bs-pill{position:absolute}
+  #b-bosset-endcard .bs-pill i{position:absolute;inset:0;display:block;border-radius:999px;transform-origin:0 50%}
+  #b-bosset-endcard .bs-pill span{position:absolute;left:0;top:0;white-space:nowrap;text-transform:uppercase}
+  #b-bosset-endcard .bs-slab{position:absolute}
+  #b-bosset-endcard .bs-slab i{position:absolute;inset:0;display:block;border-radius:14px;transform-origin:0 50%}
+  #b-bosset-endcard .bs-tile{position:absolute}
+  #b-bosset-endcard .bs-card{position:absolute;inset:0;display:block;border-radius:28px;background:linear-gradient(165deg,#ffffff 0%,#eef9fe 55%,#d9f1fc 100%);box-shadow:0 20px 44px rgba(2,24,30,.38),inset 0 0 0 1.5px rgba(255,255,255,.9)}
+  #b-bosset-endcard .bs-beam{position:absolute;transform:rotate(-12deg)}
+  #b-bosset-endcard .bs-beam i{position:absolute;inset:0;display:block;transform-origin:100% 50%}
+  #b-bosset-endcard .bs-panel{position:absolute;top:0;bottom:0;width:540px}
+  #b-bosset-endcard .bs-panel i{position:absolute;inset:0;display:block}
+  #b-bosset-endcard .bs-cap{position:absolute;white-space:nowrap;text-transform:uppercase}
+  #b-bosset-endcard .bs-page{position:absolute;left:0;top:0;width:1080px;height:3840px}
+  #b-bosset-endcard .bs-sec{position:absolute;left:0;width:1080px;height:1920px;overflow:hidden}
   </style>
-  <div id="bw-bosset-endcard" class="blk blk-bosset" style="--bg:#c5ebfc;--fg:#0b1d24;--acc:#1b97b1;--acc2:#ffc500">
-    <div id="bosset-endcard-stage" class="blk-stage"><div class="fx-field" id="bosset-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #f4fbff 0%, #c5ebfc 100%);"></div><div class="fx-mq ol" id="bosset-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#0b1d24;--ow:2px;opacity:.18"><div class="fx-mq-in" id="bosset-endcard-emq-in" style="font-family:'Outfit';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Bosset.cz · </span><span>Bosset.cz · </span><span>Bosset.cz · </span></div></div><div class="fx-ec" id="bosset-endcard-ec" style="top:799.5px">
-    <div id="bosset-endcard-ec-line" style="font-family:'Outfit';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#0b1d24;opacity:.85">Partner MČR v Trout Area 2026</div>
-    <div id="bosset-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#1b97b1;margin:32.199999999999996px 0"></div>
-    <div id="bosset-endcard-ec-lw"><img id="bosset-endcard-ec-logo" class="fx-logo " src="assets/prep/bosset/logo_on_light.png" alt="Bosset.cz" style="width:423px; height:67px;"></div>
-    <div id="bosset-endcard-ec-url" style="margin-top:46px;font-family:'Outfit';font-weight:800;font-size:96px;color:#0b1d24;letter-spacing:-.01em">bosset.cz</div>
-  </div>
+  <div id="bw-bosset-endcard" class="blk blk-bosset" style="--bg:#0A4A58;--fg:#ffffff;--acc:#FFC500;--acc2:#C5EBFC">
+    <div id="bosset-endcard-stage" class="blk-stage"><div class="fx-field" style="background:radial-gradient(90% 60% at 50% 48%, #137d93 0%, #0A4A58 52%, #052E37 100%)"></div><div class="fx-ec" id="bosset-endcard-ec" style="top:729.5px">
+    <div id="bosset-endcard-ec-line" style="font-family:'Saira';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;opacity:.85">Partner MČR v Trout Area 2026</div>
+    <div id="bosset-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#FFC500;margin:32.199999999999996px 0"></div>
+    <div id="bosset-endcard-ec-lw"><img id="bosset-endcard-ec-logo" class="fx-logo " src="assets/prep/bosset/logo_on_dark.png" alt="Bosset.cz" style="width:423px; height:67px;"></div>
+    <div id="bosset-endcard-ec-url" style="margin-top:46px;font-family:'Saira';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">bosset.cz</div>
+  </div><div class="bs-cap" id="bosset-endcard-ed" style="left:64px;top:1150px;width:952px;text-align:center;font-family:'Saira';font-weight:600;font-stretch:100%;font-size:25px;letter-spacing:0.08em;color:#C5EBFC;opacity:0">Oficiální distributor Keitech a YGK X-Braid pro ČR</div><div class="bs-pill" style="left:308px;top:1206px;width:465px;height:45px"><i id="bosset-endcard-ez-b" style="background:#FFC500"></i><span id="bosset-endcard-ez-t" style="font-family:'Saira';font-weight:800;font-stretch:110%;font-size:28px;letter-spacing:0.1em;color:#080C0E;line-height:45px;padding-left:20px">Věnuje ceny · MČR 2026</span></div><div class="fx-prod" id="bosset-endcard-ek" style="left:230px;top:1320.1px;width:620px;height:119.7px;"><div class="fx-abs" id="bosset-endcard-ek-cam" style="inset:0"><div class="fx-prod-tilt" id="bosset-endcard-ek-tl"><div class="fx-abs" id="bosset-endcard-ek-rot" style="inset:0"><img class="fx-prod-img" id="bosset-endcard-ek-im" src="assets/prep/bosset/ads/H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t.png" alt=""><i class="fx-prod-sweep" id="bosset-endcard-ek-sw" style="-webkit-mask-image:url(assets/prep/bosset/ads/H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t.png);mask-image:url(assets/prep/bosset/ads/H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t.png);--sa:100deg;--so:0.7"></i></div></div></div></div>
     </div>
-    <div class="fx-ov" id="bosset-endcard-tin" style="background:#c5ebfc"></div>
+    <div class="fx-ov" id="bosset-endcard-tin" style="background:#0A4A58"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#bosset-endcard-emq-in", {"x":0});
   gsap.set("#bosset-endcard-tin", {"opacity":1});
   gsap.set("#bosset-endcard-ec-line", {"opacity":0,"y":20});
   gsap.set("#bosset-endcard-ec-bar", {"scaleX":0});
   gsap.set("#bosset-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
   gsap.set("#bosset-endcard-ec-url", {"opacity":0,"y":30});
-  tl.fromTo("#bosset-endcard-emq-in", {"x":0}, {"x":-328.05,"duration":3.645,"ease":"none","immediateRender":false}, 0.000);
+  gsap.set("#bosset-endcard-ed", {"opacity":0,"y":16});
+  gsap.set("#bosset-endcard-ez-b", {"scaleX":0});
+  gsap.set("#bosset-endcard-ez-t", {"opacity":0,"x":-14});
+  gsap.set("#bosset-endcard-ek", {"x":560,"opacity":1});
+  gsap.set("#bosset-endcard-ek-cam", {"x":0});
+  gsap.set("#bosset-endcard-ek-rot", {"rotation":-9});
+  gsap.set("#bosset-endcard-ek-sw", {"backgroundPosition":"110% 0%"});
   tl.fromTo("#bosset-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
   tl.fromTo("#bosset-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
   tl.fromTo("#bosset-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
   tl.fromTo("#bosset-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
   tl.fromTo("#bosset-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
-  tl.set({}, {}, 3.645);
+  tl.fromTo("#bosset-endcard-ed", {"opacity":0,"y":16}, {"opacity":1,"y":0,"duration":0.45,"ease":"expo.out","immediateRender":false}, 0.750);
+  tl.fromTo("#bosset-endcard-ez-b", {"scaleX":0}, {"scaleX":1,"duration":0.34,"ease":"expo.out","immediateRender":false}, 0.950);
+  tl.fromTo("#bosset-endcard-ez-t", {"opacity":0,"x":-14}, {"opacity":1,"x":0,"duration":0.34,"ease":"expo.out","immediateRender":false}, 1.000);
+  tl.fromTo("#bosset-endcard-ek", {"x":560,"opacity":1}, {"x":0,"opacity":1,"duration":0.95,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#bosset-endcard-ek-cam", {"x":0}, {"x":-40,"duration":2.6959999999999997,"ease":"none","immediateRender":false}, 0.950);
+  tl.fromTo("#bosset-endcard-ek-rot", {"rotation":-9}, {"rotation":-2,"duration":3.646,"ease":"sine.out","immediateRender":false}, 0.000);
+  tl.fromTo("#bosset-endcard-ek-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 1.600);
+  tl.set({}, {}, 3.646);
   window.__timelines["bosset-endcard"] = tl;
   </script>
 </div>

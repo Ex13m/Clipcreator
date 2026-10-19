@@ -11,6 +11,8 @@
 //   badge(ctx,{id,text,x,y,d,t})                             yellow round "vel." badge (packaging DNA) — pops on the beat
 //   pill(ctx,{id,text,x,y,h,size,t})                         yellow spec pill (callout label)
 //   callout(ctx,{id,pts,t,d})                                hairline leader (SVG, draws itself) + anchor dot
+//   irisIn(ctx,{cx,cy,r0,d,t})                               lens-iris entrance that really opens past the corners (r0 = open on frame 1)
+//   prize(ctx,{id,text,cx,y,t})                              „Věnuje ceny · MČR 2026" chip (keyline pill)
 import * as fx from './fx.mjs';
 import { esc, nb } from './util.mjs';
 
@@ -119,12 +121,21 @@ export function callout(ctx, { id = 'co', pts, t = 0, d = 0.4, color = C.yellow,
 }
 
 // lens-iris block entrance: own bg covers the frame, a circular window opens from (cx,cy) past the farthest corner,
-// a thin yellow ring rides the edge; the cover is hidden after the move (fx.tIn('iris') stops at 78 % → corners stay covered)
-export function irisIn(ctx, { id = 'iris', color = ctx.theme.bg, cx = 540, cy = 880, d = 0.55, t = 0, ring = C.yellow, ease = 'power3.inOut' } = {}) {
+// a thin yellow ring rides the edge; the cover is hidden after the move (fx.tIn('iris') stops at 78 % → corners stay covered).
+// r0 > 0: the window is already open that wide on the first frame (the downbeat shows the product, not an empty field)
+export function irisIn(ctx, { id = 'iris', color = ctx.theme.bg, cx = 540, cy = 880, r0 = 0, d = 0.55, t = 0, ring = C.yellow, ease = 'power3.inOut' } = {}) {
   const R = Math.hypot(Math.max(cx, ctx.W - cx), Math.max(cy, ctx.H - cy)) + 40;     // past the farthest corner
   const m = `radial-gradient(circle at ${px(cx)} ${px(cy)}, transparent var(--r), #000 calc(var(--r) + 2px))`;
-  ctx.overlay(`<div class="fx-ov" id="${ctx.id(id)}" style="background:${color};--r:0px;-webkit-mask-image:${m};mask-image:${m}"></div><i class="fx-ov" id="${ctx.id(`${id}-rg`)}" style="inset:auto;left:${px(cx - R)};top:${px(cy - R)};width:${px(R * 2)};height:${px(R * 2)};border-radius:50%;border:5px solid ${ring}"></i>`);
-  ctx.tl.fromTo(ctx.sel(id), { '--r': '0px' }, { '--r': `${Math.round(R)}px`, duration: d, ease }, t);
-  ctx.tl.fromTo(ctx.sel(`${id}-rg`), { scale: 0.001, opacity: 1 }, { scale: 1, opacity: 0.0, duration: d, ease }, t);
+  ctx.overlay(`<div class="fx-ov" id="${ctx.id(id)}" style="background:${color};--r:${Math.round(r0)}px;-webkit-mask-image:${m};mask-image:${m}"></div><i class="fx-ov" id="${ctx.id(`${id}-rg`)}" style="inset:auto;left:${px(cx - R)};top:${px(cy - R)};width:${px(R * 2)};height:${px(R * 2)};border-radius:50%;border:5px solid ${ring}"></i>`);
+  ctx.tl.fromTo(ctx.sel(id), { '--r': `${Math.round(r0)}px` }, { '--r': `${Math.round(R)}px`, duration: d, ease }, t);
+  ctx.tl.fromTo(ctx.sel(`${id}-rg`), { scale: Math.max(0.001, r0 / R), opacity: 1 }, { scale: 1, opacity: 0.0, duration: d, ease }, t);
   ctx.tl.set(ctx.sel(id), { opacity: 0 }, t + d + 0.02);
+}
+
+// discreet prize chip „Věnuje ceny · MČR 2026" (BRIEF 19. 10.: every sponsor block + its Reel end card): yellow keyline, dark glass, yellow dot
+export function prize(ctx, { id = 'pz', text = 'Věnuje ceny · MČR 2026', cx = 540, y, size = 34, h = 66, padX = 30, t = 0 } = {}) {
+  const tw = ctx.measure(nb(text), { font: 'PT Sans Narrow', size, wght: 700, upper: true, tracking: 0.1 });
+  const w = tw + padX * 2 + 26;
+  ctx.tl.fromTo(ctx.sel(id), { opacity: 0, scale: 0.86, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, t);
+  return { w, h, html: `<div class="jg-pill" id="${ctx.id(id)}" style="left:${px(cx - w / 2)};top:${px(y)};width:${px(w)};height:${px(h)};padding:0 ${padX}px;box-sizing:border-box;gap:14px;justify-content:center;${FN};font-size:${size}px;letter-spacing:.1em;color:#fff;background:rgba(0,33,15,.55);border:2.5px solid ${C.yellow};box-shadow:0 12px 26px rgba(0,16,7,.35)"><i style="display:block;width:12px;height:12px;border-radius:50%;background:${C.yellow};flex-shrink:0"></i><span>${esc(nb(text))}</span></div>` };
 }

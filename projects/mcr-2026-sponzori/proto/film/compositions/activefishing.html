@@ -5,72 +5,310 @@
   <style>
   #bw-activefishing { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #activefishing-stage { position:absolute; inset:0; overflow:hidden; }
-  #b-activefishing #activefishing-g > div { box-shadow: inset 0 0 0 2px #f0ece6; }
+  @font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+#b-activefishing .af-p{position:absolute}
+#b-activefishing .af-p img{position:absolute;inset:0;width:100%;height:100%;display:block}
+#b-activefishing .af-p .fx-prod-sweep{inset:0}
+#b-activefishing .af-sh{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(78,48,20,.3),rgba(78,48,20,0));pointer-events:none}
+#b-activefishing .af-arm{position:absolute;width:0;height:0;transform-origin:0 0}
+#b-activefishing .af-w{display:inline-block}
+#b-activefishing .af-grad{background-image:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.22em;margin-top:-.22em}
+#b-activefishing .af-pill{position:absolute;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:999px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1}
+#b-activefishing .af-pill.fill{background:linear-gradient(180deg, #F59A2C 0%, #F28A27 45%, #E5702D 100%);color:#fff;box-shadow:0 14px 30px rgba(223,89,66,.32)}
+#b-activefishing .af-pill.ol{background:#fff;color:#111111;box-shadow:inset 0 0 0 3px #F28A27,0 10px 24px rgba(80,50,20,.10)}
+#b-activefishing .af-pill.wht{background:#fff;color:#111111;box-shadow:0 14px 30px rgba(110,30,0,.25)}
+#b-activefishing .af-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;color:#111111}
+#b-activefishing .af-tag i{display:block;flex-shrink:0;width:8px;height:1.05em;border-radius:4px;background:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%)}
+#b-activefishing .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:27px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
+#b-activefishing .af-cwl i{display:block;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+#b-activefishing .af-card{position:absolute;border-radius:38px;background:#fff;box-shadow:0 40px 80px rgba(110,30,0,.30)}
+#b-activefishing .af-tile{position:absolute;border-radius:26px;background:#fff;box-shadow:0 14px 30px rgba(60,40,20,.10),0 0 0 1px rgba(0,0,0,.04)}
+#b-activefishing .af-tile i{position:absolute;display:block;background:center/100% 100% no-repeat}
+#b-activefishing .af-url{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:1000;letter-spacing:-.02em;line-height:1;color:#111111;white-space:nowrap}
+#b-activefishing .af-url .o{color:#F28A27}
   </style>
-  <div id="bw-activefishing" class="blk blk-activefishing" style="--bg:#f1f1ef;--fg:#111111;--acc:#e2812d;--acc2:#df5942">
-    <div id="activefishing-stage" class="blk-stage"><div class="fx-field" id="activefishing-field" style="background:radial-gradient(120% 80% at 50% 35%, #ffffff 0%, #f1f1ef 100%);"></div><div class="fx-abs" id="activefishing-disc" style="left:110px;top:660px;width:860px;height:860px;border-radius:50%;background:linear-gradient(180deg, #E39025, #E2812D 40%, #DD603A 75%, #DF5942);opacity:.95"></div><div class="fx-t " id="activefishing-h" style="left:64px;top:400px;width:952px;font-family:'Nunito';font-weight:1000;font-size:110px;line-height:0.98;letter-spacing:-0.02em;color:#111111;text-align:left;"><span class="fx-ln" id="activefishing-h-l0" style=""><span><span class="fx-c">Pro</span> <span class="fx-c">všechny,</span> <span class="fx-c">kdo</span></span></span><span class="fx-ln" id="activefishing-h-l1" style=""><span><span class="fx-c">milují</span> <span class="fx-c">přívlač</span></span></span></div><div class="fx-prod" id="activefishing-pa" style="left:190px;top:836px;width:700px;height:507.9px;"><div class="fx-abs" id="activefishing-pa-cam" style="inset:0"><i class="fx-prod-shadow" id="activefishing-pa-sh" style="left:99.5px;width:501.7px;top:518.1px;height:50.8px;--sho:0.4;filter:blur(10px)"></i><div class="fx-prod-tilt" id="activefishing-pa-tl"><div class="fx-abs" id="activefishing-pa-rot" style="inset:0"><img class="fx-prod-img" id="activefishing-pa-im" src="assets/prep/activefishing/heroes/h01_nories_sofia.png" alt=""><i class="fx-prod-sweep" id="activefishing-pa-sw" style="-webkit-mask-image:url(assets/prep/activefishing/heroes/h01_nories_sofia.png);mask-image:url(assets/prep/activefishing/heroes/h01_nories_sofia.png);--sa:105deg;--so:0.7"></i></div></div></div></div><div class="fx-full" id="activefishing-s1" style=""><div class="fx-t " id="activefishing-pr" style="left:64px;top:840px;width:952px;font-family:'Nunito';font-weight:800;font-size:56px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:center;"><span class="fx-ln" id="activefishing-pr-l0" style=""><span>Přes</span></span></div><div class="fx-odo" id="activefishing-n" style="left:64px;top:910px;width:952px;justify-content:center;font-family:'Nunito';font-weight:1000;font-size:230px;color:#ffffff;"><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-n-s0"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i></span></span><span class="fx-odo-x">&nbsp;</span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-n-s1"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-n-s2"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-n-s3"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-x">+</span></div><div class="fx-t " id="activefishing-pl" style="left:64px;top:1150px;width:952px;font-family:'Nunito';font-weight:900;font-size:84px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:center;"><span class="fx-ln" id="activefishing-pl-l0" style=""><span>plandavek</span></span></div></div><div class="fx-abs" id="activefishing-card" style="left:64px;top:640px;width:876px;height:620px;border-radius:30px;background:#fff;box-shadow:0 30px 60px rgba(0,0,0,.12)"></div><div class="fx-grid" id="activefishing-g" style="left:84px;top:660px;width:836px;height:580px;overflow:hidden;"><div id="activefishing-g-0" style="left:0px;top:0px;width:411px;height:283px;border-radius:18px;background:#fff;"><img class="fx-img " src="assets/prep/activefishing/heroes/h02_khor_frea.png" alt="" style="object-fit:contain; object-position:50% 50%;inset:22px;width:auto;height:auto;"></div><div id="activefishing-g-1" style="left:425px;top:0px;width:411px;height:283px;border-radius:18px;background:#fff;"><img class="fx-img " src="assets/prep/activefishing/heroes/h03_velvetarts_forte_06.png" alt="" style="object-fit:contain; object-position:50% 50%;inset:22px;width:auto;height:auto;"></div><div id="activefishing-g-2" style="left:0px;top:297px;width:411px;height:283px;border-radius:18px;background:#fff;"><img class="fx-img " src="assets/prep/activefishing/heroes/h04_luckycraft_wah33f.png" alt="" style="object-fit:contain; object-position:50% 50%;inset:22px;width:auto;height:auto;"></div><div id="activefishing-g-3" style="left:425px;top:297px;width:411px;height:283px;border-radius:18px;background:#fff;"><img class="fx-img " src="assets/prep/activefishing/heroes/h05_timon_chibi_futten.png" alt="" style="object-fit:contain; object-position:50% 50%;inset:22px;width:auto;height:auto;"></div></div><div class="fx-chip light" id="activefishing-c1" style="left:64px;top:1290px;font-family:'Nunito';--vs:44px;--ls:22px;--acc:#e2812d;"><i></i><span>Woblery</span><b>777 kusů</b></div><div class="fx-chip light" id="activefishing-c2" style="left:444px;top:1290px;font-family:'Nunito';--vs:44px;--ls:22px;--acc:#df5942;"><i></i><span>E-shop</span><b>osobní přístup</b></div><div class="fx-abs" id="activefishing-lw" style="left:778px;top:244px"><img id="activefishing-logo" class="fx-logo " src="assets/prep/activefishing/logo_on_light.png" alt="Activefishing.cz" style="width:238px; height:99px;"></div>
+  <div id="bw-activefishing" class="blk blk-activefishing" style="--bg:#f4f3f1;--fg:#111111;--acc:#f28a27;--acc2:#df5942">
+    <div id="activefishing-stage" class="blk-stage"><div class="fx-field" id="activefishing-wf" style="background:radial-gradient(130% 85% at 50% 40%, #ffffff 0%, #f5f4f1 52%, #e6e3de 100%)"></div><div class="fx-glow" id="activefishing-wg" style="left:200px;top:-140px;width:1400px;height:1400px;background:radial-gradient(closest-side, rgba(245,155,16,.30), rgba(242,138,39,.10) 55%, rgba(242,138,39,0))"></div><div class="fx-full" id="activefishing-sA" style=""><div class="fx-glow" id="activefishing-tint" style="left:-100px;top:360px;width:1280px;height:1280px;background:radial-gradient(closest-side, currentColor, rgba(255,255,255,0));color:#ffc2d2;opacity:0"></div><div class="fx-full" id="activefishing-rig" style="transform-origin:540px 1000px"><div class="fx-full" id="activefishing-slide"><div class="fx-full" id="activefishing-pose" style="transform-origin:540px 1000px"><div class="fx-full" id="activefishing-cam" style="transform-origin:280.8px 964.2px"><i class="af-sh" style="left:228px;top:1155.7201767676768px;width:624px;height:46px"></i><div class="af-p" id="activefishing-cw0" style="left:146.1px;top:844.2px;width:787.9px;height:311.5px;"><img src="assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png" alt=""><i class="fx-prod-sweep" id="activefishing-cw0-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png);mask-image:url(assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png);--sa:105deg;--so:.75"></i></div><div class="af-p" id="activefishing-cw1" style="left:130.3px;top:823.2px;width:820.2px;height:355.1px;opacity:0"><img src="assets/prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png" alt=""></div><div class="af-p" id="activefishing-cw2" style="left:132.0px;top:823.3px;width:817.6px;height:353.5px;opacity:0"><img src="assets/prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png" alt=""></div><div class="af-p" id="activefishing-cw3" style="left:132.0px;top:821.8px;width:818.5px;height:356.4px;opacity:0"><img src="assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png" alt=""><i class="fx-prod-sweep" id="activefishing-cw3-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png);mask-image:url(assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png);--sa:105deg;--so:.75"></i></div><div class="af-p" id="activefishing-cw4" style="left:131.2px;top:814.5px;width:817.6px;height:370.9px;opacity:0"><img src="assets/prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png" alt=""></div></div></div></div></div><div class="af-tag" id="activefishing-kick" style="left:64px;top:432px;font-size:30px;letter-spacing:.16em;color:#111111"><i></i><span class="fx-ln"><span>Český e-shop pro trout area</span></span></div><div class="af-url" id="activefishing-nm" style="top:482px;left:64px;right:auto;text-align:left;font-size:118px"><span class="fx-ln"><span><span class="fx-c">a</span><span class="fx-c">c</span><span class="fx-c">t</span><span class="fx-c">i</span><span class="fx-c">v</span><span class="fx-c">e</span><span class="fx-c">f</span><span class="fx-c">i</span><span class="fx-c">s</span><span class="fx-c">h</span><span class="fx-c">i</span><span class="fx-c">n</span><span class="fx-c">g</span><span class="o"><span class="fx-c">.</span><span class="fx-c">c</span><span class="fx-c">z</span></span></span></span></div><div class="fx-t" id="activefishing-hz" style="left:64px;top:430px;width:952px;font-family:'Saira Extra Condensed';font-weight:900;font-size:170px;line-height:0.98;letter-spacing:0em;color:#111111;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="activefishing-hz-l0"><span><span class="af-w" id="activefishing-hz-w0">Zrozený</span> <span class="af-w" id="activefishing-hz-w1">z</span> <span class="af-w af-grad" id="activefishing-hz-w2">vášně</span></span></span><span class="fx-ln" id="activefishing-hz-l1"><span><span class="af-w" id="activefishing-hz-w3">pro</span> <span class="af-w" id="activefishing-hz-w4">přívlač</span></span></span></div><div class="af-pill ol" id="activefishing-chip" style="left:64px;top:1296px;width:586.3px;height:56px;font-size:28px;letter-spacing:0.07em;">Timon · Chibi Futten FS · 51 mm</div><div class="af-cwl" id="activefishing-cwl0" style="left:70px;top:1392px;opacity:0"><i style="background:#f7385c"></i>Tropical Chart Pink</div><div class="af-cwl" id="activefishing-cwl1" style="left:70px;top:1392px;opacity:0"><i style="background:#034a9e"></i>UV Cobalt Blue</div><div class="af-cwl" id="activefishing-cwl2" style="left:70px;top:1392px;opacity:0"><i style="background:#a8862f"></i>Gold Shower</div><div class="af-cwl" id="activefishing-cwl3" style="left:70px;top:1392px;opacity:0"><i style="background:#a3262b"></i>Red Black Glitter</div><div class="af-cwl" id="activefishing-cwl4" style="left:70px;top:1392px;opacity:0"><i style="background:#b4976b"></i>Hologram Bait</div></div><div class="fx-full" id="activefishing-sB" style=""><div class="fx-field" id="activefishing-orf" style="background:radial-gradient(85% 42% at 50% 26%, rgba(255,214,140,.5), rgba(255,214,140,0) 70%), linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%)"></div><div class="fx-t " id="activefishing-pres" style="left:64px;top:392px;width:952px;font-family:'Nunito';font-weight:900;font-size:46px;line-height:0.98;letter-spacing:0.24em;color:#ffffff;text-align:center;text-transform:uppercase;"><span class="fx-ln" id="activefishing-pres-l0" style=""><span>Přes</span></span></div><div class="fx-odo" id="activefishing-odo" style="left:64px;top:438px;width:952px;justify-content:center;font-family:'Saira Extra Condensed';font-weight:900;font-size:320px;color:#ffffff;word-spacing:.1em"><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-odo-s0"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i></span></span><span class="fx-odo-x">&nbsp;</span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-odo-s1"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-odo-s2"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="activefishing-odo-s3"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-x">+</span></div><div class="fx-t" id="activefishing-pl" style="left:64px;top:758px;width:952px;text-align:center;font-family:'Saira Extra Condensed';font-weight:900;font-size:176px;line-height:1;letter-spacing:.02em;text-transform:uppercase"><span class="fx-ln"><span class="fx-of" id="activefishing-plof" style="--ofc:#111111;--ofw:3px">PLANDAVEK</span></span></div><div class="fx-full" id="activefishing-cg"><div class="af-card" id="activefishing-card" style="left:220px;top:968px;width:640px;height:404px;transform-origin:50% 50%"></div><div class="af-p" id="activefishing-bk" style="left:72.3px;top:922.3px;width:187.4px;height:255.9px;transform-origin:50% 49.9%;"><div class="fx-abs" id="activefishing-bk-cam" style="inset:0;transform-origin:50% 49.9%;"><div class="fx-abs" id="activefishing-bk-r" style="inset:0;transform-origin:50% 49.9%"><img src="assets/prep/activefishing/heroes/h02_khor_frea.png" alt="" style="filter:drop-shadow(0 18px 18px rgba(110,35,0,.30))"><i class="fx-prod-sweep" id="activefishing-bk-sw" style="-webkit-mask-image:url(assets/prep/activefishing/heroes/h02_khor_frea.png);mask-image:url(assets/prep/activefishing/heroes/h02_khor_frea.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-bf" style="left:773.4px;top:945px;width:269.8px;height:170.5px;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bf-cam" style="inset:0;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bf-r" style="inset:0;transform-origin:49.9% 49.9%"><img src="assets/prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png" alt="" style="filter:drop-shadow(0 18px 18px rgba(110,35,0,.30))"><i class="fx-prod-sweep" id="activefishing-bf-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png);mask-image:url(assets/prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-bs" style="left:41.9px;top:1221.1px;width:268.7px;height:170.3px;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bs-cam" style="inset:0;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bs-r" style="inset:0;transform-origin:49.9% 49.9%"><img src="assets/prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png" alt="" style="filter:drop-shadow(0 18px 18px rgba(110,35,0,.30))"><i class="fx-prod-sweep" id="activefishing-bs-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png);mask-image:url(assets/prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-bo" style="left:769.9px;top:1248.1px;width:268.9px;height:136px;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bo-cam" style="inset:0;transform-origin:49.9% 49.9%;"><div class="fx-abs" id="activefishing-bo-r" style="inset:0;transform-origin:49.9% 49.9%"><img src="assets/prep/activefishing/heroes/h03_velvetarts_forte_06.png" alt="" style="filter:drop-shadow(0 18px 18px rgba(110,35,0,.30))"><i class="fx-prod-sweep" id="activefishing-bo-sw" style="-webkit-mask-image:url(assets/prep/activefishing/heroes/h03_velvetarts_forte_06.png);mask-image:url(assets/prep/activefishing/heroes/h03_velvetarts_forte_06.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-so" style="left:311.7px;top:1007.9px;width:456.6px;height:324.5px;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-so-cam" style="inset:0;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-so-r" style="inset:0;transform-origin:50% 50%"><img src="assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png" alt="" style="filter:drop-shadow(0 16px 16px rgba(90,40,10,.20))"><i class="fx-prod-sweep" id="activefishing-so-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png);mask-image:url(assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png);--sa:105deg;--so:0.8"></i></div></div></div></div><div class="af-tag" id="activefishing-brands" style="left:0;right:0;justify-content:center;top:1412px;font-size:25px;letter-spacing:.14em;color:#ffffff">Nories · Velvet Arts · ValkeIN · Khor</div></div><div class="fx-full" id="activefishing-sC" style=""><div class="af-p" id="activefishing-mk" style="left:561.2px;top:488.5px;width:478.1px;height:247.3px;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-mk-cam" style="inset:0;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-mk-r" style="inset:0;transform-origin:50% 50%"><img src="assets/prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png" alt="" style=""><i class="fx-prod-sweep" id="activefishing-mk-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png);mask-image:url(assets/prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png);--sa:105deg;--so:0.55"></i></div></div></div><div class="af-p" id="activefishing-vs" style="left:251.3px;top:689px;width:578.5px;height:446.1px;transform-origin:49.9% 50%;"><i class="af-sh" id="activefishing-vs-sh" style="left:70.3px;top:419.6px;width:436.8px;height:68.7px;opacity:1.00"></i><div class="fx-abs" id="activefishing-vs-cam" style="inset:0;transform-origin:49.9% 50%;perspective:1300px;"><div class="fx-abs" id="activefishing-vs-r" style="inset:0;transform-origin:49.9% 50%"><img src="assets/prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural.png" alt="" style="filter:drop-shadow(0 26px 30px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-vs-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural.png);mask-image:url(assets/prep/activefishing/ads/H3_varivas_super_trout_area_es2_ester_natural.png);--sa:105deg;--so:0.7"></i></div></div></div><div class="af-p" id="activefishing-pc" style="left:59.7px;top:1078.6px;width:353.3px;height:143.6px;transform-origin:49.9% 49.8%;"><i class="af-sh" id="activefishing-pc-sh" style="left:47.6px;top:120.9px;width:257.4px;height:30px;opacity:0.73"></i><div class="fx-abs" id="activefishing-pc-cam" style="inset:0;transform-origin:49.9% 49.8%;"><div class="fx-abs" id="activefishing-pc-r" style="inset:0;transform-origin:49.9% 49.8%"><img src="assets/prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png" alt="" style=""><i class="fx-prod-sweep" id="activefishing-pc-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png);mask-image:url(assets/prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png);--sa:105deg;--so:0.55"></i></div></div></div><div class="af-p" id="activefishing-wh" style="left:686.4px;top:1075px;width:319.1px;height:150.5px;transform-origin:50% 49.9%;"><i class="af-sh" id="activefishing-wh-sh" style="left:42.6px;top:130.4px;width:234px;height:30px;opacity:0.73"></i><div class="fx-abs" id="activefishing-wh-cam" style="inset:0;transform-origin:50% 49.9%;"><div class="fx-abs" id="activefishing-wh-r" style="inset:0;transform-origin:50% 49.9%"><img src="assets/prep/activefishing/heroes/h04_luckycraft_wah33f.png" alt="" style=""><i class="fx-prod-sweep" id="activefishing-wh-sw" style="-webkit-mask-image:url(assets/prep/activefishing/heroes/h04_luckycraft_wah33f.png);mask-image:url(assets/prep/activefishing/heroes/h04_luckycraft_wah33f.png);--sa:105deg;--so:0.55"></i></div></div></div><div class="af-tag" id="activefishing-vtag" style="left:64px;top:432px;font-size:30px;letter-spacing:.1em"><i></i><span class="fx-ln"><span>VARIVAS · ES2 Ester · 80 m</span></span></div><div class="af-pill fill" id="activefishing-op" style="left:234.2px;top:1240px;width:611.6px;height:108px;font-size:54px;letter-spacing:0.05em;">Osobní přístup</div><div class="af-pill ol" id="activefishing-p1" style="left:142.7px;top:1372px;width:387px;height:55px;font-size:27px;letter-spacing:0.07em;">Rychlost doručení</div><div class="af-pill ol" id="activefishing-p2" style="left:545.8px;top:1372px;width:391.5px;height:55px;font-size:27px;letter-spacing:0.07em;">Unikátní sortiment</div></div><div class="fx-full" id="activefishing-sD" style=""><div class="fx-field" id="activefishing-lkf" style="background:radial-gradient(120% 70% at 50% 30%, #ffffff 0%, #f1f0ed 60%, #e7e4df 100%)"></div><div class="af-url" id="activefishing-url" style="top:548px;font-size:116px"><span class="fx-ln"><span><span class="fx-c">a</span><span class="fx-c">c</span><span class="fx-c">t</span><span class="fx-c">i</span><span class="fx-c">v</span><span class="fx-c">e</span><span class="fx-c">f</span><span class="fx-c">i</span><span class="fx-c">s</span><span class="fx-c">h</span><span class="fx-c">i</span><span class="fx-c">n</span><span class="fx-c">g</span><span class="o"><span class="fx-c">.</span><span class="fx-c">c</span><span class="fx-c">z</span></span></span></span></div><div class="af-tag" id="activefishing-ral" style="left:64px;top:732px;font-size:28px;letter-spacing:.09em"><i></i><span class="fx-ln"><span>777 woblerů</span></span></div><div class="fx-abs" id="activefishing-ra" style="left:0;top:784px;width:1080px;height:210px"><div class="fx-abs" id="activefishing-rain" style="left:-60px;top:0;width:2288px;height:210px"><div class="af-tile" id="activefishing-rat0" style="left:0px;top:0px;width:268px;height:210px"><i style="left:22.2px;top:47.2px;width:223.8px;height:115.8px;background-image:url(assets/prep/activefishing/ads/S7_mukai_upward_zanmu_35s_6ck.png);"></i></div><div class="af-tile" id="activefishing-rat1" style="left:286px;top:0px;width:268px;height:210px"><i style="left:22.9px;top:61.1px;width:222.2px;height:87.9px;background-image:url(assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png);"></i></div><div class="af-tile" id="activefishing-rat2" style="left:572px;top:0px;width:268px;height:210px"><i style="left:17px;top:50px;width:234px;height:110.4px;background-image:url(assets/prep/activefishing/heroes/h04_luckycraft_wah33f.png);"></i></div><div class="af-tile" id="activefishing-rat3" style="left:858px;top:0px;width:268px;height:210px"><i style="left:16.5px;top:57.4px;width:235.5px;height:95.7px;background-image:url(assets/prep/activefishing/ads/S6_timon_micro_panicra_mr-f_rattle_yazy_pellet_san.png);"></i></div><div class="af-tile" id="activefishing-rat4" style="left:1144px;top:0px;width:268px;height:210px"><i style="left:18.4px;top:55.1px;width:231.3px;height:100.1px;background-image:url(assets/prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png);"></i></div><div class="af-tile" id="activefishing-rat5" style="left:1430px;top:0px;width:268px;height:210px"><i style="left:18.9px;top:55.2px;width:230.6px;height:99.7px;background-image:url(assets/prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png);"></i></div><div class="af-tile" id="activefishing-rat6" style="left:1716px;top:0px;width:268px;height:210px"><i style="left:18.9px;top:54.7px;width:230.8px;height:100.5px;background-image:url(assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png);"></i></div><div class="af-tile" id="activefishing-rat7" style="left:2002px;top:0px;width:268px;height:210px"><i style="left:18.7px;top:52.7px;width:230.6px;height:104.6px;background-image:url(assets/prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png);"></i></div></div></div><div class="af-tag" id="activefishing-rbl" style="left:64px;top:1034px;font-size:28px;letter-spacing:.09em"><i></i><span class="fx-ln"><span>1 300+ plandavek</span></span></div><div class="fx-abs" id="activefishing-rb" style="left:0;top:1086px;width:1080px;height:210px"><div class="fx-abs" id="activefishing-rbin" style="left:-260px;top:0;width:1430px;height:210px"><div class="af-tile" id="activefishing-rbt0" style="left:0px;top:0px;width:268px;height:210px"><i style="left:22.9px;top:26.1px;width:222.2px;height:158px;background-image:url(assets/prep/activefishing/ads/H2_nories_sofia_1-2g_sk017_hot_mango_pair.png);transform:rotate(-12deg);"></i></div><div class="af-tile" id="activefishing-rbt1" style="left:286px;top:0px;width:268px;height:210px"><i style="left:16.5px;top:30.8px;width:235.5px;height:148.9px;background-image:url(assets/prep/activefishing/ads/S5_velvet_arts_forte_1-5g_no1.png);transform:rotate(-12deg);"></i></div><div class="af-tile" id="activefishing-rbt2" style="left:572px;top:0px;width:268px;height:210px"><i style="left:17px;top:30.9px;width:234.5px;height:148.7px;background-image:url(assets/prep/activefishing/ads/S8_valkein_scheila_1-8g_no80_delicious_peach.png);transform:rotate(-12deg);"></i></div><div class="af-tile" id="activefishing-rbt3" style="left:858px;top:0px;width:268px;height:210px"><i style="left:70.8px;top:18.8px;width:126.5px;height:172.7px;background-image:url(assets/prep/activefishing/heroes/h02_khor_frea.png);transform:rotate(-12deg);"></i></div><div class="af-tile" id="activefishing-rbt4" style="left:1144px;top:0px;width:268px;height:210px"><i style="left:17px;top:45.8px;width:234.8px;height:118.7px;background-image:url(assets/prep/activefishing/heroes/h03_velvetarts_forte_06.png);transform:rotate(-12deg);"></i></div></div></div><div class="af-pill fill" id="activefishing-pz" style="left:266.5px;top:1360px;width:547px;height:68px;font-size:34px;letter-spacing:0.07em;">Věnuje ceny · MČR 2026</div></div><div class="fx-abs" id="activefishing-lw" style="left:778px;top:250px;width:238px;height:99px"><img id="activefishing-logo" class="fx-logo " src="assets/prep/activefishing/logo_on_light.png" alt="Activefishing.cz" style="width:238px; height:99px;"></div>
     </div>
-    <svg class="fx-defs" aria-hidden="true"><filter id="activefishing-mb" x="-30%" y="-5%" width="160%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur id="activefishing-mbg" stdDeviation="0 0"/></filter></svg>
-    
+    <div class="fx-ov" id="activefishing-tout"><i id="activefishing-to0" style="position:absolute;left:0px;top:0px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to1" style="position:absolute;left:270px;top:0px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to2" style="position:absolute;left:540px;top:0px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to3" style="position:absolute;left:810px;top:0px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to4" style="position:absolute;left:0px;top:274.3px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to5" style="position:absolute;left:270px;top:274.3px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to6" style="position:absolute;left:540px;top:274.3px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to7" style="position:absolute;left:810px;top:274.3px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to8" style="position:absolute;left:0px;top:548.6px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to9" style="position:absolute;left:270px;top:548.6px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to10" style="position:absolute;left:540px;top:548.6px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to11" style="position:absolute;left:810px;top:548.6px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to12" style="position:absolute;left:0px;top:822.9px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to13" style="position:absolute;left:270px;top:822.9px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to14" style="position:absolute;left:540px;top:822.9px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to15" style="position:absolute;left:810px;top:822.9px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to16" style="position:absolute;left:0px;top:1097.1px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to17" style="position:absolute;left:270px;top:1097.1px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to18" style="position:absolute;left:540px;top:1097.1px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to19" style="position:absolute;left:810px;top:1097.1px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to20" style="position:absolute;left:0px;top:1371.4px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to21" style="position:absolute;left:270px;top:1371.4px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to22" style="position:absolute;left:540px;top:1371.4px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to23" style="position:absolute;left:810px;top:1371.4px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to24" style="position:absolute;left:0px;top:1645.7px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to25" style="position:absolute;left:270px;top:1645.7px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to26" style="position:absolute;left:540px;top:1645.7px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i><i id="activefishing-to27" style="position:absolute;left:810px;top:1645.7px;width:270px;height:274.3px;border-radius:30px;background:#0E1424"></i></div><div class="fx-ov" id="activefishing-toutf" style="background:#0E1424;opacity:0"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#activefishing-disc", {"scale":0,"x":0,"y":0,"opacity":0.95});
-  gsap.set("#activefishing-h .fx-c", {"yPercent":110,"opacity":0});
-  gsap.set("#activefishing-pa", {"scale":0.6,"opacity":0,"x":0});
-  gsap.set("#activefishing-pa-sw", {"backgroundPosition":"110% 0%"});
-  gsap.set("#activefishing-pa-cam", {"x":0,"y":0});
-  gsap.set("#activefishing-pr .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#activefishing-n-s0", {"yPercent":0});
-  gsap.set("#activefishing-n-s1", {"yPercent":0});
-  gsap.set("#activefishing-n-s2", {"yPercent":0});
-  gsap.set("#activefishing-n-s3", {"yPercent":0});
-  gsap.set("#activefishing-pl .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#activefishing-s1", {"opacity":0});
-  gsap.set("#activefishing-g-0", {"x":-398.39094500639476,"y":-619.7192477877252,"rotation":-22.132830278133042,"scale":0.6,"opacity":0});
-  gsap.set("#activefishing-g-1", {"x":198.5388255387079,"y":624.3214976566378,"rotation":19.313614103884902,"scale":0.6,"opacity":0});
-  gsap.set("#activefishing-g-2", {"x":77.23681519855745,"y":335.35130516975187,"rotation":-19.58502405177569,"scale":0.6,"opacity":0});
-  gsap.set("#activefishing-g-3", {"x":285.2546095935395,"y":419.4320298382081,"rotation":-0.588215293828398,"scale":0.6,"opacity":0});
-  gsap.set("#activefishing-c1", {"x":-80,"opacity":0,"filter":"blur(12px)"});
-  gsap.set("#activefishing-c2", {"x":-80,"opacity":0,"filter":"blur(12px)"});
-  gsap.set("#activefishing-card", {"opacity":0,"scale":0.9});
-  gsap.set("#activefishing-lw", {"opacity":0,"x":60});
-  gsap.set("#activefishing-mbg", {"attr":{"stdDeviation":"60 0"}});
-  gsap.set("#activefishing-stage", {"x":810,"skewX":-14});
-  gsap.set("#activefishing-pa-rot", {"rotation":-10});
-  gsap.set("#activefishing-stage", {"filter":"url(#activefishing-mb)"});
-  tl.fromTo("#activefishing-disc", {"scale":0}, {"scale":1,"duration":0.8,"ease":"expo.out","immediateRender":false}, 0.150);
-  tl.fromTo("#activefishing-h .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 0.050);
-  tl.fromTo("#activefishing-pa", {"scale":0.6,"opacity":0}, {"scale":1,"opacity":1,"duration":0.8,"ease":"expo.out","immediateRender":false}, 0.250);
-  tl.fromTo("#activefishing-pa-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.900);
-  tl.fromTo("#activefishing-disc", {"x":0,"y":0}, {"x":-24,"y":-12,"duration":3.0690000000000004,"ease":"sine.inOut","immediateRender":false}, 0.300);
-  tl.fromTo("#activefishing-pa-cam", {"x":0,"y":0}, {"x":-60,"y":-30,"duration":3.0690000000000004,"ease":"sine.inOut","immediateRender":false}, 0.300);
-  tl.fromTo("#activefishing-pa", {"x":0,"opacity":1}, {"x":-900,"opacity":0,"duration":0.3,"ease":"power3.in","immediateRender":false}, 3.369);
-  tl.fromTo("#activefishing-pr .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 3.669);
-  tl.fromTo("#activefishing-n-s0", {"yPercent":0}, {"yPercent":-95.45454545454545,"duration":1.38,"ease":"expo.out","immediateRender":false}, 3.719);
-  tl.fromTo("#activefishing-n-s1", {"yPercent":0}, {"yPercent":-95.83333333333334,"duration":1.3199999999999998,"ease":"expo.out","immediateRender":false}, 3.749);
-  tl.fromTo("#activefishing-n-s2", {"yPercent":0}, {"yPercent":-95.23809523809523,"duration":1.26,"ease":"expo.out","immediateRender":false}, 3.779);
-  tl.fromTo("#activefishing-n-s3", {"yPercent":0}, {"yPercent":-90.9090909090909,"duration":1.2,"ease":"expo.out","immediateRender":false}, 3.809);
-  tl.fromTo("#activefishing-pl .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 4.019);
-  tl.fromTo("#activefishing-s1", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 3.669);
-  tl.fromTo("#activefishing-s1", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 5.280);
-  tl.fromTo("#activefishing-disc", {"opacity":0.95}, {"opacity":0.25,"duration":0.4,"ease":"power2.out","immediateRender":false}, 5.280);
-  tl.fromTo("#activefishing-g-0", {"x":-398.39094500639476,"y":-619.7192477877252,"rotation":-22.132830278133042,"scale":0.6,"opacity":0}, {"x":0,"y":0,"rotation":0,"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 5.380);
-  tl.fromTo("#activefishing-g-1", {"x":198.5388255387079,"y":624.3214976566378,"rotation":19.313614103884902,"scale":0.6,"opacity":0}, {"x":0,"y":0,"rotation":0,"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 5.430);
-  tl.fromTo("#activefishing-g-2", {"x":77.23681519855745,"y":335.35130516975187,"rotation":-19.58502405177569,"scale":0.6,"opacity":0}, {"x":0,"y":0,"rotation":0,"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 5.480);
-  tl.fromTo("#activefishing-g-3", {"x":285.2546095935395,"y":419.4320298382081,"rotation":-0.588215293828398,"scale":0.6,"opacity":0}, {"x":0,"y":0,"rotation":0,"scale":1,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 5.530);
-  tl.fromTo("#activefishing-c1", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 5.944);
-  tl.set("#activefishing-c1", {"filter":"none"}, 6.564);
-  tl.fromTo("#activefishing-c2", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 6.176);
-  tl.set("#activefishing-c2", {"filter":"none"}, 6.796);
-  tl.fromTo("#activefishing-card", {"opacity":0,"scale":0.9}, {"opacity":1,"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.330);
-  tl.fromTo("#activefishing-lw", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.480);
-  tl.fromTo("#activefishing-mbg", {"attr":{"stdDeviation":"60 0"}}, {"attr":{"stdDeviation":"0 0"},"duration":0.45,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#activefishing-stage", {"x":810,"skewX":-14}, {"x":0,"skewX":0,"duration":0.45,"ease":"expo.out","immediateRender":false}, 0.000);
-  tl.set("#activefishing-stage", {"filter":"none"}, 0.470);
-  tl.set("#activefishing-stage", {"filter":"url(#activefishing-mb)"}, 8.769);
-  tl.fromTo("#activefishing-mbg", {"attr":{"stdDeviation":"0 0"}}, {"attr":{"stdDeviation":"60 0"},"duration":0.38,"ease":"power2.in","immediateRender":false}, 8.769);
-  tl.fromTo("#activefishing-stage", {"x":0,"skewX":0}, {"x":-810,"skewX":14,"duration":0.38,"ease":"fxWhip","immediateRender":false}, 8.769);
+  gsap.set("#activefishing-slide", {"x":380,"filter":"blur(14px)"});
+  gsap.set("#activefishing-cam", {"scale":2.95,"x":130,"y":46});
+  gsap.set("#activefishing-cw0-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-tint", {"opacity":0,"scale":0.7});
+  gsap.set("#activefishing-cwl0", {"opacity":0});
+  gsap.set("#activefishing-cw3-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-nm .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#activefishing-kick .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-kick i", {"scaleY":0});
+  gsap.set("#activefishing-nm .fx-ln > span", {"yPercent":0,"opacity":1});
+  gsap.set("#activefishing-hz-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#activefishing-hz-w1", {"yPercent":118,"opacity":0});
+  gsap.set("#activefishing-hz-w2", {"yPercent":118,"opacity":0});
+  gsap.set("#activefishing-hz-w3", {"yPercent":118,"opacity":0});
+  gsap.set("#activefishing-hz-w4", {"yPercent":118,"opacity":0});
+  gsap.set("#activefishing-chip", {"opacity":0,"x":-60});
+  gsap.set("#activefishing-sA", {"opacity":1});
+  gsap.set("#activefishing-pres .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#activefishing-odo-s0", {"yPercent":0});
+  gsap.set("#activefishing-odo-s1", {"yPercent":0});
+  gsap.set("#activefishing-odo-s2", {"yPercent":0});
+  gsap.set("#activefishing-odo-s3", {"yPercent":0});
+  gsap.set("#activefishing-odo", {"opacity":0,"y":40});
+  gsap.set("#activefishing-pl .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-plof", {"backgroundPosition":"100% 0%"});
+  gsap.set("#activefishing-bk", {"x":317.9,"y":102,"scale":0.35,"rotation":21,"opacity":0});
+  gsap.set("#activefishing-bk-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-bk-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-bf", {"x":-312.8,"y":119,"scale":0.35,"rotation":-24,"opacity":0});
+  gsap.set("#activefishing-bf-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-bf-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-bs", {"x":309.4,"y":-115.6,"scale":0.35,"rotation":-21,"opacity":0});
+  gsap.set("#activefishing-bs-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-bs-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-bo", {"x":-309.4,"y":-124.1,"scale":0.35,"rotation":24,"opacity":0});
+  gsap.set("#activefishing-bo-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-bo-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-cg", {"y":860,"rotation":5});
+  gsap.set("#activefishing-so-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-brands", {"opacity":0,"y":16});
+  gsap.set("#activefishing-so", {"y":0,"scale":1,"opacity":1});
+  gsap.set("#activefishing-card", {"scaleX":1,"scaleY":1});
+  gsap.set("#activefishing-sB", {"opacity":0});
+  gsap.set("#activefishing-vs", {"y":300,"scale":0.72,"opacity":0});
+  gsap.set("#activefishing-vs-r", {"rotationY":-32,"rotationX":10});
+  gsap.set("#activefishing-mk", {"x":640,"rotation":10,"opacity":1});
+  gsap.set("#activefishing-pc", {"x":-560,"opacity":1});
+  gsap.set("#activefishing-wh", {"x":560,"opacity":1});
+  gsap.set("#activefishing-mk-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-vs-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-pc-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-wh-cam", {"x":0,"y":0});
+  gsap.set("#activefishing-vs-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-mk-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-vtag .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-vtag i", {"scaleY":0});
+  gsap.set("#activefishing-op", {"scale":0.5,"opacity":0});
+  gsap.set("#activefishing-p1", {"y":50,"opacity":0});
+  gsap.set("#activefishing-p2", {"y":50,"opacity":0});
+  gsap.set("#activefishing-sC", {"opacity":0});
+  gsap.set("#activefishing-url .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#activefishing-ral .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-ral i", {"scaleY":0});
+  gsap.set("#activefishing-ra", {"x":1100});
+  gsap.set("#activefishing-rain", {"x":0});
+  gsap.set("#activefishing-rbl .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-rbl i", {"scaleY":0});
+  gsap.set("#activefishing-rb", {"x":-1100});
+  gsap.set("#activefishing-rbin", {"x":0});
+  gsap.set("#activefishing-pz", {"scale":0.55,"opacity":0});
+  gsap.set("#activefishing-sD", {"opacity":0});
+  gsap.set("#activefishing-lw", {"opacity":0,"x":40,"y":0});
+  gsap.set("#activefishing-to0", {"scale":0});
+  gsap.set("#activefishing-to1", {"scale":0});
+  gsap.set("#activefishing-to2", {"scale":0});
+  gsap.set("#activefishing-to3", {"scale":0});
+  gsap.set("#activefishing-to4", {"scale":0});
+  gsap.set("#activefishing-to5", {"scale":0});
+  gsap.set("#activefishing-to6", {"scale":0});
+  gsap.set("#activefishing-to7", {"scale":0});
+  gsap.set("#activefishing-to8", {"scale":0});
+  gsap.set("#activefishing-to9", {"scale":0});
+  gsap.set("#activefishing-to10", {"scale":0});
+  gsap.set("#activefishing-to11", {"scale":0});
+  gsap.set("#activefishing-to12", {"scale":0});
+  gsap.set("#activefishing-to13", {"scale":0});
+  gsap.set("#activefishing-to14", {"scale":0});
+  gsap.set("#activefishing-to15", {"scale":0});
+  gsap.set("#activefishing-to16", {"scale":0});
+  gsap.set("#activefishing-to17", {"scale":0});
+  gsap.set("#activefishing-to18", {"scale":0});
+  gsap.set("#activefishing-to19", {"scale":0});
+  gsap.set("#activefishing-to20", {"scale":0});
+  gsap.set("#activefishing-to21", {"scale":0});
+  gsap.set("#activefishing-to22", {"scale":0});
+  gsap.set("#activefishing-to23", {"scale":0});
+  gsap.set("#activefishing-to24", {"scale":0});
+  gsap.set("#activefishing-to25", {"scale":0});
+  gsap.set("#activefishing-to26", {"scale":0});
+  gsap.set("#activefishing-to27", {"scale":0});
+  gsap.set("#activefishing-pose", {"rotation":-5});
+  gsap.set("#activefishing-bk-r", {"rotation":-14});
+  gsap.set("#activefishing-bf-r", {"rotation":16});
+  gsap.set("#activefishing-bs-r", {"rotation":14});
+  gsap.set("#activefishing-bo-r", {"rotation":-16});
+  gsap.set("#activefishing-so-r", {"rotation":-4});
+  gsap.set("#activefishing-mk-r", {"rotation":-14});
+  gsap.set("#activefishing-pc-r", {"rotation":9});
+  gsap.set("#activefishing-wh-r", {"rotation":-7});
+  tl.fromTo("#activefishing-slide", {"x":380,"filter":"blur(14px)"}, {"x":0,"filter":"blur(0px)","duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.set("#activefishing-slide", {"filter":"none"}, 0.520);
+  tl.fromTo("#activefishing-cam", {"scale":2.95,"x":130,"y":46}, {"scale":2.66,"x":118,"y":40,"duration":0.6,"ease":"power1.out","immediateRender":false}, 0.000);
+  tl.fromTo("#activefishing-cam", {"scale":2.66,"x":118,"y":40}, {"scale":1,"x":0,"y":0,"duration":0.7700000000000001,"ease":"expo.inOut","immediateRender":false}, 0.600);
+  tl.fromTo("#activefishing-cw0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.75,"ease":"power2.inOut","immediateRender":false}, 0.200);
+  tl.fromTo("#activefishing-cw0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 1.320);
+  tl.fromTo("#activefishing-tint", {"opacity":0,"scale":0.7}, {"opacity":0.9,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 1.170);
+  tl.set("#activefishing-cw0", {"opacity":0}, 1.811);
+  tl.set("#activefishing-cw1", {"opacity":1}, 1.811);
+  tl.set("#activefishing-tint", {"color":"#c4d8fb"}, 1.811);
+  tl.set("#activefishing-cwl0", {"opacity":0}, 1.811);
+  tl.set("#activefishing-cwl1", {"opacity":1}, 1.811);
+  tl.fromTo("#activefishing-rig", {"scale":1.055}, {"scale":1,"duration":0.22,"ease":"power3.out","immediateRender":false}, 1.811);
+  tl.set("#activefishing-cw1", {"opacity":0}, 2.276);
+  tl.set("#activefishing-cw2", {"opacity":1}, 2.276);
+  tl.set("#activefishing-tint", {"color":"#f1dd9e"}, 2.276);
+  tl.set("#activefishing-cwl1", {"opacity":0}, 2.276);
+  tl.set("#activefishing-cwl2", {"opacity":1}, 2.276);
+  tl.fromTo("#activefishing-rig", {"scale":1.055}, {"scale":1,"duration":0.22,"ease":"power3.out","immediateRender":false}, 2.276);
+  tl.set("#activefishing-cw2", {"opacity":0}, 2.740);
+  tl.set("#activefishing-cw3", {"opacity":1}, 2.740);
+  tl.set("#activefishing-tint", {"color":"#f6c2c4"}, 2.740);
+  tl.set("#activefishing-cwl2", {"opacity":0}, 2.740);
+  tl.set("#activefishing-cwl3", {"opacity":1}, 2.740);
+  tl.fromTo("#activefishing-rig", {"scale":1.055}, {"scale":1,"duration":0.22,"ease":"power3.out","immediateRender":false}, 2.740);
+  tl.set("#activefishing-cw3", {"opacity":0}, 3.205);
+  tl.set("#activefishing-cw4", {"opacity":1}, 3.205);
+  tl.set("#activefishing-tint", {"color":"#e9dcc6"}, 3.205);
+  tl.set("#activefishing-cwl3", {"opacity":0}, 3.205);
+  tl.set("#activefishing-cwl4", {"opacity":1}, 3.205);
+  tl.fromTo("#activefishing-rig", {"scale":1.055}, {"scale":1,"duration":0.22,"ease":"power3.out","immediateRender":false}, 3.205);
+  tl.set("#activefishing-cw4", {"opacity":0}, 3.437);
+  tl.set("#activefishing-cw0", {"opacity":1}, 3.437);
+  tl.set("#activefishing-tint", {"color":"#ffc2d2"}, 3.437);
+  tl.set("#activefishing-cwl4", {"opacity":0}, 3.437);
+  tl.set("#activefishing-cwl0", {"opacity":1}, 3.437);
+  tl.fromTo("#activefishing-rig", {"scale":1.055}, {"scale":1,"duration":0.22,"ease":"power3.out","immediateRender":false}, 3.437);
+  tl.fromTo("#activefishing-cw3-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 3.245);
+  tl.fromTo("#activefishing-nm .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0.024,"immediateRender":false}, 0.210);
+  tl.fromTo("#activefishing-kick .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.370);
+  tl.fromTo("#activefishing-kick i", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 0.350);
+  tl.fromTo("#activefishing-nm .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.26,"ease":"power3.in","immediateRender":false}, 1.361);
+  tl.fromTo("#activefishing-kick .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 1.321);
+  tl.fromTo("#activefishing-kick i", {"scaleY":1}, {"scaleY":0,"duration":0.2,"ease":"power2.in","immediateRender":false}, 1.361);
+  tl.fromTo("#activefishing-hz-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.48,"ease":"expo.out","immediateRender":false}, 1.610);
+  tl.fromTo("#activefishing-hz-w1", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.48,"ease":"expo.out","immediateRender":false}, 2.100);
+  tl.fromTo("#activefishing-hz-w2", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.48,"ease":"expo.out","immediateRender":false}, 2.193);
+  tl.fromTo("#activefishing-hz-w3", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.48,"ease":"expo.out","immediateRender":false}, 2.600);
+  tl.fromTo("#activefishing-hz-w4", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.48,"ease":"expo.out","immediateRender":false}, 2.823);
+  tl.fromTo("#activefishing-chip", {"opacity":0,"x":-60}, {"opacity":1,"x":0,"duration":0.55,"ease":"expo.out","immediateRender":false}, 1.270);
+  tl.fromTo("#activefishing-cwl0", {"opacity":0}, {"opacity":1,"duration":0.3,"ease":"none","immediateRender":false}, 1.420);
+  tl.fromTo("#activefishing-sA", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 3.668);
+  tl.fromTo("#activefishing-pres .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 3.599);
+  tl.fromTo("#activefishing-odo-s0", {"yPercent":0}, {"yPercent":-95.45454545454545,"duration":0.75,"ease":"expo.out","immediateRender":false}, 3.639);
+  tl.fromTo("#activefishing-odo-s1", {"yPercent":0}, {"yPercent":-95.83333333333334,"duration":0.7,"ease":"expo.out","immediateRender":false}, 3.664);
+  tl.fromTo("#activefishing-odo-s2", {"yPercent":0}, {"yPercent":-95.23809523809523,"duration":0.65,"ease":"expo.out","immediateRender":false}, 3.689);
+  tl.fromTo("#activefishing-odo-s3", {"yPercent":0}, {"yPercent":-90.9090909090909,"duration":0.6,"ease":"expo.out","immediateRender":false}, 3.714);
+  tl.fromTo("#activefishing-odo", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"expo.out","immediateRender":false}, 3.599);
+  tl.fromTo("#activefishing-pl .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 3.699);
+  tl.fromTo("#activefishing-plof", {"backgroundPosition":"100% 0%"}, {"backgroundPosition":"0% 0%","duration":0.42,"ease":"power2.inOut","immediateRender":false}, 4.603);
+  tl.fromTo("#activefishing-bk", {"x":317.9,"y":102,"scale":0.35,"rotation":21,"opacity":0}, {"x":0,"y":0,"scale":1,"rotation":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 4.033);
+  tl.fromTo("#activefishing-bk-cam", {"x":0,"y":0}, {"x":-18.7,"y":-9.6,"duration":1.147,"ease":"sine.inOut","immediateRender":false}, 4.433);
+  tl.fromTo("#activefishing-bk-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 4.695);
+  tl.fromTo("#activefishing-bk", {"x":0,"y":0,"opacity":1}, {"x":-486.2,"y":-156,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-bf", {"x":-312.8,"y":119,"scale":0.35,"rotation":-24,"opacity":0}, {"x":0,"y":0,"scale":1,"rotation":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 4.068);
+  tl.fromTo("#activefishing-bf-cam", {"x":0,"y":0}, {"x":18.400000000000002,"y":-11.200000000000001,"duration":1.147,"ease":"sine.inOut","immediateRender":false}, 4.433);
+  tl.fromTo("#activefishing-bf-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 4.745);
+  tl.fromTo("#activefishing-bf", {"x":0,"y":0,"opacity":1}, {"x":478.40000000000003,"y":-182,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-bs", {"x":309.4,"y":-115.6,"scale":0.35,"rotation":-21,"opacity":0}, {"x":0,"y":0,"scale":1,"rotation":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 4.103);
+  tl.fromTo("#activefishing-bs-cam", {"x":0,"y":0}, {"x":-18.2,"y":10.88,"duration":1.147,"ease":"sine.inOut","immediateRender":false}, 4.433);
+  tl.fromTo("#activefishing-bs-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 4.795);
+  tl.fromTo("#activefishing-bs", {"x":0,"y":0,"opacity":1}, {"x":-473.2,"y":176.8,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-bo", {"x":-309.4,"y":-124.1,"scale":0.35,"rotation":24,"opacity":0}, {"x":0,"y":0,"scale":1,"rotation":0,"opacity":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 4.138);
+  tl.fromTo("#activefishing-bo-cam", {"x":0,"y":0}, {"x":18.2,"y":11.68,"duration":1.147,"ease":"sine.inOut","immediateRender":false}, 4.433);
+  tl.fromTo("#activefishing-bo-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 4.845);
+  tl.fromTo("#activefishing-bo", {"x":0,"y":0,"opacity":1}, {"x":473.2,"y":189.8,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-cg", {"y":860,"rotation":5}, {"y":0,"rotation":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 3.599);
+  tl.fromTo("#activefishing-so-cam", {"scale":1.06}, {"scale":1,"duration":0.25,"ease":"power2.out","immediateRender":false}, 4.575);
+  tl.fromTo("#activefishing-so-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 4.133);
+  tl.fromTo("#activefishing-so-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 4.989);
+  tl.fromTo("#activefishing-brands", {"opacity":0,"y":16}, {"opacity":1,"y":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 4.283);
+  tl.fromTo("#activefishing-pres .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-pl .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-odo", {"opacity":1,"y":0}, {"opacity":0,"y":-80,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-brands", {"opacity":1,"y":0}, {"opacity":0,"y":0,"duration":0.15,"ease":"none","immediateRender":false}, 5.180);
+  tl.fromTo("#activefishing-so", {"y":0,"scale":1,"opacity":1}, {"y":-380,"scale":1.35,"opacity":0,"duration":0.24,"ease":"power3.in","immediateRender":false}, 5.200);
+  tl.fromTo("#activefishing-card", {"scaleX":1,"scaleY":1}, {"scaleX":1.9,"scaleY":6.2,"duration":0.26,"ease":"power3.in","immediateRender":false}, 5.220);
+  tl.fromTo("#activefishing-sB", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 3.669);
+  tl.fromTo("#activefishing-sB", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 5.479);
+  tl.fromTo("#activefishing-vs", {"y":300,"scale":0.72,"opacity":0}, {"y":0,"scale":1,"opacity":1,"duration":0.72,"ease":"expo.out","immediateRender":false}, 5.400);
+  tl.fromTo("#activefishing-vs-r", {"rotationY":-32,"rotationX":10}, {"rotationY":16,"rotationX":-4,"duration":1.9379999999999997,"ease":"sine.inOut","immediateRender":false}, 5.400);
+  tl.fromTo("#activefishing-mk", {"x":640,"rotation":10,"opacity":1}, {"x":0,"rotation":0,"opacity":1,"duration":0.66,"ease":"expo.out","immediateRender":false}, 5.440);
+  tl.fromTo("#activefishing-pc", {"x":-560,"opacity":1}, {"x":0,"opacity":1,"duration":0.62,"ease":"expo.out","immediateRender":false}, 5.520);
+  tl.fromTo("#activefishing-wh", {"x":560,"opacity":1}, {"x":0,"opacity":1,"duration":0.62,"ease":"expo.out","immediateRender":false}, 5.580);
+  tl.fromTo("#activefishing-mk-cam", {"x":0,"y":0}, {"x":-23,"y":-7,"duration":1.5579999999999998,"ease":"sine.inOut","immediateRender":false}, 5.780);
+  tl.fromTo("#activefishing-vs-cam", {"x":0,"y":0}, {"x":-41.4,"y":-12.6,"duration":1.5579999999999998,"ease":"sine.inOut","immediateRender":false}, 5.780);
+  tl.fromTo("#activefishing-pc-cam", {"x":0,"y":0}, {"x":-69,"y":-21,"duration":1.5579999999999998,"ease":"sine.inOut","immediateRender":false}, 5.780);
+  tl.fromTo("#activefishing-wh-cam", {"x":0,"y":0}, {"x":-59.800000000000004,"y":-18.2,"duration":1.5579999999999998,"ease":"sine.inOut","immediateRender":false}, 5.780);
+  tl.fromTo("#activefishing-vs-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.75,"ease":"power2.inOut","immediateRender":false}, 5.930);
+  tl.fromTo("#activefishing-mk-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 6.409);
+  tl.fromTo("#activefishing-vs-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 6.973);
+  tl.fromTo("#activefishing-vtag .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.844);
+  tl.fromTo("#activefishing-vtag i", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 5.824);
+  tl.fromTo("#activefishing-op", {"scale":0.5,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 5.440);
+  tl.fromTo("#activefishing-p1", {"y":50,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 5.904);
+  tl.fromTo("#activefishing-p2", {"y":50,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 5.984);
+  tl.fromTo("#activefishing-op", {"scale":1.06}, {"scale":1,"duration":0.25,"ease":"power2.out","immediateRender":false}, 6.409);
+  tl.fromTo("#activefishing-mk", {"x":0,"rotation":0,"opacity":1}, {"x":760,"rotation":8,"opacity":1,"duration":0.26,"ease":"power3.in","immediateRender":false}, 7.078);
+  tl.fromTo("#activefishing-wh", {"x":0,"opacity":1}, {"x":620,"opacity":1,"duration":0.26,"ease":"power3.in","immediateRender":false}, 7.098);
+  tl.fromTo("#activefishing-pc", {"x":0,"opacity":1}, {"x":-620,"opacity":1,"duration":0.26,"ease":"power3.in","immediateRender":false}, 7.098);
+  tl.fromTo("#activefishing-vs", {"y":0,"scale":1,"opacity":1}, {"y":-140,"scale":1.5,"opacity":0,"duration":0.26,"ease":"power3.in","immediateRender":false}, 7.078);
+  tl.fromTo("#activefishing-op", {"scale":1,"opacity":1}, {"scale":0.7,"opacity":0,"duration":0.22,"ease":"power3.in","immediateRender":false}, 7.108);
+  tl.fromTo("#activefishing-p1", {"y":0,"opacity":1}, {"y":90,"opacity":0,"duration":0.22,"ease":"power3.in","immediateRender":false}, 7.108);
+  tl.fromTo("#activefishing-p2", {"y":0,"opacity":1}, {"y":90,"opacity":0,"duration":0.22,"ease":"power3.in","immediateRender":false}, 7.138);
+  tl.fromTo("#activefishing-vtag .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.22,"ease":"power3.in","immediateRender":false}, 7.078);
+  tl.fromTo("#activefishing-sC", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 5.480);
+  tl.fromTo("#activefishing-sC", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 7.337);
+  tl.fromTo("#activefishing-url .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.02,"immediateRender":false}, 7.278);
+  tl.fromTo("#activefishing-ral .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 7.458);
+  tl.fromTo("#activefishing-ral i", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 7.438);
+  tl.fromTo("#activefishing-ra", {"x":1100}, {"x":0,"duration":0.72,"ease":"expo.out","immediateRender":false}, 7.298);
+  tl.fromTo("#activefishing-rain", {"x":0}, {"x":-170,"duration":1.850999999999999,"ease":"none","immediateRender":false}, 7.298);
+  tl.fromTo("#activefishing-rbl .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 7.538);
+  tl.fromTo("#activefishing-rbl i", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 7.518);
+  tl.fromTo("#activefishing-rb", {"x":-1100}, {"x":0,"duration":0.72,"ease":"expo.out","immediateRender":false}, 7.378);
+  tl.fromTo("#activefishing-rbin", {"x":0}, {"x":150,"duration":1.770999999999999,"ease":"none","immediateRender":false}, 7.378);
+  tl.fromTo("#activefishing-pz", {"scale":0.55,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 7.742);
+  tl.fromTo("#activefishing-sD", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 7.338);
+  tl.fromTo("#activefishing-lw", {"opacity":0,"x":40}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.200);
+  tl.fromTo("#activefishing-lw", {"opacity":1}, {"opacity":0,"duration":0.06,"ease":"none","immediateRender":false}, 3.609);
+  tl.fromTo("#activefishing-lw", {"opacity":0}, {"opacity":1,"duration":0.2,"ease":"none","immediateRender":false}, 5.480);
+  tl.fromTo("#activefishing-lw", {"x":0,"y":0}, {"x":-357,"y":159,"duration":0.6,"ease":"expo.inOut","immediateRender":false}, 7.038);
+  tl.fromTo("#activefishing-to0", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.827);
+  tl.fromTo("#activefishing-to1", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.850);
+  tl.fromTo("#activefishing-to2", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.873);
+  tl.fromTo("#activefishing-to3", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.896);
+  tl.fromTo("#activefishing-to4", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.804);
+  tl.fromTo("#activefishing-to5", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.827);
+  tl.fromTo("#activefishing-to6", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.850);
+  tl.fromTo("#activefishing-to7", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.873);
+  tl.fromTo("#activefishing-to8", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.781);
+  tl.fromTo("#activefishing-to9", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.804);
+  tl.fromTo("#activefishing-to10", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.827);
+  tl.fromTo("#activefishing-to11", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.850);
+  tl.fromTo("#activefishing-to12", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.758);
+  tl.fromTo("#activefishing-to13", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.781);
+  tl.fromTo("#activefishing-to14", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.804);
+  tl.fromTo("#activefishing-to15", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.827);
+  tl.fromTo("#activefishing-to16", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.735);
+  tl.fromTo("#activefishing-to17", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.758);
+  tl.fromTo("#activefishing-to18", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.781);
+  tl.fromTo("#activefishing-to19", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.804);
+  tl.fromTo("#activefishing-to20", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.712);
+  tl.fromTo("#activefishing-to21", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.735);
+  tl.fromTo("#activefishing-to22", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.758);
+  tl.fromTo("#activefishing-to23", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.781);
+  tl.fromTo("#activefishing-to24", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.689);
+  tl.fromTo("#activefishing-to25", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.712);
+  tl.fromTo("#activefishing-to26", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.735);
+  tl.fromTo("#activefishing-to27", {"scale":0}, {"scale":1.26,"duration":0.25300000000000006,"ease":"power2.in","immediateRender":false}, 8.758);
+  tl.set("#activefishing-toutf", {"opacity":1}, 9.119);
   tl.set({}, {}, 9.149);
   window.__timelines["activefishing"] = tl;
   </script>

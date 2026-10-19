@@ -34,19 +34,21 @@ try { for (const f of JSON.parse(fs.readFileSync(path.join(ROOT, AD, 'manifest.j
 const pad = (src) => PAD[path.basename(src)] || [0.02, 0.02, 0.02, 0.02];
 
 // the assortment (all listed in velka-ryba.cz „Plandavky na pstruhy“ / Lov pstruhů, 19. 10. 2026)
+// wr = rotation in the lure box / shelf: every bait on ONE 45° axis with the hook end up-right (knolling; body axes measured by PCA
+// of the alpha; the Cardiffs keep their embossed „SHIMANO CE4.5g“ upright, the text-less spoons turn 180°)
 const L = {
-  cardiffO: { src: AD + 'H2_shimano_cardiff_roll_swimmer_ce_orange_front.png', brand: 'Shimano', glow: '#fc9c24', rot: -10, wr: -34 },
-  illexP: { src: AD + 'H3_illex_native_spoon_pink_yamame.png', brand: 'Illex', glow: '#e2559a', rot: 0 },
-  lj: { src: AD + 'S8_lucky_john_eos_003.png', brand: 'Lucky John', glow: '#4fb4f0', rot: 0 },
-  daiwaG: { src: AD + 'S3b_daiwa_presso_adm_flashing_green_single.png', brand: 'Daiwa', glow: '#22c65e', rot: 0 },
-  westin: { src: AD + 'S9_westin_fidusen_slim_pink_yellow_clown.png', brand: 'Westin', glow: '#f0407a', rot: -12, wr: -38 },
-  cardiffL: { src: AD + 'S4_shimano_cardiff_roll_swimmer_ce_lime_front.png', brand: 'Shimano', glow: '#d8d22a', rot: -10, wr: -34 },
-  vanpla: { src: AD + 'S10_vanpla_pink_black.png', brand: 'Vanpla', glow: '#d8285a', rot: 0 },
-  sukoshi: { src: AD + 'S11_berkley_sukoshi_splat_pel.png', brand: 'Berkley', glow: '#c99a5b', rot: -12, wr: -36 },
-  illexC: { src: AD + 'S1_illex_native_spoon_copper_trout.png', brand: 'Illex', glow: '#e08a2a', rot: 0 },
-  daiwaB: { src: AD + 'S2b_daiwa_presso_adm_manhattan_single.png', brand: 'Daiwa', glow: '#2a8fd0', rot: 0 },
-  camo: { src: AD + 'S5_shimano_cardiff_roll_swimmer_camo_military_pink_front.png', brand: 'Shimano', glow: '#e04a9a', rot: -10, wr: -34 },
-  flail: { src: AD + 'S6_berkley_powerbait_power_flail_trout_pellet.png', brand: 'Berkley', glow: '#b08a66', rot: -8, wr: -40 },
+  cardiffO: { src: AD + 'H2_shimano_cardiff_roll_swimmer_ce_orange_front.png', brand: 'Shimano', glow: '#fc9c24', rot: -10, wr: -36 },
+  illexP: { src: AD + 'H3_illex_native_spoon_pink_yamame.png', brand: 'Illex', glow: '#e2559a', rot: 0, wr: 181 },
+  lj: { src: AD + 'S8_lucky_john_eos_003.png', brand: 'Lucky John', glow: '#4fb4f0', rot: 0, wr: 178 },
+  daiwaG: { src: AD + 'S3b_daiwa_presso_adm_flashing_green_single.png', brand: 'Daiwa', glow: '#22c65e', rot: 0, wr: 178 },
+  westin: { src: AD + 'S9_westin_fidusen_slim_pink_yellow_clown.png', brand: 'Westin', glow: '#f0407a', rot: -12, wr: -45 },
+  cardiffL: { src: AD + 'S4_shimano_cardiff_roll_swimmer_ce_lime_front.png', brand: 'Shimano', glow: '#d8d22a', rot: -10, wr: -36 },
+  vanpla: { src: AD + 'S10_vanpla_pink_black.png', brand: 'Vanpla', glow: '#d8285a', rot: 0, wr: 192 },
+  sukoshi: { src: AD + 'S11_berkley_sukoshi_splat_pel.png', brand: 'Berkley', glow: '#c99a5b', rot: -12, wr: -45 },
+  illexC: { src: AD + 'S1_illex_native_spoon_copper_trout.png', brand: 'Illex', glow: '#e08a2a', rot: 0, wr: 180 },
+  daiwaB: { src: AD + 'S2b_daiwa_presso_adm_manhattan_single.png', brand: 'Daiwa', glow: '#2a8fd0', rot: 0, wr: 177 },
+  camo: { src: AD + 'S5_shimano_cardiff_roll_swimmer_camo_military_pink_front.png', brand: 'Shimano', glow: '#e04a9a', rot: -10, wr: -36 },
+  flail: { src: AD + 'S6_berkley_powerbait_power_flail_trout_pellet.png', brand: 'Berkley', glow: '#b08a66', rot: -8, wr: -44 },
 };
 const STROBE = ['illexP', 'lj', 'cardiffO', 'daiwaG', 'westin', 'cardiffL', 'vanpla', 'sukoshi'];   // not the Cardiff first: the Reel hook ends on it
 const WALL = ['illexP', 'cardiffO', 'lj', 'daiwaB', 'westin', 'illexC', 'vanpla', 'cardiffL', 'daiwaG', 'sukoshi', 'camo', 'flail'];
@@ -80,7 +82,7 @@ export default function velkaryba(ctx) {
   ${ctx.S} .vr-slab{position:absolute;transform:skewX(-14deg)}
   ${ctx.S} .vr-slab i{position:absolute;inset:0;transform-origin:0 50%;display:block}
   ${ctx.S} .vr-lbl{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.78)}
-  ${ctx.S} .vr-cap{position:absolute;font-family:'Nunito';font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.86);white-space:nowrap;text-shadow:0 1px 2px rgba(4,12,26,.9),0 0 14px rgba(4,12,26,.85)}
+  ${ctx.S} .vr-cap{position:absolute;font-family:'Nunito';font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.86);white-space:nowrap;text-shadow:0 1px 2px rgba(4,12,26,.9),0 0 14px rgba(4,12,26,.85)}
   ${ctx.S} .vr-tile{position:absolute;border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 60%);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),inset 0 -26px 40px rgba(4,12,26,.35),0 18px 40px rgba(0,0,0,.25)}
   ${ctx.S} .vr-lure{position:absolute;display:block;filter:drop-shadow(0 12px 12px rgba(0,0,0,.5))}
   ${ctx.S} .vr-tglow{position:absolute;inset:0;border-radius:28px;display:block}
@@ -98,7 +100,6 @@ export default function velkaryba(ctx) {
   const tWhip = vs('Shimano', ctx.at(2, 2), ctx.at(2, 2), ctx.at(2, 2));        // 4.58 (rod lands on „Shimano“)
   const tTry = vs('vyzkoušíte', ctx.at(2, 3), ctx.at(2, 3), t3);               // 5.02
   const tWater = vs('přímo', ctx.at(3, 1), ctx.at(3, 1), ctx.at(3, 2));         // 5.95
-  const tLogoFly = q(4, 0, 0.5), tURL = ctx.at(4, 1);
   const OUT_D = 0.44;
 
   // =============== bar 0 · VŠE NA PŘÍVLAČ · spoon strobe on the 8ths ===============
@@ -116,22 +117,32 @@ export default function velkaryba(ctx) {
     const dir = i % 2 ? 1 : -1;
     ctx.tl.fromTo(P.cam, { x: -26 * dir, rotation: -4 * dir }, { x: 26 * dir, rotation: 4 * dir, duration: b - a, ease: 'none' }, a);
     if (i < STROBE.length - 1) ctx.tl.set(P.sel, { opacity: 0 }, b);
-    s0 += `<div class="vr-lbl" id="${ctx.id(`br${i}`)}" style="top:1420px;font-size:30px">${ctx.esc(lu.brand)}</div>`;
+    s0 += `<div class="vr-lbl" id="${ctx.id(`br${i}`)}" style="top:1416px;font-size:36px;color:rgba(255,255,255,.92)">${ctx.esc(lu.brand)}</div>`;
     ctx.tl.fromTo(ctx.sel(`br${i}`), { opacity: 0 }, { opacity: 1, duration: 0.001, ease: 'none' }, a);
     if (i < STROBE.length - 1) ctx.tl.set(ctx.sel(`br${i}`), { opacity: 0 }, b);
     if (i) ctx.tl.set(ctx.sel('sg'), { color: lu.glow }, a);
   });
-  // headline: claim on screen from the downbeat, the red tag punches behind PŘÍVLAČ on the spoken word
+  // headline: claim on screen from the downbeat (hard cut, no mask reveal → frame 1 already sells), the red tag punches behind
+  // PŘÍVLAČ on the spoken word. Leading 1.07: at 0.96 the Ř caron of line 2 touched the Š of VŠE and read as „VŞE“.
   const f0 = ctx.fit('PŘÍVLAČ', { ...DISP, maxW: 880, maxLines: 1, sizes: [190, 180, 172, 164, 156, 148] });
-  const S0 = f0.size, Y0 = 392, P0 = Math.round(S0 * 0.96);
+  const S0 = f0.size, Y0 = 392, P0 = Math.round(S0 * 1.07);
   const tPriv = vs('přívlač', ctx.at(0, 3), ctx.at(0, 2), ctx.at(0, 3));
   s0 += slab(ctx, 'slabP', { x: SL - 10, y: Y0 + P0 + S0 * 0.14, w: widthOf(ctx, 'Přívlač', S0) + 40, h: S0 * 0.84, t: tPriv - 0.04 });
-  const h0a = line(ctx, 'h0a', 'Vše na', { y: Y0, size: S0, t: 0.02, d: 0.55 });
-  const h0b = line(ctx, 'h0b', 'Přívlač', { y: Y0 + P0, size: S0, t: 0.12, d: 0.55 });
+  const h0a = line(ctx, 'h0a', 'Vše na', { y: Y0, size: S0 });
+  const h0b = line(ctx, 'h0b', 'Přívlač', { y: Y0 + P0, size: S0 });
   s0 += h0a.html + h0b.html;
+  // kinetic settle from frame 1: the two lines slide in from opposite sides (readable all the way), RGB hit on the kick
+  ctx.tl.fromTo(h0a.sel, { x: 34 }, { x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(h0b.sel, { x: 64 }, { x: 0, duration: 0.56, ease: 'expo.out' }, 0);
+  fx.chroma(ctx, h0a.sel, 0, { amt: 6, d: 0.3 });
   fx.chroma(ctx, h0b.sel, tPriv, { amt: 7, d: 0.35 });
   fx.punch(ctx, h0b.sel, tPriv, { scale: 1.04, d: 0.3 });
-  html += scene('sc0', 0, t1, s0);
+  // hard cut on the downbeat + slam (lesson broll/finale: no zoom-from-blur into a kick, the kick frame must not be mush)
+  // origin on the headline's top edge → the slam never pushes type under the TA plate or past the left safe edge
+  ctx.tl.set(ctx.sel('slam'), { transformOrigin: `50% ${Y0}px` }, 0);
+  ctx.tl.fromTo(ctx.sel('slam'), { scale: 1.08 }, { scale: 1, duration: 0.42, ease: 'expo.out' }, 0);
+  html += scene('sc0', 0, t1, `<div class="fx-full" id="${ctx.id('slam')}">${s0}</div>`);
+  fx.flash(ctx, 0, { id: 'fl0', color: '#9cc4f0', peak: 0.26, d: 0.26, blend: 'screen' });
 
   // =============== bars 1–2½ · SPECIÁLKA Z OLOMOUCE · Shimano Vanquish FA CE studio ===============
   let s1 = `<div class="fx-field" id="${ctx.id('f1')}" style="background:radial-gradient(90% 62% at 55% 60%, #21528f 0%, ${DEEP} 56%, ${INK} 100%)"></div>`;
@@ -161,10 +172,10 @@ export default function velkaryba(ctx) {
   ctx.tl.fromTo(ctx.sel('tg1t'), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tTag + 0.04);
   // spec chips (verified on the product page 19. 10.)
   const cw = 280, cg = 18, cy = 1236;
-  s1 += `<div class="vr-cap" id="${ctx.id('cap1')}" style="left:${SL + 2}px;top:${cy - 44}px;font-size:22px">Shimano Vanquish FA Competition Edition</div>`;
+  s1 += `<div class="vr-cap" id="${ctx.id('cap1')}" style="left:${SL + 2}px;top:${cy - 46}px;font-size:26px">Shimano Vanquish FA Competition Edition</div>`;
   ctx.tl.fromTo(ctx.sel('cap1'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, tSpec - 0.06);
   [['Hmotnost', '145 g'], ['Převod', '5,1 : 1'], ['Ložiska', '11 + 1']].forEach(([lb, v], i) => {
-    s1 += fx.chip(ctx, { id: `ch${i}`, label: lb, value: v, x: SL + i * (cw + cg), y: cy, w: cw, tone: 'dark', accent: i === 0 ? RED : ICE, t: tSpec + i * 0.1, from: 'up', font: 'Nunito', vs: 52, ls: 19 });
+    s1 += fx.chip(ctx, { id: `ch${i}`, label: lb, value: v, x: SL + i * (cw + cg), y: cy, w: cw, tone: 'dark', accent: i === 0 ? RED : ICE, t: tSpec + i * 0.1, from: 'up', font: 'Nunito', vs: 54, ls: 24 });
   });
   // whip out (motion blur to the left) into the rod
   const WH = 0.14;
@@ -212,59 +223,72 @@ export default function velkaryba(ctx) {
   const h2c = line(ctx, 'h2c', 'přímo u vody', { y: Y2 + 2 * P2, size: S2, t: tWater - 0.02 });
   s2 += h2c.html;
   fx.chroma(ctx, h2c.sel, tWater + 0.06, { amt: 6, d: 0.3 });
-  s2 += `<div class="vr-cap" id="${ctx.id('cap2')}" style="left:${SL + 2}px;top:1224px;font-size:22px">${ctx.esc(ctx.nb('Shimano Cardiff Exlead Competition · 1,83 m · 0,4–4,5 g'))}</div>`;
-  ctx.tl.fromTo(ctx.sel('cap2'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, t3 - 0.08);
-  s2 += fx.chip(ctx, { id: 'rtc', label: 'Prodejna Olomouc · půjčte si prut', value: 'Shimano Rod Test Center', x: SL, y: 1268, tone: 'dark', accent: RED, t: t3, from: 'left', font: 'Nunito', vs: 46, ls: 19 });
+  // chip + spec caption sit RIGHT of the rod's butt (right-aligned to the Reels UI column x 940), so the blank never cuts through text
+  const rtcL = 'Prodejna Olomouc · půjčte si prut', rtcV = 'Shimano Rod Test Center', UIX = ctx.W - ctx.safe.uiRight;
+  const rtcW = Math.ceil(Math.max(ctx.measure(ctx.nb(rtcL), { font: 'Nunito', wght: 700, size: 22, upper: true, tracking: 0.14 }), ctx.measure(rtcV, { font: 'Nunito', wght: 800, size: 46 })) + 64);
+  const rtcY = 1262;
+  s2 += fx.chip(ctx, { id: 'rtc', label: rtcL, value: rtcV, x: UIX - rtcW, y: rtcY, w: rtcW, tone: 'dark', accent: RED, t: t3, from: 'right', font: 'Nunito', vs: 46, ls: 22 });
+  s2 += `<div class="vr-cap" id="${ctx.id('cap2')}" style="right:${ctx.W - UIX}px;top:${rtcY + 128}px;font-size:24px;text-align:right">${ctx.esc(ctx.nb('Cardiff Exlead Competition · 1,83 m · 0,4–4,5 g'))}</div>`;
+  ctx.tl.fromTo(ctx.sel('cap2'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, t3 + 0.12);
+  ctx.report(`rod chip ${rtcW}px at x ${UIX - rtcW}–${UIX}, caption ${Math.round(ctx.measure(ctx.nb('Cardiff Exlead Competition · 1,83 m · 0,4–4,5 g'), { font: 'Nunito', wght: 800, size: 24, upper: true, tracking: 0.12 }))}px`);
   ctx.tl.fromTo(ctx.sel('w2'), { x: 620, filter: 'blur(26px)' }, { x: 0, filter: 'blur(0px)', duration: 0.38, ease: 'expo.out' }, tWhip);
   ctx.tl.set(ctx.sel('w2'), { filter: 'none' }, tWhip + 0.4);
   html += scene('sc2', tWhip, t4, `<div class="fx-full" id="${ctx.id('w2')}">${s2}</div>`);
 
   // =============== bar 4 · the lure box (12 lures · 7 brands) + lockup ===============
+  // The box hits ON the downbeat: tiles pop in reading order on 32nds (row 1 already in at t4), baits drop into them; logo, URL and
+  // the red price-tag „Věnuje ceny · MČR 2026“ follow within the first beat, so the URL holds ≥ 1.2 s before the wipe.
   let s3 = fx.field(ctx, { id: 'f3', kind: 'radial', c1: '#22548f', c2: DEEP, at: '50% 40%' });
-  // 4 × 3 compartments, every lure laid on the same diagonal (flat-lay), brand under it, its own colour glowing from below
-  const GX = 102, GY = 388, GW = 876, cols = 4, rows = 3, gap = 12, th = 252;
+  const GX = 102, GY = 388, GW = 876, cols = 4, rows = 3, gap = 12, th = 236;
   const tw = (GW - gap * (cols - 1)) / cols;
-  const order = WALL.map((_, i) => i).sort((a, b) => ctx.rnd(a * 7 + 3) - ctx.rnd(b * 7 + 3));
-  const tW = (k) => t4 - 0.02 + k * (ctx.BEAT / 4) * 0.5;                  // fast cascade, all 12 in by ≈ t4 + 0.65 s
+  const tW = (k) => t4 - 0.1 + k * 0.026;
   let wall = '';
   WALL.forEach((key, i) => {
     const lu = L[key], c = i % cols, r = Math.floor(i / cols);
     const x = GX + c * (tw + gap), y = GY + r * (th + gap);
-    const wr = lu.wr || 0, f = fitRot(ctx, lu.src, tw - 14, th - 46, wr, 1);
-    const k = order.indexOf(i), t = tW(k);
-    const lx = (tw - f.w) / 2, ly = (th - 36 - f.h) / 2 + 4;
+    const wr = lu.wr || 0, f = fitRot(ctx, lu.src, tw - 18, th - 52, wr, 1);
+    const t = tW(i);
+    const lx = (tw - f.w) / 2, ly = (th - 40 - f.h) / 2 + 4;
     wall += `<div class="vr-tile" id="${ctx.id(`tile${i}`)}" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;width:${tw.toFixed(1)}px;height:${th}px">`
       + `<i class="vr-tglow" style="background:linear-gradient(0deg,${ctx.rgba(lu.glow, 0.42)} 0%,${ctx.rgba(lu.glow, 0)} 62%)"></i>`
       + `<img class="vr-lure" id="${ctx.id(`lu${i}`)}" src="${ctx.asset(lu.src)}" alt="" style="left:${lx.toFixed(1)}px;top:${ly.toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px">`
-      + `<div class="vr-lbl" style="bottom:13px;font-size:18px;letter-spacing:.16em">${ctx.esc(lu.brand)}</div></div>`;
-    ctx.tl.fromTo(ctx.sel(`tile${i}`), { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.42, ease: 'back.out(1.7)' }, t);
-    ctx.tl.fromTo(ctx.sel(`lu${i}`), { y: -60, rotation: wr + (k % 2 ? 1 : -1) * 30, opacity: 0 }, { y: 0, rotation: wr, opacity: 1, duration: 0.55, ease: 'expo.out' }, t + 0.04);
+      + `<div class="vr-lbl" style="bottom:12px;font-size:23px;letter-spacing:.1em;color:rgba(255,255,255,.88)">${ctx.esc(lu.brand)}</div></div>`;
+    ctx.tl.fromTo(ctx.sel(`tile${i}`), { opacity: 0 }, { opacity: 1, duration: 0.07, ease: 'none' }, t);
+    ctx.tl.fromTo(ctx.sel(`tile${i}`), { scale: 0.82 }, { scale: 1, duration: 0.36, ease: 'back.out(1.7)' }, t);
+    ctx.tl.fromTo(ctx.sel(`lu${i}`), { y: -48, rotation: wr + (i % 2 ? 1 : -1) * 24, opacity: 0 }, { y: 0, rotation: wr, opacity: 1, duration: 0.42, ease: 'expo.out' }, t + 0.03);
   });
   s3 += `<div class="fx-full" id="${ctx.id('wallp')}" style="perspective:1600px;perspective-origin:50% 30%"><div class="fx-full" id="${ctx.id('wall')}">${wall}</div></div>`;
   ctx.tl.set(ctx.sel('wall'), { transformOrigin: '50% 30%' }, 0);
-  ctx.tl.fromTo(ctx.sel('wall'), { rotationX: 24, scale: 1.08 }, { rotationX: 0, scale: 1, duration: 0.9, ease: 'expo.out' }, t4);
-  // beat accents on the compartments that have already landed
-  const landed = (tt) => WALL.map((_, i) => i).filter((i) => tW(order.indexOf(i)) + 0.46 < tt);
-  [ctx.at(4, 2)].forEach((tt) => { const ids = landed(tt); const pick = ids.includes(1) ? 1 : ids[0]; if (pick != null) fx.punch(ctx, ctx.sel(`tile${pick}`), tt, { scale: 1.08, d: 0.32 }); });
-  // lockup: URL in the brand face, the logo bug lands above it
-  const fU = ctx.fit('velka-ryba.cz', { ...DISP, maxW: 840, maxLines: 1, sizes: [108, 100, 96, 92, 88, 84] });
-  const UY = 1318;   // grid ends at 1176, logo 1189–1292, URL 1318–1420
-  const hu = fx.headline(ctx, { ...DISP, id: 'url', text: 'velka-ryba.cz', x: SL, y: UY, w: CW, size: fU.size, maxLines: 1, lh: 0.96, align: 'center', t: tURL, reveal: 'chars', stagger: 0.022, d: 0.5 });
+  ctx.tl.fromTo(ctx.sel('wall'), { rotationX: 20, scale: 1.06 }, { rotationX: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, t4);
+  // beat accent: the orange Cardiff (Trout Area spoon) pops on beat 3
+  fx.punch(ctx, ctx.sel('tile1'), ctx.at(4, 2), { scale: 1.08, d: 0.32 });
+  // lockup: logo bug lands above the URL, URL in the brand face, red price-tag „Věnuje ceny · MČR 2026“ (brief: every sponsor)
+  const gridB = GY + rows * th + (rows - 1) * gap;                       // 1120
+  const fU = ctx.fit('velka-ryba.cz', { ...DISP, maxW: 840, maxLines: 1, sizes: [104, 100, 96, 92, 88, 84] });
+  const UY = gridB + 132;                                                // logo 1136–1239, URL 1252–1348
+  const hu = fx.headline(ctx, { ...DISP, id: 'url', text: 'velka-ryba.cz', x: SL, y: UY, w: CW, size: fU.size, maxLines: 1, lh: 0.96, align: 'center', t: t4 + 0.1, reveal: 'lines', d: 0.45 });
   s3 += hu.html;
+  const pzS = 34, pzTxt = 'Věnuje ceny · MČR 2026', pzW = widthOf(ctx, pzTxt, pzS) + 48, pzY = UY + Math.round(fU.size * 0.96) + 26, tPz = q(4, 0, 0.5);
+  s3 += slab(ctx, 'pz', { x: (W - pzW) / 2, y: pzY, w: pzW, h: pzS * 1.42, t: tPz });
+  s3 += `<div class="vr-tag" id="${ctx.id('pzt')}" style="left:${Math.round((W - pzW) / 2 + 24)}px;top:${Math.round(pzY + pzS * 0.2)}px;font-size:${pzS}px">${ctx.esc(ctx.nb(pzTxt))}</div>`;
+  ctx.tl.fromTo(ctx.sel('pzt'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tPz + 0.05);
   html += scene('sc3', t4, END, s3);
-  fx.flash(ctx, t4, { id: 'fl4', color: '#ffffff', peak: 0.28, d: 0.32, blend: 'screen' });
+  fx.flash(ctx, t4, { id: 'fl4', color: '#cfe2ff', peak: 0.16, d: 0.28, blend: 'screen' });
 
-  // =============== the sponsor logo bug (top right, opposite the TA plate) → flies into the lockup ===============
+  // =============== the sponsor logo bug (top right, opposite the TA plate) → lockup ===============
   const lg = ctx.logo(LOGO, { box: [240, ctx.plate.rect.h + 6], id: 'logo', label: 'velkaryba logo bug' });
   const bx = W - ctx.safe.right - lg.w, by = ctx.plate.rect.y - 3;
-  const lx1 = (W - lg.w) / 2, ly1 = UY - lg.h - 26;
-  html += `<div class="fx-abs" id="${ctx.id('lgw')}" style="left:${bx}px;top:${by}px;width:${lg.w}px;height:${lg.h}px">${lg.html}</div>`;
+  const lx1 = (W - lg.w) / 2, ly1 = UY - lg.h - 13;
+  html += `<div class="fx-abs" id="${ctx.id('lgw')}" style="left:${bx}px;top:${by}px;width:${lg.w}px;height:${lg.h}px"><div class="fx-abs" id="${ctx.id('lgi')}" style="inset:0">${lg.html}</div></div>`;
   const tLg = vs('Velká', 0.25, 0, ctx.at(0, 1));
   ctx.tl.fromTo(ctx.sel('lgw'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, Math.max(0.06, tLg));
-  ctx.tl.fromTo(ctx.sel('lgw'), { x: 0, y: 0 }, { x: lx1 - bx, y: ly1 - by, duration: 0.55, ease: 'expo.inOut' }, tLogoFly);
+  // the bug blinks out of the corner just before the downbeat and pops in above the URL with the box (no flight across the lures)
+  ctx.tl.fromTo(ctx.sel('lgi'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.7, duration: 0.12, ease: 'power2.in' }, t4 - 0.12);
+  ctx.tl.fromTo(ctx.sel('lgw'), { x: 0, y: 0 }, { x: lx1 - bx, y: ly1 - by, duration: 0.001, ease: 'none' }, t4);
+  ctx.tl.fromTo(ctx.sel('lgi'), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2)' }, t4 + 0.06);
 
   // =============== transitions ===============
-  fx.tIn(ctx, 'zoom', { d: 0.42 });
+  fx.tIn(ctx, 'cut');
   fx.tOut(ctx, 'wipe', { d: OUT_D, dir: 'up' });
   ctx.report(`velkaryba: strobe ${STROBE.length} lures, wall ${WALL.length} lures (${new Set(WALL.map((k) => L[k].brand)).size} brands), whip ${tWhip.toFixed(2)} s, water ${tWater.toFixed(2)} s, VO end ${ctx.vo.end?.toFixed?.(2)}`);
   return { html, css };
@@ -283,13 +307,17 @@ export function hook(ctx) {
   // the back (gold) has no hook: size + centre it on the front's body (body = 0.64 of the front width, centre offset rotated by -9°)
   const back = fx.product(ctx, { id: 'hk', src: B, w: Math.min(f.w * 0.653, ctx.dims(B)[0]), cx: W / 2 - 0.1598 * f.w, cy: 1070 + 0.1068 * f.w, ground: 'none', pad: pad(B), rot: -9, maxUp: 1 });
   html += `<div class="fx-full" id="${ctx.id('hpw')}">${front.html}${back.html}</div>`;
-  fx.productIn(ctx, 'hp', 0, { from: 'spin', d: 0.7 });
-  ctx.tl.fromTo(back.sel, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: 'none' }, ctx.at(0, 3) - 0.01);
+  // frame 1 must already sell (lesson activefishing hook): the spoon slams in fully opaque, no fade-from-nothing
+  ctx.tl.fromTo(ctx.sel('hp'), { scale: 1.3, rotation: -24 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'expo.out' }, 0);
+  const tFlip = ctx.at(0, 2) + 0.04;                                         // gold back holds ≈ 0.7 s before the cut
   fx.sweep(ctx, 'hp', 0.42, { d: 0.75 });
-  fx.flip(ctx, 'hp', 'hk', ctx.at(0, 3) - 0.1, { d: 0.42 });
+  ctx.tl.fromTo(back.sel, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: 'none' }, tFlip);
+  fx.flip(ctx, 'hp', 'hk', tFlip, { d: 0.42 });
   fx.pushIn(ctx, ctx.sel('hpw'), 0.5, END, { from: 1, to: 1.07, origin: '50% 56%' });
-  const H = fx.headline(ctx, { ...DISP, id: 'hh', text: 'Trout Area?', x: SL, y: 392, w: CW, maxLines: 2, sizes: [196, 184, 172, 160, 150, 140], lh: 0.94, color: DEEP, t: 0.03, d: 0.5 });
+  const H = fx.headline(ctx, { ...DISP, id: 'hh', text: 'Trout Area?', x: SL, y: 392, w: CW, maxLines: 2, sizes: [196, 184, 172, 160, 150, 140], lh: 0.94, color: DEEP });
   html += H.html;
+  ctx.tl.set(H.sel, { transformOrigin: '0% 0%' }, 0);
+  ctx.tl.fromTo(H.sel, { scale: 1.14 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);    // settles, readable from frame 1
   html += `<div class="vr-tag" id="${ctx.id('hsub')}" style="left:${SL + 4}px;top:${Math.round(392 + H.h + 26)}px;font-size:46px;color:${DEEP};font-style:italic">velka-ryba.cz</div>`;
   ctx.tl.fromTo(ctx.sel('hsub'), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, 0.3);
   fx.tOut(ctx, 'flash', { color: DEEP, d: 0.14 });
@@ -297,26 +325,50 @@ export function hook(ctx) {
   return { html, css, timeline: ctx.tl };
 }
 
-// =============== REEL END CARD (2 bars): lockup (TA plate hero + logo + URL) + a shelf of six spoons + outline marquee ===============
+// =============== REEL END CARD (2 bars): lockup (TA plate hero + logo + URL + Věnuje ceny) + a shelf of six spoons + outline marquee ===
+// The TA plate starts flying 0.42 s BEFORE the end card (over the block's out-wipe) and lands on the downbeat, so frame 1 of the end
+// card is the complete lockup (lesson finale: the hit must not be an empty frame).
 export function endCard(ctx) {
   const { W } = ctx;
   let html = `<div class="fx-field" id="${ctx.id('ef')}" style="background:radial-gradient(110% 70% at 50% 42%, #22548f 0%, ${DEEP} 58%, ${INK} 100%)"></div>`;
   html += fx.marquee(ctx, { id: 'emq', text: 'Vše na přívlač', y: 1585, size: 150, font: 'Nunito', wght: 900, italic: true, color: '#ffffff', outline: true, ow: 2, speed: 90, style: 'opacity:.2' });
-  fx.tIn(ctx, 'flash', { color: DEEP, d: 0.22 });
-  const E = fx.endCard(ctx, { t: 0.05, logo: LOGO, url: 'velka-ryba.cz', line: 'Partner MČR v Trout Area 2026', fg: '#ffffff', accent: RED, font: 'Nunito', textFont: 'Nunito', scale: 1.5 });
-  html += E.html;
-  // the shelf: six spoons of six brands on the block's diagonal, popping in after the URL
+  const FLY = 0.42, SC = 1.5;
+  const P = ctx.plate.hero(-FLY, ctx.dur, { scale: SC, cx: W / 2, cy: 640, fly: FLY, ease: 'power3.inOut' });
+  const LG = ctx.logo(LOGO, { box: [760, 300], scale: SC, at: [0, ctx.dur], id: 'ec-logo', label: `${ctx.cid} end card` });
+  const fU = ctx.fit('velka-ryba.cz', { ...DISP, maxW: 860, maxLines: 1, sizes: [100, 96, 92, 88, 84] });
+  const y0 = Math.round(P.y + P.h + 34);
+  const yBar = y0 + 46, yLogo = yBar + 30, yURL = yLogo + LG.h + 28, yPz = yURL + Math.round(fU.size * 0.96) + 24, pzS = 32;
+  const pzTxt = 'Věnuje ceny · MČR 2026', pzW = widthOf(ctx, pzTxt, pzS) + 48;
+  let lock = `<div class="vr-ln" id="${ctx.id('ec-line')}" style="top:${y0}px">${ctx.esc(ctx.nb('Partner MČR v Trout Area 2026'))}</div>`
+    + `<i class="vr-bar" id="${ctx.id('ec-bar')}" style="left:${W / 2 - 60}px;top:${yBar}px"></i>`
+    + `<div class="fx-abs" id="${ctx.id('ec-lw')}" style="left:${Math.round((W - LG.w) / 2)}px;top:${yLogo}px;width:${LG.w}px;height:${LG.h}px">${LG.html}</div>`;
+  const hu = fx.headline(ctx, { ...DISP, id: 'ec-url', text: 'velka-ryba.cz', x: ctx.safe.left, y: yURL, w: W - ctx.safe.left - ctx.safe.right, size: fU.size, maxLines: 1, lh: 0.96, align: 'center' });
+  lock += hu.html;
+  lock += slab(ctx, 'epz', { x: (W - pzW) / 2, y: yPz, w: pzW, h: pzS * 1.42, t: ctx.at(0, 1) - 0.04 });
+  lock += `<div class="vr-tag" id="${ctx.id('epzt')}" style="left:${Math.round((W - pzW) / 2 + 24)}px;top:${Math.round(yPz + pzS * 0.2)}px;font-size:${pzS}px">${ctx.esc(ctx.nb(pzTxt))}</div>`;
+  ctx.tl.fromTo(ctx.sel('epzt'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, ctx.at(0, 1));
+  html += `<div class="fx-full" id="${ctx.id('ec')}">${lock}</div>`;
+  // complete on frame 1, settles with the hit
+  ctx.tl.set(ctx.sel('ec'), { transformOrigin: `50% ${yLogo}px` }, 0);
+  ctx.tl.fromTo(ctx.sel('ec'), { scale: 1.05 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('ec-bar'), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.02);
+  // the shelf: six spoons of six brands on the box's 45° axis, dropping in on the 16ths right on the hit
   const SHELF = ['illexP', 'cardiffO', 'lj', 'westin', 'daiwaG', 'vanpla'];
-  const n = SHELF.length, x0 = 118, x1 = 930, cw = (x1 - x0) / n, cyS = 1352;
+  const n = SHELF.length, x0 = 110, x1 = 936, cw = (x1 - x0) / n, cyS = yPz + pzS * 1.42 + 112;
   SHELF.forEach((key, i) => {
-    const lu = L[key], wr = lu.wr || 0, f = fitRot(ctx, lu.src, cw - 12, 150, wr, 1);
+    const lu = L[key], wr = lu.wr || 0, f = fitRot(ctx, lu.src, cw - 6, 176, wr, 1);
     const cx = x0 + cw * (i + 0.5);
     html += `<img class="vr-lure" id="${ctx.id(`sh${i}`)}" src="${ctx.asset(lu.src)}" alt="" style="left:${(cx - f.w / 2).toFixed(1)}px;top:${(cyS - f.h / 2).toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px">`;
-    const t = 0.85 + i * 0.07;
-    ctx.tl.fromTo(ctx.sel(`sh${i}`), { y: 40, rotation: wr - 25, opacity: 0 }, { y: 0, rotation: wr, opacity: 1, duration: 0.6, ease: 'expo.out' }, t);
-    ctx.tl.fromTo(ctx.sel(`sh${i}`), { y: 0 }, { y: -8, duration: ctx.BEAT * 1.5, ease: 'sine.inOut', repeat: 1, yoyo: true }, t + 0.62);
+    const t = i * ctx.BEAT / 4;
+    ctx.tl.fromTo(ctx.sel(`sh${i}`), { y: -60, rotation: wr - 25, opacity: 0 }, { y: 0, rotation: wr, opacity: 1, duration: 0.5, ease: 'expo.out' }, t);
+    ctx.tl.fromTo(ctx.sel(`sh${i}`), { y: 0 }, { y: -8, duration: ctx.BEAT * 1.5, ease: 'sine.inOut', repeat: 1, yoyo: true }, t + 0.52);
   });
+  ctx.report(`end card: plate ${Math.round(P.y)}–${Math.round(P.y + P.h)}, line ${y0}, logo ${yLogo}–${yLogo + LG.h}, URL ${yURL}, pill ${yPz}–${Math.round(yPz + pzS * 1.42)}, shelf ${Math.round(cyS - 88)}–${Math.round(cyS + 88)}`);
   const css = `${ctx.S} .vr-lure{position:absolute;display:block;filter:drop-shadow(0 10px 10px rgba(0,0,0,.5))}
-  ${ctx.S} #${ctx.id('ec-url')}{font-style:italic;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}`;
+  ${ctx.S} .vr-ln{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:800;font-size:30px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+  ${ctx.S} .vr-bar{position:absolute;display:block;width:120px;height:6px;border-radius:3px;background:${RED}}
+  ${ctx.S} .vr-slab{position:absolute;transform:skewX(-14deg)}
+  ${ctx.S} .vr-slab i{position:absolute;inset:0;transform-origin:0 50%;display:block}
+  ${ctx.S} .vr-tag{position:absolute;font-family:'Nunito';font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;white-space:nowrap;line-height:1}`;
   return { html, css, timeline: ctx.tl };
 }

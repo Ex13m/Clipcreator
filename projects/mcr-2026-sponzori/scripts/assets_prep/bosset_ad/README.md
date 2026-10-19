@@ -9,3 +9,8 @@
 - `manifest.py` → `ads/manifest.json` (size, pad [l,t,r,b], aspect, dominant colours, product page, source image, verified claims).
 - `sheet.py` → `ads/_sheet.jpg` (dark / light / teal #1B97B1 / light blue #C5EBFC).
 - `moodboard.py` → `ads/_brandworld.jpg` (4 mood frames 1080×1920, Saira instances via fontTools, real TA plate, Reels UI zones tinted).
+- `build_lures.py <workdir> [--pre | keys…]` (2026-10-19, block agent): assortment cut-outs `ads/L1…L9` for the „rybářský e-shop“ grid — Keitech Easy Shiner
+  424T / 416T / 426T / EA12T, Fresh Lures FlipWorm #122 / FlatWorm #104, Select Easy Shad #280 / Dementor 130SP #13, Decoy Round Magic SV-52.
+  Sources = shop originals in `assets/bosset/lures/` (bridge: Drive upload of `images.weserv.nl/?url=…/orig/…&output=png&l=0`). Pass `--pre` paints shop
+  branding out (largest component kept, paper by normalised convolution), then ISNet (`scratchpad/bgnode/rmbg.mjs medium`), then the cut pass:
+  soft baits `cutout3` + decontaminate, wobbler + frosted lip, jig head `white_key lo=30` gated by ISNet. Pads → `ads/_lures_meta.json`; QA `ads/_lures_sheet.jpg`.

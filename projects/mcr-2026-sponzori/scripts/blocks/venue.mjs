@@ -71,15 +71,17 @@ export function hook(ctx) {
   html += fx.field(ctx, { kind: 'radial', c1: '#2bb6dc', c2: DEEP, at: '50% 62%' });
   html += V.caustics(ctx, { id: 'hc', opacity: 0.12, size: 640, speed: 50 });
   html += fx.glow(ctx, { id: 'hg', x: ctx.W / 2, y: 1140, size: 1150, color: AQUA, opacity: 0.45 });
-  const D = 800, cx = ctx.W / 2, cy = 1135;
+  // question first (its height decides where the arena lens sits)
+  const H = fx.headline(ctx, { id: 'hh', text: ctx.module.meta.hook.headline, x: L, y: 400, w: CW, maxLines: 3, font: 'Bitter', wght: 900, upper: true, lh: 0.94, sizes: [124, 116, 108, 100, 92, 84], t: 0.02, d: 0.42, reveal: 'lines', stagger: 0.05, style: 'filter:drop-shadow(0 6px 16px rgba(16,40,60,.35))' });
+  const yS = 400 + H.h + 20, top = yS + 44 + 56;
+  const D = Math.min(760, 1700 - top), cx = ctx.W / 2, cy = top + D / 2;
   html += `<div class="fx-abs" id="${ctx.id('hd')}" style="left:${px(cx - D / 2)};top:${px(cy - D / 2)};width:${D}px;height:${D}px;border-radius:50%;box-shadow:0 40px 90px rgba(10,30,45,.45),0 0 0 6px rgba(255,255,255,.9),0 0 0 14px rgba(154,231,232,.35)"><img class="fx-img" src="${ctx.asset(V.A.disc)}" alt="" style="object-fit:contain"></div>`;
   ctx.tl.fromTo(ctx.sel('hd'), { scale: 1.22, rotation: -16, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
   html += `<div class="fx-abs" id="${ctx.id('hpw')}" style="left:${px(cx)};top:${px(cy + 10)}">${V.pin(ctx, { id: 'hp', size: 76 })}</div>`;
   ctx.tl.fromTo(ctx.sel('hp-m'), { y: -160, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, ctx.beat(1) - 0.12);
   [ctx.beat(1), ctx.beat(2), ctx.beat(3)].forEach((t) => ctx.tl.hit(ctx.sel('hp-r'), { scale: 0.3, opacity: 1 }, { scale: 1.7, opacity: 0, duration: 0.42, ease: 'power2.out' }, t));
-  const H = fx.headline(ctx, { id: 'hh', text: ctx.module.meta.hook.headline, x: L, y: 420, w: CW, maxLines: 3, font: 'Bitter', wght: 900, upper: true, lh: 0.94, sizes: [124, 116, 108, 100, 92, 84], t: 0.02, d: 0.45, reveal: 'lines', stagger: 0.06, style: 'text-shadow:0 6px 28px rgba(16,40,60,.35)' });
   html += H.html;
-  html += fx.headline(ctx, { id: 'hs', text: ctx.module.meta.hook.sub, x: L, y: 420 + H.h + 22, w: CW, maxLines: 1, ...KICK, size: 40, tracking: 0.12, color: NAVY, t: 0.25, reveal: 'fade', d: 0.4 }).html;
+  html += fx.headline(ctx, { id: 'hs', text: ctx.module.meta.hook.sub, x: L, y: yS, w: CW, maxLines: 1, ...KICK, size: 40, tracking: 0.12, color: NAVY, t: 0.2, reveal: 'fade', d: 0.35 }).html;
   fx.tOut(ctx, 'flash', { color: '#ffffff', d: 0.14 });
   return { html, css };
 }
@@ -96,6 +98,7 @@ export function endCard(ctx) {
   fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.25 });
   const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
   html += E.html;
+  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.75, reveal: 'fade', d: 0.5 }).html;
   return { html, css: V.css(ctx) };
 }
 
@@ -170,14 +173,14 @@ export default function venue(ctx) {
   let s2 = fx.field(ctx, { id: 'f2', kind: 'radial', c1: '#26354d', c2: '#0f141c', at: '62% 46%' });
   const E = V.etch(ctx, { id: 'et', x: 330, y: 380, h: 1240, color: '#ffffff', opacity: 0.3 });
   s2 += E.html;
-  V.reveal(ctx, 'et', B2 - 0.04, { d: 1.05, dir: 'up' });
+  V.reveal(ctx, 'et', B2 - 0.04, { d: 0.95, dir: 'up', ease: 'expo.out' });
   ctx.tl.set(ctx.sel('et'), { transformOrigin: '30% 30%' }, 0);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1 }, { scale: 1.06, duration: B3 - 0.32 - B2, ease: 'sine.inOut' }, B2);
   ctx.tl.fromTo(ctx.sel('et'), { scale: 1.06, opacity: 0.3 }, { scale: 2.6, opacity: 0, duration: 0.32, ease: 'power3.in' }, B3 - 0.32);
   const tYr = B2 + 0.02;                                                                     // lands (~4.3 s) while the VO says „1934“ (3.9–5.4 s)
   const ySz = Math.min(360, Math.floor(880 / Math.max(1e-3, ctx.measure('1934', { font: 'Bitter', wght: 900, size: 1 }))));
   let hx = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 46, tracking: 0.1, color: AQUA, t: B2 - 0.06, reveal: 'chars', stagger: 0.014, d: 0.45 }).html;
-  hx += fx.odometer(ctx, { id: 'yr', value: '1934', x: L - 8, y: 712, size: ySz, font: 'Bitter', wght: 900, color: GOLD, t: tYr, d: 0.6, spins: 1, style: 'text-shadow:0 18px 50px rgba(0,0,0,.35)' });
+  hx += fx.odometer(ctx, { id: 'yr', value: '1934', x: L - 8, y: 712, size: ySz, font: 'Bitter', wght: 900, color: GOLD, t: tYr, d: 0.6, spins: 0, style: 'filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))' });
   ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, tYr);
   hx += `<div class="fx-abs" id="${ctx.id('rule')}" style="left:${L}px;top:${712 + ySz * 1.02}px;width:420px;height:6px;border-radius:3px;background:${GOLD};transform-origin:0 50%"></div>`;
   ctx.tl.fromTo(ctx.sel('rule'), { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, tYr + 0.35);
@@ -196,7 +199,7 @@ export default function venue(ctx) {
   // the trout: macro swim-through, tail kept off-frame (blunt in the source)
   const TR = fx.product(ctx, { id: 'tr', src: V.A.trout, w: 1500, cx: 30 + 750, cy: 1035, ground: 'none', sweep: true, sweepAngle: 98, sweepOpacity: 0.5, pad: [0.019, 0.037, 0.019, 0.037] });
   const trUrl = ctx.asset(V.A.trout);
-  s3 += TR.html.replace(`id="${ctx.id('tr-im')}" src="${trUrl}" alt="">`, `id="${ctx.id('tr-im')}" src="${trUrl}" alt="">${V.skin(ctx, { id: 'trs', src: V.A.trout, caus: 0.2, tintO: 0.32, size: 560, t0: B3, t1: END })}`);
+  s3 += TR.html.replace(`id="${ctx.id('tr-im')}" src="${trUrl}" alt="">`, `id="${ctx.id('tr-im')}" src="${trUrl}" alt="">${V.skin(ctx, { id: 'trs', src: V.A.trout, w: TR.w, h: TR.h, caus: 0.22, tintO: 0.32, size: 560, t0: B3, t1: END })}`);
   ctx.tl.fromTo(TR.sel, { x: 1050 }, { x: 0, duration: 1.15, ease: 'expo.out' }, B3 + 0.02);
   ctx.tl.fromTo(TR.cam, { x: 0, y: 0, rotation: 0 }, { x: -60, y: -18, rotation: -1.6, duration: B5 - 0.3 - (B3 + 0.6), ease: 'sine.inOut' }, B3 + 0.6);
   ctx.tl.set(TR.cam, { transformOrigin: '22% 42%' }, 0);
@@ -208,46 +211,46 @@ export default function venue(ctx) {
   ctx.tl.set(ctx.sel('tr-im'), { filter: 'blur(6px)' }, B5 - 0.2);
   // claim: words light up with the VO (both parts of the fact always together, „donedávna“ first)
   const tClaim = Math.min(B3 + 0.1, vo('donedávna', B3, B3 - 0.1, B3 + 0.5) - 0.12);
-  const K = V.karaoke(ctx, { id: 'kl', text: 'Donedávna nejníže položené pstruhařství v Evropě', x: L, y: 418, w: CW, maxLines: 3, sizes: [104, 98, 92, 86, 80], font: 'Bitter', wght: 800, lh: 1.0, t: tClaim, dim: 0.32, times: (tok) => V.voTimes(ctx, tok, { from: B3 - 0.4, fallback: tok.map((_, i) => B3 + 0.2 + i * 0.6) }), style: 'text-shadow:0 6px 30px rgba(8,30,44,.45)' });
+  const K = V.karaoke(ctx, { id: 'kl', text: 'Donedávna nejníže položené pstruhařství v Evropě', x: L, y: 418, w: CW, maxLines: 3, sizes: [104, 98, 92, 86, 80], font: 'Bitter', wght: 800, lh: 1.0, t: tClaim, dim: 0.32, times: (tok) => V.voTimes(ctx, tok, { from: B3 - 0.4, fallback: tok.map((_, i) => B3 + 0.2 + i * 0.6) }), style: 'filter:drop-shadow(0 6px 18px rgba(8,30,44,.45))' });
   s3 += K.html;
   ctx.tl.fromTo(`${K.sel} .fx-ln > span`, { yPercent: 0, opacity: 1 }, { yPercent: -125, opacity: 0, duration: 0.3, ease: 'power3.in', stagger: 0.04 }, B5 - 0.32);
   // 164 m n. m. (joins on bar 4, under the claim)
   const t164 = B4 - 0.02, aSz = 230, aY = 1196;
-  let al = fx.odometer(ctx, { id: 'alt', value: '164', x: L - 6, y: aY, size: aSz, font: 'Bitter', wght: 900, color: GOLD, t: t164, d: 0.6, spins: 1 });
+  let al = fx.odometer(ctx, { id: 'alt', value: '164', x: L - 6, y: aY, size: aSz, font: 'Bitter', wght: 900, color: GOLD, t: t164, d: 0.5, spins: 0 });
   const aW = V.odoW(ctx, '164', { font: 'Bitter', wght: 900, size: aSz });
   al += fx.headline(ctx, { id: 'altu', text: 'm n. m.', x: L - 6 + aW + 22, y: aY + aSz * 0.5, w: 400, maxLines: 1, font: 'Montserrat', wght: 800, italic: true, size: 66, color: AQUA, t: t164 + 0.18, reveal: 'lines', d: 0.5 }).html;
   s3 += `<div class="fx-full" id="${ctx.id('al')}">${al}</div>`;
   ctx.tl.fromTo(ctx.sel('al'), { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none' }, t164);
   ctx.tl.fromTo(ctx.sel('al'), { opacity: 1, y: 0 }, { opacity: 0, y: 40, duration: 0.25, ease: 'power2.in' }, B5 - 0.3);
   // the trophy rises from the water (bar 5)
-  const CUP = fx.product(ctx, { id: 'cup', src: V.A.trophy, h: 720, cx: W / 2, floor: 1196, ground: 'none', sweep: true, sweepAngle: 115, sweepOpacity: 0.85, pad: [0.027, 0.019, 0.027, 0.019] });
+  const CUP = fx.product(ctx, { id: 'cup', src: V.A.trophy, h: 770, cx: W / 2, floor: 1178, ground: 'none', sweep: true, sweepAngle: 115, sweepOpacity: 0.85, pad: [0.027, 0.019, 0.027, 0.019] });
   s3 += CUP.html;
   fx.productIn(ctx, 'cup', B5 - 0.06, { from: 'rise', d: 0.95, dist: 820 });
   fx.sweep(ctx, 'cup', B5 + 0.62, { d: 1.0 });
   ctx.tl.fromTo(CUP.cam, { y: 0 }, { y: -12, duration: END - (B5 + 0.9), ease: 'sine.inOut' }, B5 + 0.9);
   const tD = ctx.at(5, 1) - 0.08;
-  s3 += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: 1232, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 88, align: 'center', color: '#ffffff', t: tD, reveal: 'lines', d: 0.55, style: 'text-shadow:0 6px 26px rgba(0,0,0,.35)' }).html;
+  s3 += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: 1206, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 88, align: 'center', color: '#ffffff', t: tD, reveal: 'lines', d: 0.55, style: 'filter:drop-shadow(0 6px 16px rgba(0,0,0,.35))' }).html;
   // lockup: venue badge (≤ TA logo) + URL
   const tLk = ctx.at(5, 2) - 0.1;
   const LG = ctx.logo('on_dark', { box: [128, 128], at: [tLk, END], id: 'logo', label: 'venue lockup badge' });
   const uSz = 54, uW = ctx.measure(D.url, { font: 'Montserrat', wght: 800, italic: true, size: uSz });
   const rowW = LG.w + 22 + uW, rx = (W - rowW) / 2;
-  s3 += `<div class="fx-abs" id="${ctx.id('lk')}" style="left:${px(rx)};top:1346px;width:${px(rowW + 10)};height:${LG.h}px;display:flex;align-items:center;gap:22px">${LG.html}<span style="font:italic 800 ${uSz}px/1 'Montserrat';color:#fff;white-space:nowrap;text-shadow:0 4px 18px rgba(0,0,0,.35)">${ctx.esc(D.url)}</span></div>`;
+  s3 += `<div class="fx-abs" id="${ctx.id('lk')}" style="left:${px(rx)};top:1312px;width:${px(rowW + 10)};height:${LG.h}px;display:flex;align-items:center;gap:22px">${LG.html}<span style="font:italic 800 ${uSz}px/1 'Montserrat';color:#fff;white-space:nowrap;text-shadow:0 4px 18px rgba(0,0,0,.35)">${ctx.esc(D.url)}</span></div>`;
   ctx.tl.fromTo(ctx.sel('lk'), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, tLk);
   html += fx.scene(ctx, 's3', B3 - 0.003, END, s3, { inD: 0.001 });
 
   // =============== title layer: LÍHEŇ LIBĚCHOV rides across the drop and the first cut ===============
   const tName = Math.min(0.42, vo('Líheň', 0.93, 0.3, 1.0) - 0.5);
-  const N = fx.headline(ctx, { id: 'nm', text: D.name, x: L, y: 480, w: CW, maxLines: 2, font: 'Bitter', wght: 900, upper: true, lh: 0.92, sizes: [160, 152, 144, 136], t: tName, reveal: 'chars', stagger: 0.03, d: 0.55, out: ctx.at(1, 1) - 0.14, outD: 0.3, style: 'text-shadow:0 8px 34px rgba(16,40,60,.38)' });
+  const N = fx.headline(ctx, { id: 'nm', text: D.name, x: L, y: 480, w: CW, maxLines: 2, font: 'Bitter', wght: 900, upper: true, lh: 0.92, sizes: [160, 152, 144, 136], t: tName, reveal: 'chars', stagger: 0.03, d: 0.55, out: ctx.at(1, 1) - 0.14, outD: 0.3, style: 'filter:drop-shadow(0 8px 18px rgba(16,40,60,.38))' });
   html += fx.scene(ctx, 'ttl', 0, ctx.at(1, 1) + 0.25, N.html, { outD: 0.05 });
   fx.chroma(ctx, N.sel, B1, { amt: 9, d: 0.4 });
 
   // =============== accents + transitions ===============
-  fx.flash(ctx, B1, { id: 'fl1', color: '#ffffff', peak: 0.62, d: 0.38 });
-  fx.flash(ctx, B2, { id: 'fl2', color: '#ffffff', peak: 0.5, d: 0.34 });
+  fx.flash(ctx, B1, { id: 'fl1', color: '#ffffff', peak: 0.5, d: 0.3 });
+  fx.flash(ctx, B2, { id: 'fl2', color: AQUA, peak: 0.3, d: 0.26, blend: 'screen' });
   fx.flash(ctx, B3, { id: 'fl3', color: AQUA, peak: 0.75, d: 0.5, blend: 'screen' });
   fx.flash(ctx, B4, { id: 'fl4', color: AQUA, peak: 0.16, d: 0.35, blend: 'screen' });
-  fx.flash(ctx, B5, { id: 'fl5', color: GOLD, peak: 0.38, d: 0.55, blend: 'screen' });
+  fx.flash(ctx, B5, { id: 'fl5', color: GOLD, peak: 0.26, d: 0.5, blend: 'screen' });
   fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.32 });            // the intro zooms through to white → the drop lands on white
   fx.tOut(ctx, 'blob', { d: 0.45 });                              // liquid out into the next world
   return { html, css };

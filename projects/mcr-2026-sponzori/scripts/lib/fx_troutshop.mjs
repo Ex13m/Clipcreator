@@ -44,11 +44,12 @@ ${S} .ts-arm{position:absolute;width:0;height:0;transform-origin:0 0}
 ${S} .ts-sp{position:absolute}
 ${S} .ts-sp img{position:absolute;inset:0;width:100%;height:100%;display:block}
 ${S} .ts-sp .fx-prod-sweep{inset:0}
-${S} .ts-sun{position:absolute;border-radius:50%;background:radial-gradient(circle at 50% 28%,#ff3a40 0%,#e3000f 42%,#b5030f 100%);box-shadow:0 0 140px 36px rgba(227,0,15,.38)}
+${S} .ts-sp .ts-bgimg{position:absolute;inset:0;display:block;background-size:100% 100%;background-repeat:no-repeat}
+${S} .ts-sun{position:absolute;border-radius:50%;background:radial-gradient(circle,#ff2a1e 0%,#f2070f 46%,#e3000f 78%,#ec1510 96%,#e3000f 100%);box-shadow:0 0 46px 6px rgba(255,46,30,.55),0 0 210px 70px rgba(227,0,15,.32)}
 ${S} .ts-co{position:absolute;display:flex;flex-direction:column;gap:6px;white-space:nowrap}
 ${S} .ts-co i{display:block;height:4px;width:64px;background:#e3000f;border-radius:2px;transform-origin:0 50%}
-${S} .ts-co b{font-family:'Roboto Condensed';font-weight:800;font-size:34px;letter-spacing:.08em;text-transform:uppercase;line-height:1.05;color:#fff}
-${S} .ts-co>span{font-family:'Roboto Condensed';font-weight:600;font-size:29px;letter-spacing:.06em;line-height:1.1;color:rgba(255,255,255,.78)}
+${S} .ts-co b{font-family:'Roboto Condensed';font-weight:800;font-size:40px;letter-spacing:.07em;text-transform:uppercase;line-height:1.05;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+${S} .ts-co>span{font-family:'Roboto Condensed';font-weight:600;font-size:34px;letter-spacing:.05em;line-height:1.1;color:rgba(255,255,255,.88);text-shadow:0 2px 14px rgba(0,0,0,.45)}
 ${S} .ts-co.r{align-items:flex-end;text-align:right}
 ${S} .ts-co.r i{transform-origin:100% 50%}
 ${S} .ts-pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 26px 13px;border-radius:999px;background:#e3000f;color:#fff;font-family:'Roboto Condensed';font-weight:700;font-size:32px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.35)}
@@ -84,7 +85,8 @@ export function sweep(ctx, id, t, { d = 0.7, ease = 'power2.inOut' } = {}) {
 }
 
 // fan of spoons = the sun's rays. Arms hinge at the pivot (px, py); each spoon's line eye sits r0 from the pivot,
-// hook outward. items: [{k, th}] (th = arm angle, deg clockwise from up). Whole fan: #id (transform-origin = pivot).
+// hook outward. items: [{k, th, bg?}] (th = arm angle, deg clockwise from up; bg = paint as background-image instead of <img>,
+// for a cut-out that is also an <img> elsewhere in the same composition → no duplicate_media_discovery_risk). Whole fan: #id.
 export function fan(ctx, { id = 'fan', items, x = ctx.W / 2, y = 1480, body = 340, r0 = 240, shadow = '0 18px 16px rgba(0,0,0,.6)', style = '' }) {
   let arms = '';
   items.forEach((it, i) => {
@@ -93,14 +95,16 @@ export function fan(ctx, { id = 'fan', items, x = ctx.W / 2, y = 1480, body = 34
     const s = Math.min(1.3, (it.body || body) / (G.L * nh)), w = nw * s, h = nh * s, url = ctx.asset(src);
     const org = `${pct(G.tail[0])} ${pct(G.tail[1])}`;
     ctx.tl.set(ctx.sel(`${id}-p${i}`), { rotation: -G.ang }, 0);
-    arms += `<div class="ts-arm" id="${ctx.id(`${id}-a${i}`)}" style="left:${px(x)};top:${px(y)}"><div class="ts-sp" id="${ctx.id(`${id}-p${i}`)}" style="left:${px(-G.tail[0] * w)};top:${px(-r0 - G.tail[1] * h)};width:${px(w)};height:${px(h)};transform-origin:${org}"><img src="${url}" alt="" style="filter:drop-shadow(${shadow})"><i class="fx-prod-sweep" id="${ctx.id(`${id}-sw${i}`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:105deg;--so:.65"></i></div></div>`;
+    arms += `<div class="ts-arm" id="${ctx.id(`${id}-a${i}`)}" style="left:${px(x)};top:${px(y)}"><div class="ts-sp" id="${ctx.id(`${id}-p${i}`)}" style="left:${px(-G.tail[0] * w)};top:${px(-r0 - G.tail[1] * h)};width:${px(w)};height:${px(h)};transform-origin:${org}">${it.bg ? `<i class="ts-bgimg" style="background-image:url(${url});filter:drop-shadow(${shadow})"></i>` : `<img src="${url}" alt="" style="filter:drop-shadow(${shadow})">`}<i class="fx-prod-sweep" id="${ctx.id(`${id}-sw${i}`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:105deg;--so:.65"></i></div></div>`;
   });
   return { html: `<div class="fx-full" id="${ctx.id(id)}" style="transform-origin:${px(x)} ${px(y)};${style}">${arms}</div>`, sel: ctx.sel(id), arm: (i) => ctx.sel(`${id}-a${i}`), n: items.length };
 }
 // open the fan: arms swing out from the centre (stacked) to their angles, centre first
-export function fanOpen(ctx, F, items, t, { d = 0.75, step = 0.035, from = 0.35 } = {}) {
+// (paint the sun disc above the fan: the arms start small and stacked behind it and fan out like rays)
+// skip: arm indices that do not swing (e.g. the centre arm that a hero spoon match-cuts into; the block reveals it itself)
+export function fanOpen(ctx, F, items, t, { d = 0.75, step = 0.035, from = 1, s0 = 0.35, a0 = 0, skip = [] } = {}) {
   const mid = (items.length - 1) / 2;
-  items.forEach((it, i) => ctx.tl.fromTo(F.arm(i), { rotation: 0, scale: 0.55, opacity: from }, { rotation: it.th, scale: 1, opacity: 1, duration: d, ease: 'expo.out' }, t + Math.abs(i - mid) * step));
+  items.forEach((it, i) => skip.includes(i) || ctx.tl.fromTo(F.arm(i), { rotation: it.th * a0, scale: s0, opacity: from }, { rotation: it.th, scale: 1, opacity: 1, duration: d, ease: 'expo.out' }, t + Math.abs(i - mid) * step));
 }
 export function fanSweep(ctx, id, n, t, { step = 0.05, d = 0.55 } = {}) {
   for (let i = 0; i < n; i++) ctx.tl.fromTo(ctx.sel(`${id}-sw${i}`), { backgroundPosition: '110% 0%' }, { backgroundPosition: '-10% 0%', duration: d, ease: 'power2.inOut' }, t + i * step);

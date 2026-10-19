@@ -3,7 +3,8 @@
 // yellow round "vel." badges from their packaging. Products = own-brand jig heads, 4k cut-outs in assets_prep/jigovky/ads/.
 //
 //   bar 0  MACRO      chrome TroutJig head at ~1:1, push-in + light sweep + glint; "Jigy, které chytají!" word-synced to the VO
-//   bar 1  PULL-BACK  camera pulls back to the whole TroutJig; loupe on the barbless point + callout „BEZ PROTIHROTU"; #4 #6 #8 badges
+//   bar 1  PULL-BACK  camera pulls back to the whole TroutJig (same native image, scale only goes down); loupe on the barbless point
+//                     at 1:1 native pixels + callout + pill „BEZ PROTIHROTU" (the slogan holds under it)
 //   bar 2  COLOUR     the loupe grows into a big lens: FLUO → PINK → RED heads on the beat, colour selector (7 colourways), „od 0,4 g" odometer
 //   bar 3  RANGE      bento wall of 10 own-brand products assembling on 16ths (assortment moment) + band „Poctivě vyrobeno v ČR"
 //   bar 4  LOCKUP     TroutJig hero + SICKLE in depth, the logo travels from the corner into logo | jigovky.cz; slice out
@@ -25,25 +26,26 @@ export const fonts = {
 export const theme = { bg: C.deep, bg2: C.forest, fg: '#FFFFFF', accent: C.yellow, accent2: C.leaf, font: { display: 'Roboto Slab', text: 'PT Sans Narrow' }, wght: 900, upper: false, light: false };
 export const meta = {
   reel: true,
-  hook: { product: 'assets_prep/jigovky/ads/head_fluo.png', headline: 'Od 0,4 g. Bez protihrotu.', sub: 'jigovky.cz' },   // custom hook() below
+  hook: { product: 'assets_prep/jigovky/ads/pol/head_fluo.png', headline: 'Od 0,4 g. Bez protihrotu.', sub: 'jigovky.cz' },   // custom hook() below
   endCard: { logo: 'on_dark', line: 'Partner MČR v Trout Area 2026' },                                                   // custom endCard() below
 };
 
 // ---------- assets (4k cut-outs + anchors from assets_prep/jigovky/ads/_meta.json) ----------
 const ADS = 'assets_prep/jigovky/ads/';
+const POL = ADS + 'pol/';                                       // painted heads with the white bounce-light rim removed (scripts/assets_prep/polish_jigovky_heads.py)
 const META = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, ADS, '_meta.json'), 'utf8')).items; } catch { return []; } })();
 const anchorOf = (file, k = 'head', d = [0.85, 0.62]) => META.find((m) => m.file.endsWith('/' + file))?.anchors?.[k] || d;
 const headPxOf = (file, d) => META.find((m) => m.file.endsWith('/' + file))?.head_px || d;
 const PR = {
   tj: { src: ADS + 'hero_troutjig_barbless.png', label: ['TroutJig', 'Barbless'] },
   sk: { src: ADS + 'hero_sickle.png', label: ['Jigová hlavička', 'SICKLE'] },
-  fluo: { src: ADS + 'head_fluo.png', label: ['HD Barbless', 'Fluo'] },
-  pink: { src: ADS + 'head_pink.png', label: ['HD Barbless', 'Pink'] },
-  red: { src: ADS + 'head_red.png', label: ['HD Barbless', 'Red'] },
+  fluo: { src: POL + 'head_fluo.png', label: ['HD Barbless', 'Fluo'] },
+  pink: { src: POL + 'head_pink.png', label: ['HD Barbless', 'Pink'] },
+  red: { src: POL + 'head_red.png', label: ['HD Barbless', 'Red'] },
   chrome: { src: ADS + 'head_chrome_macro.png', label: ['HD Barbless #4', '3 g'] },
   ll: { src: ADS + 'sec_head_ll_raw.png', label: ['LL Barbless #6', '2 g'] },
-  gold: { src: ADS + 'head_gold.png', label: ['H 360 BL', 'Gold'] },
-  orange: { src: ADS + 'head_orange.png', label: ['H 360 BL', 'Orange'] },
+  gold: { src: POL + 'head_gold.png', label: ['H 360 BL', 'Gold'] },
+  orange: { src: POL + 'head_orange.png', label: ['H 360 BL', 'Orange'] },
   silver: { src: ADS + 'head_silver.png', label: ['HD Barbless', 'Silver'] },
 };
 for (const [k, p] of Object.entries(PR)) { const f = p.src.split('/').pop(); p.head = anchorOf(f); p.hpx = headPxOf(f, null); p.key = k; }
@@ -80,10 +82,13 @@ export default function jigovky(ctx) {
   const lgX = R - LG.w, lgY = ctx.plate.rect.y + ctx.plate.rect.h / 2 - LG.h / 2;
   // lockup row: logo | jigovky.cz (centred in the UI-safe width)
   const urlSize = 92, urlW = ctx.measure(ctx.data.url, { font: 'Roboto Slab', size: urlSize, wght: 900, tracking: -0.01 });
-  const rowW = LG.w + 34 + 3 + 34 + urlW, rowX = Math.round(L + (UIR - L - rowW) / 2), rowY = 1110;
+  const rowW = LG.w + 34 + 3 + 34 + urlW, rowX = Math.round(L + (UIR - L - rowW) / 2), rowY = 1050;
   const tLock = B4;
   ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.55, ease: 'expo.out' }, Math.max(0.12, tName - 0.04));
-  ctx.tl.fromTo(ctx.sel('lw'), { x: 0, y: 0 }, { x: rowX - lgX, y: rowY + (urlSize * 1.0 - LG.h) / 2 + 4 - lgY, duration: 0.62, ease: 'expo.inOut' }, tLock);
+  // the bug does NOT fly across the hero: it blinks out in the corner and re-appears inside the lockup row
+  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.88, duration: 0.16, ease: 'power2.in' }, tLock - 0.24);
+  ctx.tl.set(ctx.sel('lw'), { x: rowX - lgX, y: rowY + (urlSize * 1.0 - LG.h) / 2 + 4 - lgY }, tLock - 0.04);
+  ctx.tl.fromTo(ctx.sel('lw'), { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' }, tLock + 0.2);
 
   // ===================================================================================================
   // BAR 0–1 · MACRO → PULL-BACK (one TroutJig, camera on #tj-cam, origin = ball head)
@@ -91,7 +96,8 @@ export default function jigovky(ctx) {
   const [tw, th] = ctx.dims(PR.tj.src);
   const k = tw / 2400;                                                     // staged / native (1 when staged at 2400)
   const hx = PR.tj.head[0] * tw, hy = PR.tj.head[1] * th;                  // head in element px
-  const HX = 560, HY = 880;                                                // macro: head centre on screen (scale 1)
+  // macro: head centre on screen (scale 1). x 680 keeps the eye loop (≈ −282…+18 px from the head at ×1.06) right of the TA plate (x ≤ 364)
+  const HX = 680, HY = 890;
   const sF = 880 / ((TJ_VIS[2] - TJ_VIS[0]) * k);                          // full shot: visible jig 880 px wide
   const VC = [540, 860];                                                   // full shot: visible centre
   const vcx = ((TJ_VIS[0] + TJ_VIS[2]) / 2) * k, vcy = ((TJ_VIS[1] + TJ_VIS[3]) / 2) * k;
@@ -103,7 +109,7 @@ export default function jigovky(ctx) {
   const tPull = B1, dPull = 0.92;
   ctx.tl.fromTo(P1.cam, { scale: 0.93, x: 0, y: 0 }, { scale: 1.06, x: 0, y: 0, duration: tPull, ease: 'sine.inOut' }, 0);
   ctx.tl.fromTo(P1.cam, { scale: 1.06, x: 0, y: 0 }, { scale: sF, x: Hf[0] - HX, y: Hf[1] - HY, duration: dPull, ease: 'expo.inOut' }, tPull);
-  ctx.tl.fromTo(P1.sel, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power1.out' }, 0.04);
+  // no fade-in: the head is there on the downbeat, the lens-iris (open r0 on frame 1) does the reveal
   ctx.tl.fromTo(ctx.sel('tj-sh'), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power1.out' }, tPull + dPull - 0.3);
   fx.sweep(ctx, 'tj', Math.max(0.6, tJigy - 0.3), { d: 1.0 });
   html += J.glint(ctx, { id: 'gl1', x: HX - 0.36 * 260, y: HY - 0.42 * 260, size: 300, t: tJigy - 0.05, d: 0.8 });
@@ -141,7 +147,7 @@ export default function jigovky(ctx) {
     for (const s of ['co', 'co-d']) ctx.tl.fromTo(ctx.sel(s), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, B2 - 0.1);
     // the pill re-centres above the big lens, holds through the colour heads (all barbless) and leaves with the lens
     ctx.tl.fromTo(ctx.sel('pl'), { x: 0, y: 0 }, { x: 540 - PL.w / 2 - (LP.cx + LP.r + 30), y: PILL2_Y - (LP.cy - LP.r + 44), duration: 0.5, ease: 'expo.inOut' }, B2 - 0.02);
-    ctx.tl.fromTo(ctx.sel('pl'), { opacity: 1 }, { opacity: 0, duration: 0.22, ease: 'power1.in' }, B3 - 0.14);
+    ctx.tl.fromTo(ctx.sel('pl'), { opacity: 1 }, { opacity: 0, duration: 0.18, ease: 'power1.in' }, B3 - 0.22);
   }
 
   // ===================================================================================================
@@ -153,7 +159,7 @@ export default function jigovky(ctx) {
   const swatchIx = [0, 1, 2];
   {
     const hx0 = LN.r + 24, hy0 = LN.r + 40;
-    let inner = `<div class="fx-glow" id="${ctx.id('lng')}" style="left:${px(hx0 - 250)};top:${px(hy0 - 250)};width:500px;height:500px;background:radial-gradient(closest-side,currentColor,transparent 100%);color:${J.SW[0][1]};opacity:.32"></div>`;
+    let inner = `<div class="fx-glow" id="${ctx.id('lng')}" style="left:${px(hx0 - 250)};top:${px(hy0 - 250)};width:500px;height:500px;background:radial-gradient(closest-side,currentColor,transparent 100%);color:${J.SW[0][1]};opacity:.22"></div>`;
     inner += `<i class="fx-abs" id="${ctx.id('lns')}" style="left:${px(hx0 - 170)};top:${px(hy0 + 128)};width:340px;height:56px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,40,15,.42),rgba(0,40,15,0))"></i>`;
     heads.forEach((p, i) => {
       const s = Math.min(1.13, 296 / p.hpx);
@@ -178,9 +184,9 @@ export default function jigovky(ctx) {
       fx.sweep(ctx, `lh${i}`, t + 0.04, { d: 0.42 });
       if (i) ctx.tl.hit(ctx.sel('lnr'), { scale: 1.05 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t);
     });
-    // exit: lens shrinks + fades as the range wall slams in
-    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.7, duration: 0.26, ease: 'power3.in' }, B3 - 0.12);
-    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.7, duration: 0.26, ease: 'power3.in' }, B3 - 0.12);
+    // exit: zoom-through (lens + ring blow up and vanish) ACROSS the downbeat, the first wall tiles land over it → the kick frame is never empty
+    ctx.tl.fromTo(ctx.sel('ln'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.7, duration: 0.28, ease: 'power2.in' }, B3 - 0.16);
+    ctx.tl.fromTo(ctx.sel('lnr'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.85, duration: 0.28, ease: 'power2.in' }, B3 - 0.16);
   }
   // colour selector: 7 colourways of Tungsten HD BARBLESS, the ring sits on the colour in the lens
   {
@@ -192,21 +198,22 @@ export default function jigovky(ctx) {
     J.SW.forEach((_, i) => ctx.tl.fromTo(ctx.sel(`sw${i}`), { scale: 0, y: 20 }, { scale: 1, y: 0, duration: 0.45, ease: 'back.out(2)' }, B2 + 0.12 + i * 0.045));
     ctx.tl.fromTo(ctx.sel('swr'), { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' }, B2 + 0.2);
     swaps.slice(1).forEach((t, i) => ctx.tl.fromTo(ctx.sel('swr'), { x: swatchIx[i] * (dD + gap) }, { x: swatchIx[i + 1] * (dD + gap), duration: 0.3, ease: 'expo.out' }, t));
-    ctx.tl.fromTo(ctx.sel('swg'), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, B3 - 0.12);
+    ctx.tl.fromTo(ctx.sel('swg'), { opacity: 1 }, { opacity: 0, duration: 0.18, ease: 'power1.in' }, B3 - 0.22);
   }
-  // „od 0,4 g": the digits roll from the beat before „od" and land on „nula celá čtyři"
+  // „od 0,4 g": „od" lands on the spoken „od", the digits roll in ≈ 0.4 s and land on „nula celá čtyři"
+  // (a 0.7 s roll parked readable wrong weights like „5,2 g" on screen for several frames)
   {
     const size = 176, od = 'od', odS = 84;
     const numW = ctx.measure('0,4 g', { font: 'Roboto Slab', size, wght: 900 });
     const odW = ctx.measure(od, { font: 'PT Sans Narrow', size: odS, wght: 700, tracking: 0.02 });
     const gx = 26, tot = odW + gx + numW, x0 = 540 - tot / 2, y0 = LN.cy + LN.r + 150;
-    const tRoll = clamp(beatAt(tOd) - ctx.BEAT, B2 + 0.25, t04 - 0.5);       // ≈ 4.13
+    const tRoll = clamp(tOd - 0.06, B2 + 0.25, t04 - 0.3);                   // ≈ 4.35
     html += `<div class="jg-lbl" id="${ctx.id('od')}" style="left:${px(x0)};top:${px(y0 + size * 0.84 - odS * 0.9)};${J.FN};font-size:${odS}px;line-height:1;color:#fff;text-transform:none;letter-spacing:.02em">${od}</div>`;
     ctx.tl.fromTo(ctx.sel('od'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, tRoll);
     html += fx.odometer(ctx, { id: 'odo', value: '0,4', suffix: '\u00a0g', x: x0 + odW + gx, y: y0, size, font: 'Roboto Slab', wght: 900, color: C.yellow, t: tRoll, d: t04 + 0.06 - tRoll, spins: 1, ease: 'power3.out' });
     ctx.tl.fromTo(ctx.sel('odo'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, tRoll);
     ctx.tl.hit(ctx.sel('odo'), { scale: 1.08 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, t04 + 0.06);
-    for (const s of ['od', 'odo']) ctx.tl.fromTo(ctx.sel(s), { opacity: 1, y: 0 }, { opacity: 0, y: -26, duration: 0.24, ease: 'power2.in' }, B3 - 0.12);
+    for (const s of ['od', 'odo']) ctx.tl.fromTo(ctx.sel(s), { opacity: 1, y: 0 }, { opacity: 0, y: -26, duration: 0.2, ease: 'power2.in' }, B3 - 0.22);
   }
 
   // ===================================================================================================
@@ -246,12 +253,12 @@ export default function jigovky(ctx) {
       const P = J.place(ctx, { id: `${id}p`, src: p.src, s, u: (vis[0] + vis[2]) / 2, v: (vis[1] + vis[3]) / 2, x: vx, y: vy, ground: 'none', sweep: false });
       prod = P.html;
     }
-    const lbl = `<div class="jg-lbl" style="${J.FN}"><span style="display:block;font-size:22px;opacity:.7;letter-spacing:.1em">${ctx.esc(ctx.nb(p.label[0]))}</span><span style="display:block;font-size:34px;color:${C.yellow};letter-spacing:.04em;margin-top:2px;${/\d\s?g$/.test(p.label[1]) ? 'text-transform:none;' : ''}">${ctx.esc(ctx.nb(p.label[1]))}</span></div>`;
+    const lbl = `<div class="jg-lbl" style="${J.FN}"><span style="display:block;font-size:24px;opacity:.82;letter-spacing:.1em">${ctx.esc(ctx.nb(p.label[0]))}</span><span style="display:block;font-size:38px;line-height:1.05;color:${C.yellow};letter-spacing:.04em;margin-top:2px;${/\d\s?g$/.test(p.label[1]) ? 'text-transform:none;' : ''}">${ctx.esc(ctx.nb(p.label[1]))}</span></div>`;
     html += `<div class="jg-tile" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}">${prod}${lbl}</div>`;
     tiles.push({ id, cx: x + w / 2, cy: y + h / 2 });
-    const t = tWall + i * 0.07 - 0.03;
-    ctx.tl.fromTo(ctx.sel(id), { opacity: 0, scale: 0.84, y: 46 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'expo.out' }, t);
-    ctx.tl.fromTo(ctx.sel(`${id}p`), { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, t + 0.06);
+    const t = tWall - 0.1 + i * 0.04;                                     // first tiles already up ON the downbeat, all 10 in ≈ 0.45 s
+    ctx.tl.fromTo(ctx.sel(id), { opacity: 0, scale: 0.84, y: 46 }, { opacity: 1, scale: 1, y: 0, duration: 0.36, ease: 'expo.out' }, t);
+    ctx.tl.fromTo(ctx.sel(`${id}p`), { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t + 0.05);
   });
   // beat accents on the finished wall: products punch in a diagonal run on beats 3 and 4 of bar 3
   [ctx.beats.find((b) => b > B3 + 1.5 * ctx.BEAT), ctx.beats.find((b) => b > B3 + 2.5 * ctx.BEAT)].forEach((tb, j) => {
@@ -272,39 +279,35 @@ export default function jigovky(ctx) {
   // ===================================================================================================
   // BAR 4 · LOCKUP — wall explodes outward, TroutJig hero + SICKLE in depth, logo | jigovky.cz
   // ===================================================================================================
+  // the wall clears BEFORE the downbeat (fast throw past camera), so the hero slams into a clean frame ON the downbeat
   tiles.forEach((tt, i) => {
-    const dx = (tt.cx - 540) * 0.55, dy = (tt.cy - 840) * 0.55, dist = Math.hypot(tt.cx - 540, tt.cy - 840);
-    ctx.tl.fromTo(ctx.sel(tt.id), { opacity: 1, x: 0, y: 0, scale: 1 }, { opacity: 0, x: dx, y: dy, scale: 0.72, duration: 0.42, ease: 'power3.in' }, tLock - 0.2 + dist * 0.00012);
+    const dx = (tt.cx - 540) * 0.6, dy = (tt.cy - 840) * 0.6, dist = Math.hypot(tt.cx - 540, tt.cy - 840);
+    ctx.tl.fromTo(ctx.sel(tt.id), { opacity: 1, x: 0, y: 0, scale: 1 }, { opacity: 0, x: dx, y: dy, scale: 1.18, duration: 0.26, ease: 'power3.in' }, tLock - 0.3 + dist * 0.00006);
   });
-  // depth: SICKLE behind (soft, darker), hero in front
-  {
-    const [nw, nh] = ctx.dims(PR.sk.src);
-    const s = 640 / ((SK_VIS[2] - SK_VIS[0]) * nw);
-    const P = J.place(ctx, { id: 'sk', src: PR.sk.src, s, u: 0.5, v: 0.5, x: 690, y: 560, ground: 'none', sweep: false, rot: -14 });
-    html += `<div class="fx-abs" id="${ctx.id('skw')}" style="inset:0;filter:blur(5px) brightness(.78);opacity:0">${P.html}</div>`;
-    ctx.tl.fromTo(ctx.sel('skw'), { opacity: 0 }, { opacity: 0.85, duration: 0.6, ease: 'power1.out' }, tLock + 0.05);
-    ctx.tl.fromTo(P.cam, { x: 60, y: -20, scale: 0.92 }, { x: -30, y: 10, scale: 1.0, duration: END - tLock, ease: 'sine.out' }, tLock);
-  }
-  html += fx.glow(ctx, { id: 'lkg', x: 540, y: 760, size: 1100, color: 'rgba(170,255,200,.55)', opacity: 0 });
-  ctx.tl.fromTo(ctx.sel('lkg'), { opacity: 0 }, { opacity: 0.55, duration: 0.6, ease: 'power1.out' }, tLock);
+  // ONE hero, clean (the blurred SICKLE behind it read as a double exposure): glow + float shadow + sweep + glint
+  const HC = [530, 715];
+  html += fx.glow(ctx, { id: 'lkg', x: 540, y: HC[1] - 10, size: 1100, color: 'rgba(170,255,200,.55)', opacity: 0 });
+  ctx.tl.fromTo(ctx.sel('lkg'), { opacity: 0 }, { opacity: 0.55, duration: 0.5, ease: 'power1.out' }, tLock - 0.05);
   {
     const s = 760 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
-    const P = J.place(ctx, { id: 'tj2', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 530, y: 770, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.85, shadow: 0.6, rot: -6 });
+    const P = J.place(ctx, { id: 'tj2', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: HC[0], y: HC[1], ground: 'float', pad: PAD_TJ, sweepOpacity: 0.6, shadow: 0.6, rot: -6 });
     html += P.html;
-    ctx.tl.fromTo(P.sel, { opacity: 0, scale: 0.62, y: 90 }, { opacity: 1, scale: 1, y: 0, duration: 0.75, ease: 'expo.out' }, tLock - 0.04);
+    ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.3, y: -24 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tLock - 0.05);
     ctx.tl.fromTo(P.cam, { y: 0 }, { y: -16, duration: END - tLock - 0.6, ease: 'sine.inOut' }, tLock + 0.6);
     fx.sweep(ctx, 'tj2', tLock + ctx.BEAT, { d: 0.85 });
     const [gx, gy] = P.at(PR.tj.head[0] - 0.035, PR.tj.head[1] - 0.06);
     html += J.glint(ctx, { id: 'gl2', x: gx, y: gy, size: 230, t: tLock + ctx.BEAT + 0.25, d: 0.75 });
   }
-  // lockup row: [logo (travels in)] | jigovky.cz
+  // lockup row: [logo (re-appears)] | jigovky.cz, prize chip under it (BRIEF: every sponsor block carries „Věnuje ceny · MČR 2026")
   html += `<i class="fx-abs" id="${ctx.id('dv')}" style="left:${px(rowX + LG.w + 34)};top:${px(rowY + 4)};width:3px;height:${px(urlSize * 1.02)};background:rgba(255,255,255,.55);border-radius:2px"></i>`;
-  ctx.tl.fromTo(ctx.sel('dv'), { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'expo.out' }, tLock + 0.42);
-  html += fx.headline(ctx, { id: 'url', text: ctx.data.url, x: rowX + LG.w + 34 + 3 + 34, y: rowY, w: urlW + 40, maxLines: 1, size: urlSize, font: 'Roboto Slab', wght: 900, color: C.yellow, tracking: -0.01, t: tLock + 0.38, reveal: 'chars', stagger: 0.025, d: 0.5 }).html;
+  ctx.tl.fromTo(ctx.sel('dv'), { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'expo.out' }, tLock + 0.24);
+  html += fx.headline(ctx, { id: 'url', text: ctx.data.url, x: rowX + LG.w + 34 + 3 + 34, y: rowY, w: urlW + 40, maxLines: 1, size: urlSize, font: 'Roboto Slab', wght: 900, color: C.yellow, tracking: -0.01, t: tLock + 0.22, reveal: 'chars', stagger: 0.022, d: 0.45 }).html;
   html += `<div class="fx-abs" id="${ctx.id('lw')}" style="left:${px(lgX)};top:${px(lgY)};width:${LG.w}px;height:${LG.h}px">${LG.html}</div>`;
+  html += J.prize(ctx, { id: 'pz', cx: L + (UIR - L) / 2, y: rowY + 172, t: tLock + 0.42 }).html;
 
   // ---------- transitions: lens-iris in from our green, slice out on the downbeat ----------
-  J.irisIn(ctx, { cx: 560, cy: 880, d: 0.46, ease: 'power2.out' });                             // opens on the chrome head (fx 'iris' leaves the corners covered)
+  // opens on the chrome head; r0: the ball is already framed by the lens on the downbeat (rhymes with the neighbour's circle exit)
+  J.irisIn(ctx, { cx: HX, cy: HY, r0: 300, d: 0.5, ease: 'expo.out' });
   fx.tOut(ctx, 'slice', { d: 0.42 });
   return { html, css: css.join('\n') };
 }
@@ -317,17 +320,24 @@ export function hook(ctx) {
   const L = ctx.safe.left, R = ctx.W - ctx.safe.right;
   let html = fx.field(ctx, { id: 'bg', bg: J.WORLD });
   html += fx.glow(ctx, { id: 'g', x: 640, y: 1110, size: 1200, color: 'rgba(211,252,2,.42)', opacity: 0.6 });
-  const H = fx.headline(ctx, { id: 'h', text: 'Od 0,4 g.', x: L, y: 400, w: R - L, maxLines: 1, sizes: [210, 196, 184], font: 'Roboto Slab', wght: 900, color: C.yellow, t: 0.0, reveal: 'lines', d: 0.32, tracking: -0.02, lh: 1 });
-  const S = fx.headline(ctx, { id: 's', text: 'Bez protihrotu.', x: L, y: 400 + H.h + 8, w: R - L, maxLines: 1, sizes: [118, 110, 104, 96], font: 'Roboto Slab', wght: 900, color: '#fff', t: 0.08, reveal: 'lines', d: 0.34, tracking: -0.015, lh: 1.02 });
+  // frame 1 already sells: both lines are fully set and only SETTLE (scale 1.12 → 1), no mask reveal from t = 0
+  const H = fx.headline(ctx, { id: 'h', text: 'Od 0,4 g.', x: L, y: 400, w: R - L, maxLines: 1, sizes: [210, 196, 184], font: 'Roboto Slab', wght: 900, color: C.yellow, tracking: -0.02, lh: 1 });
+  const S = fx.headline(ctx, { id: 's', text: 'Bez protihrotu.', x: L, y: 400 + H.h + 8, w: R - L, maxLines: 1, sizes: [118, 110, 104, 96], font: 'Roboto Slab', wght: 900, color: '#fff', tracking: -0.015, lh: 1.02 });
+  for (const q of [H.sel, S.sel]) ctx.tl.set(q, { transformOrigin: '0% 50%' }, 0);
+  ctx.tl.fromTo(H.sel, { scale: 1.12 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(S.sel, { scale: 1.1, opacity: 0.0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' }, 0);
   const heads = [PR.fluo, PR.pink, PR.red];
-  const pos = [[846, 930], [640, 1130], [434, 1330]];
+  // diagonal with air between the heads (eyes no longer poke into the shank above); red stays above the Reels UI zone (y < 1460)
+  const pos = [[852, 912], [636, 1128], [420, 1344]];
   heads.forEach((p, i) => {
-    const hp = 232, s = Math.min(1.13, hp / p.hpx);
+    const hp = 200, s = Math.min(1.13, hp / p.hpx);
     const P = J.place(ctx, { id: `p${i}`, src: p.src, s, u: p.head[0], v: p.head[1], x: pos[i][0], y: pos[i][1], ground: 'none', sweepOpacity: 0.32 });
     html += P.html;
-    const t = (ctx.beats[i] ?? i * ctx.BEAT) - 0.02;
-    ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: 140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, Math.max(0, t));
-    fx.sweep(ctx, `p${i}`, Math.max(0, t) + 0.12, { d: 0.55 });
+    const t = Math.max(0, (ctx.beats[i] ?? i * ctx.BEAT) - 0.02);
+    // the first head is on screen on frame 1 (slam settle), the next two slam in on beats 2 and 3
+    if (i === 0) ctx.tl.fromTo(P.sel, { scale: 1.35, x: 60 }, { scale: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+    else ctx.tl.fromTo(P.sel, { opacity: 0, scale: 1.45, x: 140 }, { opacity: 1, scale: 1, x: 0, duration: 0.42, ease: 'expo.out' }, t);
+    fx.sweep(ctx, `p${i}`, t + 0.12, { d: 0.55 });
   });
   html += H.html + S.html;
   fx.tOut(ctx, 'flash', { color: theme.bg, d: 0.14 });
@@ -341,15 +351,16 @@ export function endCard(ctx) {
   stage(ctx);
   let html = fx.field(ctx, { id: 'bg', bg: J.WORLD });
   html += fx.mesh(ctx, { id: 'fog', colors: [C.leaf, '#0a5c2c', C.forest], size: 900, blur: 150, opacity: 0.3, drift: 90, seed: 6 });
-  fx.tIn(ctx, 'flash', { color: theme.bg, d: 0.22 });
-  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 800 });
+  // hard cut on the downbeat (the block's slice-out already ends on our deep green): the hero is THERE on frame 1, no flat-green flash
+  const E = fx.endCard(ctx, { t: 0.05, logo: 'on_dark', url: ctx.data.url, line: 'Partner MČR v Trout Area 2026', fg: '#fff', accent: C.yellow, font: 'Roboto Slab', textFont: 'PT Sans Narrow', scale: 1.5, cy: 760 });
   html += E.html;
-  // the hero product floats under the lockup (light sweep + glint)
+  html += J.prize(ctx, { id: 'pz', cx: 540, y: 1012, t: 0.9 }).html;
+  // the hero product floats under the lockup (slam on the downbeat, light sweep + glint)
   {
-    const k = ctx.dims(PR.tj.src)[0] / 2400, s = 600 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
-    const P = J.place(ctx, { id: 'tj', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 540, y: 1268, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.85, shadow: 0.55, rot: -6 });
+    const k = ctx.dims(PR.tj.src)[0] / 2400, s = 520 / ((TJ_VIS[2] - TJ_VIS[0]) * k);
+    const P = J.place(ctx, { id: 'tj', src: PR.tj.src, s, u: ((TJ_VIS[0] + TJ_VIS[2]) / 2) / 2400, v: ((TJ_VIS[1] + TJ_VIS[3]) / 2) / 1571, x: 540, y: 1288, ground: 'float', pad: PAD_TJ, sweepOpacity: 0.7, shadow: 0.55, rot: -6 });
     html += P.html;
-    ctx.tl.fromTo(P.sel, { opacity: 0, y: 80, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+    ctx.tl.fromTo(P.sel, { y: -60, scale: 1.22 }, { y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 0);
     ctx.tl.fromTo(P.cam, { y: 0 }, { y: -14, duration: ctx.dur - 1.3, ease: 'sine.inOut' }, 1.2);
     fx.sweep(ctx, 'tj', 1.45, { d: 0.9 });
     const [gx, gy] = P.at(PR.tj.head[0] - 0.035, PR.tj.head[1] - 0.06);

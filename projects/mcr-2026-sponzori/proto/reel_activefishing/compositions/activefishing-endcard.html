@@ -5,32 +5,67 @@
   <style>
   #bw-activefishing-endcard { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #activefishing-endcard-stage { position:absolute; inset:0; overflow:hidden; }
-  
+  @font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-weight:900;font-display:block;src:url(assets/fonts/saira-extra-condensed-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+#b-activefishing-endcard .af-p{position:absolute}
+#b-activefishing-endcard .af-p img{position:absolute;inset:0;width:100%;height:100%;display:block}
+#b-activefishing-endcard .af-p .fx-prod-sweep{inset:0}
+#b-activefishing-endcard .af-sh{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(78,48,20,.3),rgba(78,48,20,0));pointer-events:none}
+#b-activefishing-endcard .af-arm{position:absolute;width:0;height:0;transform-origin:0 0}
+#b-activefishing-endcard .af-w{display:inline-block}
+#b-activefishing-endcard .af-grad{background-image:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.22em;margin-top:-.22em}
+#b-activefishing-endcard .af-pill{position:absolute;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:999px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1}
+#b-activefishing-endcard .af-pill.fill{background:linear-gradient(180deg, #F59A2C 0%, #F28A27 45%, #E5702D 100%);color:#fff;box-shadow:0 14px 30px rgba(223,89,66,.32)}
+#b-activefishing-endcard .af-pill.ol{background:#fff;color:#111111;box-shadow:inset 0 0 0 3px #F28A27,0 10px 24px rgba(80,50,20,.10)}
+#b-activefishing-endcard .af-pill.wht{background:#fff;color:#111111;box-shadow:0 14px 30px rgba(110,30,0,.25)}
+#b-activefishing-endcard .af-tag{position:absolute;display:flex;align-items:center;gap:14px;font-family:'Nunito';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;color:#111111}
+#b-activefishing-endcard .af-tag i{display:block;flex-shrink:0;width:8px;height:1.05em;border-radius:4px;background:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%)}
+#b-activefishing-endcard .af-cwl{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Nunito';font-weight:800;font-size:27px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;line-height:1;color:#3a3a3a}
+#b-activefishing-endcard .af-cwl i{display:block;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+#b-activefishing-endcard .af-card{position:absolute;border-radius:38px;background:#fff;box-shadow:0 40px 80px rgba(110,30,0,.30)}
+#b-activefishing-endcard .af-tile{position:absolute;border-radius:26px;background:#fff;box-shadow:0 14px 30px rgba(60,40,20,.10),0 0 0 1px rgba(0,0,0,.04)}
+#b-activefishing-endcard .af-tile i{position:absolute;display:block;background:center/100% 100% no-repeat}
+#b-activefishing-endcard .af-url{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:1000;letter-spacing:-.02em;line-height:1;color:#111111;white-space:nowrap}
+#b-activefishing-endcard .af-url .o{color:#F28A27}
   </style>
-  <div id="bw-activefishing-endcard" class="blk blk-activefishing" style="--bg:#f1f1ef;--fg:#111111;--acc:#e2812d;--acc2:#df5942">
-    <div id="activefishing-endcard-stage" class="blk-stage"><div class="fx-field" id="activefishing-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #ffffff 0%, #f1f1ef 100%);"></div><div class="fx-mq ol" id="activefishing-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#111111;--ow:2px;opacity:.18"><div class="fx-mq-in" id="activefishing-endcard-emq-in" style="font-family:'Nunito';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Activefishing.cz · </span><span>Activefishing.cz · </span><span>Activefishing.cz · </span></div></div><div class="fx-ec" id="activefishing-endcard-ec" style="top:799.5px">
-    <div id="activefishing-endcard-ec-line" style="font-family:'Nunito';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:#111111;opacity:.85">Partner MČR v Trout Area 2026</div>
-    <div id="activefishing-endcard-ec-bar" style="width:120px;height:6px;border-radius:3px;background:#e2812d;margin:32.199999999999996px 0"></div>
-    <div id="activefishing-endcard-ec-lw"><img id="activefishing-endcard-ec-logo" class="fx-logo " src="assets/prep/activefishing/logo_on_light.png" alt="Activefishing.cz" style="width:357px; height:148px;"></div>
-    <div id="activefishing-endcard-ec-url" style="margin-top:46px;font-family:'Nunito';font-weight:800;font-size:96px;color:#111111;letter-spacing:-.01em">activefishing.cz</div>
-  </div>
+  <div id="bw-activefishing-endcard" class="blk blk-activefishing" style="--bg:#f4f3f1;--fg:#111111;--acc:#f28a27;--acc2:#df5942">
+    <div id="activefishing-endcard-stage" class="blk-stage"><div class="fx-field" id="activefishing-endcard-ewf" style="background:radial-gradient(130% 85% at 50% 40%, #ffffff 0%, #f5f4f1 52%, #e6e3de 100%)"></div><div class="fx-glow" id="activefishing-endcard-ewg" style="left:120px;top:600px;width:1400px;height:1400px;background:radial-gradient(closest-side, rgba(245,155,16,.30), rgba(242,138,39,.10) 55%, rgba(242,138,39,0))"></div><div class="af-tag" id="activefishing-endcard-eline" style="left:0;right:0;justify-content:center;top:567.5px;font-size:28px;letter-spacing:.14em"><span class="fx-ln"><span>Partner MČR v Trout Area 2026</span></span></div><div class="fx-abs" id="activefishing-endcard-ebar" style="left:480px;top:619.5px;width:120px;height:6px;border-radius:3px;background:linear-gradient(180deg, #E39025 0%, #E2812D 38%, #DD603A 74%, #DF5942 100%)"></div><div class="fx-abs" id="activefishing-endcard-elw" style="left:361.5px;top:655.5px;width:357px;height:148px"><img id="activefishing-endcard-elogo" class="fx-logo " src="assets/prep/activefishing/logo_on_light.png" alt="Activefishing.cz" style="width:357px; height:148px;"></div><div class="af-url" id="activefishing-endcard-eurl" style="top:829.5px;font-size:112px"><span class="fx-ln"><span><span class="fx-c">a</span><span class="fx-c">c</span><span class="fx-c">t</span><span class="fx-c">i</span><span class="fx-c">v</span><span class="fx-c">e</span><span class="fx-c">f</span><span class="fx-c">i</span><span class="fx-c">s</span><span class="fx-c">h</span><span class="fx-c">i</span><span class="fx-c">n</span><span class="fx-c">g</span><span class="o"><span class="fx-c">.</span><span class="fx-c">c</span><span class="fx-c">z</span></span></span></span></div><div class="af-pill fill" id="activefishing-endcard-epz" style="left:282.7px;top:971.5px;width:514.6px;height:64px;font-size:32px;letter-spacing:0.07em;">Věnuje ceny · MČR 2026</div><div class="af-p" id="activefishing-endcard-ec0" style="left:280.3px;top:1075.6px;width:343.4px;height:135.8px;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-endcard-ec0-cam" style="inset:0;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-endcard-ec0-r" style="inset:0;transform-origin:50% 50%"><img src="assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png" alt="" style="filter:drop-shadow(0 14px 14px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-endcard-ec0-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png);mask-image:url(assets/prep/activefishing/ads/H1_timon_chibi_futten_fs_tropical_chart_pink.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-endcard-ec1" style="left:317.4px;top:1128.4px;width:357.5px;height:154.8px;transform-origin:50% 49.8%;"><div class="fx-abs" id="activefishing-endcard-ec1-cam" style="inset:0;transform-origin:50% 49.8%;"><div class="fx-abs" id="activefishing-endcard-ec1-r" style="inset:0;transform-origin:50% 49.8%"><img src="assets/prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png" alt="" style="filter:drop-shadow(0 14px 14px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-endcard-ec1-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png);mask-image:url(assets/prep/activefishing/ads/S1_timon_chibi_futten_fs_uv_cobalt_blue.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-endcard-ec2" style="left:362.2px;top:1190.5px;width:356.4px;height:154.1px;transform-origin:49.9% 50%;"><div class="fx-abs" id="activefishing-endcard-ec2-cam" style="inset:0;transform-origin:49.9% 50%;"><div class="fx-abs" id="activefishing-endcard-ec2-r" style="inset:0;transform-origin:49.9% 50%"><img src="assets/prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png" alt="" style="filter:drop-shadow(0 14px 14px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-endcard-ec2-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png);mask-image:url(assets/prep/activefishing/ads/S3_timon_chibi_futten_fs_gold_shower.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-endcard-ec3" style="left:406.2px;top:1251.8px;width:356.8px;height:155.4px;transform-origin:49.9% 50%;"><div class="fx-abs" id="activefishing-endcard-ec3-cam" style="inset:0;transform-origin:49.9% 50%;"><div class="fx-abs" id="activefishing-endcard-ec3-r" style="inset:0;transform-origin:49.9% 50%"><img src="assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png" alt="" style="filter:drop-shadow(0 14px 14px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-endcard-ec3-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png);mask-image:url(assets/prep/activefishing/ads/S2_timon_chibi_futten_fs_red_black_glitter.png);--sa:105deg;--so:0.6"></i></div></div></div><div class="af-p" id="activefishing-endcard-ec4" style="left:449.8px;top:1310.7px;width:356.4px;height:161.7px;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-endcard-ec4-cam" style="inset:0;transform-origin:50% 50%;"><div class="fx-abs" id="activefishing-endcard-ec4-r" style="inset:0;transform-origin:50% 50%"><img src="assets/prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png" alt="" style="filter:drop-shadow(0 14px 14px rgba(60,40,20,.16))"><i class="fx-prod-sweep" id="activefishing-endcard-ec4-sw" style="-webkit-mask-image:url(assets/prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png);mask-image:url(assets/prep/activefishing/ads/S4_timon_chibi_futten_fs_hologram_bait.png);--sa:105deg;--so:0.6"></i></div></div></div>
     </div>
-    <div class="fx-ov" id="activefishing-endcard-tin" style="background:#f1f1ef"></div>
+    
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#activefishing-endcard-emq-in", {"x":0});
-  gsap.set("#activefishing-endcard-tin", {"opacity":1});
-  gsap.set("#activefishing-endcard-ec-line", {"opacity":0,"y":20});
-  gsap.set("#activefishing-endcard-ec-bar", {"scaleX":0});
-  gsap.set("#activefishing-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
-  gsap.set("#activefishing-endcard-ec-url", {"opacity":0,"y":30});
-  tl.fromTo("#activefishing-endcard-emq-in", {"x":0}, {"x":-330.21,"duration":3.669,"ease":"none","immediateRender":false}, 0.000);
-  tl.fromTo("#activefishing-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#activefishing-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
-  tl.fromTo("#activefishing-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
-  tl.fromTo("#activefishing-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
-  tl.fromTo("#activefishing-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
+  gsap.set("#activefishing-endcard-eline .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#activefishing-endcard-ebar", {"scaleX":0});
+  gsap.set("#activefishing-endcard-elw", {"opacity":0,"scale":0.85});
+  gsap.set("#activefishing-endcard-eurl .fx-c", {"yPercent":70,"opacity":0.35});
+  gsap.set("#activefishing-endcard-epz", {"scale":0.55,"opacity":0});
+  gsap.set("#activefishing-endcard-ec0", {"x":640,"opacity":1});
+  gsap.set("#activefishing-endcard-ec0-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#activefishing-endcard-ec1", {"x":640,"opacity":1});
+  gsap.set("#activefishing-endcard-ec2", {"x":640,"opacity":1});
+  gsap.set("#activefishing-endcard-ec3", {"x":640,"opacity":1});
+  gsap.set("#activefishing-endcard-ec4", {"x":640,"opacity":1});
+  gsap.set("#activefishing-endcard-ec0-r", {"rotation":-4});
+  gsap.set("#activefishing-endcard-ec1-r", {"rotation":-4});
+  gsap.set("#activefishing-endcard-ec2-r", {"rotation":-4});
+  gsap.set("#activefishing-endcard-ec3-r", {"rotation":-4});
+  gsap.set("#activefishing-endcard-ec4-r", {"rotation":-4});
+  tl.fromTo("#activefishing-endcard-eline .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#activefishing-endcard-ebar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.080);
+  tl.fromTo("#activefishing-endcard-elw", {"opacity":0,"scale":0.85}, {"opacity":1,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.650);
+  tl.fromTo("#activefishing-endcard-eurl .fx-c", {"yPercent":70,"opacity":0.35}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.015,"immediateRender":false}, 0.000);
+  tl.fromTo("#activefishing-endcard-epz", {"scale":0.55,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 0.850);
+  tl.fromTo("#activefishing-endcard-ec0", {"x":640,"opacity":1}, {"x":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#activefishing-endcard-ec0-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 1.600);
+  tl.fromTo("#activefishing-endcard-ec1", {"x":640,"opacity":1}, {"x":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.186);
+  tl.fromTo("#activefishing-endcard-ec2", {"x":640,"opacity":1}, {"x":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.371);
+  tl.fromTo("#activefishing-endcard-ec3", {"x":640,"opacity":1}, {"x":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.557);
+  tl.fromTo("#activefishing-endcard-ec4", {"x":640,"opacity":1}, {"x":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.742);
   tl.set({}, {}, 3.669);
   window.__timelines["activefishing-endcard"] = tl;
   </script>

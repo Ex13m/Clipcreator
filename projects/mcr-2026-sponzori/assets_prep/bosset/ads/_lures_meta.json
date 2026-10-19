@@ -1,0 +1,119 @@
+{
+ "L1_keitech_easy_shiner_4-5in_lime_chartreuse_424t": {
+  "size": [
+   744,
+   153
+  ],
+  "pad": [
+   0.0242,
+   0.1111,
+   0.0242,
+   0.1242
+  ],
+  "src": "assets/bosset/lures/bos_keitech_es45_424t.png"
+ },
+ "L2_keitech_easy_shiner_4in_silver_flash_minnow_416t": {
+  "size": [
+   745,
+   161
+  ],
+  "pad": [
+   0.0242,
+   0.1118,
+   0.0228,
+   0.0994
+  ],
+  "src": "assets/bosset/lures/bos_keitech_es4_416t.png"
+ },
+ "L3_keitech_easy_shiner_3in_sexy_shad_426t": {
+  "size": [
+   789,
+   167
+  ],
+  "pad": [
+   0.0228,
+   0.1018,
+   0.0228,
+   0.1018
+  ],
+  "src": "assets/bosset/lures/bos_keitech_es3_426t.png"
+ },
+ "L4_keitech_easy_shiner_4in_ua_limited_ea12t": {
+  "size": [
+   883,
+   182
+  ],
+  "pad": [
+   0.0204,
+   0.0989,
+   0.0204,
+   0.0989
+  ],
+  "src": "assets/bosset/lures/bos_keitech_es4_ea12t.png"
+ },
+ "L5_fresh_lures_flipworm_3-1in_122": {
+  "size": [
+   1328,
+   372
+  ],
+  "pad": [
+   0.0128,
+   0.043,
+   0.0136,
+   0.0457
+  ],
+  "src": "assets/bosset/lures/bos_fresh_flipworm_122.png"
+ },
+ "L6_fresh_lures_flatworm_3-1in_104": {
+  "size": [
+   854,
+   112
+  ],
+  "pad": [
+   0.0211,
+   0.1607,
+   0.0211,
+   0.1607
+  ],
+  "src": "assets/bosset/lures/bos_fresh_flatworm_104.png"
+ },
+ "L7_select_easy_shad_3in_280": {
+  "size": [
+   1226,
+   243
+  ],
+  "pad": [
+   0.0139,
+   0.07,
+   0.0139,
+   0.0658
+  ],
+  "src": "assets/bosset/lures/bos_select_easyshad_280.png"
+ },
+ "L8_select_dementor_130sp_13": {
+  "size": [
+   1226,
+   389
+  ],
+  "pad": [
+   0.0139,
+   0.0437,
+   0.0139,
+   0.0437
+  ],
+  "src": "assets/bosset/lures/bos_select_dementor_13.png"
+ },
+ "L9_decoy_round_magic_sv-52": {
+  "size": [
+   549,
+   339
+  ],
+  "pad": [
+   0.0291,
+   0.0501,
+   0.0328,
+   0.0472
+  ],
+  "src": "assets/bosset/lures/bos_decoy_sv52.png"
+ }
+}
