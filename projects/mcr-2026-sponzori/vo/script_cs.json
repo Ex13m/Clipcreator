@@ -211,7 +211,9 @@
     "file": "vo/venue.wav",
     "status": "v3 21. 10.: nová věta (operátor: „Hostí nás“ na začátku nesrozumitelné) – take 4 (eleven_v3, „… “ na začátku i konci)",
     "cs_prev": "Hostí nás Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
-    "tts_prev": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě."
+    "tts_prev": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+    "real_s": 12.493,
+    "end_s": 12.743
    },
    "onscreen": {
     "kicker": "Místo konání",
@@ -534,7 +536,7 @@
     "est_s_real": 7.6,
     "est_note": "≈ 34 slabik; Paul eleven_v3 v take 3 mluvil 3,9–4,7 slabiky/s (Bosset 27 sl. = 6,9 s, Jigovky 15 slov = 7,9 s) → reálně ≈ 7,3–7,9 s; blok 5 taktů ≈ 9,2 s",
     "in_s": 0.25,
-    "end_s": 7.85,
+    "end_s": 8.507,
     "file": "vo/bosset.wav",
     "status": "v3 text 21. 10. – take 4 nainstalován (vo/bosset.wav); take 3 v vo/prev/bosset.take3.*",
     "tts_alt": "Boset – rybářský í-šop: Kejtek a ypsilon gé ká. A vítězové mistrovství získají špičkové termosky Zodžiruši.",
@@ -548,7 +550,8 @@
     },
     "cs_prev": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
     "tts_prev": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "cs_old": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin."
+    "cs_old": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin.",
+    "real_s": 8.257
    },
    "onscreen": {
     "name": "Bosset.cz",
@@ -764,7 +767,9 @@
     "spoken_words": 7,
     "in_s": 0.25,
     "file": "vo/crs.wav",
-    "status": "v3 21. 10.: take 1 (eleven_v3, „… “ na začátku i konci)"
+    "status": "v3 21. 10.: take 1 (eleven_v3, „… “ na začátku i konci)",
+    "real_s": 4.118,
+    "end_s": 4.368
    },
    "onscreen": {
     "kicker": "Děkujeme",

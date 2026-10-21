@@ -2,7 +2,7 @@
  "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
  "meta": {
   "title": "MČR 2026 Trout Area – partneři (reklamní film)",
-  "version": "v5"
+  "version": "v6"
  },
  "event": {
   "title1": "Mistrovství ČR",
@@ -41,18 +41,18 @@
   "thanks2": "partnerům"
  },
  "music": {
-  "track": "audio/track_A.wav",
-  "beats": "audio/track_A.beats.json",
+  "track": "audio/track_B.wav",
+  "beats": "audio/track_B.beats.json",
   "beatsPerBar": 4,
-  "bpm": 129,
+  "bpm": 129.2,
   "volume": 1,
-  "_planA": "operator plan A 19.10 — sponsor blocks 5 bars, venue 6, see data/block_plan_A.json"
+  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu"
  },
  "vo": {
   "dir": "vo",
   "offset": 0.25,
   "volume": 1,
-  "tailMin": 0.95,
+  "tailMin": 1.0,
   "_note": "vo/<key>.wav (+ volitelně vo/<key>.words.json se zarovnanými slovy) → automaticky do filmu, bloků i Reels"
  },
  "plan": [
@@ -63,91 +63,106 @@
     7
    ],
    "voOffset": 0.5,
-   "_": "build-up, bez kicku"
+   "_": "build-up ze zdroje (takt 10–17), bez kicku"
   },
   {
    "key": "venue",
    "bars": [
     8,
-    13
+    15
    ],
-   "_": "drop na taktu 8"
-  },
-  {
-   "key": "troutshop",
-   "bars": [
-    14,
-    18
-   ]
-  },
-  {
-   "key": "activefishing",
-   "bars": [
-    19,
-    23
-   ]
-  },
-  {
-   "key": "moonky",
-   "bars": [
-    24,
-    28
-   ]
-  },
-  {
-   "key": "jigovky",
-   "bars": [
-    29,
-    33
-   ]
-  },
-  {
-   "key": "broll",
-   "bars": [
-    34,
-    34
-   ],
-   "vo": null
-  },
-  {
-   "key": "brollbreak",
-   "block": "broll",
-   "bars": [
-    35,
-    36
-   ],
-   "vo": null,
-   "_": "hudební break"
-  },
-  {
-   "key": "velkaryba",
-   "bars": [
-    37,
-    41
-   ]
-  },
-  {
-   "key": "bosset",
-   "bars": [
-    42,
-    46
-   ]
+   "_": "DROP na taktu 8 (zdroj 18); dron + schéma + fakta"
   },
   {
    "key": "gausseholler",
    "bars": [
-    47,
-    51
+    16,
+    20
+   ],
+   "_": "HLAVNÍ CENA; poslední takt (20) = fill zdroje"
+  },
+  {
+   "key": "activefishing",
+   "bars": [
+    21,
+    25
+   ],
+   "_": "vstup na re-entry (zdroj 31)"
+  },
+  {
+   "key": "bosset",
+   "bars": [
+    26,
+    31
+   ],
+   "_": "6 taktů"
+  },
+  {
+   "key": "jigovky",
+   "bars": [
+    32,
+    36
+   ],
+   "_": "takty 3–4 bloku = hudební break zdroje (45–46)"
+  },
+  {
+   "key": "moonky",
+   "bars": [
+    37,
+    41
+   ],
+   "_": "takty 0–1 = rebuild bez hi-hatů"
+  },
+  {
+   "key": "broll",
+   "bars": [
+    42,
+    42
+   ],
+   "vo": null,
+   "_": "nářez (1 takt)"
+  },
+  {
+   "key": "brollbreak",
+   "bars": [
+    43,
+    44
+   ],
+   "block": "broll",
+   "vo": null,
+   "_": "2 takty (groove, ne break)"
+  },
+  {
+   "key": "troutshop",
+   "bars": [
+    45,
+    49
    ]
+  },
+  {
+   "key": "velkaryba",
+   "bars": [
+    50,
+    54
+   ],
+   "_": "takt 2 = fill, takt 3 = vstup peaku 1"
+  },
+  {
+   "key": "crs",
+   "bars": [
+    55,
+    58
+   ],
+   "_": "poděkování ČRS (4 takty, peak 1)"
   },
   {
    "key": "finale",
    "bars": [
-    52,
-    64
+    59,
+    71
    ],
    "tail": true,
-   "_": "peak + doznění do konce tracku"
+   "_": "střih do peaku 2 (zdroj 81) + konec skladby (101–konec)"
   }
  ]
 }

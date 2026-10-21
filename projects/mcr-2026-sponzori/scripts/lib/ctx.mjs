@@ -15,14 +15,26 @@ export function initOutput({ TK, G, mode, plate }) {
 }
 export const output = () => OUT;
 
-// TA plate geometry (corner state) + logo-rule reference size
+// TA plate geometry (corner state) + logo-rule reference size.
+// v3: the TA logo has NO white plate any more (white+red / navy+red on transparent). The corner BOX (x, y, w × h) stays the v2
+// plate box so block layouts and ctx.plate.rect do not move; the logo sits centred in it at logoW (= logo-rule reference, 281 px).
 export function plateGeom(TK) {
-  const P = TK.plate, [iw, ih] = A.dims(P.src);
-  const w = P.w, h = Math.round((w * ih) / iw);
-  // the plate PNG is the TA logo on a white plate; inner logo box measured once (1783×533 inside 1900×622)
-  const logo = { w: Math.round(w * P.innerW), h: Math.round(h * P.innerH) };
-  return { x: P.x, y: P.y, w, h, logo, moves: [] };
+  const P = TK.plate, [iw, ih] = A.dims(P.src);   // staged + trimmed to the visible logo
+  const w = P.w, h = P.h || Math.round((w * ih) / iw);
+  const logo = P.logoW ? { w: P.logoW, h: Math.round((P.logoW * ih) / iw) } : { w: Math.round(w * P.innerW), h: Math.round(h * P.innerH) };
+  return { x: P.x, y: P.y, w, h, logo, moves: [], tones: [] };
 }
+// TA logo tone for a background: 'dark' = white+red logo (on dark), 'light' = navy+red (on light), 'scrim' = white+red on a soft dark halo
+export const TONES = ['dark', 'light', 'scrim'];
+export const lumOf = (hex) => {
+  const h = String(hex || '#000').replace('#', ''); const v = h.length === 3 ? h.split('').map((c) => c + c).join('') : h.slice(0, 6);
+  const n = parseInt(v, 16); if (!Number.isFinite(n)) return 0;
+  const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+};
+// default tone of a block from its theme: theme.plate wins, else the relative luminance of theme.bg
+// (relative luminance > thr → light; 0.3 ≈ where white and navy reach the same contrast ratio)
+export const toneOfTheme = (T = {}, thr = 0.3) => (TONES.includes(T.plate) ? T.plate : lumOf(T.bg) > thr ? 'light' : 'dark');
 // plate scale at global time g (corner = 1)
 export function plateScaleAt(plate, g) {
   for (const m of plate.moves) {
@@ -73,6 +85,13 @@ export function makeCtx({ key, part = 'main', P, gT0, tT0 = gT0, dur, data, even
         if (scale < 1) throw new Error('plate scale must be ≥ 1 (TA logo never smaller than the corner plate)');
         plate.moves.push(m); plate.moves.sort((a, b) => a.g0 - b.g0);
         return { w: plate.w * scale, h: plate.h * scale, x: cx - (plate.w * scale) / 2, y: cy - (plate.h * scale) / 2 };
+      },
+      // TA logo tone for [t0, t1] (block-local): 'dark' (white+red, default on dark themes), 'light' (navy+red, default when
+      // theme.bg is light), 'scrim' (white+red on a soft dark halo — busy photos / video). Use it where YOUR background under the
+      // logo (ctx.plate.rect, or the hero position) differs from theme.bg, e.g. a white card behind the corner on a dark theme.
+      tone(t0, t1, tone) {
+        if (!TONES.includes(tone)) throw new Error(`plate.tone: ${tone} (use ${TONES.join(' | ')})`);
+        plate.tones.push({ g0: r3(gT0 + Math.max(0, t0)), g1: r3(gT0 + Math.min(dur, t1)), tone, prio: 3, by: cid });
       },
     },
     // ---- sponsor logo with the logo rule (never larger than the TA logo in the same frame) ----

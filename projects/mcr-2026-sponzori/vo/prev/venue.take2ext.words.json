@@ -1,0 +1,307 @@
+{
+  "key": "venue",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": 2,
+  "request_id": "3SespzopD48V4Jq4ovYl",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=b7e2e5dc-e3f6-41d9-8ae6-950a56084224.wav",
+  "cs": "Hostí nás Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
+  "tts": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
+  "tts_sent": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě. …",
+  "timebase": "seconds in vo/venue.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.085,
+  "raw_duration_s": 8.986,
+  "duration_s": 8.981,
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -34.5,
+    "extension_s": 0.08,
+    "extension": {
+      "T_samples": 636,
+      "f0": 69.3,
+      "periodicity": 0.64
+    }
+  },
+  "words": [
+    {
+      "word": "Hostí",
+      "start": 0.0,
+      "end": 0.315
+    },
+    {
+      "word": "nás",
+      "start": 0.415,
+      "end": 0.715
+    },
+    {
+      "word": "Líheň",
+      "start": 0.755,
+      "end": 1.115
+    },
+    {
+      "word": "Liběchov",
+      "start": 1.175,
+      "end": 1.915
+    },
+    {
+      "word": "pstruží",
+      "start": 2.195,
+      "end": 2.635
+    },
+    {
+      "word": "líheň",
+      "start": 2.715,
+      "end": 3.115
+    },
+    {
+      "word": "od",
+      "start": 3.195,
+      "end": 3.355
+    },
+    {
+      "word": "roku",
+      "start": 3.403,
+      "end": 3.595
+    },
+    {
+      "word": "1934,",
+      "start": 3.655,
+      "end": 5.115,
+      "spoken": "devatenáct set třicet čtyři,"
+    },
+    {
+      "word": "donedávna",
+      "start": 5.415,
+      "end": 6.315
+    },
+    {
+      "word": "nejníže",
+      "start": 6.395,
+      "end": 6.955
+    },
+    {
+      "word": "položené",
+      "start": 7.008,
+      "end": 7.515
+    },
+    {
+      "word": "pstruhařství",
+      "start": 7.595,
+      "end": 8.235
+    },
+    {
+      "word": "v",
+      "start": 8.275,
+      "end": 8.315
+    },
+    {
+      "word": "Evropě.",
+      "start": 8.368,
+      "end": 8.795
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Hostí",
+      "start": 0.0,
+      "end": 0.315
+    },
+    {
+      "word": "nás",
+      "start": 0.415,
+      "end": 0.715
+    },
+    {
+      "word": "Líheň",
+      "start": 0.755,
+      "end": 1.115
+    },
+    {
+      "word": "Liběchov",
+      "start": 1.175,
+      "end": 1.915
+    },
+    {
+      "word": "pstruží",
+      "start": 2.195,
+      "end": 2.635
+    },
+    {
+      "word": "líheň",
+      "start": 2.715,
+      "end": 3.115
+    },
+    {
+      "word": "od",
+      "start": 3.195,
+      "end": 3.355
+    },
+    {
+      "word": "roku",
+      "start": 3.403,
+      "end": 3.595
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.655,
+      "end": 4.315
+    },
+    {
+      "word": "set",
+      "start": 4.335,
+      "end": 4.395
+    },
+    {
+      "word": "třicet",
+      "start": 4.422,
+      "end": 4.715
+    },
+    {
+      "word": "čtyři,",
+      "start": 4.782,
+      "end": 5.115
+    },
+    {
+      "word": "donedávna",
+      "start": 5.415,
+      "end": 6.315
+    },
+    {
+      "word": "nejníže",
+      "start": 6.395,
+      "end": 6.955
+    },
+    {
+      "word": "položené",
+      "start": 7.008,
+      "end": 7.515
+    },
+    {
+      "word": "pstruhařství",
+      "start": 7.595,
+      "end": 8.235
+    },
+    {
+      "word": "v",
+      "start": 8.275,
+      "end": 8.315
+    },
+    {
+      "word": "Evropě.",
+      "start": 8.368,
+      "end": 8.795
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "Hostí",
+      "start": 0.0,
+      "end": 0.4
+    },
+    {
+      "word": "nás",
+      "start": 0.5,
+      "end": 0.8
+    },
+    {
+      "word": "Líheň",
+      "start": 0.84,
+      "end": 1.2
+    },
+    {
+      "word": "Liběchov",
+      "start": 1.26,
+      "end": 2.0
+    },
+    {
+      "word": "–",
+      "start": 2.0,
+      "end": 2.0
+    },
+    {
+      "word": "pstruží",
+      "start": 2.2800000000000002,
+      "end": 2.72
+    },
+    {
+      "word": "líheň",
+      "start": 2.8000000000000003,
+      "end": 3.2
+    },
+    {
+      "word": "od",
+      "start": 3.2800000000000002,
+      "end": 3.44
+    },
+    {
+      "word": "roku",
+      "start": 3.488,
+      "end": 3.68
+    },
+    {
+      "word": "devatenáct",
+      "start": 3.74,
+      "end": 4.4
+    },
+    {
+      "word": "set",
+      "start": 4.42,
+      "end": 4.48
+    },
+    {
+      "word": "třicet",
+      "start": 4.507,
+      "end": 4.8
+    },
+    {
+      "word": "čtyři,",
+      "start": 4.867,
+      "end": 5.2
+    },
+    {
+      "word": "donedávna",
+      "start": 5.5,
+      "end": 6.4
+    },
+    {
+      "word": "nejníže",
+      "start": 6.48,
+      "end": 7.04
+    },
+    {
+      "word": "položené",
+      "start": 7.093,
+      "end": 7.6
+    },
+    {
+      "word": "pstruhařství",
+      "start": 7.68,
+      "end": 8.32
+    },
+    {
+      "word": "v",
+      "start": 8.36,
+      "end": 8.4
+    },
+    {
+      "word": "Evropě.",
+      "start": 8.453,
+      "end": 8.88
+    },
+    {
+      "word": "…",
+      "start": 8.88,
+      "end": 8.88
+    },
+    {
+      "word": "<end>",
+      "start": 8.986122448979591,
+      "end": 8.986122448979591
+    }
+  ]
+}

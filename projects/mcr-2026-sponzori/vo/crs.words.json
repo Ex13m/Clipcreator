@@ -1,0 +1,160 @@
+{
+  "key": "crs",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": 1,
+  "request_id": "xtLnG9VdOrAlT0RqssJQ",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=7fea72b1-3506-4aa4-8b46-3f1a2a02c8ca.wav",
+  "cs": "Děkujeme Českému rybářskému svazu za dlouholetou podporu.",
+  "tts": "Děkujeme Českému rybářskému svazu za dlouholetou podporu.",
+  "tts_sent": "… Děkujeme Českému rybářskému svazu za dlouholetou podporu. …",
+  "timebase": "seconds in vo/crs.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.13,
+  "raw_duration_s": 4.127,
+  "duration_s": 4.118,
+  "onset": {
+    "first_phoneme_raw_s": 0.17,
+    "lead_in_s": 0.04
+  },
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -28.5,
+    "extension_s": 0.12,
+    "extension": {
+      "T_samples": 579,
+      "f0": 76.2,
+      "periodicity": 0.91
+    }
+  },
+  "words": [
+    {
+      "word": "Děkujeme",
+      "start": 0.0,
+      "end": 0.51
+    },
+    {
+      "word": "Českému",
+      "start": 0.59,
+      "end": 1.07
+    },
+    {
+      "word": "rybářskému",
+      "start": 1.13,
+      "end": 1.79
+    },
+    {
+      "word": "svazu",
+      "start": 1.843,
+      "end": 2.35
+    },
+    {
+      "word": "za",
+      "start": 2.43,
+      "end": 2.59
+    },
+    {
+      "word": "dlouholetou",
+      "start": 2.647,
+      "end": 3.31
+    },
+    {
+      "word": "podporu.",
+      "start": 3.38,
+      "end": 3.87
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Děkujeme",
+      "start": 0.0,
+      "end": 0.51
+    },
+    {
+      "word": "Českému",
+      "start": 0.59,
+      "end": 1.07
+    },
+    {
+      "word": "rybářskému",
+      "start": 1.13,
+      "end": 1.79
+    },
+    {
+      "word": "svazu",
+      "start": 1.843,
+      "end": 2.35
+    },
+    {
+      "word": "za",
+      "start": 2.43,
+      "end": 2.59
+    },
+    {
+      "word": "dlouholetou",
+      "start": 2.647,
+      "end": 3.31
+    },
+    {
+      "word": "podporu.",
+      "start": 3.38,
+      "end": 3.87
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "…",
+      "start": 0.0,
+      "end": 0.08
+    },
+    {
+      "word": "Děkujeme",
+      "start": 0.12,
+      "end": 0.64
+    },
+    {
+      "word": "Českému",
+      "start": 0.72,
+      "end": 1.2000000000000002
+    },
+    {
+      "word": "rybářskému",
+      "start": 1.26,
+      "end": 1.9200000000000002
+    },
+    {
+      "word": "svazu",
+      "start": 1.973,
+      "end": 2.48
+    },
+    {
+      "word": "za",
+      "start": 2.56,
+      "end": 2.7199999999999998
+    },
+    {
+      "word": "dlouholetou",
+      "start": 2.777,
+      "end": 3.4400000000000004
+    },
+    {
+      "word": "podporu.",
+      "start": 3.5100000000000002,
+      "end": 4.0
+    },
+    {
+      "word": "…",
+      "start": 4.0,
+      "end": 4.0
+    },
+    {
+      "word": "<end>",
+      "start": 4.12734693877551,
+      "end": 4.12734693877551
+    }
+  ]
+}

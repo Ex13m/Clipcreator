@@ -1,0 +1,153 @@
+{
+ "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
+ "meta": {
+  "title": "MČR 2026 Trout Area – partneři (reklamní film)",
+  "version": "v5"
+ },
+ "event": {
+  "title1": "Mistrovství ČR",
+  "title2": "v Trout Area 2026",
+  "date": "24.–25. 10. 2026",
+  "dateBig": "24.–25. 10.",
+  "year": "2026",
+  "days": "sobota + neděle",
+  "place": "Líheň Liběchov",
+  "pond": "rybník Malý Sporťáček",
+  "web": "troutareacz.cz",
+  "stats": [
+   {
+    "v": 40,
+    "l": "závodníků",
+    "src": "troutareacz.cz – max 40, obsazeno 40/40"
+   },
+   {
+    "v": "hard",
+    "l": "baits",
+    "src": "troutareacz.cz – formát hard baits"
+   },
+   {
+    "v": 12,
+    "l": "kol",
+    "src": "troutareacz.cz – 12 kol"
+   },
+   {
+    "v": 2,
+    "l": "dny",
+    "src": "Den 1 so 24. 10., Den 2 ne 25. 10."
+   }
+  ],
+  "partnersTitle": "Partneři mistrovství",
+  "thanks1": "Děkujeme",
+  "thanks2": "partnerům"
+ },
+ "music": {
+  "track": "audio/track_A.wav",
+  "beats": "audio/track_A.beats.json",
+  "beatsPerBar": 4,
+  "bpm": 129,
+  "volume": 1,
+  "_planA": "operator plan A 19.10 — sponsor blocks 5 bars, venue 6, see data/block_plan_A.json"
+ },
+ "vo": {
+  "dir": "vo",
+  "offset": 0.25,
+  "volume": 1,
+  "tailMin": 0.95,
+  "_note": "vo/<key>.wav (+ volitelně vo/<key>.words.json se zarovnanými slovy) → automaticky do filmu, bloků i Reels"
+ },
+ "plan": [
+  {
+   "key": "intro",
+   "bars": [
+    0,
+    7
+   ],
+   "voOffset": 0.5,
+   "_": "build-up, bez kicku"
+  },
+  {
+   "key": "venue",
+   "bars": [
+    8,
+    13
+   ],
+   "_": "drop na taktu 8"
+  },
+  {
+   "key": "troutshop",
+   "bars": [
+    14,
+    18
+   ]
+  },
+  {
+   "key": "activefishing",
+   "bars": [
+    19,
+    23
+   ]
+  },
+  {
+   "key": "moonky",
+   "bars": [
+    24,
+    28
+   ]
+  },
+  {
+   "key": "jigovky",
+   "bars": [
+    29,
+    33
+   ]
+  },
+  {
+   "key": "broll",
+   "bars": [
+    34,
+    34
+   ],
+   "vo": null
+  },
+  {
+   "key": "brollbreak",
+   "block": "broll",
+   "bars": [
+    35,
+    36
+   ],
+   "vo": null,
+   "_": "hudební break"
+  },
+  {
+   "key": "velkaryba",
+   "bars": [
+    37,
+    41
+   ]
+  },
+  {
+   "key": "bosset",
+   "bars": [
+    42,
+    46
+   ]
+  },
+  {
+   "key": "gausseholler",
+   "bars": [
+    47,
+    51
+   ]
+  },
+  {
+   "key": "finale",
+   "bars": [
+    52,
+    64
+   ],
+   "tail": true,
+   "_": "peak + doznění do konce tracku"
+  }
+ ]
+}

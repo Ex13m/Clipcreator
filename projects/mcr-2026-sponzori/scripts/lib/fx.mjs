@@ -39,11 +39,19 @@
 //   chroma(ctx,sel,t,{amt,d,kind})                           subtle chromatic-aberration hit (text or image)
 //   grid(ctx,{id,src|cells[{src,pos,fit,bg,pad}],cols,rows,x,y,w,h,gap,t,mode,stagger,radius})   split-screen grid assemble
 //   flash(ctx,t,{color,peak,d,blend})                        colour flash on a downbeat
-//   tIn(ctx,type,{color,d,dir}) / tOut(ctx,type,{color,d,dir})   block transitions: cut|wipe|iris|slice|whip|zoom|blob|grid|flash
-//   endCard(ctx,{t,logo,url,line,tone,scale,cy})             end-card lockup: TA plate hero + sponsor logo + URL + line
+//   tIn(ctx,type,{color,d,dir}) / tOut(ctx,type,{color,d,dir})   block transitions: cut|wipe|iris|slice|whip|zoom|blob|grid|flash|fader
+//        'fader' = TA signature (v3): mixer-fader columns ride up with a TA-red cap line (cover = `color`, caps = TA red)
+//   endCard(ctx,{t,logo,url,line,tone,scale,cy,ta})          end-card lockup: TA logo hero + sponsor logo + URL + line
+//                                                            (ta:true default → line in Montserrat + TA-red hairline, the TA signature)
+//   taChip(ctx,{id,text,sub,cx|x,y,size,tone,t})             TA-style chip (Montserrat 800 caps + TA-red hairline) — e.g. „Věnuje ceny · MČR 2026“
+//   TA                                                       TA CZ palette + font (red #e31e24, navy #304285, deep #0b1e42, Montserrat)
 import { esc, nb, rnd, J, r3 } from './util.mjs';
 
 const px = (n) => `${Math.round(n * 10) / 10}px`;
+
+// TA CZ house accents (v3 „a little of our style“): use them ONLY as details (hairline, chip, end-card line, fader transition) —
+// never repaint a sponsor world with them
+export const TA = { red: '#e31e24', navy: '#304285', deep: '#0b1e42', light: '#eef2f9', blue: '#8ea2d8', font: 'Montserrat' };
 
 // ======================================================================================
 // CSS (root, once)
@@ -113,6 +121,16 @@ export const CSS = `
 .fx-ov-wp{position:absolute;inset:0;display:block}
 .fx-ov-bl i{position:absolute;inset:0}
 .fx-ec{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.fx-ov-fd{display:flex}
+.fx-ov-fd i{position:relative;flex:1;margin:0 -1px;display:block}
+.fx-ov-fd i::before,.fx-ov-fd i::after{content:'';position:absolute;left:0;right:0;height:var(--cap,7px);background:var(--capc,#e31e24)}
+.fx-ov-fd i::before{top:calc(-1 * var(--cap,7px))}
+.fx-ov-fd i::after{bottom:calc(-1 * var(--cap,7px))}
+.fx-tach{position:absolute;display:flex;align-items:center;gap:14px;white-space:nowrap;font-family:'Montserrat';font-weight:800;text-transform:uppercase;line-height:1;border-radius:999px;box-sizing:border-box}
+.fx-tach.dark{background:rgba(8,14,28,.42);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);color:#fff}
+.fx-tach.light{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);box-shadow:inset 0 0 0 1.5px rgba(48,66,133,.22);color:#0b1e42}
+.fx-tach b{display:block;width:var(--hl,34px);height:3px;border-radius:2px;background:#e31e24;flex-shrink:0}
+.fx-tach em{font-style:normal;font-weight:600;opacity:.72}
 .fx-defs{position:absolute;width:0;height:0;overflow:hidden}
 `;
 
@@ -406,12 +424,19 @@ function overlayFor(ctx, type, oid, color, dir, n = 7, lead = null) {
   // liquid blob: circles merged by an SVG "goo" filter (blur + alpha threshold) → one organic, melting mask; container is
   // larger than the frame so the blur never thins the frame edges
   if (type === 'wipe') return `<div class="fx-ov" id="${ctx.id(oid)}" style="overflow:hidden">${lead ? `<i class="fx-ov-wp" id="${ctx.id(`${oid}a`)}" style="background:${lead}"></i>` : ''}<i class="fx-ov-wp" id="${ctx.id(`${oid}b`)}" style="background:${color}"></i></div>`;
+  // TA mixer faders: n columns, each a full-height panel of `color` with TA-red cap lines just outside its top and bottom edge
+  // (visible only while the column moves → the cover itself is a clean solid colour, the caps read as fader knobs)
+  if (type === 'fader') return `<div class="fx-ov fx-ov-fd" id="${ctx.id(oid)}" style="overflow:hidden;--capc:${TA.red}">${Array.from({ length: FADER_N }, (_, i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color}"></i>`).join('')}</div>`;
   if (type === 'blob') return `${gooFor(ctx)}<div class="fx-ov fx-ov-bl" id="${ctx.id(oid)}" style="filter:url(#${ctx.id('goo')})">${BLOBS.map(([x, y], i) => `<i id="${ctx.id(`${oid}${i}`)}" style="background:${color};clip-path:circle(0% at ${x}% ${y}%)"></i>`).join('')}</div>`;
   return `<div class="fx-ov" id="${ctx.id(oid)}" style="background:${color}"></div>`;
 }
 // wipe = solid panels sliding in (tOut) / out (tIn) on x/yPercent — a moving hard edge, identical to an inset() wipe for a solid
 // colour but transform-only (an inset() clip-path tween jumps: Chrome's computed value collapses equal sides, GSAP can't match it)
 const WIPE = { right: ['xPercent', -100], left: ['xPercent', 100], up: ['yPercent', 100], down: ['yPercent', -100] };
+// fader columns: count + per-column delay (fraction of d) shaped like a mixer move (centre faders lead, edges follow, a little
+// seeded jitter) — deterministic
+const FADER_N = 8;
+const faderDelay = (i) => (Math.abs(i - (FADER_N - 1) / 2) / ((FADER_N - 1) / 2)) * 0.22 + rnd(i * 7 + 3) * 0.06;
 const wipeAxis = (dir) => WIPE[dir] || WIPE.right;
 
 export function tOut(ctx, type = 'cut', { color = ctx.next?.theme?.bg || ctx.theme.bg || '#000', d = 0.4, dir = 'right', end = ctx.dur } = {}) {
@@ -444,6 +469,8 @@ export function tOut(ctx, type = 'cut', { color = ctx.next?.theme?.bg || ctx.the
   else if (type === 'slice') for (let i = 0; i < 7; i++) ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { xPercent: i % 2 ? -101 : 101 }, { xPercent: 0, duration: d * 0.75, ease: 'power3.inOut' }, t + i * d * 0.035);
   else if (type === 'grid') for (let i = 0; i < 28; i++) { const c = i % 4, r = Math.floor(i / 4); ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { scale: 0 }, { scale: 1.02, duration: d * 0.6, ease: 'power2.in' }, t + (Math.abs(c - 1.5) + Math.abs(r - 3)) * d * 0.06); }
   else if (type === 'blob') BLOBS.forEach(([x, y, r, dl], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(0% at ${x}% ${y}%)` }, { clipPath: `circle(${r}% at ${x}% ${y}%)`, duration: d * (0.84 - dl), ease: 'power2.in' }, t + dl * d));
+  // faders ride up from below (dir 'down' → from above); every column is closed exactly at `end`
+  else if (type === 'fader') { const v = dir === 'down' ? -101 : 101; for (let i = 0; i < FADER_N; i++) { const dl = faderDelay(i) * d; ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { yPercent: v }, { yPercent: 0, duration: d - dl, ease: 'power3.inOut' }, t + dl); } }
 }
 export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.45, dir = 'right', start = 0 } = {}) {
   const t = start, oid = 'tin', o = ctx.sel(oid);
@@ -482,6 +509,8 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
   else if (type === 'slice') for (let i = 0; i < 7; i++) ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { xPercent: 0 }, { xPercent: i % 2 ? 101 : -101, duration: d * 0.75, ease: 'power3.inOut' }, t + i * d * 0.035);
   else if (type === 'grid') for (let i = 0; i < 28; i++) { const c = i % 4, r = Math.floor(i / 4); ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { scale: 1.02 }, { scale: 0, duration: d * 0.6, ease: 'power2.out' }, t + (Math.abs(c - 1.5) + Math.abs(r - 3)) * d * 0.06); }
   else if (type === 'blob') BLOBS.forEach(([x, y, r, dl], i) => ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { clipPath: `circle(${r}% at ${x}% ${y}%)` }, { clipPath: `circle(0% at ${x}% ${y}%)`, duration: d * (0.84 - dl), ease: 'power2.out' }, t + dl * d));
+  // faders keep riding the same way (up) and leave the frame: centre columns first, so the product in the middle shows first
+  else if (type === 'fader') { const v = dir === 'down' ? 101 : -101; for (let i = 0; i < FADER_N; i++) { const dl = faderDelay(i) * d; ctx.tl.fromTo(ctx.sel(`${oid}${i}`), { yPercent: 0 }, { yPercent: v, duration: d - dl, ease: 'power3.inOut' }, t + dl); } }
 }
 
 // ======================================================================================
@@ -491,14 +520,16 @@ export function tIn(ctx, type = 'cut', { color = ctx.theme.bg || '#000', d = 0.4
 // plateT: when the plate starts flying (default t). Reel end cards pass plateT = −plateFly so the TA plate flies OVER the block's
 // out-transition and lands on the downbeat; settle: true → the lockup is complete on frame 1 and only settles (no fade-in from an
 // empty frame — the first frame of a Reel end card must already be the finished lockup).
-export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark', url = ctx.data?.url, line = 'Partner MČR v Trout Area 2026', tone = 'dark', fg = ctx.theme.fg || '#fff', accent = ctx.theme.accent || '#fff', font = ctx.theme.font?.display || 'Inter', textFont = ctx.theme.font?.text || 'Inter', scale = 1.5, cy = 1010, gap = 46, plateFly = 0.6, plateT = t, settle = false, ease } = {}) {
+// ta: true (default, v3) → the line under the TA logo is set in Montserrat 700 caps and the separator is a TA-red hairline (our
+// signature in every lockup); ta: false → the old look (line in textFont, bar in the sponsor accent).
+export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark', url = ctx.data?.url, line = 'Partner MČR v Trout Area 2026', tone = 'dark', fg = ctx.theme.fg || '#fff', accent = ctx.theme.accent || '#fff', font = ctx.theme.font?.display || 'Inter', textFont = ctx.theme.font?.text || 'Inter', scale = 1.5, cy = 1010, gap = 46, plateFly = 0.6, plateT = t, settle = false, ease, ta = true } = {}) {
   const P = ctx.plate.hero(plateT, t1, { scale, cx: ctx.W / 2, cy: cy - 330, fly: plateFly, ...(ease ? { ease } : {}) });
   const SET = settle ? 1.05 : 1;   // the settle scales the whole lockup 1.05 → 1: fit the logo to scale ÷ 1.05 so frame 1 obeys the logo rule
   const L = ctx.logo(logo, { box: [760, 300], scale: scale / SET, at: [Math.max(t, plateT + plateFly), t1], id: `${id}-logo`, label: `${ctx.cid} end card` });
   const urlFit = ctx.fit(url || '', { font, wght: 800, maxW: 900, maxLines: 1, sizes: [96, 88, 80, 72, 64, 56] });
   const html = `<div class="fx-ec" id="${ctx.id(id)}" style="top:${px(P.y + P.h + gap)}">
-    <div id="${ctx.id(`${id}-line`)}" style="font-family:'${textFont}';font-weight:700;font-size:28px;letter-spacing:.18em;text-transform:uppercase;color:${fg};opacity:.85">${esc(nb(line))}</div>
-    <div id="${ctx.id(`${id}-bar`)}" style="width:120px;height:6px;border-radius:3px;background:${accent};margin:${gap * 0.7}px 0"></div>
+    <div id="${ctx.id(`${id}-line`)}" style="font-family:'${ta ? TA.font : textFont}';font-weight:700;font-size:${ta ? 26 : 28}px;letter-spacing:${ta ? '.2em' : '.18em'};text-transform:uppercase;color:${fg};opacity:.85">${esc(nb(line))}</div>
+    <div id="${ctx.id(`${id}-bar`)}" style="width:${ta ? 140 : 120}px;height:${ta ? 3 : 6}px;border-radius:3px;background:${ta ? TA.red : accent};margin:${gap * 0.7}px 0"></div>
     <div id="${ctx.id(`${id}-lw`)}">${L.html}</div>
     <div id="${ctx.id(`${id}-url`)}" style="margin-top:${gap}px;font-family:'${font}';font-weight:800;font-size:${urlFit.size}px;color:${fg};letter-spacing:-.01em">${esc(url || '')}</div>
   </div>`;
@@ -514,6 +545,30 @@ export function endCard(ctx, { id = 'ec', t = 0, t1 = ctx.dur, logo = 'on_dark',
   ctx.tl.fromTo(ctx.sel(`${id}-lw`), { opacity: 0, scale: 0.85, filter: 'blur(10px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out' }, tt + 0.14);
   ctx.tl.fromTo(ctx.sel(`${id}-url`), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, tt + 0.26);
   return { html, logo: L, plate: P };
+}
+
+// ======================================================================================
+// TA CHIP — „a little of our style“ (v3): Montserrat 800 caps + a short TA-red hairline, glass pill in the sponsor world.
+//   const C = fx.taChip(ctx, { id: 'pz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: 540, y: 1320, t: 1.2 }); html += C.html;
+// tone 'dark' (on dark / photo) | 'light' (on light). cx centres the chip, else x = left edge. Entrance: settle + hairline draw
+// (t = null → static, visible from frame 1). Returns {html, w, h, x, y}.
+// ======================================================================================
+export function taChip(ctx, { id = 'tachip', text, sub = '', cx = null, x = ctx.safe.left, y = 1300, size = 30, tone = 'dark', t = 0, d = 0.5, tracking = 0.08, hl = 34, style = '' } = {}) {
+  const T = ctx.tokens?.ta || {};
+  const padX = Math.round(size * 0.95), padY = Math.round(size * 0.62), gap = 14;
+  const wMain = ctx.measure(text, { font: TA.font, size, wght: 800, upper: true, tracking });
+  const wSub = sub ? ctx.measure(sub, { font: TA.font, size, wght: 600, upper: true, tracking }) + gap + 4 : 0;
+  const w = Math.ceil(padX * 2 + hl + gap + wMain + wSub), h = Math.ceil(size + padY * 2);
+  const left = cx != null ? cx - w / 2 : x;
+  const html = `<div class="fx-tach ${tone}" id="${ctx.id(id)}" style="left:${px(left)};top:${px(y)};height:${px(h)};padding:0 ${padX}px;font-size:${size}px;letter-spacing:${tracking}em;--hl:${hl}px;${style}"><b id="${ctx.id(`${id}-hl`)}" style="background:${T.red || TA.red}"></b><span>${esc(nb(text))}</span>${sub ? `<em>${esc(nb(sub))}</em>` : ''}</div>`;
+  if (t != null) {
+    // opacity in 2 frames (a slow fade = grey ghost over the world), movement separately
+    ctx.tl.fromTo(ctx.sel(id), { opacity: 0 }, { opacity: 1, duration: 0.07, ease: 'none' }, t);
+    ctx.tl.fromTo(ctx.sel(id), { y: 24 }, { y: 0, duration: d, ease: 'expo.out' }, t);
+    ctx.tl.fromTo(ctx.sel(`${id}-hl`), { scaleX: 0 }, { scaleX: 1, duration: d * 1.2, ease: 'expo.out' }, t + 0.08);
+    ctx.tl.set(ctx.sel(`${id}-hl`), { transformOrigin: '0% 50%' }, 0);
+  }
+  return { html, w, h, x: left, y };
 }
 
 export { r3, J };
