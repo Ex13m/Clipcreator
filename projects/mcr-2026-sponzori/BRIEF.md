@@ -12,6 +12,12 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 - Gausse Holler: stojan na pruty Black Standard Edition (render z webu) + značka „MADE BY ⚙ © 2026 Gausse Holler“ (gausseholler.com) na konci.
 
 
+## LOGO TA (uživatel 21. 10.) — platí přednostně
+- Logo TA CZ = **bílé TROUT + červené AREA na PRŮHLEDNÉM pozadí** (assets_prep/ta_cz/logo_h_on_dark.png; vzor poslal uživatel). Stará bílá destička se už nepoužívá.
+- **Varianta A**: všude stejné bílo-červené logo, i na světlém pozadí — čitelnost zajistí jemný tmavý stín/halo (bez viditelné destičky). Navy variantu (logo_h_on_light) nepoužívat.
+- Gausse Holler blok: **adresa gausseholler.com viditelně po celý blok** (nejen v závěru).
+- Ryba „donedávna“: scene_leap2_d (výskok s přetočením, jediná bez anatomických vad); titulek ne přes tělo ryby.
+
 ## FOTKY ZÁVODNÍKŮ A RYB (uživatel 21. 10.)
 - **Všechny fotky závodníků a ryb vyměnit** — brát z galerie na NAŠEM webu troutareacz.cz — z jakýchkoli alb, ALE JEN Z LIGOVÝCH ZÁVODŮ (ligová kola TA CZ; uživatel 21. 10.). Nepoužívat H-BATTLE/Klonówiec b-roll ani AI-upscalovanou rybu. Výběr: ostré, akční (záběr, zdolávání, ryba v podběráku, radost), vertikálně ořezatelné; tváře OK (vlastní komunita), ale ne cizí sponzorská loga větší než TA.
 
