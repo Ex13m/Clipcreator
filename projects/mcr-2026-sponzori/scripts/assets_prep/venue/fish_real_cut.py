@@ -168,6 +168,22 @@ def band_copy(x0, y0, x1, y1, dx, excl, feather_v=12, feather_h=12, dc_scale=0.5
 fixed |= band_copy(795, 1183, 990, 1252, -190, pecb)
 fixed |= band_copy(425, 1168, 500, 1240, 70, pecb, feather_v=8, feather_h=8)
 
+# (1c) fingertips under the jaw/throat (x 245–425): the fingers only clip the lower rim, so the outline follows the
+#      finger tops there (smoothed) instead of inventing throat texture
+xs_ = np.arange(245, 426)
+bot = np.array([edge_y(x, True) for x in xs_], float)
+for i, x in enumerate(xs_):
+    col = np.nonzero((skin[1150:1260, x] > 0) & bodyb[1150:1260, x])[0]
+    if len(col):
+        bot[i] = min(bot[i], 1150 + col.min() - 2)
+bot = np.array([bot[max(0, i - 6):i + 7].min() for i in range(len(bot))])
+bot = cv2.GaussianBlur(bot.reshape(1, -1).astype(np.float32), (0, 0), 3).ravel()
+for i, x in enumerate(xs_):
+    yb = int(np.floor(bot[i]))
+    keep = pecb[:, x].copy()
+    m[yb + 1:1300, x] = keep[yb + 1:1300].astype(np.uint8)
+    bodyb[yb + 1:1300, x] = False
+
 # (2) everything else (finger behind the gill, fingertips on the jaw underside, both thumbs on the back/head):
 #     Telea on an image whose outside-the-fish pixels are replaced by the nearest fish pixel (no jacket/skin bleeding in)
 zm = np.zeros((H, W), bool)

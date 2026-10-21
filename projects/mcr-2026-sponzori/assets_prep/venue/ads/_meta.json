@@ -186,7 +186,7 @@
     "body_offset_px_mean_abs": 2.39,
     "body_offset_px_max_abs": 9.55
    },
-   "fingers_retouched_px": 23458,
+   "fingers_retouched_px": 20942,
    "pose": "side-on, straight, head left, belly down; snout at x≈6, tail tip at x≈1179 (canvas px)",
    "use": "native 1:1 or smaller (max 1.3x per BLOCK_API); never through an AI upscaler"
   }
