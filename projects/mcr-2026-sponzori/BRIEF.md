@@ -15,6 +15,8 @@ Cíl: módní (fashion-grade) animovaná prezentace sponzorů v TA CZ stylu, 9:1
 ## FOTKY ZÁVODNÍKŮ A RYB (uživatel 21. 10.)
 - **Všechny fotky závodníků a ryb vyměnit** — brát z galerie na NAŠEM webu troutareacz.cz (Galerie, alba z českých závodů TA CZ). Nepoužívat H-BATTLE/Klonówiec b-roll ani AI-upscalovanou rybu. Výběr: ostré, akční (záběr, zdolávání, ryba v podběráku, radost), vertikálně ořezatelné; tváře OK (vlastní komunita), ale ne cizí sponzorská loga větší než TA.
 
+- **Ryba ve filmu = PSTRUH DUHOVÝ (rainbow trout)** — na závodech se loví hlavně duhák (uživatel 21. 10.). AI ryby: assets_prep/fish_ai/fish_rainbow_*_cut.png (Higgsfield gpt_image_2_5), sivena/potočáka nepoužívat jako hero.
+
 ## ZMĚNA SMĚRU (19. 10., uživatel) — platí přednostně
 - NE „náš TA styl“. Je to **reklamní film produktů a sponzorů** — nejmodernější techniky reklamního designu 2025/26, všechny triky povoleny.
 - Z našeho stylu zůstává **jen logo TA CZ** (vždy viditelné, malý roh). Žádné drum-pady/EQ/ticker/navy šablona.
