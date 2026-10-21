@@ -127,16 +127,18 @@ blocks. The fx classes (`.fx-*`) are global.
 `theme.bg`. That way any out works with any in. `whip` and `zoom` move `ctx.stage` (and its children), so never animate the stage yourself.
 
 ## 5. TA logo and the logo rule (hard rules, enforced by the build)
-- **v3 (operator 21. 10.): no white plate.** The TA CZ logo is drawn on transparent: white+red (`assets_prep/ta_cz/logo_h_on_dark.png`)
-  on dark backgrounds, navy+red (`logo_h_on_light.png`) on light ones, white+red on a soft dark halo (`scrim`) over busy photos /
-  video. It sits in the same corner box as before (`ctx.plate.rect` = 300×98 at 64,250; the logo inside is 281 px wide = the
+- **v3 (operator 21. 10.): no white plate, ALWAYS white 'TROUT' + red 'AREA' on transparent** (`assets_prep/ta_cz/logo_h_on_dark.png`)
+  — the navy variant is never used. On light / busy backgrounds the engine keeps the same logo readable with a soft dark shadow that
+  follows the letters + a faint radial halo (no visible box). It sits in the same corner box as before (`ctx.plate.rect` = 300×98 at 64,250; the logo inside is 281 px wide = the
   logo-rule reference), is the **only persistent layer** (root page, above every block) and nothing can cover it. **Do not draw
   another TA logo** and do not put key content under `ctx.plate.rect`.
-- **Tone of the TA logo** (who decides, highest first): `ctx.plate.tone(t0, t1, 'dark'|'light'|'scrim')` from your block (use it when
-  what is under the logo differs from `theme.bg`, e.g. a white card behind the corner on a dark theme, or a bright photo) >
+- **Tone = shadow strength of the TA logo**: `dark` (base soft shadow) · `scrim` (denser shadow + soft halo: mid / busy photos, red
+  under AREA) · `halo` (strongest: light backgrounds; `light` is an alias). Who decides, highest first:
+  `ctx.plate.tone(t0, t1, 'dark'|'scrim'|'halo')` from your block (use it when what is under the logo differs from `theme.bg`, e.g. a
+  white card behind the corner on a dark theme, or a bright photo) >
   `content.json plan[].plate` > the **luminance probe** (`node scripts/plate_probe.mjs [film|reel:<key>|block:<key>|reels]` measures the
   real frames under the logo and writes `data/plate_tone.json`; it goes stale as soon as a block changes — the build then warns) >
-  `theme.plate` > the relative luminance of `theme.bg` (> 0.3 → light). The build log prints `TA logo tone: …`.
+  `theme.plate` > the relative luminance of `theme.bg` (> 0.3 → halo). The build log prints `TA logo tone: …`.
 - A sponsor logo or mark (logo, badge, GH gear, MADE BY lockup…) must **never be larger than the TA logo in the same frame** (width and area).
   `ctx.logo(which, {box:[w,h]})` fits it automatically at plate scale ×1, which is at most about 281 px wide and 23.6k px² area.
 - For a bigger logo moment, request a plate hero for that window and pass the same scale:
@@ -202,7 +204,8 @@ lockups and chips, the logo glint in intro + finale, and ONE `fader` transition 
 
 ## 13. v3 global changes (21. 10.)
 - Plan B + new music edit (§7). `voOffset` 0.25 s (intro 0.5 s), VO must end ≥ 1.0 s before the block end (`vo.tailMin` 1.0).
-- TA logo without the plate + tone schedule + luminance probe (§5). The logo-rule reference size is unchanged (281 px).
+- TA logo without the plate, always white+red; shadow/halo strength from the tone schedule + luminance probe (§5). The logo-rule
+  reference size is unchanged (281 px).
 - „A little of our TA style“ — global accents only: (1) a light glint runs through the TA logo on every downbeat in **intro and
   finale** only (root layer, `tokens.ta.glint`); (2) `fx.endCard` lockups: line in Montserrat caps + TA-red hairline (`ta: true`);
   (3) `fx.taChip` (Montserrat + TA-red hairline) for chips that should read as „ours“; (4) `fx.tIn/tOut('fader')` — TA mixer faders.

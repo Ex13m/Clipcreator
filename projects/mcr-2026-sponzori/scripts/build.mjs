@@ -283,8 +283,8 @@ function build(mode, blockKey = null) {
   // ---- TA logo tone (v3: no white plate; operator 21. 10.: ALWAYS the white+red logo): piecewise schedule over the output, highest
   //      priority window wins (later wins a tie); a tone = strength of the soft dark shadow (#ta-sh: blurred dark copy of the logo)
   //      and of the radial halo (#ta-scrim), cross-faded over toneFade s centred on the boundary ----
-  const LV = TK.plate.levels || { dark: { sh: 0.35, scrim: 0 }, scrim: { sh: 0.6, scrim: 0.75 }, halo: { sh: 0.85, scrim: 1 } };
-  const LAYERS = Object.fromEntries(TONES.map((t) => [t, { '#ta-sh': LV[t].sh, '#ta-scrim': LV[t].scrim }]));
+  const LV = TK.plate.levels || { dark: { sh: 0.3, sh2: 0, scrim: 0 }, scrim: { sh: 0.65, sh2: 0.5, scrim: 0.35 }, halo: { sh: 0.95, sh2: 0.75, scrim: 0.5 } };
+  const LAYERS = Object.fromEntries(TONES.map((t) => [t, { '#ta-sh': LV[t].sh, '#ta-sh2': LV[t].sh2 ?? 0, '#ta-scrim': LV[t].scrim }]));
   const cuts = [...new Set([0, DUR_RAW, ...plate.tones.flatMap((w) => [w.g0, w.g1])].map(r3))].filter((g) => g >= 0 && g <= DUR_RAW + 1e-6).sort((a, b) => a - b);
   const toneSegs = [];
   for (let i = 0; i + 1 < cuts.length; i++) {
@@ -343,9 +343,11 @@ ${fx.CSS}
    ALWAYS the white 'TROUT' + red 'AREA' logo on transparent (operator 21. 10.); readability on light / busy backgrounds comes from a
    soft dark shadow (#ta-sh) + radial halo (#ta-scrim) whose strength follows the tone schedule — never a visible box */
 #ta-plate { position:absolute; left:${P0.x}px; top:${P0.y}px; width:${P0.w}px; height:${P0.h}px; z-index:1000; transform-origin:0 0; }
-#ta-plate .ta-lg, #ta-glint, #ta-sh { position:absolute; left:${LX}px; top:${LY}px; width:${P0.logo.w}px; height:${P0.logo.h}px; display:block; }
+#ta-plate .ta-lg, #ta-glint, #ta-sh, #ta-sh2 { position:absolute; left:${LX}px; top:${LY}px; width:${P0.logo.w}px; height:${P0.logo.h}px; display:block; }
 #ta-lg-d { filter:${TK.plate.shadowDark}; }
-#ta-sh { background:url(${plateUrl}) center/100% 100% no-repeat; filter:${TK.plate.shadowCopy || 'brightness(0) blur(7px)'}; }
+#ta-sh, #ta-sh2 { background:url(${plateUrl}) center/100% 100% no-repeat; }
+#ta-sh { filter:${TK.plate.shadowCopy || 'brightness(0) blur(3px)'}; }
+#ta-sh2 { filter:${TK.plate.shadowCopy2 || 'brightness(0) blur(14px)'}; }
 #ta-scrim { position:absolute; left:-80px; right:-80px; top:-54px; bottom:-54px; background:${TK.plate.scrim}; }
 #ta-glint { overflow:hidden; -webkit-mask-image:url(${plateUrl}); mask-image:url(${plateUrl}); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
 ${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
@@ -356,7 +358,7 @@ ${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
 <div id="root" data-composition-id="main" data-start="0" data-duration="${f3(DUR)}" data-width="${W}" data-height="${H}">
   ${hosts.join('\n  ')}
   ${audio.join('\n  ')}
-  <div id="ta-plate"><i id="ta-scrim"></i><i id="ta-sh"></i><img id="ta-lg-d" class="ta-lg" src="${plateUrl}" alt="Trout Area Czech Republic"><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
+  <div id="ta-plate"><i id="ta-scrim"></i><i id="ta-sh2"></i><i id="ta-sh"></i><img id="ta-lg-d" class="ta-lg" src="${plateUrl}" alt="Trout Area Czech Republic"><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
   ${FINAL ? '' : `<div id="badge">DRAFT · ${esc(VER)}${mode !== 'film' ? ` · ${esc(mode)} ${esc(blockKey)}` : ''}</div>`}
 </div>
 <script>
