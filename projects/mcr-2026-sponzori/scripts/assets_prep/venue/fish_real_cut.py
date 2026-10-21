@@ -40,11 +40,11 @@ def cr(pts, n=10, closed=True):
 BODY = [  # clockwise from the upper jaw tip (orig px); head re-traced on a 2x overlay
     (154, 1094), (162, 1083), (170, 1077), (190, 1070), (215, 1060), (240, 1050), (265, 1042), (290, 1034), (315, 1027),
     (340, 1022), (365, 1019), (390, 1016), (440, 1014), (490, 1013), (540, 1017), (590, 1022), (640, 1027), (700, 1031),
-    (760, 1036), (800, 1044), (853, 1050), (887, 1055), (930, 1066), (973, 1080), (1000, 1090), (1020, 1096),
-    (1045, 1105), (1070, 1124), (1100, 1150), (1130, 1171), (1155, 1184), (1172, 1187), (1220, 1195), (1270, 1208),
+    (760, 1036), (800, 1044), (853, 1050), (887, 1055), (930, 1068), (960, 1081), (985, 1090), (1010, 1097),
+    (1045, 1106), (1070, 1124), (1100, 1150), (1130, 1171), (1155, 1184), (1172, 1187), (1220, 1195), (1270, 1208),
     (1300, 1218), (1318, 1226), (1325, 1234), (1310, 1246), (1295, 1263), (1280, 1286), (1265, 1312), (1245, 1340),
     (1225, 1367), (1210, 1386), (1200, 1390), (1186, 1371), (1165, 1345), (1140, 1312), (1115, 1284), (1095, 1266),
-    (1075, 1260), (1058, 1258), (995, 1247), (980, 1242), (950, 1241), (900, 1241), (850, 1241), (800, 1240), (780, 1246),
+    (1075, 1260), (1058, 1258), (995, 1247), (980, 1243), (950, 1245), (900, 1246), (850, 1245), (800, 1241), (780, 1246),
     (750, 1253), (720, 1257), (680, 1260), (630, 1263), (580, 1260), (530, 1248), (500, 1233), (465, 1212), (440, 1203),
     (410, 1200), (390, 1197), (365, 1195), (340, 1191), (315, 1187), (290, 1182), (265, 1175), (240, 1167), (215, 1157),
     (190, 1147), (170, 1140), (157, 1130), (152, 1122), (152, 1108),
@@ -118,7 +118,7 @@ snap_stats = {'body_offset_px_mean_abs': round(float(np.abs(body_off).mean()), 2
 
 # --- remove fingers lying ON the fish: column-wise copy of neighbouring fish texture aligned to the body edge
 b_, g_, r_ = [img[..., i].astype(int) for i in range(3)]
-skin = ((r_ - g_ > 22) & (r_ - b_ > 28) & (r_ > 100)).astype(np.uint8)
+skin = ((r_ - g_ > 36) & (r_ - b_ > 40) & (r_ > 90)).astype(np.uint8)   # fingers R-G ≈ 45–70; cream throat/belly R-G ≤ 28
 skin = cv2.dilate(cv2.morphologyEx(skin, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))),
                   cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11)))
 bodyb = body > 127
@@ -164,9 +164,9 @@ def band_copy(x0, y0, x1, y1, dx, excl, feather_v=12, feather_h=12, dc_scale=0.5
     work = (work.astype(np.float32) * (1 - w3) + src * w3).clip(0, 255).astype(np.uint8)
     return wgt > 0.02
 
-# (1) belly under the right hand ← belly 190 px to the left; (1b) finger behind the gill ← belly 70 px to the right
-fixed |= band_copy(795, 1183, 990, 1252, -190, pecb)
-fixed |= band_copy(425, 1168, 500, 1240, 70, pecb, feather_v=8, feather_h=8)
+# (1) belly under the right hand ← belly 262 px to the left; (1b) finger behind the gill ← belly 85 px to the right
+fixed |= band_copy(795, 1183, 990, 1256, -262, pecb)          # source x 533–728: plain belly, in front of the pelvic fin base
+fixed |= band_copy(400, 1165, 500, 1240, 85, pecb, feather_v=10, feather_h=14)
 
 # (1c) fingertips under the jaw/throat (x 245–425): the fingers only clip the lower rim, so the outline follows the
 #      finger tops there (smoothed) instead of inventing throat texture
@@ -225,6 +225,17 @@ h_ref, s_ref = np.median(hsv[ref, 0]), np.median(hsv[ref, 1])
 hsv[..., 0] = hsv[..., 0] * (1 - pinkf) + h_ref * pinkf
 hsv[..., 1] = hsv[..., 1] * (1 - pinkf) + s_ref * pinkf
 work2 = cv2.cvtColor(hsv.clip(0, 255).astype(np.uint8), cv2.COLOR_HSV2BGR)
+# translucent fins over the dark jacket read as black notches: lift dark fin pixels toward the fin's own median colour
+for k_ in ('pectoral', 'pelvic', 'anal', 'dorsal'):
+    fm = (fins[k_] > 127) & (m > 0)
+    if not fm.any():
+        continue
+    hv = cv2.cvtColor(work2, cv2.COLOR_BGR2HSV)[..., 2].astype(np.float32)
+    medv = np.median(hv[fm]); medc = np.median(work2[fm].reshape(-1, 3), 0).astype(np.float32)
+    lift = np.clip(1 - hv / (0.62 * medv), 0, 1) * 0.85 * fm
+    lift = cv2.GaussianBlur(lift.astype(np.float32), (0, 0), 1.2) * fm
+    detail = work2.astype(np.float32) - cv2.GaussianBlur(work2, (0, 0), 3).astype(np.float32)
+    work2 = (work2.astype(np.float32) * (1 - lift[..., None]) + (medc + detail * 0.6) * lift[..., None]).clip(0, 255).astype(np.uint8)
 rgba = np.dstack([cv2.cvtColor(work2, cv2.COLOR_BGR2RGB), (alpha * 255).astype(np.uint8)])
 ys, xs = np.nonzero(alpha > 0)
 pad = 6
@@ -266,7 +277,7 @@ meta = {
         'source_page': 'https://www.lihenlibechov.cz/cs/aktualita/novy-rybarsky-rad',
         'source_size': [W, H], 'crop_box_in_source': [int(x0), int(y0), int(x1), int(y1)],
         'processing': 'hand-traced outline snapped to the photo edge (Lab gradient, ±10 px, smoothed); fingers on the belly/back replaced by a '
-                      'column-wise copy of the fish’s own neighbouring belly/back texture (aligned to the body edge, colour-matched, 5 px feather) + Telea on thin rims; no upscale, no generative fill. The far pectoral fin (hidden behind the left hand) is left out.',
+                      'column-wise copy of the fish’s own neighbouring belly/back texture (aligned to the body edge, mild DC colour match, 10–14 px feather) + Telea on thin rims; no upscale, no generative fill. The far pectoral fin (hidden behind the left hand) is left out.',
         'edge_snap': gc_change, 'fingers_retouched_px': int(fix.sum()),
         'pose': 'side-on, straight, head left, belly down; snout at x≈%d, tail tip at x≈%d (canvas px)' % (152 - x0, 1325 - x0),
         'use': 'native 1:1 or smaller (max 1.3x per BLOCK_API); never through an AI upscaler',
