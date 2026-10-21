@@ -24,8 +24,11 @@ export function plateGeom(TK) {
   const logo = P.logoW ? { w: P.logoW, h: Math.round((P.logoW * ih) / iw) } : { w: Math.round(w * P.innerW), h: Math.round(h * P.innerH) };
   return { x: P.x, y: P.y, w, h, logo, moves: [], tones: [] };
 }
-// TA logo tone for a background: 'dark' = white+red logo (on dark), 'light' = navy+red (on light), 'scrim' = white+red on a soft dark halo
-export const TONES = ['dark', 'light', 'scrim'];
+// TA logo „tone“ = how much soft dark shadow/halo the logo gets. OPERATOR DECISION 21. 10.: the logo is ALWAYS white 'TROUT' + red
+// 'AREA' on transparent (logo_h_on_dark.png) — never the navy variant. 'dark' = base soft shadow (dark backgrounds) · 'scrim' = denser
+// shadow + soft radial halo (mid / busy photos, red under AREA) · 'halo' = strongest shadow + halo (light backgrounds). 'light' = alias of 'halo'.
+export const TONES = ['dark', 'scrim', 'halo'];
+export const toneAlias = (t) => (t === 'light' ? 'halo' : t);
 export const lumOf = (hex) => {
   const h = String(hex || '#000').replace('#', ''); const v = h.length === 3 ? h.split('').map((c) => c + c).join('') : h.slice(0, 6);
   const n = parseInt(v, 16); if (!Number.isFinite(n)) return 0;
@@ -34,7 +37,7 @@ export const lumOf = (hex) => {
 };
 // default tone of a block from its theme: theme.plate wins, else the relative luminance of theme.bg
 // (relative luminance > thr → light; 0.3 ≈ where white and navy reach the same contrast ratio)
-export const toneOfTheme = (T = {}, thr = 0.3) => (TONES.includes(T.plate) ? T.plate : lumOf(T.bg) > thr ? 'light' : 'dark');
+export const toneOfTheme = (T = {}, thr = 0.3) => (TONES.includes(toneAlias(T.plate)) ? toneAlias(T.plate) : lumOf(T.bg) > thr ? 'halo' : 'dark');
 // plate scale at global time g (corner = 1)
 export function plateScaleAt(plate, g) {
   for (const m of plate.moves) {
@@ -86,11 +89,13 @@ export function makeCtx({ key, part = 'main', P, gT0, tT0 = gT0, dur, data, even
         plate.moves.push(m); plate.moves.sort((a, b) => a.g0 - b.g0);
         return { w: plate.w * scale, h: plate.h * scale, x: cx - (plate.w * scale) / 2, y: cy - (plate.h * scale) / 2 };
       },
-      // TA logo tone for [t0, t1] (block-local): 'dark' (white+red, default on dark themes), 'light' (navy+red, default when
-      // theme.bg is light), 'scrim' (white+red on a soft dark halo — busy photos / video). Use it where YOUR background under the
-      // logo (ctx.plate.rect, or the hero position) differs from theme.bg, e.g. a white card behind the corner on a dark theme.
-      tone(t0, t1, tone) {
-        if (!TONES.includes(tone)) throw new Error(`plate.tone: ${tone} (use ${TONES.join(' | ')})`);
+      // TA logo shadow strength for [t0, t1] (block-local) — the logo itself is always white+red: 'dark' (base shadow, default on
+      // dark themes), 'scrim' (denser shadow + soft halo: busy photos / video / red under AREA), 'halo' (strongest: light
+      // backgrounds; default when theme.bg is light; 'light' = alias). Use it where YOUR background under the logo
+      // (ctx.plate.rect, or the hero position) differs from theme.bg, e.g. a white card behind the corner on a dark theme.
+      tone(t0, t1, tone0) {
+        const tone = toneAlias(tone0);
+        if (!TONES.includes(tone)) throw new Error(`plate.tone: ${tone0} (use ${TONES.join(' | ')})`);
         plate.tones.push({ g0: r3(gT0 + Math.max(0, t0)), g1: r3(gT0 + Math.min(dur, t1)), tone, prio: 3, by: cid });
       },
     },

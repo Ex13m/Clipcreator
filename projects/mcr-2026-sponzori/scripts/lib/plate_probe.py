@@ -6,9 +6,10 @@ stdout: {"windows": [[g0, g1, tone], …], "stats": {…}}
 
 Per frame: where the TA logo is at that time (corner, or a hero move of the plate), the pixels UNDER the logo strokes (logo alpha,
 dilated a little for the outline/shadow zone) → relative luminance (sRGB → linear, BT.709):
-  p85 ≤ 0.30            → 'dark'   (white+red logo reads: white vs bg ≥ 3:1 on 85 % of the strokes)
-  p15 ≥ 0.38            → 'light'  (navy+red logo reads)
-  otherwise             → 'scrim'  (mixed / mid-grey / busy photo: white+red on the soft dark halo)
+  p85 ≤ 0.30            → 'dark'   (white+red logo reads with the base soft shadow: white vs bg ≥ 3:1 on 85 % of the strokes)
+  p15 ≥ 0.38            → 'halo'   (light background: strongest dark shadow + radial halo)
+  otherwise             → 'scrim'  (mixed / mid-grey / busy photo: denser shadow + soft halo)
+The logo itself is ALWAYS white+red (operator 21. 10.); the probe only decides the shadow / halo strength.
   + red check: bg under the red AREA strokes close to TA red on a 'dark' frame → 'scrim'
 Then a 3-sample mode filter, blips < MIN_S are absorbed into the neighbour, and every change is snapped to the nearest block
 boundary (± 0.6 step) or beat.
@@ -70,7 +71,7 @@ def decide(g):
     L = 0.2126 * lin(patch[..., 0]) + 0.7152 * lin(patch[..., 1]) + 0.0722 * lin(patch[..., 2])
     v = L[a]
     p85, p15 = float(np.percentile(v, 85)), float(np.percentile(v, 15))
-    tone = 'dark' if p85 <= 0.30 else 'light' if p15 >= 0.38 else 'scrim'
+    tone = 'dark' if p85 <= 0.30 else 'halo' if p15 >= 0.38 else 'scrim'
     if tone == 'dark' and rp.any():
         mc = patch[rp].mean(0)
         if np.linalg.norm(mc - np.array([227, 30, 36])) < 90: tone = 'scrim'
@@ -122,7 +123,7 @@ for k in range(1, len(segs)):
     segs[k - 1][1] = g; segs[k][0] = g
 if segs: segs[0][0] = 0.0; segs[-1][1] = side['dur']
 win = [[round(a, 3), round(b, 3), t] for a, b, t in segs if b - a > 1e-3]
-stats = {t: round(sum(b - a for a, b, tt in win if tt == t), 2) for t in ('dark', 'light', 'scrim')}
+stats = {t: round(sum(b - a for a, b, tt in win if tt == t), 2) for t in ('dark', 'scrim', 'halo')}
 stats['frames'] = len(seq)
 stats['worst_dark'] = sorted([i for i, t in zip(info, filt) if t == 'dark'], key=lambda x: -x['p85'])[:3]
 json.dump({'windows': win, 'stats': stats}, sys.stdout)

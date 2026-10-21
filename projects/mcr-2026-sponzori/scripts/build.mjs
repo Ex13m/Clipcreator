@@ -20,7 +20,7 @@ import * as A from './lib/assets.mjs';
 import { fontCss, stageFonts, registerFonts } from './lib/fonts.mjs';
 import { loadGrid, planFilm } from './lib/grid.mjs';
 import { voFor } from './lib/vo.mjs';
-import { initOutput, makeCtx, plateGeom, toneOfTheme, TONES } from './lib/ctx.mjs';
+import { initOutput, makeCtx, plateGeom, toneOfTheme, TONES, toneAlias } from './lib/ctx.mjs';
 import { createTL } from './lib/tl.mjs';
 import * as fx from './lib/fx.mjs';
 import { defaultHook, defaultEndCard } from './lib/reel.mjs';
@@ -42,7 +42,7 @@ const FILM_DUR = PLAN[PLAN.length - 1].t1;
 A.stageRuntime();
 stageFonts(path.join(A.PA, 'fonts'));
 A.prestage(PLAN.map((p) => dataOf(p.data)));
-for (const s of [TK.plate.src, TK.plate.srcLight].filter(Boolean)) A.ref(s, { trim: true, maxSide: 1400 });
+A.ref(TK.plate.src, { trim: true, maxSide: 1400 });
 A.flush();
 
 // ---------- block modules ----------
@@ -165,7 +165,7 @@ function build(mode, blockKey = null) {
     //      > theme.plate / luminance of theme.bg (prio 1) ----
     plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: toneOfTheme(mod.theme, TK.plate.lightLum), prio: 1, by: `${ctx.cid} theme` });
     if (I.part === 'main' && (TK.ta?.glint?.blocks || []).includes(P.block)) glintWins.push({ gT0: I.gT0, tT0: I.tT0, dur: I.dur, key: P.key });
-    if (I.part === 'main' && TONES.includes(P.opt.plate)) plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: P.opt.plate, prio: 2.5, by: `${ctx.cid} plan` });
+    if (I.part === 'main' && TONES.includes(toneAlias(P.opt.plate))) plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: toneAlias(P.opt.plate), prio: 2.5, by: `${ctx.cid} plan` });
     const tlCode = typeof r.timeline === 'string' ? r.timeline : (r.timeline || ctx.tl).code('  ');
     const end = ctx.tl.end(); if (end.t > I.dur + 0.05) ctx.warn(`timeline runs to ${end.t.toFixed(2)} s > block ${I.dur} s (${end.sel} is cut off)`);
     // ---- rule: the prize chip „Věnuje ceny · MČR 2026“ in every sponsor block + its Reel end card, never in the venue (host) ----
@@ -277,12 +277,14 @@ function build(mode, blockKey = null) {
   const probeStamp = crypto.createHash('sha1').update(subs.map((x) => x.html).join('\n') + hosts.join('\n') + f3(DUR)).digest('hex').slice(0, 16);
   const PT = exists(path.join(ROOT, 'data/plate_tone.json')) ? rd(path.join(ROOT, 'data/plate_tone.json')) : {};
   if (PT[outName] && !ENV.PLATE_HIDE && !ENV.NO_PROBE) {
-    if (PT[outName].stamp === probeStamp) { for (const [g0, g1, tone] of PT[outName].windows) plate.tones.push({ g0, g1, tone, prio: 2, by: 'probe' }); report.push(`TA logo probe: ${PT[outName].windows.length} windows applied (${PT[outName].date})`); }
+    if (PT[outName].stamp === probeStamp) { for (const [g0, g1, tone] of PT[outName].windows) plate.tones.push({ g0, g1, tone: toneAlias(tone), prio: 2, by: 'probe' }); report.push(`TA logo probe: ${PT[outName].windows.length} windows applied (${PT[outName].date})`); }
     else OUT.warns.push(`TA logo probe for ${outName} is stale (blocks changed) → theme defaults only; re-run: node scripts/plate_probe.mjs ${mode === 'film' ? 'film' : `${mode}:${blockKey}`}`);
   }
-  // ---- TA logo tone (v3: no white plate): piecewise schedule over the output, highest priority window wins (later wins a tie);
-  //      a change cross-fades the two logo variants (+ the scrim) over toneFade s centred on the boundary ----
-  const LAYERS = { dark: { '#ta-lg-d': 1, '#ta-lg-l': 0, '#ta-scrim': 0 }, light: { '#ta-lg-d': 0, '#ta-lg-l': 1, '#ta-scrim': 0 }, scrim: { '#ta-lg-d': 1, '#ta-lg-l': 0, '#ta-scrim': 1 } };
+  // ---- TA logo tone (v3: no white plate; operator 21. 10.: ALWAYS the white+red logo): piecewise schedule over the output, highest
+  //      priority window wins (later wins a tie); a tone = strength of the soft dark shadow (#ta-sh: blurred dark copy of the logo)
+  //      and of the radial halo (#ta-scrim), cross-faded over toneFade s centred on the boundary ----
+  const LV = TK.plate.levels || { dark: { sh: 0.35, scrim: 0 }, scrim: { sh: 0.6, scrim: 0.75 }, halo: { sh: 0.85, scrim: 1 } };
+  const LAYERS = Object.fromEntries(TONES.map((t) => [t, { '#ta-sh': LV[t].sh, '#ta-scrim': LV[t].scrim }]));
   const cuts = [...new Set([0, DUR_RAW, ...plate.tones.flatMap((w) => [w.g0, w.g1])].map(r3))].filter((g) => g >= 0 && g <= DUR_RAW + 1e-6).sort((a, b) => a - b);
   const toneSegs = [];
   for (let i = 0; i + 1 < cuts.length; i++) {
@@ -318,7 +320,7 @@ function build(mode, blockKey = null) {
 
   // ---- root page ----
   const P0 = plate;
-  const plateUrl = A.ref(TK.plate.src), plateUrlL = A.ref(TK.plate.srcLight || TK.plate.src);
+  const plateUrl = A.ref(TK.plate.src);
   const LX = r3((P0.w - P0.logo.w) / 2), LY = r3((P0.h - P0.logo.h) / 2);
   const easeJs = Object.entries(fx.EASES).map(([k, v]) => `CustomEase.create(${J(k)}, ${J(v)});`).join(' ');
   const title = mode === 'film' ? 'MČR 2026 · partneři · reklamní film' : `MČR 2026 · ${mode} ${blockKey}`;
@@ -338,11 +340,12 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
 .blk { position:absolute; inset:0; }
 ${fx.CSS}
 /* the ONLY persistent layer: TA CZ logo (top-left, inside the Reels safe zone; never covered — highest z). v3: no white plate —
-   white+red logo on transparent (dark tone), navy+red (light tone), white+red on a soft dark halo (scrim tone) */
+   ALWAYS the white 'TROUT' + red 'AREA' logo on transparent (operator 21. 10.); readability on light / busy backgrounds comes from a
+   soft dark shadow (#ta-sh) + radial halo (#ta-scrim) whose strength follows the tone schedule — never a visible box */
 #ta-plate { position:absolute; left:${P0.x}px; top:${P0.y}px; width:${P0.w}px; height:${P0.h}px; z-index:1000; transform-origin:0 0; }
-#ta-plate .ta-lg, #ta-glint { position:absolute; left:${LX}px; top:${LY}px; width:${P0.logo.w}px; height:${P0.logo.h}px; display:block; }
+#ta-plate .ta-lg, #ta-glint, #ta-sh { position:absolute; left:${LX}px; top:${LY}px; width:${P0.logo.w}px; height:${P0.logo.h}px; display:block; }
 #ta-lg-d { filter:${TK.plate.shadowDark}; }
-#ta-lg-l { filter:${TK.plate.shadowLight}; }
+#ta-sh { background:url(${plateUrl}) center/100% 100% no-repeat; filter:${TK.plate.shadowCopy || 'brightness(0) blur(7px)'}; }
 #ta-scrim { position:absolute; left:-80px; right:-80px; top:-54px; bottom:-54px; background:${TK.plate.scrim}; }
 #ta-glint { overflow:hidden; -webkit-mask-image:url(${plateUrl}); mask-image:url(${plateUrl}); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
 ${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
@@ -353,7 +356,7 @@ ${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
 <div id="root" data-composition-id="main" data-start="0" data-duration="${f3(DUR)}" data-width="${W}" data-height="${H}">
   ${hosts.join('\n  ')}
   ${audio.join('\n  ')}
-  <div id="ta-plate"><i id="ta-scrim"></i><img id="ta-lg-d" class="ta-lg" src="${plateUrl}" alt="Trout Area Czech Republic"><img id="ta-lg-l" class="ta-lg" src="${plateUrlL}" alt=""><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
+  <div id="ta-plate"><i id="ta-scrim"></i><i id="ta-sh"></i><img id="ta-lg-d" class="ta-lg" src="${plateUrl}" alt="Trout Area Czech Republic"><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
   ${FINAL ? '' : `<div id="badge">DRAFT · ${esc(VER)}${mode !== 'film' ? ` · ${esc(mode)} ${esc(blockKey)}` : ''}</div>`}
 </div>
 <script>
