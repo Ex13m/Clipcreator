@@ -1,0 +1,56 @@
+{
+ "_note": "Český rybářský svaz — poděkování za dlouholetou podporu (v3, operátor 21. 10.). Fakta: research/crs.md §1 (citace + URL). NETVRDIT „pod záštitou ČRS“, „MČR pořádá ČRS“, „oficiální disciplína“; chip „Věnuje ceny“ ČRS NENESE (meta.role = 'supporter'). „Dlouholetá podpora“ = formulace operátora.",
+ "key": "crs",
+ "name": "Český rybářský svaz",
+ "url": "rybsvaz.cz",
+ "kicker": "Děkujeme",
+ "brand": {
+  "colors": {
+   "blue": "#2B5DA9",
+   "navy": "#182F5D",
+   "turquoise": "#38B0C0",
+   "eye": "#FFFFFF"
+  },
+  "font": "Roboto (gov design system) → Inter v enginu",
+  "research": "research/crs.md"
+ },
+ "logo": {
+  "on_dark": "assets_prep/crs/logo_crs_white.png",
+  "on_light": "assets_prep/crs/logo_crs_color.png",
+  "color": "assets_prep/crs/logo_crs_color.png",
+  "navy": "assets_prep/crs/logo_crs_navy.png",
+  "mark_dark": "assets_prep/crs/mark_crs_white.png",
+  "badge": "assets_prep/crs/badge_crs_round.png"
+ },
+ "products": [],
+ "copy": {
+  "headline": "Český rybářský svaz",
+  "sub": "za dlouholetou podporu",
+  "facts": [
+   "Vlastník areálu Líheň Liběchov · ČRS MO Mělník"
+  ],
+  "url": "rybsvaz.cz",
+  "lines": [
+   {
+    "t": "Děkujeme",
+    "s": "Českému rybářskému svazu za dlouholetou podporu",
+    "src": "VO v3 (formulace operátora 21. 10.)"
+   },
+   {
+    "t": "Vlastník areálu Líheň Liběchov",
+    "s": "Český rybářský svaz, z. s., místní organizace Mělník",
+    "src": "https://www.lihenlibechov.cz/cs/kontakt"
+   },
+   {
+    "t": "Mezi největší zájmová sdružení v ČR",
+    "s": "nezisková organizace s dlouholetou tradicí",
+    "src": "https://www.rybsvaz.cz/cesky-rybarsky-svaz"
+   }
+  ]
+ },
+ "notes": [
+  "role: supporter (poděkování), ne sponzor cen",
+  "logo ČRS ≤ logo TA (ctx.logo)",
+  "kulatý znak = oficiální znak ČRS (i v partnerském pruhu troutareacz.cz) — platí pro něj pravidlo loga"
+ ]
+}
