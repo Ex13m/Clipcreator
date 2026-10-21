@@ -23,7 +23,9 @@ export const C = { TURQ: '#17a1c8', NAVY: '#1a212e', AQUA: '#9ae7e8', GOLD: '#d8
 const AD = 'assets_prep/venue/ads/';
 export const A = {
   island: AD + 'h1_pond_island_3d.png', islandShadow: AD + 'h1_pond_island_3d_shadow.png', islandWater: AD + 'fx_island_water_a.png',
-  disc: AD + 'h1_arena_disc.png', trout: AD + 'h2_trout_potocak.png', trophy: AD + 'h3_mcr_trophy.png',
+  disc: AD + 'h1_arena_disc.png', trophy: AD + 'h3_mcr_trophy.png',
+  // fish = rainbow trout (brief 21. 10.: AI rainbow cut-outs; no trout close-up in our gallery; no AI-upscaled potočák as hero)
+  trout: 'assets_prep/fish_ai/fish_rainbow_a_cut.png',
   etch: AD + 's2_etched_trout_ink.png', caustics: AD + 'fx_caustics.png',
 };
 

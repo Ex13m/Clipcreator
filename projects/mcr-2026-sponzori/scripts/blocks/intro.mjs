@@ -23,7 +23,7 @@ export const meta = { reel: false };
 
 // partner teaser (film order). Colours follow each partner's own block theme when that module loads; fallback = brand colours.
 const TEASE = [
-  { key: 'venue', photo: 'assets_prep/libechov/venue/v03_trout_in_net.jpg', bg: '#1a212e', accent: '#17a1c8', dark: true },
+  { key: 'venue', photo: 'assets_prep/broll_tacz/t14_libechov_briefing.jpg', bg: '#1a212e', accent: '#17a1c8', dark: true },   // our gallery: Liběchov jaro 2026 (was a fish photo)
   { key: 'troutshop', src: 'assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png', bg: '#070707', accent: '#e3000f' },
   { key: 'activefishing', src: 'assets_prep/activefishing/heroes/h02_khor_frea.png', bg: '#f1f1ef', accent: '#e2812d' },
   { key: 'moonky', src: 'assets_prep/moonky/heroes/h04_scelet_pink_bubblegum.png', bg: '#0e1424', accent: '#b8ff2e' },

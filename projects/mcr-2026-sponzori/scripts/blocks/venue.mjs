@@ -8,7 +8,7 @@
 //            „Malý Sporťáček · 24.–25. 10.“; push-in into the pond
 //   bar 2    heritage: the logo's etched trout engraves itself on navy, PSTRUŽÍ LÍHEŇ OD ROKU + gold 1934 (digits rise from the mask, VO „1934“),
 //            „Založil Karel Stutzig“; the etching dives at the camera
-//   bar 3–4  underwater: caustics, light shafts, bubbles; the brown trout (pstruh obecný) swims in as a macro, light sweeps
+//   bar 3–4  underwater: caustics, light shafts, bubbles; the rainbow trout (pstruh duhový, fish_ai) swims in as a macro, light sweeps
 //            along the spots; claim words light up with the VO; 164 m n. m. joins (never without „donedávna“)
 //   bar 5    payoff: the trout darts off, the MČR 2026 trophy rises from the water in gold light; 24.–25. 10. 2026 +
 //            logo badge + lihenlibechov.cz; clean poster, liquid blob out
@@ -206,8 +206,8 @@ export default function venue(ctx) {
   // trophy light (bar 5)
   s3 += `<div class="fx-full" id="${ctx.id('gl')}">${fx.rays(ctx, { id: 'gr', x: W / 2, y: 820, size: 2000, color: 'rgba(216,175,100,1)', n: 22, duty: 0.3, opacity: 0.32, spin: 12, t0: B5, t1: END, hole: 0.08 })}${fx.glow(ctx, { id: 'gg', x: W / 2, y: 880, size: 1150, color: 'rgba(216,175,100,.85)', opacity: 0.55 })}</div>`;
   ctx.tl.fromTo(ctx.sel('gl'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, B5 - 0.1);
-  // the trout: macro swim-through, tail kept off-frame (blunt in the source)
-  const TR = fx.product(ctx, { id: 'tr', src: V.A.trout, w: 1500, cx: 30 + 750, cy: 1035, ground: 'none', sweep: true, sweepAngle: 98, sweepOpacity: 0.5, pad: [0.019, 0.037, 0.019, 0.037] });
+  // the trout: macro swim-through, tail off-frame (pad = transparent margins of fish_rainbow_a_cut.png, 1310×459)
+  const TR = fx.product(ctx, { id: 'tr', src: V.A.trout, w: 1500, cx: 30 + 750, cy: 1035, ground: 'none', sweep: true, sweepAngle: 98, sweepOpacity: 0.5, pad: [0.009, 0.026, 0.01, 0.028] });
   const trUrl = ctx.asset(V.A.trout);
   s3 += TR.html.replace(`id="${ctx.id('tr-im')}" src="${trUrl}" alt="">`, `id="${ctx.id('tr-im')}" src="${trUrl}" alt="">${V.skin(ctx, { id: 'trs', src: V.A.trout, w: TR.w, h: TR.h, caus: 0.22, tintO: 0.32, size: 560, t0: B3, t1: END })}`);
   ctx.tl.fromTo(TR.sel, { x: 1050 }, { x: 0, duration: 1.15, ease: 'expo.out' }, B3 - 0.16);     // head already in frame on the cut

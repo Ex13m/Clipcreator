@@ -1,7 +1,9 @@
 // B-ROLL · cinematic action interlude (no sponsor, TA plate only). One module, two plan entries (plan A, track_A):
 //   'broll'      bar 34       (full groove, kick on the downbeat, fill on beat 4) → mode 'cut'
 //   'brollbreak' bars 35–36   (musical break: kick and hats drop out)             → mode 'break'
-// Real fishing photos (assets_prep/broll, 1080×1920; H-BATTLE + Klonówiec), film grade (teal shadows / warm highlights).
+// Photos (21. 10.): OUR gallery troutareacz.cz, league rounds only (assets_prep/broll_tacz, 1080×1920, scripts/assets_prep/
+// prep_broll_tacz.py; research/gallery_tacz.md). The gallery has no trout close-up → the trout shot is the brief's AI rainbow
+// trout (fish_ai) on a blurred gallery pond (ai01). Film grade (teal shadows / warm highlights).
 // One bold word per bar, Nike-style: NERVY. → ZÁBĚR. → PSTRUH.
 //   cut  : a new shot on every beat, speed-ramp push-ins, whip smears between beats, the word sits BEHIND the angler on the
 //          downbeat shot (subject cut-out), slam + echo burst; the fill beat is a 3-frame stutter with RGB-split hits;
@@ -12,19 +14,19 @@
 //          Second type level: event credit (tracked caps) in the top cinema bar, right of the TA plate.
 // CD pass (19. 10.): every downbeat lands on an image (no zoom-through out of black, flash screen ≤ .5), no face under the
 //          word on non-cut-out shots, trout regraded lighter (teal layer .7 → .3) and pushed in from below the hand.
-// Works for any bar count (cut: one word per bar, shots per beat; break: 2 bars). Subject cut-outs: assets_prep/broll/cut/
-// <id>_cut.png + _stroke.png (scripts/assets_prep/broll_cut.py). No VO.
+// Works for any bar count (cut: one word per bar, shots per beat; break: 2 bars). Subject cut-outs: assets_prep/broll_tacz/cut/
+// <id>_cut.png + _stroke.png (BROLL_DIR=assets_prep/broll_tacz scripts/assets_prep/broll_cut.py t01 t04). No VO.
 import * as fx from '../lib/fx.mjs';
 import * as fb from '../lib/fx_broll.mjs';
 
 export const theme = { bg: '#000000', bg2: '#0b1418', fg: '#ffffff', accent: '#ffb067', accent2: '#8fe3ff', font: { display: 'Archivo', text: 'Inter' }, wght: 900, upper: true };
 export const meta = { reel: false };
 
+const DIR = 'assets_prep/broll_tacz';
 const FILES = {
-  br01: 'br01_fight_splash.jpg', br02: 'br02_netting_sunrays.jpg', br03: 'br03_fish_in_net.jpg', br04: 'br04_net_with_fish.jpg',
-  br05: 'br05_reeling_portrait.jpg', br07: 'br07_landing_rod_up.jpg', br08: 'br08_landing_ripples.jpg', br09: 'br09_landing_rods_flare.jpg',
-  br10: 'br10_lake_mist.jpg', br11: 'br11_lake_sunflare.jpg', br12: 'br12_keepnet_trout.jpg', br13: 'br13_lure_check.jpg',
-  br14: 'br14_crouch_net.jpg', br15: 'br15_net_splash.jpg', br16: 'br16_dock_gear.jpg',
+  t01: 't01_rig_tacz_vest.jpg', t02: 't02_lure_box.jpg', t03: 't03_kneel_net.jpg', t04: 't04_angler_rods_tacz.jpg',
+  t05: 't05_rods_sun.jpg', t06: 't06_bank_line.jpg', t07: 't07_gold_cups.jpg', t13: 't13_dawn_trophies.jpg', t16: 't16_rod_stand_grass.jpg',
+  ai01: 'ai01_trout_rainbow_on_water.jpg',
 };
 const WORDS = { cut: ['NERVY.', 'SOUBOJ.'], break: ['ZÁBĚR.', 'PSTRUH.'] };   // data copy.words overrides
 const WORD_Y = 392;                       // word band top: below the TA plate (250–348), above the subjects' heads
@@ -32,9 +34,9 @@ const WORD_Y = 392;                       // word band top: below the TA plate (
 export default function broll(ctx) {
   const D = ctx.data || {};
   const pool = D.photos || [];
-  const photo = (k, i = 0) => { const rel = `assets_prep/broll/${FILES[k]}`; return ctx.has(rel) ? rel : pool[i % Math.max(1, pool.length)]; };
-  const cutOf = (k) => { const rel = `assets_prep/broll/cut/${k}_cut.png`; return ctx.has(rel) ? rel : null; };
-  const stkOf = (k) => { const rel = `assets_prep/broll/cut/${k}_stroke.png`; return ctx.has(rel) ? rel : null; };
+  const photo = (k, i = 0) => { const rel = `${DIR}/${FILES[k]}`; return ctx.has(rel) ? rel : pool[i % Math.max(1, pool.length)]; };
+  const cutOf = (k) => { const rel = `${DIR}/cut/${k}_cut.png`; return ctx.has(rel) ? rel : null; };
+  const stkOf = (k) => { const rel = `${DIR}/cut/${k}_stroke.png`; return ctx.has(rel) ? rel : null; };
   const words = D.copy?.words || WORDS[D.mode === 'break' ? 'break' : 'cut'];
   const env = { photo, cutOf, stkOf, words };
   const r = D.mode === 'break' ? breakMode(ctx, env) : cutMode(ctx, env);
@@ -52,9 +54,11 @@ const grade = (ctx) => `<div class="br-grade" id="${ctx.id('gt')}" style="backgr
 // ======================================================================================
 // per bar: [downbeat shot (* = subject cut-out, the word goes behind it), beat 2, beat 3, beat 4]
 // CD pass: br13 / br15 put a head straight under the word, br16 / br04 a bright band (white word unreadable) → swapped
-const CUT_BARS = [['br05*', 'br09', 'br14', 'br08'], ['br13', 'br10', 'br16', 'br08']];
-const STUTTER = ['br01', 'br12', 'br02'];
-const ORIGIN = { br05: '72% 0%', br13: '62% 40%', br14: '70% 44%', br16: '58% 52%', br09: '76% 46%', br04: '60% 62%', br12: '50% 50%', br08: '40% 60%', br01: '40% 55%', br15: '45% 55%', br02: '55% 40%' };
+// gallery swap (21. 10.): same rule — non-cut-out shots keep faces out of the word band (y 392–760; t06 / t03 zoomed so the head
+// sits below it), t01 = cut-out (the word goes behind the angler); band luma per shot in assets_prep/broll_tacz/manifest.json
+const CUT_BARS = [['t01*', 't02', 't06', 't16'], ['t16', 't13', 't02', 't06']];
+const STUTTER = ['t05', 't16', 't07'];
+const ORIGIN = { t01: '51% 0%', t02: '35% 45%', t06: '40% 56%', t16: '50% 55%', t13: '45% 62%', t05: '62% 52%', t07: '40% 42%' };
 
 function cutMode(ctx, { photo, cutOf, words }) {
   const dur = ctx.dur, nb = Math.max(1, ctx.nBars), b = (i) => (i < ctx.beats.length ? ctx.beats[i] : dur);
@@ -111,15 +115,16 @@ function cutMode(ctx, { photo, cutOf, words }) {
 function breakMode(ctx, { photo, cutOf, stkOf, words }) {
   const dur = ctx.dur, b1 = ctx.bar(1), X = 0.36;                          // X = dissolve overlap around the 2nd downbeat
   // A — the strike, frozen: grey background, angler + bent rod in colour with a white sticker outline, popping forward (2.5D)
-  const A = fb.shot(ctx, { id: 'a', src: photo('br07', 0), cut: cutOf('br07'), stroke: stkOf('br07'), mono: true, t0: 0, t1: b1 + X, origin: '66% 0%', subOrigin: '74% 52%', blur: false, kb: { from: 1.0, to: 1.12, ease: 'expo.out' } });   // origin on the top edge: the push moves the head DOWN, off the word
+  // t03 (kneeling angler + tackle box, head at y ≈ 750–950): the whole word stays readable above him; t04 (TA jersey) hid the B of ZÁBĚR
+  const A = fb.shot(ctx, { id: 'a', src: photo('t03', 0), cut: cutOf('t03'), stroke: stkOf('t03'), mono: true, t0: 0, t1: b1 + X, origin: '30% 0%', subOrigin: '35% 73%', blur: false, kb: { from: 1.0, to: 1.12, ease: 'expo.out' } });   // origin on the top edge: the push moves the head DOWN, off the word
   ctx.tl.fromTo(ctx.sel('a-sub'), { scale: 1 }, { scale: 1.06, duration: b1, ease: 'expo.out' }, 0.02);
   ctx.tl.fromTo(ctx.sel('a-stk'), { opacity: 0 }, { opacity: 1, duration: 0.1, ease: 'none' }, 0.04);
   ctx.tl.fromTo(ctx.sel('a-stk'), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'power1.in' }, b1 - 0.3);
   ctx.tl.fromTo(ctx.sel('a-mono'), { opacity: 0 }, { opacity: 0.92, duration: 0.16, ease: 'power2.out' }, 0.02);
   ctx.tl.fromTo(ctx.sel('a-mono'), { opacity: 0.92 }, { opacity: 0.8, duration: b1 - 0.3, ease: 'sine.inOut' }, 0.2);   // stay grey: the colour subject must pop
   // B — the trout: macro push-in, light sweep
-  // origin low on the fish: the push-in drives the hand at the top of the frame up under the cinema bar, off the word
-  const B = fb.shot(ctx, { id: 'b', src: photo('br03', 1), t0: b1 - X, t1: dur, origin: '50% 74%', blur: false, grade: 'contrast(1.16) saturate(.98) brightness(1.0) sepia(.06)', kb: { from: 1.12, to: 1.3, ease: 'sine.inOut', flat: true } });
+  // origin on the fish (ai01: AI rainbow trout centred at y 1110, inside the letterbox window): the push-in grows it in place
+  const B = fb.shot(ctx, { id: 'b', src: photo('ai01', 1), t0: b1 - X, t1: dur, origin: '50% 58%', blur: false, grade: 'contrast(1.16) saturate(.98) brightness(1.0) sepia(.06)', kb: { from: 1.12, to: 1.3, ease: 'sine.inOut', flat: true } });
   ctx.tl.fromTo(ctx.sel('gt'), { opacity: 0.7 }, { opacity: 0.3, duration: 0.8, ease: 'power1.inOut' }, b1 - 0.3);   // lighter teal: the trout keeps its colour
   const sweepT = b1 + 0.22, sweepD = 1.2;
   const SW = fb.sweepBand(ctx, { id: 'sw', t: sweepT, d: sweepD, opacity: 0.85 });

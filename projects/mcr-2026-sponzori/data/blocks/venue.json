@@ -22,8 +22,8 @@
  "photos": [
   "assets_prep/libechov/venue/v01_maly_sportacek.jpg",
   "assets_prep/libechov/venue/v02_velky_sportak.jpg",
-  "assets_prep/libechov/venue/v03_trout_in_net.jpg",
-  "assets_prep/libechov/venue/v04_mcr_poster_fit.jpg"
+  "assets_prep/libechov/venue/v04_mcr_poster_fit.jpg",
+  "assets_prep/broll_tacz/t14_libechov_briefing.jpg"
  ],
  "place": "Rybník Malý Sporťáček · Boží Voda 289, Liběchov",
  "copy": {
@@ -62,5 +62,6 @@
  },
  "notes": [
   "dron chybí (drone/final/flyover_9x16.mp4) → foto v01 Malý Sporťáček; jakmile dorazí, blok ho použije sám (a podrží poslední snímek, když je kratší)."
- ]
+ ],
+ "fish": "assets_prep/fish_ai/fish_rainbow_a_cut.png (AI pstruh duhový, brief 21. 10.; dříve h2_trout_potocak = AI-upscalovaný potočák)"
 }

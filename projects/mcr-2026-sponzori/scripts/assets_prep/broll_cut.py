@@ -7,8 +7,10 @@ Output: assets_prep/broll/cut/<id>_cut.png     subject only, alpha hardened (sem
         assets_prep/broll/cut/<id>_stroke.png  white silhouette dilated by STROKE px (put it UNDER the cut → white sticker outline)
 
 Run   : python3 scripts/assets_prep/broll_cut.py br01 br05 br07
+        BROLL_DIR=assets_prep/broll_tacz python3 scripts/assets_prep/broll_cut.py t01 t04   (gallery b-roll, 21. 10.)
 Raw   : cd <bgnode> && node rmbg.mjs medium assets_prep/broll/br07_landing_rod_up.jpg assets_prep/broll/cut/raw/br07.png
 """
+import os
 import sys
 from pathlib import Path
 
@@ -16,10 +18,23 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / 'assets_prep/broll'
+SRC = ROOT / os.environ.get('BROLL_DIR', 'assets_prep/broll')
 CUT = SRC / 'cut'
 STROKE = 12          # px of the white sticker outline
 LO, HI = 0.22, 0.5   # alpha ramp: below LO → 0, above HI → 1 (hardens ISNet's half-transparent dark clothing)
+# per-shot boxes (x0, y0, x1, y1 in the 1080×1920 frame) or polygons [(x, y), …] where ISNet kept things that are not the
+# subject → alpha 0
+#   t01: the rod rack left of the angler (ISNet kept broken rod segments → half the rods in front of the word, half behind)
+#   t04: wooden post, a stick, a neighbour's red jacket and dark legs left of the angler's legs (polygon along his trouser edge,
+#        below his elbow); rod blanks above the
+#        rack right of him (a 12 px sticker stroke turns thin blanks into white bars)
+EXCLUDE = {'t01': [(0, 0, 380, 1920)],
+           't04': [[(0, 895), (395, 895), (402, 990), (420, 1010), (432, 1150), (447, 1245), (447, 1920), (0, 1920)],
+                   (935, 0, 1080, 760), (895, 425, 935, 760)],
+           # t03: rods + landing net above the tackle box (broken ISNet rod segments, mesh) → stay grey behind the word
+           't03': [(560, 0, 1080, 1400)]}
+# sticker stroke drawn from the silhouette OPENED by this many px first → thin rod blanks stay in colour but get no white bar
+OPEN = {'t04': 9, 't03': 9}
 
 
 def photo_of(key):
@@ -51,6 +66,15 @@ def main(keys):
         assert raw.size == ph.size, (key, raw.size, ph.size)
         a = np.asarray(raw, dtype=np.float32)[:, :, 3] / 255.0
         a = np.clip((a - LO) / (HI - LO), 0, 1)
+        for ex in EXCLUDE.get(key, []):
+            if isinstance(ex, list):                      # polygon
+                from PIL import ImageDraw
+                pm = Image.new('L', raw.size, 0)
+                ImageDraw.Draw(pm).polygon(ex, fill=255)
+                a[np.asarray(pm) > 0] = 0
+            else:
+                x0, y0, x1, y1 = ex
+                a[y0:y1, x0:x1] = 0
         m = keep_big(a > 0.5)
         a = a * m
         # 1 px erode + soft edge: MinFilter(3) then a light blur
@@ -61,7 +85,13 @@ def main(keys):
         cut.putalpha(A)
         cut.save(CUT / f'{key}_cut.png', optimize=True)
         # stroke: dilated silhouette, anti-aliased
-        S = Image.fromarray(((np.asarray(A) > 110) * 255).astype(np.uint8))
+        sil = np.asarray(A) > 110
+        if key in OPEN:
+            from scipy import ndimage
+            r = OPEN[key] // 2
+            yy, xx = np.mgrid[-r:r + 1, -r:r + 1]
+            sil = ndimage.binary_opening(sil, structure=(xx * xx + yy * yy) <= r * r)
+        S = Image.fromarray((sil * 255).astype(np.uint8))
         S = S.filter(ImageFilter.MaxFilter(2 * (STROKE // 2) + 1)).filter(ImageFilter.MaxFilter(2 * (STROKE - STROKE // 2) + 1)).filter(ImageFilter.GaussianBlur(1.2))
         st = Image.new('RGBA', ph.size, (255, 255, 255, 0))
         st.putalpha(S)

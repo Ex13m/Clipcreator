@@ -1,16 +1,16 @@
 {
- "_note": "Úvod (build-up bez kicku, takty 0–7). Texty z data/content.json → event. Fotky = b-roll (H-BATTLE, nejsou z Liběchova → jen krátce a stylizovaně).",
+ "_note": "Úvod (build-up bez kicku, takty 0–7). Texty z data/content.json → event. Karta místa = foto z naší galerie (Liběchov jaro 2026, t14); photos = pool z galerie troutareacz.cz (ligová kola).",
  "key": "intro",
  "name": "MČR v Trout Area 2026",
  "photos": [
-  "assets_prep/broll/br10_lake_mist.jpg",
-  "assets_prep/broll/br02_netting_sunrays.jpg",
-  "assets_prep/broll/br01_fight_splash.jpg",
-  "assets_prep/broll/br08_landing_ripples.jpg",
-  "assets_prep/broll/br12_keepnet_trout.jpg",
-  "assets_prep/broll/br05_reeling_portrait.jpg",
-  "assets_prep/broll/br14_crouch_net.jpg",
-  "assets_prep/broll/br11_lake_sunflare.jpg"
+  "assets_prep/broll_tacz/t14_libechov_briefing.jpg",
+  "assets_prep/broll_tacz/t13_dawn_trophies.jpg",
+  "assets_prep/broll_tacz/t06_bank_line.jpg",
+  "assets_prep/broll_tacz/t01_rig_tacz_vest.jpg",
+  "assets_prep/broll_tacz/t02_lure_box.jpg",
+  "assets_prep/broll_tacz/t10_joy_denis.jpg",
+  "assets_prep/broll_tacz/t12_joy_cup_duo.jpg",
+  "assets_prep/broll_tacz/t07_gold_cups.jpg"
  ],
  "copy": {
   "hero": "TA CZ logo (hero, velké)",

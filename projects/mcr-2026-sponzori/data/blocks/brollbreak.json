@@ -1,12 +1,12 @@
 {
- "_note": "Hudební break (takty 35–36): zpomalení, dech. Bez VO.",
+ "_note": "Hudební break (takty 35–36): zpomalení, dech. Bez VO. Fotky: galerie troutareacz.cz (ligová kola) + AI pstruh duhový (ai01, galerie nemá detail ryby).",
  "key": "brollbreak",
  "mode": "break",
  "photos": [
-  "assets_prep/broll/br11_lake_sunflare.jpg",
-  "assets_prep/broll/br13_lure_check.jpg",
-  "assets_prep/broll/br16_dock_gear.jpg",
-  "assets_prep/broll/br02_netting_sunrays.jpg"
+  "assets_prep/broll_tacz/t03_kneel_net.jpg",
+  "assets_prep/broll_tacz/ai01_trout_rainbow_on_water.jpg",
+  "assets_prep/broll_tacz/t13_dawn_trophies.jpg",
+  "assets_prep/broll_tacz/t04_angler_rods_tacz.jpg"
  ],
  "copy": {
   "line": "24.–25. 10. 2026 · Líheň Liběchov"

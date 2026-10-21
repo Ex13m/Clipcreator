@@ -18,7 +18,7 @@ export const meta = { reel: false };
 // ---- A: one card per partner (film order). p = index into data.products; bg = radial [centre, edge]; fg = type colour on this card;
 //      name = the partner's name in ITS web/display font, tone-on-tone behind the product (type, not logo artwork)
 const CARDS = [
-  { k: 'venue', photo: 'assets_prep/libechov/venue/v03_trout_in_net.jpg', pos: '50% 38%', fg: '#ffffff' },
+  { k: 'venue', photo: 'assets_prep/broll_tacz/t14_libechov_briefing.jpg', pos: '50% 38%', fg: '#ffffff' },   // our gallery: Liběchov jaro 2026
   { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
   { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
   { k: 'moonky', p: 0, rot: -8, bg: ['#24305c', '#0e1424'], glow: '#ff4f8b', go: 0.42, fg: '#ffffff', name: 'MOONKY', font: 'Unbounded', wght: 900, nc: 'rgba(184,255,46,.16)' },
@@ -224,7 +224,7 @@ export default function finale(ctx) {
   // =====================================================================================================
   // D · SIGN-OFF on the music drop: misty lake, closer, event line, MADE BY GH; fade to black (TA hero + GH stay)
   // =====================================================================================================
-  let d = fx.photo(ctx, { id: 'dph', src: 'assets_prep/broll/br10_lake_mist.jpg', pos: '50% 55%', kb: { from: { scale: 1.16 }, to: { scale: 1.02 }, t0: tD, t1: END, ease: 'sine.out' } });
+  let d = fx.photo(ctx, { id: 'dph', src: 'assets_prep/broll_tacz/t13_dawn_trophies.jpg', pos: '50% 55%', kb: { from: { scale: 1.16 }, to: { scale: 1.02 }, t0: tD, t1: END, ease: 'sine.out' } });
   d += `<div class="fx-full" style="background:linear-gradient(180deg,rgba(4,6,10,.9) 0%,rgba(4,6,10,.6) 28%,rgba(4,6,10,.58) 50%,rgba(4,6,10,.8) 72%,rgba(4,6,10,.96) 100%)"></div>`;
   const dY = PH.y + PH.h + 70;
   // condensed like every other display line of the finale → the tagline can be ~40 % bigger in the same width

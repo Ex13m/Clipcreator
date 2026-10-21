@@ -154,6 +154,41 @@
     "libechov/venue/v03_trout_in_net.jpg",
     "libechov/venue/v04_mcr_poster_fit.jpg"
    ]
+  },
+  {
+   "role": "hero",
+   "key": "H2r",
+   "what": "REAL brown trout (pstruh obecný), straight side-on, from the Líheň Liběchov web — replaces the AI-upscaled, bent h2_trout_potocak in the \"donedávna\" frame",
+   "file": "venue/ads/fish_real_brown_trout.png",
+   "companions": {
+    "shadow": "venue/ads/fish_real_brown_trout_shadow.png",
+    "qa": "venue/ads/_fish_real_qa.jpg"
+   },
+   "size": [
+    1184,
+    413
+   ],
+   "species": "pstruh obecný (brown trout, Salmo trutta)",
+   "source_url": "https://www.lihenlibechov.cz/uploads/images/651b0f8db1675072923966.jpg",
+   "source_page": "https://www.lihenlibechov.cz/cs/aktualita/novy-rybarsky-rad",
+   "source_size": [
+    1388,
+    2048
+   ],
+   "crop_box_in_source": [
+    146,
+    984,
+    1330,
+    1397
+   ],
+   "processing": "hand-traced outline snapped to the photo edge (Lab gradient, ±10 px, smoothed); fingers on the belly/back replaced by a column-wise copy of the fish’s own neighbouring belly/back texture (aligned to the body edge, colour-matched, 5 px feather) + Telea on thin rims; no upscale, no generative fill. The far pectoral fin (hidden behind the left hand) is left out.",
+   "edge_snap": {
+    "body_offset_px_mean_abs": 2.47,
+    "body_offset_px_max_abs": 9.55
+   },
+   "fingers_retouched_px": 21540,
+   "pose": "side-on, straight, head left, belly down; snout at x≈6, tail tip at x≈1179 (canvas px)",
+   "use": "native 1:1 or smaller (max 1.3x per BLOCK_API); never through an AI upscaler"
   }
  ]
 }

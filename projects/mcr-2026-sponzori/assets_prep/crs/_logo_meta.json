@@ -1,0 +1,37 @@
+{
+ "logo_crs_color.png": {
+  "w": 1825,
+  "h": 565
+ },
+ "logo_crs_white.png": {
+  "w": 1825,
+  "h": 565
+ },
+ "logo_crs_navy.png": {
+  "w": 1825,
+  "h": 565
+ },
+ "mark_crs_color.png": {
+  "w": 1032,
+  "h": 565
+ },
+ "mark_crs_white.png": {
+  "w": 1032,
+  "h": 565
+ },
+ "wordmark_crs_color.png": {
+  "w": 758,
+  "h": 487
+ },
+ "wordmark_crs_white.png": {
+  "w": 758,
+  "h": 487
+ },
+ "_split_x_px": 1049,
+ "source": "https://www.rybsvaz.cz/g/cms/api/rest/documents/by-uuid/b01c4638-0bcb-f7ab-b6d8-de1234fa39ab/content/logoCRSLight.svg (158x47 viewBox, fills #2B5DA9 / #182F5D / white eye) rendered via images.weserv.nl w=1900 output=png",
+ "colors": {
+  "blue": "#2B5DA9",
+  "navy": "#182F5D",
+  "eye": "#FFFFFF"
+ }
+}
