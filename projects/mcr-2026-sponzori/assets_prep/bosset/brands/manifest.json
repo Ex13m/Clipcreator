@@ -1,0 +1,212 @@
+{
+ "sponsor": "bosset",
+ "generated": "2026-10-21",
+ "note": "Third-party brands sold by the shop (logos as shown on the shop site). Never present them as the sponsor's own. <slug>.png = transparent, original colours (light bg); <slug>_on_dark.png = dark neutrals lifted/inverted. Do not upscale beyond native width (field size).",
+ "brands": [
+  {
+   "slug": "keitech",
+   "name": "Keitech",
+   "file": "assets_prep/bosset/brands/keitech.png",
+   "file_on_dark": "assets_prep/bosset/brands/keitech_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    377,
+    96
+   ],
+   "items_on_shop": 1450,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/znacky_keitech.png",
+   "brand_page": "https://www.bosset.cz/keitech/",
+   "note": "oficiální distributor pro ČR",
+   "hires": {
+    "file": "assets_prep/bosset/brands/keitech_hires.png",
+    "file_on_dark": "assets_prep/bosset/brands/keitech_hires_on_dark.png",
+    "size": [
+     726,
+     184
+    ],
+    "logo_url": "https://www.velka-ryba.cz/img/m/133.jpg",
+    "note": "same official Keitech wordmark as served by velka-ryba.cz (manufacturer logo); use when shown > 377 px wide"
+   }
+  },
+  {
+   "slug": "ygk",
+   "name": "YGK X-Braid",
+   "file": "assets_prep/bosset/brands/ygk.png",
+   "file_on_dark": "assets_prep/bosset/brands/ygk_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    913,
+    300
+   ],
+   "items_on_shop": 97,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/ygk_x-braid1.jpg",
+   "brand_page": "https://www.bosset.cz/x-braid-ygk/",
+   "note": "oficiální distributor pro ČR; filtr: YGK X-Braid 78 + YGK 19"
+  },
+  {
+   "slug": "zojirushi",
+   "name": "Zojirushi",
+   "file": "assets_prep/bosset/brands/zojirushi.png",
+   "file_on_dark": "assets_prep/bosset/brands/zojirushi_on_dark.png",
+   "on_dark_mode": "chip",
+   "size": [
+    897,
+    263
+   ],
+   "items_on_shop": 215,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/vrnt2819_896.jpg",
+   "brand_page": "https://www.bosset.cz/zojirushi/",
+   "note": "source is 285×71 px; file = 3× Lanczos (weserv w=855) — use ≤ 570 px wide; blue on dark is weak -> light chip"
+  },
+  {
+   "slug": "select",
+   "name": "Select",
+   "file": "assets_prep/bosset/brands/select.png",
+   "file_on_dark": "assets_prep/bosset/brands/select_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    310,
+    88
+   ],
+   "items_on_shop": 2323,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/selectjpg11.jpg",
+   "brand_page": "https://www.bosset.cz/select/",
+   "note": "Select Tackles; small source (310 px wide): show ≤ native width"
+  },
+  {
+   "slug": "freshlures",
+   "name": "Fresh Lures",
+   "file": "assets_prep/bosset/brands/freshlures.png",
+   "file_on_dark": "assets_prep/bosset/brands/freshlures_on_dark.png",
+   "on_dark_mode": "chip",
+   "size": [
+    357,
+    357
+   ],
+   "items_on_shop": 363,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/fresh_lures_logo1.png",
+   "brand_page": "https://www.bosset.cz/-fresh-lures/",
+   "note": "round badge"
+  },
+  {
+   "slug": "decoy",
+   "name": "Decoy",
+   "file": "assets_prep/bosset/brands/decoy.png",
+   "file_on_dark": "assets_prep/bosset/brands/decoy_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    269,
+    56
+   ],
+   "items_on_shop": 248,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/decoy1.png",
+   "brand_page": "https://www.bosset.cz/decoy/",
+   "note": "small source (269 px wide): show ≤ native width"
+  },
+  {
+   "slug": "zipbaits",
+   "name": "ZipBaits",
+   "file": "assets_prep/bosset/brands/zipbaits.png",
+   "file_on_dark": "assets_prep/bosset/brands/zipbaits_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    920,
+    221
+   ],
+   "items_on_shop": 156,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/zipbaits_logo.png",
+   "brand_page": "https://www.bosset.cz/zipbaits/",
+   "note": "JDM wobblers"
+  },
+  {
+   "slug": "megabass",
+   "name": "Megabass",
+   "file": "assets_prep/bosset/brands/megabass.png",
+   "file_on_dark": "assets_prep/bosset/brands/megabass_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    304,
+    55
+   ],
+   "items_on_shop": 85,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/megabass_logo1.png",
+   "brand_page": "https://www.bosset.cz/megabass/",
+   "note": "JDM wobblers; small source (304 px wide): show ≤ native width"
+  },
+  {
+   "slug": "osp",
+   "name": "O.S.P",
+   "file": "assets_prep/bosset/brands/osp.png",
+   "file_on_dark": "assets_prep/bosset/brands/osp_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    347,
+    159
+   ],
+   "items_on_shop": 58,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/osp_logo.png",
+   "brand_page": "https://www.bosset.cz/osp/",
+   "note": "JDM wobblers"
+  },
+  {
+   "slug": "reins",
+   "name": "Reins",
+   "file": "assets_prep/bosset/brands/reins.png",
+   "file_on_dark": "assets_prep/bosset/brands/reins_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    616,
+    209
+   ],
+   "items_on_shop": 64,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/reins_logo.png",
+   "brand_page": "https://www.bosset.cz/reins/",
+   "note": "soft baits"
+  },
+  {
+   "slug": "bassday",
+   "name": "Bassday",
+   "file": "assets_prep/bosset/brands/bassday.png",
+   "file_on_dark": "assets_prep/bosset/brands/bassday_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    276,
+    73
+   ],
+   "items_on_shop": 3,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/bassday_logo.png",
+   "brand_page": "https://www.bosset.cz/bassday/",
+   "note": "small source (276 px wide): show ≤ native width"
+  },
+  {
+   "slug": "brain",
+   "name": "Brain",
+   "file": "assets_prep/bosset/brands/brain.png",
+   "file_on_dark": "assets_prep/bosset/brands/brain_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    1171,
+    328
+   ],
+   "items_on_shop": 769,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/brain_logo.png",
+   "brand_page": "https://www.bosset.cz/brain/",
+   "note": "carp / feeder gear, not spinning"
+  },
+  {
+   "slug": "xfish",
+   "name": "X-Fish",
+   "file": "assets_prep/bosset/brands/xfish.png",
+   "file_on_dark": "assets_prep/bosset/brands/xfish_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    386,
+    71
+   ],
+   "items_on_shop": 418,
+   "logo_url": "https://cdn.myshoptet.com/usr/www.bosset.cz/user/categories/orig/x_fish_logo_woby_znacka.png",
+   "brand_page": "https://www.bosset.cz/x-fish/",
+   "note": "small source (386 px wide): show ≤ native width"
+  }
+ ]
+}

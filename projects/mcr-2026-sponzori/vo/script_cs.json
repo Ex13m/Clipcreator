@@ -121,6 +121,21 @@
    "term": "e-shop",
    "respell": "í-šop",
    "note": "schváleno 19. 10. (take 3)"
+  },
+  {
+   "term": "Keitech",
+   "respell": "kejtek",
+   "note": "nové 21. 10. (Bosset v3), ke schválení"
+  },
+  {
+   "term": "YGK",
+   "respell": "wáj dží kej",
+   "note": "nové 21. 10.; alternativa česky „ypsilon gé ká“"
+  },
+  {
+   "term": "Zojirushi",
+   "respell": "zodžiruši",
+   "note": "nové 21. 10. (Bosset v3), ke schválení"
   }
  ],
  "order": [
@@ -504,15 +519,29 @@
    "block_s": 8,
    "vo_limit_words": 18,
    "vo": {
-    "cs": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "tts": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "respell": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
-    "words": 15,
-    "spoken_words": 14,
-    "est_s": 4.8,
+    "cs": "Bosset – rybářský e-shop: Keitech a YGK. A vítězové mistrovství získají špičkové termosky Zojirushi.",
+    "tts": "Boset – rybářský í-šop: Kejtek a wáj dží kej. A vítězové mistrovství získají špičkové termosky Zodžiruši.",
+    "respell": "Boset – rybářský í-šop: Kejtek a wáj dží kej. A vítězové mistrovství získají špičkové termosky Zodžiruši.",
+    "words": 13,
+    "spoken_words": 15,
+    "est_s": 5.2,
+    "est_s_real": 7.6,
+    "est_note": "≈ 34 slabik; Paul eleven_v3 v take 3 mluvil 3,9–4,7 slabiky/s (Bosset 27 sl. = 6,9 s, Jigovky 15 slov = 7,9 s) → reálně ≈ 7,3–7,9 s; blok 5 taktů ≈ 9,2 s",
     "in_s": 0.25,
-    "end_s": 5.05,
+    "end_s": 7.85,
     "file": "vo/bosset.wav",
+    "status": "v3 text 21. 10. – TTS (take 4) čeká; vo/bosset.wav je ještě take 3 (cs_prev)",
+    "tts_alt": "Boset – rybářský í-šop: Kejtek a ypsilon gé ká. A vítězové mistrovství získají špičkové termosky Zodžiruši.",
+    "tts_alt_note": "YGK česky po písmenech (+2 slabiky), pokud operátor nechce anglické „wáj dží kej“",
+    "respell_map": {
+     "Bosset": "Boset",
+     "e-shop": "í-šop",
+     "Keitech": "Kejtek",
+     "YGK": "wáj dží kej",
+     "Zojirushi": "Zodžiruši"
+    },
+    "cs_prev": "Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.",
+    "tts_prev": "Boset – rybářský í-šop i termosky, které udrží nápoj horký i studený až šest hodin.",
     "cs_old": "Ceny pro vítěze věnuje Bosset – termosky, které udrží nápoj horký i studený až šest hodin."
    },
    "onscreen": {
@@ -539,11 +568,28 @@
      "claim": "Rozsah 0,5–0,7 l: skladem 0,52 l a 0,6 l",
      "ref": "research/bosset.md:13",
      "url": "https://www.bosset.cz/termosky/"
+    },
+    {
+     "claim": "Rybářský e-shop (přívlač); oficiální distributor Keitech a YGK X-Braid pro ČR",
+     "ref": "research/bosset_brands.md §1, research/bosset.md:47–48, 61",
+     "url": "https://www.bosset.cz/"
+    },
+    {
+     "claim": "Zojirushi = celá kategorie TERMOSKY (215/215 položek, 21. 10.)",
+     "ref": "research/bosset_brands.md §1–3",
+     "url": "https://www.bosset.cz/termosky/"
+    },
+    {
+     "claim": "Vítězové MČR dostanou termosky Zojirushi 0,6 l (mezi cenami; ceny věnují všichni sponzoři); „špičkové“ = slovo operátora 21. 10.",
+     "ref": "BRIEF.md:11; operátor 21. 10. (film v3 feedback)",
+     "url": "—"
     }
    ],
    "notes": [
     "„až 6 hodin“ platí pro modely 0,6 l (SM-SR/VB/SHE/SF) i pro 0,52 l SW-KA (jídlo, 6 h). Předpoklad: ceny jsou z řady termosek na bosset.cz.",
-    "Neříkat nic o původu Zojirushi (bosset.md:75). bosset.md zatím nemá sekci Verification."
+    "Neříkat nic o původu Zojirushi (bosset.md:75). bosset.md zatím nemá sekci Verification.",
+    "v3 (21. 10.): VO končí akcentem na termosky pro vítěze (operátor). Neříkat, že ceny věnuje jen Bosset; nic o původu Zojirushi.",
+    "Přesné modely cenových termosek nejsou nikde zveřejněné → na obrazovce jen „termosky Zojirushi 0,6 l“; modely potvrdit u Bosset (research/bosset_brands.md §3)."
    ]
   },
   "gausseholler": {

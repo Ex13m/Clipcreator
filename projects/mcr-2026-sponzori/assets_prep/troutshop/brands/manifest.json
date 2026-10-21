@@ -1,0 +1,247 @@
+{
+ "sponsor": "troutshop",
+ "generated": "2026-10-21",
+ "note": "Third-party brands sold by the shop (ordered by trout-area prominence on the shop). Never present them as the sponsor's own. <slug>.png = transparent, original colours (light bg); <slug>_on_dark.png = variant for dark bg. Do not upscale beyond native width. Logo rule: every brand logo must stay smaller than the TA CZ logo in frame (ctx.logo / plate rule applies to brand marks too). Wordmark-only brands: see research/troutshop_brands.md (typed in Montserrat 800, never imitating their artwork).",
+ "brands": [
+  {
+   "rank": 1,
+   "slug": "nories",
+   "name": "Nories",
+   "file": "assets_prep/troutshop/brands/nories.png",
+   "file_on_dark": "assets_prep/troutshop/brands/nories_on_dark.png",
+   "on_dark_mode": "letters",
+   "size": [
+    1467,
+    532
+   ],
+   "size_on_dark": [
+    1467,
+    532
+   ],
+   "items_on_shop": "spoons 897 · wobblers 290 · rods 8",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=nories-en",
+   "logo_url": "https://nories.com/wp/wp-content/themes/nories/images/common/logo.svg",
+   "note": "official SVG (nories.com header). on_dark = letters white, grey keyline dropped"
+  },
+  {
+   "rank": 2,
+   "slug": "forest",
+   "name": "Forest",
+   "file": "assets_prep/troutshop/brands/forest.png",
+   "file_on_dark": "assets_prep/troutshop/brands/forest_on_dark.png",
+   "on_dark_mode": "badge",
+   "size": [
+    284,
+    126
+   ],
+   "size_on_dark": [
+    284,
+    126
+   ],
+   "items_on_shop": "spoons 636 · wobblers 91 · spinners",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=forest-en",
+   "logo_url": "https://forestjp.com/wp-content/uploads/2018/08/hed1.jpg",
+   "note": "forestjp.com header banner (hed1.jpg 1080×250): green oval \"out door life friend / Forest / FOREST\" cut from the dark banner. Native ≈ 290 px wide: use ≤ 300 px"
+  },
+  {
+   "rank": 3,
+   "slug": "rodiocraft",
+   "name": "Rodio Craft",
+   "file": "assets_prep/troutshop/brands/rodiocraft.png",
+   "file_on_dark": "assets_prep/troutshop/brands/rodiocraft_on_dark.png",
+   "on_dark_mode": "badge",
+   "size": [
+    1200,
+    260
+   ],
+   "size_on_dark": [
+    1200,
+    260
+   ],
+   "items_on_shop": "spoons 117 · wobblers 201 · hooks 18 · rods 9 · lines 10",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=rodio-craft-en",
+   "logo_url": "https://troutshop.eu/wp-content/uploads/2021/04/RC-1.jpg",
+   "note": "troutshop.eu brand tile 1200 px; green/orange bar cropped (np.int64(0), np.int64(470), np.int64(1200), np.int64(730)) (opaque badge, works on any bg)"
+  },
+  {
+   "rank": 4,
+   "slug": "valkein",
+   "name": "ValkeIN",
+   "file": "assets_prep/troutshop/brands/valkein.png",
+   "file_on_dark": "assets_prep/troutshop/brands/valkein_on_dark.png",
+   "on_dark_mode": "mono",
+   "size": [
+    1770,
+    535
+   ],
+   "size_on_dark": [
+    1770,
+    535
+   ],
+   "items_on_shop": "spoons 102 · wobblers 78",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=valkein-en",
+   "logo_url": "https://valkein.jp/area-hp/wp-content/themes/itreat_base/dist/img/common/logo.svg",
+   "note": "official SVG (valkein.jp header, light grey #DDD on transparent). light = recoloured #111, on_dark = white"
+  },
+  {
+   "rank": 5,
+   "slug": "vanfook",
+   "name": "Vanfook",
+   "file": "assets_prep/troutshop/brands/vanfook.png",
+   "file_on_dark": "assets_prep/troutshop/brands/vanfook_on_dark.png",
+   "on_dark_mode": "keyed",
+   "size": [
+    469,
+    485
+   ],
+   "size_on_dark": [
+    469,
+    485
+   ],
+   "items_on_shop": "hooks 246 · spoons 32",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=vanfook-en",
+   "logo_url": "https://vanfook.co.jp/wp/wp-content/uploads/2022/08/ogp.png",
+   "note": "vanfook.co.jp og:image (1200×630, black bg keyed by luminance): chrome hook + VANFOOK. on_dark is the original look; light = neutrals darkened"
+  },
+  {
+   "rank": 6,
+   "slug": "varivas",
+   "name": "VARIVAS",
+   "file": "assets_prep/troutshop/brands/varivas.png",
+   "file_on_dark": "assets_prep/troutshop/brands/varivas_on_dark.png",
+   "on_dark_mode": "mono",
+   "size": [
+    2400,
+    524
+   ],
+   "size_on_dark": [
+    2400,
+    524
+   ],
+   "items_on_shop": "lines 110 · hooks 8",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=varivas-en",
+   "logo_url": "https://www.varivas.co.jp/bjAhvt/wp-content/themes/swell_child/assets/img/common/logo_header.svg",
+   "note": "official SVG (varivas.co.jp header, blue #003F98). on_dark = white (blue on dark is weak)"
+  },
+  {
+   "rank": 7,
+   "slug": "fishup",
+   "name": "FishUp",
+   "file": "assets_prep/troutshop/brands/fishup.png",
+   "file_on_dark": "assets_prep/troutshop/brands/fishup_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    363,
+    178
+   ],
+   "size_on_dark": [
+    363,
+    178
+   ],
+   "items_on_shop": "soft baits 474",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=fishup-en",
+   "logo_url": "https://troutshop.eu/wp-content/uploads/2020/03/fishup.jpg",
+   "note": "troutshop.eu tile 363 px (white bg keyed): orange fish + black FISHUP. on_dark = black lettering -> white. Small: ≤ 360 px wide"
+  },
+  {
+   "rank": 8,
+   "slug": "mukai",
+   "name": "Mukai",
+   "file": "assets_prep/troutshop/brands/mukai.png",
+   "file_on_dark": "assets_prep/troutshop/brands/mukai_on_dark.png",
+   "on_dark_mode": "keyed",
+   "size": [
+    807,
+    421
+   ],
+   "size_on_dark": [
+    807,
+    421
+   ],
+   "items_on_shop": "wobblers 81",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=mukai-2",
+   "logo_url": "https://troutshop.eu/wp-content/uploads/2024/07/Mukai_logo.jpg",
+   "note": "troutshop.eu brand tile (black square, baked-in TROUTSHOP.EU watermark removed by key: neutrals forced to pure white). Native 960 px tile, logo ≈ 760 px wide"
+  },
+  {
+   "rank": 9,
+   "slug": "velvetarts",
+   "name": "Velvet Arts",
+   "file": "assets_prep/troutshop/brands/velvetarts.png",
+   "file_on_dark": "assets_prep/troutshop/brands/velvetarts_on_dark.png",
+   "on_dark_mode": "mono",
+   "size": [
+    1199,
+    533
+   ],
+   "size_on_dark": [
+    1199,
+    533
+   ],
+   "items_on_shop": "spoons 60",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=velvet-arts-2",
+   "logo_url": "https://troutshop.eu/wp-content/uploads/2025/02/velvet-arts-logo.jpg",
+   "note": "troutshop.eu brand tile 1241 px (white bg keyed). light = black, on_dark = white"
+  },
+  {
+   "rank": 10,
+   "slug": "yarie",
+   "name": "YARIE (Jespa)",
+   "file": "assets_prep/troutshop/brands/yarie.png",
+   "file_on_dark": "assets_prep/troutshop/brands/yarie_on_dark.png",
+   "on_dark_mode": "badge",
+   "size": [
+    394,
+    128
+   ],
+   "size_on_dark": [
+    394,
+    128
+   ],
+   "items_on_shop": "spoons 32",
+   "brand_page": "https://troutshop.eu/all-shop-products/?filter_brand=yarie-2",
+   "logo_url": "https://troutshop.eu/wp-content/uploads/2024/05/yarie-logo.jpg",
+   "note": "troutshop.eu tile 394×128 (green plate, white YARIE + JESPA CREATIVE FISHING GEAR). Small: use ≤ 400 px wide"
+  },
+  {
+   "rank": 11,
+   "slug": "libralures",
+   "name": "Libra Lures",
+   "file": "assets_prep/troutshop/brands/libralures.png",
+   "file_on_dark": "assets_prep/troutshop/brands/libralures_on_dark.png",
+   "on_dark_mode": "reuse",
+   "size": [
+    611,
+    613
+   ],
+   "size_on_dark": [
+    611,
+    613
+   ],
+   "items_on_shop": "soft baits 73",
+   "brand_page": "https://troutshop.eu/pc/soft-baits/libra-en/",
+   "logo_url": "https://www.velka-ryba.cz/img/m/153.jpg",
+   "note": "reused from Velká ryba set (source https://www.velka-ryba.cz/img/m/153.jpg, 797 px round badge); same Libra Lures badge as on troutshop.eu (1112223.jpg, 225 px) and activefishing.cz carousel (libra.png)"
+  },
+  {
+   "rank": 12,
+   "slug": "berkley",
+   "name": "Berkley",
+   "file": "assets_prep/troutshop/brands/berkley.png",
+   "file_on_dark": "assets_prep/troutshop/brands/berkley_on_dark.png",
+   "on_dark_mode": "reuse",
+   "size": [
+    670,
+    282
+   ],
+   "size_on_dark": [
+    670,
+    282
+   ],
+   "items_on_shop": "soft baits 88",
+   "brand_page": "https://troutshop.eu/pc/soft-baits/berkley-en/",
+   "logo_url": "https://www.velka-ryba.cz/img/m/10.jpg",
+   "note": "reused from Velká ryba set (source https://www.velka-ryba.cz/img/m/10.jpg)"
+  }
+ ]
+}

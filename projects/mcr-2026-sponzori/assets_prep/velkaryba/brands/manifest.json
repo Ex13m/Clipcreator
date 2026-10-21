@@ -1,0 +1,247 @@
+{
+ "sponsor": "velkaryba",
+ "generated": "2026-10-21",
+ "note": "Third-party brands sold by the shop (logos as shown on the shop site). Never present them as the sponsor's own. <slug>.png = transparent, original colours (light bg); <slug>_on_dark.png = dark neutrals lifted/inverted. Do not upscale beyond native width (field size).",
+ "brands": [
+  {
+   "slug": "shimano",
+   "name": "Shimano",
+   "file": "assets_prep/velkaryba/brands/shimano.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/shimano_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    742,
+    137
+   ],
+   "items_on_shop": 555,
+   "logo_url": "https://www.velka-ryba.cz/img/m/18.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/18_shimano",
+   "note": "Shimano Rod Test Center partner"
+  },
+  {
+   "slug": "rapala",
+   "name": "Rapala",
+   "file": "assets_prep/velkaryba/brands/rapala.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/rapala_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    732,
+    343
+   ],
+   "items_on_shop": 589,
+   "logo_url": "https://www.velka-ryba.cz/img/m/7.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/7_rapala",
+   "note": ""
+  },
+  {
+   "slug": "illex",
+   "name": "Illex",
+   "file": "assets_prep/velkaryba/brands/illex.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/illex_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    651,
+    284
+   ],
+   "items_on_shop": 359,
+   "logo_url": "https://www.velka-ryba.cz/img/m/16.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/16_illex",
+   "note": "navy badge"
+  },
+  {
+   "slug": "3stan",
+   "name": "3Stan Lures",
+   "file": "assets_prep/velkaryba/brands/3stan.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/3stan_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    535,
+    535
+   ],
+   "items_on_shop": 375,
+   "logo_url": "https://www.velka-ryba.cz/img/m/124.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/124_3stan-lures",
+   "note": "brown badge"
+  },
+  {
+   "slug": "savagegear",
+   "name": "Savage Gear",
+   "file": "assets_prep/velkaryba/brands/savagegear.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/savagegear_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    496,
+    600
+   ],
+   "items_on_shop": 358,
+   "logo_url": "https://www.velka-ryba.cz/img/m/78.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/78_savage-gear",
+   "note": ""
+  },
+  {
+   "slug": "westin",
+   "name": "Westin",
+   "file": "assets_prep/velkaryba/brands/westin.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/westin_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    726,
+    465
+   ],
+   "items_on_shop": 345,
+   "logo_url": "https://www.velka-ryba.cz/img/m/105.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/105_westin",
+   "note": ""
+  },
+  {
+   "slug": "foxrage",
+   "name": "Fox Rage",
+   "file": "assets_prep/velkaryba/brands/foxrage.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/foxrage_on_dark.png",
+   "on_dark_mode": "invert",
+   "size": [
+    690,
+    375
+   ],
+   "items_on_shop": 262,
+   "logo_url": "https://www.velka-ryba.cz/img/m/92.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/92_fox-rage",
+   "note": ""
+  },
+  {
+   "slug": "keitech",
+   "name": "Keitech",
+   "file": "assets_prep/velkaryba/brands/keitech.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/keitech_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    726,
+    184
+   ],
+   "items_on_shop": 231,
+   "logo_url": "https://www.velka-ryba.cz/img/m/133.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/133_keitech",
+   "note": ""
+  },
+  {
+   "slug": "salmo",
+   "name": "Salmo",
+   "file": "assets_prep/velkaryba/brands/salmo.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/salmo_on_dark.png",
+   "on_dark_mode": "invert",
+   "size": [
+    742,
+    325
+   ],
+   "items_on_shop": 184,
+   "logo_url": "https://www.velka-ryba.cz/img/m/38.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/38_salmo",
+   "note": ""
+  },
+  {
+   "slug": "mepps",
+   "name": "Mepps",
+   "file": "assets_prep/velkaryba/brands/mepps.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/mepps_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    648,
+    440
+   ],
+   "items_on_shop": 167,
+   "logo_url": "https://www.velka-ryba.cz/img/m/9.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/9_mepps",
+   "note": ""
+  },
+  {
+   "slug": "berkley",
+   "name": "Berkley",
+   "file": "assets_prep/velkaryba/brands/berkley.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/berkley_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    670,
+    282
+   ],
+   "items_on_shop": 148,
+   "logo_url": "https://www.velka-ryba.cz/img/m/10.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/10_berkley",
+   "note": ""
+  },
+  {
+   "slug": "libralures",
+   "name": "Libra Lures",
+   "file": "assets_prep/velkaryba/brands/libralures.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/libralures_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    611,
+    613
+   ],
+   "items_on_shop": 148,
+   "logo_url": "https://www.velka-ryba.cz/img/m/153.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/153_libra-lures",
+   "note": "Turbo Worm: made at the request of Trout Area anglers (velkaryba.md #7)"
+  },
+  {
+   "slug": "luckyjohn",
+   "name": "Lucky John",
+   "file": "assets_prep/velkaryba/brands/luckyjohn.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/luckyjohn_on_dark.png",
+   "on_dark_mode": "keep",
+   "size": [
+    574,
+    485
+   ],
+   "items_on_shop": 46,
+   "logo_url": "https://www.velka-ryba.cz/img/m/104.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/104_lucky-john",
+   "note": "red badge"
+  },
+  {
+   "slug": "daiwa",
+   "name": "Daiwa",
+   "file": "assets_prep/velkaryba/brands/daiwa.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/daiwa_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    598,
+    303
+   ],
+   "items_on_shop": 15,
+   "logo_url": "https://www.velka-ryba.cz/img/m/21.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/21_daiwa",
+   "note": "D-Vec mark only (no wordmark)"
+  },
+  {
+   "slug": "gloomis",
+   "name": "G. Loomis",
+   "file": "assets_prep/velkaryba/brands/gloomis.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/gloomis_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    745,
+    193
+   ],
+   "items_on_shop": 19,
+   "logo_url": "https://www.velka-ryba.cz/img/m/162.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/162_g-loomis",
+   "note": "premium rods"
+  },
+  {
+   "slug": "majorcraft",
+   "name": "Major Craft",
+   "file": "assets_prep/velkaryba/brands/majorcraft.png",
+   "file_on_dark": "assets_prep/velkaryba/brands/majorcraft_on_dark.png",
+   "on_dark_mode": "lift",
+   "size": [
+    726,
+    159
+   ],
+   "items_on_shop": 21,
+   "logo_url": "https://www.velka-ryba.cz/img/m/106.jpg",
+   "brand_page": "https://www.velka-ryba.cz/cs/106_major-craft",
+   "note": ""
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+{
+ "sponsor": "jigovky",
+ "generated": "2026-10-21",
+ "note": "Third-party brands sold by the shop (ordered by trout-area prominence on the shop). Never present them as the sponsor's own. <slug>.png = transparent, original colours (light bg); <slug>_on_dark.png = variant for dark bg. Do not upscale beyond native width. Logo rule: every brand logo must stay smaller than the TA CZ logo in frame (ctx.logo / plate rule applies to brand marks too). Wordmark-only brands: see research/jigovky_brands.md (typed in Montserrat 800, never imitating their artwork).",
+ "brands": [
+  {
+   "rank": 1,
+   "slug": "varivas",
+   "name": "VARIVAS",
+   "file": "assets_prep/jigovky/brands/varivas.png",
+   "file_on_dark": "assets_prep/jigovky/brands/varivas_on_dark.png",
+   "on_dark_mode": "mono",
+   "size": [
+    2400,
+    524
+   ],
+   "size_on_dark": [
+    2400,
+    524
+   ],
+   "items_on_shop": "VARIVAS 206 (fluorocarbony, háčky, šňůry, vlasce, oblečení)",
+   "brand_page": "https://www.jigovky.cz/varivas/",
+   "logo_url": "https://www.varivas.co.jp/bjAhvt/wp-content/themes/swell_child/assets/img/common/logo_header.svg",
+   "note": "official SVG (varivas.co.jp header, blue #003F98). on_dark = white (blue on dark is weak)"
+  }
+ ]
+}

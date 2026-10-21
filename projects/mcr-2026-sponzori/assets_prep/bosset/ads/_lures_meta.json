@@ -115,5 +115,65 @@
    0.0472
   ],
   "src": "assets/bosset/lures/bos_decoy_sv52.png"
+ },
+ "W1_zipbaits_orbit_110sp_510r": {
+  "size": [
+   841,
+   277
+  ],
+  "pad": [
+   0.0202,
+   0.0614,
+   0.0202,
+   0.0614
+  ],
+  "src": "assets/bosset/lures2/bos_zipbaits_orbit110_510r.png",
+  "page": "https://www.bosset.cz/zipbaits-woblery-orbit-110sp-sr-2/orbit-110-sp-110mm-16-5g--510r/",
+  "kind": "wobbler"
+ },
+ "W2_megabass_x-52_acrobat_f_shigyo": {
+  "size": [
+   1008,
+   322
+  ],
+  "pad": [
+   0.0159,
+   0.0528,
+   0.0159,
+   0.0528
+  ],
+  "src": "assets/bosset/lures2/bos_megabass_x52_shigyo.png",
+  "page": "https://www.bosset.cz/woblery-megabass-x-52-acrobat-f/megabass-x-52-acrobat-f-52mm-3-2g-shigyo/",
+  "kind": "clear"
+ },
+ "W3_osp_asura_durga_73sp_s76": {
+  "size": [
+   848,
+   203
+  ],
+  "pad": [
+   0.0189,
+   0.0837,
+   0.02,
+   0.0788
+  ],
+  "src": "assets/bosset/lures2/bos_osp_durga73_s76.png",
+  "page": "https://www.bosset.cz/woblery-osp-asura-duraga-73sp/osp-asura-durga-73-sp-73mm-4-7g-s76--1-4m/",
+  "kind": "wobbler"
+ },
+ "W4_reins_bubbling_shaker_4in_567": {
+  "size": [
+   823,
+   124
+  ],
+  "pad": [
+   0.0207,
+   0.1371,
+   0.0207,
+   0.1371
+  ],
+  "src": "assets/bosset/lures2/bos_reins_bubbling_567.png",
+  "page": "https://www.bosset.cz/gumove-nastrahy-reins-bubbling-shaker-4/soft-lure--bubbring-shaker-4--567-lilac-silver-blue-flake--12-pcs-pack/",
+  "kind": "soft"
  }
 }
