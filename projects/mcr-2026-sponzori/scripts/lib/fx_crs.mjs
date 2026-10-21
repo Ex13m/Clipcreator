@@ -58,8 +58,8 @@ export function ripples(ctx, { id = 'rp', cx, cy, w = 1000, h = 330, color = '#3
     const rid = `${id}${i}${e}`, pk = e ? peak * 0.55 : peak, tt = t + e * 0.16;
     html += `<i class="fx-abs" id="${ctx.id(rid)}" style="left:${px(cx - w / 2)};top:${px(cy - h / 2)};width:${px(w)};height:${px(h)};border-radius:50%;border:${e ? 1.5 : 2.5}px solid ${color};box-shadow:0 0 18px ${hexA(color, 0.35)},inset 0 0 14px ${hexA(color, 0.2)};opacity:0"></i>`;
     ctx.tl.fromTo(ctx.sel(rid), { scale: 0.3 }, { scale: e ? 1.45 : 1.8, duration: d, ease: 'expo.out' }, tt);
-    ctx.tl.fromTo(ctx.sel(rid), { opacity: 0 }, { opacity: pk, duration: 0.06, ease: 'none' }, tt);
-    ctx.tl.fromTo(ctx.sel(rid), { opacity: pk }, { opacity: 0, duration: d - 0.1, ease: 'power2.in' }, tt + 0.06);
+    ctx.tl.fromTo(ctx.sel(rid), { opacity: 0 }, { opacity: pk, duration: 0.05, ease: 'none' }, tt);
+    ctx.tl.fromTo(ctx.sel(rid), { opacity: pk }, { opacity: 0, duration: d - 0.1, ease: 'power2.in' }, tt + 0.07);
   }));
   return html;
 }

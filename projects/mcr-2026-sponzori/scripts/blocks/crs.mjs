@@ -6,8 +6,8 @@
 //   „Českému“  the ČRS logo (white, ≤ TA) is revealed along the fish, tail → head, a light runs through it; hairlines draw out of it
 //   „za / dlouholetou / podporu“  ZA DLOUHOLETOU PODPORU word by word on the voice → the kinetic line reads
 //         DĚKUJEME · [ČRS] · ZA DLOUHOLETOU PODPORU
-//   bar 2  verified fact (lihenlibechov.cz/cs/kontakt): „Areál MČR 2026 · Líheň Liběchov / vlastní ČRS · místní organizace Mělník“
-//   bar 2+1 beat  rybsvaz.cz · bar 3 (music only) light sweep on the downbeat, everything holds
+//   bar 2 + 1 beat  verified fact (lihenlibechov.cz/cs/kontakt): „Areál MČR 2026 · Líheň Liběchov / vlastní ČRS · místní organizace Mělník“
+//   bar 2 + 3 beats  rybsvaz.cz · bars 1–3 (peak 1) water rings out of the seal on every downbeat · bar 3 light sweep
 //   film: TA mixer faders rise over the still lockup into the finale (our one fader); the TA logo flies home, the ČRS logo shrinks
 //         in sync with it (always ≤ TA)
 //   Reel: custom hook (MČR 2025 photo from our league gallery, „Dlouholetá podpora“) → block → end card = the same lockup continued
@@ -82,14 +82,14 @@ export default function crs(ctx) {
   const n = K.thanks.n;
   K.thanks.ids.forEach((id, i) => { if (id) ctx.tl.fromTo(ctx.sel(id), { x: (i - (n - 1) / 2) * 12 }, { x: 0, duration: 1.3, ease: 'expo.out' }, 0); });
   ctx.tl.set(ctx.sel('thx'), { transformOrigin: '50% 60%' }, 0);
-  ctx.tl.fromTo(ctx.sel('thx'), { scale: 1.07 }, { scale: 1, duration: 1.1, ease: 'expo.out' }, 0);
+  ctx.tl.fromTo(ctx.sel('thx'), { scale: 1.04 }, { scale: 1, duration: 1.1, ease: 'expo.out' }, 0);
 
   // ---- soft turquoise light behind the seal: blooms with the reveal, breathes on the bar-2/3 downbeats ----
   html += fx.glow(ctx, { id: 'sg', x: CX, y: Y.logo, size: 900, color: C.turq, opacity: 0.22 });
   ctx.tl.fromTo(ctx.sel('sg'), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 0.22, duration: 1.2, ease: 'expo.out' }, tLogo);
   [ctx.bar(2), ctx.bar(3)].forEach((t) => ctx.tl.hit(ctx.sel('sg'), { opacity: 0.36 }, { opacity: 0.22, duration: 1.0, ease: 'power2.out' }, t));
   // ---- water rings out of the seal on the peak-1 downbeats (bars 1–3): the calm lockup breathes with the loudest music so far ----
-  html += cx.ripples(ctx, { id: 'rp', cx: CX, cy: Y.logo, color: C.turq, times: [ctx.bar(1), ctx.bar(2), ctx.bar(3)] });
+  html += cx.ripples(ctx, { id: 'rp', cx: CX, cy: Y.logo, color: C.turq, times: [ctx.bar(1), ctx.bar(2), ctx.bar(3)], peak: 0.42 });
   // ---- ČRS logo: diagonal reveal along the fish + light sweep; hairlines draw out of it ----
   const R = cx.reveal(ctx, { id: 'rv', ...K.logoBox, inner: K.LG.html, src: K.LG.src, t: tLogo, d: 1.1 });
   html += R.html;
@@ -113,7 +113,7 @@ export default function crs(ctx) {
 
   // ---- fact + URL ----
   html += K.factHtml + K.urlHtml;
-  const tF = ctx.bar(2) - 0.04, tU = ctx.at(2, 1) - 0.04;
+  const tF = ctx.at(2, 1) - 0.04, tU = ctx.at(2, 3) - 0.04;   // fact one beat after „podporu“ lands (no double entry)
   ctx.tl.fromTo(ctx.sel('fact'), { opacity: 0 }, { opacity: 1, duration: 0.07, ease: 'none' }, tF);
   ctx.tl.fromTo(ctx.sel('fact'), { y: 36 }, { y: 0, duration: 0.8, ease: 'expo.out' }, tF);
   ctx.tl.set(ctx.sel('fact-bar'), { transformOrigin: '50% 50%' }, 0);
@@ -144,10 +144,10 @@ export function hook(ctx) {
   // cooled; slow push-in toward the banner. Type sits in the darkened sky above it (the TA logo corner stays clear).
   const L = ctx.safe.left, W = ctx.W;
   let html = fx.field(ctx, { bg: C.deep });
-  html += fx.photo(ctx, { id: 'ph', src: PHOTO, treat: 'none', pos: '88% 50%', kb: { from: { scale: 1.06 }, to: { scale: 1.16 }, t0: 0, t1: ctx.dur }, style: 'filter:saturate(.82) contrast(1.06) brightness(.94)' });
+  html += fx.photo(ctx, { id: 'ph', src: PHOTO, treat: 'none', pos: '88% 50%', kb: { from: { scale: 1.06 }, to: { scale: 1.16 }, t0: 0, t1: ctx.dur }, style: 'filter:saturate(.9) contrast(1.08) brightness(1.02)' });
   ctx.tl.set(ctx.sel('ph-in'), { transformOrigin: '52% 76%' }, 0);
   html += `<div class="fx-full" style="background:linear-gradient(180deg, rgba(12,25,52,.9) 0%, rgba(12,25,52,.84) 30%, rgba(12,25,52,.45) 46%, rgba(12,25,52,0) 60%, rgba(12,25,52,0) 84%, rgba(12,25,52,.55) 100%)"></div>`;
-  html += `<div class="fx-full" style="background:${C.blue};mix-blend-mode:soft-light;opacity:.55"></div>`;
+  html += `<div class="fx-full" style="background:${C.blue};mix-blend-mode:soft-light;opacity:.32"></div>`;
   const k = fx.taChip(ctx, { id: 'k', text: 'Poděkování', sub: 'MČR 2026', x: L, y: 400, size: 30, tone: 'dark', t: null });
   html += k.html;
   const H = fx.headline(ctx, { id: 'hh', text: 'Dlouholetá podpora', x: L, y: 480, w: W - 2 * L, maxLines: 2, upper: true, font: 'Inter', wght: 900, color: '#fff', t: null, sizes: [150, 140, 130, 120, 110] });
@@ -155,7 +155,7 @@ export function hook(ctx) {
   ctx.tl.set(H.sel, { transformOrigin: '0% 0%' }, 0);
   ctx.tl.fromTo(H.sel, { scale: 1.07 }, { scale: 1, duration: 0.8, ease: 'expo.out' }, 0);
   html += `<div class="fx-abs" id="${ctx.id('sub')}" style="left:${L}px;top:${480 + H.h + 26}px;font-family:'Inter';font-weight:800;font-size:50px;line-height:1;color:${C.ice}">${ctx.esc(ctx.data.name)}</div>`;
-  html += `<div class="fx-abs" id="${ctx.id('cap')}" style="right:${L}px;top:1388px;font-family:'Inter';font-weight:700;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)">${ctx.esc(ctx.nb('Foto: MČR 2025 · Polička'))}</div>`;
+  html += `<div class="fx-abs" id="${ctx.id('cap')}" style="left:${L}px;top:${480 + H.h + 96}px;font-family:'Inter';font-weight:700;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)">${ctx.esc(ctx.nb('Foto: MČR 2025 · Polička'))}</div>`;
   ctx.plate.tone(0, ctx.dur, 'scrim');
   fx.tOut(ctx, 'flash', { color: C.navy, d: 0.12 });
   return { html, css: '' };
@@ -169,7 +169,7 @@ export function endCard(ctx) {
   html += fx.photo(ctx, { id: 'ph', src: PHOTO, treat: 'duo', d1: '#0c1934', d2: '#5d8fd8', pos: '22% 50%', kb: { from: { scale: 1.04 }, to: { scale: 1.12 }, t0: 0, t1: ctx.dur }, style: 'opacity:.2' });
   html += `<div class="fx-full" style="background:radial-gradient(90% 60% at 50% 46%, rgba(12,25,52,.35) 0%, rgba(12,25,52,.8) 100%)"></div>`;
   html += K.thanks.html;
-  html += cx.ripples(ctx, { id: 'rp', cx: CX, cy: Y.logo, color: C.turq, times: [0, ctx.bar(1)], peak: 0.42 });
+  html += cx.ripples(ctx, { id: 'rp', cx: CX, cy: Y.logo, color: C.turq, times: [0, ctx.bar(1)], peak: 0.32 });
   html += `<div class="fx-abs" style="left:${K.logoBox.x}px;top:${K.logoBox.y}px;width:${K.LG.w}px;height:${K.LG.h}px">${K.LG.html}</div>`;
   html += K.hairHtml + K.line.html + K.urlHtml;
   html += K.factHtml;
