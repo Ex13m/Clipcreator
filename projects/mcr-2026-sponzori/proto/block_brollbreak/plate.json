@@ -1,0 +1,44 @@
+{
+ "out": "block_brollbreak",
+ "stamp": "525cade3c78d872e",
+ "dur": 3.666,
+ "box": {
+  "x": 64,
+  "y": 250,
+  "w": 300,
+  "h": 98
+ },
+ "logo": {
+  "w": 281,
+  "h": 84,
+  "lx": 9.5,
+  "ly": 7,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/prep/ta_cz/logo_h_on_dark.png"
+ },
+ "moves": [],
+ "tones": [
+  {
+   "g0": 0,
+   "g1": 3.652,
+   "tone": "dark",
+   "by": "brollbreak theme"
+  }
+ ],
+ "beats": [
+  0,
+  0.456,
+  0.913,
+  1.369,
+  1.826,
+  2.283,
+  2.739,
+  3.196
+ ],
+ "bounds": [
+  {
+   "cid": "brollbreak",
+   "g0": 0,
+   "g1": 3.652
+  }
+ ]
+}

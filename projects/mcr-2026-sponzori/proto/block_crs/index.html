@@ -181,13 +181,17 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
 .fx-defs{position:absolute;width:0;height:0;overflow:hidden}
 
 /* the ONLY persistent layer: TA CZ logo (top-left, inside the Reels safe zone; never covered — highest z). v3: no white plate —
-   white+red logo on transparent (dark tone), navy+red (light tone), white+red on a soft dark halo (scrim tone) */
+   ALWAYS the white 'TROUT' + red 'AREA' logo on transparent (operator 21. 10.); readability on light / busy backgrounds comes from a
+   soft dark shadow (#ta-sh) + radial halo (#ta-scrim) whose strength follows the tone schedule — never a visible box */
 #ta-plate { position:absolute; left:64px; top:250px; width:300px; height:98px; z-index:1000; transform-origin:0 0; }
-#ta-plate .ta-lg, #ta-glint { position:absolute; left:9.5px; top:7px; width:281px; height:84px; display:block; }
-#ta-lg-d { filter:drop-shadow(0 2px 3px rgba(0,0,0,.55)) drop-shadow(0 6px 16px rgba(0,0,0,.35)); }
-#ta-lg-l { filter:drop-shadow(0 1px 2px rgba(255,255,255,.7)) drop-shadow(0 4px 14px rgba(255,255,255,.45)); }
-#ta-scrim { position:absolute; left:-80px; right:-80px; top:-54px; bottom:-54px; background:radial-gradient(closest-side, rgba(4,8,16,.5), rgba(4,8,16,.32) 55%, rgba(4,8,16,0)); }
+#ta-plate .ta-lg, #ta-glint, #ta-sh, #ta-sh2 { position:absolute; left:9.5px; top:7px; width:281px; height:84px; display:block; }
+#ta-lg-d { filter:drop-shadow(0 1px 2px rgba(0,0,0,.5)) drop-shadow(0 3px 10px rgba(0,0,0,.28)); }
+#ta-sh, #ta-sh2 { background:url(assets/prep/ta_cz/logo_h_on_dark.png) center/100% 100% no-repeat; }
+#ta-sh { filter:brightness(0) blur(3px); }
+#ta-sh2 { filter:brightness(0) blur(14px); }
+#ta-scrim { position:absolute; left:-80px; right:-80px; top:-54px; bottom:-54px; background:radial-gradient(closest-side, rgba(6,10,20,.30), rgba(6,10,20,.16) 60%, rgba(6,10,20,0)); }
 #ta-glint { overflow:hidden; -webkit-mask-image:url(assets/prep/ta_cz/logo_h_on_dark.png); mask-image:url(assets/prep/ta_cz/logo_h_on_dark.png); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+
 #ta-glint-s { position:absolute; top:-30%; height:160%; left:-150px; width:130px; opacity:0.9; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 30%, rgba(255,255,255,1) 50%, rgba(255,255,255,.25) 70%, rgba(255,255,255,0) 100%); }
 #badge { position:absolute; left:64px; bottom:28px; z-index:1001; font:600 18px/1 'Inter', sans-serif; letter-spacing:.2em; color:#fff; opacity:.5; text-shadow:0 1px 3px rgba(0,0,0,.8); }
 </style></head>
@@ -195,13 +199,13 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
 <div id="root" data-composition-id="main" data-start="0" data-duration="7.300" data-width="1080" data-height="1920">
   <div id="el-crs" class="host" data-composition-id="crs" data-composition-src="compositions/crs.html" data-start="0.000" data-duration="7.289" data-track-index="2" data-width="1080" data-height="1920"></div>
   <audio id="mix" src="assets/audio/mix_block_crs.wav" data-start="0" data-duration="7.300" data-track-index="10" data-volume="1"></audio>
-  <div id="ta-plate"><i id="ta-scrim"></i><img id="ta-lg-d" class="ta-lg" src="assets/prep/ta_cz/logo_h_on_dark.png" alt="Trout Area Czech Republic"><img id="ta-lg-l" class="ta-lg" src="assets/prep/ta_cz/logo_h_on_light.png" alt=""><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
-  <div id="badge">DRAFT · v6 · block crs</div>
+  <div id="ta-plate"><i id="ta-scrim"></i><i id="ta-sh2"></i><i id="ta-sh"></i><img id="ta-lg-d" class="ta-lg" src="assets/prep/ta_cz/logo_h_on_dark.png" alt="Trout Area Czech Republic"><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
+  
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#ta-lg-d", {"opacity":1});
-  gsap.set("#ta-lg-l", {"opacity":0});
+  gsap.set("#ta-sh", {"opacity":0.3});
+  gsap.set("#ta-sh2", {"opacity":0});
   gsap.set("#ta-scrim", {"opacity":0});
   tl.set({}, {}, 7.300);
   window.__timelines["main"] = tl;

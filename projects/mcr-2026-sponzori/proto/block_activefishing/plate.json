@@ -1,0 +1,56 @@
+{
+ "out": "block_activefishing",
+ "stamp": "0f475a6475b174fe",
+ "dur": 9.166,
+ "box": {
+  "x": 64,
+  "y": 250,
+  "w": 300,
+  "h": 98
+ },
+ "logo": {
+  "w": 281,
+  "h": 84,
+  "lx": 9.5,
+  "ly": 7,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/prep/ta_cz/logo_h_on_dark.png"
+ },
+ "moves": [],
+ "tones": [
+  {
+   "g0": 0,
+   "g1": 9.158,
+   "tone": "halo",
+   "by": "activefishing theme"
+  }
+ ],
+ "beats": [
+  0,
+  0.458,
+  0.916,
+  1.374,
+  1.832,
+  2.29,
+  2.748,
+  3.206,
+  3.663,
+  4.121,
+  4.579,
+  5.037,
+  5.495,
+  5.953,
+  6.41,
+  6.868,
+  7.326,
+  7.784,
+  8.242,
+  8.7
+ ],
+ "bounds": [
+  {
+   "cid": "activefishing",
+   "g0": 0,
+   "g1": 9.158
+  }
+ ]
+}

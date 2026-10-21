@@ -1,0 +1,56 @@
+{
+ "out": "block_troutshop",
+ "stamp": "76d6d4cca7cceaa7",
+ "dur": 9.133,
+ "box": {
+  "x": 64,
+  "y": 250,
+  "w": 300,
+  "h": 98
+ },
+ "logo": {
+  "w": 281,
+  "h": 84,
+  "lx": 9.5,
+  "ly": 7,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/prep/ta_cz/logo_h_on_dark.png"
+ },
+ "moves": [],
+ "tones": [
+  {
+   "g0": 0,
+   "g1": 9.124,
+   "tone": "dark",
+   "by": "troutshop theme"
+  }
+ ],
+ "beats": [
+  0,
+  0.457,
+  0.914,
+  1.37,
+  1.826,
+  2.283,
+  2.739,
+  3.195,
+  3.651,
+  4.107,
+  4.564,
+  5.02,
+  5.476,
+  5.932,
+  6.388,
+  6.844,
+  7.3,
+  7.756,
+  8.212,
+  8.668
+ ],
+ "bounds": [
+  {
+   "cid": "troutshop",
+   "g0": 0,
+   "g1": 9.124
+  }
+ ]
+}

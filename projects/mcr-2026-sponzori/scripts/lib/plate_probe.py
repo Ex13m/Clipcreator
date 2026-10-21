@@ -11,7 +11,7 @@ dilated a little for the outline/shadow zone) → relative luminance (sRGB → l
   otherwise             → 'scrim'  (mixed / mid-grey / busy photo: denser shadow + soft halo)
 The logo itself is ALWAYS white+red (operator 21. 10.); the probe only decides the shadow / halo strength.
   + red check: bg under the red AREA strokes close to TA red on a 'dark' frame → 'scrim'
-Then a 3-sample mode filter, blips < MIN_S are absorbed into the neighbour, and every change is snapped to the nearest block
+Then a 3-sample strength dilation (stronger shadow wins), blips < MIN_S are absorbed into the neighbour (stronger tone wins), and every change is snapped to the nearest block
 boundary (± 0.6 step) or beat.
 """
 import json, sys, os, re, glob
@@ -82,13 +82,11 @@ seq, info = [], []
 for g in times:
     t, i = decide(g)
     if t: seq.append([g, t]); info.append(i)
-# mode filter (3)
+# strength dilation (3 samples): a stronger shadow is always safe (on a dark background the dark halo is invisible), so beat-fast
+# alternations of light / dark worlds (finale partner cuts) resolve to the stronger tone instead of flickering
+RANK = {'dark': 0, 'scrim': 1, 'halo': 2}
 tones = [t for _, t in seq]
-filt = []
-for i in range(len(tones)):
-    w = tones[max(0, i - 1):i + 2]
-    best = max(set(w), key=lambda x: (w.count(x), x == tones[i]))
-    filt.append(best)
+filt = [max(tones[max(0, i - 1):i + 2], key=lambda x: RANK[x]) for i in range(len(tones))]
 step = (times[1] - times[0]) if len(times) > 1 else 0.3
 segs = []
 for (g, _), t in zip(seq, filt):
@@ -103,7 +101,7 @@ while changed and len(segs) > 1:
             j = i - 1 if i > 0 else i + 1
             if i > 0 and i + 1 < len(segs) and (segs[i + 1][1] - segs[i + 1][0]) > (segs[i - 1][1] - segs[i - 1][0]): j = i + 1
             lo, hi = min(segs[i][0], segs[j][0]), max(segs[i][1], segs[j][1])
-            segs[j] = [lo, hi, segs[j][2]]; segs.pop(i); changed = True
+            segs[j] = [lo, hi, max(segs[i][2], segs[j][2], key=lambda x: RANK[x])]; segs.pop(i); changed = True
             break
     # merge equal neighbours
     k = 0

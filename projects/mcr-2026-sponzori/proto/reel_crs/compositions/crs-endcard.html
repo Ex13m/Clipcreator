@@ -11,26 +11,21 @@
     <div id="crs-endcard-stage" class="blk-stage"><div class="fx-field" id="crs-endcard-field" style="background:radial-gradient(120% 80% at 50% 45%, #2B5DA9 0%, #182F5D 100%);"></div><div class="fx-mq ol" id="crs-endcard-emq" style="top:1458.5px;height:203px;background:transparent;transform:rotate(0deg);--oc:#ffffff;--ow:2px;opacity:.18"><div class="fx-mq-in" id="crs-endcard-emq-in" style="font-family:'Inter';font-weight:900;font-size:150px;letter-spacing:-0.01em;text-transform:uppercase;color:transparent;line-height:1"><span>Český rybářský svaz · </span><span>Český rybářský svaz · </span></div></div><div class="fx-ec" id="crs-endcard-ec" style="top:799.5px">
     <div id="crs-endcard-ec-line" style="font-family:'Montserrat';font-weight:700;font-size:26px;letter-spacing:.2em;text-transform:uppercase;color:#ffffff;opacity:.85">Děkujeme za dlouholetou podporu</div>
     <div id="crs-endcard-ec-bar" style="width:140px;height:3px;border-radius:3px;background:#e31e24;margin:32.199999999999996px 0"></div>
-    <div id="crs-endcard-ec-lw"><img id="crs-endcard-ec-logo" class="fx-logo " src="assets/prep/crs/logo_crs_white.png" alt="Český rybářský svaz" style="width:417px; height:126px;"></div>
+    <div id="crs-endcard-ec-lw"><img id="crs-endcard-ec-logo" class="fx-logo " src="assets/prep/crs/logo_crs_white.png" alt="Český rybářský svaz" style="width:397px; height:120px;"></div>
     <div id="crs-endcard-ec-url" style="margin-top:46px;font-family:'Inter';font-weight:800;font-size:96px;color:#ffffff;letter-spacing:-.01em">rybsvaz.cz</div>
   </div>
     </div>
-    <div class="fx-ov" id="crs-endcard-tin" style="background:#182F5D"></div>
+    
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
   gsap.set("#crs-endcard-emq-in", {"x":0});
-  gsap.set("#crs-endcard-tin", {"opacity":1});
-  gsap.set("#crs-endcard-ec-line", {"opacity":0,"y":20});
-  gsap.set("#crs-endcard-ec-bar", {"scaleX":0});
-  gsap.set("#crs-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"});
-  gsap.set("#crs-endcard-ec-url", {"opacity":0,"y":30});
+  gsap.set("#crs-endcard-ec", {"scale":1.05});
+  gsap.set("#crs-endcard-ec-bar", {"scaleX":0.3});
+  gsap.set("#crs-endcard-ec", {"transformOrigin":"50% 0%"});
   tl.fromTo("#crs-endcard-emq-in", {"x":0}, {"x":-326.61,"duration":3.629,"ease":"none","immediateRender":false}, 0.000);
-  tl.fromTo("#crs-endcard-tin", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#crs-endcard-ec-line", {"opacity":0,"y":20}, {"opacity":0.85,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.410);
-  tl.fromTo("#crs-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.490);
-  tl.fromTo("#crs-endcard-ec-lw", {"opacity":0,"scale":0.85,"filter":"blur(10px)"}, {"opacity":1,"scale":1,"filter":"blur(0px)","duration":0.7,"ease":"expo.out","immediateRender":false}, 0.550);
-  tl.fromTo("#crs-endcard-ec-url", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.670);
+  tl.fromTo("#crs-endcard-ec", {"scale":1.05}, {"scale":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-endcard-ec-bar", {"scaleX":0.3}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.set({}, {}, 3.629);
   window.__timelines["crs-endcard"] = tl;
   </script>

@@ -14,11 +14,10 @@
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#crs-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#crs-hook-hs", {"opacity":0,"y":24});
+  gsap.set("#crs-hook-hh", {"scale":1.08});
   gsap.set("#crs-hook-tout", {"opacity":0});
-  tl.fromTo("#crs-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
-  tl.fromTo("#crs-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
+  gsap.set("#crs-hook-hh", {"transformOrigin":"0% 0%"});
+  tl.fromTo("#crs-hook-hh", {"scale":1.08}, {"scale":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#crs-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.704);
   tl.set({}, {}, 1.824);
   window.__timelines["crs-hook"] = tl;

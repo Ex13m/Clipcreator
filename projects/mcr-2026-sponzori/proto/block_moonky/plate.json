@@ -1,0 +1,56 @@
+{
+ "out": "block_moonky",
+ "stamp": "55f64b416e446efb",
+ "dur": 9.133,
+ "box": {
+  "x": 64,
+  "y": 250,
+  "w": 300,
+  "h": 98
+ },
+ "logo": {
+  "w": 281,
+  "h": 84,
+  "lx": 9.5,
+  "ly": 7,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/prep/ta_cz/logo_h_on_dark.png"
+ },
+ "moves": [],
+ "tones": [
+  {
+   "g0": 0,
+   "g1": 9.122,
+   "tone": "dark",
+   "by": "moonky theme"
+  }
+ ],
+ "beats": [
+  0,
+  0.456,
+  0.911,
+  1.367,
+  1.823,
+  2.278,
+  2.734,
+  3.19,
+  3.647,
+  4.103,
+  4.56,
+  5.016,
+  5.472,
+  5.928,
+  6.384,
+  6.841,
+  7.297,
+  7.753,
+  8.209,
+  8.666
+ ],
+ "bounds": [
+  {
+   "cid": "moonky",
+   "g0": 0,
+   "g1": 9.122
+  }
+ ]
+}
