@@ -1,16 +1,16 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_reel_troutshop.wav",
- "dur": 14.7,
+ "dur": 14.6,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 23.87,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 80.598,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
-   "at": 2.084,
+   "at": 2.076,
    "dur": 6.096
   }
  ],

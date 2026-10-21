@@ -1,9 +1,9 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_block_finale.wav",
- "dur": 24,
+ "dur": 27.933,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 95.148,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 107.949,
   "fadeIn": 0.04,
   "fadeOut": 0.25
  },

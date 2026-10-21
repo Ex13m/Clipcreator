@@ -1,8 +1,8 @@
 # Block API — MČR 2026 partner ad film (engine v5)
 
 The film is an **advertising film for the sponsors and their products**. Every sponsor gets its **own visual world** taken from its
-brand (logo colours, web CSS colours and fonts, see `research/<key>.md`). The only thing from our TA style is the **TA CZ logo
-plate**, which the engine draws for you. Each sponsor block must also work as a standalone **Reel**.
+brand (logo colours, web CSS colours and fonts, see `research/<key>.md`). From our TA style the engine adds the **TA CZ logo**
+(v3: white+red on transparent, no plate) and **a few small TA accents** (§13). Each sponsor block must also work as a standalone **Reel**.
 
 You own **one file**, `scripts/blocks/<block>.mjs`, plus your data file `data/blocks/<key>.json`. Do not edit the shared files
 (`build.mjs`, `lib/*`, `data/content.json`, `data/tokens.json`). If you need something there, write it in your report and say why.
@@ -13,7 +13,7 @@ You own **one file**, `scripts/blocks/<block>.mjs`, plus your data file `data/bl
 cd projects/mcr-2026-sponzori
 BLOCK=troutshop node scripts/build.mjs          # bare block: proto/block_troutshop/ (its own music slice + VO)
 BLOCK=troutshop REEL=1 node scripts/build.mjs   # Reel: proto/reel_troutshop/ = 1-bar hook + block + 2-bar end card
-node scripts/build.mjs                          # master film: proto/film/ (whole track, 106.4 s)
+node scripts/build.mjs                          # master film: proto/film/ (plan B, whole track, 135.9 s)
 BLOCK=all [REEL=1] node scripts/build.mjs       # every block / every Reel (REEL only for modules with meta.reel = true)
 FINAL=1 …                                       # without the DRAFT badge
 
@@ -118,17 +118,25 @@ blocks. The fx classes (`.fx-*`) are global.
 | duotone / mono / halftone photo | `photo({src, treat:'duo'\|'mono'\|'halftone', d1, d2, kb:{from, to, t0, t1}})` | Ken Burns built in |
 | split-screen grid assemble | `grid({src \| cells:[{src, fit, bg, pad}], cols, rows, mode:'cols'\|'scatter'\|'scale', t})` | |
 | colour flash on a downbeat | `flash(t, {color, peak, d, blend})` | |
-| transitions | `tIn(type, {color, d, dir})` / `tOut(type, …)`: `cut`, `wipe`, `iris`, `slice`, `whip` (directional blur and skew), `zoom` (zoom-through), `blob` (liquid mask: 8 drops fused by an SVG goo filter), `grid`, `flash` | |
-| end-card lockup | `endCard({t, logo, url, line, scale, plateT, plateFly, settle})` | flies the TA plate into the lockup (`ctx.plate.hero`) and fits the sponsor logo ≤ the TA logo. Reel end cards: `plateT: -0.42, plateFly: 0.42, settle: true` → the plate flies over the block's out-transition, lands on the downbeat, the lockup is complete on frame 1 |
+| transitions | `tIn(type, {color, d, dir})` / `tOut(type, …)`: `cut`, `wipe`, `iris`, `slice`, `whip` (directional blur and skew), `zoom` (zoom-through), `blob` (liquid mask: 8 drops fused by an SVG goo filter), `grid`, `flash`, **`fader`** (v3 TA signature: 8 mixer-fader columns ride up with TA-red caps; cover = `color`) | use `fader` sparingly (it is our signature, not a sponsor look): the film uses it once (crs → finale) |
+| TA chip | `taChip({id, text, sub, cx\|x, y, size, tone:'dark'\|'light', t})` → `{html, w, h}` | Montserrat 800 caps + TA-red hairline; the house look for „Věnuje ceny · MČR 2026“ if it fits your world |
+| end-card lockup | `endCard({t, logo, url, line, scale, plateT, plateFly, settle, ta})` (`ta: true` default → line in Montserrat + TA-red hairline) | flies the TA plate into the lockup (`ctx.plate.hero`) and fits the sponsor logo ≤ the TA logo. Reel end cards: `plateT: -0.42, plateFly: 0.42, settle: true` → the plate flies over the block's out-transition, lands on the downbeat, the lockup is complete on frame 1 |
 
 **Transition handoff contract.** Each block owns its own in and out. At a boundary the two sides either **hard-cut on the downbeat** or
 **meet at a solid colour**: `tOut` covers the frame with `ctx.next.theme.bg` by default, and `tIn` starts covered by your own
 `theme.bg`. That way any out works with any in. `whip` and `zoom` move `ctx.stage` (and its children), so never animate the stage yourself.
 
 ## 5. TA logo and the logo rule (hard rules, enforced by the build)
-- The TA CZ plate (`assets_prep/ta_cz/logo_h_plate.png`, 300 px wide, top-left at 64,250) is the **only persistent layer**. It sits in
-  the root page above every block, so nothing can cover it. **Do not draw another TA logo** and do not put key content under
-  `ctx.plate.rect`.
+- **v3 (operator 21. 10.): no white plate.** The TA CZ logo is drawn on transparent: white+red (`assets_prep/ta_cz/logo_h_on_dark.png`)
+  on dark backgrounds, navy+red (`logo_h_on_light.png`) on light ones, white+red on a soft dark halo (`scrim`) over busy photos /
+  video. It sits in the same corner box as before (`ctx.plate.rect` = 300×98 at 64,250; the logo inside is 281 px wide = the
+  logo-rule reference), is the **only persistent layer** (root page, above every block) and nothing can cover it. **Do not draw
+  another TA logo** and do not put key content under `ctx.plate.rect`.
+- **Tone of the TA logo** (who decides, highest first): `ctx.plate.tone(t0, t1, 'dark'|'light'|'scrim')` from your block (use it when
+  what is under the logo differs from `theme.bg`, e.g. a white card behind the corner on a dark theme, or a bright photo) >
+  `content.json plan[].plate` > the **luminance probe** (`node scripts/plate_probe.mjs [film|reel:<key>|block:<key>|reels]` measures the
+  real frames under the logo and writes `data/plate_tone.json`; it goes stale as soon as a block changes — the build then warns) >
+  `theme.plate` > the relative luminance of `theme.bg` (> 0.3 → light). The build log prints `TA logo tone: …`.
 - A sponsor logo or mark (logo, badge, GH gear, MADE BY lockup…) must **never be larger than the TA logo in the same frame** (width and area).
   `ctx.logo(which, {box:[w,h]})` fits it automatically at plate scale ×1, which is at most about 281 px wide and 23.6k px² area.
 - For a bigger logo moment, request a plate hero for that window and pass the same scale:
@@ -150,10 +158,13 @@ blocks. The fx classes (`.fx-*`) are global.
 - VO longer than the block is cut by the build (`!! VO … CUT`). Report it; do not stretch the block.
 
 ## 7. Timing / plan (do not change bar counts on your own)
-Bars are 0-based on `audio/track.wav` (129 BPM; bar ≈ 1.834 s; beat grid in `audio/track.beats.json`). Plan (`data/content.json`):
-intro 0–7 (build-up, no kick) · **venue 8–12 (drop on bar 8)** · troutshop 13–16 · activefishing 17–20 · moonky 21–24 · jigovky 25–28 ·
-velkaryba 29–32 · broll 33–34 · brollbreak 35–36 (musical break) · bosset 37–40 · gausseholler 41–44 · finale 45–55 + tail to track end.
-Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on `ctx.beats`.
+**PLAN B (v3, 21. 10.)** — bars are 0-based on `audio/track_B.wav` (cut by `scripts/music_edit.py` from `music/sponsors_3.mp3`;
+~130–132 BPM drift, bar ≈ 1.82–1.84 s; grid `audio/track_B.beats.json`, aligned to the drum TRANSIENT, with a per-bar energy profile
+`bars[]` = dB full / low / high + source bar). Plan (`data/content.json`, table with times in `_work/V3_GLOBAL.md`):
+intro 0–7 · **venue 8–15 (DROP on bar 8)** · gausseholler 16–20 · activefishing 21–25 · bosset 26–31 · jigovky 32–36 · moonky 37–41 ·
+broll 42 · brollbreak 43–44 · troutshop 45–49 · velkaryba 50–54 · crs 55–58 · finale 59–71 (+ tail to the end).
+Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on `ctx.beats`. Musical events inside blocks
+(breaks, fills, peak entries) are listed in `_work/V3_GLOBAL.md` §2.
 
 ## 8. Reels
 `BLOCK=<key> REEL=1` builds: **hook** (the bar before the block; `meta.hook` or your `hook(ctx)`) → **your block** (unchanged) → **end
@@ -176,9 +187,11 @@ Your block must not depend on what comes before or after it: use `ctx.prev` / `c
   **your** module with `export const fonts = {…}`. Measuring converts it to `fonts/_ttf/` automatically.
 - Need a new asset (AI upscale, new cut-out)? Put it under `assets_prep/<key>/…`, never in `proto/`.
 
-## 10. Banned (old TA house style — the operator rejected it)
+## 10. Banned (old TA house style — the operator rejected it as a TEMPLATE; v3 allows a few TA accents, see §13)
 Drum pads, EQ strip, mixer faders, ticker, grain over everything, navy (#304285 / #0b1e42) as default background, red TA bars on
 kickers, „01 / 08“ counters, logo cards in TA style, TA-blue/red colouring of sponsor blocks. No second TA logo, no TA colours in sponsor worlds.
+Exceptions since v3 (operator: „добавь немного нашего стиля“): the engine's TA accents (§13) — a TA-red hairline / Montserrat line in
+lockups and chips, the logo glint in intro + finale, and ONE `fader` transition in the film. Do not add more of them on your own.
 
 ## 11. Definition of done (per block)
 1. `BLOCK=<key>` and `BLOCK=<key> REEL=1` build without `XX` / errors, and lint shows 0 errors.
@@ -186,6 +199,17 @@ kickers, „01 / 08“ counters, logo cards in TA style, TA-blue/red colouring o
 3. Texts are verified and readable (≥ 1.2 s per message, inside the safe zone), and Czech NBSP rules are respected.
 4. Logo rule OK (build log `OK logo …`), and the TA plate is never covered.
 5. Transitions meet the handoff contract, and the block looks right as the first and last thing in its Reel.
+
+## 13. v3 global changes (21. 10.)
+- Plan B + new music edit (§7). `voOffset` 0.25 s (intro 0.5 s), VO must end ≥ 1.0 s before the block end (`vo.tailMin` 1.0).
+- TA logo without the plate + tone schedule + luminance probe (§5). The logo-rule reference size is unchanged (281 px).
+- „A little of our TA style“ — global accents only: (1) a light glint runs through the TA logo on every downbeat in **intro and
+  finale** only (root layer, `tokens.ta.glint`); (2) `fx.endCard` lockups: line in Montserrat caps + TA-red hairline (`ta: true`);
+  (3) `fx.taChip` (Montserrat + TA-red hairline) for chips that should read as „ours“; (4) `fx.tIn/tOut('fader')` — TA mixer faders.
+  §10 still applies to sponsor worlds: no navy templates, no drum pads, no TA colouring of sponsor blocks.
+- `meta.role`: `'sponsor'` (default, must carry „Věnuje ceny“) · `'host'` (venue) · `'supporter'` (crs: thanks, never the prize chip).
+- New block `crs` (Český rybářský svaz, 4 bars, placeholder in `scripts/blocks/crs.mjs`, data `data/blocks/crs.json`, VO `vo/crs.wav`).
+- `lib/reel.mjs` defaults (hook / end card) are now ready on frame 1 (settle, plate hero from −0.42 s).
 
 ## 12. Audio mix (integration 19. 10.)
 - The build writes ONE audio track per output: `proto/assets/audio/mix_<film|block_<key>|reel_<key>>.wav` (`scripts/lib/mix.py`,

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>crs-hook · MČR 2026</title></head>
+<body><template>
+<div id="b-crs-hook" data-composition-id="crs-hook" data-width="1080" data-height="1920" data-duration="1.824">
+  <style>
+  #bw-crs-hook { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #crs-hook-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-crs-hook" class="blk blk-crs" style="--bg:#182F5D;--fg:#ffffff;--acc:#38B0C0;--acc2:#ffffff">
+    <div id="crs-hook-stage" class="blk-stage"><div class="fx-field" id="crs-hook-field" style="background:radial-gradient(120% 80% at 50% 55%, #2B5DA9 0%, #182F5D 100%);"></div><div class="fx-glow" id="crs-hook-glow" style="left:-10px;top:450px;width:1100px;height:1100px;background:radial-gradient(closest-side, #38B0C0, transparent);opacity:0.35;"></div><div class="fx-t " id="crs-hook-hh" style="left:64px;top:420px;width:952px;font-family:'Inter';font-weight:900;font-size:84px;line-height:0.98;letter-spacing:0em;color:#ffffff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="crs-hook-hh-l0" style=""><span>Děkujeme Českému</span></span><span class="fx-ln" id="crs-hook-hh-l1" style=""><span>rybářskému svazu</span></span></div><div class="fx-t " id="crs-hook-hs" style="left:64px;top:610.6px;width:952px;font-family:'Inter';font-weight:700;font-size:40px;line-height:0.98;letter-spacing:0em;color:#38B0C0;text-align:left;"><span class="fx-ln" id="crs-hook-hs-l0" style=""><span>rybsvaz.cz</span></span></div>
+    </div>
+    <div class="fx-ov" id="crs-hook-tout" style="background:#182F5D"></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#crs-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#crs-hook-hs", {"opacity":0,"y":24});
+  gsap.set("#crs-hook-tout", {"opacity":0});
+  tl.fromTo("#crs-hook-hh .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.050);
+  tl.fromTo("#crs-hook-hs", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.300);
+  tl.fromTo("#crs-hook-tout", {"opacity":0}, {"opacity":1,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.704);
+  tl.set({}, {}, 1.824);
+  window.__timelines["crs-hook"] = tl;
+  </script>
+</div>
+</template></body></html>

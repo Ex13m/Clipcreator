@@ -1,16 +1,16 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_reel_gausseholler.wav",
- "dur": 14.533,
+ "dur": 14.666,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 84.265,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 27.532,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/gausseholler.wav",
-   "at": 2.061,
+   "at": 2.084,
    "dur": 5.87
   }
  ],

@@ -13,6 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import crypto from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { ROOT, rd, exists, J, f3, r3, esc, ffDur, copyIfNewer } from './lib/util.mjs';
 import * as A from './lib/assets.mjs';
@@ -164,7 +165,7 @@ function build(mode, blockKey = null) {
     //      > theme.plate / luminance of theme.bg (prio 1) ----
     plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: toneOfTheme(mod.theme, TK.plate.lightLum), prio: 1, by: `${ctx.cid} theme` });
     if (I.part === 'main' && (TK.ta?.glint?.blocks || []).includes(P.block)) glintWins.push({ gT0: I.gT0, tT0: I.tT0, dur: I.dur, key: P.key });
-    if (I.part === 'main' && TONES.includes(P.opt.plate)) plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: P.opt.plate, prio: 2, by: `${ctx.cid} plan` });
+    if (I.part === 'main' && TONES.includes(P.opt.plate)) plate.tones.push({ g0: I.gT0, g1: r3(I.gT0 + I.dur), tone: P.opt.plate, prio: 2.5, by: `${ctx.cid} plan` });
     const tlCode = typeof r.timeline === 'string' ? r.timeline : (r.timeline || ctx.tl).code('  ');
     const end = ctx.tl.end(); if (end.t > I.dur + 0.05) ctx.warn(`timeline runs to ${end.t.toFixed(2)} s > block ${I.dur} s (${end.sel} is cut off)`);
     // ---- rule: the prize chip „Věnuje ceny · MČR 2026“ in every sponsor block + its Reel end card, never in the venue (host) ----
@@ -269,6 +270,16 @@ function build(mode, blockKey = null) {
   }
   if (viol.length) throw new Error('LOGO RULE violated: ' + viol.join(', '));
 
+  // ---- automatic luminance probe (scripts/plate_probe.mjs → data/plate_tone.json): measured tone windows for THIS output, used
+  //      only while the block compositions are byte-identical to the probed build (stamp); prio 2 = above the theme default,
+  //      below content.json plan[].plate (2.5) and ctx.plate.tone() calls (3) ----
+  const outName = mode === 'film' ? 'film' : `${mode}_${blockKey}`;
+  const probeStamp = crypto.createHash('sha1').update(subs.map((x) => x.html).join('\n') + hosts.join('\n') + f3(DUR)).digest('hex').slice(0, 16);
+  const PT = exists(path.join(ROOT, 'data/plate_tone.json')) ? rd(path.join(ROOT, 'data/plate_tone.json')) : {};
+  if (PT[outName] && !ENV.PLATE_HIDE && !ENV.NO_PROBE) {
+    if (PT[outName].stamp === probeStamp) { for (const [g0, g1, tone] of PT[outName].windows) plate.tones.push({ g0, g1, tone, prio: 2, by: 'probe' }); report.push(`TA logo probe: ${PT[outName].windows.length} windows applied (${PT[outName].date})`); }
+    else OUT.warns.push(`TA logo probe for ${outName} is stale (blocks changed) → theme defaults only; re-run: node scripts/plate_probe.mjs ${mode === 'film' ? 'film' : `${mode}:${blockKey}`}`);
+  }
   // ---- TA logo tone (v3: no white plate): piecewise schedule over the output, highest priority window wins (later wins a tie);
   //      a change cross-fades the two logo variants (+ the scrim) over toneFade s centred on the boundary ----
   const LAYERS = { dark: { '#ta-lg-d': 1, '#ta-lg-l': 0, '#ta-scrim': 0 }, light: { '#ta-lg-d': 0, '#ta-lg-l': 1, '#ta-scrim': 0 }, scrim: { '#ta-lg-d': 1, '#ta-lg-l': 0, '#ta-scrim': 1 } };
@@ -334,6 +345,7 @@ ${fx.CSS}
 #ta-lg-l { filter:${TK.plate.shadowLight}; }
 #ta-scrim { position:absolute; left:-80px; right:-80px; top:-54px; bottom:-54px; background:${TK.plate.scrim}; }
 #ta-glint { overflow:hidden; -webkit-mask-image:url(${plateUrl}); mask-image:url(${plateUrl}); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
 #ta-glint-s { position:absolute; top:-30%; height:160%; left:-150px; width:130px; opacity:${TK.ta?.glint?.opacity ?? 0.9}; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 30%, rgba(255,255,255,1) 50%, rgba(255,255,255,.25) 70%, rgba(255,255,255,0) 100%); }
 #badge { position:absolute; left:${TK.safe.left}px; bottom:28px; z-index:1001; font:600 18px/1 'Inter', sans-serif; letter-spacing:.2em; color:#fff; opacity:.5; text-shadow:0 1px 3px rgba(0,0,0,.8); }
 </style></head>
@@ -357,6 +369,9 @@ ${fx.CSS}
   fs.mkdirSync(dir, { recursive: true });
   const ln = path.join(dir, 'assets'); if (!exists(ln)) fs.symlinkSync('../assets', ln);
   fs.writeFileSync(path.join(dir, 'index.html'), html);
+  // sidecar for QA / the luminance probe: where the TA logo is at any time + the beat grid of this output
+  const outBeats = inst.flatMap((I) => G.beats.filter((b) => b >= I.tT0 - 1e-3 && b < I.tT0 + I.dur - 1e-3).map((b) => r3(I.gT0 + b - I.tT0)));
+  fs.writeFileSync(path.join(dir, 'plate.json'), JSON.stringify({ out: outName, stamp: probeStamp, dur: DUR, box: { x: P0.x, y: P0.y, w: P0.w, h: P0.h }, logo: { w: P0.logo.w, h: P0.logo.h, lx: LX, ly: LY, src: path.join(A.PROTO, plateUrl) }, moves: plate.moves.map((m) => ({ g0: m.g0, g1: m.g1, scale: m.scale, cx: m.cx, cy: m.cy, fly: m.fly, hold: !!m.hold })), tones: toneSegs, beats: outBeats, bounds: inst.map((I) => ({ cid: I.part === 'main' ? I.P.key : `${I.P.key}-${I.part}`, g0: I.gT0, g1: r3(I.gT0 + I.dur) })) }, null, 1));
   const cdir = path.join(dir, 'compositions'); fs.mkdirSync(cdir, { recursive: true });
   for (const f of fs.readdirSync(cdir)) if (f.endsWith('.html')) fs.unlinkSync(path.join(cdir, f));
   for (const sc of subs) fs.writeFileSync(path.join(cdir, `${sc.cid}.html`), sc.html);

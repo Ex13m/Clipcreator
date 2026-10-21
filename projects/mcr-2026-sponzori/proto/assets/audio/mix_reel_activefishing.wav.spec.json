@@ -2,15 +2,15 @@
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_reel_activefishing.wav",
  "dur": 14.666,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 33.042,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 36.699,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
-   "at": 2.084,
+   "at": 2.082,
    "dur": 6.496
   }
  ],

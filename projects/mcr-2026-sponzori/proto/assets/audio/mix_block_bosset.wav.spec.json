@@ -1,9 +1,9 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_block_bosset.wav",
- "dur": 9.133,
+ "dur": 11,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 76.951,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 47.689,
   "fadeIn": 0.04,
   "fadeOut": 0.25
  },
@@ -11,7 +11,7 @@
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/bosset.wav",
    "at": 0.25,
-   "dur": 6.899
+   "dur": 8.257
   }
  ],
  "duck": {

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>brollbreak · MČR 2026</title></head>
 <body><template>
-<div id="b-brollbreak" data-composition-id="brollbreak" data-width="1080" data-height="1920" data-duration="3.645">
+<div id="b-brollbreak" data-composition-id="brollbreak" data-width="1080" data-height="1920" data-duration="3.652">
   <style>
   #bw-brollbreak { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #brollbreak-stage { position:absolute; inset:0; overflow:hidden; }
@@ -52,37 +52,37 @@
   gsap.set("#brollbreak-lb-b", {"yPercent":100});
   gsap.set("#brollbreak-stage", {"scale":1});
   gsap.set("#brollbreak-tout", {"opacity":0});
-  tl.fromTo("#brollbreak-a-cam, #brollbreak-a-fcam", {"scale":1}, {"scale":1.12,"duration":2.194,"ease":"expo.out","immediateRender":false}, 0.000);
-  tl.fromTo("#brollbreak-a-sub", {"scale":1}, {"scale":1.06,"duration":1.834,"ease":"expo.out","immediateRender":false}, 0.020);
+  tl.fromTo("#brollbreak-a-cam, #brollbreak-a-fcam", {"scale":1}, {"scale":1.12,"duration":2.186,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#brollbreak-a-sub", {"scale":1}, {"scale":1.06,"duration":1.826,"ease":"expo.out","immediateRender":false}, 0.020);
   tl.fromTo("#brollbreak-a-stk", {"opacity":0}, {"opacity":1,"duration":0.1,"ease":"none","immediateRender":false}, 0.040);
-  tl.fromTo("#brollbreak-a-stk", {"opacity":1}, {"opacity":0,"duration":0.3,"ease":"power1.in","immediateRender":false}, 1.534);
+  tl.fromTo("#brollbreak-a-stk", {"opacity":1}, {"opacity":0,"duration":0.3,"ease":"power1.in","immediateRender":false}, 1.526);
   tl.fromTo("#brollbreak-a-mono", {"opacity":0}, {"opacity":0.92,"duration":0.16,"ease":"power2.out","immediateRender":false}, 0.020);
-  tl.fromTo("#brollbreak-a-mono", {"opacity":0.92}, {"opacity":0.8,"duration":1.534,"ease":"sine.inOut","immediateRender":false}, 0.200);
-  tl.fromTo("#brollbreak-b-cam", {"scale":1.12}, {"scale":1.3,"duration":2.171,"ease":"sine.inOut","immediateRender":false}, 1.474);
-  tl.fromTo("#brollbreak-gt", {"opacity":0.7}, {"opacity":0.3,"duration":0.8,"ease":"power1.inOut","immediateRender":false}, 1.534);
-  tl.fromTo("#brollbreak-sw", {"backgroundPosition":"115% 0%"}, {"backgroundPosition":"-15% 0%","duration":1.2,"ease":"power1.inOut","immediateRender":false}, 2.054);
+  tl.fromTo("#brollbreak-a-mono", {"opacity":0.92}, {"opacity":0.8,"duration":1.526,"ease":"sine.inOut","immediateRender":false}, 0.200);
+  tl.fromTo("#brollbreak-b-cam", {"scale":1.12}, {"scale":1.3,"duration":2.186,"ease":"sine.inOut","immediateRender":false}, 1.466);
+  tl.fromTo("#brollbreak-gt", {"opacity":0.7}, {"opacity":0.3,"duration":0.8,"ease":"power1.inOut","immediateRender":false}, 1.526);
+  tl.fromTo("#brollbreak-sw", {"backgroundPosition":"115% 0%"}, {"backgroundPosition":"-15% 0%","duration":1.2,"ease":"power1.inOut","immediateRender":false}, 2.046);
   tl.fromTo("#brollbreak-w1-m .fx-c", {"opacity":0,"yPercent":14}, {"opacity":1,"yPercent":0,"duration":0.7,"ease":"expo.out","stagger":0.045,"immediateRender":false}, 0.060);
-  tl.fromTo("#brollbreak-w1-m", {"--wght":120,"--wdth":62,"--trk":0.07}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.624,"ease":"power2.inOut","immediateRender":false}, 0.060);
-  tl.fromTo("#brollbreak-w2-m", {"opacity":0,"y":40,"filter":"blur(18px)"}, {"opacity":1,"y":0,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 1.884);
-  tl.fromTo("#brollbreak-w2-m", {"--wght":620,"--wdth":62,"--trk":0.06}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.3110000000000002,"ease":"power2.inOut","immediateRender":false}, 1.884);
-  tl.fromTo("#brollbreak-w2-m", {"backgroundPosition":"100% 0%"}, {"backgroundPosition":"0% 0%","duration":0.54,"ease":"power1.inOut","immediateRender":false}, 2.414);
-  tl.fromTo("#brollbreak-w1", {"opacity":1,"filter":"blur(0px)"}, {"opacity":0,"filter":"blur(14px)","duration":0.32,"ease":"power2.in","immediateRender":false}, 1.534);
-  tl.fromTo("#brollbreak-bv", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.474);
-  tl.fromTo("#brollbreak-av", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.474);
-  tl.fromTo("#brollbreak-af", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.474);
-  tl.fromTo("#brollbreak-w1v", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 1.833);
-  tl.fromTo("#brollbreak-w2v", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.834);
-  tl.fromTo("#brollbreak-lk1", {"opacity":0,"scale":0.7,"x":0}, {"opacity":0.6,"scale":1.15,"x":-160,"duration":0.5,"ease":"power2.in","immediateRender":false}, 1.334);
-  tl.fromTo("#brollbreak-lk1", {"opacity":0.6,"scale":1.15,"x":-160}, {"opacity":0,"scale":1.35,"x":-300,"duration":0.5,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#brollbreak-w1-m", {"--wght":120,"--wdth":62,"--trk":0.07}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.616,"ease":"power2.inOut","immediateRender":false}, 0.060);
+  tl.fromTo("#brollbreak-w2-m", {"opacity":0,"y":40,"filter":"blur(18px)"}, {"opacity":1,"y":0,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 1.876);
+  tl.fromTo("#brollbreak-w2-m", {"--wght":620,"--wdth":62,"--trk":0.06}, {"--wght":900,"--wdth":62,"--trk":-0.01,"duration":1.3260000000000003,"ease":"power2.inOut","immediateRender":false}, 1.876);
+  tl.fromTo("#brollbreak-w2-m", {"backgroundPosition":"100% 0%"}, {"backgroundPosition":"0% 0%","duration":0.54,"ease":"power1.inOut","immediateRender":false}, 2.406);
+  tl.fromTo("#brollbreak-w1", {"opacity":1,"filter":"blur(0px)"}, {"opacity":0,"filter":"blur(14px)","duration":0.32,"ease":"power2.in","immediateRender":false}, 1.526);
+  tl.fromTo("#brollbreak-bv", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.466);
+  tl.fromTo("#brollbreak-av", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.466);
+  tl.fromTo("#brollbreak-af", {"opacity":1}, {"opacity":0,"duration":0.72,"ease":"power1.in","immediateRender":false}, 1.466);
+  tl.fromTo("#brollbreak-w1v", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 1.825);
+  tl.fromTo("#brollbreak-w2v", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.826);
+  tl.fromTo("#brollbreak-lk1", {"opacity":0,"scale":0.7,"x":0}, {"opacity":0.6,"scale":1.15,"x":-160,"duration":0.5,"ease":"power2.in","immediateRender":false}, 1.326);
+  tl.fromTo("#brollbreak-lk1", {"opacity":0.6,"scale":1.15,"x":-160}, {"opacity":0,"scale":1.35,"x":-300,"duration":0.5,"ease":"power2.out","immediateRender":false}, 1.826);
   tl.fromTo("#brollbreak-cr-0", {"opacity":0,"x":36}, {"opacity":1,"x":0,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.500);
   tl.fromTo("#brollbreak-cr-1", {"opacity":0,"x":36}, {"opacity":1,"x":0,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.590);
   tl.fromTo("#brollbreak-lb-t", {"yPercent":-100}, {"yPercent":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#brollbreak-lb-b", {"yPercent":100}, {"yPercent":0,"duration":0.62,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#brollbreak-fl0", {"opacity":0.5}, {"opacity":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.set("#brollbreak-stage", {"filter":"blur(0px)"}, 3.195);
-  tl.fromTo("#brollbreak-stage", {"scale":1,"filter":"blur(0px)"}, {"scale":2.6,"filter":"blur(18px)","duration":0.45,"ease":"power3.in","immediateRender":false}, 3.195);
-  tl.fromTo("#brollbreak-tout", {"opacity":0}, {"opacity":1,"duration":0.2025,"ease":"power1.in","immediateRender":false}, 3.442);
-  tl.set({}, {}, 3.645);
+  tl.set("#brollbreak-stage", {"filter":"blur(0px)"}, 3.202);
+  tl.fromTo("#brollbreak-stage", {"scale":1,"filter":"blur(0px)"}, {"scale":2.6,"filter":"blur(18px)","duration":0.45,"ease":"power3.in","immediateRender":false}, 3.202);
+  tl.fromTo("#brollbreak-tout", {"opacity":0}, {"opacity":1,"duration":0.2025,"ease":"power1.in","immediateRender":false}, 3.450);
+  tl.set({}, {}, 3.652);
   window.__timelines["brollbreak"] = tl;
   </script>
 </div>

@@ -1,8 +1,8 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_film.wav",
- "dur": 119.133,
+ "dur": 135.9,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
   "start": 0,
   "fadeIn": 0,
   "fadeOut": 0
@@ -15,47 +15,52 @@
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/venue.wav",
-   "at": 14.948,
-   "dur": 8.981
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
-   "at": 25.954,
-   "dur": 6.096
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
-   "at": 35.126,
-   "dur": 6.496
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
-   "at": 44.275,
-   "dur": 7.384
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/jigovky.wav",
-   "at": 53.447,
-   "dur": 7.877
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/velkaryba.wav",
-   "at": 68.075,
-   "dur": 6.799
-  },
-  {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/bosset.wav",
-   "at": 77.201,
-   "dur": 6.899
+   "at": 14.939,
+   "dur": 12.493
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/gausseholler.wav",
-   "at": 86.326,
+   "at": 29.616,
    "dur": 5.87
   },
   {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
+   "at": 38.781,
+   "dur": 6.496
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/bosset.wav",
+   "at": 47.939,
+   "dur": 8.257
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/jigovky.wav",
+   "at": 58.929,
+   "dur": 7.877
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
+   "at": 68.074,
+   "dur": 7.384
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
+   "at": 82.674,
+   "dur": 6.096
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/velkaryba.wav",
+   "at": 91.798,
+   "dur": 6.799
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/crs.wav",
+   "at": 100.91,
+   "dur": 4.118
+  },
+  {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/finale.wav",
-   "at": 95.398,
+   "at": 108.199,
    "dur": 12.64
   }
  ],

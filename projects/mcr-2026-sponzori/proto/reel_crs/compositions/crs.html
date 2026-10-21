@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>crs · MČR 2026</title></head>
+<body><template>
+<div id="b-crs" data-composition-id="crs" data-width="1080" data-height="1920" data-duration="7.289">
+  <style>
+  #bw-crs { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #crs-stage { position:absolute; inset:0; overflow:hidden; }
+  
+  </style>
+  <div id="bw-crs" class="blk blk-crs" style="--bg:#182F5D;--fg:#ffffff;--acc:#38B0C0;--acc2:#ffffff">
+    <div id="crs-stage" class="blk-stage"><div class="fx-field" id="crs-field" style="background:radial-gradient(120% 80% at 50% 34%, #2B5DA9 0%, #182F5D 100%);"></div><div class="fx-glow" id="crs-gl" style="left:270px;top:10px;width:1100px;height:1100px;background:radial-gradient(closest-side, #38B0C0, transparent);opacity:0.22;"></div><div class="fx-big" id="crs-big" style="left:-40px;top:1080px;font-family:'Inter';font-weight:900;font-size:620px;letter-spacing:-0.03em;text-transform:uppercase;color:rgba(255,255,255,.05);--oc:rgba(255,255,255,.05);--ow:3px;opacity:1;">ČRS</div><div id="crs-kick" class="fx-abs" style="left:64px;top:430px;display:flex;align-items:center;gap:18px;font-family:'Montserrat';font-weight:800;font-size:44px;letter-spacing:.22em;text-transform:uppercase;color:#fff;line-height:1">
+    <b id="crs-kick-hl" style="display:block;width:64px;height:4px;border-radius:2px;background:#e31e24"></b><span>Děkujeme</span></div><div class="fx-t " id="crs-ttl" style="left:64px;top:520px;width:952px;font-family:'Inter';font-weight:900;font-size:132px;line-height:0.98;letter-spacing:0em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="crs-ttl-l0" style=""><span>Český</span></span><span class="fx-ln" id="crs-ttl-l1" style=""><span>rybářský</span></span><span class="fx-ln" id="crs-ttl-l2" style=""><span>svaz</span></span></div><img id="crs-logo" class="fx-logo " src="assets/prep/crs/logo_crs_white.png" alt="Český rybářský svaz" style="width:278px; height:84px;position:absolute;left:64px;top:964.0799999999999px"><div class="fx-t " id="crs-sub" style="left:64px;top:1108.1px;width:952px;font-family:'Inter';font-weight:700;font-size:64px;line-height:0.98;letter-spacing:0em;color:rgba(255,255,255,.92);text-align:left;"><span class="fx-ln" id="crs-sub-l0" style=""><span><span class="fx-c">za</span> <span class="fx-c">dlouholetou</span> <span class="fx-c">podporu</span></span></span></div><div class="fx-chip dark" id="crs-fact" style="left:64px;top:1240.8px;font-family:'Inter';--vs:44px;--ls:22px;--acc:#38B0C0;"><i></i><span>Vlastník areálu Líheň Liběchov</span><b>ČRS · MO Mělník</b></div><img id="crs-badge" class="fx-logo " src="assets/prep/crs/badge_crs_round.png" alt="Český rybářský svaz" style="width:150px; height:150px;position:absolute;left:64px;top:1410.8px"><div id="crs-url" class="fx-abs" style="left:244px;top:1449.8px;font-family:'Inter';font-weight:800;font-size:64px;line-height:72px;color:#fff;letter-spacing:-.01em">rybsvaz.cz</div>
+    </div>
+    <div class="fx-ov fx-ov-fd" id="crs-tout" style="overflow:hidden;--capc:#e31e24"><i id="crs-tout0" style="background:#182F5D"></i><i id="crs-tout1" style="background:#182F5D"></i><i id="crs-tout2" style="background:#182F5D"></i><i id="crs-tout3" style="background:#182F5D"></i><i id="crs-tout4" style="background:#182F5D"></i><i id="crs-tout5" style="background:#182F5D"></i><i id="crs-tout6" style="background:#182F5D"></i><i id="crs-tout7" style="background:#182F5D"></i></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#crs-big", {"x":0});
+  gsap.set("#crs-kick", {"scale":1.12});
+  gsap.set("#crs-kick-hl", {"scaleX":0});
+  gsap.set("#crs-ttl .fx-ln > span", {"yPercent":125,"opacity":0});
+  gsap.set("#crs-logo", {"opacity":0,"y":30});
+  gsap.set("#crs-sub .fx-c", {"yPercent":110,"opacity":0});
+  gsap.set("#crs-fact", {"x":-80,"opacity":0,"filter":"blur(12px)"});
+  gsap.set("#crs-badge", {"opacity":0,"rotation":-40});
+  gsap.set("#crs-url", {"opacity":0,"x":-40});
+  gsap.set("#crs-tout0", {"yPercent":101});
+  gsap.set("#crs-tout1", {"yPercent":101});
+  gsap.set("#crs-tout2", {"yPercent":101});
+  gsap.set("#crs-tout3", {"yPercent":101});
+  gsap.set("#crs-tout4", {"yPercent":101});
+  gsap.set("#crs-tout5", {"yPercent":101});
+  gsap.set("#crs-tout6", {"yPercent":101});
+  gsap.set("#crs-tout7", {"yPercent":101});
+  gsap.set("#crs-kick", {"transformOrigin":"0% 50%"});
+  gsap.set("#crs-kick-hl", {"transformOrigin":"0% 50%"});
+  tl.fromTo("#crs-big", {"x":0}, {"x":-160,"duration":7.289,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-kick", {"scale":1.12}, {"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-kick-hl", {"scaleX":0}, {"scaleX":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.040);
+  tl.fromTo("#crs-ttl .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.832);
+  tl.fromTo("#crs-logo", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 1.784);
+  tl.fromTo("#crs-logo", {"y":30}, {"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 1.784);
+  tl.fromTo("#crs-sub .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 2.675);
+  tl.fromTo("#crs-fact", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 3.586);
+  tl.set("#crs-fact", {"filter":"none"}, 4.206);
+  tl.fromTo("#crs-badge", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 4.507);
+  tl.fromTo("#crs-badge", {"rotation":-40}, {"rotation":0,"duration":0.8,"ease":"expo.out","immediateRender":false}, 4.507);
+  tl.fromTo("#crs-url", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 4.557);
+  tl.fromTo("#crs-url", {"x":-40}, {"x":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 4.557);
+  tl.fromTo("#crs-tout0", {"yPercent":101}, {"yPercent":0,"duration":0.4271076679835678,"ease":"power3.inOut","immediateRender":false}, 6.862);
+  tl.fromTo("#crs-tout1", {"yPercent":101}, {"yPercent":0,"duration":0.4397916716350093,"ease":"power3.inOut","immediateRender":false}, 6.849);
+  tl.fromTo("#crs-tout2", {"yPercent":101}, {"yPercent":0,"duration":0.47881084058557677,"ease":"power3.inOut","immediateRender":false}, 6.810);
+  tl.fromTo("#crs-tout3", {"yPercent":101}, {"yPercent":0,"duration":0.5057549500291894,"ease":"power3.inOut","immediateRender":false}, 6.783);
+  tl.fromTo("#crs-tout4", {"yPercent":101}, {"yPercent":0,"duration":0.532042996976957,"ease":"power3.inOut","immediateRender":false}, 6.757);
+  tl.fromTo("#crs-tout5", {"yPercent":101}, {"yPercent":0,"duration":0.48911387891891567,"ease":"power3.inOut","immediateRender":false}, 6.800);
+  tl.fromTo("#crs-tout6", {"yPercent":101}, {"yPercent":0,"duration":0.445562944742219,"ease":"power3.inOut","immediateRender":false}, 6.843);
+  tl.fromTo("#crs-tout7", {"yPercent":101}, {"yPercent":0,"duration":0.4112934248111633,"ease":"power3.inOut","immediateRender":false}, 6.878);
+  tl.set({}, {}, 7.289);
+  window.__timelines["crs"] = tl;
+  </script>
+</div>
+</template></body></html>

@@ -1,16 +1,16 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_reel_moonky.wav",
- "dur": 14.666,
+ "dur": 14.6,
  "music": {
-  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_A.wav",
-  "start": 42.214,
+  "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
+  "start": 65.999,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
-   "at": 2.061,
+   "at": 2.075,
    "dur": 7.384
   }
  ],
