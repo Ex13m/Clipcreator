@@ -3,13 +3,17 @@
 // (the site's web font, italic = its signature against Activefishing's upright Nunito). Retailer — Shimano / Illex / Daiwa / Lucky John /
 // Westin / Vanpla / Berkley are brands it SELLS, never „its“ products. VO: „Velká ryba – vše na přívlač. Speciálka z Olomouce, kde si
 // pruty Shimano vyzkoušíte přímo u vody.“
-//   bar 0      VŠE NA PŘÍVLAČ — 8 trout spoons of 7 brands strobe on the 8ths (one glow, colour per lure), giant outline „Velká ryba“,
-//              the logo bug pops on „Velká ryba“ (top right, opposite the TA plate)
+//   bar 0      VŠE NA PŘÍVLAČ — beats 0–1: 8 trout spoons of 7 brands strobe on the 16ths (one glow, colour per lure), giant outline
+//              „Velká ryba“, the logo bug pops on „Velká ryba“ (top right, opposite the TA plate);
+//              beats 2–3 = BRAND MOMENT „od značek …“: the shop's own homepage sentence („Nabízíme vše na přívlač od značek 3stan, Fox
+//              Rage, Keitech, Mepps, Rapala, Salmo, Savage Gear, Shimano a mnoha dalších“) as a 4×4 wall of white brand cards (15 logos,
+//              research/velkaryba_brands.md) snapping in by rows on the 16ths + the 16th card „a mnoha dalších“ (v3, 21. 10.)
 //   bar 1–2½   SPECIÁLKA Z OLOMOUCE · OD ROKU 2011 — Shimano Vanquish FA CE rises out of the dark studio (floor reflection, light
 //              sweeps), spec chips 145 g · 5,1 : 1 · 11 + 1, speed-ramp macro push into the spool on the downbeat of bar 2
 //   bar 2½–4   whip → PRUTY SHIMANO · VYZKOUŠÍTE · PŘÍMO U VODY — the Cardiff Exlead rod draws itself along the diagonal (rim light,
 //              light band), chip SHIMANO ROD TEST CENTER, the water photo grades in under „přímo u vody“
-//   bar 4      the lure box: 12 spoons/baits of 7 brands snap into compartments on the 16ths, the logo bug flies into the lockup
+//   bar 4      the lure box: 12 spoons/baits of 7 brands snap into compartments on the 16ths (each compartment labelled with the
+//              brand's LOGO, v3), the logo bug flies into the lockup
 //              above VELKA-RYBA.CZ → stacked wipe out
 // Reel: own hook (Cardiff on orange „TROUT AREA?“ → flip to the gold back) + own end card (lockup + outline marquee).
 import fs from 'node:fs';
@@ -50,6 +54,13 @@ const L = {
   camo: { src: AD + 'S5_shimano_cardiff_roll_swimmer_camo_military_pink_front.png', brand: 'Shimano', glow: '#e04a9a', rot: -10, wr: -36 },
   flail: { src: AD + 'S6_berkley_powerbait_power_flail_trout_pellet.png', brand: 'Berkley', glow: '#b08a66', rot: -8, wr: -44 },
 };
+// brands the shop SELLS (third-party, never „its“): logos as served by velka-ryba.cz (/img/m/<id>.jpg), assets_prep/velkaryba/brands/
+// wall order = Shimano (lead, VO) → the homepage list → the trout brands of the hero spoons; Major Craft left out (15 + „a mnoha dalších“)
+const BR = 'assets_prep/velkaryba/brands/';
+const BWALL = ['shimano', 'rapala', 'savagegear', 'foxrage', 'illex', '3stan', 'westin', 'keitech', 'salmo', 'mepps', 'berkley', 'daiwa', 'luckyjohn', 'gloomis', 'libralures'];
+const BSLUG = { Shimano: 'shimano', Illex: 'illex', 'Lucky John': 'luckyjohn', Daiwa: 'daiwa', Westin: 'westin', Berkley: 'berkley' };   // Vanpla: no logo → type
+// equal visual weight = equal area (lesson finale logo wall): w = min(maxW, sqrt(A·ar), maxH·ar)
+const eqFit = (ctx, src, A, maxW, maxH) => { const [nw, nh] = ctx.dims(src), ar = nw / nh; const w = Math.min(maxW, Math.sqrt(A * ar), maxH * ar, nw); return { w, h: w / ar }; };
 const STROBE = ['illexP', 'lj', 'cardiffO', 'daiwaG', 'westin', 'cardiffL', 'vanpla', 'sukoshi'];   // not the Cardiff first: the Reel hook ends on it
 const WALL = ['illexP', 'cardiffO', 'lj', 'daiwaB', 'westin', 'illexC', 'vanpla', 'cardiffL', 'daiwaG', 'sukoshi', 'camo', 'flail'];
 const DISP = { font: 'Nunito', wght: 900, italic: true, upper: true, tracking: -0.01 };
@@ -88,6 +99,10 @@ export default function velkaryba(ctx) {
   ${ctx.S} .vr-tglow{position:absolute;inset:0;border-radius:28px;display:block}
   ${ctx.S} .vr-tag{position:absolute;font-family:'Nunito';font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;white-space:nowrap;line-height:1}
   ${ctx.S} #${ctx.id('rod-im')}{filter:drop-shadow(0 0 1.5px rgba(225,238,255,.95)) drop-shadow(0 0 12px rgba(140,190,245,.55))}
+  ${ctx.S} .vr-bcard{position:absolute;border-radius:18px;background:#ffffff;box-shadow:0 14px 30px rgba(3,10,24,.42),inset 0 0 0 1px rgba(15,37,65,.08)}
+  ${ctx.S} .vr-bcard img{position:absolute;display:block}
+  ${ctx.S} .vr-bmore{position:absolute;border-radius:18px;box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Nunito';font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;line-height:1.02}
+  ${ctx.S} .vr-blg{position:absolute;display:block;left:50%;background-position:center;background-size:100% 100%;background-repeat:no-repeat;filter:drop-shadow(0 1px 2px rgba(4,12,26,.85)) drop-shadow(0 0 8px rgba(4,12,26,.6))}
   ${ctx.S} .vr-band{position:absolute;transform:rotate(-45deg);transform-origin:50% 50%}
   ${ctx.S} .vr-band i{position:absolute;inset:0;display:block;transform-origin:0 50%;background:linear-gradient(180deg,transparent 0%,rgba(127,176,230,.10) 30%,rgba(190,220,255,.42) 50%,rgba(127,176,230,.10) 70%,transparent 100%)}
   `;
@@ -106,7 +121,8 @@ export default function velkaryba(ctx) {
   let s0 = fx.field(ctx, { id: 'f0', kind: 'radial', c1: '#1f4f8a', c2: DEEP, at: '50% 62%' });
   s0 += `<div class="fx-glow" id="${ctx.id('sg')}" style="left:${W / 2 - 620}px;top:${1100 - 620}px;width:1240px;height:1240px;color:${L[STROBE[0]].glow};background:radial-gradient(closest-side,currentColor,transparent);opacity:.62"></div>`;
   s0 += fx.bigType(ctx, { id: 'bt0', text: 'Velká ryba', font: 'Nunito', wght: 900, size: 330, y: 820, x: -40, color: '#ffffff', outline: true, ow: 3, opacity: 0.16, drift: -320, t0: 0, t1, style: 'font-style:italic' });
-  const slots = Array.from({ length: 9 }, (_, k) => (k < 8 ? q(0, k >> 1, (k & 1) * 0.5) : t1));
+  const tB = ctx.at(0, 2);                                                       // brand wall on beat 2 („vše na přívlač“)
+  const slots = Array.from({ length: 9 }, (_, k) => (k < 8 ? q(0, k >> 2, (k & 3) * 0.25) : tB));
   STROBE.forEach((key, i) => {
     const lu = L[key], a = slots[i], b = slots[i + 1];
     const f = fitRot(ctx, lu.src, 900, 610, lu.rot);
@@ -116,12 +132,36 @@ export default function velkaryba(ctx) {
     ctx.tl.fromTo(ctx.sel(`st${i}-tl`), { scale: 1.2 }, { scale: 1, duration: 0.22, ease: 'expo.out' }, a);
     const dir = i % 2 ? 1 : -1;
     ctx.tl.fromTo(P.cam, { x: -26 * dir, rotation: -4 * dir }, { x: 26 * dir, rotation: 4 * dir, duration: b - a, ease: 'none' }, a);
-    if (i < STROBE.length - 1) ctx.tl.set(P.sel, { opacity: 0 }, b);
-    s0 += `<div class="vr-lbl" id="${ctx.id(`br${i}`)}" style="top:1416px;font-size:36px;color:rgba(255,255,255,.92)">${ctx.esc(lu.brand)}</div>`;
-    ctx.tl.fromTo(ctx.sel(`br${i}`), { opacity: 0 }, { opacity: 1, duration: 0.001, ease: 'none' }, a);
-    if (i < STROBE.length - 1) ctx.tl.set(ctx.sel(`br${i}`), { opacity: 0 }, b);
+    ctx.tl.set(P.sel, { opacity: 0 }, b);
     if (i) ctx.tl.set(ctx.sel('sg'), { color: lu.glow }, a);
   });
+  ctx.tl.fromTo(ctx.sel('sg'), { opacity: 0.62 }, { opacity: 0.3, duration: 0.2, ease: 'power2.out' }, tB);
+  ctx.tl.set(ctx.sel('sg'), { color: '#9cc4f0' }, tB);
+  // ---- BRAND MOMENT (beats 2–3): „od značek …“ = 4×4 wall of white brand cards, rows on the 16ths, row 1 ON the beat ----
+  const BX = SL, BW = ctx.W - ctx.safe.uiRight - SL, bcols = 4, bgap = 14, bth = 128, BY = 872;       // x 64–940 (Reels UI column)
+  const btw = (BW - bgap * (bcols - 1)) / bcols;
+  const TA = ctx.plate.logo, BA = 8200;                                         // logo area ≈ 27 % of the TA logo, ≤ the sponsor bug
+  let bw = '';
+  [...BWALL, null].forEach((slug, i) => {
+    const c = i % bcols, r = Math.floor(i / bcols);
+    const x = BX + c * (btw + bgap), y = BY + r * (bth + bgap);
+    const t = tB + 0.004 + r * ctx.BEAT / 8 + c * 0.016;                   // rows on the 32nds → the wall stands ≈ 0.25 s after the beat
+    const sty = `left:${x.toFixed(1)}px;top:${y}px;width:${btw.toFixed(1)}px;height:${bth}px`;
+    if (slug) {
+      const src = BR + slug + '.png', f = eqFit(ctx, src, BA, btw - 52, bth - 40);
+      if (f.w > TA.w || f.w * f.h > TA.w * TA.h) ctx.warn(`brand logo ${slug} larger than the TA logo`);
+      bw += `<div class="vr-bcard" id="${ctx.id(`bc${i}`)}" style="${sty}"><img src="${ctx.asset(src)}" alt="${slug}" style="left:${((btw - f.w) / 2).toFixed(1)}px;top:${((bth - f.h) / 2).toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px"></div>`;
+    } else {
+      bw += `<div class="vr-bmore" id="${ctx.id(`bc${i}`)}" style="${sty};font-size:30px"><span><b style="display:block;font-weight:900">${ctx.esc(ctx.nb('a mnoha'))}</b><b style="display:block;font-weight:900">${ctx.esc(ctx.nb('dalších'))}</b></span></div>`;
+    }
+    ctx.tl.fromTo(ctx.sel(`bc${i}`), { opacity: 0, scale: 0.8, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: 'back.out(1.8)' }, t);
+  });
+  s0 += `<div class="fx-full" id="${ctx.id('bwall')}">${bw}</div>`;
+  ctx.tl.set(ctx.sel('bwall'), { transformOrigin: `50% ${BY}px` }, 0);
+  ctx.tl.fromTo(ctx.sel('bwall'), { scale: 1 }, { scale: 0.975, duration: t1 - tB, ease: 'none' }, tB);
+  s0 += `<div class="vr-cap" id="${ctx.id('bcap')}" style="left:${SL + 2}px;top:${BY - 52}px;font-size:30px;letter-spacing:.16em">${ctx.esc(ctx.nb('od značek'))}</div>`;
+  ctx.tl.fromTo(ctx.sel('bcap'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, tB + 0.004);
+  ctx.report(`brand wall ${BWALL.length} logos + „a mnoha dalších“ at ${tB.toFixed(2)}–${t1.toFixed(2)} s, cards ${Math.round(btw)}×${bth}, y ${BY}–${BY + 4 * bth + 3 * bgap}`);
   // headline: claim on screen from the downbeat (hard cut, no mask reveal → frame 1 already sells), the red tag punches behind
   // PŘÍVLAČ on the spoken word. Leading 1.07: at 0.96 the Ř caron of line 2 touched the Š of VŠE and read as „VŞE“.
   const f0 = ctx.fit('PŘÍVLAČ', { ...DISP, maxW: 880, maxLines: 1, sizes: [190, 180, 172, 164, 156, 148] });
@@ -137,6 +177,7 @@ export default function velkaryba(ctx) {
   fx.chroma(ctx, h0a.sel, 0, { amt: 6, d: 0.3 });
   fx.chroma(ctx, h0b.sel, tPriv, { amt: 7, d: 0.35 });
   fx.punch(ctx, h0b.sel, tPriv, { scale: 1.04, d: 0.3 });
+  fx.punch(ctx, ctx.sel('bc0'), Math.max(tPriv, tB + 0.32), { scale: 1.06, d: 0.3 });                // lead brand (VO: „pruty Shimano“) pops with PŘÍVLAČ
   // hard cut on the downbeat + slam (lesson broll/finale: no zoom-from-blur into a kick, the kick frame must not be mush)
   // origin on the headline's top edge → the slam never pushes type under the TA plate or past the left safe edge
   ctx.tl.set(ctx.sel('slam'), { transformOrigin: `50% ${Y0}px` }, 0);
@@ -253,7 +294,10 @@ export default function velkaryba(ctx) {
       + `<i class="vr-tglow" style="background:linear-gradient(0deg,${ctx.rgba(lu.glow, 0.42)} 0%,${ctx.rgba(lu.glow, 0)} 62%)"></i>`
       // background-image, not <img>: the same PNGs are <img> in the strobe (lint duplicate_media_discovery_risk)
       + `<i class="vr-lure" id="${ctx.id(`lu${i}`)}" style="left:${lx.toFixed(1)}px;top:${ly.toFixed(1)}px;width:${f.w.toFixed(1)}px;height:${f.h.toFixed(1)}px;background:url(${ctx.asset(lu.src)}) center/100% 100% no-repeat"></i>`
-      + `<div class="vr-lbl" style="bottom:12px;font-size:23px;letter-spacing:.1em;color:rgba(255,255,255,.88)">${ctx.esc(lu.brand)}</div></div>`;
+      + (BSLUG[lu.brand]
+        ? (() => { const src = BR + BSLUG[lu.brand] + '_on_dark.png', g = eqFit(ctx, src, 3800, tw - 64, 40); return `<i class="vr-blg" style="bottom:${(10 + (40 - g.h) / 2).toFixed(1)}px;width:${g.w.toFixed(1)}px;height:${g.h.toFixed(1)}px;margin-left:${(-g.w / 2).toFixed(1)}px;background-image:url(${ctx.asset(src)})"></i>`; })()
+        : `<div class="vr-lbl" style="bottom:12px;font-size:23px;letter-spacing:.1em;color:rgba(255,255,255,.88)">${ctx.esc(lu.brand)}</div>`)
+      + `</div>`;
     ctx.tl.fromTo(ctx.sel(`tile${i}`), { opacity: 0 }, { opacity: 1, duration: 0.07, ease: 'none' }, t);
     ctx.tl.fromTo(ctx.sel(`tile${i}`), { scale: 0.82 }, { scale: 1, duration: 0.36, ease: 'back.out(1.7)' }, t);
     ctx.tl.fromTo(ctx.sel(`lu${i}`), { y: -48, rotation: wr + (i % 2 ? 1 : -1) * 24, opacity: 0 }, { y: 0, rotation: wr, opacity: 1, duration: 0.42, ease: 'expo.out' }, t + 0.03);

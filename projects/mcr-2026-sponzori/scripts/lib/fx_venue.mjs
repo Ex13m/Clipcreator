@@ -173,19 +173,22 @@ export const POND = JSON.parse(fs.readFileSync(path.resolve(path.dirname(fileURL
 // GSAP transform that lays the plan (portrait frame, origin = pond centroid at (540, 957), 12.6 px/m) onto the pond in the LAST frame of
 // the v2 drone flyover (drone/final/flyover_9x16.mp4 @ 3.967 s): least-squares fit of the real ortho outline (4 corners + edge chamfer)
 // to the water mask segmented from that frame (scratch fit, RMS ≈ 6 px). Tween it to {0…, scale 1} → the oblique AR overlay becomes a clean plan.
+// outline length (m) for the draw-on dash, from the clean polygon + 3 % for the Catmull–Rom bulge
+export const PLEN = +(POND.outline.clean.points_portrait.reduce((a, p, i, A) => a + Math.hypot(p[0] - A[(i + 1) % A.length][0], p[1] - A[(i + 1) % A.length][1]), 0) * 1.03).toFixed(2);
 export const AR = { cx: 540, cy: 957, s: 12.6, x: -68.76, y: 92.7, rotation: 14.05, rotationX: 51.6, rotationY: -17.72, scale: 0.745, transformPerspective: 2154 };
 
 export function pondScheme(ctx, { id = 'ps', cx = AR.cx, cy = AR.cy, s = AR.s, red = '#e31e24', white = '#ffffff', out = 2.6, r = 13 } = {}) {
   const O = POND.outline.clean, R = POND.outline.real;
   const g = `translate(${cx} ${cy}) scale(${s})`;
+  const PL = PLEN;                                  // dash length in metres (no pathLength: Chrome ignored it under the 3D transform)
   const nss = 'vector-effect="non-scaling-stroke"';
   let svg = `<svg class="vn-ps" viewBox="0 0 ${ctx.W} ${ctx.H}" width="${ctx.W}" height="${ctx.H}" style="position:absolute;left:0;top:0;overflow:visible">
-    <defs><filter id="${ctx.id(`${id}-blur`)}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+    <defs><filter id="${ctx.id(`${id}-blur`)}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${(9 / s).toFixed(3)}"/></filter></defs>
     <g transform="${g}">
       <path id="${ctx.id(`${id}-wf`)}" d="${O.path_d_portrait}" fill="${white}" fill-opacity=".09"/>
       <path id="${ctx.id(`${id}-iso`)}" d="${O.path_d_portrait}" transform="scale(.86)" fill="none" stroke="${red}" stroke-width="2.4" stroke-dasharray="9 8" ${nss} opacity=".85"/>
-      <path id="${ctx.id(`${id}-gl`)}" d="${O.path_d_portrait}" fill="none" stroke="${red}" stroke-width="14" ${nss} pathLength="1" stroke-dasharray="1 1" filter="url(#${ctx.id(`${id}-blur`)})" opacity=".75"/>
-      <path id="${ctx.id(`${id}-ol`)}" d="${O.path_d_portrait}" fill="none" stroke="${white}" stroke-width="5" stroke-linejoin="round" ${nss} pathLength="1" stroke-dasharray="1 1"/>`;
+      <path id="${ctx.id(`${id}-gl`)}" d="${O.path_d_portrait}" fill="none" stroke="${red}" stroke-width="${(14 / s).toFixed(3)}" stroke-dasharray="${PL} ${PL}" stroke-dashoffset="${PL}" filter="url(#${ctx.id(`${id}-blur`)})" opacity=".75"/>
+      <path id="${ctx.id(`${id}-ol`)}" d="${O.path_d_portrait}" fill="none" stroke="${white}" stroke-width="${(5 / s).toFixed(3)}" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="${PL} ${PL}" stroke-dashoffset="${PL}"/>`;
   const places = [];
   let pins = '';
   for (const p of POND.places.list) {
@@ -202,7 +205,7 @@ export function pondScheme(ctx, { id = 'ps', cx = AR.cx, cy = AR.cy, s = AR.s, r
   return {
     html: `<div class="fx-full" id="${ctx.id(id)}">${svg}${pins}</div>`,
     sel: ctx.sel(id), places, s, cx, cy,
-    ol: ctx.sel(`${id}-ol`), gl: ctx.sel(`${id}-gl`), wf: ctx.sel(`${id}-wf`), iso: ctx.sel(`${id}-iso`),
+    ol: ctx.sel(`${id}-ol`), len: PL, gl: ctx.sel(`${id}-gl`), wf: ctx.sel(`${id}-wf`), iso: ctx.sel(`${id}-iso`),
     bbox: { x0: cx + bx0 * s, y0: cy + by0 * s, x1: cx + bx1 * s, y1: cy + by1 * s },
     real: R,
   };

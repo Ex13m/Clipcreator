@@ -6,6 +6,8 @@
 //   bar 1  fan of 9 spoons (8 products, 3 brands) opens on the downbeat, beat punches, light wave · „RODINNÁ FIRMA OD ROKU“ (VO)
 //   bar 2  sun floods red · Nories CRANKIN' PUPA 109 (clear) slides in on a red floor · odometer 1999 on „devatenáct set…“ (VO)
 //   bar 3  sunset → black · 8 spoon faces cut on every 8th note, glow tinted by each spoon · odometer „3 100+ plandavek v nabídce“
+//          + BRAND CORONA (v3): 6 spoon-maker logos sold by the shop (Nories, Forest, ValkeIN, Rodio Craft, Velvet Arts, YARIE; mono
+//          white) open in mirrored pairs on the first three 8ths around a red orbit ring = the set sun, thrown outward into bar 4
 //   bar 4  sunrise lockup: logo (≤ TA plate) + TROUTSHOP.EU + „Generální partner Trout Area Slovakia“ + „Věnuje ceny · MČR 2026“
 // Products: assets_prep/troutshop/ads/ (clean cut-outs, ts_polish). All hard baits (MČR = hard baits); no soft bait shown.
 // Only verified copy (research/troutshop.md Verification, troutshop_ad.md §4). Velvet Arts / Nories / Forest are NOT Troutshop brands:
@@ -39,6 +41,17 @@ const FB = 300, FR0 = 245, FC = 4;             // fan spoon body, eye radius (ey
 // beat-cut colour run (bar 3): 7 faces (sides not used in the fan), one per 8th note, ends on the newest product (Velvet Arts Forte 2,1 g 32, back „VA 2.1“)
 const RUN = ['miub', 'sk20b', 'forte35a', 'forte30b', 'tullea', 'rooney101b', 'forte32b'];   // 6 eighths + the last face holds a beat
 const RUNC = ['#d9d40c', '#c98a1c', '#b3101c', '#c9b48a', '#d4a52a', '#f0c40c', '#ec2d5a'];   // glow tint per face (bright version of its colour)
+// brand moment (bar 3, „3 100+ plandavek v nabídce“): the spoon makers the shop sells (research/troutshop_brands.md §2–3; all six make
+// spoons on troutshop.eu) open as a corona of mono-white logos around the colour run — rays of the set sun, mirrored pairs on the
+// 8th notes like the fan. Third-party brands, never „naše“: the counter label says „v nabídce“. Mono knock-outs of the green
+// badges: scripts/assets_prep/troutshop_brands/mono.py. Every logo goes through ctx.logo (logo rule: far below the TA logo).
+const BD = 'assets_prep/troutshop/brands/';
+const BRANDS = [   // [left, right] per pair, top pair first
+  ['nories_on_dark', 'Nories'], ['forest_mono', 'Forest'],
+  ['valkein_on_dark', 'ValkeIN'], ['rodiocraft_mono', 'Rodio Craft'],
+  ['velvetarts_on_dark', 'Velvet Arts'], ['yarie_mono', 'YARIE'],
+];
+const RC3 = [540, 1262], RR = 322, RTH = [40, 76, 112];   // run centre (bar 3), corona radius, ray angles (deg from up, ± per side)
 
 export default function troutshop(ctx) {
   const { bar, W } = ctx, S = ctx.S;
@@ -114,10 +127,14 @@ export default function troutshop(ctx) {
   // ---------- bar 3: beat-cut colour run + counter ----------
   const e8 = (i) => (i % 2 ? (ctx.at(3, (i - 1) / 2) + ctx.at(3, (i + 1) / 2)) / 2 : ctx.at(3, i / 2));   // i-th 8th note of bar 3
   const runT = [...RUN.map((_, i) => e8(i)), t4];
-  html += `<div class="fx-glow" id="${ctx.id('rg')}" style="left:${W / 2 - 560}px;top:${1230 - 600}px;width:1200px;height:1200px;background:radial-gradient(closest-side,currentColor,transparent);color:${RUNC[0]};opacity:0;mix-blend-mode:screen"></div>`;
+  html += `<div class="fx-glow" id="${ctx.id('rg')}" style="left:${RC3[0] - 600}px;top:${RC3[1] - 600}px;width:1200px;height:1200px;background:radial-gradient(closest-side,currentColor,transparent);color:${RUNC[0]};opacity:0;mix-blend-mode:screen"></div>`;
   ctx.tl.set(ctx.sel('rg'), { opacity: 0.8 }, t3);
+  // the set sun's ring: a thin red orbit the logos sit on (opens with the first pair, thrown out with them)
+  html += `<div class="ts-orb" id="${ctx.id('orb')}" style="left:${RC3[0] - RR}px;top:${RC3[1] - RR}px;width:${2 * RR}px;height:${2 * RR}px"></div>`;
+  ctx.tl.fromTo(ctx.sel('orb'), { scale: 0.45, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, t3 - 0.04);
+  ctx.tl.fromTo(ctx.sel('orb'), { scale: 1, opacity: 1 }, { scale: 1.9, opacity: 0, duration: 0.3, ease: 'power3.in' }, t4 - 0.3);
   RUN.forEach((k, i) => {
-    const sp = ts.spoon(ctx, { id: `r${i}`, k, cx: 556, cy: 1230, body: 530, angle: 40, so: 0.75, style: 'opacity:0' });
+    const sp = ts.spoon(ctx, { id: `r${i}`, k, cx: RC3[0], cy: RC3[1], body: 410, angle: 14, so: 0.75, style: 'opacity:0' });
     html += sp.html;
     const a = runT[i], b = runT[i + 1];
     ctx.tl.set(sp.sel, { opacity: 1 }, a);
@@ -131,6 +148,19 @@ export default function troutshop(ctx) {
     }
   });
   ctx.tl.fromTo(ctx.sel('rg'), { opacity: 0.8 }, { opacity: 0, duration: 0.25, ease: 'power1.in' }, t4 - 0.25);
+  // brand corona: pairs pop out along their rays on the first three 8ths, hold, and are thrown outward into the lockup downbeat
+  BRANDS.forEach(([f, name], i) => {
+    const pair = i >> 1, side = i % 2 ? 1 : -1, th = (side * RTH[pair] * Math.PI) / 180;
+    const cx = RC3[0] + RR * Math.sin(th), cy = RC3[1] - RR * Math.cos(th), dx = cx - RC3[0], dy = cy - RC3[1];
+    const [iw, ih] = ctx.dims(BD + f + '.png'), ar = iw / ih;
+    const k = f === 'forest_mono' ? 1.3 : 1;   // thin-line oval reads lighter than solid wordmarks
+    const bw = Math.min(190, Math.sqrt(12400 * k * ar), 86 * Math.sqrt(k) * ar);      // equal visual weight = equal area, capped box
+    const lg = ctx.logo(BD + f + '.png', { box: [bw, bw / ar], at: [t3, t4], label: `troutshop brand ${name}` });
+    html += `<div class="ts-bl" id="${ctx.id(`bl${i}`)}" style="left:${(cx - lg.w / 2).toFixed(1)}px;top:${(cy - lg.h / 2).toFixed(1)}px;width:${lg.w}px;height:${lg.h}px"><img src="${lg.src}" alt="${ctx.esc(name)}" style="width:${lg.w}px;height:${lg.h}px"></div>`;
+    const ta = e8(pair) - 0.04;
+    ctx.tl.fromTo(ctx.sel(`bl${i}`), { x: -dx * 0.55, y: -dy * 0.55, scale: 0.55, opacity: 0 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, ta);
+    ctx.tl.fromTo(ctx.sel(`bl${i}`), { x: 0, y: 0, scale: 1, opacity: 1 }, { x: dx * 1.5, y: dy * 1.5, scale: 0.8, opacity: 0, duration: 0.28, ease: 'power3.in' }, t4 - 0.3 + pair * 0.02);
+  });
   let cnt = fx.odometer(ctx, { id: 'cnt', value: '3 100', suffix: '+', x: L - 4, y: 392, size: 240, font: 'Anton', wght: 400, color: '#ffffff', t: t3 + 0.02, d: 0.65, stagger: 0.05 });
   cnt += `<div class="ts-lbl" style="left:${L}px;top:${392 + 240 + 12}px">${ctx.esc(ctx.nb('plandavek v nabídce'))}</div>`;
   html += fx.scene(ctx, 'cs', t3, t4 - 0.08, cnt, { inD: 0.001, outD: 0.22 });
@@ -170,6 +200,9 @@ export default function troutshop(ctx) {
 
   const css = `${ts.CSS(S)}
 ${S} .ts-brands{position:absolute;left:0;right:0;top:${PIV[1] - 74}px;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Roboto Condensed';font-weight:800;font-size:36px;line-height:1.08;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(90,0,0,.45)}
+${S} .ts-orb{position:absolute;border-radius:50%;border:4px solid #e3000f;box-shadow:0 0 26px rgba(227,0,15,.6),inset 0 0 26px rgba(227,0,15,.35)}
+${S} .ts-bl{position:absolute;filter:drop-shadow(0 4px 14px rgba(0,0,0,.55))}
+${S} .ts-bl img{display:block}
 ${S} .ts-lbl{position:absolute;font-family:'Roboto Condensed';font-weight:700;font-size:46px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 ${S} .ts-tag{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Roboto Condensed';font-weight:800;font-style:italic;font-size:38px;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
 ${S} .ts-tag i{display:block;width:10px;height:30px;background:${RED};transform:skewX(-14deg)}

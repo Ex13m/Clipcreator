@@ -1,6 +1,6 @@
 {
  "out": "block_crs",
- "stamp": "d3f4bbaa84b21871",
+ "stamp": "d38a7aa9b93c1a8c",
  "dur": 7.3,
  "box": {
   "x": 64,
@@ -15,7 +15,17 @@
   "ly": 7,
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/prep/ta_cz/logo_h_on_dark.png"
  },
- "moves": [],
+ "moves": [
+  {
+   "g0": 0,
+   "g1": 7.289,
+   "scale": 1.8,
+   "cx": 540,
+   "cy": 335,
+   "fly": 0.62,
+   "hold": true
+  }
+ ],
  "tones": [
   {
    "g0": 0,

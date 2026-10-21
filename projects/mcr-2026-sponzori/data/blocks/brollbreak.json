@@ -1,10 +1,9 @@
 {
- "_note": "Hudební break (takty 35–36): zpomalení, dech. Bez VO. Fotky: galerie troutareacz.cz (ligová kola) + AI pstruh duhový (ai01, galerie nemá detail ryby).",
+ "_note": "Takty 43–44 (plán B, groove). Bez VO. Fotky: galerie troutareacz.cz (ligová kola) + AI pstruh duhový v podběráku (PSTRUH.): assets_prep/fish_ai/scenes/scene_net_a_2k_fix.png — cesta je v scripts/blocks/broll.mjs (FISH), ne tady (prestage by ji zmenšil na 1600 px). Složená ryba ai01 ZAMÍTNUTA.",
  "key": "brollbreak",
  "mode": "break",
  "photos": [
   "assets_prep/broll_tacz/t03_kneel_net.jpg",
-  "assets_prep/broll_tacz/ai01_trout_rainbow_on_water.jpg",
   "assets_prep/broll_tacz/t13_dawn_trophies.jpg",
   "assets_prep/broll_tacz/t04_angler_rods_tacz.jpg"
  ],

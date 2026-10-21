@@ -1,6 +1,6 @@
 {
  "out": "block_velkaryba",
- "stamp": "c82cb58d44bafe05",
+ "stamp": "84b590b2998c5850",
  "dur": 9.133,
  "box": {
   "x": 64,
@@ -21,7 +21,7 @@
    "g0": 0,
    "g1": 9.112,
    "tone": "dark",
-   "by": "velkaryba theme"
+   "by": "probe"
   }
  ],
  "beats": [

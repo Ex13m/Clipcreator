@@ -269,10 +269,15 @@ export default function bosset(ctx) {
   });
   const zx = SL + tw / 2, zy = wY + th / 2;                                      // Zojirushi tile centre
   // flood: a deep-teal panel grows from the Zojirushi tile to the whole frame (it meets the podium scene in colour)
-  const fsx = (2 * Math.max(zx, W - zx) + 60) / tw, fsy = (2 * Math.max(zy, 1920 - zy) + 60) / th;   // section-local = screen coords
-  s1 += `<i class="bs-flood" id="${ctx.id('flood')}" style="left:${Math.round(SL)}px;top:${wY}px;width:${Math.round(tw)}px;height:${th}px;background:${DEEP};opacity:0"></i>`;
+  // iris (circle) from the tile centre to the farthest corner — a scaled rounded rect stretched its corners into a slab
+  const fD = th, fR = Math.hypot(Math.max(zx, W - zx), Math.max(zy, 1920 - zy)) + 40, fS = (2 * fR) / fD;
+  s1 += `<i class="bs-flood" id="${ctx.id('flood')}" style="left:${Math.round(zx - fD / 2)}px;top:${Math.round(zy - fD / 2)}px;width:${fD}px;height:${fD}px;border-radius:50%;background:${DEEP};opacity:0"></i>`;
   ctx.tl.fromTo(ctx.sel('flood'), { opacity: 0 }, { opacity: 1, duration: 0.03, ease: 'none' }, tZ - 0.3);
-  ctx.tl.fromTo(ctx.sel('flood'), { scaleX: 1, scaleY: 1 }, { scaleX: fsx, scaleY: fsy, duration: 0.3, ease: 'power3.in' }, tZ - 0.3);
+  ctx.tl.fromTo(ctx.sel('flood'), { scale: 0.9 }, { scale: fS, duration: 0.3, ease: 'power3.in' }, tZ - 0.3);
+  // the Zojirushi logo rides on top of the flood (continuity into the prize scene), same size and place as in its tile
+  const zf = ctx.logo(BR + 'zojirushi_on_dark.png', { box: [Math.min(180, tw - 30), Math.min(62, th - 26)], at: [tZ - 0.3, tZ], id: 'zfi', label: 'bosset:brand Zojirushi (flood)' });
+  s1 += `<div class="fx-abs" id="${ctx.id('zf')}" style="left:${Math.round(SL + (tw - zf.w) / 2)}px;top:${Math.round(wY + (th - zf.h) / 2)}px;opacity:0">${zf.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('zf'), { opacity: 0 }, { opacity: 1, duration: 0.03, ease: 'none' }, tZ - 0.3);
   ctx.tl.hit(ctx.sel('wall'), { scale: 1.02 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t2);
   ctx.tl.hit(ctx.sel('w0'), { scale: 1.07 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, ctx.at(2, 1));
   s1 += bug(ctx, 'bug1', 'on_light', tScroll - 0.16, tZ);
@@ -302,7 +307,7 @@ export default function bosset(ctx) {
   let s2 = stage('p1', { top: POD.top, glowY: 1080 });
   ctx.tl.fromTo(ctx.sel('p1sl'), { rotation: -26, opacity: 0.4 }, { rotation: -14, opacity: 1, duration: 0.9, ease: 'expo.out' }, tZ);
   ctx.tl.fromTo(ctx.sel('p1sr'), { rotation: 26, opacity: 0.4 }, { rotation: 14, opacity: 1, duration: 0.9, ease: 'expo.out' }, tZ);
-  const pd1 = podium(ctx, 'pd', { ...POD, t: tZ - 0.02 });
+  const pd1 = podium(ctx, 'pd', { ...POD, t: tZ - 0.14 });   // pre-rolled under the iris: the cut frame already has the podium
   // bottles: SM-VB black on the top step, SM-SR green left, SM-SHE orange right (no „DOUBLE LOCK / jednou rukou“ near the orange one)
   const B = [
     { id: 'bC', src: PR.H1, h: 640, cx: 540, floor: POD.top + 22 },
@@ -326,7 +331,7 @@ export default function bosset(ctx) {
   // headline: VÍTĚZOVÉ / MISTROVSTVÍ (VO word for word) + ZÍSKAJÍ plate
   const VS = Math.min(sz(ctx, 'Mistrovství', CW, [124, 116, 108, 100, 92, 86, 80]), sz(ctx, 'Vítězové', CW, [124, 116, 108, 100]));
   const vY = 404;
-  s2 += line(ctx, 'vH', 'Vítězové', { x: SL, y: vY, w: CW, size: VS, color: '#ffffff', t: tZ + 0.02, d: 0.5 }).html;
+  s2 += line(ctx, 'vH', 'Vítězové', { x: SL, y: vY, w: CW, size: VS, color: '#ffffff', t: tZ - 0.16, d: 0.5 }).html;   // VÍTĚZOVÉ readable on the cut frame
   s2 += line(ctx, 'mH', 'mistrovství', { x: SL, y: vY + Math.round(VS * 1.04), w: CW, size: VS, color: SKY, t: tMis, d: 0.45 }).html;
   s2 += pill(ctx, 'zp', 'získají', { x: SL, y: vY + Math.round(VS * 2.08) + 18, size: 40, wght: 900, wdth: 125, tracking: 0.04, t: tZis - 0.04 }).html;
   html += scene('scP', tZ, t4, s2);
@@ -345,10 +350,10 @@ export default function bosset(ctx) {
   fx.sweep(ctx, 'hb', t4 + 0.12, { d: 0.7 });
   fx.sweep(ctx, 'hb', ctx.at(4, 2) + 0.05, { d: 0.7 });
   const LW = 540;                                                                // left column x 64–604
-  s3 += pill(ctx, 'sp1', 'špičkové', { x: SL, y: 398, size: 34, wght: 900, wdth: 125, tracking: 0.04, t: t4 - 0.06 }).html;
+  s3 += pill(ctx, 'sp1', 'špičkové', { x: SL, y: 398, size: 34, wght: 900, wdth: 125, tracking: 0.04, t: t4 - 0.24 }).html;   // pre-rolled: legible on the cut frame
   const TS2 = Math.min(sz(ctx, 'Termosky', LW, [104, 96, 90, 84, 78]), sz(ctx, 'Zojirushi', LW, [104, 96, 90, 84, 78]));
   const tY = 470;
-  s3 += line(ctx, 'tH', 'Termosky', { x: SL, y: tY, w: LW, size: TS2, color: '#ffffff', t: t4 - 0.02, d: 0.45 }).html;
+  s3 += line(ctx, 'tH', 'Termosky', { x: SL, y: tY, w: LW, size: TS2, color: '#ffffff', t: t4 - 0.18, d: 0.45 }).html;
   s3 += line(ctx, 'zH', 'Zojirushi', { x: SL, y: tY + Math.round(TS2 * 1.02), w: LW, size: TS2, color: SKY, t: tZoj, d: 0.45 }).html;
   // Zojirushi logo (shop tile on a white chip) — ≤ TA logo
   const ZL = ctx.logo(BR + 'zojirushi_on_dark.png', { box: [230, 70], at: [t4, t5], id: 'zLi', label: 'bosset:brand Zojirushi' });
@@ -362,8 +367,9 @@ export default function bosset(ctx) {
   s3 += line(ctx, 'v06', '0,6 l', { x: SL, y, w: LW, size: V06, color: '#ffffff', t: tZoj + 0.12, d: 0.42 }).html;
   y += Math.round(V06 * 0.98) + 18;
   const az = pill(ctx, 'az', 'až 6 hodin', { x: SL, y, size: 38, wght: 900, wdth: 125, tracking: 0.03, t: tS1 });
-  s3 += az.html + cap(ctx, 'hs', 'horké i studené', { x: SL + az.w + 18, y: y + Math.round((az.h - 32) / 2) - 1, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: '#ffffff', t: tS1 + 0.06, op: 1 });
-  y += az.h + 22;
+  y += az.h + 10;
+  s3 += az.html + cap(ctx, 'hs', 'horké i studené', { x: SL + 2, y, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: '#ffffff', t: tS1 + 0.06, op: 1 });
+  y += 32 + 26;
   const dl = pill(ctx, 'dl', 'Double lock', { x: SL, y, size: 38, wght: 900, wdth: 125, tracking: 0.03, bg: SKY, fg: DEEP, t: tS2 });
   s3 += dl.html;
   y += dl.h + 10;
@@ -394,13 +400,13 @@ export default function bosset(ctx) {
   const LG = ctx.logo('on_dark', { box: [281, 80], at: [t5, END], id: 'lgi' });
   const lgY = 420;
   s4 += `<div class="fx-abs" id="${ctx.id('lg')}" style="left:${Math.round(W / 2 - LG.w / 2)}px;top:${lgY}px">${LG.html}</div>`;
-  ctx.tl.fromTo(ctx.sel('lg'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, t5 - LEAD);
+  ctx.tl.fromTo(ctx.sel('lg'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, t5 - 0.24);   // pre-rolled under the cut: lockup reads on the downbeat
   const US = Math.min(sz(ctx, 'bosset.cz', CW, [104, 96, 88], { wght: 800, upper: false }), 96);
   const uY = lgY + LG.h + 34;
-  s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: uY, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t5 + 0.02, d: 0.45 }).html;
+  s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: uY, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t5 - 0.18, d: 0.45 }).html;
   const pzY = uY + US + 30;
-  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: pzY, size: 30, t: t5 + 0.06 }).html;
-  s4 += cap(ctx, 'pv', 'Pro vítěze MČR · termosky Zojirushi 0,6 l', { x: SL, y: pzY + 49 + 26, w: CW, align: 'center', size: 30, wght: 700, wdth: 100, tracking: 0.08, color: SKY, t: t5 + 0.16, op: 1 });
+  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: pzY, size: 30, t: t5 - 0.16 }).html;
+  s4 += cap(ctx, 'pv', 'Pro vítěze MČR · termosky Zojirushi 0,6 l', { x: SL, y: pzY + 49 + 26, w: CW, align: 'center', size: 30, wght: 800, wdth: 100, tracking: 0.08, color: '#ffffff', t: t5 - 0.06, op: 1 });   // white 800: SKY 700 sank into the spotlight beams
   ctx.report(`lockup: logo ${lgY}–${lgY + LG.h}, URL ${uY} (${US}px), prize ${pzY}, line ${pzY + 75}, centre bottle top ${POD2.top + 22 - 560}`);
   html += scene('scD', t5, END, s4);
 
@@ -453,7 +459,7 @@ export function endCard(ctx) {
   html += `<div class="fx-full" id="${ctx.id('ecg')}" style="transform-origin:50% ${yLogo + LG.h / 2}px">${g}</div>`;
   ctx.tl.fromTo(ctx.sel('ecg'), { scale: 1.04 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
   ctx.tl.fromTo(ctx.sel('ec-bar'), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.02);
-  html += pill(ctx, 'ez', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: yPz, size: 30, t: ctx.at(0, 1) - 0.04 }).html;
+  html += pill(ctx, 'ez', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: yPz, size: 30 }).html;   // static: the lockup is complete on frame 1
   const kCY = yPz + 48 + 150;
   const K = fx.product(ctx, { id: 'ek', src: PR.H3, w: 640, cx: W / 2, cy: kCY, ground: 'float', shadow: 0.45, pad: pad(PR.H3), sweepAngle: 100, maxUp: 1 });
   html += K.html;

@@ -1,6 +1,6 @@
 {
  "out": "reel_venue",
- "stamp": "24039da0b18cce2f",
+ "stamp": "9ba90df746b73a93",
  "dur": 20.2,
  "box": {
   "x": 64,
@@ -30,8 +30,8 @@
   {
    "g0": 0,
    "g1": 1.829,
-   "tone": "dark",
-   "by": "venue-hook theme"
+   "tone": "halo",
+   "by": "venue-hook"
   },
   {
    "g0": 1.829,

@@ -2,8 +2,9 @@
 //   'broll'      bar 34       (full groove, kick on the downbeat, fill on beat 4) → mode 'cut'
 //   'brollbreak' bars 35–36   (musical break: kick and hats drop out)             → mode 'break'
 // Photos (21. 10.): OUR gallery troutareacz.cz, league rounds only (assets_prep/broll_tacz, 1080×1920, scripts/assets_prep/
-// prep_broll_tacz.py; research/gallery_tacz.md). The gallery has no trout close-up → the trout shot is the brief's AI rainbow
-// trout (fish_ai) on a blurred gallery pond (ai01). Film grade (teal shadows / warm highlights).
+// prep_broll_tacz.py; research/gallery_tacz.md). The gallery has no trout close-up → the 'PSTRUH.' shot is the brief's AI rainbow
+// trout IN A LANDING NET (21. 10.: fish_ai/scenes/scene_net_a_2k_fix.png = 2k upscale with the defocused tail / left fins patched
+// from a Lanczos upscale, scripts/assets_prep/fish_ai/patch_net_a_2k.py; the old ai01 composite was rejected). Film grade.
 // One bold word per bar, Nike-style: NERVY. → ZÁBĚR. → PSTRUH.
 //   cut  : a new shot on every beat, speed-ramp push-ins, whip smears between beats, the word sits BEHIND the angler on the
 //          downbeat shot (subject cut-out), slam + echo burst; the fill beat is a 3-frame stutter with RGB-split hits;
@@ -29,6 +30,7 @@ const FILES = {
   ai01: 'ai01_trout_rainbow_on_water.jpg',
 };
 const WORDS = { cut: ['NERVY.', 'SOUBOJ.'], break: ['ZÁBĚR.', 'PSTRUH.'] };   // data copy.words overrides
+const FISH = ['assets_prep/fish_ai/scenes/scene_net_a_2k_fix.png', 'assets_prep/fish_ai/scenes/scene_net_a.png'];   // first that exists
 const WORD_Y = 392;                       // word band top: below the TA plate (250–348), above the subjects' heads
 
 export default function broll(ctx) {
@@ -122,9 +124,11 @@ function breakMode(ctx, { photo, cutOf, stkOf, words }) {
   ctx.tl.fromTo(ctx.sel('a-stk'), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'power1.in' }, b1 - 0.3);
   ctx.tl.fromTo(ctx.sel('a-mono'), { opacity: 0 }, { opacity: 0.92, duration: 0.16, ease: 'power2.out' }, 0.02);
   ctx.tl.fromTo(ctx.sel('a-mono'), { opacity: 0.92 }, { opacity: 0.8, duration: b1 - 0.3, ease: 'sine.inOut' }, 0.2);   // stay grey: the colour subject must pop
-  // B — the trout: macro push-in, light sweep
-  // origin on the fish (ai01: AI rainbow trout centred at y 1110, inside the letterbox window): the push-in grows it in place
-  const B = fb.shot(ctx, { id: 'b', src: photo('ai01', 1), t0: b1 - X, t1: dur, origin: '50% 58%', blur: false, grade: 'contrast(1.16) saturate(.98) brightness(1.0) sepia(.06)', kb: { from: 1.12, to: 1.3, ease: 'sine.inOut', flat: true } });
+  // B — the trout in the landing net: the frame is lifted 340 px inside the camera so head, eye and the lure sit in the letterbox
+  // window (372–1548) and 'PSTRUH.' (y ≈ 416–700) lies on the spotted body above the gill cover; slow push-in on the head/lure
+  // (origin 84% 67%, ≤ ×1.15) → the defocused tail leaves the frame top-left, the whole lure stays inside the window (y ≲ 1530)
+  const fish = FISH.find((r) => ctx.has(r)) || photo('t03', 1);
+  const B = fb.shot(ctx, { id: 'b', src: fish, srcMax: 2560, frame: 'top:-340px;bottom:auto;height:1928px', t0: b1 - X, t1: dur, origin: '84% 67%', blur: false, grade: 'contrast(1.1) saturate(1.06) brightness(.97)', kb: { from: 1.0, to: 1.15, ease: 'sine.inOut', flat: true } });
   ctx.tl.fromTo(ctx.sel('gt'), { opacity: 0.7 }, { opacity: 0.3, duration: 0.8, ease: 'power1.inOut' }, b1 - 0.3);   // lighter teal: the trout keeps its colour
   const sweepT = b1 + 0.22, sweepD = 1.2;
   const SW = fb.sweepBand(ctx, { id: 'sw', t: sweepT, d: sweepD, opacity: 0.85 });

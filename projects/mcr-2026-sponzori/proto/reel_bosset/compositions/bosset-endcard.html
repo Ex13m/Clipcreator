@@ -36,16 +36,12 @@
   const tl = gsap.timeline({ paused: true });
   gsap.set("#bosset-endcard-ecg", {"scale":1.04});
   gsap.set("#bosset-endcard-ec-bar", {"scaleX":0});
-  gsap.set("#bosset-endcard-ez-b", {"scaleX":0});
-  gsap.set("#bosset-endcard-ez-t", {"opacity":0,"x":-14});
   gsap.set("#bosset-endcard-ek", {"x":150});
   gsap.set("#bosset-endcard-ek-cam", {"x":0});
   gsap.set("#bosset-endcard-ek-rot", {"rotation":-9});
   gsap.set("#bosset-endcard-ek-sw", {"backgroundPosition":"110% 0%"});
   tl.fromTo("#bosset-endcard-ecg", {"scale":1.04}, {"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#bosset-endcard-ec-bar", {"scaleX":0}, {"scaleX":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.020);
-  tl.fromTo("#bosset-endcard-ez-b", {"scaleX":0}, {"scaleX":1,"duration":0.34,"ease":"expo.out","immediateRender":false}, 0.418);
-  tl.fromTo("#bosset-endcard-ez-t", {"opacity":0,"x":-14}, {"opacity":1,"x":0,"duration":0.34,"ease":"expo.out","immediateRender":false}, 0.508);
   tl.fromTo("#bosset-endcard-ek", {"x":150}, {"x":0,"duration":0.8,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#bosset-endcard-ek-cam", {"x":0}, {"x":-36,"duration":2.8629999999999995,"ease":"none","immediateRender":false}, 0.800);
   tl.fromTo("#bosset-endcard-ek-rot", {"rotation":-9}, {"rotation":-3,"duration":3.663,"ease":"sine.out","immediateRender":false}, 0.000);

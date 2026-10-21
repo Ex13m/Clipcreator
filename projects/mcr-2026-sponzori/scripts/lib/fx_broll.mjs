@@ -4,7 +4,9 @@
 //
 //   css(ctx)                                               scoped CSS: film grade, words, letterbox, leak, streak, sweep
 //   blurDefs(ctx, ids[])                                   one SVG directional-blur filter per id (whip smear); returns html
-//   shot(ctx,{id,src,cut,stroke,mono,t0,t1,origin,inn,out,kb,grade}) → {back, front, cam, fcam}   grade = per-shot img filter
+//   shot(ctx,{id,src,cut,stroke,mono,t0,t1,origin,inn,out,kb,grade,frame,srcMax}) → {back, front, cam, fcam}   grade = per-shot img filter
+//        frame  = extra inline img geometry (e.g. 'top:-280px;bottom:auto;height:1928px' = reframe the photo inside the camera)
+//        srcMax = staging max side for the photo (default 1920 for b-roll JPEGs / 1600 for PNGs; a push-in needs more)
 //        back  = graded photo in its own camera (goes UNDER the words)
 //        front = the subject cut-out (+ white sticker stroke) in an identical camera (goes ABOVE the words → text behind subject)
 //        inn   = 'slam' (scale punch-out settle on a downbeat) | 'whipL' | 'whipR' (enter from the right / left with smear) | 'none'
@@ -53,17 +55,18 @@ export function blurDefs(ctx, ids) {
 // shot: graded photo (+ optional mono copy for a freeze look) and optional subject cut-out in a twin camera
 export function shot(ctx, o) {
   const { id, src, cut = null, stroke = null, mono = false, t0, t1, origin = '50% 50%', inn = 'none', out = 'none', blur = true,
-    kb = {}, inD = 0.18, outD = 0.09, X = 110, slam = 1.34, grade = null } = o;
+    kb = {}, inD = 0.18, outD = 0.09, X = 110, slam = 1.34, grade = null, frame = '', srcMax = undefined } = o;
   const cam = ctx.sel(`${id}-cam`), fcam = ctx.sel(`${id}-fcam`), both = cut ? `${cam}, ${fcam}` : cam;
   const flt = blur ? `filter:url(#${ctx.id(`bf-${id}`)});` : '';
-  const img = (rel, cls = '', extra = '') => `<img class="${cls}" ${extra} src="${ctx.asset(rel)}" alt="">`;
-  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src, '', grade ? `style="filter:${grade}"` : '')}${mono ? `<div class="br-mono" id="${ctx.id(`${id}-mono`)}" style="opacity:0;background-image:url(${ctx.asset(src)})"></div>` : ''}</div>`;
+  const img = (rel, cls = '', extra = '', ms) => `<img class="${cls}" ${extra} src="${ctx.asset(rel, ms ? { maxSide: ms } : undefined)}" alt="">`;
+  const st = `${grade ? `filter:${grade};` : ''}${frame}`;
+  const back = `<div class="br-cam" id="${ctx.id(`${id}-cam`)}" style="transform-origin:${origin};${flt}">${img(src, '', st ? `style="${st}"` : '', srcMax)}${mono ? `<div class="br-mono" id="${ctx.id(`${id}-mono`)}" style="opacity:0;background-image:url(${ctx.asset(src)})"></div>` : ''}</div>`;
   // front: twin camera › #id-sub (extra subject scale = 2.5D parallax pop) › [white sticker stroke, cut-out]
   const front = cut ? `<div class="br-cam" id="${ctx.id(`${id}-fcam`)}" style="transform-origin:${origin};${flt}"><div class="br-cam" id="${ctx.id(`${id}-sub`)}" style="transform-origin:${o.subOrigin || origin}">${stroke ? img(stroke, 'br-stk', `id="${ctx.id(`${id}-stk`)}" style="opacity:0"`) : ''}${img(cut)}</div></div>` : '';
   // camera: entrance → speed-ramp push-in → exit
   const s1 = kb.from ?? 1.08, s2 = kb.to ?? 1.2;
   let tm = t0;
-  if (inn === 'slam') { const sd = Math.min(0.3, (t1 - t0) * 0.85); ctx.tl.fromTo(both, { scale: slam }, { scale: s1, duration: sd, ease: 'expo.out' }, t0); tm = t0 + sd; }
+  if (inn === 'slam') { const sd = Math.min(0.3, (t1 - t0) * 0.85); ctx.tl.fromTo(both, { scale: slam }, { scale: s1, duration: sd, ease: 'expo.out' }, t0); tm = t0 + sd + 0.002; }   // +2 ms: no touching scale tweens (lint)
   else if (inn === 'whipL' || inn === 'whipR') {
     const sx = inn === 'whipL' ? 1 : -1;      // whipL = the move goes to the left → the new shot enters from the right
     ctx.tl.fromTo(both, { scale: 1.26, x: sx * X }, { scale: s1, x: 0, duration: inD, ease: 'expo.out' }, t0);

@@ -11,7 +11,7 @@
 //
 // Facts (research/jigovky.md › Verification, research/jigovky_ad.md §4): slogan „Jigy, které chytají!", TroutJig Barbless #4/#6/#8 0,4–3 g,
 // bez protihrotu, 7 colourways of Tungsten HD BARBLESS, „Poctivě vyrobeno v ČR". MČR = hard baits → no hint that jigs are used at the event.
-// VARIVAS (resold brand) and spinners (treble hooks) are deliberately not shown.
+// VARIVAS (resold brand, research/jigovky_brands.md) gets ONE brand line in bar 4 („V nabídce také · VARIVAS", after the band); spinners (treble hooks) are not shown.
 import fs from 'node:fs';
 import path from 'node:path';
 import * as fx from '../lib/fx.mjs';
@@ -285,9 +285,9 @@ export default function jigovky(ctx) {
   // ≈ 183×40 px (far under the Jigovky logo 217×107 and the TA logo 281 px). Background layer (not <img>): third-party mark, not ours.
   // ===================================================================================================
   const tVb = ctx.beats.find((b) => b > B4 + 0.3) ?? B4 + ctx.BEAT;          // beat 2 of bar 4 ≈ 7.79: the VARIVAS logo lands here
-  const tBandOut = clamp(vw(/^v$/i, 7.48) - 0.02, tBand + 1.2, tVb - 0.3);     // band rolls up on „v (Česku)" ≈ 7.46 (on screen ≥ 1.2 s)
-  ctx.tl.set(ctx.sel('bd'), { transformOrigin: '100% 50%' }, tBandOut - 0.01);
-  ctx.tl.fromTo(ctx.sel('bd'), { scaleX: 1 }, { scaleX: 0, duration: 0.26, ease: 'power3.in' }, tBandOut);
+  const tBandOut = clamp(vw(/^v$/i, 7.48) - 0.02, tBand + 1.2, tVb - 0.3);     // band drops away on „v (Česku)" ≈ 7.46 (on screen ≥ 1.2 s)
+  // the band drops away whole (no scaleX squash of its type), the strip only starts once it is (almost) gone
+  ctx.tl.fromTo(ctx.sel('bd'), { opacity: 1, y: 0 }, { opacity: 0, y: 46, duration: 0.2, ease: 'power2.in' }, tBandOut);
   {
     const VS = { h: 104, size: 38, trk: 0.12, gap: 30, padX: 40 };
     const VL = { h: 42, w: Math.round(42 * 2400 / 524) };                    // varivas_on_dark.png 2400×524 → 192×42
@@ -299,12 +299,17 @@ export default function jigovky(ctx) {
     html += `<div class="fx-abs" id="${ctx.id('vs')}" style="left:${px(sx)};top:${px(sy)};width:${px(sw)};height:${VS.h}px;border-radius:${VS.h / 2}px;background:rgba(0,33,15,.58);box-shadow:inset 0 0 0 2px rgba(255,255,255,.22),0 16px 34px rgba(0,16,7,.35);overflow:hidden">`
       + `<div class="jg-lbl" id="${ctx.id('vst')}" style="${J.FN};left:${VS.padX}px;top:${px((VS.h - VS.size * 1.12) / 2)};font-size:${VS.size}px;line-height:1.12;letter-spacing:${VS.trk}em;color:rgba(255,255,255,.82)">${ctx.esc(ctx.nb(lbl))}</div>`
       + `<i class="fx-abs" id="${ctx.id('vsd')}" style="left:${px(VS.padX + lw + VS.gap)};top:${px((VS.h - 50) / 2)};width:2px;height:50px;background:${C.yellow};border-radius:1px"></i>`
-      + `<i class="fx-abs" id="${ctx.id('vsl')}" style="left:${px(sw - VS.padX - VL.w)};top:${px((VS.h - VL.h) / 2)};width:${VL.w}px;height:${VL.h}px;background:url(${logoUrl}) center/contain no-repeat"></i></div>`;
+      + `<i class="fx-abs" id="${ctx.id('vsl')}" style="left:${px(sw - VS.padX - VL.w)};top:${px((VS.h - VL.h) / 2)};width:${VL.w}px;height:${VL.h}px;background:url(${logoUrl}) center/contain no-repeat"></i>`
+      + `<i class="fx-abs" id="${ctx.id('vsg')}" style="left:-140px;top:-20px;width:90px;height:${VS.h + 40}px;background:linear-gradient(105deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.34) 50%,rgba(255,255,255,0) 70%)"></i></div>`;
     ctx.tl.set(ctx.sel('vs'), { transformOrigin: '0% 50%' }, 0);
-    ctx.tl.fromTo(ctx.sel('vs'), { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, tBandOut + 0.16);
+    ctx.tl.fromTo(ctx.sel('vs'), { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, tBandOut + 0.17);
     ctx.tl.fromTo(ctx.sel('vst'), { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, tBandOut + 0.24);
     ctx.tl.fromTo(ctx.sel('vsd'), { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: 'expo.out' }, tVb - 0.12);
     ctx.tl.fromTo(ctx.sel('vsl'), { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tVb - 0.08);
+    // beat 3 of bar 4 (music break, so a soft accent, not a hit): a glass glint runs across the strip, the VARIVAS mark breathes
+    const tV3 = ctx.beats.find((b) => b > tVb + 0.3) ?? tVb + ctx.BEAT;
+    ctx.tl.fromTo(ctx.sel('vsg'), { x: 0 }, { x: sw + 200, duration: 0.55, ease: 'power2.inOut' }, tV3 - 0.2);
+    ctx.tl.hit(ctx.sel('vsl'), { scale: 1.06 }, { scale: 1, duration: 0.36, ease: 'power2.out' }, tV3);
   }
 
   // ===================================================================================================

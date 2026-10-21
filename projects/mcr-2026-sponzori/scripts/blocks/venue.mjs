@@ -61,6 +61,7 @@ function water(ctx, { id = 'wt', t0 = 0, t1 = ctx.dur, caus = 0.3 } = {}) {
 export function hook(ctx) {
   const L = ctx.safe.left, CW = ctx.W - L - ctx.safe.right;
   let html = '', css = V.css(ctx);
+  ctx.plate.tone(0, ctx.dur, 'halo');                                            // bright turquoise under the TA logo
   html += fx.field(ctx, { kind: 'radial', c1: '#2bb6dc', c2: DEEP, at: '50% 62%' });
   html += V.caustics(ctx, { id: 'hc', opacity: 0.12, size: 640, speed: 50 });
   html += fx.glow(ctx, { id: 'hg', x: ctx.W / 2, y: 1140, size: 1150, color: AQUA, opacity: 0.45 });
@@ -97,7 +98,7 @@ export function endCard(ctx) {
   // (blob) + 0.22 s navy flash + ~0.3 s of empty water before the lockup faded in
   const E = fx.endCard(ctx, { t: 0, plateT: -0.42, plateFly: 0.42, ease: 'power3.inOut', settle: true, logo: 'on_dark', url: ctx.data.url, line: meta.endCard.line, fg: '#ffffff', accent: GOLD, font: 'Bitter', textFont: 'Montserrat', scale: 1.5 });
   html += E.html;
-  html += fx.headline(ctx, { id: 'ex', text: 'Místo konání MČR · 24.–25. 10. 2026', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, size: 34, tracking: 0.1, color: AQUA, align: 'center', t: 0.12, reveal: 'fade', d: 0.4 }).html;
+  html += fx.headline(ctx, { id: 'ex', text: '24.–25. 10. 2026 · rybník Malý Sporťáček', x: ctx.safe.left, y: 1318, w: ctx.W - ctx.safe.left - ctx.safe.right, maxLines: 1, ...KICK, sizes: [34, 32, 30, 28], tracking: 0.08, color: AQUA, align: 'center', t: 0.12, reveal: 'fade', d: 0.4 }).html;
   return { html, css: V.css(ctx) };
 }
 
@@ -158,7 +159,7 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   ctx.tl.fromTo(ctx.sel('rule'), { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, tYr + 0.35);
   hx += fx.headline(ctx, { id: 'cap', text: 'Založil Karel Stutzig', x: L, y: 712 + ySz * 1.02 + 34, maxLines: 1, font: 'Montserrat', wght: 600, italic: true, size: 40, color: '#ffffff', t: tYr + 0.45, reveal: 'lines', d: 0.5 }).html;
   s2 += `<div class="fx-full" id="${ctx.id('hx')}">${hx}</div>`;
-  ctx.tl.fromTo(ctx.sel('hx'), { opacity: 1, y: 0 }, { opacity: 0, y: -40, duration: 0.24, ease: 'power2.in' }, B3 - 0.3);
+  ctx.tl.fromTo(ctx.sel('hx'), { opacity: 1, y: 0 }, { opacity: 0, y: -60, duration: 0.09, ease: 'power2.in' }, B3 - 0.09);
   html += fx.scene(ctx, 's2', B2 - 0.003, B3, s2, { inD: 0.001, outD: 0.001 });
 
   // =============== bars 3–4 · the trout LEAPS with a flip + „donedávna…“ + 164 m n. m. ===============
@@ -167,7 +168,7 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   ctx.tl.set(ctx.sel('fw'), { transformOrigin: '50% 45%' }, 0);
   // the camera follows the leap: the frame rises with the fish and rolls through the flip, then breathes
   ctx.tl.fromTo(ctx.sel('fw'), { y: 190, scale: 1.24, rotation: -3.2 }, { y: 0, scale: 1.16, rotation: 0, duration: 0.95, ease: 'expo.out' }, B3 - 0.12);
-  ctx.tl.fromTo(ctx.sel('fw'), { scale: 1.16, rotation: 0 }, { scale: 1.1, rotation: 1.3, duration: B5 - (B3 + 0.83), ease: 'sine.inOut' }, B3 + 0.83);
+  ctx.tl.fromTo(ctx.sel('fw'), { scale: 1.16, rotation: 0 }, { scale: 1.1, rotation: 1.3, duration: B5 - (B3 + 0.85), ease: 'sine.inOut' }, B3 + 0.85);
   s3 += `<div class="fx-full" style="background:linear-gradient(180deg,rgba(6,14,20,.35) 0%,rgba(6,14,20,0) 12%,rgba(6,14,20,0) 52%,rgba(6,14,20,.62) 58%,rgba(6,14,20,.84) 70%,rgba(6,14,20,.9) 100%)"></div>`;
   const tClaim = Math.min(B3 + 0.1, vo('donedávna', B3, B3 - 0.1, B3 + 0.5) - 0.12);
   const kY = 1040;
@@ -188,6 +189,7 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   const AR = V.AR;
   let s5 = '';
   s5 += still ? `<div class="fx-full" id="${ctx.id('arb')}">${ctx.img(still, { id: 'ars' })}</div>` : fx.field(ctx, { id: 'arf', kind: 'solid', bg: NAVY });
+  s5 += `<div class="fx-full" style="background:linear-gradient(180deg,rgba(14,20,30,.82) 0%,rgba(14,20,30,.6) 26%,rgba(14,20,30,0) 40%)"></div>`;   // kicker + TA logo over the aerial
   // the world darkens under the plan while it tilts up (venue navy, not a TA template)
   s5 += `<div class="fx-full" id="${ctx.id('ard')}" style="background:radial-gradient(120% 80% at 50% 48%,#1f2a3c 0%,${NAVY} 55%,#0e131b 100%)"></div>`;
   const tT0 = ctx.at(5, 1) - 0.06, tT1 = ctx.at(5, 2) + 0.2;                              // tilt window
@@ -212,10 +214,10 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   ctx.tl.set(ctx.sel('sc'), { transformOrigin: `${AR.cx}px ${AR.cy}px`, transformPerspective: AR.transformPerspective }, 0);
   ctx.tl.fromTo(ctx.sel('sc'), arFrom, { x: 0, y: 0, rotation: 0, rotationX: 0, rotationY: 0, scale: 1, duration: tT1 - tT0, ease: 'expo.inOut' }, tT0);
   // outline draws on over the real water edge (first beat), glow + fill follow
-  ctx.tl.fromTo(PS.ol, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.inOut' }, B5 - 0.02);
-  ctx.tl.fromTo(PS.gl, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.inOut' }, B5 + 0.02);
-  ctx.tl.fromTo(PS.wf, { fillOpacity: 0 }, { fillOpacity: 0.22, duration: 0.3, ease: 'power2.out' }, B5 + 0.3);
-  ctx.tl.fromTo(PS.wf, { fillOpacity: 0.22 }, { fillOpacity: 0.07, duration: 0.6, ease: 'power2.inOut' }, tT1 - 0.3);
+  ctx.tl.fromTo(PS.ol, { strokeDashoffset: PS.len }, { strokeDashoffset: 0, duration: 0.42, ease: 'power1.out' }, B5);
+  ctx.tl.fromTo(PS.gl, { strokeDashoffset: PS.len }, { strokeDashoffset: 0, duration: 0.42, ease: 'power1.out' }, B5 + 0.04);
+  ctx.tl.fromTo(PS.wf, { fillOpacity: 0 }, { fillOpacity: 0.14, duration: 0.25, ease: 'power2.out' }, B5 + 0.08);
+  ctx.tl.fromTo(PS.wf, { fillOpacity: 0.14 }, { fillOpacity: 0.07, duration: 0.5, ease: 'power2.inOut' }, tT0);
   ctx.tl.fromTo(PS.iso, { opacity: 0 }, { opacity: 0.85, duration: 0.4, ease: 'power2.out' }, tT1 - 0.15);
   // places pop one by one, counting up: 1→20 over two beats from beat 5.2, 21→40 over the next two beats (each run starts on a beat)
   const run = (a, t0) => PS.places.filter((p) => p.n >= a && p.n < a + 20).forEach((p, i) => {
@@ -241,8 +243,8 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   // title: kicker on „Závodí se na rybníku“, MALÝ SPORŤÁČEK on „Malý“
   const tKs = Math.max(ctx.at(5, 1), vo('Závodí', ctx.at(5, 1)) - 0.1);
   const tMs = Math.max(tKs + 0.6, vo('Malý', ctx.at(6, 1)) - 0.12);
-  let ttl5 = fx.headline(ctx, { id: 'k5', text: 'Závodí se na rybníku', x: L, y: 356, w: CW, maxLines: 1, ...KICK, size: 36, tracking: 0.12, color: RED, t: tKs, reveal: 'chars', stagger: 0.012, d: 0.4 }).html;
-  const MS = fx.headline(ctx, { id: 'ms', text: 'Malý Sporťáček', x: L, y: 404, w: CW, maxLines: 1, font: 'Bitter', wght: 900, upper: true, lh: 1, sizes: [104, 100, 96, 92, 88], color: '#ffffff', t: tMs, reveal: 'chars', stagger: 0.025, d: 0.5, style: 'filter:drop-shadow(0 6px 18px rgba(0,0,0,.4))' });
+  let ttl5 = fx.headline(ctx, { id: 'k5', text: 'Závodí se na rybníku', x: L, y: 374, w: CW, maxLines: 1, ...KICK, size: 36, tracking: 0.12, color: RED, t: tKs, reveal: 'chars', stagger: 0.012, d: 0.4 }).html;
+  const MS = fx.headline(ctx, { id: 'ms', text: 'Malý Sporťáček', x: L, y: 420, w: CW, maxLines: 1, font: 'Bitter', wght: 900, upper: true, lh: 1, sizes: [104, 100, 96, 92, 88], color: '#ffffff', t: tMs, reveal: 'chars', stagger: 0.025, d: 0.5, style: 'filter:drop-shadow(0 6px 18px rgba(0,0,0,.4))' });
   ttl5 += MS.html;
   // facts chips (web: 0,2 ha · hloubka 1,5 m) on beats 6.0 / 6.1, Reels-safe (≤ 1460)
   const chips = [['50 × 40 m', tDm + 0.12], ['0,2 ha', ctx.at(6, 0)], ['hloubka 1,5 m', ctx.at(6, 1)]];
@@ -258,20 +260,21 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   ch += '</div>';
   s5 += `<div class="fx-full" id="${ctx.id('t5')}">${ttl5}</div>${ch}`;
   // =============== bar 7 · lockup ===============
-  const tL = B7 - 0.08;
+  const tL = B7 - 0.04;
   ctx.tl.set(ctx.sel('pl'), { transformOrigin: '540px 470px' }, 0);
-  ctx.tl.fromTo(ctx.sel('pl'), { scale: 1, y: 0 }, { scale: 0.56, y: 0, duration: 0.6, ease: 'expo.inOut' }, tL - 0.2);
-  ctx.tl.fromTo(ctx.sel('chs'), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, tL - 0.2);
-  ctx.tl.fromTo(ctx.sel('t5'), { opacity: 1, y: 0 }, { opacity: 0, y: -30, duration: 0.25, ease: 'power2.in' }, tL - 0.2);
+  ctx.tl.fromTo(ctx.sel('pl'), { scale: 1, y: 0 }, { scale: 0.5, y: 92, duration: 0.55, ease: 'expo.inOut' }, tL - 0.42);   // stays under the title (≥ y 560)
+  ctx.tl.fromTo(ctx.sel('chs'), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power1.in' }, tL - 0.42);
+  // CD: „ZÁVODÍ SE NA RYBNÍKU / MALÝ SPORŤÁČEK“ stays as the lockup header (was on screen only ~1.0 s before the shrink)
+  ctx.tl.fromTo(ctx.sel('t5'), { opacity: 1, y: 0 }, { opacity: 0, y: -24, duration: 0.18, ease: 'power2.in' }, END - 0.46);   // clears the corner before the Reel's plate hero flies in (−0.42 s)
   // venue badge (≤ TA logo) + URL row
-  const LG = ctx.logo('on_dark', { box: [150, 150], at: [tL, END], id: 'logo', label: 'venue lockup badge' });
+  const LG = ctx.logo('on_dark', { box: [150, 150], at: [tL - 0.16, END], id: 'logo', label: 'venue lockup badge' });
   const uSz = 58, uW = ctx.measure(D.url, { font: 'Montserrat', wght: 800, italic: true, size: uSz });
-  const rowW = LG.w + 24 + uW, rx = (W - rowW) / 2, yRow = 1030;
+  const rowW = LG.w + 24 + uW, rx = (W - rowW) / 2, yRow = 1040;
   let lk = `<div class="fx-abs" id="${ctx.id('lk')}" style="left:${px(rx)};top:${yRow}px;width:${px(rowW + 10)};height:${LG.h}px;display:flex;align-items:center;gap:24px">${LG.html}<span style="font:italic 800 ${uSz}px/1 'Montserrat';color:#fff;white-space:nowrap">${ctx.esc(D.url)}</span></div>`;
-  ctx.tl.fromTo(ctx.sel('lk'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tL);
-  const TC = fx.taChip(ctx, { id: 'mk', text: 'Místo konání', sub: 'MČR 2026', cx: W / 2, y: yRow + LG.h + 40, size: 32, tone: 'dark', t: tL + 0.1 });
+  ctx.tl.fromTo(ctx.sel('lk'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tL - 0.16);
+  const TC = fx.taChip(ctx, { id: 'mk', text: 'Místo konání', sub: 'MČR 2026', cx: W / 2, y: yRow + LG.h + 34, size: 32, tone: 'dark', t: tL - 0.04 });
   lk += TC.html;
-  lk += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: TC.y + TC.h + 30, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 72, align: 'center', color: '#ffffff', t: tL + 0.2, reveal: 'lines', d: 0.5 }).html;
+  lk += fx.headline(ctx, { id: 'dt', text: '24.–25. 10. 2026', x: L, y: TC.y + TC.h + 26, w: CW, maxLines: 1, font: 'Bitter', wght: 900, size: 72, align: 'center', color: '#ffffff', t: tL + 0.06, reveal: 'lines', d: 0.5 }).html;
   s5 += `<div class="fx-full">${lk}</div>`;
   html += fx.scene(ctx, 's5', B5 - 0.003, END, s5, { inD: 0.001 });
 
@@ -284,7 +287,7 @@ ${ctx.S} .vn-dl{position:absolute;font:800 30px/1 'Montserrat';color:#fff;white-
   html += fx.scene(ctx, 'ttl', 0, tNo + 0.35, t0s, { outD: 0.05 });
   // „Pstruží líheň od roku“ arrives over the drone with the VO and carries across the cut into 1934
   const tK2 = vo('pstruží', 2.8) - 0.08;
-  const K2 = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 50, tracking: 0.08, color: AQUA, t: tK2, reveal: 'chars', stagger: 0.014, d: 0.4, out: B3 - 0.3, outD: 0.24, style: 'filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))' });
+  const K2 = fx.headline(ctx, { id: 'k2', text: 'Pstruží líheň od roku', x: L, y: 650, maxLines: 1, ...KICK, size: 50, tracking: 0.08, color: AQUA, t: tK2, reveal: 'chars', stagger: 0.014, d: 0.4, out: B3 - 0.09, outD: 0.08, style: 'filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))' });
   html += fx.scene(ctx, 'k2s', tK2 - 0.01, B3, K2.html, { inD: 0.001, outD: 0.001 });
 
   // =============== accents + transitions ===============

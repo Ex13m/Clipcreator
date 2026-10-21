@@ -1,6 +1,6 @@
 {
  "out": "reel_jigovky",
- "stamp": "e72fe5d74f85bbc3",
+ "stamp": "fa6291ad9e7c5879",
  "dur": 14.633,
  "box": {
   "x": 64,
@@ -31,7 +31,7 @@
    "g0": 0,
    "g1": 14.623,
    "tone": "dark",
-   "by": "probe"
+   "by": "jigovky-hook theme"
   }
  ],
  "beats": [

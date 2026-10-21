@@ -168,24 +168,15 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
   <div id="el-troutshop-endcard" class="host" data-composition-id="troutshop-endcard" data-composition-src="compositions/troutshop-endcard.html" data-start="10.950" data-duration="3.644" data-track-index="2" data-width="1080" data-height="1920"></div>
   <audio id="mix" src="assets/audio/mix_reel_troutshop.wav" data-start="0" data-duration="14.600" data-track-index="10" data-volume="1"></audio>
   <div id="ta-plate"><i id="ta-scrim"></i><i id="ta-sh2"></i><i id="ta-sh"></i><img id="ta-lg-d" class="ta-lg" src="assets/prep/ta_cz/logo_h_on_dark.png" alt="Trout Area Czech Republic"><div id="ta-glint"><i id="ta-glint-s"></i></div></div>
-  
+  <div id="badge">DRAFT · v6 · reel troutshop</div>
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
   gsap.set("#ta-plate", {"x":0,"y":0,"scale":1});
-  gsap.set("#ta-sh", {"opacity":0.65});
-  gsap.set("#ta-sh2", {"opacity":0.5});
-  gsap.set("#ta-scrim", {"opacity":0.35});
+  gsap.set("#ta-sh", {"opacity":0.3});
+  gsap.set("#ta-sh2", {"opacity":0});
+  gsap.set("#ta-scrim", {"opacity":0});
   tl.fromTo("#ta-plate", {"x":0,"y":0,"scale":1}, {"x":251,"y":146.5,"scale":1.5,"duration":0.42,"ease":"power3.inOut","immediateRender":false}, 10.530);
-  tl.fromTo("#ta-sh", {"opacity":0.65}, {"opacity":0.3,"duration":0.1,"ease":"none","immediateRender":false}, 2.050);
-  tl.fromTo("#ta-sh2", {"opacity":0.5}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 2.050);
-  tl.fromTo("#ta-scrim", {"opacity":0.35}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 2.050);
-  tl.fromTo("#ta-sh", {"opacity":0.3}, {"opacity":0.65,"duration":0.1,"ease":"none","immediateRender":false}, 4.971);
-  tl.fromTo("#ta-sh2", {"opacity":0}, {"opacity":0.5,"duration":0.1,"ease":"none","immediateRender":false}, 4.971);
-  tl.fromTo("#ta-scrim", {"opacity":0}, {"opacity":0.35,"duration":0.1,"ease":"none","immediateRender":false}, 4.971);
-  tl.fromTo("#ta-sh", {"opacity":0.65}, {"opacity":0.3,"duration":0.1,"ease":"none","immediateRender":false}, 7.450);
-  tl.fromTo("#ta-sh2", {"opacity":0.5}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 7.450);
-  tl.fromTo("#ta-scrim", {"opacity":0.35}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 7.450);
   tl.set({}, {}, 14.600);
   window.__timelines["main"] = tl;
 </script>

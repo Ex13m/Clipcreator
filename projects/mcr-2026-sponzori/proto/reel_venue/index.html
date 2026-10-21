@@ -161,13 +161,13 @@ body { font-family:'Inter', sans-serif; color:#fff; -webkit-font-smoothing:antia
 <script>
   const tl = gsap.timeline({ paused: true });
   gsap.set("#ta-plate", {"x":0,"y":0,"scale":1});
-  gsap.set("#ta-sh", {"opacity":0.3});
-  gsap.set("#ta-sh2", {"opacity":0});
-  gsap.set("#ta-scrim", {"opacity":0});
+  gsap.set("#ta-sh", {"opacity":0.95});
+  gsap.set("#ta-sh2", {"opacity":0.8});
+  gsap.set("#ta-scrim", {"opacity":0.5});
   tl.fromTo("#ta-plate", {"x":0,"y":0,"scale":1}, {"x":251,"y":356.5,"scale":1.5,"duration":0.42,"ease":"power3.inOut","immediateRender":false}, 16.086);
-  tl.fromTo("#ta-sh", {"opacity":0.3}, {"opacity":0.65,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
-  tl.fromTo("#ta-sh2", {"opacity":0}, {"opacity":0.5,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
-  tl.fromTo("#ta-scrim", {"opacity":0}, {"opacity":0.35,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
+  tl.fromTo("#ta-sh", {"opacity":0.95}, {"opacity":0.65,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
+  tl.fromTo("#ta-sh2", {"opacity":0.8}, {"opacity":0.5,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
+  tl.fromTo("#ta-scrim", {"opacity":0.5}, {"opacity":0.35,"duration":0.1,"ease":"none","immediateRender":false}, 1.779);
   tl.fromTo("#ta-sh", {"opacity":0.65}, {"opacity":0.3,"duration":0.1,"ease":"none","immediateRender":false}, 5.447);
   tl.fromTo("#ta-sh2", {"opacity":0.5}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 5.447);
   tl.fromTo("#ta-scrim", {"opacity":0.35}, {"opacity":0,"duration":0.1,"ease":"none","immediateRender":false}, 5.447);

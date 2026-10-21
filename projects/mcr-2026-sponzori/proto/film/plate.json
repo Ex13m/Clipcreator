@@ -1,6 +1,6 @@
 {
  "out": "film",
- "stamp": "4eb7439b252b678d",
+ "stamp": "6d8aeef3dbdd39dd",
  "dur": 135.9,
  "box": {
   "x": 64,
@@ -23,6 +23,15 @@
    "cx": 540,
    "cy": 700,
    "fly": 0.45,
+   "hold": false
+  },
+  {
+   "g0": 100.66,
+   "g1": 107.949,
+   "scale": 1.8,
+   "cx": 540,
+   "cy": 335,
+   "fly": 0.62,
    "hold": false
   },
   {

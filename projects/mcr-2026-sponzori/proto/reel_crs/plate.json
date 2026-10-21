@@ -1,6 +1,6 @@
 {
  "out": "reel_crs",
- "stamp": "f5b1be4350800c40",
+ "stamp": "323d3a2bf79ca405",
  "dur": 12.766,
  "box": {
   "x": 64,
@@ -17,33 +17,27 @@
  },
  "moves": [
   {
-   "g0": 8.693,
-   "g1": 12.742,
-   "scale": 1.5,
+   "g0": 1.824,
+   "g1": 69.113,
+   "scale": 1.8,
    "cx": 540,
-   "cy": 680,
-   "fly": 0.42,
+   "cy": 335,
+   "fly": 0.62,
    "hold": true
   }
  ],
  "tones": [
   {
    "g0": 0,
-   "g1": 8.4,
-   "tone": "dark",
-   "by": "probe"
-  },
-  {
-   "g0": 8.4,
-   "g1": 9.3,
+   "g1": 1.824,
    "tone": "scrim",
-   "by": "probe"
+   "by": "crs-hook"
   },
   {
-   "g0": 9.3,
+   "g0": 1.824,
    "g1": 12.742,
    "tone": "dark",
-   "by": "probe"
+   "by": "crs theme"
   }
  ],
  "beats": [

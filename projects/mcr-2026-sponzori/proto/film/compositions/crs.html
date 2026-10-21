@@ -5,25 +5,46 @@
   <style>
   #bw-crs { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #crs-stage { position:absolute; inset:0; overflow:hidden; }
-  
+  #b-crs .crs-fact{display:flex;flex-direction:column;align-items:center;gap:10px;padding:24px 30px 26px;box-sizing:border-box;border-radius:24px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22),0 24px 50px rgba(0,0,0,.25);text-align:center;font-family:'Inter';color:#fff}
+#b-crs .crs-fact span{font-size:26px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#cfe6ff;opacity:.9;line-height:1.1}
+#b-crs .crs-fact b{font-size:42px;font-weight:800;line-height:1.08}
+#b-crs .crs-fact i{position:absolute;left:50%;top:0;width:120px;margin-left:-60px;height:3px;border-radius:0 0 3px 3px;background:#38B0C0}
   </style>
   <div id="bw-crs" class="blk blk-crs" style="--bg:#182F5D;--fg:#ffffff;--acc:#38B0C0;--acc2:#ffffff">
-    <div id="crs-stage" class="blk-stage"><div class="fx-field" id="crs-field" style="background:radial-gradient(120% 80% at 50% 34%, #2B5DA9 0%, #182F5D 100%);"></div><div class="fx-glow" id="crs-gl" style="left:270px;top:10px;width:1100px;height:1100px;background:radial-gradient(closest-side, #38B0C0, transparent);opacity:0.22;"></div><div class="fx-big" id="crs-big" style="left:-40px;top:1080px;font-family:'Inter';font-weight:900;font-size:620px;letter-spacing:-0.03em;text-transform:uppercase;color:rgba(255,255,255,.05);--oc:rgba(255,255,255,.05);--ow:3px;opacity:1;">ČRS</div><div id="crs-kick" class="fx-abs" style="left:64px;top:430px;display:flex;align-items:center;gap:18px;font-family:'Montserrat';font-weight:800;font-size:44px;letter-spacing:.22em;text-transform:uppercase;color:#fff;line-height:1">
-    <b id="crs-kick-hl" style="display:block;width:64px;height:4px;border-radius:2px;background:#e31e24"></b><span>Děkujeme</span></div><div class="fx-t " id="crs-ttl" style="left:64px;top:520px;width:952px;font-family:'Inter';font-weight:900;font-size:132px;line-height:0.98;letter-spacing:0em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="crs-ttl-l0" style=""><span>Český</span></span><span class="fx-ln" id="crs-ttl-l1" style=""><span>rybářský</span></span><span class="fx-ln" id="crs-ttl-l2" style=""><span>svaz</span></span></div><img id="crs-logo" class="fx-logo " src="assets/prep/crs/logo_crs_white.png" alt="Český rybářský svaz" style="width:278px; height:84px;position:absolute;left:64px;top:964.0799999999999px"><div class="fx-t " id="crs-sub" style="left:64px;top:1108.1px;width:952px;font-family:'Inter';font-weight:700;font-size:64px;line-height:0.98;letter-spacing:0em;color:rgba(255,255,255,.92);text-align:left;"><span class="fx-ln" id="crs-sub-l0" style=""><span><span class="fx-c">za</span> <span class="fx-c">dlouholetou</span> <span class="fx-c">podporu</span></span></span></div><div class="fx-chip dark" id="crs-fact" style="left:64px;top:1240.8px;font-family:'Inter';--vs:44px;--ls:22px;--acc:#38B0C0;"><i></i><span>Vlastník areálu Líheň Liběchov</span><b>ČRS · MO Mělník</b></div><img id="crs-badge" class="fx-logo " src="assets/prep/crs/badge_crs_round.png" alt="Český rybářský svaz" style="width:150px; height:150px;position:absolute;left:64px;top:1410.8px"><div id="crs-url" class="fx-abs" style="left:244px;top:1449.8px;font-family:'Inter';font-weight:800;font-size:64px;line-height:72px;color:#fff;letter-spacing:-.01em">rybsvaz.cz</div>
+    <div id="crs-stage" class="blk-stage"><div class="fx-field" id="crs-field" style="background:radial-gradient(120% 80% at 50% 40%, #20488a 0%, #0c1934 100%);"></div><div class="fx-mesh" id="crs-mesh" style="--b:170px;"><i id="crs-mesh0" style="left:-340.5px;top:1535.1px;width:980px;height:980px;background:#2B5DA9;opacity:0.42"></i><i id="crs-mesh1" style="left:-329.3px;top:776.1px;width:980px;height:980px;background:#38B0C0;opacity:0.42"></i><i id="crs-mesh2" style="left:-62.1px;top:911px;width:980px;height:980px;background:#182F5D;opacity:0.42"></i><i id="crs-mesh3" style="left:424.2px;top:1405.2px;width:980px;height:980px;background:#1d3f7c;opacity:0.42"></i></div><div class="fx-abs" id="crs-cau" style="left:-10%;top:0;width:120%;height:100%;background:radial-gradient(60% 9% at 30% 62%, rgba(56,176,192,0.16) 0%, transparent 100%), radial-gradient(52% 7% at 72% 70%, rgba(56,176,192,0.128) 0%, transparent 100%)"></div><div class="fx-abs" id="crs-hatch" style="left:-120px;top:0px;width:1320px;height:1920px;background:repeating-linear-gradient(118deg, rgba(255,255,255,0.055) 0 1.6px, transparent 1.6px 15px);-webkit-mask-image:radial-gradient(70% 46% at 50% 42%, #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);mask-image:radial-gradient(70% 46% at 50% 42%, #000 0%, rgba(0,0,0,.55) 45%, transparent 100%)"></div><div class="fx-full" style="background:radial-gradient(95% 62% at 50% 46%, rgba(12,25,52,0) 0%, rgba(12,25,52,.5) 72%, rgba(8,16,34,.86) 100%)"></div><div class="fx-t" id="crs-thx" style="left:64px;top:500px;width:952px;font-family:'Inter';font-weight:900;font-size:150px;line-height:1;letter-spacing:-0.01em;color:#fff;text-align:center;white-space:nowrap"><span class="fx-c" id="crs-thx-c0">D</span><span class="fx-c" id="crs-thx-c1">Ě</span><span class="fx-c" id="crs-thx-c2">K</span><span class="fx-c" id="crs-thx-c3">U</span><span class="fx-c" id="crs-thx-c4">J</span><span class="fx-c" id="crs-thx-c5">E</span><span class="fx-c" id="crs-thx-c6">M</span><span class="fx-c" id="crs-thx-c7">E</span></div><div class="fx-glow" id="crs-sg" style="left:90px;top:396px;width:900px;height:900px;background:radial-gradient(closest-side, #38B0C0, transparent);opacity:0.22;"></div><div class="fx-abs" id="crs-rv" style="left:289.5px;top:770px;width:501px;height:152px;--p:-2%;-webkit-mask-image:linear-gradient(62deg, #000 calc(var(--p) - 22%), transparent var(--p));mask-image:linear-gradient(62deg, #000 calc(var(--p) - 22%), transparent var(--p))"><img id="crs-logo" class="fx-logo " src="assets/prep/crs/logo_crs_white.png" alt="Český rybářský svaz" style="width:501px; height:152px;position:absolute;left:0;top:0"><i id="crs-rv-sw" style="position:absolute;inset:0;-webkit-mask-image:url(assets/prep/crs/logo_crs_white.png);mask-image:url(assets/prep/crs/logo_crs_white.png);-webkit-mask-size:100% 100%;mask-size:100% 100%;background-image:linear-gradient(105deg,transparent 40%,rgba(190,240,255,.95) 50%,transparent 60%);background-size:300% 100%;background-position:110% 0;mix-blend-mode:screen;opacity:.85"></i></div><i class="fx-abs" id="crs-hl-l" style="left:64px;top:848px;width:191.5px;height:2px;background:linear-gradient(90deg,rgba(56,176,192,0),#38B0C0)"></i>
+    <i class="fx-abs" id="crs-hl-r" style="left:824.5px;top:848px;width:191.5px;height:2px;background:linear-gradient(90deg,#38B0C0,rgba(56,176,192,0))"></i><div class="fx-t" id="crs-za" style="left:64px;top:994px;width:952px;font-family:'Inter';font-weight:800;font-size:96px;line-height:1.04;letter-spacing:0em;color:#fff;text-align:center;text-transform:uppercase;"><span class="fx-ln" id="crs-za-l0"><span><span class="fx-c" id="crs-za-w0">za</span> <span class="fx-c" id="crs-za-w1">dlouholetou</span></span></span><span class="fx-ln" id="crs-za-l1"><span><span class="fx-c" id="crs-za-w2">podporu</span></span></span></div><div class="fx-abs crs-fact" id="crs-fact" style="left:104px;width:872px;top:1240px">
+    <i id="crs-fact-bar"></i><span>Areál MČR 2026 · Líheň Liběchov</span><b style="font-size:42px">vlastní ČRS · místní organizace Mělník</b></div><div class="fx-abs" id="crs-url" style="left:0;width:1080px;top:1398px;text-align:center;font-family:'Inter';font-weight:800;font-size:64px;line-height:1;color:#fff;letter-spacing:-.01em">rybsvaz.cz</div>
     </div>
     <div class="fx-ov fx-ov-fd" id="crs-tout" style="overflow:hidden;--capc:#e31e24"><i id="crs-tout0" style="background:#04060a"></i><i id="crs-tout1" style="background:#04060a"></i><i id="crs-tout2" style="background:#04060a"></i><i id="crs-tout3" style="background:#04060a"></i><i id="crs-tout4" style="background:#04060a"></i><i id="crs-tout5" style="background:#04060a"></i><i id="crs-tout6" style="background:#04060a"></i><i id="crs-tout7" style="background:#04060a"></i></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
-  gsap.set("#crs-big", {"x":0});
-  gsap.set("#crs-kick", {"scale":1.12});
-  gsap.set("#crs-kick-hl", {"scaleX":0});
-  gsap.set("#crs-ttl .fx-ln > span", {"yPercent":125,"opacity":0});
-  gsap.set("#crs-logo", {"opacity":0,"y":30});
-  gsap.set("#crs-sub .fx-c", {"yPercent":110,"opacity":0});
-  gsap.set("#crs-fact", {"x":-80,"opacity":0,"filter":"blur(12px)"});
-  gsap.set("#crs-badge", {"opacity":0,"rotation":-40});
-  gsap.set("#crs-url", {"opacity":0,"x":-40});
+  gsap.set("#crs-mesh0", {"x":0,"y":0,"scale":1});
+  gsap.set("#crs-mesh1", {"x":0,"y":0,"scale":1});
+  gsap.set("#crs-mesh2", {"x":0,"y":0,"scale":1});
+  gsap.set("#crs-mesh3", {"x":0,"y":0,"scale":1});
+  gsap.set("#crs-cau", {"x":0,"y":0});
+  gsap.set("#crs-hatch", {"x":0});
+  gsap.set("#crs-thx-c0", {"x":-42});
+  gsap.set("#crs-thx-c1", {"x":-30});
+  gsap.set("#crs-thx-c2", {"x":-18});
+  gsap.set("#crs-thx-c3", {"x":-6});
+  gsap.set("#crs-thx-c4", {"x":6});
+  gsap.set("#crs-thx-c5", {"x":18});
+  gsap.set("#crs-thx-c6", {"x":30});
+  gsap.set("#crs-thx-c7", {"x":42});
+  gsap.set("#crs-thx", {"scale":1.07});
+  gsap.set("#crs-sg", {"scale":0.4,"opacity":0});
+  gsap.set("#crs-rv", {"--p":"-2%","scale":1});
+  gsap.set("#crs-rv-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#crs-hl-l", {"scaleX":0});
+  gsap.set("#crs-hl-r", {"scaleX":0});
+  gsap.set("#crs-za-w0", {"yPercent":118,"opacity":0});
+  gsap.set("#crs-za-w1", {"yPercent":118,"opacity":0});
+  gsap.set("#crs-za-w2", {"yPercent":118,"opacity":0});
+  gsap.set("#crs-fact", {"opacity":0,"y":36});
+  gsap.set("#crs-fact-bar", {"scaleX":0});
+  gsap.set("#crs-url", {"opacity":0,"y":30});
   gsap.set("#crs-tout0", {"yPercent":101});
   gsap.set("#crs-tout1", {"yPercent":101});
   gsap.set("#crs-tout2", {"yPercent":101});
@@ -32,21 +53,43 @@
   gsap.set("#crs-tout5", {"yPercent":101});
   gsap.set("#crs-tout6", {"yPercent":101});
   gsap.set("#crs-tout7", {"yPercent":101});
-  gsap.set("#crs-kick", {"transformOrigin":"0% 50%"});
-  gsap.set("#crs-kick-hl", {"transformOrigin":"0% 50%"});
-  tl.fromTo("#crs-big", {"x":0}, {"x":-160,"duration":7.289,"ease":"none","immediateRender":false}, 0.000);
-  tl.fromTo("#crs-kick", {"scale":1.12}, {"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
-  tl.fromTo("#crs-kick-hl", {"scaleX":0}, {"scaleX":1,"duration":0.7,"ease":"expo.out","immediateRender":false}, 0.040);
-  tl.fromTo("#crs-ttl .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 0.832);
-  tl.fromTo("#crs-logo", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 1.784);
-  tl.fromTo("#crs-logo", {"y":30}, {"y":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 1.784);
-  tl.fromTo("#crs-sub .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.62,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 2.675);
-  tl.fromTo("#crs-fact", {"x":-80,"opacity":0,"filter":"blur(12px)"}, {"x":0,"opacity":1,"filter":"blur(0px)","duration":0.6,"ease":"expo.out","immediateRender":false}, 3.586);
-  tl.set("#crs-fact", {"filter":"none"}, 4.206);
-  tl.fromTo("#crs-badge", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 4.507);
-  tl.fromTo("#crs-badge", {"rotation":-40}, {"rotation":0,"duration":0.8,"ease":"expo.out","immediateRender":false}, 4.507);
-  tl.fromTo("#crs-url", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 4.557);
-  tl.fromTo("#crs-url", {"x":-40}, {"x":0,"duration":0.6,"ease":"expo.out","immediateRender":false}, 4.557);
+  gsap.set("#crs-thx", {"transformOrigin":"50% 60%"});
+  gsap.set("#crs-hl-l", {"transformOrigin":"100% 50%"});
+  gsap.set("#crs-hl-r", {"transformOrigin":"0% 50%"});
+  gsap.set("#crs-fact-bar", {"transformOrigin":"50% 50%"});
+  gsap.set("#crs-rv", {"transformOrigin":"50% 50%"});
+  tl.fromTo("#crs-mesh0", {"x":0,"y":0,"scale":1}, {"x":-116.84731193820696,"y":-27.325916138628543,"scale":1.2215680705194245,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-mesh1", {"x":0,"y":0,"scale":1}, {"x":-118.23330033221762,"y":20.515523209307396,"scale":1.0270748797411215,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-mesh2", {"x":0,"y":0,"scale":1}, {"x":-103.88870587433281,"y":-60.05944381824035,"scale":1.122058923530858,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-mesh3", {"x":0,"y":0,"scale":1}, {"x":-116.98235737395478,"y":26.74187845369739,"scale":1.112887762941682,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-cau", {"x":0,"y":0}, {"x":-160,"y":-60,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-hatch", {"x":0}, {"x":90,"duration":7.289,"ease":"sine.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c0", {"x":-42}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c1", {"x":-30}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c2", {"x":-18}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c3", {"x":-6}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c4", {"x":6}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c5", {"x":18}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c6", {"x":30}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx-c7", {"x":42}, {"x":0,"duration":1.3,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-thx", {"scale":1.07}, {"scale":1,"duration":1.1,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#crs-sg", {"scale":0.4,"opacity":0}, {"scale":1,"opacity":0.22,"duration":1.2,"ease":"expo.out","immediateRender":false}, 0.740);
+  tl.fromTo("#crs-sg", {"opacity":0.36}, {"opacity":0.22,"duration":1,"ease":"power2.out","immediateRender":false}, 3.646);
+  tl.fromTo("#crs-sg", {"opacity":0.36}, {"opacity":0.22,"duration":1,"ease":"power2.out","immediateRender":false}, 5.467);
+  tl.fromTo("#crs-rv", {"--p":"-2%"}, {"--p":"126%","duration":1.1,"ease":"power3.out","immediateRender":false}, 0.740);
+  tl.fromTo("#crs-rv-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":1,"ease":"power2.inOut","immediateRender":false}, 1.190);
+  tl.fromTo("#crs-hl-l", {"scaleX":0}, {"scaleX":1,"duration":1,"ease":"expo.out","immediateRender":false}, 0.990);
+  tl.fromTo("#crs-hl-r", {"scaleX":0}, {"scaleX":1,"duration":1,"ease":"expo.out","immediateRender":false}, 0.990);
+  tl.fromTo("#crs-za-w0", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 2.620);
+  tl.fromTo("#crs-za-w1", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 2.837);
+  tl.fromTo("#crs-za-w2", {"yPercent":118,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 3.570);
+  tl.fromTo("#crs-fact", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 3.606);
+  tl.fromTo("#crs-fact", {"y":36}, {"y":0,"duration":0.8,"ease":"expo.out","immediateRender":false}, 3.606);
+  tl.fromTo("#crs-fact-bar", {"scaleX":0}, {"scaleX":1,"duration":0.8,"ease":"expo.out","immediateRender":false}, 3.706);
+  tl.fromTo("#crs-url", {"opacity":0}, {"opacity":1,"duration":0.07,"ease":"none","immediateRender":false}, 4.061);
+  tl.fromTo("#crs-url", {"y":30}, {"y":0,"duration":0.8,"ease":"expo.out","immediateRender":false}, 4.061);
+  tl.fromTo("#crs-rv-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":1.1,"ease":"power2.inOut","immediateRender":false}, 5.267);
+  tl.fromTo("#crs-rv", {"scale":1}, {"scale":0.5555555555555556,"duration":0.62,"ease":"power3.inOut","immediateRender":false}, 6.669);
   tl.fromTo("#crs-tout0", {"yPercent":101}, {"yPercent":0,"duration":0.4271076679835678,"ease":"power3.inOut","immediateRender":false}, 6.862);
   tl.fromTo("#crs-tout1", {"yPercent":101}, {"yPercent":0,"duration":0.4397916716350093,"ease":"power3.inOut","immediateRender":false}, 6.849);
   tl.fromTo("#crs-tout2", {"yPercent":101}, {"yPercent":0,"duration":0.47881084058557677,"ease":"power3.inOut","immediateRender":false}, 6.810);
