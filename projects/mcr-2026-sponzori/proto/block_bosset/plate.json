@@ -1,6 +1,6 @@
 {
  "out": "block_bosset",
- "stamp": "7a3c36fa3a2dafe0",
+ "stamp": "140df509c9a3b469",
  "dur": 11,
  "box": {
   "x": 64,
@@ -19,6 +19,18 @@
  "tones": [
   {
    "g0": 0,
+   "g1": 2.299,
+   "tone": "dark",
+   "by": "bosset theme"
+  },
+  {
+   "g0": 2.299,
+   "g1": 4.479,
+   "tone": "halo",
+   "by": "bosset"
+  },
+  {
+   "g0": 4.479,
    "g1": 10.99,
    "tone": "dark",
    "by": "bosset theme"

@@ -1,116 +1,130 @@
-# MČR 2026 · film v3 — глобальные изменения движка (21. 10.)
+# MČR 2026 · film v3 — globální změny enginu (21. 10.)
 
-Вход: замечания оператора к film v2 (21. 10.). Этот этап меняет только общие файлы: `scripts/build.mjs`, `scripts/lib/*`,
-`data/content.json`, `data/tokens.json`, `audio/`, плюс новые `scripts/music_edit.py`, `scripts/plate_probe.mjs`,
-`scripts/lib/plate_probe.py`, `data/block_plan_B.json`, `data/plate_tone.json`, заглушка `scripts/blocks/crs.mjs` + `data/blocks/crs.json`.
-Сборки FINAL=1: фильм 135,900 с, 13 голых блоков, 9 Reels. Ошибок lint 0, правила логотипа и чипа приза проходят везде.
-Кадры швов: `_work/snap/v3_global_seams/seams_{1,2}.jpg` (по 4 кадра на шов: −0,2 / −0,067 / +0,034 / +0,2 с).
+Výstup: `proto/film/` (FINAL=1, **135,900 s**, 72 taktů), lint 0 chyb (7 varování, viz §6), všech 12 bloků se staví samostatně
+(`BLOCK=all`) a 9 Reels (`BLOCK=all REEL=1`, včetně nového `crs`). Mix filmu −14,04 LUFS / −2,02 dBTP, VO +9,45 LU nad hudbou.
+Snímky: `_work/snap/v3_global/seam_1..3.jpg` (každý šev −0,2 / −0,067 / +0,034 / +0,2 s), `logo_bars.jpg` (výřez loga TA uprostřed
+každého taktu), `reel_<key>/` (hook 1,0 s + první snímek end cardu + konec).
 
-## 1. План B (новый порядок, такты на сетке трека)
+## 1. Plán B (nové pořadí, takty na mřížce `audio/track_B.beats.json`)
 
-Трек `audio/track_B.wav` (48 kHz, 135,872 с) вырезан из `music/sponsors_3.mp3` скриптом `scripts/music_edit.py data/block_plan_B.json`.
-Куски источника (полуоткрытые такты): [10,69) + [81,89) + [101,конец), в конце fade 2,5 с. Сетка: `audio/track_B.beats.json`
-(+ `bars[]`: dB full/low/high и такт источника). Все границы блоков стоят на сильных долях.
-
-| блок | такты | n | t0, с | t1, с | длина, с | такты источника | VO, с | хвост после VO, с | в плане A |
+| blok | takty | počet | t0, s | t1, s | délka, s | takty zdroje | VO, s | rezerva VO → konec, s | plán A |
 |---|---|---|---|---|---|---|---|---|---|
-| intro | 0–7 | 8 | 0,000 | 14,689 | 14,689 | 10–17 | 13,18 (с 0,5) | 1,01 | 8 |
-| venue | 8–15 | 8 | 14,689 | 29,366 | 14,677 | 18–25 | 12,49 | 1,93 | **6 → 8** |
-| gausseholler | 16–20 | 5 | 29,366 | 38,531 | 9,165 | 26–30 | 5,87 | 3,04 | 5 |
-| activefishing | 21–25 | 5 | 38,531 | 47,689 | 9,158 | 31–35 | 6,50 | 2,41 | 5 |
-| bosset | 26–31 | 6 | 47,689 | 58,679 | 10,990 | 36–41 | 8,26 | 2,48 | **5 → 6** |
-| jigovky | 32–36 | 5 | 58,679 | 67,824 | 9,145 | 42–46 | 7,88 | 1,02 | 5 |
-| moonky | 37–41 | 5 | 67,824 | 76,946 | 9,122 | 47–51 | 7,38 | 1,49 | 5 |
-| broll | 42 | 1 | 76,946 | 78,772 | 1,826 | 52 | — | — | 1 |
-| brollbreak | 43–44 | 2 | 78,772 | 82,424 | 3,652 | 53–54 | — | — | 2 |
-| troutshop | 45–49 | 5 | 82,424 | 91,548 | 9,124 | 55–59 | 6,10 | 2,78 | 5 |
-| velkaryba | 50–54 | 5 | 91,548 | 100,660 | 9,112 | 60–64 | 6,80 | 2,06 | 5 |
-| crs | 55–58 | 4 | 100,660 | 107,949 | 7,289 | 65–68 | 4,12 | 2,92 | **новый** |
-| finale | 59–71 | 13 | 107,949 | 135,872 | 27,923 | 81–88 + 101–105 | 12,64 | 15,03 | 13 |
+| intro | 0–7 | 8 | 0.000 | 14.689 | 14.689 | 10–17 | 13.18 (od 0,5) | 1.01 | 8 |
+| venue | 8–15 | **8** | 14.689 | 29.366 | 14.677 | 18–25 | 12.49 | 1.93 | 6 |
+| gausseholler | 16–20 | 5 | 29.366 | 38.531 | 9.165 | 26–30 | 5.87 | 3.04 | 5 |
+| activefishing | 21–25 | 5 | 38.531 | 47.689 | 9.158 | 31–35 | 6.50 | 2.41 | 5 |
+| bosset | 26–31 | **6** | 47.689 | 58.679 | 10.990 | 36–41 | 8.26 | 2.48 | 5 |
+| jigovky | 32–36 | 5 | 58.679 | 67.824 | 9.145 | 42–46 | 7.88 | 1.02 | 5 |
+| moonky | 37–41 | 5 | 67.824 | 76.946 | 9.122 | 47–51 | 7.38 | 1.49 | 5 |
+| broll | 42 | 1 | 76.946 | 78.772 | 1.826 | 52 | — | — | 1 |
+| brollbreak | 43–44 | 2 | 78.772 | 82.424 | 3.652 | 53–54 | — | — | 2 |
+| troutshop | 45–49 | 5 | 82.424 | 91.548 | 9.124 | 55–59 | 6.10 | 2.78 | 5 |
+| velkaryba | 50–54 | 5 | 91.548 | 100.660 | 9.112 | 60–64 | 6.80 | 2.06 | 5 |
+| crs | 55–58 | **4 (nový)** | 100.660 | 107.949 | 7.289 | 65–68 | 4.12 | 2.92 | — |
+| finale | 59–71 | 13 | 107.949 | 135.872 | 27.923 | 81–88 + 101–konec | 12.64 | 15.03 | 13 |
 
-72 такта = 2:15,9 (последний «такт» финала = финальный удар + звон, 6,2 с). VO стартует через 0,25 с (intro 0,5 с) и везде
-кончается ≥ 1,0 с до конца блока (`vo.tailMin` 1.0; впритык intro 1,01 и jigovky 1,02). Микс фильма: −14,04 LUFS, −2,02 dBTP,
-VO на +9,45 LU над музыкой.
+VO start 0,25 s (intro 0,5 s), `vo.tailMin` = 1,0 s → všechny VO sedí (nejtěsněji intro 1,01 a jigovky 1,02). Žádné `!`/CUT.
+Troutshop + Velká ryba stojí jako dvojice před crs (čeká na potvrzení operátora — změna pořadí = jen `content.json` + `block_plan_B.json`
++ `python3 scripts/music_edit.py data/block_plan_B.json`, hudba se přestříhá sama).
 
-## 2. Музыка: что изменилось и где события внутри блоков
+## 2. Hudba — `audio/track_B.wav` (+ `track_B.beats.json`, `data/block_plan_B.json`)
 
-- **Сетка точнее, чем в v2.** Трек Suno плывёт 130,0 → 132,3 BPM, поэтому сетка = полином по долям + локальная фаза по onset-огибающей
-  (остаток ±7 мс). Время доли теперь = **начало удара** (медиана −0,2 мс). Сетка v2 (librosa) опаздывала на ~39 мс, поэтому все
-  удары в кадре теперь попадают на ~1 кадр раньше относительно звука, т. е. ровно в удар. Блокам ничего делать не надо.
-- **Склейки** только на сильных долях: 107,949 с (в финал, 68 → 81) и 122,471 с (внутри финала, 88 → 101). Исходящий кусок играет
-  до T − 6 мс, входящий заходит equal-power за [T − 24, T − 6] мс, оба удара целые, фаза не сбивается, щелчков нет.
-- **События внутри блоков (важно для агентов):**
-  - intro: билд без полного кика; такт 2 без баса; такты 5–7 нарастают хэты → дроп.
-  - venue: **ДРОП на такте 0**, такты 1–7 грув A (мягкие хэты).
-  - gausseholler: грув A; **такт 4 (последний) = fill/провал** (−20 dB, бас уходит) → вдох перед AF.
-  - activefishing: такт 0 = re-entry с сильным акцентом, грув B.
-  - bosset: грув B, хэты ярче с такта 2.
-  - jigovky: такты 0–2 грув; **такты 3–4 = брейк источника** (хэтов нет, в такте 4 нет баса). Вторая половина VO идёт по брейку.
-  - moonky: **такты 0–1 = rebuild** (бас вернулся, хэтов нет), такты 2–4 разреженный грув C.
-  - broll + brollbreak: грув C, хэты возвращаются в последнем такте. **Музыкального брейка под b-roll больше нет** (в плане A был).
-    Если «брейк»-визуал b-roll (стоп-кадры) будет выглядеть не в такт, можно сделать вариант B2 с 8-тактовой петлёй в первой
-    половине: тогда брейк источника встаёт под brollbreak. Это стоит одной склейки-повтора, решение за оркестратором/оператором.
-  - troutshop: грув D, хэты нарастают каждый такт.
-  - velkaryba: такт 1 = пик хэтов, **такт 2 = fill/провал**, **такт 3 = вход ПИКА 1** (большой кик), такт 4 = пик.
-  - crs: пик 1 (громче всего, что было до него).
-  - finale: такт 0 = **склейка в ПИК 2** (самое громкое место трека), такты 0–7 = пик, такт 8 = последний громкий такт без хэтов,
-    такты 9–11 = спад (−23 dB), такт 12 = финальный удар + звон + fade. Структура та же, что в плане A (там было 87–94 + 101–конец).
+- Nástroj: `scripts/music_edit.py data/block_plan_B.json` (reprodukovatelný). Zdroj `music/sponsors_3.mp3`, segmenty zdroje (polootevřené):
+  **[10, 69) · [81, 89) · [101, konec)** = intro build od taktu 10, **drop přesně na začátku venue (zdroj 18)**, jedna souvislá groove
+  sekce 18–68 (venue → crs), střih do peaku 2 na začátku finále (zdroj 81), konec skladby + 2,5 s kosinový fade do ticha.
+- Skladba (Suno) zrychluje 130,0 → 132,3 BPM → lineární mřížka nesedí. Nová zdrojová mřížka `music/sponsors_3.grid.json`: polynom
+  st. 5 přes doby librosy + lokální fázová korekce z onset obálky 2,7 ms (rezidua p5..p95 −8..+6 ms), **posunutá na začátek úderu**
+  (hi-band attack; librosa mřížka plánu A byla ~27 ms za vrcholem flux = ~39 ms za úderem). Na track_B: hi-attack vs doba medián −0,2 ms.
+- Střihy jen na dobách taktu, fázově konzistentní: odcházející segment hraje do T−6 ms, příchozí equal-power fade-in [T−24, T−6] ms →
+  oba údery celé, žádný klik (HF 5ms okna před T bez špičky). Délka taktu přes střih = příchozí takt (1,815 / 1,798 s).
+- `track_B.beats.json → bars[]`: profil každého taktu (dB full/low/high + takt zdroje) pro agenty bloků.
 
-## 3. Логотип TA (замечание оператора 1)
+**Hudební události uvnitř bloků (na co se bloky mají napojit):**
 
-- Белой плашки больше нет. Логотип прозрачный, всегда **белое TROUT + красное AREA** (`assets_prep/ta_cz/logo_h_on_dark.png`).
-  Это решение оператора, внесено во время этапа: navy-вариант **не использовать**. Бокс в углу тот же
-  (`ctx.plate.rect` = 300×98 в точке 64,250), логотип внутри шириной 281 px. Это та же эталонная ширина для правила логотипа,
-  поэтому раскладки блоков не сдвинулись.
-- Читаемость на любом фоне обеспечивает «тон» = сила мягкой тени. `#ta-sh`/`#ta-sh2` — размытые тёмные копии логотипа, `#ta-scrim` —
-  еле заметное радиальное гало, видимой подложки нет. Тоны: `dark` (база), `scrim` (средний фон или пёстрое фото, красное под AREA),
-  `halo` (светлый фон; алиас `light`). Тон меняется кроссфейдом 0,1 с.
-- Кто решает тон, по старшинству: `ctx.plate.tone(t0, t1, tone)` из блока > `content.json plan[].plate` > **проба яркости**
-  `node scripts/plate_probe.mjs [film|reel:<key>|block:<key>|reels]` (снимает кадры со скрытым логотипом, меряет пиксели под
-  штрихами логотипа, пишет `data/plate_tone.json`; при любом изменении блока проба устаревает, и сборка об этом предупреждает) >
-  `theme.plate` > яркость `theme.bg` (> 0,3 → halo).
-- Для фильма проба прогнана (453 кадра, шаг 0,3 с): 15 окон, лог `TA logo tone: …`. Halo стоит на светлых кадрах интро и во всём
-  activefishing, scrim — на воде/дроне venue (20,2–29,1 с) и на светлых кадрах bosset/troutshop. **После правок блоков пробу
-  перезапустить** (фильм ≈ 9–10 мин, Reel ≈ 1 мин).
-- Правило размера (спонсор не крупнее логотипа TA) работает как раньше, включая движение (`logo motion`), во всех 23 выходах.
+| blok (takty bloku) | co hraje |
+|---|---|
+| intro 0–7 | build bez plného kicku; takt 2 bez basu (low −53 dB); takty 5–7 hi-hat riser do dropu |
+| venue 0 | **DROP** (takt 0 přechodový, plný groove od taktu 1), groove A (tiché hi-haty) |
+| gausseholler 4 | **fill / dip** (full −20 dB) = nádech před Activefishing |
+| activefishing 0 | re-entry akcent zdroje 31 (silný úder), groove B |
+| bosset 2–5 | groove B, jasnější hi-haty |
+| jigovky 3–4 | **hudební BREAK** zdroje 45–46 (hi-haty pryč −45 dB, takt 4 bez basu) — druhá půlka VO jde přes break |
+| moonky 0–1 | rebuild (bas zpět, bez hi-hatů); 2–4 groove C (řídké haty) — sedí na „Moonlight“ |
+| broll + brollbreak | groove C, haty se vrací v taktu 44 — **už to není hudební break** (v plánu A byl) |
+| troutshop 0–4 | groove D, hi-haty sílí každý takt (build) |
+| velkaryba 2 / 3 | takt 2 = **fill / dip**, takt 3 = **vstup peaku 1** (velký úder) |
+| crs 0–3 | peak 1 (zatím nejhlasitější) |
+| finale 0–7 / 8 / 9–11 / 12 | 0–7 **peak 2** (nejhlasitější, střih na zdroj 81); 8 poslední hlasitý takt bez hatů; 9–11 doznění (−23 dB); 12 finální úder + dozvuk + fade (blok-lokálně: 14,52 / 16,32 / 21,70 s, konec 27,92 s) |
 
-## 4. Немного нашего стиля (замечание 5): только акценты
+Alternativa (na přání): plán „B2“ s 8taktovou smyčkou groove B dá break zdroje 45–46 pod brollbreak a fill 62 na konec crs — za cenu
+jedné smyčky uvnitř groove (nebylo by „jedna souvislá sekce“).
 
-1. **Сигнатурный блик**: только в intro и finale на каждой сильной доле по логотипу TA проходит световой блик, маскированный его альфой.
-   Самая яркая точка блика пересекает центр логотипа ровно на доле. Это 23 блика (`tokens.ta.glint`), слой root, блоки не трогаются.
-2. **`fx.endCard`** (`ta: true` по умолчанию): строка под логотипом TA набрана Montserrat caps, разделитель — красная волосяная линия TA.
-   Действует в venue, jigovky и crs (они используют fx.endCard). У остальных end card свои.
-3. **`fx.taChip({text, sub, cx, y, tone, t})`**: чип в стиле TA, Montserrat 800 caps + красная волосяная линия. Подходит для
-   «Věnuje ceny · MČR 2026», если вписывается в мир спонсора. Сейчас его использует только crs (косвенно).
-4. **Переход `fx.tIn/tOut('fader')`**: 8 колонок-фейдеров микшера поднимаются с красными «ручками» TA. В фильме он используется
-   один раз: **crs → finale**.
-   §10 BLOCK_API дополнен: это исключения, миры спонсоров не перекрашивать, своих TA-акцентов не добавлять.
+## 3. Logo TA (rozhodnutí operátora 21. 10.)
 
-## 5. Новый блок crs (заглушка) + роли
+- **Vždy bílé „TROUT“ + červené „AREA“ na průhledném pozadí** (`assets_prep/ta_cz/logo_h_on_dark.png`), žádná destička, **navy varianta
+  se nepoužívá nikde** (původní auto-přepínání na `logo_h_on_light.png` zrušeno). Box `ctx.plate.rect` = původní 300×98 @ 64,250,
+  logo uvnitř 281 px = reference pravidla loga (nezměněno, kontrola loga OK ve všech výstupech).
+- Čitelnost na světlém / pestrém pozadí = **měkký tmavý stín, ne destička**: `#ta-sh` (rozmazaná tmavá kopie loga 3 px), `#ta-sh2`
+  (14 px, měkká záře podél písmen), `#ta-scrim` (velmi slabé radiální halo). Síla podle „tónu“ (`tokens.plate.levels`):
+  `dark` (základ) · `scrim` (střední: pestré foto, červené pod AREA) · `halo` (světlé pozadí; alias `light`).
+- Kdo tón určuje (nejvyšší první): `ctx.plate.tone(t0,t1,…)` z bloku > `content.json plan[].plate` > **sonda jasu**
+  (`node scripts/plate_probe.mjs film|reel:<key>|block:<key>|reels` → `data/plate_tone.json`; měří skutečné snímky pod logem, rozhoduje
+  JEN sílu stínu; posílení vyhrává u rychlého střídání světů) > `theme.plate` > jas `theme.bg`. Sonda je platná, jen dokud se kompozice
+  bloků nezmění (stamp) → po úpravách bloků ji pustit znovu (film ≈ 9 min), build jinak varuje a padá na default z theme.
+- Aktuální film (sonda 21:45 + re-analýza): dark většinu času; halo: intro bílé/světlé karty, Activefishing celé, Bosset bílé karty
+  e-shopu (49,98–51,81), začátek finále (krémové světy partnerů 108,6–111,1); scrim: venue voda/dron 19,7–29,4, Bosset, troutshop
+  červený svět 85,8–88,4.
+- Reels (sonda 22:1x): AF halo celé; bosset halo 3,9–5,95 (bílé karty) + scrim; troutshop scrim na hooku (červená) a 5,0–7,5;
+  velkaryba halo na oranžovém hooku 0–2,28; crs/GH/jigovky/moonky dark. Venue reel se během sondy nepostavil — `venue.mjs` právě
+  přepisuje agent bloku (chybí default export) → sondu venue pustit po jeho dokončení. Sondy zastarají s každou úpravou bloků
+  (agenti teď pracují paralelně) → po integraci: `node scripts/plate_probe.mjs film` + `reels`.
+- Kontrola čitelnosti (`logo_bars.jpg`, `reels_endcards.jpg`, `reel_*/`): čitelné na všech taktech včetně bílé (AF), krémové (finále), oranžové, tyrkysové
+  vody, zelené, červené. Nejslabší: červené „AREA“ na plně červeném světě Troutshopu (85,8–88,4; bílé TROUT čitelné, AREA drží jen
+  tmavý obrys) — případně `ctx.plate.tone(…, 'halo')` v troutshopu nebo neumisťovat plnou červenou pod roh.
 
-- `scripts/blocks/crs.mjs`: мир ČRS (синий #2B5DA9 → navy #182F5D). Такт 0: «DĚKUJEME» (Montserrat + красная линия TA), под «Českému»
-  поднимается заголовок «ČESKÝ RYBÁŘSKÝ SVAZ». Такт 1: логотип ČRS (белый, ≤ TA) и «za dlouholetou podporu». Такт 2: проверенный
-  факт-чип «Vlastník areálu Líheň Liběchov · ČRS · MO Mělník», круглая эмблема 150 px и rybsvaz.cz. Такт 3: удержание, затем fader в финал.
-  Reels работают: хук и end card по умолчанию, строка «Děkujeme za dlouholetou podporu».
-- `meta.role`: `sponsor` (по умолчанию, обязан нести «Věnuje ceny»), `host` (venue), `supporter` (crs — чипа приза **никогда**
-  нет, «pod záštitou» не писать). Правило PRIZE CHIP в сборке проверяет это по роли.
-- `lib/reel.mjs`: хук и end card по умолчанию готовы на 1-м кадре (settle, логотип TA летит с −0,42 с) — по урокам v2.
+## 4. „Trochu našeho stylu“ (jen akcenty, světy sponzorů nepřebarveny)
 
-## 6. Что должны подхватить агенты блоков
+1. **Podpisový záblesk loga TA v rytmu — jen intro a finále**: světelný pruh projede logem (maskováno alfou loga) na každou dobu taktu,
+   nejjasnější přesně na doběhu (23× ve filmu; `tokens.ta.glint`).
+2. **End card lockupy** (`fx.endCard`, `ta: true` default): řádek pod logem TA v Montserrat caps + TA-červená hairline 140×3 px.
+3. **`fx.taChip`** (Montserrat 800 caps + TA-červená hairline, skleněná pilulka) — k dispozici pro „Věnuje ceny · MČR 2026“.
+4. **Přechod `fader`** (`fx.tIn/tOut('fader')`): 8 sloupců jako fadery mixu jede nahoru s TA-červenými „knoflíky“ na hraně.
+   Ve filmu použit jednou: **crs → finále**.
+- `TA` paleta exportována z `fx.mjs`. BLOCK_API §10/§13: víc TA prvků bloky samy nepřidávají.
 
-| блок | что изменилось для него | что сделать |
-|---|---|---|
-| **venue** | 6 → **8 тактов** (14,68 с), новое VO 12,49 с («Mistrovství hostí Líheň Liběchov… Závodí se na rybníku Malý Sporťáček»), сосед справа теперь gausseholler | переразложить на 8 тактов: дрон v2 (утверждён) + схема пруда (`data/pond_scheme.json`) вместо 3D-корыта + факты; рыба «donedávna» → реальное фото. На воде/дроне проба ставит тон scrim — если под углом будет белая карточка, вызвать `ctx.plate.tone` |
-| **gausseholler** | теперь сразу после venue; последний такт = музыкальный провал | акцент «HLAVNÍ CENA MČR» на дропе-грув; выход в белый zoom продолжает работать (AF светлый) |
-| **activefishing** | сосед слева GH (вход после белого zoom), справа bosset | только бренды/ассортимент; тон логотипа halo весь блок |
-| **bosset** | 5 → **6 тактов** (10,99 с), VO 8,26 с | добавить такт ассортимента/брендов, в конце акцент на призовые термосы; lint-предупреждение `overlapping_gsap_tweens` на `#bosset-hero-rot` (0,81 с) |
-| **jigovky** | такты 3–4 на музыкальном брейке | хиты такта 3–4 сделать мягче/по брейку; бренды |
-| **moonky** | такты 0–1 = rebuild без хэтов | вход спокойнее, бренды |
-| **troutshop** | теперь после b-roll (вход из «PSTRUH.»), справа velkaryba | бренды; пара troutshop/velkaryba ждёт подтверждения оператора |
-| **velkaryba** | такт 2 = fill, такт 3 = вход пика 1; справа crs | синхронизировать большой хит с тактом 3 (≈ 5,47 с блока) |
-| **crs** | новый, 4 такта, заглушка | дизайн блока; роль supporter (без чипа приза); выход fader уже стоит |
-| **broll / brollbreak** | под ними больше нет музыкального брейка; lint-предупреждения `overlapping_gsap_tweens` на `#broll-u0..2-cam` | проверить «брейк»-визуал на груве (см. §2, вариант B2) |
-| **finale** | открывается склейкой в пик 2 после fader из crs | без изменений по структуре; блик TA на долях уже идёт |
+## 5. Nový blok `crs` (Český rybářský svaz) — placeholder
 
-Общее для всех: границы в `content.json`, время берите только из `ctx.bar/beat/at/vo` (не хардкодить секунды плана A); после правок
-перезапустить `node scripts/plate_probe.mjs film` (и `reels`).
+`scripts/blocks/crs.mjs` + `data/blocks/crs.json` + `vo/crs.wav` (4,12 s „Děkujeme Českému rybářskému svazu za dlouholetou podporu.“).
+Svět ČRS (modrá #2B5DA9 / navy #182F5D / tyrkys znaku), DĚKUJEME (Montserrat + TA hairline) → titul ČESKÝ RYBÁŘSKÝ SVAZ na „Českému“
+→ logo ČRS bílé (≤ TA) → „za dlouholetou podporu“ na „za“ → ověřený chip „Vlastník areálu Líheň Liběchov · ČRS · MO Mělník“ → kulatý
+znak + rybsvaz.cz → fader do finále. `meta.role = 'supporter'` → build hlídá, že **nenese** „Věnuje ceny“. Reel: default hook +
+default end card („Děkujeme za dlouholetou podporu“). Výchozí hook/end card v `lib/reel.mjs` jsou nově hotové na 1. snímku.
+
+## 6. Co musí bloky přizpůsobit (pro agenty bloků)
+
+- **venue: 8 taktů** (bylo 6) — VO 12,49 s od 0,25 s; dron v2 zůstává; 3D „koryto“ → motion-graphics schéma (`data/pond_scheme.json`).
+  Teď se původních 6 taktů natáhne a poslední scéna stojí ~3,7 s navíc. Drop = takt 0. Vstup z intra = zoom-through do bílé (OK).
+- **bosset: 6 taktů** (bylo 5) — VO 8,26 s, lockup teď trvá 2 takty; doplnit akcent na termosky na konci. Lint varování
+  `overlapping_gsap_tweens #bosset-hero-rot` (0,81 s) = časování z nové mřížky.
+- **crs: 4 takty** — placeholder k dopracování.
+- **gausseholler** je hned po venue (vstup: venue blob do černé → cut, OK); poslední takt = hudební fill; výstup zoom do bílé →
+  Activefishing (světlý svět) funguje.
+- **jigovky**: takty 3–4 = hudební break (bez kicku) — dobré místo pro zklidnění / makro, ne pro velké údery.
+- **moonky**: takty 0–1 rebuild bez hatů.
+- **broll/brollbreak**: už není pod hudebním breakem (groove); lint varování `overlapping_gsap_tweens #broll-u0..2-cam` (nová mřížka).
+- **velkaryba**: takt 2 fill, takt 3 vstup peaku 1 — přirozené místo pro hlavní úder bloku.
+- **finale**: začíná peakem 2 hned po crs (fader v barvě finále `#04060a`); první snímek po švu je mléčný kvůli `tIn flash 0,16` přes
+  fotku — zvážit kratší flash. Struktura konce (8 peak + 101 + doznění + úder) je stejná jako v plánu A.
+- Všechny bloky: mřížka je nově na začátku úderu (o ~39 ms dřív vůči audiu než v2) — vizuální údery teď sedí přesně, nic neposouvat.
+- Sousedé se změnili → přechody se barevně napojují automaticky (`ctx.next.theme.bg`); švy viz `seam_1..3.jpg` — žádný prázdný /
+  dvojexpoziční šev, nejdelší jednobarevný úsek ~0,2 s (venue→GH černá, velkaryba→crs navy).
+- Při změně bloků znovu pustit sondu loga (`node scripts/plate_probe.mjs film`, pak `reels`).
+
+## 7. Změněné / nové soubory
+
+`scripts/music_edit.py` (nový), `music/sponsors_3.grid.json` (nový), `audio/track_B.wav`, `audio/track_B.beats.json`,
+`data/block_plan_B.json`, `data/content.json` (plán B, v6; záloha `content.pre_planB.json`), `data/tokens.json` (logo bez destičky,
+stínové úrovně, TA akcenty), `data/plate_tone.json` (sonda), `data/blocks/crs.json`, `scripts/blocks/crs.mjs`, `scripts/build.mjs`
+(tóny loga, sonda, záblesk, role, sidecar `proto/<out>/plate.json`, `PLATE_HIDE`), `scripts/lib/ctx.mjs` (`plate.tone`, geometrie),
+`scripts/lib/fx.mjs` (`TA`, `fader`, `taChip`, `endCard ta`), `scripts/lib/reel.mjs`, `scripts/plate_probe.mjs` + `scripts/lib/plate_probe.py`
+(nové), `scripts/BLOCK_API.md` (§5, §7, §10, §13).

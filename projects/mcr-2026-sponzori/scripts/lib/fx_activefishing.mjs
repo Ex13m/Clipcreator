@@ -94,6 +94,41 @@ export function tile(ctx, { id, k, x, y, w = 250, h = 200, pad = 24, rot = 0 }) 
   return `<div class="af-tile" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}"><i style="left:${px(g.left)};top:${px(g.top)};width:${px(g.w)};height:${px(g.h)};background-image:url(${g.url});${rot ? `transform:rotate(${rot}deg);` : ''}"></i></div>`;
 }
 
+// brands the shop carries (research/activefishing_brands.md, logos assets_prep/activefishing/brands/, 21. 10. 2026). Third-party brands:
+// never „vlastní“. f = logo file (original colours, for the white shop tiles); wm = typed wordmark (no logo file exists: Montserrat 800
+// caps, never imitating their artwork); s = optical size inside the tile box (badges / plates a bit smaller, round badge bigger).
+export const BRD = 'assets_prep/activefishing/brands/';
+export const BR = {
+  nories: { f: 'nories.png', n: 'Nories' }, timon: { wm: 'TIMON', sub: 'by JACKALL', n: 'Timon' }, mukai: { f: 'mukai.png', n: 'Mukai' },
+  valkein: { f: 'valkein.png', n: 'ValkeIN' }, varivas: { f: 'varivas.png', n: 'VARIVAS', s: 0.96 }, yarie: { f: 'yarie.png', n: 'YARIE', s: 0.86 },
+  forest: { f: 'forest.png', n: 'Forest', s: 1.08 }, officeeucalyptus: { f: 'officeeucalyptus.png', n: 'Office Eucalyptus' },
+  velvetarts: { f: 'velvetarts.png', n: 'Velvet Arts', s: 1.06 }, libralures: { f: 'libralures.png', n: 'Libra Lures', s: 1.12 },
+  jigovky: { f: 'jigovky.png', n: 'Jigovky.cz', s: 1.08 }, rodiocraft: { f: 'rodiocraft.png', n: 'Rodio Craft', s: 0.84 },
+  fishup: { f: 'fishup.png', n: 'FishUp' }, khor: { wm: 'KHOR', n: 'KHOR' },
+};
+// brand tile = the shop's „Prodávané značky“ carousel card: white rounded card, logo contained (background layer → no duplicate <img>)
+export function brandTile(ctx, { id, b, x, y, w = 200, h = 84, padX = 22, padY = 14 }) {
+  const B = BR[b]; if (!B) throw new Error(`fx_activefishing: unknown brand ${b}`);
+  const s = B.s ?? 1, bw = (w - 2 * padX) * s, bh = (h - 2 * padY) * s;
+  const inner = B.f
+    ? `<i style="left:${px((w - bw) / 2)};top:${px((h - bh) / 2)};width:${px(bw)};height:${px(bh)};background-image:url(${ctx.asset(BRD + B.f)})"></i>`
+    : `<b style="font-family:'Montserrat';font-size:${B.sub ? 34 : 38}px">${esc(B.wm)}${B.sub ? `<small style="font-family:'Montserrat'">${esc(B.sub)}</small>` : ''}</b>`;
+  return `<div class="af-brand" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}">${inner}</div>`;
+}
+// brand rail: a full-width clip (#id, entrance / exit) › strip (#id-in, the beat-stepped carousel) of brand tiles.
+// step(t, n) moves the strip by n tiles, landing ON t (expo.inOut, the shop carousel's „next“ click on the beat).
+export function brandRail(ctx, { id, items, y, w = 200, h = 84, gap = 16, x0 = null, c0 = 0, dir = -1 }) {
+  const STEP = w + gap;
+  if (x0 == null) x0 = ctx.W / 2 - w / 2 - c0 * STEP;               // tile c0 starts in the centre of the frame
+  const tiles = items.map((b, i) => brandTile(ctx, { id: `${id}b${i}`, b, x: i * STEP, y: 0, w, h })).join('');
+  const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:0;top:${px(y - 30)};width:${ctx.W}px;height:${px(h + 60)}"><div class="fx-abs" id="${ctx.id(`${id}-in`)}" style="left:${px(x0)};top:30px;width:${px(items.length * STEP)};height:${px(h)}">${tiles}</div></div>`;
+  let k = 0;
+  const step = (t, n = 1, d = 0.4) => { ctx.tl.fromTo(ctx.sel(`${id}-in`), { x: dir * k * STEP }, { x: dir * (k + n) * STEP, duration: d, ease: 'expo.inOut' }, t - d * 0.55); k += n; };
+  // hero(t): the card that has just landed in the centre pops on the beat (scale punch, accent only)
+  const hero = (t, { scale = 1.12, d = 0.34 } = {}) => { const c = c0 - dir * k; if (c >= 0 && c < items.length) ctx.tl.hit(ctx.sel(`${id}b${c}`), { scale }, { scale: 1, duration: d, ease: 'power2.out' }, t); };
+  return { html, sel: ctx.sel(id), inner: ctx.sel(`${id}-in`), step, hero, STEP, tile: (i) => ctx.sel(`${id}b${i}`) };
+}
+
 // shop pill button (site .orange-btn / outline button). tone 'fill' | 'ol'. Returns {html, w, h}.
 export function pill(ctx, { id, text, x = null, cx = null, y, size = 34, padX = null, tone = 'fill', tracking = 0.06, style = '' }) {
   const t = nb(text), pX = padX ?? Math.round(size * 0.95), pY = Math.round(size * 0.5);
@@ -166,6 +201,11 @@ ${S} .af-cwl i{display:block;width:22px;height:22px;border-radius:50%;box-shadow
 ${S} .af-card{position:absolute;border-radius:38px;background:#fff;box-shadow:0 40px 80px rgba(110,30,0,.30)}
 ${S} .af-tile{position:absolute;border-radius:26px;background:#fff;box-shadow:0 14px 30px rgba(60,40,20,.10),0 0 0 1px rgba(0,0,0,.04)}
 ${S} .af-tile i{position:absolute;display:block;background:center/100% 100% no-repeat}
+${S} .af-brand{position:absolute;border-radius:22px;background:#fff;box-shadow:0 12px 26px rgba(90,40,10,.16),0 0 0 1px rgba(0,0,0,.04)}
+${S} .af-brand i{position:absolute;display:block;background:center/contain no-repeat}
+${S} .af-brand b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;letter-spacing:.04em;line-height:1;color:${C.ink};text-transform:uppercase;white-space:nowrap}
+${S} .af-brand small{display:block;margin-top:5px;font-size:15px;font-weight:600;letter-spacing:.12em;color:#555}
+${S} .af-tag em.af-bl{display:block;flex-shrink:0;background:center/contain no-repeat}
 ${S} .af-url{position:absolute;left:0;right:0;text-align:center;font-family:'Nunito';font-weight:1000;letter-spacing:-.02em;line-height:1;color:${C.ink};white-space:nowrap}
 ${S} .af-url .o{color:${C.web}}
 ${S} .af-num{position:absolute;font-family:'${SAIRA}';font-weight:900;text-transform:uppercase;white-space:nowrap;line-height:1;letter-spacing:.01em;word-spacing:.12em;color:${C.ink}}

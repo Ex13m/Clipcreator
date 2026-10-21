@@ -29,9 +29,21 @@
  "tones": [
   {
    "g0": 0,
+   "g1": 8.4,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 8.4,
+   "g1": 9.3,
+   "tone": "scrim",
+   "by": "probe"
+  },
+  {
+   "g0": 9.3,
    "g1": 12.742,
    "tone": "dark",
-   "by": "crs-hook theme"
+   "by": "probe"
   }
  ],
  "beats": [

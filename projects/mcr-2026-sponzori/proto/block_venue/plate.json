@@ -1,6 +1,6 @@
 {
  "out": "block_venue",
- "stamp": "a358405488bd9feb",
+ "stamp": "e1646d219ef34f77",
  "dur": 14.7,
  "box": {
   "x": 64,
@@ -19,9 +19,27 @@
  "tones": [
   {
    "g0": 0,
+   "g1": 3.668,
+   "tone": "scrim",
+   "by": "venue"
+  },
+  {
+   "g0": 3.668,
+   "g1": 5.504,
+   "tone": "dark",
+   "by": "venue"
+  },
+  {
+   "g0": 5.504,
+   "g1": 10.092,
+   "tone": "scrim",
+   "by": "venue"
+  },
+  {
+   "g0": 10.092,
    "g1": 14.677,
    "tone": "dark",
-   "by": "venue theme"
+   "by": "venue"
   }
  ],
  "beats": [

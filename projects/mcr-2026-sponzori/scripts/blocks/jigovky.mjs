@@ -278,6 +278,36 @@ export default function jigovky(ctx) {
   }
 
   // ===================================================================================================
+  // BRANDS (v3, research/jigovky_brands.md §5): Jigovky.cz is the MAKER — the story stays on the own brand; the one resold brand that
+  // matters for trout area (VARIVAS, 206 items: Trout Nylon, fluorocarbons, hooks) gets ONE line „V nabídce také · VARIVAS" in bar 4.
+  // The yellow band hands its slot over: it rolls up to the right on „v Česku" and the dark strip unrolls from the left (VARIVAS is
+  // never in frame with „Poctivě vyrobeno v ČR" — the logo lands on beat 2 of bar 4, after the band is gone). White on-dark logo,
+  // ≈ 183×40 px (far under the Jigovky logo 217×107 and the TA logo 281 px). Background layer (not <img>): third-party mark, not ours.
+  // ===================================================================================================
+  const tVb = ctx.beats.find((b) => b > B4 + 0.3) ?? B4 + ctx.BEAT;          // beat 2 of bar 4 ≈ 7.79: the VARIVAS logo lands here
+  const tBandOut = clamp(vw(/^v$/i, 7.48) - 0.02, tBand + 1.2, tVb - 0.3);     // band rolls up on „v (Česku)" ≈ 7.46 (on screen ≥ 1.2 s)
+  ctx.tl.set(ctx.sel('bd'), { transformOrigin: '100% 50%' }, tBandOut - 0.01);
+  ctx.tl.fromTo(ctx.sel('bd'), { scaleX: 1 }, { scaleX: 0, duration: 0.26, ease: 'power3.in' }, tBandOut);
+  {
+    const VS = { h: 104, size: 38, trk: 0.12, gap: 30, padX: 40 };
+    const VL = { h: 42, w: Math.round(42 * 2400 / 524) };                    // varivas_on_dark.png 2400×524 → 192×42
+    const lbl = 'V nabídce také';
+    const lw = ctx.measure(ctx.nb(lbl), { font: 'PT Sans Narrow', size: VS.size, wght: 700, upper: true, tracking: VS.trk });
+    const sw = VS.padX + lw + VS.gap + 2 + VS.gap + VL.w + VS.padX;
+    const sx = Math.round(L + (UIR - L - sw) / 2), sy = Math.round(BD.y + (BD.h - VS.h) / 2);
+    const logoUrl = ctx.asset('assets_prep/jigovky/brands/varivas_on_dark.png');
+    html += `<div class="fx-abs" id="${ctx.id('vs')}" style="left:${px(sx)};top:${px(sy)};width:${px(sw)};height:${VS.h}px;border-radius:${VS.h / 2}px;background:rgba(0,33,15,.58);box-shadow:inset 0 0 0 2px rgba(255,255,255,.22),0 16px 34px rgba(0,16,7,.35);overflow:hidden">`
+      + `<div class="jg-lbl" id="${ctx.id('vst')}" style="${J.FN};left:${VS.padX}px;top:${px((VS.h - VS.size * 1.12) / 2)};font-size:${VS.size}px;line-height:1.12;letter-spacing:${VS.trk}em;color:rgba(255,255,255,.82)">${ctx.esc(ctx.nb(lbl))}</div>`
+      + `<i class="fx-abs" id="${ctx.id('vsd')}" style="left:${px(VS.padX + lw + VS.gap)};top:${px((VS.h - 50) / 2)};width:2px;height:50px;background:${C.yellow};border-radius:1px"></i>`
+      + `<i class="fx-abs" id="${ctx.id('vsl')}" style="left:${px(sw - VS.padX - VL.w)};top:${px((VS.h - VL.h) / 2)};width:${VL.w}px;height:${VL.h}px;background:url(${logoUrl}) center/contain no-repeat"></i></div>`;
+    ctx.tl.set(ctx.sel('vs'), { transformOrigin: '0% 50%' }, 0);
+    ctx.tl.fromTo(ctx.sel('vs'), { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, tBandOut + 0.16);
+    ctx.tl.fromTo(ctx.sel('vst'), { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, tBandOut + 0.24);
+    ctx.tl.fromTo(ctx.sel('vsd'), { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: 'expo.out' }, tVb - 0.12);
+    ctx.tl.fromTo(ctx.sel('vsl'), { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tVb - 0.08);
+  }
+
+  // ===================================================================================================
   // BAR 4 · LOCKUP — wall explodes outward, TroutJig hero + SICKLE in depth, logo | jigovky.cz
   // ===================================================================================================
   // the wall clears BEFORE the downbeat (fast throw past camera), so the hero slams into a clean frame ON the downbeat

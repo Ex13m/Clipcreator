@@ -29,6 +29,24 @@ export const meta = {
 };
 
 const px = (n) => `${Math.round(n * 10) / 10}px`;
+const PRIZE = 'Hlavní cena · MČR 2026';                   // persistent hero line (BRIEF: GH = HLAVNÍ CENA pro vítěze MČR)
+const PRIZE_END = 'Hlavní cena pro vítěze MČR · Revolut 8';   // lockup / end-card line (= VO take 3)
+// persistent header opposite the TA logo (same band y 250–348, right-aligned to the safe edge): orange prize line + gausseholler.com
+// (operator 21. 10.: the web address visible through the whole block, phone-readable ≥ 44 px). URL on screen from frame 0;
+// the prize line hands over from the big „HLAVNÍ CENA“ headline (prizeT); both leave when the lockup URL lands (outT).
+function header(ctx, { prizeT = 0, prizeIn = true, outT = null, urlSize = 56 }) {
+  const R = ctx.W - ctx.safe.right, w = 640, x = R - w, y1 = 246, y2 = 288;
+  const sh = 'text-shadow:0 2px 3px rgba(0,0,0,.55),0 0 18px rgba(0,0,0,.55)';
+  const prize = [...ctx.nb(PRIZE)].map((c) => (c === ' ' ? ' ' : `<span class="fx-c">${ctx.esc(c)}</span>`)).join('');
+  let html = `<div class="fx-t" id="${ctx.id('hdp')}" style="left:${px(x)};top:${px(y1)};width:${px(w)};font-family:'Inter';font-weight:800;font-size:34px;line-height:1.15;letter-spacing:.11em;text-transform:uppercase;color:${C.orange};text-align:right;white-space:nowrap;${sh}">${prize}</div>`;
+  html += `<div class="fx-t" id="${ctx.id('hdu')}" style="left:${px(x)};top:${px(y2)};width:${px(w)};font-family:'Inter';font-weight:800;font-size:${urlSize}px;line-height:1.1;letter-spacing:-.01em;color:${C.white};text-align:right;white-space:nowrap;${sh}">gausseholler.com</div>`;
+  // whole line at once (a char stagger from the right showed a lone „2026“ next to the big HLAVNÍ CENA)
+  if (prizeIn) ctx.tl.fromTo(ctx.sel('hdp'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, prizeT);
+  ctx.tl.fromTo(ctx.sel('hdu'), { x: 18 }, { x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+  // one selector per element (a combined „#hdp, #hdu“ out-tween would set opacity 1 at load and unhide the prize line early)
+  if (outT != null) ['hdp', 'hdu'].forEach((k) => ctx.tl.fromTo(ctx.sel(k), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: 'power2.in' }, outT));
+  return html;
+}
 // the 8 eighth notes of a bar (block-local seconds, from the real beat grid)
 const eighths = (ctx, bar) => Array.from({ length: 8 }, (_, i) => { const k = Math.floor(i / 2), t = ctx.at(bar, k); return i % 2 ? (t + ctx.at(bar, k + 1)) / 2 : t; });
 
@@ -156,12 +174,16 @@ export default function gausseholler(ctx) {
   e += M.html;
   ctx.tl.fromTo(M.sel, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'expo.out' }, tE - 0.1);
   ctx.tl.fromTo(M.ring, { rotation: -120 }, { rotation: 0, duration: 1.0, ease: 'expo.out' }, tE - 0.1);
-  const yU = 372 + M.h + 16;
-  const U = fx.headline(ctx, { id: 'url', text: 'gausseholler.com', x: L, y: yU, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: false, tracking: -0.01, sizes: [84, 80, 76, 72], color: C.white, align: 'center', t: tE - 0.1, reveal: 'lines', d: 0.42 });
+  const yU = 372 + M.h + 14;
+  const U = fx.headline(ctx, { id: 'url', text: 'gausseholler.com', x: L, y: yU, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: false, tracking: -0.01, sizes: [80, 76, 72], color: C.white, align: 'center', t: tE - 0.1, reveal: 'lines', d: 0.42 });
   e += U.html;
-  const yR = yU + U.size * 0.98 + 16;
-  e += gh.kicker(ctx, { id: 'role', text: 'Partner a informační sponzor', x: L, y: yR, w: CW, size: 30, color: 'rgba(233,230,226,.86)', align: 'center', t: tE + 0.06, track: 0.18, stagger: 0.008 });
-  e += gh.pill(ctx, { id: 'prz', text: 'Věnuje hlavní cenu · MČR 2026', cx: W / 2, y: yR + 60, t: tE + 0.16, size: 28 });
+  // the prize line of the lockup = the VO sentence („Hlavní cena pro vítěze MČR – stojan Revolut 8“)
+  const yH = yU + U.size * 0.98 + 12;
+  const sH = ctx.fit(PRIZE_END, { font: 'Inter', wght: 800, upper: true, tracking: 0.08, maxW: CW - 20, maxLines: 1, sizes: [34, 32, 30, 28] }).size;
+  e += gh.kicker(ctx, { id: 'hero', text: PRIZE_END, x: L, y: yH, w: CW, size: sH, wght: 800, color: C.orange, align: 'center', t: tE - 0.02, track: 0.08, stagger: 0.006 });
+  const yR = yH + sH * 1.15 + 12;
+  e += gh.kicker(ctx, { id: 'role', text: 'Partner a informační sponzor', x: L, y: yR, w: CW, size: 28, color: 'rgba(233,230,226,.86)', align: 'center', t: tE + 0.06, track: 0.18, stagger: 0.008 });
+  e += gh.pill(ctx, { id: 'prz', text: 'Věnuje hlavní cenu · MČR 2026', cx: W / 2, y: yR + 50, t: tE + 0.16, size: 28 });
   html += fx.scene(ctx, 'sE', tE, END, e, { outD: 0.001 });
   fx.flash(ctx, tE, { id: 'fe', color: '#cfe3ec', peak: 0.08, d: 0.2, blend: 'screen' });
 
@@ -177,6 +199,8 @@ export default function gausseholler(ctx) {
   html += gh.words(ctx, { id: 't1b', x: L, y: y1b, size: 50, wght: 700, track: 0.16, words: [{ w: 'pro', t: v('pro', 0.9) - 0.08 }, { w: 'vítěze', t: v('vítěze', 1.12) - 0.08 }, { w: 'MČR', t: v('MČR', 1.75) - 0.1, c: C.orange }] });
   const o1 = Math.min(tB + ctx.BEAT * 1.6, v('stojan', 2.79) - 0.22);
   gh.out(ctx, `${ctx.sel('t1')}, ${ctx.sel('t1b')}`, o1, { d: 0.26, y: -36 });
+  // persistent header: gausseholler.com from frame 0; HLAVNÍ CENA · MČR 2026 takes over as the big headline leaves
+  html += header(ctx, { prizeT: o1 + 0.2, outT: tE - 0.12 });
   // 2 · STOJAN NA PRUTY / REVOLUT 8  (2.79 – 4.2) — the 8 rolls in and lands on „osm“
   const tK2 = v('stojan', 2.79) - 0.08, tR = v('Revolut', 3.32) - 0.14, t8v = v('8', 3.9);
   html += gh.kicker(ctx, { id: 'k2', text: 'Stojan na pruty', x: L, y: T0, size: 34, t: tK2 });
@@ -246,6 +270,8 @@ export function hook(ctx) {
   html += gh.kicker(ctx, { id: 'hs', text: meta.hook.sub, x: L, y: y2, size: 40, wght: 700, track: 0.12, color: C.white });
   html += gh.kicker(ctx, { id: 'hk', text: 'Stojan Revolut 8 · Gausse Holler', x: L, y: y2 + 62, size: 30 });
   ctx.tl.fromTo(`${ctx.sel('hs')}, ${ctx.sel('hk')}`, { x: 22 }, { x: 0, duration: 0.5, ease: 'expo.out' }, 0);
+  html += header(ctx, { prizeIn: false });
+  ctx.tl.set(ctx.sel('hdp'), { opacity: 0 }, 0);
   fx.tIn(ctx, 'cut');
   const css = gh.CSS(S);
   return { html, css };
@@ -285,7 +311,10 @@ export function endCard(ctx) {
   y += Mk.h + 18;
   const U = fx.headline(ctx, { id: 'xu', text: ctx.data.url || 'gausseholler.com', x: L, y, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: false, tracking: -0.01, sizes: [92, 88, 84, 80], color: C.white, align: 'center' });
   html += U.html;
-  y += U.size * 0.98 + 24;
+  y += U.size * 0.98 + 14;
+  const sH = ctx.fit(PRIZE_END, { font: 'Inter', wght: 800, upper: true, tracking: 0.08, maxW: CW - 20, maxLines: 1, sizes: [36, 34, 32, 30] }).size;
+  html += gh.kicker(ctx, { id: 'xh', text: PRIZE_END, x: L, y, w: CW, size: sH, wght: 800, color: C.orange, align: 'center', track: 0.08 });
+  y += sH * 1.15 + 20;
   html += gh.pill(ctx, { id: 'xp', text: 'Věnuje hlavní cenu · MČR 2026', cx: W / 2, y, t: null, size: 28 });
   fx.tIn(ctx, 'cut');
   return { html, css: gh.CSS(S) };

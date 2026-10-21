@@ -1,39 +1,44 @@
-// BOSSET.CZ · plan A bars 42–46 (5 bars ≈ 9.17 s) · concept A „termosky“ (research/bosset_ad.md, recommended) adapted to the take-3 VO
-// „Bosset – rybářský e-shop i termosky, které udrží nápoj horký i studený až šest hodin.“  (VO from 0.25 s, ends ≈ 7.2 s)
+// BOSSET.CZ · plan B bars 26–31 (6 bars ≈ 10.99 s) · v3 VO (take 4):
+// „Bosset – rybářský e-shop: Keitech a YGK. A vítězové mistrovství získají špičkové termosky Zojirushi.“  (VO from 0.25 s, ends ≈ 8.5 s)
 // Brand world (research/bosset_ad.md §3): logo teal #1B97B1, derived deep teal #0A4A58, site header light blue #C5EBFC, site yellow #FFC500
 // (only as plates/pills, never yellow text on teal), ink; display = Saira Expanded Black (wdth 125 / wght 900) ≈ the squarish BOSSET logo.
-// Retailer: Keitech / Select / Fresh Lures / Decoy / YGK / Zojirushi are brands it SELLS (never „its“ products). Nothing about Zojirushi origin.
-//   bar 0     slam: Keitech Easy Shiner (the shop's best-selling family) on a teal light beam, logo bug on „Bosset“;
-//             on „rybářský“ the hero shrinks into the first card of an e-shop BENTO GRID — 8 products of 5 brands (Keitech ×3,
-//             Select ×2, Fresh Lures, YGK X-Braid, Decoy) snap in on the 16ths; „E-SHOP“ yellow plate a beat later, grid punch on bar 1
-//   bar 1     „i termosky“: the page SCROLLS (vertical motion blur) to the light-blue thermos section: 7 bottles rise into a V line-up,
-//             TERMOSKY + „0,6 l · nerez · bez BPA“
-//   bar 2     macro push-in on the open SM-SR lid: DOUBLE LOCK / otevřeš jednou rukou, then the set splits warm | cold on „horký“ / „studený“
-//   bar 3     „až šest hodin“: SM-VB black hero, AŽ plate, a 760 px odometer 6, HODIN, HORKÉ I STUDENÉ
-//   bar 4     lockup (music only): logo + bosset.cz + „Věnuje ceny · MČR 2026“ over the prize line-up → stacked wipe into the next block
-// Reel: own hook (SM-VB black + „Horké i studené“ + AŽ 6 HODIN) and own end card (fx.endCard lockup + distributor line + Keitech cameo).
+// Retailer: every brand shown is a brand it SELLS (never „its“ products). Nothing about Zojirushi origin; no prices / counts on screen.
+//   bar 0     slam: Keitech Easy Shiner on a teal light beam, logo bug on „Bosset“; on „rybářský“ the hero shrinks into the first card
+//             of an e-shop BENTO GRID — the wider assortment: JDM wobblers (Megabass, ZipBaits, O.S.P), YGK line, Decoy jig heads,
+//             Fresh Lures, Select; RYBÁŘSKÝ / E-SHOP + a category band (the shop menu) — research/bosset_brands.md §2
+//   bar 1–2½  „Keitech a YGK“: the page SCROLLS to the ZNAČKY section (light-blue set, like the shop header): KEITECH / YGK X-BRAID,
+//             „Oficiální distributor pro ČR“, featured tiles (Keitech logo + 4 Easy Shiner colourways; YGK logo + X-Braid spool) and
+//             a wall of 8 brand tiles (the shop's own logos, assets_prep/bosset/brands/) — Zojirushi tile in deep teal
+//   bar 2½    „A vítězové“: the Zojirushi tile floods the frame (colour meet) → PRIZE PODIUM: spotlights, empty podium,
+//             VÍTĚZOVÉ / MISTROVSTVÍ; bar 3 downbeat: three Zojirushi 0,6 l bottles land on the steps + confetti; ZÍSKAJÍ; „špičkové“ = flare
+//   bar 4     hard cut to the hero: SM-VB 0,6 l on the top step; ŠPIČKOVÉ / TERMOSKY / ZOJIRUSHI + Zojirushi logo chip + verified
+//             spec stack (0,6 l · horké i studené až 6 hodin · DOUBLE LOCK otevřeš jednou rukou · nerez · bez BPA — SM-VB = all verified)
+//   bar 5     lockup on the podium (music only): Bosset logo + bosset.cz + „Věnuje ceny · MČR 2026“ + „Pro vítěze MČR · termosky
+//             Zojirushi 0,6 l“ → wipe up into the next block
+// Prize models are NOT published (research/bosset_brands.md §3) → the bottles are „the kind of bottle“, no model codes as prize claims.
+// Reel: own hook (SM-VB on the podium step + PRO VÍTĚZE MČR) and own end card (fx.endCard-like lockup + distributor line + Keitech cameo).
 import fs from 'node:fs';
 import path from 'node:path';
 import * as fx from '../lib/fx.mjs';
 import { ROOT } from '../lib/util.mjs';
 
 const TEAL = '#1B97B1', DEEP = '#0A4A58', ABYSS = '#052E37', SKY = '#C5EBFC', YEL = '#FFC500', INK = '#080C0E';
-const AD = 'assets_prep/bosset/ads/';
+const AD = 'assets_prep/bosset/ads/', BR = 'assets_prep/bosset/brands/';
 const PR = {
-  H1: AD + 'H1_zojirushi_sm-vb_0-6l_black.png', H2: AD + 'H2_zojirushi_sm-sr_0-6l_green.png', H2m: AD + 'H2m_zojirushi_sm-sr_green_lid_open_macro.png',
+  H1: AD + 'H1_zojirushi_sm-vb_0-6l_black.png', H2: AD + 'H2_zojirushi_sm-sr_0-6l_green.png',
   H3: AD + 'H3_keitech_easy_shiner_4in_ice_chartreuse_pal03t.png',
-  S1: AD + 'S1_zojirushi_sm-she_0-6l_orange.png', S2: AD + 'S2_zojirushi_sm-sr_0-6l_pink.png', S3: AD + 'S3_zojirushi_sm-sr_0-6l_white.png',
-  S4: AD + 'S4_zojirushi_sm-vb_0-6l_green.png', S5: AD + 'S5_zojirushi_sm-vb_0-6l_beige.png', S6: AD + 'S6_ygk_x-braid_upgrade_x8_150m.png',
-  L1: AD + 'L1_keitech_easy_shiner_4-5in_lime_chartreuse_424t.png', L4: AD + 'L4_keitech_easy_shiner_4in_ua_limited_ea12t.png',
-  L5: AD + 'L5_fresh_lures_flipworm_3-1in_122.png', L7: AD + 'L7_select_easy_shad_3in_280.png', L8: AD + 'L8_select_dementor_130sp_13.png',
-  L9: AD + 'L9_decoy_round_magic_sv-52.png',
+  S1: AD + 'S1_zojirushi_sm-she_0-6l_orange.png', S6: AD + 'S6_ygk_x-braid_upgrade_x8_150m.png',
+  L1: AD + 'L1_keitech_easy_shiner_4-5in_lime_chartreuse_424t.png', L2: AD + 'L2_keitech_easy_shiner_4in_silver_flash_minnow_416t.png',
+  L3: AD + 'L3_keitech_easy_shiner_3in_sexy_shad_426t.png', L4: AD + 'L4_keitech_easy_shiner_4in_ua_limited_ea12t.png',
+  L5: AD + 'L5_fresh_lures_flipworm_3-1in_122.png', L8: AD + 'L8_select_dementor_130sp_13.png', L9: AD + 'L9_decoy_round_magic_sv-52.png',
+  W1: AD + 'W1_zipbaits_orbit_110sp_510r.png', W2: AD + 'W2_megabass_x-52_acrobat_f_shigyo.png', W3: AD + 'W3_osp_asura_durga_73sp_s76.png',
 };
 
 export const fonts = { Saira: { v: 'saira-{r}-wdth-normal', weight: '100 900', stretch: '50% 125%', axes: ['wght', 'wdth'], use: 'Bosset display (Saira Expanded Black ≈ the extended squarish BOSSET logo lettering), @fontsource-variable/saira 5.3.0, OFL' } };
 export const theme = { bg: DEEP, bg2: TEAL, fg: '#ffffff', accent: YEL, accent2: SKY, font: { display: 'Saira', text: 'Saira' }, wght: 900, upper: true, light: false };
 export const meta = {
   reel: true,
-  hook: { product: PR.H1, headline: 'Horké i studené', sub: 'až 6 hodin' },
+  hook: { product: PR.H1, headline: 'Pro vítěze MČR', sub: 'bosset.cz' },
   endCard: { logo: 'on_dark', line: 'Partner MČR v Trout Area 2026' },
 };
 
@@ -56,15 +61,20 @@ const CSS = (S) => `
   ${S} .bs-slab i{position:absolute;inset:0;display:block;border-radius:14px;transform-origin:0 50%}
   ${S} .bs-tile{position:absolute}
   ${S} .bs-card{position:absolute;inset:0;display:block;border-radius:28px;background:linear-gradient(165deg,#ffffff 0%,#eef9fe 55%,#d9f1fc 100%);box-shadow:0 20px 44px rgba(2,24,30,.38),inset 0 0 0 1.5px rgba(255,255,255,.9)}
+  ${S} .bs-card.dk{background:linear-gradient(165deg,#163a44 0%,#0b2a33 55%,#061c22 100%);box-shadow:0 20px 44px rgba(2,24,30,.45),inset 0 0 0 1.5px rgba(197,235,252,.22)}
+  ${S} .bs-card.lt{border-radius:22px;box-shadow:0 12px 28px rgba(10,74,88,.16),inset 0 0 0 1.5px rgba(255,255,255,.95)}
   ${S} .bs-beam{position:absolute;transform:rotate(-12deg)}
   ${S} .bs-beam i{position:absolute;inset:0;display:block;transform-origin:100% 50%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 34%,#000 80%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 34%,#000 80%,transparent 100%)}
-  ${S} .bs-panel{position:absolute;top:0;bottom:0;width:540px}
-  ${S} .bs-panel i{position:absolute;inset:0;display:block}
   ${S} .bs-cap{position:absolute;white-space:nowrap;text-transform:uppercase}
   ${S} .bs-page{position:absolute;left:0;top:0;width:1080px;height:3840px}
   ${S} .bs-sec{position:absolute;left:0;width:1080px;height:1920px;overflow:hidden}
-  ${S} .bs-win{position:absolute;overflow:hidden}
-  ${S} .bs-win>div{position:absolute;left:0;white-space:nowrap;line-height:1}
+  ${S} .bs-flood{position:absolute;display:block;border-radius:22px}
+  ${S} .bs-step{position:absolute;bottom:-40px}
+  ${S} .bs-step b{position:absolute;left:0;right:0;top:0;height:38px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#f2fbff 0%,${SKY} 70%,#9fd6ec 100%)}
+  ${S} .bs-step em{position:absolute;left:0;right:0;top:38px;bottom:0;background:linear-gradient(180deg,#2aa8c2 0%,${TEAL} 18%,${DEEP} 70%,${ABYSS} 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.35)}
+  ${S} .bs-step span{position:absolute;left:0;right:0;text-align:center;font-weight:800;font-stretch:110%;letter-spacing:.2em;text-transform:uppercase;color:rgba(197,235,252,.88);white-space:nowrap}
+  ${S} .bs-spot{position:absolute;top:-80px;width:900px;height:1640px;-webkit-clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(220,246,255,.55) 0%,rgba(197,235,252,.16) 55%,rgba(197,235,252,0) 100%);mix-blend-mode:screen;transform-origin:50% 0}
+  ${S} .bs-cf{position:absolute;display:block;width:16px;height:30px;border-radius:3px}
 `;
 
 // rounded pill (yellow plate + ink text by default); x = left (or cx = centre)
@@ -83,19 +93,26 @@ function cap(ctx, id, text, { x = ctx.safe.left, y, size = 28, color = '#fff', w
   if (t != null) ctx.tl.fromTo(ctx.sel(id), { opacity: 0, y: 16 }, { opacity: op, y: 0, duration: 0.45, ease: 'expo.out' }, t);
   return `<div class="bs-cap" id="${ctx.id(id)}" style="left:${Math.round(x)}px;top:${Math.round(y)}px;${w ? `width:${w}px;` : ''}text-align:${align};font-family:'Saira';font-weight:${wght};font-stretch:${wdth}%;font-size:${size}px;letter-spacing:${tracking}em;color:${color};opacity:${t != null ? 0 : op}">${ctx.esc(ctx.nb(text))}</div>`;
 }
-// e-shop product card (bento cell): white card + cut-out + brand pill; snaps in at t
-function card(ctx, id, { x, y, w, h, src, brand, rot = -3, t, padX = 26, padTop = 56, padBot = 12 }) {
+// e-shop product card (bento cell): white (or ink) card + cut-out + brand pill; snaps in at t
+function card(ctx, id, { x, y, w, h, src, brand, rot = -3, t, padX = 26, padTop = 56, padBot = 12, dark = false }) {
   const [nw, nh] = ctx.dims(src), ar = nw / nh;
   const c = Math.abs(Math.cos((rot * Math.PI) / 180)), s = Math.abs(Math.sin((rot * Math.PI) / 180));
   const bw = w - 2 * padX, bh = h - padTop - padBot;
   const pw = Math.min(bw / (c + s / ar), bh / (s + c / ar), nw);
   const P = fx.product(ctx, { id: `${id}p`, src, w: pw, cx: w / 2, cy: padTop + bh / 2, ground: 'none', pad: pad(src), rot, sweepOpacity: 0.55, maxUp: 1 });
   const pl = pill(ctx, `${id}l`, brand, { x: 14, y: 12, size: 21, t: t + 0.1, tracking: 0.1 });
-  // CD fix: solid card (opacity snaps in one frame) that pops on the 32nds — no grey half-transparent ghost cards over the teal
+  // solid card (opacity snaps in one frame) that pops on the 32nds — no grey half-transparent ghost cards over the teal
   ctx.tl.fromTo(ctx.sel(id), { scale: 0.8, y: 46 }, { scale: 1, y: 0, duration: 0.36, ease: 'back.out(1.6)' }, t);
   ctx.tl.fromTo(ctx.sel(id), { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none' }, t);
   ctx.tl.fromTo(P.sel, { x: 60 }, { x: 0, duration: 0.5, ease: 'expo.out' }, t + 0.03);
-  return { P, html: `<div class="bs-tile" id="${ctx.id(id)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><i class="bs-card"></i>${P.html}${pl.html}</div>` };
+  return { P, html: `<div class="bs-tile" id="${ctx.id(id)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><i class="bs-card${dark ? ' dk' : ''}"></i>${P.html}${pl.html}</div>` };
+}
+// brand tile of the ZNAČKY wall: the shop's own logo file in a light card (logo fitted under the logo rule via ctx.logo)
+function btile(ctx, id, { x, y, w, h, file, box, t, dark = false, label }) {
+  const L = ctx.logo(file, { box, id: `${id}i`, label: `bosset:brand ${label}` });
+  ctx.tl.fromTo(ctx.sel(id), { scale: 0.86, y: 30 }, { scale: 1, y: 0, duration: 0.34, ease: 'back.out(1.5)' }, t);
+  ctx.tl.fromTo(ctx.sel(id), { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none' }, t);
+  return `<div class="bs-tile" id="${ctx.id(id)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><i class="bs-card lt${dark ? ' dk' : ''}"></i><div class="fx-abs" style="left:${Math.round((w - L.w) / 2)}px;top:${Math.round((h - L.h) / 2)}px">${L.html}</div></div>`;
 }
 // Bosset logo bug, top right, vertically centred on the TA plate (never larger than the TA logo: ctx.logo)
 function bug(ctx, id, which, t0, t1, { inT = null } = {}) {
@@ -104,122 +121,162 @@ function bug(ctx, id, which, t0, t1, { inT = null } = {}) {
   if (inT != null) ctx.tl.fromTo(ctx.sel(id), { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, inT);
   return `<div class="fx-abs" id="${ctx.id(id)}" style="left:${ctx.W - ctx.safe.right - L.w}px;top:${Math.round(r.y + r.h / 2 - L.h / 2)}px">${L.html}</div>`;
 }
-// 7-bottle V line-up (centre = SM-VB black, the shop's no. 1 thermos); returns html + entrance
-function lineup(ctx, id, { cx = 540, floor = 1420, hC = 760, scale = 1, t = null, reflect = 0.22, shadow = 0.42, stagger = 0.075 }) {
-  const order = [[PR.S3, -3], [PR.S5, -2], [PR.S2, -1], [PR.H1, 0], [PR.H2, 1], [PR.S4, 2], [PR.S1, 3]];
-  const H = { 0: hC, 1: hC * 0.86, 2: hC * 0.77, 3: hC * 0.7 }, DX = { 0: 0, 1: 172, 2: 312, 3: 430 }, DF = { 0: 0, 1: -16, 2: -30, 3: -42 };
+// three-step prize podium (no place numbers: the prize split per place is not published); top = y of the centre step's top face
+function podium(ctx, id, { cx = 540, top = 1300, w = 320, dl = 110, dr = 150, label = 'MČR 2026', t = null }) {
+  const steps = [[cx - 1.5 * w, top + dl, ''], [cx + 0.5 * w, top + dr, ''], [cx - 0.5 * w, top, label]];
   let html = '';
-  const P = [];
-  // back to front: outermost first
-  [...order].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).forEach(([src, k]) => {
-    const a = Math.abs(k), sg = Math.sign(k);
-    const [nw, nh] = ctx.dims(src), h = Math.min(H[a] * scale, nh);
-    const p = fx.product(ctx, { id: `${id}${k + 3}`, src, h, cx: cx + sg * DX[a] * scale, floor: floor + DF[a] * scale, ground: 'floor', reflect, shadow, pad: pad(src), sweepOpacity: 0.6, maxUp: 1 });
-    html += p.html; P.push({ k, p, id: `${id}${k + 3}` });
-    // CD fix: bottles rise solid (opacity snaps in 0.1 s) — no translucent ghost bottles mid-rise
-    if (t != null) {
-      ctx.tl.fromTo(p.sel, { y: 220 }, { y: 0, duration: 0.7, ease: 'expo.out' }, t + a * stagger);
-      ctx.tl.fromTo(p.sel, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: 'none' }, t + a * stagger);
-    }
+  steps.forEach(([x, y, lab], i) => {
+    html += `<div class="bs-step" id="${ctx.id(`${id}${i}`)}" style="left:${Math.round(x)}px;top:${Math.round(y)}px;width:${w}px"><em></em><b></b>${lab ? `<span style="top:78px;font-size:30px;font-family:'Saira'">${ctx.esc(ctx.nb(lab))}</span>` : ''}</div>`;
+    if (t != null) ctx.tl.fromTo(ctx.sel(`${id}${i}`), { y: 520 }, { y: 0, duration: 0.55, ease: 'expo.out' }, t + (i === 2 ? 0 : 0.05 + i * 0.04));
   });
-  return { html, P };
+  return { html, feet: { L: [cx - w, top + dl], R: [cx + w, top + dr], C: [cx, top] } };
+}
+// deterministic confetti burst (brand colours) falling from above the frame over [t, t + d]; x range [x0, x1]
+function confetti(ctx, id, { t, d = 2.2, n = 22, x0 = 40, x1 = 1040, y0 = -60, y1 = 1500, seed = 5 }) {
+  const cols = [YEL, SKY, '#ffffff', YEL, '#3cc3dc'];
+  let html = '';
+  for (let i = 0; i < n; i++) {
+    const r = (k) => ctx.rnd(seed * 97 + i * 13 + k);
+    const x = x0 + (x1 - x0) * r(1), sc = 0.55 + 0.6 * r(2), dl = 0.22 * r(3), yE = y1 * (0.55 + 0.45 * r(4));
+    html += `<i class="bs-cf" id="${ctx.id(`${id}${i}`)}" style="left:${Math.round(x)}px;top:${y0}px;background:${cols[i % cols.length]};width:${Math.round(16 * sc)}px;height:${Math.round(30 * sc)}px"></i>`;
+    ctx.tl.fromTo(ctx.sel(`${id}${i}`), { y: y0 < 0 ? -40 - 260 * r(5) : -30 * r(5), x: 0, rotation: 360 * r(6) }, { y: yE - y0 - 60, x: (r(7) - 0.5) * 220, rotation: 360 * r(6) + (r(8) > 0.5 ? 1 : -1) * (300 + 420 * r(9)), duration: d - dl, ease: 'power1.out' }, t + dl);
+  }
+  return html;
 }
 
 export default function bosset(ctx) {
   const { W, bar } = ctx;
   const SL = ctx.safe.left, CW = W - SL - ctx.safe.right;                    // 64 · 952
-  const END = ctx.dur, LEAD = 0.012;
+  const END = ctx.dur, LEAD = 0.012, BEAT = ctx.BEAT;
   const vs = (word, dflt, lo, hi) => Math.min(hi, Math.max(lo, ctx.snap(ctx.vo.at(word) ?? dflt, 'beat')));
   const scene = (id, t0, t1, inner) => fx.scene(ctx, id, t0 > 0.01 ? t0 - LEAD : t0, t1 >= END - 0.01 ? END : t1 - LEAD, inner, { inD: 0.001, outD: 0.001 });
   let html = '';
 
   // ---------- key times (real grid, VO-synced with fallbacks) ----------
-  const t1 = bar(1), t2 = bar(2), t3 = bar(3), t4 = bar(4);
+  const t1 = bar(1), t2 = bar(2), t3 = bar(3), t4 = bar(4), t5 = bar(5);
   const tLogo = Math.max(0.1, (ctx.vo.at('Bosset') ?? 0.25) - 0.1);           // logo bug a hair before the name
-  const tRyb = vs('rybářský', ctx.at(0, 2), ctx.at(0, 2), ctx.at(0, 2));       // 0.92 hero → grid
-  const tShop = tRyb + ctx.BEAT / 2;                                            // CD fix: E-SHOP an 8th after RYBÁŘSKÝ → the 2-word claim reads as one unit for ~1 s before the scroll
-  const tScroll = vs('termosky', ctx.at(1, 1), ctx.at(1, 1), ctx.at(1, 1));    // 2.29 page scroll („i termosky“ 2.35)
-  const tHot = vs('horký', ctx.at(2, 2), ctx.at(2, 1), ctx.at(2, 2));          // 4.59
-  const tCold = vs('studený', ctx.at(2, 3), ctx.at(2, 3), ctx.at(2, 3));       // 5.04
-  const tAz = Math.max(t3 + 0.08, ctx.snap(ctx.vo.at('až') ?? ctx.at(3, 0) + ctx.BEAT / 2, 'half') - 0.05);
-  const tSix = vs('šest', ctx.at(3, 1), ctx.at(3, 1), ctx.at(3, 1));           // 5.96 → 6 lands with „šest“
-  const tHod = vs('hodin', ctx.at(3, 2), ctx.at(3, 2), ctx.at(3, 2));          // 6.42
+  const tRyb = vs('rybářský', ctx.at(0, 2), ctx.at(0, 2), ctx.at(0, 2));       // ≈ 0.92 hero → grid
+  const tShop = tRyb + BEAT / 2;                                                // E-SHOP an 8th after RYBÁŘSKÝ (one 2-word claim)
+  const tScroll = vs('Keitech', ctx.at(1, 1), ctx.at(1, 1), ctx.at(1, 1));     // ≈ 2.29 page scroll → ZNAČKY („Keitech“ 2.39)
+  const tYgk = vs('YGK', ctx.at(1, 3), ctx.at(1, 2), ctx.at(1, 3));            // ≈ 3.20 („YGK“ 3.33)
+  const tZ = vs('vítězové', ctx.at(2, 2), ctx.at(2, 2), ctx.at(2, 2));         // ≈ 4.58 Zojirushi tile floods → podium („vítězové“ 4.73)
+  const tMis = Math.max(tZ + BEAT / 2, ctx.snap(ctx.vo.at('mistrovství') ?? tZ + BEAT, 'half') - 0.04);   // ≈ 5.27
+  const tZis = vs('získají', ctx.at(3, 1), ctx.at(3, 1), ctx.at(3, 1));        // ≈ 5.95
+  const tSpi = vs('špičkové', ctx.at(3, 2), ctx.at(3, 2), ctx.at(3, 2));       // ≈ 6.40 flare
+  const tZoj = Math.max(t4 + BEAT / 2, ctx.snap(ctx.vo.at('Zojirushi') ?? t4 + BEAT / 2, 'half') - 0.04);   // ≈ 7.55
   const OUT_D = 0.42;
 
-  // =============== bars 0–1½ · the e-shop page (section 0) + thermos section (section 1), scrolled on „i termosky“ ===============
-  // ---- section 0: RYBÁŘSKÝ E-SHOP ----
+  // =============== bars 0–2½ · the e-shop page: section 0 (RYBÁŘSKÝ E-SHOP) → scroll → section 1 (ZNAČKY) ===============
+  // ---- section 0: RYBÁŘSKÝ E-SHOP (the wider assortment) ----
   let s0 = `<div class="fx-field" style="background:radial-gradient(90% 60% at 50% 56%, #137d93 0%, ${DEEP} 48%, ${ABYSS} 100%)"></div>`;
-  // teal light beam behind the hero (collapses into the grid)
   s0 += `<div class="bs-beam" style="left:-260px;top:${1010 - 170}px;width:1600px;height:340px"><i id="${ctx.id('beam')}" style="background:linear-gradient(180deg,rgba(27,151,177,0) 0%,rgba(27,151,177,.85) 26%,#3cc3dc 50%,rgba(27,151,177,.85) 74%,rgba(27,151,177,0) 100%)"></i></div>`;
-  // CD fix: the beam is a feathered light streak (mask on the scaled element) — its leading end used to be a hard slanted edge
   ctx.tl.fromTo(ctx.sel('beam'), { scaleX: 0.22, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, 0);
   ctx.tl.fromTo(ctx.sel('beam'), { scaleX: 1, opacity: 1 }, { scaleX: 1, opacity: 0, duration: 0.3, ease: 'power2.in' }, tRyb);
-  // bento grid geometry (x 64–1016, y 682–1452)
-  const GX = SL, GY = 680, GAP = 14, RA = 204, RB = 168, HW = (CW - GAP) / 2, QW = (HW - GAP) / 2;
+  // headline: RYBÁŘSKÝ (white) / E-SHOP (ink on a yellow plate)
+  const HS = Math.min(sz(ctx, 'Rybářský', CW, [124, 116, 112, 108, 100]), 112);
+  const HY = 392, HY2 = HY + Math.round(HS * 1.02);
+  // category band (the shop's main menu, research/bosset_brands.md §2) between the headline and the grid
+  const MQY = HY2 + Math.round(HS * 0.98) + 34;
+  // bento grid geometry
+  const GX = SL, GY = MQY + 30, GAP = 14, RA = 186, RB = 160, HW = (CW - GAP) / 2, QW = (HW - GAP) / 2;
   const rows = [GY, GY + RA + GAP, GY + RA + GAP + (RB + GAP), GY + RA + GAP + 2 * (RB + GAP)];
   // hero: Keitech Easy Shiner slams in on the downbeat, then becomes the first card of the grid (FLIP)
   const heroW = 980, heroCY = 1010;
-  const hero = fx.product(ctx, { id: 'hero', src: PR.H3, w: heroW, cx: W / 2, cy: heroCY, ground: 'float', shadow: 0.5, pad: pad(PR.H3), sweepAngle: 100, sweepOpacity: 0.8, maxUp: 1 });
+  const hero = fx.product(ctx, { id: 'hero', src: PR.H3, w: heroW, cx: W / 2, cy: heroCY, ground: 'float', shadow: 0.5, pad: pad(PR.H3), sweepAngle: 100, sweepOpacity: 0.8, maxUp: 1, rot: -14 });
   const [h3w, h3h] = ctx.dims(PR.H3);
   const cardA = { x: GX, y: rows[0], w: CW, h: RA };
   const inA = Math.min(CW - 70, (RA - 76) * (h3w / h3h));
   const flipS = inA / heroW, flipY = (cardA.y + 56 + (RA - 56 - 12) / 2) - heroCY;
   ctx.tl.fromTo(hero.sel, { scale: 1.34, x: 150, y: 0, opacity: 1 }, { scale: 1, x: 0, y: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, 0);
-  ctx.tl.fromTo(ctx.sel('hero-rot'), { rotation: -14 }, { rotation: -10, duration: tRyb - 0.1, ease: 'none' }, 0);
+  ctx.tl.fromTo(hero.cam, { rotation: 0 }, { rotation: 4, duration: tRyb - 0.13, ease: 'none' }, 0);   // −14 → −10 (static −14 on -rot)
   fx.sweep(ctx, 'hero', 0.24, { d: 0.6 });
   ctx.tl.fromTo(hero.sel, { scale: 1, y: 0 }, { scale: flipS, y: flipY, duration: 0.5, ease: 'expo.inOut' }, tRyb - 0.1);
-  ctx.tl.fromTo(ctx.sel('hero-rot'), { rotation: -10 }, { rotation: -2, duration: 0.5, ease: 'expo.inOut' }, tRyb - 0.1);
+  ctx.tl.fromTo(hero.cam, { rotation: 4 }, { rotation: 12, duration: 0.5, ease: 'expo.inOut' }, tRyb - 0.1);
   ctx.tl.fromTo(ctx.sel('hero-sh'), { opacity: 1 }, { opacity: 0, duration: 0.25, ease: 'power1.out' }, tRyb - 0.1);
-  // CD fix: no RGB-split on the hero at the kick — on the chartreuse body it read as a red/cyan halo around the cut-out
-  // card A (behind the hero) + its brand pill
   s0 += `<div class="bs-tile" id="${ctx.id('cA')}" style="left:${cardA.x}px;top:${cardA.y}px;width:${cardA.w}px;height:${cardA.h}px"><i class="bs-card"></i></div>`;
   ctx.tl.fromTo(ctx.sel('cA'), { scale: 0.9 }, { scale: 1, duration: 0.4, ease: 'expo.out' }, tRyb + 0.14);
   ctx.tl.fromTo(ctx.sel('cA'), { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none' }, tRyb + 0.14);
   const pA = pill(ctx, 'pA', 'Keitech', { x: GX + 14, y: rows[0] + 12, size: 21, t: tRyb + 0.3, tracking: 0.1 });
-  // the other 7 cards snap in on the 16ths (5 brands, real items of bosset.cz on 19. 10.)
+  // 7 more cards — the shop's other shelves: JDM wobblers (MČR = hard baits), YGK line, Decoy jig heads, Fresh Lures, Select
   const cards = [
-    { id: 'c1', x: GX, y: rows[1], w: HW, h: RB, src: PR.L8, brand: 'Select', rot: -3 },
-    { id: 'c2', x: GX + HW + GAP, y: rows[1], w: HW, h: RB, src: PR.L4, brand: 'Keitech', rot: -4 },
-    { id: 'c3', x: GX, y: rows[2], w: HW, h: RB, src: PR.L5, brand: 'Fresh Lures', rot: -2 },
+    { id: 'c1', x: GX, y: rows[1], w: HW, h: RB, src: PR.W2, brand: 'Megabass', rot: -4, dark: true },
+    { id: 'c2', x: GX + HW + GAP, y: rows[1], w: HW, h: RB, src: PR.W1, brand: 'ZipBaits', rot: -4 },
+    { id: 'c3', x: GX, y: rows[2], w: HW, h: RB, src: PR.W3, brand: 'O.S.P', rot: -3 },
     { id: 'c4', x: GX + HW + GAP, y: rows[2], w: QW, h: RB, src: PR.S6, brand: 'YGK', rot: 0, padX: 18 },
     { id: 'c5', x: GX + HW + GAP + QW + GAP, y: rows[2], w: QW, h: RB, src: PR.L9, brand: 'Decoy', rot: 0, padX: 14 },
-    { id: 'c6', x: GX, y: rows[3], w: HW, h: RB, src: PR.L7, brand: 'Select', rot: -4 },
-    { id: 'c7', x: GX + HW + GAP, y: rows[3], w: HW, h: RB, src: PR.L1, brand: 'Keitech', rot: -3 },
+    { id: 'c6', x: GX, y: rows[3], w: HW, h: RB, src: PR.L5, brand: 'Fresh Lures', rot: -2 },
+    { id: 'c7', x: GX + HW + GAP, y: rows[3], w: HW, h: RB, src: PR.L8, brand: 'Select', rot: -4 },
   ];
-  // CD fix: cards start once the shrinking hero has cleared row 1 and land on the 32nds → the whole page stands BEFORE the bar-1 punch
-  const s32 = ctx.BEAT / 8;
+  const s32 = BEAT / 8;
   const C = cards.map((c, i) => card(ctx, c.id, { ...c, t: tRyb + 0.18 + i * s32 * 0.9 }));
   s0 += C.map((c) => c.html).join('') + pA.html;
-  // grid accents: punch on the bar-1 downbeat, sweep across the cards
   ctx.tl.hit(ctx.sel('grid'), { scale: 1.025 }, { scale: 1, duration: 0.32, ease: 'power2.out' }, t1);
   cards.forEach((c, i) => fx.sweep(ctx, `${c.id}p`, t1 + 0.1 + i * 0.035, { d: 0.5 }));
   fx.sweep(ctx, 'hero', t1 + 0.06, { d: 0.55 });
-  // headline: RYBÁŘSKÝ (white) / E-SHOP (ink on a yellow plate)
-  const HS = Math.min(sz(ctx, 'Rybářský', CW, [150, 140, 132, 124, 116, 108, 100]), 132);
-  const HY = 392, HY2 = HY + Math.round(HS * 1.02);
   const hA = line(ctx, 'hA', 'Rybářský', { x: SL, y: HY, w: CW, size: HS, color: '#ffffff', t: tRyb - 0.04, d: 0.5 });
   const eW = wOf(ctx, 'E-shop', HS);
   s0 += `<div class="bs-slab" style="left:${SL - 16}px;top:${HY2 + Math.round(HS * 0.02)}px;width:${Math.round(eW + 34)}px;height:${Math.round(HS * 0.98)}px"><i id="${ctx.id('slab')}" style="background:${YEL}"></i></div>`;
   ctx.tl.fromTo(ctx.sel('slab'), { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: 'expo.out' }, tShop - 0.07);
   const hB = line(ctx, 'hB', 'E-shop', { x: SL, y: HY2, w: CW, size: HS, color: INK, t: tShop - 0.04, d: 0.42 });
   s0 += hA.html + hB.html;
+  s0 += fx.marquee(ctx, { id: 'mq', text: 'Gumové nástrahy · Woblery · Pletené šňůry · Háčky · Jigové hlavičky · Trout Area · Termosky', y: MQY, size: 30, font: 'Saira', wght: 800, wdth: 110, tracking: 0.12, color: SKY, speed: 150, t0: 0, t1: tScroll + 0.4 });
+  ctx.tl.fromTo(ctx.sel('mq'), { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'none' }, tShop);
   s0 += bug(ctx, 'bug0', 'on_dark', tLogo, tScroll + 0.2, { inT: tLogo });
-  // the hero sits above the grid wrapper (it flies into card A); everything else is inside #grid (punched on the downbeat)
   const sec0 = `<div class="bs-sec" style="top:0"><div class="fx-full" id="${ctx.id('grid')}" style="transform-origin:50% 60%">${s0}</div>${hero.html}</div>`;
 
-  // ---- section 1: TERMOSKY (light-blue set) ----
-  let s1 = `<div class="fx-field" style="background:linear-gradient(180deg,#ecf9ff 0%,${SKY} 52%,#a7dcf3 100%)"></div>`;
-  s1 += `<div class="fx-abs" style="left:0;right:0;top:1330px;height:590px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 70%)"></div>`;
-  s1 += fx.glow(ctx, { id: 'g1', x: 540, y: 1030, size: 1100, color: '#ffffff', opacity: 0.75 });
-  const tT = tScroll + 0.1;
-  const LU = lineup(ctx, 'lu', { floor: 1430, hC: 740, t: tT - 0.04 });
-  s1 += LU.html;
-  LU.P.forEach(({ k, id }) => fx.sweep(ctx, id, ctx.at(1, 3) + Math.abs(k) * 0.05, { d: 0.6 }));
-  const TS = Math.min(sz(ctx, 'Termosky', CW, [150, 140, 132, 124, 116, 108]), 140);
-  s1 += line(ctx, 'tH', 'Termosky', { x: SL, y: 392, w: CW, size: TS, color: DEEP, t: tT, d: 0.5 }).html;
-  s1 += cap(ctx, 'tC', '0,6 l · nerez · bez BPA', { y: 392 + TS + 18, size: 32, color: DEEP, wght: 700, wdth: 110, tracking: 0.14, t: tT + 0.1, op: 1 });
-  s1 += bug(ctx, 'bug1', 'on_light', tScroll - 0.16, t2);
-  const sec1 = `<div class="bs-sec" style="top:1920px">${s1}</div>`;
+  // ---- section 1: ZNAČKY (light-blue set like the shop header): official distribution + the brand wall ----
+  let s1 = `<div class="fx-field" style="background:linear-gradient(180deg,#ecf9ff 0%,${SKY} 58%,#a7dcf3 100%)"></div>`;
+  s1 += fx.glow(ctx, { id: 'g1', x: 540, y: 900, size: 1200, color: '#ffffff', opacity: 0.7 });
+  const tK = tScroll + 0.06;
+  const KS = Math.min(sz(ctx, 'YGK X-Braid', CW, [124, 116, 108, 100, 92, 86]), 112);
+  const kY = 452;
+  s1 += cap(ctx, 'od', 'Oficiální distributor pro ČR', { x: SL, y: 400, size: 30, color: DEEP, wght: 800, wdth: 110, tracking: 0.14, t: tK, op: 1 });
+  s1 += line(ctx, 'kH', 'Keitech', { x: SL, y: kY, w: CW, size: KS, color: DEEP, t: tK, d: 0.45 }).html;
+  s1 += line(ctx, 'yH', 'YGK X-Braid', { x: SL, y: kY + Math.round(KS * 1.0), w: CW, size: KS, color: TEAL, t: tYgk - 0.04, d: 0.45 }).html;
+  // featured tile: Keitech (logo + 4 Easy Shiner colourways)
+  const fY = kY + Math.round(KS * 2.0) + 30, fH = 262;
+  const KL = ctx.logo(BR + 'keitech_hires.png', { box: [236, 60], id: 'kLi', label: 'bosset:brand Keitech' });
+  let kt = `<i class="bs-card lt"></i><div class="fx-abs" style="left:26px;top:22px">${KL.html}</div>`;
+  const kLures = [[PR.L1, 300, 222, -6], [PR.L2, 700, 132, -5], [PR.L3, 690, 226, -4], [PR.L4, 300, 130, -5]];
+  kLures.forEach(([src, cx, cy, rot], i) => {
+    const P = fx.product(ctx, { id: `kl${i}`, src, w: 380, cx, cy, ground: 'none', pad: pad(src), rot, sweepOpacity: 0.55, maxUp: 1 });
+    kt += P.html;
+    ctx.tl.fromTo(P.sel, { x: 140 + i * 30 }, { x: 0, duration: 0.55, ease: 'expo.out' }, tK + 0.08 + i * s32);
+    fx.sweep(ctx, `kl${i}`, t2 + 0.06 + i * 0.04, { d: 0.5 });
+  });
+  s1 += `<div class="bs-tile" id="${ctx.id('kT')}" style="left:${SL}px;top:${fY}px;width:${CW}px;height:${fH}px">${kt}</div>`;
+  ctx.tl.fromTo(ctx.sel('kT'), { scale: 0.92, y: 40 }, { scale: 1, y: 0, duration: 0.42, ease: 'expo.out' }, tK);
+  // featured tile: YGK X-Braid (logo + Upgrade X8 spool; no line strength: the shop image box ≠ the listed item)
+  const yY = fY + fH + 14, yH = 196;
+  const YL = ctx.logo(BR + 'ygk.png', { box: [210, 70], id: 'yLi', label: 'bosset:brand YGK' });
+  const sp = fx.product(ctx, { id: 'sp', src: PR.S6, h: yH - 22, cx: CW - 150, cy: yH / 2, ground: 'none', pad: pad(PR.S6), sweepOpacity: 0.5, maxUp: 1 });
+  let yt = `<i class="bs-card lt"></i><div class="fx-abs" style="left:26px;top:${Math.round(yH / 2 - YL.h / 2 - 22)}px">${YL.html}</div>`;
+  yt += cap(ctx, 'yC', 'X-Braid Upgrade X8', { x: 28, y: Math.round(yH / 2 + YL.h / 2 - 8), size: 30, color: DEEP, wght: 800, wdth: 100, tracking: 0.08, op: 1 }) + sp.html;
+  s1 += `<div class="bs-tile" id="${ctx.id('yT')}" style="left:${SL}px;top:${yY}px;width:${CW}px;height:${yH}px">${yt}</div>`;
+  ctx.tl.fromTo(ctx.sel('yT'), { x: 1100 }, { x: 0, duration: 0.42, ease: 'expo.out' }, tYgk - 0.06);
+  ctx.tl.fromTo(sp.cam, { rotation: -40 }, { rotation: 0, duration: 0.7, ease: 'expo.out' }, tYgk - 0.02);
+  fx.sweep(ctx, 'sp', t2 + 0.2, { d: 0.5 });
+  // brand wall: 8 small tiles (the shop's ZNAČKY tiles) — Zojirushi in deep teal: it floods the frame on „vítězové“
+  const wY = yY + yH + 14, tw = (CW - 3 * 12) / 4, th = Math.min(112, Math.floor((1452 - wY - 12) / 2));
+  const wall = [
+    ['zojirushi_on_dark.png', 'Zojirushi', [180, 62], true], ['megabass.png', 'Megabass', [184, 44]], ['zipbaits.png', 'ZipBaits', [184, 52]], ['osp.png', 'O.S.P', [150, 70]],
+    ['reins.png', 'Reins', [170, 60]], ['freshlures.png', 'Fresh Lures', [86, 86]], ['decoy.png', 'Decoy', [180, 40]], ['select.png', 'Select', [170, 50]],
+  ];
+  const tW0 = tScroll + 0.42;                                                    // between „Keitech“ and „YGK“, on the 32nds
+  wall.forEach(([f, label, box, dark], i) => {
+    const x = SL + (i % 4) * (tw + 12), y = wY + Math.floor(i / 4) * (th + 12);
+    s1 += btile(ctx, `w${i}`, { x: Math.round(x), y, w: Math.round(tw), h: th, file: BR + f, box: [Math.min(box[0], tw - 30), Math.min(box[1], th - 26)], t: tW0 + i * s32, dark, label });
+  });
+  const zx = SL + tw / 2, zy = wY + th / 2;                                      // Zojirushi tile centre
+  // flood: a deep-teal panel grows from the Zojirushi tile to the whole frame (it meets the podium scene in colour)
+  const fsx = (2 * Math.max(zx, W - zx) + 60) / tw, fsy = (2 * Math.max(zy, 1920 - zy) + 60) / th;   // section-local = screen coords
+  s1 += `<i class="bs-flood" id="${ctx.id('flood')}" style="left:${Math.round(SL)}px;top:${wY}px;width:${Math.round(tw)}px;height:${th}px;background:${DEEP};opacity:0"></i>`;
+  ctx.tl.fromTo(ctx.sel('flood'), { opacity: 0 }, { opacity: 1, duration: 0.03, ease: 'none' }, tZ - 0.3);
+  ctx.tl.fromTo(ctx.sel('flood'), { scaleX: 1, scaleY: 1 }, { scaleX: fsx, scaleY: fsy, duration: 0.3, ease: 'power3.in' }, tZ - 0.3);
+  ctx.tl.hit(ctx.sel('wall'), { scale: 1.02 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t2);
+  ctx.tl.hit(ctx.sel('w0'), { scale: 1.07 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, ctx.at(2, 1));
+  s1 += bug(ctx, 'bug1', 'on_light', tScroll - 0.16, tZ);
+  const sec1 = `<div class="bs-sec" style="top:1920px"><div class="fx-full" id="${ctx.id('wall')}" style="transform-origin:50% 62%">${s1}</div></div>`;
 
   // ---- the page: scroll with vertical motion blur ----
   const SC0 = tScroll - 0.16, SCD = 0.34;
@@ -229,117 +286,156 @@ export default function bosset(ctx) {
   ctx.tl.fromTo(`#${ctx.id('vbg')}`, { attr: { stdDeviation: '0 0' } }, { attr: { stdDeviation: '0 46' }, duration: SCD / 2, ease: 'power2.in' }, SC0);
   ctx.tl.fromTo(`#${ctx.id('vbg')}`, { attr: { stdDeviation: '0 46' } }, { attr: { stdDeviation: '0 0' }, duration: SCD / 2, ease: 'power2.out' }, SC0 + SCD / 2);
   ctx.tl.set(ctx.sel('page'), { filter: 'none' }, SC0 + SCD + 0.02);
-  html += scene('scA', 0, t2, `<div class="bs-page" id="${ctx.id('page')}">${sec0}${sec1}</div>`);
+  html += scene('scA', 0, tZ, `<div class="bs-page" id="${ctx.id('page')}">${sec0}${sec1}</div>`);
   fx.flash(ctx, t1, { id: 'fl1', color: '#ffffff', peak: 0.1, d: 0.22, blend: 'screen' });
+  ctx.plate.tone(SC0 + SCD * 0.5, tZ - 0.1, 'halo');                          // light-blue page under the TA logo
 
-  // =============== bar 2 · macro: DOUBLE LOCK, warm | cold split on „horký“ / „studený“ ===============
-  let s2 = `<div class="fx-field" style="background:radial-gradient(80% 55% at 50% 62%, #12707f 0%, ${DEEP} 55%, ${ABYSS} 100%)"></div>`;
-  s2 += `<div class="bs-panel" style="left:0"><i id="${ctx.id('warm')}" style="background:linear-gradient(0deg,#f4a25e 0%,#d9682f 42%,#8a3216 100%);transform-origin:0 50%"></i></div>`;
-  s2 += `<div class="bs-panel" style="left:540px"><i id="${ctx.id('cold')}" style="background:linear-gradient(0deg,#5fd2e8 0%,#1b97b1 42%,#0a4a58 100%);transform-origin:100% 50%"></i></div>`;
-  ctx.tl.fromTo(ctx.sel('warm'), { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: 'expo.out' }, tHot - 0.05);
-  ctx.tl.fromTo(ctx.sel('cold'), { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: 'expo.out' }, tCold - 0.05);
-  const MW = 1300;
-  const [mw, mh] = ctx.dims(PR.H2m);
-  const mH = MW / (mw / mh);
-  // CD fix: sweepOpacity .7 → .34 — on the pale mint body the screen sweep blew the macro out to white
-  const mac = fx.product(ctx, { id: 'mac', src: PR.H2m, w: MW, cx: 556, cy: 1935 - mH / 2, ground: 'none', pad: pad(PR.H2m), sweepAngle: 115, sweepOpacity: 0.34, maxUp: 1 });
-  s2 += mac.html;
-  ctx.tl.fromTo(mac.sel, { y: 180, opacity: 1 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, t2);
-  fx.pushIn(ctx, mac.cam, t2, t3, { from: 1, to: 1.15, origin: '40% 42%', ease: 'power1.inOut' });
-  fx.sweep(ctx, 'mac', t2 + 0.35, { d: 0.8 });
-  fx.sweep(ctx, 'mac', tCold + 0.05, { d: 0.6 });
-  const tw2 = (CW - 40) / 2;
-  const HS2 = Math.min(sz(ctx, 'Horké', tw2, [120, 112, 104, 96, 90, 84, 78], { wdth: 100 }), sz(ctx, 'Studené', tw2, [120, 112, 104, 96, 90, 84, 78], { wdth: 100 }));
-  s2 += line(ctx, 'hot', 'Horké', { x: SL, y: 400, w: tw2, size: HS2, wdth: 100, color: '#ffffff', t: tHot - 0.03, d: 0.45 }).html;
-  s2 += line(ctx, 'cld', 'Studené', { x: W - ctx.safe.right - tw2, y: 400, w: tw2, size: HS2, wdth: 100, color: '#ffffff', align: 'right', t: tCold - 0.03, d: 0.45 }).html;
-  fx.chroma(ctx, ctx.sel('hot'), tHot, { amt: 6, d: 0.3 });
-  fx.chroma(ctx, ctx.sel('cld'), tCold, { amt: 6, d: 0.3 });
-  // CD fix — headline line = the VO, word for word („…které UDRŽÍ NÁPOJ | HORKÝ | i STUDENÝ“): UDRŽÍ NÁPOJ on the bar-2 hit
-  // (VO „udrží“ 3.70), handed over to HORKÉ | STUDENÉ on „horký“. The product feature is NOT a sub-headline any more (it used to
-  // stay orphaned under HORKÉ): it is a spec tag pinned above the open lid — yellow DOUBLE LOCK plate + „otevřeš jednou rukou“,
-  // on screen for the whole bar (≈ 1.7 s), verified for SM-SR / SM-VB only (research/bosset.md, Verification 5) = the lid shown.
-  const tUd = vs('udrží', t2, t2, t2 + ctx.BEAT);
-  const UDS = Math.min(sz(ctx, 'Udrží nápoj', CW, [120, 112, 104, 96, 90, 84]), 112);
-  s2 += line(ctx, 'udh', 'Udrží nápoj', { x: SL, y: 400, w: CW, size: UDS, color: '#ffffff', t: tUd - 0.02, d: 0.45, out: tHot - 0.2, outD: 0.2 }).html;
-  const yTag = 730, tTag = t2 + ctx.BEAT / 2;                                 // just above the lid (top ≈ 840 at full push-in), clear of the headline
-  const tg = pill(ctx, 'dlp', 'Double lock', { x: SL, y: yTag, size: 34, wght: 900, wdth: 125, tracking: 0.03, t: tTag });
-  s2 += tg.html;
-  s2 += cap(ctx, 'dl', 'otevřeš jednou rukou', { x: SL + tg.w + 22, y: yTag + Math.round((tg.h - 34) / 2) - 1, size: 30, wght: 800, wdth: 100, tracking: 0.1, t: tTag + 0.08, op: 1 });
-  ctx.report(`spec tag DOUBLE LOCK x ${SL}–${Math.round(SL + tg.w + 22 + ctx.measure(ctx.nb('otevřeš jednou rukou'), { font: 'Saira', size: 30, wght: 800, wdth: 100, upper: true, tracking: 0.1 }))} (≤ ${W - ctx.safe.right}), ${tTag.toFixed(2)}–${t3.toFixed(2)} s; UDRŽÍ NÁPOJ ${UDS}px at ${tUd.toFixed(2)}`);
-  html += scene('scB', t2, t3, s2);
-  // (CD fix: the orange / cyan screen flashes on „horký“ / „studený“ muddied the teal to olive-grey → removed; the panels are the hit)
+  // =============== bars 2½–3 · PRIZE PODIUM: VÍTĚZOVÉ MISTROVSTVÍ ZÍSKAJÍ (bottles land on the bar-3 downbeat) ===============
+  const stage = (id, { cx = 540, top, glowY }) => {
+    let s = `<div class="fx-field" style="background:radial-gradient(85% 55% at 50% ${Math.round((glowY / 1920) * 100)}%, #13788c 0%, ${DEEP} 46%, ${ABYSS} 100%)"></div>`;
+    s += fx.rays(ctx, { id: `${id}r`, x: cx, y: glowY, size: 2200, color: 'rgba(197,235,252,.5)', n: 18, duty: 0.3, opacity: 0.16, spin: 14, t0: tZ, t1: END, hole: 0.06 });
+    s += fx.glow(ctx, { id: `${id}g`, x: cx, y: glowY, size: 1100, color: 'rgba(60,195,220,.95)', opacity: 0.5 });
+    s += `<div class="bs-spot" id="${ctx.id(`${id}sl`)}" style="left:${cx - 450 - 330}px"></div><div class="bs-spot" id="${ctx.id(`${id}sr`)}" style="left:${cx - 450 + 330}px"></div>`;
+    return s;
+  };
+  const POD = { top: 1296, w: 316, dl: 108, dr: 150 };
+  let s2 = stage('p1', { top: POD.top, glowY: 1080 });
+  ctx.tl.fromTo(ctx.sel('p1sl'), { rotation: -26, opacity: 0.4 }, { rotation: -14, opacity: 1, duration: 0.9, ease: 'expo.out' }, tZ);
+  ctx.tl.fromTo(ctx.sel('p1sr'), { rotation: 26, opacity: 0.4 }, { rotation: 14, opacity: 1, duration: 0.9, ease: 'expo.out' }, tZ);
+  const pd1 = podium(ctx, 'pd', { ...POD, t: tZ - 0.02 });
+  // bottles: SM-VB black on the top step, SM-SR green left, SM-SHE orange right (no „DOUBLE LOCK / jednou rukou“ near the orange one)
+  const B = [
+    { id: 'bC', src: PR.H1, h: 640, cx: 540, floor: POD.top + 22 },
+    { id: 'bL', src: PR.H2, h: 560, cx: 540 - POD.w, floor: POD.top + POD.dl + 22 },
+    { id: 'bR', src: PR.S1, h: 500, cx: 540 + POD.w - 6, floor: POD.top + POD.dr + 22 },
+  ];
+  let bots = '';
+  B.forEach((b, i) => {
+    const P = fx.product(ctx, { id: b.id, src: b.src, h: b.h, cx: b.cx, floor: b.floor, ground: 'floor', reflect: 0, shadow: 0.6, pad: pad(b.src), sweepAngle: 104, sweepOpacity: 0.6, maxUp: 1 });
+    bots += P.html;
+    // drop from above the frame, land exactly on the bar-3 downbeat, short squash from the foot
+    ctx.tl.fromTo(P.sel, { y: -1500 - i * 120 }, { y: 0, duration: 0.34, ease: 'power3.in' }, t3 - 0.34);
+    ctx.tl.set(P.cam, { transformOrigin: '50% 100%' }, 0);
+    ctx.tl.hit(P.cam, { scaleY: 0.93, scaleX: 1.04 }, { scaleY: 1, scaleX: 1, duration: 0.36, ease: 'back.out(2.4)' }, t3);
+    fx.sweep(ctx, b.id, tSpi + i * 0.06, { d: 0.6 });
+  });
+  s2 += `<div class="fx-full" id="${ctx.id('pw')}" style="transform-origin:540px 1000px">${pd1.html}${bots}</div>`;
+  ctx.tl.fromTo(ctx.sel('pw'), { scale: 1 }, { scale: 1.07, duration: t4 - tSpi, ease: 'power2.in' }, tSpi);   // lean in → cut to the hero
+  ctx.tl.hit(ctx.sel('p1g'), { opacity: 0.95 }, { opacity: 0.5, duration: 0.5, ease: 'power2.out' }, tSpi);
+  s2 += confetti(ctx, 'cf', { t: t3 - 0.04, d: t4 - t3 + 0.1, n: 24, seed: 3 });
+  // headline: VÍTĚZOVÉ / MISTROVSTVÍ (VO word for word) + ZÍSKAJÍ plate
+  const VS = Math.min(sz(ctx, 'Mistrovství', CW, [124, 116, 108, 100, 92, 86, 80]), sz(ctx, 'Vítězové', CW, [124, 116, 108, 100]));
+  const vY = 404;
+  s2 += line(ctx, 'vH', 'Vítězové', { x: SL, y: vY, w: CW, size: VS, color: '#ffffff', t: tZ + 0.02, d: 0.5 }).html;
+  s2 += line(ctx, 'mH', 'mistrovství', { x: SL, y: vY + Math.round(VS * 1.04), w: CW, size: VS, color: SKY, t: tMis, d: 0.45 }).html;
+  s2 += pill(ctx, 'zp', 'získají', { x: SL, y: vY + Math.round(VS * 2.08) + 18, size: 40, wght: 900, wdth: 125, tracking: 0.04, t: tZis - 0.04 }).html;
+  html += scene('scP', tZ, t4, s2);
 
-  // =============== bar 3 · AŽ 6 HODIN (SM-VB black hero) ===============
-  let s3 = `<div class="fx-field" style="background:radial-gradient(85% 60% at 72% 52%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
-  s3 += fx.glow(ctx, { id: 'g3', x: 818, y: 900, size: 980, color: 'rgba(60,195,220,.9)', opacity: 0.45 });
-  const b3 = fx.product(ctx, { id: 'b3', src: PR.H1, h: 990, cx: 818, floor: 1446, ground: 'floor', reflect: 0.2, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, sweepOpacity: 0.6, maxUp: 1 });
-  s3 += b3.html;
-  ctx.tl.fromTo(b3.sel, { scale: 1.16, y: -40, opacity: 1 }, { scale: 1, y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, t3);
-  fx.sweep(ctx, 'b3', tSix + 0.1, { d: 0.8 });
-  fx.float(ctx, b3.cam, t3 + 0.6, t4, { y: -10, period: ctx.BAR / 2 });
-  s3 += pill(ctx, 'az', 'Až', { x: SL, y: 418, size: 54, wght: 900, wdth: 125, tracking: 0.04, t: tAz }).html;
-  // CD fix: no rolling odometer for a single digit — it flashed a 760 px „5“ across the AŽ plate („až 5 hodin“ for a frame or
-  // three). The 6 now rises out of its own window (y 560–1160, below the plate) and settles on „šest“: only the true number is ever shown.
-  const SIX = 760, WY = 560, WH = 600;
-  s3 += `<div class="bs-win" style="left:${SL - 22}px;top:${WY}px;width:${Math.round(SIX * 0.9)}px;height:${WH}px"><div id="${ctx.id('six')}" style="top:${470 - WY}px;transform-origin:50% 85%;font-family:'Saira';font-weight:900;font-stretch:125%;font-size:${SIX}px;color:#ffffff">6</div></div>`;
-  ctx.tl.fromTo(ctx.sel('six'), { y: WH + 220, scaleY: 1.14 }, { y: 0, scaleY: 1, duration: 0.42, ease: 'expo.out' }, tSix - 0.08);   // parked fully below the window (the stretched top must not peek in)
-  const HOD = Math.min(sz(ctx, 'hodin', 560, [132, 124, 116, 108, 100]), 124);
-  s3 += line(ctx, 'hod', 'hodin', { x: SL, y: 1196, w: 600, size: HOD, color: '#ffffff', t: tHod - 0.04, d: 0.42 }).html;
-  s3 += cap(ctx, 'hc', 'horké i studené', { x: SL + 2, y: 1196 + HOD + 22, size: 30, color: SKY, tracking: 0.2, t: tHod + 0.18, op: 1 });
-  s3 += bug(ctx, 'bug3', 'on_dark', t3, t4);
-  html += scene('scC', t3, t4, s3);
-  // (CD fix: the white screen flash after „šest“ greyed the whole teal frame → removed; the rising 6 is the hit)
+  // =============== bar 4 · HERO: ŠPIČKOVÉ TERMOSKY ZOJIRUSHI + verified spec stack (SM-VB 0,6 l) ===============
+  let s3 = `<div class="fx-field" style="background:radial-gradient(80% 58% at 72% 52%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
+  s3 += fx.rays(ctx, { id: 'p2r', x: 790, y: 900, size: 2000, color: 'rgba(197,235,252,.5)', n: 18, duty: 0.3, opacity: 0.14, spin: 10, t0: t4, t1: t5, hole: 0.06 });
+  s3 += fx.glow(ctx, { id: 'p2g', x: 790, y: 900, size: 1000, color: 'rgba(60,195,220,.95)', opacity: 0.5 });
+  const HF = 1488;                                                               // top face of the (close) top step
+  s3 += `<div class="bs-step" style="left:560px;top:${HF - 22}px;width:620px"><em></em><b></b></div>`;
+  const hB1 = fx.product(ctx, { id: 'hb', src: PR.H1, h: 1040, cx: 792, floor: HF, ground: 'floor', reflect: 0, shadow: 0.65, pad: pad(PR.H1), sweepAngle: 104, sweepOpacity: 0.65, maxUp: 1 });
+  s3 += hB1.html;
+  ctx.tl.fromTo(hB1.sel, { scale: 1.12, y: -30 }, { scale: 1, y: 0, duration: 0.55, ease: 'expo.out' }, t4 - 0.02);
+  ctx.tl.set(hB1.sel, { transformOrigin: '50% 100%' }, 0);
+  fx.pushIn(ctx, hB1.cam, t4 + 0.5, t5, { from: 1, to: 1.04, origin: '50% 100%' });
+  fx.sweep(ctx, 'hb', t4 + 0.12, { d: 0.7 });
+  fx.sweep(ctx, 'hb', ctx.at(4, 2) + 0.05, { d: 0.7 });
+  const LW = 540;                                                                // left column x 64–604
+  s3 += pill(ctx, 'sp1', 'špičkové', { x: SL, y: 398, size: 34, wght: 900, wdth: 125, tracking: 0.04, t: t4 - 0.06 }).html;
+  const TS2 = Math.min(sz(ctx, 'Termosky', LW, [104, 96, 90, 84, 78]), sz(ctx, 'Zojirushi', LW, [104, 96, 90, 84, 78]));
+  const tY = 470;
+  s3 += line(ctx, 'tH', 'Termosky', { x: SL, y: tY, w: LW, size: TS2, color: '#ffffff', t: t4 - 0.02, d: 0.45 }).html;
+  s3 += line(ctx, 'zH', 'Zojirushi', { x: SL, y: tY + Math.round(TS2 * 1.02), w: LW, size: TS2, color: SKY, t: tZoj, d: 0.45 }).html;
+  // Zojirushi logo (shop tile on a white chip) — ≤ TA logo
+  const ZL = ctx.logo(BR + 'zojirushi_on_dark.png', { box: [230, 70], at: [t4, t5], id: 'zLi', label: 'bosset:brand Zojirushi' });
+  const zlY = tY + Math.round(TS2 * 2.06) + 22;
+  s3 += `<div class="fx-abs" id="${ctx.id('zL')}" style="left:${SL - 4}px;top:${zlY}px">${ZL.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('zL'), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, tZoj + 0.06);
+  // spec stack (verbatim-verified for SM-VB 0,6 l: „až 6 hodin“ hot & cold · DOUBLE LOCK / one hand · nerez + plast bez BPA)
+  const tS1 = ctx.at(4, 1) + 0.02, tS2 = tS1 + BEAT / 4, tS3 = tS1 + BEAT / 2, tS4 = tS1 + BEAT * 0.75;   // whole stack stands ≥ 1 s before the lockup
+  let y = zlY + ZL.h + 34;
+  const V06 = 150;
+  s3 += line(ctx, 'v06', '0,6 l', { x: SL, y, w: LW, size: V06, color: '#ffffff', t: tZoj + 0.12, d: 0.42 }).html;
+  y += Math.round(V06 * 0.98) + 18;
+  const az = pill(ctx, 'az', 'až 6 hodin', { x: SL, y, size: 38, wght: 900, wdth: 125, tracking: 0.03, t: tS1 });
+  s3 += az.html + cap(ctx, 'hs', 'horké i studené', { x: SL + az.w + 18, y: y + Math.round((az.h - 32) / 2) - 1, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: '#ffffff', t: tS1 + 0.06, op: 1 });
+  y += az.h + 22;
+  const dl = pill(ctx, 'dl', 'Double lock', { x: SL, y, size: 38, wght: 900, wdth: 125, tracking: 0.03, bg: SKY, fg: DEEP, t: tS2 });
+  s3 += dl.html;
+  y += dl.h + 10;
+  s3 += cap(ctx, 'jr', 'otevřeš jednou rukou', { x: SL + 2, y, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: SKY, t: tS3, op: 1 });
+  y += 32 + 28;
+  s3 += cap(ctx, 'np', 'nerez · bez BPA', { x: SL + 2, y, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: SKY, t: tS4, op: 1 });
+  ctx.report(`hero spec stack y ${zlY}–${y + 30} (≤ ${ctx.H - ctx.safe.bottom}), times ${tZoj.toFixed(2)}/${tS1.toFixed(2)}–${tS4.toFixed(2)}, hero bottle x ${Math.round(hB1.x)}–${Math.round(hB1.x + hB1.w)}`);
+  html += scene('scH', t4, t5, s3);
 
-  // =============== bar 4 · lockup: logo + bosset.cz + Věnuje ceny over the prize line-up ===============
-  let s4 = `<div class="fx-field" style="background:radial-gradient(90% 55% at 50% 70%, #137d93 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
-  s4 += fx.glow(ctx, { id: 'g4', x: 540, y: 1150, size: 1200, color: 'rgba(60,195,220,.9)', opacity: 0.35 });
-  const LU4 = lineup(ctx, 'l4', { floor: 1446, hC: 600, scale: 0.92, t: null, reflect: 0.18, shadow: 0.55 });
-  LU4.P.forEach(({ k, p }) => ctx.tl.fromTo(p.sel, { y: 90 + Math.abs(k) * 40, opacity: 1 }, { y: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, t4 - LEAD));
-  s4 += `<div class="fx-full" id="${ctx.id('l4w')}">${LU4.html}</div>`;
-  LU4.P.forEach(({ k, id }) => fx.sweep(ctx, id, ctx.at(4, 2) + (k + 3) * 0.05, { d: 0.6 }));
-  ctx.tl.fromTo(ctx.sel('l4w'), { scale: 1 }, { scale: 1.035, duration: END - t4, ease: 'none' }, t4);
-  const LG = ctx.logo('on_dark', { box: [281, 80], at: [t4, END], id: 'lgi' });
-  s4 += `<div class="fx-abs" id="${ctx.id('lg')}" style="left:${Math.round(W / 2 - LG.w / 2)}px;top:430px">${LG.html}</div>`;
-  ctx.tl.fromTo(ctx.sel('lg'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, t4 - LEAD);
-  const US = Math.min(sz(ctx, 'bosset.cz', CW, [112, 104, 96, 88], { wght: 800, upper: false }), 104);
-  s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: 430 + LG.h + 40, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t4 + 0.04, d: 0.45 }).html;
-  // CD fix: prize plate on the first 8th of the lockup (was beat 2 → only ~0.9 s before the out-wipe started to cover it)
-  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: 430 + LG.h + 40 + US + 36, size: 30, t: t4 + ctx.BEAT / 2 }).html;
-  html += scene('scD', t4, END, s4);
-  fx.flash(ctx, t4, { id: 'fl4', color: '#ffffff', peak: 0.1, d: 0.22, blend: 'screen' });
+  // =============== bar 5 · lockup on the podium: logo + bosset.cz + Věnuje ceny + Pro vítěze MČR ===============
+  const POD2 = { top: 1366, w: 300, dl: 96, dr: 132 };
+  let s4 = stage('p3', { top: POD2.top, glowY: 1160 });
+  ctx.tl.fromTo(ctx.sel('p3sl'), { rotation: -18 }, { rotation: -12, duration: END - t5, ease: 'sine.out' }, t5);
+  ctx.tl.fromTo(ctx.sel('p3sr'), { rotation: 18 }, { rotation: 12, duration: END - t5, ease: 'sine.out' }, t5);
+  const pd2 = podium(ctx, 'pe', { ...POD2 });
+  let bots2 = '';
+  [
+    { id: 'eC', src: PR.H1, h: 560, cx: 540, floor: POD2.top + 22 },
+    { id: 'eL', src: PR.H2, h: 490, cx: 540 - POD2.w, floor: POD2.top + POD2.dl + 22 },
+    { id: 'eR', src: PR.S1, h: 440, cx: 540 + POD2.w - 6, floor: POD2.top + POD2.dr + 22 },
+  ].forEach((b, i) => {
+    bots2 += fx.product(ctx, { id: b.id, src: b.src, h: b.h, cx: b.cx, floor: b.floor, ground: 'floor', reflect: 0, shadow: 0.6, pad: pad(b.src), sweepAngle: 104, sweepOpacity: 0.6, maxUp: 1 }).html;
+    fx.sweep(ctx, b.id, ctx.at(5, 1) + i * 0.06, { d: 0.6 });
+  });
+  s4 += `<div class="fx-full" id="${ctx.id('ew')}" style="transform-origin:540px 1300px">${pd2.html}${bots2}</div>`;
+  ctx.tl.fromTo(ctx.sel('ew'), { scale: 1.08 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, t5 - LEAD);
+  s4 += confetti(ctx, 'ce', { t: t5 - 0.3, d: END - t5 + 0.3, n: 16, seed: 9, y0: 760, y1: 1560 });
+  const LG = ctx.logo('on_dark', { box: [281, 80], at: [t5, END], id: 'lgi' });
+  const lgY = 420;
+  s4 += `<div class="fx-abs" id="${ctx.id('lg')}" style="left:${Math.round(W / 2 - LG.w / 2)}px;top:${lgY}px">${LG.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('lg'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, t5 - LEAD);
+  const US = Math.min(sz(ctx, 'bosset.cz', CW, [104, 96, 88], { wght: 800, upper: false }), 96);
+  const uY = lgY + LG.h + 34;
+  s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: uY, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t5 + 0.02, d: 0.45 }).html;
+  const pzY = uY + US + 30;
+  s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: pzY, size: 30, t: t5 + 0.06 }).html;
+  s4 += cap(ctx, 'pv', 'Pro vítěze MČR · termosky Zojirushi 0,6 l', { x: SL, y: pzY + 49 + 26, w: CW, align: 'center', size: 30, wght: 700, wdth: 100, tracking: 0.08, color: SKY, t: t5 + 0.16, op: 1 });
+  ctx.report(`lockup: logo ${lgY}–${lgY + LG.h}, URL ${uY} (${US}px), prize ${pzY}, line ${pzY + 75}, centre bottle top ${POD2.top + 22 - 560}`);
+  html += scene('scD', t5, END, s4);
 
   fx.tOut(ctx, 'wipe', { d: OUT_D, dir: 'up' });
   return { html, css: CSS(ctx.S) };
 }
 
-// ---------- Reel hook (1 bar): the prize bottle + the claim, readable on frame 1 ----------
-// CD fix: frame 1 of a Reel is its thumbnail / autoplay frame → everything is already in place (headline, plate, bottle) and only
-// SETTLES (scale 1.05 → 1 from the text's left edge, bottle 1.04 → 1 from its foot — the lid never touches „STUDENÉ“); no mask reveal / drop from off-frame.
+// ---------- Reel hook (1 bar): the prize bottle on the podium step + the claim, readable on frame 1 ----------
+// frame 1 of a Reel is its thumbnail / autoplay frame → everything is already in place and only SETTLES (no mask reveal / drop).
 export function hook(ctx) {
   const { W } = ctx, SL = ctx.safe.left, CW = W - SL - ctx.safe.right;
-  let html = `<div class="fx-field" style="background:radial-gradient(85% 60% at 60% 60%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
+  let html = `<div class="fx-field" style="background:radial-gradient(85% 60% at 64% 56%, #13788c 0%, ${DEEP} 50%, ${ABYSS} 100%)"></div>`;
+  html += fx.rays(ctx, { id: 'hr', x: 770, y: 1000, size: 2000, color: 'rgba(197,235,252,.5)', n: 18, duty: 0.3, opacity: 0.14, spin: 8, t0: 0, t1: ctx.dur, hole: 0.06 });
   html += fx.glow(ctx, { id: 'hg', x: 770, y: 1080, size: 1000, color: 'rgba(60,195,220,.9)', opacity: 0.45 });
-  const P = fx.product(ctx, { id: 'hp', src: PR.H1, h: 760, cx: 780, floor: 1450, ground: 'floor', reflect: 0.2, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, maxUp: 1 });
+  const HF = 1460;
+  html += `<div class="bs-step" style="left:520px;top:${HF - 22}px;width:620px"><em></em><b></b></div>`;
+  const P = fx.product(ctx, { id: 'hp', src: PR.H1, h: 820, cx: 790, floor: HF, ground: 'floor', reflect: 0, shadow: 0.6, pad: pad(PR.H1), sweepAngle: 104, maxUp: 1 });
   html += P.html;
   ctx.tl.set(P.sel, { transformOrigin: '50% 100%' }, 0);
   ctx.tl.fromTo(P.sel, { scale: 1.04, y: -8 }, { scale: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 0);
   fx.sweep(ctx, 'hp', 0.3, { d: 0.8 });
   fx.pushIn(ctx, P.cam, 0.5, ctx.dur, { from: 1, to: 1.05, origin: '50% 100%' });
-  const S = Math.min(sz(ctx, 'i studené', CW, [140, 132, 124, 116, 108]), 120);
-  let g = line(ctx, 'h1', 'Horké', { x: SL, y: 400, w: CW, size: S, color: '#ffffff' }).html;
-  g += line(ctx, 'h2', 'i studené', { x: SL, y: 400 + Math.round(S * 1.0), w: CW, size: S, color: '#ffffff' }).html;
-  g += pill(ctx, 'hz', 'až 6 hodin', { x: SL, y: 400 + Math.round(S * 2.0) + 34, size: 44, wght: 900, wdth: 125, tracking: 0.03 }).html;
+  const S = Math.min(sz(ctx, 'Pro vítěze', CW, [140, 132, 124, 116, 108]), 124);
+  let g = line(ctx, 'h1', 'Pro vítěze', { x: SL, y: 400, w: CW, size: S, color: '#ffffff' }).html;
+  g += line(ctx, 'h2', 'MČR', { x: SL, y: 400 + Math.round(S * 1.02), w: CW, size: S, color: SKY }).html;
+  g += pill(ctx, 'hz', 'termosky Zojirushi 0,6 l', { x: SL, y: 400 + Math.round(S * 2.04) + 30, size: 34, wght: 900, wdth: 110, tracking: 0.03 }).html;
   html += `<div class="fx-full" id="${ctx.id('hgrp')}" style="transform-origin:${SL}px 400px">${g}</div>`;
   ctx.tl.fromTo(ctx.sel('hgrp'), { scale: 1.05 }, { scale: 1, duration: 0.55, ease: 'expo.out' }, 0);
-  html += cap(ctx, 'hu', 'bosset.cz', { x: SL + 2, y: 1366, size: 32, color: SKY, wght: 700, tracking: 0.12, t: 0.3, op: 1 });
+  html += cap(ctx, 'hu', 'bosset.cz', { x: SL + 2, y: 1340, size: 32, color: SKY, wght: 700, tracking: 0.12, t: 0.3, op: 1 });
   fx.tOut(ctx, 'flash', { color: DEEP, d: 0.12 });
   return { html, css: CSS(ctx.S), timeline: ctx.tl };
 }
 
 // ---------- Reel end card (2 bars): lockup + the shop's own distributor claim + Keitech cameo ----------
-// CD fix: the old card opened with ~0.5 s of empty teal (tIn flash + a lockup that built itself from t 0.05 while the TA plate
-// was still in its corner). Now the TA plate flies in OVER the block's out-wipe (plate.hero from −0.42 s) and lands on the
-// downbeat, and the whole lockup is complete on frame 1 (settles 1.04 → 1); only the prize plate and the light sweep come later.
+// The TA plate flies in OVER the block's out-wipe (plate.hero from −0.42 s) and lands on the downbeat; the lockup is complete on frame 1.
 export function endCard(ctx) {
   const { W } = ctx, SL = ctx.safe.left, CW = W - SL - ctx.safe.right;
   let html = `<div class="fx-field" style="background:radial-gradient(90% 60% at 50% 48%, #137d93 0%, ${DEEP} 52%, ${ABYSS} 100%)"></div>`;
@@ -358,7 +454,6 @@ export function endCard(ctx) {
   ctx.tl.fromTo(ctx.sel('ecg'), { scale: 1.04 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, 0);
   ctx.tl.fromTo(ctx.sel('ec-bar'), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.02);
   html += pill(ctx, 'ez', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: yPz, size: 30, t: ctx.at(0, 1) - 0.04 }).html;
-  // the shop's best-selling Keitech: in frame on the downbeat, glides and levels out (sweep on beat 3)
   const kCY = yPz + 48 + 150;
   const K = fx.product(ctx, { id: 'ek', src: PR.H3, w: 640, cx: W / 2, cy: kCY, ground: 'float', shadow: 0.45, pad: pad(PR.H3), sweepAngle: 100, maxUp: 1 });
   html += K.html;

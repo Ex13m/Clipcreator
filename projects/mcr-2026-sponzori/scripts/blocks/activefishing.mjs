@@ -12,7 +12,10 @@
 //   bar 4  lockup: logo (≤ TA plate) slides to the centre, „activefishing.cz“, two shop-shelf carousels (777 woblerů / 1 300+ plandavek,
 //          13 products), pill „Věnuje ceny · MČR 2026“ → rounded shop-card tiles close into the next block
 // 14 products from 8 brands (Timon, Mukai, Lucky Craft, Nories, Velvet Arts, ValkeIN, Khor, VARIVAS). Activefishing resells them:
-// no „vlastní“, no prices. Counts 1 300+ (1340) / 777 = live counts from 19. 10. 2026 (recheck before the final render).
+// no „vlastní“, no prices.
+// v3 BRANDS (21. 10.): bar 2 rail of white „Prodávané značky“ logo cards (plandavky brands) under the spoon card, clicks one card per beat with
+// the centre card popping (Nories → Timon → ValkeIN); bar 3 tag = real VARIVAS logo; bar 4 second rail (VARIVAS → Jigovky.cz → Rodio Craft…).
+// Logos assets_prep/activefishing/brands/ (≤ 224×78 card, far under the TA logo), Timon / KHOR typed in Montserrat 800 (no logo file). Counts 1 300+ (1340) / 777 = live counts from 19. 10. 2026 (recheck before the final render).
 import * as fx from '../lib/fx.mjs';
 import * as af from '../lib/fx_activefishing.mjs';
 
@@ -128,13 +131,13 @@ export default function activefishing(ctx) {
   ctx.tl.fromTo(`${ctx.sel('pl')} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, tB + 0.1);
   fx.outlineFill(ctx, ctx.sel('plof'), tPl - 0.12, { d: 0.42, ease: 'power2.inOut' });
   // white shop card (Sofia pair, the Nories hero) — four more spoons burst out of it on the beat
-  const card = { x: 220, y: 968, w: 640, h: 404 }, ccx = card.x + card.w / 2, ccy = card.y + card.h / 2;
+  const DY = -40, card = { x: 220, y: 968 + DY, w: 640, h: 404 }, ccx = card.x + card.w / 2, ccy = card.y + card.h / 2;
   let cg = `<div class="af-card" id="${ctx.id('card')}" style="left:${card.x}px;top:${card.y}px;width:${card.w}px;height:${card.h}px;transform-origin:50% 50%"></div>`;
   const BURST = [
-    { id: 'bk', k: 'khor', VH: 240, cx: 166, cy: 1050, rot: -14 },
-    { id: 'bf', k: 'forte15', V: 252, cx: 908, cy: 1030, rot: 16 },
-    { id: 'bs', k: 'scheila', V: 252, cx: 176, cy: 1306, rot: 14 },
-    { id: 'bo', k: 'forte06', V: 252, cx: 904, cy: 1316, rot: -16 },
+    { id: 'bk', k: 'khor', VH: 240, cx: 166, cy: 1050 + DY, rot: -14 },
+    { id: 'bf', k: 'forte15', V: 252, cx: 908, cy: 1030 + DY, rot: 16 },
+    { id: 'bs', k: 'scheila', V: 252, cx: 176, cy: 1306 + DY, rot: 14 },
+    { id: 'bo', k: 'forte06', V: 252, cx: 904, cy: 1316 + DY, rot: -16 },
   ];
   const tBurst = beat(2, 1) - 0.1;
   BURST.forEach((it, i) => {
@@ -152,13 +155,19 @@ export default function activefishing(ctx) {
   fx.punch(ctx, so.cam, beat(2, 2), { scale: 1.06, d: 0.25 });
   af.sweep(ctx, 'so', beat(2, 1), { d: 0.6 });
   af.sweep(ctx, 'so', beat(2, 3) - 0.05, { d: 0.5 });
-  sB += `<div class="af-tag" id="${ctx.id('brands')}" style="left:0;right:0;justify-content:center;top:1410px;font-size:31px;letter-spacing:.1em;color:#ffffff">${ctx.esc(ctx.nb('Nories · Velvet Arts · ValkeIN · Khor'))}</div>`;
-  ctx.tl.fromTo(ctx.sel('brands'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, tBurst + 0.08);
+  // BRANDS (v3): the shop's „Prodávané značky“ carousel as a rail of white logo cards under the spoons — plandavky brands by item count
+  // (research/activefishing_brands.md §2: Nories 356 · Timon 188 · ValkeIN 120 · YARIE 112 · Forest 88 · Office Eucalyptus 87 · Velvet Arts 70 · KHOR 35);
+  // it rises with the burst and clicks one card left on every following beat (the shop carousel's „next“, landing on the beat)
+  const R2 = af.brandRail(ctx, { id: 'br2', items: ['velvetarts', 'khor', 'nories', 'timon', 'valkein', 'yarie', 'forest', 'officeeucalyptus'], y: 1388, w: 224, h: 78, c0: 2 });
+  sB += R2.html;
+  ctx.tl.fromTo(R2.sel, { y: 190 }, { y: 0, duration: 0.6, ease: 'expo.out' }, tBurst + 0.02);
+  R2.hero(beat(2, 1) + 0.05);                                             // Nories (no. 1 in plandavky) centre on the burst beat
+  [2, 3].forEach((j) => { R2.step(beat(2, j), 1); R2.hero(beat(2, j)); });   // → Timon → ValkeIN, one card per beat
   // exit: type up, spoons thrown out, the card zooms to fill the frame (white) → bar 3
   const tX = b[3] - 0.3;
   ['pres', 'pl'].forEach((k) => ctx.tl.fromTo(`${ctx.sel(k)} .fx-ln > span`, { yPercent: 0, opacity: 1 }, { yPercent: -125, opacity: 0, duration: 0.24, ease: 'power3.in' }, tX));
   ctx.tl.fromTo(ctx.sel('odo'), { opacity: 1, y: 0 }, { opacity: 0, y: -80, duration: 0.24, ease: 'power3.in' }, tX);
-  ctx.tl.fromTo(ctx.sel('brands'), { opacity: 1, y: 0 }, { opacity: 0, y: 0, duration: 0.15, ease: 'none' }, tX);
+  ctx.tl.fromTo(R2.sel, { y: 0 }, { y: 260, duration: 0.24, ease: 'power3.in' }, tX);   // the rail drops out of frame (no fade)
   ctx.tl.fromTo(so.sel, { y: 0, scale: 1, opacity: 1 }, { y: -380, scale: 1.35, opacity: 0, duration: 0.24, ease: 'power3.in' }, tX + 0.02);
   ctx.tl.fromTo(ctx.sel('card'), { scaleX: 1, scaleY: 1 }, { scaleX: 1.9, scaleY: 6.2, duration: 0.26, ease: 'power3.in' }, b[3] - 0.26);
   html += fx.scene(ctx, 'sB', b[2], b[3], sB, { inD: 0.001, outD: 0.001 });
@@ -180,7 +189,8 @@ export default function activefishing(ctx) {
   af.sweep(ctx, 'vs', t3 + 0.45, { d: 0.75 });
   af.sweep(ctx, 'mk', beat(3, 2), { d: 0.55 });
   af.sweep(ctx, 'vs', beat(3, 3) + 0.1, { d: 0.6 });
-  sC += `<div class="af-tag" id="${ctx.id('vtag')}" style="left:${L}px;top:428px;font-size:34px;letter-spacing:.09em"><i></i><span class="fx-ln"><span>${ctx.esc(ctx.nb('VARIVAS · ES2 Ester · 80 m'))}</span></span></div>`;
+  const VLH = 40, VLW = Math.round(VLH * 2392 / 512);              // VARIVAS logo (brand file, blue) — 183 px wide, well under the TA logo
+  sC += `<div class="af-tag" id="${ctx.id('vtag')}" style="left:${L}px;top:428px;font-size:34px;letter-spacing:.09em"><i></i><span class="fx-ln"><span style="display:flex;align-items:center;gap:16px"><em class="af-bl" style="width:${VLW}px;height:${VLH}px;background-image:url(${ctx.asset(af.BRD + af.BR.varivas.f)})"></em>${ctx.esc(ctx.nb('ES2 Ester · 80 m'))}</span></span></div>`;
   ctx.tl.fromTo(`${ctx.sel('vtag')} .fx-ln > span`, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, beat(3, 1) - 0.1);
   ctx.tl.fromTo(ctx.sel('vtag') + ' i', { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'expo.out' }, beat(3, 1) - 0.12);
   // benefits (site USPs): OSOBNÍ PŘÍSTUP on the VO, the other two right after
@@ -232,9 +242,16 @@ export default function activefishing(ctx) {
     ctx.tl.fromTo(ctx.sel(R.id), { x: 0 }, { x: R.exit, duration: 0.4, ease: 'power3.in' }, tOutD);      // shelves whip out under the closing tiles
     ctx.tl.fromTo(ctx.sel(`${R.id}in`), { x: 0 }, { x: R.drift, duration: END - R.t, ease: 'none' }, R.t);
   });
-  const pz = af.pill(ctx, { id: 'pz', text: 'Věnuje ceny · MČR 2026', cx: W / 2, y: 1318, size: 34, tone: 'fill', tracking: 0.07 });
+  const pz = af.pill(ctx, { id: 'pz', text: 'Věnuje ceny · MČR 2026', cx: W / 2, y: 1298, size: 34, tone: 'fill', tracking: 0.07 });
   sD += pz.html;
   ctx.tl.fromTo(ctx.sel('pz'), { scale: 0.55, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, beat(4, 1) - 0.06);
+  // BRANDS (v3): second rail = the rest of the shelf (woblery Timon 269 · Mukai 267 · Rodio Craft 32, VARIVAS 100 % vlasců,
+  // Libra Lures 174 gum, Jigovky.cz 48 jigů — a fellow MČR sponsor, FishUp) sliding in against the shelves and clicking RIGHT on beats 2–4
+  const R4 = af.brandRail(ctx, { id: 'br4', items: ['fishup', 'libralures', 'rodiocraft', 'jigovky', 'varivas', 'mukai', 'timon', 'valkein'], y: 1388, w: 214, h: 76, c0: 5, dir: 1 });
+  sD += R4.html;
+  ctx.tl.fromTo(R4.sel, { x: 1100 }, { x: 0, duration: 0.72, ease: 'expo.out' }, t4 + 0.02);
+  [1, 2, 3].forEach((j) => { R4.step(beat(4, j), 1); R4.hero(beat(4, j)); });   // Mukai → VARIVAS → Jigovky.cz → Rodio Craft in the centre
+  ctx.tl.fromTo(R4.sel, { x: 0 }, { x: -1300, duration: 0.4, ease: 'power3.in' }, tOutD + 0.06);
   html += fx.scene(ctx, 'sD', b[4], END, sD, { inD: 0.001 });
 
   // =============================== sponsor logo bug (≤ TA plate), top right → centre lockup ===============================

@@ -5,8 +5,6 @@
 //   C, A                                                  brand colours (lihenlibechov.cz CSS) and asset paths
 //   css(ctx)                                              scoped CSS (.vn-*)
 //   caustics(ctx,{id,x,y,w,h,opacity,size,t0,t1,speed,mask})   two drifting layers of a tileable caustic web (water light)
-//   island(ctx,{id,cx,cy,w,shadow})                       Malý Sporťáček as a floating 3D diorama: shadow + perspective tilt layer + caustics
-//                                                         on the water only (alpha water mask) + light sweep → {html, sel, cam, tl, w, h}
 //   pin(ctx,{id,color,ring})                              map pin (tip at the wrapper origin) + water ring → move the wrapper with track()
 //   track(ctx,sel,keys[[t,x,y]])                          piecewise-linear x/y path (e.g. a pin glued to the pond in the drone shot)
 //   etch(ctx,{id,x,y,h,color,opacity})                    the logo's etched trout as a tinted line drawing (CSS mask) with a wipe-reveal layer
@@ -15,6 +13,13 @@
 //   voTimes(ctx,tokens,from,fallback)                     VO start time per display token (diacritics-insensitive, sequential)
 //   bubbles(ctx,{id,n,t0,t1,box,seed})                    rising bubbles (border rings, deterministic)
 //   shafts(ctx,{id,n,t0,t1,opacity,seed})                 soft underwater light shafts (screen), slow sway
+//   POND, pondScheme(ctx,{id,cx,cy,s,…})                  v3: motion-graphics plan of Malý Sporťáček (data/pond_scheme.json, portrait
+//                                                         frame = drone-matched) in white + red: water, outline (draw-on via pathLength),
+//                                                         red glow, 1,5 m depth isoline, places 1–40 (HTML pins, pop one by one)
+//                                                         → {html, sel, places[{n, sel}], bbox, AR}
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { esc, nb, rnd } from './util.mjs';
 
 const px = (n) => `${Math.round(n * 10) / 10}px`;
@@ -22,7 +27,8 @@ const px = (n) => `${Math.round(n * 10) / 10}px`;
 export const C = { TURQ: '#17a1c8', NAVY: '#1a212e', AQUA: '#9ae7e8', GOLD: '#d8af64', PAPER: '#f8f8f8', DEEP: '#0f6f8c', ABYSS: '#0e3a52' };
 const AD = 'assets_prep/venue/ads/';
 export const A = {
-  island: AD + 'h1_pond_island_3d.png', islandShadow: AD + 'h1_pond_island_3d_shadow.png', islandWater: AD + 'fx_island_water_a.png',
+  // v3: the 3D island (h1_pond_island_3d*) is gone — the pond is now a white+red plan (pondScheme)
+  leap: 'assets_prep/fish_ai/scenes/scene_leap2_d.png',   // AI rainbow trout leaping with a flip (verdict 21. 10.: the only clean one)
   disc: AD + 'h1_arena_disc.png', trophy: AD + 'h3_mcr_trophy.png',
   // fish = rainbow trout (brief 21. 10.: AI rainbow cut-outs; no trout close-up in our gallery; no AI-upscaled potočák as hero)
   trout: 'assets_prep/fish_ai/fish_rainbow_a_cut.png',
@@ -39,6 +45,10 @@ ${ctx.S} .vn-shaft{position:absolute;top:-260px;height:2000px;transform-origin:5
 ${ctx.S} .vn-shaft i{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,var(--a,.3)) 50%,rgba(255,255,255,0))}
 ${ctx.S} .vn-tint{position:absolute;inset:0;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
 ${ctx.S} .vn-pin svg{position:absolute;overflow:visible}
+${ctx.S} .vn-pl{position:absolute;border-radius:50%;box-shadow:0 0 0 2px #fff,0 3px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+${ctx.S} .vn-pl span{font:800 13px/1 'Montserrat';color:#fff;letter-spacing:-.02em}
+${ctx.S} .vn-dim{position:absolute;background:#fff}
+${ctx.S} .vn-dim i{position:absolute;background:#fff}
 ${ctx.S} .vn-ring{position:absolute;border-radius:50%;border:4px solid var(--rc,#9ae7e8)}
 `;
 
@@ -50,26 +60,6 @@ export function caustics(ctx, { id = 'cau', x = 0, y = 0, w = ctx.W, h = ctx.H, 
   ctx.tl.fromTo(ctx.sel(`${id}-b`), { backgroundPosition: '0px 0px' }, { backgroundPosition: `${px(speed * 0.62 * T)} ${px(speed * 0.3 * T)}`, duration: T, ease: 'none' }, t0);
   const m = mask ? `-webkit-mask-image:${mask};mask-image:${mask};-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;` : '';
   return `<div class="vn-caus" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)};opacity:${opacity};mix-blend-mode:${blend};${m}${style}"><i id="${ctx.id(`${id}-a`)}" style="background-image:url(${url});background-size:${size}px ${size}px"></i><i id="${ctx.id(`${id}-b`)}" style="background-image:url(${url});background-size:${s2}px ${s2}px;opacity:.65"></i></div>`;
-}
-
-// ---------------------------------------------------------------- 3D island (H1b)
-// layers: #id (entrance) > #id-cam (float / dive scale) > shadow + #id-p (perspective) > #id-tl (rotationX/Z) > img + water caustics + sweep
-export function island(ctx, { id = 'isl', cx = ctx.W / 2, cy = 1080, w = 780, shadow = 0.75, caus = 0.15, t0 = 0, t1 = ctx.dur } = {}) {
-  const [nw, nh] = ctx.dims(A.island); const h = (w * nh) / nw;
-  const url = ctx.asset(A.island), wurl = ctx.asset(A.islandWater), surl = ctx.asset(A.islandShadow);
-  const pw = (168 / 1863) * w, ph = (168 / 1870) * h;                    // shadow PNG = island canvas + 168 px pad (source px)
-  const sh = `<img class="fx-abs" id="${ctx.id(`${id}-sh`)}" src="${surl}" alt="" style="left:${px(-pw + w * 0.01)};top:${px(-ph + h * 0.035)};width:${px(w + 2 * pw)};height:${px(h + 2 * ph)};opacity:${shadow}">`;
-  const wm = `url(${wurl})`;
-  const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:${px(cx - w / 2)};top:${px(cy - h / 2)};width:${px(w)};height:${px(h)}">
-  <div class="fx-abs" id="${ctx.id(`${id}-cam`)}" style="inset:0">${sh}
-    <div class="fx-abs" style="inset:0;perspective:1700px"><div class="fx-abs" id="${ctx.id(`${id}-tl`)}" style="inset:0;transform-style:preserve-3d">
-      <img class="fx-prod-img" src="${url}" alt="">
-      <i class="fx-abs" style="inset:0;background:${C.TURQ};mix-blend-mode:soft-light;opacity:.55;-webkit-mask-image:${wm};mask-image:${wm};-webkit-mask-size:100% 100%;mask-size:100% 100%"></i>
-      ${caustics(ctx, { id: `${id}-cw`, w, h, opacity: caus, size: Math.round(w * 0.42), t0, t1, speed: 26, mask: wm })}
-      <i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="-webkit-mask-image:url(${url});mask-image:url(${url});--sa:112deg;--so:.55"></i>
-    </div></div>
-  </div></div>`;
-  return { html, w, h, x: cx - w / 2, y: cy - h / 2, sel: ctx.sel(id), cam: ctx.sel(`${id}-cam`), tl: ctx.sel(`${id}-tl`) };
 }
 
 // underwater skin for a cut-out (inserted right after its <img>): caustic light + deep-water tint, both masked by the cut-out's alpha
@@ -176,4 +166,44 @@ export function shafts(ctx, { id = 'sha', n = 3, t0 = 0, t1 = ctx.dur, opacity =
     html += `<div class="vn-shaft" style="left:${px(x)};width:${px(w)};transform:rotate(${rot.toFixed(1)}deg)"><i id="${ctx.id(`${id}${i}`)}" style="--a:${(alpha * (0.6 + 0.6 * r(5))).toFixed(2)}"></i></div>`;
   }
   return `<div class="vn-shafts" id="${ctx.id(id)}" style="opacity:${opacity}">${html}</div>`;
+}
+
+// ---------------------------------------------------------------- pond scheme (v3)
+export const POND = JSON.parse(fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../data/pond_scheme.json'), 'utf8'));
+// GSAP transform that lays the plan (portrait frame, origin = pond centroid at (540, 957), 12.6 px/m) onto the pond in the LAST frame of
+// the v2 drone flyover (drone/final/flyover_9x16.mp4 @ 3.967 s): least-squares fit of the real ortho outline (4 corners + edge chamfer)
+// to the water mask segmented from that frame (scratch fit, RMS ≈ 6 px). Tween it to {0…, scale 1} → the oblique AR overlay becomes a clean plan.
+export const AR = { cx: 540, cy: 957, s: 12.6, x: -68.76, y: 92.7, rotation: 14.05, rotationX: 51.6, rotationY: -17.72, scale: 0.745, transformPerspective: 2154 };
+
+export function pondScheme(ctx, { id = 'ps', cx = AR.cx, cy = AR.cy, s = AR.s, red = '#e31e24', white = '#ffffff', out = 2.6, r = 13 } = {}) {
+  const O = POND.outline.clean, R = POND.outline.real;
+  const g = `translate(${cx} ${cy}) scale(${s})`;
+  const nss = 'vector-effect="non-scaling-stroke"';
+  let svg = `<svg class="vn-ps" viewBox="0 0 ${ctx.W} ${ctx.H}" width="${ctx.W}" height="${ctx.H}" style="position:absolute;left:0;top:0;overflow:visible">
+    <defs><filter id="${ctx.id(`${id}-blur`)}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+    <g transform="${g}">
+      <path id="${ctx.id(`${id}-wf`)}" d="${O.path_d_portrait}" fill="${white}" fill-opacity=".09"/>
+      <path id="${ctx.id(`${id}-iso`)}" d="${O.path_d_portrait}" transform="scale(.86)" fill="none" stroke="${red}" stroke-width="2.4" stroke-dasharray="9 8" ${nss} opacity=".85"/>
+      <path id="${ctx.id(`${id}-gl`)}" d="${O.path_d_portrait}" fill="none" stroke="${red}" stroke-width="14" ${nss} pathLength="1" stroke-dasharray="1 1" filter="url(#${ctx.id(`${id}-blur`)})" opacity=".75"/>
+      <path id="${ctx.id(`${id}-ol`)}" d="${O.path_d_portrait}" fill="none" stroke="${white}" stroke-width="5" stroke-linejoin="round" ${nss} pathLength="1" stroke-dasharray="1 1"/>`;
+  const places = [];
+  let pins = '';
+  for (const p of POND.places.list) {
+    const [ex, ey] = p.water_edge_portrait, [px0, py0] = p.xy_portrait;
+    const dx = px0 - ex, dy = py0 - ey, L = Math.hypot(dx, dy) || 1;
+    const qx = ex + (dx / L) * out, qy = ey + (dy / L) * out;
+    svg += `<line id="${ctx.id(`${id}-t${p.n}`)}" x1="${ex}" y1="${ey}" x2="${qx.toFixed(3)}" y2="${qy.toFixed(3)}" stroke="${white}" stroke-width="2" ${nss} opacity="0"/>`;
+    const X = cx + qx * s, Y = cy + qy * s;
+    pins += `<div class="vn-pl" id="${ctx.id(`${id}-p${p.n}`)}" style="left:${px(X - r)};top:${px(Y - r)};width:${2 * r}px;height:${2 * r}px;background:${red}"><span>${p.n}</span></div>`;
+    places.push({ n: p.n, side: p.side, sel: ctx.sel(`${id}-p${p.n}`), tick: ctx.sel(`${id}-t${p.n}`), x: X, y: Y });
+  }
+  svg += '</g></svg>';
+  const [bx0, by0, bx1, by1] = O.bbox_portrait;
+  return {
+    html: `<div class="fx-full" id="${ctx.id(id)}">${svg}${pins}</div>`,
+    sel: ctx.sel(id), places, s, cx, cy,
+    ol: ctx.sel(`${id}-ol`), gl: ctx.sel(`${id}-gl`), wf: ctx.sel(`${id}-wf`), iso: ctx.sel(`${id}-iso`),
+    bbox: { x0: cx + bx0 * s, y0: cy + by0 * s, x1: cx + bx1 * s, y1: cy + by1 * s },
+    real: R,
+  };
 }

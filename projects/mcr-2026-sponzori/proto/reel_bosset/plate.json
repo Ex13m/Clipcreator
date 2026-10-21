@@ -1,6 +1,6 @@
 {
  "out": "reel_bosset",
- "stamp": "0cca93bc04f6c7c0",
+ "stamp": "0a66133410104a2d",
  "dur": 16.5,
  "box": {
   "x": 64,
@@ -29,9 +29,21 @@
  "tones": [
   {
    "g0": 0,
-   "g1": 16.485,
+   "g1": 4.131,
    "tone": "dark",
    "by": "bosset-hook theme"
+  },
+  {
+   "g0": 4.131,
+   "g1": 6.311,
+   "tone": "halo",
+   "by": "bosset"
+  },
+  {
+   "g0": 6.311,
+   "g1": 16.485,
+   "tone": "dark",
+   "by": "bosset theme"
   }
  ],
  "beats": [
