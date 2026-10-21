@@ -6,7 +6,8 @@ Source : https://www.lihenlibechov.cz/uploads/images/651b0f8db1675072923966.jpg 
 Method : hand-traced outline (body + fins, Catmull–Rom, checked on 2x overlays) snapped to the strongest Lab edge within
          ±10 px (median + Gaussian smoothed along the contour); inside the hand zones (fingers under head / belly, thumbs on
          the back) the traced outline is authoritative. Fingers that cover the fish are replaced by a column-wise copy of the
-         fish's own neighbouring belly/back texture, aligned to the body edge, colour-matched on a ring, 5 px feather; Telea
+         fish's own neighbouring belly texture, aligned to the body edge, mild DC colour match, 10–14 px feather; under the jaw the
+         outline follows the finger tops (smoothed, cut only); translucent fins: dark/green see-through lifted to the fin colour; Telea
          only for thin leftover rims. (GrabCut was tried first and leaked into reeds/jacket — dropped.)
          Edge colours decontaminated from 3 px inside. No upscaling, no generative model: pixels are the photo's own.
 Out    : assets_prep/venue/ads/fish_real_brown_trout.png (native ~1180 px long, RGBA, trimmed)

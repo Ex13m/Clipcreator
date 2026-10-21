@@ -131,3 +131,10 @@ Všechny zdrojové stránky byly znovu staženy (aktualita MČR, Historie, O ná
 | siven_americky.jpg | 1000×507 | ne, obecná ilustrace (licence neznámá) | hraniční | nepoužívat |
 | web_fbshare_screenshot.jpg | 1200×630 | ne, screenshot webu; v hlavičce je zámek Liběchov, ne líheň | — | jen reference |
 | fb_screen_info.png / fb_screen_profile.png | 768×1713 | screenshoty FB od uživatele | — | jen reference |
+
+## Re-verifikace Malého Sporťáčku (21. 10. 2026, pro schéma rybníka ve v3)
+- Ceník https://www.lihenlibechov.cz/cs/sportovni-rybolov (staženo 21. 10.): „Ceny povolenek v režimu chyť a pusť - malý Sporťáček (0,2 ha hloubka 1,5 m)“; upřesňující řád: „Rybolov je povolen pouze na 1 prut.“ · „Lovit je možné ze všech stran.“
+- Aktualita https://www.lihenlibechov.cz/cs/aktualita/maly-sportacek: „Má rozměry 50x40m. Je to takový rybník na rychlý zachytání, maximálně pro 10 rybářů.“ (běžný provoz; MČR = 40 závodníků).
+- Satelit (ortofoto ČÚZK 0,125 m, maska `mcr-2026-dron/data/water_labels.png`, label 2): plocha vody **1 854 m² (0,185 ha)**, ekvivalentní obdélník **50,7 × 36,0 m**, min. opsaný obdélník 54,0 × 38,9 m, dlouhé břehy SZ 47 m / JV 49 m, krátké SV 36 m / JZ 28 m, obvod ≈ 167–170 m, osa 43,6° (SV–JZ). Dřívější „≈ 58 × 42 m“ (approx z manifestu dronu) bylo nadsazené. Hloubku z ortofota/lidaru změřit nelze → platí web 1,5 m.
+- Na obrazovku: „0,2 ha · hloubka 1,5 m · 50 × 40 m“ (čísla webu; satelit je s nimi v souladu). Schéma + místa 1–40: `data/pond_scheme.json`.
+- Kontakt https://www.lihenlibechov.cz/cs/kontakt (21. 10.): „vlastník: Český rybářský svaz, z. s., místní organizace Mělník, IČ: 185 84 187“ — viz `research/crs.md`.
