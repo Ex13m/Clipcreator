@@ -202,15 +202,16 @@
    "block_s": 8,
    "vo_limit_words": 24,
    "vo": {
-    "cs": "Hostí nás Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
-    "tts": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
-    "respell": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě.",
-    "words": 15,
-    "spoken_words": 18,
-    "est_s": 6.2,
+    "cs": "Mistrovství hostí Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě. Závodí se na rybníku Malý Sporťáček.",
+    "tts": "Mistrovství hostí Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě. Závodí se na rybníku Malý Sporťáček.",
+    "respell": "Mistrovství hostí Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě. Závodí se na rybníku Malý Sporťáček.",
+    "words": 21,
+    "spoken_words": 24,
     "in_s": 0.25,
-    "end_s": 6.45,
-    "file": "vo/venue.wav"
+    "file": "vo/venue.wav",
+    "status": "v3 21. 10.: nová věta (operátor: „Hostí nás“ na začátku nesrozumitelné) – take 4 (eleven_v3, „… “ na začátku i konci)",
+    "cs_prev": "Hostí nás Líheň Liběchov – pstruží líheň od roku 1934, donedávna nejníže položené pstruhařství v Evropě.",
+    "tts_prev": "Hostí nás Líheň Liběchov – pstruží líheň od roku devatenáct set třicet čtyři, donedávna nejníže položené pstruhařství v Evropě."
    },
    "onscreen": {
     "kicker": "Místo konání",
@@ -246,6 +247,11 @@
      "claim": "Pramen Boží Voda",
      "ref": "research/libechov.md:38–40, Verification #4 (ř. 101)",
      "url": "https://www.lihenlibechov.cz/cs/o-nas"
+    },
+    {
+     "claim": "Mistrovství hostí Líheň Liběchov; závodí se na rybníku Malý Sporťáček (v3 VO)",
+     "ref": "research/libechov.md:7, 14, 28 (citace aktuality)",
+     "url": "https://www.lihenlibechov.cz/cs/aktualita/22-25-10-uzavren-maly-sportacek"
     }
    ],
    "notes": [
@@ -530,7 +536,7 @@
     "in_s": 0.25,
     "end_s": 7.85,
     "file": "vo/bosset.wav",
-    "status": "v3 text 21. 10. – TTS (take 4) čeká; vo/bosset.wav je ještě take 3 (cs_prev)",
+    "status": "v3 text 21. 10. – take 4 nainstalován (vo/bosset.wav); take 3 v vo/prev/bosset.take3.*",
     "tts_alt": "Boset – rybářský í-šop: Kejtek a ypsilon gé ká. A vítězové mistrovství získají špičkové termosky Zodžiruši.",
     "tts_alt_note": "YGK česky po písmenech (+2 slabiky), pokud operátor nechce anglické „wáj dží kej“",
     "respell_map": {
@@ -745,6 +751,55 @@
    },
    "notes": [
     "jen hudba, bez VO"
+   ]
+  },
+  "crs": {
+   "type": "thanks",
+   "vo_limit_words": 10,
+   "vo": {
+    "cs": "Děkujeme Českému rybářskému svazu za dlouholetou podporu.",
+    "tts": "Děkujeme Českému rybářskému svazu za dlouholetou podporu.",
+    "respell": "Děkujeme Českému rybářskému svazu za dlouholetou podporu.",
+    "words": 7,
+    "spoken_words": 7,
+    "in_s": 0.25,
+    "file": "vo/crs.wav",
+    "status": "v3 21. 10.: take 1 (eleven_v3, „… “ na začátku i konci)"
+   },
+   "onscreen": {
+    "kicker": "Děkujeme",
+    "name": "Český rybářský svaz",
+    "oneliner": "za dlouholetou podporu",
+    "facts": [
+     "Vlastník areálu Líheň Liběchov · ČRS MO Mělník"
+    ],
+    "url": "rybsvaz.cz"
+   },
+   "sources": [
+    {
+     "claim": "ČRS = nezisková organizace s dlouholetou tradicí",
+     "ref": "research/crs.md §1.1",
+     "url": "https://www.rybsvaz.cz/cesky-rybarsky-svaz"
+    },
+    {
+     "claim": "Vlastník Líhně Liběchov = ČRS, z. s., místní organizace Mělník",
+     "ref": "research/crs.md §1.2",
+     "url": "https://www.lihenlibechov.cz/cs/kontakt"
+    },
+    {
+     "claim": "ČRS v partnerském pruhu troutareacz.cz nejméně od 19. 8. 2024; banner ČRS na zahájení MČR 2025",
+     "ref": "research/crs.md §1.4",
+     "url": "https://www.troutareacz.cz/"
+    },
+    {
+     "claim": "„za dlouholetou podporu“ = formulace operátora 21. 10.",
+     "ref": "research/crs.md §1.4",
+     "url": "—"
+    }
+   ],
+   "notes": [
+    "Netvrdit „pod záštitou ČRS“, „MČR pořádá ČRS“ ani „oficiální disciplína ČRS“ (crs.md §1.4).",
+    "Chip „Věnuje ceny“ ČRS nenese (crs.md §2)."
    ]
   }
  }
