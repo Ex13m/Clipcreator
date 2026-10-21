@@ -170,7 +170,7 @@ fixed |= band_copy(400, 1165, 500, 1240, 85, pecb, feather_v=10, feather_h=14)
 
 # (1c) fingertips under the jaw/throat (x 245–425): the fingers only clip the lower rim, so the outline follows the
 #      finger tops there (smoothed) instead of inventing throat texture
-xs_ = np.arange(245, 426)
+xs_ = np.arange(245, 412)
 bot = np.array([edge_y(x, True) for x in xs_], float)
 for i, x in enumerate(xs_):
     col = np.nonzero((skin[1150:1260, x] > 0) & bodyb[1150:1260, x])[0]
@@ -183,6 +183,18 @@ for i, x in enumerate(xs_):
     keep = pecb[:, x].copy()
     m[yb + 1:1300, x] = keep[yb + 1:1300].astype(np.uint8)
     bodyb[yb + 1:1300, x] = False
+
+# (1d) one smooth underside from the jaw to the pectoral base (only ever cuts, never adds pixels)
+xs2 = np.arange(245, 480)
+ob = np.array([edge_y(x, True) for x in xs2], float)
+sb = np.array([ob[max(0, i - 8):i + 9].min() for i in range(len(ob))])
+sb = cv2.GaussianBlur(sb.reshape(1, -1).astype(np.float32), (0, 0), 6).ravel()
+sb = np.minimum(sb, ob)
+for i, x in enumerate(xs2):
+    yb = int(np.floor(sb[i]))
+    if yb < ob[i]:
+        m[yb + 1:int(ob[i]) + 1, x] = pecb[yb + 1:int(ob[i]) + 1, x].astype(np.uint8)
+        bodyb[yb + 1:int(ob[i]) + 1, x] = False
 
 # (2) everything else (finger behind the gill, fingertips on the jaw underside, both thumbs on the back/head):
 #     Telea on an image whose outside-the-fish pixels are replaced by the nearest fish pixel (no jacket/skin bleeding in)
@@ -224,6 +236,19 @@ ref = pec & ~cv2.dilate(pink.astype(np.uint8), np.ones((9, 9), np.uint8)).astype
 h_ref, s_ref = np.median(hsv[ref, 0]), np.median(hsv[ref, 1])
 hsv[..., 0] = hsv[..., 0] * (1 - pinkf) + h_ref * pinkf
 hsv[..., 1] = hsv[..., 1] * (1 - pinkf) + s_ref * pinkf
+work2 = cv2.cvtColor(hsv.clip(0, 255).astype(np.uint8), cv2.COLOR_HSV2BGR)
+# anal fin is translucent over the reeds: damp the reed strokes seen through it
+af = ((fins['anal'] > 127) & (m > 0)).astype(np.float32)
+afm = af > 0
+af = cv2.erode(af, np.ones((3, 3), np.uint8)) * 0.8
+blur = cv2.GaussianBlur(work2, (0, 0), 3.0).astype(np.float32)
+work2 = (work2.astype(np.float32) * (1 - af[..., None]) + blur * af[..., None]).clip(0, 255).astype(np.uint8)
+hsv = cv2.cvtColor(work2, cv2.COLOR_BGR2HSV).astype(np.float32)
+fin_ref = (fins['pelvic'] > 127) & (m > 0)
+green = afm & (hsv[..., 0] > 28) & (hsv[..., 0] < 95)
+gf = cv2.GaussianBlur(green.astype(np.float32), (0, 0), 1.5) * afm
+hsv[..., 0] = hsv[..., 0] * (1 - gf) + np.median(hsv[fin_ref, 0]) * gf
+hsv[..., 1] = hsv[..., 1] * (1 - gf) + np.median(hsv[fin_ref, 1]) * gf
 work2 = cv2.cvtColor(hsv.clip(0, 255).astype(np.uint8), cv2.COLOR_HSV2BGR)
 # translucent fins over the dark jacket read as black notches: lift dark fin pixels toward the fin's own median colour
 for k_ in ('pectoral', 'pelvic', 'anal', 'dorsal'):
