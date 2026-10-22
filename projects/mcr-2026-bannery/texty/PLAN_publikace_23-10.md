@@ -78,7 +78,7 @@ Soubor: `gausseholler_static_16x9.png`
 ```
 Hlavní cena MČR 2026: stojan na pruty Revolut 8 🏆
 
-Vítěz Mistrovství ČR v Trout Area 2026 si odveze stojan Revolut 8 od Gausse Holler Custom Lab – stojan na 8 prutů.
+Vítěz Mistrovství ČR v Trout Area 2026 si odveze špičkový stojan Revolut 8 od Gausse Holler Custom Lab – stojan na 8 prutů, vyrobený v Česku. Stojany jsou k mání v různých variantách a s možností customizace, z vysoce kvalitních materiálů: karbon, eloxovaný hliník a PETG.
 
 Více na gausseholler.com
 
@@ -94,6 +94,10 @@ Soubor: `reel_gausseholler_v9_60fps.mp4`
 ```
 Hlavní cena pro vítěze MČR 2026
 Stojan na pruty Revolut 8 – na 8 prutů
+
+Špičkový stojan vyrobený v Česku.
+Různé varianty i customizace.
+Karbon · eloxovaný hliník · PETG
 
 Gausse Holler Custom Lab
 gausseholler.com
