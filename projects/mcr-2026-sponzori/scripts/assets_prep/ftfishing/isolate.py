@@ -12,10 +12,18 @@ KEEP = {'p01_impulse_pro_firetiger': 1, 'p02_impulse_pro_lime': 1, 'p03_target_s
         'p07_king_14g_3801': 1, 'p06_nano_minnow_3d': 1,
         'c01_nimble_5cm_14': 1, 'c02_polaris_68_4d': 2, 'c03_vibrofat_10_9': 1, 'c04_glider_5_kiwi': 1,
         'c05_scalp_minnow_6': 1, 'c06_comet_75_20': 1,
-        'f02_reel_totem_2000s': 1, 'f03_reel_x1_2000s': 1, 'f04_rod_arena_stream': 2}
+        'f02_reel_totem_2000s': 1, 'f03_reel_x1_2000s': 1, 'f04_rod_arena_stream': 2,
+        # Higgsfield 4k upscales (crop of the product area, see hf_log.md)
+        'h_p01_impulse_hf4k': 1, 'h_p03_target_hf4k': 1, 'h_c03_vibrofat_hf4k': 1, 'h_f02_totem_hf4k': 1, 'h_f03_x1_hf4k': 1}
 bgs = {}
+import sys
+only = sys.argv[1:]
 for stem, k in KEEP.items():
-    a = np.asarray(Image.open(f'{SRC}/{stem}.png').convert('RGB')).astype(np.float32)
+    if only and stem not in only: continue
+    import glob, os
+    fs = glob.glob(f'{SRC}/{stem}.*')
+    if not fs: print('missing', stem); continue
+    a = np.asarray(Image.open(fs[0]).convert('RGB')).astype(np.float32)
     H, W, _ = a.shape
     bg = np.median(np.concatenate([a[:6, :6].reshape(-1, 3), a[-6:, -6:].reshape(-1, 3), a[-6:, :6].reshape(-1, 3)]), 0)
     d = np.abs(a - bg).max(2) > 6
@@ -34,4 +42,7 @@ for stem, k in KEEP.items():
     Image.fromarray(out.round().clip(0, 255).astype(np.uint8)).save(f'{OUT}/{stem}.png')
     bgs[stem] = dict(bg=bg.round().tolist(), crop=[int(x0), int(y0), int(x1), int(y1)], src_size=[W, H])
     print(stem, out.shape[1], out.shape[0], bg.round().tolist())
-json.dump(bgs, open(f'{OUT}/bg.json', 'w'), indent=1)
+import os
+old = json.load(open(f'{OUT}/bg.json')) if os.path.exists(f'{OUT}/bg.json') else {}
+old.update(bgs)
+json.dump(old, open(f'{OUT}/bg.json', 'w'), indent=1)
