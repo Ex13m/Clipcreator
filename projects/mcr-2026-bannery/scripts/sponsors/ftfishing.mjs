@@ -83,7 +83,7 @@ export function css() {
 .ft-p img{position:absolute;inset:0;width:100%;height:100%;display:block}
 .ft-sw{position:absolute;inset:0;overflow:hidden;-webkit-mask-size:100% 100%;mask-size:100% 100%;mix-blend-mode:screen;pointer-events:none}
 .ft-sw i{position:absolute;top:0;bottom:0;left:-130%;width:70%;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 62%)}
-.ft-k{font-family:Saira;font-weight:700;font-stretch:112%;text-transform:uppercase;letter-spacing:.1em;color:${C.dark};line-height:1}
+.ft-k{font-family:Saira;font-weight:700;font-stretch:112%;text-transform:uppercase;letter-spacing:.1em;color:${C.dark};line-height:1.3;margin-top:-.15em}
 .ft-tag{display:flex;align-items:center;gap:.55em}
 .ft-tag:before{content:"";display:block;flex:none;width:1.5em;height:.62em;background:repeating-linear-gradient(-60deg,${C.green} 0 .22em,rgba(0,0,0,0) .22em .44em)}
 .ft-h{font-family:${EXO};font-weight:800;text-transform:uppercase;color:${C.ink};line-height:.96;letter-spacing:-.005em;padding-top:.08em;margin-top:-.08em}
@@ -123,7 +123,7 @@ function frame(E, { wing = null } = {}) {
 // the green stripe „wing“ (slanted panel from the web hero banner) between the bars; x0 = left edge at the bottom, slant = px shift at the top
 function wing(E, { x0, slant = 160, id = '' }) {
   const top = 0, h = E.H;
-  return `<div class="ft-wing"${id ? ` id="${id}"` : ''} data-in="wipe-l" data-dur=".5" style="left:${R1(x0)}px;top:${top}px;width:${R1(E.W - x0 + 2)}px;height:${h}px;clip-path:polygon(${R1(slant)}px 0,100% 0,100% 100%,0 100%)"></div>`;
+  return `<div class="abs"${id ? ` id="${id}"` : ''} style="left:${R1(x0)}px;top:${top}px;width:${R1(E.W - x0 + 2)}px;height:${h}px;clip-path:polygon(${R1(slant)}px 0,100% 0,100% 100%,0 100%)"><div class="ft-wing" data-in="wipe-l" data-dur=".5" style="inset:0"></div></div>`;
 }
 
 // product cut-out: visible box V px wide (or VH tall), visible centre (cx, cy), static pose rotation; never > maxUp × native
@@ -327,7 +327,7 @@ export const scenes = {
     let html = frame(E), txt = '';
     // green stripe band behind the lure (the web hero banner's stripes, slanted)
     const by = b.y + (sq ? 250 : 300), bh = sq ? 330 : 420;
-    html += `<div class="ft-wing" data-in="wipe-l" data-dur=".45" style="left:0;top:${R1(by)}px;width:${E.W}px;height:${R1(bh)}px;clip-path:polygon(0 18%,100% 0,100% 82%,0 100%)"></div>`;
+    html += `<div class="abs" style="left:0;top:${R1(by)}px;width:${E.W}px;height:${R1(bh)}px;clip-path:polygon(0 18%,100% 0,100% 82%,0 100%)"><div class="ft-wing" data-in="wipe-l" data-dur=".45" style="inset:0"></div></div>`;
     txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: b.w * 0.62, size: sq ? 24 : 27, text: 'Spinmad · nástraha v nabídce', inAttr: 'data-in="left"' });
     txt += brandLogo(E, 'spinmad', { x: b.r - 210, y: b.y - 6, w: 210, h: sq ? 90 : 100, align: 'right', attrs: 'data-in="scale" data-d=".1"' });
     const hs = sq ? 126 : 146;

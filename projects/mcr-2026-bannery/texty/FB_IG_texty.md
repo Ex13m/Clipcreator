@@ -5,7 +5,7 @@ Publikuje: **Trout Area Czech Republic** (FB + IG) · stav 22. 10. 2026 · fak
 **Akce (řádek do každého příspěvku):** Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 Poznámky k použití:
-- Pořadí partnerů: Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → Moonky → Troutshop → Velká ryba → ČRS.
+- Pořadí partnerů: Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → Moonky → Troutshop → Velká ryba → FT Fishing → ČRS.
 - Ceny věnují všichni partneři kromě Líhně Liběchov (místo konání) a ČRS (poděkování). Hlavní cenu pro vítěze věnuje Gausse Holler.
 - Hashtagy píšeme jako u Klonówce (CamelCase): #TroutArea #TroutAreaCZ #MCR2026 – vyhledávání na velikosti písmen nezáleží.
 - Texty mají nezlomitelné mezery (za v, k, s, z, o, u, a, i a mezi číslem a jednotkou). Při kopírování do FB/IG zůstanou.
@@ -22,7 +22,7 @@ Už tuto sobotu a neděli to vypukne: 40 závodníků, 12 kol denně, hard ba
 
 Místo konání: Líheň Liběchov
 Hlavní cena, partner a informační sponzor: Gausse Holler Custom Lab
-Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz
+Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
 Za dlouholetou podporu děkujeme: Český rybářský svaz
 
 Každého partnera vám v dalších příspěvcích představíme zvlášť. Děkujeme, že jste s námi!
@@ -41,7 +41,7 @@ Partneři MČR 2026
 
 Místo konání – Líheň Liběchov
 Hlavní cena – Gausse Holler Custom Lab
-Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz
+Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
 Děkujeme – Český rybářský svaz
 
 24.–25. 10. 2026 · Líheň Liběchov
@@ -57,7 +57,7 @@ Mistrovství ČR v Trout Area 2026 je za námi
 
 Dva dny, 40 závodníků a 24 kol na Malém Sporťáčku. Gratulujeme vítězi MČR 2026 [JMÉNO] a dalším na stupních vítězů: [2. MÍSTO], [3. MÍSTO].
 
-Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu a Velka-ryba.cz. Českému rybářskému svazu děkujeme za dlouholetou podporu.
+Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu, Velka-ryba.cz a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
 
 Díky i organizátorům Stanislavu Lukáškovi, Michalu Horákovi, Denisu Zaikinovi a Igoru Novákovi – a hlavně všem závodníkům a divákům.
 
@@ -74,7 +74,7 @@ Vítěz: [JMÉNO]
 
 Díky Líhni Liběchov za zázemí.
 Díky Gausse Holler za hlavní cenu.
-Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz
+Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
 Díky Českému rybářskému svazu za dlouholetou podporu.
 
 Uvidíme se u vody.
@@ -491,6 +491,58 @@ velka-ryba.cz
 
 ---
 
+## 8b. FT Fishing (ftfishing.cz) – věnuje ceny
+
+### FB příspěvek
+
+FT Fishing – vše pro přívlač
+
+Fishing Trade CZ provozuje e-shop ftfishing.cz od roku 2016 a showroom s výdejnou v Praze 9. Sortiment je čistě přívlačový a stojí na třech značkách: pruty a navijáky Favorite, gumové nástrahy Crazy Fish a polský Spinmad – rotující ocásky, cikády i plandavky Target Spoon pro trout area. Spinmad do Čech přivezl sám majitel František Čáha. Pruty v nabídce jsou podle obchodu i pro trout area a závodníky.
+
+FT Fishing věnuje ceny pro závodníky MČR 2026. Děkujeme!
+
+ftfishing.cz
+
+Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
+
+#TroutArea #TroutAreaCZ #MCR2026 #FTFishing #Spinmad
+
+Označit: FB [doplnit tag] (stránka facebook.com/privlac – název ověřit) · IG [doplnit tag]
+
+### IG popisek
+
+FT Fishing
+Vše pro přívlač.
+
+E-shop od roku 2016 · showroom Praha 9
+Favorite · Crazy Fish · Spinmad
+Spinmad do Čech přivezl majitel František Čáha
+
+Věnuje ceny pro závodníky MČR 2026. Děkujeme!
+ftfishing.cz
+
+#TroutArea #TroutAreaCZ #MCR2026 #FTFishing
+
+### Meta reklama
+
+| Pole | Text |
+|---|---|
+| Primary text | Pruty Favorite, nástrahy Crazy Fish a Spinmad. FT Fishing věnuje ceny pro MČR v Trout Area 2026. |
+| Headline | FT Fishing – vše pro přívlač |
+| Description | Favorite, Crazy Fish, Spinmad |
+| CTA | Shop Now (Nakoupit) → ftfishing.cz |
+
+Délky: primary 96/125, headline 28/40, description 29/30 znaků.
+
+### Karusel (4 karty)
+
+1. FT Fishing – vše pro přívlač · e-shop od roku 2016, showroom Praha 9 · Spinmad do Čech přivezl majitel
+2. Tři značky v nabídce: Favorite (230+ prutů, navijáky) · Crazy Fish (700+ gumových nástrah) · Spinmad (300+ nástrah)
+3. Spinmad Impulse PRO 10 g · Target Spoon 1,5 g – plandavka pro trout area
+4. Věnuje ceny · MČR 2026 · ftfishing.cz
+
+---
+
 ## 9. Český rybářský svaz – poděkování (NE dárce cen)
 
 ### FB příspěvek
@@ -553,3 +605,4 @@ rybsvaz.cz
 10. **Troutshop:** „Do Česka doručují do pár dní“ = jejich vlastní tvrzení (SK meta description). Netvrdit vítězství v SK/CZ/PL/UA ani vlastní značku.
 11. **Velká ryba:** záměrně bez „nejdéle provozovaná speciálka“ (vlastní superlativ). Půjčovna Shimano Rod Test Center funguje v prodejně v Olomouci (od 2025).
 12. **Meta CTA:** v textu jsou anglické názvy tlačítek z Ads Manageru. Český popisek v závorce je orientační, finální zobrazí Meta.
+13. **FT Fishing:** konkrétní ceny pro MČR nejsou známé – nic konkrétního neuvádět. Nikdy „oficiální / výhradní dovozce“: Spinmad je jen parafráze článku FT z roku 2018 („distribuce této nástrahy do Čech mohla začít“). „Od roku 2016“ = rok v patičce webu (© 2016–2026). Živá čísla 230+ / 700+ / 300+ ze 22. 10. jen s „v nabídce“, před publikací přepočítat. Gumy Crazy Fish = značka sortimentu, ne nástraha na MČR (hard baits). Tagy FB/IG doplnit (FB stránka facebook.com/privlac).

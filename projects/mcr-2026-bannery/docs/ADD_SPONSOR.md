@@ -17,6 +17,7 @@ Potřebuješ něco v enginu? Napiš to do závěrečné zprávy a proč.
 | `troutshop` | `sponsor` | Věnuje ceny · MČR 2026 | troutshop.eu | Anton + Roboto Condensed, černá/červená |
 | `velkaryba` | `sponsor` | Věnuje ceny · MČR 2026 | velka-ryba.cz | Nunito 900 italic, navy/červená/oranžová |
 | `crs` | `supporter` | Děkujeme za dlouholetou podporu (bez cenového chipu) | rybsvaz.cz | Inter, modrá #2B5DA9 / navy #182F5D / tyrkys |
+| `ftfishing` | `sponsor` | Věnuje ceny · MČR 2026 | ftfishing.cz | bílý web + zelené šikmé pruhy #6DB52C, Exo 2 800 + Saira, koncept „Tři značky“ (research/ftfishing_ad.md) |
 
 URL ber z `mcr-2026-sponzori/data/blocks/<key>.json → url` (ověřené). Barvy/fonty: `theme` ve filmovém bloku `scripts/blocks/<key>.mjs`
 a `lib/fx_<key>.mjs`, výřezy `assets_prep/<key>/ads|heroes|brands/`, fakta `research/<key>*.md` (sekce Verification) a

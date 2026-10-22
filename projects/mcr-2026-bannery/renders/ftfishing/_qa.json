@@ -1,6 +1,6 @@
 {
  "key": "ftfishing",
- "built": "2026-10-22T10:59:58.140Z",
+ "built": "2026-10-22T11:00:57.009Z",
  "outputs": {
   "ftfishing_static_191.png": {
    "err": [],
@@ -37,6 +37,34 @@
   "ftfishing_static_9x16.png": {
    "err": [],
    "warn": []
+  },
+  "ftfishing_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.87,
+    5.9,
+    7.77,
+    9.57
+   ]
+  },
+  "ftfishing_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.87,
+    5.9,
+    7.77,
+    9.57
+   ]
   }
  }
 }
