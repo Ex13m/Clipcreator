@@ -284,7 +284,7 @@ function mcrWide(E) {
   const L0 = afLogo(E, { x: 0, y: 0, maxH: 80 }), ly = b.b - L0.h - 6;
   txt += afLogo(E, { x: b.x, y: ly, maxH: 80, attrs: 'data-in="scale" data-d=".18"' }).html;
   const ux = b.x + L0.w + 22;
-  txt += T(E, { cls: 'af-url', x: ux, y: ly + L0.h / 2 - 44 * 0.66, w: colW - L0.w - 22, size: 44, fit: 30, html: `activefishing<b>.cz</b>`, main: true, inAttr: 'data-in="left" data-d=".22"' });
+  txt += T(E, { cls: 'af-url', x: ux, y: ly + L0.h / 2 - 44 * 0.66, w: colW - L0.w - 22, size: 44, fit: 30, html: `activefishing<b>.cz</b>`, main: true, inAttr: 'data-in="up" data-d=".22"' });
   txt += T(E, { cls: 'af-k', x: ux + 2, y: ly + L0.h / 2 + 44 * 0.48 - 3, w: colW - L0.w - 24, size: 16, fit: 13, text: 'plandavky · woblery · pruty', style: `color:${C.grey};letter-spacing:.16em;line-height:1.4`, inAttr: 'data-in="left" data-d=".26"' });
   const gx = b.x + colW + 40, gw = b.r - gx, rh = (b.h - 20) / 2;
   const shelf = [[['forte06', -8], ['wah', 0], ['khor', 0]], [['gold', 0], ['scheila', 8]]];

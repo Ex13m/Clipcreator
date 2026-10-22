@@ -335,7 +335,7 @@ export const scenes = {
       const L = logoSize(E, 110);
       txt += logo(E, { x: b.x, y, maxH: 110, attrs: 'data-in="scale" data-d=".2"' }).html;
       txt += `<i class="abs" data-in="scale" data-d=".25" style="left:${R1(b.x + L.w + 24)}px;top:${R1(y + 8)}px;width:3px;height:${R1(L.h - 16)}px;background:rgba(255,255,255,.55);border-radius:2px"></i>`;
-      txt += T(E, { cls: 'jg-h', x: b.x + L.w + 50, y: y + (L.h - 60 * 1.02) / 2, w: colW - L.w - 50, size: 60, fit: 36, text: 'jigovky.cz', inAttr: 'data-in="left" data-d=".26"', main: true });
+      txt += T(E, { cls: 'jg-h', x: b.x + L.w + 50, y: y + (L.h - 60 * 1.02) / 2, w: colW - L.w - 50, size: 60, fit: 36, text: 'jigovky.cz', inAttr: 'data-in="up" data-d=".26"', main: true });
       y += L.h + 22;
       txt += T(E, { cls: 'jg-k', x: b.x, y, w: colW, size: 22, fit: 16, text: 'Jigy, které chytají! · Poctivě vyrobeno v ČR', inAttr: 'data-in="up" data-d=".32"' });
       ['fluo', 'pink', 'red'].forEach((key, i) => {

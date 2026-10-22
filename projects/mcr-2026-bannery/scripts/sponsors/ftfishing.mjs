@@ -253,7 +253,7 @@ function mcrWide(E, html) {
   const L0 = ftLogo(E, { x: 0, y: 0, maxH: 120 }), ly = b.b - L0.h - 4;
   txt += ftLogo(E, { x: b.x, y: ly, maxH: 120, attrs: 'data-in="scale" data-d=".18"' }).html;
   const ux = b.x + L0.w + 26;
-  txt += T(E, { cls: 'ft-url', x: ux, y: ly + 2, w: colW - L0.w - 26, size: 54, fit: 36, html: `ftfishing<b>.cz</b>`, main: true, inAttr: 'data-in="left" data-d=".22"' });
+  txt += T(E, { cls: 'ft-url', x: ux, y: ly + 2, w: colW - L0.w - 26, size: 54, fit: 36, html: `ftfishing<b>.cz</b>`, main: true, inAttr: 'data-in="up" data-d=".22"' });   // „up“: sliding in from the left it crossed the FT logo
   txt += brandRow(E, { x: ux, y: ly + 2 + 54 * 1.15, w: colW - L0.w - 40, h: 48, d: 0.28, gap: 18 });
   const gx = b.x + colW + 40, gw = b.r - gx, bh = b.h, shelfY = b.b - 14;
   html += `<div class="ft-band" data-in="wipe-l" data-d=".2" style="left:${R1(gx)}px;top:${R1(shelfY)}px;width:${R1(gw)}px;height:14px"></div>`;

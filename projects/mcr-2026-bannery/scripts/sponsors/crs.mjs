@@ -265,7 +265,7 @@ export const scenes = {
       h += T(E, { cls: 'crs-p', x: b.x, y, w: b.w * 0.86, size: 28, lines: 2, text: 'Nezisková organizace s dlouholetou tradicí. Věnuje se rybářství, ochraně vodních živočichů a přírody.', inAttr: 'data-in="up" data-d=".2"' });
       y += 28 * 1.25 * 2 + 30;
       h += `<i class="abs" data-in="wipe-r" data-d=".3" style="left:${R1(b.x)}px;top:${R1(y - 14)}px;width:100px;height:3px;background:${C.turq}"></i>`;
-      h += T(E, { cls: 'crs-s', x: b.x, y, w: b.w, size: 22, text: 'Mezi největší zájmová sdružení v České republice', inAttr: 'data-in="up" data-d=".3"' });
+      h += T(E, { cls: 'crs-s', x: b.x, y, w: b.w, size: 22, text: 'Mezi největší zájmová sdružení v České republice', inAttr: 'data-in="up" data-dist="16" data-d=".3"' });
       return { html: h };
     }
     const sz = sq ? { hd: 100, p: 40, s: 24 } : { hd: 100, p: 44, s: 26 };
@@ -330,7 +330,7 @@ export const scenes = {
       h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: 150, size: 104, fit: 70, text: '40', style: `color:${C.white}`, inAttr: 'data-in="up" data-d=".16"', main: true });
       h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x + 150)}px;top:${R1(y + 40)}px;width:70px;height:4px;background:${C.turq}"></i>`;
       h += T(E, { cls: 'crs-l', x: b.x + 150, y: y + 54, w: colW - 150, size: 30, fit: 20, text: 'závodních míst', inAttr: 'data-in="up" data-d=".2"' });
-      const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
+      const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="20"' };
       const F = factCard(E, { ...FC, y: 0 });
       h += factCard(E, { ...FC, y: b.b - F.h - 2 }).html;
       return { html: h, taTone: 'dark' };
