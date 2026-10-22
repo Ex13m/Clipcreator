@@ -329,7 +329,7 @@ export const scenes = {
       y += 30;
       h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: 150, size: 104, fit: 70, text: '40', style: `color:${C.white}`, inAttr: 'data-in="up" data-d=".16"', main: true });
       h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x + 150)}px;top:${R1(y + 40)}px;width:70px;height:4px;background:${C.turq}"></i>`;
-      h += T(E, { cls: 'crs-l', x: b.x + 150, y: y + 54, w: colW - 150, size: 30, fit: 20, text: 'závodních míst', inAttr: 'data-in="up" data-d=".2"' });
+      h += T(E, { cls: 'crs-l', x: b.x + 150, y: y + 48, w: colW - 150, size: 30, fit: 20, text: 'závodních míst', style: 'line-height:1.4', inAttr: 'data-in="up" data-d=".2"' });   // line-height 1 + overflow:hidden cropped Á / Í
       const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="20"' };
       const F = factCard(E, { ...FC, y: 0 });
       h += factCard(E, { ...FC, y: b.b - F.h - 2 }).html;
