@@ -43,6 +43,13 @@ export const anim = {
     { scene: 'mcr', d: 1.8 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): poster → Impulse PRO colour drop → prizes + gear → poster (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'mcr', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 export const fonts = {};   // Exo 2 + Saira are in the engine registry
 
@@ -210,6 +217,57 @@ function cluster(E, L, box) {
   return h;
 }
 
+// ---------- 16:9 (kind 'wide') mid scenes for the landscape MP4 ----------
+// hero: Impulse PRO name + Spinmad logo left, the lure switching colourways on the green stripe band right, Target Spoon card
+function heroWide(E, html) {
+  const b = E.body, colW = 470;
+  let txt = '';
+  const by = b.y + 30, bh = 300;
+  html += `<div class="abs" style="left:${R1(b.x + colW + 10)}px;top:${R1(by)}px;width:${R1(E.W - b.x - colW - 10)}px;height:${bh}px;clip-path:polygon(10% 0,100% 0,100% 82%,0 100%)"><div class="ft-wing" data-in="wipe-l" data-dur=".45" style="inset:0"></div></div>`;
+  const y0 = b.y + 6;
+  txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: y0, w: colW, size: 19, fit: 14, text: 'Spinmad · nástraha v nabídce', inAttr: 'data-in="left"' });
+  txt += T(E, { cls: 'ft-h', x: b.x - 3, y: y0 + 34, w: colW, size: 84, fit: 50, html: `Impulse <em>PRO</em>`, main: true, inAttr: 'data-in="slam" data-d=".05"' });
+  txt += T(E, { cls: 'ft-s', x: b.x, y: y0 + 34 + 84, w: colW, size: 26, fit: 18, html: `<b>10 g</b> · ${E.t('v nabídce ve více barvách')}`, inAttr: 'data-in="up" data-d=".14"' });
+  txt += brandLogo(E, 'spinmad', { x: b.x, y: y0 + 34 + 84 + 26 * 1.4 + 18, w: 190, h: 76, align: 'left', attrs: 'data-in="scale" data-d=".1"' });
+  const CW = [['impulse', 'Firetiger', '#f2b600'], ['lime', 'Electric Lime', '#9be22a']];
+  const lcx = b.x + colW + (b.r - b.x - colW) / 2 + 10, lcy = by + bh / 2 - 6;
+  const lures = CW.map(([k]) => `<div class="cy">${prod(E, k, { cx: 400, cy: 200, V: 580, rot: -6, maxUp: 1.3, sweep: k === 'impulse', drop: '0 22px 20px rgba(10,30,0,.40)' }).html}</div>`).join('');
+  html += `<div class="abs" data-in="right" data-dist="120" data-cycle="0.5" data-d="0.35" data-rest="0" style="left:${R1(lcx - 400)}px;top:${R1(lcy - 200)}px;width:800px;height:400px">${lures}</div>`;
+  const ns = 22, nh = ns * 2, ny = b.b - nh;
+  const names = CW.map(([, n, dot]) => `<div class="cy"><div class="t ft-pill ol" style="left:0;top:0;height:${R1(nh)}px;padding:0 ${R1(ns * 0.8)}px;font-size:${ns}px"><i style="display:inline-block;width:.6em;height:.6em;border-radius:50%;background:${dot};margin-right:.45em;box-shadow:0 0 0 2px rgba(0,0,0,.08)"></i>${E.t(n)}</div></div>`).join('');
+  txt += `<div class="abs" data-cycle="0.5" data-d="0.35" data-rest="0" style="left:${R1(b.x)}px;top:${R1(ny)}px;width:${R1(colW)}px;height:${R1(nh)}px">${names}</div>`;
+  const cw = 310, chh = 116, cx0 = b.r - cw, cyy = b.b - chh;
+  html += `<div class="ft-card" data-in="up" data-dist="40" data-d=".3" style="left:${R1(cx0)}px;top:${R1(cyy)}px;width:${cw}px;height:${chh}px"><i class="edge" style="background:${C.sm}"></i></div>`;
+  html += prodIn(E, 'spoon', { x: cx0 + 16, y: cyy + 8, w: chh * 0.62, h: chh - 16 }, { rot: 10, attrs: 'data-in="scale" data-d=".38"', drop: '0 8px 8px rgba(0,0,0,.22)' }).html;
+  const tx = cx0 + 20 + chh * 0.62 + 8;
+  txt += T(E, { cls: 'ft-k', x: tx, y: cyy + chh / 2 - 36, w: cx0 + cw - tx - 12, size: 22, fit: 14, text: 'Target Spoon', style: `color:${C.ink};letter-spacing:.04em`, inAttr: 'data-in="up" data-d=".36"' });
+  txt += T(E, { cls: 'ft-s', x: tx, y: cyy + chh / 2 - 6, w: cx0 + cw - tx - 12, size: 18, lines: 2, html: `${E.t('1,5 g · plandavka')}<br>${E.t('pro trout area')}`, style: 'line-height:1.15', inAttr: 'data-in="up" data-d=".4"' });
+  return { html: html + txt };
+}
+// mcr: prizes + logo / URL / three brands left, gear of the three brands right on a green stripe band
+function mcrWide(E, html) {
+  const b = E.body, colW = 560;
+  let txt = T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 6, w: colW, size: 19, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });
+  txt += T(E, { cls: 'ft-h', x: b.x - 3, y: b.y + 38, w: colW, size: 96, fit: 56, html: `Věnuje <em>ceny</em>`, main: true, inAttr: 'data-in="slam" data-d=".05"' });
+  txt += T(E, { cls: 'ft-s', x: b.x, y: b.y + 38 + 96, w: colW, size: 30, text: 'pro závodníky mistrovství', main: false, style: `color:${C.ink}`, inAttr: 'data-in="up" data-d=".14"' });
+  const L0 = ftLogo(E, { x: 0, y: 0, maxH: 120 }), ly = b.b - L0.h - 4;
+  txt += ftLogo(E, { x: b.x, y: ly, maxH: 120, attrs: 'data-in="scale" data-d=".18"' }).html;
+  const ux = b.x + L0.w + 26;
+  txt += T(E, { cls: 'ft-url', x: ux, y: ly + 2, w: colW - L0.w - 26, size: 54, fit: 36, html: `ftfishing<b>.cz</b>`, main: true, inAttr: 'data-in="left" data-d=".22"' });
+  txt += brandRow(E, { x: ux, y: ly + 2 + 54 * 1.15, w: colW - L0.w - 40, h: 48, d: 0.28, gap: 18 });
+  const gx = b.x + colW + 40, gw = b.r - gx, bh = b.h, shelfY = b.b - 14;
+  html += `<div class="ft-band" data-in="wipe-l" data-d=".2" style="left:${R1(gx)}px;top:${R1(shelfY)}px;width:${R1(gw)}px;height:14px"></div>`;
+  const boxes = [
+    ['x1', 0, { x: gx, y: b.y + 20, w: gw * 0.36, h: bh - 44 }],
+    ['impulse', -6, { x: gx + gw * 0.38, y: b.y + 4, w: gw * 0.62, h: bh * 0.32 }],
+    ['vibro', -8, { x: gx + gw * 0.38, y: b.y + bh * 0.36, w: gw * 0.62, h: bh * 0.26 }],
+    ['king', 6, { x: gx + gw * 0.38, y: b.y + bh * 0.66, w: gw * 0.38, h: bh * 0.3 }],
+    ['spoon', 8, { x: gx + gw * 0.8, y: b.y + bh * 0.64, w: gw * 0.2, h: bh * 0.32 }],
+  ];
+  boxes.forEach(([k, rot, box], i) => { html += prodIn(E, k, box, { rot, attrs: `data-in="scale" data-d="${(0.14 + i * 0.05).toFixed(2)}"`, maxUp: 1.2 }).html; });
+  return { html: html + txt };
+}
+
 // ---------- scenes ----------
 export const scenes = {
   // POSTER (statics + loop start/end): „VŠE PRO PŘÍVLAČ“ + the three focus brands + a green stripe wing with Favorite / Crazy Fish / Spinmad gear
@@ -217,9 +275,21 @@ export const scenes = {
     const b = E.body, k = E.kind;
     let html = '', txt = '';
     if (k === 'wide') {
-      const colW = 470;
+      // 16:9 (taller than 1.91): wider text column → the brand row next to the FT logo gets readable (Crazy Fish / Vanfook)
+      const w16 = E.f.key === '16x9', colW = w16 ? 520 : 470;
       html += frame(E, { wing: wing(E, { x0: b.x + colW - 40, slant: 150 }) });
-      txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: colW, size: 19, text: 'FT Fishing · od roku 2016', inAttr: 'data-in="left"' });
+      // review 22. 10. MINOR 4: same kicker as the other formats („e-shop od roku 2016“)
+      txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: colW, size: 19, fit: 14, text: 'FT Fishing · e-shop od roku 2016', inAttr: 'data-in="left"' });
+      if (w16) {
+        txt += T(E, { cls: 'ft-h', x: b.x - 2, y: b.y + 40, w: colW - 60, size: 80, fit: 50, text: 'Vše pro', main: true, inAttr: 'data-in="up" data-d=".04"' });
+        txt += T(E, { cls: 'ft-h', x: b.x - 2, y: b.y + 40 + 77, w: colW - 70, size: 80, fit: 50, html: '<em>přívlač</em>', main: true, inAttr: 'data-in="slam" data-d=".1"' });
+        txt += T(E, { cls: 'ft-s', x: b.x, y: b.y + 212, w: colW - 90, size: 25, lines: 2, html: `${E.t('Pruty a navijáky Favorite,')}<br>${E.t('nástrahy Crazy Fish a Spinmad')}`, inAttr: 'data-in="up" data-d=".18"' });
+        const L = ftLogo(E, { x: 0, y: 0, maxH: 110 });
+        txt += ftLogo(E, { x: b.x, y: b.b - L.h, maxH: 110 }).html;
+        txt += brandRow(E, { x: b.x + L.w + 26, y: b.b - L.h / 2 - 30, w: colW - L.w - 100, h: 60, gap: 18 });
+        html += cluster(E, CL_WIDE, { x: b.x + colW + 10, y: b.y - 6, w: b.r - b.x - colW + 10, h: b.h + 14 });
+        return { html: html + txt };
+      }
       txt += T(E, { cls: 'ft-h', x: b.x - 2, y: b.y + 36, w: colW - 60, size: 70, fit: 50, text: 'Vše pro', main: true, inAttr: 'data-in="up" data-d=".04"' });
       txt += T(E, { cls: 'ft-h', x: b.x - 2, y: b.y + 36 + 67, w: colW - 70, size: 70, fit: 50, html: '<em>přívlač</em>', main: true, inAttr: 'data-in="slam" data-d=".1"' });
       txt += T(E, { cls: 'ft-s', x: b.x, y: b.y + 182, w: colW - 90, size: 23, lines: 2, html: `${E.t('Pruty a navijáky Favorite,')}<br>${E.t('nástrahy Crazy Fish a Spinmad')}`, inAttr: 'data-in="up" data-d=".18"' });
@@ -339,6 +409,7 @@ export const scenes = {
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = frame(E), txt = '';
+    if (E.kind === 'wide') return heroWide(E, html);
     // green stripe band behind the lure (the web hero banner's stripes, slanted)
     const by = b.y + (sq ? 250 : 300), bh = sq ? 330 : 420;
     html += `<div class="abs" style="left:0;top:${R1(by)}px;width:${E.W}px;height:${R1(bh)}px;clip-path:polygon(0 18%,100% 0,100% 82%,0 100%)"><div class="ft-wing" data-in="wipe-l" data-dur=".45" style="inset:0"></div></div>`;
@@ -369,6 +440,7 @@ export const scenes = {
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = frame(E), txt = '';
+    if (E.kind === 'wide') return mcrWide(E, html);
     txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: b.w, size: sq ? 24 : 27, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });
     const hs = sq ? 140 : 160;
     let y = b.y + (sq ? 48 : 56);

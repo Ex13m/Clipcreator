@@ -29,6 +29,13 @@ export const anim = {
     { scene: 'mcr', d: 1.9 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): poster → TroutJig hero → thanks + colourways → poster (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'mcr', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 
 // ---------- products (native px: visible alpha bbox, ball-head centre + radius; from assets_prep/jigovky/ads/_meta.json) ----------
@@ -273,6 +280,22 @@ export const scenes = {
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = world(E, { lx: 0.6, ly: 0.62 }), txt = '';
+    if (E.kind === 'wide') {
+      // 16:9: name + spec pills left, the floating jig right (no 1:1 loupe — it would be upscaled 1.6× in the 1920 output)
+      const colW = 470, y0 = b.y + Math.max(0, (b.h - 360) / 2);
+      txt += T(E, { cls: 'jg-k', x: b.x, y: y0, w: colW, size: 20, fit: 15, text: 'Pstruhová řada · značka Jigovky.cz', inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'jg-h', x: b.x - 3, y: y0 + 34, w: colW, size: 84, fit: 50, text: 'TroutJig', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      txt += T(E, { cls: 'jg-h', x: b.x - 3, y: y0 + 34 + 84 * 1.02, w: colW, size: 84, fit: 50, text: 'Barbless', style: 'color:#fff', inAttr: 'data-in="slam" data-d=".1"', main: true });
+      const top = y0 + 34 + 84 * 2.1 + 10;
+      [['Bez protihrotu', false], ['0,4–3 g', true], ['Háčky #4 · #6 · #8', true]].forEach(([t, o], i) => {
+        txt += pill(E, { x: b.x, y: top + i * 50, h: 42, size: 23, text: t, outline: o, inAttr: `data-in="left" data-d="${(0.18 + i * 0.08).toFixed(2)}"` }).html;
+      });
+      const J = fitIn(E, 'tj', { cx: b.x + colW + (b.w - colW) / 2 + 20, cy: b.y + b.h / 2, w: b.w - colW - 20, h: b.h - 40, rot: -6, inAttr: 'data-in="rise" data-d=".02"', sweep: '0.3,1.2', shadow: 18 });
+      html += J.html;
+      const [gx, gy] = J.at(P.tj.head[0] - 80, P.tj.head[1] - 95);
+      html += glint(gx, gy, 130);
+      return { html: html + txt };
+    }
     const hS = sq ? 104 : 120;
     txt += T(E, { cls: 'jg-k', x: b.x, y: b.y + 2, w: b.w, size: sq ? 28 : 32, text: 'Pstruhová řada · značka Jigovky.cz', inAttr: 'data-in="left"' });
     txt += T(E, { cls: 'jg-h', x: b.x - 4, y: b.y + 44, w: b.w, size: hS, fit: 60, html: `TroutJig <span style="color:#fff">Barbless</span>`, inAttr: 'data-in="slam" data-d=".06"', main: true });
@@ -303,6 +326,25 @@ export const scenes = {
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = world(E, { lx: 0.55, ly: 0.7 }), txt = '';
+    if (E.kind === 'wide') {
+      // 16:9: thanks + logo | URL lockup left, the three colourways staircase right
+      const colW = 640;
+      txt += T(E, { cls: 'jg-k', x: b.x, y: b.y + 8, w: colW, size: 21, text: 'Mistrovství ČR v Trout Area 2026', style: `color:${C.yellow}`, inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'jg-hw', x: b.x - 3, y: b.y + 42, w: colW, size: 84, fit: 50, text: 'Děkujeme za ceny!', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      let y = b.y + 42 + 84 * 1.1 + 28;
+      const L = logoSize(E, 110);
+      txt += logo(E, { x: b.x, y, maxH: 110, attrs: 'data-in="scale" data-d=".2"' }).html;
+      txt += `<i class="abs" data-in="scale" data-d=".25" style="left:${R1(b.x + L.w + 24)}px;top:${R1(y + 8)}px;width:3px;height:${R1(L.h - 16)}px;background:rgba(255,255,255,.55);border-radius:2px"></i>`;
+      txt += T(E, { cls: 'jg-h', x: b.x + L.w + 50, y: y + (L.h - 60 * 1.02) / 2, w: colW - L.w - 50, size: 60, fit: 36, text: 'jigovky.cz', inAttr: 'data-in="left" data-d=".26"', main: true });
+      y += L.h + 22;
+      txt += T(E, { cls: 'jg-k', x: b.x, y, w: colW, size: 22, fit: 16, text: 'Jigy, které chytají! · Poctivě vyrobeno v ČR', inAttr: 'data-in="up" data-d=".32"' });
+      ['fluo', 'pink', 'red'].forEach((key, i) => {
+        const p = P[key], s = Math.min(1, 120 / (2 * p.r));
+        const cx = b.r - 60 - (2 - i) * 115, cy = b.b - 52 - (2 - i) * 92;
+        html += put(E, key, { s, nx: p.head[0], ny: p.head[1], x: cx, y: cy, inAttr: `data-in="right" data-d="${(0.15 + i * 0.08).toFixed(2)}"`, sweep: `${(0.3 + i * 0.1).toFixed(2)},1.1` }).html;
+      });
+      return { html: html + txt };
+    }
     txt += T(E, { cls: 'jg-k', x: b.x, y: b.y + 2, w: b.w, size: sq ? 28 : 32, text: 'Mistrovství ČR v Trout Area 2026', style: `color:${C.yellow}`, inAttr: 'data-in="left"' });
     const hS = sq ? 116 : 132;
     txt += T(E, { cls: 'jg-hw', x: b.x - 4, y: b.y + 46, w: b.w, size: hS, lines: 2, fit: 60, text: 'Děkujeme za ceny!', inAttr: 'data-in="slam" data-d=".06"', main: true });

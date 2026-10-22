@@ -41,6 +41,13 @@ export const anim = {
     { scene: 'mcr', d: 1.8 },
     { scene: 'poster', d: 1.9 },
   ],
+  // 16:9 MP4 (kind 'wide'): poster → Chibi Futten colour drop → prizes + URL + lure shelf → poster (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'mcr', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 export const fonts = {};   // Saira Extra Condensed, Nunito, Montserrat are in the engine registry
 
@@ -244,6 +251,55 @@ function cluster(E, L, box) {
   return h;
 }
 
+// ---------- 16:9 (kind 'wide') mid scenes for the landscape MP4 ----------
+// hero: name + Timon card + synced colourway pill left, the lure switching colourways (with its tint glow) right
+function heroWide(E) {
+  const b = E.body, colW = 470;
+  let html = frame(E, { glow: [0.68, 0.5], glowR: 0.45 }), txt = '';
+  const y0 = b.y + 10;
+  txt += T(E, { cls: 'af-k af-tag', x: b.x, y: y0 - 4, w: colW, size: 20, text: 'Wobler v nabídce · 51 mm', style: 'line-height:1.4', inAttr: 'data-in="left"' });   // line-height 1 + overflow:hidden would crop the í / č accents at 20 px
+  txt += T(E, { cls: 'af-h', x: b.x - 3, y: y0 + 38, w: colW, size: 96, fit: 56, html: `Chibi Futten <span class="af-g">FS</span>`, main: true, inAttr: 'data-in="slam" data-d=".05"' });
+  txt += T(E, { cls: 'af-s', x: b.x, y: y0 + 38 + 100, w: colW, size: 30, text: 'Jeden model, řada barev', style: `color:${C.ink}`, inAttr: 'data-in="up" data-d=".14"' });
+  html += brandCard(E, 'timon', { x: b.x, y: y0 + 38 + 100 + 30 * 1.2 + 22, w: 190, h: 70, pad: 12, d: 0.1 });
+  const ns = 24, nh = ns * 2, ny = b.b - nh, STEP = 0.32, D0 = 0.2;
+  const names = CW.map((c) => `<div class="cy"><div class="t af-pill ol" style="left:0;top:0;height:${R1(nh)}px;padding:0 ${R1(ns * 0.9)}px;font-size:${ns}px"><span class="af-dot" style="background:${P[c].dot}"></span>${E.t(P[c].name)}</div></div>`).join('');
+  txt += `<div class="abs" data-cycle="${STEP}" data-d="${D0}" data-rest="0" style="left:${R1(b.x)}px;top:${R1(ny)}px;width:${R1(colW)}px;height:${R1(nh)}px">${names}</div>`;
+  const lcx = b.x + colW + (b.r - b.x - colW) / 2 + 10, lcy = b.y + b.h / 2 - 10, V = Math.min(600, b.r - b.x - colW);
+  const tints = CW.map((c) => `<div class="cy" style="background:radial-gradient(closest-side,${P[c].tint},rgba(255,255,255,0))"></div>`).join('');
+  html += `<div class="abs" data-cycle="${STEP}" data-d="${D0}" data-rest="0" style="left:${R1(lcx - 400)}px;top:${R1(lcy - 300)}px;width:800px;height:600px;opacity:.9">${tints}</div>`;
+  const lures = CW.map((c) => `<div class="cy">${prod(E, c, { cx: 400, cy: 300, V, rot: -5, maxUp: 1.3, sweep: c === 'chart' }).html}</div>`).join('');
+  html += `<div class="abs" data-in="right" data-dist="100" data-cycle="${STEP}" data-d="${D0}" data-rest="0" style="left:${R1(lcx - 400)}px;top:${R1(lcy - 300)}px;width:800px;height:600px">${lures}</div>`;
+  let dots = '';
+  CW.forEach((c, i) => { dots += `<i class="abs" style="left:${R1(i * 34)}px;top:0;width:24px;height:24px;border-radius:50%;background:${P[c].dot};box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),0 4px 10px rgba(0,0,0,.15)"></i>`; });
+  html += `<div class="abs" data-in="up" data-d=".3" style="left:${R1(b.r - 4 * 34 - 24)}px;top:${R1(b.b - 30)}px;width:${4 * 34 + 24}px;height:24px">${dots}</div>`;
+  return { html: html + txt };
+}
+// mcr: prizes + logo / URL left, a 3 + 2 shelf of lures right
+function mcrWide(E) {
+  const b = E.body, colW = 560;
+  let html = frame(E, { glow: [0.72, 0.5], glowR: 0.45 }), txt = '';
+  txt += T(E, { cls: 'af-k af-tag', x: b.x, y: b.y + 6, w: colW, size: 20, text: 'Mistrovství ČR v Trout Area 2026', style: 'line-height:1.4', inAttr: 'data-in="left"' });
+  txt += T(E, { cls: 'af-h', x: b.x - 3, y: b.y + 46, w: colW, size: 110, fit: 60, html: `Věnuje <span class="af-g">ceny</span>`, main: true, inAttr: 'data-in="slam" data-d=".05"' });
+  txt += T(E, { cls: 'af-s', x: b.x, y: b.y + 46 + 110, w: colW, size: 30, text: 'pro závodníky mistrovství', style: `color:${C.ink}`, inAttr: 'data-in="up" data-dist="24" data-d=".14"' });
+  const L0 = afLogo(E, { x: 0, y: 0, maxH: 80 }), ly = b.b - L0.h - 6;
+  txt += afLogo(E, { x: b.x, y: ly, maxH: 80, attrs: 'data-in="scale" data-d=".18"' }).html;
+  const ux = b.x + L0.w + 22;
+  txt += T(E, { cls: 'af-url', x: ux, y: ly + L0.h / 2 - 44 * 0.66, w: colW - L0.w - 22, size: 44, fit: 30, html: `activefishing<b>.cz</b>`, main: true, inAttr: 'data-in="left" data-d=".22"' });
+  txt += T(E, { cls: 'af-k', x: ux + 2, y: ly + L0.h / 2 + 44 * 0.48 - 3, w: colW - L0.w - 24, size: 16, fit: 13, text: 'plandavky · woblery · pruty', style: `color:${C.grey};letter-spacing:.16em;line-height:1.4`, inAttr: 'data-in="left" data-d=".26"' });
+  const gx = b.x + colW + 40, gw = b.r - gx, rh = (b.h - 20) / 2;
+  const shelf = [[['forte06', -8], ['wah', 0], ['khor', 0]], [['gold', 0], ['scheila', 8]]];
+  let i = 0;
+  shelf.forEach((row, r) => {
+    const sw = gw / row.length, sy = b.y + r * (rh + 20);
+    html += `<div class="af-sep" style="left:${R1(gx)}px;top:${R1(sy + rh)}px;width:${R1(gw)}px"></div>`;
+    row.forEach(([k, rot], c) => {
+      html += prodIn(E, k, { x: gx + c * sw + 10, y: sy + 6, w: sw - 20, h: rh - 18 }, { rot, attrs: `data-in="scale" data-d="${(0.12 + i * 0.05).toFixed(2)}"`, maxUp: 1.2 }).html;
+      i++;
+    });
+  });
+  return { html: html + txt };
+}
+
 // ---------- scenes ----------
 export const scenes = {
   // POSTER (statics + loop start/end): the counter lockup + a drop of lures from 6 brands
@@ -356,6 +412,7 @@ export const scenes = {
   // 3 — HERO: Timon Chibi Futten FS 51 mm — COLOUR DROP: the same lure switches colourway (data-cycle), names follow
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return heroWide(E);
     let html = frame(E, { glow: [0.5, 0.62], glowR: 0.55 }), txt = '';
     txt += T(E, { cls: 'af-k af-tag', x: b.x, y: b.y + 4, w: b.w * 0.7, size: sq ? 26 : 28, text: 'Wobler v nabídce · 51 mm', inAttr: 'data-in="left"' });
     const hs = sq ? 132 : 150;
@@ -388,6 +445,7 @@ export const scenes = {
   // 4 — MČR: the shop gives prizes to the championship; URL big + a shelf of lures
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return mcrWide(E);
     let html = frame(E, { glow: [0.5, 0.5], glowR: 0.6 }), txt = '';
     txt += T(E, { cls: 'af-k af-tag', x: b.x, y: b.y + 4, w: b.w, size: sq ? 26 : 28, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });
     const hs = sq ? 150 : 170;

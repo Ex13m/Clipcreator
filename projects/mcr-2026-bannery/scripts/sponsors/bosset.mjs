@@ -30,6 +30,13 @@ export const anim = {
     { scene: 'mcr', d: 2.0 },
     { scene: 'poster', d: 1.9 },
   ],
+  // 16:9 MP4 (kind 'wide'): poster → brand shelf → thermos run → poster (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'range', d: 2.4 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 
 const AD = 'film:assets_prep/bosset/ads/', BR = 'film:assets_prep/bosset/brands/';
@@ -147,6 +154,28 @@ function confetti(E, { x0, x1, y0, y1, n = 16, seed = 3 }) {
 const shiner = (E, { cx, cy, w, rot = -8, inAttr = 'data-in="left" data-d=".25" data-dist="120"' }) =>
   `<div class="abs" ${inAttr} style="left:0;top:0;width:${E.W}px;height:${E.H}px"><div class="abs" style="left:0;top:0;width:100%;height:100%;transform:rotate(${rot}deg);transform-origin:${R1(cx)}px ${R1(cy)}px">${E.img(LURE.shiner, { cx, cy, w }).html}</div></div>`;
 
+// 16:9 hero: the claim column left, the 0,6 l colour run (SM-VB / SM-SR only → Double Lock allowed) on the shelf right
+function heroWide(E) {
+  const b = E.body, shelfH = 30, shelfY = b.b - shelfH - 4, sx = b.x + 520;
+  let html = studio(E, { gx: (sx + b.r) / 2, gy: shelfY - 150, gs: 760 });
+  const colW = 480, y0 = b.y + Math.max(0, (b.h - 330) / 2);
+  html += T(E, { cls: 'bo-k', x: b.x, y: y0, w: colW, size: 20, text: 'Termosky Zojirushi', inAttr: 'data-in="left"' });
+  html += T(E, { cls: 'bo-h', x: b.x - 3, y: y0 + 34, w: colW, size: 54, fit: 36, text: 'Horké i studené', inAttr: 'data-in="up" data-d=".05"', main: true });
+  html += T(E, { cls: 'bo-h y', x: b.x - 4, y: y0 + 34 + 54 * 0.98, w: colW, size: 86, fit: 50, text: 'až 6 hodin', inAttr: 'data-in="slam" data-d=".12"', main: true });
+  const py = y0 + 34 + 54 * 0.98 + 86 + 18;
+  html += pill(E, { x: b.x, y: py, size: 20, text: 'Double Lock · jednou rukou', kind: 'sk', inAttr: 'data-in="left" data-d=".22"' });
+  html += pill(E, { x: b.x, y: py + 20 * 1.62 + 10, size: 20, text: 'Nerez · bez BPA', kind: 'sk', inAttr: 'data-in="left" data-d=".28"' });
+  html += `<div class="bo-shelf" data-in="up" data-dist="40" style="left:${R1(sx - 20)}px;top:${R1(shelfY)}px;width:${R1(b.r - sx + 60)}px;height:${R1(shelfH + 6)}px"></div>`;
+  const base = shelfY + shelfH * 0.45, H = base - (b.y + 2), sw = b.r - sx;
+  const run = [['srWhite', 0.72, 0.08], ['srPink', 0.74, 0.24], ['vbBeige', 0.76, 0.4], ['vbBlack', 1, 0.58], ['srGreen', 0.76, 0.76], ['vbGreen', 0.74, 0.92]];
+  const ord = run.map((r, i) => i).sort((a, c) => run[a][1] - run[c][1]);
+  for (const i of ord) {
+    const [kk, f, fx] = run[i];
+    html += bottle(E, kk, { cx: sx + sw * fx, base, h: H * f, inAttr: `data-in="rise" data-d="${(0.06 + i * 0.05).toFixed(2)}"`, sweep: kk === 'vbBlack' }).html;
+  }
+  return { html };
+}
+
 // ---------- scenes ----------
 export const scenes = {
   // POSTER: shop + winners' accent in one frame — CENY PRO VÍTĚZE, SM-VB 0,6 l on the podium, Keitech cameo, Bosset logo
@@ -239,20 +268,30 @@ export const scenes = {
 
   // 2 — RANGE: the brand shelf — one product + its brand logo per card (brands Bosset SELLS; no prices / counts)
   range(E) {
-    const b = E.body, sq = E.kind === 'square';
-    let html = studio(E, { gx: E.W / 2, gy: b.y + b.h * 0.6, gs: 1100 });
-    html += T(E, { cls: 'bo-k', x: b.x, y: b.y + 4, w: b.w, size: sq ? 25 : 28, text: 'Značky v nabídce bosset.cz', inAttr: 'data-in="left"' });
-    const hs = sq ? 74 : 84;
-    html += T(E, { cls: 'bo-h', x: b.x - 3, y: b.y + (sq ? 44 : 50), w: b.w, size: hs, fit: 44, html: `Nástrahy <span style="color:${C.yel}">&amp;</span> šňůry`, inAttr: 'data-in="up" data-d=".05"', main: true });
-    const gy = b.y + (sq ? 44 : 50) + hs * 1.18, gap = sq ? 14 : 18, cols = 2, rows = 4;
-    const cw = (b.w - gap) / cols, ch = (b.b - gy - gap * (rows - 1)) / rows;
+    const b = E.body, sq = E.kind === 'square', wide = E.kind === 'wide';
+    let html = studio(E, { gx: wide ? E.W * 0.68 : E.W / 2, gy: b.y + b.h * 0.6, gs: 1100 });
+    let gx0 = b.x, gy, gw = b.w, gap, cols = 2, rows = 4;
+    if (wide) {
+      // 16:9: headline column left, the 2 × 4 shelf right
+      const colW = 400, y0 = b.y + Math.max(0, (b.h - 200) / 2);
+      html += T(E, { cls: 'bo-k', x: b.x, y: y0, w: colW, size: 19, fit: 14, text: 'Značky v nabídce bosset.cz', inAttr: 'data-in="left"' });
+      html += T(E, { cls: 'bo-h', x: b.x - 3, y: y0 + 34, w: colW, size: 62, fit: 40, text: 'Nástrahy', inAttr: 'data-in="up" data-d=".05"', main: true });
+      html += T(E, { cls: 'bo-h', x: b.x - 3, y: y0 + 34 + 62 * 0.98, w: colW, size: 62, fit: 40, html: `<span style="color:${C.yel}">&amp;</span> šňůry`, inAttr: 'data-in="up" data-d=".1"', main: true });
+      gx0 = b.x + colW + 40; gw = b.r - gx0; gy = b.y; gap = 12;
+    } else {
+      html += T(E, { cls: 'bo-k', x: b.x, y: b.y + 4, w: b.w, size: sq ? 25 : 28, text: 'Značky v nabídce bosset.cz', inAttr: 'data-in="left"' });
+      const hs = sq ? 74 : 84;
+      html += T(E, { cls: 'bo-h', x: b.x - 3, y: b.y + (sq ? 44 : 50), w: b.w, size: hs, fit: 44, html: `Nástrahy <span style="color:${C.yel}">&amp;</span> šňůry`, inAttr: 'data-in="up" data-d=".05"', main: true });
+      gy = b.y + (sq ? 44 : 50) + hs * 1.18; gap = sq ? 14 : 18;
+    }
+    const cw = (gw - gap) / cols, ch = (b.b - gy - gap * (rows - 1)) / rows;
     SHELF.forEach((s, i) => {
-      const x = b.x + (i % cols) * (cw + gap), y = gy + Math.floor(i / cols) * (ch + gap);
+      const x = gx0 + (i % cols) * (cw + gap), y = gy + Math.floor(i / cols) * (ch + gap);
       const lw = cw * 0.34, lh = ch * (s.b.startsWith('fresh') ? 0.74 : 0.6), pw = cw * 0.56, ph = ch * 0.78;
       const lg = E.logo(`${BR}${s.b}`, { cx: 6 + 14 + lw / 2, y: 0, maxW: lw, maxH: lh, trim: s.trim, id: `bo-br${i}` });
       const logo = E.logo(`${BR}${s.b}`, { cx: 6 + 14 + lw / 2, y: (ch - lg.h) / 2 + (i < 2 ? 14 : 0), maxW: lw, maxH: lh, trim: s.trim, id: `bo-br${i}` }).html;
       const prod = `<div class="abs" style="left:0;top:0;width:${R1(cw)}px;height:${R1(ch)}px;transform:rotate(${s.rot}deg);transform-origin:${R1(cw - 14 - pw / 2)}px ${R1(ch / 2)}px">${E.img(s.p, { cx: cw - 14 - pw / 2, cy: ch / 2, w: pw, h: ph }).html}</div>`;
-      const tag = i < 2 ? `<div class="t bo-tag" style="left:20px;top:9px;font-size:${sq ? 17 : 19}px">${E.t('Distributor pro ČR')}</div>` : '';
+      const tag = i < 2 ? `<div class="t bo-tag" style="left:20px;top:${wide ? 5 : 9}px;font-size:${wide ? 13 : sq ? 17 : 19}px">${E.t('Distributor pro ČR')}</div>` : '';
       html += `<div class="bo-card" data-in="up" data-dist="40" data-d="${(0.1 + i * 0.05).toFixed(2)}" style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(cw)}px;height:${R1(ch)}px">${prod}${logo}${tag}</div>`;
     });
     return { html };
@@ -261,6 +300,7 @@ export const scenes = {
   // 3 — HERO: the 0,6 l line (SM-VB / SM-SR only → Double Lock claim allowed) on the light-blue shelf, verified spec
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return heroWide(E);
     const shelfH = sq ? 34 : 44, shelfY = b.b - shelfH - 6;
     let html = studio(E, { gx: E.W / 2, gy: shelfY - 160, gs: 1000 });
     let y = b.y + 4;

@@ -25,6 +25,7 @@ export const theme = {
 };
 // optional: export const fonts = { 'Family': { v: 'family-{r}-wght-normal', weight: '100 900' } }  (woff2 in mcr-2026-sponzori/fonts/)
 // optional: export const anim = { seq: [{ scene: 'poster', d: 2.6 }, { scene: 'range', d: 2.3 }, { scene: 'hero', d: 2.3 }, { scene: 'poster', d: 2.8 }] }
+//   + wide: [...] = the 16:9 MP4 sequence (only scenes with an E.kind === 'wide' layout; default = the seq above → give range/hero a wide branch)
 
 export function css() {
   return `

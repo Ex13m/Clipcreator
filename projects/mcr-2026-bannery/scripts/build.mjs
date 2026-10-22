@@ -4,6 +4,7 @@
 //   node scripts/build.mjs <key> --only=static,carousel  skip the MP4s while iterating (fast, ~10 s)
 //   node scripts/build.mjs <key> --fmt=4x5               only these formats
 //   node scripts/build.mjs <key> --draft                 DRAFT badge
+//   node scripts/build.mjs <key> --fmt=16x9 --only=peek --peek=range,hero   stills of any scenes → build/<key>/peek_<fmt>_<scene>.png
 //   node scripts/build.mjs --list                        sponsor keys + module status
 // Outputs: renders/<key>/<key>_{static_1x1,static_4x5,static_191,static_9x16,static_16x9}.png, <key>_carousel_{1..4}.png,
 //          <key>_anim_{4x5,1x1,16x9}.mp4, _sheet.jpg (contact sheet), _qa.json (rule checks). Exit 1 on a rule error.
@@ -52,6 +53,8 @@ const need = (fk, ids) => { if (fmts && !fmts.has(fk)) return; (plan[fk] ||= new
 if (only.has('static')) OUTPUTS.static.forEach((fk) => need(fk, ['poster']));
 if (only.has('carousel')) OUTPUTS.carousel.forEach((fk) => need(fk, CAROUSEL));
 if (only.has('anim')) OUTPUTS.anim.forEach((fk) => need(fk, seqOf(fk).map((s) => s.scene)));
+const PEEK = opt.peek ? String(opt.peek).split(',') : [];   // preview stills of any scene (not deliverables, not in _qa.json)
+if (PEEK.length) Object.keys(FORMATS).forEach((fk) => need(fk, PEEK));
 
 const OUT = path.join(ROOT, 'renders', key), WORK = path.join(ROOT, 'build', key);
 fs.mkdirSync(OUT, { recursive: true }); fs.mkdirSync(WORK, { recursive: true });
@@ -82,6 +85,11 @@ try {
     if (only.has('carousel') && OUTPUTS.carousel.includes(fk)) {
       for (const [i, id] of CAROUSEL.entries()) note(`${key}_carousel_${i + 1}.png`, await still(page, id, path.join(OUT, `${key}_carousel_${i + 1}.png`)), { scene: id });
     }
+    for (const id of PEEK) {
+      const q = await still(page, id, path.join(WORK, `peek_${fk}_${id}.png`));
+      const e = q.err.length; errors += e;
+      log(`  ${e ? 'XX' : q.warn.length ? ' !' : 'OK'} peek ${fk} ${id}${e ? `  ERR: ${q.err.join(' | ')}` : ''}${q.warn.length ? `  warn: ${q.warn.join(' | ')}` : ''}`);
+    }
     if (only.has('anim') && OUTPUTS.anim.includes(fk)) {
       const out = path.join(OUT, `${key}_anim_${fk}.mp4`);
       const r = await withLock('video', () => video(page, seqOf(fk), out, { fps, onProgress: (i, n) => process.stdout.write(`\r  rendering ${fk} ${i}/${n}   `) }), log);
@@ -94,9 +102,12 @@ try {
 } finally {
   await br.close(); srv.close();
 }
-fs.writeFileSync(path.join(OUT, '_qa.json'), JSON.stringify(qa, null, 1));
-try {
-  execFileSync('python3', [path.join(ROOT, 'scripts/engine/sheet.py'), OUT, key], { stdio: 'inherit' });
-} catch (e) { log(`  ! contact sheet failed: ${e.message}`); }
+const peekOnly = [...only].every((o) => o === 'peek');
+if (!peekOnly) {
+  fs.writeFileSync(path.join(OUT, '_qa.json'), JSON.stringify(qa, null, 1));
+  try {
+    execFileSync('python3', [path.join(ROOT, 'scripts/engine/sheet.py'), OUT, key], { stdio: 'inherit' });
+  } catch (e) { log(`  ! contact sheet failed: ${e.message}`); }
+}
 log(`${errors ? 'XX' : 'OK'} ${key}: ${Object.keys(qa.outputs).length} outputs in ${((Date.now() - t0) / 1000).toFixed(1)} s → renders/${key}/ (sheet: renders/${key}/_sheet.jpg)`);
 process.exit(errors ? 1 : 0);

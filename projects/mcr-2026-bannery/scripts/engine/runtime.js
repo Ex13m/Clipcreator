@@ -18,6 +18,8 @@
   const cubic = (x) => 1 - Math.pow(1 - x, 3);
   const nums = (s, n) => { const a = String(s || '').split(',').map(Number); while (a.length < n) a.push(a[a.length - 1] ?? 0); return a; };
   const ANIM = '[data-in],[data-spin],[data-kb],[data-pan],[data-float],[data-sweep]';
+  // default entrance travel: 70 px; landscape (16:9 MP4) has tighter vertical spacing → 40 px, else text slides through its neighbours
+  const DIST0 = C.w > C.h * 1.5 ? 40 : 70;
   const els = $$(ANIM).map((el) => ({ el, sc: el.closest('.scene'), base: el.style.transform || '' }));
   const cycles = $$('[data-cycle]').map((el) => ({ el, sc: el.closest('.scene'), kids: $$(':scope > .cy', el) }));
 
@@ -49,7 +51,7 @@
     let tx = 0, ty = 0, sc = 1, rot = 0, op = null, clip = null;
     const u = w ? t - w.t0 : 1e9, span = w ? w.t1 - w.t0 : 1;
     if (d.in && w && w.enter) {
-      const del = +(d.d || 0), dur = +(d.dur || 0.7), dist = +(d.dist || 70);
+      const del = +(d.d || 0), dur = +(d.dur || 0.7), dist = +(d.dist || DIST0);
       const x = clamp((u - del) / dur), e = expo(x);
       const k = 1 - e, pop = clamp(u / 0.09);   // opaque within ~3 frames of the cut whatever the delay: only the MOTION is staggered (delayed fades = empty cut frames)
       switch (d.in) {

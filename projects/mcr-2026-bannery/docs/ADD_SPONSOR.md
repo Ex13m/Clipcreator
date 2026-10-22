@@ -28,12 +28,13 @@ a `lib/fx_<key>.mjs`, výřezy `assets_prep/<key>/ads|heroes|brands/`, fakta `re
 ```bash
 cd /home/user/Clipcreator/projects/mcr-2026-bannery
 cp scripts/sponsors/_template.mjs scripts/sponsors/<key>.mjs        # startér: sám načte logo/produkty/copy z filmových dat
-node scripts/build.mjs <key> --only=static,carousel                  # rychlá iterace (~10 s): 4 statiky + 4 karty karuselu
+node scripts/build.mjs <key> --only=static,carousel                  # rychlá iterace (~15 s): 5 statik + 4 karty karuselu
+node scripts/build.mjs <key> --fmt=16x9 --only=peek --peek=hero,mcr  # náhled scén v 16:9 (build/<key>/peek_16x9_<scéna>.png)
 #   … otevři renders/<key>/_sheet.jpg, podívej se, oprav, opakuj (min. 2 kola) …
-node scripts/build.mjs <key>                                         # finál: + 2× MP4 (4:5, 1:1, 10 s, 60 fps, ~2–3 min), sheet, _qa.json
+node scripts/build.mjs <key>                                         # finál: + 3× MP4 (4:5, 1:1, 16:9; 10 s, 60 fps, ~5–6 min), sheet, _qa.json
 ```
 
-Výstupy: `renders/<key>/<key>_static_{1x1,4x5,191,9x16}.png`, `<key>_carousel_{1..4}.png`, `<key>_anim_{4x5,1x1}.mp4`,
+Výstupy: `renders/<key>/<key>_static_{1x1,4x5,191,9x16,16x9}.png`, `<key>_carousel_{1..4}.png`, `<key>_anim_{4x5,1x1,16x9}.mp4`,
 `_sheet.jpg` (kontaktní arch), `_qa.json`. Build skončí kódem 1 a řádkem `XX`, když se poruší pravidlo (viz níže).
 MP4 rendery se mezi agenty řadí přes zámek (`/tmp/mcr-bannery-video.lock`), takže paralelní agenti nepřetíží 4 jádra —
 když build píše „waiting for the video lock“, jen čeká.
@@ -46,11 +47,15 @@ když build píše „waiting for the video lock“, jen čeká.
 | `theme = { bg, light, taTone, chrome:{…} }` | ne | barva pozadí stránky; `light:true` = silný stín loga TA; `chrome` = barvy/font URL (`url`, `urlFont`, `urlW`), řádku role (`sub`), chipu (`chipBg`, `chipFg`, `chipLine`, `dot`), řádku akce (`event`), `shadow` |
 | `fonts` | ne | další rodiny (woff2 latin + latin-ext v `mcr-2026-sponzori/fonts/`); v registru už jsou Inter, Montserrat, Saira, Saira Extra Condensed, Nunito, Anton, Roboto Condensed, Roboto Slab, PT Sans Narrow, Exo 2, Source Sans 3, Bitter, Jost, Cormorant Garamond, Oswald, Outfit, Poppins, Archivo, Playfair Display… |
 | `css(E)` | ne | globální CSS (prefixuj třídy zkratkou sponzora, např. `.gh-`) |
-| `scenes = { poster, who, range, hero, mcr }` | `poster` ano | každá `(E) => ({ html, css?, taTone? })`. `poster` = všechny 4 statiky + začátek/konec smyčky MP4; `who` / `range` / `hero` / `mcr` = karty karuselu 1–4 (chybí-li `mcr`, použije se poster) |
-| `anim = { seq:[{scene, d}] }` | ne | sekvence MP4 (součet ≈ 10 s; první a poslední scéna = `poster` → bezešvá smyčka). Default: poster 2,6 · range 2,3 · hero 2,3 · poster 2,8 |
+| `scenes = { poster, who, range, hero, mcr }` | `poster` ano | každá `(E) => ({ html, css?, taTone? })`. `poster` = všech 5 statik + začátek/konec smyčky MP4; `who` / `range` / `hero` / `mcr` = karty karuselu 1–4 (chybí-li `mcr`, použije se poster) |
+| `anim = { seq:[{scene, d}], wide:[{scene, d}] }` | ne (`wide` doporučeno) | `wide` = sekvence MP4 16:9 — jen scény, které mají `wide` layout (default = `seq` výchozí: poster · range · hero · poster). |
+| `anim.seq` | ne | sekvence MP4 (součet ≈ 10 s; první a poslední scéna = `poster` → bezešvá smyčka). Default: poster 2,6 · range 2,3 · hero 2,3 · poster 2,8 |
 
 Scény se kreslí pro formáty `E.kind`: `square` (1080², karusel + MP4 1:1 + statika), `portrait` (1080×1350), `tall` (1080×1920),
-`wide` (1200×628). Karty `who/range/hero/mcr` a scény v `anim.seq` musí fungovat ve `square` i `portrait`.
+`wide` (1200×628 = 1,91:1 **a** 16:9 = 1200×675 CSS px renderované ×1,6 → 1920×1080; rozlišíš je `E.f.key === '16x9'`).
+Karty `who/range/hero/mcr` a scény v `anim.seq` musí fungovat ve `square` i `portrait`; scény v `anim.wide` ve `wide`
+(landscape: textový sloupec vlevo ~40 %, produkt vpravo). V 16:9 je každý CSS px = 1,6 výstupního px → obrázky v nativní
+velikosti jsou zvětšené 1,6× (QA varuje nad 1,3× výstupních px); lupy 1:1 / fotky menší než 1920 px raději vynech nebo zmenši.
 
 **Engine kreslí sám (chrome), scéna to NEKRESLÍ:** logo TA vlevo nahoře (bílé TROUT + červené AREA, měkký tmavý stín, nikdy
 destička), URL vpravo nahoře (+ řádek role u GH), chip role dole a řádek akce
@@ -93,6 +98,7 @@ Lekce z filmu platí i tady: žádné poloprůhledné „duchy“ produktů, ž�
 
 ## QA před odevzdáním
 1. `node scripts/build.mjs <key>` → `OK`, 0 × `XX`.
-2. Prohlédni `renders/<key>/_sheet.jpg` (statiky, karusel, snímky obou MP4) a aspoň 9:16 a 1.91:1 v plném rozlišení.
+2. Prohlédni `renders/<key>/_sheet.jpg` (statiky, karusel, snímky všech MP4) a aspoň 9:16, 1.91:1 a 16:9 v plném rozlišení.
+   Pozor na diakritiku: `.t` s `overflow:hidden` + `line-height:1` u malých kapitálek ořízne čárky/háčky (Í, Č) → line-height ≥ 1,3.
 3. Snímky kolem střihů MP4: `ffmpeg -ss <t> -i renders/<key>/<key>_anim_4x5.mp4 -frames:v 1 x.png` (t = hranice scén + 0,03 s).
 4. Zpráva: cesty výstupů, co je na kterém formátu, otevřené otázky.

@@ -40,6 +40,13 @@ export const anim = {
     { scene: 'hero', d: 2.0 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): thank-you → who → the venue plan → thank-you (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'who', d: 2.4 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 export const fonts = {};   // Inter + Montserrat are in the engine registry
 
@@ -245,6 +252,22 @@ export const scenes = {
   who(E) {
     const b = E.body, sq = E.kind === 'square';
     let h = world();
+    if (E.kind === 'wide') {
+      // 16:9: seal + kicker row, the name on one line, the verified one-liners below
+      let y = b.y + 20;   // seal ring stays clear of the TA logo
+      const SE = seal(E, { cx: b.x + 66, cy: y + 70, maxW: 132, rings: 1 });
+      h += SE.html;
+      h += T(E, { cls: 'crs-k', x: b.x + 170, y: y + 34, w: b.w - 170, size: 22, text: 'Kdo jsou', inAttr: 'data-in="left" data-d=".1"' });
+      h += T(E, { cls: 'crs-k', x: b.x + 170, y: y + 70, w: b.w - 170, size: 20, text: 'Samostatný svaz od roku 1968', style: `color:${C.ice};letter-spacing:.18em`, inAttr: 'data-in="left" data-d=".16"' });
+      y += 162;
+      h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: b.w, size: 76, fit: 50, html: `${E.t('Český rybářský')} <span style="color:${C.ice}">svaz</span>`, inAttr: 'data-in="up" data-d=".08"', main: true });
+      y += 76 + 24;
+      h += T(E, { cls: 'crs-p', x: b.x, y, w: b.w * 0.86, size: 28, lines: 2, text: 'Nezisková organizace s dlouholetou tradicí. Věnuje se rybářství, ochraně vodních živočichů a přírody.', inAttr: 'data-in="up" data-d=".2"' });
+      y += 28 * 1.25 * 2 + 30;
+      h += `<i class="abs" data-in="wipe-r" data-d=".3" style="left:${R1(b.x)}px;top:${R1(y - 14)}px;width:100px;height:3px;background:${C.turq}"></i>`;
+      h += T(E, { cls: 'crs-s', x: b.x, y, w: b.w, size: 22, text: 'Mezi největší zájmová sdružení v České republice', inAttr: 'data-in="up" data-d=".3"' });
+      return { html: h };
+    }
     const sz = sq ? { hd: 100, p: 40, s: 24 } : { hd: 100, p: 44, s: 26 };
     const blockH = 170 + 50 + sz.hd * 0.98 * 2 + 30 + sz.p * 1.25 * 3 + 34 + sz.s * 1.45 * 2;
     let y = b.y + Math.max(4, (b.h - blockH) / 2);
@@ -285,6 +308,33 @@ export const scenes = {
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
     let h = world();
+    if (E.kind === 'wide') {
+      // 16:9: the plan of Malý Sporťáček right (numbered → „čísla míst orientační“ + © ČÚZK), facts + owner card left
+      const top = b.y + 30, bot = b.b - 24;
+      const mh = PL_EXT.y1 - PL_EXT.y0, mw = PL_EXT.x1 - PL_EXT.x0;
+      const s = Math.min((bot - top) / mh, 440 / mw), r = Math.max(9, Math.round(s * 1.15));
+      const cx = b.r - 6 - PL_EXT.x1 * s, cy = top - PL_EXT.y0 * s;
+      const plan = pondPlan(E, { cx, cy, s, r });
+      h += `<div class="full" data-in="scale" data-d=".04" style="transform-origin:${R1(cx)}px ${R1(cy)}px">${plan.html}</div>`;
+      const pl = Math.min(plan.pins.x0, plan.bbox.x0);
+      h += `<div class="crs-note t" style="left:${R1(b.r - 400)}px;width:400px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 6)}px;font-size:14px">Schéma · čísla míst orientační</div>`;
+      h += `<div class="crs-note t" style="left:${R1(b.r - 400)}px;width:400px;text-align:right;top:${R1(Math.min(plan.pins.y0, plan.bbox.y0) - 24)}px;font-size:13px">Podklad © ČÚZK</div>`;
+      const colW = Math.min(620, pl - 50 - b.x);
+      let y = b.y + 6;
+      h += T(E, { cls: 'crs-k', x: b.x, y, w: colW, size: 20, text: 'Místo konání MČR 2026', inAttr: 'data-in="left"' });
+      y += 34;
+      h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: colW, size: 72, fit: 46, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".05"', main: true });
+      y += 72 + 14;
+      h += T(E, { cls: 'crs-cap', x: b.x, y, w: colW, size: 20, fit: 14, text: 'Rybník Malý Sporťáček', style: `color:${C.ice}`, inAttr: 'data-in="left" data-d=".12"' });
+      y += 30;
+      h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: 150, size: 104, fit: 70, text: '40', style: `color:${C.white}`, inAttr: 'data-in="up" data-d=".16"', main: true });
+      h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x + 150)}px;top:${R1(y + 40)}px;width:70px;height:4px;background:${C.turq}"></i>`;
+      h += T(E, { cls: 'crs-l', x: b.x + 150, y: y + 54, w: colW - 150, size: 30, fit: 20, text: 'závodních míst', inAttr: 'data-in="up" data-d=".2"' });
+      const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
+      const F = factCard(E, { ...FC, y: 0 });
+      h += factCard(E, { ...FC, y: b.b - F.h - 2 }).html;
+      return { html: h, taTone: 'dark' };
+    }
     const hd = sq ? 104 : 118, ks = sq ? 26 : 28;
     let y = b.y + 6;
     h += T(E, { cls: 'crs-k', x: b.x, y, w: b.w, size: ks, text: 'Místo konání MČR 2026', inAttr: 'data-in="left"' });

@@ -38,6 +38,13 @@ export const anim = {
     { scene: 'mcr', d: 1.9 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): poster → Rod Test Center → prizes + spoon shelf → poster (landscape layouts)
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'mcr', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 
 // ---------- assets (film project, read-only) ----------
@@ -273,6 +280,26 @@ export const scenes = {
   // 3 — HERO: Shimano. Rod Test Center (rent a Shimano rod in the Olomouc shop, try it at the water) + Vanquish FA CE + Cardiff Exlead
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') {
+      // 16:9: claim + chips left; on the right the water, the Exlead rod laid along the horizon and the Vanquish in front
+      const hs = 56, colW = 520, y0 = b.y + 2;
+      let txt = T(E, { cls: 'vr-k', x: b.x, y: y0, w: colW, size: 19, text: 'Shimano Rod Test Center', inAttr: 'data-in="left"' });
+      txt += H(E, { x: b.x, y: y0 + 28, w: colW, size: hs, text: 'Pruty Shimano', inAttr: 'data-in="up" data-d=".04"' });
+      txt += H(E, { x: b.x, y: y0 + 28 + hs * 1.08, w: colW, size: hs, text: 'vyzkoušíte', inAttr: 'data-in="up" data-d=".1"' });
+      txt += H(E, { x: b.x, y: y0 + 28 + hs * 2.16, w: colW, size: hs, text: 'přímo u vody', slabbed: true, inAttr: 'data-in="slam" data-d=".16"' });
+      const chH = 54, vs = 23, gap = 9;
+      let cy = b.b - 3 * chH - 2 * gap;
+      [['Prodejna Olomouc', 'Půjčte si prut', false], ['Prut Cardiff Exlead Competition', '1,83 m · 0,4–4,5 g', true], ['Naviják Shimano Vanquish FA CE', '145 g · převod 5,1 : 1', true]].forEach(([label, value, lower], i) => {
+        txt += chip(E, { x: b.x, y: cy, w: 470, h: chH, label, value, vs, lower, inAttr: `data-in="left" data-d="${(0.2 + i * 0.06).toFixed(2)}"` });
+        cy += chH + gap;
+      });
+      const rx0 = b.x + colW + 30, rodY = b.y + b.h * 0.36, hz = rodY + 10;
+      const [rn] = E.dims(ROD), rw = rn * Math.min(1, (E.W - rx0 + 40) / 1307);
+      const band = `<div class="vr-band" data-in="wipe-r" data-d=".1" style="left:${R1(rx0 - 40)}px;width:${R1(E.W - rx0 + 40)}px;top:${R1(rodY - 50)}px;height:100px"></div>`;
+      const rod = E.img(ROD, { cx: (rx0 + E.W) / 2, cy: rodY, w: rw, cls: 'vr-rod', style: `transform:rotate(${ROD_DEG}deg)`, attrs: 'data-in="wipe-r" data-d=".12" data-dur=".6"' }).html;
+      const R = reel(E, { cx: b.r - 150, bottom: b.b + 4, h: b.b - rodY + 40 });
+      return { html: '<div class="full vr-bg2"></div>' + water(E, 'vr-wtr-hero', hz, { op: 0.9 }) + `<div class="full" style="background:linear-gradient(90deg,rgba(7,20,38,.9) 0%,rgba(7,20,38,.75) 40%,rgba(7,20,38,0) 55%)"></div>` + band + rod + R.html + txt };
+    }
     const hs = sq ? 82 : 92, ks = 24;
     let y = b.y + 2, txt = '';
     txt += T(E, { cls: 'vr-k', x: b.x, y, w: b.w, size: ks, text: 'Shimano Rod Test Center', inAttr: 'data-in="left"' });
@@ -304,6 +331,23 @@ export const scenes = {
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = '<div class="full vr-bg"></div>';
+    if (E.kind === 'wide') {
+      // 16:9: prizes + logo / URL lockup left, six spoons (six brands) as a 3 × 2 shelf right
+      const colW = 560;
+      html += T(E, { cls: 'vr-k', x: b.x, y: b.y + 4, w: colW, size: 19, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });
+      html += H(E, { x: b.x, y: b.y + 34, w: colW, size: 84, text: 'Věnuje ceny', slabbed: true, inAttr: 'data-in="slam" data-d=".04"' });
+      html += H(E, { x: b.x, y: b.y + 34 + 84 * 1.12, w: colW, size: 42, text: 'pro závodníky MČR', inAttr: 'data-in="up" data-d=".12"' });
+      const lw = logoW(E), ly = b.b - lw.h - 2;
+      html += vrLogo(E, { x: b.x, y: ly, attrs: 'data-in="scale" data-d=".2"' }).html;
+      html += H(E, { x: b.x + lw.w + 30, y: ly + (lw.h - 54 * 1.07) / 2, w: colW - lw.w - 30, size: 54, text: 'velka-ryba.cz', style: 'text-transform:none', inAttr: 'data-in="up" data-d=".26"' });
+      const SH = ['illexP', 'cardiffO', 'lj', 'westin', 'daiwaG', 'vanpla'], gx = b.x + colW + 40, cw = (b.r - gx) / 3, rh = b.h / 2;
+      html += glow((gx + b.r) / 2, b.y + b.h / 2, (b.r - gx) * 0.6, 'rgba(127,176,230,.5)', 0.35);
+      SH.forEach((k, i) => {
+        const c = i % 3, r = Math.floor(i / 3);
+        html += lureImg(E, k, { cx: gx + cw * (c + 0.5), cy: b.y + rh * (r + 0.5), bw: cw * 1.3, bh: rh * 0.92, attrs: `data-in="down" data-dist="50" data-d="${(0.12 + i * 0.05).toFixed(2)}"` });
+      });
+      return { html };
+    }
     const ks = 24, hs = sq ? 112 : 126, ss = sq ? 58 : 64;
     let y = b.y + 2;
     html += T(E, { cls: 'vr-k', x: b.x, y, w: b.w, size: ks, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });

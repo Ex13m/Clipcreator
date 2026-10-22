@@ -7,7 +7,8 @@ Sada bannerů pro každého partnera MČR (FB + Instagram) ve **vlastním svět�
 `mcr-2026-sponzori/` (barvy, písma, výřezy produktů, efekty). Storytelling + produkty + značky.
 
 ## Formáty na sponzora
-- Statika PNG: 1080×1080 (1:1), 1080×1350 (4:5), 1200×628 (1,91:1 link ad), 1080×1920 (9:16 story; safe zóny Story/Reels: nahoře 250, dole 380 px).
+- Statika PNG: 1080×1080 (1:1), 1080×1350 (4:5), 1200×628 (1,91:1 link ad), 1080×1920 (9:16 story; safe zóny Story/Reels: nahoře 250, dole 380 px), 1920×1080 (16:9, operátor 22. 10.).
+- Animace MP4 16:9 (1920×1080, 10 s, 60 fps, smyčka) — operátor 22. 10. „сделай баннеры 16:9 тоже“.
 - Animace MP4: 4:5 a 1:1, 10 s, 60 fps, bezešvá smyčka (poster na 1. i posledním snímku), H.264, bez zvuku (FB autoplay je ztlumený).
 - Karusel: 4 karty 1080×1080 — 1 kdo jsou → 2 sortiment / značky → 3 hero produkt → 4 role na MČR / cena + URL + akce.
 

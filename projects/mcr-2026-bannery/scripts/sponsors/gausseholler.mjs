@@ -31,6 +31,14 @@ export const anim = {
     { scene: 'mcr', d: 1.9 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): the same story, every scene has a landscape layout (text column left, product right)
+  wide: [
+    { scene: 'poster', d: 2.2 },
+    { scene: 'range', d: 2.1 },
+    { scene: 'hero', d: 2.0 },
+    { scene: 'mcr', d: 1.9 },
+    { scene: 'poster', d: 1.8 },
+  ],
 };
 
 const AD = 'film:assets_prep/gausseholler/ads/';
@@ -108,6 +116,26 @@ const SPEC = [['8', 'karbonových tubusů'], ['Ø 32 × 200', 'mm'], ['Série 5 
 const T = (E, { cls, x, y, w, size, text, html, align = 'left', fit = 0, lines = 0, main = false, inAttr = '', style = '', id = '' }) =>
   `<div ${id ? `id="${id}" ` : ''}class="t ${cls}${main ? ' main' : ''}" ${inAttr} ${fit ? `data-fit="${fit}"` : ''} ${lines ? `data-lines="${lines}"` : ''} style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;font-size:${size}px;text-align:${align};${lines ? 'white-space:normal;' : 'overflow:hidden;'}${style}">${html ?? E.t(text)}</div>`;
 
+// 16:9 assortment: headline column left, the four lines as a 2 × 2 tile grid right (Revolut 8 tile cycles its colours)
+function rangeWide(E) {
+  const b = E.body;
+  let html = studio(E, { cone: 0.6, cx: E.W * 0.7 });
+  const colW = 380, y0 = b.y + Math.max(0, (b.h - 250) / 2);
+  html += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 20, fit: 14, text: 'Sortiment Custom Lab', inAttr: 'data-in="left"' });
+  html += T(E, { cls: 'gh-h', x: b.x - 3, y: y0 + 36, w: colW, size: 62, lines: 3, html: `${E.t('Stojany,')}<br>${E.t('díly')}<br>${E.t('i zakázky')}`, style: 'line-height:1.05', inAttr: 'data-in="up" data-d=".06"', main: true });
+  const gx = b.x + colW + 30, gap = 16, tw = (b.r - gx - gap) / 2, th = (b.h - gap) / 2, lab = 24;
+  const tiles = [{ label: 'Revolut 8', cyc: true }, { label: 'Snap 8', src: P.snap }, { label: 'Hliníkové díly', src: P.aluO }, { label: 'Karbonové tubusy', src: P.tubes }];
+  tiles.forEach((tl, i) => {
+    const x = gx + (i % 2) * (tw + gap), y = b.y + Math.floor(i / 2) * (th + gap);
+    const ih = th - lab * 1.9 - 14, iw = tw - 40;
+    const inner = tl.cyc
+      ? `<div class="abs" data-cycle="0.26" data-d="0.15" data-rest="1" style="left:0;top:0;width:${R1(tw)}px;height:${R1(th)}px">${COLS.map((c) => `<div class="cy">${E.img(c, { cx: tw / 2, cy: 10 + ih / 2, h: ih, w: iw }).html}</div>`).join('')}</div>`
+      : E.img(tl.src, { cx: tw / 2, cy: 10 + ih / 2, h: ih, w: iw }).html;
+    html += `<div class="gh-tile" data-in="up" data-dist="34" data-d="${(0.12 + i * 0.07).toFixed(2)}" style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(tw)}px;height:${R1(th)}px">${inner}<div class="gh-tl t" style="top:${R1(th - lab * 1.6)}px;font-size:${lab}px;left:0;width:${R1(tw)}px">${E.t(tl.label)}</div></div>`;
+  });
+  return { html };
+}
+
 // ---------- scenes ----------
 // every scene: background → products → text (text always on top); products are sized to the space the text leaves free
 export const scenes = {
@@ -176,6 +204,7 @@ export const scenes = {
   // 2 — RANGE: own lines (stands, parts, tubes, made to order); Revolut 8 tile cycles its anodised colours (no count on screen)
   range(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return rangeWide(E);
     let html = studio(E, { cone: 0.6 });
     const hs = sq ? 74 : 82;
     html += T(E, { cls: 'gh-k', x: b.x, y: b.y + 4, w: b.w, size: 28, text: 'Sortiment Custom Lab', inAttr: 'data-in="left"' });
@@ -202,6 +231,17 @@ export const scenes = {
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
     let txt = '';
+    if (E.kind === 'wide') {
+      // 16:9: spec column left, the front view of the stand on its plinth right
+      const colW = 560, y0 = b.y + Math.max(0, (b.h - 330) / 2);
+      txt += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 20, fit: 14, text: 'Revolut 8 · Black Standard Edition', inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'gh-h', x: b.x - 3, y: y0 + 36, w: colW, size: 88, fit: 50, html: 'Karbon <em>+</em> hliník', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      SPEC.forEach(([a, c], i) => {
+        txt += `<div class="gh-chipx t" data-in="left" data-d="${(0.18 + i * 0.08).toFixed(2)}" style="left:${R1(b.x)}px;top:${R1(y0 + 150 + i * (24 * 1.9 + 12))}px;height:${R1(24 * 1.9)}px;font-size:24px"><b>${E.t(a)}</b>${E.t(c)}</div>`;
+      });
+      const st = stand(E, { k: 'front', right: b.r + 10, baseY: b.b, top: b.y + 2, h: 40, maxW: 520, inAttr: 'data-in="rise" data-d=".02"' });
+      return { html: studio(E, { cx: st.cx, floorY: st.plinthTop + 20 }) + st.html + txt };
+    }
     const hs = sq ? 108 : 120;
     txt += T(E, { cls: 'gh-k', x: b.x, y: b.y + 4, w: b.w, size: 28, text: 'Revolut 8 · Black Standard Edition', inAttr: 'data-in="left"' });
     txt += T(E, { cls: 'gh-h', x: b.x - 4, y: b.y + 46, w: b.w, size: hs, fit: 60, html: 'Karbon <em>+</em> hliník', inAttr: 'data-in="slam" data-d=".06"', main: true });
@@ -219,6 +259,17 @@ export const scenes = {
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
     let txt = '';
+    if (E.kind === 'wide') {
+      // 16:9: the prize line left, the stand on its plinth right
+      const colW = 600, y0 = b.y + Math.max(0, (b.h - 300) / 2) - 10;
+      txt += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 20, fit: 14, text: 'Mistrovství ČR v Trout Area 2026', style: `color:${C.orange}`, inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'gh-h', x: b.x - 4, y: y0 + 36, w: colW, size: 104, fit: 60, text: 'Hlavní cena', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      txt += T(E, { cls: 'gh-s', x: b.x, y: y0 + 150, w: colW, size: 44, fit: 30, text: 'Revolut 8 pro vítěze mistrovství', inAttr: 'data-in="up" data-d=".2"', main: true });
+      const rows = [['Black', 'Standard Edition'], ['Série 5 ks', 'číslováno']];
+      txt += specChips(E, { x: b.x, y: y0 + 228, size: 22, rows, d: 0.3 }).html;
+      const st = stand(E, { right: b.r - 6, baseY: b.b, top: b.y + 4, h: 40, maxW: 400, label: 'Revolut 8', labelSize: 15 });
+      return { html: studio(E, { floorY: st.plinthTop + 20, cone: 1.3, cx: st.cx }) + st.html + txt };
+    }
     const head = sq ? 136 : 156, sub = sq ? 48 : 56;
     txt += T(E, { cls: 'gh-k', x: b.x, y: b.y + 4, w: b.w, size: 28, text: 'Mistrovství ČR v Trout Area 2026', style: `color:${C.orange}`, inAttr: 'data-in="left"' });
     txt += T(E, { cls: 'gh-h', x: b.x - 5, y: b.y + 46, w: b.w, size: head, fit: 70, text: 'Hlavní cena', inAttr: 'data-in="slam" data-d=".06"', main: true });

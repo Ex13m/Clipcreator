@@ -37,6 +37,14 @@ export const anim = {
     { scene: 'mcr', d: 1.8 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): same story with landscape layouts
+  wide: [
+    { scene: 'poster', d: 2.3 },
+    { scene: 'who', d: 1.9 },
+    { scene: 'hero', d: 2.2 },
+    { scene: 'mcr', d: 1.8 },
+    { scene: 'poster', d: 1.8 },
+  ],
 };
 
 const PREP = 'film:assets_prep/';
@@ -169,11 +177,112 @@ const LOGO_TRIM = [0, 0, 2000, 2000];
 const credit = (E, { x, y, w = 360, text = 'Podklad © ČÚZK', size = 15, align = 'right' }) =>
   `<div class="vn-ai t" style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;text-align:${align};font-size:${size}px;white-space:nowrap">${E.t(text)}</div>`;
 
+// ---------- 16:9 (kind 'wide', 1200×675 CSS px rendered at 1.6×) ----------
+// poster: the whole 16:9 drone frame (1920×1080) at ≤ 1.25× output px (sharper than the 1.91 crop blown up 1.6×),
+// the pond right of a two-line headline column
+function poster16(E) {
+  const b = E.body, IW = 1500, IH = IW * 9 / 16, ix = -10, iy = -150;   // pond centre ≈ (870, 640) of the frame → x ≈ 670, y ≈ 350
+  const k = IW / 1920, pondR = ix + 1100 * k, pondY = iy + 560 * k;
+  let html = `<div class="full" data-kb="1,1.04" style="transform-origin:58% 52%"><img src="${E.src(P.drone16)}" alt="" style="position:absolute;left:${ix}px;top:${R1(iy)}px;width:${IW}px;height:${R1(IH)}px"></div>`;
+  html += `<div class="full" style="background:${C.turq};mix-blend-mode:soft-light;opacity:.25"></div>`;
+  html += `<div class="full" style="background:linear-gradient(90deg,rgba(14,20,30,.93) 0%,rgba(14,20,30,.82) 30%,rgba(14,20,30,.25) 46%,rgba(14,20,30,0) 58%),linear-gradient(180deg,rgba(14,20,30,.6),rgba(14,20,30,0) 30%,rgba(14,20,30,0) 70%,rgba(14,20,30,.65))"></div>`;
+  const colW = 440;
+  html += T(E, { cls: 'vn-k', x: b.x, y: b.y + 14, w: colW, size: 21, fit: 16, text: 'Pstruží líheň od roku 1934', inAttr: 'data-in="left" data-d=".08"' });
+  html += H2(E, { cls: 'vn-h vn-shadow', x: b.x - 3, y: b.y + 50, w: colW, size: 84, fit: 56, a: 'Líheň', b2: 'Liběchov', d: 0.12 });
+  html += T(E, { cls: 'vn-s vn-shadow', x: b.x, y: b.y + 236, w: colW, size: 27, fit: 20, text: 'U pramene Boží Voda', inAttr: 'data-in="up" data-d=".25"' });
+  html += pill(E, { x: pondR - 280, y: pondY + 40, size: 22, text: 'Malý Sporťáček', attrs: 'data-in="scale" data-d=".35"' });   // on the water of the pond
+  const L = E.logo(P.logo, { x: 0, y: 0, maxH: 150, trim: LOGO_TRIM });
+  html += E.logo(P.logo, { x: b.x, y: b.b - L.h, maxH: 150, trim: LOGO_TRIM, attrs: 'data-in="fade" data-d=".4"' }).html;
+  html += credit(E, { x: b.r - 360, y: b.b - 18, size: 13 });
+  return { html };
+}
+// who: Líheň Liběchov + heritage left, „1934“ in the middle, the AI leap card right
+function whoWide(E) {
+  const b = E.body;
+  let html = deepBg('70% 40%');
+  html += etch(E, { x: b.x - 80, y: b.y, h: b.h * 1.15, color: '#ffffff', op: 0.07 });
+  const [nw, nh] = E.dims(P.leap), ph = Math.min(b.h - 4, nh), pw = ph * nw / nh, px0 = b.r - pw, py0 = b.b - ph;
+  html += `<div class="vn-card" data-in="rise" data-d=".05" style="left:${R1(px0)}px;top:${R1(py0)}px;width:${R1(pw)}px;height:${R1(ph)}px"><img src="${E.src(P.leap)}" alt="" style="position:absolute;inset:0;width:100%;height:100%">
+      <div class="full" style="background:linear-gradient(180deg,rgba(0,0,0,0) 80%,rgba(0,0,0,.45))"></div>
+      <div class="vn-ai t" style="right:12px;bottom:10px;font-size:13px">AI ilustrace</div></div>`;
+  const colW = 420, y0 = b.y + 24;
+  html += T(E, { cls: 'vn-k', x: b.x, y: y0, w: colW, size: 21, text: 'Mistrovství hostí', style: `color:${C.aqua}`, inAttr: 'data-in="left"' });
+  html += H2(E, { x: b.x - 3, y: y0 + 36, w: colW, size: 72, fit: 48, a: 'Líheň', b2: 'Liběchov' });
+  html += T(E, { cls: 'vn-p', x: b.x, y: y0 + 36 + 72 * 0.98 * 2 + 30, w: colW, size: 26, lines: 3, text: 'Založil Karel Stutzig. Přes 90 let tradice u pramene Boží Voda.', style: 'font-style:italic', inAttr: 'data-in="up" data-d=".3"' });
+  const mx = b.x + colW + 40, mw = px0 - 30 - mx;
+  html += T(E, { cls: 'vn-s', x: mx, y: y0 + 50, w: mw, size: 24, fit: 18, text: 'Pstruží líheň od roku', style: 'color:#fff', inAttr: 'data-in="up" data-d=".14"' });
+  // „up“, not „slam“: the 1.12 slam scale pushed the year into the kicker line in the MP4 (frame 2.5 s)
+  html += T(E, { cls: 'vn-n vn-shadow', x: mx - 6, y: y0 + 92, w: mw + 6, size: 150, fit: 90, text: '1934', inAttr: 'data-in="up" data-dist="40" data-d=".18"', main: true });
+  html += `<div class="vn-rule" data-in="wipe-l" data-d=".3" style="left:${R1(mx)}px;top:${R1(y0 + 252)}px;width:${R1(Math.min(240, mw))}px"></div>`;
+  return { html, taTone: 'dark' };
+}
+// hero: the race pond plan right, „40 závodních míst“ + facts left (numbered scheme → „čísla míst orientační“)
+function heroWide(E) {
+  const b = E.body;
+  let html = deepBg('70% 55%') + caustics(E, { op: 0.07, size: 520 });
+  const top = b.y + 40, bot = b.b - 26;
+  const mh = PL_EXT.y1 - PL_EXT.y0, mw = PL_EXT.x1 - PL_EXT.x0;
+  const s = Math.min((bot - top) / mh, 470 / mw), r = Math.max(9, Math.round(s * 1.15));
+  const cx = b.r - 20 - PL_EXT.x1 * s, cy = top - PL_EXT.y0 * s;
+  const plan = pondPlan(E, { W: E.W, H: E.H, cx, cy, s, r, fill: 0.1, pinAnim: true });
+  html += `<div class="full" data-in="scale" data-d=".04" style="transform-origin:${R1(cx)}px ${R1(cy)}px">${plan.html}</div>`;
+  const len50 = 50 * s, x50 = plan.pins.x0 - 30, y50 = cy - len50 / 2;
+  const len40 = 40 * s, y40 = Math.min(plan.pins.y0, plan.bbox.y0) - 22, x40 = cx - len40 / 2, dl = 20;
+  html += `<div data-in="fade" data-d=".3">
+      <div class="vn-dim" style="left:${R1(x50 - 1.5)}px;top:${R1(y50)}px;width:3px;height:${R1(len50)}px"><i class="vn-dim" style="left:-8px;top:-1.5px;width:19px;height:3px"></i><i class="vn-dim" style="left:-8px;bottom:-1.5px;width:19px;height:3px"></i></div>
+      <div class="vn-dl t" style="left:${R1(x50 - 40)}px;top:${R1(cy - dl * 0.7)}px;width:80px;font-size:${dl}px;line-height:1.4;background:#172031;transform:rotate(-90deg)">50 m</div>
+      <div class="vn-dim" style="left:${R1(x40)}px;top:${R1(y40 - 1.5)}px;width:${R1(len40)}px;height:3px"><i class="vn-dim" style="left:-1.5px;top:-8px;width:3px;height:19px"></i><i class="vn-dim" style="right:-1.5px;top:-8px;width:3px;height:19px"></i></div>
+      <div class="vn-dl t" style="left:${R1(cx - 40)}px;top:${R1(y40 - dl * 0.7)}px;width:80px;font-size:${dl}px;line-height:1.4;background:#172031">40 m</div></div>`;
+  html += `<div class="vn-ai t" style="left:${R1(Math.max(plan.pins.x1, plan.bbox.x1) - 520)}px;width:520px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 6)}px;font-size:13px;opacity:.8;white-space:nowrap">Schéma · čísla míst orientační · podklad © ČÚZK</div>`;
+  const colW = Math.min(560, x50 - 60 - b.x);
+  let y = b.y + 8;
+  html += T(E, { cls: 'vn-k', x: b.x, y, w: colW, size: 21, text: 'Závodí se na rybníku', style: `color:${C.red}`, inAttr: 'data-in="left"' });
+  y += 34;
+  html += T(E, { cls: 'vn-h', x: b.x - 3, y, w: colW, size: 70, fit: 44, text: 'Malý Sporťáček', inAttr: 'data-in="slam" data-d=".06"', main: true });
+  y += 70 + 22;
+  html += T(E, { cls: 'vn-n', x: b.x - 4, y, w: 170, size: 124, fit: 80, text: '40', style: 'color:#fff', inAttr: 'data-in="slam" data-d=".12"', main: true });
+  html += `<div class="vn-rule" data-in="wipe-l" data-d=".2" style="left:${R1(b.x + 170)}px;top:${R1(y + 46)}px;width:70px;background:${C.red}"></div>`;
+  html += T(E, { cls: 'vn-s', x: b.x + 170, y: y + 64, w: colW - 170, size: 28, fit: 20, text: 'závodních míst', style: 'color:#fff', inAttr: 'data-in="up" data-d=".2"' });
+  y += 124 + 26;
+  const facts = [['50 × 40 m', 'rozměr', 0.42], ['0,2 ha', 'plocha', 0.29], ['1,5 m', 'hloubka', 0.29]];
+  let fx = b.x;
+  facts.forEach(([n, l, f], i) => {
+    const fw = colW * f;
+    html += T(E, { cls: 'vn-n', x: fx, y, w: fw - 16, size: 40, fit: 26, text: n, inAttr: `data-in="left" data-d="${(0.24 + i * 0.07).toFixed(2)}"`, main: true });
+    html += T(E, { cls: 'vn-k', x: fx, y: y + 44, w: fw - 16, size: 17, text: l, style: `color:${C.aqua};letter-spacing:.2em`, inAttr: `data-in="left" data-d="${(0.27 + i * 0.07).toFixed(2)}"` });
+    fx += fw;
+  });
+  return { html, taTone: 'dark' };
+}
+// mcr: the date big left, venue + pond + invitation under it, the venue badge right on the water
+function mcrWide(E) {
+  const b = E.body;
+  let html = waterBg();
+  html += caustics(E, { op: 0.26, size: 560, mask: 'linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 40%,transparent 75%)' });
+  html += shafts();
+  html += etch(E, { x: b.r - 520, y: b.y - 10, h: b.h + 40, color: C.aqua, op: 0.16, attrs: 'data-float="8,5"' });
+  const L = E.logo(P.logo, { x: 0, y: 0, maxH: 230, trim: LOGO_TRIM });
+  html += E.logo(P.logo, { x: b.r - L.w - 20, y: b.y + (b.h - L.h) / 2, maxH: 230, trim: LOGO_TRIM, attrs: 'data-in="fade" data-d=".3"' }).html;
+  const colW = b.w - L.w - 70;
+  let y = b.y + 6;
+  html += T(E, { cls: 'vn-k', x: b.x, y, w: colW, size: 21, text: 'Mistrovství ČR v Trout Area 2026', style: 'color:#fff', inAttr: 'data-in="left"' });
+  y += 34;
+  html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 6, y, w: colW, size: 124, fit: 80, html: `${E.t('24.–25. 10.')} <span style="color:#fff;font-size:.56em">2026</span>`, inAttr: 'data-in="slam" data-d=".08"', main: true });
+  y += 124 + 24;
+  html += T(E, { cls: 'vn-h vn-shadow', x: b.x - 3, y, w: colW, size: 62, fit: 40, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".22"', main: true });
+  y += 62 + 14;
+  html += T(E, { cls: 'vn-s', x: b.x, y, w: colW, size: 28, text: 'rybník Malý Sporťáček', style: `color:${C.aqua}`, inAttr: 'data-in="up" data-d=".28"' });
+  y += 28 * 1.1 + 26;
+  html += `<div class="t vn-k" data-in="scale" data-d=".36" style="left:${b.x}px;top:${R1(y)}px;height:46px;line-height:46px;padding:0 22px;border-radius:999px;background:${C.gold};color:${C.navy};font-size:22px;letter-spacing:.08em">${E.t('Přijďte se podívat')}</div>`;
+  return { html, taTone: 'scrim' };
+}
+
 // ---------- scenes ----------
 export const scenes = {
   // POSTER (1:1 / 4:5 / 1.91:1 / 9:16 + loop start/end): the real place from the drone, the race pond outlined on it
   poster(E) {
     const b = E.body, k = E.kind;
+    if (k === 'wide' && E.f.key === '16x9') return poster16(E);
     if (k === 'wide') {
       // 16:9 drone frame at native size, pond moved right of the text column
       let html = `<div class="full" data-kb="1,1.04" style="transform-origin:76% 55%"><img src="${E.src(P.drone16)}" alt="" style="position:absolute;left:-20px;top:-300px;width:1920px;height:1080px"></div>`;
@@ -215,6 +324,7 @@ export const scenes = {
   // 1 — WHO: heritage — pstruží líheň od roku 1934, Karel Stutzig, pramen Boží Voda; the AI rainbow trout leap as the picture
   who(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return whoWide(E);
     let html = deepBg('70% 40%');
     html += etch(E, { x: b.x - 120, y: b.y + 40, h: b.h * 1.1, color: '#ffffff', op: 0.07 });
     // the leap (AI) in a framed card, bottom-right, native or smaller
@@ -277,6 +387,7 @@ export const scenes = {
   // 3 — HERO: the race pond plan — Malý Sporťáček, 40 závodních míst, 50 × 40 m, 0,2 ha, hloubka 1,5 m (lihenlibechov.cz)
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return heroWide(E);
     let html = deepBg('68% 55%');
     html += caustics(E, { op: 0.07, size: 560 });
     const ks = sq ? 26 : 30, hs = sq ? 96 : 104;
@@ -325,6 +436,7 @@ export const scenes = {
   // 4 — MČR: the venue of the championship + date + pond + invitation (role chip „Místo konání MČR 2026“ by the engine)
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') return mcrWide(E);
     let html = waterBg();
     html += caustics(E, { op: 0.26, size: 620, mask: 'linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 40%,transparent 75%)' });
     html += shafts();

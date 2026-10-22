@@ -25,6 +25,13 @@ export const anim = {
     { scene: 'mcr', d: 1.9 },
     { scene: 'poster', d: 1.8 },
   ],
+  // 16:9 MP4 (kind 'wide'): the same look composed in landscape — poster → ROONEY hero → prizes on the red sun → poster
+  wide: [
+    { scene: 'poster', d: 2.6 },
+    { scene: 'hero', d: 2.4 },
+    { scene: 'mcr', d: 2.4 },
+    { scene: 'poster', d: 2.6 },
+  ],
 };
 export const fonts = {};   // Anton + Roboto Condensed are in the engine registry
 
@@ -264,6 +271,20 @@ export const scenes = {
   // 3 — HERO: Nories ROONEY 2,8 g 101 (gold / fluo) — 1st place by popularity in the shop's spoons
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') {
+      // 16:9: name + chips left, the spoon in front of the sun right
+      const sx = b.x + b.w * 0.75, sy = b.y + b.h * 0.55;
+      let html = world(E, { x: sx, y: sy, r: 210, rays: 1, horizon: false });
+      html += prod(E, P.rooney, { cx: sx + 6, cy: b.y + b.h / 2 + 6, h: b.h * 0.98, w: b.w * 0.42, inAttr: 'data-in="rise" data-d=".02"', rot: 12 }).html;
+      const y0 = b.y + Math.max(0, (b.h - 380) / 2);
+      let txt = T(E, { cls: 'ts-k', x: b.x, y: y0, w: 520, size: 21, text: 'Plandavka Nories', inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'ts-h ml', x: b.x - 2, y: y0 + 32, w: 520, size: 88, lines: 2, html: E.t('Rooney') + '<br><em>2,8&nbsp;<span style="text-transform:none">g</span></em>', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      const cy0 = y0 + 32 + 88 * 1.08 * 2 + 16, cs = 21, chH = cs * 1.9;
+      [['101', 'zlatá / fluo'], ['1,5 · 1,8 · 2,2 · 2,8 g', ''], ['č. 1', 'v oblíbenosti e-shopu']].forEach(([a, c], i) => {
+        txt += `<div class="ts-chipx t" data-in="left" data-d="${(0.18 + i * 0.08).toFixed(2)}" style="left:${R1(b.x)}px;top:${R1(cy0 + i * (chH + 10))}px;height:${R1(chH)}px;font-size:${cs}px"><b>${E.t(a)}</b>${c ? E.t(c) : ''}</div>`;
+      });
+      return { html: html + txt };
+    }
     const sx = b.x + b.w * 0.72, sy = b.y + b.h * 0.56, R = sq ? 250 : 290;
     let html = world(E, { x: sx, y: sy, r: R, rays: 1, horizon: false });
     const ph = b.h * (sq ? 1.0 : 0.98);
@@ -287,6 +308,25 @@ export const scenes = {
   // 4 — MČR: the sun floods the lower frame red; prizes + logo + URL; top stays black (TA logo on dark)
   mcr(E) {
     const b = E.body, sq = E.kind === 'square';
+    if (E.kind === 'wide') {
+      // 16:9: headline on black, the risen sun floods the lower frame red; logo + URL left, wobbler + spoons right
+      let txt = T(E, { cls: 'ts-k', x: b.x, y: b.y + 4, w: b.w, size: 21, text: 'Mistrovství ČR v Trout Area 2026', inAttr: 'data-in="left"' });
+      txt += T(E, { cls: 'ts-h', x: b.x - 3, y: b.y + 34, w: b.w * 0.6, size: 96, fit: 60, text: 'Věnuje ceny', inAttr: 'data-in="slam" data-d=".06"', main: true });
+      const top = b.y + 34 + 96 + 30, RR = E.W * 1.6;
+      let bg = '<div class="full ts-bg"></div>';
+      bg += `<div class="ts-rays" data-spin="20" style="left:${R1(E.W / 2 - 1400)}px;top:${R1(top + RR - 1400)}px;width:2800px;height:2800px;opacity:.9"></div>`;
+      bg += `<div class="ts-sun ts-redfield" style="left:${R1(E.W / 2 - RR)}px;top:${R1(top)}px;width:${R1(2 * RR)}px;height:${R1(2 * RR)}px"></div>`;
+      const py = b.b - 120, sh = '0 18px 20px rgba(90,0,4,.6)';
+      let pr = spoon(E, { k: 'forte32a', cx: b.r - 300, cy: py - 120, body: 190, angle: -22, shadow: sh, attrs: 'data-in="rise" data-d=".12"' });
+      pr += spoon(E, { k: 'sk20a', cx: b.r - 120, cy: py - 135, body: 200, angle: 24, shadow: sh, attrs: 'data-in="rise" data-d=".16"' });
+      pr += prod(E, P.pupa, { cx: b.r - 220, cy: py + 30, w: 380, id: 'pupa', inAttr: 'data-in="left" data-d=".1"', shadow: '0 20px 22px rgba(90,0,4,.65)' }).html;
+      const L = tsLogo(E, { x: b.x, y: top + 22, maxH: 90, attrs: 'data-in="scale" data-d=".15"' });
+      txt += L.html;
+      const L2 = tsLogo(E, { x: 0, y: 0, maxH: 90 });
+      txt += T(E, { cls: 'ts-h', x: b.x + L2.w + 30, y: top + 22 + (L2.h - 64 * 1.1) / 2, w: 420, size: 64, fit: 40, text: 'troutshop.eu', style: 'text-transform:none;text-shadow:0 4px 18px rgba(90,0,4,.5)', inAttr: 'data-in="up" data-d=".2"', main: true });
+      txt += T(E, { cls: 'ts-p', x: b.x, y: top + 22 + L2.h + 22, w: 560, size: 28, fit: 20, text: 'Generální partner Trout Area Slovakia', style: 'color:#fff;font-weight:700', inAttr: 'data-in="up" data-d=".26"' });
+      return { html: bg + pr + txt, taTone: 'scrim' };
+    }
     const head = sq ? 140 : 160;
     let y = b.y + 4;
     let txt = '';
