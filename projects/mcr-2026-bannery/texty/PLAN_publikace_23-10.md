@@ -1,6 +1,6 @@
 # Plán publikace – Mistrovství ČR v Trout Area 2026
 
-**Datum:** čtvrtek 23. 10. 2026 · **Stránka:** Trout Area Czech Republic (facebook.com/troutareacz) · **Čas:** SELČ (Praha)
+**Datum:** pátek 23. 10. 2026 · **Stránka:** Trout Area Czech Republic (facebook.com/troutareacz) · **Čas:** SELČ (Praha)
 
 Pořadí: Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → Troutshop → Velká ryba → FT Fishing → ČRS → večer celé video.
 
@@ -48,8 +48,6 @@ lihenlibechov.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #LihenLibechov #pstruh
-
-Označit: FB @Sportovní rybaření Boží Voda - Liběchov · IG [doplnit tag]
 ```
 
 ### 10:30 – Líheň Liběchov · Reel
@@ -89,8 +87,6 @@ gausseholler.com
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #GausseHoller #Revolut8
-
-Označit: FB [doplnit tag – stránka Gausse Holler] · IG [doplnit tag]
 ```
 
 ### 11:30 – Gausse Holler Custom Lab · Reel
@@ -128,8 +124,6 @@ activefishing.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Activefishing #plandavky
-
-Označit: FB @activefishing.cz · IG @activefishingshop
 ```
 
 ### 12:30 – Activefishing.cz · Reel
@@ -167,8 +161,6 @@ bosset.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Bosset #Keitech
-
-Označit: FB [doplnit tag] · IG [doplnit tag]
 ```
 
 ### 13:30 – Bosset.cz · Reel
@@ -206,8 +198,6 @@ jigovky.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Jigovky #barbless
-
-Označit: FB @jigovky.cz · IG @jigovky.cz
 ```
 
 ### 14:30 – Jigovky.cz · Reel
@@ -246,8 +236,6 @@ troutshop.eu
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Troutshop #Nories
-
-Označit: FB [doplnit tag] · IG [doplnit tag]
 ```
 
 ### 15:30 – Troutshop.eu · Reel
@@ -285,8 +273,6 @@ velka-ryba.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #VelkaRyba #privlac
-
-Označit: FB [doplnit tag] · IG [doplnit tag]
 ```
 
 ### 16:30 – Velká ryba · Reel
@@ -314,7 +300,7 @@ Soubor: `ftfishing_static_16x9.png`
 ```
 FT Fishing – vše pro přívlač
 
-Fishing Trade CZ provozuje e-shop ftfishing.cz od roku 2016 a showroom s výdejnou v Praze 9. Sortiment je čistě přívlačový a stojí na třech značkách: pruty a navijáky Favorite, gumové nástrahy Crazy Fish a polský Spinmad – rotující ocásky, cikády i plandavky Target Spoon pro trout area. V nabídce jsou také háčky Vanfook. Spinmad do Čech přivezl sám majitel František Čáha. Pruty v nabídce jsou podle obchodu i pro trout area a závodníky.
+Fishing Trade CZ provozuje e-shop ftfishing.cz od roku 2016 a showroom s výdejnou v Praze 9. Sortiment je čistě přívlačový a stojí na třech značkách: pruty a navijáky Favorite, gumové nástrahy Crazy Fish a polský Spinmad – rotující ocásky, cikády i plandavky Target Spoon pro trout area. V nabídce jsou také háčky Vanfook.
 
 FT Fishing věnuje ceny pro závodníky MČR 2026. Děkujeme!
 
@@ -323,8 +309,6 @@ ftfishing.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #FTFishing #Spinmad
-
-Označit: FB [doplnit tag] (stránka facebook.com/privlac – název ověřit) · IG [doplnit tag]
 ```
 
 ### 17:30 – FT Fishing · Reel
@@ -337,8 +321,6 @@ Vše pro přívlač.
 
 E-shop od roku 2016 · showroom Praha 9
 Favorite · Crazy Fish · Spinmad
-a také háčky Vanfook
-Spinmad do Čech přivezl majitel František Čáha
 
 Věnuje ceny pro závodníky MČR 2026. Děkujeme!
 ftfishing.cz
@@ -362,8 +344,6 @@ rybsvaz.cz
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #CeskyRybarskySvaz #rybarstvi
-
-Označit: FB [doplnit tag] · IG [doplnit tag]
 ```
 
 ### 18:30 – Český rybářský svaz · Reel
@@ -389,23 +369,21 @@ Soubor: `MCR2026_sponzori_v9_60fps_fb.mp4`
 ```
 Partneři Mistrovství ČR v Trout Area 2026 🏆
 
-Už tuto sobotu a neděli to vypukne: 40 závodníků, 12 kol denně, hard baits. Mistrovství by ale nebylo bez lidí a firem, které za ním stojí. Představujeme partnery letošního MČR:
+Už tuto sobotu a neděli to vypukne: 40 závodníků, dva dny závodů na rybníku Malý Sporťáček. Mistrovství by ale nebylo bez lidí a firem, které za ním stojí. Představujeme partnery letošního MČR:
 
 Místo konání: Líheň Liběchov
 Hlavní cena, partner a informační sponzor: Gausse Holler Custom Lab
 Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Troutshop.eu · Velká ryba · FT Fishing
 Za dlouholetou podporu děkujeme: Český rybářský svaz
 
-Každého partnera vám v dalších příspěvcích představíme zvlášť. Děkujeme, že jste s námi!
+Během dne jsme vám představili každého partnera zvlášť – teď je tu celé video. Děkujeme, že jste s námi!
 
 Přijďte se podívat, diváci jsou vítáni v sobotu i v neděli.
 
 Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #areafishing #pstruh #hardbaits
-
-Označit: všechny stránky partnerů (viz jednotlivé bloky níže).
 ```
 
 ---
-*Poznámka:* Reels lze naplánovat v Meta Business Suite jako „Reel“; přes automatické publikování (Zapier) se vertikální video zveřejní jako běžný video příspěvek.
+*Poznámka:* publikuje se automaticky přes Zapier; vertikální videa vyjdou jako video příspěvky. Označení stránek partnerů (tagy) se automaticky nedoplňují – případně doplnit ručně v komentáři.
