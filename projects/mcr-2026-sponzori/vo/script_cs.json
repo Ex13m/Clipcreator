@@ -136,6 +136,26 @@
    "term": "Zojirushi",
    "respell": "zodžiruši",
    "note": "nové 21. 10. (Bosset v3), ke schválení"
+  },
+  {
+   "term": "FT Fishing",
+   "respell": "ef té fišing",
+   "note": "nové 22. 10.; take 2 zkoušel „ef tý fišing“ (anglické T)"
+  },
+  {
+   "term": "Favorite",
+   "respell": "fejvorit",
+   "note": "nové 22. 10."
+  },
+  {
+   "term": "Crazy Fish",
+   "respell": "krejzy fiš",
+   "note": "nové 22. 10."
+  },
+  {
+   "term": "Spinmad",
+   "respell": "spinmad",
+   "note": "nové 22. 10.; polská značka, čte se jak se píše; alternativa „spinmed“ (take 2/3)"
   }
  ],
  "order": [
@@ -805,6 +825,79 @@
    "notes": [
     "Netvrdit „pod záštitou ČRS“, „MČR pořádá ČRS“ ani „oficiální disciplína ČRS“ (crs.md §1.4).",
     "Chip „Věnuje ceny“ ČRS nenese (crs.md §2)."
+   ]
+  },
+  "ftfishing": {
+   "type": "sponsor",
+   "block_s": 9.15,
+   "vo_limit_words": 14,
+   "vo": {
+    "cs": "FT Fishing – vše pro přívlač. Pruty Favorite, nástrahy Crazy Fish a Spinmad.",
+    "tts": "Ef té fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmad.",
+    "respell": "Ef té fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmad.",
+    "respell_map": {
+     "FT Fishing": "Ef té fišing",
+     "Favorite": "Fejvorit",
+     "Crazy Fish": "Krejzy fiš",
+     "Spinmad": "Spinmad (take 1) / Spinmed (take 2, 3)"
+    },
+    "tts_alt": [
+     "Ef tý fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmed. (take 2)",
+     "Ef té fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmed. (take 3)"
+    ],
+    "words": 12,
+    "spoken_words": 13,
+    "syllables": 24,
+    "est_s": 5.9,
+    "in_s": 0.25,
+    "file": "vo/ftfishing.wav",
+    "status": "22. 10.: 3 takes (eleven_v3, „… “ na začátku i konci); nainstalován take 1 (Ef té + Spinmad), take 2/3 v vo/prev/ftfishing.take2|3.*",
+    "real_s": 6.121,
+    "end_s": 6.371
+   },
+   "onscreen": {
+    "name": "FT Fishing",
+    "oneliner": "Vše pro přívlač",
+    "facts": [
+     "Pruty a navijáky Favorite",
+     "Nástrahy Crazy Fish",
+     "Nástrahy Spinmad"
+    ],
+    "chip": "Věnuje ceny · MČR 2026",
+    "url": "ftfishing.cz"
+   },
+   "sources": [
+    {
+     "claim": "„Vše pro přívlač“ = slogan v logu FT Fishing",
+     "ref": "research/ftfishing.md §1",
+     "url": "https://www.ftfishing.cz/css/local/logo.png"
+    },
+    {
+     "claim": "Pruty Favorite + Crazy Fish (kategorie „Pruty Favorite, Crazy Fish“, og:title „Pruty Favorite a nástrahy Crazy Fish“)",
+     "ref": "research/ftfishing.md §2",
+     "url": "https://www.ftfishing.cz/pruty-favorite-crazy-fish/"
+    },
+    {
+     "claim": "Nástrahy Crazy Fish (vlastní kategorie, 722 položek 22. 10.)",
+     "ref": "research/ftfishing.md §2",
+     "url": "https://www.ftfishing.cz/nastrahy-crazy-fish/"
+    },
+    {
+     "claim": "Nástrahy SPINMAD (vlastní kategorie, 286 položek + 36 Target Spoon)",
+     "ref": "research/ftfishing.md §2",
+     "url": "https://www.ftfishing.cz/nastrahy-spinmad/"
+    },
+    {
+     "claim": "Věnuje ceny MČR 2026 (role sponzora; konkrétní ceny neznámé)",
+     "ref": "operátor 22. 10.",
+     "url": "—"
+    }
+   ],
+   "notes": [
+    "Neříkat „oficiální dovozce/distributor“ – web to výslovně netvrdí (jen článek 2018 o Spinmadu a seznam prodejen „naše zboží“), viz research/ftfishing.md Verification.",
+    "Konkrétní ceny pro MČR neuvádět (neznámé).",
+    "MČR = hard baits: gumy Crazy Fish ukazovat jako značku/sortiment, ne jako „nástrahu na MČR“.",
+    "Pořadí bloku: ve filmu PŘED blokem místa konání (Liběchov) – vkládá jiný agent; 'order' zde neměněn."
    ]
   }
  }

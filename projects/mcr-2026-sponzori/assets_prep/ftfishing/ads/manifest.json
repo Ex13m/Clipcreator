@@ -1,0 +1,137 @@
+[
+ {
+  "file": "assets_prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png",
+  "w": 2400,
+  "h": 921,
+  "role": "hero",
+  "brand": "spinmad",
+  "shadow": true,
+  "opaque_frac": 0.315
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/H2_crazyfish_vibro_fat_4in_09_caramel.png",
+  "w": 2400,
+  "h": 545,
+  "role": "hero",
+  "brand": "crazyfish",
+  "shadow": true,
+  "opaque_frac": 0.474
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/H3_favorite_totem_2000s_reel.png",
+  "w": 1941,
+  "h": 2400,
+  "role": "hero",
+  "brand": "favorite",
+  "shadow": true,
+  "opaque_frac": 0.4
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/H4_favorite_x1_2000s_reel.png",
+  "w": 1996,
+  "h": 2400,
+  "role": "hero",
+  "brand": "favorite",
+  "shadow": true,
+  "opaque_frac": 0.393
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/H5_spinmad_target_spoon_1-5g_3201_pair.png",
+  "w": 1118,
+  "h": 1800,
+  "role": "hero",
+  "brand": "spinmad",
+  "shadow": true,
+  "opaque_frac": 0.339
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S10_favorite_arena_stream_arns1_rod.png",
+  "w": 1200,
+  "h": 909,
+  "role": "secondary",
+  "brand": "favorite",
+  "shadow": false,
+  "opaque_frac": 0.052
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S11_favorite_x1_2000s_reel_native.png",
+  "w": 736,
+  "h": 878,
+  "role": "secondary",
+  "brand": "favorite",
+  "shadow": false,
+  "opaque_frac": 0.37
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S1_spinmad_impulse_pro_10g_3908_electric_lime.png",
+  "w": 802,
+  "h": 327,
+  "role": "secondary",
+  "brand": "spinmad",
+  "shadow": false,
+  "opaque_frac": 0.292
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S2_spinmad_hart_9g_spicy_blade_3705_firetiger.png",
+  "w": 1075,
+  "h": 653,
+  "role": "secondary",
+  "brand": "spinmad",
+  "shadow": false,
+  "opaque_frac": 0.271
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S3_spinmad_king_14g_spicy_blade_3801.png",
+  "w": 1265,
+  "h": 691,
+  "role": "secondary",
+  "brand": "spinmad",
+  "shadow": false,
+  "opaque_frac": 0.29
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S4_crazyfish_scalp_minnow_100_06_chartreuse.png",
+  "w": 479,
+  "h": 122,
+  "role": "secondary",
+  "brand": "crazyfish",
+  "shadow": false,
+  "opaque_frac": 0.317
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S5_crazyfish_nimble_50_14_motor_oil.png",
+  "w": 389,
+  "h": 390,
+  "role": "secondary",
+  "brand": "crazyfish",
+  "shadow": false,
+  "opaque_frac": 0.228
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S6_crazyfish_polaris_68_4d_pair.png",
+  "w": 656,
+  "h": 585,
+  "role": "secondary",
+  "brand": "crazyfish",
+  "shadow": false,
+  "opaque_frac": 0.174
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S7_crazyfish_glider_55_20_kiwi.png",
+  "w": 475,
+  "h": 107,
+  "role": "secondary",
+  "brand": "crazyfish",
+  "shadow": false,
+  "opaque_frac": 0.321
+ },
+ {
+  "file": "assets_prep/ftfishing/ads/S8_crazyfish_comet_2-5in_20_kiwi.png",
+  "w": 460,
+  "h": 349,
+  "role": "secondary",
+  "brand": "crazyfish",
+  "shadow": false,
+  "opaque_frac": 0.135
+ }
+]

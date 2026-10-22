@@ -1,0 +1,250 @@
+{
+  "key": "ftfishing",
+  "source": "heygen create_speech · Paul – Broadcaster (02733a92a0db457aadf63b235d2aa457) · elevenlabs eleven_v3 · cs · speed 1",
+  "take": "ftfishing take 2 (Ef tý, Spinmed)",
+  "request_id": "ndLSvfP6e8QJXmZ4t8IK",
+  "audio_url": "https://resource2.heygen.ai/text_to_speech/1bead8fa9ebd49e1bdefa895c3daa586/02733a92a0db457aadf63b235d2aa457/id=586a2dc5-845b-4f64-90af-564361f44f08.wav",
+  "cs": "FT Fishing – vše pro přívlač. Pruty Favorite, nástrahy Crazy Fish a Spinmad.",
+  "tts": "Ef té fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmad.",
+  "tts_sent": "… Ef tý fišing – vše pro přívlač. Pruty Fejvorit, nástrahy Krejzy fiš a Spinmed. …",
+  "timebase": "seconds in vo/ftfishing.wav (processed); = raw time - trim_start_s",
+  "trim_start_s": 0.06,
+  "raw_duration_s": 6.531,
+  "duration_s": 6.301,
+  "onset": {
+    "first_phoneme_raw_s": 0.1,
+    "lead_in_s": 0.04
+  },
+  "tail": {
+    "fade_out_s": 0.12,
+    "pad_out_s": 0.08,
+    "raw_cut_level_dbfs": -42.8
+  },
+  "words": [
+    {
+      "word": "FT",
+      "start": 0.047,
+      "end": 0.26,
+      "spoken": "Ef tý"
+    },
+    {
+      "word": "Fishing",
+      "start": 0.34,
+      "end": 0.82,
+      "spoken": "fišing"
+    },
+    {
+      "word": "vše",
+      "start": 1.14,
+      "end": 1.38
+    },
+    {
+      "word": "pro",
+      "start": 1.44,
+      "end": 1.62
+    },
+    {
+      "word": "přívlač.",
+      "start": 1.7,
+      "end": 2.34
+    },
+    {
+      "word": "Pruty",
+      "start": 2.5,
+      "end": 2.9
+    },
+    {
+      "word": "Favorite,",
+      "start": 2.953,
+      "end": 3.46,
+      "spoken": "Fejvorit,"
+    },
+    {
+      "word": "nástrahy",
+      "start": 3.673,
+      "end": 4.26
+    },
+    {
+      "word": "Crazy",
+      "start": 4.32,
+      "end": 4.66,
+      "spoken": "Krejzy"
+    },
+    {
+      "word": "Fish",
+      "start": 4.74,
+      "end": 5.14,
+      "spoken": "fiš"
+    },
+    {
+      "word": "a",
+      "start": 5.3,
+      "end": 5.46
+    },
+    {
+      "word": "Spinmad.",
+      "start": 5.556,
+      "end": 6.18,
+      "spoken": "Spinmed."
+    }
+  ],
+  "words_tts": [
+    {
+      "word": "Ef",
+      "start": 0.047,
+      "end": 0.1
+    },
+    {
+      "word": "tý",
+      "start": 0.153,
+      "end": 0.26
+    },
+    {
+      "word": "fišing",
+      "start": 0.34,
+      "end": 0.82
+    },
+    {
+      "word": "vše",
+      "start": 1.14,
+      "end": 1.38
+    },
+    {
+      "word": "pro",
+      "start": 1.44,
+      "end": 1.62
+    },
+    {
+      "word": "přívlač.",
+      "start": 1.7,
+      "end": 2.34
+    },
+    {
+      "word": "Pruty",
+      "start": 2.5,
+      "end": 2.9
+    },
+    {
+      "word": "Fejvorit,",
+      "start": 2.953,
+      "end": 3.46
+    },
+    {
+      "word": "nástrahy",
+      "start": 3.673,
+      "end": 4.26
+    },
+    {
+      "word": "Krejzy",
+      "start": 4.32,
+      "end": 4.66
+    },
+    {
+      "word": "fiš",
+      "start": 4.74,
+      "end": 5.14
+    },
+    {
+      "word": "a",
+      "start": 5.3,
+      "end": 5.46
+    },
+    {
+      "word": "Spinmed.",
+      "start": 5.556,
+      "end": 6.18
+    }
+  ],
+  "word_timestamps_raw": [
+    {
+      "word": "<start>",
+      "start": 0.0,
+      "end": 0.0
+    },
+    {
+      "word": "…",
+      "start": 0.0,
+      "end": 0.08
+    },
+    {
+      "word": "Ef",
+      "start": 0.107,
+      "end": 0.16
+    },
+    {
+      "word": "tý",
+      "start": 0.213,
+      "end": 0.32
+    },
+    {
+      "word": "fišing",
+      "start": 0.4,
+      "end": 0.88
+    },
+    {
+      "word": "–",
+      "start": 0.88,
+      "end": 0.88
+    },
+    {
+      "word": "vše",
+      "start": 1.2,
+      "end": 1.44
+    },
+    {
+      "word": "pro",
+      "start": 1.5,
+      "end": 1.68
+    },
+    {
+      "word": "přívlač.",
+      "start": 1.76,
+      "end": 2.4
+    },
+    {
+      "word": "Pruty",
+      "start": 2.56,
+      "end": 2.96
+    },
+    {
+      "word": "Fejvorit,",
+      "start": 3.013,
+      "end": 3.52
+    },
+    {
+      "word": "nástrahy",
+      "start": 3.733,
+      "end": 4.32
+    },
+    {
+      "word": "Krejzy",
+      "start": 4.38,
+      "end": 4.72
+    },
+    {
+      "word": "fiš",
+      "start": 4.8,
+      "end": 5.2
+    },
+    {
+      "word": "a",
+      "start": 5.36,
+      "end": 5.52
+    },
+    {
+      "word": "Spinmed.",
+      "start": 5.616,
+      "end": 6.24
+    },
+    {
+      "word": "…",
+      "start": 6.24,
+      "end": 6.24
+    },
+    {
+      "word": "<end>",
+      "start": 6.530612244897959,
+      "end": 6.530612244897959
+    }
+  ]
+}

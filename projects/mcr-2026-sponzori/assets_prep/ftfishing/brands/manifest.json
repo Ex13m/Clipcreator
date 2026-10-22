@@ -1,0 +1,97 @@
+[
+ {
+  "slug": "favorite",
+  "name": "Favorite",
+  "file": "assets_prep/ftfishing/brands/favorite.png",
+  "on_dark": "assets_prep/ftfishing/brands/favorite_on_dark.png",
+  "size": [
+   918,
+   217
+  ],
+  "source": "https://www.ftfishing.cz/data/animace/28.jpg",
+  "crop": [
+   18,
+   44,
+   328,
+   112
+  ],
+  "method": "white key ×3, on_dark=lift"
+ },
+ {
+  "slug": "spinmad",
+  "name": "Spinmad",
+  "file": "assets_prep/ftfishing/brands/spinmad.png",
+  "on_dark": "assets_prep/ftfishing/brands/spinmad_on_dark.png",
+  "size": [
+   886,
+   380
+  ],
+  "source": "https://www.ftfishing.cz/data/animace/28.jpg",
+  "crop": [
+   28,
+   128,
+   322,
+   258
+  ],
+  "method": "white key ×3, on_dark=keep"
+ },
+ {
+  "slug": "crazyfish",
+  "name": "Crazy Fish",
+  "file": "assets_prep/ftfishing/brands/crazyfish.png",
+  "on_dark": "assets_prep/ftfishing/brands/crazyfish_on_dark.png",
+  "size": [
+   1084,
+   840
+  ],
+  "source": "https://www.ftfishing.cz/data/shop/categories/68.jpg",
+  "crop": [
+   18,
+   56,
+   390,
+   340
+  ],
+  "method": "white key ×3, on_dark=chip"
+ },
+ {
+  "slug": "vanfook",
+  "name": "Vanfook",
+  "file": "assets_prep/ftfishing/brands/vanfook.png",
+  "on_dark": "assets_prep/ftfishing/brands/vanfook_on_dark.png",
+  "size": [
+   670,
+   403
+  ],
+  "source": "https://www.ftfishing.cz/data/animace/28.jpg",
+  "crop": [
+   893,
+   322,
+   1114,
+   455
+  ],
+  "method": "white key ×3, on_dark=chip"
+ },
+ {
+  "slug": "svfishing",
+  "name": "SV Fishing Lures",
+  "file": "assets_prep/ftfishing/brands/svfishing.png",
+  "on_dark": "assets_prep/ftfishing/brands/svfishing_on_dark.png",
+  "size": [
+   719,
+   362
+  ],
+  "source": "https://www.ftfishing.cz/data/animace/28.jpg",
+  "crop": [
+   878,
+   42,
+   1128,
+   168
+  ],
+  "method": "white key ×3, on_dark=lift"
+ },
+ {
+  "slug": "jigovky",
+  "file": "assets_prep/ftfishing/brands/jigovky.png",
+  "reused_from": "/home/user/Clipcreator/projects/mcr-2026-sponzori/assets_prep/activefishing/brands/jigovky.png"
+ }
+]
