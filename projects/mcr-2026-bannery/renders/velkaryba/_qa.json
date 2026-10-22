@@ -1,6 +1,6 @@
 {
  "key": "velkaryba",
- "built": "2026-10-22T09:28:16.553Z",
+ "built": "2026-10-22T09:38:18.274Z",
  "outputs": {
   "velkaryba_static_191.png": {
    "err": [],
@@ -53,9 +53,7 @@
    ]
   },
   "velkaryba_anim_4x5.mp4": {
-   "err": [
-    "text does not fit: \"Cardiff Exlead Competition · 1,83 m \""
-   ],
+   "err": [],
    "warn": [],
    "dur": 10.000000000000002,
    "frames": 300,
