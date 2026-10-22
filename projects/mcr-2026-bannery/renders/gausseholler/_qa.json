@@ -1,0 +1,70 @@
+{
+ "key": "gausseholler",
+ "built": "2026-10-22T09:18:53.298Z",
+ "outputs": {
+  "gausseholler_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "gausseholler_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "gausseholler_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "gausseholler_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "gausseholler_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "gausseholler_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "gausseholler_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "gausseholler_static_9x16.png": {
+   "err": [],
+   "warn": []
+  },
+  "gausseholler_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.77,
+    5.8,
+    7.73,
+    9.57
+   ]
+  },
+  "gausseholler_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.77,
+    5.8,
+    7.73,
+    9.57
+   ]
+  }
+ }
+}
