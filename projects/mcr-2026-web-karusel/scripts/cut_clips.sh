@@ -2,7 +2,7 @@
 # Vyřeže krátké němé smyčky z Reels: 540×960 H.264 (web), VP9 (jen QA v Playwright – chromium bez H.264), 1080p VP9 (záznam MP4), JPG poster.
 set -e
 P=$(cd "$(dirname "$0")/.." && pwd); R=$P/../mcr-2026-sponzori/renders; O=$P/_work/clips; mkdir -p $O
-DUR=${DUR:-4.4}; CRF=${CRF:-31}
+DUR=${DUR:-4.4}; CRF=${CRF:-26}
 grep -v '^#' $P/scripts/clips.txt | while read k s; do
   [ -z "$k" ] && continue
   ffmpeg -nostdin -v error -y -ss $s -t $DUR -i $R/reel_${k}_v8.mp4 -an -vf "scale=540:960:flags=lanczos,format=yuv420p" \

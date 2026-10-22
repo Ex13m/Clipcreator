@@ -1,0 +1,63 @@
+<!-- MČR 2026 partneři – karusel 9:16 -->
+<style>
+.kr{--bg:#06080c;--fg:#f3f4f6;--muted:#9aa3ad;--red:#e3202a;color-scheme:dark;margin:0 auto}
+
+
+.kr{position:relative;width:min(100%,calc((100vh - 32px) * 9 / 16),540px);aspect-ratio:9/16;max-width:100%;perspective:1600px;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.kr-stage{position:absolute;inset:0;transform-style:preserve-3d}
+.kr-s{position:absolute;inset:0;border-radius:14px;overflow:hidden;backface-visibility:hidden;transform-origin:50% 50% -50%;box-shadow:0 30px 60px rgba(0,0,0,.55);background:#000;opacity:0;pointer-events:none}
+.kr-s img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);will-change:transform}
+.kr-s.on{opacity:1;pointer-events:auto}
+.kr-s.on img{animation:kb 4.2s ease-out forwards}
+@keyframes kb{from{transform:scale(1.07)}to{transform:scale(1)}}
+.kr-s::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.kr-s.on::after{animation:sweep 1.1s .35s ease-out}
+@keyframes sweep{to{transform:translateX(120%)}}
+.in-n{animation:inN .9s cubic-bezier(.7,0,.2,1) forwards}
+.out-n{animation:outN .9s cubic-bezier(.7,0,.2,1) forwards;opacity:1}
+.in-p{animation:inP .9s cubic-bezier(.7,0,.2,1) forwards}
+.out-p{animation:outP .9s cubic-bezier(.7,0,.2,1) forwards;opacity:1}
+@keyframes inN{from{transform:rotateY(90deg);filter:brightness(.4)}to{transform:rotateY(0);filter:brightness(1)}}
+@keyframes outN{from{transform:rotateY(0);filter:brightness(1)}to{transform:rotateY(-90deg);filter:brightness(.35)}}
+@keyframes inP{from{transform:rotateY(-90deg);filter:brightness(.4)}to{transform:rotateY(0);filter:brightness(1)}}
+@keyframes outP{from{transform:rotateY(0);filter:brightness(1)}to{transform:rotateY(90deg);filter:brightness(.35)}}
+.kr-bar{position:absolute;left:0;right:0;bottom:-28px;display:flex;justify-content:center;gap:7px}
+.kr-dot{width:7px;height:7px;border-radius:99px;border:0;padding:0;background:#3a414b;cursor:pointer;transition:width .3s,background .3s}
+.kr-dot.on{width:22px;background:var(--red)}
+.kr-dot:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.kr-prog{position:absolute;left:14px;right:14px;top:10px;height:3px;border-radius:3px;background:rgba(255,255,255,.18);overflow:hidden;z-index:5}
+.kr-prog i{display:block;height:100%;width:0;background:#fff}
+.kr-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;font-size:18px;cursor:pointer;z-index:6;opacity:0;transition:opacity .25s}
+.kr:hover .kr-nav,.kr-nav:focus-visible{opacity:1}
+.kr-l{left:8px}.kr-r{right:8px}
+@media (prefers-reduced-motion:reduce){.in-n,.in-p{animation:fade .5s forwards}.out-n,.out-p{animation:fadeo .5s forwards}.kr-s.on img,.kr-s.on::after{animation:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes fadeo{from{opacity:1}to{opacity:0}}
+</style>
+<div class="kr" id="kr" role="region" aria-roledescription="carousel" aria-label="Partneři MČR v Trout Area 2026">
+  <div class="kr-prog"><i id="kr-p"></i></div>
+  <div class="kr-stage" id="kr-st"></div>
+  <button class="kr-nav kr-l" id="kr-l" aria-label="Předchozí">‹</button>
+  <button class="kr-nav kr-r" id="kr-r" aria-label="Další">›</button>
+  <div class="kr-bar" id="kr-b"></div>
+</div>
+<script>
+(function(){
+var S=[{"k": "ftfishing", "u": "https://www.ftfishing.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_ftfishing.jpg"}, {"k": "venue", "u": "https://www.lihenlibechov.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_venue.jpg"}, {"k": "gausseholler", "u": "https://gausseholler.com/", "src": "https://admin.troutareacz.cz/media/mcr26_gausseholler.jpg"}, {"k": "activefishing", "u": "https://www.activefishing.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_activefishing.jpg"}, {"k": "bosset", "u": "https://www.bosset.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_bosset.jpg"}, {"k": "jigovky", "u": "https://www.jigovky.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_jigovky.jpg"}, {"k": "moonky", "u": "https://www.moonky.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_moonky.jpg"}, {"k": "troutshop", "u": "https://www.troutshop.eu/", "src": "https://admin.troutareacz.cz/media/mcr26_troutshop.jpg"}, {"k": "velkaryba", "u": "https://www.velka-ryba.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_velkaryba.jpg"}, {"k": "crs", "u": "https://www.rybsvaz.cz/", "src": "https://admin.troutareacz.cz/media/mcr26_crs.jpg"}],D=4200,st=document.getElementById('kr-st'),bar=document.getElementById('kr-b'),pr=document.getElementById('kr-p'),root=document.getElementById('kr');
+var els=S.map(function(s,i){var a=document.createElement('a');a.className='kr-s';a.href=s.u;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',s.k);var im=new Image();im.src=s.src;im.alt=s.k;im.draggable=false;a.appendChild(im);st.appendChild(a);
+ var d=document.createElement('button');d.className='kr-dot';d.setAttribute('aria-label',(i+1)+'/'+S.length);d.onclick=function(){go(i)};bar.appendChild(d);return a});
+var dots=bar.children,cur=0,t0=performance.now(),paused=false,busy=false,moved=false;
+els[0].classList.add('on');dots[0].classList.add('on');
+function go(n,dir){if(busy||n===cur)return;n=(n+S.length)%S.length;dir=dir||(n>cur?1:-1);busy=true;var a=els[cur],b=els[n];
+ a.className='kr-s '+(dir>0?'out-n':'out-p');b.className='kr-s on '+(dir>0?'in-n':'in-p');
+ dots[cur].classList.remove('on');dots[n].classList.add('on');cur=n;t0=performance.now();
+ setTimeout(function(){a.className='kr-s';b.className='kr-s on';busy=false},920)}
+function tick(now){if(paused)t0=now-(parseFloat(pr.style.width)||0)/100*D;var p=Math.min(1,(now-t0)/D);pr.style.width=(p*100)+'%';if(p>=1&&!paused)go(cur+1,1);requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+document.getElementById('kr-l').onclick=function(){go(cur-1,-1)};document.getElementById('kr-r').onclick=function(){go(cur+1,1)};
+root.addEventListener('mouseenter',function(){paused=true});root.addEventListener('mouseleave',function(){paused=false});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(cur+1,1);if(e.key==='ArrowLeft')go(cur-1,-1)});
+var x0=null;root.addEventListener('pointerdown',function(e){x0=e.clientX;moved=false;paused=true});
+root.addEventListener('pointerup',function(e){if(x0!==null){var dx=e.clientX-x0;if(Math.abs(dx)>40){moved=true;go(cur+(dx<0?1:-1),dx<0?1:-1)}}x0=null;paused=false});
+st.addEventListener('click',function(e){if(moved){e.preventDefault();moved=false}},true);
+})();
+</script>

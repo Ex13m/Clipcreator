@@ -18,3 +18,4 @@ projects/mcr-2026-sponzori/assets/gallery_tacz/*.webp
 projects/mcr-2026-bannery/dist/
 projects/**/renders/work-*/
 projects/**/renders/.*hf-transaction*/
+projects/mcr-2026-web-karusel/dist/*.gif
