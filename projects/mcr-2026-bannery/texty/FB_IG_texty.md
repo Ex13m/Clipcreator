@@ -5,7 +5,7 @@ Publikuje: **Trout Area Czech Republic** (FB + IG) · stav 22. 10. 2026 · fak
 **Akce (řádek do každého příspěvku):** Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 Poznámky k použití:
-- Pořadí partnerů: Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → Moonky → Troutshop → Velká ryba → FT Fishing → ČRS.
+- Pořadí partnerů: Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → Troutshop → Velká ryba → FT Fishing → ČRS.
 - Ceny věnují všichni partneři kromě Líhně Liběchov (místo konání) a ČRS (poděkování). Hlavní cenu pro vítěze věnuje Gausse Holler.
 - Hashtagy píšeme jako u Klonówce (CamelCase): #TroutArea #TroutAreaCZ #MCR2026 – vyhledávání na velikosti písmen nezáleží.
 - Texty mají nezlomitelné mezery (za v, k, s, z, o, u, a, i a mezi číslem a jednotkou). Při kopírování do FB/IG zůstanou.
@@ -22,7 +22,7 @@ Už tuto sobotu a neděli to vypukne: 40 závodníků, 12 kol denně, hard ba
 
 Místo konání: Líheň Liběchov
 Hlavní cena, partner a informační sponzor: Gausse Holler Custom Lab
-Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
+Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Troutshop.eu · Velká ryba · FT Fishing
 Za dlouholetou podporu děkujeme: Český rybářský svaz
 
 Každého partnera vám v dalších příspěvcích představíme zvlášť. Děkujeme, že jste s námi!
@@ -41,7 +41,7 @@ Partneři MČR 2026
 
 Místo konání – Líheň Liběchov
 Hlavní cena – Gausse Holler Custom Lab
-Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
+Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Troutshop.eu · Velká ryba · FT Fishing
 Děkujeme – Český rybářský svaz
 
 24.–25. 10. 2026 · Líheň Liběchov
@@ -57,7 +57,7 @@ Mistrovství ČR v Trout Area 2026 je za námi
 
 Dva dny, 40 závodníků a 24 kol na Malém Sporťáčku. Gratulujeme vítězi MČR 2026 [JMÉNO] a dalším na stupních vítězů: [2. MÍSTO], [3. MÍSTO].
 
-Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu (Jaro a Stano Petríčkovi), Velké rybě a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
+Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Troutshop.eu (Jaro a Stano Petríčkovi), Velké rybě a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
 
 Díky i organizátorům Stanislavu Lukáškovi, Michalu Horákovi, Denisu Zaikinovi a Igoru Novákovi – a hlavně všem závodníkům a divákům.
 
@@ -74,7 +74,7 @@ Vítěz: [JMÉNO]
 
 Díky Líhni Liběchov za zázemí.
 Díky Gausse Holler za hlavní cenu.
-Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
+Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Troutshop.eu · Velká ryba · FT Fishing
 Díky Českému rybářskému svazu za dlouholetou podporu.
 
 Uvidíme se u vody.
@@ -341,55 +341,6 @@ jigovky.cz
 
 ---
 
-## 6. Moonky – věnuje ceny
-
-### FB příspěvek
-
-Moonky – nástrahy, které pstruzi milují
-
-Český výrobce ručně dělaných gumových nástrah pro lov pstruhů a Trout Area. Nástrahy vyrábějí od návrhu až po vlastní formy na CNC strojích, z gumy bez ftalátů, a vyvíjejí a testují je s českou reprezentací v lovu pstruhů ze břehu. V nabídce jsou Gamer, Scelet, Coccon, Savory, Kukla, Long Worm nebo Master – s příchutěmi banán, sýr a oliheň.
-
-Moonky věnuje ceny pro závodníky Mistrovství ČR v Trout Area 2026. Děkujeme!
-
-moonky.cz
-
-Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
-
-#TroutArea #TroutAreaCZ #MCR2026 #Moonky #handmadelures
-
-Označit: FB @Moonky [ověřit přesný název stránky] · IG @moonky.cz
-
-### IG popisek
-
-Moonky
-Handmade lures – ručně dělané gumové nástrahy na pstruhy.
-
-Vlastní formy z CNC.
-Vývoj a testy s českou reprezentací.
-Gamer · Scelet · Coccon · Savory
-
-Věnuje ceny pro závodníky MČR 2026. Děkujeme!
-moonky.cz
-
-#TroutArea #TroutAreaCZ #MCR2026 #Moonky
-
-### Meta reklama
-
-| Pole | Text |
-|---|---|
-| Primary text | Ručně dělané gumové nástrahy na pstruhy, vyvíjené s českou reprezentací. Moonky věnuje ceny pro MČR 2026. |
-| Headline | Moonky – ručně dělané nástrahy |
-| Description | Vlastní formy z CNC |
-| CTA | Shop Now (Nakoupit) → moonky.cz (bez webu: Learn More → FB stránka) |
-
-### Karusel (4 karty)
-
-1. Moonky – handmade lures z Česka
-2. Gamer · Scelet · Coccon · Savory · Kukla
-3. Scelet – nástraha na velké pstruhy
-4. Věnuje ceny · MČR 2026
-
----
 
 ## 7. Troutshop.eu – věnuje ceny
 
@@ -599,15 +550,14 @@ rybsvaz.cz
 
 ## K ověření (před publikací)
 
-1. **Moonky – web:** zadání říká „jen FB stránka“, ale research (`moonky.md`, ověřeno 19. 10.) našel e-shop **moonky.cz** a IG @moonky.cz. V textech je moonky.cz; pokud ho operátor nechce, nahradit odkazem na FB stránku. Přesný název FB stránky („Moonky“) ověřit.
-2. **Tagy chybí** (research je neuvádí): Gausse Holler (FB i IG), Bosset, Troutshop, Velká ryba, ČRS, IG Líhně Liběchov. Ověřené: FB „Sportovní rybaření Boží Voda - Liběchov“, FB activefishing.cz + IG @activefishingshop, FB + IG jigovky.cz, IG @moonky.cz.
+2. **Tagy chybí** (research je neuvádí): Gausse Holler (FB i IG), Bosset, Troutshop, Velká ryba, ČRS, IG Líhně Liběchov. Ověřené: FB „Sportovní rybaření Boží Voda - Liběchov“, FB activefishing.cz + IG @activefishingshop, FB + IG jigovky.cz.
 3. **Bosset – termosky:** přesné modely a počet kusů nejsou zveřejněné; „vítězové mistrovství“ (jaká místa / kategorie) potvrdit u Bosset (Taras Burakov, info@bosset.cz). Nic o původu Zojirushi.
 4. **Gausse Holler – Revolut 8:** „série 5 kusů, každý číslovaný“ platí podle produktové stránky rod-stand-v2. Potvrdit, že cenový kus je z této série (a jeho číslo, pokud ho chceme uvést).
 5. **Živá čísla:** Activefishing 1 354 plandavek / 776 woblerů (21. 10.) → v textu „přes 1 300“ a „přes 770“. Jigovky 990 jigových hlaviček (19. a 21. 10.). Před publikací přepočítat.
 6. **ČRS:** forma podpory není doložená, proto jen obecné „za dlouholetou podporu“ (formulace operátora). Nepsat „pod záštitou ČRS“ ani „MČR pořádá ČRS“. Rozhodnout, zda děkovat celému ČRS, nebo i MO Mělník.
 7. **Poděkování po akci:** doplnit vítěze, stupně vítězů a odkaz. Pozor: „vítěz MČR“ (součet umístění z obou dnů) není totéž co „Mistr ČR“ (celkové hodnocení ročníku, putovní pohár). „24 kol“ = 2 × 12 kol podle formátu; potvrdit podle skutečného průběhu.
 8. **Líheň Liběchov:** u Malého Sporťáčku neuvádět „chyť a pusť“ (od 23. 6. 2026 „chyť a vem“). „Donedávna“ u nejníže položeného pstruhařství musí zůstat. Diváci 24.–25. 10. podle aktuality webu Líhně.
-9. **Jigovky a Moonky:** MČR je ve formátu hard baits, texty proto netvrdí, že se jejich nástrahy (jigy, gumy) na MČR používají.
+9. **Jigovky:** MČR je ve formátu hard baits, texty proto netvrdí, že se jejich jigy na MČR používají.
 10. **Troutshop:** fakta podle textu, který Troutshop poslal 22. 10.: věcné ceny pro MČR, bratři Jaro a Stano Petríčkovi (závodníci a nadšenci Trout Area), zboží posílají i do ČR. Starší „do pár dní“ (SK meta description) už v textech není. Netvrdit vítězství v SK/CZ/PL/UA ani vlastní značku.
 11. **Velká ryba:** záměrně bez „nejdéle provozovaná speciálka“ (vlastní superlativ). Půjčovna Shimano Rod Test Center funguje v prodejně v Olomouci (od 2025).
 12. **Meta CTA:** v textu jsou anglické názvy tlačítek z Ads Manageru. Český popisek v závorce je orientační, finální zobrazí Meta.

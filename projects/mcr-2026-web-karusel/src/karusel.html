@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Partneři MČR 2026 · Trout Area CZ</title>
+<meta name="description" content="Partneři Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov">
+<style>
+/*__FONTS__*/
+:root{
+  --navy:#304285; --deep:#0b1e42; --red:#e31e24; --sky:#8ea2d8; --card:#eef2f9;
+  --u:4.2px; /* 1 % šířky karuselu; JS přepočítá (ResizeObserver) */
+  color-scheme: dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:transparent}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden;
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#fff;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+.kz{position:relative;width:min(100vw, calc(100vh * 9 / 16));aspect-ratio:9/16;max-height:100vh;
+  border-radius:calc(var(--u)*2.2);overflow:hidden;background:radial-gradient(120% 80% at 50% 40%,#16295a 0%,#070f24 70%);
+  isolation:isolate;outline:none;user-select:none;-webkit-user-select:none;touch-action:pan-y;
+  box-shadow:0 calc(var(--u)*2) calc(var(--u)*6) rgba(0,0,0,.35)}
+@supports not (aspect-ratio:1){.kz{height:min(100vh, calc(100vw * 16 / 9))}}
+.kz:focus-visible{box-shadow:0 0 0 3px var(--sky)}
+.stage{position:absolute;inset:0;perspective:calc(var(--u)*230);perspective-origin:50% 50%}
+.slide{position:absolute;inset:0;transform-origin:50% 50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  visibility:hidden;will-change:transform,opacity;background:#0b1e42;overflow:hidden}
+.slide.on{visibility:visible}
+.media,.media>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.media video{opacity:0;transition:opacity .25s}
+.media video.live{opacity:1}
+.kb{transform-origin:50% 45%;will-change:transform}
+.shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+.gloss{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.22) 48%,transparent 62%)}
+
+/* ---------- překryv partnera ---------- */
+.scrim{position:absolute;left:0;right:0;bottom:0;height:40%;pointer-events:none;
+  background:linear-gradient(to top,rgba(4,10,26,.92) 0%,rgba(4,10,26,.72) 38%,rgba(4,10,26,0) 100%)}
+.ov{position:absolute;left:calc(var(--u)*6);right:calc(var(--u)*6);bottom:calc(var(--u)*10);display:flex;flex-direction:column;gap:calc(var(--u)*2.6)}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:calc(var(--u)*1.6);
+  padding:calc(var(--u)*1.25) calc(var(--u)*2.8);border-radius:999px;font-weight:800;font-size:calc(var(--u)*2.85);
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.15;
+  background:rgba(8,16,38,.66);border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.chip i{width:calc(var(--u)*1.6);height:calc(var(--u)*1.6);border-radius:50%;background:var(--red);flex:none;
+  box-shadow:0 0 calc(var(--u)*1.6) var(--red)}
+.chip.prize{background:linear-gradient(90deg,rgba(227,30,36,.92),rgba(160,18,24,.9));border-color:rgba(255,255,255,.4)}
+.chip.prize i{background:#fff;box-shadow:0 0 calc(var(--u)*1.6) #fff}
+.name{font-weight:900;font-size:calc(var(--u)*6.6);line-height:1.04;letter-spacing:-.01em;
+  text-shadow:0 2px calc(var(--u)*2) rgba(0,0,0,.55);padding-top:.1em;margin-top:-.1em}
+.name small{display:block;font-weight:600;font-size:.42em;letter-spacing:.04em;color:rgba(255,255,255,.8);margin-top:.35em}
+.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.4em;padding:calc(var(--u)*2.2) calc(var(--u)*3.6);border-radius:999px;
+  background:#fff;color:#0b1e42;font-weight:800;font-size:calc(var(--u)*3.3);text-decoration:none;white-space:nowrap;
+  box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) rgba(0,0,0,.35);transition:transform .2s,background .2s,color .2s}
+.btn b{color:var(--red);font-weight:900}
+.btn:hover,.btn:focus-visible{background:var(--red);color:#fff;transform:translateY(-2px);outline:none}
+.btn:hover b,.btn:focus-visible b{color:#fff}
+
+/* ---------- úvodní snímek ---------- */
+.intro .media img{filter:saturate(.9) brightness(.9)}
+.intro .tint{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(11,30,66,.94) 0%,rgba(11,30,66,.80) 38%,rgba(11,30,66,.35) 62%,rgba(5,12,30,.92) 100%)}
+.intro .sweep{position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 40%,rgba(142,162,216,.18) 50%,transparent 60%);
+  will-change:transform}
+.intro .in{position:absolute;left:calc(var(--u)*7);right:calc(var(--u)*7);top:calc(var(--u)*14);text-align:center}
+.intro .big{width:74%;height:auto;display:block;margin:0 auto calc(var(--u)*6);filter:drop-shadow(0 calc(var(--u)*.6) calc(var(--u)*1.6) rgba(0,0,0,.55))}
+.kick{display:inline-flex;align-items:center;gap:calc(var(--u)*2.4);font-weight:800;font-size:calc(var(--u)*3.6);letter-spacing:.32em;
+  text-transform:uppercase;color:#fff;padding-left:.32em}
+.kick:before,.kick:after{content:"";width:calc(var(--u)*7);height:2px;background:var(--red)}
+.intro h1{font-weight:900;font-size:calc(var(--u)*8.6);line-height:1.02;margin:calc(var(--u)*3.4) 0 calc(var(--u)*3);letter-spacing:-.01em;
+  text-shadow:0 2px calc(var(--u)*2.5) rgba(0,0,0,.5)}
+.intro h1 em{font-style:normal;color:var(--red)}
+.when{display:inline-block;font-weight:800;font-size:calc(var(--u)*3.7);letter-spacing:.02em;padding:calc(var(--u)*1.6) calc(var(--u)*3.4);
+  border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.wall{position:absolute;left:calc(var(--u)*5);right:calc(var(--u)*5);bottom:calc(var(--u)*10);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:calc(var(--u)*1.4);padding:calc(var(--u)*2.6) calc(var(--u)*2.4) calc(var(--u)*2.8);
+  border-radius:calc(var(--u)*3);background:rgba(8,16,38,.55);border:1px solid rgba(255,255,255,.16);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.wall button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:center;height:calc(var(--u)*11);border-radius:calc(var(--u)*1.6);
+  transition:background .2s,transform .2s}
+.wall button:hover,.wall button:focus-visible{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.wall img{max-width:88%;max-height:78%;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.wall-t{grid-column:1/-1;text-align:center;font-weight:700;font-size:calc(var(--u)*2.6);padding-bottom:calc(var(--u)*.8);
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+
+/* ---------- trvalé prvky ---------- */
+.ta{position:absolute;left:6.806%;top:13.385%;width:26.02%;height:auto;z-index:5;pointer-events:none;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 calc(var(--u)*1.5) rgba(0,0,0,.25));transition:opacity .35s}
+.ta.off{opacity:0}
+.dots{position:absolute;left:0;right:0;bottom:calc(var(--u)*4.2);z-index:6;display:flex;justify-content:center;gap:calc(var(--u)*1.3)}
+.dots button{all:unset;cursor:pointer;position:relative;width:calc(var(--u)*1.9);height:calc(var(--u)*1.9);border-radius:999px;
+  background:rgba(255,255,255,.38);overflow:hidden;transition:width .35s cubic-bezier(.2,.8,.2,1),background .2s}
+.dots button:before{content:"";position:absolute;inset:-8px}
+.dots button.on{width:calc(var(--u)*9);background:rgba(255,255,255,.3)}
+.dots button i{position:absolute;inset:0;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+.dots button.on i{background:linear-gradient(90deg,#fff,#fff)}
+.dots button:focus-visible{box-shadow:0 0 0 2px var(--sky)}
+.nav{position:absolute;top:50%;z-index:6;width:calc(var(--u)*10);height:calc(var(--u)*10);margin-top:calc(var(--u)*-5);border:0;border-radius:50%;
+  background:rgba(8,16,38,.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;
+  transition:opacity .25s,background .2s;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.nav svg{width:46%;height:46%}
+.nav.prev{left:calc(var(--u)*2.5)} .nav.next{right:calc(var(--u)*2.5)}
+.kz:hover .nav,.nav:focus-visible{opacity:1}
+.nav:hover{background:var(--red)}
+@media (hover:none){.nav{display:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cap .nav{display:none}
+</style>
+</head>
+<body>
+<div class="kz" id="kz" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Partneři Mistrovství ČR v Trout Area 2026">
+  <div class="stage" id="stage"></div>
+  <img class="ta off" id="ta" alt="Trout Area Czech Republic" src="__TA__">
+  <button class="nav prev" id="prev" type="button" aria-label="Předchozí partner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="nav next" id="next" type="button" aria-label="Další partner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="dots" id="dots" role="tablist" aria-label="Výběr snímku"></div>
+  <p class="sr" id="live" aria-live="polite"></p>
+</div>
+<!--__DATA__-->
+<script>
+(function(){
+'use strict';
+var CFG = /*__CFG__*/;
+var SL = CFG.slides, N = SL.length, T = CFG.interval, TR = CFG.trans;
+var CAPTURE = !!window.KZ_CAPTURE;
+var kz = document.getElementById('kz'), stage = document.getElementById('stage'), ta = document.getElementById('ta');
+var dotsBox = document.getElementById('dots'), live = document.getElementById('live');
+var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (CAPTURE) kz.classList.add('cap');
+
+/* ---------- jednotka --u = 1 % šířky ---------- */
+function fit(){ var w = kz.getBoundingClientRect().width || 420; kz.style.setProperty('--u', (w/100) + 'px'); W = w; }
+var W = 420; fit();
+if (window.ResizeObserver) new ResizeObserver(fit).observe(kz); else window.addEventListener('resize', fit);
+
+/* ---------- média: base64 → Blob URL (líně) ---------- */
+var blobs = {};
+function mediaURL(id){
+  if (blobs[id]) return blobs[id];
+  var el = document.getElementById('d-' + id);
+  if (!el) return null;
+  if (el.getAttribute('data-src')) return (blobs[id] = el.getAttribute('data-src'));
+  try {
+    var b = atob(el.textContent.replace(/\s+/g, '')), a = new Uint8Array(b.length);
+    for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i);
+    blobs[id] = URL.createObjectURL(new Blob([a], {type: el.getAttribute('data-type')}));
+  } catch (e) { blobs[id] = 'data:' + el.getAttribute('data-type') + ';base64,' + el.textContent.trim(); }
+  return blobs[id];
+}
+var canVideo = (function(){ try { var v = document.createElement('video'); return !!v.canPlayType(CFG.videoType); } catch(e){ return false; } })();
+
+/* ---------- stavba snímků ---------- */
+function h(tag, cls, html){ var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+var slides = SL.map(function(s, i){
+  var el = h('article', 'slide' + (s.type === 'intro' ? ' intro' : ''));
+  el.setAttribute('role', 'group'); el.setAttribute('aria-roledescription', 'snímek');
+  el.setAttribute('aria-label', (i+1) + ' / ' + N + ': ' + (s.type === 'intro' ? 'Partneři MČR 2026' : s.name));
+  var media = h('div', 'media'); el.appendChild(media);
+  var o = {el: el, s: s, video: null, kb: null};
+  if (s.type === 'intro') {
+    var bg = h('img', 'kb'); bg.alt = ''; bg.src = s.bg; media.appendChild(bg); o.kb = bg;
+    el.appendChild(h('div', 'tint')); var sw = h('div', 'sweep'); el.appendChild(sw); o.sweep = sw;
+    var inn = h('div', 'in');
+    inn.innerHTML = '<img class="big" alt="Trout Area Czech Republic" src="' + CFG.ta + '">' +
+      '<div class="kick">Partneři</div><h1>Mistrovství ČR<br>v Trout Area <em>2026</em></h1>' +
+      '<div class="when">24.–25. 10. 2026 · Líheň Liběchov</div>';
+    el.appendChild(inn);
+    var wall = h('div', 'wall'); wall.appendChild(h('div', 'wall-t', 'Děkujeme našim partnerům'));
+    SL.forEach(function(p, j){ if (p.type === 'intro') return;
+      var b = h('button'); b.type = 'button'; b.setAttribute('aria-label', p.name);
+      var im = h('img'); im.alt = p.name; im.src = p.logo; b.appendChild(im);
+      b.addEventListener('click', function(ev){ ev.stopPropagation(); go(j, 1); userPause(); });
+      wall.appendChild(b); });
+    el.appendChild(wall);
+  } else {
+    var poster = h('img', s.kb ? 'kb' : ''); poster.alt = s.name; poster.src = s.poster; media.appendChild(poster);
+    if (s.kb) o.kb = poster;
+    if (s.video && (canVideo || CAPTURE)) {
+      var v = document.createElement('video');
+      v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.playsInline = true; v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', ''); v.loop = !CAPTURE; v.preload = 'metadata'; v.setAttribute('aria-hidden', 'true');
+      v.addEventListener('playing', function(){ v.classList.add('live'); });
+      v.addEventListener('seeked', function(){ if (CAPTURE) v.classList.add('live'); });
+      v.addEventListener('error', function(){ v.classList.remove('live'); });
+      media.appendChild(v); o.video = v;
+    }
+    el.appendChild(h('div', 'scrim'));
+    var ov = h('div', 'ov');
+    ov.innerHTML = '<span class="chip' + (s.prize ? ' prize' : '') + '"><i></i>' + s.chip + '</span>' +
+      '<div class="name">' + s.name + (s.sub ? '<small>' + s.sub + '</small>' : '') + '</div>' +
+      '<a class="btn" href="' + s.href + '" target="_blank" rel="noopener" aria-label="' + s.name + ' – web ' + s.url + ' (nové okno)">' + s.url + ' <b>↗</b></a>';
+    el.appendChild(ov);
+  }
+  el.appendChild(h('div', 'gloss')); el.appendChild(h('div', 'shade'));
+  o.shade = el.querySelector('.shade'); o.gloss = el.querySelector('.gloss');
+  stage.appendChild(el);
+  return o;
+});
+var dots = SL.map(function(s, i){
+  var b = h('button', '', '<i></i>'); b.type = 'button'; b.setAttribute('role', 'tab');
+  b.setAttribute('aria-label', (i+1) + ': ' + (s.type === 'intro' ? 'Úvod' : s.name));
+  b.addEventListener('click', function(ev){ ev.stopPropagation(); if (i !== cur) go(i, i > cur ? 1 : -1); userPause(); });
+  dotsBox.appendChild(b); return b;
+});
+
+/* ---------- video ---------- */
+function ensureSrc(o){ if (o.video && !o.video.src) { var u = mediaURL(o.s.video); if (u) o.video.src = u; } }
+function playV(o, fromStart){
+  if (!o.video || CAPTURE) return; ensureSrc(o);
+  if (fromStart) { try { o.video.currentTime = 0; } catch(e){} }
+  var p = o.video.play(); if (p && p.catch) p.catch(function(){ o.video.classList.remove('live'); });
+}
+function stopV(o, rewind){ if (!o.video || CAPTURE) return; if (!o.video.paused) o.video.pause(); if (rewind && o.video.src) { try { o.video.currentTime = 0; } catch(e){} o.video.classList.remove('live'); } }
+function idx(i){ return (i % N + N) % N; }
+function syncVideos(){ // jen aktivní (+ příští připravené) – ostatní stojí
+  slides.forEach(function(o, i){
+    if (i === cur) { if (!hidden) playV(o, false); else stopV(o); }
+    else if (anim && i === anim.to) {}
+    else stopV(o, true);
+  });
+  var nx = slides[idx(cur + 1)]; if (!CAPTURE) ensureSrc(nx);
+}
+
+/* ---------- vykreslení přechodu (kostka 3D / crossfade) ---------- */
+function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+function setFace(o, ang, back, shade, gloss){
+  o.el.style.transform = 'translateZ(' + (-W/2 - back) + 'px) rotateY(' + ang + 'deg) translateZ(' + (W/2) + 'px)';
+  o.shade.style.opacity = shade; o.gloss.style.opacity = gloss;
+}
+function clearFace(o){ o.el.style.transform = ''; o.el.style.opacity = ''; o.shade.style.opacity = 0; o.gloss.style.opacity = 0; }
+function render(from, to, dir, p){ // p 0..1 (už se easingem)
+  slides.forEach(function(o, i){ var on = (i === from) || (p > 0 && i === to); o.el.classList.toggle('on', on); if (!on) clearFace(o); });
+  var A = slides[from], B = slides[to];
+  if (p <= 0 || from === to) { clearFace(A); A.el.style.zIndex = 2; return; }
+  if (reduce) {
+    clearFace(A); clearFace(B); A.el.style.zIndex = 1; B.el.style.zIndex = 2; B.el.style.opacity = p; return;
+  }
+  var back = Math.sin(Math.PI * p) * W * 0.22;
+  A.el.style.zIndex = p < .5 ? 2 : 1; B.el.style.zIndex = p < .5 ? 1 : 2;
+  setFace(A, -90 * p * dir, back, Math.min(.85, p * .95), Math.sin(Math.PI * p) * .5);
+  setFace(B, 90 * (1 - p) * dir, back, Math.min(.85, (1 - p) * .95), Math.sin(Math.PI * p) * .5);
+}
+function taFor(i){ return SL[i].type !== 'intro'; }
+function taState(from, to, p){ var vis = p < .5 ? taFor(from) : taFor(to); ta.classList.toggle('off', !vis); }
+
+/* ---------- stav ---------- */
+var cur = 0, anim = null, elapsed = 0, hovering = false, holdUntil = 0, hidden = false, inView = true, drag = null;
+function setDots(i, prog){
+  dots.forEach(function(d, j){ d.classList.toggle('on', j === i); d.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    d.firstChild.style.transform = 'scaleX(' + (j === i ? prog : 0) + ')'; });
+}
+function announce(i){ live.textContent = SL[i].type === 'intro' ? 'Partneři MČR 2026' : SL[i].name + ' – ' + SL[i].chip; }
+function go(to, dir, startP){
+  to = idx(to); if (anim) finish(); if (to === cur) return;
+  anim = {from: cur, to: to, dir: dir || 1, t0: performance.now(), p0: startP || 0, dur: (reduce ? .5 : TR) * 1000 * (1 - (startP || 0))};
+  ensureSrc(slides[to]);
+  if (slides[to].video && !CAPTURE) { try { slides[to].video.currentTime = 0; } catch(e){} }
+}
+function finish(){
+  if (!anim) return; var a = anim; anim = null;
+  stopV(slides[a.from], true); cur = a.to; elapsed = 0; render(cur, cur, 1, 0); taState(cur, cur, 1);
+  playV(slides[cur], true); syncVideos(); setDots(cur, 0); announce(cur);
+}
+function kenBurns(o, local){ if (!o || !o.kb || reduce) return; var k = 1 + Math.min(local / (T + TR), 1) * 0.07; o.kb.style.transform = 'scale(' + k.toFixed(4) + ')'; }
+function paused(){ return hovering || drag || hidden || !inView || performance.now() < holdUntil; }
+function userPause(){ holdUntil = performance.now() + 6000; }
+
+var last = performance.now();
+function tick(now){
+  var dt = Math.min(now - last, 100) / 1000; last = now;
+  if (anim && !drag) {
+    var q = Math.min(1, (now - anim.t0) / Math.max(anim.dur, 1));
+    var p = anim.p0 + (1 - anim.p0) * q, e = (anim.p0 > 0) ? 1 - Math.pow(1 - p, 3) : ease(p);
+    render(anim.from, anim.to, anim.dir, e); taState(anim.from, anim.to, e);
+    kenBurns(slides[anim.to], 0);
+    if (q >= 1) finish();
+  } else if (!drag) {
+    if (!paused()) elapsed += dt;
+    var lim = T - TR; setDots(cur, Math.min(1, elapsed / lim));
+    kenBurns(slides[cur], elapsed); if (slides[cur].sweep) slides[cur].sweep.style.transform = 'translateX(' + (((elapsed / lim) * 140) - 70).toFixed(2) + '%)';
+    if (elapsed >= lim) go(cur + 1, 1);
+  }
+  if (!CAPTURE) requestAnimationFrame(tick);
+}
+
+/* ---------- ovládání ---------- */
+kz.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') hovering = true; });
+kz.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') hovering = false; });
+var suppressClick = false;
+kz.addEventListener('pointerdown', function(e){
+  if (e.button !== 0 || anim) return;
+  if (e.target.closest('a,.nav')) return;
+  drag = {x: e.clientX, y: e.clientY, id: e.pointerId, t: performance.now(), dx: 0, active: false};
+});
+kz.addEventListener('pointermove', function(e){
+  if (!drag || e.pointerId !== drag.id) return;
+  var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!drag.active) {
+    if (Math.abs(dx) < 8) return;
+    if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; } // svislé posouvání stránky
+    drag.active = true; try { kz.setPointerCapture(e.pointerId); } catch(_){}
+  }
+  drag.dx = dx; var dir = dx < 0 ? 1 : -1, to = idx(cur + dir), p = Math.min(.98, Math.abs(dx) / W);
+  if (drag.to !== to) { if (drag.to != null) clearFace(slides[drag.to]); drag.to = to; ensureSrc(slides[to]); }
+  drag.dir = dir; drag.p = p; render(cur, to, dir, p); taState(cur, to, p);
+  e.preventDefault();
+});
+function endDrag(e){
+  if (!drag || (e && e.pointerId !== drag.id)) return;
+  var d = drag; drag = null;
+  if (!d.active) return;
+  suppressClick = true; setTimeout(function(){ suppressClick = false; }, 50);
+  var v = Math.abs(d.dx) / Math.max(1, performance.now() - d.t);
+  userPause();
+  if (d.p > .25 || v > .5) { go(d.to, d.dir, d.p); }
+  else { anim = {from: d.to, to: cur, dir: -d.dir, t0: performance.now(), p0: 1 - d.p, dur: 260};
+    // návrat: přehrát „zpět“ jako přechod z cílového na aktuální
+    var keep = cur; cur = d.to; anim.from = d.to; anim.to = keep; }
+}
+kz.addEventListener('pointerup', endDrag); kz.addEventListener('pointercancel', endDrag);
+kz.addEventListener('click', function(e){ if (suppressClick) { e.preventDefault(); e.stopPropagation(); } }, true);
+document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); go(cur - 1, -1); userPause(); });
+document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); go(cur + 1, 1); userPause(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight') { go(cur + 1, 1); userPause(); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { go(cur - 1, -1); userPause(); e.preventDefault(); }
+});
+document.addEventListener('visibilitychange', function(){ hidden = document.hidden; syncVideos(); });
+if (window.IntersectionObserver && !CAPTURE) new IntersectionObserver(function(en){ inView = en[0].isIntersecting; hidden = document.hidden || !inView; syncVideos(); }, {threshold: .2}).observe(kz);
+
+/* ---------- start ---------- */
+render(0, 0, 1, 0); taState(0, 0, 1); setDots(0, 0); announce(0);
+if (!CAPTURE) { syncVideos(); requestAnimationFrame(function(t){ last = t; tick(t); }); }
+
+/* ---------- deterministický režim pro záznam MP4 (KZ_CAPTURE) ---------- */
+window.__kz = {
+  N: N, T: T, TR: TR, total: N * T,
+  at: function(t){ // t v sekundách; snímek i ukazuje [i*T, (i+1)*T), posledních TR s = přechod na i+1
+    t = ((t % (N*T)) + N*T) % (N*T);
+    var i = Math.floor(t / T), lt = t - i*T, from = i, to = idx(i+1), p = 0;
+    if (lt > T - TR) p = ease((lt - (T - TR)) / TR);
+    render(from, to, 1, p); taState(from, to, p);
+    var ps = [];
+    function seek(o, local){
+      kenBurns(o, local);
+      if (o.sweep) o.sweep.style.transform = 'translateX(' + (((Math.min(local, T-TR) / (T-TR)) * 140) - 70).toFixed(2) + '%)';
+      if (!o.video) return; ensureSrc(o);
+      var v = o.video, tt = Math.max(0, Math.min(local, (v.duration || 4.4) - 0.04));
+      ps.push(new Promise(function(res){
+        var done = function(){ v.removeEventListener('seeked', done); res(); };
+        if (v.readyState >= 1 && Math.abs(v.currentTime - tt) < 0.001 && v.readyState >= 2) return res();
+        v.addEventListener('seeked', done); setTimeout(done, 3000);
+        var doSeek = function(){ v.currentTime = tt; };
+        if (v.readyState >= 1) doSeek(); else v.addEventListener('loadedmetadata', doSeek, {once: true});
+      }));
+    }
+    seek(slides[from], lt);
+    if (p > 0) seek(slides[to], 0);
+    setDots(p < .5 ? from : to, p < .5 ? Math.min(1, lt / (T - TR)) : 0);
+    return Promise.all(ps);
+  }
+};
+})();
+</script>
+</body>
+</html>

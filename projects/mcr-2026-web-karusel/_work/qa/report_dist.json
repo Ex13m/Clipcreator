@@ -1,0 +1,103 @@
+{
+ "variant": "dist",
+ "file": "dist/karusel_mcr2026.html",
+ "size_bytes": 3680269,
+ "runs": [
+  {
+   "vp": "360x640",
+   "checks": {
+    "noHScroll": true,
+    "box": [
+     360,
+     640,
+     0.5625
+    ],
+    "imagesOk": true,
+    "fonts": 6,
+    "autoplayIdxAfter4s": 1,
+    "autoplayIdx": 1,
+    "video": null,
+    "playingCount": 0,
+    "afterArrow": 4,
+    "hoverPauseHolds": true,
+    "swipeLeft": [
+     4,
+     4
+    ],
+    "swipeRight": [
+     4,
+     3
+    ],
+    "links": [
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
+     "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
+     "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
+     "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
+     "bosset.cz ↗ | https://bosset.cz/ | _blank | noopener",
+     "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
+     "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
+     "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
+    ]
+   },
+   "errors": []
+  },
+  {
+   "vp": "540x960",
+   "checks": {
+    "noHScroll": true,
+    "box": [
+     540,
+     960,
+     0.5625
+    ],
+    "imagesOk": true,
+    "fonts": 6,
+    "autoplayIdxAfter4s": 1,
+    "autoplayIdx": 1,
+    "video": null,
+    "playingCount": 0,
+    "afterArrow": 4,
+    "hoverPauseHolds": true,
+    "swipeLeft": [
+     4,
+     5
+    ],
+    "swipeRight": [
+     5,
+     4
+    ],
+    "links": [
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
+     "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
+     "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
+     "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
+     "bosset.cz ↗ | https://bosset.cz/ | _blank | noopener",
+     "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
+     "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
+     "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
+    ]
+   },
+   "errors": []
+  },
+  {
+   "vp": "iframe 1280x800",
+   "checks": {
+    "box": [
+     380,
+     676
+    ],
+    "idx": 1,
+    "hostHScroll": false
+   },
+   "errors": []
+  },
+  {
+   "vp": "reduced-motion",
+   "checks": {
+    "transform": "none"
+   }
+  }
+ ]
+}

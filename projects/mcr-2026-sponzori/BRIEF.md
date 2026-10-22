@@ -50,3 +50,4 @@ Fandovy plandavky: NE (rozhodnutí uživatele) — nezařazovat.
 - Schéma míst 1–20 / 21–40: ponechat s poznámkou „čísla míst orientační“.
 - Ceny: konkrétní ceny NEUVÁDĚT (nejsou známy), jen „věnuje ceny“.
 - **Nový sponzor FT Fishing (ftfishing.cz)**: stejné schéma (storytelling, nástrahy, značky), hlavní důraz **Favorite, Crazy Fish, Spinmad**. Blok ve filmu **před Líheň Liběchov** (po intru), vlastní Reels + FB bannery + texty. Chip „Věnuje ceny · MČR 2026“.
+- **Moonky (22. 10., uživatel): odstranit ODEVŠAD** — z filmu, společných textů (souhrnný post, poděkování, vlastní sekce), balíčků bannerů a webové karusely. Zdrojové soubory (blok, Reel, bannery) zůstávají jen v archivu repozitáře, NEDODÁVAT.

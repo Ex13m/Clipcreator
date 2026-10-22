@@ -5,6 +5,5 @@ gausseholler 2.0
 activefishing 2.6
 bosset 6.7
 jigovky 2.0
-moonky 0.4
 troutshop 5.0
 velkaryba 2.0
