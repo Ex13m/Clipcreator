@@ -19,3 +19,5 @@ projects/mcr-2026-bannery/dist/
 projects/**/renders/work-*/
 projects/**/renders/.*hf-transaction*/
 projects/mcr-2026-web-karusel/dist/*.gif
+projects/MCR2026_FINAL/**/*.mp4
+projects/MCR2026_FINAL/*.zip
