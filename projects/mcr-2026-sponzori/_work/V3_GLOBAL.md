@@ -1,5 +1,60 @@
 # MČR 2026 · film v3 — globální změny enginu (21. 10.)
 
+> **AKTUÁLNÍ PLÁN = v7 (22. 10., FT Fishing) — viz §0.** Tabulky §1–§2 níže jsou historie v6 (bez FT Fishing, 72 taktů); všechny
+> bloky za intrem jsou ve v7 posunuté o +5 taktů / +9,174 s, jejich zdrojové takty (= hudba pod nimi) se NEZMĚNILY.
+
+## 0. v7 (22. 10.): nový blok FT Fishing mezi intro a venue (rozhodnutí operátora 22. 10.)
+
+Výstup: `proto/film/` (FINAL=1, **145,046 s**, 77 taktů), lint 0 chyb. Mix filmu −14,05 LUFS / −2,02 dBTP, VO +9,42 LU nad hudbou.
+
+**Hudba** (`python3 scripts/music_edit.py data/block_plan_B.json`): segmenty zdroje **[10, 23) · [18, 69) · [81, 89) · [101, konec)**.
+Intro build 10–17 beze změny → **DROP (zdroj 18) teď padá na začátek FT Fishing** (takt 8), FT = zdroj 18–22 (drop + 4 takty groove A).
+Venue pak znovu startuje zdrojem 18 (střih 22 → 18 na době taktu 23,863 s: stejný příchozí takt jako původní drop → „re-drop“, groove
+venue je bit po bitu stejná jako ve v6). Všechno za venue = stejné zdrojové takty jako ve v6 (události §2 platí, jen +5 taktů).
+Střihy jen na dobách (odchozí do T−6 ms, příchozí equal-power [T−24, T−6] ms); střih 22→18 má stejný profil jako drop 17→18
+(max |Δ| 0,188, RMS 5 ms před/po 0,062/0,115). `track_B.wav` + `track_B.beats.json` přegenerovány (mřížka fázově konzistentní,
+na náběh úderu), `data/block_plan_B.json` (`total_bars` 77), `data/content.json` (plan, v7), `vo/script_cs.json › order`.
+Záloha předchozího stavu: `_work/bak_ftfishing/`.
+
+| blok | takty | počet | t0, s | t1, s | délka, s | takty zdroje | VO, s | rezerva VO → konec, s |
+|---|---|---|---|---|---|---|---|---|
+| intro | 0–7 | 8 | 0.000 | 14.689 | 14.689 | 10–17 | 13.18 (od 0,5) | 1.01 |
+| **ftfishing** (nový) | 8–12 | 5 | 14.689 | 23.863 | 9.174 | 18–22 (DROP) | 6.12 | 2.80 |
+| venue | 13–20 | 8 | 23.863 | 38.541 | 14.678 | 18–25 (re-drop) | 12.49 | 1.93 |
+| gausseholler | 21–25 | 5 | 38.541 | 47.705 | 9.164 | 26–30 | 5.87 | 3.04 |
+| activefishing | 26–30 | 5 | 47.705 | 56.863 | 9.158 | 31–35 | 6.50 | 2.41 |
+| bosset | 31–36 | 6 | 56.863 | 67.853 | 10.990 | 36–41 | 8.26 | 2.48 |
+| jigovky | 37–41 | 5 | 67.853 | 76.998 | 9.145 | 42–46 | 7.88 | 1.02 |
+| moonky | 42–46 | 5 | 76.998 | 86.120 | 9.122 | 47–51 | 7.38 | 1.49 |
+| broll | 47 | 1 | 86.120 | 87.946 | 1.826 | 52 | — | — |
+| brollbreak | 48–49 | 2 | 87.946 | 91.599 | 3.653 | 53–54 | — | — |
+| troutshop | 50–54 | 5 | 91.599 | 100.722 | 9.123 | 55–59 | 6.10 | 2.78 |
+| velkaryba | 55–59 | 5 | 100.722 | 109.834 | 9.112 | 60–64 | 6.80 | 2.06 |
+| crs | 60–63 | 4 | 109.834 | 117.123 | 7.289 | 65–68 | 4.12 | 2.92 |
+| finale | 64–76 | 13 | 117.123 | 145.046 | 27.923 | 81–88 + 101–konec | 12.64 | 15.03 |
+
+VO start 0,25 s (intro 0,5 s), tail ≥ 1,0 s u všech (nejtěsněji intro 1,01, jigovky 1,02). Délky ostatních bloků beze změny (±1 ms).
+
+**Švy**: intro → FT: intro `tOut('zoom')` do bílé → FT svět je bílý papír, kadr 1 = FT/FISHING + pruhy + prut (bez prázdného snímku).
+FT → venue: FT `slashOut` (zelené pruhy + bílý panel, zavřeno přesně na konci) → venue `tIn('flash')` z bílé 0,12 s (1 bílý snímek, dron
+od 3. snímku) — stejný kontrakt jako původní intro → venue. Ostatní švy beze změny (sousedé stejní), zkontrolováno snímky:
+`_work/snap/v3_ftfishing/film_seams/seams_A.jpg`, `seams_B.jpg` (každý šev −0,2 / −0,067 / +0,034 / +0,2 s).
+
+**FT Fishing blok** (`scripts/blocks/ftfishing.mjs` + `scripts/lib/fx_ftfishing.mjs` + `data/blocks/ftfishing.json`), koncept A „Tři
+značky – tři takty“: T0 DROP FT/FISHING + VŠE·PRO·PŘÍVLAČ po slovech, prut Arena Stream na pruhy · T1 Favorite (X1 2000S slam na dobu,
+PRUTY A NAVIJÁKY na „Pruty“, logo na „Favorite“, Totem na 4. dobu) · T2 Crazy Fish (zelené pruhy stírají do černé + magenta, Vibro Fat,
+NÁSTRAHY, logo, hejno 5 gum na osminy) · T3 Spinmad (stěrka do stříbrné, Impulse PRO → Hart → King → Target Spoon 1,5 g na doby) ·
+T4 lockup (logo FT ≤ TA, VŠE PRO PŘÍVLAČ, ftfishing.cz, chip „Věnuje ceny · MČR 2026“, 3 sloupce značka + produkt). 13 produktů.
+Reel: hook = Impulse PRO + VŠE PRO PŘÍVLAČ (hotové na 1. snímku), end card = plate hero ×1,5 + logo FT + značky + URL + chip.
+
+**Finále**: FT Fishing na kartě montáže (bílý papír + FT zelená, Impulse PRO, „FT FISHING“ v Exo 2) — 9 partnerů na 8 dob → doba 6
+taktu 1 rozdělena na osminy (Velká ryba · Bosset), Gausse Holler drží celou poslední dobu před výbuchem; v „burstu“ Target Spoon místo
+druhé Moonky; logo stěna 3 × 3 (stejná plocha 21 000 px², max 260 px), GH kolečko se točí (kód beze změny).
+
+**Bosset (operátor 22. 10.)**: bez litráže termosek — velká „0,6 l“ ve spec stacku pryč (stack posunut pod logo Zojirushi), lockup
+„Pro vítěze MČR · termosky Zojirushi“, hook pill „termosky Zojirushi“; `data/blocks/bosset.json` + `vo/script_cs.json` onscreen.
+
+
 Výstup: `proto/film/` (FINAL=1, **135,900 s**, 72 taktů), lint 0 chyb (7 varování, viz §6), všech 12 bloků se staví samostatně
 (`BLOCK=all`) a 9 Reels (`BLOCK=all REEL=1`, včetně nového `crs`). Mix filmu −14,04 LUFS / −2,02 dBTP, VO +9,45 LU nad hudbou.
 Snímky: `_work/snap/v3_global/seam_1..3.jpg` (každý šev −0,2 / −0,067 / +0,034 / +0,2 s), `logo_bars.jpg` (výřez loga TA uprostřed

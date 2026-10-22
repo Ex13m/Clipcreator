@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>ftfishing-hook · MČR 2026</title></head>
+<body><template>
+<div id="b-ftfishing-hook" data-composition-id="ftfishing-hook" data-width="1080" data-height="1920" data-duration="1.829">
+  <style>
+  #bw-ftfishing-hook { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #ftfishing-hook-stage { position:absolute; inset:0; overflow:hidden; }
+  #b-ftfishing-hook .ft-p{position:absolute}
+#b-ftfishing-hook .ft-p img{position:absolute;inset:0;width:100%;height:100%;display:block}
+#b-ftfishing-hook .ft-band{position:absolute;pointer-events:none}
+#b-ftfishing-hook .ft-band-r{position:absolute;inset:0}
+#b-ftfishing-hook .ft-band-r i{position:absolute;top:0;bottom:0;left:-10%;width:120%;display:block}
+#b-ftfishing-hook .ft-sl-t{position:absolute;top:-200px;height:2320px;left:0}
+#b-ftfishing-hook .ft-sl-s{position:absolute;top:0;bottom:0;display:block;transform:skewX(-22deg)}
+#b-ftfishing-hook .ft-lb{position:absolute;white-space:nowrap;line-height:1;text-transform:uppercase}
+#b-ftfishing-hook .ft-bl{position:absolute}
+#b-ftfishing-hook .ft-bl img{display:block}
+#b-ftfishing-hook .ft-bug{position:absolute}
+#b-ftfishing-hook .ft-bug img{display:block}
+  </style>
+  <div id="bw-ftfishing-hook" class="blk blk-ftfishing" style="--bg:#ffffff;--fg:#1A1A1A;--acc:#6DB52C;--acc2:#878786">
+    <div id="ftfishing-hook-stage" class="blk-stage"><div class="fx-field" id="ftfishing-hook-field" style="background:radial-gradient(120% 80% at 50% 60%, #ffffff 0%, #e9ebe6 100%);"></div><div class="ft-band" id="ftfishing-hook-hb" style="left:-960px;top:1080px;width:3000px;height:340px;opacity:1;"><div class="ft-band-r" style="transform:rotate(-22deg)"><i id="ftfishing-hook-hb-in" style="background:repeating-linear-gradient(118deg, #6DB52C 0 44px, transparent 44px 88px)"></i></div></div><div class="fx-full" id="ftfishing-hook-hcam" style="transform-origin:300px 1100px"><div class="ft-p" id="ftfishing-hook-hp" style="left:53.9px;top:986.2px;width:1011.1px;height:388px;transform-origin:50.0% 50.0%;"><div class="fx-abs" id="ftfishing-hook-hp-cam" style="inset:0;transform-origin:50.0% 50.0%"><div class="fx-abs" id="ftfishing-hook-hp-r" style="inset:0;transform-origin:50.0% 50.0%"><img src="assets/prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png" alt="" style="filter:drop-shadow(0 34px 40px rgba(0,0,0,.3))"><i class="fx-prod-sweep" id="ftfishing-hook-hp-sw" style="-webkit-mask-image:url(assets/prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png);mask-image:url(assets/prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png);--sa:105deg;--so:0.9"></i></div></div></div></div><div class="fx-full" id="ftfishing-hook-hhw" style="transform-origin:64px 410px"><div class="fx-t " id="ftfishing-hook-hh1" style="left:64px;top:410px;width:952px;font-family:'Exo 2';font-weight:900;font-size:190px;line-height:0.92;letter-spacing:0em;color:#1A1A1A;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="ftfishing-hook-hh1-l0" style=""><span>Vše pro</span></span></div><div class="fx-t " id="ftfishing-hook-hh2" style="left:64px;top:584.8px;width:952px;font-family:'Exo 2';font-weight:900;font-size:190px;line-height:0.92;letter-spacing:0em;color:#6DB52C;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="ftfishing-hook-hh2-l0" style=""><span>přívlač</span></span></div><div class="ft-lb" id="ftfishing-hook-hsu" style="left:68px;top:785.6px;font-family:'Saira';font-weight:800;font-stretch:112%;font-size:44px;letter-spacing:0.04em;color:#878786;text-transform:none">FT Fishing · ftfishing.cz</div></div>
+    </div>
+    
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#ftfishing-hook-hb-in", {"x":0});
+  gsap.set("#ftfishing-hook-hp", {"x":160,"scale":1.1});
+  gsap.set("#ftfishing-hook-hcam", {"scale":1});
+  gsap.set("#ftfishing-hook-hp-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#ftfishing-hook-hhw", {"scale":1.07,"opacity":1});
+  gsap.set("#ftfishing-hook-hp-r", {"rotation":-16});
+  tl.fromTo("#ftfishing-hook-hb-in", {"x":0}, {"x":-160,"duration":1.829,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#ftfishing-hook-hp", {"x":160,"scale":1.1}, {"x":0,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#ftfishing-hook-hcam", {"scale":1}, {"scale":1.07,"duration":1.4289999999999998,"ease":"none","immediateRender":false}, 0.400);
+  tl.fromTo("#ftfishing-hook-hp-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.250);
+  tl.fromTo("#ftfishing-hook-hhw", {"scale":1.07}, {"scale":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#ftfishing-hook-hhw", {"opacity":1}, {"opacity":0,"duration":0.12,"ease":"power2.in","immediateRender":false}, 1.709);
+  tl.set({}, {}, 1.829);
+  window.__timelines["ftfishing-hook"] = tl;
+  </script>
+</div>
+</template></body></html>

@@ -23,6 +23,8 @@ const CARDS = [
   // read as a stray random photo for ~0.4 s before DĚKUJEME — operator 22. 10.). Líheň colours (turquoise / navy, aqua name) + its
   // trout (the venue's own fish, same cut-out as the venue block) as the „product“
   { k: 'venue', src: 'assets_prep/fish_ai/fish_rainbow_a_cut.png', h: 330, rot: -8, bg: ['#17607a', '#1a212e'], glow: '#17a1c8', go: 0.5, fg: '#ffffff', name: 'LÍHEŇ LIBĚCHOV', font: 'Montserrat', wght: 900, italic: true, nc: 'rgba(154,231,232,.16)' },
+  // FT Fishing (22. 10.): its white paper + FT green, the Impulse PRO Firetiger, name in Exo 2 (its block's display font), ink type on the light world
+  { k: 'ftfishing', p: 0, rot: -10, bg: ['#ffffff', '#e4e9dc'], glow: '#6DB52C', go: 0.42, fg: '#1A1A1A', name: 'FT FISHING', font: 'Exo 2', wght: 900, nc: 'rgba(109,181,44,.2)' },
   { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
   { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
   { k: 'moonky', p: 0, rot: -8, bg: ['#24305c', '#0e1424'], glow: '#ff4f8b', go: 0.42, fg: '#ffffff', name: 'MOONKY', font: 'Unbounded', wght: 900, nc: 'rgba(184,255,46,.16)' },
@@ -38,7 +40,7 @@ const CARDS = [
 const BURST = [
   ['activefishing', 1, 150, 410, 230, 0, 1, -14], ['moonky', 4, 345, 300, 300, 0, 1, -18], ['bosset', 0, 545, 285, 290, 0, 1, 6],
   ['velkaryba', 0, 752, 310, 260, 0, 1, 22], ['troutshop', 3, 945, 425, 220, 0, 1, 12],
-  ['jigovky', 0, 128, 655, 200, 0, 1, -8], ['moonky', 2, 972, 655, 230, 0, 1, -14],
+  ['jigovky', 0, 128, 655, 200, 0, 1, -8], ['ftfishing', 4, 972, 655, 230, 0, 1, -14],
   ['velkaryba', 3, 70, 1760, 700, 15, 1, 32], ['activefishing', 2, 1010, 1790, 640, 15, 1, -24],
 ];
 
@@ -48,7 +50,10 @@ export default function finale(ctx) {
   const voAt = (q, d) => ctx.vo.at(q) ?? d;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const tB = bar(2), tC = bar(6), tD = ctx.at(8, 2), tGH = bar(10), tFade = bar(11), END = ctx.dur;
-  const beatsA = ctx.beats.filter((t) => t < tB - 0.05).slice(0, CARDS.length);
+  // one partner per beat; with 9 partners (FT Fishing added 22. 10.) beat 6 splits into two 8ths (Velká ryba · Bosset accelerate into
+  // the Gausse Holler card on the last beat, which keeps a full beat before the burst)
+  const beats8 = ctx.beats.filter((t) => t < tB - 0.05).slice(0, 8);
+  const beatsA = CARDS.length > beats8.length ? [...beats8.slice(0, 7), (beats8[6] + beats8[7]) / 2, beats8[7]] : beats8;
   let html = fx.field(ctx, { kind: 'radial', c1: T.bg2, c2: T.bg, at: '50% 42%' });
   const fitSize = (text, o) => ctx.fit(ctx.nb(text), { maxW: CW, maxLines: 1, ...o }).size;
 
@@ -186,21 +191,23 @@ export default function finale(ctx) {
   // =====================================================================================================
   // C · LOGO WALL (bars 6 → drop): equal optical weight, below the TA hero, metallic glint on the downbeats
   // =====================================================================================================
-  const keys = D.wall, cols = 2, rows = Math.ceil(keys.length / cols);
+  const keys = D.wall, cols = keys.length > 8 ? 3 : 2, rows = Math.ceil(keys.length / cols);   // 9 partners (22. 10.) → 3 × 3
   const kY = PH.y + PH.h + 44;
   const kick = fx.headline(ctx, { id: 'wk', text: E.partnersTitle || 'Partneři mistrovství', x: L, y: kY, w: CW, maxLines: 1, font: 'Inter', wght: 700, size: 30, upper: true, tracking: 0.24, align: 'center', color: T.accent, t: tC, reveal: 'chars', stagger: 0.012 });
   const gTop = kY + 70, gBot = ctx.H - ctx.safe.bottom - 16, gL = L, gR = ctx.W - L;
   const cw = (gR - gL) / cols, ch = (gBot - gTop) / rows;
   // no URL captions (19 px = unreadable on a phone, and they ate 35 px of every cell) → logos get the whole cell; square
   // marks (Liběchov, GH) were capped by the cell height, now ~125 px instead of 105
-  const AREA = 24000, MAXW = 360, MAXH = Math.min(130, ch - 30);
+  const AREA = cols > 2 ? 21000 : 24000, MAXW = cols > 2 ? 260 : 360, MAXH = Math.min(130, ch - 30);
   // halo per brand; Jigovky: its green, not yellow (yellow behind the thin white line logo killed the contrast)
-  const GLOW = { venue: '#17a1c8', troutshop: '#e3000f', activefishing: '#e39025', moonky: '#ff4f8b', jigovky: '#1f9a4c', velkaryba: '#3d7fd0', bosset: '#1b97b1', gausseholler: '#1d8fd5' };
+  const GLOW = { venue: '#17a1c8', troutshop: '#e3000f', activefishing: '#e39025', moonky: '#ff4f8b', jigovky: '#1f9a4c', velkaryba: '#3d7fd0', bosset: '#1b97b1', gausseholler: '#1d8fd5', ftfishing: '#6DB52C' };
   const tWall1 = tD + 0.5;
   let wall = '';
   // hairline grid (draws in from the centre)
-  wall += `<i class="fin-hl fin-v" id="${ctx.id('gv')}" style="left:${CX}px;top:${gTop}px;height:${gBot - gTop}px"></i>`;
-  ctx.tl.fromTo(ctx.sel('gv'), { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: 'expo.out' }, tC);
+  for (let c = 1; c < cols; c++) {
+    wall += `<i class="fin-hl fin-v" id="${ctx.id(`gv${c}`)}" style="left:${Math.round(gL + c * cw)}px;top:${gTop}px;height:${gBot - gTop}px"></i>`;
+    ctx.tl.fromTo(ctx.sel(`gv${c}`), { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: 'expo.out' }, tC);
+  }
   for (let r = 0; r <= rows; r++) {
     wall += `<i class="fin-hl fin-h" id="${ctx.id(`gh${r}`)}" style="left:${gL}px;top:${Math.round(gTop + r * ch)}px;width:${gR - gL}px;opacity:${r === 0 || r === rows ? 0.5 : 1}"></i>`;
     ctx.tl.fromTo(ctx.sel(`gh${r}`), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'expo.out' }, tC + 0.04 * r);

@@ -163,8 +163,9 @@ blocks. The fx classes (`.fx-*`) are global.
 **PLAN B (v3, 21. 10.)** — bars are 0-based on `audio/track_B.wav` (cut by `scripts/music_edit.py` from `music/sponsors_3.mp3`;
 ~130–132 BPM drift, bar ≈ 1.82–1.84 s; grid `audio/track_B.beats.json`, aligned to the drum TRANSIENT, with a per-bar energy profile
 `bars[]` = dB full / low / high + source bar). Plan (`data/content.json`, table with times in `_work/V3_GLOBAL.md`):
-intro 0–7 · **venue 8–15 (DROP on bar 8)** · gausseholler 16–20 · activefishing 21–25 · bosset 26–31 · jigovky 32–36 · moonky 37–41 ·
-broll 42 · brollbreak 43–44 · troutshop 45–49 · velkaryba 50–54 · crs 55–58 · finale 59–71 (+ tail to the end).
+**v7 (22. 10.)**: intro 0–7 · **ftfishing 8–12 (DROP on bar 8)** · venue 13–20 (re-drop, same source bars as before) · gausseholler 21–25 ·
+activefishing 26–30 · bosset 31–36 · jigovky 37–41 · moonky 42–46 · broll 47 · brollbreak 48–49 · troutshop 50–54 · velkaryba 55–59 · crs 60–63 ·
+finale 64–76 (+ tail to the end; film 145.05 s). Block-local music is unchanged for every block except the new ftfishing (`_work/V3_GLOBAL.md` §0).
 Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on `ctx.beats`. Musical events inside blocks
 (breaks, fills, peak entries) are listed in `_work/V3_GLOBAL.md` §2.
 

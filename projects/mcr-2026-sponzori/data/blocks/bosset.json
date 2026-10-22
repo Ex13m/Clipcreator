@@ -147,7 +147,7 @@
  "copy": {
   "headline": "Ceny pro vítěze",
   "facts": [
-   "Termosky 0,5–0,7 l",
+   "Termosky Zojirushi",
    "Horké až 6 hodin"
   ],
   "url": "bosset.cz",
@@ -155,7 +155,7 @@
   "lines": [
    {
     "t": "Termosky do cen",
-    "s": "Zojirushi · 0,5–0,7 l",
+    "s": "Zojirushi",
     "cta": false,
     "src": "brief (ceny) + research/bosset.md (kategorie Termosky)"
    },
@@ -180,6 +180,6 @@
   ]
  },
  "notes": [
-  "Nic o původu Zojirushi. Ceny = termosky 0,6 l (rozsah 0,5–0,7 l dle briefu). VO „Ceny pro vítěze“ — L3 v REVIEW čeká na potvrzení."
+  "Nic o původu Zojirushi. Ceny = termosky Zojirushi — objem NEUVÁDĚT (operátor 22. 10.: „jen termosky“). VO „Ceny pro vítěze“ — L3 v REVIEW čeká na potvrzení."
  ]
 }

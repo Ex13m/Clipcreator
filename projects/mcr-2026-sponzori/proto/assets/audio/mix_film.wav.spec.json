@@ -1,6 +1,6 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_film.wav",
- "dur": 135.9,
+ "dur": 145.066,
  "music": {
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
   "start": 0,
@@ -14,53 +14,58 @@
    "dur": 13.182
   },
   {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/venue.wav",
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/ftfishing.wav",
    "at": 14.939,
+   "dur": 6.121
+  },
+  {
+   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/venue.wav",
+   "at": 24.113,
    "dur": 12.493
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/gausseholler.wav",
-   "at": 29.616,
+   "at": 38.791,
    "dur": 5.87
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/activefishing.wav",
-   "at": 38.781,
+   "at": 47.955,
    "dur": 6.496
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/bosset.wav",
-   "at": 47.939,
+   "at": 57.113,
    "dur": 8.257
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/jigovky.wav",
-   "at": 58.929,
+   "at": 68.103,
    "dur": 7.877
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
-   "at": 68.074,
+   "at": 77.248,
    "dur": 7.384
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
-   "at": 82.674,
+   "at": 91.849,
    "dur": 6.096
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/velkaryba.wav",
-   "at": 91.798,
+   "at": 100.972,
    "dur": 6.799
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/crs.wav",
-   "at": 100.91,
+   "at": 110.084,
    "dur": 4.118
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/finale.wav",
-   "at": 108.199,
+   "at": 117.373,
    "dur": 12.64
   }
  ],

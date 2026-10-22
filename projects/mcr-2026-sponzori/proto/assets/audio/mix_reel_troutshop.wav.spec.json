@@ -3,14 +3,14 @@
  "dur": 14.6,
  "music": {
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
-  "start": 80.598,
+  "start": 89.772,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
-   "at": 2.076,
+   "at": 2.077,
    "dur": 6.096
   }
  ],

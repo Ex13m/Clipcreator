@@ -7,6 +7,8 @@ import { fontCss } from './fonts.mjs';
 
 export const EVENT = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/event.json'), 'utf8'));
 const RUNTIME = fs.readFileSync(path.join(ROOT, 'scripts/engine/runtime.js'), 'utf8');
+// visible ink box of every brand logo (scripts/engine/brand_trims.py → data/brand_trims.json), used by E.brandStrip
+const TRIMS = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data/brand_trims.json'), 'utf8')); } catch { return {}; } })();
 // TA logo shadow levels (= film tokens.json plate.levels): blurred dark copies 3 px / 14 px + faint radial halo
 export const TONES = { dark: { sh: 0.4, sh2: 0.15, scrim: 0 }, scrim: { sh: 0.7, sh2: 0.55, scrim: 0.35 }, halo: { sh: 0.95, sh2: 0.85, scrim: 0.55 } };
 
@@ -67,6 +69,68 @@ export function makeE(mod, f, L, roleInfo) {
       const left = cx != null ? cx - ww / 2 : x, top = cy != null ? cy - hh / 2 : y;
       return { html: `<img ${id ? `id="${id}" ` : ''}class="${cls}" src="${E.src(rel)}" alt="" style="position:absolute;left:${px(left)};top:${px(top)};width:${px(ww)};height:${px(hh)};${style}" ${attrs}>`, x: left, y: top, w: ww, h: hh };
     },
+    // Row of THIRD-PARTY brand logos the shop carries (operator 22. 10.: „vyveď jejich značky na banner“).
+    //   items: ['film:assets_prep/<key>/brands/x_on_dark.png' | {f, s (size weight, default 1), trim:[x,y,w,h]} | {wm:'TIMON', sub:'by Jackall'}]
+    //   box: x, y, w, h (row height = tallest logo), label (small caps text left of / above the row), labelPos 'left'|'top',
+    //   labelSize, labelCss, gap (px between logos), align 'left'|'center'|'right'|'justify', mono 'white'|'black'|null,
+    //   opacity, rows (1|2: split the list into two rows, h = height of ONE row), rowGap, font (wordmarks), color (wordmarks), inAttr
+    // Logos are sized by equal visual AREA (sqrt-normalised, × s) so wide wordmarks and round badges read the same weight, all
+    // capped by h and never upscaled > maxUp. Every logo is a .sp-logo (QA: ≤ TA logo); the whole strip is a .t box (QA: no chrome overlap).
+    brandStrip(items, { x, y, w, h, label = '', labelPos = 'left', labelSize = null, labelCss = '', gap = null, align = 'left', mono = null, opacity = 1, rows = 1, rowGap = null, font = 'Montserrat', color = '#fff', maxUp = 1, maxLogoW = null, inAttr = '', id = 'brand-strip', cls = '' }) {
+      const its = items.map((it) => (typeof it === 'string' ? { f: it } : it)).map((it) => {
+        if (it.wm) return { ...it, ar: Math.max(2.2, it.wm.length * 0.78), nat: 1e9 };
+        const [nw, nh] = dims(fileOf(it.f)), T = it.trim || TRIMS[it.f] || [0, 0, nw, nh];
+        return { ...it, nw, nh, T, ar: T[2] / T[3], nat: T[2] };
+      });
+      const ls = labelSize ?? Math.max(14, Math.round(h * 0.3));
+      const labW = label && labelPos === 'left' ? label.length * ls * 0.7 + ls * 1.2 : 0;
+      const labH = label && labelPos === 'top' ? ls * 1.6 : 0;
+      const g = gap ?? Math.round(h * 0.55), rg = rowGap ?? Math.round(h * 0.35);
+      const perRow = Math.ceil(its.length / rows), R = [];
+      for (let i = 0; i < its.length; i += perRow) R.push(its.slice(i, i + perRow));
+      // unit-area sizes → one scale k for all rows (largest k whose row fits the width); each logo is then capped at the row
+      // height h on its own (a tall badge stops at h, the wordmarks keep growing) — binary search on k
+      const unit = (it) => { const hh = Math.sqrt(1 / it.ar) * (it.s || 1); return { w: hh * it.ar, h: hh }; };
+      const rowW = w - labW;
+      // per-logo cap: width ≤ 0.8 × TA logo width (logo rule with margin), never upscaled > maxUp
+      const capW = Math.min(maxLogoW ?? Infinity, L.ta.w * 0.8);
+      const sized = (it, kk) => { const u = unit(it); let hh = Math.min(u.h * kk, h), ww = hh * it.ar; const cw = Math.min(capW, it.nat * maxUp); if (ww > cw) { ww = cw; hh = ww / it.ar; } return { w: ww, h: hh }; };
+      const fits = (kk) => R.every((r) => r.reduce((a, it) => a + sized(it, kk).w, 0) + g * (r.length - 1) <= rowW);
+      // k ≤ the value where the median logo reaches the row height (only the tall badges get clamped by h)
+      const uh = its.map((it) => unit(it).h).sort((p, q) => p - q);
+      let lo = 0, hi = h / uh[Math.floor((uh.length - 1) / 2)];
+      if (fits(hi)) lo = hi;
+      for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+      const k = lo;
+      const filt = mono === 'white' ? 'filter:brightness(0) invert(1);' : mono === 'black' ? 'filter:brightness(0);' : '';
+      let html = '', used = 0, n = 0;
+      const top0 = labH;
+      R.forEach((r, ri) => {
+        const S = r.map((it) => ({ it, ...sized(it, k) }));
+        const tot = S.reduce((a, q) => a + q.w, 0);
+        let gg = g, cx = labW;
+        if (align === 'justify' && r.length > 1) gg = (rowW - tot) / (r.length - 1);
+        else if (align === 'center') cx = labW + (rowW - tot - g * (r.length - 1)) / 2;
+        else if (align === 'right') cx = labW + rowW - tot - g * (r.length - 1);
+        const cy = top0 + ri * (h + rg) + h / 2;
+        for (const q of S) {
+          const { it } = q, l = cx, t = cy - q.h / 2;
+          if (it.wm) {
+            html += `<span class="sp-wm" style="position:absolute;left:${px(l)};top:${px(cy - h / 2)};width:${px(q.w)};height:${px(h)};display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 ${px(q.h * 0.62)}/1 ${font};letter-spacing:.04em;text-transform:uppercase;color:${color};opacity:${opacity}">${esc(it.wm)}${it.sub ? `<small style="display:block;margin-top:.3em;font-size:.36em;font-weight:600;letter-spacing:.14em;opacity:.8">${esc(it.sub)}</small>` : ''}</span>`;
+          } else {
+            const s = q.w / it.T[2];
+            html += `<span id="${id}-${n}" class="sp-logo" data-cw="1" data-ch="1" style="position:absolute;left:${px(l)};top:${px(t)};width:${px(q.w)};height:${px(q.h)};opacity:${opacity}"><img src="${E.src(it.f)}" alt="" data-noscale style="position:absolute;left:${px(-it.T[0] * s)};top:${px(-it.T[1] * s)};width:${px(it.nw * s)};height:${px(it.nh * s)};max-width:none;${filt}"></span>`;
+          }
+          cx += q.w + gg; used = Math.max(used, cx - gg); n++;
+        }
+      });
+      const H = labH + R.length * h + (R.length - 1) * rg;
+      const lab = !label ? '' : labelPos === 'left'
+        ? `<span class="sp-strip-l" style="position:absolute;left:0;top:${px(h / 2 - ls * 0.6)};height:${px(ls * 1.2)};font:700 ${ls}px/${px(ls * 1.2)} Montserrat;letter-spacing:.14em;text-transform:uppercase;color:${color};${labelCss}">${esc(nb(label))}</span>`
+        : `<span class="sp-strip-l" style="position:absolute;left:0;top:0;height:${px(ls * 1.2)};font:700 ${ls}px/${px(ls * 1.2)} Montserrat;letter-spacing:.14em;text-transform:uppercase;color:${color};${labelCss}">${esc(nb(label))}</span>`;
+      const W = align === 'left' ? Math.min(w, used) : w;
+      return { html: `<div id="${id}" class="t sp-strip ${cls}" ${inAttr} style="left:${px(x)};top:${px(y)};width:${px(W)};height:${px(H)};overflow:visible">${lab}${html}</div>`, w: W, h: H, k };
+    },
   };
   return E;
 }
@@ -92,6 +156,17 @@ export function buildPage(mod, f, sceneIds, { draft = false } = {}) {
   }
   if (mod.css) css = `${mod.css(E) || ''}\n${css}`;
   const taUrl = urlOf(path.join(PROJECTS, EVENT.ta.logo));
+  // optional sponsor icon right before the URL (brand.urlIcon = {ring, core, canvas:[w,h], box:[x,y,w,h] visible, pivot:[x,y], spin, cap, scale, gap, dy})
+  // sized in em of the URL font → follows data-fit; height = scale × cap height; outer ring turns clockwise in MP4s (data-spin)
+  let urlIcon = '';
+  const UI = mod.brand.urlIcon;
+  if (UI) {
+    const [cw, chh] = UI.canvas, [bx, by, bw, bh] = UI.box, hEm = (UI.cap ?? 0.727) * (UI.scale ?? 1.2), s = hEm / bh, em = (n) => `${(Math.round(n * 10000) / 10000)}em`;
+    const lay = (rel, extra = '') => `<img src="${E.src(rel)}" alt="" data-noscale style="position:absolute;left:${em(-bx * s)};top:${em(-by * s)};width:${em(cw * s)};height:${em(chh * s)};max-width:none;${extra}"`;
+    urlIcon = `<span id="ch-urlicon" class="sp-logo" data-cw="1" data-ch="1" style="position:relative;flex:none;display:block;width:${em(bw * s)};height:${em(bh * s)};margin-right:${em(UI.gap ?? 0.3)};top:${em(UI.dy ?? 0)}">`
+      + (UI.ring ? `${lay(UI.ring, `transform-origin:${em((UI.pivot?.[0] ?? cw / 2) * s)} ${em((UI.pivot?.[1] ?? chh / 2) * s)}`)}${UI.spin === false ? '' : ` data-spin="${UI.spin ?? 360}"`}>` : '')
+      + (UI.core ? `${lay(UI.core)}>` : '') + (UI.img ? `${lay(UI.img)}>` : '') + '</span>';
+  }
   const T = L.ta, I = T.img;
   const roleHtml = L.role ? `<div id="ch-role" class="ch" style="left:${px(L.role.x)};top:${px(L.role.y)};width:${px(L.role.w)};height:${px(L.role.h)};font:700 ${f.role}px/${px(L.role.h)} Montserrat;letter-spacing:.12em;text-transform:uppercase;color:${ch.sub};text-align:right" data-fit="12">${esc(nb(roleInfo.roleLine))}</div>` : '';
   const evParts = EVENT.line.split(' · ');
@@ -130,7 +205,7 @@ ${css}
 ${scenesHtml}
 <div id="chrome">
   <i id="ta-scrim"></i><i id="ta-sh2"></i><i id="ta-sh"></i><img id="ta-logo" src="${taUrl}" alt="Trout Area Czech Republic"><i id="ta-logo-box"></i>
-  <div id="ch-url" class="ch" data-fit="18">${esc(mod.brand.url)}</div>${roleHtml}
+  <div id="ch-url" class="ch" data-fit="18"${urlIcon ? ' style="display:flex;justify-content:flex-end;align-items:center"' : ''}>${urlIcon}${urlIcon ? `<span>${esc(mod.brand.url)}</span>` : esc(mod.brand.url)}</div>${roleHtml}
   ${chipHtml}
   <div id="ch-event" class="ch" data-fit="14">${evHtml}</div>
 </div>

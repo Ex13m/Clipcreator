@@ -123,7 +123,7 @@
     const lg = document.getElementById('ta-logo');
     if (!lg || !vis(lg) || !lg.complete || !lg.naturalWidth) err.push('TA logo missing / not visible');
     const shown = scenes.filter((s) => +s.style.opacity > 0.5);
-    for (const s of shown) {
+    for (const s of [...shown, document.getElementById('chrome')]) {   // + a sponsor mark in the chrome (brand.urlIcon)
       for (const el of $$('.sp-logo', s)) {
         if (!vis(el)) continue;
         const r = R(el), cw = +(el.dataset.cw || 1), ch = +(el.dataset.ch || 1);   // content fraction of the box (padding in the PNG)

@@ -70,6 +70,21 @@ const BR = {
   velvetarts: { f: 'velvetarts.png', bb: [7, 6, 1188, 526] }, forest: { f: 'forest.png', bb: [4, 4, 280, 122] },
   officeeucalyptus: { f: 'officeeucalyptus.png', bb: [6, 6, 193, 82] }, rodiocraft: { f: 'rodiocraft.png', bb: [0, 0, 1200, 260] },
 };
+// brand strip on the poster (operator 22. 10.: „vyveď jejich značky“) — order = research/activefishing_brands.md rank;
+// third-party brands the shop SELLS, shown next to the shop logo on the paper (original colours, Timon = typed wordmark)
+const STRIP = [{ f: `${BRD}nories.png`, s: 1.05 }, { wm: 'Timon', sub: 'by Jackall', s: 0.9 }, { f: `${BRD}mukai.png`, s: 0.95 }, { f: `${BRD}valkein.png` }, { f: `${BRD}varivas.png`, s: 0.9 }, { f: `${BRD}yarie.png`, s: 0.85 }];
+const strip = (E, o) => E.brandStrip(STRIP, { label: 'V nabídce', labelPos: 'top', labelCss: `font-family:Nunito;font-weight:900;letter-spacing:.14em;color:${C.grey}`, color: C.ink, inAttr: 'data-in="up" data-d=".3" data-dist="30"', align: 'justify', ...o });
+// shop logo + brand strip in one bottom row of the body; returns html + top of the row
+function logoRow(E, { sh, gap = 40, labelSize = 18, logoMaxH = 999 }) {
+  const b = E.body, L = afLogo(E, { x: 0, y: 0, maxH: logoMaxH });
+  const rowH = Math.max(L.h, sh + labelSize * 1.6), top = b.b - rowH - 4;
+  let h = afLogo(E, { x: b.x, y: top + (rowH - L.h) / 2, maxH: logoMaxH }).html;
+  const sx = b.x + L.w + gap, o = { w: b.r - sx, h: sh, labelSize };
+  const st = strip(E, { x: 0, y: 0, ...o });
+  h += `<i class="abs" style="left:${R1(sx - gap / 2)}px;top:${R1(top + 6)}px;width:2px;height:${R1(rowH - 12)}px;background:rgba(17,17,17,.14)"></i>`;
+  h += strip(E, { x: sx, y: top + (rowH - st.h) / 2, ...o }).html;
+  return { html: h, top };
+}
 const LOGO = 'film:assets_prep/activefishing/logo_on_light.png', LOGO_TRIM = [32, 32, 1599, 666];
 
 export function css() {
@@ -240,9 +255,9 @@ export const scenes = {
       const colW = 440;
       const c = counter(E, { x: b.x, y: b.y + 2, w: colW, big: 124, d: 0.05 });
       txt += c.html;
-      const L = afLogo(E, { x: 0, y: 0, maxH: 999 });
-      txt += afLogo(E, { x: b.x, y: b.b - L.h }).html;
-      html += cluster(E, CL_WIDE, { x: b.x + colW + 10, y: b.y - 4, w: b.r - b.x - colW + 30, h: b.h + 10 });
+      const R = logoRow(E, { sh: 34, labelSize: 14, gap: 30, logoMaxH: 64 });
+      txt += R.html;
+      html += cluster(E, CL_WIDE, { x: b.x + colW + 10, y: b.y - 4, w: b.r - b.x - colW + 30, h: R.top - b.y - 2 });
       return { html: html + txt };
     }
     html += frame(E, { glow: k === 'square' ? [0.75, 0.6] : [0.6, 0.72] });
@@ -251,9 +266,9 @@ export const scenes = {
       txt += T(E, { cls: 'af-k af-tag', x: b.x, y: b.y + 8, w: 600, size: 25, text: 'Český e-shop pro trout area', style: 'letter-spacing:.08em', inAttr: 'data-in="left"' });
       const c = counter(E, { x: b.x, y: b.y + 64, w: colW, big: 236, d: 0.05 });
       txt += c.html;
-      const L = afLogo(E, { x: 0, y: 0, maxH: 999 });
-      txt += afLogo(E, { x: b.x, y: b.b - L.h - 2 }).html;
-      html += cluster(E, CL_TALL, { x: b.x + colW - 10, y: b.y + 30, w: b.r - b.x - colW + 40, h: b.h - 30 });
+      const R = logoRow(E, { sh: 44, labelSize: 16, logoMaxH: 84 });
+      txt += R.html;
+      html += cluster(E, CL_TALL, { x: b.x + colW - 10, y: b.y + 30, w: b.r - b.x - colW + 40, h: R.top - b.y - 40 });
       return { html: html + txt };
     }
     // portrait / tall: counter column left, site benefits + logo under it, the drop of lures fills the right column
@@ -264,9 +279,9 @@ export const scenes = {
     const ps = tall ? 28 : 26;
     txt += pill(E, { x: b.x, y: c.b + (tall ? 40 : 30), text: 'Osobní přístup', size: ps, tone: 'fill', d: 0.25 });
     txt += pill(E, { x: b.x, y: c.b + (tall ? 40 : 30) + ps * 2 + 14, text: 'Unikátní sortiment', size: ps, tone: 'ol', d: 0.3 });
-    const L = afLogo(E, { x: 0, y: 0, maxH: 999 });
-    txt += afLogo(E, { x: b.x, y: b.b - L.h - 4 }).html;
-    html += cluster(E, CL_TALL, { x: b.x + colW - 30, y: b.y + 60, w: b.r - b.x - colW + 60, h: b.h - 60 });
+    const R = logoRow(E, { sh: tall ? 56 : 50, labelSize: tall ? 19 : 17 });
+    txt += R.html;
+    html += cluster(E, CL_TALL, { x: b.x + colW - 30, y: b.y + 60, w: b.r - b.x - colW + 60, h: R.top - b.y - 80 });
     return { html: html + txt };
   },
 

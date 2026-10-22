@@ -248,7 +248,7 @@ Bosset.cz – nástrahy, které sami vyzkoušeli
 
 Český e-shop pro přívlač a oficiální distributor Keitech a YGK X-Braid pro ČR. Přívlači na umělé nástrahy se věnují víc než dvacet let a dávají přednost nástrahám, které mají osobně vyzkoušené. V nabídce najdete i woblery Megabass, ZipBaits a O.S.P, trout area sortiment Fresh Lures a Decoy – a termosky Zojirushi.
 
-Bosset.cz věnuje ceny pro závodníky MČR 2026: vítězové mistrovství získají termosky Zojirushi 0,6 l, které udrží nápoj horký i studený až 6 hodin. Děkujeme!
+Bosset.cz věnuje ceny pro závodníky MČR 2026: vítězové mistrovství získají termosky Zojirushi, které udrží nápoj horký i studený až 6 hodin. Děkujeme!
 
 bosset.cz
 
@@ -265,7 +265,7 @@ Oficiální distributor Keitech a YGK X-Braid pro ČR.
 
 Gumy Keitech · šňůry YGK · woblery Megabass, ZipBaits, O.S.P
 
-Pro vítěze MČR 2026: termosky Zojirushi 0,6 l.
+Pro vítěze MČR 2026: termosky Zojirushi.
 Horké i studené až 6 hodin.
 
 Děkujeme za ceny!
@@ -286,7 +286,7 @@ bosset.cz
 
 1. Bosset.cz – rybářský e-shop pro přívlač
 2. Oficiální distributor Keitech a YGK X-Braid pro ČR
-3. Termosky Zojirushi 0,6 l – horké i studené až 6 hodin
+3. Termosky Zojirushi – horké i studené až 6 hodin
 4. Věnuje ceny · termosky pro vítěze MČR
 
 ---

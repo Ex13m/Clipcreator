@@ -115,6 +115,10 @@ function lureImg(E, key, { cx, cy, bw, bh, extra = 0, attrs = '', cls = 'vr-lure
 }
 // equal visual weight for brand logos = equal area
 function eqFit(E, src, A, maxW, maxH) { const [nw, nh] = E.dims(src), ar = nw / nh; const w = Math.min(maxW, Math.sqrt(A * ar), maxH * ar, nw); return { w, h: w / ar }; }
+// brand strip on the poster (operator 22. 10.): Shimano lead + the shop's homepage brands + the trout spoons' brands
+// (research/velkaryba_brands.md §3) — third-party brands „v nabídce“, never „naše“
+const STRIP = [{ f: `${BR}shimano_on_dark.png`, s: 1.0 }, { f: `${BR}illex_on_dark.png`, s: 1.18 }, { f: `${BR}daiwa_on_dark.png`, s: 1.0 }, { f: `${BR}rapala_on_dark.png`, s: 1.12 }, { f: `${BR}savagegear_on_dark.png`, s: 1.6 }, { f: `${BR}salmo_on_dark.png`, s: 1.1 }];
+const strip = (E, o) => E.brandStrip(STRIP, { label: 'Značky v nabídce', labelPos: 'top', labelCss: `font-family:Nunito;font-weight:900;font-style:italic;letter-spacing:.16em;color:${C.ice}`, color: C.white, inAttr: 'data-in="up" data-d=".3" data-dist="30"', ...o });
 const logoW = (E) => E.logoFit(LOGO_TRIM[2] / LOGO_TRIM[3]);
 const vrLogo = (E, o) => E.logo(LOGO, { trim: LOGO_TRIM, ...o });
 
@@ -181,14 +185,17 @@ function brandCards(E, { x, y, w, rows = 2, cols = 5, ch = 64, gap = 10, d0 = 0.
 export const scenes = {
   // POSTER — VŠE NA PŘÍVLAČ: Shimano Vanquish FA CE + the orange Cardiff (Trout Area spoon), Speciálka z Olomouce · od roku 2011
   poster(E) {
-    const b = E.body, k = E.kind;
+    let b = E.body; const k = E.kind;
     let bg = '<div class="full vr-bg"></div>', prod = '', txt = '';
     const lw = logoW(E);
     if (k === 'wide') {
       const hs = 88, colW = 600;
       const R = reel(E, { cx: b.r - 170, bottom: b.b + 6, h: b.h + 10 });
       prod += R.html;
-      prod += lureImg(E, 'cardiffO', { cx: b.x + 470, cy: b.b - 66, bw: 300, bh: 150, extra: 26, attrs: 'data-in="left" data-d=".2"' });
+      // brand strip right of the shop logo (replaces the spoon in 1.91:1), 2 rows
+      const so = { w: b.r - 360 - (b.x + lw.w + 40), h: 42, rows: 2, labelSize: 14, gap: 28, rowGap: 10 };
+      const st = strip(E, { x: 0, y: 0, ...so });
+      txt += strip(E, { x: b.x + lw.w + 40, y: b.b - st.h - 4, ...so }).html;
       txt += H(E, { x: b.x, y: b.y + 8, w: colW, size: hs, text: 'Vše na', inAttr: 'data-in="left" data-d=".05"' });
       txt += H(E, { x: b.x, y: b.y + 8 + hs * 1.08, w: colW, size: hs, text: 'Přívlač', slabbed: true, inAttr: 'data-in="slam" data-d=".1"' });
       const sy = b.y + 8 + hs * 2.2 + 10;
@@ -196,7 +203,12 @@ export const scenes = {
       txt += vrLogo(E, { x: b.x, y: b.b - lw.h - 2, attrs: 'data-in="fade" data-d=".35"' }).html;
       return { html: bg + prod + txt };
     }
-    const S = { square: { hs: 124, sub: 44, tag: 36, reelH: 570, spoon: 400 }, portrait: { hs: 150, sub: 50, tag: 40, reelH: 680, spoon: 460 }, tall: { hs: 158, sub: 52, tag: 42, reelH: 760, spoon: 480 } }[k];
+    const S = { square: { hs: 124, sub: 44, tag: 36, reelH: 500, spoon: 340, sh: 66 }, portrait: { hs: 150, sub: 50, tag: 40, reelH: 620, spoon: 420, sh: 76 }, tall: { hs: 158, sub: 52, tag: 42, reelH: 720, spoon: 460, sh: 80 } }[k];
+    // full-width brand strip at the bottom of the body; the products stand on top of it
+    const so = { w: b.w, h: S.sh, align: 'justify', labelSize: k === 'square' ? 17 : 20 };
+    const st = strip(E, { x: 0, y: 0, ...so });
+    txt += strip(E, { x: b.x, y: b.b - st.h, ...so }).html;
+    b = { ...b, b: b.b - st.h - (k === 'square' ? 18 : 30) };
     const y0 = b.y + (k === 'tall' ? 20 : 6), l2 = y0 + S.hs * 1.08, headB = l2 + S.hs * 1.1;
     bg += outline(E, 'Přívlač', { x: -40, y: headB + (b.b - headB) * 0.18, size: k === 'square' ? 300 : 360 });
     // products: reel right, standing on the bottom of the body; orange Cardiff lying lower-left

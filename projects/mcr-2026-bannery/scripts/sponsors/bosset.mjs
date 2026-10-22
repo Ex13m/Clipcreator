@@ -3,10 +3,10 @@
 // #0A4A58 / abyss #052E37 studio with a teal glow behind the product, site light blue #C5EBFC as podium / shelf, site yellow #FFC500
 // only as plates and hit words on DEEP teal (never yellow on #1B97B1), Saira Expanded Black (wdth 125 / wght 900) ≈ the squarish
 // BOSSET lettering, tracked Saira captions ≈ the logo's „F I S H I N G“.
-// Story: fishing e-shop (Keitech, YGK X-Braid + shelf of brands it SELLS) → winners' accent: top Zojirushi 0,6 l thermoses (podium).
+// Story: fishing e-shop (Keitech, YGK X-Braid + shelf of brands it SELLS) → winners' accent: top Zojirushi thermoses (podium).
 // Facts only from research/bosset.md (Verification), research/bosset_brands.md §3, bosset_ad.md copy guardrails, vo/script_cs.json:
 //   „Oficiální distributor Keitech a YGK X-Braid pro ČR“ (footer banner) · „přívlači se věnují víc než 20 let“ (/o-nas/) ·
-//   „Expedujeme do 24h“ (footer, 3rd person) · termosky Zojirushi 0,6 l · „horké a studené až 6 hodin“ · „nerez · bez BPA“ ·
+//   „Expedujeme do 24h“ (footer, 3rd person) · termosky Zojirushi (operator 22. 10.: NO volume on screen — „jen termosky“) · „horké a studené až 6 hodin“ · „nerez · bez BPA“ ·
 //   „Double Lock · otevřeš jednou rukou“ ONLY next to SM-VB / SM-SR visuals (so no orange SM-SHE anywhere in this set) ·
 //   „špičkové termosky“ = operator's word (VO v3). NOT: prize models / count, Zojirushi origin, prices, item counts, „nejlepší“,
 //   „více než 6 hodin“, brands presented as Bosset's own.
@@ -60,6 +60,14 @@ const SHELF = [
   { b: 'decoy_on_dark.png', trim: [8, 8, 253, 40], p: LURE.L9, rot: 0 },
   { b: 'select_on_dark.png', trim: [9, 9, 292, 70], p: LURE.L8, rot: -5 },
 ];
+
+// brand strip on the poster (operator 22. 10.: show the brands the shop carries) — research/bosset_brands.md recommended order:
+// distributor brands Keitech + YGK X-Braid first (heavier), JDM hard baits (MČR = hard baits), Decoy (area hooks)
+const STRIP = [
+  { f: `${BR}keitech_hires_on_dark.png`, s: 1.12 }, { f: `${BR}ygk_on_dark.png`, s: 1.12 }, { f: `${BR}zipbaits_on_dark.png` },
+  { f: `${BR}megabass_on_dark.png` }, { f: `${BR}osp_on_dark.png` }, { f: `${BR}decoy_on_dark.png`, s: 0.92 },
+];
+const strip = (E, o) => E.brandStrip(o.items || STRIP, { label: 'Značky v nabídce', labelPos: 'top', labelCss: `font-family:Saira;font-weight:600;font-stretch:112%;letter-spacing:.2em;color:${C.sky}`, color: C.white, inAttr: 'data-in="up" data-d=".3" data-dist="30"', ...o });
 
 export function css() {
   return `
@@ -153,10 +161,12 @@ export const scenes = {
       html += T(E, { cls: 'bo-h', x: b.x - 2, y: b.y + 44, w: colW, size: 84, fit: 50, text: 'Ceny pro', inAttr: 'data-in="slam" data-d=".08"', main: true });
       html += T(E, { cls: 'bo-h y', x: b.x - 2, y: b.y + 44 + 84 * 0.98, w: colW, size: 84, fit: 50, text: 'vítěze', inAttr: 'data-in="slam" data-d=".16"', main: true });
       const sy = b.y + 44 + 84 * 1.98 + 12;
-      html += T(E, { cls: 'bo-s', x: b.x, y: sy, w: colW, size: 40, text: 'Termosky Zojirushi 0,6 l', inAttr: 'data-in="up" data-d=".26"', main: true });
+      html += T(E, { cls: 'bo-s', x: b.x, y: sy, w: colW, size: 40, text: 'Termosky Zojirushi', inAttr: 'data-in="up" data-d=".26"', main: true });
       html += pill(E, { x: b.x, y: sy + 58, size: 20, text: 'Horké i studené až 6 hodin', inAttr: 'data-in="left" data-d=".34"' });
       const L = bossetLogo(E, { x: 0, y: 0, maxW: 210 });
       html += bossetLogo(E, { x: b.x + 440, y: sy + 58 + (32 - L.h) / 2, maxW: 210 }).html;
+      const st = strip(E, { x: 0, y: 0, w: 700, h: 30, labelSize: 14, gap: 26, items: STRIP });
+      html += strip(E, { x: b.x, y: b.b - st.h + 2, w: 700, h: 30, labelSize: 14, gap: 26 }).html;
       return { html };
     }
     const S = k === 'square' ? { kick: 25, head: 124, sub: 44, pill: 28, stepW: 290, face: 30, lab: 21, stepH: 80 }
@@ -169,7 +179,7 @@ export const scenes = {
     const l2 = y + S.head * 0.98;
     txt += T(E, { cls: 'bo-h y', x: b.x - 4, y: l2, w: b.w * 0.66, size: S.head, fit: 70, text: 'vítěze', inAttr: 'data-in="slam" data-d=".18"', main: true });
     y = l2 + S.head * 1.0 + 14;
-    txt += T(E, { cls: 'bo-s', x: b.x, y, w: b.w * 0.62, size: S.sub, lines: 2, html: 'Termosky<br>Zojirushi&nbsp;0,6&nbsp;l', inAttr: 'data-in="up" data-d=".28"', main: true });
+    txt += T(E, { cls: 'bo-s', x: b.x, y, w: b.w * 0.62, size: S.sub, lines: 2, html: 'Termosky<br>Zojirushi', inAttr: 'data-in="up" data-d=".28"', main: true });
     const subLines = 2;
     y += S.sub * 1.12 * subLines + 22;
     txt += pill(E, { x: b.x, y, size: S.pill, text: 'Horké i studené', inAttr: 'data-in="left" data-d=".36"' });
@@ -181,11 +191,18 @@ export const scenes = {
     html += step(E, { cx: bx, w: S.stepW, top: stepTop, bottom: E.chrome.event.y - 10, label: 'MČR 2026', size: S.lab, face: S.face });
     html += bottle(E, 'vbBlack', { cx: bx, base, h: bh }).html;
     // Keitech Easy Shiner gliding across the lower left (the shop's signature bait)
-    const lw = k === 'square' ? 470 : k === 'portrait' ? 560 : 620;
-    const ly = k === 'square' ? b.b - 128 : b.b - (k === 'tall' ? 330 : 270);
-    html += shiner(E, { cx: b.x + lw / 2 + 10, cy: ly, w: lw, rot: -9 });
-    const L = bossetLogo(E, { x: 0, y: 0, maxW: k === 'square' ? 250 : 290 });
-    txt += bossetLogo(E, { x: b.x, y: b.b - L.h - 4, maxW: k === 'square' ? 250 : 290 }).html;
+    const L = bossetLogo(E, { x: 0, y: 0, maxW: k === 'square' ? 230 : 290 });
+    txt += bossetLogo(E, { x: b.x, y: b.b - L.h - 4, maxW: k === 'square' ? 230 : 290 }).html;
+    // brand strip above the Bosset logo, left column (podium on the right): square / tall 2 rows × 3, portrait 1 row
+    const colR = bx - S.stepW / 2 - 30, so = { w: colR - b.x, h: { square: 44, portrait: 50, tall: 56 }[k], rows: 2, labelSize: k === 'square' ? 17 : 20, gap: k === 'square' ? 30 : 38, rowGap: k === 'square' ? 14 : 20 };
+    const st0 = strip(E, { x: 0, y: 0, ...so });
+    const sy0 = b.b - L.h - 4 - (k === 'square' ? 22 : 34) - st0.h;
+    txt += strip(E, { x: b.x, y: sy0, ...so }).html;
+    // Keitech Easy Shiner (the shop's signature bait) between the pills and the strip — not in 1:1 (no room; Keitech is in the strip)
+    if (k !== 'square') {
+      const pillsB = y + S.pill * 1.62 * 2 + 12, lw = k === 'portrait' ? 460 : 560;
+      html += shiner(E, { cx: b.x + lw / 2 + 10, cy: (pillsB + sy0) / 2 + 6, w: lw, rot: -9 });
+    }
     return { html: html + txt };
   },
 
@@ -247,7 +264,7 @@ export const scenes = {
     const shelfH = sq ? 34 : 44, shelfY = b.b - shelfH - 6;
     let html = studio(E, { gx: E.W / 2, gy: shelfY - 160, gs: 1000 });
     let y = b.y + 4;
-    html += T(E, { cls: 'bo-k', x: b.x, y, w: b.w, size: sq ? 25 : 28, text: 'Termosky Zojirushi · 0,6 l', inAttr: 'data-in="left"' });
+    html += T(E, { cls: 'bo-k', x: b.x, y, w: b.w, size: sq ? 25 : 28, text: 'Termosky Zojirushi', inAttr: 'data-in="left"' });
     y += (sq ? 25 : 28) * 1.6;
     const h1 = sq ? 74 : 84, h2 = sq ? 112 : 130;
     html += T(E, { cls: 'bo-h', x: b.x - 3, y, w: b.w, size: h1, fit: 44, text: 'Horké i studené', inAttr: 'data-in="up" data-d=".05"', main: true });

@@ -31,17 +31,17 @@ const BR = ['favorite', 'crazyfish', 'spinmad'];
 const BRP = { favorite: PR.x1, crazyfish: PR.vibro, spinmad: PR.impulse };
 
 // three brand columns (logo + its hero product) — used by the block lockup and the Reel end card
-function brandRow(ctx, { y, t, at, logoH = 64, prodTop, prodH = 250, cols = [205, 540, 875], idp = 'br', anim = true }) {
+function brandRow(ctx, { y, t, at, logoH = 72, prodTop, prodH = 250, cols = [205, 540, 875], idp = 'br', anim = true }) {
   let html = '';
   BR.forEach((k, j) => {
     const rel = ctx.data.brands[k].on_light, [iw, ih] = ctx.dims(rel), ar = iw / ih;
     // equal visual weight = equal area (Crazy Fish is a tall illustrated mark, Favorite a long wordmark)
-    const bw = Math.min(290, Math.sqrt(9800 * ar), (logoH * 1.45) * ar);
+    const bw = Math.min(290, Math.sqrt(14000 * ar), (logoH * 1.45) * ar);
     const lg = ctx.logo(rel, { box: [bw, bw / ar], at, label: `ftfishing ${k}` });
     const cx = cols[j];
     html += `<div class="ft-bl" id="${ctx.id(`${idp}l${j}`)}" style="left:${(cx - lg.w / 2).toFixed(1)}px;top:${(y + (logoH * 1.45 - lg.h) / 2).toFixed(1)}px;width:${lg.w}px;height:${lg.h}px"><img src="${lg.src}" alt="${ctx.esc(ctx.data.brands[k].name)}" style="width:${lg.w}px;height:${lg.h}px"></div>`;
     const i = BRP[k];
-    const P = F.prod(ctx, { id: `${idp}p${j}`, i, ...(k === 'favorite' ? { VH: prodH } : { V: 290 }), cx, cy: prodTop + prodH / 2, rot: k === 'favorite' ? 0 : k === 'crazyfish' ? -24 : -20, drop: '0 18px 22px rgba(0,0,0,.25)' });
+    const P = F.prod(ctx, { id: `${idp}p${j}`, i, ...(k === 'favorite' ? { VH: prodH } : { V: Math.min(320, prodH * 1.15) }), cx, cy: prodTop + prodH / 2, rot: k === 'favorite' ? 0 : k === 'crazyfish' ? -24 : -20, drop: '0 18px 22px rgba(0,0,0,.25)' });
     html += P.html;
     if (anim) {
       ctx.tl.fromTo(ctx.sel(`${idp}l${j}`), { y: 26 }, { y: 0, duration: 0.5, ease: 'expo.out' }, t + j * 0.05);
@@ -69,9 +69,9 @@ export default function ftfishing(ctx) {
   ctx.tl.fromTo(ctx.sel('bd'), { x: 700 }, { x: 0, duration: 0.45, ease: 'expo.out' }, 0);       // slams in on the drop (already in frame on frame 1)
 
   // ================= bar 0–1: rod + reels (Favorite) on the band =================
-  const rod = F.prod(ctx, { id: 'rod', i: PR.rod, V: 1060, cx: 560, cy: 1250, rot: -6, drop: '0 16px 16px rgba(0,0,0,.25)', so: 0.9 });
+  const rod = F.prod(ctx, { id: 'rod', i: PR.rod, V: 1060, cx: 600, cy: 1420, rot: -6, drop: '0 16px 16px rgba(0,0,0,.25)', so: 0.9 });
   html += rod.html;
-  ctx.tl.fromTo(rod.sel, { x: 1300, y: -260 }, { x: 0, y: 0, duration: 0.55, ease: 'expo.out' }, 0.04);
+  ctx.tl.fromTo(rod.sel, { x: 520, y: -110 }, { x: 0, y: 0, duration: 0.5, ease: 'expo.out' }, 0);   // already racing in on frame 1 (no empty drop frame)
   F.sweep(ctx, 'rod', tPruty, { d: 0.6 });
   ctx.tl.fromTo(rod.sel, { x: 0, y: 0 }, { x: -1400, y: 300, duration: 0.32, ease: 'power3.in' }, t2 - 0.32);
   // X1 2000S slams on the bar-1 downbeat (opaque from its first frame), Totem swaps in on beat 3 (whip)
@@ -137,13 +137,13 @@ export default function ftfishing(ctx) {
     const dx = cx - 540, dy = cy - 1150;
     ctx.tl.fromTo(P.sel, { x: 0, y: 0 }, { x: dx * 2.2, y: dy * 2.2, duration: 0.3, ease: 'power3.in' }, t3 - 0.3 + k * 0.01);
   });
-  html += fx.scene(ctx, 'scf', t2, t3, cf, { inD: 0.001, outD: 0.001 });
+  html += fx.scene(ctx, 'scf', t2 - 0.04, t3, cf, { inD: 0.001, outD: 0.001 });
   ctx.plate.tone(t2, t3, 'dark');
 
   // ================= bar 3: SPINMAD — silver + blue =================
   let sm = `<div class="fx-full" style="background:radial-gradient(70% 48% at 50% 58%, #ffffff 0%, ${C.smSilver} 45%, ${C.smSilver2} 100%)"></div>`;
   sm += F.band(ctx, { id: 'bds', y: 1560, h: 220, rot: -22, color: C.sm, op: 0.85, drift: -160, t0: t3, t1: t4 });
-  const RIG = [[PR.impulse, { V: 880 }, -12, 'Impulse PRO 10 g'], [PR.hart, { V: 760 }, -10, 'Hart 9 g · Spicy Blade'], [PR.king, { V: 800 }, -10, 'King 14 g · Spicy Blade'], [PR.target, { VH: 600 }, 0, 'Target Spoon 1,5 g']];
+  const RIG = [[PR.impulse, { V: 880 }, -12, 'Impulse PRO · 10 g'], [PR.hart, { V: 760 }, -10, 'Spicy Blade Hart · 9 g'], [PR.king, { V: 800 }, -10, 'Spicy Blade King · 14 g'], [PR.target, { VH: 600 }, 0, 'Target Spoon · 1,5 g']];
   const rigT = [t3, ctx.at(3, 1), ctx.at(3, 2), ctx.at(3, 3), t4];
   RIG.forEach(([i, sz, rot, name], k) => {
     const P = F.prod(ctx, { id: `rg${k}`, i, ...sz, cx: 540, cy: 1130, rot, so: 0.85, drop: '0 26px 30px rgba(10,30,60,.32)' });
@@ -156,11 +156,11 @@ export default function ftfishing(ctx) {
     if (k < RIG.length - 1) ctx.tl.set(P.sel, { opacity: 0 }, b - 0.03);
     else ctx.tl.fromTo(P.sel, { y: 0, rotation: 0 }, { y: -1500, rotation: 14, duration: 0.3, ease: 'power3.in' }, t4 - 0.3);
     // product name tag under the rig (short, beat-long: a label, not a message)
-    sm += F.label(ctx, { id: `rn${k}`, text: name, y: 1440, size: 34, wght: 700, wdth: 100, color: C.ink, align: 'center', tracking: 0.08, style: 'opacity:0' });
+    sm += F.label(ctx, { id: `rn${k}`, text: name, y: 1430, size: 38, wght: 700, wdth: 100, color: C.ink, align: 'center', tracking: 0.04, style: 'opacity:0;text-transform:none' });
     ctx.tl.set(ctx.sel(`rn${k}`), { opacity: 1 }, a - 0.03);
     ctx.tl.set(ctx.sel(`rn${k}`), { opacity: 0 }, k < RIG.length - 1 ? b - 0.03 : t4 - 0.3);
   });
-  html += fx.scene(ctx, 'ssm', t3, t4, sm, { inD: 0.001, outD: 0.001 });
+  html += fx.scene(ctx, 'ssm', t3 - 0.04, t4, sm, { inD: 0.001, outD: 0.001 });
 
   // ================= NÁSTRAHY (bars 2–3) + brand logo per bar =================
   const hN = fx.headline(ctx, { id: 'hn', text: 'Nástrahy', x: L, y: yT + 10, w: CW, maxLines: 1, font: EXO, wght: 900, upper: true, tracking: -0.01, lh: 0.92, sizes: [190, 180, 170, 160], color: '#ffffff', t: t2 - 0.08, reveal: 'lines', d: 0.36, out: t4 - 0.3, outD: 0.26 });
@@ -169,7 +169,7 @@ export default function ftfishing(ctx) {
   const yLg = yT + 10 + hN.h + 34;
   const cfRel = ctx.data.brands.crazyfish.on_dark, smRel = ctx.data.brands.spinmad.on_light;
   const ar = (rel) => { const [w, h] = ctx.dims(rel); return w / h; };
-  const lgC = ctx.logo(cfRel, { box: [Math.min(250, Math.sqrt(16000 * ar(cfRel))), 200], at: [tCrazy, t3], label: 'ftfishing Crazy Fish (bar 2)' });
+  const lgC = ctx.logo(cfRel, { box: [178, 150], at: [tCrazy, t3], label: 'ftfishing Crazy Fish (bar 2)' });
   const lgS = ctx.logo(smRel, { box: [281, 120], at: [t3, t4], label: 'ftfishing Spinmad (bar 3)' });
   html += `<div class="ft-bl" id="${ctx.id('cfl')}" style="left:${L}px;top:${yLg}px;width:${lgC.w}px;height:${lgC.h}px;opacity:0"><img src="${lgC.src}" alt="Crazy Fish" style="width:${lgC.w}px;height:${lgC.h}px"></div>`;
   html += `<div class="ft-bl" id="${ctx.id('sml')}" style="left:${L}px;top:${yLg}px;width:${lgS.w}px;height:${lgS.h}px;opacity:0"><img src="${lgS.src}" alt="Spinmad" style="width:${lgS.w}px;height:${lgS.h}px"></div>`;
@@ -198,17 +198,17 @@ export default function ftfishing(ctx) {
   let yy = yL + lgFT.h + 22;
   lk += F.label(ctx, { id: 'lks', text: 'Vše pro přívlač', y: yy, size: 50, wght: 800, wdth: 112, color: C.grey, align: 'center' });
   yy += 50 + 24;
-  const U = fx.headline(ctx, { id: 'lku', text: 'ftfishing.cz', x: L, y: yy, w: CW, maxLines: 1, font: EXO, wght: 900, upper: false, tracking: -0.01, lh: 1, sizes: [132, 124, 116, 108], align: 'center', color: C.ink, t: t4 - 0.06, reveal: 'chars', stagger: 0.016, d: 0.34 });
+  const U = fx.headline(ctx, { id: 'lku', text: 'ftfishing.cz', x: L, y: yy, w: CW, maxLines: 1, font: EXO, wght: 900, upper: false, tracking: -0.01, lh: 1, sizes: [132, 124, 116, 108], align: 'center', color: C.ink, t: t4 - 0.3, reveal: 'chars', stagger: 0.016, d: 0.3 });
   lk += U.html;
   yy += U.h + 26;
-  const chip = fx.taChip(ctx, { id: 'pz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y: yy, size: 30, tone: 'light', t: t4 + 0.08 });
+  const chip = fx.taChip(ctx, { id: 'pz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y: yy, size: 30, tone: 'light', t: t4 - 0.12 });
   lk += chip.html;
   yy += chip.h + 40;
-  lk += brandRow(ctx, { y: yy, t: t4 + 0.04, at: [t4, END], prodTop: yy + 64 * 1.45 + 26, prodH: Math.min(250, 1452 - (yy + 64 * 1.45 + 26)), idp: 'lb' });
+  lk += brandRow(ctx, { y: yy, t: t4 + 0.04, at: [t4, END], prodTop: yy + 72 * 1.45 + 22, prodH: Math.min(320, 1440 - (yy + 72 * 1.45 + 22)), idp: 'lb' });
   ctx.tl.fromTo(ctx.sel('lkw'), { scale: 0.86 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, t4 - 0.04);
   ctx.tl.fromTo(ctx.sel('lks'), { y: 20 }, { y: 0, duration: 0.45, ease: 'expo.out' }, t4);
-  html += fx.scene(ctx, 'slk', t4, END, lk, { inD: 0.001, outD: 0.001 });
-  ctx.report(`lockup bottom ${Math.round(yy + 64 * 1.45 + 26 + 250)} · times Pruty ${tPruty.toFixed(2)} Fav ${tFav.toFixed(2)} Crazy ${tCrazy.toFixed(2)}`);
+  html += fx.scene(ctx, 'slk', t4 - 0.04, END, lk, { inD: 0.001, outD: 0.001 });
+  ctx.report(`lockup bottom ${Math.round(yy + 72 * 1.45 + 22 + Math.min(320, 1440 - (yy + 72 * 1.45 + 22)))} · times Pruty ${tPruty.toFixed(2)} Fav ${tFav.toFixed(2)} Crazy ${tCrazy.toFixed(2)}`);
 
   // ================= transitions: stripes wipe between the worlds; in = white (intro zooms through to white) =================
   F.slash(ctx, { id: 'w2', t: t2 });
@@ -265,8 +265,8 @@ export function endCard(ctx) {
   const chip = fx.taChip(ctx, { id: 'epz', text: 'Věnuje ceny', sub: 'MČR 2026', cx: W / 2, y, size: 28, tone: 'light', t: null });
   html += chip.html;
   y += chip.h + 28;
-  const prodTop = y + 52 * 1.45 + 14;
-  html += brandRow(ctx, { y, t: 0, at: [0, END], logoH: 52, prodTop, prodH: Math.min(230, 1456 - prodTop), idp: 'eb', anim: false });
+  const prodTop = y + 62 * 1.45 + 14;
+  html += brandRow(ctx, { y, t: 0, at: [0, END], logoH: 62, prodTop, prodH: Math.min(230, 1456 - prodTop), idp: 'eb', anim: false });
   [0, 1, 2].forEach((j) => { ctx.tl.fromTo(ctx.sel(`ebp${j}`), { y: 30 }, { y: 0, duration: 0.6, ease: 'expo.out' }, 0.02 * j); F.sweep(ctx, `ebp${j}`, 0.5 + j * 0.15, { d: 0.6 }); });
   ctx.report(`end card bottom ${Math.round(prodTop + Math.min(230, 1456 - prodTop))}`);
   fx.tIn(ctx, 'cut');

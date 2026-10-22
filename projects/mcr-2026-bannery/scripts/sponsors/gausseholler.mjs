@@ -11,6 +11,9 @@ export const brand = {
   name: 'Gausse Holler Custom Lab',
   url: 'gausseholler.com',
   role: 'prize',                      // → chip „Hlavní cena pro vítěze MČR · Revolut 8“ + role line „Partner a informační sponzor“
+  // operator 22. 10.: no separate GH logo block in the composition — only the GH gear icon right before the URL (engine chrome);
+  // outer ring turns clockwise in the MP4s (360° per loop), core stands. Layers 512×512, ring pivot by its 60° symmetry (MEMORY).
+  urlIcon: { ring: 'shared:brand/gh/ring.png', core: 'shared:brand/gh/core.png', canvas: [512, 512], box: [14, 2, 487, 509], pivot: [256.375, 257], spin: 360, scale: 1.2, gap: 0.3, dy: 0.05 },
 };
 
 const C = { bg: '#0f1113', panel: '#16191c', line: '#282d33', bone: '#e9e6e2', white: '#ffffff', ice: '#7fb2c7', gear: '#1d8fd5', orange: '#e8925a' };
@@ -39,9 +42,6 @@ const P = {
 const COLS = ['1_blue', '2_orange', '3_red', '4_purple', '5_tiffany', '6_lightgreen', '7_bronze'].map((k) => `${AD}H2_revolut8_colourway_${k}.png`);
 // floor ellipse through the leg tips (fractions of the displayed PNG width; from fx_gausseholler.mjs FOOT)
 const FOOT = { threeq: { cx: 0.4975, cy: 0.789, a: 0.473, b: 0.265 }, front: { cx: 0.493, cy: 0.805, a: 0.453, b: 0.087 }, cw: { cx: 0.5095, cy: 0.87, a: 0.526, b: 0.365 } };
-// GH logo layers (shared 1200×1139 canvas): union bbox + ring/core hub (fx_gausseholler.mjs BOX / HUB)
-const LAY = { ring: 'film:assets/gausseholler/logo_layer_ring.png', core: 'film:assets/gausseholler/logo_layer_core.png', word: 'film:assets/gausseholler/logo_layer_word.png' };
-const BOX = { x: 209, y: 120, w: 786, h: 734 }, HUB = [600.75, 336.5];
 
 export const fonts = {};   // Inter, Jost, Cormorant Garamond are in the engine registry
 
@@ -97,16 +97,12 @@ function stand(E, { k = 'threeq', cx, right, baseY, top, maxW = 2000, h = 70, la
     ${sweep ? `<div class="gh-sw" style="inset:0;-webkit-mask-image:url(${url});mask-image:url(${url})"><i data-sweep="0.35,1.35"></i></div>` : ''}</div>`;
   return { html: shadow + plinth + prod, top: py0, left: px0, w: ww, h: hh, cx, A, plinthTop: fy - B, plinthL: cx - A };
 }
-// GH logo from the three site layers; the outer ring turns clockwise (data-spin) around the hub. Fitted to the TA-logo rule.
-function ghLogo(E, { x, y, cx, maxW, maxH, gearOnly = false, id = 'gh-logo', attrs = '' }) {
-  const fit = E.logoFit(BOX.w / BOX.h, { maxW, maxH }), s = fit.w / BOX.w;
-  const left = cx != null ? cx - fit.w / 2 : x;
-  const im = (k, extra = '') => `<img id="${id}-${k}" src="${E.src(LAY[k])}" alt="" data-noscale style="position:absolute;left:${R1(-BOX.x * s)}px;top:${R1(-BOX.y * s)}px;width:${R1(1200 * s)}px;height:${R1(1139 * s)}px;${extra}" ${k === 'ring' ? 'data-spin="360"' : ''}>`;
-  return {
-    html: `<div class="abs sp-logo" id="${id}" data-cw="1" data-ch="1" ${attrs} style="left:${R1(left)}px;top:${R1(y)}px;width:${R1(fit.w)}px;height:${R1(fit.h)}px">${im('ring', `transform-origin:${R1(HUB[0] * s)}px ${R1(HUB[1] * s)}px`)}${im('core')}${gearOnly ? '' : im('word')}</div>`,
-    w: fit.w, h: fit.h,
-  };
+// stacked spec chips (verified facts) — fill the column the old GH logo block used to take
+function specChips(E, { x, y, size, rows, d = 0.3, gap = 12 }) {
+  const h = size * 1.9;
+  return { html: rows.map(([a, c], i) => `<div class="gh-chipx t" data-in="left" data-d="${(d + i * 0.08).toFixed(2)}" style="left:${R1(x)}px;top:${R1(y + i * (h + gap))}px;height:${R1(h)}px;font-size:${size}px"><b>${E.t(a)}</b>${E.t(c)}</div>`).join(''), h: rows.length * (h + gap) - gap };
 }
+const SPEC = [['8', 'karbonových tubusů'], ['Ø 32 × 200', 'mm'], ['Série 5 ks', 'číslováno']];
 const T = (E, { cls, x, y, w, size, text, html, align = 'left', fit = 0, lines = 0, main = false, inAttr = '', style = '', id = '' }) =>
   `<div ${id ? `id="${id}" ` : ''}class="t ${cls}${main ? ' main' : ''}" ${inAttr} ${fit ? `data-fit="${fit}"` : ''} ${lines ? `data-lines="${lines}"` : ''} style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;font-size:${size}px;text-align:${align};${lines ? 'white-space:normal;' : 'overflow:hidden;'}${style}">${html ?? E.t(text)}</div>`;
 
@@ -118,14 +114,12 @@ export const scenes = {
     const b = E.body, k = E.kind;
     let txt = '';
     if (k === 'wide') {
-      const colW = 600;
-      const st = stand(E, { right: b.r - 6, baseY: b.b, top: b.y + 4, h: 40, maxW: 360, label: 'Black Standard Edition', labelSize: 13 });
-      txt += T(E, { cls: 'gh-k', x: b.x, y: b.y + 14, w: colW, size: 22, text: 'Stojan na pruty', inAttr: 'data-in="left" data-d=".1"' });
-      txt += T(E, { cls: 'gh-h', x: b.x - 3, y: b.y + 50, w: colW, size: 112, fit: 60, html: 'Revolut&nbsp;<em>8</em>', inAttr: 'data-in="slam" data-d=".15"', main: true });
-      txt += T(E, { cls: 'gh-s', x: b.x, y: b.y + 176, w: colW, size: 44, text: 'Ručně stavěno v Česku', inAttr: 'data-in="up" data-d=".3"', main: true });
-      txt += T(E, { cls: 'gh-k', x: b.x, y: b.y + 238, w: colW, size: 19, text: 'Karbon · hliník · série 5 kusů, číslováno', style: `color:${C.bone};letter-spacing:.16em`, inAttr: 'data-in="up" data-d=".38"' });
-      const L = ghLogo(E, { x: 0, y: 0, maxH: 999 });
-      txt += ghLogo(E, { x: b.x, y: b.b - L.h, attrs: 'data-in="fade" data-d=".5"' }).html;
+      const colW = 640, blockH = 300, y0 = b.y + Math.max(0, (b.h - blockH) / 2);
+      const st = stand(E, { right: b.r - 6, baseY: b.b, top: b.y + 4, h: 40, maxW: 380, label: 'Black Standard Edition', labelSize: 13 });
+      txt += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 24, text: 'Stojan na pruty', inAttr: 'data-in="left" data-d=".1"' });
+      txt += T(E, { cls: 'gh-h', x: b.x - 3, y: y0 + 40, w: colW, size: 132, fit: 60, html: 'Revolut&nbsp;<em>8</em>', inAttr: 'data-in="slam" data-d=".15"', main: true });
+      txt += T(E, { cls: 'gh-s', x: b.x, y: y0 + 186, w: colW, size: 48, text: 'Ručně stavěno v Česku', inAttr: 'data-in="up" data-d=".3"', main: true });
+      txt += T(E, { cls: 'gh-k', x: b.x, y: y0 + 256, w: colW, size: 20, text: 'Karbon · hliník · série 5 kusů, číslováno', style: `color:${C.bone};letter-spacing:.16em`, inAttr: 'data-in="up" data-d=".38"' });
       return { html: studio(E, { cx: st.cx, floorY: st.plinthTop + 20 }) + st.html + txt };
     }
     if (k === 'square') {
@@ -137,10 +131,9 @@ export const scenes = {
       const headB = y + S.head;
       y = headB + 8;
       txt += T(E, { cls: 'gh-s', x: b.x, y, w: 520, size: S.sub, text: 'Ručně stavěno v Česku', inAttr: 'data-in="up" data-d=".3"', main: true });
-      txt += T(E, { cls: 'gh-k', x: b.x, y: y + S.sub * 1.15 + 14, w: 420, size: 22, lines: 3, text: 'Karbon · hliník · série 5 kusů, číslováno', style: `color:${C.bone};letter-spacing:.14em;line-height:1.5`, inAttr: 'data-in="up" data-d=".38"' });
+      const ch = specChips(E, { x: b.x, y: 0, size: 26, rows: SPEC });
+      txt += specChips(E, { x: b.x, y: b.b - ch.h - 6, size: 26, rows: SPEC, d: 0.38 }).html;
       const st = stand(E, { right: b.r + 4, baseY: b.b, top: headB + 6, h: S.ph, maxW: 600, label: 'Black Standard Edition', labelSize: S.label });
-      const L = ghLogo(E, { x: 0, y: 0, maxH: 999 });
-      txt += ghLogo(E, { x: b.x, y: b.b - L.h - 4, attrs: 'data-in="fade" data-d=".5"' }).html;
       return { html: studio(E, { cx: st.cx, floorY: st.plinthTop + 30 }) + st.html + txt };
     }
     // portrait / tall: big stand tucked behind the lower part of the headline; the crafted line is engraved on the plinth face
@@ -155,8 +148,6 @@ export const scenes = {
     // engraved line on the plinth front face (a .t text → QA checks it)
     const faceY = b.b - S.ph + (S.ph - S.sub * 1.1) / 2;
     txt += T(E, { cls: 'gh-s', x: st.cx - 400, y: faceY, w: 800, size: S.sub, align: 'center', text: 'Ručně stavěno v Česku', inAttr: 'data-in="fade" data-d=".35"', main: true, style: 'color:rgba(233,230,226,.92)' });
-    const L = ghLogo(E, { x: 0, y: 0, maxH: 999 });
-    txt += ghLogo(E, { x: b.r - L.w, y: headB + 18, attrs: 'data-in="fade" data-d=".5"' }).html;
     return { html: studio(E, { cx: st.cx, floorY: st.plinthTop + 30 }) + st.html + txt };
   },
 
@@ -166,13 +157,10 @@ export const scenes = {
     let html = studio(E, { cx: E.W * 0.72, cone: 0.8 });
     html += E.img(P.top, { cx: E.W * 0.76, cy: b.y + b.h * 0.52, h: b.h * 1.1, style: 'opacity:.85', attrs: 'data-kb="1.05,1"' }).html;
     html += `<div class="full" style="background:linear-gradient(90deg,rgba(11,12,14,.97) 0%,rgba(11,12,14,.9) 40%,rgba(11,12,14,.25) 70%,rgba(11,12,14,0))"></div>`;
-    const hs0 = sq ? 92 : 100, blockH = 160 + 30 + hs0 * 1.06 + 34 * 2.2 + (sq ? 46 : 50) * 1.22 * 3 + 30 + 30;
+    const hs = sq ? 112 : 124, blockH = hs * 1.06 + 34 * 2.2 + (sq ? 46 : 50) * 1.22 * 3 + 30 + 30;
     const y0 = b.y + Math.max(6, (b.h - blockH) / 2 - 10);
-    const L = ghLogo(E, { x: b.x, y: y0, attrs: 'data-in="scale"' });
-    html += L.html;
-    let y = y0 + L.h + 30;
-    const hs = sq ? 92 : 100;
-    html += T(E, { cls: 'gh-h', x: b.x - 3, y, w: b.w * 0.75, size: hs, fit: 50, text: 'Gausse Holler', inAttr: 'data-in="left" data-d=".1"', main: true });
+    let y = y0;
+    html += T(E, { cls: 'gh-h', x: b.x - 3, y, w: b.w * 0.8, size: hs, fit: 50, text: 'Gausse Holler', inAttr: 'data-in="left" data-d=".1"', main: true });
     y += hs * 1.06;
     html += T(E, { cls: 'gh-k', x: b.x, y, w: b.w * 0.7, size: 34, text: 'Custom Lab', style: 'font-family:Jost;font-weight:500;letter-spacing:.5em', inAttr: 'data-in="left" data-d=".18"' });
     y += 34 * 2.2;
@@ -234,8 +222,9 @@ export const scenes = {
     const sy = b.y + 46 + head * 1.04;
     txt += T(E, { cls: 'gh-s', x: b.x, y: sy, w: b.w, size: sub, text: 'Revolut 8 pro vítěze mistrovství', inAttr: 'data-in="up" data-d=".2"', main: true });
     const st = stand(E, { right: b.r + 10, baseY: b.b, top: sy + sub * 1.25 + 10, h: sq ? 52 : 66, maxW: 620, label: 'Revolut 8', labelSize: sq ? 22 : 24 });
-    const L = ghLogo(E, { x: 0, y: 0, maxH: 999 });
-    txt += ghLogo(E, { x: b.x, y: b.b - L.h - 4, attrs: 'data-in="fade" data-d=".3"' }).html;
+    const rows = [['Black', 'Standard Edition'], ['Série 5 ks', 'číslováno']], cs = sq ? 28 : 30;
+    const ch = specChips(E, { x: b.x, y: 0, size: cs, rows });
+    txt += specChips(E, { x: b.x, y: b.b - ch.h - 6, size: cs, rows, d: 0.3 }).html;
     return { html: studio(E, { floorY: st.plinthTop + 30, cone: 1.3, cx: st.cx }) + st.html + txt };
   },
 };

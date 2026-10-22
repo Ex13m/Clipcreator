@@ -12,9 +12,9 @@
 //   bar 2½    „A vítězové“: the Zojirushi tile floods the frame (colour meet) → PRIZE PODIUM: spotlights, empty podium,
 //             VÍTĚZOVÉ / MISTROVSTVÍ; bar 3 downbeat: three Zojirushi 0,6 l bottles land on the steps + confetti; ZÍSKAJÍ; „špičkové“ = flare
 //   bar 4     hard cut to the hero: SM-VB 0,6 l on the top step; ŠPIČKOVÉ / TERMOSKY / ZOJIRUSHI + Zojirushi logo chip + verified
-//             spec stack (0,6 l · horké i studené až 6 hodin · DOUBLE LOCK otevřeš jednou rukou · nerez · bez BPA — SM-VB = all verified)
+//             spec stack (horké i studené až 6 hodin · DOUBLE LOCK otevřeš jednou rukou · nerez · bez BPA — SM-VB = all verified)
 //   bar 5     lockup on the podium (music only): Bosset logo + bosset.cz + „Věnuje ceny · MČR 2026“ + „Pro vítěze MČR · termosky
-//             Zojirushi 0,6 l“ → wipe up into the next block
+//             Zojirushi“ → wipe up into the next block
 // Prize models are NOT published (research/bosset_brands.md §3) → the bottles are „the kind of bottle“, no model codes as prize claims.
 // Reel: own hook (SM-VB on the podium step + PRO VÍTĚZE MČR) and own end card (fx.endCard-like lockup + distributor line + Keitech cameo).
 import fs from 'node:fs';
@@ -363,9 +363,7 @@ export default function bosset(ctx) {
   // spec stack (verbatim-verified for SM-VB 0,6 l: „až 6 hodin“ hot & cold · DOUBLE LOCK / one hand · nerez + plast bez BPA)
   const tS1 = ctx.at(4, 1) + 0.02, tS2 = tS1 + BEAT / 4, tS3 = tS1 + BEAT / 2, tS4 = tS1 + BEAT * 0.75;   // whole stack stands ≥ 1 s before the lockup
   let y = zlY + ZL.h + 34;
-  const V06 = 150;
-  s3 += line(ctx, 'v06', '0,6 l', { x: SL, y, w: LW, size: V06, color: '#ffffff', t: tZoj + 0.12, d: 0.42 }).html;
-  y += Math.round(V06 * 0.98) + 18;
+  y += 14;   // operator 22. 10.: no volume on screen („jen termosky“) — the spec stack sits right under the Zojirushi logo
   const az = pill(ctx, 'az', 'až 6 hodin', { x: SL, y, size: 38, wght: 900, wdth: 125, tracking: 0.03, t: tS1 });
   y += az.h + 10;
   s3 += az.html + cap(ctx, 'hs', 'horké i studené', { x: SL + 2, y, size: 32, wght: 800, wdth: 100, tracking: 0.1, color: '#ffffff', t: tS1 + 0.06, op: 1 });
@@ -406,7 +404,7 @@ export default function bosset(ctx) {
   s4 += line(ctx, 'url', 'bosset.cz', { x: SL, y: uY, w: CW, size: US, wght: 800, upper: false, align: 'center', color: '#ffffff', t: t5 - 0.18, d: 0.45 }).html;
   const pzY = uY + US + 30;
   s4 += pill(ctx, 'pz', 'Věnuje ceny · MČR 2026', { cx: W / 2, y: pzY, size: 30, t: t5 - 0.16 }).html;
-  s4 += cap(ctx, 'pv', 'Pro vítěze MČR · termosky Zojirushi 0,6 l', { x: SL, y: pzY + 49 + 26, w: CW, align: 'center', size: 30, wght: 800, wdth: 100, tracking: 0.08, color: '#ffffff', t: t5 - 0.06, op: 1 });   // white 800: SKY 700 sank into the spotlight beams
+  s4 += cap(ctx, 'pv', 'Pro vítěze MČR · termosky Zojirushi', { x: SL, y: pzY + 49 + 26, w: CW, align: 'center', size: 30, wght: 800, wdth: 100, tracking: 0.08, color: '#ffffff', t: t5 - 0.06, op: 1 });   // white 800: SKY 700 sank into the spotlight beams
   ctx.report(`lockup: logo ${lgY}–${lgY + LG.h}, URL ${uY} (${US}px), prize ${pzY}, line ${pzY + 75}, centre bottle top ${POD2.top + 22 - 560}`);
   html += scene('scD', t5, END, s4);
 
@@ -432,7 +430,7 @@ export function hook(ctx) {
   const S = Math.min(sz(ctx, 'Pro vítěze', CW, [140, 132, 124, 116, 108]), 124);
   let g = line(ctx, 'h1', 'Pro vítěze', { x: SL, y: 400, w: CW, size: S, color: '#ffffff' }).html;
   g += line(ctx, 'h2', 'MČR', { x: SL, y: 400 + Math.round(S * 1.02), w: CW, size: S, color: SKY }).html;
-  g += pill(ctx, 'hz', 'termosky Zojirushi 0,6 l', { x: SL, y: 400 + Math.round(S * 2.04) + 30, size: 34, wght: 900, wdth: 110, tracking: 0.03 }).html;
+  g += pill(ctx, 'hz', 'termosky Zojirushi', { x: SL, y: 400 + Math.round(S * 2.04) + 30, size: 34, wght: 900, wdth: 110, tracking: 0.03 }).html;
   html += `<div class="fx-full" id="${ctx.id('hgrp')}" style="transform-origin:${SL}px 400px">${g}</div>`;
   ctx.tl.fromTo(ctx.sel('hgrp'), { scale: 1.05 }, { scale: 1, duration: 0.55, ease: 'expo.out' }, 0);
   html += cap(ctx, 'hu', 'bosset.cz', { x: SL + 2, y: 1340, size: 32, color: SKY, wght: 700, tracking: 0.12, t: 0.3, op: 1 });

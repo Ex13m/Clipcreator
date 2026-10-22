@@ -1,0 +1,752 @@
+{
+"film:assets_prep/activefishing/brands/fishup.png": [
+0,
+9,
+363,
+163
+],
+"film:assets_prep/activefishing/brands/fishup_on_dark.png": [
+0,
+9,
+363,
+163
+],
+"film:assets_prep/activefishing/brands/forest.png": [
+4,
+4,
+276,
+118
+],
+"film:assets_prep/activefishing/brands/forest_on_dark.png": [
+4,
+4,
+276,
+118
+],
+"film:assets_prep/activefishing/brands/jigovky.png": [
+36,
+36,
+1800,
+895
+],
+"film:assets_prep/activefishing/brands/jigovky_on_dark.png": [
+36,
+36,
+1800,
+895
+],
+"film:assets_prep/activefishing/brands/libralures.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/activefishing/brands/libralures_on_dark.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/activefishing/brands/mukai.png": [
+6,
+6,
+795,
+409
+],
+"film:assets_prep/activefishing/brands/mukai_on_dark.png": [
+6,
+6,
+795,
+409
+],
+"film:assets_prep/activefishing/brands/nories.png": [
+6,
+6,
+1455,
+520
+],
+"film:assets_prep/activefishing/brands/nories_on_dark.png": [
+7,
+6,
+1453,
+520
+],
+"film:assets_prep/activefishing/brands/officeeucalyptus.png": [
+6,
+6,
+187,
+76
+],
+"film:assets_prep/activefishing/brands/officeeucalyptus_on_dark.png": [
+6,
+6,
+187,
+76
+],
+"film:assets_prep/activefishing/brands/rodiocraft.png": [
+0,
+0,
+1200,
+260
+],
+"film:assets_prep/activefishing/brands/rodiocraft_on_dark.png": [
+0,
+0,
+1200,
+260
+],
+"film:assets_prep/activefishing/brands/valkein.png": [
+6,
+6,
+1758,
+526
+],
+"film:assets_prep/activefishing/brands/valkein_on_dark.png": [
+6,
+6,
+1758,
+526
+],
+"film:assets_prep/activefishing/brands/varivas.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/activefishing/brands/varivas_on_dark.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/activefishing/brands/velvetarts.png": [
+7,
+6,
+1182,
+521
+],
+"film:assets_prep/activefishing/brands/velvetarts_on_dark.png": [
+7,
+6,
+1182,
+521
+],
+"film:assets_prep/activefishing/brands/yarie.png": [
+0,
+0,
+394,
+128
+],
+"film:assets_prep/activefishing/brands/yarie_on_dark.png": [
+0,
+0,
+394,
+128
+],
+"film:assets_prep/bosset/brands/bassday.png": [
+8,
+8,
+260,
+56
+],
+"film:assets_prep/bosset/brands/bassday_on_dark.png": [
+8,
+8,
+260,
+56
+],
+"film:assets_prep/bosset/brands/brain.png": [
+33,
+33,
+1105,
+262
+],
+"film:assets_prep/bosset/brands/brain_on_dark.png": [
+33,
+33,
+1105,
+262
+],
+"film:assets_prep/bosset/brands/decoy.png": [
+8,
+8,
+253,
+40
+],
+"film:assets_prep/bosset/brands/decoy_on_dark.png": [
+8,
+8,
+253,
+40
+],
+"film:assets_prep/bosset/brands/freshlures.png": [
+10,
+10,
+337,
+337
+],
+"film:assets_prep/bosset/brands/freshlures_on_dark.png": [
+0,
+0,
+457,
+457
+],
+"film:assets_prep/bosset/brands/keitech.png": [
+11,
+11,
+355,
+74
+],
+"film:assets_prep/bosset/brands/keitech_hires.png": [
+21,
+21,
+684,
+142
+],
+"film:assets_prep/bosset/brands/keitech_hires_on_dark.png": [
+21,
+21,
+684,
+142
+],
+"film:assets_prep/bosset/brands/keitech_on_dark.png": [
+11,
+11,
+355,
+74
+],
+"film:assets_prep/bosset/brands/megabass.png": [
+10,
+9,
+285,
+37
+],
+"film:assets_prep/bosset/brands/megabass_on_dark.png": [
+10,
+9,
+285,
+37
+],
+"film:assets_prep/bosset/brands/osp.png": [
+10,
+10,
+327,
+139
+],
+"film:assets_prep/bosset/brands/osp_on_dark.png": [
+10,
+10,
+327,
+139
+],
+"film:assets_prep/bosset/brands/reins.png": [
+17,
+17,
+582,
+175
+],
+"film:assets_prep/bosset/brands/reins_on_dark.png": [
+17,
+17,
+582,
+175
+],
+"film:assets_prep/bosset/brands/select.png": [
+9,
+9,
+292,
+70
+],
+"film:assets_prep/bosset/brands/select_on_dark.png": [
+9,
+9,
+292,
+70
+],
+"film:assets_prep/bosset/brands/xfish.png": [
+11,
+11,
+364,
+49
+],
+"film:assets_prep/bosset/brands/xfish_on_dark.png": [
+11,
+11,
+364,
+49
+],
+"film:assets_prep/bosset/brands/ygk.png": [
+26,
+26,
+861,
+248
+],
+"film:assets_prep/bosset/brands/ygk_on_dark.png": [
+26,
+26,
+861,
+248
+],
+"film:assets_prep/bosset/brands/zipbaits.png": [
+26,
+26,
+868,
+169
+],
+"film:assets_prep/bosset/brands/zipbaits_on_dark.png": [
+26,
+26,
+868,
+169
+],
+"film:assets_prep/bosset/brands/zojirushi.png": [
+25,
+25,
+847,
+213
+],
+"film:assets_prep/bosset/brands/zojirushi_on_dark.png": [
+0,
+0,
+971,
+337
+],
+"film:assets_prep/ftfishing/brands/crazyfish.png": [
+12,
+16,
+1055,
+810
+],
+"film:assets_prep/ftfishing/brands/crazyfish_on_dark.png": [
+0,
+0,
+1300,
+1056
+],
+"film:assets_prep/ftfishing/brands/favorite.png": [
+19,
+14,
+882,
+191
+],
+"film:assets_prep/ftfishing/brands/favorite_on_dark.png": [
+19,
+14,
+882,
+191
+],
+"film:assets_prep/ftfishing/brands/jigovky.png": [
+36,
+36,
+1800,
+895
+],
+"film:assets_prep/ftfishing/brands/jigovky_on_dark.png": [
+36,
+36,
+1800,
+895
+],
+"film:assets_prep/ftfishing/brands/spinmad.png": [
+15,
+12,
+857,
+355
+],
+"film:assets_prep/ftfishing/brands/spinmad_on_dark.png": [
+15,
+12,
+857,
+355
+],
+"film:assets_prep/ftfishing/brands/svfishing.png": [
+14,
+14,
+692,
+336
+],
+"film:assets_prep/ftfishing/brands/svfishing_on_dark.png": [
+14,
+14,
+692,
+336
+],
+"film:assets_prep/ftfishing/brands/vanfook.png": [
+14,
+13,
+631,
+378
+],
+"film:assets_prep/ftfishing/brands/vanfook_on_dark.png": [
+0,
+0,
+804,
+537
+],
+"film:assets_prep/jigovky/brands/varivas.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/jigovky/brands/varivas_on_dark.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/troutshop/brands/berkley.png": [
+19,
+20,
+632,
+242
+],
+"film:assets_prep/troutshop/brands/berkley_on_dark.png": [
+19,
+20,
+632,
+242
+],
+"film:assets_prep/troutshop/brands/fishup.png": [
+0,
+9,
+363,
+163
+],
+"film:assets_prep/troutshop/brands/fishup_on_dark.png": [
+0,
+9,
+363,
+163
+],
+"film:assets_prep/troutshop/brands/forest.png": [
+4,
+4,
+276,
+118
+],
+"film:assets_prep/troutshop/brands/forest_mono.png": [
+0,
+0,
+270,
+113
+],
+"film:assets_prep/troutshop/brands/forest_on_dark.png": [
+4,
+4,
+276,
+118
+],
+"film:assets_prep/troutshop/brands/libralures.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/troutshop/brands/libralures_on_dark.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/troutshop/brands/mukai.png": [
+6,
+6,
+795,
+409
+],
+"film:assets_prep/troutshop/brands/mukai_on_dark.png": [
+6,
+6,
+795,
+409
+],
+"film:assets_prep/troutshop/brands/nories.png": [
+6,
+6,
+1455,
+520
+],
+"film:assets_prep/troutshop/brands/nories_on_dark.png": [
+7,
+6,
+1453,
+520
+],
+"film:assets_prep/troutshop/brands/rodiocraft.png": [
+0,
+0,
+1200,
+260
+],
+"film:assets_prep/troutshop/brands/rodiocraft_mono.png": [
+0,
+0,
+690,
+191
+],
+"film:assets_prep/troutshop/brands/rodiocraft_on_dark.png": [
+0,
+0,
+1200,
+260
+],
+"film:assets_prep/troutshop/brands/valkein.png": [
+6,
+6,
+1758,
+526
+],
+"film:assets_prep/troutshop/brands/valkein_on_dark.png": [
+6,
+6,
+1758,
+526
+],
+"film:assets_prep/troutshop/brands/vanfook.png": [
+6,
+6,
+456,
+473
+],
+"film:assets_prep/troutshop/brands/vanfook_on_dark.png": [
+6,
+6,
+456,
+473
+],
+"film:assets_prep/troutshop/brands/varivas.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/troutshop/brands/varivas_on_dark.png": [
+5,
+6,
+2391,
+512
+],
+"film:assets_prep/troutshop/brands/velvetarts.png": [
+7,
+6,
+1182,
+521
+],
+"film:assets_prep/troutshop/brands/velvetarts_on_dark.png": [
+7,
+6,
+1182,
+521
+],
+"film:assets_prep/troutshop/brands/yarie.png": [
+0,
+0,
+394,
+128
+],
+"film:assets_prep/troutshop/brands/yarie_mono.png": [
+0,
+0,
+269,
+105
+],
+"film:assets_prep/troutshop/brands/yarie_on_dark.png": [
+0,
+0,
+394,
+128
+],
+"film:assets_prep/velkaryba/brands/3stan.png": [
+15,
+15,
+505,
+505
+],
+"film:assets_prep/velkaryba/brands/3stan_on_dark.png": [
+15,
+15,
+505,
+505
+],
+"film:assets_prep/velkaryba/brands/berkley.png": [
+19,
+20,
+632,
+242
+],
+"film:assets_prep/velkaryba/brands/berkley_on_dark.png": [
+19,
+20,
+632,
+242
+],
+"film:assets_prep/velkaryba/brands/daiwa.png": [
+17,
+17,
+564,
+269
+],
+"film:assets_prep/velkaryba/brands/daiwa_on_dark.png": [
+17,
+17,
+564,
+269
+],
+"film:assets_prep/velkaryba/brands/foxrage.png": [
+20,
+20,
+650,
+335
+],
+"film:assets_prep/velkaryba/brands/foxrage_on_dark.png": [
+20,
+20,
+650,
+335
+],
+"film:assets_prep/velkaryba/brands/gloomis.png": [
+21,
+21,
+703,
+151
+],
+"film:assets_prep/velkaryba/brands/gloomis_on_dark.png": [
+21,
+21,
+703,
+151
+],
+"film:assets_prep/velkaryba/brands/illex.png": [
+18,
+18,
+615,
+248
+],
+"film:assets_prep/velkaryba/brands/illex_on_dark.png": [
+18,
+18,
+615,
+248
+],
+"film:assets_prep/velkaryba/brands/keitech.png": [
+21,
+21,
+684,
+142
+],
+"film:assets_prep/velkaryba/brands/keitech_on_dark.png": [
+21,
+21,
+684,
+142
+],
+"film:assets_prep/velkaryba/brands/libralures.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/velkaryba/brands/libralures_on_dark.png": [
+18,
+19,
+575,
+570
+],
+"film:assets_prep/velkaryba/brands/luckyjohn.png": [
+16,
+16,
+542,
+453
+],
+"film:assets_prep/velkaryba/brands/luckyjohn_on_dark.png": [
+16,
+16,
+542,
+453
+],
+"film:assets_prep/velkaryba/brands/majorcraft.png": [
+21,
+22,
+684,
+116
+],
+"film:assets_prep/velkaryba/brands/majorcraft_on_dark.png": [
+21,
+22,
+684,
+116
+],
+"film:assets_prep/velkaryba/brands/mepps.png": [
+18,
+18,
+612,
+404
+],
+"film:assets_prep/velkaryba/brands/mepps_on_dark.png": [
+18,
+18,
+612,
+404
+],
+"film:assets_prep/velkaryba/brands/rapala.png": [
+21,
+21,
+690,
+301
+],
+"film:assets_prep/velkaryba/brands/rapala_on_dark.png": [
+21,
+21,
+690,
+301
+],
+"film:assets_prep/velkaryba/brands/salmo.png": [
+21,
+21,
+700,
+283
+],
+"film:assets_prep/velkaryba/brands/salmo_on_dark.png": [
+21,
+21,
+700,
+283
+],
+"film:assets_prep/velkaryba/brands/savagegear.png": [
+17,
+17,
+462,
+566
+],
+"film:assets_prep/velkaryba/brands/savagegear_on_dark.png": [
+17,
+17,
+462,
+566
+],
+"film:assets_prep/velkaryba/brands/shimano.png": [
+21,
+21,
+700,
+95
+],
+"film:assets_prep/velkaryba/brands/shimano_on_dark.png": [
+21,
+21,
+700,
+95
+],
+"film:assets_prep/velkaryba/brands/westin.png": [
+21,
+21,
+684,
+423
+],
+"film:assets_prep/velkaryba/brands/westin_on_dark.png": [
+21,
+21,
+684,
+423
+]
+}
