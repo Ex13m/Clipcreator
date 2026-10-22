@@ -1,7 +1,51 @@
 # MČR 2026 · film v3 — globální změny enginu (21. 10.)
 
-> **AKTUÁLNÍ PLÁN = v7 (22. 10., FT Fishing) — viz §0.** Tabulky §1–§2 níže jsou historie v6 (bez FT Fishing, 72 taktů); všechny
-> bloky za intrem jsou ve v7 posunuté o +5 taktů / +9,174 s, jejich zdrojové takty (= hudba pod nimi) se NEZMĚNILY.
+> **AKTUÁLNÍ PLÁN = v8 (22. 10., bez Moonky, Vanfook u FT Fishing) — viz §00.** §0 = v7 (77 taktů, s Moonky), §1–§2 = historie v6.
+> Ve v8 jsou všechny bloky od broll dál posunuté o −5 taktů / −9,122 s; jejich zdrojové takty (= hudba pod nimi) se NEZMĚNILY.
+
+## 00. v8 (22. 10.): Moonky vyřazen z filmu, Vanfook ve FT Fishing (rozhodnutí operátora 22. 10.)
+
+Výstup: `proto/film/` (FINAL=1, **135,933 s** po zaokrouhlení na snímky; hudba 135,923 s, **72 taktů**). Mix filmu −14,05 LUFS /
+−2,02 dBTP, VO +9,41 LU nad hudbou. Záloha stavu v7: `_work/bak_nomoonky/`.
+
+**Hudba** (`python3 scripts/music_edit.py data/block_plan_B.json`): segmenty zdroje **[10, 23) · [18, 47) · [52, 69) · [81, 89) · [101, konec)**.
+Vystřiženy zdrojové takty 47–51 (Moonky: rebuild bez hatů + groove C). Nový střih **zdroj 46 → 52 na době 76,998 s = šev jigovky → broll**:
+z konce breaku jigovky (takt 46: bez hi-hatů −42 dB, bez basu −37 dB) rovnou do re-entry groove (52: bas −20 dB, řídké haty) — hudebně
+„návrat po breaku“, broll vstupuje hard cutem + slamem přesně na ten úder. Profil střihu: max |Δ| 0,128, RMS 5 ms před/po 0,138/0,154
+(klidnější než drop 22→18). **Jigovky, broll, brollbreak, troutshop a vše dál mají bit po bitu stejnou hudbu jako ve v7**
+(události §2 platí, jen −5 taktů). Zvažované varianty: (b) vystřihnout 45–49 → jigovky by přišel o break pod VO (zamítnuto);
+(c) [18,50)·[55,69) → broll/brollbreak na rebuildu 47–49 (bez hatů = „skoro break“), ale broll by ztratil re-entry úder a brollbreak by měl
+napůl jinou hudbu; (d) break 45–46 zopakovat pod brollbreak → týž break 2× během 5 s. Skutečný break pod brollbreak tedy nejde bez obětování
+breaku jigovky → zvolena (a).
+
+| blok | takty | počet | t0, s | t1, s | délka, s | takty zdroje | VO, s | rezerva VO → konec, s |
+|---|---|---|---|---|---|---|---|---|
+| intro | 0–7 | 8 | 0.000 | 14.689 | 14.689 | 10–17 | 13.18 (od 0,5) | 1.01 |
+| ftfishing | 8–12 | 5 | 14.689 | 23.863 | 9.174 | 18–22 (DROP) | 6.12 | 2.80 |
+| venue | 13–20 | 8 | 23.863 | 38.541 | 14.678 | 18–25 (re-drop) | 12.49 | 1.94 |
+| gausseholler | 21–25 | 5 | 38.541 | 47.705 | 9.164 | 26–30 | 5.87 | 3.04 |
+| activefishing | 26–30 | 5 | 47.705 | 56.863 | 9.158 | 31–35 | 6.50 | 2.41 |
+| bosset | 31–36 | 6 | 56.863 | 67.853 | 10.990 | 36–41 | 8.26 | 2.48 |
+| jigovky | 37–41 | 5 | 67.853 | 76.998 | 9.145 | 42–46 (break 45–46) | 7.88 | 1.02 |
+| broll | 42 | 1 | 76.998 | 78.824 | 1.826 | 52 (re-entry, **střih 46→52**) | — | — |
+| brollbreak | 43–44 | 2 | 78.824 | 82.476 | 3.652 | 53–54 | — | — |
+| troutshop | 45–49 | 5 | 82.476 | 91.599 | 9.123 | 55–59 | 6.10 | 2.77 |
+| velkaryba | 50–54 | 5 | 91.599 | 100.712 | 9.113 | 60–64 | 6.80 | 2.06 |
+| crs | 55–58 | 4 | 100.712 | 108.001 | 7.289 | 65–68 | 4.12 | 2.92 |
+| finale | 59–71 | 13 | 108.001 | 135.923 | 27.922 | 81–88 + 101–konec | 12.64 | 15.03 |
+
+**Moonky mimo film**: `data/content.json › standalone.moonky` + `data/block_plan_moonky.json` → `audio/track_moonky.wav` (zdroj 46 hook ·
+47–51 blok · 52–54 end card = stejná hudba jako dřívější reel). `build.mjs`: `BLOCK=moonky [REEL=1]` staví na vlastní mřížce,
+`BLOCK=all [REEL=1]` ho staví v podprocesu. Modul `scripts/blocks/moonky.mjs` + `fx_moonky.mjs` beze změny.
+
+**Intro teaser (takt 7)**: 8 osmin = přesně 8 partnerů filmu: Líheň Liběchov · **FT Fishing** (Impulse PRO na bílé) · Troutshop ·
+Activefishing · Jigovky · Bosset · Velká ryba · Gausse Holler (hlavní cena drží poslední osminu před zoomem do bílé → FT). ČRS = supporter
+(vlastní blok). Pořadí střídá tmavé/světlé světy.
+**Finále**: montáž 8 karet = 8 dob, každá zase celá doba (osminové dělení Velká ryba · Bosset zmizelo samo), GH drží poslední dobu; burst:
+slot Moonky → Crazy Fish Vibro Fat (FT); logo stěna 2 × 4 (8 partnerů, plocha 24 000 px², max 360 px), GH kolečko beze změny.
+**Šev jigovky → broll**: jigovky `tOut('slice')` zavírá do `next.theme.bg` = černá broll (dřív Moonky navy) → broll hard cut + slam na úder.
+**FT Fishing + Vanfook**: lockup (takt 4) a Reel end card — řada značek 4 sloupce: Favorite · Crazy Fish · Spinmad (logo + produkt) ·
+**Vanfook** (logo z banneru FT, o stupeň menší plocha 11 500 px², pod ním „HÁČKY“ Saira + tah v barvě loga #9F4745). VO beze změny.
 
 ## 0. v7 (22. 10.): nový blok FT Fishing mezi intro a venue (rozhodnutí operátora 22. 10.)
 

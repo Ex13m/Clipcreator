@@ -1,6 +1,6 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_film.wav",
- "dur": 145.066,
+ "dur": 135.933,
  "music": {
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
   "start": 0,
@@ -44,28 +44,23 @@
    "dur": 7.877
   },
   {
-   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/moonky.wav",
-   "at": 77.248,
-   "dur": 7.384
-  },
-  {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/troutshop.wav",
-   "at": 91.849,
+   "at": 82.726,
    "dur": 6.096
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/velkaryba.wav",
-   "at": 100.972,
+   "at": 91.849,
    "dur": 6.799
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/crs.wav",
-   "at": 110.084,
+   "at": 100.962,
    "dur": 4.118
   },
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/finale.wav",
-   "at": 117.373,
+   "at": 108.251,
    "dur": 12.64
   }
  ],

@@ -35,6 +35,13 @@
    "name": "Spinmad",
    "on_light": "assets_prep/ftfishing/brands/spinmad.png",
    "on_dark": "assets_prep/ftfishing/brands/spinmad_on_dark.png"
+  },
+  "vanfook": {
+   "name": "Vanfook",
+   "on_light": "assets_prep/ftfishing/brands/vanfook.png",
+   "on_dark": "assets_prep/ftfishing/brands/vanfook_on_dark.png",
+   "label": "háčky",
+   "_": "operátor 22. 10.: 4. značka v řadě značek lockupu + Reel end cardu (bez produktu, jen logo + „háčky“); FT prodává Vanfook háčky, trojháčky, karabinky (research/ftfishing.md ř. 31, ftfishing_brands.md #5); logo = výřez z hero banneru FT"
   }
  },
  "products": [

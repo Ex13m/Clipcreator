@@ -13,7 +13,7 @@ You own **one file**, `scripts/blocks/<block>.mjs`, plus your data file `data/bl
 cd projects/mcr-2026-sponzori
 BLOCK=troutshop node scripts/build.mjs          # bare block: proto/block_troutshop/ (its own music slice + VO)
 BLOCK=troutshop REEL=1 node scripts/build.mjs   # Reel: proto/reel_troutshop/ = 1-bar hook + block + 2-bar end card
-node scripts/build.mjs                          # master film: proto/film/ (plan B, whole track, 135.9 s)
+node scripts/build.mjs                          # master film: proto/film/ (plan B v8, whole track, 135.9 s)
 BLOCK=all [REEL=1] node scripts/build.mjs       # every block / every Reel (REEL only for modules with meta.reel = true)
 FINAL=1 …                                       # without the DRAFT badge
 
@@ -163,9 +163,11 @@ blocks. The fx classes (`.fx-*`) are global.
 **PLAN B (v3, 21. 10.)** — bars are 0-based on `audio/track_B.wav` (cut by `scripts/music_edit.py` from `music/sponsors_3.mp3`;
 ~130–132 BPM drift, bar ≈ 1.82–1.84 s; grid `audio/track_B.beats.json`, aligned to the drum TRANSIENT, with a per-bar energy profile
 `bars[]` = dB full / low / high + source bar). Plan (`data/content.json`, table with times in `_work/V3_GLOBAL.md`):
-**v7 (22. 10.)**: intro 0–7 · **ftfishing 8–12 (DROP on bar 8)** · venue 13–20 (re-drop, same source bars as before) · gausseholler 21–25 ·
-activefishing 26–30 · bosset 31–36 · jigovky 37–41 · moonky 42–46 · broll 47 · brollbreak 48–49 · troutshop 50–54 · velkaryba 55–59 · crs 60–63 ·
-finale 64–76 (+ tail to the end; film 145.05 s). Block-local music is unchanged for every block except the new ftfishing (`_work/V3_GLOBAL.md` §0).
+**v8 (22. 10.)**: intro 0–7 · **ftfishing 8–12 (DROP on bar 8)** · venue 13–20 (re-drop) · gausseholler 21–25 ·
+activefishing 26–30 · bosset 31–36 · jigovky 37–41 · broll 42 (re-entry after the jigovky break: splice source 46 → 52) · brollbreak 43–44 ·
+troutshop 45–49 · velkaryba 50–54 · crs 55–58 · finale 59–71 (+ tail; film 135.93 s). **Moonky is out of the film** (operator 22. 10.):
+`content.json › standalone.moonky` builds it with `BLOCK=moonky [REEL=1]` on its own music (`audio/track_moonky.wav`, same bars as before).
+Block-local music is unchanged for every block (`_work/V3_GLOBAL.md` §00).
 Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on `ctx.beats`. Musical events inside blocks
 (breaks, fills, peak entries) are listed in `_work/V3_GLOBAL.md` §2.
 
