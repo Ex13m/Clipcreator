@@ -66,7 +66,7 @@ const CW = ['chart', 'cobalt', 'gold', 'red', 'holo'];   // Timon Chibi Futten F
 // third-party brands the shop sells (research/activefishing_brands.md); wm = typed wordmark (no logo file: Montserrat 800, never their artwork)
 const BR = {
   nories: { f: 'nories.png', bb: [7, 6, 1460, 526] }, timon: { wm: 'TIMON', sub: 'by JACKALL' }, mukai: { f: 'mukai.png', bb: [6, 6, 801, 415] },
-  valkein: { f: 'valkein.png', bb: [7, 7, 1764, 531] }, varivas: { f: 'varivas.png', bb: [5, 6, 2395, 518] }, yarie: { f: 'yarie.png', bb: [0, 0, 394, 128] },
+  valkein: { f: 'valkein.png', bb: [7, 7, 1764, 531], s: 0.86 }, varivas: { f: 'varivas.png', bb: [5, 6, 2395, 518], s: 0.74 }, yarie: { f: 'yarie.png', bb: [0, 0, 394, 128] },
   velvetarts: { f: 'velvetarts.png', bb: [7, 6, 1188, 526] }, forest: { f: 'forest.png', bb: [4, 4, 280, 122] },
   officeeucalyptus: { f: 'officeeucalyptus.png', bb: [6, 6, 193, 82] }, rodiocraft: { f: 'rodiocraft.png', bb: [0, 0, 1200, 260] },
 };
@@ -160,7 +160,7 @@ function brandMark(E, b, { x, y, w, h }) {
   const B = BR[b];
   if (B.wm) return `<div class="af-brand" style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;height:${R1(h)}px;background:none;box-shadow:none"><b style="font-size:${R1(h * 0.62)}px">${E.esc(B.wm)}${B.sub ? `<small>${E.esc(B.sub)}</small>` : ''}</b></div>`;
   const [nw, nh] = E.dims(BRD + B.f), [x0, y0, x1, y1] = B.bb, ar = (x1 - x0) / (y1 - y0);
-  let lw = Math.min(w, h * ar, (x1 - x0)), lh = lw / ar;
+  const lw = Math.min(w, h * ar, (x1 - x0)) * (B.s || 1), lh = lw / ar;
   const s = lw / (x1 - x0);
   return `<div class="abs" style="left:${R1(x + (w - lw) / 2 - x0 * s)}px;top:${R1(y + (h - lh) / 2 - y0 * s)}px;width:${R1(nw * s)}px;height:${R1(nh * s)}px;background:url(${E.src(BRD + B.f)}) center/100% 100% no-repeat"></div>`;
 }
@@ -200,13 +200,13 @@ function counter(E, { x, y, w, big, d = 0, align = 'left', woblery = true }) {
 }
 
 // loose cluster of lures (poster): positions in a reference box, scaled uniformly into the target box
-const CL_TALL = { w: 480, h: 640, items: [
+const CL_TALL = { w: 480, h: 740, items: [
   { k: 'khor', cx: 92, cy: 150, VH: 210, rot: -12, d: 0.10 },
   { k: 'sofia', cx: 300, cy: 140, V: 300, rot: 4, d: 0.04 },
   { k: 'forte15', cx: 118, cy: 350, V: 210, rot: 16, d: 0.14 },
   { k: 'scheila', cx: 372, cy: 345, V: 196, rot: -14, d: 0.18 },
-  { k: 'mukai', cx: 250, cy: 410, V: 210, rot: -4, d: 0.2 },
-  { k: 'chart', cx: 238, cy: 560, V: 470, rot: -7, d: 0.0, hero: true },
+  { k: 'mukai', cx: 300, cy: 500, V: 230, rot: -6, d: 0.2 },
+  { k: 'chart', cx: 238, cy: 660, V: 470, rot: -7, d: 0.0, hero: true },
 ] };
 const CL_WIDE = { w: 720, h: 440, items: [
   { k: 'sofia', cx: 130, cy: 120, V: 220, rot: 4, d: 0.04 },
@@ -276,14 +276,14 @@ export const scenes = {
     let html = frame(E, { glow: [0.7, 0.75] }), txt = '';
     const L = afLogo(E, { x: b.x, y: b.y + 6, maxH: 999, attrs: 'data-in="scale"' });
     txt += L.html;
-    txt += T(E, { cls: 'af-s', x: b.x + L.w + 28, y: b.y + 6 + L.h / 2 - 34, w: b.w - L.w - 28, size: 30, lines: 2, text: 'E-shop Stanislava Lukáška, zrozený z vášně pro přívlač', style: 'line-height:1.15', inAttr: 'data-in="left" data-d=".1"' });
+    txt += T(E, { cls: 'af-s', x: b.x + L.w + 28, y: b.y + 6 + L.h / 2 - 34, w: b.w - L.w - 28, size: 30, lines: 2, html: `${E.t('E-shop Stanislava Lukáška,')}<br>${E.t('zrozený z vášně pro přívlač')}`, style: 'line-height:1.15', inAttr: 'data-in="left" data-d=".1"' });
     let y = b.y + L.h + (sq ? 34 : 50);
     const hs = sq ? 104 : 118;
     txt += T(E, { cls: 'af-h', x: b.x, y, w: b.w, size: hs, fit: 60, text: 'Pro všechny,', main: true, inAttr: 'data-in="up" data-d=".06"' });
     y += hs * 0.98;
     txt += T(E, { cls: 'af-h', x: b.x, y, w: b.w, size: hs, fit: 60, html: `kdo milují <span class="af-g">přívlač</span>`, main: true, inAttr: 'data-in="up" data-d=".12"' });
     y += hs * 1.06 + 8;
-    txt += T(E, { cls: 'af-s', x: b.x, y, w: b.w, size: sq ? 40 : 42, fit: 30, text: 'Český e-shop pro přívlač a trout area', main: true, inAttr: 'data-in="up" data-d=".18"', style: `color:${C.ink}` });
+    txt += T(E, { cls: 'af-s', x: b.x, y, w: b.w, size: sq ? 40 : 42, fit: 30, text: 'Český e-shop pro trout area', main: true, inAttr: 'data-in="up" data-d=".18"', style: `color:${C.ink}` });
     y += (sq ? 40 : 42) * 1.2 + (sq ? 20 : 30);
     // benefit pills (homepage)
     const ps = sq ? 24 : 27, ph = ps * 2, gap = 12;

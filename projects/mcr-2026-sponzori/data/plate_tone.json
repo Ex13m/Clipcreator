@@ -20,8 +20,8 @@
   }
  },
  "film": {
-  "stamp": "aa5dc2d41a78d3a0",
-  "date": "2026-10-21T22:36",
+  "stamp": "c09f95c89ce9faea",
+  "date": "2026-10-22T09:29",
   "step": 0.3,
   "frames": 453,
   "windows": [
@@ -252,8 +252,8 @@
   }
  },
  "reel_gausseholler": {
-  "stamp": "60f1dc02434c2c18",
-  "date": "2026-10-21T21:55",
+  "stamp": "2ccdbb006b693703",
+  "date": "2026-10-22T09:31",
   "step": 0.3,
   "frames": 49,
   "windows": [

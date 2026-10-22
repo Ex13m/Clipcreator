@@ -59,7 +59,7 @@ export const fonts = {};   // Bitter + Montserrat (normal + italic) are in the e
 export function css(E) {
   return `
 .vn-k{font-family:Montserrat;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.12em;color:${C.gold}}
-.vn-h{font-family:Bitter;font-weight:900;text-transform:uppercase;line-height:.95;color:${C.white};letter-spacing:-.005em}
+.vn-h{font-family:Bitter;font-weight:900;text-transform:uppercase;line-height:1.02;padding-top:.1em;color:${C.white};letter-spacing:-.005em}
 .vn-h em{font-style:normal;color:${C.gold}}
 .vn-s{font-family:Montserrat;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.06em;color:${C.aqua};line-height:1.1}
 .vn-p{font-family:Montserrat;font-weight:600;color:#e8f1f4;line-height:1.25}
@@ -86,8 +86,8 @@ const T = (E, { cls, x, y, w, size, text, html, align = 'left', fit = 0, lines =
 
 // two-line headline as two single-line fitted rows (diacritics on caps make a 2-line data-lines box overflow its height)
 const H2 = (E, { cls = 'vn-h', x, y, w, size, fit, a, b2, inAttr = '', d = 0.06, lh = 0.98 }) =>
-  T(E, { cls, x, y, w, size, fit, text: a, inAttr: inAttr || `data-in="up" data-d="${d}"`, main: true, style: 'padding-top:.08em;line-height:1.02' }) +
-  T(E, { cls, x, y: y + size * lh, w, size, fit, text: b2, inAttr: inAttr || `data-in="up" data-d="${(d + 0.06).toFixed(2)}"`, main: true, style: 'padding-top:.08em;line-height:1.02' });
+  T(E, { cls, x, y, w, size, fit, text: a, inAttr: inAttr || `data-in="up" data-d="${d}"`, main: true }) +
+  T(E, { cls, x, y: y + size * lh, w, size, fit, text: b2, inAttr: inAttr || `data-in="up" data-d="${(d + 0.06).toFixed(2)}"`, main: true });
 
 const caustics = (E, { op = 0.2, size = 640, mask = '' } = {}) => {
   const u = E.src(P.caus), s2 = Math.round(size * 1.47);
@@ -319,22 +319,20 @@ export const scenes = {
     html += caustics(E, { op: 0.26, size: 620, mask: 'linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 40%,transparent 75%)' });
     html += shafts();
     html += etch(E, { x: b.r - (sq ? 520 : 600), y: b.y + (sq ? 120 : 200), h: sq ? 760 : 920, color: C.aqua, op: 0.16, attrs: 'data-float="8,5"' });
-    const ks = sq ? 26 : 30, hs = sq ? 150 : 170;
-    let y = b.y + 6;
+    const ks = sq ? 28 : 32, hs = sq ? 176 : 196;
+    let y = b.y + 10;
     html += T(E, { cls: 'vn-k', x: b.x, y, w: b.w, size: ks, text: 'Mistrovství ČR v Trout Area 2026', style: 'color:#fff', inAttr: 'data-in="left"' });
-    y += ks * 1.7;
-    html += T(E, { cls: 'vn-s', x: b.x, y, w: b.w, size: sq ? 40 : 46, text: 'Dějiště mistrovství', style: `color:${C.aqua}`, inAttr: 'data-in="up" data-d=".05"' });
-    y += (sq ? 40 : 46) * 1.25;
-    html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 8, y, w: b.w + 8, size: hs, fit: 90, text: '24.–25. 10.', inAttr: 'data-in="slam" data-d=".1"', main: true });
+    y += ks * 1.9;
+    html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 8, y, w: b.w + 8, size: hs, fit: 90, text: '24.–25. 10.', inAttr: 'data-in="slam" data-d=".08"', main: true });
     y += hs * 1.0;
-    html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 4, y, w: b.w, size: sq ? 72 : 84, text: '2026', style: 'color:#fff', inAttr: 'data-in="up" data-d=".16"', main: true });
-    y += (sq ? 72 : 84) * 1.0 + (sq ? 34 : 56);
+    html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 4, y, w: b.w, size: sq ? 84 : 96, text: '2026', style: 'color:#fff', inAttr: 'data-in="up" data-d=".14"', main: true });
+    y += (sq ? 84 : 96) * 1.0 + (sq ? 50 : 80);
     const L = E.logo(P.logo, { x: 0, y: 0, maxH: 999, trim: LOGO_TRIM });
     const colW = b.w - L.w - 30;
-    html += T(E, { cls: 'vn-h vn-shadow', x: b.x - 3, y, w: colW, size: sq ? 66 : 76, fit: 44, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".22"', main: true });
-    y += (sq ? 66 : 76) * 1.0 + 14;
-    html += T(E, { cls: 'vn-s', x: b.x, y, w: colW, size: sq ? 32 : 36, text: 'rybník Malý Sporťáček', style: 'color:#fff', inAttr: 'data-in="up" data-d=".28"' });
-    y += (sq ? 32 : 36) * 1.1 + (sq ? 30 : 44);
+    html += T(E, { cls: 'vn-h vn-shadow', x: b.x - 3, y: y - (sq ? 76 : 86) * 0.1, w: colW, size: sq ? 76 : 86, fit: 44, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".22"', main: true });
+    y += (sq ? 76 : 86) * 1.0 + 18;
+    html += T(E, { cls: 'vn-s', x: b.x, y, w: colW, size: sq ? 36 : 40, text: 'rybník Malý Sporťáček', style: `color:${C.aqua}`, inAttr: 'data-in="up" data-d=".28"' });
+    y += (sq ? 36 : 40) * 1.1 + (sq ? 40 : 56);
     html += `<div class="t vn-k" data-in="scale" data-d=".36" style="left:${b.x}px;top:${R1(y)}px;height:${sq ? 58 : 64}px;line-height:${sq ? 58 : 64}px;padding:0 26px;border-radius:999px;background:${C.gold};color:${C.navy};font-size:${sq ? 28 : 31}px;letter-spacing:.08em">${E.t('Přijďte se podívat')}</div>`;
     html += E.logo(P.logo, { x: b.r - L.w, y: b.b - L.h, trim: LOGO_TRIM, attrs: 'data-in="fade" data-d=".3"' }).html;
     return { html, taTone: 'scrim' };

@@ -1,6 +1,6 @@
 {
  "key": "venue",
- "built": "2026-10-22T09:28:11.564Z",
+ "built": "2026-10-22T09:28:52.296Z",
  "outputs": {
   "venue_static_191.png": {
    "err": [],
@@ -17,9 +17,7 @@
   },
   "venue_carousel_2.png": {
    "err": [],
-   "warn": [
-    "text outside the safe zone: \"Malý Sporťáček\""
-   ],
+   "warn": [],
    "scene": "range"
   },
   "venue_carousel_3.png": {

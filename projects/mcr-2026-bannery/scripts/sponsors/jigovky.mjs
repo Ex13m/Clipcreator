@@ -124,9 +124,11 @@ function fitIn(E, k, { cx, cy, w, h, maxS = 1, ...o }) {
 const logo = (E, o) => E.logo(LOGO, { trim: LOGO_TRIM, ...o });
 const logoSize = (E, maxH = 999) => E.logoFit(LOGO_TRIM[2] / LOGO_TRIM[3], { maxH });
 
+// caps labels, but the gram unit stays a lower-case „g“ (0,4 g, not 0,4 G)
+const unitCase = (E, text) => E.t(text).replace(/(\d)(&nbsp;|\u00a0| )g\b/g, '$1$2<span style="text-transform:none">g</span>');
 function pill(E, { x, y, h, size, text, outline = false, inAttr = '', w = null }) {
   const ww = w ?? Math.ceil(text.length * size * 0.46 + size * 1.5);
-  return { html: `<div class="t jg-pill${outline ? ' o' : ''}" ${inAttr} style="left:${R1(x)}px;top:${R1(y)}px;height:${R1(h)}px;width:${R1(ww)}px;font-size:${size}px">${E.t(text)}</div>`, w: ww };
+  return { html: `<div class="t jg-pill${outline ? ' o' : ''}" ${inAttr} style="left:${R1(x)}px;top:${R1(y)}px;height:${R1(h)}px;width:${R1(ww)}px;font-size:${size}px">${unitCase(E, text)}</div>`, w: ww };
 }
 function band(E, { x, y, w, h, size, text, inAttr = 'data-in="wipe-r" data-d=".25"' }) {
   return `<div class="abs jg-band" ${inAttr} style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;height:${R1(h)}px">${T(E, { cls: 'jg-band-t', x: h * 0.32, y: (h - size) / 2 + size * 0.04, w: w - h * 0.64, size, fit: 22, text })}</div>`;
@@ -164,7 +166,7 @@ export const scenes = {
       html += glint(gx, gy, 120);
       return { html: html + txt };
     }
-    const S = k === 'square' ? { kick: 30, head: 140, pillH: 64, pillS: 36, jigW: 900, dots: 0 } : k === 'portrait' ? { kick: 34, head: 168, pillH: 74, pillS: 40, jigW: 980, dots: 0 } : { kick: 36, head: 176, pillH: 78, pillS: 42, jigW: 980, dots: 44 };
+    const S = k === 'square' ? { kick: 30, head: 140, pillH: 64, pillS: 36, jigW: 900, dots: 0 } : k === 'portrait' ? { kick: 34, head: 150, pillH: 74, pillS: 40, jigW: 980, dots: 0 } : { kick: 36, head: 150, pillH: 78, pillS: 42, jigW: 980, dots: 44 };
     let y = b.y + (k === 'tall' ? 30 : 4);
     txt += T(E, { cls: 'jg-k', x: b.x, y, w: b.w * 0.7, size: S.kick, text: 'Poctivě vyrobeno v ČR', style: `color:${C.yellow}`, inAttr: 'data-in="left" data-d=".05"' });
     y += S.kick * 1.45;
