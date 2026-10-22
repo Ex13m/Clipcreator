@@ -1,0 +1,9 @@
+ftfishing 0.3
+venue 2.0
+gausseholler 2.0
+activefishing 2.6
+bosset 6.2
+jigovky 2.0
+moonky 0.4
+troutshop 4.6
+velkaryba 2.0

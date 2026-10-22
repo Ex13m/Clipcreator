@@ -1,0 +1,10 @@
+# key  start(s)  — výřez 4,4 s z mcr-2026-sponzori/renders/reel_<key>_v8.mp4
+ftfishing 0.3
+venue 2.6
+gausseholler 2.0
+activefishing 2.6
+bosset 6.7
+jigovky 2.0
+moonky 0.4
+troutshop 5.0
+velkaryba 2.0
