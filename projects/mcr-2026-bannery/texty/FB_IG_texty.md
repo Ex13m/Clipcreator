@@ -212,7 +212,7 @@ Označit: FB @activefishing.cz · IG @activefishingshop
 Activefishing.cz
 Pro všechny, kdo milují přívlač.
 
-1 350+ plandavek · 770+ woblerů
+Přes 1 350 plandavek · přes 770 woblerů
 Nories · Timon · Mukai · ValkeIN · VARIVAS
 
 Věnuje ceny pro závodníky MČR 2026. Děkujeme!
@@ -226,7 +226,7 @@ activefishing.cz
 
 | Pole | Text |
 |---|---|
-| Primary text | Přes 1 350 plandavek a 770 woblerů pro trout area. Activefishing.cz věnuje ceny pro MČR 2026. |
+| Primary text | Přes 1 350 plandavek a přes 770 woblerů pro trout area. Activefishing.cz věnuje ceny pro MČR 2026. |
 | Headline | Activefishing.cz – plandavky a woblery |
 | Description | Nories · Timon · VARIVAS |
 | CTA | Shop Now (Nakoupit) → activefishing.cz |
@@ -499,7 +499,7 @@ Děkujeme Českému rybářskému svazu
 
 Český rybářský svaz je nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody, a patří mezi největší zájmová sdružení v České republice. Sportovní lov ryb je nedílnou součástí jeho činnosti – od místních závodů až po mistrovství republiky a světa.
 
-Areál Líheň Liběchov, kde se letošní mistrovství koná, vlastní místní organizace ČRS Mělník. Děkujeme za dlouholetou podporu Trout Area Czech Republic!
+Areál Líheň Liběchov, kde se letošní mistrovství koná, vlastní Český rybářský svaz, místní organizace Mělník. Děkujeme za dlouholetou podporu Trout Area Czech Republic!
 
 rybsvaz.cz
 
@@ -516,7 +516,7 @@ Děkujeme
 
 za dlouholetou podporu.
 
-Areál Líheň Liběchov, dějiště MČR 2026, vlastní místní organizace ČRS Mělník.
+Areál Líheň Liběchov, dějiště MČR 2026, vlastní Český rybářský svaz, místní organizace Mělník.
 rybsvaz.cz
 
 #TroutArea #TroutAreaCZ #MCR2026
@@ -534,7 +534,7 @@ rybsvaz.cz
 
 1. Český rybářský svaz – spolek s dlouholetou tradicí
 2. Rybářství · ochrana přírody · sportovní lov
-3. MO Mělník – vlastník areálu Líheň Liběchov
+3. Líheň Liběchov, rybník Malý Sporťáček (schéma) – areál vlastní Český rybářský svaz, místní organizace Mělník
 4. Děkujeme za dlouholetou podporu
 
 ---
