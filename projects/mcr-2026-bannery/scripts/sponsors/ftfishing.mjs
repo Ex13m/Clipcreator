@@ -64,10 +64,12 @@ const P = {
   comet: { f: `${AD}S8_crazyfish_comet_2-5in_20_kiwi.png`, bb: [16, 17, 443, 333] },
   rod: { f: `${AD}S10_favorite_arena_stream_arns1_rod.png`, bb: [17, 16, 1184, 893] },
 };
+const BBCF = [3, 2, 418, 313];   // alpha bbox of crazyfish_clean.png
 const BR = {
   favorite: { f: 'favorite.png', bb: [26, 30, 900, 198] },
   spinmad: { f: 'spinmad.png', bb: [27, 13, 856, 355] },
-  crazyfish: { f: 'crazyfish.png', bb: [13, 20, 1066, 818] },
+  // review 22. 10. MINOR 5: cleaned + pre-sharpened mark (scripts/assets_prep/crazyfish_clean.py: no drips/splatter, 420 px Lanczos + unsharp)
+  crazyfish: { src: 'own:assets/ftfishing/crazyfish_clean.png', bb: BBCF },
   vanfook: { f: 'vanfook.png', bb: [27, 26, 641, 389] },   // háčky (operátor 22. 10.: 4. značka, vedlejší vedle tří hlavních)
 };
 const LOGO = 'film:assets_prep/ftfishing/logo_on_light.png', LOGO_TRIM = [0, 0, 1881, 1878];
@@ -150,17 +152,17 @@ function prodIn(E, k, box, o = {}) {
 }
 // third-party brand logo contained in a box (positioned absolutely in the page / parent)
 function brandLogo(E, b, { x, y, w, h, align = 'center', attrs = '' }) {
-  const B = BR[b], [nw, nh] = E.dims(BRD + B.f), [x0, y0, x1, y1] = B.bb, ar = (x1 - x0) / (y1 - y0);
+  const B = BR[b], SRC = B.src || BRD + B.f, [nw, nh] = E.dims(SRC), [x0, y0, x1, y1] = B.bb, ar = (x1 - x0) / (y1 - y0);
   const lw = Math.min(w, h * ar), lh = lw / ar, s = lw / (x1 - x0);
   const lx = align === 'left' ? x : align === 'right' ? x + w - lw : x + (w - lw) / 2;
-  return `<div class="abs" ${attrs} style="left:${R1(lx - x0 * s)}px;top:${R1(y + (h - lh) / 2 - y0 * s)}px;width:${R1(nw * s)}px;height:${R1(nh * s)}px;background:url(${E.src(BRD + B.f)}) center/100% 100% no-repeat"></div>`;
+  return `<div class="abs" ${attrs} style="left:${R1(lx - x0 * s)}px;top:${R1(y + (h - lh) / 2 - y0 * s)}px;width:${R1(nw * s)}px;height:${R1(nh * s)}px;background:url(${E.src(SRC)}) center/100% 100% no-repeat"></div>`;
 }
 // row of the three focus brands (Favorite · Crazy Fish · Spinmad), equal optical weight; + Vanfook (hooks) as a smaller 4th brand
 // behind a thin divider — the three focus brands stay dominant (operator 22. 10.)
 function brandRow(E, { x, y, w, h, d = 0.3, gap = 26, van = true }) {
   const vw = van ? 0.62 : 0, div = van ? gap + 2 : 0;
-  const ws = [1.45, 0.7, 1.0], tot = ws.reduce((a, b) => a + b, 0) + vw, u = (w - gap * 2 - div) / tot;
-  const keys = ['favorite', 'crazyfish', 'spinmad'], hs = [h * 0.7, h * 1.25, h * 0.95];
+  const ws = [1.45, 0.84, 1.0], tot = ws.reduce((a, b) => a + b, 0) + vw, u = (w - gap * 2 - div) / tot;
+  const keys = ['favorite', 'crazyfish', 'spinmad'], hs = [h * 0.7, h * 1.5, h * 0.95];   // Crazy Fish +20 % (review MINOR 5)
   let xx = x, html = '';
   keys.forEach((k, i) => {
     const bw = ws[i] * u;

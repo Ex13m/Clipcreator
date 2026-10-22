@@ -55,7 +55,7 @@ export async function still(page, id, out) {
 }
 
 // MP4: H.264 High, yuv420p, CRF 18, faststart, silent. Returns QA of a frame in the middle of every scene window.
-export async function video(page, seq, out, { fps = 30, onProgress } = {}) {
+export async function video(page, seq, out, { fps = 60, onProgress } = {}) {
   const dur = await page.evaluate((s) => window.__setSeq(s), seq);
   const n = Math.round(dur * fps);
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
@@ -69,7 +69,7 @@ export async function video(page, seq, out, { fps = 30, onProgress } = {}) {
     if (mids.includes(i)) qa.push({ t: +(i / fps).toFixed(2), ...(await page.evaluate(() => window.__qa())) });
     const buf = await page.screenshot({ type: 'jpeg', quality: 96 });
     if (!ff.stdin.write(buf)) await new Promise((r) => ff.stdin.once('drain', r));
-    if (onProgress && i % 30 === 0) onProgress(i, n);
+    if (onProgress && i % fps === 0) onProgress(i, n);
   }
   ff.stdin.end();
   await done;

@@ -301,6 +301,9 @@ export const scenes = {
     h += `<div class="full" data-in="scale" data-d=".04" style="transform-origin:${R1(cx)}px ${R1(cy)}px">${plan.html}</div>`;
     const pl = Math.min(plan.pins.x0, plan.bbox.x0);
     h += `<div class="crs-note t" style="left:${R1(b.r - 420)}px;width:420px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 8)}px;font-size:${sq ? 16 : 18}px">Schéma · čísla míst orientační</div>`;
+    // „podklad © ČÚZK“ (review 22. 10. MINOR 1): the scheme is traced from the ČÚZK orthophoto (mcr-2026-dron/data); above the plan,
+    // right-aligned — next to the note it would run into the owner card
+    h += `<div class="crs-note t" style="left:${R1(b.r - 420)}px;width:420px;text-align:right;top:${R1(Math.min(plan.pins.y0, plan.bbox.y0) - (sq ? 30 : 34))}px;font-size:${sq ? 15 : 17}px">Podklad © ČÚZK</div>`;
     // left column: pond name + 40 places + owner fact card
     const colW = pl - 40 - b.x;
     let fy = top + 4;

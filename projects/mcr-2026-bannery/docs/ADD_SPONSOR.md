@@ -30,7 +30,7 @@ cd /home/user/Clipcreator/projects/mcr-2026-bannery
 cp scripts/sponsors/_template.mjs scripts/sponsors/<key>.mjs        # startér: sám načte logo/produkty/copy z filmových dat
 node scripts/build.mjs <key> --only=static,carousel                  # rychlá iterace (~10 s): 4 statiky + 4 karty karuselu
 #   … otevři renders/<key>/_sheet.jpg, podívej se, oprav, opakuj (min. 2 kola) …
-node scripts/build.mjs <key>                                         # finál: + 2× MP4 (4:5, 1:1, 10 s, ~70 s), sheet, _qa.json
+node scripts/build.mjs <key>                                         # finál: + 2× MP4 (4:5, 1:1, 10 s, 60 fps, ~2–3 min), sheet, _qa.json
 ```
 
 Výstupy: `renders/<key>/<key>_static_{1x1,4x5,191,9x16}.png`, `<key>_carousel_{1..4}.png`, `<key>_anim_{4x5,1x1}.mp4`,

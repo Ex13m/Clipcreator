@@ -211,8 +211,12 @@ export const scenes = {
     b = { ...b, b: b.b - st.h - (k === 'square' ? 18 : 30) };
     const y0 = b.y + (k === 'tall' ? 20 : 6), l2 = y0 + S.hs * 1.08, headB = l2 + S.hs * 1.1;
     bg += outline(E, 'Přívlač', { x: -40, y: headB + (b.b - headB) * 0.18, size: k === 'square' ? 300 : 360 });
-    // products: reel right, standing on the bottom of the body; orange Cardiff lying lower-left
-    const R = reel(E, { cx: b.r - S.reelH * 0.43, bottom: b.b - 4, h: S.reelH });
+    // products: reel right, standing on the bottom of the body; orange Cardiff lying lower-left.
+    // 9:16 (review 22. 10. M7): the reel stands BELOW the „PŘÍVLAČ“ slab and right of the subtitle column, its foot drops into the
+    // empty right half of the strip's label row → text never overlaps the product
+    const tall = k === 'tall', rBottom = tall ? b.b + 26 : b.b - 4;
+    const rH = tall ? Math.min(S.reelH, rBottom - (headB + 26)) : S.reelH;
+    const R = reel(E, { cx: tall ? b.r - rH * 0.866 / 2 + 6 : b.r - S.reelH * 0.43, bottom: rBottom, h: rH });
     prod += R.html;
     const spY = b.b - S.spoon * 0.3;
     prod += lureImg(E, 'cardiffO', { cx: b.x + S.spoon * 0.55, cy: spY, bw: S.spoon * 1.2, bh: S.spoon * 0.62, extra: 26, attrs: 'data-in="left" data-d=".2"' });
@@ -221,8 +225,9 @@ export const scenes = {
     txt += H(E, { x: b.x, y: y0, w: b.w - lw.w - 30, size: S.hs, text: 'Vše na', inAttr: 'data-in="left" data-d=".05"' });
     txt += H(E, { x: b.x, y: l2, w: b.w, size: S.hs, text: 'Přívlač', slabbed: true, inAttr: 'data-in="slam" data-d=".1"' });
     let y = headB + 14;
-    txt += T(E, { cls: 'vr-p', x: b.x, y, w: b.w * 0.62, size: S.sub, lines: 2, text: 'Speciálka z Olomouce', main: true, style: 'font-weight:800', inAttr: 'data-in="up" data-d=".22"' });
-    y += S.sub * 1.2 + 16;
+    const subW = tall ? Math.min(b.w * 0.62, R.x - b.x - 24) : b.w * 0.62, subL = tall ? 2 : 1;   // 9:16: two lines left of the reel
+    txt += T(E, { cls: 'vr-p', x: b.x, y, w: subW, size: S.sub, lines: 2, ...(tall ? { html: `${E.t('Speciálka')}<br>${E.t('z Olomouce')}` } : { text: 'Speciálka z Olomouce' }), main: true, style: 'font-weight:800', inAttr: 'data-in="up" data-d=".22"' });
+    y += S.sub * 1.2 * subL + 16;
     txt += H(E, { x: b.x + 4, y, w: b.w * 0.5, size: S.tag, text: 'od roku 2011', slabbed: true, main: false, inAttr: 'data-in="left" data-d=".3"' });
     return { html: bg + prod + txt };
   },

@@ -4,6 +4,7 @@
 //     data-d="0.15" delay (s) · data-dur="0.7" · data-dist="70" (px)
 //   data-spin="360"        continuous rotation, degrees per whole loop (positive = clockwise); 0 in statics
 //   data-kb="1,1.08"       scale over its scene window (Ken Burns)   · data-pan="dx,dy" translate over the scene window
+//                          (in the loop's last window, if it repeats the first scene, both run backwards → seamless loop)
 //   data-float="8,5"       sine bob: amplitude px, period s (snapped so the loop stays seamless)
 //   data-cycle="0.35"      container: children .cy shown one at a time every 0.35 s inside the scene window (data-rest="k" = still frame)
 //   data-sweep="0.5,0.9"   light band: x −130% → 130% between scene t0+a and t0+b
@@ -65,8 +66,9 @@
         case 'wipe-u': clip = `inset(${(100 * k).toFixed(2)}% -20% -20% -20%)`; break;
       }
     }
-    if (d.kb && w) { const [a, b] = nums(d.kb, 2); sc *= a + (b - a) * clamp(u / span); }
-    if (d.pan && w) { const [dx, dy] = nums(d.pan, 2); const q = clamp(u / span); tx += dx * q; ty += dy * q; }
+    const q = w ? (w.rev ? 1 - clamp(u / span) : clamp(u / span)) : 0;
+    if (d.kb && w) { const [a, b] = nums(d.kb, 2); sc *= a + (b - a) * q; }
+    if (d.pan && w) { const [dx, dy] = nums(d.pan, 2); tx += dx * q; ty += dy * q; }
     if (d.float && C.playing) { let [amp, per] = nums(d.float, 2); per = C.dur / Math.max(1, Math.round(C.dur / per)); ty += amp * Math.sin((2 * Math.PI * t) / per); }
     if (d.spin && C.playing) rot += (+d.spin * t) / C.dur;
     if (d.sweep) { const [a, b] = nums(d.sweep, 2); const x = w ? clamp((u - a) / (b - a)) : 1.2; tx = 0; o.el.style.left = `${(-130 + 260 * cubic(x)).toFixed(2)}%`; }
@@ -86,6 +88,9 @@
   // ---- animated sequence ----
   window.__setSeq = function (seq) {   // [{scene, d}]
     let t = 0; SEQ = seq.map((s, i) => { const w = { id: s.scene, t0: t, t1: t + s.d, enter: i > 0 }; t += s.d; return w; });
+    // seamless loop: when the last window shows the same scene as the first, its Ken Burns / pan runs BACKWARDS (end → rest), so
+    // the last frame equals frame 0 (review 22. 10. M3/M4: data-kb on the poster made the loop seam jump, 21–22 dB)
+    if (SEQ.length > 1 && SEQ[SEQ.length - 1].id === SEQ[0].id) SEQ[SEQ.length - 1].rev = true;
     C.dur = t; return t;
   };
   const XF = 0.1;   // near-hard cut (3 frames): incoming on top, settles 1.03 → 1; outgoing pushes 1 → 1.04 under it (long cross-fades = ghosts)

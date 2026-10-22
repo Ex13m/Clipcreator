@@ -4,7 +4,7 @@
 // Facts only from research/troutshop.md (Verification), troutshop_ad.md, troutshop_brands.md, vo/script_cs.json:
 //   „Specialista na pstruhy“ (EN hero „The trout fishing SPECIALIST!“) · „Rodinná firma od roku 1999“ (about-us, #1)
 //   „Generální partner Trout Area Slovakia“ (#2) · „partner několika japonských značek“ (#4, wording „několika“)
-//   „Doručení Česko – Slovensko do pár dní“ (SK meta) · Piešťany, Slovensko (footer)
+//   „zboží posílají i do ČR“ (partner's own text 22. 10.; the SK meta „do pár dní“ is NOT used — review B2) · Piešťany, Slovensko (footer)
 //   3 102 spoons / 992 wobblers on the shop 21. 10. → only „3 100+ plandavek“, „990+ woblerů“ + „v nabídce“
 //   ROONEY 101 = 1st place of /pc/spoons/?orderby=popularity (19. 10.); ROONEY 1,5 · 1,8 · 2,2 · 2,8 g (menu)
 // never_say: no „vítězové v SK, CZ, PL i UA“; Nories / Forest / Velvet Arts … are NOT Troutshop brands → always „v nabídce“.
@@ -202,7 +202,7 @@ export const scenes = {
     html += T(E, { cls: 'ts-p', x: b.x, y, w: b.w * 0.6, size: ps, lines: 2, text: 'Slovenský e-shop pro Trout Area a přívlač na pstruhy.', inAttr: 'data-in="up" data-d=".2"', main: true });
     y += ps * 1.2 * 2 + (sq ? 26 : 40);
     const li = sq ? 31 : 35;
-    ['Generální partner Trout Area Slovakia', 'Partner několika japonských značek', 'Do Česka za pár dní'].forEach((s, i) => {
+    ['Generální partner Trout Area Slovakia', 'Partner několika japonských značek', 'Zboží posílají i do Česka'].forEach((s, i) => {
       html += T(E, { cls: 'ts-li', x: b.x, y: y + i * li * 1.55, w: b.w * 0.66, size: li, html: `<i></i>${E.t(s)}`, style: 'display:flex', inAttr: `data-in="left" data-d="${(0.28 + i * 0.07).toFixed(2)}"` });
     });
     return { html };

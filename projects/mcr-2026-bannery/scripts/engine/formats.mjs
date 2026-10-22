@@ -16,7 +16,7 @@ export const OUTPUTS = {
   carousel: ['1x1'],
 };
 export const CAROUSEL = ['who', 'range', 'hero', 'mcr'];   // 1 who they are → 2 assortment / brands → 3 hero product → 4 MČR role + URL + event
-export const ANIM = { dur: 10, fps: 30 };
+export const ANIM = { dur: 10, fps: 60 };   // operator 22. 10.: 60 fps everywhere
 // default animated sequence (seconds). First and last scene = the poster at rest → seamless loop; a module may override (export const anim)
 export const DEFAULT_SEQ = [
   { scene: 'poster', d: 2.6 },

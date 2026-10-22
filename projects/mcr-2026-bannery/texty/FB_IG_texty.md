@@ -176,7 +176,7 @@ gausseholler.com
 | Pole | Text |
 |---|---|
 | Primary text | Vítěz MČR v Trout Area 2026 získá stojan Revolut 8 – ručně stavěný v Česku z karbonu a hliníku. |
-| Headline | Revolut 8 – hlavní cena MČR 2026 |
+| Headline | Revolut 8 – hlavní cena MČR |
 | Description | Ručně stavěno v Česku |
 | CTA | Shop Now (Nakoupit) → gausseholler.com |
 
@@ -340,7 +340,6 @@ jigovky.cz
 4. Věnuje ceny · MČR 2026
 
 ---
-
 
 ## 7. Troutshop.eu – věnuje ceny
 

@@ -106,7 +106,7 @@ const shafts = () => `<div class="full" style="mix-blend-mode:screen;-webkit-mas
 
 // plan of Malý Sporťáček (portrait = drone-matched frame) in white + red: water tint, red glow, white outline, 1,5 m isoline,
 // places 1–40 as red pins just outside the water edge. Drawn in a W×H frame, centroid at (cx, cy), s px/m.
-function pondPlan(E, { W, H, cx, cy, s, r = 13, out = 2.6, nums = true, fill = 0.1, pinAnim = false }) {
+function pondPlan(E, { W, H, cx, cy, s, r = 13, out = 2.6, nums = true, fill = 0.1, pinAnim = false, places = true }) {
   const O = POND.outline.clean;
   const nss = 'vector-effect="non-scaling-stroke"';
   let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="position:absolute;left:0;top:0;overflow:visible">
@@ -118,7 +118,7 @@ function pondPlan(E, { W, H, cx, cy, s, r = 13, out = 2.6, nums = true, fill = 0
       <path d="${O.path_d_portrait}" fill="none" stroke="#ffffff" stroke-width="${(5 / s).toFixed(3)}" stroke-linejoin="round"/>`;
   let pins = '';
   const pts = [];
-  for (const p of POND.places.list) {
+  for (const p of places ? POND.places.list : []) {
     const [ex, ey] = p.water_edge_portrait, [px0, py0] = p.xy_portrait;
     const dx = px0 - ex, dy = py0 - ey, L = Math.hypot(dx, dy) || 1;
     const qx = ex + (dx / L) * out, qy = ey + (dy / L) * out;
@@ -134,7 +134,7 @@ function pondPlan(E, { W, H, cx, cy, s, r = 13, out = 2.6, nums = true, fill = 0
   return {
     html: svg + pins,
     bbox: { x0: cx + bx0 * s, y0: cy + by0 * s, x1: cx + bx1 * s, y1: cy + by1 * s },
-    pins: { x0: Math.min(...px) - r, x1: Math.max(...px) + r, y0: Math.min(...py) - r, y1: Math.max(...py) + r },
+    pins: pts.length ? { x0: Math.min(...px) - r, x1: Math.max(...px) + r, y0: Math.min(...py) - r, y1: Math.max(...py) + r } : null,
   };
 }
 // extent of the plan (pins included) in metres around the centroid → fit a box
@@ -149,10 +149,12 @@ const PL_EXT = (() => {
 })();
 
 // the drone's last frame (1080×1920, native) shifted by dy, with the plan laid on the real pond (AR) — portrait-type formats
-function droneAR(E, { dy, kb = true, pins = true, dark = 0 }) {
-  const plan = pondPlan(E, { W: 1080, H: 1920, cx: AR.cx, cy: AR.cy, s: AR.s, r: 13, nums: true, fill: 0.12 });
+// review 22. 10. M5: the aerial frame shows only the pond outline + „Malý Sporťáček“ — numbered places (pins 1–40) live on the
+// readable carousel-3 scheme, which carries „Schéma · čísla míst orientační“
+function droneAR(E, { dy, kb = true, dark = 0 }) {
+  const plan = pondPlan(E, { W: 1080, H: 1920, cx: AR.cx, cy: AR.cy, s: AR.s, r: 13, places: false, fill: 0.12 });
   const img = `<img src="${E.src(P.drone)}" alt="" style="position:absolute;left:0;top:0;width:1080px;height:1920px">`;
-  const ov = `<div class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:${AR.cx}px ${AR.cy}px;transform:${AR_T}">${pins ? plan.html : plan.html.replace(/<div class="vn-pl"[^>]*>[^<]*<\/div>/g, '')}</div>`;
+  const ov = `<div class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:${AR.cx}px ${AR.cy}px;transform:${AR_T}">${plan.html}</div>`;
   const pcx = AR.cx + AR.x, pcy = AR.cy + AR.y + dy;   // pond centre on screen
   return {
     html: `<div class="full" ${kb ? 'data-kb="1,1.045"' : ''} style="transform-origin:${R1(pcx)}px ${R1(pcy)}px"><div class="abs" style="left:0;top:${dy}px;width:1080px;height:1920px">${img}${ov}</div></div>
@@ -162,6 +164,10 @@ function droneAR(E, { dy, kb = true, pins = true, dark = 0 }) {
 }
 const pill = (E, { x, y, size, text, attrs = '' }) => `<div class="vn-pill t" ${attrs} style="left:${R1(x)}px;top:${R1(y)}px;height:${R1(size * 1.9)}px;font-size:${size}px"><b></b>${E.t(text)}</div>`;
 const LOGO_TRIM = [0, 0, 2000, 2000];
+// source credit (review 22. 10. MINOR 1): the aerial frames are a reconstruction from ČÚZK orthophoto + surface model
+// (mcr-2026-dron/data/README.md), the round lens is the ČÚZK orthophoto, the scheme is traced from it
+const credit = (E, { x, y, w = 360, text = 'Podklad © ČÚZK', size = 15, align = 'right' }) =>
+  `<div class="vn-ai t" style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;text-align:${align};font-size:${size}px;white-space:nowrap">${E.t(text)}</div>`;
 
 // ---------- scenes ----------
 export const scenes = {
@@ -180,6 +186,7 @@ export const scenes = {
       html += pill(E, { x: 790, y: 300, size: 22, text: 'Malý Sporťáček', attrs: 'data-in="scale" data-d=".35"' });
       const L = E.logo(P.logo, { x: 0, y: 0, maxH: 999, trim: LOGO_TRIM });
       html += E.logo(P.logo, { x: b.x, y: b.b - L.h, trim: LOGO_TRIM, attrs: 'data-in="fade" data-d=".4"' }).html;
+      html += credit(E, { x: b.r - 360, y: b.b - 18, size: 13 });
       return { html };
     }
     const S = {
@@ -201,6 +208,7 @@ export const scenes = {
     html += E.logo(P.logo, { x: b.r - L.w, y: b.y + 4, trim: LOGO_TRIM, attrs: 'data-in="fade" data-d=".3"' }).html;
     // label next to the real pond (right of its outline)
     html += pill(E, { x: D.pcx + 232, y: D.pcy - S.pill * 0.95 - 84, size: S.pill, text: 'Malý Sporťáček', attrs: 'data-in="scale" data-d=".35"' });
+    html += credit(E, { x: b.r - 360, y: b.b - 22, size: k === 'tall' ? 17 : 15 });
     return { html };
   },
 
@@ -262,6 +270,7 @@ export const scenes = {
       y += rh + gap;
     });
     html += pill(E, { x: pcx - (sq ? 330 : 360), y: pcy + (sq ? 110 : 130), size: sq ? 26 : 28, text: 'Malý Sporťáček', attrs: 'data-in="scale" data-d=".3"' });
+    html += credit(E, { x: b.r - 360, y: b.b - 22, text: 'Ortofoto © ČÚZK', size: 16 });
     return { html };
   },
 
@@ -293,7 +302,7 @@ export const scenes = {
       <div class="vn-dl t" style="left:${R1(x50 - 50)}px;top:${R1(cy - dl * 0.7)}px;width:100px;font-size:${dl}px;line-height:1.4;background:#172031;transform:rotate(-90deg)">50 m</div>
       <div class="vn-dim" style="left:${R1(x40)}px;top:${R1(y40 - 1.5)}px;width:${R1(len40)}px;height:3px"><i class="vn-dim" style="left:-1.5px;top:-10px;width:3px;height:23px"></i><i class="vn-dim" style="right:-1.5px;top:-10px;width:3px;height:23px"></i></div>
       <div class="vn-dl t" style="left:${R1(cx - 50)}px;top:${R1(y40 - dl * 0.7)}px;width:100px;font-size:${dl}px;line-height:1.4;background:#172031">40 m</div></div>`;
-    html += `<div class="vn-ai t" style="left:${R1(Math.max(plan.pins.x1, plan.bbox.x1) - 400)}px;width:400px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 8)}px;font-size:16px;opacity:.8">Schéma · čísla míst orientační</div>`;
+    html += `<div class="vn-ai t" style="left:${R1(Math.max(plan.pins.x1, plan.bbox.x1) - 640)}px;width:640px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 8)}px;font-size:16px;opacity:.8;white-space:nowrap">Schéma · čísla míst orientační · podklad © ČÚZK</div>`;
     // facts column left of the plan
     const colW = x50 - 60 - b.x;
     let fy = y + (sq ? 10 : 40);
