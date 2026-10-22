@@ -30,7 +30,7 @@ export async function browser() {
 
 // open a page (html string written next to the outputs so it is served from projects/)
 export async function open(br, base, htmlPath, f) {
-  const page = await br.newPage({ viewport: { width: f.w, height: f.h }, deviceScaleFactor: 1 });
+  const page = await br.newPage({ viewport: { width: f.w, height: f.h }, deviceScaleFactor: f.scale || 1 });   // 16x9: 1200×675 × 1.6 = 1920×1080
   const logs = [];
   page.on('console', (m) => { if (m.type() === 'error') logs.push(m.text()); });
   page.on('pageerror', (e) => logs.push(String(e)));

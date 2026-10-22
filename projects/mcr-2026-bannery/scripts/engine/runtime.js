@@ -154,7 +154,8 @@
     }
     for (const s of shown) for (const im of $$('img', s)) {
       if (!vis(im) || !im.naturalWidth || im.dataset.noscale != null) continue;
-      const r = R(im); if (r.width > im.naturalWidth * 1.3 + 2) warn.push(`image upscaled ${(r.width / im.naturalWidth).toFixed(2)}×: ${im.src.split('/').pop()}`);
+      const r = R(im), dpr = window.devicePixelRatio || 1;   // output px (16x9 renders at 1.6×)
+      if (r.width * dpr > im.naturalWidth * 1.3 + 2) warn.push(`image upscaled ${(r.width * dpr / im.naturalWidth).toFixed(2)}×: ${im.src.split('/').pop()}`);
     }
     for (const el of $$('[data-fit]')) if (vis(el) && el.scrollWidth > el.clientWidth + 1) err.push(`text does not fit: "${el.textContent.slice(0, 36)}"`);
     return { err: [...new Set(err)], warn: [...new Set(warn)] };

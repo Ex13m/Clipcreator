@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 // MČR 2026 sponsor banners — ONE command builds every format for one sponsor key.
-//   node scripts/build.mjs <key>                         all: 4 statics + 4 carousel cards + 2 MP4 + contact sheet + QA
+//   node scripts/build.mjs <key>                         all: 5 statics + 4 carousel cards + 3 MP4 + contact sheet + QA
 //   node scripts/build.mjs <key> --only=static,carousel  skip the MP4s while iterating (fast, ~10 s)
 //   node scripts/build.mjs <key> --fmt=4x5               only these formats
 //   node scripts/build.mjs <key> --draft                 DRAFT badge
 //   node scripts/build.mjs --list                        sponsor keys + module status
-// Outputs: renders/<key>/<key>_{static_1x1,static_4x5,static_191,static_9x16}.png, <key>_carousel_{1..4}.png,
-//          <key>_anim_{4x5,1x1}.mp4, _sheet.jpg (contact sheet), _qa.json (rule checks). Exit 1 on a rule error.
+// Outputs: renders/<key>/<key>_{static_1x1,static_4x5,static_191,static_9x16,static_16x9}.png, <key>_carousel_{1..4}.png,
+//          <key>_anim_{4x5,1x1,16x9}.mp4, _sheet.jpg (contact sheet), _qa.json (rule checks). Exit 1 on a rule error.
+//          16x9 = 1920×1080 (wide layout at 1200×675 CSS px × 1.6); its MP4 plays anim.wide (scenes with a wide layout).
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { ROOT } from './engine/util.mjs';
-import { FORMATS, OUTPUTS, CAROUSEL, ANIM, DEFAULT_SEQ } from './engine/formats.mjs';
+import { FORMATS, OUTPUTS, CAROUSEL, ANIM, DEFAULT_SEQ, DEFAULT_SEQ_WIDE } from './engine/formats.mjs';
 import { buildPage, EVENT } from './engine/page.mjs';
 import { serve, browser, open, still, video, withLock } from './engine/render.mjs';
 
@@ -27,7 +28,7 @@ if (opt.list || !key) {
     const n = fs.existsSync(r) ? fs.readdirSync(r).filter((f) => /\.(png|mp4)$/.test(f)).length : 0;
     console.log(`${k.padEnd(14)} module: ${fs.existsSync(m) ? 'yes' : '—  '}  renders: ${n}`);
   }
-  if (!key) { console.log('\nusage: node scripts/build.mjs <key> [--only=static,carousel,anim] [--fmt=1x1,4x5,191,9x16] [--draft]'); process.exit(opt.list ? 0 : 2); }
+  if (!key) { console.log('\nusage: node scripts/build.mjs <key> [--only=static,carousel,anim] [--fmt=1x1,4x5,191,9x16,16x9] [--draft]'); process.exit(opt.list ? 0 : 2); }
   process.exit(0);
 }
 
@@ -41,6 +42,8 @@ M.brand.key = key;
 const only = new Set(String(opt.only || 'static,carousel,anim').split(','));
 const fmts = opt.fmt ? new Set(String(opt.fmt).split(',')) : null;
 const SEQ = M.anim?.seq || DEFAULT_SEQ;
+const SEQ_WIDE = M.anim?.wide || DEFAULT_SEQ_WIDE;   // 16:9 MP4: only scenes that have a wide layout
+const seqOf = (fk) => (FORMATS[fk].kind === 'wide' ? SEQ_WIDE : SEQ);
 const fps = +(opt.fps || ANIM.fps);
 
 // which scenes each format page needs
@@ -48,7 +51,7 @@ const plan = {};
 const need = (fk, ids) => { if (fmts && !fmts.has(fk)) return; (plan[fk] ||= new Set()); ids.forEach((i) => plan[fk].add(i)); };
 if (only.has('static')) OUTPUTS.static.forEach((fk) => need(fk, ['poster']));
 if (only.has('carousel')) OUTPUTS.carousel.forEach((fk) => need(fk, CAROUSEL));
-if (only.has('anim')) OUTPUTS.anim.forEach((fk) => need(fk, SEQ.map((s) => s.scene)));
+if (only.has('anim')) OUTPUTS.anim.forEach((fk) => need(fk, seqOf(fk).map((s) => s.scene)));
 
 const OUT = path.join(ROOT, 'renders', key), WORK = path.join(ROOT, 'build', key);
 fs.mkdirSync(OUT, { recursive: true }); fs.mkdirSync(WORK, { recursive: true });
@@ -81,7 +84,7 @@ try {
     }
     if (only.has('anim') && OUTPUTS.anim.includes(fk)) {
       const out = path.join(OUT, `${key}_anim_${fk}.mp4`);
-      const r = await withLock('video', () => video(page, SEQ, out, { fps, onProgress: (i, n) => process.stdout.write(`\r  rendering ${fk} ${i}/${n}   `) }), log);
+      const r = await withLock('video', () => video(page, seqOf(fk), out, { fps, onProgress: (i, n) => process.stdout.write(`\r  rendering ${fk} ${i}/${n}   `) }), log);
       process.stdout.write('\r');
       const merged = { err: [...new Set(r.qa.flatMap((q) => q.err))], warn: [...new Set(r.qa.flatMap((q) => q.warn))] };
       note(`${key}_anim_${fk}.mp4`, merged, { dur: r.dur, frames: r.frames, fps, samples: r.qa.map((q) => q.t) });

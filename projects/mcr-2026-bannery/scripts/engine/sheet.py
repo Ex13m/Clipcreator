@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Contact sheet of one sponsor's banner set: renders/<key>/_sheet.jpg
-Row 1: statics 1x1 · 4x5 · 9x16 · 1.91 · Row 2: carousel 1–4 · Row 3+: MP4 frames (4x5, 1x1) every ~1.25 s."""
+Row 1: statics 1x1 · 4x5 · 9x16 · 1.91 · 16x9 · Row 2: carousel 1–4 · Row 3+: MP4 frames (4x5, 1x1, 16x9) every ~1.25 s."""
 import os, subprocess, sys, tempfile
 from PIL import Image, ImageDraw, ImageFont
 
@@ -33,9 +33,9 @@ def f(name):
     return p if os.path.exists(p) else None
 
 rows = []
-rows.append(row([tile(Image.open(p), n) for n in ['static_1x1.png', 'static_4x5.png', 'static_9x16.png', 'static_191.png'] if (p := f(n))]))
+rows.append(row([tile(Image.open(p), n) for n in ['static_1x1.png', 'static_4x5.png', 'static_9x16.png', 'static_191.png', 'static_16x9.png'] if (p := f(n))]))
 rows.append(row([tile(Image.open(p), n) for n in [f'carousel_{i}.png' for i in range(1, 5)] if (p := f(n))]))
-for v in ['anim_4x5.mp4', 'anim_1x1.mp4']:
+for v in ['anim_4x5.mp4', 'anim_1x1.mp4', 'anim_16x9.mp4']:
     p = f(v)
     if not p:
         continue
@@ -46,7 +46,7 @@ for v in ['anim_4x5.mp4', 'anim_1x1.mp4']:
             o = os.path.join(td, f'{t}.png')
             subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-ss', str(t), '-i', p, '-frames:v', '1', o], check=False)
             if os.path.exists(o):
-                tiles.append(tile(Image.open(o), f'{v} {t:.1f}s', 300))
+                tiles.append(tile(Image.open(o), f'{v} {t:.1f}s', 220 if '16x9' in v else 300))
         rows.append(row(tiles, 6))
 rows = [r for r in rows if r]
 W = max(r.width for r in rows)
