@@ -1,6 +1,6 @@
 {
  "out": "film",
- "stamp": "c5d052f39f1336c3",
+ "stamp": "ab976b345cefee57",
  "dur": 135.866,
  "box": {
   "x": 64,
@@ -47,39 +47,15 @@
  "tones": [
   {
    "g0": 0,
-   "g1": 5.061,
+   "g1": 14.239,
    "tone": "dark",
-   "by": "probe"
+   "by": "intro theme"
   },
   {
-   "g0": 5.061,
-   "g1": 8.276,
-   "tone": "halo",
-   "by": "probe"
-  },
-  {
-   "g0": 8.276,
-   "g1": 9,
-   "tone": "dark",
-   "by": "probe"
-  },
-  {
-   "g0": 9,
-   "g1": 10.8,
-   "tone": "halo",
-   "by": "probe"
-  },
-  {
-   "g0": 10.8,
-   "g1": 13.775,
-   "tone": "dark",
-   "by": "probe"
-  },
-  {
-   "g0": 13.775,
+   "g0": 14.239,
    "g1": 14.689,
    "tone": "halo",
-   "by": "probe"
+   "by": "intro"
   },
   {
    "g0": 14.689,
@@ -101,33 +77,33 @@
   },
   {
    "g0": 24.781,
-   "g1": 38.073,
+   "g1": 38.531,
    "tone": "dark",
    "by": "venue"
   },
   {
-   "g0": 38.073,
-   "g1": 48.146,
+   "g0": 38.531,
+   "g1": 47.689,
    "tone": "halo",
-   "by": "probe"
+   "by": "activefishing theme"
   },
   {
-   "g0": 48.146,
-   "g1": 49.52,
+   "g0": 47.689,
+   "g1": 49.988,
    "tone": "dark",
-   "by": "probe"
+   "by": "bosset theme"
   },
   {
-   "g0": 49.52,
-   "g1": 52.5,
+   "g0": 49.988,
+   "g1": 52.168,
    "tone": "halo",
-   "by": "probe"
+   "by": "bosset"
   },
   {
-   "g0": 52.5,
+   "g0": 52.168,
    "g1": 76.493,
    "tone": "dark",
-   "by": "probe"
+   "by": "bosset theme"
   },
   {
    "g0": 76.493,
@@ -137,15 +113,15 @@
   },
   {
    "g0": 79.277,
-   "g1": 91.082,
-   "tone": "scrim",
-   "by": "probe"
+   "g1": 91.538,
+   "tone": "dark",
+   "by": "troutshop theme"
   },
   {
-   "g0": 91.082,
+   "g0": 91.538,
    "g1": 95.184,
    "tone": "halo",
-   "by": "probe"
+   "by": "ftfishing theme"
   },
   {
    "g0": 95.184,
@@ -157,31 +133,13 @@
    "g0": 97.008,
    "g1": 100.651,
    "tone": "halo",
-   "by": "probe"
+   "by": "ftfishing theme"
   },
   {
    "g0": 100.651,
-   "g1": 107.94,
-   "tone": "dark",
-   "by": "probe"
-  },
-  {
-   "g0": 107.94,
-   "g1": 111.3,
-   "tone": "halo",
-   "by": "probe"
-  },
-  {
-   "g0": 111.3,
-   "g1": 112.023,
-   "tone": "scrim",
-   "by": "probe"
-  },
-  {
-   "g0": 112.023,
    "g1": 135.863,
    "tone": "dark",
-   "by": "probe"
+   "by": "crs theme"
   }
  ],
  "beats": [
