@@ -1,6 +1,6 @@
 {
  "key": "troutshop",
- "built": "2026-10-22T14:50:28.897Z",
+ "built": "2026-10-22T16:01:59.217Z",
  "outputs": {
   "troutshop_static_191.png": {
    "err": [],
@@ -65,6 +65,10 @@
     7.73,
     9.55
    ]
+  },
+  "troutshop_static_16x9.png": {
+   "err": [],
+   "warn": []
   }
  }
 }
