@@ -6,9 +6,18 @@
 //   „nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody“ (rybsvaz.cz)
 //   „mezi největší zájmová sdružení v České republice“ (rybsvaz.cz — only in this full form) · 1968 = samostatný Český rybářský svaz
 //   Líheň Liběchov: „vlastník: Český rybářský svaz, z. s., místní organizace Mělník“ (lihenlibechov.cz/cs/kontakt);
-//   „od roku 2022 ji provozuje Český rybářský svaz, místní organizace Mělník“ (lihenlibechov.cz/cs/historie)
+//   on screen ONLY „Areál vlastní Český rybářský svaz, místní organizace Mělník“ (operator 22. 10.: no „provozuje“ wording)
+//   carousel 3 = plan of Malý Sporťáček (mcr-2026-sponzori/data/pond_scheme.json, same drawing as venue.mjs) in ČRS colours,
+//   labelled „Schéma · čísla míst orientační“ (the peg layout is our proposal)
 //   MČR 2025 trophy table dressed in the ČRS cloth (our gallery, gtacz_mcr25_1000046063, verified by eye) · „dlouholetá podpora“ = operator.
 // Never: „pod záštitou ČRS“, „MČR pořádá ČRS“, „oficiální disciplína“, member counts, „největší“ without „mezi“.
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const FILM = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../mcr-2026-sponzori');
+const POND = JSON.parse(fs.readFileSync(path.join(FILM, 'data/pond_scheme.json'), 'utf8'));
 
 export const brand = {
   name: 'Český rybářský svaz',
@@ -37,7 +46,6 @@ export const fonts = {};   // Inter + Montserrat are in the engine registry
 const A = 'film:assets_prep/crs/';
 const LOGO = `${A}logo_crs_white.png`, BADGE = `${A}badge_crs_round.png`;
 const PH_MCR25 = 'own:assets/crs/mcr25_trophy_table_crs.jpg';   // MČR 2025 opening: trophy table in the ČRS cloth (4032×2268)
-const PH_POND = 'film:assets_prep/libechov/venue/v01_maly_sportacek.jpg';  // rybník Malý Sporťáček, Líheň Liběchov (1080×1920)
 const TABLE = { fx: 0.735, fy: 0.80 };                                      // trophy table + ČRS cloth in the MČR 2025 photo (fractions)
 
 export function css() {
@@ -61,6 +69,10 @@ export function css() {
 .crs-sw{position:absolute;overflow:hidden;-webkit-mask-size:100% 100%;mask-size:100% 100%;mix-blend-mode:screen;pointer-events:none}
 .crs-sw i{position:absolute;top:0;bottom:0;left:-130%;width:70%;background:linear-gradient(100deg,rgba(255,255,255,0) 38%,rgba(220,245,255,.42) 50%,rgba(255,255,255,0) 62%)}
 .crs-ph{position:absolute;overflow:hidden}
+.crs-pl{position:absolute;border-radius:50%;background:${C.blue};box-shadow:0 0 0 2px #fff,0 3px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-family:Inter;font-weight:800;color:#fff;letter-spacing:-.02em}
+.crs-dim{position:absolute;background:${C.ice}}
+.crs-dl{position:absolute;font-family:Inter;font-weight:800;color:${C.ice};white-space:nowrap;text-align:center;background:${C.deep}}
+.crs-note{position:absolute;font-family:Inter;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(207,230,255,.75)}
 .crs-ph img{filter:saturate(.88) contrast(1.06)}
 `;
 }
@@ -136,6 +148,45 @@ function lockup(E, { y, S, kicker = 'Poděkování · Trout Area CZ' }) {
   y += S.line * 1.05;
   return { html: h, y };
 }
+
+// plan of Malý Sporťáček (portrait frame of data/pond_scheme.json, as venue.mjs) in ČRS colours: turquoise water tint + glow,
+// white outline, dashed 1,5 m isoline, places 1–40 as ČRS-blue pins outside the water edge. Centroid at (cx, cy), s px/m.
+function pondPlan(E, { cx, cy, s, r = 12, out = 2.6 }) {
+  const O = POND.outline.clean, nss = 'vector-effect="non-scaling-stroke"', fid = `crsblur-${Math.round(s * 10)}`;
+  let svg = `<svg viewBox="0 0 ${E.W} ${E.H}" width="${E.W}" height="${E.H}" style="position:absolute;left:0;top:0;overflow:visible">
+    <defs><filter id="${fid}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${(9 / s).toFixed(3)}"/></filter></defs>
+    <g transform="translate(${cx} ${cy}) scale(${s})">
+      <path d="${O.path_d_portrait}" fill="${C.turq}" fill-opacity=".16"/>
+      <path d="${O.path_d_portrait}" transform="scale(.86)" fill="none" stroke="${C.turq}" stroke-width="2.4" stroke-dasharray="9 8" ${nss} opacity=".9"/>
+      <path d="${O.path_d_portrait}" fill="none" stroke="${C.turq}" stroke-width="${(14 / s).toFixed(3)}" filter="url(#${fid})" opacity=".85"/>
+      <path d="${O.path_d_portrait}" fill="none" stroke="#ffffff" stroke-width="${(5 / s).toFixed(3)}" stroke-linejoin="round"/>`;
+  let pins = '';
+  const pts = [];
+  for (const p of POND.places.list) {
+    const [ex, ey] = p.water_edge_portrait, [px0, py0] = p.xy_portrait;
+    const dx = px0 - ex, dy = py0 - ey, L = Math.hypot(dx, dy) || 1, qx = ex + (dx / L) * out, qy = ey + (dy / L) * out;
+    svg += `<line x1="${ex}" y1="${ey}" x2="${qx.toFixed(3)}" y2="${qy.toFixed(3)}" stroke="#fff" stroke-width="2" ${nss} opacity=".8"/>`;
+    const X = cx + qx * s, Y = cy + qy * s;
+    pts.push([X, Y]);
+    pins += `<div class="crs-pl" data-in="scale" data-d="${(0.15 + p.n * 0.018).toFixed(3)}" data-dur="0.35" style="left:${R1(X - r)}px;top:${R1(Y - r)}px;width:${2 * r}px;height:${2 * r}px;font-size:${R1(r)}px">${p.n}</div>`;
+  }
+  svg += '</g></svg>';
+  const [bx0, by0, bx1, by1] = O.bbox_portrait, px = pts.map((q) => q[0]), py = pts.map((q) => q[1]);
+  return {
+    html: svg + pins,
+    bbox: { x0: cx + bx0 * s, y0: cy + by0 * s, x1: cx + bx1 * s, y1: cy + by1 * s },
+    pins: { x0: Math.min(...px) - r, x1: Math.max(...px) + r, y0: Math.min(...py) - r, y1: Math.max(...py) + r },
+  };
+}
+const PL_EXT = (() => {
+  const xs = [], ys = [];
+  for (const p of POND.places.list) {
+    const [ex, ey] = p.water_edge_portrait, [px0, py0] = p.xy_portrait, dx = px0 - ex, dy = py0 - ey, L = Math.hypot(dx, dy) || 1;
+    xs.push(ex + (dx / L) * 2.6); ys.push(ey + (dy / L) * 2.6);
+  }
+  const [bx0, by0, bx1, by1] = POND.outline.clean.bbox_portrait;
+  return { x0: Math.min(bx0, ...xs), x1: Math.max(bx1, ...xs), y0: Math.min(by0, ...ys), y1: Math.max(by1, ...ys) };
+})();
 
 // ---------- scenes ----------
 export const scenes = {
@@ -230,24 +281,40 @@ export const scenes = {
     return { html: h, taTone: 'scrim' };
   },
 
-  // 3 — THE VENUE: Líheň Liběchov is owned (and since 2022 run) by ČRS, local organisation Mělník
+  // 3 — THE VENUE: Líheň Liběchov, the race pond Malý Sporťáček as a plan (schéma), owned by ČRS, místní organizace Mělník
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
-    let h = `<div class="full" style="background:${C.deep}"></div>`;
-    h += photo(E, PH_POND, { fx: 0.5, fy: 0.42, tx: E.W / 2, ty: E.H * 0.5, w: 1080, attrs: 'data-kb="1,1.06"' });
-    h += `<div class="full" style="background:${C.navy};mix-blend-mode:color;opacity:.55"></div>`;
-    h += `<div class="full" style="background:linear-gradient(180deg,rgba(12,25,52,.92) 0%,rgba(12,25,52,.78) 30%,rgba(12,25,52,.15) 52%,rgba(12,25,52,.2) 66%,rgba(8,16,34,.9) 100%)"></div>`;
-    const hd = sq ? 118 : 132;
+    let h = world();
+    const hd = sq ? 104 : 118, ks = sq ? 26 : 28;
     let y = b.y + 6;
-    h += T(E, { cls: 'crs-k', x: b.x, y, w: b.w, size: sq ? 26 : 28, text: 'Místo konání MČR 2026', inAttr: 'data-in="left"' });
-    y += (sq ? 26 : 28) * 1.8;
-    h += T(E, { cls: 'crs-h', x: b.x - 4, y, w: b.w, size: hd, lines: 2, fit: 60, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".05"', main: true });
-    y += hd * 1.02;
-    h += T(E, { cls: 'crs-cap', x: b.x, y: y + 6, w: b.w, size: sq ? 22 : 24, text: 'Rybník Malý Sporťáček', style: `color:${C.ice}`, inAttr: 'data-in="left" data-d=".15"' });
-    const FC = { x: b.x, w: b.w, k: 'Areál vlastní a od roku 2022 provozuje', b: 'Český rybářský svaz, místní organizace Mělník', ks: sq ? 24 : 26, bs: sq ? 46 : 52, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
+    h += T(E, { cls: 'crs-k', x: b.x, y, w: b.w, size: ks, text: 'Místo konání MČR 2026', inAttr: 'data-in="left"' });
+    y += ks * 1.8;
+    h += T(E, { cls: 'crs-h', x: b.x - 4, y, w: b.w, size: hd, fit: 60, text: 'Líheň Liběchov', inAttr: 'data-in="up" data-d=".05"', main: true });
+    y += hd * 1.0 + 18;
+    // plan on the right, as large as the free box allows (30 px under it for the „schéma“ note)
+    const top = y + 10, bot = b.b - 34;
+    const mh = PL_EXT.y1 - PL_EXT.y0, mw = PL_EXT.x1 - PL_EXT.x0;
+    const s = Math.min((bot - top) / mh, (sq ? 440 : 420) / mw);   // leave ≥ 500 px for the owner card (3 lines)
+    const r = Math.max(10, Math.round(s * 1.15));
+    const cx = b.r - 6 - PL_EXT.x1 * s, cy = top - PL_EXT.y0 * s;
+    const plan = pondPlan(E, { cx, cy, s, r });
+    h += `<div class="full" data-in="scale" data-d=".04" style="transform-origin:${R1(cx)}px ${R1(cy)}px">${plan.html}</div>`;
+    const pl = Math.min(plan.pins.x0, plan.bbox.x0);
+    h += `<div class="crs-note t" style="left:${R1(b.r - 420)}px;width:420px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 8)}px;font-size:${sq ? 16 : 18}px">Schéma · čísla míst orientační</div>`;
+    // left column: pond name + 40 places + owner fact card
+    const colW = pl - 40 - b.x;
+    let fy = top + 4;
+    h += T(E, { cls: 'crs-cap', x: b.x, y: fy, w: colW, size: sq ? 24 : 26, fit: 16, text: 'Rybník Malý Sporťáček', style: `color:${C.ice}`, inAttr: 'data-in="left" data-d=".12"' });
+    fy += (sq ? 24 : 26) * 1.6;
+    h += T(E, { cls: 'crs-h', x: b.x - 4, y: fy, w: colW, size: sq ? 150 : 170, fit: 90, text: '40', style: `color:${C.white}`, inAttr: 'data-in="up" data-d=".16"', main: true });
+    fy += (sq ? 150 : 170) * 0.98;
+    h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x)}px;top:${R1(fy + 4)}px;width:110px;height:4px;background:${C.turq}"></i>`;
+    fy += 22;
+    h += T(E, { cls: 'crs-l', x: b.x, y: fy, w: colW, size: sq ? 40 : 44, fit: 24, text: 'závodních míst', inAttr: 'data-in="up" data-d=".2"', main: true });
+    const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: sq ? 22 : 24, bs: sq ? 36 : 38, blines: 3, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
     const F = factCard(E, { ...FC, y: 0 });
     h += factCard(E, { ...FC, y: b.b - F.h - 4 }).html;
-    return { html: h, taTone: 'scrim' };
+    return { html: h, taTone: 'dark' };
   },
 
   // 4 — THANK-YOU: seal + lockup + URL (chip „Děkujeme za dlouholetou podporu“ + event line come from the engine chrome)

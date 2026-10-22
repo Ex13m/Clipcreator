@@ -9,13 +9,13 @@
 //          slams up and a fan of 5 spoons (Nories, Velvet Arts ×2, ValkeIN, Khor) opens on it; the card zooms into the next world
 //   bar 3  white again: VARIVAS ES2 spool turns in 3D, Mukai / Timon / Lucky Craft cranks in a parallax depth stack,
 //          pill „OSOBNÍ PŘÍSTUP“ on the VO + „Rychlost doručení · Unikátní sortiment“ (site benefits)
-//   bar 4  lockup: logo (≤ TA plate) slides to the centre, „activefishing.cz“, two shop-shelf carousels (777 woblerů / 1 300+ plandavek,
+//   bar 4  lockup: logo (≤ TA plate) slides to the centre, „activefishing.cz“, two shop-shelf carousels (770+ woblerů / 1 300+ plandavek,
 //          13 products), pill „Věnuje ceny · MČR 2026“ → rounded shop-card tiles close into the next block
 // 14 products from 8 brands (Timon, Mukai, Lucky Craft, Nories, Velvet Arts, ValkeIN, Khor, VARIVAS). Activefishing resells them:
 // no „vlastní“, no prices.
 // v3 BRANDS (21. 10.): bar 2 rail of white „Prodávané značky“ logo cards (plandavky brands) under the spoon card, clicks one card per beat with
 // the centre card popping (Nories → Timon → ValkeIN); bar 3 tag = real VARIVAS logo; bar 4 second rail (VARIVAS → Jigovky.cz → Rodio Craft…).
-// Logos assets_prep/activefishing/brands/ (≤ 224×78 card, far under the TA logo), Timon / KHOR typed in Montserrat 800 (no logo file). Counts 1 300+ (1340) / 777 = live counts from 19. 10. 2026 (recheck before the final render).
+// Logos assets_prep/activefishing/brands/ (≤ 224×78 card, far under the TA logo), Timon / KHOR typed in Montserrat 800 (no logo file). Counts 1 300+ (1340 → 1354) / 770+ (777 on 19. 10., 776 on 21. 10. → „přes 770“, operator 22. 10.) = live counts (recheck before the final render).
 import * as fx from '../lib/fx.mjs';
 import * as af from '../lib/fx_activefishing.mjs';
 
@@ -229,7 +229,7 @@ export default function activefishing(ctx) {
   // CD review: the two counts are the facts of this bar → big Saira numerals (number in the logo gradient), not 28 px tags
   const TW = 256, TH = 196, TG = 18, STEP = TW + TG, NUM = 80, tOutD = END - 0.46;
   const rows = [
-    { id: 'ra', num: '777', label: 'woblerů', y: 770, items: ['mukai', 'chart', 'wah', 'panicra', 'cobalt', 'gold', 'red', 'holo'], x0: -60, drift: -170, from: 1100, exit: -1300, t: t4 - 0.14 },
+    { id: 'ra', num: '770+', label: 'woblerů', y: 770, items: ['mukai', 'chart', 'wah', 'panicra', 'cobalt', 'gold', 'red', 'holo'], x0: -60, drift: -170, from: 1100, exit: -1300, t: t4 - 0.14 },
     { id: 'rb', num: '1 300+', label: 'plandavek', y: 1086, items: ['sofia', 'forte15', 'scheila', 'khor', 'forte06'], x0: -250, drift: 150, from: -1100, exit: 1300, t: t4 - 0.05 },
   ];
   rows.forEach((R, ri) => {

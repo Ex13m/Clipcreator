@@ -140,18 +140,18 @@ TTS: Hostí nás Líheň Liběchov u pramene Boží Voda. Pstruží líheň od r
 **Na obrazovce:**
 - Název: Activefishing.cz
 - One-liner: Pro všechny, kdo milují přívlač
-- Mikro fakta: (1) 1 300+ plandavek (2) 777 woblerů
+- Mikro fakta: (1) 1 300+ plandavek (2) přes 770 woblerů
 - URL: activefishing.cz
 
 **Zdroje:**
 - E-shop vznikl z vášně zakladatele pro přívlač („vášeň“ = přijatelné zesílení „záliby“) → `research/activefishing.md:27, Verification #2 (ř. 77)` · https://www.activefishing.cz/o-nas/
 - Pro všechny, kdo milují přívlač (převyprávěno ve 3. osobě) → `research/activefishing.md:23, Verification #1 (ř. 76)` · https://www.activefishing.cz/
 - Přes 1 300 plandavek (1340 položek k 19. 10. 2026) → `research/activefishing.md:31, Verification #3 (ř. 78)` · https://www.activefishing.cz/plandavky/
-- 777 woblerů (k 19. 10. 2026) → `research/activefishing.md:35, Verification #4 (ř. 79)` · https://www.activefishing.cz/woblery/
+- přes 770 woblerů (777 k 19. 10., 776 k 21. 10. 2026) → `research/activefishing.md:35, Verification #4 (ř. 79)` · https://www.activefishing.cz/woblery/
 - Osobní přístup (benefit na homepage) → `research/activefishing.md:8, Verification ř. 85` · https://www.activefishing.cz/
 
 **Poznámky:**
-- Počty 1 300+ / 777 jsou živá čísla k 19. 10. 2026; před finálním renderem ověřit.
+- Počty 1 300+ / přes 770 jsou živá čísla (woblery 777 k 19. 10., 776 k 21. 10. 2026); před finálním renderem ověřit.
 - Neříkat „vlastní značka“ ani „jen japonské nástrahy“.
 
 ## Moonky · 8 s
@@ -302,6 +302,6 @@ TTS: Hostí nás Líheň Liběchov u pramene Boží Voda. Pstruží líheň od r
 ## Otevřené body
 - Velka-ryba, Jigovky, Bosset a Gausse Holler zatím nemají v `research/*.md` sekci Verification. Texty stojí jen na citacích ze zdrojů. Po doplnění Verification projít znovu.
 - Místo konání: `content.json` má `bars: 4` (8 s) a build ořízne VO na konci bloku. Delší VO (10 s) jen s `bars: 5`.
-- Počty Activefishing (1 300+ / 777) platí k 19. 10. 2026.
+- Počty Activefishing (1 300+ / přes 770) platí k 21. 10. 2026.
 - Moonky: claim „Nástrahy, které pstruzi milují“ je jen z fotky od uživatele (u03). Na webu není, proto je jen alternativa.
 - Gausse Holler: „Black Standard Edition“ je podle briefu. Na webu jde o „Revolut 8 · Standard Edition · Black“.

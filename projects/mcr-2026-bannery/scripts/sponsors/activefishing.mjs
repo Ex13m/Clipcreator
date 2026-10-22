@@ -6,7 +6,7 @@
 // so the white-TROUT TA logo sits on black (no halo smudge on white paper).
 // Facts only from research/activefishing*.md (Verification) + vo/script_cs.json + data/blocks/activefishing.json:
 //   „Pro všechny, kdo milují přívlač“ (homepage) · e-shop Stanislava Lukáška (/o-nas/) · „Český e-shop pro přívlač a trout area“
-//   (corrected one-liner) · PŘES 1 300 PLANDAVEK (1 340 → 1 354, 19.–21. 10.) · 777 WOBLERŮ (19. 10.; 776 on 21. 10.) ·
+//   (corrected one-liner) · PŘES 1 300 PLANDAVEK (1 340 → 1 354, 19.–21. 10.) · PŘES 770 WOBLERŮ (777 on 19. 10., 776 on 21. 10. → „přes 770“, operator 22. 10.; „770+“ next to „1 300+“) ·
 //   Rychlost doručení · Unikátní sortiment · Osobní přístup (homepage benefits) · menu: plandavky · woblery · pruty.
 //   Brands are THIRD-PARTY brands the shop sells („v nabídce“, never „vlastní“); never „jen japonské“. No prices, no gram weight on Khor.
 //   Copy rule (CD review): never „PŘES“ + „1 300+“ together.
@@ -179,7 +179,7 @@ function afLogo(E, { x, y, cx, maxH, maxW, attrs = 'data-in="fade" data-d=".25"'
   return E.logo(LOGO, { x, y, cx, maxH, maxW, trim: LOGO_TRIM, attrs });
 }
 
-// counter lockup „PŘES · 1 300 · PLANDAVEK“ + „777 WOBLERŮ“ (the VO verbatim; numbers in the logo gradient)
+// counter lockup „PŘES · 1 300 · PLANDAVEK“ + „PŘES 770 WOBLERŮ“ (the VO verbatim; numbers in the logo gradient)
 function counter(E, { x, y, w, big, d = 0, align = 'left', woblery = true }) {
   let h = '', yy = y;
   const ks = Math.max(30, Math.round(big * 0.17));
@@ -191,9 +191,9 @@ function counter(E, { x, y, w, big, d = 0, align = 'left', woblery = true }) {
   h += T(E, { cls: 'af-n', x, y: yy, w, size: ps, fit: 40, text: 'plandavek', align, main: true, inAttr: `data-in="up" data-d="${(d + 0.12).toFixed(2)}"` });
   yy += ps * 1.08;
   if (woblery) {
-    const ws = Math.round(big * 0.38);
+    const ws = Math.round(big * 0.33);   // „přes 770 woblerů“ is longer than „777 woblerů“ → keep it inside the text column
     yy += ws * 0.12;
-    h += T(E, { cls: 'af-n', x, y: yy, w, size: ws, fit: 40, html: `<span class="af-g">777</span> woblerů`, align, main: true, inAttr: `data-in="up" data-d="${(d + 0.2).toFixed(2)}"` });
+    h += T(E, { cls: 'af-n', x, y: yy, w, size: ws, fit: 40, html: `přes <span class="af-g">770</span>&nbsp;woblerů`, align, main: true, inAttr: `data-in="up" data-d="${(d + 0.2).toFixed(2)}"` });
     yy += ws * 1.08;
   }
   return { html: h, b: yy };
@@ -313,7 +313,7 @@ export const scenes = {
     let y = b.y + (sq ? 44 : 50);
     const ns = sq ? 96 : 112, half = b.w / 2;
     txt += T(E, { cls: 'af-n', x: b.x, y, w: half - 10, size: ns, fit: 50, html: `<span class="af-g">1 300+</span>`, main: true, inAttr: 'data-in="slam" data-d=".04"' });
-    txt += T(E, { cls: 'af-n', x: b.x + half, y, w: half, size: ns, fit: 50, html: `<span class="af-g">777</span>`, main: true, inAttr: 'data-in="slam" data-d=".1"' });
+    txt += T(E, { cls: 'af-n', x: b.x + half, y, w: half, size: ns, fit: 50, html: `<span class="af-g">770+</span>`, main: true, inAttr: 'data-in="slam" data-d=".1"' });
     y += ns * 1.0;
     const ls = sq ? 34 : 38;
     txt += T(E, { cls: 'af-k', x: b.x + 4, y, w: half - 10, size: ls, text: 'plandavek', main: false, style: 'letter-spacing:.08em', inAttr: 'data-in="up" data-d=".08"' });
