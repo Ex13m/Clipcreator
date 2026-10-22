@@ -160,7 +160,7 @@
  ],
  "order": [
   "intro",
-  "ftfishing",
+  
   "venue",
   "gausseholler",
   "activefishing",
@@ -168,7 +168,7 @@
   "jigovky",
   "broll1",
   "troutshop",
-  "velkaryba",
+  "velkaryba", "ftfishing",
   "crs",
   "finale"
  ],

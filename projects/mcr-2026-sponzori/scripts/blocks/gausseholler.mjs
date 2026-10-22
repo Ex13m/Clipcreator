@@ -230,8 +230,9 @@ export default function gausseholler(ctx) {
   fx.tIn(ctx, 'cut');                                         // Bosset wipes up in our graphite → hard cut on the downbeat
   // the finale opens on white (zoom-through, its tIn expects white); in the Reel our own end card follows → graphite, hard cut
   // into a ready lockup. 0.34 s (was 0.45) keeps the lockup clean ≥ 1.2 s.
-  const toSelf = ctx.next && ctx.next.key === ctx.key;
-  fx.tOut(ctx, 'zoom', { d: 0.34, color: toSelf ? C.bg : '#ffffff' });
+  // v9 (REVIEW_v8 MINOR 1): zooming into WHITE over the dark lockup gave 2–3 grey „veil“ frames → zoom-through into our own graphite,
+  // the next world (Activefishing paper) hard-cuts in with its slam on the downbeat
+  fx.tOut(ctx, 'zoom', { d: 0.34, color: C.bg });
 
   const css = `${gh.CSS(S)}
 ${S} #${ctx.id('tv-im')}{filter:drop-shadow(26px 38px 30px rgba(0,0,0,.72))}

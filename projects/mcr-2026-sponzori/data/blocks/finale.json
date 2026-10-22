@@ -3,12 +3,12 @@
  "key": "finale",
  "wall": [
   "venue",
-  "ftfishing",
-  "troutshop",
   "activefishing",
-  "jigovky",
-  "velkaryba",
   "bosset",
+  "jigovky",
+  "troutshop",
+  "velkaryba",
+  "ftfishing",
   "gausseholler"
  ],
  "madeby": {
@@ -19,7 +19,7 @@
    "Děkujeme",
    "partnerům"
   ],
-  "wall": "Líheň Liběchov · FT Fishing (ftfishing.cz) · Troutshop.eu · Activefishing.cz · Jigovky.cz · Velka-ryba.cz · Bosset.cz · Gausse Holler (žádné větší než TA)",
+  "wall": "Líheň Liběchov · Activefishing.cz · Bosset.cz · Jigovky.cz · Troutshop.eu · Velka-ryba.cz · FT Fishing (ftfishing.cz) · Gausse Holler (žádné větší než TA; v9: pořadí filmu, FT předposlední, GH = hlavní cena poslední)",
   "hero": "TA CZ logo (velké)",
   "event": "Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
   "closer": "Uvidíme se u vody",

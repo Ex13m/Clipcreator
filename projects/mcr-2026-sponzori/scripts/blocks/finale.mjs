@@ -19,17 +19,19 @@ export const meta = { reel: false };
 // ---- A: one card per partner (film order). p = index into data.products; bg = radial [centre, edge]; fg = type colour on this card;
 //      name = the partner's name in ITS web/display font, tone-on-tone behind the product (type, not logo artwork)
 const CARDS = [
+  // v9 (operator 22. 10.): the film's partner order — FT Fishing second-to-last, Gausse Holler (main prize) keeps the last beat before
+  // the burst; the logo wall (data/blocks/finale.json › wall) follows the same order
   // venue = a brand-world card like the others (was a gallery photo, t14_libechov_briefing.jpg: on the first beat after the ČRS fader it
   // read as a stray random photo for ~0.4 s before DĚKUJEME — operator 22. 10.). Líheň colours (turquoise / navy, aqua name) + its
   // trout (the venue's own fish, same cut-out as the venue block) as the „product“
   { k: 'venue', src: 'assets_prep/fish_ai/fish_rainbow_a_cut.png', h: 330, rot: -8, bg: ['#17607a', '#1a212e'], glow: '#17a1c8', go: 0.5, fg: '#ffffff', name: 'LÍHEŇ LIBĚCHOV', font: 'Montserrat', wght: 900, italic: true, nc: 'rgba(154,231,232,.16)' },
+  { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
+  { k: 'bosset', trio: [1, 0, 2], bg: ['#ffffff', '#bfe6f8'], glow: '#1b97b1', go: 0.22, fg: '#0b1d24', name: 'bosset', font: 'Outfit', wght: 800, upper: false, nc: 'rgba(27,151,177,.18)' },
+  { k: 'jigovky', p: 1, rot: -8, bg: ['#ffe866', '#f4c400'], glow: '#ffffff', go: 0.55, fg: '#0c2414', name: 'jigovky', font: 'Poppins', wght: 900, upper: false, nc: 'rgba(23,110,55,.18)' },
+  { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
+  { k: 'velkaryba', p: 4, rot: -6, bg: ['#22599a', '#0f2541'], glow: '#7fb0e6', go: 0.32, fg: '#ffffff', name: 'VELKÁ RYBA', font: 'Oswald', wght: 700, nc: 'rgba(127,176,230,.18)' },
   // FT Fishing (22. 10.): its white paper + FT green, the Impulse PRO Firetiger, name in Exo 2 (its block's display font), ink type on the light world
   { k: 'ftfishing', p: 0, rot: -10, bg: ['#ffffff', '#e4e9dc'], glow: '#6DB52C', go: 0.42, fg: '#1A1A1A', name: 'FT FISHING', font: 'Exo 2', wght: 900, nc: 'rgba(109,181,44,.2)' },
-  { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
-  { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
-  { k: 'jigovky', p: 1, rot: -8, bg: ['#ffe866', '#f4c400'], glow: '#ffffff', go: 0.55, fg: '#0c2414', name: 'jigovky', font: 'Poppins', wght: 900, upper: false, nc: 'rgba(23,110,55,.18)' },
-  { k: 'velkaryba', p: 4, rot: -6, bg: ['#22599a', '#0f2541'], glow: '#7fb0e6', go: 0.32, fg: '#ffffff', name: 'VELKÁ RYBA', font: 'Oswald', wght: 700, nc: 'rgba(127,176,230,.18)' },
-  { k: 'bosset', trio: [1, 0, 2], bg: ['#ffffff', '#bfe6f8'], glow: '#1b97b1', go: 0.22, fg: '#0b1d24', name: 'bosset', font: 'Outfit', wght: 800, upper: false, nc: 'rgba(27,151,177,.18)' },
   { k: 'gausseholler', p: 2, h: 700, bg: ['#56616c', '#0f1113'], glow: '#9cc6d8', go: 0.72, fg: '#e9e6e2', name: 'Gausse Holler', font: 'Playfair Display', wght: 900, italic: true, upper: false, nc: 'rgba(240,144,79,.18)' },
 ];
 // ---- B: products that explode out of the centre on the bar-2 downbeat (every sponsor, other products than in A;
@@ -106,10 +108,10 @@ export default function finale(ctx) {
     if (i) { ctx.tl.set(H1.sel, { color: c.fg }, t0); ctx.tl.set(H2.sel, { color: c.fg }, t0); }
   });
   html += fx.scene(ctx, 'sA', 0, tB, H1.html + H2.html, { outD: 0.001 });
-  // gausseholler hands over on white (zoom-through). 0.16 s (was 0.4): one white frame on the kick, the trout reads from frame 3 —
-  // the long fade left ~0.3 s of milky, washed-out frames on the peak downbeat (same treatment as intro → venue)
-  fx.tIn(ctx, 'flash', { color: '#ffffff', d: 0.16 });
-  fx.flash(ctx, bar(1), { id: 'pk1', color: '#ffffff', peak: 0.45, d: 0.28 });
+  // in: hard cut — the ČRS TA faders already close the frame on our ink, DĚKUJEME + the first card are there on the downbeat
+  // (v9: the old white tIn flash from the GH → finale order made the first frame milky, REVIEW_v8 MINOR 1)
+  fx.tIn(ctx, 'cut');
+  fx.flash(ctx, bar(1), { id: 'pk1', color: '#ffffff', peak: 0.3, d: 0.2, blend: 'screen' });   // was normal .45 / .28 = milky peak frame
   fx.chroma(ctx, H1.sel, bar(1), { amt: 12, d: 0.35 });
   fx.chroma(ctx, H2.sel, bar(1), { amt: 12, d: 0.35 });
 
@@ -164,8 +166,10 @@ export default function finale(ctx) {
   // the in-between lines are small caps with tracking → clear 2-level hierarchy instead of five different styles.
   const tTitle = tB + 0.08, tSub = tB + BEAT;
   const tDate = clamp(ctx.snap(voAt('24.', bar(3)), 'beat'), tB + 1.0, bar(4));
-  const tPlace = clamp(ctx.snap(voAt('Líheň', bar(4) + BEAT * 2), 'beat'), tDate + 1.3, bar(5));
-  const tClose = clamp(ctx.snap(voAt('Uvidíme', bar(5) + BEAT), 'beat'), tPlace + 0.9, tC - 1.2);
+  // v9: place on its word (was clamped to bar 5 = ~1 s before the voice); the closer „Uvidíme se u vody“ is no longer on the poster
+  // (it showed ~1.5 s BEFORE the VO said it) → it is set on its VO words above the logo wall (REVIEW_v8 MINOR 3)
+  const tPlace = clamp(ctx.snap(voAt('Líheň', bar(4) + BEAT * 2), 'beat') - 0.04, tDate + 1.3, tC - 0.75);
+  const tClose = clamp(ctx.snap(voAt('Uvidíme', tC + BEAT), 'beat') - 0.06, tC + 0.2, tD - 1.4);
   const CND = { font: 'Archivo', wdth: 75, upper: true };
   let yy = PH.y + PH.h + 50;
   const pT = fx.headline(ctx, { id: 'pt', text: E.title1, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 900, tracking: -0.01, sizes: [150, 142, 136, 132, 126, 120], align: 'center', t: tTitle, reveal: 'lines', d: 0.7, variable: true });
@@ -174,27 +178,30 @@ export default function finale(ctx) {
   const pS = fx.headline(ctx, { id: 'ps', text: E.title2, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 700, tracking: 0.12, sizes: [54, 50, 46], align: 'center', color: T.accent, t: tSub, reveal: 'lines' });
   yy += pS.h + 34;
   const dSize = fitSize(E.date, { ...CND, wght: 900, tracking: 0, maxW: CW - 60, sizes: [176, 168, 160, 152, 144, 136, 128] });
-  // fast roll (≈0.6 s) so the date is never on screen as a wrong number for long
-  const pDate = `<div class="fx-abs" id="${ctx.id('pdw')}" style="left:${L}px;top:${yy}px;width:${CW}px">${fx.odometer(ctx, { id: 'pd', value: E.date, x: 0, y: 0, w: CW, align: 'center', size: dSize, font: 'Archivo', wght: 900, t: tDate - 0.05, d: 0.5, spins: 0, stagger: 0.02, style: 'font-stretch:75%' })}</div>`;
-  ctx.tl.fromTo(ctx.sel('pdw'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'expo.out' }, tDate - 0.05);
+  // v9 (REVIEW_v8 MAJOR 1): NO odometer on the event date — even a 0.5 s roll showed „13.–14. 09. 1915“ / „89.–99. 65. 6441“ on
+  // the CTA frame. The real date rises out of its mask as one line (wrapper settles 1.08 → 1 + blur 6 → 0), complete on the VO „24.“
+  const PD = fx.headline(ctx, { id: 'pd', text: E.date, x: 0, y: 0, w: CW, maxLines: 1, ...CND, wght: 900, tracking: 0, lh: 1, sizes: [dSize], align: 'center', t: tDate - 0.16, reveal: 'lines', d: 0.3 });
+  const pDate = `<div class="fx-abs" id="${ctx.id('pdw')}" style="left:${L}px;top:${yy}px;width:${CW}px;height:${dSize}px;transform-origin:50% 60%">${PD.html}</div>`;
+  ctx.tl.fromTo(ctx.sel('pdw'), { scale: 1.08, filter: 'blur(6px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.32, ease: 'expo.out' }, tDate - 0.16);
+  ctx.tl.set(ctx.sel('pdw'), { filter: 'none' }, tDate + 0.2);
   yy += dSize + 30;
   const pP = fx.headline(ctx, { id: 'pp', text: E.place, x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 800, tracking: 0.04, sizes: [84, 80, 76, 72], align: 'center', t: tPlace, reveal: 'chars', stagger: 0.02 });
-  yy += pP.h + 40;
-  const pC = fx.headline(ctx, { id: 'pc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: yy, w: CW, maxLines: 1, ...CND, wght: 900, tracking: 0, sizes: [92, 88, 84, 80], align: 'center', color: T.accent, t: tClose, reveal: 'chars', stagger: 0.022 });
-  if (yy + pC.h > ctx.H - ctx.safe.bottom) ctx.warn(`poster runs to y ${Math.round(yy + pC.h)} > safe ${ctx.H - ctx.safe.bottom}`);
-  const poster = `<div class="fx-full" id="${ctx.id('pw')}">${pT.html}${pS.html}${pDate}${pP.html}${pC.html}</div>`;
+  if (yy + pP.h > ctx.H - ctx.safe.bottom) ctx.warn(`poster runs to y ${Math.round(yy + pP.h)} > safe ${ctx.H - ctx.safe.bottom}`);
+  const poster = `<div class="fx-full" id="${ctx.id('pw')}">${pT.html}${pS.html}${pDate}${pP.html}</div>`;
   ctx.tl.fromTo(ctx.sel('pw'), { opacity: 1, y: 0 }, { opacity: 0, y: -70, duration: 0.3, ease: 'power3.in' }, tC - 0.3);
   html += fx.scene(ctx, 'sB', tB, tC, poster, { outD: 0.001 });
   fx.chroma(ctx, pT.sel, bar(3), { amt: 8, d: 0.3 });
-  fx.punch(ctx, ctx.sel('pdw'), bar(4), { scale: 1.06, d: 0.3 });
 
   // =====================================================================================================
   // C · LOGO WALL (bars 6 → drop): equal optical weight, below the TA hero, metallic glint on the downbeats
   // =====================================================================================================
   const keys = D.wall, cols = keys.length > 8 ? 3 : 2, rows = Math.ceil(keys.length / cols);   // v8: 8 partners → 2 × 4 (9 → 3 × 3)
-  const kY = PH.y + PH.h + 44;
+  // v9: „UVIDÍME SE U VODY“ on its VO words (≈ 1 beat after the wall starts) in a band between the TA hero and the kicker
+  const cY = PH.y + PH.h + 36;
+  const wC = fx.headline(ctx, { id: 'wc', text: D.copy?.closer || 'Uvidíme se u vody', x: L, y: cY, w: CW, maxLines: 1, ...CND, wght: 900, tracking: 0, lh: 1, sizes: [96, 92, 88, 84, 80], align: 'center', color: '#ffffff', t: tClose, reveal: 'chars', stagger: 0.03, d: 0.4 });
+  const kY = cY + wC.h + 26;
   const kick = fx.headline(ctx, { id: 'wk', text: E.partnersTitle || 'Partneři mistrovství', x: L, y: kY, w: CW, maxLines: 1, font: 'Inter', wght: 700, size: 30, upper: true, tracking: 0.24, align: 'center', color: T.accent, t: tC, reveal: 'chars', stagger: 0.012 });
-  const gTop = kY + 70, gBot = ctx.H - ctx.safe.bottom - 16, gL = L, gR = ctx.W - L;
+  const gTop = kY + 62, gBot = ctx.H - ctx.safe.bottom - 16, gL = L, gR = ctx.W - L;
   const cw = (gR - gL) / cols, ch = (gBot - gTop) / rows;
   // no URL captions (19 px = unreadable on a phone, and they ate 35 px of every cell) → logos get the whole cell; square
   // marks (Liběchov, GH) were capped by the cell height, now ~125 px instead of 105
@@ -236,7 +243,7 @@ export default function finale(ctx) {
     glints.forEach((g) => ctx.tl.fromTo(swSel, { backgroundPosition: '110% 0%' }, { backgroundPosition: '-10% 0%', duration: 0.75, ease: 'power2.inOut' }, g + (col * 0.06 + row * 0.07)));
   });
   ctx.downs.filter((t) => t >= bar(8) - 1e-3 && t < tD).forEach((t) => keys.forEach((_, i) => { fx.punch(ctx, ctx.sel(`w${i}`), t, { scale: 1.05, d: 0.35 }); ctx.tl.hit(ctx.sel(`wg${i}`), { opacity: 0.9 }, { opacity: 0.32, duration: 0.5, ease: 'power2.out' }, t); }));
-  html += fx.scene(ctx, 'sC', tC, tWall1, kick.html + wall, { outD: 0.5 });
+  html += fx.scene(ctx, 'sC', tC, tWall1, wC.html + kick.html + wall, { outD: 0.5 });
   [tC, bar(8)].forEach((t, j) => fx.flash(ctx, t, { id: `fc${j}`, color: T.accent, peak: 0.22, d: 0.4, blend: 'screen' }));
 
   // =====================================================================================================
@@ -255,8 +262,10 @@ export default function finale(ctx) {
   // tail: fade the block to black (TA plate = root layer stays; GH mark sits in an overlay above the fade)
   ctx.overlay(`<div class="fx-ov" id="${ctx.id('fade')}" style="background:#000"></div>`);
   ctx.tl.fromTo(ctx.sel('fade'), { opacity: 0 }, { opacity: 1, duration: Math.max(1, END - tFade - 0.5), ease: 'sine.inOut' }, tFade);
-  // MADE BY ⚙ © 2026 Gausse Holler from layers: the gear ring turns clockwise for the whole sign-off (operator rule 22. 10.)
-  const mb = gh.madeby(ctx, { id: 'mbg', src: D.madeby.on_dark, box: [520, 60], scale: 2.0, at: [tGH, END], label: 'MADE BY GH' });
+  // MADE BY ⚙ © 2026 Gausse Holler from layers: the gear ring turns clockwise for the whole sign-off (operator rule 22. 10.).
+  // v9 (operator 22. 10.: ≥ 30 px): stacked on two lines → ~32 px caps and still ≤ the TA hero (×2.2 = 618 px) in width and area
+  const mb = gh.madebyStack(ctx, { id: 'mbg', box: [600, 160], scale: 2.2, at: [tGH, END], label: 'MADE BY GH' });
+  ctx.report(`MADE BY ${mb.w}×${mb.h} · caps ${mb.caps.toFixed(1)} px`);
   ctx.overlay(`<div class="fx-abs" id="${ctx.id('mb')}" style="left:${Math.round(CX - mb.w / 2)}px;top:${Math.round(ctx.H - ctx.safe.bottom - mb.h - 24)}px">${mb.html}</div>`);
   ctx.tl.fromTo(ctx.sel('mb'), { opacity: 0, y: 16, filter: 'blur(8px)' }, { opacity: 0.92, y: 0, filter: 'blur(0px)', duration: 1.1, ease: 'expo.out' }, tGH);
 

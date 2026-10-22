@@ -1,4 +1,4 @@
-// INTRO · bars 0–7 · build-up (no kick) → the drop lands on FT Fishing (bar 8, v7+).
+// INTRO · bars 0–7 · build-up (no kick) → the drop lands on the venue (bar 8; v9 again, as in v6 — FT Fishing moved to the end).
 // High-fashion sports-ad title sequence for the event (neutral event world, not a sponsor world):
 // ink black / bone white / ice + an iridescent "rainbow trout" chrome, Archivo variable, hard cuts on the grid.
 // Every title lands on the beat NEAREST its spoken word (VO starts 0.5 s), never a bar late:
@@ -9,7 +9,7 @@
 //   bar 4¼–5   LÍHEŇ LIBĚCHOV — the aerial only THROUGH the letters on ink (teaser); venue reveals the full aerial after the drop
 //   bar 5–5¾   40 závodníků — quick odometer on ice, product on the floor
 //   bar 5¾–7   HARD (pickup, on the word) · BAITS on the bar-6 downbeat — four hard baits slam in on the beats, depth parallax
-//   bar 7      PARTNEŘI MISTROVSTVÍ — the 8 film partners (v8: FT Fishing in, Moonky out) strobe on 8ths in their own brand colours; title + outline countdown 4-3-2-1
+//   bar 7      PARTNEŘI MISTROVSTVÍ — the 8 film partners (v9 film order, FT second-to-last, GH last) strobe on 8ths in their own brand colours; title + outline countdown 4-3-2-1
 //              switch ink/white per card (no difference blend → no off-brand mint/brown), zoom-through into the drop
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,17 +23,17 @@ export const meta = { reel: false };
 
 // partner teaser (film order). Colours follow each partner's own block theme when that module loads; fallback = brand colours.
 const TEASE = [
-  // v8 (22. 10.): Moonky out of the film, FT Fishing in → exactly the 8 partners of the film (7 sponsors + the venue; ČRS = supporter,
-  // thanked separately). Order alternates dark / light brand worlds so every 8th reads as a cut; Gausse Holler (main prize) keeps the last
-  // 8th before the zoom-through into the drop (= FT Fishing's white world)
+  // v9 (operator 22. 10.): the same partner order as the film — FT Fishing second-to-last; Gausse Holler (main prize) keeps the last
+  // 8th before the zoom-through into the drop (= the venue, which opens from white). 8 partners = 8 eighths (7 sponsors + the venue;
+  // ČRS = supporter, thanked separately). rot = product tilt on its card
   { key: 'venue', photo: 'assets_prep/broll_tacz/t14_libechov_briefing.jpg', bg: '#1a212e', accent: '#17a1c8', dark: true },   // our gallery: Liběchov jaro 2026 (was a fish photo)
-  { key: 'ftfishing', src: 'assets_prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png', bg: '#ffffff', accent: '#6DB52C' },
-  { key: 'troutshop', src: 'assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png', bg: '#070707', accent: '#e3000f' },
-  { key: 'activefishing', src: 'assets_prep/activefishing/heroes/h02_khor_frea.png', bg: '#f1f1ef', accent: '#e2812d' },
-  { key: 'jigovky', src: 'assets_prep/jigovky/ads/hero_sickle.png', bg: '#060807', accent: '#fed700' },
-  { key: 'bosset', src: 'assets_prep/bosset/heroes/h01_zojirushi_orange.png', bg: '#c5ebfc', accent: '#1b97b1' },
-  { key: 'velkaryba', src: 'assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png', bg: '#0f2541', accent: '#da0f00' },
-  { key: 'gausseholler', src: 'assets_prep/gausseholler/heroes/h01_revolut8_black_front.png', bg: '#0f1113', accent: '#f0904f' },
+  { key: 'activefishing', src: 'assets_prep/activefishing/heroes/h02_khor_frea.png', bg: '#f1f1ef', accent: '#e2812d', rot: 12 },
+  { key: 'bosset', src: 'assets_prep/bosset/heroes/h01_zojirushi_orange.png', bg: '#c5ebfc', accent: '#1b97b1', rot: 0 },
+  { key: 'jigovky', src: 'assets_prep/jigovky/ads/hero_sickle.png', bg: '#060807', accent: '#fed700', rot: 14 },
+  { key: 'troutshop', src: 'assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png', bg: '#070707', accent: '#e3000f', rot: -10 },
+  { key: 'velkaryba', src: 'assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png', bg: '#0f2541', accent: '#da0f00', rot: -14 },
+  { key: 'ftfishing', src: 'assets_prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png', bg: '#ffffff', accent: '#6DB52C', rot: -8 },
+  { key: 'gausseholler', src: 'assets_prep/gausseholler/heroes/h01_revolut8_black_front.png', bg: '#0f1113', accent: '#f0904f', rot: 0 },
 ];
 const THEMES = {};
 for (const k of new Set(TEASE.map((p) => p.key))) {
@@ -232,7 +232,7 @@ export default function intro(ctx) {
     if (k && inkOf(p) !== inkOf(TEASE[k - 1])) ctx.tl.set(ctx.sel('mc'), { '--nc': inkOf(p) }, a);
     if (p.src && ctx.has(p.src)) {
       const pr = ctx.dataOf(p.key)?.products?.find((x) => x.src === p.src);
-      prods += X.teaseProd(ctx, { id: `mp${k}`, t0: a, t1: b, src: p.src, pad: pr?.pad, box: [640, 600], cy: MCY, rot: [0, -8, -10, 12, 14, 0, -14, 0][k], zoom: 1.16, ground: 'none' });
+      prods += X.teaseProd(ctx, { id: `mp${k}`, t0: a, t1: b, src: p.src, pad: pr?.pad, box: [640, 600], cy: MCY, rot: p.rot || 0, zoom: 1.16, ground: 'none' });
     }
   });
   const fN = 1000, YN = MCY - fN * 0.475;
@@ -244,10 +244,14 @@ export default function intro(ctx) {
   const fPa = ctx.fit('Partneři', { ...A, wght: 900, wdth: 75, tracking: -0.01, maxW: CW, maxLines: 1, sizes: [230, 220, 210, 200, 190, 180] });
   const pa = fx.headline(ctx, { id: 'pa', text: 'Partneři', x: L, y: 430, w: CW, size: fPa.size, maxLines: 1, ...A, wght: 900, wdth: 75, tracking: -0.01, lh: 0.9, align: 'center', color: 'var(--nc)', t: tP - PRE, reveal: 'chars', stagger: 0.025, d: 0.4 });
   const pb = fx.headline(ctx, { id: 'pb', text: 'mistrovství', x: L, y: 430 + fPa.size * 0.9 + 6, w: CW, maxLines: 1, ...A, wght: 300, wdth: 100, tracking: 0.08, sizes: [96, 90, 84, 78, 72], align: 'center', color: 'var(--nc)', t: tP + 0.12, reveal: 'lines', d: 0.45 });
-  const title = `<div class="fx-full">${pa.html}${pb.html}</div>`;
+  const title = `<div class="fx-full" id="${ctx.id('ttl')}">${pa.html}${pb.html}</div>`;
   html += scene('sc7', tP, END, `<div class="fx-full" id="${ctx.id('mc')}" style="--nc:${inkOf(TEASE[0])}">${bgs}${nums}${prods}${title}</div>`);
   fx.ramp(ctx, ctx.sel('mc'), tP, END - 0.3, { from: { scale: 1 }, to: { scale: 1.1 } });
   fx.tOut(ctx, 'zoom', { d: 0.42, color: '#ffffff' });
+  // v9 (REVIEW_v8 MINOR 4): the zoom-through blew the white PARTNEŘI letters up UNDER the white TROUT of the TA logo → the title leaves
+  // (down + out) as the zoom starts to accelerate, and the logo gets its strongest shadow for the white hand-over
+  ctx.tl.fromTo(ctx.sel('ttl'), { opacity: 1, y: 0 }, { opacity: 0, y: 120, duration: 0.16, ease: 'power2.in' }, END - 0.3);
+  ctx.plate.tone(END - 0.45, END, 'halo');
 
   ctx.report(`times: land ${tLand} · title ${tTitle} · ČR ${tCR} · TA ${tTA} · 20 ${t20} · 26 ${t26} · 24 ${t24} · 25 ${t25} · 10 ${t10} · place ${tPlace} · 40 ${t40} · hard ${tHB} · baits ${tBaits}`);
   ctx.report(`sizes: title ${fT.size}/ČR ${fC.size} · 2026 ${S20} · date ${SD} · place ${fPl.size} (${fPl.lines.length} l) · 40 ${S40} · hard baits ${sHa}/${sBa} · partneři ${fPa.size} · aerial ${AER.split('/').pop()}`);

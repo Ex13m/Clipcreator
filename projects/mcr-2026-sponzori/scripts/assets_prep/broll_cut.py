@@ -31,8 +31,10 @@ LO, HI = 0.22, 0.5   # alpha ramp: below LO → 0, above HI → 1 (hardens ISNet
 EXCLUDE = {'t01': [(0, 0, 380, 1920)],
            't04': [[(0, 895), (395, 895), (402, 990), (420, 1010), (432, 1150), (447, 1245), (447, 1920), (0, 1920)],
                    (935, 0, 1080, 760), (895, 425, 935, 760)],
-           # t03: rods + landing net above the tackle box (broken ISNet rod segments, mesh) → stay grey behind the word
-           't03': [(560, 0, 1080, 1400)]}
+           # t03: rods + landing net above the tackle box (broken ISNet rod segments, mesh) → stay grey behind the word;
+           #      v9 (22. 10.): the tackle box + reels right of his knee too — their stroke drew white scraps („=5\A“) above the
+           #      bottom cinema bar of the break (REVIEW_v8 MINOR 8) → only the angler is the colour subject
+           't03': [(560, 0, 1080, 1400), [(505, 1395), (1080, 1395), (1080, 1920), (552, 1920), (549, 1660), (522, 1560), (508, 1480)]]}
 # sticker stroke drawn from the silhouette OPENED by this many px first → thin rod blanks stay in colour but get no white bar
 OPEN = {'t04': 9, 't03': 9}
 

@@ -7,8 +7,8 @@ Zadání operátora (22. 10.): „сделай мне карусель в фор
 - Jeden samostatný HTML soubor (vše inline, bez CDN a externích fontů, média base64) → projde nahráním do CMS, funguje přímo i v `<iframe>`.
 - Poměr 9:16 v libovolném kontejneru; mobil i desktop; bez horizontálního scrollu.
 - Snímky: úvod „Partneři · Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov“ + partneři v pořadí:
-  FT Fishing · Líheň Liběchov (místo konání) · Gausse Holler Custom Lab (Hlavní cena · Revolut 8) · Activefishing.cz · Bosset.cz ·
-  Jigovky.cz · Troutshop.eu · Velká ryba · Český rybářský svaz (poděkování).
+  Líheň Liběchov (místo konání) · Gausse Holler Custom Lab (Hlavní cena · Revolut 8) · Activefishing.cz · Bosset.cz · Jigovky.cz ·
+  Troutshop.eu · Velká ryba · FT Fishing (předposlední) · Český rybářský svaz (poděkování, poslední) — pořadí operátor 22. 10.
 - **Moonky z webového karuselu vyřazen** (operátor 22. 10.) — ve všech výstupech (HTML, MP4, GIF).
 - Každý partner = 4,4 s němá smyčka vyříznutá z jeho Reels v8 (hero moment, bez VO); ČRS = statický banner (vlastní logo TA a spodní chip
   zamalovány, aby se nezdvojovaly s překryvem karuselu) s pomalým Ken Burns.

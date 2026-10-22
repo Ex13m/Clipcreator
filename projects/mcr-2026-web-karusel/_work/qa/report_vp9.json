@@ -19,23 +19,22 @@
     "video": {
      "paused": false,
      "rs": 4,
-     "t": 0.75,
+     "t": 0.74,
      "live": true,
      "err": null
     },
     "playingCount": 1,
-    "afterArrow": 4,
+    "afterArrow": 3,
     "hoverPauseHolds": true,
     "swipeLeft": [
-     4,
-     5
-    ],
-    "swipeRight": [
-     5,
+     3,
      4
     ],
+    "swipeRight": [
+     4,
+     3
+    ],
     "links": [
-     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
      "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
      "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
@@ -43,10 +42,13 @@
      "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
      "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
      "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
     ]
    },
-   "errors": []
+   "errors": [
+    "reqfail: blob:null/da406bc2-388f-453b-a7d1-d1b511 net::ERR_ABORTED"
+   ]
   },
   {
    "vp": "540x960",
@@ -64,23 +66,22 @@
     "video": {
      "paused": false,
      "rs": 4,
-     "t": 0.7,
+     "t": 0.71,
      "live": true,
      "err": null
     },
     "playingCount": 1,
-    "afterArrow": 4,
+    "afterArrow": 3,
     "hoverPauseHolds": true,
     "swipeLeft": [
-     4,
-     5
-    ],
-    "swipeRight": [
-     5,
+     3,
      4
     ],
+    "swipeRight": [
+     4,
+     3
+    ],
     "links": [
-     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
      "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
      "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
@@ -88,11 +89,12 @@
      "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
      "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
      "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
     ]
    },
    "errors": [
-    "reqfail: blob:null/7c38d5fe-8872-419e-991d-9187ec net::ERR_ABORTED"
+    "reqfail: blob:null/110321d5-1e46-49f8-be32-5b1ca5 net::ERR_ABORTED"
    ]
   },
   {

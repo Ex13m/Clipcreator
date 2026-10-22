@@ -353,6 +353,21 @@ export function odometer(ctx, { id = 'odo', value, prefix = '', suffix = '', x =
   const just = align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start';
   return `<div class="fx-odo" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};${w ? `width:${px(w)};` : ''}justify-content:${just};font-family:'${font}';font-weight:${wght};font-size:${size}px;color:${color};${style}">${prefix ? `<span class="fx-odo-x">${esc(prefix)}</span>` : ''}${parts}${suffix ? `<span class="fx-odo-x">${esc(suffix)}</span>` : ''}</div>`;
 }
+// countIn: the same markup / metrics as odometer() (drop-in), but every digit window holds ONLY its final digit, which rises out of
+// its own overflow:hidden window (no rolling strip → never a wrong number or a stray row of digits on screen; v9, REVIEW_v8 MAJOR 1–2:
+// letters / years / counts that are facts). Digits rise left → right with `stagger`, the whole number is complete at t + d + stagger·(n−1).
+export function countIn(ctx, { id = 'cnt', value, prefix = '', suffix = '', x = ctx.safe.left, y = 800, size = 220, font = ctx.theme.font?.display || 'Inter', wght = 900, color = ctx.theme.fg || '#fff', t = 0, d = 0.42, ease = 'expo.out', stagger = 0.04, align = 'left', w = null, style = '' } = {}) {
+  const chars = [...nb(String(value))];
+  let di = 0;
+  const parts = chars.map((c) => {
+    if (!/\d/.test(c)) return `<span class="fx-odo-x">${c === ' ' || c === '\u00a0' ? '&nbsp;' : esc(c)}</span>`;
+    const k = di++, sel = ctx.sel(`${id}-s${k}`);
+    ctx.tl.fromTo(sel, { yPercent: 135, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease }, t + k * stagger);
+    return `<span class="fx-odo-d"><span class="fx-odo-s" id="${ctx.id(`${id}-s${k}`)}"><i>${c}</i></span></span>`;
+  }).join('');
+  const just = align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start';
+  return `<div class="fx-odo" id="${ctx.id(id)}" style="left:${px(x)};top:${px(y)};${w ? `width:${px(w)};` : ''}justify-content:${just};font-family:'${font}';font-weight:${wght};font-size:${size}px;color:${color};${style}">${prefix ? `<span class="fx-odo-x">${esc(prefix)}</span>` : ''}${parts}${suffix ? `<span class="fx-odo-x">${esc(suffix)}</span>` : ''}</div>`;
+}
 const starPts = (n, r0, r1) => Array.from({ length: n * 2 }, (_, i) => { const a = (Math.PI * i) / n - Math.PI / 2, r = i % 2 ? r1 : r0; return `${(50 + r * Math.cos(a)).toFixed(2)},${(50 + r * Math.sin(a)).toFixed(2)}`; }).join(' ');
 // shape: 'burst' (star badge), 'circle', 'pill'. size = diameter px (pill: width = size*1.9)
 export function sticker(ctx, { id = 'stk', text, sub = '', x = 760, y = 700, size = 240, color = '#ffd400', fg = '#111', shape = 'burst', rot = -12, t = 0, d = 0.55, font = ctx.theme.font?.display || 'Inter', wght = 900, tsize = null, rays = true, style = '' } = {}) {

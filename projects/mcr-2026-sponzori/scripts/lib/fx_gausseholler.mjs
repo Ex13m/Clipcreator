@@ -155,6 +155,25 @@ export function madeby(ctx, { id, src, box, scale = 1, at, label = 'MADE BY GH',
   return { html, w: L.w, h: L.h, ring };
 }
 
+// v9 (operator 22. 10.: MADE BY ≥ 30 px caps): the same sign-off STACKED on two lines (MADE BY ⚙ / © 2026 GAUSSE HOLLER) so ≥ 30 px
+// caps fit under the TA hero width (logo rule). Assets: scripts/assets_prep/madeby_stack.py → madeby_stack_on_dark.png (flat: size +
+// logo rule, trimmed to bbox) + madeby_stack_text_on_dark.png (gear cleared, untrimmed canvas); gear = the same ring/core layers as
+// madeby() → the ring turns clockwise all the time it is visible (operator rule 22. 10.). bbox = [x, y, w, h] of the content on the canvas.
+const MBS = { canvas: [2563, 591], bbox: [40, 44, 2483, 507], gear: [1632, 40, 340], caps: 131 };
+export function madebyStack(ctx, { id, src = 'assets_prep/gausseholler/madeby_stack_on_dark.png', box, scale = 1, at, label = 'MADE BY GH', spin: sp = {} }) {
+  const L = ctx.logo(src, { box, scale, at, label });
+  const k = L.w / MBS.bbox[2], [bx, by] = MBS.bbox, [gx, gy, gs] = MBS.gear;
+  const gl = (gx - bx) * k, gt = (gy - by) * k, gw = gs * k;
+  const gimg = (rel) => `<img src="${ctx.asset(rel, { trim: false })}" alt="" style="position:absolute;left:0;top:0;width:100%;height:100%">`;
+  const html = `<div style="position:relative;width:${px(L.w)};height:${px(L.h)}">`
+    + `<img src="${ctx.asset('assets_prep/gausseholler/madeby_stack_text_on_dark.png', { trim: false })}" alt="${esc('MADE BY © 2026 Gausse Holler')}" style="position:absolute;left:${px(-bx * k)};top:${px(-by * k)};width:${px(MBS.canvas[0] * k)};height:${px(MBS.canvas[1] * k)}">`
+    + `<div id="${ctx.id(`${id}-ring`)}" style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)};transform-origin:${px((MB.hub[0] / MB.gc) * gw)} ${px((MB.hub[1] / MB.gc) * gw)}">${gimg('brand/gh/ring.png')}</div>`
+    + `<div style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)}">${gimg('brand/gh/core.png')}</div></div>`;
+  const ring = ctx.sel(`${id}-ring`);
+  if (sp !== false) spin(ctx, ring, sp.t0 ?? at?.[0] ?? 0, sp.t1 ?? at?.[1] ?? ctx.dur, { dps: sp.dps ?? SPIN_DPS });
+  return { html, w: L.w, h: L.h, ring, caps: MBS.caps * k };
+}
+
 // ---------- studio light ----------
 // top light cone (soft trapezoid); one element, static blur
 export function cone(ctx, { id, x = 540, top = -80, wTop = 300, wBot = 1100, h = 1700, color = C.bone, a = 0.13, style = '' }) {

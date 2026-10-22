@@ -4,8 +4,8 @@
 // sets again for a beat-cut colour run of 8 spoon faces under a „3 100+ plandavek v nabídce“ counter, rises for the lockup.
 //   bar 0  hero: Nories ROONEY 2,8 g 101 (gold) rises in front of the sun, macro push-in + light sweeps · „SPECIALISTA NA PSTRUHY“ (VO)
 //   bar 1  fan of 9 spoons (8 products, 3 brands) opens on the downbeat, beat punches, light wave · „RODINNÁ FIRMA OD ROKU“ (VO)
-//   bar 2  sun floods red · Nories CRANKIN' PUPA 109 (clear) slides in on a red floor · odometer 1999 on „devatenáct set…“ (VO)
-//   bar 3  sunset → black · 8 spoon faces cut on every 8th note, glow tinted by each spoon · odometer „3 100+ plandavek v nabídce“
+//   bar 2  sun floods red · Nories CRANKIN' PUPA 109 (clear) slides in on a red floor · year 1999 rises digit by digit on „devatenáct set…“ (VO; v9: no rolling odometer)
+//   bar 3  sunset → black · 8 spoon faces cut on every 8th note, glow tinted by each spoon · „3 100+ plandavek v nabídce“ (digits rise, no roll)
 //          + BRAND CORONA (v3): 6 spoon-maker logos sold by the shop (Nories, Forest, ValkeIN, Rodio Craft, Velvet Arts, YARIE; mono
 //          white) open in mirrored pairs on the first three 8ths around a red orbit ring = the set sun, thrown outward into bar 4
 //   bar 4  sunrise lockup: logo (≤ TA plate) + TROUTSHOP.EU + „Generální partner Trout Area Slovakia“ + „Věnuje ceny · MČR 2026“
@@ -161,7 +161,8 @@ export default function troutshop(ctx) {
     ctx.tl.fromTo(ctx.sel(`bl${i}`), { x: -dx * 0.55, y: -dy * 0.55, scale: 0.55, opacity: 0 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.42, ease: 'expo.out' }, ta);
     ctx.tl.fromTo(ctx.sel(`bl${i}`), { x: 0, y: 0, scale: 1, opacity: 1 }, { x: dx * 1.5, y: dy * 1.5, scale: 0.8, opacity: 0, duration: 0.28, ease: 'power3.in' }, t4 - 0.3 + pair * 0.02);
   });
-  let cnt = fx.odometer(ctx, { id: 'cnt', value: '3 100', suffix: '+', x: L - 4, y: 392, size: 240, font: 'Anton', wght: 400, color: '#ffffff', t: t3 + 0.02, d: 0.65, stagger: 0.05 });
+  // v9 (REVIEW_v8 MAJOR 2): no rolling odometer on facts — each digit rises once out of its window (fx.countIn, same metrics)
+  let cnt = fx.countIn(ctx, { id: 'cnt', value: '3 100', suffix: '+', x: L - 4, y: 392, size: 240, font: 'Anton', wght: 400, color: '#ffffff', t: t3 - 0.06, d: 0.36, stagger: 0.035 });
   cnt += `<div class="ts-lbl" style="left:${L}px;top:${392 + 240 + 12}px">${ctx.esc(ctx.nb('plandavek v nabídce'))}</div>`;
   html += fx.scene(ctx, 'cs', t3, t4 - 0.08, cnt, { inD: 0.001, outD: 0.22 });
 
@@ -170,7 +171,7 @@ export default function troutshop(ctx) {
   html += H1.html;
   const H2 = ts.lines(ctx, { id: 'hl2', lines: [[{ w: 'Rodinná firma' }], [{ w: 'od roku' }]], y: 410, sizes: [132, 124, 116, 108], times: [tRod - 0.08, tOd - 0.1], out: t3 - 0.4 });   // gone before the bar-3 downbeat
   html += H2.html;
-  html += fx.odometer(ctx, { id: 'yr', value: '1999', x: L - 6, y: 410 + H2.h + 6, size: 270, font: 'Anton', wght: 400, color: INK, t: tYear - 0.1, d: 0.7, stagger: 0.06 });
+  html += fx.countIn(ctx, { id: 'yr', value: '1999', x: L - 6, y: 410 + H2.h + 6, size: 270, font: 'Anton', wght: 400, color: INK, t: tYear - 0.14, d: 0.36, stagger: 0.035 });   // v9: the year is a fact → no roll through „4?5?“ / „0776“
   ctx.tl.fromTo(ctx.sel('yr'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, tYear - 0.14);
   ctx.tl.fromTo(ctx.sel('yr'), { opacity: 1, y: 0 }, { opacity: 0, y: -60, duration: 0.26, ease: 'power3.in' }, t3 - 0.34);
   // URL tag (top right, mirrors the TA plate) from the spoken „Troutshop“ until the lockup takes over
@@ -195,6 +196,8 @@ export default function troutshop(ctx) {
   // ---------- accents + transitions ----------
   fx.flash(ctx, 0, { id: 'f0', color: RED, peak: 0.32, d: 0.45, blend: 'screen' });
   fx.flash(ctx, t3, { id: 'f3', color: '#ffffff', peak: 0.16, d: 0.22, blend: 'screen' });
+  // v9 (REVIEW_v8 MINOR 4): red AREA of the TA logo on the full-red world held only by its outline → strongest shadow + halo there
+  ctx.plate.tone(Math.max(0, t2 - 0.4), t3 + 0.5, 'halo');
   fx.tIn(ctx, 'cut');
   fx.tOut(ctx, 'slice', { d: 0.3 });   // short: the lockup reads ≥ 1.2 s and no dead frames before the next world
 

@@ -31,7 +31,9 @@ const FILES = {
 };
 const WORDS = { cut: ['NERVY.', 'SOUBOJ.'], break: ['ZÁBĚR.', 'PSTRUH.'] };   // data copy.words overrides
 const FISH = ['assets_prep/fish_ai/scenes/scene_net_a_2k_fix.png', 'assets_prep/fish_ai/scenes/scene_net_a.png'];   // first that exists
-const WORD_Y = 392;                       // word band top: below the TA plate (250–348), above the subjects' heads
+const WORD_Y = 392;
+// the trout shot inside its camera: the frame is shifted down so the trout's HEAD sits below the PSTRUH. band (v9, REVIEW_v8 MINOR 9)
+const FISH_FRAME = 'top:-340px;bottom:auto;height:1928px', FISH_ORIGIN = '84% 67%';                       // word band top: below the TA plate (250–348), above the subjects' heads
 
 export default function broll(ctx) {
   const D = ctx.data || {};
@@ -94,7 +96,7 @@ function cutMode(ctx, { photo, cutOf, words }) {
     if (k) { fx.flash(ctx, t0, { id: `fl${k}`, color: '#ffffff', peak: 0.75, d: 0.2 }); fb.shake(ctx, ctx.sel('rig'), t0, { amp: 26, seed: 4 + k }); }
   }
   fb.shake(ctx, ctx.sel('rig'), 0.03, { amp: 18, n: 4, seed: 9 });
-  fx.flash(ctx, 0, { id: 'fl0', color: '#fff3e4', peak: 0.38, d: 0.18, blend: 'screen' });   // camera pop on the kick (screen ≤ .5: never a grey void)
+  fx.flash(ctx, 0, { id: 'fl0', color: '#fff3e4', peak: 0.22, d: 0.1, blend: 'screen' });    // camera pop on the kick — v9: .38/.18 s washed the first slam frame out (REVIEW_v8 MINOR 1)
   // beat accents: anamorphic streak on every whip cut, micro-punch of the word
   SH.forEach((s, i) => {
     if (s.inn?.startsWith('whip')) fxHtml += fb.streak(ctx, { id: `k${i}`, y: [1180, 980, 1260, 1120][i % 4], t: s.t0 - 0.04, d: 0.24 });
@@ -118,7 +120,9 @@ function breakMode(ctx, { photo, cutOf, stkOf, words }) {
   const dur = ctx.dur, b1 = ctx.bar(1), X = 0.36;                          // X = dissolve overlap around the 2nd downbeat
   // A — the strike, frozen: grey background, angler + bent rod in colour with a white sticker outline, popping forward (2.5D)
   // t03 (kneeling angler + tackle box, head at y ≈ 750–950): the whole word stays readable above him; t04 (TA jersey) hid the B of ZÁBĚR
-  const A = fb.shot(ctx, { id: 'a', src: photo('t03', 0), cut: cutOf('t03'), stroke: stkOf('t03'), mono: true, t0: 0, t1: b1 + X, origin: '30% 0%', subOrigin: '35% 73%', blur: false, kb: { from: 1.0, to: 1.12, ease: 'expo.out' } });   // origin on the top edge: the push moves the head DOWN, off the word
+  // v9 (REVIEW_v8 MAJOR 3): ZÁBĚR. → PSTRUH. is a HARD CUT + slam on the 2nd downbeat (was a 0.36 s light-leak dissolve = double exposure
+  // of the angler's face over the trout on the beat); every other change in the film is a cut on the beat too
+  const A = fb.shot(ctx, { id: 'a', src: photo('t03', 0), cut: cutOf('t03'), stroke: stkOf('t03'), mono: true, t0: 0, t1: b1, origin: '30% 0%', subOrigin: '35% 73%', blur: false, kb: { from: 1.0, to: 1.12, ease: 'expo.out' } });   // origin on the top edge: the push moves the head DOWN, off the word
   ctx.tl.fromTo(ctx.sel('a-sub'), { scale: 1 }, { scale: 1.06, duration: b1, ease: 'expo.out' }, 0.02);
   ctx.tl.fromTo(ctx.sel('a-stk'), { opacity: 0 }, { opacity: 1, duration: 0.1, ease: 'none' }, 0.04);
   ctx.tl.fromTo(ctx.sel('a-stk'), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'power1.in' }, b1 - 0.3);
@@ -128,31 +132,34 @@ function breakMode(ctx, { photo, cutOf, stkOf, words }) {
   // window (372–1548) and 'PSTRUH.' (y ≈ 416–700) lies on the spotted body above the gill cover; slow push-in on the head/lure
   // (origin 84% 67%, ≤ ×1.15) → the defocused tail leaves the frame top-left, the whole lure stays inside the window (y ≲ 1530)
   const fish = FISH.find((r) => ctx.has(r)) || photo('t03', 1);
-  const B = fb.shot(ctx, { id: 'b', src: fish, srcMax: 2560, frame: 'top:-340px;bottom:auto;height:1928px', t0: b1 - X, t1: dur, origin: '84% 67%', blur: false, grade: 'contrast(1.1) saturate(1.06) brightness(.97)', kb: { from: 1.0, to: 1.15, ease: 'sine.inOut', flat: true } });
-  ctx.tl.fromTo(ctx.sel('gt'), { opacity: 0.7 }, { opacity: 0.3, duration: 0.8, ease: 'power1.inOut' }, b1 - 0.3);   // lighter teal: the trout keeps its colour
+  const B = fb.shot(ctx, { id: 'b', src: fish, srcMax: 2560, frame: FISH_FRAME, t0: b1, t1: dur, origin: FISH_ORIGIN, blur: false, inn: 'slam', slam: 1.16, grade: 'contrast(1.1) saturate(1.06) brightness(.97)', kb: { from: 1.0, to: 1.12, ease: 'sine.inOut', flat: true } });
+  ctx.tl.set(ctx.sel('gt'), { opacity: 0.3 }, b1);   // lighter teal from the cut on: the trout keeps its colour
   const sweepT = b1 + 0.22, sweepD = 1.2;
   const SW = fb.sweepBand(ctx, { id: 'sw', t: sweepT, d: sweepD, opacity: 0.85 });
   // words: hairline → black weight behind the angler; the trout word is an outline that the light sweep fills
   const W1 = fb.word(ctx, { id: 'w1', text: words[0], y: WORD_Y + 24, t: 0.06, t1: b1, inn: 'breath', echo: false, from: { wght: 120, wdth: 62, trk: 0.07 } });
-  const W2 = fb.word(ctx, { id: 'w2', text: words[1 % words.length], y: WORD_Y + 24, t: b1 + 0.05, t1: dur - 0.3, inn: 'breath', echo: false, outline: true, split: false, ofw: 5, from: { wght: 620, wdth: 62, trk: 0.06 } });
+  const W2 = fb.word(ctx, { id: 'w2', text: words[1 % words.length], y: WORD_Y + 24, t: b1, t1: dur - 0.3, inn: 'none', echo: false, outline: true, split: false, ofw: 5, from: { wght: 620, wdth: 62, trk: 0.06 } });
+  // PSTRUH. slams with the cut (opaque outline from the downbeat frame), then gains weight while the light sweep fills it
+  ctx.tl.set(W2.sel, { transformOrigin: '50% 50%' }, 0);
+  ctx.tl.fromTo(W2.sel, { scale: 1.22 }, { scale: 1, duration: 0.34, ease: 'expo.out' }, b1 - 0.02);
+  fx.varType(ctx, W2.m, b1, { from: { wght: 620, wdth: 62, trk: 0.06 }, to: { wght: 900, wdth: 62, trk: -0.01 }, d: 0.9, ease: 'power2.inOut' });
   fx.outlineFill(ctx, W2.m, sweepT + sweepD * 0.3, { d: sweepD * 0.45, ease: 'power1.inOut' });   // the light band passes → the letters fill
-  ctx.tl.fromTo(W1.sel, { opacity: 1, filter: 'blur(0px)' }, { opacity: 0, filter: 'blur(14px)', duration: 0.32, ease: 'power2.in' }, b1 - 0.3);
   // scenes (B under A: A dissolves away on top of it)
-  const sb = fx.scene(ctx, 'bv', b1 - X, dur, B.back + SW, { inD: 0.001 });
-  const sa = fx.scene(ctx, 'av', 0, b1 + X, A.back, { outD: X * 2 });
-  const sf = fx.scene(ctx, 'af', 0, b1 + X, A.front, { outD: X * 2 });
+  const sb = fx.scene(ctx, 'bv', b1 - 0.003, dur, B.back + SW, { inD: 0.001 });
+  const sa = fx.scene(ctx, 'av', 0, b1, A.back, { outD: 0.001 });
+  const sf = fx.scene(ctx, 'af', 0, b1, A.front, { outD: 0.001 });
   const sw1 = fx.scene(ctx, 'w1v', 0, b1, W1.html, { outD: 0.001 });
   const sw2 = fx.scene(ctx, 'w2v', b1, dur, W2.html, { inD: 0.001 });
-  // light: leak dissolve at the 2nd downbeat; cinema bars close on the break downbeat (the TA plate sits on the top bar)
-  const L1 = fb.leak(ctx, { id: 'lk1', t: b1 - 0.5, d: 1.0, x: 820, y: 760, size: 1500, peak: 0.6 });
+  // cinema bars close on the break downbeat (the TA plate sits on the top bar); v9: no light-leak dissolve (cut), a short warm pop instead
+  fx.flash(ctx, b1, { id: 'fl1', color: '#fff2e2', peak: 0.22, d: 0.12, blend: 'screen' });
   // second type level: event credit in the top cinema bar, right of the TA plate (verified copy from data/content.json)
   const ev = ctx.event || {}, P = ctx.plate.rect;
   const CR = fb.credit(ctx, { id: 'cr', x1: ctx.W - ctx.safe.right, yMid: P.y + P.h / 2, maxW: ctx.W - ctx.safe.right - (P.x + P.w + 48), t: 0.5, lines: [
     { text: `${ev.title1 || 'Mistrovství ČR'} ${ev.year || '2026'}`, wght: 800, size: 36 },
     { text: `${ev.dateBig || '24.–25. 10.'} · ${ev.place || 'Líheň Liběchov'}`, wght: 500, size: 30, alpha: 0.78 }] });
   const LB = fb.letterbox(ctx, { id: 'lb', h: 372, t: 0, d: 0.62, top: CR });
-  fx.flash(ctx, 0, { id: 'fl0', color: '#ffffff', peak: 0.5, d: 0.3, blend: 'screen' });   // photo flash, not a white-out
-  const html = `<div class="fx-full" id="${ctx.id('rig')}">${sb}${sa}${shade()}${sw1}${sw2}${sf}${grade(ctx)}</div>${L1}${LB}`;
+  fx.flash(ctx, 0, { id: 'fl0', color: '#ffffff', peak: 0.22, d: 0.12, blend: 'screen' });   // photo flash — v9: .5/.3 s made the cut frame milky and the closing bars grey (REVIEW_v8 MINOR 1)
+  const html = `<div class="fx-full" id="${ctx.id('rig')}">${sb}${sa}${shade()}${sw1}${sw2}${sf}${grade(ctx)}</div>${LB}`;
   fx.tIn(ctx, 'cut');
   fx.tOut(ctx, 'zoom', { d: 0.45 });                                       // dive into the trout → next block's colour
   return { html };

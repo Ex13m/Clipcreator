@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="UTF-8" /><title>gausseholler · MČR 2026</title></head>
 <body><template>
-<div id="b-gausseholler" data-composition-id="gausseholler" data-width="1080" data-height="1920" data-duration="9.164">
+<div id="b-gausseholler" data-composition-id="gausseholler" data-width="1080" data-height="1920" data-duration="9.165">
   <style>
   #bw-gausseholler { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
   #gausseholler-stage { position:absolute; inset:0; overflow:hidden; }
@@ -51,7 +51,7 @@
     </div>
     <div class="fx-ov" id="gausseholler-fb" style="background:#cfe3ec;opacity:0;mix-blend-mode:screen"></div>
     <div class="fx-ov" id="gausseholler-fe" style="background:#cfe3ec;opacity:0;mix-blend-mode:screen"></div>
-    <div class="fx-ov" id="gausseholler-tout" style="background:#ffffff"></div>
+    <div class="fx-ov" id="gausseholler-tout" style="background:#0f1113"></div>
   </div>
   <script>
   const tl = gsap.timeline({ paused: true });
@@ -133,37 +133,37 @@
   gsap.set("#gausseholler-o8", {"transformOrigin":"30% 80%"});
   tl.fromTo("#gausseholler-apool", {"opacity":0.6,"scale":0.82}, {"opacity":1,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#gausseholler-tv", {"opacity":0.9}, {"opacity":1,"duration":0.25,"ease":"power2.out","immediateRender":false}, 0.000);
-  tl.fromTo("#gausseholler-tv-cam", {"scale":1,"rotation":-14}, {"scale":1.12,"rotation":7,"duration":1.883,"ease":"power1.inOut","immediateRender":false}, 0.000);
-  tl.fromTo("#gausseholler-tv-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.95,"ease":"power2.inOut","immediateRender":false}, 0.358);
-  tl.fromTo("#gausseholler-ag", {"scale":0,"rotation":-40}, {"scale":1,"rotation":15,"duration":0.24750000000000003,"ease":"power2.out","immediateRender":false}, 1.325);
+  tl.fromTo("#gausseholler-tv-cam", {"scale":1,"rotation":-14}, {"scale":1.12,"rotation":7,"duration":1.8840000000000001,"ease":"power1.inOut","immediateRender":false}, 0.000);
+  tl.fromTo("#gausseholler-tv-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.95,"ease":"power2.inOut","immediateRender":false}, 0.359);
+  tl.fromTo("#gausseholler-ag", {"scale":0,"rotation":-40}, {"scale":1,"rotation":15,"duration":0.24750000000000003,"ease":"power2.out","immediateRender":false}, 1.326);
   tl.fromTo("#gausseholler-ag", {"opacity":1}, {"opacity":0,"duration":0.30250000000000005,"ease":"power1.in","immediateRender":false}, 1.573);
-  tl.fromTo("#gausseholler-sA", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 1.832);
-  tl.fromTo("#gausseholler-b8", {"opacity":0,"scale":1.3}, {"opacity":0.2,"scale":1,"duration":0.6450000000000005,"ease":"expo.out","immediateRender":false}, 3.200);
-  tl.fromTo("#gausseholler-b8", {"opacity":0.2}, {"opacity":0,"duration":0.2,"ease":"none","immediateRender":false}, 3.865);
-  tl.fromTo("#gausseholler-bpod-lb", {"opacity":0,"y":10}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.283);
-  tl.fromTo("#gausseholler-sB", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.833);
-  tl.fromTo("#gausseholler-sB", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 3.665);
-  tl.fromTo("#gausseholler-bgrp", {"y":120,"scale":1.05}, {"y":0,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 1.803);
+  tl.fromTo("#gausseholler-sA", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 1.833);
+  tl.fromTo("#gausseholler-b8", {"opacity":0,"scale":1.3}, {"opacity":0.2,"scale":1,"duration":0.6460000000000008,"ease":"expo.out","immediateRender":false}, 3.200);
+  tl.fromTo("#gausseholler-b8", {"opacity":0.2}, {"opacity":0,"duration":0.2,"ease":"none","immediateRender":false}, 3.866);
+  tl.fromTo("#gausseholler-bpod-lb", {"opacity":0,"y":10}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 2.284);
+  tl.fromTo("#gausseholler-sB", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 1.834);
+  tl.fromTo("#gausseholler-sB", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 3.666);
+  tl.fromTo("#gausseholler-bgrp", {"y":120,"scale":1.05}, {"y":0,"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 1.804);
   tl.fromTo("#gausseholler-h1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.9,"ease":"power2.inOut","immediateRender":false}, 2.242);
-  tl.fromTo("#gausseholler-bcam", {"scale":1}, {"scale":1.8,"duration":0.8159999999999998,"ease":"fxRampIn","immediateRender":false}, 2.850);
-  tl.fromTo("#gausseholler-fb", {"opacity":0.08}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 1.833);
-  tl.fromTo("#gausseholler-cg", {"scale":0,"rotation":-40}, {"scale":1,"rotation":15,"duration":0.24750000000000003,"ease":"power2.out","immediateRender":false}, 3.686);
-  tl.fromTo("#gausseholler-cg", {"opacity":1}, {"opacity":0,"duration":0.30250000000000005,"ease":"power1.in","immediateRender":false}, 3.933);
-  tl.fromTo("#gausseholler-sp-hr", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 3.965);
-  tl.fromTo("#gausseholler-sp-n0 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.065);
-  tl.fromTo("#gausseholler-sp-l0 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.185);
-  tl.fromTo("#gausseholler-sp-n1 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.225);
-  tl.fromTo("#gausseholler-sp-u1", {"opacity":0,"x":-10}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 4.525);
-  tl.fromTo("#gausseholler-sp-l1 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.345);
-  tl.fromTo("#gausseholler-sp-n2 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.385);
-  tl.fromTo("#gausseholler-sp-u2", {"opacity":0,"x":-10}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 4.685);
-  tl.fromTo("#gausseholler-sp-l2 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.505);
-  tl.fromTo("#gausseholler-tube", {"y":160,"opacity":0}, {"y":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 4.225);
-  tl.fromTo("#gausseholler-sC", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 3.666);
+  tl.fromTo("#gausseholler-bcam", {"scale":1}, {"scale":1.8,"duration":0.8159999999999998,"ease":"fxRampIn","immediateRender":false}, 2.851);
+  tl.fromTo("#gausseholler-fb", {"opacity":0.08}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 1.834);
+  tl.fromTo("#gausseholler-cg", {"scale":0,"rotation":-40}, {"scale":1,"rotation":15,"duration":0.24750000000000003,"ease":"power2.out","immediateRender":false}, 3.687);
+  tl.fromTo("#gausseholler-cg", {"opacity":1}, {"opacity":0,"duration":0.30250000000000005,"ease":"power1.in","immediateRender":false}, 3.934);
+  tl.fromTo("#gausseholler-sp-hr", {"scaleX":0}, {"scaleX":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 3.966);
+  tl.fromTo("#gausseholler-sp-n0 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.066);
+  tl.fromTo("#gausseholler-sp-l0 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.186);
+  tl.fromTo("#gausseholler-sp-n1 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.226);
+  tl.fromTo("#gausseholler-sp-u1", {"opacity":0,"x":-10}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 4.526);
+  tl.fromTo("#gausseholler-sp-l1 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.346);
+  tl.fromTo("#gausseholler-sp-n2 .fx-c", {"yPercent":110,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.05,"immediateRender":false}, 4.386);
+  tl.fromTo("#gausseholler-sp-u2", {"opacity":0,"x":-10}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 4.686);
+  tl.fromTo("#gausseholler-sp-l2 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","stagger":0.06,"immediateRender":false}, 4.506);
+  tl.fromTo("#gausseholler-tube", {"y":160,"opacity":0}, {"y":0,"opacity":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 4.226);
+  tl.fromTo("#gausseholler-sC", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 3.667);
   tl.fromTo("#gausseholler-sC", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 5.499);
-  tl.fromTo("#gausseholler-cstand", {"scale":1.16}, {"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 3.666);
-  tl.fromTo("#gausseholler-cgrid", {"opacity":0}, {"opacity":1,"duration":0.6,"ease":"power1.out","immediateRender":false}, 3.766);
-  tl.fromTo("#gausseholler-h1b-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.9,"ease":"power2.inOut","immediateRender":false}, 4.016);
+  tl.fromTo("#gausseholler-cstand", {"scale":1.16}, {"scale":1,"duration":0.6,"ease":"expo.out","immediateRender":false}, 3.667);
+  tl.fromTo("#gausseholler-cgrid", {"opacity":0}, {"opacity":1,"duration":0.6,"ease":"power1.out","immediateRender":false}, 3.767);
+  tl.fromTo("#gausseholler-h1b-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.9,"ease":"power2.inOut","immediateRender":false}, 4.017);
   tl.set("#gausseholler-cw-i1", {"opacity":1}, 5.729);
   tl.set("#gausseholler-cw-i0", {"opacity":0}, 5.729);
   tl.set("#gausseholler-cw-i2", {"opacity":1}, 5.958);
@@ -172,10 +172,10 @@
   tl.set("#gausseholler-cw-i2", {"opacity":0}, 6.187);
   tl.set("#gausseholler-cw-i4", {"opacity":1}, 6.416);
   tl.set("#gausseholler-cw-i3", {"opacity":0}, 6.416);
-  tl.set("#gausseholler-cw-i5", {"opacity":1}, 6.645);
-  tl.set("#gausseholler-cw-i4", {"opacity":0}, 6.645);
-  tl.set("#gausseholler-cw-i6", {"opacity":1}, 6.874);
-  tl.set("#gausseholler-cw-i5", {"opacity":0}, 6.874);
+  tl.set("#gausseholler-cw-i5", {"opacity":1}, 6.646);
+  tl.set("#gausseholler-cw-i4", {"opacity":0}, 6.646);
+  tl.set("#gausseholler-cw-i6", {"opacity":1}, 6.875);
+  tl.set("#gausseholler-cw-i5", {"opacity":0}, 6.875);
   tl.fromTo("#gausseholler-sw-s0", {"scale":0}, {"scale":1,"duration":0.35,"ease":"back.out(2.4)","immediateRender":false}, 5.550);
   tl.fromTo("#gausseholler-sw-s1", {"scale":0}, {"scale":1,"duration":0.35,"ease":"back.out(2.4)","immediateRender":false}, 5.580);
   tl.fromTo("#gausseholler-sw-s2", {"scale":0}, {"scale":1,"duration":0.35,"ease":"back.out(2.4)","immediateRender":false}, 5.610);
@@ -188,8 +188,8 @@
   tl.fromTo("#gausseholler-sw-ring", {"y":70}, {"y":140,"duration":0.16,"ease":"power3.out","immediateRender":false}, 5.958);
   tl.fromTo("#gausseholler-sw-ring", {"y":140}, {"y":210,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.187);
   tl.fromTo("#gausseholler-sw-ring", {"y":210}, {"y":280,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.416);
-  tl.fromTo("#gausseholler-sw-ring", {"y":280}, {"y":350,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.645);
-  tl.fromTo("#gausseholler-sw-ring", {"y":350}, {"y":420,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.874);
+  tl.fromTo("#gausseholler-sw-ring", {"y":280}, {"y":350,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.646);
+  tl.fromTo("#gausseholler-sw-ring", {"y":350}, {"y":420,"duration":0.16,"ease":"power3.out","immediateRender":false}, 6.875);
   tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 5.500);
   tl.set("#gausseholler-tint", {"color":"#f07a22"}, 5.729);
   tl.set("#gausseholler-dfg", {"color":"#f07a22"}, 5.729);
@@ -203,39 +203,39 @@
   tl.set("#gausseholler-tint", {"color":"#14a6c4"}, 6.416);
   tl.set("#gausseholler-dfg", {"color":"#14a6c4"}, 6.416);
   tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 6.416);
-  tl.set("#gausseholler-tint", {"color":"#86b532"}, 6.645);
-  tl.set("#gausseholler-dfg", {"color":"#86b532"}, 6.645);
-  tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 6.645);
-  tl.set("#gausseholler-tint", {"color":"#c27a45"}, 6.874);
-  tl.set("#gausseholler-dfg", {"color":"#c27a45"}, 6.874);
-  tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 6.874);
+  tl.set("#gausseholler-tint", {"color":"#86b532"}, 6.646);
+  tl.set("#gausseholler-dfg", {"color":"#86b532"}, 6.646);
+  tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 6.646);
+  tl.set("#gausseholler-tint", {"color":"#c27a45"}, 6.875);
+  tl.set("#gausseholler-dfg", {"color":"#c27a45"}, 6.875);
+  tl.fromTo("#gausseholler-cw-cam", {"scale":1.035}, {"scale":1,"duration":0.2,"ease":"power2.out","immediateRender":false}, 6.875);
   tl.fromTo("#gausseholler-sD", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 5.500);
-  tl.fromTo("#gausseholler-sD", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 7.331);
+  tl.fromTo("#gausseholler-sD", {"opacity":1}, {"opacity":0,"duration":0.001,"ease":"power1.in","immediateRender":false}, 7.332);
   tl.fromTo("#gausseholler-cw", {"y":-60,"opacity":1}, {"y":0,"opacity":1,"duration":0.4,"ease":"expo.out","immediateRender":false}, 5.460);
-  tl.fromTo("#gausseholler-cw-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 6.854);
-  tl.fromTo("#gausseholler-dgrp", {"scale":1}, {"scale":0.92,"duration":0.2290000000000001,"ease":"power2.in","immediateRender":false}, 7.103);
-  tl.fromTo("#gausseholler-egrp", {"y":70,"scale":1.04}, {"y":0,"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 7.232);
-  tl.fromTo("#gausseholler-e1", {"x":-120,"opacity":0}, {"x":0,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 7.272);
-  tl.fromTo("#gausseholler-e2", {"x":120,"opacity":0}, {"x":0,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 7.272);
-  tl.fromTo("#gausseholler-h1e-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.85,"ease":"power2.inOut","immediateRender":false}, 7.632);
-  tl.fromTo("#gausseholler-stp", {"scale":1.6,"rotation":-33,"opacity":0}, {"scale":1,"rotation":-8,"opacity":1,"duration":0.42,"ease":"power4.out","immediateRender":false}, 7.750);
-  tl.fromTo("#gausseholler-mk-ring", {"rotation":0}, {"rotation":49.679999999999986,"duration":1.9319999999999995,"ease":"none","immediateRender":false}, 7.232);
-  tl.fromTo("#gausseholler-mk", {"opacity":0,"scale":0.8}, {"opacity":1,"scale":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 7.232);
-  tl.fromTo("#gausseholler-url .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.42,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 7.232);
-  tl.fromTo("#gausseholler-hero .fx-c", {"opacity":0,"x":-8}, {"opacity":1,"x":0,"duration":0.32,"ease":"power2.out","stagger":0.006,"immediateRender":false}, 7.312);
-  tl.fromTo("#gausseholler-role .fx-c", {"opacity":0,"x":-8}, {"opacity":1,"x":0,"duration":0.32,"ease":"power2.out","stagger":0.008,"immediateRender":false}, 7.392);
-  tl.fromTo("#gausseholler-prz", {"opacity":0,"y":24,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 7.492);
-  tl.fromTo("#gausseholler-sE", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 7.332);
-  tl.fromTo("#gausseholler-fe", {"opacity":0.08}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 7.332);
+  tl.fromTo("#gausseholler-cw-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.5,"ease":"power2.inOut","immediateRender":false}, 6.855);
+  tl.fromTo("#gausseholler-dgrp", {"scale":1}, {"scale":0.92,"duration":0.2290000000000001,"ease":"power2.in","immediateRender":false}, 7.104);
+  tl.fromTo("#gausseholler-egrp", {"y":70,"scale":1.04}, {"y":0,"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 7.233);
+  tl.fromTo("#gausseholler-e1", {"x":-120,"opacity":0}, {"x":0,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 7.273);
+  tl.fromTo("#gausseholler-e2", {"x":120,"opacity":0}, {"x":0,"opacity":1,"duration":0.55,"ease":"expo.out","immediateRender":false}, 7.273);
+  tl.fromTo("#gausseholler-h1e-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.85,"ease":"power2.inOut","immediateRender":false}, 7.633);
+  tl.fromTo("#gausseholler-stp", {"scale":1.6,"rotation":-33,"opacity":0}, {"scale":1,"rotation":-8,"opacity":1,"duration":0.42,"ease":"power4.out","immediateRender":false}, 7.751);
+  tl.fromTo("#gausseholler-mk-ring", {"rotation":0}, {"rotation":49.679999999999964,"duration":1.9319999999999986,"ease":"none","immediateRender":false}, 7.233);
+  tl.fromTo("#gausseholler-mk", {"opacity":0,"scale":0.8}, {"opacity":1,"scale":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 7.233);
+  tl.fromTo("#gausseholler-url .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.42,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 7.233);
+  tl.fromTo("#gausseholler-hero .fx-c", {"opacity":0,"x":-8}, {"opacity":1,"x":0,"duration":0.32,"ease":"power2.out","stagger":0.006,"immediateRender":false}, 7.313);
+  tl.fromTo("#gausseholler-role .fx-c", {"opacity":0,"x":-8}, {"opacity":1,"x":0,"duration":0.32,"ease":"power2.out","stagger":0.008,"immediateRender":false}, 7.393);
+  tl.fromTo("#gausseholler-prz", {"opacity":0,"y":24,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 7.493);
+  tl.fromTo("#gausseholler-sE", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 7.333);
+  tl.fromTo("#gausseholler-fe", {"opacity":0.08}, {"opacity":0,"duration":0.2,"ease":"power2.out","immediateRender":false}, 7.333);
   tl.fromTo("#gausseholler-t1", {"scale":1.05}, {"scale":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
   tl.fromTo("#gausseholler-t1b-w0", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.820);
   tl.fromTo("#gausseholler-t1b-w1", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.040);
   tl.fromTo("#gausseholler-t1b-w2", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 1.647);
-  tl.fromTo("#gausseholler-t1, #gausseholler-t1b", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.26,"ease":"power3.in","immediateRender":false}, 2.564);
-  tl.fromTo("#gausseholler-hdp", {"opacity":0,"y":14}, {"opacity":1,"y":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 2.764);
+  tl.fromTo("#gausseholler-t1, #gausseholler-t1b", {"opacity":1,"y":0}, {"opacity":0,"y":-36,"duration":0.26,"ease":"power3.in","immediateRender":false}, 2.565);
+  tl.fromTo("#gausseholler-hdp", {"opacity":0,"y":14}, {"opacity":1,"y":0,"duration":0.4,"ease":"expo.out","immediateRender":false}, 2.765);
   tl.fromTo("#gausseholler-hdu", {"x":18}, {"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.000);
-  tl.fromTo("#gausseholler-hdp", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.in","immediateRender":false}, 7.212);
-  tl.fromTo("#gausseholler-hdu", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.in","immediateRender":false}, 7.212);
+  tl.fromTo("#gausseholler-hdp", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.in","immediateRender":false}, 7.213);
+  tl.fromTo("#gausseholler-hdu", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power2.in","immediateRender":false}, 7.213);
   tl.fromTo("#gausseholler-k2 .fx-c", {"opacity":0,"x":-8}, {"opacity":1,"x":0,"duration":0.32,"ease":"power2.out","stagger":0.018,"immediateRender":false}, 2.707);
   tl.fromTo("#gausseholler-rv .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 3.180);
   tl.fromTo("#gausseholler-o8 .fx-ln > span", {"yPercent":125,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.4,"ease":"expo.out","stagger":0.09,"immediateRender":false}, 3.740);
@@ -247,11 +247,11 @@
   tl.fromTo("#gausseholler-cz-w0", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.600);
   tl.fromTo("#gausseholler-cz-w1", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.700);
   tl.fromTo("#gausseholler-cz-w2", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.800);
-  tl.fromTo("#gausseholler-gn, #gausseholler-cl, #gausseholler-cz", {"opacity":1,"y":0}, {"opacity":0,"y":-30,"duration":0.2,"ease":"power3.in","immediateRender":false}, 7.112);
-  tl.set("#gausseholler-stage", {"filter":"blur(0px)"}, 8.824);
-  tl.fromTo("#gausseholler-stage", {"scale":1,"filter":"blur(0px)"}, {"scale":2.6,"filter":"blur(18px)","duration":0.34,"ease":"power3.in","immediateRender":false}, 8.824);
-  tl.fromTo("#gausseholler-tout", {"opacity":0}, {"opacity":1,"duration":0.15300000000000002,"ease":"power1.in","immediateRender":false}, 9.011);
-  tl.set({}, {}, 9.164);
+  tl.fromTo("#gausseholler-gn, #gausseholler-cl, #gausseholler-cz", {"opacity":1,"y":0}, {"opacity":0,"y":-30,"duration":0.2,"ease":"power3.in","immediateRender":false}, 7.113);
+  tl.set("#gausseholler-stage", {"filter":"blur(0px)"}, 8.825);
+  tl.fromTo("#gausseholler-stage", {"scale":1,"filter":"blur(0px)"}, {"scale":2.6,"filter":"blur(18px)","duration":0.34,"ease":"power3.in","immediateRender":false}, 8.825);
+  tl.fromTo("#gausseholler-tout", {"opacity":0}, {"opacity":1,"duration":0.15300000000000002,"ease":"power1.in","immediateRender":false}, 9.012);
+  tl.set({}, {}, 9.165);
   window.__timelines["gausseholler"] = tl;
   </script>
 </div>

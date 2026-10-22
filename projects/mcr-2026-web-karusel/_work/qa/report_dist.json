@@ -18,18 +18,17 @@
     "autoplayIdx": 1,
     "video": null,
     "playingCount": 0,
-    "afterArrow": 4,
+    "afterArrow": 3,
     "hoverPauseHolds": true,
     "swipeLeft": [
-     4,
-     5
-    ],
-    "swipeRight": [
-     5,
+     3,
      4
     ],
+    "swipeRight": [
+     4,
+     3
+    ],
     "links": [
-     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
      "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
      "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
@@ -37,6 +36,7 @@
      "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
      "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
      "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
     ]
    },
@@ -57,18 +57,17 @@
     "autoplayIdx": 1,
     "video": null,
     "playingCount": 0,
-    "afterArrow": 4,
+    "afterArrow": 3,
     "hoverPauseHolds": true,
     "swipeLeft": [
-     4,
-     5
-    ],
-    "swipeRight": [
-     5,
+     3,
      4
     ],
+    "swipeRight": [
+     4,
+     3
+    ],
     "links": [
-     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "lihenlibechov.cz ↗ | https://lihenlibechov.cz/ | _blank | noopener",
      "gausseholler.com ↗ | https://gausseholler.com/ | _blank | noopener",
      "activefishing.cz ↗ | https://activefishing.cz/ | _blank | noopener",
@@ -76,6 +75,7 @@
      "jigovky.cz ↗ | https://jigovky.cz/ | _blank | noopener",
      "troutshop.eu ↗ | https://troutshop.eu/ | _blank | noopener",
      "velka-ryba.cz ↗ | https://velka-ryba.cz/ | _blank | noopener",
+     "ftfishing.cz ↗ | https://ftfishing.cz/ | _blank | noopener",
      "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
     ]
    },

@@ -5,7 +5,7 @@
 //          · „activefishing.cz“ + „Český e-shop pro trout area“ (VO: Activefishing – e-shop)
 //   bar 1  COLOUR DROP: the same lure switches colourway on every beat (Cobalt → Gold → Red → Hologram → Chart Pink),
 //          backdrop tint follows · „ZROZENÝ Z VÁŠNĚ PRO PŘÍVLAČ“ word by word on the VO · chip „Timon · Chibi Futten FS · 51 mm“
-//   bar 2  hard cut to the logo-orange field: odometer „PŘES 1 300+ PLANDAVEK“ (outline → fill on the VO word), a white shop card
+//   bar 2  hard cut to the logo-orange field: „PŘES 1 300 PLANDAVEK“ (digits rise, no roll) (outline → fill on the VO word), a white shop card
 //          slams up and a fan of 5 spoons (Nories, Velvet Arts ×2, ValkeIN, Khor) opens on it; the card zooms into the next world
 //   bar 3  white again: VARIVAS ES2 spool turns in 3D, Mukai / Timon / Lucky Craft cranks in a parallax depth stack,
 //          pill „OSOBNÍ PŘÍSTUP“ on the VO + „Rychlost doručení · Unikátní sortiment“ (site benefits)
@@ -124,7 +124,9 @@ export default function activefishing(ctx) {
   const PR = fx.headline(ctx, { id: 'pres', text: 'Přes', x: L, y: 392, w: CW, maxLines: 1, align: 'center', font: 'Nunito', wght: 900, size: 46, tracking: 0.24, upper: true, color: '#ffffff', t: tB, reveal: 'lines', d: 0.45 });
   sB += PR.html;
   // copy fix (CD review): „PŘES 1 300+“ said „over“ twice → the VO verbatim: PŘES · 1 300 · PLANDAVEK (1 340 on 19. 10.)
-  sB += fx.odometer(ctx, { id: 'odo', value: '1 300', x: L, y: 438, w: CW, align: 'center', size: 320, font: SAIRA, wght: 900, color: '#ffffff', t: tB + 0.04, d: 0.6, stagger: 0.05, style: 'word-spacing:.1em' });
+  // v9 (REVIEW_v8 MAJOR 2): the odometer rolled „6 746“ / „0 290“ / „2 ½ 2“ over the downbeat while the VO says the number → each
+  // digit rises once out of its own window (fx.countIn, same metrics), complete ~0.2 s after the downbeat
+  sB += fx.countIn(ctx, { id: 'odo', value: '1 300', x: L, y: 438, w: CW, align: 'center', size: 320, font: SAIRA, wght: 900, color: '#ffffff', t: tB, d: 0.34, stagger: 0.03, style: 'word-spacing:.1em' });
   ctx.tl.fromTo(ctx.sel('odo'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, tB);
   const plFit = ctx.fit('PLANDAVEK', { font: SAIRA, wght: 900, upper: true, tracking: 0.02, maxW: 740, maxLines: 1, sizes: [176, 170, 164, 156, 150] });
   sB += `<div class="fx-t" id="${ctx.id('pl')}" style="left:${L}px;top:758px;width:${CW}px;text-align:center;font-family:'${SAIRA}';font-weight:900;font-size:${plFit.size}px;line-height:1;letter-spacing:.02em;text-transform:uppercase"><span class="fx-ln"><span class="fx-of" id="${ctx.id('plof')}" style="--ofc:${C.ink};--ofw:3px">PLANDAVEK</span></span></div>`;
@@ -265,7 +267,7 @@ export default function activefishing(ctx) {
 
   // =============================== transitions ===============================
   fx.tIn(ctx, 'cut');                                   // the previous block hands over on our paper colour
-  af.tilesOut(ctx, { d: 0.46 });                         // rounded shop-card tiles close into the next block's colour
+  af.tilesOut(ctx, { d: 0.3 });                          // v9: 0.46 closed the frame ~5 frames early = empty teal before Bosset (REVIEW_v8 MINOR 2)                         // rounded shop-card tiles close into the next block's colour
 
   return { html, css: af.CSS(S) };
 }

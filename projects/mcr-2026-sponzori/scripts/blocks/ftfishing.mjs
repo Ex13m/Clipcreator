@@ -1,4 +1,5 @@
-// FT FISHING (ftfishing.cz) · plan B v7 bars 8–12 (5 bars ≈ 9.17 s, the DROP lands on bar 0) · concept A „TŘI ZNAČKY – TŘI TAKTY“
+// FT FISHING (ftfishing.cz) · plan B v9 bars 50–54 (5 bars ≈ 9.11 s; v9: penultimate partner, after Velká ryba, before ČRS — bar 0 = the
+// peak-1 re-entry hit, source bar 63) · concept A „TŘI ZNAČKY – TŘI TAKTY“
 // (research/ftfishing_ad.md §4). Brand world = the shop's own web hero banner: white paper + GREEN DIAGONAL STRIPES #6DB52C + grey
 // #878786; Exo 2 900 caps titles, Saira (wide) slogan / labels. The stripes are also the wiper between the three brand worlds.
 // VO (take 1): „FT Fishing – vše pro přívlač. Pruty Favorite, nástrahy Crazy Fish a Spinmad.“ — every brand lands in „its“ bar:
@@ -11,7 +12,7 @@
 //   bar 3      SPINMAD: stripes wipe into silver, Impulse PRO slam, then Hart → King → Target Spoon 1,5 g swap in place on the beats,
 //              Spinmad logo on „Spinmad“ (= the downbeat), NÁSTRAHY stays (ink)
 //   bar 4      LOCKUP on white + stripes: FT logo (≤ TA) · VŠE PRO PŘÍVLAČ · ftfishing.cz · „Věnuje ceny · MČR 2026“ · three brand
-//              columns (logo + product) + Vanfook as the quieter 4th column (logo + „háčky“, 22. 10.); out = stripes + white panel
+//              columns (logo + product) — v9: no Vanfook (banners only); out = stripes + a panel in the next world's colour
 // Only verified copy (research/ftfishing.md Verification): no „oficiální dovozce“, no prices, no prizes named, no brand origin.
 import * as fx from '../lib/fx.mjs';
 import * as F from '../lib/fx_ftfishing.mjs';
@@ -29,25 +30,19 @@ export const meta = {
 };
 const BR = ['favorite', 'crazyfish', 'spinmad'];
 const BRP = { favorite: PR.x1, crazyfish: PR.vibro, spinmad: PR.impulse };
-// 4th brand (operator 22. 10.): Vanfook hooks — logo in the brand row + „háčky“ in its product slot (no product shot); the three
-// focus brands keep their hero products, Vanfook stays the quieter 4th column (FT's own web banner lists it the same way)
-const BR2 = 'vanfook';
-
-// brand row: three focus columns (logo + its hero product) + the Vanfook column (logo + label) — block lockup and Reel end card
-function brandRow(ctx, { y, t, at, logoH = 72, prodTop, prodH = 250, cols = [180, 425, 670, 885], idp = 'br', anim = true }) {
+// three brand columns (logo + its hero product) — used by the block lockup and the Reel end card. v9 (operator 22. 10.): Vanfook is
+// OUT of the film block and the Reel (it stays only on the FB/IG banners) → back to the three focus brands Favorite · Crazy Fish · Spinmad
+function brandRow(ctx, { y, t, at, logoH = 72, prodTop, prodH = 250, cols = [205, 540, 875], idp = 'br', anim = true }) {
   let html = '';
-  const logoCell = (k, j) => {
+  BR.forEach((k, j) => {
     const rel = ctx.data.brands[k].on_light, [iw, ih] = ctx.dims(rel), ar = iw / ih;
-    // equal visual weight = equal area (Crazy Fish is a tall illustrated mark, Favorite a long wordmark); width ≤ 242 so 4 columns fit
-    const bw = Math.min(242, Math.sqrt((k === BR2 ? 11500 : 14000) * ar), (logoH * 1.45) * ar);   // Vanfook a notch quieter
+    // equal visual weight = equal area (Crazy Fish is a tall illustrated mark, Favorite a long wordmark)
+    const bw = Math.min(290, Math.sqrt(14000 * ar), (logoH * 1.45) * ar);
     const lg = ctx.logo(rel, { box: [bw, bw / ar], at, label: `ftfishing ${k}` });
     const cx = cols[j];
-    return `<div class="ft-bl" id="${ctx.id(`${idp}l${j}`)}" style="left:${(cx - lg.w / 2).toFixed(1)}px;top:${(y + (logoH * 1.45 - lg.h) / 2).toFixed(1)}px;width:${lg.w}px;height:${lg.h}px"><img src="${lg.src}" alt="${ctx.esc(ctx.data.brands[k].name)}" style="width:${lg.w}px;height:${lg.h}px"></div>`;
-  };
-  BR.forEach((k, j) => {
-    html += logoCell(k, j);
-    const i = BRP[k], cx = cols[j];
-    const P = F.prod(ctx, { id: `${idp}p${j}`, i, ...(k === 'favorite' ? { VH: prodH * 0.94 } : { V: Math.min(k === 'spinmad' ? 250 : 285, prodH * 1.15) }), cx: cx - (k === 'spinmad' ? 12 : 0), cy: prodTop + prodH / 2, rot: k === 'favorite' ? 0 : k === 'crazyfish' ? -24 : -20, drop: '0 18px 22px rgba(0,0,0,.25)' });
+    html += `<div class="ft-bl" id="${ctx.id(`${idp}l${j}`)}" style="left:${(cx - lg.w / 2).toFixed(1)}px;top:${(y + (logoH * 1.45 - lg.h) / 2).toFixed(1)}px;width:${lg.w}px;height:${lg.h}px"><img src="${lg.src}" alt="${ctx.esc(ctx.data.brands[k].name)}" style="width:${lg.w}px;height:${lg.h}px"></div>`;
+    const i = BRP[k];
+    const P = F.prod(ctx, { id: `${idp}p${j}`, i, ...(k === 'favorite' ? { VH: prodH } : { V: Math.min(320, prodH * 1.15) }), cx, cy: prodTop + prodH / 2, rot: k === 'favorite' ? 0 : k === 'crazyfish' ? -24 : -20, drop: '0 18px 22px rgba(0,0,0,.25)' });
     html += P.html;
     if (anim) {
       ctx.tl.fromTo(ctx.sel(`${idp}l${j}`), { y: 26 }, { y: 0, duration: 0.5, ease: 'expo.out' }, t + j * 0.05);
@@ -55,14 +50,6 @@ function brandRow(ctx, { y, t, at, logoH = 72, prodTop, prodH = 250, cols = [180
       F.sweep(ctx, `${idp}p${j}`, t + 0.4 + j * 0.08, { d: 0.6 });
     }
   });
-  // Vanfook: logo in the row + „HÁČKY“ (Saira, grey like the slogan) where the others show a product
-  const j = 3, lbS = Math.round(logoH * 0.62);
-  html += logoCell(BR2, j);
-  html += `<div class="fx-abs" id="${ctx.id(`${idp}v`)}" style="left:${cols[j] - 110}px;width:220px;top:${Math.round(prodTop + prodH * 0.3 - lbS / 2)}px">${F.label(ctx, { id: `${idp}vl`, text: ctx.data.brands[BR2].label || 'háčky', x: 0, y: 0, size: lbS, wght: 800, wdth: 112, color: F.C.grey, align: 'center', style: 'left:0;right:0' })}<i class="ft-vh" style="left:${110 - 30}px;top:${lbS + 16}px;width:60px;height:5px;background:#9F4745"></i></div>`;
-  if (anim) {
-    ctx.tl.fromTo(ctx.sel(`${idp}l${j}`), { y: 26 }, { y: 0, duration: 0.5, ease: 'expo.out' }, t + j * 0.05);
-    ctx.tl.fromTo(ctx.sel(`${idp}v`), { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t + 0.1 + j * 0.05);
-  }
   return html;
 }
 
@@ -224,16 +211,17 @@ export default function ftfishing(ctx) {
   html += fx.scene(ctx, 'slk', t4 - 0.04, END, lk, { inD: 0.001, outD: 0.001 });
   ctx.report(`lockup bottom ${Math.round(yy + 72 * 1.45 + 22 + Math.min(320, 1440 - (yy + 72 * 1.45 + 22)))} · times Pruty ${tPruty.toFixed(2)} Fav ${tFav.toFixed(2)} Crazy ${tCrazy.toFixed(2)}`);
 
-  // ================= transitions: stripes wipe between the worlds; in = white (intro zooms through to white) =================
+  // ================= transitions: stripes wipe between the worlds; in = white (v9: Velká ryba wipes up into our white) =================
   F.slash(ctx, { id: 'w2', t: t2 });
   F.slash(ctx, { id: 'w3', t: t3, color: C.green });
   F.slash(ctx, { id: 'w4', t: t4 });
   fx.tIn(ctx, 'cut');
-  F.slashOut(ctx, { cover: '#ffffff' });   // venue opens from white (flash in), our Reel end card is white too
+  // v9: the panel behind the stripes = the NEXT world's colour (film: ČRS navy → its DĚKUJEME is on screen on the downbeat;
+  // Reel: our own white end card) — handoff contract, no white frame before a dark block
+  F.slashOut(ctx, { cover: ctx.next?.theme?.bg || '#ffffff' });
 
   const css = `${F.CSS(S)}
-${S} .ft-hair{position:absolute;display:block;border-radius:3px;transform-origin:0 50%}
-${S} .ft-vh{position:absolute;display:block;border-radius:3px}`;
+${S} .ft-hair{position:absolute;display:block;border-radius:3px;transform-origin:0 50%}`;
   return { html, css };
 }
 
@@ -283,11 +271,9 @@ export function endCard(ctx) {
   const prodTop = y + 62 * 1.45 + 14;
   html += brandRow(ctx, { y, t: 0, at: [0, END], logoH: 62, prodTop, prodH: Math.min(230, 1456 - prodTop), idp: 'eb', anim: false });
   [0, 1, 2].forEach((j) => { ctx.tl.fromTo(ctx.sel(`ebp${j}`), { y: 30 }, { y: 0, duration: 0.6, ease: 'expo.out' }, 0.02 * j); F.sweep(ctx, `ebp${j}`, 0.5 + j * 0.15, { d: 0.6 }); });
-  ctx.tl.fromTo(ctx.sel('ebv'), { y: 30 }, { y: 0, duration: 0.6, ease: 'expo.out' }, 0.06);
   ctx.report(`end card bottom ${Math.round(prodTop + Math.min(230, 1456 - prodTop))}`);
   fx.tIn(ctx, 'cut');
   const css = `${F.CSS(S)}
-${S} .ft-hair{position:absolute;display:block;border-radius:3px;transform-origin:50% 50%}
-${S} .ft-vh{position:absolute;display:block;border-radius:3px}`;
+${S} .ft-hair{position:absolute;display:block;border-radius:3px;transform-origin:50% 50%}`;
   return { html, css };
 }

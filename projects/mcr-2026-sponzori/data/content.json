@@ -2,7 +2,7 @@
  "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
  "meta": {
   "title": "MČR 2026 Trout Area – partneři (reklamní film)",
-  "version": "v8"
+  "version": "v9"
  },
  "event": {
   "title1": "Mistrovství ČR",
@@ -46,7 +46,7 @@
   "beatsPerBar": 4,
   "bpm": 129.2,
   "volume": 1,
-  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu · v7 (22. 10.): segmenty [10,23)·[18,69)·[81,89)·[101,konec) — FT Fishing 5 taktů po intru · v8 (22. 10.): Moonky mimo film → [10,23)·[18,47)·[52,69)·[81,89)·[101,konec), 72 taktů"
+  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu · v7 (22. 10.): segmenty [10,23)·[18,69)·[81,89)·[101,konec) — FT Fishing 5 taktů po intru · v8 (22. 10.): Moonky mimo film → [10,23)·[18,47)·[52,69)·[81,89)·[101,konec), 72 taktů · v9 (22. 10.): FT Fishing předposlední → [10,47)·[52,65)·[63,68)·[65,69)·[81,89)·[101,konec), 72 taktů (venue opět na dropu zdroje 18)"
  },
  "vo": {
   "dir": "vo",
@@ -66,58 +66,50 @@
    "_": "build-up ze zdroje (takt 10–17), bez kicku"
   },
   {
-   "key": "ftfishing",
-   "bars": [
-    8,
-    12
-   ],
-   "_": "FT Fishing (22. 10.): DROP na taktu 8 (zdroj 18) + 4 takty groove (zdroj 19–22)"
-  },
-  {
    "key": "venue",
    "bars": [
-    13,
-    20
+    8,
+    15
    ],
-   "_": "re-drop na taktu 13 (zdroj 18 znovu po FT Fishing); dron + schéma + fakta"
+   "_": "v9: DROP na taktu 8 (zdroj 18) hned po intru (jako ve v6); dron + schéma + fakta"
   },
   {
    "key": "gausseholler",
    "bars": [
-    21,
-    25
+    16,
+    20
    ],
    "_": "HLAVNÍ CENA; poslední takt (20) = fill zdroje"
   },
   {
    "key": "activefishing",
    "bars": [
-    26,
-    30
+    21,
+    25
    ],
    "_": "vstup na re-entry (zdroj 31)"
   },
   {
    "key": "bosset",
    "bars": [
-    31,
-    36
+    26,
+    31
    ],
    "_": "6 taktů"
   },
   {
    "key": "jigovky",
    "bars": [
-    37,
-    41
+    32,
+    36
    ],
-   "_": "takty 3–4 bloku = hudební break zdroje (45–46); v8: za breakem rovnou broll (re-entry groove C, zdroj 52)"
+   "_": "takty 3–4 bloku = hudební break zdroje (45–46); za breakem rovnou broll (re-entry groove C, zdroj 52)"
   },
   {
    "key": "broll",
    "bars": [
-    42,
-    42
+    37,
+    37
    ],
    "vo": null,
    "_": "nářez (1 takt) — v8: vstup na re-entry po breaku jigovky (střih zdroje 46 → 52)"
@@ -125,8 +117,8 @@
   {
    "key": "brollbreak",
    "bars": [
-    43,
-    44
+    38,
+    39
    ],
    "block": "broll",
    "vo": null,
@@ -135,17 +127,25 @@
   {
    "key": "troutshop",
    "bars": [
-    45,
-    49
+    40,
+    44
    ]
   },
   {
    "key": "velkaryba",
    "bars": [
+    45,
+    49
+   ],
+   "_": "takt 2 = fill, takt 3 = vstup peaku 1"
+  },
+  {
+   "key": "ftfishing",
+   "bars": [
     50,
     54
    ],
-   "_": "takt 2 = fill, takt 3 = vstup peaku 1"
+   "_": "FT Fishing (v9, operátor 22. 10.): předposlední partner — po Velké rybě, před ČRS; zdroj 63–67 (re-entry peaku 1: střih 64→63 na taktu 50, pak groove peaku)"
   },
   {
    "key": "crs",
@@ -153,7 +153,7 @@
     55,
     58
    ],
-   "_": "poděkování ČRS (4 takty, peak 1)"
+   "_": "poděkování ČRS (4 takty, peak 1, zdroj 65–68 jako ve v8; střih 67→65 z FT)"
   },
   {
    "key": "finale",

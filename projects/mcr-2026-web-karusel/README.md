@@ -7,7 +7,7 @@ Zadání a rozhodnutí: `BRIEF.md`. Moonky je z karuselu vyřazen (operátor 22.
 |---|---|
 | `karusel_mcr2026.html` | **jediný samostatný soubor** (~3,7 MB): CSS/JS inline, Montserrat (podmnožina, base64), 8× H.264 MP4 540×960 + plakáty + statiky jako base64. Žádné externí požadavky. |
 | `karusel_mcr2026_9x16.mp4` | stejný karusel jako němá smyčka 40 s, 1080×1920, 30 fps, H.264 (pro CMS, které bere jen video) |
-| `karusel_preview.gif` | malý náhled (pokud je) |
+| `karusel_preview.gif` | náhled 200×356, 6 fps, ~2,9 MB (z MP4) |
 
 Pozn.: `static/` a `dist/karusel_mcr2026_9x16*.gif`, `*_60fps.mp4` vyrábí jiný (paralelní) agent – tento README je nepopisuje.
 
