@@ -1,0 +1,22 @@
+{
+  "_note": "Globální texty banneru (ověřeno: mcr-2026-sponzori/BRIEF.md § Akce, lihenlibechov.cz). Sponzorské moduly je NEMĚNÍ.",
+  "title": "Mistrovství ČR v Trout Area 2026",
+  "short": "MČR v Trout Area 2026",
+  "date": "24.–25. 10. 2026",
+  "place": "Líheň Liběchov",
+  "pond": "rybník Malý Sporťáček",
+  "line": "MČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
+  "roles": {
+    "_note": "role → povinný chip (engine ho kreslí sám a sestavení hlídá text). prize = Gausse Holler (hlavní cena), host = místo konání (bez cenového chipu), supporter = ČRS (poděkování, bez cenového chipu).",
+    "sponsor": { "chip": "Věnuje ceny · MČR 2026", "prize": true },
+    "prize": { "chip": "Hlavní cena pro vítěze MČR · Revolut 8", "roleLine": "Partner a informační sponzor", "prize": true },
+    "host": { "chip": "Místo konání MČR 2026", "prize": false },
+    "supporter": { "chip": "Děkujeme za dlouholetou podporu", "prize": false }
+  },
+  "ta": {
+    "logo": "mcr-2026-sponzori/assets_prep/ta_cz/logo_h_on_dark.png",
+    "_logo_note": "2079×679 plátno, obsah 1999×599 (okraj 40 px) → poměr 3,337; bílé TROUT + červené AREA na průhledném pozadí, nikdy stará bílá destička",
+    "pad": 40, "cw": 1999, "ch": 599,
+    "red": "#e31e24"
+  }
+}

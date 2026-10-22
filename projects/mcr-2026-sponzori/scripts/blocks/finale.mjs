@@ -10,6 +10,7 @@
 //   D  drop→end   SIGN-OFF on the music drop: misty lake, „Uvidíme se u vody“, event line, MADE BY ⚙ © 2026 Gausse Holler;
 //                 everything fades to black except the TA hero and the GH mark
 import * as fx from '../lib/fx.mjs';
+import * as gh from '../lib/fx_gausseholler.mjs';
 
 // event world = ink + cold lake teal + ice accent (same family as the intro); deliberately NOT navy (old TA house style)
 export const theme = { bg: '#04060a', bg2: '#0a2325', fg: '#ffffff', accent: '#8fe3ff', accent2: '#ffffff', font: { display: 'Archivo', text: 'Inter' }, wght: 900, upper: true };
@@ -18,7 +19,10 @@ export const meta = { reel: false };
 // ---- A: one card per partner (film order). p = index into data.products; bg = radial [centre, edge]; fg = type colour on this card;
 //      name = the partner's name in ITS web/display font, tone-on-tone behind the product (type, not logo artwork)
 const CARDS = [
-  { k: 'venue', photo: 'assets_prep/broll_tacz/t14_libechov_briefing.jpg', pos: '50% 38%', fg: '#ffffff' },   // our gallery: Liběchov jaro 2026
+  // venue = a brand-world card like the others (was a gallery photo, t14_libechov_briefing.jpg: on the first beat after the ČRS fader it
+  // read as a stray random photo for ~0.4 s before DĚKUJEME — operator 22. 10.). Líheň colours (turquoise / navy, aqua name) + its
+  // trout (the venue's own fish, same cut-out as the venue block) as the „product“
+  { k: 'venue', src: 'assets_prep/fish_ai/fish_rainbow_a_cut.png', h: 330, rot: -8, bg: ['#17607a', '#1a212e'], glow: '#17a1c8', go: 0.5, fg: '#ffffff', name: 'LÍHEŇ LIBĚCHOV', font: 'Montserrat', wght: 900, italic: true, nc: 'rgba(154,231,232,.16)' },
   { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
   { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
   { k: 'moonky', p: 0, rot: -8, bg: ['#24305c', '#0e1424'], glow: '#ff4f8b', go: 0.42, fg: '#ffffff', name: 'MOONKY', font: 'Unbounded', wght: 900, nc: 'rgba(184,255,46,.16)' },
@@ -57,9 +61,12 @@ export default function finale(ctx) {
   const h1o = { font: 'Archivo', wght: 900, wdth: 75, upper: true, tracking: -0.02, sizes: [210, 200, 190, 180, 170, 160, 150] };
   const h2o = { font: 'Archivo', wght: 900, wdth: 75, upper: true, tracking: -0.02, sizes: [190, 180, 176, 170, 160, 150, 140] };
   const s2 = fitSize(E.thanks2, h2o), y2 = 1446 - s2 * 0.98;
-  const H1 = fx.headline(ctx, { id: 'h1', text: E.thanks1, x: L, y: y1, w: CW, maxLines: 1, ...h1o, align: 'center', color: CARDS[0].fg, t: tH1, reveal: 'chars', stagger: 0.028, d: 0.55, variable: true });
+  // DĚKUJEME is on screen from frame 1 of the finale (designed opening frame, operator 22. 10.); it settles + gains weight instead of a char reveal
+  const H1 = fx.headline(ctx, { id: 'h1', text: E.thanks1, x: L, y: y1, w: CW, maxLines: 1, ...h1o, align: 'center', color: CARDS[0].fg, t: null, variable: true });
   const H2 = fx.headline(ctx, { id: 'h2', text: E.thanks2, x: L, y: y2, w: CW, maxLines: 1, ...h2o, align: 'center', color: CARDS[0].fg, t: tH2, reveal: 'chars', stagger: 0.024, d: 0.5, variable: true });
-  fx.varType(ctx, H1.sel, tH1, { from: { wght: 300, wdth: 62, trk: 0.08 }, to: { wght: 900, wdth: 75, trk: -0.02 }, d: 0.9, ease: 'expo.out' });
+  ctx.tl.set(H1.sel, { transformOrigin: '50% 50%' }, 0);
+  ctx.tl.fromTo(H1.sel, { scale: 1.06 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, 0);
+  fx.varType(ctx, H1.sel, 0, { from: { wght: 500, wdth: 66, trk: 0.04 }, to: { wght: 900, wdth: 75, trk: -0.02 }, d: Math.max(0.6, tH1 + 0.5), ease: 'expo.out' });
   fx.varType(ctx, H2.sel, tH2, { from: { wght: 300, wdth: 62, trk: 0.08 }, to: { wght: 900, wdth: 75, trk: -0.02 }, d: 0.9, ease: 'expo.out' });
   // product zone between the two lines
   const zTop = y1 + H1.h + 24, zBot = y2 - 18, zCy = (zTop + zBot) / 2, zH = zBot - zTop;
@@ -79,7 +86,7 @@ export default function finale(ctx) {
       const items = c.trio ? c.trio.map((pi, j) => ({ pi, j, off: (j - 1) * 250, hh: j === 1 ? zH * 0.98 : zH * 0.86 })) : [{ pi: c.p, j: 0, off: 0, hh: Math.min(zH, c.h || zH) }];
       // trio: side bottles first (painted behind), centre bottle last
       items.sort((a, b) => Math.abs(b.off) - Math.abs(a.off)).forEach(({ pi, j, off, hh }) => {
-        const p = dk.products[pi], [nw, nh] = ctx.dims(p.src), ar = nw / nh;
+        const p = c.src ? { src: c.src } : dk.products[pi], [nw, nh] = ctx.dims(p.src), ar = nw / nh;
         const w = Math.min(860, hh * ar, nw);
         const id = `c${i}p${j}`;
         const P = fx.product(ctx, { id, src: p.src, w, cx: CX + off, cy: zCy + (c.trio ? (j === 1 ? 0 : (zH * 0.98 - hh) / 2) : 0), ground: 'float', shadow: c.bg ? 0.42 : 0.5, pad: p.pad, rot: c.rot || 0, maxUp: 1.0 });
@@ -204,18 +211,22 @@ export default function finale(ctx) {
     const rel = dk.logo?.[variant] || dk.logo?.on_dark;
     const [iw, ih] = ctx.dims(rel), ar = iw / ih;
     const bw = Math.floor(Math.min(MAXW, Math.sqrt(AREA * ar), MAXH * ar));
-    const lg = ctx.logo(rel, { box: [bw, Math.ceil(bw / ar)], scale: 1.6, at: [tC, tWall1], label: `wall ${k}` });
+    // GH: the site's layered mark (ring turns clockwise all the time it is on screen — operator rule 22. 10.), same size/logo rule
+    const isGH = k === 'gausseholler';
+    const GM = isGH ? gh.mark(ctx, { id: `w${i}m`, src: rel, cx: 0, y: 0, box: [bw, Math.ceil(bw / ar)], scale: 1.6, at: [tC, tWall1], label: `wall ${k}`, spin: { t0: tC, t1: tWall1 + 0.6 }, sweep: { sa: 110, so: 0.85 } }) : null;
+    const lg = isGH ? { w: GM.w, h: Math.round(GM.h), html: GM.html.replace(/left:-?[\d.]+px;top:0px;/, 'left:0;top:0;') } : ctx.logo(rel, { box: [bw, Math.ceil(bw / ar)], scale: 1.6, at: [tC, tWall1], label: `wall ${k}` });
     const col = i % cols, row = Math.floor(i / cols);
     const cx = gL + cw * (col + 0.5), cy = gTop + ch * (row + 0.5);
     wall += `<i class="fin-glow" id="${ctx.id(`wg${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px;background:radial-gradient(closest-side,${ctx.rgba(GLOW[k] || T.accent, 0.5)},${ctx.rgba(GLOW[k] || T.accent, 0)})"></i>`;
     wall += `<div class="fx-abs fin-cell" id="${ctx.id(`w${i}`)}" style="left:${Math.round(cx - cw / 2)}px;top:${Math.round(cy - ch / 2)}px;width:${Math.round(cw)}px;height:${Math.round(ch)}px">
-      <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i></div></div>`;
+      <div class="fin-lg" style="width:${lg.w}px;height:${lg.h}px">${lg.html}${isGH ? '' : `<i class="fx-prod-sweep" id="${ctx.id(`w${i}-sw`)}" style="-webkit-mask-image:url(${lg.src});mask-image:url(${lg.src});--sa:110deg;--so:.85"></i>`}</div></div>`;
     const t = tC + 0.02 + i * BEAT * 0.5;            // first logo ON the bar-6 downbeat, then one per half-beat
     ctx.tl.fromTo(ctx.sel(`w${i}`), { opacity: 0, y: 34, filter: 'blur(14px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.1, duration: 0.29, ease: 'power2.out' }, t);
     ctx.tl.fromTo(ctx.sel(`wg${i}`), { opacity: 1, scale: 1.1 }, { opacity: 0.32, scale: 1, duration: 0.9, ease: 'power2.out' }, t + 0.3);
     ctx.tl.set(ctx.sel(`w${i}`), { filter: 'none' }, t + 0.62);
-    glints.forEach((g) => ctx.tl.fromTo(ctx.sel(`w${i}-sw`), { backgroundPosition: '110% 0%' }, { backgroundPosition: '-10% 0%', duration: 0.75, ease: 'power2.inOut' }, g + (col * 0.06 + row * 0.07)));
+    const swSel = isGH ? GM.sweeps.join(', ') : ctx.sel(`w${i}-sw`);
+    glints.forEach((g) => ctx.tl.fromTo(swSel, { backgroundPosition: '110% 0%' }, { backgroundPosition: '-10% 0%', duration: 0.75, ease: 'power2.inOut' }, g + (col * 0.06 + row * 0.07)));
   });
   ctx.downs.filter((t) => t >= bar(8) - 1e-3 && t < tD).forEach((t) => keys.forEach((_, i) => { fx.punch(ctx, ctx.sel(`w${i}`), t, { scale: 1.05, d: 0.35 }); ctx.tl.hit(ctx.sel(`wg${i}`), { opacity: 0.9 }, { opacity: 0.32, duration: 0.5, ease: 'power2.out' }, t); }));
   html += fx.scene(ctx, 'sC', tC, tWall1, kick.html + wall, { outD: 0.5 });
@@ -237,7 +248,8 @@ export default function finale(ctx) {
   // tail: fade the block to black (TA plate = root layer stays; GH mark sits in an overlay above the fade)
   ctx.overlay(`<div class="fx-ov" id="${ctx.id('fade')}" style="background:#000"></div>`);
   ctx.tl.fromTo(ctx.sel('fade'), { opacity: 0 }, { opacity: 1, duration: Math.max(1, END - tFade - 0.5), ease: 'sine.inOut' }, tFade);
-  const mb = ctx.logo(D.madeby.on_dark, { box: [520, 60], scale: 2.0, at: [tGH, END], label: 'MADE BY GH' });
+  // MADE BY ⚙ © 2026 Gausse Holler from layers: the gear ring turns clockwise for the whole sign-off (operator rule 22. 10.)
+  const mb = gh.madeby(ctx, { id: 'mbg', src: D.madeby.on_dark, box: [520, 60], scale: 2.0, at: [tGH, END], label: 'MADE BY GH' });
   ctx.overlay(`<div class="fx-abs" id="${ctx.id('mb')}" style="left:${Math.round(CX - mb.w / 2)}px;top:${Math.round(ctx.H - ctx.safe.bottom - mb.h - 24)}px">${mb.html}</div>`);
   ctx.tl.fromTo(ctx.sel('mb'), { opacity: 0, y: 16, filter: 'blur(8px)' }, { opacity: 0.92, y: 0, filter: 'blur(0px)', duration: 1.1, ease: 'expo.out' }, tGH);
 

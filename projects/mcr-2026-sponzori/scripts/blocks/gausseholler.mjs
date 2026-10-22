@@ -170,10 +170,10 @@ export default function gausseholler(ctx) {
   fx.sweep(ctx, 'h1e', tE + 0.3, { d: 0.85 });
   e += gh.stamp(ctx, { id: 'stp', x: 178, y: 874, size: 178, l1: 'Série 5 ks', l2: 'číslováno', t: ctx.at(4, 1) - 0.04 });
   // lockup: logo (site layers, ring turns; logo rule ×1) + URL + role + prize pill — URL lands ON the downbeat
-  const M = gh.mark(ctx, { id: 'mk', cx: W / 2, y: 372, box: [300, 300], at: [tE, END], label: 'gausseholler lockup' });
+  const M = gh.mark(ctx, { id: 'mk', cx: W / 2, y: 372, box: [300, 300], at: [tE, END], label: 'gausseholler lockup', spin: { t0: tE - 0.1, t1: END } });
   e += M.html;
   ctx.tl.fromTo(M.sel, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'expo.out' }, tE - 0.1);
-  ctx.tl.fromTo(M.ring, { rotation: -120 }, { rotation: 0, duration: 1.0, ease: 'expo.out' }, tE - 0.1);
+  // ring: gh.mark spins it clockwise at the site speed for the whole visible window (operator rule 22. 10.)
   const yU = 372 + M.h + 14;
   const U = fx.headline(ctx, { id: 'url', text: 'gausseholler.com', x: L, y: yU, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: false, tracking: -0.01, sizes: [80, 76, 72], color: C.white, align: 'center', t: tE - 0.1, reveal: 'lines', d: 0.42 });
   e += U.html;
@@ -307,7 +307,6 @@ export function endCard(ctx) {
   y += 5 + 24;
   const Mk = gh.mark(ctx, { id: 'xmk', cx: W / 2, y, box: [400, 400], scale, at: [0, END], label: `${ctx.cid} end card` });
   html += Mk.html;
-  ctx.tl.fromTo(Mk.ring, { rotation: -60 }, { rotation: 60, duration: END, ease: 'power2.out' }, 0);
   y += Mk.h + 18;
   const U = fx.headline(ctx, { id: 'xu', text: ctx.data.url || 'gausseholler.com', x: L, y, w: CW, maxLines: 1, font: 'Inter', wght: 800, upper: false, tracking: -0.01, sizes: [92, 88, 84, 80], color: C.white, align: 'center' });
   html += U.html;

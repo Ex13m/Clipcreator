@@ -95,15 +95,63 @@ export function plinth(ctx, { id, F, m = 1.16, h = 80, accent = C.orange, label 
 
 // ---------- logo: the site's own three layers (ring / core / word, shared 1200×1139 canvas) stacked so the ring can turn
 // like on gausseholler.com (.gh-logo__ring). Size + logo rule from ctx.logo('on_dark') (= the same artwork, Lanczos 2×).
+// OPERATOR RULE (22. 10.): wherever the GH mark is visible, its OUTER RING turns CLOCKWISE at a constant speed for the whole visible
+// window — never stops, never reverses; core + word stay still. Speed = the site's own (`animation: gh-spin 14s linear infinite`
+// on .gh-logo__ring / .gh-sign__ring) → 360°/14 s ≈ 25.7°/s. Seek-safe: one linear GSAP tween on the paused timeline.
+export const SPIN_DPS = 360 / 14;
+export function spin(ctx, sel, t0, t1, { dps = SPIN_DPS, from = 0 } = {}) {
+  if (!(t1 > t0)) return;
+  ctx.tl.fromTo(sel, { rotation: from }, { rotation: from + dps * (t1 - t0), duration: t1 - t0, ease: 'none', immediateRender: true }, t0);
+}
 const LAY = { ring: 'assets/gausseholler/logo_layer_ring.png', core: 'assets/gausseholler/logo_layer_core.png', word: 'assets/gausseholler/logo_layer_word.png' };
 const BOX = { x: 209, y: 120, w: 786, h: 734 };            // union bbox of the three layers on the 1200×1139 canvas
-const HUB = [600.75, 336.5];                               // ring / core centre on the canvas
-export function mark(ctx, { id, cx, y, box = [300, 300], scale = 1, at, label, gearOnly = false }) {
-  const L = ctx.logo('on_dark', { box, scale, at, label: label || `${ctx.cid}:gh logo (layers)` });
+// ring / core centre on the canvas = the ring's own 60° symmetry centre (measured: rotate the alpha 60° and minimise the diff;
+// the site's transform-origin 50.04% 29.54% = 600.5/336.5 is ~1 px off → would wobble ±1 px at film size)
+const HUB = [601.0, 337.5];
+// spin: {t0, t1, dps} (block-local; default = the `at` window) or false. sweep: {sa, so} → glint layers that follow the logo
+// (core+word mask static, ring mask turns with the ring while its gradient counter-turns, so the glint stays world-aligned);
+// returns `sweeps` = selectors to animate backgroundPosition on.
+export function mark(ctx, { id, cx, y, box = [300, 300], scale = 1, at, label, gearOnly = false, src = 'on_dark', spin: sp = {}, sweep = null }) {
+  const L = ctx.logo(src, { box, scale, at, label: label || `${ctx.cid}:gh logo (layers)` });
   const s = L.w / BOX.w, h = BOX.h * s;
-  const im = (k, extra = '') => `<img id="${ctx.id(`${id}-${k}`)}" src="${ctx.asset(LAY[k], { trim: false })}" alt="" style="position:absolute;left:${px(-BOX.x * s)};top:${px(-BOX.y * s)};width:${px(1200 * s)};height:${px(1139 * s)};${extra}">`;
-  const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:${px(cx - L.w / 2)};top:${px(y)};width:${px(L.w)};height:${px(h)}">${im('ring', `transform-origin:${px(HUB[0] * s)} ${px(HUB[1] * s)}`)}${im('core')}${gearOnly ? '' : im('word')}</div>`;
-  return { html, w: L.w, h, sel: ctx.sel(id), ring: ctx.sel(`${id}-ring`), word: ctx.sel(`${id}-word`), core: ctx.sel(`${id}-core`) };
+  const cw = 1200 * s, chh = 1139 * s, geo = `position:absolute;left:${px(-BOX.x * s)};top:${px(-BOX.y * s)};width:${px(cw)};height:${px(chh)}`;
+  const url = (k) => ctx.asset(LAY[k], { trim: false });
+  const im = (k) => `<img id="${ctx.id(`${id}-${k}`)}" src="${url(k)}" alt="" style="${geo}">`;
+  const org = `${px(HUB[0] * s)} ${px(HUB[1] * s)}`;
+  const swStyle = sweep ? `--sa:${sweep.sa ?? 110}deg;--so:${sweep.so ?? 0.85}` : '';
+  // ring: a wrapper that turns (img + optional masked glint inside)
+  let ring = `<img src="${url('ring')}" alt="" style="position:absolute;left:0;top:0;width:100%;height:100%">`;
+  if (sweep) ring += `<div style="position:absolute;inset:0;-webkit-mask-image:url(${url('ring')});mask-image:url(${url('ring')});-webkit-mask-size:100% 100%;mask-size:100% 100%"><i class="fx-prod-sweep" id="${ctx.id(`${id}-rsw`)}" style="right:auto;bottom:auto;left:${px(BOX.x * s)};top:${px(BOX.y * s)};width:${px(L.w)};height:${px(h)};-webkit-mask-image:none;mask-image:none;transform-origin:${px((HUB[0] - BOX.x) * s)} ${px((HUB[1] - BOX.y) * s)};${swStyle}"></i></div>`;
+  const stat = gearOnly ? ['core'] : ['core', 'word'];
+  const ms = stat.map((k) => `url(${url(k)})`).join(',');
+  const sw = sweep ? `<i class="fx-prod-sweep" id="${ctx.id(`${id}-sw`)}" style="${geo};-webkit-mask-image:${ms};mask-image:${ms};-webkit-mask-size:100% 100%;mask-size:100% 100%;${swStyle}"></i>` : '';
+  const html = `<div class="fx-abs" id="${ctx.id(id)}" style="left:${px(cx - L.w / 2)};top:${px(y)};width:${px(L.w)};height:${px(h)}"><div id="${ctx.id(`${id}-ring`)}" style="${geo};transform-origin:${org}">${ring}</div>${im('core')}${gearOnly ? '' : im('word')}${sw}</div>`;
+  const out = { html, w: L.w, h, src: L.src, sel: ctx.sel(id), ring: ctx.sel(`${id}-ring`), word: ctx.sel(`${id}-word`), core: ctx.sel(`${id}-core`), sweeps: sweep ? [ctx.sel(`${id}-sw`), ctx.sel(`${id}-rsw`)] : [] };
+  if (sp !== false) {
+    const t0 = sp.t0 ?? at?.[0] ?? 0, t1 = sp.t1 ?? at?.[1] ?? ctx.dur, dps = sp.dps ?? SPIN_DPS;
+    spin(ctx, out.ring, t0, t1, { dps });
+    if (sweep) spin(ctx, ctx.sel(`${id}-rsw`), t0, t1, { dps: -dps });   // invisible gradient carrier: keeps the glint world-aligned
+  }
+  return out;
+}
+// MADE BY ⚙ © 2026 GAUSSE HOLLER sign-off (assets_prep/gausseholler/madeby_on_dark.png, prep_logos.py) rebuilt from layers so the
+// gear ring turns: text layer = the same PNG with the gear pixels cleared (madeby_text_on_dark.png, same 4041×413 canvas) +
+// gear_ring / gear_core (shared 1024 canvas). Gear canvas origin on the madeby canvas measured by re-compositing (alpha diff < 1/255):
+// (1081.04, 36.0), 340 px square; ring's own 60° symmetry centre on the 1024 canvas = (512.75, 514.0). Size + logo rule = ctx.logo on
+// the flat PNG (trimmed to its content bbox 40,40 – 4001,373).
+const MB = { pad: 40, cw: 3961, canvas: [4041, 413], gear: [1081.04, 36.0, 340], hub: [512.75, 514.0] };
+export function madeby(ctx, { id, src, box, scale = 1, at, label = 'MADE BY GH', spin: sp = {} }) {
+  const L = ctx.logo(src, { box, scale, at, label });
+  const k = L.w / MB.cw, [gx, gy, gs] = MB.gear;
+  const gl = (gx - MB.pad) * k, gt = (gy - MB.pad) * k, gw = gs * k;
+  const gimg = (rel, extra = '') => `<img src="${ctx.asset(rel, { trim: false })}" alt="" style="position:absolute;left:0;top:0;width:100%;height:100%;${extra}">`;
+  const html = `<div style="position:relative;width:${px(L.w)};height:${px(L.h)}">`
+    + `<img src="${ctx.asset('assets_prep/gausseholler/madeby_text_on_dark.png', { trim: false })}" alt="${esc('MADE BY © 2026 Gausse Holler')}" style="position:absolute;left:${px(-MB.pad * k)};top:${px(-MB.pad * k)};width:${px(MB.canvas[0] * k)};height:${px(MB.canvas[1] * k)}">`
+    + `<div id="${ctx.id(`${id}-ring`)}" style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)};transform-origin:${px((MB.hub[0] / 1024) * gw)} ${px((MB.hub[1] / 1024) * gw)}">${gimg('assets_prep/gausseholler/gear_ring.png')}</div>`
+    + `<div style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)}">${gimg('assets_prep/gausseholler/gear_core.png')}</div></div>`;
+  const ring = ctx.sel(`${id}-ring`);
+  if (sp !== false) spin(ctx, ring, sp.t0 ?? at?.[0] ?? 0, sp.t1 ?? at?.[1] ?? ctx.dur, { dps: sp.dps ?? SPIN_DPS });
+  return { html, w: L.w, h: L.h, ring };
 }
 
 // ---------- studio light ----------
