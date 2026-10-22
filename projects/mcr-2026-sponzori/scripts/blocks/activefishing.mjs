@@ -267,7 +267,7 @@ export default function activefishing(ctx) {
 
   // =============================== transitions ===============================
   fx.tIn(ctx, 'cut');                                   // the previous block hands over on our paper colour
-  af.tilesOut(ctx, { d: 0.3 });                          // v9: 0.46 closed the frame ~5 frames early = empty teal before Bosset (REVIEW_v8 MINOR 2)                         // rounded shop-card tiles close into the next block's colour
+  af.tilesOut(ctx, { d: 0.24 });   // rounded shop-card tiles close into the next block colour; v9: 0.46 closed the frame ~5 frames early = empty teal before Bosset (REVIEW_v8 MINOR 2)
 
   return { html, css: af.CSS(S) };
 }

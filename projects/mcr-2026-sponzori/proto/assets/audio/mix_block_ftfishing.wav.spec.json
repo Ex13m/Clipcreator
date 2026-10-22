@@ -1,9 +1,9 @@
 {
  "out": "/home/user/Clipcreator/projects/mcr-2026-sponzori/proto/assets/audio/mix_block_ftfishing.wav",
- "dur": 9.2,
+ "dur": 9.133,
  "music": {
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
-  "start": 14.689,
+  "start": 91.538,
   "fadeIn": 0.04,
   "fadeOut": 0.25
  },

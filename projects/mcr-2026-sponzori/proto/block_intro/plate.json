@@ -1,6 +1,6 @@
 {
  "out": "block_intro",
- "stamp": "08e39501598c4b86",
+ "stamp": "106cb5842190889b",
  "dur": 14.7,
  "box": {
   "x": 64,
@@ -29,9 +29,15 @@
  "tones": [
   {
    "g0": 0,
-   "g1": 14.689,
+   "g1": 14.239,
    "tone": "dark",
    "by": "intro theme"
+  },
+  {
+   "g0": 14.239,
+   "g1": 14.689,
+   "tone": "halo",
+   "by": "intro"
   }
  ],
  "beats": [
