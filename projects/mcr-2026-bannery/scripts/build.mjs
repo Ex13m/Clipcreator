@@ -16,7 +16,7 @@ import { FORMATS, OUTPUTS, CAROUSEL, ANIM, DEFAULT_SEQ } from './engine/formats.
 import { buildPage, EVENT } from './engine/page.mjs';
 import { serve, browser, open, still, video, withLock } from './engine/render.mjs';
 
-const KEYS = ['venue', 'gausseholler', 'activefishing', 'bosset', 'jigovky', 'moonky', 'troutshop', 'velkaryba', 'crs'];
+const KEYS = ['venue', 'gausseholler', 'activefishing', 'bosset', 'jigovky', 'moonky', 'troutshop', 'velkaryba', 'crs', 'ftfishing'];
 const args = process.argv.slice(2);
 const opt = Object.fromEntries(args.filter((a) => a.startsWith('--')).map((a) => { const [k, v] = a.slice(2).split('='); return [k, v ?? true]; }));
 const key = args.find((a) => !a.startsWith('--'));
