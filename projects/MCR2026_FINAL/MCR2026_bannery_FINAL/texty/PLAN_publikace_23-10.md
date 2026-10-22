@@ -78,13 +78,11 @@ Soubor: `gausseholler_static_16x9.png`
 ```
 Hlavní cena MČR 2026: stojan na pruty Revolut 8 🏆
 
-Gausse Holler Custom Lab je česká dílna, která ručně staví stojany na pruty pro trout area – karbon, hliník, limitované série. Vedle Revolut 8 nabízí i Snap 8, barevné hliníkové a karbonové díly a zakázkovou výrobu. Revolut 8 nese osm karbonových tubusů na radiálních hliníkových ramenech; série má pět kusů a každý stojan je číslovaný.
+Vítěz Mistrovství ČR v Trout Area 2026 si odveze stojan Revolut 8 od Gausse Holler Custom Lab – stojan na 8 prutů.
 
-Vítěz Mistrovství ČR si odveze Revolut 8 Standard Edition v černé s oranžovým logem. Gausse Holler je zároveň partnerem a informačním sponzorem mistrovství. Díky!
+Více na gausseholler.com
 
-gausseholler.com
-
-Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
+Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #GausseHoller #Revolut8
 ```
@@ -95,15 +93,12 @@ Soubor: `reel_gausseholler_v9_60fps.mp4`
 
 ```
 Hlavní cena pro vítěze MČR 2026
-Stojan na pruty Revolut 8
+Stojan na pruty Revolut 8 – na 8 prutů
 
-8 karbonových tubusů. Radiální hliníková ramena.
-Ručně stavěno v Česku. Série 5 kusů, každý číslovaný.
-
-Gausse Holler Custom Lab – partner a informační sponzor mistrovství.
+Gausse Holler Custom Lab
 gausseholler.com
 
-24.–25. 10. 2026 · Líheň Liběchov
+24.–25. 10. 2026 · Líheň Liběchov
 
 #TroutArea #TroutAreaCZ #MCR2026 #GausseHoller
 ```
