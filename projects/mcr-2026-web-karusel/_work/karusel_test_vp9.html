@@ -80,20 +80,20 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden;
 .when{display:inline-block;font-weight:800;font-size:calc(var(--u)*3.7);letter-spacing:.02em;padding:calc(var(--u)*1.6) calc(var(--u)*3.4);
   border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .wall{position:absolute;left:calc(var(--u)*5);right:calc(var(--u)*5);bottom:calc(var(--u)*10);
-  display:grid;grid-template-columns:repeat(5,1fr);gap:calc(var(--u)*1.4);padding:calc(var(--u)*2.6) calc(var(--u)*2.4) calc(var(--u)*2.8);
+  display:flex;flex-wrap:wrap;justify-content:center;gap:calc(var(--u)*1.4);padding:calc(var(--u)*2.6) calc(var(--u)*2.4) calc(var(--u)*2.8);
   border-radius:calc(var(--u)*3);background:rgba(8,16,38,.55);border:1px solid rgba(255,255,255,.16);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.wall button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:center;height:calc(var(--u)*11);border-radius:calc(var(--u)*1.6);
+.wall button{all:unset;cursor:pointer;width:calc((100% - var(--u)*5.6) / 5);display:flex;align-items:center;justify-content:center;height:calc(var(--u)*11);border-radius:calc(var(--u)*1.6);
   transition:background .2s,transform .2s}
 .wall button:hover,.wall button:focus-visible{background:rgba(255,255,255,.1);transform:translateY(-1px)}
 .wall img{max-width:88%;max-height:78%;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
-.wall-t{grid-column:1/-1;text-align:center;font-weight:700;font-size:calc(var(--u)*2.6);padding-bottom:calc(var(--u)*.8);
+.wall-t{flex:0 0 100%;text-align:center;font-weight:700;font-size:calc(var(--u)*2.6);padding-bottom:calc(var(--u)*.8);
   letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8)}
 
 /* ---------- trvalé prvky ---------- */
 .ta{position:absolute;left:6.806%;top:13.385%;width:26.02%;height:auto;z-index:5;pointer-events:none;
-  filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 calc(var(--u)*1.5) rgba(0,0,0,.25));transition:opacity .35s}
-.ta.off{opacity:0}
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 calc(var(--u)*1.5) rgba(0,0,0,.25))}
+.ta.off{opacity:0!important}
 .dots{position:absolute;left:0;right:0;bottom:calc(var(--u)*4.2);z-index:6;display:flex;justify-content:center;gap:calc(var(--u)*1.3)}
 .dots button{all:unset;cursor:pointer;position:relative;width:calc(var(--u)*1.9);height:calc(var(--u)*1.9);border-radius:999px;
   background:rgba(255,255,255,.38);overflow:hidden;transition:width .35s cubic-bezier(.2,.8,.2,1),background .2s}
@@ -112,6 +112,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden;
 @media (hover:none){.nav{display:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .cap .nav{display:none}
+.cap{border-radius:0;box-shadow:none}
 </style>
 </head>
 <body>
@@ -255,7 +256,9 @@ function render(from, to, dir, p){ // p 0..1 (už se easingem)
   setFace(B, 90 * (1 - p) * dir, back, Math.min(.85, (1 - p) * .95), Math.sin(Math.PI * p) * .5);
 }
 function taFor(i){ return SL[i].type !== 'intro'; }
-function taState(from, to, p){ var vis = p < .5 ? taFor(from) : taFor(to); ta.classList.toggle('off', !vis); }
+function taState(from, to, p){ // trvalé logo; během otáčení kostky ho nesou samy stěny (logo je ve videu na stejném místě) → jemně zeslabit, ať se nezdvojuje
+  var vis = p < .5 ? taFor(from) : taFor(to); ta.classList.toggle('off', !vis);
+  ta.style.opacity = (p > 0 && p < 1 && !reduce) ? Math.max(0, 1 - Math.sin(Math.PI * p) * 2.2).toFixed(3) : ''; }
 
 /* ---------- stav ---------- */
 var cur = 0, anim = null, elapsed = 0, hovering = false, holdUntil = 0, hidden = false, inView = true, drag = null;
@@ -302,8 +305,9 @@ kz.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') 
 kz.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') hovering = false; });
 var suppressClick = false;
 kz.addEventListener('pointerdown', function(e){
-  if (e.button !== 0 || anim) return;
+  if (e.button !== 0) return;
   if (e.target.closest('a,.nav')) return;
+  if (anim) finish(); // rozjetý přechod dokončit, ať jde hned táhnout dál
   drag = {x: e.clientX, y: e.clientY, id: e.pointerId, t: performance.now(), dx: 0, active: false};
 });
 kz.addEventListener('pointermove', function(e){

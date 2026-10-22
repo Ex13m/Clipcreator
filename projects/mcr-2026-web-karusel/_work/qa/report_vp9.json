@@ -1,7 +1,7 @@
 {
  "variant": "vp9",
  "file": "_work/karusel_test_vp9.html",
- "size_bytes": 3101290,
+ "size_bytes": 3101680,
  "runs": [
   {
    "vp": "360x640",
@@ -19,7 +19,7 @@
     "video": {
      "paused": false,
      "rs": 4,
-     "t": 0.76,
+     "t": 0.75,
      "live": true,
      "err": null
     },
@@ -64,7 +64,7 @@
     "video": {
      "paused": false,
      "rs": 4,
-     "t": 0.72,
+     "t": 0.7,
      "live": true,
      "err": null
     },
@@ -91,7 +91,9 @@
      "rybsvaz.cz ↗ | https://rybsvaz.cz/ | _blank | noopener"
     ]
    },
-   "errors": []
+   "errors": [
+    "reqfail: blob:null/7c38d5fe-8872-419e-991d-9187ec net::ERR_ABORTED"
+   ]
   },
   {
    "vp": "iframe 1280x800",
