@@ -1,4 +1,4 @@
-// INTRO · bars 0–7 · build-up (no kick) → the drop lands on venue (bar 8).
+// INTRO · bars 0–7 · build-up (no kick) → the drop lands on FT Fishing (bar 8, v7+).
 // High-fashion sports-ad title sequence for the event (neutral event world, not a sponsor world):
 // ink black / bone white / ice + an iridescent "rainbow trout" chrome, Archivo variable, hard cuts on the grid.
 // Every title lands on the beat NEAREST its spoken word (VO starts 0.5 s), never a bar late:
@@ -9,7 +9,7 @@
 //   bar 4¼–5   LÍHEŇ LIBĚCHOV — the aerial only THROUGH the letters on ink (teaser); venue reveals the full aerial after the drop
 //   bar 5–5¾   40 závodníků — quick odometer on ice, product on the floor
 //   bar 5¾–7   HARD (pickup, on the word) · BAITS on the bar-6 downbeat — four hard baits slam in on the beats, depth parallax
-//   bar 7      PARTNEŘI MISTROVSTVÍ — 8 partners strobe on 8ths in their own brand colours; title + outline countdown 4-3-2-1
+//   bar 7      PARTNEŘI MISTROVSTVÍ — the 8 film partners (v8: FT Fishing in, Moonky out) strobe on 8ths in their own brand colours; title + outline countdown 4-3-2-1
 //              switch ink/white per card (no difference blend → no off-brand mint/brown), zoom-through into the drop
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,13 +23,16 @@ export const meta = { reel: false };
 
 // partner teaser (film order). Colours follow each partner's own block theme when that module loads; fallback = brand colours.
 const TEASE = [
+  // v8 (22. 10.): Moonky out of the film, FT Fishing in → exactly the 8 partners of the film (7 sponsors + the venue; ČRS = supporter,
+  // thanked separately). Order alternates dark / light brand worlds so every 8th reads as a cut; Gausse Holler (main prize) keeps the last
+  // 8th before the zoom-through into the drop (= FT Fishing's white world)
   { key: 'venue', photo: 'assets_prep/broll_tacz/t14_libechov_briefing.jpg', bg: '#1a212e', accent: '#17a1c8', dark: true },   // our gallery: Liběchov jaro 2026 (was a fish photo)
+  { key: 'ftfishing', src: 'assets_prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png', bg: '#ffffff', accent: '#6DB52C' },
   { key: 'troutshop', src: 'assets_prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red.png', bg: '#070707', accent: '#e3000f' },
   { key: 'activefishing', src: 'assets_prep/activefishing/heroes/h02_khor_frea.png', bg: '#f1f1ef', accent: '#e2812d' },
-  { key: 'moonky', src: 'assets_prep/moonky/heroes/h04_scelet_pink_bubblegum.png', bg: '#0e1424', accent: '#b8ff2e' },
   { key: 'jigovky', src: 'assets_prep/jigovky/ads/hero_sickle.png', bg: '#060807', accent: '#fed700' },
-  { key: 'velkaryba', src: 'assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png', bg: '#0f2541', accent: '#da0f00' },
   { key: 'bosset', src: 'assets_prep/bosset/heroes/h01_zojirushi_orange.png', bg: '#c5ebfc', accent: '#1b97b1' },
+  { key: 'velkaryba', src: 'assets_prep/velkaryba/heroes/h04_daiwa_presso_flashing_green.png', bg: '#0f2541', accent: '#da0f00' },
   { key: 'gausseholler', src: 'assets_prep/gausseholler/heroes/h01_revolut8_black_front.png', bg: '#0f1113', accent: '#f0904f' },
 ];
 const THEMES = {};
@@ -229,7 +232,7 @@ export default function intro(ctx) {
     if (k && inkOf(p) !== inkOf(TEASE[k - 1])) ctx.tl.set(ctx.sel('mc'), { '--nc': inkOf(p) }, a);
     if (p.src && ctx.has(p.src)) {
       const pr = ctx.dataOf(p.key)?.products?.find((x) => x.src === p.src);
-      prods += X.teaseProd(ctx, { id: `mp${k}`, t0: a, t1: b, src: p.src, pad: pr?.pad, box: [640, 600], cy: MCY, rot: [0, -10, 12, -8, 14, -14, 0, 0][k], zoom: 1.16, ground: 'none' });
+      prods += X.teaseProd(ctx, { id: `mp${k}`, t0: a, t1: b, src: p.src, pad: pr?.pad, box: [640, 600], cy: MCY, rot: [0, -8, -10, 12, 14, 0, -14, 0][k], zoom: 1.16, ground: 'none' });
     }
   });
   const fN = 1000, YN = MCY - fN * 0.475;

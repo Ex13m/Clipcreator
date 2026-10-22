@@ -1,0 +1,30 @@
+{
+ "_note": "Moonky — samostatný blok/Reel mimo film (v8, 22. 10.): hudba = zdroj 46 (hook, konec breaku) · 47–51 (blok, stejné takty jako ve v7 filmu) · 52–54 (end card 2 takty + 1 takt rezervy, aby downbeat konce end cardu byl skutečný) → audio/track_moonky.wav. Stejná hudba jako dřívější reel_moonky.",
+ "source": "music/sponsors_3.mp3",
+ "track": "audio/track_moonky.wav",
+ "beats": "audio/track_moonky.beats.json",
+ "source_segments_bars": [
+  [
+   46,
+   55
+  ]
+ ],
+ "tailFade": 0.05,
+ "total_bars": 9,
+ "blocks": {
+  "moonky": {
+   "start_bar": 1,
+   "bars": 5,
+   "t0": 1.825,
+   "t1": 10.947,
+   "src_bars": [
+    47,
+    48,
+    49,
+    50,
+    51
+   ]
+  }
+ },
+ "duration": 16.426
+}

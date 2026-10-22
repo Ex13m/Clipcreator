@@ -162,17 +162,14 @@
   "intro",
   "ftfishing",
   "venue",
+  "gausseholler",
+  "activefishing",
+  "bosset",
+  "jigovky",
   "broll1",
   "troutshop",
-  "activefishing",
-  "broll2",
-  "moonky",
-  "jigovky",
-  "broll3",
   "velkaryba",
-  "bosset",
-  "broll4",
-  "gausseholler",
+  "crs",
   "finale"
  ],
  "blocks": {
@@ -706,7 +703,7 @@
      "Děkujeme",
      "partnerům"
     ],
-    "wall": "Líheň Liběchov · Troutshop.eu · Activefishing.cz · Moonky · Jigovky.cz · Velka-ryba.cz · Bosset.cz · Gausse Holler (žádné větší než TA)",
+    "wall": "Líheň Liběchov · Troutshop.eu · Activefishing.cz · Jigovky.cz · Velka-ryba.cz · Bosset.cz · Gausse Holler (žádné větší než TA)",
     "hero": "TA CZ logo (velké)",
     "event": "Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov",
     "closer": "Uvidíme se u vody",
@@ -901,5 +898,6 @@
     "Pořadí: ve filmu po intru, před venue (takty 8–12, plán B v7, 22. 10.)."
    ]
   }
- }
+ },
+ "order_note": "v8 (22. 10.): pořadí filmu podle data/content.json (plán B); Moonky vyřazen z filmu (operátor 22. 10.) — blok moonky zůstává jen jako samostatný Reel (proto/reel_moonky); broll2–4 se ve filmu nepoužívají."
 }

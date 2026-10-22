@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { ROOT, rd, exists, J, f3, r3, esc, ffDur, copyIfNewer } from './lib/util.mjs';
 import * as A from './lib/assets.mjs';
 import { fontCss, stageFonts, registerFonts } from './lib/fonts.mjs';
@@ -27,7 +27,13 @@ import { defaultHook, defaultEndCard } from './lib/reel.mjs';
 
 const ENV = process.env;
 const TK = rd(path.join(ROOT, 'data/tokens.json'));
-const C = rd(path.join(ROOT, 'data/content.json'));
+const C0 = rd(path.join(ROOT, 'data/content.json'));
+// blocks OUTSIDE the film (content.json › standalone, e.g. moonky since v8): BLOCK=<key> [REEL=1] builds them on their own music
+// (own track + grid, own bar numbers) → the film plan, its music and its neighbours are untouched
+const SA = Object.fromEntries(Object.entries(C0.standalone || {}).filter(([k]) => !k.startsWith('_')));
+const C = SA[ENV.BLOCK]
+  ? { ...C0, music: { ...C0.music, ...SA[ENV.BLOCK].music }, plan: [{ key: ENV.BLOCK, ...SA[ENV.BLOCK], music: undefined }] }
+  : C0;
 const W = TK.canvas.w, H = TK.canvas.h;
 const VER = ENV.VER || C.meta.version;
 const FINAL = !!ENV.FINAL;
@@ -394,5 +400,7 @@ ${ENV.PLATE_HIDE ? '#ta-plate { visibility:hidden; }' : ''}
 const mode = ENV.BLOCK ? (ENV.REEL ? 'reel' : 'block') : 'film';
 if (ENV.BLOCK === 'all') {
   for (const p of PLAN) { if (mode === 'reel' && !MODS[p.block].meta?.reel) continue; build(mode, p.key); }
+  // standalone blocks (not in the film): each in its own process (own music grid)
+  for (const k of Object.keys(SA)) execFileSync('node', [fileURLToPath(import.meta.url)], { env: { ...ENV, BLOCK: k }, stdio: 'inherit' });
 } else if (ENV.BLOCK) build(mode, ENV.BLOCK);
 else build('film');

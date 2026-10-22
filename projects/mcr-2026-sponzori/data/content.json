@@ -2,7 +2,7 @@
  "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
  "meta": {
   "title": "MČR 2026 Trout Area – partneři (reklamní film)",
-  "version": "v7"
+  "version": "v8"
  },
  "event": {
   "title1": "Mistrovství ČR",
@@ -46,7 +46,7 @@
   "beatsPerBar": 4,
   "bpm": 129.2,
   "volume": 1,
-  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu · v7 (22. 10.): segmenty [10,23)·[18,69)·[81,89)·[101,konec) — FT Fishing 5 taktů po intru"
+  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu · v7 (22. 10.): segmenty [10,23)·[18,69)·[81,89)·[101,konec) — FT Fishing 5 taktů po intru · v8 (22. 10.): Moonky mimo film → [10,23)·[18,47)·[52,69)·[81,89)·[101,konec), 72 taktů"
  },
  "vo": {
   "dir": "vo",
@@ -111,30 +111,22 @@
     37,
     41
    ],
-   "_": "takty 3–4 bloku = hudební break zdroje (45–46)"
-  },
-  {
-   "key": "moonky",
-   "bars": [
-    42,
-    46
-   ],
-   "_": "takty 0–1 = rebuild bez hi-hatů"
+   "_": "takty 3–4 bloku = hudební break zdroje (45–46); v8: za breakem rovnou broll (re-entry groove C, zdroj 52)"
   },
   {
    "key": "broll",
    "bars": [
-    47,
-    47
+    42,
+    42
    ],
    "vo": null,
-   "_": "nářez (1 takt)"
+   "_": "nářez (1 takt) — v8: vstup na re-entry po breaku jigovky (střih zdroje 46 → 52)"
   },
   {
    "key": "brollbreak",
    "bars": [
-    48,
-    49
+    43,
+    44
    ],
    "block": "broll",
    "vo": null,
@@ -143,34 +135,48 @@
   {
    "key": "troutshop",
    "bars": [
-    50,
-    54
+    45,
+    49
    ]
   },
   {
    "key": "velkaryba",
    "bars": [
-    55,
-    59
+    50,
+    54
    ],
    "_": "takt 2 = fill, takt 3 = vstup peaku 1"
   },
   {
    "key": "crs",
    "bars": [
-    60,
-    63
+    55,
+    58
    ],
    "_": "poděkování ČRS (4 takty, peak 1)"
   },
   {
    "key": "finale",
    "bars": [
-    64,
-    76
+    59,
+    71
    ],
    "tail": true,
    "_": "střih do peaku 2 (zdroj 81) + konec skladby (101–konec)"
   }
- ]
+ ],
+ "standalone": {
+  "_": "Bloky mimo film (operátor 22. 10.): staví se jen BLOCK=<key> [REEL=1] (a v BLOCK=all) s vlastní hudbou; bars = takty na jejich vlastní mřížce.",
+  "moonky": {
+   "bars": [
+    1,
+    5
+   ],
+   "music": {
+    "track": "audio/track_moonky.wav",
+    "beats": "audio/track_moonky.beats.json"
+   },
+   "_": "data/block_plan_moonky.json: zdroj 46 (hook) · 47–51 (blok, jako ve v7 filmu) · 52–54 (end card)"
+  }
+ }
 }

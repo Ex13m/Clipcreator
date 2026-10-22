@@ -1,0 +1,297 @@
+{
+ "_note": "Data bloku FT Fishing (jen ověřená fakta + assety). Vzhled = scripts/blocks/ftfishing.mjs. Zdroje: research/ftfishing.md (+ Verification), ftfishing_ad.md, ftfishing_brands.md, vo/script_cs.json › blocks.ftfishing.",
+ "key": "ftfishing",
+ "name": "FT Fishing",
+ "url": "ftfishing.cz",
+ "brand": {
+  "colors": {
+   "green": "#6DB52C",
+   "greenUi": "#2EA200",
+   "greenDark": "#237C00",
+   "grey": "#878786",
+   "ink": "#1A1A1A",
+   "paper": "#FFFFFF"
+  },
+  "research": "research/ftfishing_ad.md"
+ },
+ "logo": {
+  "on_light": "assets_prep/ftfishing/logo_nosl_on_light.png",
+  "on_dark": "assets_prep/ftfishing/logo_nosl_on_dark.png",
+  "full_on_light": "assets_prep/ftfishing/logo_on_light.png",
+  "full_on_dark": "assets_prep/ftfishing/logo_on_dark.png"
+ },
+ "brands": {
+  "favorite": {
+   "name": "Favorite",
+   "on_light": "assets_prep/ftfishing/brands/favorite.png",
+   "on_dark": "assets_prep/ftfishing/brands/favorite_on_dark.png"
+  },
+  "crazyfish": {
+   "name": "Crazy Fish",
+   "on_light": "assets_prep/ftfishing/brands/crazyfish.png",
+   "on_dark": "assets_prep/ftfishing/brands/crazyfish_on_dark.png"
+  },
+  "spinmad": {
+   "name": "Spinmad",
+   "on_light": "assets_prep/ftfishing/brands/spinmad.png",
+   "on_dark": "assets_prep/ftfishing/brands/spinmad_on_dark.png"
+  }
+ },
+ "products": [
+  {
+   "src": "assets_prep/ftfishing/ads/H1_spinmad_impulse_pro_10g_3907_firetiger.png",
+   "name": "Spinmad Impulse PRO 10 g Firetiger",
+   "brand": "spinmad",
+   "size": [
+    2400,
+    921
+   ],
+   "pad": [
+    0.006,
+    0.013,
+    0.005,
+    0.014
+   ],
+   "aspect": 2.606
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/H2_crazyfish_vibro_fat_4in_09_caramel.png",
+   "name": "Crazy Fish Vibro Fat 4\" 09 Caramel",
+   "brand": "crazyfish",
+   "size": [
+    2400,
+    545
+   ],
+   "pad": [
+    0.004,
+    0.018,
+    0.004,
+    0.017
+   ],
+   "aspect": 4.404
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/H3_favorite_totem_2000s_reel.png",
+   "name": "Favorite Totem 2000S",
+   "brand": "favorite",
+   "size": [
+    1941,
+    2400
+   ],
+   "pad": [
+    0.007,
+    0.005,
+    0.007,
+    0.005
+   ],
+   "aspect": 0.809
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/H4_favorite_x1_2000s_reel.png",
+   "name": "Favorite X1 2000S",
+   "brand": "favorite",
+   "size": [
+    1996,
+    2400
+   ],
+   "pad": [
+    0.007,
+    0.005,
+    0.006,
+    0.005
+   ],
+   "aspect": 0.832
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/H5_spinmad_target_spoon_1-5g_3201_pair.png",
+   "name": "Spinmad Target Spoon 1,5 g",
+   "brand": "spinmad",
+   "size": [
+    1118,
+    1800
+   ],
+   "pad": [
+    0.013,
+    0.008,
+    0.013,
+    0.008
+   ],
+   "aspect": 0.621
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S1_spinmad_impulse_pro_10g_3908_electric_lime.png",
+   "name": "Spinmad Impulse PRO 10 g Electric Lime",
+   "brand": "spinmad",
+   "size": [
+    802,
+    327
+   ],
+   "pad": [
+    0.021,
+    0.049,
+    0.02,
+    0.049
+   ],
+   "aspect": 2.453
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S2_spinmad_hart_9g_spicy_blade_3705_firetiger.png",
+   "name": "Spinmad Hart 9 g Spicy Blade",
+   "brand": "spinmad",
+   "size": [
+    1075,
+    653
+   ],
+   "pad": [
+    0.016,
+    0.025,
+    0.015,
+    0.026
+   ],
+   "aspect": 1.646
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S3_spinmad_king_14g_spicy_blade_3801.png",
+   "name": "Spinmad King 14 g Spicy Blade",
+   "brand": "spinmad",
+   "size": [
+    1265,
+    691
+   ],
+   "pad": [
+    0.013,
+    0.023,
+    0.013,
+    0.023
+   ],
+   "aspect": 1.831
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S4_crazyfish_scalp_minnow_100_06_chartreuse.png",
+   "name": "Crazy Fish Scalp Minnow 100 mm",
+   "brand": "crazyfish",
+   "size": [
+    479,
+    122
+   ],
+   "pad": [
+    0.044,
+    0.131,
+    0.044,
+    0.205
+   ],
+   "aspect": 3.926
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S5_crazyfish_nimble_50_14_motor_oil.png",
+   "name": "Crazy Fish Nimble 50 mm",
+   "brand": "crazyfish",
+   "size": [
+    389,
+    390
+   ],
+   "pad": [
+    0.069,
+    0.072,
+    0.049,
+    0.051
+   ],
+   "aspect": 0.997
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S6_crazyfish_polaris_68_4d_pair.png",
+   "name": "Crazy Fish Polaris 6,8",
+   "brand": "crazyfish",
+   "size": [
+    656,
+    585
+   ],
+   "pad": [
+    0.024,
+    0.027,
+    0.026,
+    0.027
+   ],
+   "aspect": 1.121
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S7_crazyfish_glider_55_20_kiwi.png",
+   "name": "Crazy Fish Glider 55 mm",
+   "brand": "crazyfish",
+   "size": [
+    475,
+    107
+   ],
+   "pad": [
+    0.034,
+    0.159,
+    0.036,
+    0.159
+   ],
+   "aspect": 4.439
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S8_crazyfish_comet_2-5in_20_kiwi.png",
+   "name": "Crazy Fish Comet 2,5\"",
+   "brand": "crazyfish",
+   "size": [
+    460,
+    349
+   ],
+   "pad": [
+    0.035,
+    0.046,
+    0.035,
+    0.046
+   ],
+   "aspect": 1.318
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S10_favorite_arena_stream_arns1_rod.png",
+   "name": "Favorite Arena Stream ARNS1",
+   "brand": "favorite",
+   "size": [
+    1200,
+    909
+   ],
+   "pad": [
+    0.014,
+    0.017,
+    0.013,
+    0.017
+   ],
+   "aspect": 1.32
+  },
+  {
+   "src": "assets_prep/ftfishing/ads/S11_favorite_x1_2000s_reel_native.png",
+   "name": "Favorite X1 2000S (nativ)",
+   "brand": "favorite",
+   "size": [
+    736,
+    878
+   ],
+   "pad": [
+    0.022,
+    0.018,
+    0.022,
+    0.018
+   ],
+   "aspect": 0.838
+  }
+ ],
+ "copy": {
+  "headline": "Vše pro přívlač",
+  "slogan": "Vše pro přívlač",
+  "facts": [
+   "Pruty a navijáky Favorite",
+   "Nástrahy Crazy Fish",
+   "Nástrahy Spinmad"
+  ],
+  "prize": "Věnuje ceny · MČR 2026"
+ },
+ "notes": [
+  "Neříkat „oficiální dovozce/distributor“, žádné ceny, žádné konkrétní ceny MČR, žádný původ značek, žádné „nejlepší“.",
+  "Crazy Fish = gumy (MČR = hard baits) → jen jako značka sortimentu, ne „nástraha na MČR“.",
+  "Loga značek i FT ≤ logo TA (ctx.logo)."
+ ]
+}

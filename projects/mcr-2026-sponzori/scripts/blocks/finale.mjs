@@ -27,18 +27,18 @@ const CARDS = [
   { k: 'ftfishing', p: 0, rot: -10, bg: ['#ffffff', '#e4e9dc'], glow: '#6DB52C', go: 0.42, fg: '#1A1A1A', name: 'FT FISHING', font: 'Exo 2', wght: 900, nc: 'rgba(109,181,44,.2)' },
   { k: 'troutshop', p: 0, h: 660, rot: -10, bg: ['#5c0009', '#070707'], glow: '#e3000f', go: 0.5, fg: '#ffffff', name: 'TROUTSHOP', font: 'Anton', wght: 400, nc: 'rgba(227,0,15,.34)' },
   { k: 'activefishing', p: 0, rot: -6, bg: ['#ffffff', '#efe7dc'], glow: '#f0a24a', go: 0.45, fg: '#141414', name: 'activefishing', font: 'Nunito', wght: 900, upper: false, nc: 'rgba(223,89,66,.16)' },
-  { k: 'moonky', p: 0, rot: -8, bg: ['#24305c', '#0e1424'], glow: '#ff4f8b', go: 0.42, fg: '#ffffff', name: 'MOONKY', font: 'Unbounded', wght: 900, nc: 'rgba(184,255,46,.16)' },
   { k: 'jigovky', p: 1, rot: -8, bg: ['#ffe866', '#f4c400'], glow: '#ffffff', go: 0.55, fg: '#0c2414', name: 'jigovky', font: 'Poppins', wght: 900, upper: false, nc: 'rgba(23,110,55,.18)' },
   { k: 'velkaryba', p: 4, rot: -6, bg: ['#22599a', '#0f2541'], glow: '#7fb0e6', go: 0.32, fg: '#ffffff', name: 'VELKÁ RYBA', font: 'Oswald', wght: 700, nc: 'rgba(127,176,230,.18)' },
   { k: 'bosset', trio: [1, 0, 2], bg: ['#ffffff', '#bfe6f8'], glow: '#1b97b1', go: 0.22, fg: '#0b1d24', name: 'bosset', font: 'Outfit', wght: 800, upper: false, nc: 'rgba(27,151,177,.18)' },
   { k: 'gausseholler', p: 2, h: 700, bg: ['#56616c', '#0f1113'], glow: '#9cc6d8', go: 0.72, fg: '#e9e6e2', name: 'Gausse Holler', font: 'Playfair Display', wght: 900, italic: true, upper: false, nc: 'rgba(240,144,79,.18)' },
 ];
-// ---- B: products that explode out of the centre on the bar-2 downbeat (every sponsor, other products than in A)
+// ---- B: products that explode out of the centre on the bar-2 downbeat (every sponsor, other products than in A;
+//      v8: the Moonky slot → Crazy Fish Vibro Fat (FT Fishing), a soft lure of the same silhouette)
 // they burst out from behind the TA logo and settle into a depth-of-field constellation around it: an arc of sharp products
 // (focal plane, alternating colours, 200–300 px so each one reads as a product, not a sticker) + two big, fully opaque,
 // rack-focused foreground pieces cropped by the bottom corners (camera-near bokeh). [key, product, x, y, box px, blur px, opacity, rot]
 const BURST = [
-  ['activefishing', 1, 150, 410, 230, 0, 1, -14], ['moonky', 4, 345, 300, 300, 0, 1, -18], ['bosset', 0, 545, 285, 290, 0, 1, 6],
+  ['activefishing', 1, 150, 410, 230, 0, 1, -14], ['ftfishing', 1, 345, 300, 300, 0, 1, -18], ['bosset', 0, 545, 285, 290, 0, 1, 6],
   ['velkaryba', 0, 752, 310, 260, 0, 1, 22], ['troutshop', 3, 945, 425, 220, 0, 1, 12],
   ['jigovky', 0, 128, 655, 200, 0, 1, -8], ['ftfishing', 4, 972, 655, 230, 0, 1, -14],
   ['velkaryba', 3, 70, 1760, 700, 15, 1, 32], ['activefishing', 2, 1010, 1790, 640, 15, 1, -24],
@@ -50,8 +50,8 @@ export default function finale(ctx) {
   const voAt = (q, d) => ctx.vo.at(q) ?? d;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const tB = bar(2), tC = bar(6), tD = ctx.at(8, 2), tGH = bar(10), tFade = bar(11), END = ctx.dur;
-  // one partner per beat; with 9 partners (FT Fishing added 22. 10.) beat 6 splits into two 8ths (Velká ryba · Bosset accelerate into
-  // the Gausse Holler card on the last beat, which keeps a full beat before the burst)
+  // one partner per beat: v8 (22. 10., Moonky out of the film) = 8 partners on the 8 beats of bars 0–1, each a full beat again.
+  // (fallback if a 9th partner comes back: beat 6 splits into two 8ths, Gausse Holler keeps the full last beat before the burst)
   const beats8 = ctx.beats.filter((t) => t < tB - 0.05).slice(0, 8);
   const beatsA = CARDS.length > beats8.length ? [...beats8.slice(0, 7), (beats8[6] + beats8[7]) / 2, beats8[7]] : beats8;
   let html = fx.field(ctx, { kind: 'radial', c1: T.bg2, c2: T.bg, at: '50% 42%' });
@@ -191,7 +191,7 @@ export default function finale(ctx) {
   // =====================================================================================================
   // C · LOGO WALL (bars 6 → drop): equal optical weight, below the TA hero, metallic glint on the downbeats
   // =====================================================================================================
-  const keys = D.wall, cols = keys.length > 8 ? 3 : 2, rows = Math.ceil(keys.length / cols);   // 9 partners (22. 10.) → 3 × 3
+  const keys = D.wall, cols = keys.length > 8 ? 3 : 2, rows = Math.ceil(keys.length / cols);   // v8: 8 partners → 2 × 4 (9 → 3 × 3)
   const kY = PH.y + PH.h + 44;
   const kick = fx.headline(ctx, { id: 'wk', text: E.partnersTitle || 'Partneři mistrovství', x: L, y: kY, w: CW, maxLines: 1, font: 'Inter', wght: 700, size: 30, upper: true, tracking: 0.24, align: 'center', color: T.accent, t: tC, reveal: 'chars', stagger: 0.012 });
   const gTop = kY + 70, gBot = ctx.H - ctx.safe.bottom - 16, gL = L, gR = ctx.W - L;

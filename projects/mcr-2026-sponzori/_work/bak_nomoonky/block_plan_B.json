@@ -1,0 +1,219 @@
+{
+ "_note": "PLAN B (v3, 21. 10.): nové pořadí bloků podle operátora; hudba = music/sponsors_3.mp3 přestříhaná scripts/music_edit.py (fázově konzistentní, střih vždy na dobu taktu). source_segments_bars = polootevřené [a, b) takty zdroje (0-based). · 22. 10.: +5 taktů FT Fishing po intru = zdroj 18–22 (drop) a venue znovu od zdroje 18 (re-drop, groove venue beze změny); vše za tím posunuto o 5 taktů beze změny zdrojových taktů.",
+ "source": "music/sponsors_3.mp3",
+ "track": "audio/track_B.wav",
+ "beats": "audio/track_B.beats.json",
+ "source_segments_bars": [
+  [
+   10,
+   23
+  ],
+  [
+   18,
+   69
+  ],
+  [
+   81,
+   89
+  ],
+  [
+   101,
+   "end"
+  ]
+ ],
+ "tailFade": 2.5,
+ "total_bars": 77,
+ "blocks": {
+  "intro": {
+   "start_bar": 0,
+   "bars": 8,
+   "t0": 0.0,
+   "t1": 14.689,
+   "src_bars": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ]
+  },
+  "ftfishing": {
+   "start_bar": 8,
+   "bars": 5,
+   "t0": 14.689,
+   "t1": 23.863,
+   "src_bars": [
+    18,
+    19,
+    20,
+    21,
+    22
+   ]
+  },
+  "venue": {
+   "start_bar": 13,
+   "bars": 8,
+   "t0": 23.863,
+   "t1": 38.541,
+   "src_bars": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+   ]
+  },
+  "gausseholler": {
+   "start_bar": 21,
+   "bars": 5,
+   "t0": 38.541,
+   "t1": 47.705,
+   "src_bars": [
+    26,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "activefishing": {
+   "start_bar": 26,
+   "bars": 5,
+   "t0": 47.705,
+   "t1": 56.863,
+   "src_bars": [
+    31,
+    32,
+    33,
+    34,
+    35
+   ]
+  },
+  "bosset": {
+   "start_bar": 31,
+   "bars": 6,
+   "t0": 56.863,
+   "t1": 67.853,
+   "src_bars": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41
+   ]
+  },
+  "jigovky": {
+   "start_bar": 37,
+   "bars": 5,
+   "t0": 67.853,
+   "t1": 76.998,
+   "src_bars": [
+    42,
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  "moonky": {
+   "start_bar": 42,
+   "bars": 5,
+   "t0": 76.998,
+   "t1": 86.12,
+   "src_bars": [
+    47,
+    48,
+    49,
+    50,
+    51
+   ]
+  },
+  "broll": {
+   "start_bar": 47,
+   "bars": 1,
+   "t0": 86.12,
+   "t1": 87.946,
+   "src_bars": [
+    52
+   ]
+  },
+  "brollbreak": {
+   "start_bar": 48,
+   "bars": 2,
+   "t0": 87.946,
+   "t1": 91.599,
+   "src_bars": [
+    53,
+    54
+   ]
+  },
+  "troutshop": {
+   "start_bar": 50,
+   "bars": 5,
+   "t0": 91.599,
+   "t1": 100.722,
+   "src_bars": [
+    55,
+    56,
+    57,
+    58,
+    59
+   ]
+  },
+  "velkaryba": {
+   "start_bar": 55,
+   "bars": 5,
+   "t0": 100.722,
+   "t1": 109.834,
+   "src_bars": [
+    60,
+    61,
+    62,
+    63,
+    64
+   ]
+  },
+  "crs": {
+   "start_bar": 60,
+   "bars": 4,
+   "t0": 109.834,
+   "t1": 117.123,
+   "src_bars": [
+    65,
+    66,
+    67,
+    68
+   ]
+  },
+  "finale": {
+   "start_bar": 64,
+   "bars": 13,
+   "tail": true,
+   "t0": 117.123,
+   "t1": 145.046,
+   "src_bars": [
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    101,
+    102,
+    103,
+    104,
+    105
+   ]
+  }
+ },
+ "duration": 145.046
+}

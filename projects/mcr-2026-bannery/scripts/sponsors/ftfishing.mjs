@@ -68,6 +68,7 @@ const BR = {
   favorite: { f: 'favorite.png', bb: [26, 30, 900, 198] },
   spinmad: { f: 'spinmad.png', bb: [27, 13, 856, 355] },
   crazyfish: { f: 'crazyfish.png', bb: [13, 20, 1066, 818] },
+  vanfook: { f: 'vanfook.png', bb: [27, 26, 641, 389] },   // háčky (operátor 22. 10.: 4. značka, vedlejší vedle tří hlavních)
 };
 const LOGO = 'film:assets_prep/ftfishing/logo_on_light.png', LOGO_TRIM = [0, 0, 1881, 1878];
 
@@ -154,9 +155,11 @@ function brandLogo(E, b, { x, y, w, h, align = 'center', attrs = '' }) {
   const lx = align === 'left' ? x : align === 'right' ? x + w - lw : x + (w - lw) / 2;
   return `<div class="abs" ${attrs} style="left:${R1(lx - x0 * s)}px;top:${R1(y + (h - lh) / 2 - y0 * s)}px;width:${R1(nw * s)}px;height:${R1(nh * s)}px;background:url(${E.src(BRD + B.f)}) center/100% 100% no-repeat"></div>`;
 }
-// row of the three focus brands (Favorite · Crazy Fish · Spinmad), equal optical weight
-function brandRow(E, { x, y, w, h, d = 0.3, gap = 26 }) {
-  const ws = [1.45, 0.7, 1.0], tot = ws.reduce((a, b) => a + b, 0), u = (w - gap * 2) / tot;
+// row of the three focus brands (Favorite · Crazy Fish · Spinmad), equal optical weight; + Vanfook (hooks) as a smaller 4th brand
+// behind a thin divider — the three focus brands stay dominant (operator 22. 10.)
+function brandRow(E, { x, y, w, h, d = 0.3, gap = 26, van = true }) {
+  const vw = van ? 0.62 : 0, div = van ? gap + 2 : 0;
+  const ws = [1.45, 0.7, 1.0], tot = ws.reduce((a, b) => a + b, 0) + vw, u = (w - gap * 2 - div) / tot;
   const keys = ['favorite', 'crazyfish', 'spinmad'], hs = [h * 0.7, h * 1.25, h * 0.95];
   let xx = x, html = '';
   keys.forEach((k, i) => {
@@ -164,6 +167,11 @@ function brandRow(E, { x, y, w, h, d = 0.3, gap = 26 }) {
     html += brandLogo(E, k, { x: xx, y: y + (h - hs[i]) / 2, w: bw, h: hs[i], attrs: `data-in="up" data-dist="24" data-d="${(d + i * 0.06).toFixed(2)}"` });
     xx += bw + gap;
   });
+  if (van) {
+    const dx = xx - gap / 2 + 1, vh = h * 0.78;
+    html += `<div class="abs" data-in="fade" data-d="${(d + 0.2).toFixed(2)}" style="left:${R1(dx)}px;top:${R1(y + h * 0.12)}px;width:2px;height:${R1(h * 0.76)}px;background:rgba(26,26,26,.18)"></div>`;
+    html += brandLogo(E, 'vanfook', { x: xx + div - gap, y: y + (h - vh) / 2, w: vw * u, h: vh, attrs: `data-in="up" data-dist="24" data-d="${(d + 0.22).toFixed(2)}"` });
+  }
   return html;
 }
 function ftLogo(E, { x, y, cx, maxH, maxW, attrs = 'data-in="scale" data-d=".25"' }) {
@@ -283,7 +291,11 @@ export const scenes = {
   range(E) {
     const b = E.body, sq = E.kind === 'square';
     let html = frame(E), txt = '';
-    txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: b.w, size: sq ? 24 : 27, text: 'Tři značky v nabídce', inAttr: 'data-in="left"' });
+    txt += T(E, { cls: 'ft-k ft-tag', x: b.x, y: b.y + 4, w: b.w * 0.6, size: sq ? 24 : 27, text: 'Tři značky v nabídce', inAttr: 'data-in="left"' });
+    // + Vanfook (hooks) — small, top right, the three cards below stay the focus
+    const vH = sq ? 46 : 52, vW = vH * 1.69;
+    txt += brandLogo(E, 'vanfook', { x: b.r - vW, y: b.y - 8, w: vW, h: vH, align: 'right', attrs: 'data-in="up" data-d=".3"' });
+    txt += T(E, { cls: 'ft-k', x: b.r - vW - 230, y: b.y + 4, w: 216, size: sq ? 20 : 22, align: 'right', text: 'a také háčky', style: `color:${C.grey};letter-spacing:.08em`, inAttr: 'data-in="left" data-d=".28"' });
     const hs = sq ? 84 : 96;
     txt += T(E, { cls: 'ft-h', x: b.x - 3, y: b.y + (sq ? 44 : 52), w: b.w, size: hs, fit: 50, html: `Pruty · navijáky · <em>nástrahy</em>`, main: true, inAttr: 'data-in="up" data-d=".04"' });
     const gy = b.y + (sq ? 44 : 52) + hs * 1.06 + (sq ? 14 : 24), gap = sq ? 16 : 22, ch = (b.b - gy - gap * 2) / 3;

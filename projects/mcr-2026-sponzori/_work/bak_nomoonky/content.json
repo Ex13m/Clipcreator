@@ -1,0 +1,176 @@
+{
+ "_note": "Globální obsah filmu: akce, hudba, VO, PLÁN BLOKŮ v taktech (0-based, bar i = downbeats[i] v audio/track.beats.json; hranice bloků = sudé doby). Data jednotlivých bloků: data/blocks/<key>.json, vzhled: scripts/blocks/<block>.mjs.",
+ "meta": {
+  "title": "MČR 2026 Trout Area – partneři (reklamní film)",
+  "version": "v7"
+ },
+ "event": {
+  "title1": "Mistrovství ČR",
+  "title2": "v Trout Area 2026",
+  "date": "24.–25. 10. 2026",
+  "dateBig": "24.–25. 10.",
+  "year": "2026",
+  "days": "sobota + neděle",
+  "place": "Líheň Liběchov",
+  "pond": "rybník Malý Sporťáček",
+  "web": "troutareacz.cz",
+  "stats": [
+   {
+    "v": 40,
+    "l": "závodníků",
+    "src": "troutareacz.cz – max 40, obsazeno 40/40"
+   },
+   {
+    "v": "hard",
+    "l": "baits",
+    "src": "troutareacz.cz – formát hard baits"
+   },
+   {
+    "v": 12,
+    "l": "kol",
+    "src": "troutareacz.cz – 12 kol"
+   },
+   {
+    "v": 2,
+    "l": "dny",
+    "src": "Den 1 so 24. 10., Den 2 ne 25. 10."
+   }
+  ],
+  "partnersTitle": "Partneři mistrovství",
+  "thanks1": "Děkujeme",
+  "thanks2": "partnerům"
+ },
+ "music": {
+  "track": "audio/track_B.wav",
+  "beats": "audio/track_B.beats.json",
+  "beatsPerBar": 4,
+  "bpm": 129.2,
+  "volume": 1,
+  "_planB": "PLAN B (v3, 21. 10.): nové pořadí, data/block_plan_B.json; střih scripts/music_edit.py ze zdroje music/sponsors_3.mp3 (takty 10–68 souvisle, 81–88 peak, 101–konec + 2,5 s fade), grid zarovnaný na nástup úderu · v7 (22. 10.): segmenty [10,23)·[18,69)·[81,89)·[101,konec) — FT Fishing 5 taktů po intru"
+ },
+ "vo": {
+  "dir": "vo",
+  "offset": 0.25,
+  "volume": 1,
+  "tailMin": 1.0,
+  "_note": "vo/<key>.wav (+ volitelně vo/<key>.words.json se zarovnanými slovy) → automaticky do filmu, bloků i Reels"
+ },
+ "plan": [
+  {
+   "key": "intro",
+   "bars": [
+    0,
+    7
+   ],
+   "voOffset": 0.5,
+   "_": "build-up ze zdroje (takt 10–17), bez kicku"
+  },
+  {
+   "key": "ftfishing",
+   "bars": [
+    8,
+    12
+   ],
+   "_": "FT Fishing (22. 10.): DROP na taktu 8 (zdroj 18) + 4 takty groove (zdroj 19–22)"
+  },
+  {
+   "key": "venue",
+   "bars": [
+    13,
+    20
+   ],
+   "_": "re-drop na taktu 13 (zdroj 18 znovu po FT Fishing); dron + schéma + fakta"
+  },
+  {
+   "key": "gausseholler",
+   "bars": [
+    21,
+    25
+   ],
+   "_": "HLAVNÍ CENA; poslední takt (20) = fill zdroje"
+  },
+  {
+   "key": "activefishing",
+   "bars": [
+    26,
+    30
+   ],
+   "_": "vstup na re-entry (zdroj 31)"
+  },
+  {
+   "key": "bosset",
+   "bars": [
+    31,
+    36
+   ],
+   "_": "6 taktů"
+  },
+  {
+   "key": "jigovky",
+   "bars": [
+    37,
+    41
+   ],
+   "_": "takty 3–4 bloku = hudební break zdroje (45–46)"
+  },
+  {
+   "key": "moonky",
+   "bars": [
+    42,
+    46
+   ],
+   "_": "takty 0–1 = rebuild bez hi-hatů"
+  },
+  {
+   "key": "broll",
+   "bars": [
+    47,
+    47
+   ],
+   "vo": null,
+   "_": "nářez (1 takt)"
+  },
+  {
+   "key": "brollbreak",
+   "bars": [
+    48,
+    49
+   ],
+   "block": "broll",
+   "vo": null,
+   "_": "2 takty (groove, ne break)"
+  },
+  {
+   "key": "troutshop",
+   "bars": [
+    50,
+    54
+   ]
+  },
+  {
+   "key": "velkaryba",
+   "bars": [
+    55,
+    59
+   ],
+   "_": "takt 2 = fill, takt 3 = vstup peaku 1"
+  },
+  {
+   "key": "crs",
+   "bars": [
+    60,
+    63
+   ],
+   "_": "poděkování ČRS (4 takty, peak 1)"
+  },
+  {
+   "key": "finale",
+   "bars": [
+    64,
+    76
+   ],
+   "tail": true,
+   "_": "střih do peaku 2 (zdroj 81) + konec skladby (101–konec)"
+  }
+ ]
+}

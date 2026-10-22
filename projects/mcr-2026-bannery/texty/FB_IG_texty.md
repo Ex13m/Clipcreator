@@ -57,7 +57,7 @@ Mistrovství ČR v Trout Area 2026 je za námi
 
 Dva dny, 40 závodníků a 24 kol na Malém Sporťáčku. Gratulujeme vítězi MČR 2026 [JMÉNO] a dalším na stupních vítězů: [2. MÍSTO], [3. MÍSTO].
 
-Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu, Velka-ryba.cz a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
+Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu (Jaro a Stano Petríčkovi), Velka-ryba.cz a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
 
 Díky i organizátorům Stanislavu Lukáškovi, Michalu Horákovi, Denisu Zaikinovi a Igoru Novákovi – a hlavně všem závodníkům a divákům.
 
@@ -395,15 +395,17 @@ moonky.cz
 
 ### FB příspěvek
 
-Troutshop.eu – milujeme lov pstruhů
+Troutshop.eu – obchod od závodníků Trout Area 🎣
 
-Slovenský rodinný e-shop specializovaný na Trout Area a přívlač na pstruhy, v oboru od roku 1999 a generální partner Trout Area Slovakia. V nabídce jsou plandavky a woblery Nories, Forest, Rodio Craft a ValkeIN, háčky Vanfook, vlasce VARIVAS, gumy FishUp i japonská značka Velvet Arts. Do Česka doručují do pár dní.
+Mistrovství ČR v Trout Area letos podpořil věcnými cenami také Troutshop.eu. Za slovenským e-shopem stojí bratři Jaro a Stano Petríčkovi – závodníci a nadšenci Trout Area, kteří rybařením sami žijí. Rodinná firma je v oboru od roku 1999 a je generálním partnerem Trout Area Slovakia.
 
-Troutshop.eu věnuje ceny pro závodníky MČR 2026. Díky, že podporujete trout area i za hranicemi!
+Troutshop.eu posílá zboží i do České republiky. Je to obchod, za kterým stojí konkrétní lidé, které známe, a proto vám jeho nabídku rádi doporučujeme k prozkoumání. Ať hledáte nástrahy, vybavení, nebo něco nového do závodní výbavy – plandavky a woblery Nories, Forest, Rodio Craft a ValkeIN, háčky Vanfook, vlasce VARIVAS, gumy FishUp i japonská značka Velvet Arts.
+
+Jaro a Stano, děkujeme za ceny pro závodníky MČR 2026!
 
 troutshop.eu
 
-Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
+Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Troutshop #Nories
 
@@ -412,13 +414,14 @@ Označit: FB [doplnit tag] · IG [doplnit tag]
 ### IG popisek
 
 Troutshop.eu
-Milujeme lov pstruhů.
+Obchod, za kterým stojí lidé, které známe.
 
-Rodinná firma od roku 1999.
-Generální partner Trout Area Slovakia.
+Bratři Jaro a Stano Petríčkovi – závodníci a nadšenci Trout Area.
+Rodinná firma od roku 1999, generální partner Trout Area Slovakia.
 Nories · Forest · Rodio Craft · Vanfook · VARIVAS
+Zboží posílají i do Česka.
 
-Věnuje ceny pro závodníky MČR 2026. Děkujeme!
+Věcné ceny pro závodníky MČR 2026. Děkujeme!
 troutshop.eu
 
 #TroutArea #TroutAreaCZ #MCR2026 #Troutshop
@@ -427,6 +430,21 @@ troutshop.eu
 
 | Pole | Text |
 |---|---|
+| Primary text | Bratři Petríčkovi, závodníci Trout Area, podpořili MČR 2026 cenami. Nories, Forest, Vanfook – posílají i do ČR. |
+| Headline | Troutshop.eu – od závodníků Trout Area |
+| Description | Zboží posílají i do ČR |
+| CTA | Shop Now (Nakoupit) → troutshop.eu |
+
+Délky: primary 111/125, headline 38/40, description 22/30 znaků.
+
+### Karusel (4 karty)
+
+1. Troutshop.eu – rodinný e-shop od roku 1999 · za obchodem stojí bratři Jaro a Stano Petríčkovi, závodníci a nadšenci Trout Area
+2. Nories · Forest · Rodio Craft · Vanfook · VARIVAS – nástrahy i vybavení do závodní výbavy
+3. Plandavky Nories Rooney a Velvet Arts Forte
+4. Věnuje ceny · MČR 2026 – věcné ceny pro závodníky · zboží posílají i do ČR
+
+---|---|
 | Primary text | Specialista na pstruhy od roku 1999: Nories, Forest, Rodio Craft. Troutshop.eu věnuje ceny pro MČR 2026. |
 | Headline | Troutshop.eu – specialista na pstruhy |
 | Description | Rodinná firma od roku 1999 |
@@ -497,7 +515,7 @@ velka-ryba.cz
 
 FT Fishing – vše pro přívlač
 
-Fishing Trade CZ provozuje e-shop ftfishing.cz od roku 2016 a showroom s výdejnou v Praze 9. Sortiment je čistě přívlačový a stojí na třech značkách: pruty a navijáky Favorite, gumové nástrahy Crazy Fish a polský Spinmad – rotující ocásky, cikády i plandavky Target Spoon pro trout area. Spinmad do Čech přivezl sám majitel František Čáha. Pruty v nabídce jsou podle obchodu i pro trout area a závodníky.
+Fishing Trade CZ provozuje e-shop ftfishing.cz od roku 2016 a showroom s výdejnou v Praze 9. Sortiment je čistě přívlačový a stojí na třech značkách: pruty a navijáky Favorite, gumové nástrahy Crazy Fish a polský Spinmad – rotující ocásky, cikády i plandavky Target Spoon pro trout area. V nabídce jsou také háčky Vanfook. Spinmad do Čech přivezl sám majitel František Čáha. Pruty v nabídce jsou podle obchodu i pro trout area a závodníky.
 
 FT Fishing věnuje ceny pro závodníky MČR 2026. Děkujeme!
 
@@ -516,6 +534,7 @@ Vše pro přívlač.
 
 E-shop od roku 2016 · showroom Praha 9
 Favorite · Crazy Fish · Spinmad
+a také háčky Vanfook
 Spinmad do Čech přivezl majitel František Čáha
 
 Věnuje ceny pro závodníky MČR 2026. Děkujeme!
@@ -537,7 +556,7 @@ Délky: primary 96/125, headline 28/40, description 29/30 znaků.
 ### Karusel (4 karty)
 
 1. FT Fishing – vše pro přívlač · e-shop od roku 2016, showroom Praha 9 · Spinmad do Čech přivezl majitel
-2. Tři značky v nabídce: Favorite (230+ prutů, navijáky) · Crazy Fish (700+ gumových nástrah) · Spinmad (300+ nástrah)
+2. Tři značky v nabídce: Favorite (230+ prutů, navijáky) · Crazy Fish (700+ gumových nástrah) · Spinmad (300+ nástrah) · a také háčky Vanfook
 3. Spinmad Impulse PRO 10 g · Target Spoon 1,5 g – plandavka pro trout area
 4. Věnuje ceny · MČR 2026 · ftfishing.cz
 
@@ -602,7 +621,7 @@ rybsvaz.cz
 7. **Poděkování po akci:** doplnit vítěze, stupně vítězů a odkaz. Pozor: „vítěz MČR“ (součet umístění z obou dnů) není totéž co „Mistr ČR“ (celkové hodnocení ročníku, putovní pohár). „24 kol“ = 2 × 12 kol podle formátu; potvrdit podle skutečného průběhu.
 8. **Líheň Liběchov:** u Malého Sporťáčku neuvádět „chyť a pusť“ (od 23. 6. 2026 „chyť a vem“). „Donedávna“ u nejníže položeného pstruhařství musí zůstat. Diváci 24.–25. 10. podle aktuality webu Líhně.
 9. **Jigovky a Moonky:** MČR je ve formátu hard baits, texty proto netvrdí, že se jejich nástrahy (jigy, gumy) na MČR používají.
-10. **Troutshop:** „Do Česka doručují do pár dní“ = jejich vlastní tvrzení (SK meta description). Netvrdit vítězství v SK/CZ/PL/UA ani vlastní značku.
+10. **Troutshop:** fakta podle textu, který Troutshop poslal 22. 10.: věcné ceny pro MČR, bratři Jaro a Stano Petríčkovi (závodníci a nadšenci Trout Area), zboží posílají i do ČR. Starší „do pár dní“ (SK meta description) už v textech není. Netvrdit vítězství v SK/CZ/PL/UA ani vlastní značku.
 11. **Velká ryba:** záměrně bez „nejdéle provozovaná speciálka“ (vlastní superlativ). Půjčovna Shimano Rod Test Center funguje v prodejně v Olomouci (od 2025).
 12. **Meta CTA:** v textu jsou anglické názvy tlačítek z Ads Manageru. Český popisek v závorce je orientační, finální zobrazí Meta.
 13. **FT Fishing:** konkrétní ceny pro MČR nejsou známé – nic konkrétního neuvádět. Nikdy „oficiální / výhradní dovozce“: Spinmad je jen parafráze článku FT z roku 2018 („distribuce této nástrahy do Čech mohla začít“). „Od roku 2016“ = rok v patičce webu (© 2016–2026). Živá čísla 230+ / 700+ / 300+ ze 22. 10. jen s „v nabídce“, před publikací přepočítat. Gumy Crazy Fish = značka sortimentu, ne nástraha na MČR (hard baits). Tagy FB/IG doplnit (FB stránka facebook.com/privlac).
