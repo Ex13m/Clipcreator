@@ -172,16 +172,16 @@ gausseholler.com
 
 | Pole | Text |
 |---|---|
-| Primary text | Vítěz MČR v Trout Area 2026 získá stojan Revolut 8 – ručně stavěný v Česku z karbonu a hliníku. |
+| Primary text | Vítěz MČR v Trout Area 2026 získá špičkový stojan Revolut 8 na 8 prutů, vyrobený v Česku. Různé varianty a customizace · karbon, eloxovaný hliník a PETG. |
 | Headline | Revolut 8 – hlavní cena MČR |
-| Description | Ručně stavěno v Česku |
+| Description | Špičkový stojan vyrobený v Česku |
 | CTA | Shop Now (Nakoupit) → gausseholler.com |
 
 ### Karusel (4 karty)
 
-1. Gausse Holler Custom Lab – ručně stavěné stojany na pruty
+1. Gausse Holler Custom Lab – stojany na pruty vyrobené v Česku
 2. Revolut 8 · Snap 8 · díly a zakázková výroba
-3. Revolut 8 Black – 8 karbonových tubusů, série 5 kusů
+3. Revolut 8 – stojan na 8 prutů · vyrobeno v Česku · varianty a customizace
 4. Hlavní cena pro vítěze MČR 2026
 
 ---
@@ -548,7 +548,7 @@ rybsvaz.cz
 
 2. **Tagy chybí** (research je neuvádí): Gausse Holler (FB i IG), Bosset, Troutshop, Velká ryba, ČRS, IG Líhně Liběchov. Ověřené: FB „Sportovní rybaření Boží Voda - Liběchov“, FB activefishing.cz + IG @activefishingshop, FB + IG jigovky.cz.
 3. **Bosset – termosky:** přesné modely a počet kusů nejsou zveřejněné; „vítězové mistrovství“ (jaká místa / kategorie) potvrdit u Bosset (Taras Burakov, info@bosset.cz). Nic o původu Zojirushi.
-4. **Gausse Holler – Revolut 8:** „série 5 kusů, každý číslovaný“ platí podle produktové stránky rod-stand-v2. Potvrdit, že cenový kus je z této série (a jeho číslo, pokud ho chceme uvést).
+4. **Gausse Holler – Revolut 8:** v textech, bannerech i filmu jen dohodnutá fakta (operátor 22. 10.): Revolut 8 – stojan na 8 prutů · špičkový stojan vyrobený v Česku · různé varianty a customizace · karbon · eloxovaný hliník · PETG · Hlavní cena pro vítěze MČR · Partner a informační sponzor · gausseholler.com. Nic dalšího nepřidávat.
 5. **Živá čísla:** Activefishing 1 354 plandavek / 776 woblerů (21. 10.) → v textu „přes 1 300“ a „přes 770“. Jigovky 990 jigových hlaviček (19. a 21. 10.). Před publikací přepočítat.
 6. **ČRS:** forma podpory není doložená, proto jen obecné „za dlouholetou podporu“ (formulace operátora). Nepsat „pod záštitou ČRS“ ani „MČR pořádá ČRS“. Rozhodnout, zda děkovat celému ČRS, nebo i MO Mělník.
 7. **Poděkování po akci:** doplnit vítěze, stupně vítězů a odkaz. Pozor: „vítěz MČR“ (součet umístění z obou dnů) není totéž co „Mistr ČR“ (celkové hodnocení ročníku, putovní pohár). „24 kol“ = 2 × 12 kol podle formátu; potvrdit podle skutečného průběhu.
