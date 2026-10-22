@@ -13,9 +13,8 @@ variant = sys.argv[1] if len(sys.argv) > 1 else 'dist'
 def b64(path): return base64.b64encode(open(path, 'rb').read()).decode()
 def uri(path, mime): return f'data:{mime};base64,{b64(path)}'
 
-# pořadí = pořadí ve filmu MČR (FT Fishing hned po intru, pak místo konání…), ČRS poděkování na konec
+# pořadí dle operátora 22. 10.: Líheň, GH, Activefishing, Bosset, Jigovky, Troutshop, Velká ryba, FT Fishing (předposlední), ČRS (poslední); bez Moonky
 SPONSORS = [
-    dict(key='ftfishing', name='FT Fishing', sub='Vše pro přívlač', url='ftfishing.cz', chip='Věnuje ceny · MČR 2026'),
     dict(key='venue', name='Líheň Liběchov', sub='Rybník Malý Sporťáček', url='lihenlibechov.cz', chip='Místo konání · MČR 2026', logo='venue'),
     dict(key='gausseholler', name='Gausse Holler Custom Lab', sub='Partner a informační sponzor', url='gausseholler.com', chip='Hlavní cena · Revolut 8', prize=True),
     dict(key='activefishing', name='Activefishing.cz', url='activefishing.cz', chip='Věnuje ceny · MČR 2026'),
@@ -23,6 +22,7 @@ SPONSORS = [
     dict(key='jigovky', name='Jigovky.cz', url='jigovky.cz', chip='Věnuje ceny · MČR 2026'),
     dict(key='troutshop', name='Troutshop.eu', url='troutshop.eu', chip='Věnuje ceny · MČR 2026'),
     dict(key='velkaryba', name='Velká ryba', url='velka-ryba.cz', chip='Věnuje ceny · MČR 2026'),
+    dict(key='ftfishing', name='FT Fishing', sub='Vše pro přívlač', url='ftfishing.cz', chip='Věnuje ceny · MČR 2026'),
     dict(key='crs', name='Český rybářský svaz', sub='Areál MČR · MO Mělník', url='rybsvaz.cz', chip='Děkujeme za podporu', static=True),
 ]
 

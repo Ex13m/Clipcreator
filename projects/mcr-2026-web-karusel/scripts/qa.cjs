@@ -30,15 +30,15 @@ const curIdx = page => page.evaluate(() => [...document.querySelectorAll('.dots 
     await sleep(600);
     r.checks.autoplayIdx = await curIdx(page);
     // klik na tečku 2 (GH) → video běží?
-    await page.click('.dots button:nth-child(4)'); await sleep(1500);
-    r.checks.video = await page.evaluate(() => { const v = document.querySelectorAll('.slide')[3].querySelector('video'); return v ? { paused: v.paused, rs: v.readyState, t: +v.currentTime.toFixed(2), live: v.classList.contains('live'), err: v.error && v.error.code } : null; });
+    await page.click('.dots button:nth-child(3)'); await sleep(1500);
+    r.checks.video = await page.evaluate(() => { const v = document.querySelectorAll('.slide')[2].querySelector('video'); return v ? { paused: v.paused, rs: v.readyState, t: +v.currentTime.toFixed(2), live: v.classList.contains('live'), err: v.error && v.error.code } : null; });
     r.checks.playingCount = await page.evaluate(() => [...document.querySelectorAll('video')].filter(v => !v.paused).length);
-    await page.screenshot({ path: `${Q}/${tag}_s3_gh.png` });
+    await page.screenshot({ path: `${Q}/${tag}_s2_gh.png` });
     // přechod uprostřed (šipka)
     await page.keyboard.press('ArrowRight'); await sleep(330);
     await page.screenshot({ path: `${Q}/${tag}_mid_transition.png` });
     await sleep(1200); r.checks.afterArrow = await curIdx(page);
-    await page.screenshot({ path: `${Q}/${tag}_s4_af.png` });
+    await page.screenshot({ path: `${Q}/${tag}_s3_af.png` });
     // hover pauza
     await page.mouse.move(w / 2, h / 2); const i0 = await curIdx(page); await sleep(5000); r.checks.hoverPauseHolds = (await curIdx(page)) === i0;
     // swipe (pointer events myší): doleva = další
@@ -53,8 +53,8 @@ const curIdx = page => page.evaluate(() => [...document.querySelectorAll('.dots 
     for (let k = 1; k <= 10; k++) { await page.mouse.move(w * (0.2 + k * 0.05), h * 0.5); await sleep(16); }
     await page.mouse.up(); await sleep(900); r.checks.swipeRight = [b2, await curIdx(page)];
     // ČRS (poslední) + venue
-    await page.click('.dots button:nth-child(10)'); await sleep(1300); await page.screenshot({ path: `${Q}/${tag}_s10_crs.png` });
-    await page.click('.dots button:nth-child(3)'); await sleep(1500); await page.screenshot({ path: `${Q}/${tag}_s2_venue.png` });
+    await page.click('.dots button:nth-child(10)'); await sleep(1300); await page.screenshot({ path: `${Q}/${tag}_s9_crs.png` });
+    await page.click('.dots button:nth-child(2)'); await sleep(1500); await page.screenshot({ path: `${Q}/${tag}_s1_venue.png` });
     // odkaz
     r.checks.links = await page.evaluate(() => [...document.querySelectorAll('a.btn')].map(a => [a.textContent.trim(), a.href, a.target, a.rel].join(' | ')));
     r.errors = errs; rep.runs.push(r); await ctx.close();

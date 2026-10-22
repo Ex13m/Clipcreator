@@ -7,12 +7,12 @@ const P = path.resolve(__dirname, '..'); const FPS = 30;
   await pg.goto('file://' + P + '/_work/karusel_capture.html'); await pg.evaluate(() => document.fonts.ready);
   const total = await pg.evaluate(() => window.__kz.total); const n = Math.round(total * FPS);
   const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-vf', 'scale=1080:1920,format=yuv420p',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-profile:v', 'high', '-g', '60', '-movflags', '+faststart', '-an', P + '/dist/karusel_mcr2026_9x16.mp4'], { stdio: ['pipe', 'inherit', 'inherit'] });
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-profile:v', 'high', '-g', '60', '-movflags', '+faststart', '-an', P + '/_work/rec_tmp.mp4'], { stdio: ['pipe', 'inherit', 'inherit'] });
   for (let f = 0; f < n; f++) {
     await pg.evaluate(t => window.__kz.at(t), f / FPS);
     const buf = await pg.screenshot({ type: 'png' });
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
     if (f % 150 === 0) console.log('frame', f, '/', n);
   }
-  ff.stdin.end(); await new Promise(r => ff.on('close', r)); await b.close(); console.log('done');
+  ff.stdin.end(); await new Promise(r => ff.on('close', r)); await b.close(); require('fs').renameSync(P + '/_work/rec_tmp.mp4', P + '/dist/karusel_mcr2026_9x16.mp4'); console.log('done');
 })();
