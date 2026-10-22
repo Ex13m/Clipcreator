@@ -642,7 +642,7 @@
     "role": "Partner a informační sponzor",
     "facts": [
      "Ručně stavěno v Česku",
-     "Série 5 kusů · číslováno"
+     "Různé varianty a customizace"
     ],
     "url": "gausseholler.com",
     "prize": "Věnuje hlavní cenu · MČR 2026",
@@ -658,14 +658,9 @@
      "url": "https://gausseholler.com/products/rod-stand-v2"
     },
     {
-     "claim": "Ručně stavěné v Česku; karbon, hliník, limitovaná série",
+     "claim": "Ručně stavěné v Česku; karbon, eloxovaný hliník, PETG; různé varianty a customizace",
      "ref": "research/gausseholler.md:11–13, 21–23",
      "url": "https://gausseholler.com/"
-    },
-    {
-     "claim": "Série pěti kusů, každý číslovaný",
-     "ref": "research/gausseholler.md:29",
-     "url": "https://gausseholler.com/products/rod-stand-v2"
     },
     {
      "claim": "8 karbonových tubusů na radiálních hliníkových ramenech",

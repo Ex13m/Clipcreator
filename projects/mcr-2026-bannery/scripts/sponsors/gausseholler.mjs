@@ -3,8 +3,8 @@
 // top light cone, Revolut 8 Black on a display plinth in the render's own perspective (FOOT ellipses copied from fx_gausseholler),
 // bone type, ice kickers, ONE orange accent (Black-edition logo), GH logo = the site's three layers with the OUTER RING turning clockwise.
 // Facts only from research/gausseholler.md (Verification) + vo/script_cs.json: no colour count, no prices, no „závodní“.
-//   „Stojany na pruty ručně stavěné v Česku: karbon, hliník, limitovaná série“ · „Osm karbonových tubusů na radiálních hliníkových
-//   ramenech“ · „Limitovaná série pěti kusů, každý stojan je číslovaný“ · tubusy Ø 32 mm, délka 200 mm · „custom builds made to order“ ·
+//   „Stojany na pruty ručně stavěné v Česku: karbon, hliník“ · „Osm karbonových tubusů na radiálních hliníkových
+//   ramenech“ · tubusy Ø 32 mm, délka 200 mm · „custom builds made to order“ ·
 //   „hand-built in Czechia · ships across the EU“ · Hlavní cena pro vítěze MČR = Revolut 8 (BRIEF) · Partner a informační sponzor (BRIEF)
 
 export const brand = {
@@ -112,7 +112,9 @@ function specChips(E, { x, y, size, rows, d = 0.3, gap = 12 }) {
   const h = size * 1.9;
   return { html: rows.map(([a, c], i) => `<div class="gh-chipx t" data-in="left" data-d="${(d + i * 0.08).toFixed(2)}" style="left:${R1(x)}px;top:${R1(y + i * (h + gap))}px;height:${R1(h)}px;font-size:${size}px"><b>${E.t(a)}</b>${E.t(c)}</div>`).join(''), h: rows.length * (h + gap) - gap };
 }
-const SPEC = [['8', 'karbonových tubusů'], ['Ø 32 × 200', 'mm'], ['Série 5 ks', 'číslováno']];
+// operator 22. 10. (evening): NO limited series / numbering anywhere — chips = agreed facts only
+// (Revolut 8 – stojan na 8 prutů · špičkový stojan vyrobený v Česku · různé varianty a customizace)
+const SPEC = [['8', 'prutů'], ['Vyrobeno', 'v Česku'], ['Varianty', 'customizace']];
 const T = (E, { cls, x, y, w, size, text, html, align = 'left', fit = 0, lines = 0, main = false, inAttr = '', style = '', id = '' }) =>
   `<div ${id ? `id="${id}" ` : ''}class="t ${cls}${main ? ' main' : ''}" ${inAttr} ${fit ? `data-fit="${fit}"` : ''} ${lines ? `data-lines="${lines}"` : ''} style="left:${R1(x)}px;top:${R1(y)}px;width:${R1(w)}px;font-size:${size}px;text-align:${align};${lines ? 'white-space:normal;' : 'overflow:hidden;'}${style}">${html ?? E.t(text)}</div>`;
 
@@ -149,7 +151,7 @@ export const scenes = {
       txt += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 24, text: 'Stojan na pruty', inAttr: 'data-in="left" data-d=".1"' });
       txt += T(E, { cls: 'gh-h', x: b.x - 3, y: y0 + 40, w: colW, size: 132, fit: 60, html: 'Revolut&nbsp;<em>8</em>', inAttr: 'data-in="slam" data-d=".15"', main: true });
       txt += T(E, { cls: 'gh-s', x: b.x, y: y0 + 186, w: colW, size: 48, text: 'Ručně stavěno v Česku', inAttr: 'data-in="up" data-d=".3"', main: true });
-      txt += T(E, { cls: 'gh-k', x: b.x, y: y0 + 256, w: colW, size: 20, text: 'Karbon · hliník · série 5 kusů, číslováno', style: `color:${C.bone};letter-spacing:.16em`, inAttr: 'data-in="up" data-d=".38"' });
+      txt += T(E, { cls: 'gh-k', x: b.x, y: y0 + 256, w: colW, size: 20, text: 'Karbon · eloxovaný hliník · PETG', style: `color:${C.bone};letter-spacing:.16em`, inAttr: 'data-in="up" data-d=".38"' });
       return { html: studio(E, { cx: st.cx, floorY: st.plinthTop + 20 }) + st.html + txt };
     }
     if (k === 'square') {
@@ -227,7 +229,7 @@ export const scenes = {
     return { html };
   },
 
-  // 3 — HERO: Revolut 8 Black Standard Edition, verified spec (8 tubes Ø 32 × 200 mm, series of 5, numbered)
+  // 3 — HERO: Revolut 8 Black Standard Edition, agreed facts (8 rods · made in Czechia · variants & customisation)
   hero(E) {
     const b = E.body, sq = E.kind === 'square';
     let txt = '';
@@ -246,7 +248,7 @@ export const scenes = {
     txt += T(E, { cls: 'gh-k', x: b.x, y: b.y + 4, w: b.w, size: 28, text: 'Revolut 8 · Black Standard Edition', inAttr: 'data-in="left"' });
     txt += T(E, { cls: 'gh-h', x: b.x - 4, y: b.y + 46, w: b.w, size: hs, fit: 60, html: 'Karbon <em>+</em> hliník', inAttr: 'data-in="slam" data-d=".06"', main: true });
     const top = b.y + 46 + hs * 1.08;
-    const chips = [['8', 'karbonových tubusů'], ['Ø 32 × 200', 'mm'], ['Série 5 ks', 'číslováno']];
+    const chips = SPEC;
     const cs = sq ? 30 : 34, chH = cs * 1.9;
     chips.forEach(([a, c], i) => {
       txt += `<div class="gh-chipx t" data-in="left" data-d="${(0.18 + i * 0.08).toFixed(2)}" style="left:${R1(b.x)}px;top:${R1(top + 12 + i * (chH + 14))}px;height:${R1(chH)}px;font-size:${cs}px"><b>${E.t(a)}</b>${E.t(c)}</div>`;
@@ -265,7 +267,7 @@ export const scenes = {
       txt += T(E, { cls: 'gh-k', x: b.x, y: y0, w: colW, size: 20, fit: 14, text: 'Mistrovství ČR v Trout Area 2026', style: `color:${C.orange}`, inAttr: 'data-in="left"' });
       txt += T(E, { cls: 'gh-h', x: b.x - 4, y: y0 + 36, w: colW, size: 104, fit: 60, text: 'Hlavní cena', inAttr: 'data-in="slam" data-d=".06"', main: true });
       txt += T(E, { cls: 'gh-s', x: b.x, y: y0 + 150, w: colW, size: 44, fit: 30, text: 'Revolut 8 pro vítěze mistrovství', inAttr: 'data-in="up" data-d=".2"', main: true });
-      const rows = [['Black', 'Standard Edition'], ['Série 5 ks', 'číslováno']];
+      const rows = [['Black', 'Standard Edition'], ['Vyrobeno', 'v Česku']];
       txt += specChips(E, { x: b.x, y: y0 + 228, size: 22, rows, d: 0.3 }).html;
       const st = stand(E, { right: b.r - 6, baseY: b.b, top: b.y + 4, h: 40, maxW: 400, label: 'Revolut 8', labelSize: 15 });
       return { html: studio(E, { floorY: st.plinthTop + 20, cone: 1.3, cx: st.cx }) + st.html + txt };
@@ -276,7 +278,7 @@ export const scenes = {
     const sy = b.y + 46 + head * 1.04;
     txt += T(E, { cls: 'gh-s', x: b.x, y: sy, w: b.w, size: sub, text: 'Revolut 8 pro vítěze mistrovství', inAttr: 'data-in="up" data-d=".2"', main: true });
     const st = stand(E, { right: b.r + 10, baseY: b.b, top: sy + sub * 1.25 + 10, h: sq ? 52 : 66, maxW: 620, label: 'Revolut 8', labelSize: sq ? 22 : 24 });
-    const rows = [['Black', 'Standard Edition'], ['Série 5 ks', 'číslováno']], cs = sq ? 28 : 30;
+    const rows = [['Black', 'Standard Edition'], ['Vyrobeno', 'v Česku']], cs = sq ? 28 : 30;
     const ch = specChips(E, { x: b.x, y: 0, size: cs, rows });
     txt += specChips(E, { x: b.x, y: b.b - ch.h - 6, size: cs, rows, d: 0.3 }).html;
     return { html: studio(E, { floorY: st.plinthTop + 30, cone: 1.3, cx: st.cx }) + st.html + txt };

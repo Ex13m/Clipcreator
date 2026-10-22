@@ -10,7 +10,7 @@
 //                   e-shop colour rail · RUČNĚ STAVĚNO V ČESKU
 //   bar 4  LOCKUP   family on the podium (Black hero + Nevergreen, Black & White, Snap 8, Orange in depth), GH logo (site layers, ring turns,
 //                   ≤ TA plate) + gausseholler.com + „Partner a informační sponzor“ + „Věnuje hlavní cenu · MČR 2026“ + edition stamp
-//                   „Série 5 ks · číslováno“ → zoom-through to white (the finale opens on white)
+//                   „Custom / na míru“ (= „různé varianty a customizace“; operator 22. 10. evening: no limited series / numbering anywhere) → zoom-through to white
 // Facts only from research/gausseholler.md (Verification) + gausseholler_ad.md guardrails: no colour count, no prices, no „závodní“.
 import * as fx from '../lib/fx.mjs';
 import * as gh from '../lib/fx_gausseholler.mjs';
@@ -168,7 +168,7 @@ export default function gausseholler(ctx) {
   ctx.tl.fromTo(ctx.sel('egrp'), { y: 70, scale: 1.04 }, { y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, tE - 0.1);
   fam.forEach((s, i) => ctx.tl.fromTo(s.sel, { x: (i ? 1 : -1) * 120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, tE - 0.06));
   fx.sweep(ctx, 'h1e', tE + 0.3, { d: 0.85 });
-  e += gh.stamp(ctx, { id: 'stp', x: 178, y: 874, size: 178, l1: 'Série 5 ks', l2: 'číslováno', t: ctx.at(4, 1) - 0.04 });
+  e += gh.stamp(ctx, { id: 'stp', x: 178, y: 874, size: 178, l1: 'Custom', l2: 'na míru', t: ctx.at(4, 1) - 0.04 });
   // lockup: logo (site layers, ring turns; logo rule ×1) + URL + role + prize pill — URL lands ON the downbeat
   const M = gh.mark(ctx, { id: 'mk', cx: W / 2, y: 372, box: [300, 300], at: [tE, END], label: 'gausseholler lockup', spin: { t0: tE - 0.1, t1: END } });
   e += M.html;
