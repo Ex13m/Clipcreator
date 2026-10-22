@@ -64,6 +64,13 @@ mezi hlavičkou a patičkou; pozadí kresli přes celé plátno, texty a klíčo
 - `E.logo(rel, {x|cx, y, maxW, maxH, trim:[x,y,w,h], attrs})` → `<img class="sp-logo">` už **zmenšené podle pravidla loga**
   (šířka ≤ logo TA, plocha ≤ plocha loga TA). `E.logoFit(aspect)` → max {w, h}. Vlastní složené logo (jako GH 3 vrstvy) musí
   mít třídu `sp-logo` a velikost z `E.logoFit`.
+- `E.brandStrip(items, {x, y, w, h, label, labelPos:'top'|'left', rows, align:'left'|'justify'|'grid'|…, mono:'white'|'black', …})` →
+  `{html, w, h}`: řada log **cizích značek, které obchod prodává** (operátor 22. 10.: „vyveď jejich značky na banner“). `items` =
+  `film:assets_prep/<key>/brands/*.png` (na tmavém `*_on_dark.png`), `{f, s}` (s = váha velikosti) nebo `{wm:'TIMON', sub:'by Jackall'}`.
+  Loga mají stejnou vizuální plochu (√-normalizace, ořez podle `data/brand_trims.json` ← `scripts/engine/brand_trims.py`), každé je
+  `.sp-logo` (≤ 0,8 × šířka loga TA → QA), celý pás je `.t` (QA hlídá kolizi s chipem / URL / řádkem akce).
+- `brand.urlIcon = {ring, core, canvas, box, pivot, spin, scale, gap, dy}` → ikona značky těsně před URL v hlavičce (GH: jen ozubené
+  kolo, vnější prstenec se v MP4 točí po směru hodin 360°/smyčku); velikost v em písma URL (≈ 1,2 × výška verzálek), je to `.sp-logo` v chrome → QA pravidla loga.
 - `E.t(text)` = escape + česká typografie (NBSP po v/k/s/z/o/u/a/i, „1 300“, „24. 10.“); `E.esc`, `E.nb`, `E.px`, `E.hex2rgba`.
 
 ### Animace (atributy na libovolném prvku scény; čistě funkce času → deterministické)

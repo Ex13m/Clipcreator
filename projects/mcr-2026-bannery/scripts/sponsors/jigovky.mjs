@@ -33,6 +33,8 @@ export const anim = {
 
 // ---------- products (native px: visible alpha bbox, ball-head centre + radius; from assets_prep/jigovky/ads/_meta.json) ----------
 const AD = 'film:assets_prep/jigovky/ads/', POL = AD + 'pol/';
+// own maker → only a small „V nabídce také · VARIVAS“ (research/jigovky_brands.md: VARIVAS lines/hooks sold alongside; operator 22. 10.)
+const alsoStrip = (E, o) => E.brandStrip([{ f: 'film:assets_prep/jigovky/brands/varivas_on_dark.png' }], { label: 'V nabídce také', labelPos: 'left', labelCss: `font-family:'PT Sans Narrow';font-weight:700;letter-spacing:.1em;color:${C.soft}`, color: C.white, inAttr: 'data-in="up" data-d=".35" data-dist="24"', id: 'jg-also', labelW: (o.labelSize || 20) * 7.6, ...o });
 const P = {
   tj: { src: AD + 'hero_troutjig_barbless.png', vb: [90, 90, 2310, 1480], head: [356, 1213], r: 259, l: ['TroutJig', 'Barbless'] },
   sk: { src: AD + 'hero_sickle.png', vb: [97, 97, 2503, 1001], head: [419, 661], r: 314, l: ['Jigová hlavička', 'SICKLE'] },
@@ -160,6 +162,8 @@ export const scenes = {
       txt += pl.html;
       const L = logoSize(E);
       txt += logo(E, { x: b.x, y: b.b - L.h, attrs: 'data-in="scale" data-d=".4"' }).html;
+      const as = alsoStrip(E, { x: 0, y: 0, w: 290, h: 24, labelSize: 17, gap: 0 });
+      txt += alsoStrip(E, { x: b.x + L.w + 34, y: b.b - L.h / 2 - as.h / 2, w: 290, h: 24, labelSize: 17, gap: 0 }).html;
       const J = fitIn(E, 'tj', { cx: b.x + colW + (b.w - colW) / 2 + 10, cy: b.y + b.h / 2 + 2, w: b.w - colW - 10, h: b.h - 30, rot: -6, inAttr: 'data-in="rise" data-d=".05"', sweep: '0.35,1.3', shadow: 26, float: '6,5' });
       html += J.html;
       const [gx, gy] = J.at(P.tj.head[0] - 80, P.tj.head[1] - 95);
@@ -180,7 +184,12 @@ export const scenes = {
     txt += p1.html;
     txt += pill(E, { x: b.x + p1.w + 16, y, h: S.pillH, size: S.pillS, text: 'od 0,4 g', outline: true, inAttr: 'data-in="left" data-d=".3"' }).html;
     // the floating hero jig: its top-left (above the eye) is empty, so the box may start beside line 2 of the headline
-    const bottom = b.b - (S.dots ? S.dots + 40 : 0);
+    // „V nabídce také · VARIVAS“ bottom-right of the body (under the jig's hook bend); 9:16 = above the colourway row
+    const ao = { w: k === 'square' ? 330 : 380, h: k === 'square' ? 30 : 34, labelSize: k === 'square' ? 21 : 24, gap: 0 };
+    const as = alsoStrip(E, { x: 0, y: 0, ...ao });
+    const ay = S.dots ? b.b - S.dots - 26 - as.h : b.b - as.h - 2;
+    txt += alsoStrip(E, { x: b.r - as.w, y: ay, ...ao }).html;
+    const bottom = S.dots ? ay - 30 : b.b;
     const top = headB - S.head * (k === 'square' ? 0.55 : 0.4);
     const J = fitIn(E, 'tj', { cx: b.x + b.w / 2 + (k === 'square' ? 60 : 30), cy: (top + bottom) / 2 - 6, w: S.jigW, h: bottom - top - 24, rot: -6, inAttr: 'data-in="rise" data-d=".05"', sweep: '0.35,1.3', shadow: 22, float: '7,5' });
     html += J.html;

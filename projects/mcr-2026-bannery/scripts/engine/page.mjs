@@ -72,18 +72,18 @@ export function makeE(mod, f, L, roleInfo) {
     // Row of THIRD-PARTY brand logos the shop carries (operator 22. 10.: „vyveď jejich značky na banner“).
     //   items: ['film:assets_prep/<key>/brands/x_on_dark.png' | {f, s (size weight, default 1), trim:[x,y,w,h]} | {wm:'TIMON', sub:'by Jackall'}]
     //   box: x, y, w, h (row height = tallest logo), label (small caps text left of / above the row), labelPos 'left'|'top',
-    //   labelSize, labelCss, gap (px between logos), align 'left'|'center'|'right'|'justify', mono 'white'|'black'|null,
+    //   labelSize, labelCss, gap (px between logos), align 'left'|'center'|'right'|'justify'|'grid', mono 'white'|'black'|null,
     //   opacity, rows (1|2: split the list into two rows, h = height of ONE row), rowGap, font (wordmarks), color (wordmarks), inAttr
     // Logos are sized by equal visual AREA (sqrt-normalised, × s) so wide wordmarks and round badges read the same weight, all
     // capped by h and never upscaled > maxUp. Every logo is a .sp-logo (QA: ≤ TA logo); the whole strip is a .t box (QA: no chrome overlap).
-    brandStrip(items, { x, y, w, h, label = '', labelPos = 'left', labelSize = null, labelCss = '', gap = null, align = 'left', mono = null, opacity = 1, rows = 1, rowGap = null, font = 'Montserrat', color = '#fff', maxUp = 1, maxLogoW = null, inAttr = '', id = 'brand-strip', cls = '' }) {
+    brandStrip(items, { x, y, w, h, label = '', labelPos = 'left', labelSize = null, labelCss = '', gap = null, align = 'left', mono = null, opacity = 1, rows = 1, rowGap = null, font = 'Montserrat', color = '#fff', maxUp = 1, maxLogoW = null, labelW = null, inAttr = '', id = 'brand-strip', cls = '' }) {
       const its = items.map((it) => (typeof it === 'string' ? { f: it } : it)).map((it) => {
         if (it.wm) return { ...it, ar: Math.max(2.2, it.wm.length * 0.78), nat: 1e9 };
         const [nw, nh] = dims(fileOf(it.f)), T = it.trim || TRIMS[it.f] || [0, 0, nw, nh];
         return { ...it, nw, nh, T, ar: T[2] / T[3], nat: T[2] };
       });
       const ls = labelSize ?? Math.max(14, Math.round(h * 0.3));
-      const labW = label && labelPos === 'left' ? label.length * ls * 0.7 + ls * 1.2 : 0;
+      const labW = label && labelPos === 'left' ? (labelW ?? label.length * ls * 0.7) + ls * 0.9 : 0;   // labelW = measured/estimated label text width (condensed fonts)
       const labH = label && labelPos === 'top' ? ls * 1.6 : 0;
       const g = gap ?? Math.round(h * 0.55), rg = rowGap ?? Math.round(h * 0.35);
       const perRow = Math.ceil(its.length / rows), R = [];
@@ -95,7 +95,9 @@ export function makeE(mod, f, L, roleInfo) {
       // per-logo cap: width ≤ 0.8 × TA logo width (logo rule with margin), never upscaled > maxUp
       const capW = Math.min(maxLogoW ?? Infinity, L.ta.w * 0.8);
       const sized = (it, kk) => { const u = unit(it); let hh = Math.min(u.h * kk, h), ww = hh * it.ar; const cw = Math.min(capW, it.nat * maxUp); if (ww > cw) { ww = cw; hh = ww / it.ar; } return { w: ww, h: hh }; };
-      const fits = (kk) => R.every((r) => r.reduce((a, it) => a + sized(it, kk).w, 0) + g * (r.length - 1) <= rowW);
+      // align 'grid': equal cells (rowW / perRow), each logo centred in its cell and ≤ cell − gap → columns line up across rows
+      const cellW = rowW / perRow;
+      const fits = (kk) => (align === 'grid' ? its.every((it) => sized(it, kk).w <= cellW - g * 0.8) : R.every((r) => r.reduce((a, it) => a + sized(it, kk).w, 0) + g * (r.length - 1) <= rowW));
       // k ≤ the value where the median logo reaches the row height (only the tall badges get clamped by h)
       const uh = its.map((it) => unit(it).h).sort((p, q) => p - q);
       let lo = 0, hi = h / uh[Math.floor((uh.length - 1) / 2)];
@@ -113,16 +115,16 @@ export function makeE(mod, f, L, roleInfo) {
         else if (align === 'center') cx = labW + (rowW - tot - g * (r.length - 1)) / 2;
         else if (align === 'right') cx = labW + rowW - tot - g * (r.length - 1);
         const cy = top0 + ri * (h + rg) + h / 2;
-        for (const q of S) {
-          const { it } = q, l = cx, t = cy - q.h / 2;
+        S.forEach((q, qi) => {
+          const { it } = q, l = align === 'grid' ? labW + cellW * (qi + 0.5) - q.w / 2 : cx, t = cy - q.h / 2;
           if (it.wm) {
             html += `<span class="sp-wm" style="position:absolute;left:${px(l)};top:${px(cy - h / 2)};width:${px(q.w)};height:${px(h)};display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 ${px(q.h * 0.62)}/1 ${font};letter-spacing:.04em;text-transform:uppercase;color:${color};opacity:${opacity}">${esc(it.wm)}${it.sub ? `<small style="display:block;margin-top:.3em;font-size:.36em;font-weight:600;letter-spacing:.14em;opacity:.8">${esc(it.sub)}</small>` : ''}</span>`;
           } else {
             const s = q.w / it.T[2];
             html += `<span id="${id}-${n}" class="sp-logo" data-cw="1" data-ch="1" style="position:absolute;left:${px(l)};top:${px(t)};width:${px(q.w)};height:${px(q.h)};opacity:${opacity}"><img src="${E.src(it.f)}" alt="" data-noscale style="position:absolute;left:${px(-it.T[0] * s)};top:${px(-it.T[1] * s)};width:${px(it.nw * s)};height:${px(it.nh * s)};max-width:none;${filt}"></span>`;
           }
-          cx += q.w + gg; used = Math.max(used, cx - gg); n++;
-        }
+          cx += q.w + gg; used = Math.max(used, align === 'grid' ? labW + cellW * (qi + 0.5) + q.w / 2 : cx - gg); n++;
+        });
       });
       const H = labH + R.length * h + (R.length - 1) * rg;
       const lab = !label ? '' : labelPos === 'left'

@@ -131,6 +131,10 @@ function prod(E, src, { cx, cy, w, h, id = 'pr', inAttr = 'data-in="rise"', swee
   const url = E.src(src);
   return { ...im, html: `<div class="abs" id="${id}" ${inAttr} style="left:${R1(im.x)}px;top:${R1(im.y)}px;width:${R1(im.w)}px;height:${R1(im.h)}px${rot ? `;transform:rotate(${rot}deg)` : ''}"><img src="${url}" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(${shadow})">${sweep ? `<div class="ts-sw" style="inset:0;-webkit-mask-image:url(${url});mask-image:url(${url})"><i data-sweep="0.3,1.3"></i></div>` : ''}</div>` };
 }
+// brand strip on the poster (operator 22. 10.): brands the shop carries, mono white on the black floor under the sun
+// (research/troutshop_brands.md: plandavky Nories · Forest · Rodio Craft · ValkeIN · YARIE, vlasce VARIVAS; „*_on_dark / mono bílá“)
+const STRIP = [{ f: `${BD}nories_on_dark.png`, s: 1.1 }, { f: `${BD}forest_mono.png`, s: 1.25 }, { f: `${BD}rodiocraft_mono.png` }, { f: `${BD}valkein_on_dark.png` }, { f: `${BD}yarie_mono.png`, s: 0.95 }, { f: `${BD}varivas_on_dark.png`, s: 0.9 }];
+const strip = (E, o) => E.brandStrip(o.items || STRIP, { label: 'Značky v nabídce', labelPos: 'top', labelCss: `font-family:'Roboto Condensed';font-weight:800;letter-spacing:.16em;color:${C.red}`, mono: 'white', color: C.white, inAttr: 'data-in="up" data-d=".3" data-dist="30"', align: 'justify', ...o });
 const tsLogo = (E, o) => E.logo(LOGO.src, { trim: LOGO.trim, id: 'ts-logo', ...o });
 // logo centred in the upper half of the sun disc
 function sunLogo(E, { x, y, r, attrs = 'data-in="scale" data-d=".2"' }) {
@@ -145,16 +149,23 @@ export const scenes = {
     const b = E.body, k = E.kind;
     let txt = '';
     if (k === 'wide') {
-      const colW = 540, hy = b.b + 4, sx = b.r - 250, R = 165;
+      const colW = 540, hy = b.b + 4, sx = b.r - 250, R = 165, hs = 84;
       const bg = world(E, { x: sx, y: hy, r: R, raysR: 900 });
       const f = fan(E, { x: sx, y: hy, body: 130, r0: R + 16, spread: 62 });
       txt += T(E, { cls: 'ts-k', x: b.x, y: b.y + 12, w: colW, size: 22, text: 'Rodinná firma od roku 1999', inAttr: 'data-in="left" data-d=".08"' });
-      txt += T(E, { cls: 'ts-h ml', x: b.x - 2, y: b.y + 46, w: colW, size: 104, lines: 2, html: E.t('Specialista') + '<br><em>na pstruhy</em>', inAttr: 'data-in="slam" data-d=".12"', main: true });
-      txt += T(E, { cls: 'ts-p', x: b.x, y: b.y + 46 + 104 * 1.08 * 2 + 10, w: colW, size: 28, lines: 2, text: 'Trout Area e-shop · 3 100+ plandavek a 990+ woblerů v nabídce', inAttr: 'data-in="up" data-d=".3"' });
+      txt += T(E, { cls: 'ts-h ml', x: b.x - 2, y: b.y + 44, w: colW, size: hs, lines: 2, html: E.t('Specialista') + '<br><em>na pstruhy</em>', inAttr: 'data-in="slam" data-d=".12"', main: true });
+      txt += T(E, { cls: 'ts-p', x: b.x, y: b.y + 44 + hs * 1.08 * 2 + 8, w: colW, size: 26, fit: 18, text: '3 100+ plandavek · 990+ woblerů v nabídce', style: 'white-space:nowrap', inAttr: 'data-in="up" data-d=".3"' });
+      const so = { w: colW - 20, h: 32, labelSize: 14, items: STRIP.filter((q) => !/yarie/.test(q.f)) };
+      const st = strip(E, { x: 0, y: 0, ...so });
+      txt += strip(E, { x: b.x, y: b.b - st.h, ...so }).html;
       return { html: bg + f + sunLogo(E, { x: sx, y: hy, r: R }) + txt };
     }
-    const S = { square: { kick: 28, head: 96, sub: 30, R: 205, body: 190, sp: 66 }, portrait: { kick: 30, head: 150, sub: 34, R: 230, body: 225, sp: 66 }, tall: { kick: 32, head: 150, sub: 36, R: 270, body: 215, sp: 62 } }[k];
-    const hy = b.b - 2, cx = E.W / 2;
+    const S = { square: { kick: 28, head: 96, sub: 30, R: 172, body: 162, sp: 66, sh: 46 }, portrait: { kick: 30, head: 150, sub: 34, R: 205, body: 200, sp: 66, sh: 54 }, tall: { kick: 32, head: 150, sub: 36, R: 250, body: 200, sp: 62, sh: 60 } }[k];
+    // brand strip on the floor under the sun (full body width); the sun's horizon sits above it
+    const so = { w: b.w, h: S.sh, labelSize: k === 'square' ? 17 : 20 };
+    const st = strip(E, { x: 0, y: 0, ...so });
+    txt += strip(E, { x: b.x, y: b.b - st.h, ...so }).html;
+    const hy = b.b - st.h - (k === 'square' ? 22 : 34), cx = E.W / 2;
     let y = b.y + (k === 'tall' ? 20 : 6);
     txt += T(E, { cls: 'ts-k', x: b.x, y, w: b.w, size: S.kick, text: 'Rodinná firma od roku 1999', inAttr: 'data-in="left" data-d=".08"' });
     y += S.kick * 1.5;

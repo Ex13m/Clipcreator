@@ -47,15 +47,39 @@
  "tones": [
   {
    "g0": 0,
-   "g1": 14.689,
+   "g1": 5.061,
    "tone": "dark",
-   "by": "intro theme"
+   "by": "probe"
   },
   {
-   "g0": 14.689,
+   "g0": 5.061,
+   "g1": 8.276,
+   "tone": "halo",
+   "by": "probe"
+  },
+  {
+   "g0": 8.276,
+   "g1": 9,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 9,
+   "g1": 10.8,
+   "tone": "halo",
+   "by": "probe"
+  },
+  {
+   "g0": 10.8,
+   "g1": 12.86,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 12.86,
    "g1": 18.357,
    "tone": "halo",
-   "by": "ftfishing theme"
+   "by": "probe"
   },
   {
    "g0": 18.357,
@@ -67,7 +91,7 @@
    "g0": 20.193,
    "g1": 23.863,
    "tone": "halo",
-   "by": "ftfishing theme"
+   "by": "probe"
   },
   {
    "g0": 23.863,
@@ -89,33 +113,81 @@
   },
   {
    "g0": 33.955,
-   "g1": 47.705,
+   "g1": 47.247,
    "tone": "dark",
    "by": "venue"
   },
   {
-   "g0": 47.705,
+   "g0": 47.247,
    "g1": 56.863,
    "tone": "halo",
-   "by": "activefishing theme"
+   "by": "probe"
   },
   {
    "g0": 56.863,
-   "g1": 59.163,
+   "g1": 58.694,
    "tone": "dark",
-   "by": "bosset theme"
+   "by": "probe"
   },
   {
-   "g0": 59.163,
-   "g1": 61.343,
+   "g0": 58.694,
+   "g1": 61.901,
    "tone": "halo",
-   "by": "bosset"
+   "by": "probe"
   },
   {
-   "g0": 61.343,
-   "g1": 145.046,
+   "g0": 61.901,
+   "g1": 67.2,
    "tone": "dark",
-   "by": "bosset theme"
+   "by": "probe"
+  },
+  {
+   "g0": 67.2,
+   "g1": 68.1,
+   "tone": "halo",
+   "by": "probe"
+  },
+  {
+   "g0": 68.1,
+   "g1": 94.793,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 94.793,
+   "g1": 97.074,
+   "tone": "scrim",
+   "by": "probe"
+  },
+  {
+   "g0": 97.074,
+   "g1": 109.378,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 109.378,
+   "g1": 110.1,
+   "tone": "scrim",
+   "by": "probe"
+  },
+  {
+   "g0": 110.1,
+   "g1": 116.668,
+   "tone": "dark",
+   "by": "probe"
+  },
+  {
+   "g0": 116.668,
+   "g1": 120.752,
+   "tone": "halo",
+   "by": "probe"
+  },
+  {
+   "g0": 120.752,
+   "g1": 145.046,
+   "tone": "scrim",
+   "by": "probe"
   }
  ],
  "beats": [
