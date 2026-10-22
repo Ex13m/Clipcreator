@@ -197,7 +197,7 @@ export default function troutshop(ctx) {
   fx.flash(ctx, 0, { id: 'f0', color: RED, peak: 0.32, d: 0.45, blend: 'screen' });
   fx.flash(ctx, t3, { id: 'f3', color: '#ffffff', peak: 0.16, d: 0.22, blend: 'screen' });
   // v9 (REVIEW_v8 MINOR 4): red AREA of the TA logo on the full-red world held only by its outline → strongest shadow + halo there
-  ctx.plate.tone(Math.max(0, t2 - 0.4), t3 + 0.5, 'halo');
+  ctx.plate.tone(Math.max(0, t2 - 0.46), t3 + 0.5, 'halo');   // start = probe boundary (no 50 ms tone sliver → overlapping fades)
   fx.tIn(ctx, 'cut');
   fx.tOut(ctx, 'slice', { d: 0.3 });   // short: the lockup reads ≥ 1.2 s and no dead frames before the next world
 

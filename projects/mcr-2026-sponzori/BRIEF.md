@@ -52,3 +52,10 @@ Fandovy plandavky: NE (rozhodnutí uživatele) — nezařazovat.
 - **Nový sponzor FT Fishing (ftfishing.cz)**: stejné schéma (storytelling, nástrahy, značky), hlavní důraz **Favorite, Crazy Fish, Spinmad**. Blok ve filmu **před Líheň Liběchov** (po intru), vlastní Reels + FB bannery + texty. Chip „Věnuje ceny · MČR 2026“.
 - **Moonky (22. 10., uživatel): odstranit ODEVŠAD** — z filmu, společných textů (souhrnný post, poděkování, vlastní sekce), balíčků bannerů a webové karusely. Zdrojové soubory (blok, Reel, bannery) zůstávají jen v archivu repozitáře, NEDODÁVAT.
 - **Pořadí (22. 10., uživatel): FT Fishing PŘEDPOSLEDNÍ** — Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → (b-roll) → Troutshop → Velká ryba → FT Fishing → ČRS. Vanfook jen na bannerech (ne ve filmu/Reelu). Vše 60 fps.
+
+## ROZHODNUTÍ 22. 10. (uživatel, v9)
+- **Pořadí ve filmu:** intro → Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → b-roll → Troutshop → Velká ryba → **FT Fishing (předposlední partner)** → ČRS → finále. Teaser v intru, montáž DĚKUJEME i logo stěna ve finále ve stejném pořadí (FT předposlední, GH = hlavní cena poslední).
+- **Vanfook:** ve filmu (FT blok) ani v FT Reelu NE — řada značek jen Favorite · Crazy Fish · Spinmad. Vanfook zůstává jen na bannerech.
+- Moonky dál mimo film (samostatný Reel se jen staví, nedodává se).
+- Opravy z `_work/REVIEW_v8_film.md` (datum bez odometru, 1999 / 1 300 bez „cizích“ čísel, PSTRUH. tvrdým střihem, švy bez mléčných snímků, „Uvidíme se u vody“ na slovech VO, MADE BY ≥ 30 px).
+- Všechny rendery v **60 fps**.

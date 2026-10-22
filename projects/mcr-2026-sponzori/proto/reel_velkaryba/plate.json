@@ -29,9 +29,15 @@
  "tones": [
   {
    "g0": 0,
+   "g1": 2.279,
+   "tone": "halo",
+   "by": "probe"
+  },
+  {
+   "g0": 2.279,
    "g1": 14.582,
    "tone": "dark",
-   "by": "velkaryba-hook theme"
+   "by": "probe"
   }
  ],
  "beats": [

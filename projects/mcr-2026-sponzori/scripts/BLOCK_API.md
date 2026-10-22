@@ -13,7 +13,7 @@ You own **one file**, `scripts/blocks/<block>.mjs`, plus your data file `data/bl
 cd projects/mcr-2026-sponzori
 BLOCK=troutshop node scripts/build.mjs          # bare block: proto/block_troutshop/ (its own music slice + VO)
 BLOCK=troutshop REEL=1 node scripts/build.mjs   # Reel: proto/reel_troutshop/ = 1-bar hook + block + 2-bar end card
-node scripts/build.mjs                          # master film: proto/film/ (plan B v8, whole track, 135.9 s)
+node scripts/build.mjs                          # master film: proto/film/ (plan B v9, whole track, 135.9 s)
 BLOCK=all [REEL=1] node scripts/build.mjs       # every block / every Reel (REEL only for modules with meta.reel = true)
 FINAL=1 …                                       # without the DRAFT badge
 
@@ -111,7 +111,7 @@ blocks. The fx classes (`.fx-*`) are global.
 | product animation | `productIn/Out(id, t, {from/to})`, `sweep(id, t)` (specular light sweep masked by the product alpha), `tilt(id, t0, t1)` (3D), `float(P.cam, …)`, `pushIn(P.cam, …)`, `flip(frontId, backId, t)` | entrance on `sel`, camera on `cam`, tilt/flip on `#…-tl` (the helpers pick the right layer) |
 | depth parallax stack | `parallax([{sel, depth}], t0, t1, {x, y, scale})` | use `P.cam` for products |
 | speed-ramp zoom / beat accents | `ramp(sel, t0, t1, {from, to})` (CustomEase `fxRampIn`), `punch`, `pulse` | |
-| counters | `odometer({value:'1 300', suffix:'+', size, font, t, d, align, w})` | rolling digits, transform only |
+| counters | `odometer({value:'1 300', suffix:'+', size, font, t, d, align, w})` · `countIn({…same…})` | odometer = rolling digits (only for counts where in-between numbers are harmless); **facts (years, dates, stock counts) → `countIn`**: each digit rises once out of its window, never a wrong number (v9) |
 | sticker / badge burst | `sticker({text, sub, shape:'burst'\|'circle'\|'pill', color, fg, rot, t})` | |
 | glass UI chips (price / spec) | `chip({label, value, tone:'dark'\|'light', accent, t, from})` | backdrop blur |
 | chromatic aberration | `chroma(sel, t, {amt, kind:'text'\|'img'})` | keep it subtle |
@@ -163,9 +163,9 @@ blocks. The fx classes (`.fx-*`) are global.
 **PLAN B (v3, 21. 10.)** — bars are 0-based on `audio/track_B.wav` (cut by `scripts/music_edit.py` from `music/sponsors_3.mp3`;
 ~130–132 BPM drift, bar ≈ 1.82–1.84 s; grid `audio/track_B.beats.json`, aligned to the drum TRANSIENT, with a per-bar energy profile
 `bars[]` = dB full / low / high + source bar). Plan (`data/content.json`, table with times in `_work/V3_GLOBAL.md`):
-**v8 (22. 10.)**: intro 0–7 · **ftfishing 8–12 (DROP on bar 8)** · venue 13–20 (re-drop) · gausseholler 21–25 ·
-activefishing 26–30 · bosset 31–36 · jigovky 37–41 · broll 42 (re-entry after the jigovky break: splice source 46 → 52) · brollbreak 43–44 ·
-troutshop 45–49 · velkaryba 50–54 · crs 55–58 · finale 59–71 (+ tail; film 135.93 s). **Moonky is out of the film** (operator 22. 10.):
+**v9 (22. 10.)**: intro 0–7 · venue 8–15 (**DROP on bar 8** again) · gausseholler 16–20 · activefishing 21–25 · bosset 26–31 ·
+jigovky 32–36 · broll 37 (splice 46 → 52) · brollbreak 38–39 · troutshop 40–44 · velkaryba 45–49 · **ftfishing 50–54** (peak-1 re-entry,
+source 63–67) · crs 55–58 · finale 59–71 (+ tail; film 135.87 s). **Moonky is out of the film** (operator 22. 10.):
 `content.json › standalone.moonky` builds it with `BLOCK=moonky [REEL=1]` on its own music (`audio/track_moonky.wav`, same bars as before).
 Block-local music is unchanged for every block (`_work/V3_GLOBAL.md` §00).
 Every block boundary sits on a downbeat. Put big hits on `ctx.downs` and cuts on `ctx.beats`. Musical events inside blocks

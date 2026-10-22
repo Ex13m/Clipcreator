@@ -1,7 +1,63 @@
 # MČR 2026 · film v3 — globální změny enginu (21. 10.)
 
-> **AKTUÁLNÍ PLÁN = v8 (22. 10., bez Moonky, Vanfook u FT Fishing) — viz §00.** §0 = v7 (77 taktů, s Moonky), §1–§2 = historie v6.
+> **AKTUÁLNÍ PLÁN = v9 (22. 10., FT Fishing předposlední, bez Vanfooku ve filmu) — viz §000.** v8 = §00. §0 = v7 (77 taktů, s Moonky), §1–§2 = historie v6.
 > Ve v8 jsou všechny bloky od broll dál posunuté o −5 taktů / −9,122 s; jejich zdrojové takty (= hudba pod nimi) se NEZMĚNILY.
+
+## 000. v9 (22. 10.): FT Fishing předposlední, Vanfook pryč z filmu, opravy z REVIEW_v8 (rozhodnutí operátora 22. 10.)
+
+Výstup: `proto/film/` (FINAL=1, **135,866 s** na celé snímky; hudba 135,863 s, **72 taktů**). Mix filmu −14,05 LUFS / −2,02 dBTP,
+VO +9,45 LU nad hudbou. Záloha stavu v8: `_work/bak_v8/` (plán, content, track_B, beats, plate_tone).
+
+**Pořadí:** intro → Líheň Liběchov → Gausse Holler → Activefishing → Bosset → Jigovky → broll/brollbreak → Troutshop → Velká ryba →
+**FT Fishing** → ČRS → finále.
+
+**Hudba** (`python3 scripts/music_edit.py data/block_plan_B.json`): segmenty zdroje
+**[10, 47) · [52, 65) · [63, 68) · [65, 69) · [81, 89) · [101, konec)**.
+- intro → venue souvisle: **drop zdroje 18 zase přesně na začátku venue** (jako ve v6, před vložením FT). Venue … jigovky = zdroj 18–46 beze změny.
+- jigovky → broll: střih 46 → 52 jako ve v8 (broll … Velká ryba = zdroj 52–64 beze změny).
+- Velká ryba → FT (91,538 s): **střih 64 → 63** = znovu vstup peaku 1 (stejný příchozí takt jako původní vstup peaku po fillu 62 → FT
+  dostane úder/crash na svou první dobu = jeho „DROP“ takt 0). FT = zdroj 63–67 (5 taktů groove peaku 1).
+- FT → ČRS (100,651 s): **střih 67 → 65** uvnitř groove peaku 1 → ČRS má bit po bitu stejnou hudbu (65–68) jako ve v8; ČRS → finále 68 → 81 beze změny.
+- Střihy jen na dobách (odchozí do T−6 ms, příchozí equal-power [T−24, T−6] ms). Kontrola HF v 5ms oknech před T: na 91,538 je
+  v posledních 5 ms 0,028 = náběh crash/úderu zdroje 63 (v přirozeném přechodu 62→63 ve zdroji 0,025), na 100,651 0,021 (přirozeně 0,025)
+  → žádné kliky; max |Δ²| 0,26 / 0,18 (v8 střih 68→81: 0,25).
+- Všechny bloky kromě FT mají stejné zdrojové takty jako ve v8 (FT: 18–22 → 63–67; délka 9,174 → 9,113 s, VO 6,12 s, rezerva 2,74 s).
+
+| blok | takty | počet | t0, s | t1, s | délka, s | takty zdroje | VO, s | rezerva VO → konec, s |
+|---|---|---|---|---|---|---|---|---|
+| intro | 0–7 | 8 | 0.000 | 14.689 | 14.689 | 10–17 | 13.18 (od 0,5) | 1.01 |
+| venue | 8–15 | 8 | 14.689 | 29.366 | 14.677 | 18–25 (DROP) | 12.49 | 1.94 |
+| gausseholler | 16–20 | 5 | 29.366 | 38.531 | 9.165 | 26–30 | 5.87 | 3.04 |
+| activefishing | 21–25 | 5 | 38.531 | 47.689 | 9.158 | 31–35 | 6.50 | 2.41 |
+| bosset | 26–31 | 6 | 47.689 | 58.679 | 10.990 | 36–41 | 8.26 | 2.48 |
+| jigovky | 32–36 | 5 | 58.679 | 67.824 | 9.145 | 42–46 (break 45–46) | 7.88 | 1.01 |
+| broll | 37 | 1 | 67.824 | 69.649 | 1.825 | 52 (střih 46→52) | — | — |
+| brollbreak | 38–39 | 2 | 69.649 | 73.302 | 3.653 | 53–54 | — | — |
+| troutshop | 40–44 | 5 | 73.302 | 82.425 | 9.123 | 55–59 | 6.10 | 2.77 |
+| velkaryba | 45–49 | 5 | 82.425 | 91.538 | 9.113 | 60–64 (fill 62, peak 63) | 6.80 | 2.06 |
+| **ftfishing** | 50–54 | 5 | 91.538 | 100.651 | 9.113 | **63–67** (střih 64→63) | 6.12 | 2.74 |
+| crs | 55–58 | 4 | 100.651 | 107.940 | 7.289 | 65–68 (střih 67→65) | 4.12 | 2.92 |
+| finale | 59–71 | 13 | 107.940 | 135.863 | 27.923 | 81–88 + 101–konec | 12.64 | 15.03 |
+
+**Švy (v9):** intro → venue: intro zoom do bílé (titul PARTNEŘI odjede dolů + TA logo halo posl. 0,45 s) → venue `tIn flash` 0,12 z bílé
+(kontrakt v6). Velká ryba → FT: wipe nahoru (zelený lead = FT accent, pak bílá) → FT cut na bílý svět (FT/FISHING hotové na 1. snímku).
+FT → ČRS: `slashOut` = zelené pruhy + panel v **barvě dalšího světa** (`ctx.next.theme.bg` = ČRS navy; v Reelu vlastní bílý end card) →
+DĚKUJEME na downbeatu. GH → AF: zoom-through do vlastního grafitu (dřív do bílé = šedá „pelena“) → AF slam. AF → Bosset: tiles 0,24 s
+(dřív 0,46 = 5 prázdných tyrkysových snímků). ČRS → finále: fader → finále `cut` (dřív bílý flash = mléčné DĚKUJEME).
+Snímky: `_work/snap/v9/seams_A.jpg`, `seams_B.jpg` (každý šev −0,2 / −0,1 / −0,034 / +0,004 / +0,037 / +0,07 / +0,15 / +0,3 s).
+
+**Intro teaser / finále:** pořadí partnerů jako ve filmu, FT předposlední, GH (hlavní cena) poslední: Líheň · Activefishing · Bosset ·
+Jigovky · Troutshop · Velká ryba · FT Fishing · Gausse Holler (teaser osminy, montáž DĚKUJEME po dobách, logo stěna 2 × 4). Kolečko GH beze změny.
+
+**Vanfook:** pryč z FT bloku i Reelu (řada značek zase Favorite · Crazy Fish · Spinmad, sloupce 205/540/875). Zůstává jen na bannerech.
+
+**Opravy z REVIEW_v8:** datum ve finále bez odometru (headline z masky + settle 1,08→1, blur 6→0); nový `fx.countIn` (stejné metriky
+jako odometr, každá číslice jen jednou vyjede ze svého okna) pro Troutshop 1999 + 3 100+ a Activefishing 1 300 (i v Reels);
+brollbreak ZÁBĚR. → PSTRUH. tvrdý střih + slam (shot `inn:'slam'` 1,16, slovo scale 1,22→1 + varType), žádný light-leak; záblesky
+brollbreak/broll ≤ 0,22 screen ≤ 0,12 s (žádné šedé letterboxy); výřez t03 bez krabičky (`broll_cut.py` EXCLUDE) → žádné bílé útržky;
+PSTRUH. na hřbetu, hlava ryby pod slovem; „UVIDÍME SE U VODY“ na slovech VO nad logo stěnou (poster ho už nemá, místo na „Líheň“);
+TA logo halo na červeném světě Troutshopu; MADE BY ve dvou řádcích (`gh.madebyStack`, `assets_prep/gausseholler/madeby_stack_*.png`,
+600 × 122, verzálky 31,7 px, kolečko se točí); finále bar 1 flash screen 0,3.
 
 ## 00. v8 (22. 10.): Moonky vyřazen z filmu, Vanfook ve FT Fishing (rozhodnutí operátora 22. 10.)
 
