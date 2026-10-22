@@ -43,7 +43,9 @@ const COLS = ['1_blue', '2_orange', '3_red', '4_purple', '5_tiffany', '6_lightgr
 // floor ellipse through the leg tips (fractions of the displayed PNG width; from fx_gausseholler.mjs FOOT)
 const FOOT = { threeq: { cx: 0.4975, cy: 0.789, a: 0.473, b: 0.265 }, front: { cx: 0.493, cy: 0.805, a: 0.453, b: 0.087 }, cw: { cx: 0.5095, cy: 0.87, a: 0.526, b: 0.365 } };
 
-export const fonts = {};   // Inter, Jost, Cormorant Garamond are in the engine registry
+// EB Garamond (assets/fonts, fontsource latin + latin-ext): Cormorant Garamond's latin-ext glyphs carry the caron at cap height
+// („Rucˇneˇ“, review 22. 10. M1) — Czech serif line therefore uses EB Garamond 600 with proper č/ě.
+export const fonts = { 'EB Garamond': { s: { 600: 'eb-garamond-{r}-600-normal' }, dir: 'bannery' } };
 
 export function css(E) {
   return `
@@ -53,7 +55,7 @@ export function css(E) {
 .gh-k{font-family:Inter;font-weight:600;text-transform:uppercase;letter-spacing:.28em;color:${C.ice}}
 .gh-h{font-family:Inter;font-weight:800;text-transform:uppercase;letter-spacing:-.015em;color:${C.white};line-height:1}
 .gh-h em{font-style:normal;color:${C.orange}}
-.gh-s{font-family:'Cormorant Garamond';font-weight:600;color:${C.bone};line-height:1.1}
+.gh-s{font-family:'EB Garamond';font-weight:600;color:${C.bone};line-height:1.1}
 .gh-p{font-family:Inter;font-weight:600;color:${C.bone};line-height:1.22;white-space:normal}
 .gh-pt{position:absolute;border-radius:50%;background:radial-gradient(ellipse at 50% 38%,#2c3036 0%,#17191d 62%,#0d0e10 100%)}
 .gh-pf{position:absolute;left:0;right:0;background:linear-gradient(180deg,#121417,#060708)}
@@ -144,7 +146,8 @@ export const scenes = {
     txt += T(E, { cls: 'gh-h', x: b.x - 6, y, w: b.w, size: S.head, fit: 80, html: 'Revolut&nbsp;<em>8</em>', inAttr: 'data-in="slam" data-d=".12"', main: true });
     const headB = y + S.head;
     txt += T(E, { cls: 'gh-k', x: b.x, y: headB + 4, w: b.w * 0.75, fit: 16, size: S.k2, text: 'Black Standard Edition', style: `color:${C.bone};letter-spacing:.2em`, inAttr: 'data-in="up" data-d=".26"' });
-    const st = stand(E, { cx: E.W / 2 + 40, baseY: b.b, top: headB - S.head * 0.32, h: S.ph, maxW: S.maxW, label: '', id: 'st' });
+    // stand starts below the „Black Standard Edition“ line (review M2: the handle used to cover „EDITION“ — text always above product)
+    const st = stand(E, { cx: E.W / 2 + 40, baseY: b.b, top: headB + 4 + S.k2 * 1.45, h: S.ph, maxW: S.maxW, label: '', id: 'st' });
     // engraved line on the plinth front face (a .t text → QA checks it)
     const faceY = b.b - S.ph + (S.ph - S.sub * 1.1) / 2;
     txt += T(E, { cls: 'gh-s', x: st.cx - 400, y: faceY, w: 800, size: S.sub, align: 'center', text: 'Ručně stavěno v Česku', inAttr: 'data-in="fade" data-d=".35"', main: true, style: 'color:rgba(233,230,226,.92)' });

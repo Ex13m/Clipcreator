@@ -22,7 +22,7 @@ Už tuto sobotu a neděli to vypukne: 40 závodníků, 12 kol denně, hard ba
 
 Místo konání: Líheň Liběchov
 Hlavní cena, partner a informační sponzor: Gausse Holler Custom Lab
-Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
+Ceny pro závodníky věnují: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
 Za dlouholetou podporu děkujeme: Český rybářský svaz
 
 Každého partnera vám v dalších příspěvcích představíme zvlášť. Děkujeme, že jste s námi!
@@ -41,7 +41,7 @@ Partneři MČR 2026
 
 Místo konání – Líheň Liběchov
 Hlavní cena – Gausse Holler Custom Lab
-Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
+Ceny věnují – Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
 Děkujeme – Český rybářský svaz
 
 24.–25. 10. 2026 · Líheň Liběchov
@@ -57,7 +57,7 @@ Mistrovství ČR v Trout Area 2026 je za námi
 
 Dva dny, 40 závodníků a 24 kol na Malém Sporťáčku. Gratulujeme vítězi MČR 2026 [JMÉNO] a dalším na stupních vítězů: [2. MÍSTO], [3. MÍSTO].
 
-Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu (Jaro a Stano Petríčkovi), Velka-ryba.cz a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
+Velké díky Líhni Liběchov za skvělé zázemí. Gausse Holler Custom Lab děkujeme za hlavní cenu – stojan na pruty Revolut 8 – a za informační podporu. Za ceny pro závodníky děkujeme Activefishing.cz, Bosset.cz, Jigovky.cz, Moonky, Troutshop.eu (Jaro a Stano Petríčkovi), Velké rybě a FT Fishing. Českému rybářskému svazu děkujeme za dlouholetou podporu.
 
 Díky i organizátorům Stanislavu Lukáškovi, Michalu Horákovi, Denisu Zaikinovi a Igoru Novákovi – a hlavně všem závodníkům a divákům.
 
@@ -74,7 +74,7 @@ Vítěz: [JMÉNO]
 
 Díky Líhni Liběchov za zázemí.
 Díky Gausse Holler za hlavní cenu.
-Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velka-ryba.cz · FT Fishing
+Díky za ceny: Activefishing.cz · Bosset.cz · Jigovky.cz · Moonky · Troutshop.eu · Velká ryba · FT Fishing
 Díky Českému rybářskému svazu za dlouholetou podporu.
 
 Uvidíme se u vody.
@@ -125,7 +125,7 @@ lihenlibechov.cz
 | Pole | Text |
 |---|---|
 | Primary text | Pstruží líheň od roku 1934 hostí Mistrovství ČR v Trout Area. 24.–25. 10. 2026, Líheň Liběchov. |
-| Headline | Líheň Liběchov – místo konání MČR |
+| Headline | Líheň Liběchov – dějiště MČR |
 | Description | Pstruží líheň od roku 1934 |
 | CTA | Learn More (Další informace) → lihenlibechov.cz |
 
@@ -195,7 +195,7 @@ gausseholler.com
 
 Activefishing.cz – pro všechny, kdo milují přívlač
 
-Český e-shop, který vznikl z vášně zakladatele pro přívlač a zkoušení nových nástrah. V nabídce je přes 1 350 plandavek a přes 770 woblerů – Nories, Timon, Mukai, ValkeIN, Forest, YARIE nebo Velvet Arts – a k tomu vlasce VARIVAS. Obchod sází na rychlé doručení, unikátní sortiment a osobní přístup.
+Český e-shop, který vznikl z vášně zakladatele pro přívlač a zkoušení nových nástrah. V nabídce je přes 1 300 plandavek a přes 770 woblerů – Nories, Timon, Mukai, ValkeIN, Forest, YARIE nebo Velvet Arts – a k tomu vlasce VARIVAS. Obchod sází na rychlé doručení, unikátní sortiment a osobní přístup.
 
 Activefishing.cz věnuje ceny pro závodníky Mistrovství ČR v Trout Area 2026. Děkujeme za podporu!
 
@@ -212,7 +212,7 @@ Označit: FB @activefishing.cz · IG @activefishingshop
 Activefishing.cz
 Pro všechny, kdo milují přívlač.
 
-Přes 1 350 plandavek · přes 770 woblerů
+Přes 1 300 plandavek · přes 770 woblerů
 Nories · Timon · Mukai · ValkeIN · VARIVAS
 
 Věnuje ceny pro závodníky MČR 2026. Děkujeme!
@@ -226,8 +226,8 @@ activefishing.cz
 
 | Pole | Text |
 |---|---|
-| Primary text | Přes 1 350 plandavek a přes 770 woblerů pro trout area. Activefishing.cz věnuje ceny pro MČR 2026. |
-| Headline | Activefishing.cz – plandavky a woblery |
+| Primary text | Přes 1 300 plandavek a přes 770 woblerů pro trout area. Activefishing.cz věnuje ceny pro MČR 2026. |
+| Headline | Activefishing – 1 300+ plandavek |
 | Description | Nories · Timon · VARIVAS |
 | CTA | Shop Now (Nakoupit) → activefishing.cz |
 
@@ -328,7 +328,7 @@ jigovky.cz
 | Pole | Text |
 |---|---|
 | Primary text | Bezprotihrotové jigy od 0,4 g, poctivě vyrobené v ČR. Jigovky.cz věnuje ceny pro MČR 2026. |
-| Headline | Jigovky.cz – jigy, které chytají! |
+| Headline | Jigovky – jigy, které chytají! |
 | Description | Poctivě vyrobeno v ČR |
 | CTA | Shop Now (Nakoupit) → jigovky.cz |
 
@@ -347,7 +347,7 @@ jigovky.cz
 
 Moonky – nástrahy, které pstruzi milují
 
-Český výrobce ručně dělaných gumových nástrah pro lov pstruhů a Trout Area. Nástrahy vyrábějí od návrhu až po vlastní formy na CNC strojích, z gumy bez ftalátů, a vyvíjejí a testují je s českou reprezentací v lovu pstruhů ze břehu. V nabídce jsou Gamer, Scelet, Coccon, Savory, Kukla, Long Worm nebo Master – s aromaty banana, cheese i oliheň.
+Český výrobce ručně dělaných gumových nástrah pro lov pstruhů a Trout Area. Nástrahy vyrábějí od návrhu až po vlastní formy na CNC strojích, z gumy bez ftalátů, a vyvíjejí a testují je s českou reprezentací v lovu pstruhů ze břehu. V nabídce jsou Gamer, Scelet, Coccon, Savory, Kukla, Long Worm nebo Master – s příchutěmi banán, sýr a oliheň.
 
 Moonky věnuje ceny pro závodníky Mistrovství ČR v Trout Area 2026. Děkujeme!
 
@@ -405,7 +405,7 @@ Jaro a Stano, děkujeme za ceny pro závodníky MČR 2026!
 
 troutshop.eu
 
-Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
+Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
 
 #TroutArea #TroutAreaCZ #MCR2026 #Troutshop #Nories
 
@@ -431,11 +431,11 @@ troutshop.eu
 | Pole | Text |
 |---|---|
 | Primary text | Bratři Petríčkovi, závodníci Trout Area, podpořili MČR 2026 cenami. Nories, Forest, Vanfook – posílají i do ČR. |
-| Headline | Troutshop.eu – od závodníků Trout Area |
+| Headline | Troutshop.eu – od závodníků |
 | Description | Zboží posílají i do ČR |
 | CTA | Shop Now (Nakoupit) → troutshop.eu |
 
-Délky: primary 111/125, headline 38/40, description 22/30 znaků.
+Délky: primary 111/125, headline 27/40, description 22/30 znaků.
 
 ### Karusel (4 karty)
 
@@ -444,22 +444,9 @@ Délky: primary 111/125, headline 38/40, description 22/30 znaků.
 3. Plandavky Nories Rooney a Velvet Arts Forte
 4. Věnuje ceny · MČR 2026 – věcné ceny pro závodníky · zboží posílají i do ČR
 
----|---|
-| Primary text | Specialista na pstruhy od roku 1999: Nories, Forest, Rodio Craft. Troutshop.eu věnuje ceny pro MČR 2026. |
-| Headline | Troutshop.eu – specialista na pstruhy |
-| Description | Rodinná firma od roku 1999 |
-| CTA | Shop Now (Nakoupit) → troutshop.eu |
-
-### Karusel (4 karty)
-
-1. Troutshop.eu – rodinný e-shop od roku 1999
-2. Nories · Forest · Rodio Craft · Vanfook · VARIVAS
-3. Plandavky Nories Rooney a Velvet Arts Forte
-4. Věnuje ceny · MČR 2026
-
 ---
 
-## 8. Velká ryba (Velka-ryba.cz) – věnuje ceny
+## 8. Velká ryba (velka-ryba.cz) – věnuje ceny
 
 ### FB příspěvek
 
@@ -467,7 +454,7 @@ Velká ryba – vše na přívlač
 
 Přívlačová speciálka z Olomouce: e-shop i kamenná prodejna, od roku 2011. V nabídce jsou 3Stan, Fox Rage, Keitech, Mepps, Rapala, Salmo, Savage Gear, Shimano a mnoho dalších; pro pstruhaře plandavky Shimano Cardiff, Illex Native Spoon nebo Daiwa Presso. Od roku 2025 je obchod partnerem programu Shimano Rod Test Center – v olomoucké prodejně si pruty Shimano půjčíte a vyzkoušíte přímo u vody.
 
-Velka-ryba.cz věnuje ceny pro závodníky MČR 2026. Děkujeme!
+Velká ryba věnuje ceny pro závodníky MČR 2026. Děkujeme!
 
 velka-ryba.cz
 
@@ -495,7 +482,7 @@ velka-ryba.cz
 
 | Pole | Text |
 |---|---|
-| Primary text | Přívlačová speciálka z Olomouce od roku 2011. Velka-ryba.cz věnuje ceny pro MČR v Trout Area 2026. |
+| Primary text | Přívlačová speciálka z Olomouce od roku 2011. Velká ryba věnuje ceny pro MČR v Trout Area 2026. |
 | Headline | Velká ryba – vše na přívlač |
 | Description | Shimano Rod Test Center |
 | CTA | Shop Now (Nakoupit) → velka-ryba.cz |
@@ -616,7 +603,7 @@ rybsvaz.cz
 2. **Tagy chybí** (research je neuvádí): Gausse Holler (FB i IG), Bosset, Troutshop, Velká ryba, ČRS, IG Líhně Liběchov. Ověřené: FB „Sportovní rybaření Boží Voda - Liběchov“, FB activefishing.cz + IG @activefishingshop, FB + IG jigovky.cz, IG @moonky.cz.
 3. **Bosset – termosky:** přesné modely a počet kusů nejsou zveřejněné; „vítězové mistrovství“ (jaká místa / kategorie) potvrdit u Bosset (Taras Burakov, info@bosset.cz). Nic o původu Zojirushi.
 4. **Gausse Holler – Revolut 8:** „série 5 kusů, každý číslovaný“ platí podle produktové stránky rod-stand-v2. Potvrdit, že cenový kus je z této série (a jeho číslo, pokud ho chceme uvést).
-5. **Živá čísla:** Activefishing 1 354 plandavek / 776 woblerů (21. 10.) → v textu „přes 1 350“ a „přes 770“. Jigovky 990 jigových hlaviček (19. a 21. 10.). Před publikací přepočítat.
+5. **Živá čísla:** Activefishing 1 354 plandavek / 776 woblerů (21. 10.) → v textu „přes 1 300“ a „přes 770“. Jigovky 990 jigových hlaviček (19. a 21. 10.). Před publikací přepočítat.
 6. **ČRS:** forma podpory není doložená, proto jen obecné „za dlouholetou podporu“ (formulace operátora). Nepsat „pod záštitou ČRS“ ani „MČR pořádá ČRS“. Rozhodnout, zda děkovat celému ČRS, nebo i MO Mělník.
 7. **Poděkování po akci:** doplnit vítěze, stupně vítězů a odkaz. Pozor: „vítěz MČR“ (součet umístění z obou dnů) není totéž co „Mistr ČR“ (celkové hodnocení ročníku, putovní pohár). „24 kol“ = 2 × 12 kol podle formátu; potvrdit podle skutečného průběhu.
 8. **Líheň Liběchov:** u Malého Sporťáčku neuvádět „chyť a pusť“ (od 23. 6. 2026 „chyť a vem“). „Donedávna“ u nejníže položeného pstruhařství musí zůstat. Diváci 24.–25. 10. podle aktuality webu Líhně.
