@@ -42,3 +42,11 @@ Fandovy plandavky: NE (rozhodnutí uživatele) — nezařazovat.
 ## Chybí
 - Moonky: web nemají → FB stránka (ruční výroba gumových nástrah, „Handmade lures“), logo vyříznuto z FB; fotky nástrah dodány (assets/moonky/u01–u05), viz research/moonky_user.md.
 - Videa z rybaření.
+
+## ROZHODNUTÍ 22. 10. (uživatel)
+- Activefishing: „přes 770 woblerů“ (místo 777) ve filmu, bannerech i textech.
+- Troutshop banner: plaketa „č. 1 v oblíbenosti e-shopu“ zůstává.
+- ČRS banner: zimní foto rybníka → schéma Malého Sporťáčku; formulace „Areál vlastní ČRS, MO Mělník“ (bez „provozuje“).
+- Schéma míst 1–20 / 21–40: ponechat s poznámkou „čísla míst orientační“.
+- Ceny: konkrétní ceny NEUVÁDĚT (nejsou známy), jen „věnuje ceny“.
+- **Nový sponzor FT Fishing (ftfishing.cz)**: stejné schéma (storytelling, nástrahy, značky), hlavní důraz **Favorite, Crazy Fish, Spinmad**. Blok ve filmu **před Líheň Liběchov** (po intru), vlastní Reels + FB bannery + texty. Chip „Věnuje ceny · MČR 2026“.
