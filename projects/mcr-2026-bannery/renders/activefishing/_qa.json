@@ -1,6 +1,6 @@
 {
  "key": "activefishing",
- "built": "2026-10-22T09:29:19.961Z",
+ "built": "2026-10-22T09:44:48.158Z",
  "outputs": {
   "activefishing_static_191.png": {
    "err": [],
@@ -54,9 +54,7 @@
   },
   "activefishing_anim_4x5.mp4": {
    "err": [],
-   "warn": [
-    "image upscaled 1.31×: S4_timon_chibi_futten_fs_hologram_bait.png"
-   ],
+   "warn": [],
    "dur": 10.000000000000002,
    "frames": 300,
    "fps": 30,
