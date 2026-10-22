@@ -2,6 +2,8 @@
 //
 //   node scripts/deliver.mjs                         → every renders/*_v<N>.mp4 that has a matching pre-mix
 //   node scripts/deliver.mjs renders/film_9x16_v2.mp4 renders/reel_bosset_v2.mp4
+//   v9: any frame rate (60 fps renders `*_v9_60fps.mp4`): the video stream is copied, so frame timing is untouched; the build
+//   rounds every output UP to whole 1/30 s frames, which are whole 1/60 s frames too (audio = video length within < 1 ms)
 //
 // Why: HyperFrames encodes the (already mastered) pre-mix with ffmpeg's native AAC at 192 kbit/s. On near-mono passages close to
 // the ceiling that encoder (intensity stereo / PNS on) occasionally produces a single-frame glitch of +1…+4.5 dB (measured on the
@@ -17,7 +19,8 @@ import { ROOT } from './lib/util.mjs';
 
 const AUD = path.join(ROOT, 'proto/assets/audio');
 const mixFor = (f) => {
-  const b = path.basename(f).replace(/\.mp4$/, '').replace(/_v\d+$/, '');
+  // v9: names may carry a frame-rate suffix (film_9x16_v9_60fps.mp4, reel_bosset_v9_60fps.mp4) → strip `_v<N>[_<fps>fps]`
+  const b = path.basename(f).replace(/\.mp4$/, '').replace(/_v\d+(_\d+fps)?$/, '');
   const m = /^film/.test(b) ? 'film' : (/^(reel|block)_(.+)$/.exec(b) || []).slice(1).join('_');
   const p = m ? path.join(AUD, `mix_${m}.wav`) : null;
   return p && fs.existsSync(p) ? p : null;
@@ -29,7 +32,7 @@ const meter = (f) => {
   return { I: +I, TP: +P };
 };
 
-const files = process.argv.slice(2).length ? process.argv.slice(2) : fs.readdirSync(path.join(ROOT, 'renders')).filter((f) => /_v\d+\.mp4$/.test(f)).map((f) => path.join(ROOT, 'renders', f));
+const files = process.argv.slice(2).length ? process.argv.slice(2) : fs.readdirSync(path.join(ROOT, 'renders')).filter((f) => /_v\d+(_\d+fps)?\.mp4$/.test(f)).map((f) => path.join(ROOT, 'renders', f));
 let bad = 0;
 for (const f of files) {
   const mix = mixFor(f);

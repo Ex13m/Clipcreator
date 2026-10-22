@@ -3,14 +3,14 @@
  "dur": 12.766,
  "music": {
   "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/audio/track_B.wav",
-  "start": 98.888,
+  "start": 98.83,
   "fadeIn": 0.12,
   "fadeOut": 0.9
  },
  "vo": [
   {
    "src": "/home/user/Clipcreator/projects/mcr-2026-sponzori/vo/crs.wav",
-   "at": 2.074,
+   "at": 2.071,
    "dur": 4.118
   }
  ],
