@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="UTF-8" /><title>troutshop · MČR 2026</title></head>
+<body><template>
+<div id="b-troutshop" data-composition-id="troutshop" data-width="1080" data-height="1920" data-duration="9.123">
+  <style>
+  #bw-troutshop { position:absolute; inset:0; overflow:hidden; background:var(--bg); color:var(--fg); }
+  #troutshop-stage { position:absolute; inset:0; overflow:hidden; }
+  @font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/roboto-condensed-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/roboto-condensed-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/roboto-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:700;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/roboto-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:normal;font-weight:800;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Roboto Condensed';font-style:italic;font-weight:700;font-display:block;src:url(assets/fonts/roboto-condensed-latin-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:italic;font-weight:700;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-700-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Roboto Condensed';font-style:italic;font-weight:800;font-display:block;src:url(assets/fonts/roboto-condensed-latin-800-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Roboto Condensed';font-style:italic;font-weight:800;font-display:block;src:url(assets/fonts/roboto-condensed-latin-ext-800-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+#b-troutshop .ts-arm{position:absolute;width:0;height:0;transform-origin:0 0}
+#b-troutshop .ts-sp{position:absolute}
+#b-troutshop .ts-sp img{position:absolute;inset:0;width:100%;height:100%;display:block}
+#b-troutshop .ts-sp .fx-prod-sweep{inset:0}
+#b-troutshop .ts-sp .ts-bgimg{position:absolute;inset:0;display:block;background-size:100% 100%;background-repeat:no-repeat}
+#b-troutshop .ts-sun{position:absolute;border-radius:50%;background:radial-gradient(circle,#ff2a1e 0%,#f2070f 46%,#e3000f 78%,#ec1510 96%,#e3000f 100%);box-shadow:0 0 46px 6px rgba(255,46,30,.55),0 0 210px 70px rgba(227,0,15,.32)}
+#b-troutshop .ts-co{position:absolute;display:flex;flex-direction:column;gap:6px;white-space:nowrap}
+#b-troutshop .ts-co i{display:block;height:4px;width:64px;background:#e3000f;border-radius:2px;transform-origin:0 50%}
+#b-troutshop .ts-co b{font-family:'Roboto Condensed';font-weight:800;font-size:40px;letter-spacing:.07em;text-transform:uppercase;line-height:1.05;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+#b-troutshop .ts-co>span{font-family:'Roboto Condensed';font-weight:600;font-size:34px;letter-spacing:.05em;line-height:1.1;color:rgba(255,255,255,.88);text-shadow:0 2px 14px rgba(0,0,0,.45)}
+#b-troutshop .ts-co.r{align-items:flex-end;text-align:right}
+#b-troutshop .ts-co.r i{transform-origin:100% 50%}
+#b-troutshop .ts-pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 26px 13px;border-radius:999px;background:#e3000f;color:#fff;font-family:'Roboto Condensed';font-weight:700;font-size:32px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+#b-troutshop .ts-pill em{font-style:normal;opacity:.75}
+
+#b-troutshop .ts-brands{position:absolute;left:0;right:0;top:1406px;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Roboto Condensed';font-weight:800;font-size:36px;line-height:1.08;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(90,0,0,.45)}
+#b-troutshop .ts-orb{position:absolute;border-radius:50%;border:4px solid #e3000f;box-shadow:0 0 26px rgba(227,0,15,.6),inset 0 0 26px rgba(227,0,15,.35)}
+#b-troutshop .ts-bl{position:absolute;filter:drop-shadow(0 4px 14px rgba(0,0,0,.55))}
+#b-troutshop .ts-bl img{display:block}
+#b-troutshop .ts-lbl{position:absolute;font-family:'Roboto Condensed';font-weight:700;font-size:46px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+#b-troutshop .ts-tag{position:absolute;display:flex;align-items:center;gap:12px;font-family:'Roboto Condensed';font-weight:800;font-style:italic;font-size:38px;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
+#b-troutshop .ts-tag i{display:block;width:10px;height:30px;background:#e3000f;transform:skewX(-14deg)}
+#b-troutshop .ts-sub{position:absolute;left:0;right:0;text-align:center;font-family:'Roboto Condensed';font-weight:600;font-size:34px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+  </style>
+  <div id="bw-troutshop" class="blk blk-troutshop" style="--bg:#050505;--fg:#ffffff;--acc:#e3000f;--acc2:#c80411">
+    <div id="troutshop-stage" class="blk-stage"><div class="fx-field" id="troutshop-field" style="background:radial-gradient(120% 80% at 50% 92%, #3a0408 0%, #050505 100%);"></div><div class="fx-big ol" id="troutshop-big" style="left:-30px;top:760px;font-family:'Anton';font-weight:400;font-size:430px;letter-spacing:0.01em;text-transform:uppercase;color:transparent;--oc:#ffffff;--ow:2px;opacity:0.07;">Troutshop</div><div class="fx-full" id="troutshop-ry-w" style="transform-origin:540px 1480px;"><div class="fx-rays" id="troutshop-ry" style="left:-910px;top:30px;width:2900px;height:2900px;opacity:0.42;background:repeating-conic-gradient(from 0deg, #e3000f 0deg 8deg, transparent 8deg 20deg);-webkit-mask-image:radial-gradient(circle, transparent 8%, #000 10%, transparent 70%);mask-image:radial-gradient(circle, transparent 8%, #000 10%, transparent 70%);"></div></div><div class="fx-full" id="troutshop-fan" style="transform-origin:540px 1480px;"><div class="ts-arm" id="troutshop-fan-a0" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p0" style="left:-28.6px;top:-616.1px;width:332.1px;height:399.5px;transform-origin:8.6% 92.9%"><img src="assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_a.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw0" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_a.png);mask-image:url(assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_a.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a1" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p1" style="left:-273.9px;top:-261.5px;width:296.5px;height:392.7px;transform-origin:92.4% 4.2%"><img src="assets/prep/troutshop/ads/sec_01_nories_rooney_002_b.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw1" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_01_nories_rooney_002_b.png);mask-image:url(assets/prep/troutshop/ads/sec_01_nories_rooney_002_b.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a2" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p2" style="left:-338.1px;top:-277.1px;width:370.7px;height:465.1px;transform-origin:91.2% 6.9%"><img src="assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_b.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw2" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_b.png);mask-image:url(assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_b.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a3" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p3" style="left:-233.7px;top:-266.3px;width:262.2px;height:443.8px;transform-origin:89.1% 4.8%"><img src="assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_b.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw3" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_b.png);mask-image:url(assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_b.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a4" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p4" style="left:-21px;top:-639.9px;width:287.2px;height:411px;transform-origin:7.3% 96.1%"><i class="ts-bgimg" style="background-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png);filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"></i><i class="fx-prod-sweep" id="troutshop-fan-sw4" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png);mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a5" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p5" style="left:-21.8px;top:-630px;width:294.7px;height:401.1px;transform-origin:7.4% 96%"><img src="assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_a.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw5" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_a.png);mask-image:url(assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_a.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a6" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p6" style="left:-31px;top:-625.2px;width:365.2px;height:409.3px;transform-origin:8.5% 92.9%"><img src="assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_a.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw6" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_a.png);mask-image:url(assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_a.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a7" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p7" style="left:-20.3px;top:-614.8px;width:303.7px;height:385.6px;transform-origin:6.7% 95.9%"><img src="assets/prep/troutshop/ads/sec_01_nories_rooney_002_a.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw7" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_01_nories_rooney_002_a.png);mask-image:url(assets/prep/troutshop/ads/sec_01_nories_rooney_002_a.png);--sa:105deg;--so:.65"></i></div></div><div class="ts-arm" id="troutshop-fan-a8" style="left:540px;top:1480px"><div class="ts-sp" id="troutshop-fan-p8" style="left:-31.4px;top:-620.6px;width:373.7px;height:404.3px;transform-origin:8.4% 92.9%"><img src="assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_a.png" alt="" style="filter:drop-shadow(0 18px 16px rgba(0,0,0,.6))"><i class="fx-prod-sweep" id="troutshop-fan-sw8" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_a.png);mask-image:url(assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_a.png);--sa:105deg;--so:.65"></i></div></div></div><div class="ts-sun" id="troutshop-sun" style="left:300px;top:1240px;width:480px;height:480px;"></div><div class="fx-full" id="troutshop-ry2-w" style="transform-origin:540px 1480px;opacity:0"><div class="fx-rays" id="troutshop-ry2" style="left:-960px;top:-20px;width:3000px;height:3000px;opacity:0.16;background:repeating-conic-gradient(from 0deg, #000000 0deg 8deg, transparent 8deg 20deg);-webkit-mask-image:radial-gradient(circle, transparent 8%, #000 10%, transparent 70%);mask-image:radial-gradient(circle, transparent 8%, #000 10%, transparent 70%);"></div></div><div class="fx-full" id="troutshop-brs" style=""><div class="ts-brands" id="troutshop-brands"><span>Nories · Forest</span><span>Velvet Arts</span></div></div><div class="fx-full" id="troutshop-h1cam" style="transform-origin:535px 1170px"><div class="ts-sp" id="troutshop-h1" style="left:275.6px;top:532.3px;width:670.2px;height:958.9px;transform-origin:38.7% 66.5%;"><div class="fx-abs" id="troutshop-h1-r" style="inset:0;transform-origin:38.7% 66.5%"><img src="assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png" alt="" style="filter:drop-shadow(0 22px 26px rgba(0,0,0,.5))"><i class="fx-prod-sweep" id="troutshop-h1-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png);mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_a.png);--sa:105deg;--so:0.55"></i></div></div></div><div class="ts-co r" id="troutshop-co1" style="right:140px;top:1236px"><i id="troutshop-co1-i"></i><b class="fx-ln"><span>Nories ROONEY</span></b><span class="fx-ln"><span>2,8 g · barva 101</span></span></div><div class="fx-prod" id="troutshop-pu" style="left:133px;top:917.6px;width:830px;height:456.2px;"><div class="fx-abs" id="troutshop-pu-cam" style="inset:0"><i class="fx-prod-shadow" id="troutshop-pu-sh" style="left:85.9px;width:658.2px;top:393.3px;height:78.4px;--sho:0.55"></i><div class="fx-prod-refl" id="troutshop-pu-rf" style="top:408.7px;height:456.2px;--rfo:0.3"><i style="background-image:url(assets/prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png)"></i></div><div class="fx-prod-tilt" id="troutshop-pu-tl"><div class="fx-abs" id="troutshop-pu-rot" style="inset:0"><img class="fx-prod-img" id="troutshop-pu-im" src="assets/prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png" alt=""><i class="fx-prod-sweep" id="troutshop-pu-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png);mask-image:url(assets/prep/troutshop/ads/hero_03_nories_crankin_pupa_109.png);--sa:105deg;--so:0.55"></i></div></div></div></div><div class="ts-co" id="troutshop-co2" style="left:64px;top:1350px"><i id="troutshop-co2-i"></i><b class="fx-ln"><span>Nories Crankin’ Pupa</span></b><span class="fx-ln"><span>Floating · 34 mm · 2,6 g</span></span></div><div class="fx-glow" id="troutshop-rg" style="left:-60px;top:662px;width:1200px;height:1200px;background:radial-gradient(closest-side,currentColor,transparent);color:#d9d40c;opacity:0;mix-blend-mode:screen"></div><div class="ts-orb" id="troutshop-orb" style="left:218px;top:940px;width:644px;height:644px"></div><div class="ts-sp" id="troutshop-r0" style="left:263.1px;top:1058.8px;width:446.5px;height:587.4px;transform-origin:62% 34.6%;opacity:0"><div class="fx-abs" id="troutshop-r0-r" style="inset:0;transform-origin:62% 34.6%"><img src="assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_b.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r0-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_b.png);mask-image:url(assets/prep/troutshop/ads/sec_03_forest_miu_ts4_limited_b.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r1" style="left:313.8px;top:1074.7px;width:386px;height:581.6px;transform-origin:58.6% 32.2%;opacity:0"><div class="fx-abs" id="troutshop-r1-r" style="inset:0;transform-origin:58.6% 32.2%"><img src="assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_b.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r1-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_b.png);mask-image:url(assets/prep/troutshop/ads/sec_02_nories_rooney_sk20_magma_b.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r2" style="left:357.2px;top:884px;width:495.4px;height:571px;transform-origin:36.9% 66.2%;opacity:0"><div class="fx-abs" id="troutshop-r2-r" style="inset:0;transform-origin:36.9% 66.2%"><img src="assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_a.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r2-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_a.png);mask-image:url(assets/prep/troutshop/ads/sec_04_velvetarts_forte_2-1g_35_yellow_red_a.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r3" style="left:225.3px;top:1065.3px;width:499.5px;height:634.7px;transform-origin:63% 31%;opacity:0"><div class="fx-abs" id="troutshop-r3-r" style="inset:0;transform-origin:63% 31%"><img src="assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_b.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r3-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_b.png);mask-image:url(assets/prep/troutshop/ads/sec_07_velvetarts_forte_2-1g_30_glow_gold_b.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r4" style="left:385.3px;top:869px;width:380.9px;height:606.5px;transform-origin:40.6% 64.8%;opacity:0"><div class="fx-abs" id="troutshop-r4-r" style="inset:0;transform-origin:40.6% 64.8%"><img src="assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_a.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r4-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_a.png);mask-image:url(assets/prep/troutshop/ads/sec_05_nories_tulle_3g_101_a.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r5" style="left:312.4px;top:1072.4px;width:384.4px;height:560.9px;transform-origin:59.2% 33.8%;opacity:0"><div class="fx-abs" id="troutshop-r5-r" style="inset:0;transform-origin:59.2% 33.8%"><img src="assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_b.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r5-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_b.png);mask-image:url(assets/prep/troutshop/ads/hero_01_nories_rooney_2-8g_101_b.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-sp" id="troutshop-r6" style="left:223.5px;top:1067.1px;width:501.6px;height:628.8px;transform-origin:63.1% 31%;opacity:0"><div class="fx-abs" id="troutshop-r6-r" style="inset:0;transform-origin:63.1% 31%"><img src="assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_b.png" alt="" style="filter:drop-shadow(0 26px 28px rgba(0,0,0,.55))"><i class="fx-prod-sweep" id="troutshop-r6-sw" style="-webkit-mask-image:url(assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_b.png);mask-image:url(assets/prep/troutshop/ads/hero_02_velvetarts_forte_2-1g_32_glow_pink_b.png);--sa:105deg;--so:0.75"></i></div></div><div class="ts-bl" id="troutshop-bl0" style="left:241.0px;top:982.3px;width:184px;height:66px"><img src="assets/prep/troutshop/brands/nories_on_dark.png" alt="Nories" style="width:184px;height:66px"></div><div class="ts-bl" id="troutshop-bl1" style="left:652.0px;top:975.8px;width:190px;height:79px"><img src="assets/prep/troutshop/brands/forest_mono.png" alt="Forest" style="width:190px;height:79px"></div><div class="ts-bl" id="troutshop-bl2" style="left:132.6px;top:1155.6px;width:190px;height:57px"><img src="assets/prep/troutshop/brands/valkein_on_dark.png" alt="ValkeIN" style="width:190px;height:57px"></div><div class="ts-bl" id="troutshop-bl3" style="left:757.4px;top:1158.1px;width:190px;height:52px"><img src="assets/prep/troutshop/brands/rodiocraft_mono.png" alt="Rodio Craft" style="width:190px;height:52px"></div><div class="ts-bl" id="troutshop-bl4" style="left:157.9px;top:1345.6px;width:167px;height:74px"><img src="assets/prep/troutshop/brands/velvetarts_on_dark.png" alt="Velvet Arts" style="width:167px;height:74px"></div><div class="ts-bl" id="troutshop-bl5" style="left:749.6px;top:1348.1px;width:178px;height:69px"><img src="assets/prep/troutshop/brands/yarie_mono.png" alt="YARIE" style="width:178px;height:69px"></div><div class="fx-full" id="troutshop-cs" style=""><div class="fx-odo" id="troutshop-cnt" style="left:60px;top:392px;justify-content:flex-start;font-family:'Anton';font-weight:400;font-size:240px;color:#ffffff;"><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-cnt-s0"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i></span></span><span class="fx-odo-x">&nbsp;</span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-cnt-s1"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-cnt-s2"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-cnt-s3"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i></span></span><span class="fx-odo-x">+</span></div><div class="ts-lbl" style="left:64px;top:644px">plandavek v nabídce</div></div><div class="fx-t" id="troutshop-hl1" style="left:64px;top:410px;width:952px;font-family:'Anton';font-weight:400;font-size:176px;line-height:0.94;letter-spacing:0.005em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="troutshop-hl1-l0"><span><span style="color:#fff"><span class="fx-c">S</span><span class="fx-c">p</span><span class="fx-c">e</span><span class="fx-c">c</span><span class="fx-c">i</span><span class="fx-c">a</span><span class="fx-c">l</span><span class="fx-c">i</span><span class="fx-c">s</span><span class="fx-c">t</span><span class="fx-c">a</span></span></span></span><span class="fx-ln" id="troutshop-hl1-l1"><span><span style="color:#fff"><span class="fx-c">n</span><span class="fx-c">a</span></span> <span style="color:#e3000f"><span class="fx-c">p</span><span class="fx-c">s</span><span class="fx-c">t</span><span class="fx-c">r</span><span class="fx-c">u</span><span class="fx-c">h</span><span class="fx-c">y</span></span></span></span></div><div class="fx-t" id="troutshop-hl2" style="left:64px;top:410px;width:952px;font-family:'Anton';font-weight:400;font-size:132px;line-height:0.94;letter-spacing:0.005em;color:#fff;text-align:left;text-transform:uppercase;"><span class="fx-ln" id="troutshop-hl2-l0"><span><span style="color:#fff"><span class="fx-c">R</span><span class="fx-c">o</span><span class="fx-c">d</span><span class="fx-c">i</span><span class="fx-c">n</span><span class="fx-c">n</span><span class="fx-c">á</span> <span class="fx-c">f</span><span class="fx-c">i</span><span class="fx-c">r</span><span class="fx-c">m</span><span class="fx-c">a</span></span></span></span><span class="fx-ln" id="troutshop-hl2-l1"><span><span style="color:#fff"><span class="fx-c">o</span><span class="fx-c">d</span> <span class="fx-c">r</span><span class="fx-c">o</span><span class="fx-c">k</span><span class="fx-c">u</span></span></span></span></div><div class="fx-odo" id="troutshop-yr" style="left:58px;top:664.2px;justify-content:flex-start;font-family:'Anton';font-weight:400;font-size:270px;color:#0a0a0a;"><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-yr-s0"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-yr-s1"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-yr-s2"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="fx-odo-d"><span class="fx-odo-s" id="troutshop-yr-s3"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div><div class="ts-tag" id="troutshop-tag" style="right:64px;top:276px"><i></i>troutshop.eu</div><div class="fx-abs" id="troutshop-lw" style="left:428.5px;top:500px;width:223px;height:105px"><img id="troutshop-logo" class="fx-logo " src="assets/prep/troutshop/logo_on_dark.png" alt="Troutshop.eu" style="width:223px; height:105px;"></div><div class="fx-t" id="troutshop-url" style="left:64px;top:631px;width:952px;font-family:'Anton';font-weight:400;font-size:178px;line-height:0.94;letter-spacing:0.005em;color:#fff;text-align:center;text-transform:uppercase;"><span class="fx-ln" id="troutshop-url-l0"><span><span style="color:#fff"><span class="fx-c">t</span><span class="fx-c">r</span><span class="fx-c">o</span><span class="fx-c">u</span><span class="fx-c">t</span><span class="fx-c">s</span><span class="fx-c">h</span><span class="fx-c">o</span><span class="fx-c">p</span></span><span style="color:#e3000f"><span class="fx-c">.</span><span class="fx-c">e</span><span class="fx-c">u</span></span></span></span></div><div class="ts-sub" id="troutshop-gp" style="top:820.3199999999999px"><span class="fx-ln"><span>Generální partner Trout Area Slovakia</span></span></div><div class="ts-pill" id="troutshop-pz" style="left:305.9px;top:882.3px;width:468.2px;justify-content:center">Věnuje ceny<em>·</em>MČR 2026</div>
+    </div>
+    <div class="fx-ov" id="troutshop-f0" style="background:#e3000f;opacity:0;mix-blend-mode:screen"></div>
+    <div class="fx-ov" id="troutshop-f3" style="background:#ffffff;opacity:0;mix-blend-mode:screen"></div>
+    <div class="fx-ov" id="troutshop-tout" style="overflow:hidden"><div class="fx-ov-sl"><i id="troutshop-tout0" style="background:#0F2541"></i><i id="troutshop-tout1" style="background:#0F2541"></i><i id="troutshop-tout2" style="background:#0F2541"></i><i id="troutshop-tout3" style="background:#0F2541"></i><i id="troutshop-tout4" style="background:#0F2541"></i><i id="troutshop-tout5" style="background:#0F2541"></i><i id="troutshop-tout6" style="background:#0F2541"></i></div></div>
+  </div>
+  <script>
+  const tl = gsap.timeline({ paused: true });
+  gsap.set("#troutshop-big", {"x":0});
+  gsap.set("#troutshop-ry", {"rotation":0});
+  gsap.set("#troutshop-ry-w", {"scale":0.55,"opacity":0.3,"y":0});
+  gsap.set("#troutshop-fan-a0", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a1", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a2", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a3", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a5", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a6", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a7", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-fan-a8", {"rotation":0,"scale":0.35,"opacity":1});
+  gsap.set("#troutshop-sun", {"y":300,"scale":0.7});
+  gsap.set("#troutshop-ry2", {"rotation":0});
+  gsap.set("#troutshop-fan-sw0", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw1", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw2", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw3", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw4", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw5", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw6", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw7", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan-sw8", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-fan", {"y":0,"scale":1});
+  gsap.set("#troutshop-brs", {"opacity":0});
+  gsap.set("#troutshop-h1", {"x":0,"y":150,"scale":1.24,"rotation":0});
+  gsap.set("#troutshop-h1cam", {"scale":1,"rotation":0});
+  gsap.set("#troutshop-h1-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-co1-i", {"scaleX":0});
+  gsap.set("#troutshop-co1 .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#troutshop-ry2-w", {"opacity":0});
+  gsap.set("#troutshop-pu", {"x":-1180,"rotation":-10,"opacity":1});
+  gsap.set("#troutshop-pu-cam", {"y":0,"rotation":0});
+  gsap.set("#troutshop-pu-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-co2-i", {"scaleX":0});
+  gsap.set("#troutshop-co2 .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#troutshop-orb", {"scale":0.45,"opacity":0});
+  gsap.set("#troutshop-r0", {"scale":1.16});
+  gsap.set("#troutshop-r1", {"scale":1.16});
+  gsap.set("#troutshop-r2", {"scale":1.16});
+  gsap.set("#troutshop-r3", {"scale":1.16});
+  gsap.set("#troutshop-r4", {"scale":1.16});
+  gsap.set("#troutshop-r5", {"scale":1.16});
+  gsap.set("#troutshop-r6", {"scale":1.16,"y":0,"rotation":0});
+  gsap.set("#troutshop-r6-sw", {"backgroundPosition":"110% 0%"});
+  gsap.set("#troutshop-bl0", {"x":113.83768567548613,"y":135.66647087637102,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-bl1", {"x":-113.83768567548613,"y":135.66647087637102,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-bl2", {"x":171.839373123479,"y":42.84436771070119,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-bl3", {"x":-171.83937312347894,"y":42.84436771070119,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-bl4", {"x":164.20426064377804,"y":-66.34282769395804,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-bl5", {"x":-164.20426064377804,"y":-66.34282769395804,"scale":0.55,"opacity":0});
+  gsap.set("#troutshop-cnt-s0", {"yPercent":0});
+  gsap.set("#troutshop-cnt-s1", {"yPercent":0});
+  gsap.set("#troutshop-cnt-s2", {"yPercent":0});
+  gsap.set("#troutshop-cnt-s3", {"yPercent":0});
+  gsap.set("#troutshop-cs", {"opacity":0});
+  gsap.set("#troutshop-hl1-l0 .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#troutshop-hl1-l1 .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#troutshop-hl1 .fx-ln > span", {"yPercent":0,"opacity":1});
+  gsap.set("#troutshop-hl2-l0 .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#troutshop-hl2-l1 .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#troutshop-hl2 .fx-ln > span", {"yPercent":0,"opacity":1});
+  gsap.set("#troutshop-yr-s0", {"yPercent":0});
+  gsap.set("#troutshop-yr-s1", {"yPercent":0});
+  gsap.set("#troutshop-yr-s2", {"yPercent":0});
+  gsap.set("#troutshop-yr-s3", {"yPercent":0});
+  gsap.set("#troutshop-yr", {"opacity":0,"y":30});
+  gsap.set("#troutshop-tag", {"opacity":0,"x":40});
+  gsap.set("#troutshop-lw", {"opacity":0,"scale":0.7,"y":20});
+  gsap.set("#troutshop-url-l0 .fx-c", {"yPercent":115,"opacity":0});
+  gsap.set("#troutshop-gp .fx-ln > span", {"yPercent":120,"opacity":0});
+  gsap.set("#troutshop-pz", {"scale":0.6,"opacity":0});
+  gsap.set("#troutshop-tout0", {"xPercent":101});
+  gsap.set("#troutshop-tout1", {"xPercent":-101});
+  gsap.set("#troutshop-tout2", {"xPercent":101});
+  gsap.set("#troutshop-tout3", {"xPercent":-101});
+  gsap.set("#troutshop-tout4", {"xPercent":101});
+  gsap.set("#troutshop-tout5", {"xPercent":-101});
+  gsap.set("#troutshop-tout6", {"xPercent":101});
+  gsap.set("#troutshop-fan-p0", {"rotation":-40.8});
+  gsap.set("#troutshop-fan-p1", {"rotation":141.4});
+  gsap.set("#troutshop-fan-p2", {"rotation":136.5});
+  gsap.set("#troutshop-fan-p3", {"rotation":147.7});
+  gsap.set("#troutshop-fan-p4", {"rotation":-36.5});
+  gsap.set("#troutshop-fan-p5", {"rotation":-38.1});
+  gsap.set("#troutshop-fan-p6", {"rotation":-42.2});
+  gsap.set("#troutshop-fan-p7", {"rotation":-38});
+  gsap.set("#troutshop-fan-p8", {"rotation":-43.3});
+  gsap.set("#troutshop-fan-a4", {"opacity":0});
+  gsap.set("#troutshop-h1-r", {"rotation":10.5});
+  gsap.set("#troutshop-r0-r", {"rotation":155.6});
+  gsap.set("#troutshop-r1-r", {"rotation":155.5});
+  gsap.set("#troutshop-r2-r", {"rotation":-28.299999999999997});
+  gsap.set("#troutshop-r3-r", {"rotation":151.7});
+  gsap.set("#troutshop-r4-r", {"rotation":-18.799999999999997});
+  gsap.set("#troutshop-r5-r", {"rotation":157.2});
+  gsap.set("#troutshop-r6-r", {"rotation":151.3});
+  tl.fromTo("#troutshop-big", {"x":0}, {"x":-300,"duration":9.123,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-ry", {"rotation":0}, {"rotation":16,"duration":9.123,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-ry-w", {"scale":0.55,"opacity":0.3}, {"scale":1,"opacity":1,"duration":1,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-fan-a0", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":-60,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.786);
+  tl.fromTo("#troutshop-fan-a1", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":-45,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.756);
+  tl.fromTo("#troutshop-fan-a2", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":-30,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.726);
+  tl.fromTo("#troutshop-fan-a3", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":-15,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.696);
+  tl.fromTo("#troutshop-fan-a5", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":15,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.696);
+  tl.fromTo("#troutshop-fan-a6", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":30,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.726);
+  tl.fromTo("#troutshop-fan-a7", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":45,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.756);
+  tl.fromTo("#troutshop-fan-a8", {"rotation":0,"scale":0.35,"opacity":1}, {"rotation":60,"scale":1,"opacity":1,"duration":0.75,"ease":"expo.out","immediateRender":false}, 1.786);
+  tl.set("#troutshop-fan-a4", {"opacity":1}, 1.826);
+  tl.fromTo("#troutshop-sun", {"y":300,"scale":0.7}, {"y":0,"scale":1,"duration":0.9,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-ry2", {"rotation":0}, {"rotation":-10,"duration":9.123,"ease":"none","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-fan", {"scale":1.035}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 2.282);
+  tl.fromTo("#troutshop-fan", {"scale":1.035}, {"scale":1,"duration":0.3,"ease":"power2.out","immediateRender":false}, 2.738);
+  tl.fromTo("#troutshop-fan-sw0", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.638);
+  tl.fromTo("#troutshop-fan-sw1", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.683);
+  tl.fromTo("#troutshop-fan-sw2", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.728);
+  tl.fromTo("#troutshop-fan-sw3", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.773);
+  tl.fromTo("#troutshop-fan-sw4", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.818);
+  tl.fromTo("#troutshop-fan-sw5", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.863);
+  tl.fromTo("#troutshop-fan-sw6", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.908);
+  tl.fromTo("#troutshop-fan-sw7", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.953);
+  tl.fromTo("#troutshop-fan-sw8", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 2.998);
+  tl.fromTo("#troutshop-fan", {"y":0,"scale":1}, {"y":1250,"scale":0.8,"duration":0.34,"ease":"power3.in","immediateRender":false}, 3.311);
+  tl.fromTo("#troutshop-fan", {"y":1250,"scale":0.8}, {"y":170,"scale":0.8,"duration":0.75,"ease":"expo.out","immediateRender":false}, 7.059);
+  tl.fromTo("#troutshop-fan-sw0", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 7.849);
+  tl.fromTo("#troutshop-fan-sw1", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 7.889);
+  tl.fromTo("#troutshop-fan-sw2", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 7.929);
+  tl.fromTo("#troutshop-fan-sw3", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 7.969);
+  tl.fromTo("#troutshop-fan-sw4", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 8.009);
+  tl.fromTo("#troutshop-fan-sw5", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 8.049);
+  tl.fromTo("#troutshop-fan-sw6", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 8.089);
+  tl.fromTo("#troutshop-fan-sw7", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 8.129);
+  tl.fromTo("#troutshop-fan-sw8", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.55,"ease":"power2.inOut","immediateRender":false}, 8.169);
+  tl.fromTo("#troutshop-brs", {"opacity":0}, {"opacity":1,"duration":0.3,"ease":"none","immediateRender":false}, 2.076);
+  tl.fromTo("#troutshop-brs", {"opacity":1}, {"opacity":0,"duration":0.2,"ease":"power1.in","immediateRender":false}, 3.151);
+  tl.fromTo("#troutshop-h1", {"x":0,"y":150,"scale":1.24,"rotation":0}, {"x":0,"y":0,"scale":1,"rotation":0,"duration":0.75,"ease":"expo.out","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-h1cam", {"scale":1,"rotation":0}, {"scale":1.09,"rotation":-3,"duration":1.4260000000000002,"ease":"power1.inOut","immediateRender":false}, 0.400);
+  tl.fromTo("#troutshop-h1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.8,"ease":"power2.inOut","immediateRender":false}, 0.300);
+  tl.fromTo("#troutshop-h1-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.6,"ease":"power2.inOut","immediateRender":false}, 1.319);
+  tl.fromTo("#troutshop-h1", {"x":0,"y":0,"scale":1}, {"x":8.730930025647607,"y":-78.9478003803843,"scale":0.39318479685452157,"duration":0.4,"ease":"power3.inOut","immediateRender":false}, 1.426);
+  tl.fromTo("#troutshop-h1", {"rotation":0}, {"rotation":-44,"duration":0.3,"ease":"power2.in","immediateRender":false}, 1.526);
+  tl.set("#troutshop-h1", {"opacity":0}, 1.826);
+  tl.fromTo("#troutshop-co1-i", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 0.550);
+  tl.fromTo("#troutshop-co1 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.07,"immediateRender":false}, 0.610);
+  tl.fromTo("#troutshop-co1-i", {"scaleX":1}, {"scaleX":0,"duration":0.25,"ease":"power2.in","immediateRender":false}, 1.406);
+  tl.fromTo("#troutshop-co1 .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-120,"opacity":0,"duration":0.25,"ease":"power3.in","stagger":0.04,"immediateRender":false}, 1.406);
+  tl.fromTo("#troutshop-sun", {"scale":1}, {"scale":7.6,"duration":0.46,"ease":"power2.inOut","immediateRender":false}, 3.391);
+  tl.fromTo("#troutshop-ry2-w", {"opacity":0}, {"opacity":1,"duration":0.4,"ease":"none","immediateRender":false}, 3.651);
+  tl.fromTo("#troutshop-pu", {"x":-1180,"rotation":-10,"opacity":1}, {"x":0,"rotation":0,"opacity":1,"duration":0.62,"ease":"expo.out","immediateRender":false}, 3.371);
+  tl.fromTo("#troutshop-pu-cam", {"y":0,"rotation":0}, {"y":-12,"rotation":1.2,"duration":0.9140000000000015,"ease":"sine.inOut","repeat":0,"yoyo":true,"immediateRender":false}, 4.151);
+  tl.fromTo("#troutshop-pu-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.85,"ease":"power2.inOut","immediateRender":false}, 4.151);
+  tl.fromTo("#troutshop-pu", {"x":0,"rotation":0,"opacity":1}, {"x":1300,"rotation":10,"opacity":1,"duration":0.34,"ease":"power3.in","immediateRender":false}, 5.135);
+  tl.fromTo("#troutshop-co2-i", {"scaleX":0}, {"scaleX":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 4.101);
+  tl.fromTo("#troutshop-co2 .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.07,"immediateRender":false}, 4.161);
+  tl.fromTo("#troutshop-co2-i", {"scaleX":1}, {"scaleX":0,"duration":0.25,"ease":"power2.in","immediateRender":false}, 5.075);
+  tl.fromTo("#troutshop-co2 .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-120,"opacity":0,"duration":0.25,"ease":"power3.in","stagger":0.04,"immediateRender":false}, 5.075);
+  tl.fromTo("#troutshop-sun", {"scale":7.6}, {"scale":0,"duration":0.32,"ease":"power3.in","immediateRender":false}, 5.155);
+  tl.fromTo("#troutshop-ry2-w", {"opacity":1}, {"opacity":0,"duration":0.3,"ease":"none","immediateRender":false}, 5.175);
+  tl.set("#troutshop-rg", {"opacity":0.8}, 5.475);
+  tl.fromTo("#troutshop-orb", {"scale":0.45,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"expo.out","immediateRender":false}, 5.435);
+  tl.fromTo("#troutshop-orb", {"scale":1,"opacity":1}, {"scale":1.9,"opacity":0,"duration":0.3,"ease":"power3.in","immediateRender":false}, 6.999);
+  tl.set("#troutshop-r0", {"opacity":1}, 5.475);
+  tl.fromTo("#troutshop-r0", {"scale":1.16}, {"scale":1,"duration":0.19799999999999976,"ease":"power3.out","immediateRender":false}, 5.475);
+  tl.set("#troutshop-r0", {"opacity":0}, 5.703);
+  tl.set("#troutshop-r1", {"opacity":1}, 5.703);
+  tl.fromTo("#troutshop-r1", {"scale":1.16}, {"scale":1,"duration":0.19800000000000065,"ease":"power3.out","immediateRender":false}, 5.703);
+  tl.set("#troutshop-rg", {"color":"#c98a1c"}, 5.703);
+  tl.set("#troutshop-r1", {"opacity":0}, 5.931);
+  tl.set("#troutshop-r2", {"opacity":1}, 5.931);
+  tl.fromTo("#troutshop-r2", {"scale":1.16}, {"scale":1,"duration":0.19799999999999976,"ease":"power3.out","immediateRender":false}, 5.931);
+  tl.set("#troutshop-rg", {"color":"#b3101c"}, 5.931);
+  tl.set("#troutshop-r2", {"opacity":0}, 6.159);
+  tl.set("#troutshop-r3", {"opacity":1}, 6.159);
+  tl.fromTo("#troutshop-r3", {"scale":1.16}, {"scale":1,"duration":0.19799999999999976,"ease":"power3.out","immediateRender":false}, 6.159);
+  tl.set("#troutshop-rg", {"color":"#c9b48a"}, 6.159);
+  tl.set("#troutshop-r3", {"opacity":0}, 6.387);
+  tl.set("#troutshop-r4", {"opacity":1}, 6.387);
+  tl.fromTo("#troutshop-r4", {"scale":1.16}, {"scale":1,"duration":0.19800000000000065,"ease":"power3.out","immediateRender":false}, 6.387);
+  tl.set("#troutshop-rg", {"color":"#d4a52a"}, 6.387);
+  tl.set("#troutshop-r4", {"opacity":0}, 6.615);
+  tl.set("#troutshop-r5", {"opacity":1}, 6.615);
+  tl.fromTo("#troutshop-r5", {"scale":1.16}, {"scale":1,"duration":0.19799999999999976,"ease":"power3.out","immediateRender":false}, 6.615);
+  tl.set("#troutshop-rg", {"color":"#f0c40c"}, 6.615);
+  tl.set("#troutshop-r5", {"opacity":0}, 6.843);
+  tl.set("#troutshop-r6", {"opacity":1}, 6.843);
+  tl.fromTo("#troutshop-r6", {"scale":1.16}, {"scale":1,"duration":0.2,"ease":"power3.out","immediateRender":false}, 6.843);
+  tl.set("#troutshop-rg", {"color":"#ec2d5a"}, 6.843);
+  tl.fromTo("#troutshop-r6-sw", {"backgroundPosition":"110% 0%"}, {"backgroundPosition":"-10% 0%","duration":0.45,"ease":"power2.inOut","immediateRender":false}, 6.863);
+  tl.fromTo("#troutshop-r6", {"y":0,"rotation":0}, {"y":-1450,"rotation":16,"duration":0.3,"ease":"power3.in","immediateRender":false}, 6.999);
+  tl.set("#troutshop-r6", {"opacity":0}, 7.299);
+  tl.fromTo("#troutshop-rg", {"opacity":0.8}, {"opacity":0,"duration":0.25,"ease":"power1.in","immediateRender":false}, 7.049);
+  tl.fromTo("#troutshop-bl0", {"x":113.83768567548613,"y":135.66647087637102,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.435);
+  tl.fromTo("#troutshop-bl0", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":-310.4664154785985,"y":-369.9994660264664,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 6.999);
+  tl.fromTo("#troutshop-bl1", {"x":-113.83768567548613,"y":135.66647087637102,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.435);
+  tl.fromTo("#troutshop-bl1", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":310.4664154785985,"y":-369.9994660264664,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 6.999);
+  tl.fromTo("#troutshop-bl2", {"x":171.839373123479,"y":42.84436771070119,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.663);
+  tl.fromTo("#troutshop-bl2", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":-468.6528357913063,"y":-116.84827557463962,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 7.019);
+  tl.fromTo("#troutshop-bl3", {"x":-171.83937312347894,"y":42.84436771070119,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.663);
+  tl.fromTo("#troutshop-bl3", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":468.6528357913062,"y":-116.84827557463962,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 7.019);
+  tl.fromTo("#troutshop-bl4", {"x":164.20426064377804,"y":-66.34282769395804,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.891);
+  tl.fromTo("#troutshop-bl4", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":-447.8298017557583,"y":180.93498461988554,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 7.039);
+  tl.fromTo("#troutshop-bl5", {"x":-164.20426064377804,"y":-66.34282769395804,"scale":0.55,"opacity":0}, {"x":0,"y":0,"scale":1,"opacity":1,"duration":0.42,"ease":"expo.out","immediateRender":false}, 5.891);
+  tl.fromTo("#troutshop-bl5", {"x":0,"y":0,"scale":1,"opacity":1}, {"x":447.8298017557583,"y":180.93498461988554,"scale":0.8,"opacity":0,"duration":0.28,"ease":"power3.in","immediateRender":false}, 7.039);
+  tl.fromTo("#troutshop-cnt-s0", {"yPercent":0}, {"yPercent":-95.83333333333334,"duration":0.8,"ease":"expo.out","immediateRender":false}, 5.495);
+  tl.fromTo("#troutshop-cnt-s1", {"yPercent":0}, {"yPercent":-95.45454545454545,"duration":0.75,"ease":"expo.out","immediateRender":false}, 5.520);
+  tl.fromTo("#troutshop-cnt-s2", {"yPercent":0}, {"yPercent":-95.23809523809523,"duration":0.7000000000000001,"ease":"expo.out","immediateRender":false}, 5.545);
+  tl.fromTo("#troutshop-cnt-s3", {"yPercent":0}, {"yPercent":-90.9090909090909,"duration":0.65,"ease":"expo.out","immediateRender":false}, 5.570);
+  tl.fromTo("#troutshop-cs", {"opacity":0}, {"opacity":1,"duration":0.001,"ease":"none","immediateRender":false}, 5.475);
+  tl.fromTo("#troutshop-cs", {"opacity":1}, {"opacity":0,"duration":0.22,"ease":"power1.in","immediateRender":false}, 6.999);
+  tl.fromTo("#troutshop-hl1-l0 .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.024,"immediateRender":false}, 0.875);
+  tl.fromTo("#troutshop-hl1-l1 .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.024,"immediateRender":false}, 1.295);
+  tl.fromTo("#troutshop-hl1 .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.3,"ease":"power3.in","stagger":0.05,"immediateRender":false}, 2.365);
+  tl.fromTo("#troutshop-hl2-l0 .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.024,"immediateRender":false}, 2.625);
+  tl.fromTo("#troutshop-hl2-l1 .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.5,"ease":"expo.out","stagger":0.024,"immediateRender":false}, 3.605);
+  tl.fromTo("#troutshop-hl2 .fx-ln > span", {"yPercent":0,"opacity":1}, {"yPercent":-125,"opacity":0,"duration":0.3,"ease":"power3.in","stagger":0.05,"immediateRender":false}, 5.075);
+  tl.fromTo("#troutshop-yr-s0", {"yPercent":0}, {"yPercent":-95.45454545454545,"duration":0.8799999999999999,"ease":"expo.out","immediateRender":false}, 4.085);
+  tl.fromTo("#troutshop-yr-s1", {"yPercent":0}, {"yPercent":-96.66666666666667,"duration":0.82,"ease":"expo.out","immediateRender":false}, 4.115);
+  tl.fromTo("#troutshop-yr-s2", {"yPercent":0}, {"yPercent":-96.66666666666667,"duration":0.76,"ease":"expo.out","immediateRender":false}, 4.145);
+  tl.fromTo("#troutshop-yr-s3", {"yPercent":0}, {"yPercent":-95,"duration":0.7,"ease":"expo.out","immediateRender":false}, 4.175);
+  tl.fromTo("#troutshop-yr", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.3,"ease":"power2.out","immediateRender":false}, 4.045);
+  tl.fromTo("#troutshop-yr", {"opacity":1,"y":0}, {"opacity":0,"y":-60,"duration":0.26,"ease":"power3.in","immediateRender":false}, 5.135);
+  tl.fromTo("#troutshop-tag", {"opacity":0,"x":40}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out","immediateRender":false}, 0.200);
+  tl.fromTo("#troutshop-tag", {"opacity":1,"x":0}, {"opacity":0,"x":40,"duration":0.25,"ease":"power2.in","immediateRender":false}, 7.049);
+  tl.fromTo("#troutshop-sun", {"scale":0,"y":0}, {"scale":0.78,"y":170,"duration":0.75,"ease":"expo.out","immediateRender":false}, 7.059);
+  tl.fromTo("#troutshop-ry-w", {"y":0}, {"y":170,"duration":0.75,"ease":"expo.out","immediateRender":false}, 7.059);
+  tl.fromTo("#troutshop-lw", {"opacity":0,"scale":0.7,"y":20}, {"opacity":1,"scale":1,"y":0,"duration":0.55,"ease":"back.out(1.8)","immediateRender":false}, 7.279);
+  tl.fromTo("#troutshop-url-l0 .fx-c", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.42,"ease":"expo.out","stagger":0.02,"immediateRender":false}, 7.219);
+  tl.fromTo("#troutshop-gp .fx-ln > span", {"yPercent":120,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.45,"ease":"expo.out","immediateRender":false}, 7.339);
+  tl.fromTo("#troutshop-pz", {"scale":0.6,"opacity":0}, {"scale":1,"opacity":1,"duration":0.5,"ease":"back.out(2)","immediateRender":false}, 7.439);
+  tl.fromTo("#troutshop-f0", {"opacity":0.32}, {"opacity":0,"duration":0.45,"ease":"power2.out","immediateRender":false}, 0.000);
+  tl.fromTo("#troutshop-f3", {"opacity":0.16}, {"opacity":0,"duration":0.22,"ease":"power2.out","immediateRender":false}, 5.475);
+  tl.fromTo("#troutshop-tout0", {"xPercent":101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.823);
+  tl.fromTo("#troutshop-tout1", {"xPercent":-101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.833);
+  tl.fromTo("#troutshop-tout2", {"xPercent":101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.844);
+  tl.fromTo("#troutshop-tout3", {"xPercent":-101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.854);
+  tl.fromTo("#troutshop-tout4", {"xPercent":101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.865);
+  tl.fromTo("#troutshop-tout5", {"xPercent":-101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.875);
+  tl.fromTo("#troutshop-tout6", {"xPercent":101}, {"xPercent":0,"duration":0.22499999999999998,"ease":"power3.inOut","immediateRender":false}, 8.886);
+  tl.set({}, {}, 9.123);
+  window.__timelines["troutshop"] = tl;
+  </script>
+</div>
+</template></body></html>
