@@ -1,0 +1,42 @@
+{
+ "key": "jigovky",
+ "built": "2026-10-22T09:28:11.436Z",
+ "outputs": {
+  "jigovky_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "jigovky_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "jigovky_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "jigovky_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "jigovky_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "jigovky_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "jigovky_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "jigovky_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}

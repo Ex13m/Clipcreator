@@ -1,0 +1,42 @@
+{
+ "key": "velkaryba",
+ "built": "2026-10-22T09:27:49.826Z",
+ "outputs": {
+  "velkaryba_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "velkaryba_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "velkaryba_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "velkaryba_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "velkaryba_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "velkaryba_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "velkaryba_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "velkaryba_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}

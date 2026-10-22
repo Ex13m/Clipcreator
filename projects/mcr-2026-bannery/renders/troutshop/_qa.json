@@ -1,0 +1,42 @@
+{
+ "key": "troutshop",
+ "built": "2026-10-22T09:27:38.392Z",
+ "outputs": {
+  "troutshop_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "troutshop_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "troutshop_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "troutshop_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "troutshop_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "troutshop_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "troutshop_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "troutshop_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}

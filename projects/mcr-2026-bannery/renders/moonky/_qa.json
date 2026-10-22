@@ -1,0 +1,70 @@
+{
+ "key": "moonky",
+ "built": "2026-10-22T09:25:40.407Z",
+ "outputs": {
+  "moonky_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "moonky_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "moonky_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "moonky_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "moonky_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "moonky_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "moonky_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "moonky_static_9x16.png": {
+   "err": [],
+   "warn": []
+  },
+  "moonky_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.8,
+    5.8,
+    7.73,
+    9.53
+   ]
+  },
+  "moonky_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.8,
+    5.8,
+    7.73,
+    9.53
+   ]
+  }
+ }
+}

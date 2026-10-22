@@ -1,0 +1,42 @@
+{
+ "key": "bosset",
+ "built": "2026-10-22T09:27:16.867Z",
+ "outputs": {
+  "bosset_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "bosset_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "bosset_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "bosset_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "bosset_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "bosset_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "bosset_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "bosset_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "key": "venue",
+ "built": "2026-10-22T09:28:11.564Z",
+ "outputs": {
+  "venue_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "venue_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "venue_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "venue_carousel_2.png": {
+   "err": [],
+   "warn": [
+    "text outside the safe zone: \"Malý Sporťáček\""
+   ],
+   "scene": "range"
+  },
+  "venue_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "venue_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "venue_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "venue_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}
