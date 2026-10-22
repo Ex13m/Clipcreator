@@ -1,0 +1,42 @@
+{
+ "key": "ftfishing",
+ "built": "2026-10-22T10:59:58.140Z",
+ "outputs": {
+  "ftfishing_static_191.png": {
+   "err": [],
+   "warn": []
+  },
+  "ftfishing_static_1x1.png": {
+   "err": [],
+   "warn": []
+  },
+  "ftfishing_carousel_1.png": {
+   "err": [],
+   "warn": [],
+   "scene": "who"
+  },
+  "ftfishing_carousel_2.png": {
+   "err": [],
+   "warn": [],
+   "scene": "range"
+  },
+  "ftfishing_carousel_3.png": {
+   "err": [],
+   "warn": [],
+   "scene": "hero"
+  },
+  "ftfishing_carousel_4.png": {
+   "err": [],
+   "warn": [],
+   "scene": "mcr"
+  },
+  "ftfishing_static_4x5.png": {
+   "err": [],
+   "warn": []
+  },
+  "ftfishing_static_9x16.png": {
+   "err": [],
+   "warn": []
+  }
+ }
+}
