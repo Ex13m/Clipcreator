@@ -1,6 +1,6 @@
 {
  "key": "venue",
- "built": "2026-10-22T09:28:52.296Z",
+ "built": "2026-10-22T09:40:52.002Z",
  "outputs": {
   "venue_static_191.png": {
    "err": [],
@@ -37,6 +37,34 @@
   "venue_static_9x16.png": {
    "err": [],
    "warn": []
+  },
+  "venue_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.73,
+    5.87,
+    7.77,
+    9.53
+   ]
+  },
+  "venue_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.73,
+    5.87,
+    7.77,
+    9.53
+   ]
   }
  }
 }

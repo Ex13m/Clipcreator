@@ -159,7 +159,7 @@ export const scenes = {
       const pl = pill(E, { x: b.x, y: b.y + 214, h: 52, size: 28, text: 'Bez protihrotu · od 0,4 g', inAttr: 'data-in="left" data-d=".25"' });
       txt += pl.html;
       const L = logoSize(E);
-      txt += logo(E, { x: b.x, y: b.b - L.h, attrs: 'data-in="fade" data-d=".4"' }).html;
+      txt += logo(E, { x: b.x, y: b.b - L.h, attrs: 'data-in="scale" data-d=".4"' }).html;
       const J = fitIn(E, 'tj', { cx: b.x + colW + (b.w - colW) / 2 + 10, cy: b.y + b.h / 2 + 2, w: b.w - colW - 10, h: b.h - 30, rot: -6, inAttr: 'data-in="rise" data-d=".05"', sweep: '0.35,1.3', shadow: 26, float: '6,5' });
       html += J.html;
       const [gx, gy] = J.at(P.tj.head[0] - 80, P.tj.head[1] - 95);
@@ -174,7 +174,7 @@ export const scenes = {
     const headB = y + S.head * 1.02 * 2;
     // logo right of the first headline line (line 2 is short → the hook bend has room under it)
     const L = logoSize(E);
-    txt += logo(E, { x: b.r - L.w, y: y + (S.head * 1.0 - L.h) / 2 + 4, attrs: 'data-in="fade" data-d=".35"' }).html;
+    txt += logo(E, { x: b.r - L.w, y: y + (S.head * 1.0 - L.h) / 2 + 4, attrs: 'data-in="scale" data-d=".35"' }).html;
     y = headB + (k === 'square' ? 14 : 24);
     const p1 = pill(E, { x: b.x, y, h: S.pillH, size: S.pillS, text: 'Bez protihrotu', inAttr: 'data-in="left" data-d=".22"' });
     txt += p1.html;
@@ -224,9 +224,9 @@ export const scenes = {
     const b = E.body, sq = E.kind === 'square';
     let html = world(E, { lx: 0.5, ly: 0.5 });
     const kS = sq ? 26 : 30, hS = sq ? 74 : 88;
-    html += T(E, { cls: 'jg-k', x: b.x, y: b.y + 2, w: b.w * 0.62, size: kS, fit: 20, text: 'Jigové hlavičky · bezprotihrotové jigy', inAttr: 'data-in="left"' });
     // 7 colourways of HD Barbless, right-aligned on the kicker line
     const dd = sq ? 26 : 30, dg = 9, dw = 7 * dd + 6 * dg, lab = sq ? 24 : 28;
+    html += T(E, { cls: 'jg-k', x: b.x, y: b.y + 2, w: b.w - dw - 150, size: kS, fit: 20, text: 'Jigové hlavičky · bezprotihrotové jigy', inAttr: 'data-in="left"' });
     html += T(E, { cls: 'jg-k', x: b.r - dw - 130, y: b.y + 2 + (kS - lab) / 2, w: 116, size: lab, align: 'right', text: '7 barev', style: `color:${C.yellow}`, inAttr: 'data-in="fade" data-d=".1"' });
     html += dots(E, { x: b.r - dw, y: b.y + 2 + (kS * 1.15 - dd) / 2, d: dd, gap: dg, inAttr: 'data-in="scale" data-d="{d}"' });
     html += T(E, { cls: 'jg-h', x: b.x - 3, y: b.y + kS * 1.15 + 10, w: b.w, size: hS, fit: 44, text: 'Barbless i klasika', inAttr: 'data-in="up" data-d=".06"', main: true });
@@ -283,7 +283,7 @@ export const scenes = {
     const nx = 1478, ny = 182;
     const [nw, nh] = E.dims(P.tj.src);
     const a = Math.atan2(tip[1] - lc[1], tip[0] - lc[0]), e = [lc[0] + Math.cos(a) * (r + 6), lc[1] + Math.sin(a) * (r + 6)];
-    html += `<svg class="abs" data-in="fade" data-d=".3" style="left:0;top:0;width:${E.W}px;height:${E.H}px;overflow:visible"><line x1="${R1(e[0])}" y1="${R1(e[1])}" x2="${R1(tip[0])}" y2="${R1(tip[1])}" stroke="${C.yellow}" stroke-width="3"/><circle cx="${R1(tip[0])}" cy="${R1(tip[1])}" r="8" fill="${C.yellow}"/></svg>`;
+    html += `<svg class="abs" data-in="scale" data-d=".3" style="left:0;top:0;width:${E.W}px;height:${E.H}px;overflow:visible"><line x1="${R1(e[0])}" y1="${R1(e[1])}" x2="${R1(tip[0])}" y2="${R1(tip[1])}" stroke="${C.yellow}" stroke-width="3"/><circle cx="${R1(tip[0])}" cy="${R1(tip[1])}" r="8" fill="${C.yellow}"/></svg>`;
     html += `<div class="jg-lens" data-in="scale" data-d=".28" style="left:${R1(lc[0] - r)}px;top:${R1(lc[1] - r)}px;width:${2 * r}px;height:${2 * r}px"><img src="${E.src(P.tj.src)}" alt="" style="position:absolute;left:${R1(r - nx)}px;top:${R1(r - ny)}px;width:${nw}px;height:${nh}px;max-width:none;transform:rotate(-6deg);transform-origin:${nx}px ${ny}px"></div>`;
     const [gx, gy] = J.at(P.tj.head[0] - 80, P.tj.head[1] - 95);
     html += glint(gx, gy, sq ? 150 : 180);
@@ -300,8 +300,8 @@ export const scenes = {
     let y = b.y + 46 + hS * 1.02 * 2 + (sq ? 22 : 36);
     // lockup: logo | jigovky.cz
     const L = logoSize(E);
-    txt += logo(E, { x: b.x, y, attrs: 'data-in="fade" data-d=".2"' }).html;
-    txt += `<i class="abs" data-in="fade" data-d=".25" style="left:${R1(b.x + L.w + 28)}px;top:${R1(y + 8)}px;width:3px;height:${R1(L.h - 16)}px;background:rgba(255,255,255,.55);border-radius:2px"></i>`;
+    txt += logo(E, { x: b.x, y, attrs: 'data-in="scale" data-d=".2"' }).html;
+    txt += `<i class="abs" data-in="scale" data-d=".25" style="left:${R1(b.x + L.w + 28)}px;top:${R1(y + 8)}px;width:3px;height:${R1(L.h - 16)}px;background:rgba(255,255,255,.55);border-radius:2px"></i>`;
     const uS = sq ? 76 : 84;
     txt += T(E, { cls: 'jg-h', x: b.x + L.w + 58, y: y + (L.h - uS * 1.02) / 2, w: b.r - (b.x + L.w + 58), size: uS, fit: 44, text: 'jigovky.cz', inAttr: 'data-in="left" data-d=".26"', main: true });
     y += L.h + (sq ? 22 : 36);

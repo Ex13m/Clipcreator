@@ -136,10 +136,11 @@ export function mark(ctx, { id, cx, y, box = [300, 300], scale = 1, at, label, g
 }
 // MADE BY ⚙ © 2026 GAUSSE HOLLER sign-off (assets_prep/gausseholler/madeby_on_dark.png, prep_logos.py) rebuilt from layers so the
 // gear ring turns: text layer = the same PNG with the gear pixels cleared (madeby_text_on_dark.png, same 4041×413 canvas) +
-// gear_ring / gear_core (shared 1024 canvas). Gear canvas origin on the madeby canvas measured by re-compositing (alpha diff < 1/255):
-// (1081.04, 36.0), 340 px square; ring's own 60° symmetry centre on the 1024 canvas = (512.75, 514.0). Size + logo rule = ctx.logo on
+// the site's footer sign layers brand/gh/ring.png + core.png (shared 512 canvas; gear_ring/gear_core.png are their 2× traces, but
+// data/blocks/gausseholler.json pre-stages those TRIMMED → wrong geometry here). Gear canvas origin on the madeby canvas measured by
+// re-compositing (alpha diff < 1/255): (1081.04, 36.0), 340 px square; ring's own 60° symmetry centre = (256.375, 257.0) on 512. Size + logo rule = ctx.logo on
 // the flat PNG (trimmed to its content bbox 40,40 – 4001,373).
-const MB = { pad: 40, cw: 3961, canvas: [4041, 413], gear: [1081.04, 36.0, 340], hub: [512.75, 514.0] };
+const MB = { pad: 40, cw: 3961, canvas: [4041, 413], gear: [1081.04, 36.0, 340], hub: [256.375, 257.0], gc: 512 };
 export function madeby(ctx, { id, src, box, scale = 1, at, label = 'MADE BY GH', spin: sp = {} }) {
   const L = ctx.logo(src, { box, scale, at, label });
   const k = L.w / MB.cw, [gx, gy, gs] = MB.gear;
@@ -147,8 +148,8 @@ export function madeby(ctx, { id, src, box, scale = 1, at, label = 'MADE BY GH',
   const gimg = (rel, extra = '') => `<img src="${ctx.asset(rel, { trim: false })}" alt="" style="position:absolute;left:0;top:0;width:100%;height:100%;${extra}">`;
   const html = `<div style="position:relative;width:${px(L.w)};height:${px(L.h)}">`
     + `<img src="${ctx.asset('assets_prep/gausseholler/madeby_text_on_dark.png', { trim: false })}" alt="${esc('MADE BY © 2026 Gausse Holler')}" style="position:absolute;left:${px(-MB.pad * k)};top:${px(-MB.pad * k)};width:${px(MB.canvas[0] * k)};height:${px(MB.canvas[1] * k)}">`
-    + `<div id="${ctx.id(`${id}-ring`)}" style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)};transform-origin:${px((MB.hub[0] / 1024) * gw)} ${px((MB.hub[1] / 1024) * gw)}">${gimg('assets_prep/gausseholler/gear_ring.png')}</div>`
-    + `<div style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)}">${gimg('assets_prep/gausseholler/gear_core.png')}</div></div>`;
+    + `<div id="${ctx.id(`${id}-ring`)}" style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)};transform-origin:${px((MB.hub[0] / MB.gc) * gw)} ${px((MB.hub[1] / MB.gc) * gw)}">${gimg('brand/gh/ring.png')}</div>`
+    + `<div style="position:absolute;left:${px(gl)};top:${px(gt)};width:${px(gw)};height:${px(gw)}">${gimg('brand/gh/core.png')}</div></div>`;
   const ring = ctx.sel(`${id}-ring`);
   if (sp !== false) spin(ctx, ring, sp.t0 ?? at?.[0] ?? 0, sp.t1 ?? at?.[1] ?? ctx.dur, { dps: sp.dps ?? SPIN_DPS });
   return { html, w: L.w, h: L.h, ring };

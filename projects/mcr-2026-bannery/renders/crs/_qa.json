@@ -1,6 +1,6 @@
 {
  "key": "crs",
- "built": "2026-10-22T09:28:11.758Z",
+ "built": "2026-10-22T09:28:34.597Z",
  "outputs": {
   "crs_static_191.png": {
    "err": [],
@@ -37,6 +37,34 @@
   "crs_static_9x16.png": {
    "err": [],
    "warn": []
+  },
+  "crs_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.73,
+    5.7,
+    7.7,
+    9.53
+   ]
+  },
+  "crs_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.73,
+    3.73,
+    5.7,
+    7.7,
+    9.53
+   ]
   }
  }
 }

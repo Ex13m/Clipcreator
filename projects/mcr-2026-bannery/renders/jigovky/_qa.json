@@ -1,6 +1,6 @@
 {
  "key": "jigovky",
- "built": "2026-10-22T09:28:43.478Z",
+ "built": "2026-10-22T09:35:44.955Z",
  "outputs": {
   "jigovky_static_191.png": {
    "err": [],
@@ -37,6 +37,34 @@
   "jigovky_static_9x16.png": {
    "err": [],
    "warn": []
+  },
+  "jigovky_anim_1x1.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.77,
+    5.8,
+    7.73,
+    9.57
+   ]
+  },
+  "jigovky_anim_4x5.mp4": {
+   "err": [],
+   "warn": [],
+   "dur": 10.000000000000002,
+   "frames": 300,
+   "fps": 30,
+   "samples": [
+    1.67,
+    3.77,
+    5.8,
+    7.73,
+    9.57
+   ]
   }
  }
 }

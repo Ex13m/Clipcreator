@@ -85,7 +85,7 @@ export function css() {
 .vr-bmore{position:absolute;border-radius:14px;box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;text-align:center;font-family:Nunito;font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;line-height:1.02;white-space:nowrap}
 .vr-chip{display:flex;flex-direction:column;justify-content:center;padding:0 1em 0 1.15em;border-radius:16px;background:rgba(7,20,38,.74);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18),0 14px 30px rgba(0,0,0,.3);font-family:Nunito;white-space:nowrap;overflow:hidden}
 .vr-chip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:.32em;background:${C.red}}
-.vr-chip span{font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:${C.ice};font-size:.48em;line-height:1.5}
+.vr-chip span{font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:${C.ice};font-size:.55em;line-height:1.45}
 .vr-chip b{font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;line-height:1.1}
 .vr-band{position:absolute;pointer-events:none;background:linear-gradient(180deg,transparent 0%,rgba(127,176,230,.10) 30%,rgba(190,220,255,.36) 50%,rgba(127,176,230,.10) 70%,transparent 100%)}
 .vr-rod{filter:drop-shadow(0 0 1.5px rgba(225,238,255,.95)) drop-shadow(0 0 12px rgba(140,190,245,.55))}
@@ -142,7 +142,7 @@ function reel(E, { cx, bottom, h, attrs = 'data-in="rise" data-d=".04"' }) {
 }
 // a chip: small label + value (film fx.chip, dark glass + red accent bar)
 const chip = (E, { x, y, w, h, label, value, vs, right = false, lower = false, inAttr = '' }) =>
-  `<div class="t vr-chip" ${inAttr} style="${right ? `left:${R1(x - w)}px` : `left:${R1(x)}px`};top:${R1(y)}px;width:${R1(w)}px;height:${R1(h)}px;font-size:${vs}px">${label ? `<span>${E.t(label)}</span>` : ''}<b${lower ? ' style="text-transform:none"' : ''}>${E.t(value)}</b></div>`;
+  `<div class="t vr-chip" data-fit="24" ${inAttr} style="${right ? `left:${R1(x - w)}px` : `left:${R1(x)}px`};top:${R1(y)}px;width:${R1(w)}px;height:${R1(h)}px;font-size:${vs}px">${label ? `<span>${E.t(label)}</span>` : ''}<b${lower ? ' style="text-transform:none"' : ''}>${E.t(value)}</b></div>`;
 
 // lure tiles (knolling grid): tile glow in the lure's colour + the brand logo under the bait
 function tiles(E, keys, { x, y, w, h, cols, gap = 12, d0 = 0.1 }) {
@@ -270,15 +270,15 @@ export const scenes = {
     const band = `<div class="vr-band" data-in="wipe-r" data-d=".1" style="left:0;width:${E.W}px;top:${R1(rodY - 70)}px;height:140px"></div>`;
     const rod = E.img(ROD, { cx: E.W / 2 - 4, cy: rodY, w: rw, cls: 'vr-rod', style: `transform:rotate(${ROD_DEG}deg)`, attrs: 'data-in="wipe-r" data-d=".12" data-dur=".6"' }).html;
     // reel right, chips left (the rod never cuts text)
-    const reelH = b.b - rodY - 14;
+    const reelH = Math.min(b.b - rodY - 14, sq ? 400 : 520);
     const R = reel(E, { cx: b.r - reelH * 0.43 + 10, bottom: b.b, h: reelH });
-    const cw = Math.min(560, R.x - b.x - 10), chH = sq ? 96 : 108, vs = sq ? 40 : 44;
-    let cy = rodY + 36;
+    const cw = Math.min(600, R.x - b.x + 40), chH = sq ? 96 : 118, vs = sq ? 40 : 46, gap = sq ? 14 : 26;
+    let cy = rodY + (sq ? 36 : 50);
     txt += chip(E, { x: b.x, y: cy, w: cw, h: chH, label: 'Prodejna Olomouc', value: 'Půjčte si prut', vs, inAttr: 'data-in="left" data-d=".2"' });
-    cy += chH + 16;
-    txt += T(E, { cls: 'vr-cap', x: b.x, y: cy, w: cw, size: 22, text: 'Cardiff Exlead Competition · 1,83 m · 0,4–4,5 g', fit: 16, inAttr: 'data-in="left" data-d=".26"' });
-    cy += 44;
-    txt += chip(E, { x: b.x, y: cy, w: cw, h: chH, label: 'Naviják Shimano Vanquish FA CE', value: '145 g · převod 5,1 : 1', vs, lower: true, inAttr: 'data-in="left" data-d=".3"' });
+    cy += chH + gap;
+    txt += chip(E, { x: b.x, y: cy, w: cw, h: chH, label: 'Prut Cardiff Exlead Competition', value: '1,83 m · 0,4–4,5 g', vs, lower: true, inAttr: 'data-in="left" data-d=".26"' });
+    cy += chH + gap;
+    txt += chip(E, { x: b.x, y: cy, w: cw, h: chH, label: 'Naviják Shimano Vanquish FA CE', value: '145 g · převod 5,1 : 1', vs, lower: true, inAttr: 'data-in="left" data-d=".32"' });
     const hz = rodY + 10;
     return { html: '<div class="full vr-bg2"></div>' + water(E, 'vr-wtr-hero', hz, { op: 0.9 }) + band + rod + R.html + txt };
   },
@@ -300,9 +300,13 @@ export const scenes = {
     const uy = b.b - us * 1.1 - 4, ly = uy - lw.h - 14;
     // shelf of six spoons (six brands) between headline and lockup
     const SH = ['illexP', 'cardiffO', 'lj', 'westin', 'daiwaG', 'vanpla'];
-    const sy0 = y, sy1 = ly - 16, cw = b.w / SH.length, cyS = (sy0 + sy1) / 2, bh = Math.min(sy1 - sy0, sq ? 250 : 300);
-    html += glow(E.W / 2, cyS, b.w * 0.5, 'rgba(127,176,230,.5)', 0.35);
-    SH.forEach((k, i) => { html += lureImg(E, k, { cx: b.x + cw * (i + 0.5), cy: cyS, bw: cw * 1.45, bh, attrs: `data-in="down" data-dist="50" data-d="${(0.12 + i * 0.05).toFixed(2)}"` }); });
+    const sy0 = y, sy1 = ly - 16, rows = 1, per = SH.length / rows, cw = b.w / per, rh = (sy1 - sy0) / rows;
+    const bh = Math.min(rh, sq ? 250 : 340);
+    html += glow(E.W / 2, (sy0 + sy1) / 2, b.w * 0.5, 'rgba(127,176,230,.5)', 0.35);
+    SH.forEach((k, i) => {
+      const r = Math.floor(i / per), c = i % per, cx = b.x + cw * (c + 0.5) + (rows > 1 ? (r ? 1 : -1) * cw * 0.12 : 0);
+      html += lureImg(E, k, { cx, cy: sy0 + rh * (r + 0.5), bw: cw * (sq ? 1.45 : 1.5), bh, attrs: `data-in="down" data-dist="50" data-d="${(0.12 + i * 0.05).toFixed(2)}"` });
+    });
     html += vrLogo(E, { cx: E.W / 2, y: ly, attrs: 'data-in="scale" data-d=".2"' }).html;
     html += H(E, { x: b.x, y: uy, w: b.w, size: us, text: 'velka-ryba.cz', align: 'center', style: 'text-transform:none', inAttr: 'data-in="up" data-d=".26"' });
     return { html };

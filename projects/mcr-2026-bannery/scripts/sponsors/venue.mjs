@@ -144,7 +144,8 @@ const PL_EXT = (() => {
     const [ex, ey] = p.water_edge_portrait, [px0, py0] = p.xy_portrait, dx = px0 - ex, dy = py0 - ey, L = Math.hypot(dx, dy) || 1;
     xs.push(ex + (dx / L) * 2.6); ys.push(ey + (dy / L) * 2.6);
   }
-  return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
+  const [bx0, by0, bx1, by1] = POND.outline.clean.bbox_portrait;
+  return { x0: Math.min(bx0, ...xs), x1: Math.max(bx1, ...xs), y0: Math.min(by0, ...ys), y1: Math.max(by1, ...ys) };
 })();
 
 // the drone's last frame (1080×1920, native) shifted by dy, with the plan laid on the real pond (AR) — portrait-type formats
@@ -222,7 +223,7 @@ export const scenes = {
     y += ks * 1.6;
     html += H2(E, { x: b.x - 3, y, w: colW + 3, size: hs, fit: 56, a: 'Líheň', b2: 'Liběchov' });
     y += hs * 0.98 * 2 + (sq ? 40 : 66);
-    html += T(E, { cls: 'vn-s', x: b.x, y, w: colW, size: sq ? 30 : 34, text: 'Pstruží líheň od roku', style: 'color:#fff', inAttr: 'data-in="up" data-d=".14"' });
+    html += T(E, { cls: 'vn-s', x: b.x, y, w: colW, size: sq ? 30 : 34, fit: 22, text: 'Pstruží líheň od roku', style: 'color:#fff', inAttr: 'data-in="up" data-d=".14"' });
     y += (sq ? 30 : 34) * 1.2;
     html += T(E, { cls: 'vn-n vn-shadow', x: b.x - 8, y, w: colW + 8, size: ys, fit: 120, text: '1934', inAttr: 'data-in="slam" data-d=".18"', main: true });
     y += ys * 1.0 + 6;
@@ -276,7 +277,7 @@ export const scenes = {
     html += T(E, { cls: 'vn-h', x: b.x - 4, y, w: b.w + 4, size: hs, fit: 60, text: 'Malý Sporťáček', inAttr: 'data-in="slam" data-d=".06"', main: true });
     y += hs * 1.0 + (sq ? 30 : 50);
     // plan on the right, as large as the free box allows
-    const top = y + 40, bot = b.b - 6;   // 40 px for the 40 m callout
+    const top = y + 44, bot = b.b - 30;   // 44 px for the 40 m callout, 30 px for the „schéma“ note
     const mh = PL_EXT.y1 - PL_EXT.y0, mw = PL_EXT.x1 - PL_EXT.x0;
     const s = Math.min((bot - top) / mh, (sq ? 500 : 560) / mw);
     const r = Math.max(10, Math.round(s * 1.15));
@@ -285,14 +286,14 @@ export const scenes = {
     html += `<div class="full" data-in="scale" data-d=".04" style="transform-origin:${R1(cx)}px ${R1(cy)}px">${plan.html}</div>`;
     // dimension callouts (web „50 x 40 m“), to scale: 50 m along the long axis left of the pins, 40 m across the top
     const len50 = 50 * s, x50 = plan.pins.x0 - 34, y50 = cy - len50 / 2;
-    const len40 = 40 * s, y40 = plan.pins.y0 - 24, x40 = cx - len40 / 2;
+    const len40 = 40 * s, y40 = Math.min(plan.pins.y0, plan.bbox.y0) - 26, x40 = cx - len40 / 2;
     const dl = sq ? 24 : 26;
     html += `<div data-in="fade" data-d=".3">
       <div class="vn-dim" style="left:${R1(x50 - 1.5)}px;top:${R1(y50)}px;width:3px;height:${R1(len50)}px"><i class="vn-dim" style="left:-10px;top:-1.5px;width:23px;height:3px"></i><i class="vn-dim" style="left:-10px;bottom:-1.5px;width:23px;height:3px"></i></div>
       <div class="vn-dl t" style="left:${R1(x50 - 50)}px;top:${R1(cy - dl * 0.7)}px;width:100px;font-size:${dl}px;line-height:1.4;background:#172031;transform:rotate(-90deg)">50 m</div>
       <div class="vn-dim" style="left:${R1(x40)}px;top:${R1(y40 - 1.5)}px;width:${R1(len40)}px;height:3px"><i class="vn-dim" style="left:-1.5px;top:-10px;width:3px;height:23px"></i><i class="vn-dim" style="right:-1.5px;top:-10px;width:3px;height:23px"></i></div>
       <div class="vn-dl t" style="left:${R1(cx - 50)}px;top:${R1(y40 - dl * 0.7)}px;width:100px;font-size:${dl}px;line-height:1.4;background:#172031">40 m</div></div>`;
-    html += `<div class="vn-ai t" style="left:${R1(plan.pins.x1 - 400)}px;width:400px;text-align:right;top:${R1(Math.min(b.b - 20, plan.pins.y1 + 4))}px;font-size:16px;opacity:.8">Schéma · čísla míst orientační</div>`;
+    html += `<div class="vn-ai t" style="left:${R1(Math.max(plan.pins.x1, plan.bbox.x1) - 400)}px;width:400px;text-align:right;top:${R1(Math.max(plan.pins.y1, plan.bbox.y1) + 8)}px;font-size:16px;opacity:.8">Schéma · čísla míst orientační</div>`;
     // facts column left of the plan
     const colW = x50 - 60 - b.x;
     let fy = y + (sq ? 10 : 40);

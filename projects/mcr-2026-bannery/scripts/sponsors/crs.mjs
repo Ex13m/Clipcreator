@@ -84,7 +84,7 @@ function photo(E, src, { fx, fy, tx, ty, w, box = { x: 0, y: 0, w: E.W, h: E.H }
   return `<div class="crs-ph" style="left:${R1(box.x)}px;top:${R1(box.y)}px;width:${R1(box.w)}px;height:${R1(box.h)}px;${mk}">${im.html}</div>`;
 }
 // the ČRS logo with turquoise hairlines drawn out of it (the seal's water line). Centred at cx or left-aligned at x.
-function logoLine(E, { cx, x, y, maxW, hlL = null, hlR = null, inAttr = 'data-in="fade" data-d=".15"' }) {
+function logoLine(E, { cx, x, y, maxW, hlL = null, hlR = null, inAttr = 'data-in="up" data-d=".12" data-dist="30"' }) {
   const L = E.logo(LOGO, { x: 0, y: 0, maxW });
   const left = cx != null ? cx - L.w / 2 : x;
   const lg = E.logo(LOGO, { x: left, y, maxW, attrs: inAttr });
@@ -127,7 +127,7 @@ function factCard(E, { x, y, w, k, b, ks, bs, blines = 1, align = 'center', inAt
 function lockup(E, { y, S, kicker = 'Poděkování · Trout Area CZ' }) {
   const b = E.body, cx = b.x + b.w / 2;
   let h = '';
-  if (kicker) { h += T(E, { cls: 'crs-k', x: b.x, y, w: b.w, size: S.k, align: 'center', fit: 16, text: kicker, inAttr: 'data-in="fade"' }); y += S.k * 1.9; }
+  if (kicker) { h += T(E, { cls: 'crs-k', x: b.x, y, w: b.w, size: S.k, align: 'center', fit: 16, text: kicker, inAttr: 'data-in="up" data-dist="24"' }); y += S.k * 1.9; }
   h += T(E, { cls: 'crs-h', x: b.x, y, w: b.w, size: S.thx, align: 'center', fit: 80, text: 'Děkujeme', inAttr: 'data-in="scale" data-dur=".9"', main: true });
   y += S.thx * 0.98 + S.gap;
   const LL = logoLine(E, { cx, y, maxW: S.logoW });
@@ -150,7 +150,7 @@ export const scenes = {
       h += `<div class="abs" style="left:${R1(bx.x)}px;top:0;width:${R1(bx.w)}px;height:${E.H}px;-webkit-mask-image:${mk};mask-image:${mk};background:${C.blue};mix-blend-mode:soft-light;opacity:.4"></div>`;
       h += `<div class="abs" style="left:${R1(bx.x)}px;top:0;width:${R1(bx.w)}px;height:${E.H}px;-webkit-mask-image:${mk};mask-image:${mk};background:linear-gradient(0deg,rgba(8,16,34,.85) 0%,rgba(8,16,34,0) 32%),linear-gradient(180deg,rgba(8,16,34,.6) 0%,rgba(8,16,34,0) 28%)"></div>`;
       let y = b.y + 18;
-      h += T(E, { cls: 'crs-k', x: b.x, y, w: colW, size: 20, text: 'Poděkování · Trout Area CZ', inAttr: 'data-in="fade"' });
+      h += T(E, { cls: 'crs-k', x: b.x, y, w: colW, size: 20, text: 'Poděkování · Trout Area CZ', inAttr: 'data-in="up" data-dist="24"' });
       y += 40;
       h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: colW, size: 112, fit: 70, text: 'Děkujeme', inAttr: 'data-in="scale"', main: true });
       y += 112 + 8;
@@ -225,7 +225,7 @@ export const scenes = {
     y += (sq ? 26 : 28) * 1.8;
     h += T(E, { cls: 'crs-h', x: b.x - 4, y, w: b.w, size: hd, lines: 2, html: `${E.t('Dlouholetá')}<br>${E.t('podpora')}`, inAttr: 'data-in="up" data-d=".05"', main: true });
     y += hd * 0.98 * 2 + 26;
-    h += T(E, { cls: 'crs-p', x: b.x, y, w: b.w * 0.9, size: sq ? 40 : 44, lines: 2, main: true, text: 'Poháry MČR 2025 na stole pod znakem ČRS', inAttr: 'data-in="up" data-d=".18"', style: 'font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.4)' });
+    h += T(E, { cls: 'crs-p', x: b.x, y, w: b.w * 0.9, size: sq ? 40 : 44, lines: 2, main: true, text: 'Poháry MČR 2025 na stole pod znakem\u00a0ČRS', inAttr: 'data-in="up" data-d=".18"', style: 'font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.4)' });
     h += T(E, { cls: 'crs-cap', x: b.r - 400, y: b.b - 26, w: 400, size: 20, align: 'right', text: 'Foto: MČR 2025' });
     return { html: h, taTone: 'scrim' };
   },

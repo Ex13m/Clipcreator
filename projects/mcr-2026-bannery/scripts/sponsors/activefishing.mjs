@@ -361,7 +361,7 @@ export const scenes = {
     html += `<div class="abs" data-in="up" data-d=".3" style="left:${R1(b.r - 4 * 42 - 30)}px;top:${R1(ny + nh / 2 - 15)}px;width:${4 * 42 + 30}px;height:30px">${dots}</div>`;
     // the lure: all colourways aligned by visible box, centre of the free area
     const top = by + (sq ? 70 : 90), bot = ny - (sq ? 16 : 30);
-    const cy = (top + bot) / 2, V = Math.min(sq ? 880 : 900, b.w + 40);
+    const cy = (top + bot) / 2, V = Math.min(860, b.w + 40);
     // tint glow follows the colourway
     const tints = CW.map((c) => `<div class="cy" style="background:radial-gradient(closest-side,${P[c].tint},rgba(255,255,255,0))"></div>`).join('');
     html += `<div class="abs" data-cycle="${STEP}" data-d="${D0}" data-rest="0" style="left:${R1(E.W / 2 - 560)}px;top:${R1(cy - 420)}px;width:1120px;height:840px;opacity:.9">${tints}</div>`;
@@ -379,7 +379,7 @@ export const scenes = {
     let y = b.y + (sq ? 50 : 58);
     txt += T(E, { cls: 'af-h', x: b.x - 3, y, w: b.w, size: hs, fit: 80, html: `Věnuje <span class="af-g">ceny</span>`, main: true, inAttr: 'data-in="slam" data-d=".05"' });
     y += hs * 1.0;
-    txt += T(E, { cls: 'af-s', x: b.x, y, w: b.w, size: sq ? 42 : 46, text: 'pro závodníky mistrovství', main: true, style: `color:${C.ink}`, inAttr: 'data-in="up" data-d=".14"' });
+    txt += T(E, { cls: 'af-s', x: b.x, y, w: b.w, size: sq ? 42 : 46, text: 'pro závodníky mistrovství', main: true, style: `color:${C.ink}`, inAttr: 'data-in="up" data-dist="24" data-d=".14"' });
     y += (sq ? 42 : 46) * 1.25 + (sq ? 22 : 40);
     // logo + URL
     const L = afLogo(E, { x: b.x, y, maxH: 999, attrs: 'data-in="scale" data-d=".18"' });
@@ -395,7 +395,7 @@ export const scenes = {
     const slot = b.w / row.length;
     row.forEach(([k, rot], i) => {
       const box = { x: b.x + i * slot + 8, y: y + 4, w: slot - 16, h: sh - 24 };
-      html += prodIn(E, k, box, { rot, attrs: `data-in="rise" data-d="${(0.12 + i * 0.05).toFixed(2)}"`, maxUp: 1.2 }).html;
+      html += prodIn(E, k, box, { rot, attrs: `data-in="scale" data-d="${(0.12 + i * 0.05).toFixed(2)}"`, maxUp: 1.2 }).html;
     });
     return { html: html + txt };
   },
