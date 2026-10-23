@@ -18,3 +18,5 @@
 18:00 trig_01ELTzUKXxu4Dge8iRW1NeY4
 18:30 trig_01RVmgjNmQX2JVehoLYX7zHT
 20:00 trig_01F3Y3zxziBc9kycXA7JWTtQ
+
+# 23.10. 10:05 CEST: Zapier page_photo vrátil post_id, ale příspěvek na stránce není. Od 10:30 RUČNÍ režim: při každém triggeru NEpublikovat přes Zapier, jen poslat operátorovi soubor + text.
