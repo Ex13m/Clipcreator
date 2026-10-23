@@ -334,13 +334,13 @@ Soubor: `crs_static_16x9.png`
 ```
 Děkujeme Českému rybářskému svazu
 
-Český rybářský svaz je nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody, a patří mezi největší zájmová sdružení v České republice. Sportovní lov ryb je nedílnou součástí jeho činnosti – od místních závodů až po mistrovství republiky a světa.
+Český rybářský svaz je nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody, a patří mezi největší zájmová sdružení v České republice. Sportovní lov ryb je nedílnou součástí jeho činnosti – od místních závodů až po mistrovství republiky a světa.
 
-Areál Líheň Liběchov, kde se letošní mistrovství koná, vlastní Český rybářský svaz, místní organizace Mělník. Děkujeme za dlouholetou podporu Trout Area Czech Republic!
+Svaz dlouhodobě podporuje Trout Area Czech Republic a této podpory si velmi vážíme. Děkujeme!
 
 rybsvaz.cz
 
-Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026 · Líheň Liběchov, rybník Malý Sporťáček
+Mistrovství ČR v Trout Area 2026 · 24.–25. 10. 2026
 
 #TroutArea #TroutAreaCZ #MCR2026 #CeskyRybarskySvaz #rybarstvi
 ```
@@ -353,12 +353,12 @@ Soubor: `reel_crs_v9_60fps.mp4`
 Děkujeme
 Český rybářský svaz
 
-za dlouholetou podporu.
+za dlouholetou podporu Trout Area Czech Republic.
+Vaší podpory si velmi vážíme.
 
-Areál Líheň Liběchov, dějiště MČR 2026, vlastní Český rybářský svaz, místní organizace Mělník.
 rybsvaz.cz
 
-#TroutArea #TroutAreaCZ #MCR2026
+#TroutArea #TroutAreaCZ #MCR2026 #CeskyRybarskySvaz
 ```
 
 ### 20:00 – Celé video (všichni partneři)
