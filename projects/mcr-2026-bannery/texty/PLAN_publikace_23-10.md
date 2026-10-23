@@ -332,11 +332,13 @@ ftfishing.cz
 Soubor: `crs_static_16x9.png`
 
 ```
-Děkujeme Českému rybářskému svazu
+Děkujeme Českému rybářskému svazu 🤝
 
 Český rybářský svaz je nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody, a patří mezi největší zájmová sdružení v České republice. Sportovní lov ryb je nedílnou součástí jeho činnosti – od místních závodů až po mistrovství republiky a světa.
 
-Svaz dlouhodobě podporuje Trout Area Czech Republic a této podpory si velmi vážíme. Děkujeme!
+Trout Area Czech Republic může s podporou svazu počítat už řadu let. Vážíme si spolupráce, která stojí na vzájemné důvěře, otevřené komunikaci a společném cíli: rozvíjet sportovní rybolov, dávat prostor mladým závodníkům a ukazovat, že k závodění patří i ohleduplný přístup k rybám a k vodě.
+
+Bez partnerů, jako je Český rybářský svaz, by Trout Area v Česku nemohla růst tak, jak roste. Děkujeme za důvěru, za podporu a za to, že s námi táhnete za jeden provaz. Těšíme se na další společné sezóny!
 
 rybsvaz.cz
 
@@ -353,8 +355,9 @@ Soubor: `reel_crs_v9_60fps.mp4`
 Děkujeme
 Český rybářský svaz
 
-za dlouholetou podporu Trout Area Czech Republic.
-Vaší podpory si velmi vážíme.
+Za dlouholetou podporu Trout Area Czech Republic.
+Vážíme si spolupráce postavené na důvěře a společném cíli – rozvíjet sportovní rybolov a ohleduplný přístup k rybám i vodě.
+Těšíme se na další společné sezóny!
 
 rybsvaz.cz
 
