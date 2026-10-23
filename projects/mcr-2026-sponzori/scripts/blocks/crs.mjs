@@ -6,7 +6,7 @@
 //   „Českému“  the ČRS logo (white, ≤ TA) is revealed along the fish, tail → head, a light runs through it; hairlines draw out of it
 //   „za / dlouholetou / podporu“  ZA DLOUHOLETOU PODPORU word by word on the voice → the kinetic line reads
 //         DĚKUJEME · [ČRS] · ZA DLOUHOLETOU PODPORU
-//   bar 2 + 1 beat  verified fact (lihenlibechov.cz/cs/kontakt): „Areál MČR 2026 · Líheň Liběchov / vlastní ČRS · místní organizace Mělník“
+//   bar 2 + 1 beat  verified fact (lihenlibechov.cz/cs/kontakt): „Areál MČR 2026 · Líheň Liběchov / provozuje ČRS · místní organizace Mělník“
 //   bar 2 + 3 beats  rybsvaz.cz · bars 1–3 (peak 1) water rings out of the seal on every downbeat · bar 3 light sweep
 //   film: TA mixer faders rise over the still lockup into the finale (our one fader); the TA logo flies home, the ČRS logo shrinks
 //         in sync with it (always ≤ TA)
@@ -49,10 +49,11 @@ function lockup(ctx, { at }) {
   out.LG = LG;
   out.logoBox = { x: CX - LG.w / 2, y: Y.logo - LG.h / 2, w: LG.w, h: LG.h };
   out.line = cx.wordsBlock(ctx, { id: 'za', text: 'za dlouholetou podporu', x: L, y: Y.line, w: Wt, sizes: [104, 96, 90, 84, 78, 72], maxLines: 2, font: 'Inter', wght: 800, color: '#fff' });
-  // verified fact (lihenlibechov.cz/cs/kontakt: „vlastník: Český rybářský svaz, z. s., místní organizace Mělník“)
-  const fv = ctx.fit(ctx.nb('vlastní ČRS · místní organizace Mělník'), { font: 'Inter', wght: 800, maxW: Wt - 80 - 64, maxLines: 1, sizes: [42, 40, 38, 36, 34] }).size;
+  // verified fact (lihenlibechov.cz/cs/historie: „od roku 2022 ji provozuje Český rybářský svaz, místní organizace Mělník pomocí firmy
+  // Líheň Liběchov s.r.o.“; MO Mělník = nájemce, ne vlastník areálu → „provozuje“, ne „vlastní“ — operátor 23. 10. 2026)
+  const fv = ctx.fit(ctx.nb('provozuje ČRS · místní organizace Mělník'), { font: 'Inter', wght: 800, maxW: Wt - 80 - 64, maxLines: 1, sizes: [42, 40, 38, 36, 34] }).size;
   out.factHtml = `<div class="fx-abs crs-fact" id="${ctx.id('fact')}" style="left:${L + 40}px;width:${Wt - 80}px;top:${Y.fact}px">
-    <i id="${ctx.id('fact-bar')}"></i><span>${ctx.esc(ctx.nb('Areál MČR 2026 · Líheň Liběchov'))}</span><b style="font-size:${fv}px">${ctx.esc(ctx.nb('vlastní ČRS · místní organizace Mělník'))}</b></div>`;
+    <i id="${ctx.id('fact-bar')}"></i><span>${ctx.esc(ctx.nb('Areál MČR 2026 · Líheň Liběchov'))}</span><b style="font-size:${fv}px">${ctx.esc(ctx.nb('provozuje ČRS · místní organizace Mělník'))}</b></div>`;
   out.urlHtml = `<div class="fx-abs" id="${ctx.id('url')}" style="left:0;width:${W}px;top:${Y.url}px;text-align:center;font-family:'Inter';font-weight:800;font-size:64px;line-height:1;color:#fff;letter-spacing:-.01em">${ctx.esc(ctx.data.url)}</div>`;
   // hairlines out of the logo (the seal's „water line“)
   const hy = Y.logo + 2, gap = 34;

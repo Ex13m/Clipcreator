@@ -6,7 +6,7 @@
 //   „nezisková organizace s dlouholetou tradicí, která se věnuje rybářství, ochraně vodních živočichů a přírody“ (rybsvaz.cz)
 //   „mezi největší zájmová sdružení v České republice“ (rybsvaz.cz — only in this full form) · 1968 = samostatný Český rybářský svaz
 //   Líheň Liběchov: „vlastník: Český rybářský svaz, z. s., místní organizace Mělník“ (lihenlibechov.cz/cs/kontakt);
-//   on screen ONLY „Areál vlastní Český rybářský svaz, místní organizace Mělník“ (operator 22. 10.: no „provozuje“ wording)
+//   on screen „provozuje ČRS, místní organizace Mělník“ (operator 23. 10.: MO Mělník líheň provozuje, nevlastní — lihenlibechov.cz/cs/historie)
 //   carousel 3 = plan of Malý Sporťáček (mcr-2026-sponzori/data/pond_scheme.json, same drawing as venue.mjs) in ČRS colours,
 //   labelled „Schéma · čísla míst orientační“ (the peg layout is our proposal)
 //   MČR 2025 trophy table dressed in the ČRS cloth (our gallery, gtacz_mcr25_1000046063, verified by eye) · „dlouholetá podpora“ = operator.
@@ -225,7 +225,7 @@ export const scenes = {
       let y = b.y + Math.max(0, (b.h - blockH) / 2);
       const LK = lockup(E, { y, S });
       let h = world() + LK.html;
-      const F = factCard(E, { x: b.x + 70, y: LK.y + 46, w: b.w - 140, k: 'Areál MČR 2026 · Líheň Liběchov', b: 'vlastní ČRS · místní organizace Mělník', ks: 22, bs: 40 });
+      const F = factCard(E, { x: b.x + 70, y: LK.y + 46, w: b.w - 140, k: 'Areál MČR 2026 · Líheň Liběchov', b: 'provozuje ČRS · místní organizace Mělník', ks: 22, bs: 40 });
       h += F.html;
       return { html: h };
     }
@@ -242,7 +242,7 @@ export const scenes = {
     h += `<div class="abs" style="left:0;top:${R1(sb)}px;width:${E.W}px;height:${R1(E.H - sb)}px;background:linear-gradient(180deg,rgba(8,16,34,0) 0%,rgba(8,16,34,.78) 45%,rgba(8,16,34,.92) 100%)"></div>`;
     const LK = lockup(E, { y: b.y + (tall ? 20 : 6), S });
     h += LK.html;
-    const F = factCard(E, { x: b.x + (tall ? 10 : 40), y: LK.y + (tall ? 70 : 44), w: b.w - (tall ? 20 : 80), k: 'Areál MČR 2026 · Líheň Liběchov', b: 'vlastní ČRS · místní organizace Mělník', ks: tall ? 26 : 24, bs: tall ? 42 : 42 });
+    const F = factCard(E, { x: b.x + (tall ? 10 : 40), y: LK.y + (tall ? 70 : 44), w: b.w - (tall ? 20 : 80), k: 'Areál MČR 2026 · Líheň Liběchov', b: 'provozuje ČRS · místní organizace Mělník', ks: tall ? 26 : 24, bs: tall ? 42 : 42 });
     h += F.html;
     h += T(E, { cls: 'crs-cap', x: b.r - 400, y: b.b - 26, w: 400, size: 20, align: 'right', text: 'Foto: MČR 2025' });
     return { html: h, taTone: 'dark' };
@@ -330,7 +330,7 @@ export const scenes = {
       h += T(E, { cls: 'crs-h', x: b.x - 3, y, w: 150, size: 104, fit: 70, text: '40', style: `color:${C.white}`, inAttr: 'data-in="up" data-d=".16"', main: true });
       h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x + 150)}px;top:${R1(y + 40)}px;width:70px;height:4px;background:${C.turq}"></i>`;
       h += T(E, { cls: 'crs-l', x: b.x + 150, y: y + 48, w: colW - 150, size: 30, fit: 20, text: 'závodních míst', style: 'line-height:1.4', inAttr: 'data-in="up" data-d=".2"' });   // line-height 1 + overflow:hidden cropped Á / Í
-      const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="20"' };
+      const FC = { x: b.x, w: colW, k: 'Líheň provozuje', b: 'Český rybářský svaz, místní organizace Mělník', ks: 17, bs: 24, blines: 2, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="20"' };
       const F = factCard(E, { ...FC, y: 0 });
       h += factCard(E, { ...FC, y: b.b - F.h - 2 }).html;
       return { html: h, taTone: 'dark' };
@@ -364,7 +364,7 @@ export const scenes = {
     h += `<i class="abs" data-in="wipe-r" data-d=".22" style="left:${R1(b.x)}px;top:${R1(fy + 4)}px;width:110px;height:4px;background:${C.turq}"></i>`;
     fy += 22;
     h += T(E, { cls: 'crs-l', x: b.x, y: fy, w: colW, size: sq ? 40 : 44, fit: 24, text: 'závodních míst', inAttr: 'data-in="up" data-d=".2"', main: true });
-    const FC = { x: b.x, w: colW, k: 'Areál vlastní', b: 'Český rybářský svaz, místní organizace Mělník', ks: sq ? 22 : 24, bs: sq ? 36 : 38, blines: 3, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
+    const FC = { x: b.x, w: colW, k: 'Líheň provozuje', b: 'Český rybářský svaz, místní organizace Mělník', ks: sq ? 22 : 24, bs: sq ? 36 : 38, blines: 3, align: 'left', inAttr: 'data-in="up" data-d=".25" data-dist="50"' };
     const F = factCard(E, { ...FC, y: 0 });
     h += factCard(E, { ...FC, y: b.b - F.h - 4 }).html;
     return { html: h, taTone: 'dark' };
