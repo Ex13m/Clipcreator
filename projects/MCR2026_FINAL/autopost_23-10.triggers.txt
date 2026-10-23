@@ -20,3 +20,23 @@
 20:00 trig_01F3Y3zxziBc9kycXA7JWTtQ
 
 # 23.10. 10:05 CEST: Zapier page_photo vrátil post_id, ale příspěvek na stránce není. Od 10:30 RUČNÍ režim: při každém triggeru NEpublikovat přes Zapier, jen poslat operátorovi soubor + text.
+# 23.10. 11:37 CEST: operátor: Zapier funguje, publikovat vše přes Zapier (ruční režim ZRUŠEN).
+# 10:00 venue photo OK (post 625549374537871_1566451372163476), 11:37 venue reel OK (video 1427191282237217).
+# Nový rozvrh (CEST, krok 26 min) — orig slot → čas → trigger:
+# 11:00 GH photo      12:00 trig_01MH7Tbr3AkjSkgn8qf65eJA
+# 11:30 GH video      12:26 trig_019UEhz4aG1PJnWP6Rc7TXgS
+# 12:00 AF photo      12:52 trig_01EwsUVt1axpcucCdL3SqJXH
+# 12:30 AF video      13:18 trig_011eLtUSyEdzauWgURB4fpwv
+# 13:00 Bosset photo  13:44 trig_01A321nd9h45baUEcEav1ZXT
+# 13:30 Bosset video  14:10 trig_01EhAzjo72nAF1d3aqVwnK8r
+# 14:00 Jig photo     14:36 trig_01Nh9SoPPeiZu7MA7VpvnUPj
+# 14:30 Jig video     15:02 trig_01W7KJTMrmJTxtk7fSjt8DXT
+# 15:00 TS photo      15:28 trig_01GEHdCqaS8ZYs3tSQJYdGHe
+# 15:30 TS video      15:54 trig_019Mn4ryJ4HydDxQmzDCdXtm
+# 16:00 VR photo      16:20 trig_01ED2CmiRiThD2n2dwVZHqWW
+# 16:30 VR video      16:46 trig_01W574vPhUCLKjAiKrShYQXU
+# 17:00 FT photo      17:12 trig_01ELTzUKXxu4Dge8iRW1NeY4
+# 17:30 FT video      17:38 trig_01RVmgjNmQX2JVehoLYX7zHT
+# 18:00 ČRS photo     18:04 trig_018QTaw55nCWfgmr5dKQLPKw
+# 18:30 ČRS video     18:30 trig_01BQxHEUat8ocQBnSbcHmtzm
+# 20:00 film          20:00 trig_01F3Y3zxziBc9kycXA7JWTtQ (beze změny)
