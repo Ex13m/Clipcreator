@@ -40,3 +40,4 @@
 # 18:00 ČRS photo     18:04 trig_018QTaw55nCWfgmr5dKQLPKw
 # 18:30 ČRS video     18:30 trig_01BQxHEUat8ocQBnSbcHmtzm
 # 20:00 film          20:00 trig_01F3Y3zxziBc9kycXA7JWTtQ (beze změny)
+# 18:47 CEST: ČRS reel v10 (plashka „provozuje ČRS · MO Mělník“, Drive 15U9E0u1uBwd5ighJ7-VDMuBuS7lrJ9hs) publikován ručně na pokyn operátora (video 1680042700418566); trigger 19:15 smazán.

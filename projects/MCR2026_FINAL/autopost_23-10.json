@@ -1,164 +1,164 @@
 {
- "page_id": "625549374537871",
- "page": "Trout Area Czech Republic",
- "zapier": {
-  "selected_api": "FacebookV2CLIAPI",
-  "photo": "page_photo",
-  "video": "page_video"
- },
- "texts": "projects/mcr-2026-bannery/texty/PLAN_publikace_23-10.md",
- "slots": [
-  {
-   "slot": "10:00",
-   "utc": "2026-10-23T08:00:00Z",
-   "kind": "photo",
-   "key": "venue",
-   "source": "https://drive.google.com/uc?export=download&id=10bEPWpO8qTh7lBcmqhVZ5qmlVl3wqrJB",
-   "text_section": "### 10:00"
+  "page_id": "625549374537871",
+  "page": "Trout Area Czech Republic",
+  "zapier": {
+    "selected_api": "FacebookV2CLIAPI",
+    "photo": "page_photo",
+    "video": "page_video"
   },
-  {
-   "slot": "10:30",
-   "utc": "2026-10-23T08:30:00Z",
-   "kind": "video",
-   "key": "venue",
-   "source": "https://drive.google.com/uc?export=download&id=1xL2KDcRUSMucuCKdBOHmDFAOtjFJG5ZA",
-   "text_section": "### 10:30"
-  },
-  {
-   "slot": "11:00",
-   "utc": "2026-10-23T09:00:00Z",
-   "kind": "photo",
-   "key": "gausseholler",
-   "source": "https://drive.google.com/uc?export=download&id=1rSivI2aLc9Ck77LSq_Ynx9F-Sy6oOJa2",
-   "text_section": "### 11:00"
-  },
-  {
-   "slot": "11:30",
-   "utc": "2026-10-23T09:30:00Z",
-   "kind": "video",
-   "key": "gausseholler",
-   "source": "https://drive.google.com/uc?export=download&id=1Bt5CoQpRRMq-yJqYWcNKkC8IMlly7DtR",
-   "text_section": "### 11:30"
-  },
-  {
-   "slot": "12:00",
-   "utc": "2026-10-23T10:00:00Z",
-   "kind": "photo",
-   "key": "activefishing",
-   "source": "https://drive.google.com/uc?export=download&id=12wj-LDtyQ2TzJEFp-swuSlrET0NFltwX",
-   "text_section": "### 12:00"
-  },
-  {
-   "slot": "12:30",
-   "utc": "2026-10-23T10:30:00Z",
-   "kind": "video",
-   "key": "activefishing",
-   "source": "https://drive.google.com/uc?export=download&id=14bjvbtucoLGcNTICUhdc7wowzS5kC5w9",
-   "text_section": "### 12:30"
-  },
-  {
-   "slot": "13:00",
-   "utc": "2026-10-23T11:00:00Z",
-   "kind": "photo",
-   "key": "bosset",
-   "source": "https://drive.google.com/uc?export=download&id=14hADhWdZWTB8DnAg42tuNhQQP7jJvg7b",
-   "text_section": "### 13:00"
-  },
-  {
-   "slot": "13:30",
-   "utc": "2026-10-23T11:30:00Z",
-   "kind": "video",
-   "key": "bosset",
-   "source": "https://drive.google.com/uc?export=download&id=1E6QllBXPoKjqIvmlXKLcstjxL0WhhuNE",
-   "text_section": "### 13:30"
-  },
-  {
-   "slot": "14:00",
-   "utc": "2026-10-23T12:00:00Z",
-   "kind": "photo",
-   "key": "jigovky",
-   "source": "https://drive.google.com/uc?export=download&id=1Np7ZOqukU-5PKV534nJzWNWuPXqCiCcN",
-   "text_section": "### 14:00"
-  },
-  {
-   "slot": "14:30",
-   "utc": "2026-10-23T12:30:00Z",
-   "kind": "video",
-   "key": "jigovky",
-   "source": "https://drive.google.com/uc?export=download&id=1ohUe5PIZCshZIi-Vj5XQcVA1CLqm6KNF",
-   "text_section": "### 14:30"
-  },
-  {
-   "slot": "15:00",
-   "utc": "2026-10-23T13:00:00Z",
-   "kind": "photo",
-   "key": "troutshop",
-   "source": "https://drive.google.com/uc?export=download&id=1C1ult25K82lHd42aIjpW2wq1smVlA2Ew",
-   "text_section": "### 15:00"
-  },
-  {
-   "slot": "15:30",
-   "utc": "2026-10-23T13:30:00Z",
-   "kind": "video",
-   "key": "troutshop",
-   "source": "https://drive.google.com/uc?export=download&id=1oixIhbo1O0Qin4TcG9c23Ec-z4Ml3ing",
-   "text_section": "### 15:30"
-  },
-  {
-   "slot": "16:00",
-   "utc": "2026-10-23T14:00:00Z",
-   "kind": "photo",
-   "key": "velkaryba",
-   "source": "https://drive.google.com/uc?export=download&id=1vl8ajCinBhcdy6dJMVzlZYXfOzk5kgcM",
-   "text_section": "### 16:00"
-  },
-  {
-   "slot": "16:30",
-   "utc": "2026-10-23T14:30:00Z",
-   "kind": "video",
-   "key": "velkaryba",
-   "source": "https://drive.google.com/uc?export=download&id=1QoTFWCLDYesAygLEybyqDXrFCHgdAQoS",
-   "text_section": "### 16:30"
-  },
-  {
-   "slot": "17:00",
-   "utc": "2026-10-23T15:00:00Z",
-   "kind": "photo",
-   "key": "ftfishing",
-   "source": "https://drive.google.com/uc?export=download&id=1f7ZUQbkSJ2GlQ_QWI0QYB-SUJ4dTRDw8",
-   "text_section": "### 17:00"
-  },
-  {
-   "slot": "17:30",
-   "utc": "2026-10-23T15:30:00Z",
-   "kind": "video",
-   "key": "ftfishing",
-   "source": "https://drive.google.com/uc?export=download&id=19hq1-CcXlJzo9hAuUELOWECIaUxD6i3C",
-   "text_section": "### 17:30"
-  },
-  {
-   "slot": "18:00",
-   "utc": "2026-10-23T16:00:00Z",
-   "kind": "photo",
-   "key": "crs",
-   "source": "https://drive.google.com/uc?export=download&id=1OKWc0FQD3DwcE8nsS9q1G7S4FvbnugwA",
-   "text_section": "### 18:00"
-  },
-  {
-   "slot": "18:30",
-   "utc": "2026-10-23T16:30:00Z",
-   "kind": "video",
-   "key": "crs",
-   "source": "https://drive.google.com/uc?export=download&id=1vsqhRiHLnsAjUZ1lUPxzhRr7EJu6UveF",
-   "text_section": "### 18:30"
-  },
-  {
-   "slot": "20:00",
-   "utc": "2026-10-23T18:00:00Z",
-   "kind": "video",
-   "key": "film",
-   "source": "https://drive.google.com/uc?export=download&id=12HNF4VskwA049rhAQyrCgazNmYsrE5VM",
-   "text_section": "### 20:00"
-  }
- ]
+  "texts": "projects/mcr-2026-bannery/texty/PLAN_publikace_23-10.md",
+  "slots": [
+    {
+      "slot": "10:00",
+      "utc": "2026-10-23T08:00:00Z",
+      "kind": "photo",
+      "key": "venue",
+      "source": "https://drive.google.com/uc?export=download&id=10bEPWpO8qTh7lBcmqhVZ5qmlVl3wqrJB",
+      "text_section": "### 10:00"
+    },
+    {
+      "slot": "10:30",
+      "utc": "2026-10-23T08:30:00Z",
+      "kind": "video",
+      "key": "venue",
+      "source": "https://drive.google.com/uc?export=download&id=1xL2KDcRUSMucuCKdBOHmDFAOtjFJG5ZA",
+      "text_section": "### 10:30"
+    },
+    {
+      "slot": "11:00",
+      "utc": "2026-10-23T09:00:00Z",
+      "kind": "photo",
+      "key": "gausseholler",
+      "source": "https://drive.google.com/uc?export=download&id=1rSivI2aLc9Ck77LSq_Ynx9F-Sy6oOJa2",
+      "text_section": "### 11:00"
+    },
+    {
+      "slot": "11:30",
+      "utc": "2026-10-23T09:30:00Z",
+      "kind": "video",
+      "key": "gausseholler",
+      "source": "https://drive.google.com/uc?export=download&id=1Bt5CoQpRRMq-yJqYWcNKkC8IMlly7DtR",
+      "text_section": "### 11:30"
+    },
+    {
+      "slot": "12:00",
+      "utc": "2026-10-23T10:00:00Z",
+      "kind": "photo",
+      "key": "activefishing",
+      "source": "https://drive.google.com/uc?export=download&id=12wj-LDtyQ2TzJEFp-swuSlrET0NFltwX",
+      "text_section": "### 12:00"
+    },
+    {
+      "slot": "12:30",
+      "utc": "2026-10-23T10:30:00Z",
+      "kind": "video",
+      "key": "activefishing",
+      "source": "https://drive.google.com/uc?export=download&id=14bjvbtucoLGcNTICUhdc7wowzS5kC5w9",
+      "text_section": "### 12:30"
+    },
+    {
+      "slot": "13:00",
+      "utc": "2026-10-23T11:00:00Z",
+      "kind": "photo",
+      "key": "bosset",
+      "source": "https://drive.google.com/uc?export=download&id=14hADhWdZWTB8DnAg42tuNhQQP7jJvg7b",
+      "text_section": "### 13:00"
+    },
+    {
+      "slot": "13:30",
+      "utc": "2026-10-23T11:30:00Z",
+      "kind": "video",
+      "key": "bosset",
+      "source": "https://drive.google.com/uc?export=download&id=1E6QllBXPoKjqIvmlXKLcstjxL0WhhuNE",
+      "text_section": "### 13:30"
+    },
+    {
+      "slot": "14:00",
+      "utc": "2026-10-23T12:00:00Z",
+      "kind": "photo",
+      "key": "jigovky",
+      "source": "https://drive.google.com/uc?export=download&id=1Np7ZOqukU-5PKV534nJzWNWuPXqCiCcN",
+      "text_section": "### 14:00"
+    },
+    {
+      "slot": "14:30",
+      "utc": "2026-10-23T12:30:00Z",
+      "kind": "video",
+      "key": "jigovky",
+      "source": "https://drive.google.com/uc?export=download&id=1ohUe5PIZCshZIi-Vj5XQcVA1CLqm6KNF",
+      "text_section": "### 14:30"
+    },
+    {
+      "slot": "15:00",
+      "utc": "2026-10-23T13:00:00Z",
+      "kind": "photo",
+      "key": "troutshop",
+      "source": "https://drive.google.com/uc?export=download&id=1C1ult25K82lHd42aIjpW2wq1smVlA2Ew",
+      "text_section": "### 15:00"
+    },
+    {
+      "slot": "15:30",
+      "utc": "2026-10-23T13:30:00Z",
+      "kind": "video",
+      "key": "troutshop",
+      "source": "https://drive.google.com/uc?export=download&id=1oixIhbo1O0Qin4TcG9c23Ec-z4Ml3ing",
+      "text_section": "### 15:30"
+    },
+    {
+      "slot": "16:00",
+      "utc": "2026-10-23T14:00:00Z",
+      "kind": "photo",
+      "key": "velkaryba",
+      "source": "https://drive.google.com/uc?export=download&id=1vl8ajCinBhcdy6dJMVzlZYXfOzk5kgcM",
+      "text_section": "### 16:00"
+    },
+    {
+      "slot": "16:30",
+      "utc": "2026-10-23T14:30:00Z",
+      "kind": "video",
+      "key": "velkaryba",
+      "source": "https://drive.google.com/uc?export=download&id=1QoTFWCLDYesAygLEybyqDXrFCHgdAQoS",
+      "text_section": "### 16:30"
+    },
+    {
+      "slot": "17:00",
+      "utc": "2026-10-23T15:00:00Z",
+      "kind": "photo",
+      "key": "ftfishing",
+      "source": "https://drive.google.com/uc?export=download&id=1f7ZUQbkSJ2GlQ_QWI0QYB-SUJ4dTRDw8",
+      "text_section": "### 17:00"
+    },
+    {
+      "slot": "17:30",
+      "utc": "2026-10-23T15:30:00Z",
+      "kind": "video",
+      "key": "ftfishing",
+      "source": "https://drive.google.com/uc?export=download&id=19hq1-CcXlJzo9hAuUELOWECIaUxD6i3C",
+      "text_section": "### 17:30"
+    },
+    {
+      "slot": "18:00",
+      "utc": "2026-10-23T16:00:00Z",
+      "kind": "photo",
+      "key": "crs",
+      "source": "https://drive.google.com/uc?export=download&id=1OKWc0FQD3DwcE8nsS9q1G7S4FvbnugwA",
+      "text_section": "### 18:00"
+    },
+    {
+      "slot": "18:30",
+      "utc": "2026-10-23T16:30:00Z",
+      "kind": "video",
+      "key": "crs",
+      "source": "https://drive.google.com/uc?export=download&id=15U9E0u1uBwd5ighJ7-VDMuBuS7lrJ9hs",
+      "text_section": "### 18:30"
+    },
+    {
+      "slot": "20:00",
+      "utc": "2026-10-23T18:00:00Z",
+      "kind": "video",
+      "key": "film",
+      "source": "https://drive.google.com/uc?export=download&id=12HNF4VskwA049rhAQyrCgazNmYsrE5VM",
+      "text_section": "### 20:00"
+    }
+  ]
 }
