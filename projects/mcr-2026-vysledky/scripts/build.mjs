@@ -109,7 +109,7 @@ function build(W, H, file) {
         <div class="vlogo"><img src="assets/logos/libechov.png" alt=""></div></div></div>
       <div class="it" id="it3"><div class="l1 big"><span>Dva dny</span></div><div class="l1 big red"><span>fair play</span></div>
         <div class="tiles">${[[39, 'závodníků'], [2, 'dny'], [24, 'kol'], [40, 'stanovišť']].map(([v, l], i) => `<div class="tile" id="itl${i}"><b id="itv${i}">0</b><span>${l}</span></div>`).join('')}</div>
-        <div class="l3 dt"><span>sobota 24. 10. · neděle 25. 10. 2026</span></div></div>`);
+        <div class="l3 dte"><span>sobota 24. 10. · neděle 25. 10. 2026</span></div></div>`);
     // 1a titul
     T0('#it1 .tap', { opacity: 0, y: -3 * u, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + 0.1);
     ['#it1 .l1:nth-of-type(2) span', '#it1 .l1:nth-of-type(3) span', '#it1 .l1:nth-of-type(4) span'].forEach((s, i) => rise(s, a + 0.4 + i * BEAT * 2));
@@ -126,7 +126,7 @@ function build(W, H, file) {
     T0('#it3', { opacity: 0 }, { opacity: 1, duration: 0.01 }, m2);
     rise('#it3 .l1:nth-of-type(1) span', m2 + 0.05); rise('#it3 .l1:nth-of-type(2) span', m2 + 0.05 + BEAT);
     [[39], [2], [24], [40]].forEach(([v], i) => { const t = m2 + BEAT * (3 + i); pop(`#itl${i}`, t); CNT(`itv${i}`, 0, v, t + 0.05, 0.8); });
-    pop('#it3 .dt span', m2 + BEAT * 7);
+    pop('#it3 .dte span', m2 + BEAT * 7);
   }
 
   // ===================== 2/4) ŽIVÝ PRŮBĚH DNE =====================
@@ -453,7 +453,7 @@ function build(W, H, file) {
   .tile2 em { display:block; font-style:normal; font-weight:700; font-size:${px(1.8)}; color:#0b1e42; opacity:.8; margin-top:${px(0.3)}; }
 
   /* výsledek MČR */
-  .rule { position:absolute; ${P ? `left:${f(SAFE.l)}; top:${px(27)}` : `right:${f(SAFE.r)}; top:${f(SAFE.t)}`}; background:var(--red); color:#fff; border-radius:${px(1.4)}; padding:${px(1.2)} ${px(2.2)}; font-family:Montserrat; opacity:0; }
+  .rule { position:absolute; ${P ? `left:${f(SAFE.l)}; top:${px(27)}` : `right:${f(SAFE.r)}; top:${px(16)}`}; background:var(--red); color:#fff; border-radius:${px(1.4)}; padding:${px(1.2)} ${px(2.2)}; font-family:Montserrat; opacity:0; }
   .rule b { font-weight:900; font-size:${px(P ? 3.4 : 2.8)}; } .rule span { display:block; font-weight:700; font-size:${px(1.9)}; opacity:.9; }
   .rule.big { left:50%; top:50%; right:auto; transform:translate(-50%,-50%); text-align:center; padding:${px(2.4)} ${px(4)}; z-index:4; box-shadow:0 ${px(1)} ${px(5)} rgba(0,0,0,.5); } .rule.big b { font-size:${px(P ? 5 : 4)}; }
   .tab { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(36) : f(SAFE.t + 15 * u)}; display:flex; flex-direction:column; gap:${px(0.7)}; ${P ? '' : `max-width:${px(110)}; margin:0 auto;`} }
@@ -490,8 +490,8 @@ function build(W, H, file) {
   .smr .sa b { font-weight:900; font-size:${px(2.3)}; color:var(--gold); }
   .jump { position:absolute; ${P ? `left:${f(SAFE.l)}; bottom:${px(14)}` : `right:${f(SAFE.r)}; bottom:${f(SAFE.b)}`}; background:var(--gold); color:var(--navy); border-radius:${px(1.4)}; padding:${px(1.2)} ${px(2)}; font-family:Montserrat; opacity:0; }
   .jump b { display:block; font-weight:900; font-size:${px(2.6)}; } .jump span { font-weight:800; font-size:${px(2)}; }
-  .champ { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:${P ? 'flex-end' : 'center'}; text-align:center; opacity:0; padding-bottom:${px(P ? 14 : 0)}; }
-  .chph { position:absolute; inset:0; background-size:cover; background-position:50% 30%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 55%, transparent 92%); filter:brightness(.8); }
+  .champ { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; opacity:0; padding-bottom:${px(P ? 12 : 5)}; }
+  .chph { position:absolute; left:0; right:0; top:${P ? px(26) : px(16)}; height:${P ? px(62) : '56%'}; background-size:${P ? '160% auto' : 'contain'}; background-repeat:no-repeat; background-position:50% 0%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 62%, transparent 86%); filter:drop-shadow(0 ${px(1)} ${px(3)} rgba(0,0,0,.5)); }
   .champ > div:not(.chph) { position:relative; }
   .chk span { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3 : 2.6)}; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
   .chn span { font-family:Montserrat; font-weight:900; font-size:${px(P ? 11 : 9)}; text-transform:uppercase; line-height:1.05; text-shadow:0 ${px(0.6)} ${px(3)} rgba(0,0,0,.6); }
