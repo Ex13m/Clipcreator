@@ -1,7 +1,10 @@
 # parse MČR 2026 xlsx exports -> data/*.json
 import openpyxl, json, re, sys
 D='01_RAW/docs/'
-def nm(a,b): return (str(b or '').strip()+' '+str(a or '').strip()).strip()
+FIX={'Igor Novak':'Igor Novák'}  # export bez diakritiky
+def nm(a,b):
+    n=(str(b or '').strip()+' '+str(a or '').strip()).strip()
+    return FIX.get(n,n)
 def day(f):
     ws=openpyxl.load_workbook(D+f,data_only=True).active
     rows=list(ws.iter_rows(values_only=True))
