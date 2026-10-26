@@ -16,11 +16,12 @@ const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.pars
 const VER = process.env.VER || 'v1';
 
 // ---------- struktura v taktech ----------
-const BARS = { intro: [0, 8], d1: [8, 22], d1s: [22, 28], d2: [28, 42], d2s: [42, 48], mcr: [48, 54], pod: [54, 60], sez: [60, 74], end: [74, 78] };
-const NBARS = 78;
+// track_edit: takty 1–39 originál, 40–53 = kopie dropu 26–39, 54–79 = originál 40–65 (energie: drop 18–21, 26–31, 34–45, 48–53, velký drop 60–67, outro 72–79)
+const BARS = { intro: [0, 9], d1: [9, 24], d1s: [24, 31], d2: [31, 46], d2s: [46, 53], mcr: [53, 59], pod: [59, 66], sez: [66, 77], end: [77, 80] };
+const NBARS = 80;
 
 // ---------- čas: track nebo syntetická mřížka ----------
-const BEATS_F = path.join(ROOT, '03_MUSIC/track.beats.json');
+const BEATS_F = path.join(ROOT, '03_MUSIC/track_edit.beats.json');
 const HAS_TRACK = fs.existsSync(BEATS_F) && fs.existsSync(path.join(PROTO, 'assets/track.wav'));
 const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
   const bpm = 124, b = 60 / bpm, beats = [], downbeats = [];
@@ -29,7 +30,7 @@ const G = HAS_TRACK ? JSON.parse(fs.readFileSync(BEATS_F, 'utf8')) : (() => {
 })();
 const BEAT = G.beats[1] - G.beats[0];
 const BAR = (n) => (n < G.downbeats.length ? G.downbeats[n] : G.downbeats.at(-1) + (n - G.downbeats.length + 1) * BEAT * 4);
-const DUR = +Math.min(G.duration, BAR(NBARS)).toFixed(3);
+const DUR = +(HAS_TRACK ? G.duration : BAR(NBARS)).toFixed(3);
 const len = (a, b) => +(b - a).toFixed(3);
 const rnd = (seed) => { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
 const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -79,7 +80,7 @@ function build(W, H, file) {
   const SET = (sel, v, pos) => out.push(`tl.set(${JSON.stringify(sel)}, ${JSON.stringify(v)}, ${(+pos).toFixed(3)});`);
   const CNT = (id, from, to, pos, d, decs = 0) => out.push(`{ const o={v:${from}}, el=document.getElementById("${id}"); tl.fromTo(o,{v:${from}},{v:${to},duration:${d.toFixed(3)},ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=${decs ? `o.v.toFixed(${decs}).replace(".",",")` : `Math.round(o.v).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g,"\\u2009")`};}}, ${(+pos).toFixed(3)}); }`);
   const scenes = [], starts = [];
-  const scene = (id, a, b, html, track = 2) => { starts.push(a); scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`); };
+  const scene = (id, a, b, html, track = 2) => { starts.push(a); out.push(`tl.set("#${id}", {visibility:"hidden"}, 0); tl.set("#${id}", {visibility:"visible"}, ${a.toFixed(3)}); tl.set("#${id}", {visibility:"hidden"}, ${b.toFixed(3)});`); scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`); };
   const onBeat = (t) => G.beats.find((b) => b >= t - 0.04) ?? t;
   const rise = (sel, t, d = 0.55) => T0(sel, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease: 'expo.out' }, onBeat(t));
   const pop = (sel, t, d = 0.45) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: d, ease: 'back.out(2)' }, t);
@@ -97,7 +98,7 @@ function build(W, H, file) {
 
   // ===================== 1) INTRO =====================
   {
-    const a = BAR(BARS.intro[0]), m1 = BAR(3), m2 = BAR(5.5 | 0) + BEAT * 2, b = BAR(BARS.intro[1]);
+    const a = 0, m1 = BAR(3), m2 = BAR(6), b = BAR(BARS.intro[1]);
     const ps = P ? 78 * u : 52 * u;
     scene('s-intro', a, b, `
       <div class="it" id="it1"><div class="tap"><img src="assets/ta_logo.png" alt="Trout Area Czech Republic"></div>
@@ -209,7 +210,7 @@ function build(W, H, file) {
     T0(`#${id}-p .po`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.0, ease: 'power2.inOut' }, a + 0.1);
     Object.entries(D.stand).forEach(([n, v], i) => {
       const k = v / mx, t = a + 0.6 + (i % 40) * 0.035;
-      out.push(`tl.set("#${id}-p-s${n} .sdc", {attr:{r:${(9 + k * 26).toFixed(1)}}, fill:"hsl(${(220 - k * 220).toFixed(0)},85%,${(38 + k * 18).toFixed(0)}%)", fillOpacity:${(0.45 + k * 0.55).toFixed(2)}}, ${a.toFixed(3)});`);
+      out.push(`tl.set("#${id}-p-s${n} .sdc", {attr:{r:${(12 + k * 34).toFixed(1)}}, fill:"hsl(${(220 - k * 220).toFixed(0)},85%,${(38 + k * 18).toFixed(0)}%)", fillOpacity:${(0.45 + k * 0.55).toFixed(2)}}, ${a.toFixed(3)});`);
       T0(`#${id}-p-s${n}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2.5)' }, t);
     });
     T(`#${id}-p-s${best[0]}`, { scale: 1 }, { scale: 1.35, duration: 0.25, yoyo: true, repeat: 5, ease: 'power2.inOut' }, a + BEAT * 8);
@@ -222,9 +223,9 @@ function build(W, H, file) {
   // ===================== 6) VÝSLEDEK MČR: průměr umístění =====================
   {
     const id = 's-mcr', a = BAR(BARS.mcr[0]), b = BAR(BARS.mcr[1]);
-    scene(id, a, b, `${head(id, 'Výsledek MČR', 'pořadí = průměr umístění z obou dnů · nižší vyhrává', a + 0.05)}
-      <div class="rule" id="mr-rule"><b>(Den 1 + Den 2) ÷ 2</b></div>
-      <div class="tab"><div class="tr th"><span class="tp">#</span><span class="tn">závodník</span><span class="tc">Den 1</span><span class="tc">Den 2</span><span class="ta">Ø</span></div>
+    scene(id, a, b, `${head(id, 'Výsledek MČR', 'součet umístění z obou dnů · nižší vyhrává', a + 0.05)}
+      <div class="rule" id="mr-rule"><b>Den 1 + Den 2 = Σ</b><span>soutěžní řád 6.4–6.5</span></div>
+      <div class="tab"><div class="tr th"><span class="tp">#</span><span class="tn">závodník</span><span class="tc">Den 1</span><span class="tc">Den 2</span><span class="ta">Σ</span></div>
       ${MCR.map((x, i) => `<div class="tr" id="mr${i}"><span class="tp">${i + 1}</span><span class="tn">${x.name}</span><span class="tc"><i>${x.d1}.</i></span><span class="tc"><i>${x.d2}.</i></span><span class="ta"><b id="mra${i}">–</b></span></div>`).join('')}</div>`);
     pop('#mr-rule', a + BEAT * 2);
     T('#mr-rule', { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 }, a + BEAT * 4);
@@ -232,14 +233,14 @@ function build(W, H, file) {
       const t = a + BEAT * 4 + i * BEAT * 0.75;
       T0(`#mr${i}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, t);
       T0(`#mr${i} .tc i`, { scale: 0 }, { scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.08 }, t + 0.1);
-      CNT(`mra${i}`, 0, x.avg, t + 0.35, 0.6, 2);
+      CNT(`mra${i}`, 0, x.d1 + x.d2, t + 0.35, 0.6);
     });
     T(`#mr0, #mr1, #mr2`, { backgroundColor: 'rgba(227,30,36,0)' }, { backgroundColor: 'rgba(227,30,36,.28)', duration: 0.3, yoyo: true, repeat: 3 }, b - BEAT * 5);
   }
 
   // ===================== 7) STUPNĚ VÍTĚZŮ + kde vyhrávali =====================
   {
-    const id = 's-pod', a = BAR(BARS.pod[0]), b = BAR(BARS.pod[1]), mid = BAR(BARS.pod[0] + 3);
+    const id = 's-pod', a = BAR(BARS.pod[0]), b = BAR(BARS.pod[1]), mid = BAR(BARS.pod[0] + 4);
     const top3 = MCR.slice(0, 3).map((x) => {
       const r1 = byName(0, x.name), r2 = byName(1, x.name);
       return { ...x, fish: r1.fish + r2.fish, wins: r1.wins + r2.wins, pts: r1.points + r2.points, won: [...r1.rounds, ...r2.rounds].filter((r) => r.pts === 3).map((r) => r.los) };
@@ -249,7 +250,7 @@ function build(W, H, file) {
     const order = [1, 0, 2];
     scene(id, a, b, `${head(id, 'Stupně vítězů', 'Mistrovství ČR v Trout Area 2026', a + 0.05)}
       <div class="pods" id="pods">${order.map((i) => { const x = top3[i]; return `<div class="pd p${i + 1}" id="pd${i}"><div class="pn">${i + 1}.</div><div class="pnm">${x.name}</div>
-        <div class="pst"><span><b>${dec(x.avg)}</b>Ø místo</span><span><b>${x.fish}</b>ryb</span><span><b>${x.wins}</b>výher</span></div>
+        <div class="pst"><span><b>${x.d1}.+${x.d2}.</b>umístění</span><span><b>${x.fish}</b>ryb</span><span><b>${x.wins}</b>výher</span></div>
         <div class="col" style="height:${[0, 1, 2].map((k) => [22, 16, 11][k])[i] * u}px"></div></div>`; }).join('')}</div>
       <div class="prize" id="prize"><img src="assets/logos/gausseholler.png" alt=""><span>hlavní cena <b>Revolut 8</b></span><img class="pb" src="assets/logos/bosset.png" alt=""><span>termosky <b>Zojirushi</b></span></div>
       <div class="wmap" id="wmap">${pondSVG('pond-w', ps, { labels: false })}<div class="wl">${top3.map((x, i) => `<span><i style="background:${PC[i]}"></i>${short(x.name)} · ${x.won.length} výher</span>`).join('')}</div><div class="wcap">kde vítězové vyhrávali duely</div></div>`);
@@ -278,7 +279,7 @@ function build(W, H, file) {
   // ===================== 8) MISTR TROUT AREA ČR: 6 nejlepších z 8 =====================
   {
     const id = 's-sez', a = BAR(BARS.sez[0]), b = BAR(BARS.sez[1]);
-    const tStrike = BAR(BARS.sez[0] + 4), tSort = BAR(BARS.sez[0] + 7), tFin = BAR(BARS.sez[0] + 10);
+    const tStrike = BAR(BARS.sez[0] + 3), tSort = BAR(BARS.sez[0] + 5) + BEAT * 2, tFin = BAR(BARS.sez[0] + 7) + BEAT * 2;
     const N = SEZ.length, rowH = P ? 4.6 * u : 5.2 * u;
     const yAll = (r) => ALL10.indexOf(r.name) >= 0 ? ALL10.indexOf(r.name) : 10 + B6TOP.indexOf(r.name);
     const yB6 = (r) => B6TOP.indexOf(r.name) >= 0 ? B6TOP.indexOf(r.name) : 10 + ALL10.indexOf(r.name);
@@ -399,7 +400,7 @@ function build(W, H, file) {
   #it2 { flex-direction:${P ? 'column' : 'row'}; gap:${px(4)}; }
   .vt { text-align:${P ? 'center' : 'left'}; display:flex; flex-direction:column; align-items:${P ? 'center' : 'flex-start'}; }
   .vlogo { width:${px(P ? 16 : 11)}; margin-top:${px(2.5)}; opacity:.9; } .vlogo img { width:100%; display:block; }
-  .tiles { display:grid; grid-template-columns:repeat(${P ? 2 : 4}, ${px(P ? 36 : 20)}); gap:${px(1.8)}; margin-top:${px(4)}; }
+  .tiles { display:flex; flex-wrap:wrap; justify-content:center; gap:${px(1.8)}; margin-top:${px(4)}; width:${px(P ? 80 : 96)}; } .tiles .tile { width:${px(P ? 36 : 20)}; box-sizing:border-box; }
   .tile { background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(1.6)}; padding:${px(1.6)}; font-family:Montserrat; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); }
   .tile b { display:block; font-weight:900; font-size:${px(P ? 9 : 6)}; line-height:1; color:var(--red); } .tile span { display:block; font-weight:800; font-size:${px(P ? 2.2 : 1.7)}; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); margin-top:${px(0.4)}; }
 
@@ -430,9 +431,9 @@ function build(W, H, file) {
   .bump polyline { fill:none; stroke-linecap:round; stroke-linejoin:round; opacity:.55; } .bump polyline.hi { opacity:1; }
   .bump .gl { stroke:rgba(142,162,216,.25); stroke-width:1; } .bump text { fill:var(--lb); font:700 ${px(1.5)} Montserrat; } .bump .kx { fill:rgba(142,162,216,.8); }
   .bump .t10 { fill:rgba(255,211,107,.08); stroke:rgba(255,211,107,.35); stroke-dasharray:6 6; } .bump .t10l { fill:var(--gold); font:800 ${px(1.5)} Montserrat; letter-spacing:.15em; }
-  .bd { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(0.8)}; white-space:nowrap; font-family:Montserrat; font-size:${px(P ? 1.75 : 1.55)}; opacity:.75; }
+  .bd { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(0.8)}; white-space:nowrap; font-family:Montserrat; font-size:${px(P ? 2 : 1.85)}; opacity:.7; }
   .bd i { width:${px(1.4)}; height:${px(1.4)}; border-radius:50%; margin-left:${px(-0.7)}; box-shadow:0 0 0 ${px(0.25)} rgba(5,13,34,.8); } .bd span { font-weight:700; } .bd b { font-weight:900; color:var(--gold); }
-  .bd.hi { opacity:1; font-size:${px(P ? 2.1 : 1.8)}; } .bd.hi span { font-weight:900; }
+  .bd.hi { opacity:1; font-size:${px(P ? 2.6 : 2.4)}; } .bd.hi span { font-weight:900; }
   .bcap { position:absolute; left:0; bottom:${px(-3.6)}; font:700 ${px(1.5)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:var(--lb); }
   .dtop { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; bottom:${px(8)}` : `right:${f(SAFE.r)}; bottom:${f(SAFE.b)}; width:${px(54)}`}; display:flex; flex-direction:column; gap:${px(1)}; opacity:0; }
   .dt { display:grid; grid-template-columns:${px(5)} 1fr auto; align-items:center; gap:${px(1.4)}; background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(1.2)}; padding:${px(1)} ${px(1.6)}; font-family:Montserrat; }

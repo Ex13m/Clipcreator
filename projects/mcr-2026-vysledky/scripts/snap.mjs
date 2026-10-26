@@ -5,9 +5,9 @@ const [fmt, ...ts] = process.argv.slice(2);
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const [W, H] = fmt === '9x16' ? [1080, 1920] : [1920, 1080];
 fs.mkdirSync(path.join(ROOT, '_work'), { recursive: true });
-const b = await chromium.launch({ executablePath: process.env.HB });
+console.log('launch'); const b = await chromium.launch({ executablePath: process.env.HB }); console.log('launched');
 const p = await b.newPage({ viewport: { width: W, height: H } });
-await p.goto('file://' + path.join(ROOT, 'proto', fmt, 'index.html')); await p.waitForTimeout(800);
-for (const t of ts) { await p.evaluate((t) => window.__timelines.main.seek(+t, false), t); await p.waitForTimeout(80);
+p.on('console', (m) => console.log('console:', m.text())); p.on('pageerror', (e) => console.log('err:', e.message)); console.log('goto'); await p.goto('file://' + path.join(ROOT, 'proto', fmt, 'index.html'), { waitUntil: 'domcontentloaded', timeout: 20000 }); console.log('loaded'); await p.waitForTimeout(800);
+for (const t of ts) { await p.evaluate((t) => { window.__timelines.main.seek(+t, false); }, t); await p.waitForTimeout(80);
   await p.screenshot({ path: path.join(ROOT, '_work', `snap_${fmt}_${t}.png`) }); }
 await b.close();
