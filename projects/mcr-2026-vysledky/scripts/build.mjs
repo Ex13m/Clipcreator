@@ -252,7 +252,17 @@ function build(W, H, file) {
 
   // ===================== 3/5) SEKTORY A MÍSTA (styl Klonówiec): 20 sektorů = dvojice míst, které proti sobě hrají duel =====================
   const stats = (di) => {
-    const D = DAYS[di], id = `s-${D.k}s`, [b0, b1] = BARS[`${D.k}s`], a = BAR(b0), b = BAR(b1);
+    const D = DAYS[di], id = `s-${D.k}s`, [b0, b1] = BARS[`${D.k}s`], a = BAR(b0), b = BAR(b1), m = BAR(b0 + 3);   // a→m 3D pohled na rybník, m→b dlaždice sektorů
+    // --- 1. část: letecký snímek ve 3D, sloupec = ryby na místě, kamera krouží (každý den jiný úhel) ---
+    const mx = Math.max(...Object.values(DAYS[0].stand), ...Object.values(DAYS[1].stand));
+    const AS = P ? 104 * u : 100 * u, colW = (P ? 2.4 : 2.2) * u, maxH = (P ? 20 : 17) * u;
+    const CAM = di === 0 ? { x1: 56, z0: -38, z1: -14, s1: 1.05 } : { x1: 44, z0: 206, z1: 172, s1: 1.1 };
+    const top10 = Object.entries(D.stand).map(([n, v]) => [+n, v]).sort((x, y) => y[1] - x[1] || x[0] - y[0]).slice(0, 10);
+    const ist = (n) => top10.some(([k]) => k === +n);
+    const apo = (n) => apos(n, AS, CB);
+    const cols = Object.entries(D.stand).map(([n, v]) => { const [x, y] = apo(n), h = Math.max(0.6 * u, (v / mx) * maxH);
+      return `<div class="c3 bb" id="${id}-c${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(h)}; margin:${f(-h)} 0 0 ${f(-colW / 2)}; --c:${heat(v / mx)}">${ist(n) ? `<b class="cv">${v}</b>` : ''}</div>`; }).join('');
+    const sdots = Object.keys(AER.stands).map((n) => { const [x, y] = apo(n); return `<i class="sd3" style="left:${f(x)}; top:${f(y)}"><em class="bb">${n}</em></i>`; }).join('');
     const PL = D.stand, SEC = Object.fromEntries(Array.from({ length: 20 }, (_, i) => [i + 1, PL[2 * i + 1] + PL[2 * i + 2]]));
     const PL0 = DAYS[0].stand, SEC0 = Object.fromEntries(Array.from({ length: 20 }, (_, i) => [i + 1, PL0[2 * i + 1] + PL0[2 * i + 2]]));
     // společná škála pro oba dny → neděle je vidět bledší
@@ -275,20 +285,34 @@ function build(W, H, file) {
     const cell = (n) => { const v = SEC[n], p1 = 2 * n - 1, p2 = 2 * n, dlt = di ? Math.round((v / SEC0[n] - 1) * 100) : null;
       return `<div class="hcell" id="${id}-h${n}" style="background:${hs(v)}; color:${ink(v, smin, smax)}"><em>S${n}${dlt !== null ? ` <s>${dlt > 0 ? '+' : '−'}${Math.abs(dlt)} %</s>` : ''}</em><b>${v}</b>
         <div class="pp"><span style="background:${hp(PL[p1])}; color:${ink(PL[p1], pmin, pmax)}">${p1}<i>${PL[p1]}</i></span><span style="background:${hp(PL[p2])}; color:${ink(PL[p2], pmin, pmax)}">${p2}<i>${PL[p2]}</i></span></div></div>`; };
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · sektory a místa`, P ? (di ? '20 sektorů · % = proti sobotě' : '20 sektorů · 40 míst · 12 kol') : `20 sektorů · 40 míst · ryby za 12 kol${di ? ' · % = proti sobotě' : ''}`, a + 0.05)}
+    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · místa a sektory`, P ? (di ? '20 sektorů · % = proti sobotě' : '20 sektorů · 40 míst · 12 kol') : `20 sektorů · 40 míst · ryby za 12 kol${di ? ' · % = proti sobotě' : ''}`, a + 0.05)}
+      <div class="aw aw-s" id="${id}-a">${aerial(`${id}-a`, AS, CB, sdots + cols, { outline: true })}</div>
+      <div class="acap" id="${id}-acap"><b>výška sloupce = ryby na místě</b> · 40 míst · popsáno top 10</div>
       <div class="heat">${P ? '' : '<div class="bank">SZ břeh · u silnice</div>'}${order.map(cell).join('')}${P ? '' : '<div class="bank b2">JV břeh · u lesa</div>'}</div>
       <div class="pstrip" id="${id}-ps">${Array.from({ length: 40 }, (_, i) => `<i id="${id}-pb${i + 1}" style="height:${((PL[i + 1] / pmax) * 100).toFixed(1)}%; background:${hp(PL[i + 1])}"></i>`).join('')}<em class="pse">místo 1 → 40</em></div>
       <div class="hnote" id="${id}-note"><b>Nejlepší místo ${best[0]}: ${best[1]} ryb</b> · sektor S${bestS[0]}: ${bestS[1]} · nejslabší místo ${worst[0]}: ${worst[1]} · Ø ${dec(D.total / 40, 1)} na místo</div>
       <div class="tiles2">${tiles.map(([v, l, s0], i) => `<div class="tile2" id="${id}-t${i}"><b id="${id}-tv${i}">0</b><span>${l}</span><em>${s0}</em></div>`).join('')}</div>`);
-    order.forEach((n, i) => T0(`#${id}-h${n}`, { opacity: 0, rotationY: -100, transformPerspective: 600 }, { opacity: 1, rotationY: 0, duration: 0.5, ease: 'back.out(1.6)' }, a + BEAT * 2 + i * 0.06));
-    T0(`#${id} .pp span`, { opacity: 0, y: u }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.025, ease: 'power3.out' }, a + BEAT * 2 + 1.5);
-    if (!P) T0(`#${id} .bank`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 2);
-    for (let i = 1; i <= 40; i++) T0(`#${id}-pb${i}`, { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'power3.out' }, a + BEAT * 6 + i * 0.03);
-    T0(`#${id} .pse`, { opacity: 0 }, { opacity: 0.7, duration: 0.4 }, a + BEAT * 6);
-    pop(`#${id}-note`, a + BEAT * 9);
-    T(`#${id}-pb${best[0]}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8)', duration: 0.3, yoyo: true, repeat: 5 }, a + BEAT * 9.5);
-    T(`#${id}-h${bestS[0]}`, { boxShadow: '0 0 0 0px rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${(0.7 * u).toFixed(1)}px rgba(227,30,36,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, a + BEAT * 9.5);
-    tiles.forEach(([v], i) => { const t = a + BEAT * (13 + i); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.9); });
+    // 1. část: rybník se sklopí, sloupce vyrostou, top 10 zazáří; před m kamera odletí nahoru
+    T0(`#${id}-a`, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, a + 0.1);
+    orbit(`${id}-a`, a + 0.1, m, { x0: 0, x1: CAM.x1, z0: CAM.z0, z1: CAM.z1, s0: 0.86, s1: CAM.s1, tin: 1.1 });
+    T0(`#${id}-a .aol polygon`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, a + 0.3);
+    Object.keys(D.stand).forEach((n, i) => { const t = a + 0.9 + i * 0.035;
+      SET(`#${id}-c${n}`, { rotationX: -90, transformOrigin: '50% 100%' }, a);
+      T0(`#${id}-c${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: 'back.out(1.6)' }, t);
+      if (ist(n)) T0(`#${id}-c${n} .cv`, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.3); });
+    top10.forEach(([n], i) => T(`#${id}-c${n}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))', duration: 0.25, yoyo: true, repeat: 1 }, a + BEAT * (7 + i * 0.4)));
+    pop(`#${id}-acap`, a + BEAT * 3);
+    T(`#${id}-a, #${id}-acap`, { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.15, duration: 0.45, ease: 'power2.in' }, m - 0.45);
+    // 2. část: dlaždice sektorů (styl Klonówiec)
+    order.forEach((n, i) => T0(`#${id}-h${n}`, { opacity: 0, rotationY: -100, transformPerspective: 600 }, { opacity: 1, rotationY: 0, duration: 0.5, ease: 'back.out(1.6)' }, m + i * 0.05));
+    T0(`#${id} .pp span`, { opacity: 0, y: u }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.02, ease: 'power3.out' }, m + 1.1);
+    if (!P) T0(`#${id} .bank`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, m);
+    for (let i = 1; i <= 40; i++) T0(`#${id}-pb${i}`, { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'power3.out' }, m + BEAT * 3 + i * 0.025);
+    T0(`#${id} .pse`, { opacity: 0 }, { opacity: 0.7, duration: 0.4 }, m + BEAT * 3);
+    pop(`#${id}-note`, m + BEAT * 5.5);
+    T(`#${id}-pb${best[0]}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8)', duration: 0.3, yoyo: true, repeat: 5 }, m + BEAT * 6);
+    T(`#${id}-h${bestS[0]}`, { boxShadow: '0 0 0 0px rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${(0.7 * u).toFixed(1)}px rgba(227,30,36,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, m + BEAT * 6);
+    tiles.forEach(([v], i) => { const t = m + BEAT * (8 + i * 0.75); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.8); });
   };
   stats(0); stats(1);
 
@@ -466,10 +490,10 @@ function build(W, H, file) {
     padRun((j) => `#${id}-hc${j}`, 12, BAR(b0 + 1), BAR(b0 + 13), 1.9, 0.2);                        // běžící světlo po sloupcích kol
     eq((j) => `#${id}-hi${j}`, 12, BAR(b0 + 13), BAR(b1), 0.4);                                     // po dni: sloupce kol hrají
     padRun((j) => `#${id}-top .dt:nth-child(${j + 1})`, 10, BAR(b0 + 13) + 1.6, BAR(b1), 1.25, 0.25); });
-  ['d1s', 'd2s'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k], a = BAR(b0) + BEAT * 5, b = BAR(b1);   // sektory: světlo běží přes 20 dlaždic + úder na dobu
+  ['d1s', 'd2s'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k], a = BAR(b0 + 3) + BEAT * 2, b = BAR(b1);   // sektory: světlo běží přes 20 dlaždic + úder na dobu
     padRun((j) => `#${id}-h${j + 1}`, 20, a, b, 1.6, 0.24);
     beatsIn(a, b).forEach((t, i) => out.push(`tl.fromTo("#${id}-h${(i % 20) + 1}", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, ${t.toFixed(3)});`));
-    padRun((j) => `#${id}-pb${j + 1}`, 40, BAR(b0) + BEAT * 8, b, 2.2, 0.18); });
+    padRun((j) => `#${id}-pb${j + 1}`, 40, BAR(b0 + 3) + BEAT * 5, b, 2.2, 0.18); });
   // celé pořadí: světlo běží po řádcích na každou dobu
   ['d1l', 'd2l'].forEach((k) => padRun((j) => `#s-${k}-l${j}`, 39, BAR(BARS[k][0]) + BEAT * 6, BAR(BARS[k][1]), 1.35, 0.25));
   padRun((j) => `#s-mcr-l${j}`, 39, BAR(BARS.mcr[0]) + BEAT * 14, BAR(BARS.mcr[1]), 1.35, 0.25);
@@ -684,7 +708,9 @@ function build(W, H, file) {
   #fly { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; }
   .aw { position:absolute; perspective:${px(150)}; perspective-origin:50% 45%; opacity:0; }
   .aw-i { inset:0; } .aw-i .ax, .aw-s .ax, .aw-p .ax { left:50%; top:50%; }
-  .aw-s { ${P ? `left:0; right:0; top:${px(22)}; height:${px(84)}` : `left:${f(SAFE.l - 3 * u)}; top:${f(SAFE.t + 5 * u)}; width:${px(106)}; height:${px(84)}`}; }
+  .aw-s { ${P ? `left:0; right:0; top:${px(34)}; height:${px(120)}` : `left:0; right:0; top:${f(SAFE.t + 8 * u)}; height:${px(86)}`}; }
+  .acap { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(158)}` : `left:${f(SAFE.l)}; bottom:${f(SAFE.b)}`}; font:600 ${px(P ? 2.6 : 2.2)} Montserrat; color:var(--ice); text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.85); opacity:0; }
+  .acap b { font-weight:900; color:var(--navy); background:var(--gold); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
   .aw-p { ${P ? `left:0; right:0; top:${px(24)}; height:${px(92)}` : `left:${f(SAFE.l - 2 * u)}; top:${f(SAFE.t + 5 * u)}; width:${px(112)}; height:${px(84)}`}; }
   .ax { position:absolute; transform-style:preserve-3d; } .az { position:absolute; inset:0; transform-style:preserve-3d; }
   .aimg { position:absolute; inset:0; background-image:url(assets/aerial/malys_ortho.jpg); background-repeat:no-repeat; border-radius:${px(2)}; filter:saturate(1.05) brightness(.92);
