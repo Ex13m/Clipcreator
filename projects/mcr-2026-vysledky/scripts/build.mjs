@@ -13,7 +13,7 @@ const R = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/results.json'), 'utf8
 const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'));
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
-const VER = process.env.VER || 'v3';
+const VER = process.env.VER || 'v4';
 
 // ---------- struktura v taktech ----------
 // track_edit: takty 1–39 originál, 40–53 = kopie dropu 26–39, 54–79 = originál 40–65 (energie: drop 18–21, 26–31, 34–45, 48–53, velký drop 60–67, outro 72–79)
