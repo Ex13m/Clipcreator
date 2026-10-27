@@ -13,11 +13,11 @@ const R = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/results.json'), 'utf8
 const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'));
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
-const VER = process.env.VER || 'v4';
+const VER = process.env.VER || 'v5';
 
 // ---------- struktura v taktech ----------
 // track_edit: takty 1–39 originál, 40–53 = kopie dropu 26–39, 54–79 = originál 40–65 (energie: drop 18–21, 26–31, 34–45, 48–53, velký drop 60–67, outro 72–79)
-const BARS = { intro: [0, 7], d1: [7, 22], d1s: [22, 28], d2: [28, 43], d2s: [43, 49], mcr: [49, 57], pod: [57, 64], sez: [64, 77], end: [77, 80] };
+const BARS = { intro: [0, 7], d1: [7, 22], d1s: [22, 29], d2: [29, 44], d2s: [44, 51], mcr: [51, 58], pod: [58, 65], sez: [65, 77], end: [77, 80] };
 const NBARS = 80;
 
 // ---------- čas: track nebo syntetická mřížka ----------
@@ -86,10 +86,12 @@ function build(W, H, file) {
   const SET = (sel, v, pos) => out.push(`tl.set(${JSON.stringify(sel)}, ${JSON.stringify(v)}, ${(+pos).toFixed(3)});`);
   const CNT = (id, from, to, pos, d, decs = 0) => out.push(`{ const o={v:${from}}, el=document.getElementById("${id}"); tl.fromTo(o,{v:${from}},{v:${to},duration:${d.toFixed(3)},ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=${decs ? `o.v.toFixed(${decs}).replace(".",",")` : `Math.round(o.v).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g,"\\u2009")`};}}, ${(+pos).toFixed(3)}); }`);
   const scenes = [], starts = [];
-  const scene = (id, a, b, html, track = 2) => { starts.push(a); out.push(`tl.set("#${id}", {visibility:"hidden"}, 0); tl.set("#${id}", {visibility:"visible"}, ${a.toFixed(3)}); tl.set("#${id}", {visibility:"hidden"}, ${b.toFixed(3)});`); scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`); };
+  const scene = (id, a, b, html, track = 2) => { starts.push(a);
+    if (a > 0.5) T0(`#${id}`, { rotationY: -14, z: -260, opacity: 0, transformPerspective: 1800 }, { rotationY: 0, z: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, a);
+    if (b < DUR - 0.5) T(`#${id}`, { rotationY: 0, z: 0, opacity: 1 }, { rotationY: 12, z: -220, opacity: 0, duration: 0.35, ease: 'power2.in', transformPerspective: 1800 }, b - 0.35); out.push(`tl.set("#${id}", {visibility:"hidden"}, 0); tl.set("#${id}", {visibility:"visible"}, ${a.toFixed(3)}); tl.set("#${id}", {visibility:"hidden"}, ${b.toFixed(3)});`); scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="${track}">${html}</section>`); };
   const onBeat = (t) => G.beats.find((b) => b >= t - 0.04) ?? t;
   const rise = (sel, t, d = 0.55) => T0(sel, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease: 'expo.out' }, onBeat(t));
-  const pop = (sel, t, d = 0.45) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: d, ease: 'back.out(2)' }, t);
+  const pop = (sel, t, d = 0.5) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.94, rotationX: -55, transformPerspective: 900, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: d, ease: 'back.out(1.8)' }, t);
   // atmosféra: fotka z TA CZ / Liběchova (tlumená, pomalý Ken Burns) + obří obrysové slovo, které pluje
   const bgp = (img, a, b, { op = 0.42, word = '', id = `bg${Math.round(a * 100)}` } = {}) => {
     T0(`#${id}`, { opacity: 0 }, { opacity: op, duration: 0.6, ease: 'power2.out' }, a);
@@ -126,7 +128,7 @@ function build(W, H, file) {
       <div class="it" id="it1"><div class="tap"><img src="assets/ta_logo.png" alt="Trout Area Czech Republic"></div>
         <div class="l1"><span>Mistrovství</span></div><div class="l1"><span>České republiky</span></div><div class="l1 red"><span>2026</span></div>
         <div class="l3"><span>Trout Area · hard baits · výsledky v číslech</span></div></div>
-      <div class="it" id="it2"><div class="ph-venue">${pondSVG('pond-i', ps, { labels: true, sectors: true })}</div>
+      <div class="it" id="it2"><div class="ph-venue">${pondSVG('pond-i', ps, { labels: true })}</div>
         <div class="vt"><div class="l1"><span>Líheň Liběchov</span></div><div class="l3"><span>rybník Malý Sporťáček · 40 stanovišť</span></div>
         <div class="vlogo"><img src="assets/logos/libechov.png" alt=""></div></div></div>
       <div class="it" id="it3"><div class="l1 big"><span>Dva dny</span></div><div class="l1 big red"><span>fair play</span></div>
@@ -142,7 +144,6 @@ function build(W, H, file) {
     T0('#pond-i .po', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' }, m1);
     T0('#pond-i .pi', { opacity: 0 }, { opacity: 1, duration: 0.8 }, m1 + 1.0);
     Object.keys(POND.stands).forEach((n, i) => T0(`#pond-i-s${n}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)' }, m1 + 0.9 + i * 0.03));
-    [0, 1, 2, 3].forEach((k) => { T0(`#pond-i-sec${k}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' }, m1 + 1.6 + k * BEAT * 0.5); T0(`#pond-i-sl${k}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.5)', transformOrigin: '50% 50%' }, m1 + 1.8 + k * BEAT * 0.5); });
     rise('#it2 .l1 span', m1 + 0.3); pop('#it2 .l3 span', m1 + 0.3 + BEAT * 2); pop('#it2 .vlogo', m1 + 0.3 + BEAT * 3);
     T('#it2', { opacity: 1 }, { opacity: 0, scale: 1.04, duration: 0.35, ease: 'power2.in' }, m2 - 0.35);
     // 1c dva dny fair play
@@ -221,44 +222,50 @@ function build(W, H, file) {
   };
   live(0); live(1);
 
-  // ===================== 3/5) STATISTIKA DNE (rybník = heatmapa stanovišť) =====================
+  // ===================== 3/5) STATISTIKA DNE: 3D rybník, sloupec ryb na každém stanovišti =====================
   const stats = (di) => {
     const D = DAYS[di], id = `s-${D.k}s`, [b0, b1] = BARS[`${D.k}s`], a = BAR(b0), b = BAR(b1);
     const mx = Math.max(...Object.values(DAYS[0].stand), ...Object.values(DAYS[1].stand));
-    const ps = P ? 84 * u : 72 * u;
-    const sec = [1, 11, 21, 31].map((lo) => Object.entries(D.stand).filter(([s]) => +s >= lo && +s <= lo + 9).reduce((s, [, v]) => s + v, 0));
-    const secMax = Math.max(...[1, 11, 21, 31].map((lo) => Object.entries(DAYS[0].stand).filter(([s]) => +s >= lo && +s <= lo + 9).reduce((s, [, v]) => s + v, 0)));
-    const best = Object.entries(D.stand).sort((x, y) => y[1] - x[1])[0];
+    const S = P ? 96 * u : 82 * u, k = S / 1040, colW = (P ? 2.3 : 2.1) * u, maxH = (P ? 19 : 16) * u;
+    const ranked = Object.entries(D.stand).map(([n, v]) => [+n, v]).sort((x, y) => y[1] - x[1] || x[0] - y[0]);
+    const top5 = ranked.slice(0, 5), low3 = ranked.slice(-3).reverse();
     const tiles = [
       [D.total, 'ryb celkem', di ? `−${Math.round((1 - D.total / DAYS[0].total) * 100)} % proti sobotě` : `${dec(D.total / D.n, 1)} na závodníka`],
       [D.mostFish.fish, 'nejvíc ryb', D.mostFish.name],
       [D.rec.f, 'rekord kola', D.rec.txt],
       [D.zero, 'kol bez ryby', `z ${D.rounds} startů v kolech`],
     ];
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · rybník`, 'ryby podle stanovišť a sektorů', a + 0.05)}
-      <div class="hm">${pondSVG(`${id}-p`, ps, { labels: true, sectors: 'val' })}<div class="hmb">nejlepší stanoviště <b>č. ${best[0]}</b> · ${best[1]} ryb</div><div class="hleg"><span>méně ryb</span><i></i><span>více ryb</span></div></div>
+    const pos = (n) => { const [x, y] = POND.stands[n]; return [(x - 40) * k, (y - 40) * k]; };
+    const cols = Object.entries(D.stand).map(([n, v]) => { const [x, y] = pos(n), h = Math.max(0.6 * u, (v / mx) * maxH), kk = v / mx;
+      const g = di === 1 ? `<i class="c3g" id="${id}-g${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))}; margin:${f(-Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))} 0 0 ${f(-colW / 2)}"></i>` : '';
+      return `${g}<div class="c3" id="${id}-c${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(h)}; margin:${f(-h)} 0 0 ${f(-colW / 2)}; --c:${heat(kk)}"><b class="cv">${v}</b></div>`; }).join('');
+    const stands = Object.entries(POND.stands).map(([n]) => { const [x, y] = pos(n); return `<i class="sd3" style="left:${f(x)}; top:${f(y)}"><em>${n}</em></i>`; }).join('');
+    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'STANOVIŠTĚ', id: `bg-${id}` })}${head(id, `Den ${di + 1} · ryby na stanovištích`, `všech 40 stanovišť${di ? ' · čárkovaně sobota' : ''}`, a + 0.05)}
+      <div class="p3w"><div class="p3" id="${id}-p3" style="width:${f(S)}; height:${f(S * 980 / 1040)}">
+        <svg class="pond3" viewBox="40 40 1040 980"><path class="po" d="${POND.outer}" pathLength="1"/>${POND.inner ? `<path class="pi" d="${POND.inner}"/>` : ''}</svg>${stands}${cols}</div></div>
       <div class="side">
-        <div class="secs">${sec.map((v, i) => `<div class="sec" id="${id}-sc${i}"><span style="color:${SECC[i]}">${i * 10 + 1}–${i * 10 + 10}</span><i><u id="${id}-su${i}" style="width:${((v / secMax) * 100).toFixed(1)}%; background:linear-gradient(90deg, rgba(48,66,133,.6), ${SECC[i]})"></u></i><b id="${id}-sv${i}">0</b></div>`).join('')}</div>
+        <div class="stl"><div class="sth">Nejlepší stanoviště</div>${top5.map(([n, v], i) => `<div class="str" id="${id}-r${i}"><b>${i + 1}.</b><span>č. ${n}</span><i><u style="width:${((v / top5[0][1]) * 100).toFixed(1)}%; background:${heat(v / mx)}"></u></i><em>${v}</em></div>`).join('')}
+          <div class="slow" id="${id}-low">nejméně ryb: ${low3.map(([n, v]) => `č. ${n} (${v})`).join(' · ')}</div></div>
         <div class="tiles2">${tiles.map(([v, l, s], i) => `<div class="tile2" id="${id}-t${i}"><b id="${id}-tv${i}">0</b><span>${l}</span><em>${s}</em></div>`).join('')}</div>
       </div>`);
-    T0(`#${id}-p .po`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut' }, a);
-    Object.entries(D.stand).forEach(([n, v], i) => {
-      const k = v / mx, t = a + 0.25 + (i % 40) * 0.02;
-      out.push(`tl.set("#${id}-p-s${n} .sdc", {attr:{r:${(11 + k * 21).toFixed(1)}}, fill:"${heat(k)}", fillOpacity:${(0.6 + k * 0.4).toFixed(2)}}, ${a.toFixed(3)});`);
-      T0(`#${id}-p-s${n}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2.5)' }, t);
+    // 3D rovina přiletí z plochy, kamera pak pomalu krouží
+    T0(`#${id}-p3`, { rotationX: 0, rotationZ: 0, scale: 0.9, opacity: 0 }, { rotationX: P ? 48 : 50, rotationZ: -26, scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out' }, a + 0.1);
+    T(`#${id}-p3`, { rotationZ: -26 }, { rotationZ: -8, duration: len(a + 1.2, b), ease: 'sine.inOut' }, a + 1.2);
+    T0(`#${id} .pond3 .po`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, a + 0.1);
+    Object.keys(D.stand).forEach((n, i) => {
+      SET(`#${id}-c${n}`, { rotationX: -90, transformOrigin: '50% 100%' }, a);
+      if (di === 1) SET(`#${id}-g${n}`, { rotationX: -90, transformOrigin: '50% 100%', opacity: 0 }, a);
+      const t = a + 1.0 + i * 0.045;
+      T0(`#${id}-c${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.55, ease: 'back.out(1.6)' }, t);
+      T0(`#${id}-c${n} .cv`, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.35);
     });
-    T(`#${id}-p-s${best[0]}`, { scale: 1 }, { scale: 1.35, duration: 0.25, yoyo: true, repeat: 5, ease: 'power2.inOut' }, a + BEAT * 6);
-    pop(`#${id} .hmb`, a + BEAT * 6); pop(`#${id} .hleg`, a + BEAT * 2);
-    sec.forEach((v, i) => { const t = a + BEAT * (2 + i); pop(`#${id}-sc${i}`, t); T0(`#${id}-su${i}`, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power3.out' }, t); CNT(`${id}-sv${i}`, 0, v, t, 0.8);
-      T0(`#${id}-p-sec${i}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t - 0.1);
-      T0(`#${id}-p-sl${i}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.5)', transformOrigin: '50% 50%' }, t); CNT(`${id}-p-slv${i}`, 0, v, t, 0.8); });
-    // nejlepší a nejhorší sektor pulzují
-    const bi = sec.indexOf(Math.max(...sec)), wi = sec.indexOf(Math.min(...sec));
-    T(`#${id}-p-sl${bi}`, { scale: 1 }, { scale: 1.18, duration: 0.25, yoyo: true, repeat: 3, transformOrigin: '50% 50%' }, a + BEAT * 9);
-    T(`#${id}-p-sec${bi}`, { strokeWidth: 34 }, { strokeWidth: 52, duration: 0.25, yoyo: true, repeat: 3 }, a + BEAT * 9);
-    T(`#${id}-sc${bi}`, { scale: 1 }, { scale: 1.05, duration: 0.25, yoyo: true, repeat: 3, transformOrigin: '0% 50%' }, a + BEAT * 9);
-    if (di === 1) T(`#${id}-p-sl${wi}`, { opacity: 1 }, { opacity: 0.45, duration: 0.3, yoyo: true, repeat: 3 }, a + BEAT * 11);
-    tiles.forEach(([v], i) => { const t = a + BEAT * (7 + i * 1.5); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.9); });
+    if (di === 1) T(`#${id} .c3g`, { opacity: 0 }, { opacity: 1, duration: 0.5 }, a + BEAT * 9);
+    // top 5: řádek + sloupec na rybníku zazáří
+    top5.forEach(([n], i) => { const t = a + BEAT * (7 + i);
+      T0(`#${id}-r${i}`, { opacity: 0, x: 4 * u, rotationY: -40, transformPerspective: 900 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.5, ease: 'expo.out' }, t);
+      T(`#${id}-c${n}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))', duration: 0.3, yoyo: true, repeat: 1 }, t); });
+    pop(`#${id}-low`, a + BEAT * 12); pop(`#${id} .sth`, a + BEAT * 6.5);
+    tiles.forEach(([v], i) => { const t = a + BEAT * (14 + i * 1.5); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.9); });
   };
   stats(0); stats(1);
 
@@ -273,7 +280,7 @@ function build(W, H, file) {
     T('#mr-rule', { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 }, a + BEAT * 4);
     MCR.forEach((x, i) => {
       const t = a + BEAT * 4 + i * BEAT * 0.75;
-      T0(`#mr${i}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, t);
+      T0(`#mr${i}`, { opacity: 0, rotationX: -90, transformPerspective: 1200, transformOrigin: '50% 0%' }, { opacity: 1, rotationX: 0, duration: 0.55, ease: 'back.out(1.6)' }, t);
       T0(`#mr${i} .tc i`, { scale: 0 }, { scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.08 }, t + 0.1);
       CNT(`mra${i}`, 0, x.d1 + x.d2, t + 0.35, 0.6);
     });
@@ -296,7 +303,7 @@ function build(W, H, file) {
         <div class="col" style="height:${[0, 1, 2].map((k) => [22, 16, 11][k])[i] * u}px"></div></div>`; }).join('')}</div>
       <div class="prize" id="prize"><img src="assets/logos/gausseholler.png" alt=""><span>hlavní cena <b>Revolut 8</b></span><img class="pb" src="assets/logos/bosset.png" alt=""><span>termosky <b>Zojirushi</b></span></div>
       <div class="wmap" id="wmap">${pondSVG('pond-w', ps, { labels: false })}<div class="wl">${top3.map((x, i) => `<span><i style="background:${PC[i]}"></i>${short(x.name)} · ${x.won.length} výher</span>`).join('')}</div><div class="wcap">kde vítězové vyhrávali duely</div></div>`);
-    [2, 1, 0].forEach((i, k) => { const t = a + BEAT * (2 + k * 2); T0(`#pd${i}`, { opacity: 0, y: 8 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.6)' }, t); T0(`#pd${i} .col`, { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'expo.out' }, t + 0.1); });
+    [2, 1, 0].forEach((i, k) => { const t = a + BEAT * (2 + k * 2); T0(`#pd${i}`, { opacity: 0, y: 8 * u, rotationX: 70, transformPerspective: 1200, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, rotationX: 0, duration: 0.7, ease: 'back.out(1.6)' }, t); T0(`#pd${i} .col`, { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'expo.out' }, t + 0.1); });
     T(`#pd0`, { scale: 1 }, { scale: 1.06, duration: 0.25, yoyo: true, repeat: 3 }, a + BEAT * 7);
     T0('#pglow', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, a + BEAT * 6);
     out.push(`tl.fromTo("#pglow", {rotation:0}, {rotation:60, duration:${len(a, mid)}, ease:"none", immediateRender:false}, ${a.toFixed(3)});`);
@@ -324,7 +331,7 @@ function build(W, H, file) {
   // ===================== 8) MISTR TROUT AREA ČR: 6 nejlepších z 8 =====================
   {
     const id = 's-sez', a = BAR(BARS.sez[0]), b = BAR(BARS.sez[1]);
-    const tStrike = BAR(BARS.sez[0] + 4), tSort = BAR(BARS.sez[0] + 6) + BEAT * 2, tFin = BAR(BARS.sez[0] + 9);
+    const tStrike = BAR(BARS.sez[0] + 4), tSort = BAR(BARS.sez[0] + 6) + BEAT * 2, tFin = BAR(BARS.sez[0] + 8) + BEAT * 2;
     const N = SEZ.length, rowH = P ? 5 * u : 6 * u;
     const yAll = (r) => ALL10.indexOf(r.name) >= 0 ? ALL10.indexOf(r.name) : 10 + B6TOP.indexOf(r.name);
     const yB6 = (r) => B6TOP.indexOf(r.name) >= 0 ? B6TOP.indexOf(r.name) : 10 + ALL10.indexOf(r.name);
@@ -342,7 +349,7 @@ function build(W, H, file) {
     // matice: řádky top 10 (všech 8), sloupce po závodech
     SEZ.forEach((x, i) => { SET(`#sr${i}`, { opacity: yAll(x) < 10 ? 1 : 0 }, a); });
     T0('#sm', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + BEAT * 2);
-    for (let k = 0; k < 8; k++) T0(`#sm .smr .sc:nth-of-type(${k + 3}) i, #sm .smh .sc:nth-of-type(${k + 3})`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.5)', stagger: 0.02 }, a + BEAT * (3 + k * 0.75));
+    for (let k = 0; k < 8; k++) T0(`#sm .smr .sc:nth-of-type(${k + 3}) i, #sm .smh .sc:nth-of-type(${k + 3})`, { rotationY: 90, opacity: 0, transformPerspective: 600 }, { rotationY: 0, opacity: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.025 }, a + BEAT * (3 + k * 0.75));
     // pravidlo + škrtání
     T0('#sz-rule', { opacity: 0, y: -2 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, tStrike - BEAT * 3);
     T('#sz-rule', { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 }, tStrike - BEAT);
@@ -406,7 +413,7 @@ function build(W, H, file) {
   // paprsky jen v intru, na stupních, u šampiona a na konci; v datových scénách tlumené + vinětace
   const calm = (t, on) => { T('#rays-w', { opacity: on ? 1 : 0.3 }, { opacity: on ? 0.3 : 1, duration: 0.5 }, t); T('#vig', { opacity: on ? 0 : 1 }, { opacity: on ? 1 : 0, duration: 0.5 }, t); };
   SET('#vig', { opacity: 0 }, 0);
-  calm(BAR(BARS.d1[0]), true); calm(BAR(BARS.pod[0]), false); calm(BAR(BARS.sez[0]), true); calm(BAR(BARS.sez[0] + 9), false);
+  calm(BAR(BARS.d1[0]), true); calm(BAR(BARS.pod[0]), false); calm(BAR(BARS.sez[0]), true); calm(BAR(BARS.sez[0] + 8) + BEAT * 2, false);
   // malý TA logo v rohu (mimo intro a konec)
   T0('#corner', { opacity: 0 }, { opacity: 0.9, duration: 0.5 }, BAR(BARS.d1[0]));
   T('#corner', { opacity: 0.9 }, { opacity: 0, duration: 0.4 }, BAR(BARS.end[0]) - 0.4);
@@ -425,7 +432,7 @@ function build(W, H, file) {
   :root { --blue:#304285; --red:#e31e24; --navy:#0b1e42; --ice:#eef2f9; --deep:#050d22; --gold:#ffd36b; --lb:#8ea2d8; }
   body { margin:0; background:var(--deep); color:var(--ice); font-family:'Source Sans 3', sans-serif; }
   #root { position:relative; width:${W}px; height:${H}px; overflow:hidden; background:var(--deep); }
-  .clip { position:absolute; inset:0; }
+  .clip { position:absolute; inset:0; transform-style:preserve-3d; } #root { perspective:2000px; }
   #stage { position:absolute; inset:0; overflow:hidden; }
   #st-bg { position:absolute; inset:${px(-6)}; background:radial-gradient(90% 60% at 50% 42%, #1d3a86 0%, #0b1e42 62%, #050d22 100%); }
   #st-rays { position:absolute; left:50%; top:45%; width:${px(260)}; height:${px(260)}; margin:${px(-130)} 0 0 ${px(-130)}; border-radius:50%; opacity:.16;
@@ -507,10 +514,23 @@ function build(W, H, file) {
   .dt:first-of-type { box-shadow:0 0 0 ${px(0.4)} var(--gold), 0 ${px(1)} ${px(4)} rgba(0,0,0,.4); }
 
   /* statistika dne */
+  .p3w { position:absolute; ${P ? `left:0; right:0; top:${px(24)}; height:${px(80)}` : `left:${f(SAFE.l - 2 * u)}; top:${f(SAFE.t + 8 * u)}; width:${px(100)}; height:${px(84)}`}; perspective:${px(160)}; perspective-origin:50% 40%; display:flex; align-items:center; justify-content:center; }
+  .p3 { position:relative; transform-style:preserve-3d; }
+  .pond3 { position:absolute; inset:0; width:100%; height:100%; overflow:visible; } .pond3 .po { fill:rgba(48,66,133,.45); stroke:#eef2f9; stroke-width:6; stroke-dasharray:1; } .pond3 .pi { fill:rgba(26,160,200,.18); stroke:rgba(238,242,249,.3); stroke-width:2; }
+  .sd3 { position:absolute; width:${px(1.2)}; height:${px(1.2)}; margin:${px(-0.6)} 0 0 ${px(-0.6)}; border-radius:50%; background:#eef2f9; } .sd3 em { position:absolute; left:${px(1.4)}; top:${px(-0.4)}; font:800 ${px(1.5)} Montserrat; font-style:normal; color:rgba(238,242,249,.7); }
+  .c3 { position:absolute; transform-style:preserve-3d; background:linear-gradient(0deg, var(--c), color-mix(in srgb, var(--c) 60%, #fff)); box-shadow:0 0 ${px(0.6)} rgba(0,0,0,.35); }
+  .c3::after { content:''; position:absolute; left:100%; top:0; width:${px(1.2)}; height:100%; transform-origin:left; transform:rotateY(90deg); background:color-mix(in srgb, var(--c) 55%, #000); }
+  .c3::before { content:''; position:absolute; left:0; top:0; width:100%; height:${px(1.2)}; transform-origin:top; transform:rotateX(90deg); background:color-mix(in srgb, var(--c) 70%, #fff); }
+  .c3 .cv { position:absolute; left:50%; bottom:100%; transform:translateX(-50%); margin-bottom:${px(0.4)}; font:900 ${px(P ? 2.1 : 1.9)} Montserrat; color:#fff; text-shadow:0 0 ${px(0.5)} rgba(0,0,0,.9); white-space:nowrap; opacity:0; }
+  .c3g { position:absolute; border:${px(0.18)} dashed rgba(238,242,249,.75); box-sizing:border-box; }
+  .stl { display:flex; flex-direction:column; gap:${px(0.9)}; } .sth { font:900 ${px(2.4)} Montserrat; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); opacity:0; }
+  .str { display:grid; grid-template-columns:${px(4)} ${px(10)} 1fr ${px(6)}; align-items:center; gap:${px(1.2)}; background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(1.2)}; padding:${px(0.8)} ${px(1.4)}; font-family:Montserrat; opacity:0; }
+  .str b { font-weight:900; font-size:${px(2.6)}; color:var(--red); } .str span { font-weight:900; font-size:${px(2.6)}; } .str i { height:${px(1.6)}; background:rgba(48,66,133,.15); border-radius:${px(0.8)}; overflow:hidden; display:block; } .str u { display:block; height:100%; } .str em { font-style:normal; font-weight:900; font-size:${px(2.8)}; text-align:right; }
+  .slow { font:700 ${px(1.9)} Montserrat; color:var(--lb); opacity:0; }
   .hm { position:absolute; ${P ? `left:50%; transform:translateX(-50%); top:${px(24)}` : `left:${f(SAFE.l)}; top:${f(SAFE.t + 11 * u)}`}; }
   .hmb { margin-top:${px(0.4)}; text-align:center; font:800 ${px(2.8)} Montserrat; color:var(--ice); opacity:0; } .hmb b { color:var(--gold); font-weight:900; font-size:1.3em; }
   .hleg { position:relative; margin:${px(0.8)} auto 0; justify-content:center; display:flex; align-items:center; gap:${px(1)}; font:700 ${px(1.6)} Montserrat; color:var(--lb); opacity:0; } .hleg i { width:${px(12)}; height:${px(1.2)}; border-radius:${px(0.6)}; background:linear-gradient(90deg,#304285,#ffd36b,#e31e24); }
-  .side { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(112)}` : `right:${f(SAFE.r)}; top:${f(SAFE.t + 15 * u)}; width:${px(76)}`}; display:flex; flex-direction:column; gap:${px(2.4)}; }
+  .side { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(104)}` : `right:${f(SAFE.r)}; top:${f(SAFE.t + 13 * u)}; width:${px(68)}`}; display:flex; flex-direction:column; gap:${px(2.4)}; }
   .secs { display:flex; flex-direction:column; gap:${px(1)}; }
   .sec { display:grid; grid-template-columns:${px(9)} 1fr ${px(7)}; align-items:center; gap:${px(1.2)}; font-family:Montserrat; opacity:0; }
   .sec span { font-weight:800; font-size:${px(2.2)}; color:var(--lb); } .sec i { height:${px(2.4)}; background:rgba(142,162,216,.18); border-radius:${px(0.6)}; overflow:hidden; display:block; }
