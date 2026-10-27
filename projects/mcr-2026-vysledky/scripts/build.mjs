@@ -10,6 +10,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PROTO = path.join(ROOT, 'proto');
 const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const R = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/results.json'), 'utf8'));
+// jména: každé slovo s velkým písmenem (export má např. „Mykhailo kobets“)
+const capN = (n) => n.split(' ').map((w) => w.charAt(0).toLocaleUpperCase('cs') + w.slice(1)).join(' ');
+[R.d1, R.d2, R.mcr.rows, R.season_all.rows, R.season_best6.rows].forEach((A) => A.forEach((x) => { x.name = capN(x.name); }));
 const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'));
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
@@ -144,7 +147,7 @@ function build(W, H, file) {
   {
     const a = 0, m1 = BAR(1) + BEAT * 2, mf = m1 + 3.75, m2 = BAR(6), b = BAR(BARS.intro[1]);
     const AS = 104 * u, dots = Object.keys(AER.stands).map((n) => { const [x, y] = apos(n, AS, CFULL); return `<i class="ad" id="ad${n}" style="left:${f(x)}; top:${f(y)}"></i>`; }).join('');
-    scene('s-intro', a, b, `${bgp('bg_mcr26_porada.jpg', a, m1, { op: 0.72, id: 'bgi1' })}${bgp('bg_mcr26_breh_pruty.jpg', m2, b, { op: 0.68, id: 'bgi3', word: 'FAIR PLAY' })}
+    scene('s-intro', a, b, `${bgp('bg_mcr26_porada.jpg', a, m1, { op: 0.72, id: 'bgi1' })}${bgp('bg_mcr26_breh_pruty.jpg', m2 - 0.5, b, { op: 0.68, id: 'bgi3', word: 'FAIR PLAY' })}
       <div class="it" id="it1"><div class="tap"><img src="assets/ta_logo.png" alt="Trout Area Czech Republic"></div>
         <div class="l1"><span>Mistrovství</span></div><div class="l1"><span>České republiky</span></div><div class="l1 red"><span>2026</span></div>
         <div class="l3"><span>Trout Area · hard baits · výsledky v číslech</span></div></div>
@@ -162,17 +165,17 @@ function build(W, H, file) {
     T('#it1', { opacity: 1 }, { opacity: 0, y: -4 * u, duration: 0.35, ease: 'power2.in' }, m1 - 0.35); T('#bgi1', { opacity: 0.72 }, { opacity: 0, duration: 0.4 }, m1 - 0.2);
     // 1b průlet dronem nad Liběchovem → z posledního záběru „vyroste“ ortofoto rybníka (stejný úhel: pohled k západu, náklon) → kamera se zvedne nad rybník
     T0('#ai', { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power1.in' }, mf - 0.3);
-    T0('#ai-x', { rotationX: 52, scale: 1.05, x: (P ? -2 : -3) * u, y: 6 * u }, { rotationX: 0, scale: 1.3, x: P ? 0 : -34 * u, y: P ? -16 * u : 0, duration: 1.9, ease: 'power2.inOut' }, mf);
+    T0('#ai-x', { rotationX: 52, scale: 1.05, x: (P ? -2 : -3) * u, y: 6 * u }, { rotationX: 0, x: P ? 0 : 12 * u, y: P ? -16 * u : -4 * u, scale: P ? 1.3 : 1.75, duration: 1.9, ease: 'power2.inOut' }, mf);
     T0('#ai-z', { rotation: 90 }, { rotation: 0, duration: 1.9, ease: 'power2.inOut' }, mf);
     T0('#ai .aol polygon', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' }, mf + 1.4);
     Object.keys(AER.stands).forEach((n, i) => T0(`#ad${n}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)' }, mf + 1.7 + i * 0.025));
-    T0('#ai-x', { scale: 1.3 }, { scale: 1.38, duration: len(mf + 1.9, m2), ease: 'none' }, mf + 1.9);
+    T0('#ai-x', { scale: P ? 1.3 : 1.75 }, { scale: P ? 1.38 : 1.85, duration: len(mf + 1.9, m2), ease: 'none' }, mf + 1.9);
     T0('#it2', { opacity: 0 }, { opacity: 1, duration: 0.01 }, mf + 1.6);
     rise('#it2 .l1 span', mf + 1.7); pop('#it2 .l3 span', mf + 1.7 + BEAT * 2); pop('#it2 .vlogo', mf + 1.7 + BEAT * 3);
     T('#it2, #ai', { opacity: 1 }, { opacity: 0, scale: 1.04, duration: 0.35, ease: 'power2.in' }, m2 - 0.35);
     // 1c dva dny fair play
-    T0('#it3', { opacity: 0 }, { opacity: 1, duration: 0.01 }, m2);
-    rise('#it3 .l1:nth-of-type(1) span', m2 + 0.05); rise('#it3 .l1:nth-of-type(2) span', m2 + 0.05 + BEAT);
+    T0('#it3', { opacity: 0 }, { opacity: 1, duration: 0.01 }, m2 - 0.4);
+    rise('#it3 .l1:nth-of-type(1) span', m2 - 0.35); rise('#it3 .l1:nth-of-type(2) span', m2 + 0.05 + BEAT);
     [[39], [2], [24], [40]].forEach(([v], i) => { const t = m2 + BEAT * (2 + i * 0.5); pop(`#itl${i}`, t); CNT(`itv${i}`, 0, v, t + 0.05, 0.7); });
     pop('#it3 .dte span', m2 + BEAT * 4.5);
     T('#it3', { opacity: 1 }, { opacity: 0, scale: 0.96, duration: 0.3, ease: 'power2.in' }, b - 0.45);
@@ -182,7 +185,7 @@ function build(W, H, file) {
   const live = (di) => {
     const D = DAYS[di], id = `s-${D.k}`, [b0, b1] = BARS[D.k], a = BAR(b0), b = BAR(b1);
     const rt = (j) => BAR(b0 + 1 + j);                          // kolo j běží v taktu b0+1+j
-    const CW = P ? W - SAFE.l - SAFE.r : W * 0.62, CH = P ? H * 0.44 : H - SAFE.t - SAFE.b - 17 * u;
+    const CW = P ? W - SAFE.l - SAFE.r : W * 0.62, CH = P ? H * 0.6 : H - SAFE.t - SAFE.b - 17 * u;
     const padL = P ? 4 * u : 4 * u, padR = P ? 24 * u : 18 * u, padT = 2 * u, padB = 3 * u;
     const X = (j) => padL + (j / 11) * (CW - padL - padR), Y = (r) => padT + ((r - 1) / 38) * (CH - padT - padB);
     const COL = ['#e31e24', '#ffd36b', '#ffffff', '#7fb2ff', '#9be3c7', '#c9a7ff', '#ff9e6b', '#5fd3e8', '#b8c4e6', '#f4a3c0'];
@@ -191,15 +194,15 @@ function build(W, H, file) {
       return `<polyline class="bl${i < 3 ? ' hi' : ''}" points="${pts}" stroke="${COL[i]}" stroke-width="${(i < 3 ? 0.6 : 0.16) * u}"/>`;
     }).join('');
     // štítky: skutečná pozice = tečka, text se rozestoupí (min. mezera), mimo top 10 ztlumené
-    const GAP = (P ? 2.5 : 2.3) * u;
+    const GAP = (P ? 3.1 : 2.7) * u;
     const LY = D.ranks.map((rk) => { const o = FINAL10.map((n, i) => ({ i, y: Y(rk[n]) })).sort((p, q) => p.y - q.y); let prev = -1e9;
       o.forEach((e) => { e.d = Math.max(e.y, prev + GAP); prev = e.d; }); const over = prev - (CH - padB); if (over > 0) o.forEach((e) => (e.d -= over * ((e.d - o[0].d) / Math.max(1, prev - o[0].d))));
       return Object.fromEntries(o.map((e) => [e.i, e.d])); });
     const dots = FINAL10.map((n, i) => `<i class="bdot${i < 3 ? ' hi' : ''}" id="${id}-o${i}" style="left:${f(X(0))}; top:${f(Y(D.ranks[0][n]))}; background:${COL[i]}"></i>
-      <div class="bd${i < 3 ? ' hi' : ''}" id="${id}-d${i}" style="left:${f(X(0) + 1.4 * u)}; top:${f(LY[0][i])}; color:${i < 3 ? COL[i] : '#eef2f9'}"><span>${short(n)}</span><b id="${id}-r${i}">${D.ranks[0][n]}.</b></div>`).join('');
+      <div class="bd${i < 3 ? ' hi' : ''}" id="${id}-d${i}" style="left:${f(X(0) + 1.4 * u)}; top:${f(LY[0][i])}; color:${i === 0 ? '#ff9a9c' : i < 3 ? COL[i] : '#eef2f9'}"><span>${short(n)}</span><b id="${id}-r${i}">${D.ranks[0][n]}.</b></div>`).join('');
     const grid = [1, 10, 20, 30, 39].map((r) => `<line x1="${padL}" x2="${CW - padR}" y1="${Y(r)}" y2="${Y(r)}" class="gl"/><text x="${padL - 1 * u}" y="${Y(r) + 1 * u}" text-anchor="end">${r}.</text>`).join('')
       + Array.from({ length: 12 }, (_, j) => `<text x="${X(j)}" y="${CH - 0.2 * u}" text-anchor="middle" class="kx">${j + 1}</text>`).join('');
-    const band = `<rect x="${padL}" y="${Y(1) - 1.2 * u}" width="${CW - padL - padR}" height="${Y(10) - Y(1) + 2.4 * u}" class="t10"/><text x="${CW - padR - 0.8 * u}" y="${Y(1) + 1.6 * u}" text-anchor="end" class="t10l">TOP 10</text>`;
+    const band = `<rect x="${padL}" y="${Y(1) - 1.2 * u}" width="${CW - padL - padR}" height="${Y(10) - Y(1) + 2.4 * u}" class="t10"/><text x="${padL + 0.6 * u}" y="${Y(1) - 1.8 * u}" text-anchor="start" class="t10l">TOP 10</text>`;
     const maxR = Math.max(...DAYS[0].perRound);
     const ghost = di === 1 ? DAYS[0].perRound : null;
     const icon = di === 0
@@ -209,7 +212,7 @@ function build(W, H, file) {
       <div class="hrw"><div class="hrl">ryb v kole${ghost ? ' · <s></s> sobota' : ''}</div><div class="hr">${D.perRound.map((v, j) => `<div class="hcol" id="${id}-hc${j}">${ghost ? `<s style="height:${((ghost[j] / maxR) * 100).toFixed(1)}%"></s>` : ''}<i id="${id}-hi${j}" style="height:${((v / maxR) * 100).toFixed(1)}%"></i><u class="hv" id="${id}-hv${j}" style="bottom:${((v / maxR) * 100).toFixed(1)}%">${v}</u><em>${j + 1}</em></div>`).join('')}</div></div></div>`;
     scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_podberak.jpg' : 'bg_v02_velky_sportak.jpg', a, b, { op: 0.36, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1}`, di === 0 ? 'sobota 24. 10. · slunečno' : 'neděle 25. 10. · déšť', a + 0.05)}${icon}${hud}
       <div class="bump" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}"><defs><clipPath id="${id}-cp"><rect id="${id}-cr" x="0" y="0" width="${f(X(0) + 1.5 * u)}" height="${CH}"/></clipPath></defs>${band}${grid}<g clip-path="url(#${id}-cp)">${lines}</g></svg>${dots}
-        <div class="bcap">průběžné pořadí konečné top 10 MČR po kolech</div></div>
+        <div class="bcap">jak se TOP 10 MČR měnila po kolech</div></div>
       <div class="dtop" id="${id}-top"><div class="dth">Den ${di + 1} · top 10</div><div class="dtg">${D.top.slice(0, 10).map((x, i) => `<div class="dt${i < 3 ? ' t3' : ''}"><b>${i + 1}.</b><span>${x.name}</span><em>${x.points} b · ${x.fish} ryb</em></div>`).join('')}</div></div>`);
     T0(`#${id} .wx`, { opacity: 0, scale: 0.5, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, a + 0.2);
     if (di === 0) out.push(`tl.fromTo("#${id} .sun", {rotation:0}, {rotation:90, duration:${len(a, b)}, ease:"none", immediateRender:false}, ${a.toFixed(3)});`);
@@ -265,7 +268,7 @@ function build(W, H, file) {
     const pos = (n) => apos(n, S, CB);
     const cols = Object.entries(D.stand).map(([n, v]) => { const [x, y] = pos(n), h = Math.max(0.6 * u, (v / mx) * maxH), kk = v / mx;
       const g = di === 1 ? `<i class="c3g bb" id="${id}-g${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))}; margin:${f(-Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))} 0 0 ${f(-colW / 2)}"></i>` : '';
-      return `${g}<div class="c3 bb" id="${id}-c${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(h)}; margin:${f(-h)} 0 0 ${f(-colW / 2)}; --c:${heat(kk)}"><b class="cv">${v}</b></div>`; }).join('');
+      return `${g}<div class="c3 bb" id="${id}-c${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(h)}; margin:${f(-h)} 0 0 ${f(-colW / 2)}; --c:${heat(kk)}">${top5.some(([m]) => m === +n) ? `<b class="cv">${v}</b>` : ''}</div>`; }).join('');
     const stands = Object.keys(AER.stands).map((n) => { const [x, y] = pos(n); return `<i class="sd3" style="left:${f(x)}; top:${f(y)}"><em class="bb">${n}</em></i>`; }).join('');
     scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'STANOVIŠTĚ', id: `bg-${id}` })}${head(id, `Den ${di + 1} · ryby na stanovištích`, `všech 40 stanovišť${di ? ' · čárkovaně sobota' : ''}`, a + 0.05)}
       <div class="aw aw-s" id="${id}-a">${aerial(`${id}-a`, S, CB, stands + cols, { outline: true })}</div>
@@ -283,13 +286,14 @@ function build(W, H, file) {
       if (di === 1) SET(`#${id}-g${n}`, { rotationX: -90, transformOrigin: '50% 100%', opacity: 0 }, a);
       const t = a + 1.0 + i * 0.045;
       T0(`#${id}-c${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.55, ease: 'back.out(1.6)' }, t);
-      T0(`#${id}-c${n} .cv`, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.35);
+      if (top5.some(([m]) => m === +n)) T0(`#${id}-c${n} .cv`, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.35);
     });
     if (di === 1) T(`#${id} .c3g`, { opacity: 0 }, { opacity: 1, duration: 0.5 }, a + BEAT * 9);
     // top 5: řádek + sloupec na rybníku zazáří
     top5.forEach(([n], i) => { const t = a + BEAT * (6 + i * 0.5);
-      T0(`#${id}-r${i}`, { opacity: 0, x: 4 * u, rotationY: -40, transformPerspective: 900 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.5, ease: 'expo.out' }, t);
+      T0(`#${id}-r${i}`, { opacity: 0, x: 1.2 * u, rotationY: -25, transformPerspective: 900 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.5, ease: 'expo.out' }, t);
       T(`#${id}-c${n}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))', duration: 0.3, yoyo: true, repeat: 1 }, t); });
+    T0(`#${id} .side`, { opacity: 0 }, { opacity: 1, duration: 0.35 }, a + BEAT * 5.3);
     pop(`#${id}-low`, a + BEAT * 11.5); pop(`#${id} .sth`, a + BEAT * 5.5);
     tiles.forEach(([v], i) => { const t = a + BEAT * (13 + i); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.9); });
   };
@@ -396,7 +400,7 @@ function build(W, H, file) {
   {
     const id = 's-sez', a = BAR(BARS.sez[0]), b = BAR(BARS.sez[1]);
     const tStrike = BAR(BARS.sez[0] + 3) + BEAT * 2, tSort = BAR(BARS.sez[0] + 5) + BEAT * 2, tFin = BAR(BARS.sez[0] + 7) + BEAT * 2;
-    const N = SEZ.length, rowH = P ? 5 * u : 6 * u;
+    const N = SEZ.length, rowH = P ? 7 * u : 6 * u;
     const yAll = (r) => ALL10.indexOf(r.name) >= 0 ? ALL10.indexOf(r.name) : 10 + B6TOP.indexOf(r.name);
     const yB6 = (r) => B6TOP.indexOf(r.name) >= 0 ? B6TOP.indexOf(r.name) : 10 + ALL10.indexOf(r.name);
     const cell = (p, c, k) => `<span class="sc${ABSENT(p) ? ' ab' : ''}${c ? '' : ' x'}"><i>${ABSENT(p) ? '–' : p}</i></span>`;
@@ -405,7 +409,7 @@ function build(W, H, file) {
     const ph = PHOTOS.winners ? `<div class="chph" style="background-image:url(assets/photos/${PHOTOS.winners})"></div>` : '';
     scene(id, a, b, `${bgp('bg_mcr26_porada.jpg', a, tFin, { op: 0.24, word: 'SEZÓNA 2026', id: 'bg-sez' })}${head(id, 'Mistr Trout Area ČR 2026', 'sezóna · 8 bodovaných závodů', a + 0.05)}
       <div class="sm" id="sm"><div class="smh"><span class="sp">#</span><span class="sn">závodník</span>${EV.map((e, k) => `<span class="sc h"><i>${EVS[k]}</i><em>${EVD[k]}</em></span>`).join('')}<span class="sa">Ø</span></div>
-        <div class="smb" style="height:${f(rowH * 10)}">${SEZ.map((x, i) => `<div class="smr" id="sr${i}" style="top:${f(yAll(x) * rowH)}; height:${f(rowH)}"><span class="sp"><b id="srp${i}">${yAll(x) + 1}</b></span><span class="sn">${x.name}${x === hra ? `<em class="jmp" id="sz-jump">▲ ${hra.allRank}. → ${hra.b6Rank}.</em>` : ''}</span>${x.pos.map((p, k) => cell(p, x.cnt[k], k)).join('')}<span class="sa"><b id="sra${i}">${dec(x.all)}</b></span></div>`).join('')}</div></div>
+        <div class="smb" style="height:${f(rowH * 10)}">${SEZ.map((x, i) => `<div class="smr" id="sr${i}" style="top:${f(yAll(x) * rowH)}; height:${f(rowH)}"><span class="sp"><b id="srp${i}">${yAll(x) + 1}</b></span><span class="sn"><i class="snn">${x.name}</i>${x === hra ? `<em class="jmp" id="sz-jump">▲ ${hra.allRank}. → ${hra.b6Rank}.</em>` : ''}</span>${x.pos.map((p, k) => cell(p, x.cnt[k], k)).join('')}<span class="sa"><b id="sra${i}">${dec(x.all)}</b></span></div>`).join('')}</div></div>
       <div class="rule srule" id="sz-rule"><b>Počítá se 6 nejlepších z 8</b><span>2 nejhorší výsledky se škrtají</span></div>
       <div class="champ" id="champ">${ph}<div class="chk"><span>Mistr Trout Area ČR 2026</span></div><div class="chn"><span>${champ.name}</span></div>
         <div class="chs" id="chs">podruhé za sebou · Ø ${dec(champ.b6)}</div>
@@ -612,7 +616,7 @@ function build(W, H, file) {
   .c3 { position:absolute; transform-style:preserve-3d; background:linear-gradient(0deg, var(--c), color-mix(in srgb, var(--c) 60%, #fff)); box-shadow:0 0 ${px(0.6)} rgba(0,0,0,.35); }
   .c3::after { content:''; position:absolute; left:100%; top:0; width:${px(1.2)}; height:100%; transform-origin:left; transform:rotateY(90deg); background:color-mix(in srgb, var(--c) 55%, #000); }
   .c3::before { content:''; position:absolute; left:0; top:0; width:100%; height:${px(1.2)}; transform-origin:top; transform:rotateX(90deg); background:color-mix(in srgb, var(--c) 70%, #fff); }
-  .c3 .cv { position:absolute; left:50%; bottom:100%; transform:translateX(-50%); margin-bottom:${px(0.4)}; font:900 ${px(P ? 2.1 : 1.9)} Montserrat; color:#fff; text-shadow:0 0 ${px(0.5)} rgba(0,0,0,.9); white-space:nowrap; opacity:0; }
+  .c3 .cv { position:absolute; left:50%; bottom:100%; transform:translateX(-50%); margin-bottom:${px(0.4)}; font:900 ${px(P ? 2.6 : 2.4)} Montserrat; color:#fff; text-shadow:0 0 ${px(0.5)} rgba(0,0,0,.9); white-space:nowrap; opacity:0; }
   .c3g { position:absolute; border:${px(0.18)} dashed rgba(238,242,249,.75); box-sizing:border-box; }
   .stl { display:flex; flex-direction:column; gap:${px(0.6)}; } .sth { font:900 ${px(2.4)} Montserrat; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); opacity:0; }
   .str { display:grid; grid-template-columns:${px(4)} ${px(9)} 1fr ${px(6)}; align-items:center; gap:${px(1.2)}; background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(1)}; padding:${px(0.45)} ${px(1.4)}; opacity:0; }
@@ -634,7 +638,7 @@ function build(W, H, file) {
   /* výsledek MČR */
   .rule { position:absolute; ${P ? `left:${f(SAFE.l)}; top:${px(27)}` : `right:${f(SAFE.r)}; top:${px(16)}`}; background:var(--red); color:#fff; border-radius:${px(1.4)}; padding:${px(1.2)} ${px(2.2)}; font-family:Montserrat; opacity:0; }
   .rule b { font-weight:900; font-size:${px(P ? 3.4 : 2.8)}; } .rule span { display:block; font-weight:700; font-size:${px(1.9)}; opacity:.9; }
-  .rule.big { left:50%; top:50%; right:auto; transform:translate(-50%,-50%); text-align:center; padding:${px(2.4)} ${px(4)}; z-index:4; box-shadow:0 ${px(1)} ${px(5)} rgba(0,0,0,.5); } .rule.big b { font-size:${px(P ? 6.5 : 6)}; } .rule.big span { font-size:${px(2.4)}; }
+  .rule.big { left:50%; top:50%; right:auto; transform:translate(-50%,-50%); text-align:center; padding:${px(2.4)} ${px(4)}; z-index:4; box-shadow:0 ${px(1)} ${px(5)} rgba(0,0,0,.5); } .rule.big b { font-size:${px(P ? 5.2 : 6)}; white-space:nowrap; } .rule.big span { font-size:${px(2.4)}; }
   .tab { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(36) : f(SAFE.t + 15 * u)}; display:flex; flex-direction:column; gap:${px(0.7)}; ${P ? '' : `max-width:${px(110)}; margin:0 auto;`} }
   .tr { display:grid; grid-template-columns:${px(5)} 1fr ${px(P ? 11 : 10)} ${px(P ? 11 : 10)} ${px(P ? 13 : 12)}; align-items:center; gap:${px(1)}; background:rgba(238,242,249,.95); color:var(--navy); border-radius:${px(1.2)}; padding:${px(0.9)} ${px(1.6)}; font-family:Montserrat; opacity:0; }
   .tr.th { background:none; color:var(--gold); opacity:1; font-weight:800; font-size:${px(1.6)}; letter-spacing:.12em; text-transform:uppercase; padding-top:0; padding-bottom:0; }
@@ -659,14 +663,15 @@ function build(W, H, file) {
   .wcap { position:absolute; opacity:0; ${P ? `top:${px(26)}` : `top:${f(SAFE.t + 9.5 * u)}`}; left:${f(SAFE.l)}; font:800 ${px(2.4)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
 
   /* sezóna */
-  .sm { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(36) : f(SAFE.t + 15 * u)}; font-family:Montserrat; }
-  .srule { ${P ? `left:${f(SAFE.l)}; top:${px(27.5)}` : `right:${f(SAFE.r)}; top:${px(9)}`}; } .srule b { font-size:${px(P ? 3.2 : 3)}; }
-  .smh, .smr { display:grid; grid-template-columns:${px(4)} ${px(P ? 24 : 38)} repeat(8, 1fr) ${px(P ? 9 : 10)}; align-items:center; gap:${px(0.5)}; }
+  .sm { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(48) : f(SAFE.t + 15 * u)}; font-family:Montserrat; }
+  .srule { ${P ? `left:${f(SAFE.l)}; top:${px(36)}` : `right:${f(SAFE.r)}; top:${px(9)}`}; } .srule b { font-size:${px(P ? 3.2 : 3)}; }
+  .smh, .smr { display:grid; grid-template-columns:${px(4)} ${px(P ? 29 : 40)} repeat(8, 1fr) ${px(P ? 8 : 10)}; align-items:center; gap:${px(0.5)}; }
   .smh { color:var(--gold); margin-bottom:${px(1)}; } .smh .sc.h { display:flex; flex-direction:column; align-items:center; } .smh .sc.h i { font-style:normal; font-weight:900; font-size:${px(1.6)}; } .smh .sc.h em { font-style:normal; font-weight:600; font-size:${px(1.2)}; color:var(--lb); }
   .smh .sp, .smh .sn, .smh .sa { font-weight:800; font-size:${px(1.5)}; letter-spacing:.12em; text-transform:uppercase; }
   .smb { position:relative; } .smr { position:absolute; left:0; right:0; border-radius:${px(1)}; padding:0 ${px(0.6)}; box-sizing:border-box; }
+  .smr .sn .snn { font-style:normal; }
   .smr .sp b { font-weight:900; font-size:${px(2.2)}; color:var(--red); } .smr .sn { font-weight:900; font-size:${px(P ? 2.1 : 2.4)}; white-space:nowrap; position:relative; }
-  .jmp { position:absolute; left:100%; top:50%; transform:translateY(-50%); margin-left:${px(0.6)}; font-style:normal; font:900 ${px(P ? 1.6 : 1.9)} Montserrat; background:var(--gold); color:var(--navy); border-radius:${px(0.8)}; padding:${px(0.2)} ${px(0.8)}; opacity:0; z-index:2; white-space:nowrap; }
+  .jmp { position:relative; display:inline-block; vertical-align:middle; margin-left:${px(0.8)}; font-style:normal; font:900 ${px(P ? 1.6 : 1.9)} Montserrat; background:var(--gold); color:var(--navy); border-radius:${px(0.8)}; padding:${px(0.2)} ${px(0.8)}; opacity:0; z-index:2; white-space:nowrap; }
   .sc { position:relative; text-align:center; --x:0; } .smr .sc i { display:inline-block; font-style:normal; font-weight:800; font-size:${px(P ? 2.2 : 2.6)}; background:rgba(238,242,249,.93); color:var(--navy); border-radius:${px(0.6)}; min-width:${px(P ? 4.6 : 5.6)}; padding:${px(0.25)} 0; }
   .smr .sc.ab i { background:rgba(142,162,216,.25); color:var(--lb); }
   .smr .sc.x::after { content:''; position:absolute; left:10%; right:10%; top:50%; height:${px(0.45)}; background:var(--red); transform:rotate(-14deg) scaleX(var(--x)); transform-origin:left; border-radius:${px(0.3)}; }
@@ -674,7 +679,7 @@ function build(W, H, file) {
   .jump { position:absolute; ${P ? `left:${f(SAFE.l)}; bottom:${px(14)}` : `right:${f(SAFE.r)}; bottom:${f(SAFE.b)}`}; background:var(--gold); color:var(--navy); border-radius:${px(1.4)}; padding:${px(1.2)} ${px(2)}; font-family:Montserrat; opacity:0; }
   .jump b { display:block; font-weight:900; font-size:${px(2.6)}; } .jump span { font-weight:800; font-size:${px(2)}; }
   .champ { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; opacity:0; padding-bottom:${px(P ? 12 : 5)}; }
-  .chph { position:absolute; left:0; right:0; top:${P ? px(24) : px(13)}; height:${P ? px(70) : '64%'}; background-size:${P ? '170% auto' : 'contain'}; background-repeat:no-repeat; background-position:50% 0%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 60%, transparent 88%); filter:drop-shadow(0 0 ${px(1.2)} rgba(255,211,107,.55)) drop-shadow(0 ${px(1)} ${px(3)} rgba(0,0,0,.5)); }
+  .chph { position:absolute; left:0; right:0; top:${P ? px(50) : px(13)}; height:${P ? px(72) : '64%'}; background-size:${P ? '170% auto' : 'contain'}; background-repeat:no-repeat; background-position:50% 0%; -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 60%, transparent 88%); filter:drop-shadow(0 0 ${px(1.2)} rgba(255,211,107,.55)) drop-shadow(0 ${px(1)} ${px(3)} rgba(0,0,0,.5)); }
   .champ > div:not(.chph) { position:relative; }
   .chk span { font-family:Montserrat; font-weight:800; font-size:${px(P ? 3 : 2.6)}; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
   .chn span { font-family:Montserrat; font-weight:900; font-size:${px(P ? 11 : 9)}; text-transform:uppercase; line-height:1.05; text-shadow:0 ${px(0.6)} ${px(3)} rgba(0,0,0,.6); }
@@ -692,7 +697,8 @@ function build(W, H, file) {
     -webkit-mask-image:radial-gradient(ellipse 72% 72% at 50% 50%, #000 58%, transparent 100%); }
   .aol { position:absolute; inset:0; width:100%; height:100%; overflow:visible; } .aol polygon { fill:rgba(26,160,200,.10); stroke:rgba(238,242,249,.85); stroke-width:5; stroke-dasharray:1; stroke-linejoin:round; }
   .ad { position:absolute; width:${px(1.1)}; height:${px(1.1)}; margin:${px(-0.55)} 0 0 ${px(-0.55)}; border-radius:50%; background:var(--red); box-shadow:0 0 0 ${px(0.22)} #fff; }
-  #it2 { ${P ? `justify-content:flex-end; padding-bottom:${px(26)}` : `align-items:flex-end; padding-right:${px(9)}`}; box-sizing:border-box; }
+  #it2 { ${P ? `justify-content:flex-end; padding-bottom:${px(26)}` : `flex-direction:column; justify-content:flex-end; align-items:flex-start; padding:0 0 ${px(7)} ${px(7)}`}; box-sizing:border-box; }
+  ${P ? '' : `#it2 .vt { background:linear-gradient(90deg, rgba(5,13,34,.72), rgba(5,13,34,.35)); border-radius:${px(1.8)}; padding:${px(2)} ${px(3)}; }`}
   #it2 .vt { max-width:${px(P ? 90 : 62)}; } #it2 .l1 span { font-size:${px(P ? 10 : 7.4)}; text-shadow:0 ${px(0.5)} ${px(3)} rgba(0,0,0,.75); white-space:normal; }
   #it2 .l3 span { text-shadow:0 ${px(0.3)} ${px(1.5)} rgba(0,0,0,.9); }
   .sd3.sm3 { width:${px(0.8)}; height:${px(0.8)}; margin:${px(-0.4)} 0 0 ${px(-0.4)}; background:rgba(238,242,249,.7); }
@@ -718,11 +724,11 @@ function build(W, H, file) {
   .lgh { grid-auto-flow:row; opacity:0; }
   .lr { position:relative; display:grid; grid-template-columns:${px(4.4)} 1fr ${px(P ? 6 : 6.5)} ${px(P ? 5 : 5.5)}; align-items:center; gap:${px(0.8)}; padding:0 ${px(1.2)}; border-radius:${px(1)}; background:rgba(238,242,249,.12); color:var(--ice); overflow:hidden; opacity:0; }
   .lr > * { position:relative; } .lr .lb { position:absolute; left:0; top:0; bottom:0; background:linear-gradient(90deg, rgba(26,160,200,.0), rgba(26,160,200,.38)); transform-origin:left; }
-  .lr b { font-weight:900; font-size:${px(P ? 2.1 : 2.2)}; color:var(--gold); } .lr span { font-weight:800; font-size:${px(P ? 2.05 : 2.2)}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .lr b { font-weight:900; font-size:${px(P ? 2.1 : 2.2)}; color:var(--gold); } .lr span { font-weight:800; font-size:${px(P ? 1.85 : 2.2)}; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .lr em { font-style:normal; font-weight:800; font-size:${px(P ? 1.9 : 2)}; text-align:right; color:var(--lb); } .lr u { text-decoration:none; font-weight:900; font-size:${px(P ? 2.2 : 2.4)}; text-align:right; }
   .lr.t { background:rgba(238,242,249,.95); color:var(--navy); } .lr.t b { color:var(--red); } .lr.t em { color:var(--blue); } .lr.t .lb { background:linear-gradient(90deg, rgba(255,211,107,0), rgba(255,211,107,.55)); }
   .lr.g { box-shadow:0 0 0 ${px(0.3)} var(--gold), 0 0 ${px(1.6)} rgba(255,211,107,.35); }
-  #s-mcr .lr { grid-template-columns:${px(4.4)} 1fr ${px(P ? 4.6 : 5)} ${px(P ? 4.6 : 5)} ${px(P ? 4.6 : 5)}; } #s-mcr .lr u { color:var(--red); } #s-mcr .lr:not(.t) u { color:var(--gold); }
+  #s-mcr .lr { grid-template-columns:${px(P ? 4 : 4.4)} 1fr ${px(P ? 3.9 : 5)} ${px(P ? 3.9 : 5)} ${px(P ? 4.2 : 5)}; gap:${px(P ? 0.5 : 0.8)}; } #s-mcr .lr u { color:var(--red); } #s-mcr .lr:not(.t) u { color:var(--gold); }
   .lrh { opacity:1; background:none; height:${px(2.6)}; } .lrh b, .lrh span, .lrh em, .lrh u { font-weight:800 !important; font-size:${px(1.4)} !important; letter-spacing:.12em; text-transform:uppercase; color:var(--gold) !important; }
   #s-fpa .lr { grid-template-columns:${px(4.4)} ${px(P ? 14 : 15)} 1fr ${px(P ? 7 : 7)} ${px(P ? 4.4 : 4.6)}; background:none; padding:0 ${px(0.4)}; }
   #s-fpa .lr span { font-size:${px(P ? 1.95 : 2)}; } #s-fpa .lr em { font-size:${px(1.6)}; }
