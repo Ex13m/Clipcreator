@@ -17,7 +17,7 @@ const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
 const AER = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/aerial.json'), 'utf8'));   // ortofoto ČÚZK, stanoviště v px (malys_ortho.jpg)
-const VER = process.env.VER || 'v7';
+const VER = process.env.VER || 'v8';
 
 // ---------- struktura v taktech ----------
 // track_edit2: originál takty 1–53 + kopie 18–53 + originál 54–65 (≈ 101 taktů, 197,9 s)
