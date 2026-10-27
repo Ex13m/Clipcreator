@@ -250,51 +250,44 @@ function build(W, H, file) {
   };
   live(0); live(1);
 
-  // ===================== 3/5) STATISTIKA DNE: 3D rybník, sloupec ryb na každém stanovišti =====================
+  // ===================== 3/5) SEKTORY A MÍSTA (styl Klonówiec): 20 sektorů = dvojice míst, které proti sobě hrají duel =====================
   const stats = (di) => {
     const D = DAYS[di], id = `s-${D.k}s`, [b0, b1] = BARS[`${D.k}s`], a = BAR(b0), b = BAR(b1);
-    const mx = Math.max(...Object.values(DAYS[0].stand), ...Object.values(DAYS[1].stand));
-    const S = P ? 100 * u : 94 * u, colW = (P ? 2.3 : 2.1) * u, maxH = (P ? 19 : 16) * u;
-    // každý den jiný úhel kamery: sobota od lesa (JV), neděle z protějšího břehu od silnice
-    const CAM = di === 0 ? { x1: 56, z0: -38, z1: -12, s1: 1 } : { x1: 42, z0: 206, z1: 168, s1: 1.08 };
-    const ranked = Object.entries(D.stand).map(([n, v]) => [+n, v]).sort((x, y) => y[1] - x[1] || x[0] - y[0]);
-    const top5 = ranked.slice(0, 10), low3 = ranked.slice(-3).reverse();
+    const PL = D.stand, SEC = Object.fromEntries(Array.from({ length: 20 }, (_, i) => [i + 1, PL[2 * i + 1] + PL[2 * i + 2]]));
+    const PL0 = DAYS[0].stand, SEC0 = Object.fromEntries(Array.from({ length: 20 }, (_, i) => [i + 1, PL0[2 * i + 1] + PL0[2 * i + 2]]));
+    // společná škála pro oba dny → neděle je vidět bledší
+    const SEC1 = Array.from({ length: 20 }, (_, i) => DAYS[1].stand[2 * i + 1] + DAYS[1].stand[2 * i + 2]);
+    const smax = Math.max(...Object.values(SEC)), smin = Math.min(...Object.values(SEC));   // škála zvlášť pro každý den
+    const pmax = Math.max(...Object.values(PL)), pmin = Math.min(...Object.values(PL));
+    const mix = (t) => { t = Math.max(0, Math.min(1, t)); const c0 = [223, 229, 241], c1 = [48, 66, 133]; return `rgb(${c0.map((v, i) => Math.round(v + (c1[i] - v) * t)).join(',')})`; };
+    const hs = (v) => mix((v - smin) / (smax - smin)), hp = (v) => mix((v - pmin) / (pmax - pmin));
+    const ink = (v, lo, hi) => ((v - lo) / (hi - lo) > 0.45 ? '#eef2f9' : '#0b1e42');
+    // 16:9 jako u vody: nahoře SZ břeh (S11–S20), dole JV břeh (S1–S10), obojí zleva od JZ konce
+    const order = P ? Array.from({ length: 20 }, (_, i) => i + 1) : [...Array.from({ length: 10 }, (_, i) => 11 + i), ...Array.from({ length: 10 }, (_, i) => 1 + i)];
+    const best = Object.entries(PL).sort((p, q) => q[1] - p[1])[0], worst = Object.entries(PL).sort((p, q) => p[1] - q[1])[0];
+    const bestS = Object.entries(SEC).sort((p, q) => q[1] - p[1])[0];
     const tiles = [
       [D.total, 'ryb celkem', di ? `−${Math.round((1 - D.total / DAYS[0].total) * 100)} % proti sobotě` : `${dec(D.total / D.n, 1)} na závodníka`],
       [D.mostFish.fish, 'nejvíc ryb', D.mostFish.name],
       [D.rec.f, 'rekord kola', D.rec.txt],
       [D.zero, 'kol bez ryby', `z ${D.rounds} startů v kolech`],
     ];
-    const pos = (n) => apos(n, S, CB);
-    const cols = Object.entries(D.stand).map(([n, v]) => { const [x, y] = pos(n), h = Math.max(0.6 * u, (v / mx) * maxH), kk = v / mx;
-      const g = di === 1 ? `<i class="c3g bb" id="${id}-g${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))}; margin:${f(-Math.max(0.6 * u, (DAYS[0].stand[n] / mx) * maxH))} 0 0 ${f(-colW / 2)}"></i>` : '';
-      return `${g}<div class="c3 bb" id="${id}-c${n}" style="left:${f(x)}; top:${f(y)}; width:${f(colW)}; height:${f(h)}; margin:${f(-h)} 0 0 ${f(-colW / 2)}; --c:${heat(kk)}">${top5.some(([m]) => m === +n) ? `<b class="cv">${v}</b>` : ''}</div>`; }).join('');
-    const stands = Object.keys(AER.stands).map((n) => { const [x, y] = pos(n); return `<i class="sd3" style="left:${f(x)}; top:${f(y)}"><em class="bb">${n}</em></i>`; }).join('');
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'STANOVIŠTĚ', id: `bg-${id}` })}${head(id, `Den ${di + 1} · ryby na stanovištích`, `všech 40 stanovišť${di ? ' · čárkovaně sobota' : ''}`, a + 0.05)}
-      <div class="aw aw-s" id="${id}-a">${aerial(`${id}-a`, S, CB, stands + cols, { outline: true })}</div>
-      <div class="side">
-        <div class="stl"><div class="sth">Top 10 stanovišť</div>${top5.map(([n, v], i) => `<div class="str" id="${id}-r${i}"><b>${i + 1}.</b><span>č. ${n}</span><i><u style="width:${((v / top5[0][1]) * 100).toFixed(1)}%; background:${heat(v / mx)}"></u></i><em>${v}</em></div>`).join('')}
-          <div class="slow" id="${id}-low">nejméně ryb: ${low3.map(([n, v]) => `č. ${n} (${v})`).join(' · ')}</div></div>
-        <div class="tiles2">${tiles.map(([v, l, s], i) => `<div class="tile2" id="${id}-t${i}"><b id="${id}-tv${i}">0</b><span>${l}</span><em>${s}</em></div>`).join('')}</div>
-      </div>`);
-    // letecký snímek se sklopí do 3D, kamera pak krouží kolem rybníka (sloupce stojí čelem ke kameře)
-    T0(`#${id}-a`, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, a + 0.1);
-    orbit(`${id}-a`, a + 0.1, b, { x0: 0, x1: CAM.x1, z0: CAM.z0, z1: CAM.z1, s0: 0.86, s1: CAM.s1, tin: 1.2 });
-    T0(`#${id}-a .aol polygon`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, a + 0.3);
-    Object.keys(D.stand).forEach((n, i) => {
-      SET(`#${id}-c${n}`, { rotationX: -90, transformOrigin: '50% 100%' }, a);
-      if (di === 1) SET(`#${id}-g${n}`, { rotationX: -90, transformOrigin: '50% 100%', opacity: 0 }, a);
-      const t = a + 1.0 + i * 0.045;
-      T0(`#${id}-c${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.55, ease: 'back.out(1.6)' }, t);
-      if (top5.some(([m]) => m === +n)) T0(`#${id}-c${n} .cv`, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.35);
-    });
-    if (di === 1) T(`#${id} .c3g`, { opacity: 0 }, { opacity: 1, duration: 0.5 }, a + BEAT * 9);
-    // top 5: řádek + sloupec na rybníku zazáří
-    top5.forEach(([n], i) => { const t = a + BEAT * (6 + i * 0.5);
-      T0(`#${id}-r${i}`, { opacity: 0, x: 1.2 * u, rotationY: -25, transformPerspective: 900 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.5, ease: 'expo.out' }, t);
-      T(`#${id}-c${n}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))', duration: 0.3, yoyo: true, repeat: 1 }, t); });
-    T0(`#${id} .side`, { opacity: 0 }, { opacity: 1, duration: 0.35 }, a + BEAT * 5.3);
-    pop(`#${id}-low`, a + BEAT * 11.5); pop(`#${id} .sth`, a + BEAT * 5.5);
+    const cell = (n) => { const v = SEC[n], p1 = 2 * n - 1, p2 = 2 * n, dlt = di ? Math.round((v / SEC0[n] - 1) * 100) : null;
+      return `<div class="hcell" id="${id}-h${n}" style="background:${hs(v)}; color:${ink(v, smin, smax)}"><em>S${n}${dlt !== null ? ` <s>${dlt > 0 ? '+' : '−'}${Math.abs(dlt)} %</s>` : ''}</em><b>${v}</b>
+        <div class="pp"><span style="background:${hp(PL[p1])}; color:${ink(PL[p1], pmin, pmax)}">${p1}<i>${PL[p1]}</i></span><span style="background:${hp(PL[p2])}; color:${ink(PL[p2], pmin, pmax)}">${p2}<i>${PL[p2]}</i></span></div></div>`; };
+    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · sektory a místa`, P ? (di ? '20 sektorů · % = proti sobotě' : '20 sektorů · 40 míst · 12 kol') : `20 sektorů · 40 míst · ryby za 12 kol${di ? ' · % = proti sobotě' : ''}`, a + 0.05)}
+      <div class="heat">${P ? '' : '<div class="bank">SZ břeh · u silnice</div>'}${order.map(cell).join('')}${P ? '' : '<div class="bank b2">JV břeh · u lesa</div>'}</div>
+      <div class="pstrip" id="${id}-ps">${Array.from({ length: 40 }, (_, i) => `<i id="${id}-pb${i + 1}" style="height:${((PL[i + 1] / pmax) * 100).toFixed(1)}%; background:${hp(PL[i + 1])}"></i>`).join('')}<em class="pse">místo 1 → 40</em></div>
+      <div class="hnote" id="${id}-note"><b>Nejlepší místo ${best[0]}: ${best[1]} ryb</b> · sektor S${bestS[0]}: ${bestS[1]} · nejslabší místo ${worst[0]}: ${worst[1]} · Ø ${dec(D.total / 40, 1)} na místo</div>
+      <div class="tiles2">${tiles.map(([v, l, s0], i) => `<div class="tile2" id="${id}-t${i}"><b id="${id}-tv${i}">0</b><span>${l}</span><em>${s0}</em></div>`).join('')}</div>`);
+    order.forEach((n, i) => T0(`#${id}-h${n}`, { opacity: 0, rotationY: -100, transformPerspective: 600 }, { opacity: 1, rotationY: 0, duration: 0.5, ease: 'back.out(1.6)' }, a + BEAT * 2 + i * 0.06));
+    T0(`#${id} .pp span`, { opacity: 0, y: u }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.025, ease: 'power3.out' }, a + BEAT * 2 + 1.5);
+    if (!P) T0(`#${id} .bank`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 2);
+    for (let i = 1; i <= 40; i++) T0(`#${id}-pb${i}`, { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: 'power3.out' }, a + BEAT * 6 + i * 0.03);
+    T0(`#${id} .pse`, { opacity: 0 }, { opacity: 0.7, duration: 0.4 }, a + BEAT * 6);
+    pop(`#${id}-note`, a + BEAT * 9);
+    T(`#${id}-pb${best[0]}`, { filter: 'brightness(1)' }, { filter: 'brightness(1.8)', duration: 0.3, yoyo: true, repeat: 5 }, a + BEAT * 9.5);
+    T(`#${id}-h${bestS[0]}`, { boxShadow: '0 0 0 0px rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${(0.7 * u).toFixed(1)}px rgba(227,30,36,1)`, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, a + BEAT * 9.5);
     tiles.forEach(([v], i) => { const t = a + BEAT * (13 + i); pop(`#${id}-t${i}`, t); CNT(`${id}-tv${i}`, 0, v, t + 0.05, 0.9); });
   };
   stats(0); stats(1);
@@ -473,9 +466,10 @@ function build(W, H, file) {
     padRun((j) => `#${id}-hc${j}`, 12, BAR(b0 + 1), BAR(b0 + 13), 1.9, 0.2);                        // běžící světlo po sloupcích kol
     eq((j) => `#${id}-hi${j}`, 12, BAR(b0 + 13), BAR(b1), 0.4);                                     // po dni: sloupce kol hrají
     padRun((j) => `#${id}-top .dt:nth-child(${j + 1})`, 10, BAR(b0 + 13) + 1.6, BAR(b1), 1.25, 0.25); });
-  ['d1s', 'd2s'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k], keys = Object.keys(POND.stands);
-    padRun((j) => `#${id}-c${keys[j]}`, 40, BAR(b0) + 3.2, BAR(b1), 1.7, 0.18);                      // světlo běží kolem rybníka po stanovištích
-    padRun((j) => `#${id}-r${j}`, 10, BAR(b0) + BEAT * 11, BAR(b1), 1.12, 0.22); });
+  ['d1s', 'd2s'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k], a = BAR(b0) + BEAT * 5, b = BAR(b1);   // sektory: světlo běží přes 20 dlaždic + úder na dobu
+    padRun((j) => `#${id}-h${j + 1}`, 20, a, b, 1.6, 0.24);
+    beatsIn(a, b).forEach((t, i) => out.push(`tl.fromTo("#${id}-h${(i % 20) + 1}", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, ${t.toFixed(3)});`));
+    padRun((j) => `#${id}-pb${j + 1}`, 40, BAR(b0) + BEAT * 8, b, 2.2, 0.18); });
   // celé pořadí: světlo běží po řádcích na každou dobu
   ['d1l', 'd2l'].forEach((k) => padRun((j) => `#s-${k}-l${j}`, 39, BAR(BARS[k][0]) + BEAT * 6, BAR(BARS[k][1]), 1.35, 0.25));
   padRun((j) => `#s-mcr-l${j}`, 39, BAR(BARS.mcr[0]) + BEAT * 14, BAR(BARS.mcr[1]), 1.35, 0.25);
@@ -719,6 +713,21 @@ function build(W, H, file) {
   .pleg i { display:inline-flex; align-items:center; justify-content:center; width:${px(1.9)}; height:${px(1.9)}; border-radius:50%; box-sizing:border-box; }
   .pleg .lw { background:var(--c); } .pleg .lw svg { width:70%; height:70%; fill:#0b1e42; } .pleg .ld { border:${px(0.4)} solid var(--c); } .pleg .ll { width:${px(1)}; height:${px(1)}; background:rgba(238,242,249,.55); }
   .pleg .l1 { background:var(--c); } .pleg .l2 { background:#fff; box-shadow:inset 0 0 0 ${px(0.4)} var(--c); }
+  /* sektory (styl Klonówiec) */
+  .heat { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(37) : f(SAFE.t + 13 * u)}; display:grid; grid-template-columns:repeat(${P ? 4 : 10}, 1fr); gap:${px(P ? 1.4 : 1)}; }
+  .bank { grid-column:1 / -1; font:800 ${px(1.5)} Montserrat; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); opacity:0; } .bank.b2 { margin-top:${px(0.2)}; }
+  .hcell { border-radius:${px(1)}; padding:${px(P ? 1.3 : 1)} ${px(0.8)} ${px(0.8)}; text-align:center; box-shadow:0 ${px(0.4)} ${px(1.4)} rgba(0,0,0,.3); font-family:Montserrat; opacity:0; }
+  .hcell em { display:block; font-style:normal; font-weight:700; font-size:${px(P ? 2.2 : 1.6)}; opacity:.8; } .hcell em s { text-decoration:none; font-weight:800; font-size:.85em; opacity:.85; }
+  .hcell b { display:block; font-weight:900; font-size:${px(P ? 4.8 : 3.4)}; line-height:1.05; }
+  .pp { display:grid; grid-template-columns:1fr 1fr; gap:${px(0.4)}; margin-top:${px(0.6)}; }
+  .pp span { border-radius:${px(0.5)}; font-weight:700; font-size:${px(P ? 1.8 : 1.3)}; padding:${px(0.3)} 0; box-shadow:inset 0 0 0 ${px(0.15)} rgba(238,242,249,.35); } .pp span i { display:block; font-style:normal; font-weight:900; font-size:1.3em; }
+  .pstrip { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(131) : px(59)}; height:${px(P ? 9 : 8)}; display:flex; align-items:flex-end; gap:${px(0.35)}; }
+  .pstrip i { flex:1; border-radius:${px(0.3)} ${px(0.3)} 0 0; transform-origin:bottom; }
+  .pstrip em { position:absolute; right:0; top:${px(-3)}; font:600 ${px(P ? 2 : 1.6)} Montserrat; font-style:normal; letter-spacing:.1em; text-transform:uppercase; opacity:0; }
+  .hnote { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(143) : px(69)}; font:600 ${px(P ? 2.7 : 2.3)} Montserrat; text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); opacity:0; }
+  .hnote b { font-weight:900; color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
+  #s-d1s .tiles2, #s-d2s .tiles2 { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(155) : px(76)}; grid-template-columns:repeat(4, 1fr); }
+
   /* celé pořadí */
   .lg, .lgh { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; display:grid; grid-auto-flow:column; gap:${px(0.7)} ${px(P ? 1.6 : 2)}; font-family:Montserrat; }
   .lgh { grid-auto-flow:row; opacity:0; }

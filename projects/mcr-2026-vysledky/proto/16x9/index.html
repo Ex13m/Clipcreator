@@ -215,6 +215,21 @@
   .pleg i { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:50%; box-sizing:border-box; }
   .pleg .lw { background:var(--c); } .pleg .lw svg { width:70%; height:70%; fill:#0b1e42; } .pleg .ld { border:4px solid var(--c); } .pleg .ll { width:11px; height:11px; background:rgba(238,242,249,.55); }
   .pleg .l1 { background:var(--c); } .pleg .l2 { background:#fff; box-shadow:inset 0 0 0 4px var(--c); }
+  /* sektory (styl Klonówiec) */
+  .heat { position:absolute; left:54.0px; right:54.0px; top:205.2px; display:grid; grid-template-columns:repeat(10, 1fr); gap:11px; }
+  .bank { grid-column:1 / -1; font:800 16px Montserrat; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); opacity:0; } .bank.b2 { margin-top:2px; }
+  .hcell { border-radius:11px; padding:11px 9px 9px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,.3); font-family:Montserrat; opacity:0; }
+  .hcell em { display:block; font-style:normal; font-weight:700; font-size:17px; opacity:.8; } .hcell em s { text-decoration:none; font-weight:800; font-size:.85em; opacity:.85; }
+  .hcell b { display:block; font-weight:900; font-size:37px; line-height:1.05; }
+  .pp { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:6px; }
+  .pp span { border-radius:5px; font-weight:700; font-size:14px; padding:3px 0; box-shadow:inset 0 0 0 2px rgba(238,242,249,.35); } .pp span i { display:block; font-style:normal; font-weight:900; font-size:1.3em; }
+  .pstrip { position:absolute; left:54.0px; right:54.0px; top:637px; height:86px; display:flex; align-items:flex-end; gap:4px; }
+  .pstrip i { flex:1; border-radius:3px 3px 0 0; transform-origin:bottom; }
+  .pstrip em { position:absolute; right:0; top:-32px; font:600 17px Montserrat; font-style:normal; letter-spacing:.1em; text-transform:uppercase; opacity:0; }
+  .hnote { position:absolute; left:54.0px; right:54.0px; top:745px; font:600 25px Montserrat; text-shadow:0 3px 15px rgba(0,0,0,.8); opacity:0; }
+  .hnote b { font-weight:900; color:#fff; background:var(--red); padding:0 9px; border-radius:5px; text-shadow:none; }
+  #s-d1s .tiles2, #s-d2s .tiles2 { position:absolute; left:54.0px; right:54.0px; top:821px; grid-template-columns:repeat(4, 1fr); }
+
   /* celé pořadí */
   .lg, .lgh { position:absolute; left:54.0px; right:54.0px; display:grid; grid-auto-flow:column; gap:8px 22px; font-family:Montserrat; }
   .lgh { grid-auto-flow:row; opacity:0; }
@@ -288,24 +303,56 @@
       <div class="bd" id="s-d2-d9" style="left:58.3px; top:497.7px; color:#eef2f9"><span>J. Kulič</span><b id="s-d2-r9">26.</b></div>
         <div class="bcap">jak se TOP 10 MČR měnila po kolech</div></div>
       <div class="dtop" id="s-d2-top"><div class="dth">Den 2 · top 10</div><div class="dtg"><div class="dt t3"><b>1.</b><span>Lumír Kadlčík</span><em>29 b · 33 ryb</em></div><div class="dt t3"><b>2.</b><span>Alexandr Kulaev</span><em>28 b · 25 ryb</em></div><div class="dt t3"><b>3.</b><span>Denis Zaikin</span><em>27 b · 35 ryb</em></div><div class="dt"><b>4.</b><span>Jakub Hrobar</span><em>26 b · 23 ryb</em></div><div class="dt"><b>5.</b><span>Michael Boček</span><em>25 b · 23 ryb</em></div><div class="dt"><b>6.</b><span>Evžen Raus</span><em>25 b · 27 ryb</em></div><div class="dt"><b>7.</b><span>Petr Hrabalík</span><em>25 b · 23 ryb</em></div><div class="dt"><b>8.</b><span>Stanislav Lukášek</span><em>25 b · 23 ryb</em></div><div class="dt"><b>9.</b><span>Michal Horák</span><em>24 b · 30 ryb</em></div><div class="dt"><b>10.</b><span>Dominik Švub</span><em>24 b · 22 ryb</em></div></div></div></section>
-  <section id="s-d1s" class="clip" data-start="45.976" data-duration="13.444" data-track-index="2"><div class="bgp" id="bg-s-d1s" style="background-image:url(assets/photos/bg_mcr26_zarybneni.jpg)"></div><div class="bgo"></div><div class="bgw" id="bg-s-d1sw">STANOVIŠTĚ</div><div class="h2"><span>Den 1 · ryby na stanovištích</span><em>všech 40 stanovišť</em></div>
-      <div class="aw aw-s" id="s-d1s-a"><div class="ax" id="s-d1s-a-x" style="width:1015.2px; height:956.3px; margin:-478.2px 0 0 -507.6px"><div class="az" id="s-d1s-a-z">
-      <div class="aimg" style="background-size:1647.9px auto; background-position:-316.3px -345.8px"></div>
-      <svg class="aol" viewBox="430 470 1380 1300"><polygon points="1114.2,678.4 1062.2,698.4 1042.2,716.5 998.2,776.5 978.2,788.5 970.2,820.5 948.2,856.5 914.2,896.5 896.2,932.5 872.2,958.4 852.2,994.4 796.2,1058.4 778.2,1102.4 728.2,1158.4 718.2,1186.4 696.2,1210.4 690.2,1234.4 656.2,1278.4 666.2,1314.4 718.2,1358.4 820.2,1410.4 882.2,1484.5 904.2,1488.5 930.2,1516.5 962.2,1524.5 1002.2,1548.5 1042.2,1548.5 1082.2,1520.5 1132.2,1520.5 1146.2,1510.4 1186.2,1502.4 1298.2,1394.4 1326.2,1342.4 1530.2,1066.4 1522.2,1044.5 1530.2,1038.4 1554.2,1042.4 1588.2,1014.4 1588.2,990.4 1574.2,972.5 1574.2,930.4 1560.2,914.4 1516.2,896.5 1422.2,824.5 1376.2,806.4 1356.2,788.5 1338.2,782.4 1326.2,764.5 1288.2,754.4 1232.2,718.4 1216.2,700.5 1196.2,702.4 1174.2,690.4" pathLength="1"/></svg><i class="sd3" style="left:477.7px; top:797.4px"><em class="bb">1</em></i><i class="sd3" style="left:507.8px; top:790.7px"><em class="bb">2</em></i><i class="sd3" style="left:537.8px; top:783.8px"><em class="bb">3</em></i><i class="sd3" style="left:565.5px; top:774.6px"><em class="bb">4</em></i><i class="sd3" style="left:585.1px; top:756.4px"><em class="bb">5</em></i><i class="sd3" style="left:604.3px; top:737.9px"><em class="bb">6</em></i><i class="sd3" style="left:623.5px; top:719.3px"><em class="bb">7</em></i><i class="sd3" style="left:642.7px; top:700.8px"><em class="bb">8</em></i><i class="sd3" style="left:659.2px; top:679.3px"><em class="bb">9</em></i><i class="sd3" style="left:672.6px; top:654.4px"><em class="bb">10</em></i><i class="sd3" style="left:688.4px; top:632.0px"><em class="bb">11</em></i><i class="sd3" style="left:704.4px; top:610.0px"><em class="bb">12</em></i><i class="sd3" style="left:720.5px; top:588.1px"><em class="bb">13</em></i><i class="sd3" style="left:736.5px; top:566.1px"><em class="bb">14</em></i><i class="sd3" style="left:752.6px; top:544.1px"><em class="bb">15</em></i><i class="sd3" style="left:768.7px; top:522.1px"><em class="bb">16</em></i><i class="sd3" style="left:784.6px; top:500.2px"><em class="bb">17</em></i><i class="sd3" style="left:800.8px; top:478.2px"><em class="bb">18</em></i><i class="sd3" style="left:816.8px; top:456.2px"><em class="bb">19</em></i><i class="sd3" style="left:835.6px; top:437.0px"><em class="bb">20</em></i><i class="sd3" style="left:171.0px; top:554.1px"><em class="bb">21</em></i><i class="sd3" style="left:184.1px; top:532.2px"><em class="bb">22</em></i><i class="sd3" style="left:197.2px; top:510.3px"><em class="bb">23</em></i><i class="sd3" style="left:211.2px; top:489.1px"><em class="bb">24</em></i><i class="sd3" style="left:227.8px; top:469.9px"><em class="bb">25</em></i><i class="sd3" style="left:243.6px; top:450.1px"><em class="bb">26</em></i><i class="sd3" style="left:253.4px; top:425.6px"><em class="bb">27</em></i><i class="sd3" style="left:269.5px; top:406.0px"><em class="bb">28</em></i><i class="sd3" style="left:286.3px; top:386.8px"><em class="bb">29</em></i><i class="sd3" style="left:302.2px; top:367.1px"><em class="bb">30</em></i><i class="sd3" style="left:316.7px; top:346.2px"><em class="bb">31</em></i><i class="sd3" style="left:331.2px; top:325.4px"><em class="bb">32</em></i><i class="sd3" style="left:345.6px; top:304.6px"><em class="bb">33</em></i><i class="sd3" style="left:360.1px; top:283.7px"><em class="bb">34</em></i><i class="sd3" style="left:372.7px; top:261.5px"><em class="bb">35</em></i><i class="sd3" style="left:384.0px; top:238.2px"><em class="bb">36</em></i><i class="sd3" style="left:398.0px; top:216.9px"><em class="bb">37</em></i><i class="sd3" style="left:414.8px; top:197.9px"><em class="bb">38</em></i><i class="sd3" style="left:431.8px; top:178.8px"><em class="bb">39</em></i><i class="sd3" style="left:448.7px; top:159.9px"><em class="bb">40</em></i><div class="c3 bb" id="s-d1s-c1" style="left:477.7px; top:797.4px; width:22.7px; height:127.5px; margin:-127.5px 0 0 -11.3px; --c:#f27d49"><b class="cv">45</b></div><div class="c3 bb" id="s-d1s-c2" style="left:507.8px; top:790.7px; width:22.7px; height:104.8px; margin:-104.8px 0 0 -11.3px; --c:#f9ac5c"></div><div class="c3 bb" id="s-d1s-c3" style="left:537.8px; top:783.8px; width:22.7px; height:93.5px; margin:-93.5px 0 0 -11.3px; --c:#fdc465"></div><div class="c3 bb" id="s-d1s-c4" style="left:565.5px; top:774.6px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><div class="c3 bb" id="s-d1s-c5" style="left:585.1px; top:756.4px; width:22.7px; height:59.5px; margin:-59.5px 0 0 -11.3px; --c:#bfa673"></div><div class="c3 bb" id="s-d1s-c6" style="left:604.3px; top:737.9px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><div class="c3 bb" id="s-d1s-c7" style="left:623.5px; top:719.3px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px; --c:#ffd06a"></div><div class="c3 bb" id="s-d1s-c8" style="left:642.7px; top:700.8px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px; --c:#ccaf71"></div><div class="c3 bb" id="s-d1s-c9" style="left:659.2px; top:679.3px; width:22.7px; height:90.6px; margin:-90.6px 0 0 -11.3px; --c:#feca68"></div><div class="c3 bb" id="s-d1s-c10" style="left:672.6px; top:654.4px; width:22.7px; height:53.8px; margin:-53.8px 0 0 -11.3px; --c:#b19c75"></div><div class="c3 bb" id="s-d1s-c11" style="left:688.4px; top:632.0px; width:22.7px; height:70.8px; margin:-70.8px 0 0 -11.3px; --c:#dab970"></div><div class="c3 bb" id="s-d1s-c12" style="left:704.4px; top:610.0px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px; --c:#ccaf71"></div><div class="c3 bb" id="s-d1s-c13" style="left:720.5px; top:588.1px; width:22.7px; height:85.0px; margin:-85.0px 0 0 -11.3px; --c:#fcd16b"></div><div class="c3 bb" id="s-d1s-c14" style="left:736.5px; top:566.1px; width:22.7px; height:70.8px; margin:-70.8px 0 0 -11.3px; --c:#dab970"></div><div class="c3 bb" id="s-d1s-c15" style="left:752.6px; top:544.1px; width:22.7px; height:56.7px; margin:-56.7px 0 0 -11.3px; --c:#b8a174"></div><div class="c3 bb" id="s-d1s-c16" style="left:768.7px; top:522.1px; width:22.7px; height:96.3px; margin:-96.3px 0 0 -11.3px; --c:#fcbe63"></div><div class="c3 bb" id="s-d1s-c17" style="left:784.6px; top:500.2px; width:22.7px; height:73.7px; margin:-73.7px 0 0 -11.3px; --c:#e0be6f"></div><div class="c3 bb" id="s-d1s-c18" style="left:800.8px; top:478.2px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px; --c:#c5ab72"></div><div class="c3 bb" id="s-d1s-c19" style="left:816.8px; top:456.2px; width:22.7px; height:150.1px; margin:-150.1px 0 0 -11.3px; --c:#ea4d37"><b class="cv">53</b></div><div class="c3 bb" id="s-d1s-c20" style="left:835.6px; top:437.0px; width:22.7px; height:172.8px; margin:-172.8px 0 0 -11.3px; --c:#e31e24"><b class="cv">61</b></div><div class="c3 bb" id="s-d1s-c21" style="left:171.0px; top:554.1px; width:22.7px; height:158.6px; margin:-158.6px 0 0 -11.3px; --c:#e83c30"><b class="cv">56</b></div><div class="c3 bb" id="s-d1s-c22" style="left:184.1px; top:532.2px; width:22.7px; height:110.5px; margin:-110.5px 0 0 -11.3px; --c:#f7a157"></div><div class="c3 bb" id="s-d1s-c23" style="left:197.2px; top:510.3px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px; --c:#ccaf71"></div><div class="c3 bb" id="s-d1s-c24" style="left:211.2px; top:489.1px; width:22.7px; height:76.5px; margin:-76.5px 0 0 -11.3px; --c:#e7c26e"></div><div class="c3 bb" id="s-d1s-c25" style="left:227.8px; top:469.9px; width:22.7px; height:93.5px; margin:-93.5px 0 0 -11.3px; --c:#fdc465"></div><div class="c3 bb" id="s-d1s-c26" style="left:243.6px; top:450.1px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px; --c:#ffd06a"></div><div class="c3 bb" id="s-d1s-c27" style="left:253.4px; top:425.6px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px; --c:#c5ab72"></div><div class="c3 bb" id="s-d1s-c28" style="left:269.5px; top:406.0px; width:22.7px; height:79.3px; margin:-79.3px 0 0 -11.3px; --c:#eec76d"></div><div class="c3 bb" id="s-d1s-c29" style="left:286.3px; top:386.8px; width:22.7px; height:116.1px; margin:-116.1px 0 0 -11.3px; --c:#f59553"></div><div class="c3 bb" id="s-d1s-c30" style="left:302.2px; top:367.1px; width:22.7px; height:76.5px; margin:-76.5px 0 0 -11.3px; --c:#e7c26e"></div><div class="c3 bb" id="s-d1s-c31" style="left:316.7px; top:346.2px; width:22.7px; height:119.0px; margin:-119.0px 0 0 -11.3px; --c:#f48f50"><b class="cv">42</b></div><div class="c3 bb" id="s-d1s-c32" style="left:331.2px; top:325.4px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px; --c:#ffd06a"></div><div class="c3 bb" id="s-d1s-c33" style="left:345.6px; top:304.6px; width:22.7px; height:107.6px; margin:-107.6px 0 0 -11.3px; --c:#f8a65a"></div><div class="c3 bb" id="s-d1s-c34" style="left:360.1px; top:283.7px; width:22.7px; height:102.0px; margin:-102.0px 0 0 -11.3px; --c:#fab25e"></div><div class="c3 bb" id="s-d1s-c35" style="left:372.7px; top:261.5px; width:22.7px; height:124.6px; margin:-124.6px 0 0 -11.3px; --c:#f3834c"><b class="cv">44</b></div><div class="c3 bb" id="s-d1s-c36" style="left:384.0px; top:238.2px; width:22.7px; height:96.3px; margin:-96.3px 0 0 -11.3px; --c:#fcbe63"></div><div class="c3 bb" id="s-d1s-c37" style="left:398.0px; top:216.9px; width:22.7px; height:136.0px; margin:-136.0px 0 0 -11.3px; --c:#ef6b42"><b class="cv">48</b></div><div class="c3 bb" id="s-d1s-c38" style="left:414.8px; top:197.9px; width:22.7px; height:147.3px; margin:-147.3px 0 0 -11.3px; --c:#eb5339"><b class="cv">52</b></div><div class="c3 bb" id="s-d1s-c39" style="left:431.8px; top:178.8px; width:22.7px; height:133.1px; margin:-133.1px 0 0 -11.3px; --c:#f07145"><b class="cv">47</b></div><div class="c3 bb" id="s-d1s-c40" style="left:448.7px; top:159.9px; width:22.7px; height:130.3px; margin:-130.3px 0 0 -11.3px; --c:#f17747"><b class="cv">46</b></div></div></div></div>
-      <div class="side">
-        <div class="stl"><div class="sth">Top 10 stanovišť</div><div class="str" id="s-d1s-r0"><b>1.</b><span>č. 20</span><i><u style="width:100.0%; background:#e31e24"></u></i><em>61</em></div><div class="str" id="s-d1s-r1"><b>2.</b><span>č. 21</span><i><u style="width:91.8%; background:#e83c30"></u></i><em>56</em></div><div class="str" id="s-d1s-r2"><b>3.</b><span>č. 19</span><i><u style="width:86.9%; background:#ea4d37"></u></i><em>53</em></div><div class="str" id="s-d1s-r3"><b>4.</b><span>č. 38</span><i><u style="width:85.2%; background:#eb5339"></u></i><em>52</em></div><div class="str" id="s-d1s-r4"><b>5.</b><span>č. 37</span><i><u style="width:78.7%; background:#ef6b42"></u></i><em>48</em></div><div class="str" id="s-d1s-r5"><b>6.</b><span>č. 39</span><i><u style="width:77.0%; background:#f07145"></u></i><em>47</em></div><div class="str" id="s-d1s-r6"><b>7.</b><span>č. 40</span><i><u style="width:75.4%; background:#f17747"></u></i><em>46</em></div><div class="str" id="s-d1s-r7"><b>8.</b><span>č. 1</span><i><u style="width:73.8%; background:#f27d49"></u></i><em>45</em></div><div class="str" id="s-d1s-r8"><b>9.</b><span>č. 35</span><i><u style="width:72.1%; background:#f3834c"></u></i><em>44</em></div><div class="str" id="s-d1s-r9"><b>10.</b><span>č. 31</span><i><u style="width:68.9%; background:#f48f50"></u></i><em>42</em></div>
-          <div class="slow" id="s-d1s-low">nejméně ryb: č. 6 (18) · č. 4 (18) · č. 10 (19)</div></div>
-        <div class="tiles2"><div class="tile2" id="s-d1s-t0"><b id="s-d1s-tv0">0</b><span>ryb celkem</span><em>34,4 na závodníka</em></div><div class="tile2" id="s-d1s-t1"><b id="s-d1s-tv1">0</b><span>nejvíc ryb</span><em>Lumír Kadlčík</em></div><div class="tile2" id="s-d1s-t2"><b id="s-d1s-tv2">0</b><span>rekord kola</span><em>D. Švub (3. k.) · P. Fabera (2. k.)</em></div><div class="tile2" id="s-d1s-t3"><b id="s-d1s-tv3">0</b><span>kol bez ryby</span><em>z 468 startů v kolech</em></div></div>
-      </div></section>
-  <section id="s-d2s" class="clip" data-start="97.826" data-duration="13.444" data-track-index="2"><div class="bgp" id="bg-s-d2s" style="background-image:url(assets/photos/bg__drone_final_last.jpg)"></div><div class="bgo"></div><div class="bgw" id="bg-s-d2sw">STANOVIŠTĚ</div><div class="h2"><span>Den 2 · ryby na stanovištích</span><em>všech 40 stanovišť · čárkovaně sobota</em></div>
-      <div class="aw aw-s" id="s-d2s-a"><div class="ax" id="s-d2s-a-x" style="width:1015.2px; height:956.3px; margin:-478.2px 0 0 -507.6px"><div class="az" id="s-d2s-a-z">
-      <div class="aimg" style="background-size:1647.9px auto; background-position:-316.3px -345.8px"></div>
-      <svg class="aol" viewBox="430 470 1380 1300"><polygon points="1114.2,678.4 1062.2,698.4 1042.2,716.5 998.2,776.5 978.2,788.5 970.2,820.5 948.2,856.5 914.2,896.5 896.2,932.5 872.2,958.4 852.2,994.4 796.2,1058.4 778.2,1102.4 728.2,1158.4 718.2,1186.4 696.2,1210.4 690.2,1234.4 656.2,1278.4 666.2,1314.4 718.2,1358.4 820.2,1410.4 882.2,1484.5 904.2,1488.5 930.2,1516.5 962.2,1524.5 1002.2,1548.5 1042.2,1548.5 1082.2,1520.5 1132.2,1520.5 1146.2,1510.4 1186.2,1502.4 1298.2,1394.4 1326.2,1342.4 1530.2,1066.4 1522.2,1044.5 1530.2,1038.4 1554.2,1042.4 1588.2,1014.4 1588.2,990.4 1574.2,972.5 1574.2,930.4 1560.2,914.4 1516.2,896.5 1422.2,824.5 1376.2,806.4 1356.2,788.5 1338.2,782.4 1326.2,764.5 1288.2,754.4 1232.2,718.4 1216.2,700.5 1196.2,702.4 1174.2,690.4" pathLength="1"/></svg><i class="sd3" style="left:477.7px; top:797.4px"><em class="bb">1</em></i><i class="sd3" style="left:507.8px; top:790.7px"><em class="bb">2</em></i><i class="sd3" style="left:537.8px; top:783.8px"><em class="bb">3</em></i><i class="sd3" style="left:565.5px; top:774.6px"><em class="bb">4</em></i><i class="sd3" style="left:585.1px; top:756.4px"><em class="bb">5</em></i><i class="sd3" style="left:604.3px; top:737.9px"><em class="bb">6</em></i><i class="sd3" style="left:623.5px; top:719.3px"><em class="bb">7</em></i><i class="sd3" style="left:642.7px; top:700.8px"><em class="bb">8</em></i><i class="sd3" style="left:659.2px; top:679.3px"><em class="bb">9</em></i><i class="sd3" style="left:672.6px; top:654.4px"><em class="bb">10</em></i><i class="sd3" style="left:688.4px; top:632.0px"><em class="bb">11</em></i><i class="sd3" style="left:704.4px; top:610.0px"><em class="bb">12</em></i><i class="sd3" style="left:720.5px; top:588.1px"><em class="bb">13</em></i><i class="sd3" style="left:736.5px; top:566.1px"><em class="bb">14</em></i><i class="sd3" style="left:752.6px; top:544.1px"><em class="bb">15</em></i><i class="sd3" style="left:768.7px; top:522.1px"><em class="bb">16</em></i><i class="sd3" style="left:784.6px; top:500.2px"><em class="bb">17</em></i><i class="sd3" style="left:800.8px; top:478.2px"><em class="bb">18</em></i><i class="sd3" style="left:816.8px; top:456.2px"><em class="bb">19</em></i><i class="sd3" style="left:835.6px; top:437.0px"><em class="bb">20</em></i><i class="sd3" style="left:171.0px; top:554.1px"><em class="bb">21</em></i><i class="sd3" style="left:184.1px; top:532.2px"><em class="bb">22</em></i><i class="sd3" style="left:197.2px; top:510.3px"><em class="bb">23</em></i><i class="sd3" style="left:211.2px; top:489.1px"><em class="bb">24</em></i><i class="sd3" style="left:227.8px; top:469.9px"><em class="bb">25</em></i><i class="sd3" style="left:243.6px; top:450.1px"><em class="bb">26</em></i><i class="sd3" style="left:253.4px; top:425.6px"><em class="bb">27</em></i><i class="sd3" style="left:269.5px; top:406.0px"><em class="bb">28</em></i><i class="sd3" style="left:286.3px; top:386.8px"><em class="bb">29</em></i><i class="sd3" style="left:302.2px; top:367.1px"><em class="bb">30</em></i><i class="sd3" style="left:316.7px; top:346.2px"><em class="bb">31</em></i><i class="sd3" style="left:331.2px; top:325.4px"><em class="bb">32</em></i><i class="sd3" style="left:345.6px; top:304.6px"><em class="bb">33</em></i><i class="sd3" style="left:360.1px; top:283.7px"><em class="bb">34</em></i><i class="sd3" style="left:372.7px; top:261.5px"><em class="bb">35</em></i><i class="sd3" style="left:384.0px; top:238.2px"><em class="bb">36</em></i><i class="sd3" style="left:398.0px; top:216.9px"><em class="bb">37</em></i><i class="sd3" style="left:414.8px; top:197.9px"><em class="bb">38</em></i><i class="sd3" style="left:431.8px; top:178.8px"><em class="bb">39</em></i><i class="sd3" style="left:448.7px; top:159.9px"><em class="bb">40</em></i><i class="c3g bb" id="s-d2s-g1" style="left:477.7px; top:797.4px; width:22.7px; height:127.5px; margin:-127.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c1" style="left:477.7px; top:797.4px; width:22.7px; height:90.6px; margin:-90.6px 0 0 -11.3px; --c:#feca68"><b class="cv">32</b></div><i class="c3g bb" id="s-d2s-g2" style="left:507.8px; top:790.7px; width:22.7px; height:104.8px; margin:-104.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c2" style="left:507.8px; top:790.7px; width:22.7px; height:73.7px; margin:-73.7px 0 0 -11.3px; --c:#e0be6f"><b class="cv">26</b></div><i class="c3g bb" id="s-d2s-g3" style="left:537.8px; top:783.8px; width:22.7px; height:93.5px; margin:-93.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c3" style="left:537.8px; top:783.8px; width:22.7px; height:79.3px; margin:-79.3px 0 0 -11.3px; --c:#eec76d"><b class="cv">28</b></div><i class="c3g bb" id="s-d2s-g4" style="left:565.5px; top:774.6px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c4" style="left:565.5px; top:774.6px; width:22.7px; height:68.0px; margin:-68.0px 0 0 -11.3px; --c:#d3b471"><b class="cv">24</b></div><i class="c3g bb" id="s-d2s-g5" style="left:585.1px; top:756.4px; width:22.7px; height:59.5px; margin:-59.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c5" style="left:585.1px; top:756.4px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><i class="c3g bb" id="s-d2s-g6" style="left:604.3px; top:737.9px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c6" style="left:604.3px; top:737.9px; width:22.7px; height:42.5px; margin:-42.5px 0 0 -11.3px; --c:#968978"></div><i class="c3g bb" id="s-d2s-g7" style="left:623.5px; top:719.3px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c7" style="left:623.5px; top:719.3px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><i class="c3g bb" id="s-d2s-g8" style="left:642.7px; top:700.8px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c8" style="left:642.7px; top:700.8px; width:22.7px; height:34.0px; margin:-34.0px 0 0 -11.3px; --c:#817b7b"></div><i class="c3g bb" id="s-d2s-g9" style="left:659.2px; top:679.3px; width:22.7px; height:90.6px; margin:-90.6px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c9" style="left:659.2px; top:679.3px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><i class="c3g bb" id="s-d2s-g10" style="left:672.6px; top:654.4px; width:22.7px; height:53.8px; margin:-53.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c10" style="left:672.6px; top:654.4px; width:22.7px; height:53.8px; margin:-53.8px 0 0 -11.3px; --c:#b19c75"></div><i class="c3g bb" id="s-d2s-g11" style="left:688.4px; top:632.0px; width:22.7px; height:70.8px; margin:-70.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c11" style="left:688.4px; top:632.0px; width:22.7px; height:48.2px; margin:-48.2px 0 0 -11.3px; --c:#a39377"></div><i class="c3g bb" id="s-d2s-g12" style="left:704.4px; top:610.0px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c12" style="left:704.4px; top:610.0px; width:22.7px; height:48.2px; margin:-48.2px 0 0 -11.3px; --c:#a39377"></div><i class="c3g bb" id="s-d2s-g13" style="left:720.5px; top:588.1px; width:22.7px; height:85.0px; margin:-85.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c13" style="left:720.5px; top:588.1px; width:22.7px; height:56.7px; margin:-56.7px 0 0 -11.3px; --c:#b8a174"></div><i class="c3g bb" id="s-d2s-g14" style="left:736.5px; top:566.1px; width:22.7px; height:70.8px; margin:-70.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c14" style="left:736.5px; top:566.1px; width:22.7px; height:45.3px; margin:-45.3px 0 0 -11.3px; --c:#9d8e77"></div><i class="c3g bb" id="s-d2s-g15" style="left:752.6px; top:544.1px; width:22.7px; height:56.7px; margin:-56.7px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c15" style="left:752.6px; top:544.1px; width:22.7px; height:42.5px; margin:-42.5px 0 0 -11.3px; --c:#968978"></div><i class="c3g bb" id="s-d2s-g16" style="left:768.7px; top:522.1px; width:22.7px; height:96.3px; margin:-96.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c16" style="left:768.7px; top:522.1px; width:22.7px; height:56.7px; margin:-56.7px 0 0 -11.3px; --c:#b8a174"></div><i class="c3g bb" id="s-d2s-g17" style="left:784.6px; top:500.2px; width:22.7px; height:73.7px; margin:-73.7px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c17" style="left:784.6px; top:500.2px; width:22.7px; height:45.3px; margin:-45.3px 0 0 -11.3px; --c:#9d8e77"></div><i class="c3g bb" id="s-d2s-g18" style="left:800.8px; top:478.2px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c18" style="left:800.8px; top:478.2px; width:22.7px; height:53.8px; margin:-53.8px 0 0 -11.3px; --c:#b19c75"></div><i class="c3g bb" id="s-d2s-g19" style="left:816.8px; top:456.2px; width:22.7px; height:150.1px; margin:-150.1px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c19" style="left:816.8px; top:456.2px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px; --c:#c5ab72"></div><i class="c3g bb" id="s-d2s-g20" style="left:835.6px; top:437.0px; width:22.7px; height:172.8px; margin:-172.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c20" style="left:835.6px; top:437.0px; width:22.7px; height:59.5px; margin:-59.5px 0 0 -11.3px; --c:#bfa673"></div><i class="c3g bb" id="s-d2s-g21" style="left:171.0px; top:554.1px; width:22.7px; height:158.6px; margin:-158.6px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c21" style="left:171.0px; top:554.1px; width:22.7px; height:36.8px; margin:-36.8px 0 0 -11.3px; --c:#88807a"></div><i class="c3g bb" id="s-d2s-g22" style="left:184.1px; top:532.2px; width:22.7px; height:110.5px; margin:-110.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c22" style="left:184.1px; top:532.2px; width:22.7px; height:51.0px; margin:-51.0px 0 0 -11.3px; --c:#aa9876"></div><i class="c3g bb" id="s-d2s-g23" style="left:197.2px; top:510.3px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c23" style="left:197.2px; top:510.3px; width:22.7px; height:19.8px; margin:-19.8px 0 0 -11.3px; --c:#60637f"></div><i class="c3g bb" id="s-d2s-g24" style="left:211.2px; top:489.1px; width:22.7px; height:76.5px; margin:-76.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c24" style="left:211.2px; top:489.1px; width:22.7px; height:19.8px; margin:-19.8px 0 0 -11.3px; --c:#60637f"></div><i class="c3g bb" id="s-d2s-g25" style="left:227.8px; top:469.9px; width:22.7px; height:93.5px; margin:-93.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c25" style="left:227.8px; top:469.9px; width:22.7px; height:48.2px; margin:-48.2px 0 0 -11.3px; --c:#a39377"></div><i class="c3g bb" id="s-d2s-g26" style="left:243.6px; top:450.1px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c26" style="left:243.6px; top:450.1px; width:22.7px; height:17.0px; margin:-17.0px 0 0 -11.3px; --c:#595f80"></div><i class="c3g bb" id="s-d2s-g27" style="left:253.4px; top:425.6px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c27" style="left:253.4px; top:425.6px; width:22.7px; height:34.0px; margin:-34.0px 0 0 -11.3px; --c:#817b7b"></div><i class="c3g bb" id="s-d2s-g28" style="left:269.5px; top:406.0px; width:22.7px; height:79.3px; margin:-79.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c28" style="left:269.5px; top:406.0px; width:22.7px; height:31.2px; margin:-31.2px 0 0 -11.3px; --c:#7b767c"></div><i class="c3g bb" id="s-d2s-g29" style="left:286.3px; top:386.8px; width:22.7px; height:116.1px; margin:-116.1px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c29" style="left:286.3px; top:386.8px; width:22.7px; height:48.2px; margin:-48.2px 0 0 -11.3px; --c:#a39377"></div><i class="c3g bb" id="s-d2s-g30" style="left:302.2px; top:367.1px; width:22.7px; height:76.5px; margin:-76.5px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c30" style="left:302.2px; top:367.1px; width:22.7px; height:59.5px; margin:-59.5px 0 0 -11.3px; --c:#bfa673"></div><i class="c3g bb" id="s-d2s-g31" style="left:316.7px; top:346.2px; width:22.7px; height:119.0px; margin:-119.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c31" style="left:316.7px; top:346.2px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px; --c:#c5ab72"></div><i class="c3g bb" id="s-d2s-g32" style="left:331.2px; top:325.4px; width:22.7px; height:87.8px; margin:-87.8px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c32" style="left:331.2px; top:325.4px; width:22.7px; height:65.2px; margin:-65.2px 0 0 -11.3px; --c:#ccaf71"><b class="cv">23</b></div><i class="c3g bb" id="s-d2s-g33" style="left:345.6px; top:304.6px; width:22.7px; height:107.6px; margin:-107.6px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c33" style="left:345.6px; top:304.6px; width:22.7px; height:79.3px; margin:-79.3px 0 0 -11.3px; --c:#eec76d"><b class="cv">28</b></div><i class="c3g bb" id="s-d2s-g34" style="left:360.1px; top:283.7px; width:22.7px; height:102.0px; margin:-102.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c34" style="left:360.1px; top:283.7px; width:22.7px; height:82.2px; margin:-82.2px 0 0 -11.3px; --c:#f5cc6c"><b class="cv">29</b></div><i class="c3g bb" id="s-d2s-g35" style="left:372.7px; top:261.5px; width:22.7px; height:124.6px; margin:-124.6px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c35" style="left:372.7px; top:261.5px; width:22.7px; height:48.2px; margin:-48.2px 0 0 -11.3px; --c:#a39377"></div><i class="c3g bb" id="s-d2s-g36" style="left:384.0px; top:238.2px; width:22.7px; height:96.3px; margin:-96.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c36" style="left:384.0px; top:238.2px; width:22.7px; height:62.3px; margin:-62.3px 0 0 -11.3px; --c:#c5ab72"></div><i class="c3g bb" id="s-d2s-g37" style="left:398.0px; top:216.9px; width:22.7px; height:136.0px; margin:-136.0px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c37" style="left:398.0px; top:216.9px; width:22.7px; height:53.8px; margin:-53.8px 0 0 -11.3px; --c:#b19c75"></div><i class="c3g bb" id="s-d2s-g38" style="left:414.8px; top:197.9px; width:22.7px; height:147.3px; margin:-147.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c38" style="left:414.8px; top:197.9px; width:22.7px; height:70.8px; margin:-70.8px 0 0 -11.3px; --c:#dab970"><b class="cv">25</b></div><i class="c3g bb" id="s-d2s-g39" style="left:431.8px; top:178.8px; width:22.7px; height:133.1px; margin:-133.1px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c39" style="left:431.8px; top:178.8px; width:22.7px; height:93.5px; margin:-93.5px 0 0 -11.3px; --c:#fdc465"><b class="cv">33</b></div><i class="c3g bb" id="s-d2s-g40" style="left:448.7px; top:159.9px; width:22.7px; height:130.3px; margin:-130.3px 0 0 -11.3px"></i><div class="c3 bb" id="s-d2s-c40" style="left:448.7px; top:159.9px; width:22.7px; height:76.5px; margin:-76.5px 0 0 -11.3px; --c:#e7c26e"><b class="cv">27</b></div></div></div></div>
-      <div class="side">
-        <div class="stl"><div class="sth">Top 10 stanovišť</div><div class="str" id="s-d2s-r0"><b>1.</b><span>č. 39</span><i><u style="width:100.0%; background:#fdc465"></u></i><em>33</em></div><div class="str" id="s-d2s-r1"><b>2.</b><span>č. 1</span><i><u style="width:97.0%; background:#feca68"></u></i><em>32</em></div><div class="str" id="s-d2s-r2"><b>3.</b><span>č. 34</span><i><u style="width:87.9%; background:#f5cc6c"></u></i><em>29</em></div><div class="str" id="s-d2s-r3"><b>4.</b><span>č. 3</span><i><u style="width:84.8%; background:#eec76d"></u></i><em>28</em></div><div class="str" id="s-d2s-r4"><b>5.</b><span>č. 33</span><i><u style="width:84.8%; background:#eec76d"></u></i><em>28</em></div><div class="str" id="s-d2s-r5"><b>6.</b><span>č. 40</span><i><u style="width:81.8%; background:#e7c26e"></u></i><em>27</em></div><div class="str" id="s-d2s-r6"><b>7.</b><span>č. 2</span><i><u style="width:78.8%; background:#e0be6f"></u></i><em>26</em></div><div class="str" id="s-d2s-r7"><b>8.</b><span>č. 38</span><i><u style="width:75.8%; background:#dab970"></u></i><em>25</em></div><div class="str" id="s-d2s-r8"><b>9.</b><span>č. 4</span><i><u style="width:72.7%; background:#d3b471"></u></i><em>24</em></div><div class="str" id="s-d2s-r9"><b>10.</b><span>č. 32</span><i><u style="width:69.7%; background:#ccaf71"></u></i><em>23</em></div>
-          <div class="slow" id="s-d2s-low">nejméně ryb: č. 26 (6) · č. 24 (7) · č. 23 (7)</div></div>
-        <div class="tiles2"><div class="tile2" id="s-d2s-t0"><b id="s-d2s-tv0">0</b><span>ryb celkem</span><em>−43 % proti sobotě</em></div><div class="tile2" id="s-d2s-t1"><b id="s-d2s-tv1">0</b><span>nejvíc ryb</span><em>Miroslav Kučera</em></div><div class="tile2" id="s-d2s-t2"><b id="s-d2s-tv2">0</b><span>rekord kola</span><em>Miroslav Kučera · 1. kolo</em></div><div class="tile2" id="s-d2s-t3"><b id="s-d2s-tv3">0</b><span>kol bez ryby</span><em>z 468 startů v kolech</em></div></div>
-      </div></section>
+  <section id="s-d1s" class="clip" data-start="45.976" data-duration="13.444" data-track-index="2"><div class="bgp" id="bg-s-d1s" style="background-image:url(assets/photos/bg_mcr26_zarybneni.jpg)"></div><div class="bgo"></div><div class="bgw" id="bg-s-d1sw">SEKTORY</div><div class="h2"><span>Den 1 · sektory a místa</span><em>20 sektorů · 40 míst · ryby za 12 kol</em></div>
+      <div class="heat"><div class="bank">SZ břeh · u silnice</div><div class="hcell" id="s-d1s-h11" style="background:rgb(92,107,160); color:#eef2f9"><em>S11</em><b>95</b>
+        <div class="pp"><span style="background:rgb(68,85,146); color:#eef2f9">21<i>56</i></span><span style="background:rgb(138,149,188); color:#eef2f9">22<i>39</i></span></div></div><div class="hcell" id="s-d1s-h12" style="background:rgb(197,205,225); color:#0b1e42"><em>S12</em><b>50</b>
+        <div class="pp"><span style="background:rgb(203,210,228); color:#0b1e42">23<i>23</i></span><span style="background:rgb(186,195,218); color:#0b1e42">24<i>27</i></span></div></div><div class="hcell" id="s-d1s-h13" style="background:rgb(165,175,205); color:#0b1e42"><em>S13</em><b>64</b>
+        <div class="pp"><span style="background:rgb(162,172,203); color:#0b1e42">25<i>33</i></span><span style="background:rgb(170,180,208); color:#0b1e42">26<i>31</i></span></div></div><div class="hcell" id="s-d1s-h14" style="background:rgb(197,205,225); color:#0b1e42"><em>S14</em><b>50</b>
+        <div class="pp"><span style="background:rgb(207,214,231); color:#0b1e42">27<i>22</i></span><span style="background:rgb(182,191,216); color:#0b1e42">28<i>28</i></span></div></div><div class="hcell" id="s-d1s-h15" style="background:rgb(155,166,199); color:#0b1e42"><em>S15</em><b>68</b>
+        <div class="pp"><span style="background:rgb(129,142,183); color:#eef2f9">29<i>41</i></span><span style="background:rgb(186,195,218); color:#0b1e42">30<i>27</i></span></div></div><div class="hcell" id="s-d1s-h16" style="background:rgb(144,155,192); color:#eef2f9"><em>S16</em><b>73</b>
+        <div class="pp"><span style="background:rgb(125,138,181); color:#eef2f9">31<i>42</i></span><span style="background:rgb(170,180,208); color:#0b1e42">32<i>31</i></span></div></div><div class="hcell" id="s-d1s-h17" style="background:rgb(141,153,191); color:#eef2f9"><em>S17</em><b>74</b>
+        <div class="pp"><span style="background:rgb(142,153,191); color:#eef2f9">33<i>38</i></span><span style="background:rgb(150,161,196); color:#0b1e42">34<i>36</i></span></div></div><div class="hcell" id="s-d1s-h18" style="background:rgb(132,144,185); color:#eef2f9"><em>S18</em><b>78</b>
+        <div class="pp"><span style="background:rgb(117,130,176); color:#eef2f9">35<i>44</i></span><span style="background:rgb(158,168,201); color:#0b1e42">36<i>34</i></span></div></div><div class="hcell" id="s-d1s-h19" style="background:rgb(81,96,153); color:#eef2f9"><em>S19</em><b>100</b>
+        <div class="pp"><span style="background:rgb(101,115,166); color:#eef2f9">37<i>48</i></span><span style="background:rgb(85,100,156); color:#eef2f9">38<i>52</i></span></div></div><div class="hcell" id="s-d1s-h20" style="background:rgb(97,112,163); color:#eef2f9"><em>S20</em><b>93</b>
+        <div class="pp"><span style="background:rgb(105,119,168); color:#eef2f9">39<i>47</i></span><span style="background:rgb(109,123,171); color:#eef2f9">40<i>46</i></span></div></div><div class="hcell" id="s-d1s-h1" style="background:rgb(123,136,179); color:#eef2f9"><em>S1</em><b>82</b>
+        <div class="pp"><span style="background:rgb(113,127,173); color:#eef2f9">1<i>45</i></span><span style="background:rgb(146,157,193); color:#0b1e42">2<i>37</i></span></div></div><div class="hcell" id="s-d1s-h2" style="background:rgb(195,203,224); color:#0b1e42"><em>S2</em><b>51</b>
+        <div class="pp"><span style="background:rgb(162,172,203); color:#0b1e42">3<i>33</i></span><span style="background:rgb(223,229,241); color:#0b1e42">4<i>18</i></span></div></div><div class="hcell" id="s-d1s-h3" style="background:rgb(223,229,241); color:#0b1e42"><em>S3</em><b>39</b>
+        <div class="pp"><span style="background:rgb(211,218,233); color:#0b1e42">5<i>21</i></span><span style="background:rgb(223,229,241); color:#0b1e42">6<i>18</i></span></div></div><div class="hcell" id="s-d1s-h4" style="background:rgb(188,196,219); color:#0b1e42"><em>S4</em><b>54</b>
+        <div class="pp"><span style="background:rgb(170,180,208); color:#0b1e42">7<i>31</i></span><span style="background:rgb(203,210,228); color:#0b1e42">8<i>23</i></span></div></div><div class="hcell" id="s-d1s-h5" style="background:rgb(195,203,224); color:#0b1e42"><em>S5</em><b>51</b>
+        <div class="pp"><span style="background:rgb(166,176,206); color:#0b1e42">9<i>32</i></span><span style="background:rgb(219,225,238); color:#0b1e42">10<i>19</i></span></div></div><div class="hcell" id="s-d1s-h6" style="background:rgb(202,209,228); color:#0b1e42"><em>S6</em><b>48</b>
+        <div class="pp"><span style="background:rgb(195,202,223); color:#0b1e42">11<i>25</i></span><span style="background:rgb(203,210,228); color:#0b1e42">12<i>23</i></span></div></div><div class="hcell" id="s-d1s-h7" style="background:rgb(186,194,218); color:#0b1e42"><em>S7</em><b>55</b>
+        <div class="pp"><span style="background:rgb(174,184,211); color:#0b1e42">13<i>30</i></span><span style="background:rgb(195,202,223); color:#0b1e42">14<i>25</i></span></div></div><div class="hcell" id="s-d1s-h8" style="background:rgb(188,196,219); color:#0b1e42"><em>S8</em><b>54</b>
+        <div class="pp"><span style="background:rgb(215,221,236); color:#0b1e42">15<i>20</i></span><span style="background:rgb(158,168,201); color:#0b1e42">16<i>34</i></span></div></div><div class="hcell" id="s-d1s-h9" style="background:rgb(202,209,228); color:#0b1e42"><em>S9</em><b>48</b>
+        <div class="pp"><span style="background:rgb(190,199,221); color:#0b1e42">17<i>26</i></span><span style="background:rgb(207,214,231); color:#0b1e42">18<i>22</i></span></div></div><div class="hcell" id="s-d1s-h10" style="background:rgb(48,66,133); color:#eef2f9"><em>S10</em><b>114</b>
+        <div class="pp"><span style="background:rgb(81,96,153); color:#eef2f9">19<i>53</i></span><span style="background:rgb(48,66,133); color:#eef2f9">20<i>61</i></span></div></div><div class="bank b2">JV břeh · u lesa</div></div>
+      <div class="pstrip" id="s-d1s-ps"><i id="s-d1s-pb1" style="height:73.8%; background:rgb(113,127,173)"></i><i id="s-d1s-pb2" style="height:60.7%; background:rgb(146,157,193)"></i><i id="s-d1s-pb3" style="height:54.1%; background:rgb(162,172,203)"></i><i id="s-d1s-pb4" style="height:29.5%; background:rgb(223,229,241)"></i><i id="s-d1s-pb5" style="height:34.4%; background:rgb(211,218,233)"></i><i id="s-d1s-pb6" style="height:29.5%; background:rgb(223,229,241)"></i><i id="s-d1s-pb7" style="height:50.8%; background:rgb(170,180,208)"></i><i id="s-d1s-pb8" style="height:37.7%; background:rgb(203,210,228)"></i><i id="s-d1s-pb9" style="height:52.5%; background:rgb(166,176,206)"></i><i id="s-d1s-pb10" style="height:31.1%; background:rgb(219,225,238)"></i><i id="s-d1s-pb11" style="height:41.0%; background:rgb(195,202,223)"></i><i id="s-d1s-pb12" style="height:37.7%; background:rgb(203,210,228)"></i><i id="s-d1s-pb13" style="height:49.2%; background:rgb(174,184,211)"></i><i id="s-d1s-pb14" style="height:41.0%; background:rgb(195,202,223)"></i><i id="s-d1s-pb15" style="height:32.8%; background:rgb(215,221,236)"></i><i id="s-d1s-pb16" style="height:55.7%; background:rgb(158,168,201)"></i><i id="s-d1s-pb17" style="height:42.6%; background:rgb(190,199,221)"></i><i id="s-d1s-pb18" style="height:36.1%; background:rgb(207,214,231)"></i><i id="s-d1s-pb19" style="height:86.9%; background:rgb(81,96,153)"></i><i id="s-d1s-pb20" style="height:100.0%; background:rgb(48,66,133)"></i><i id="s-d1s-pb21" style="height:91.8%; background:rgb(68,85,146)"></i><i id="s-d1s-pb22" style="height:63.9%; background:rgb(138,149,188)"></i><i id="s-d1s-pb23" style="height:37.7%; background:rgb(203,210,228)"></i><i id="s-d1s-pb24" style="height:44.3%; background:rgb(186,195,218)"></i><i id="s-d1s-pb25" style="height:54.1%; background:rgb(162,172,203)"></i><i id="s-d1s-pb26" style="height:50.8%; background:rgb(170,180,208)"></i><i id="s-d1s-pb27" style="height:36.1%; background:rgb(207,214,231)"></i><i id="s-d1s-pb28" style="height:45.9%; background:rgb(182,191,216)"></i><i id="s-d1s-pb29" style="height:67.2%; background:rgb(129,142,183)"></i><i id="s-d1s-pb30" style="height:44.3%; background:rgb(186,195,218)"></i><i id="s-d1s-pb31" style="height:68.9%; background:rgb(125,138,181)"></i><i id="s-d1s-pb32" style="height:50.8%; background:rgb(170,180,208)"></i><i id="s-d1s-pb33" style="height:62.3%; background:rgb(142,153,191)"></i><i id="s-d1s-pb34" style="height:59.0%; background:rgb(150,161,196)"></i><i id="s-d1s-pb35" style="height:72.1%; background:rgb(117,130,176)"></i><i id="s-d1s-pb36" style="height:55.7%; background:rgb(158,168,201)"></i><i id="s-d1s-pb37" style="height:78.7%; background:rgb(101,115,166)"></i><i id="s-d1s-pb38" style="height:85.2%; background:rgb(85,100,156)"></i><i id="s-d1s-pb39" style="height:77.0%; background:rgb(105,119,168)"></i><i id="s-d1s-pb40" style="height:75.4%; background:rgb(109,123,171)"></i><em class="pse">místo 1 → 40</em></div>
+      <div class="hnote" id="s-d1s-note"><b>Nejlepší místo 20: 61 ryb</b> · sektor S10: 114 · nejslabší místo 4: 18 · Ø 33,5 na místo</div>
+      <div class="tiles2"><div class="tile2" id="s-d1s-t0"><b id="s-d1s-tv0">0</b><span>ryb celkem</span><em>34,4 na závodníka</em></div><div class="tile2" id="s-d1s-t1"><b id="s-d1s-tv1">0</b><span>nejvíc ryb</span><em>Lumír Kadlčík</em></div><div class="tile2" id="s-d1s-t2"><b id="s-d1s-tv2">0</b><span>rekord kola</span><em>D. Švub (3. k.) · P. Fabera (2. k.)</em></div><div class="tile2" id="s-d1s-t3"><b id="s-d1s-tv3">0</b><span>kol bez ryby</span><em>z 468 startů v kolech</em></div></div></section>
+  <section id="s-d2s" class="clip" data-start="97.826" data-duration="13.444" data-track-index="2"><div class="bgp" id="bg-s-d2s" style="background-image:url(assets/photos/bg__drone_final_last.jpg)"></div><div class="bgo"></div><div class="bgw" id="bg-s-d2sw">SEKTORY</div><div class="h2"><span>Den 2 · sektory a místa</span><em>20 sektorů · 40 míst · ryby za 12 kol · % = proti sobotě</em></div>
+      <div class="heat"><div class="bank">SZ břeh · u silnice</div><div class="hcell" id="s-d2s-h11" style="background:rgb(158,169,201); color:#0b1e42"><em>S11 <s>−67 %</s></em><b>31</b>
+        <div class="pp"><span style="background:rgb(178,187,213); color:#0b1e42">21<i>13</i></span><span style="background:rgb(145,157,193); color:#0b1e42">22<i>18</i></span></div></div><div class="hcell" id="s-d2s-h12" style="background:rgb(223,229,241); color:#0b1e42"><em>S12 <s>−72 %</s></em><b>14</b>
+        <div class="pp"><span style="background:rgb(217,223,237); color:#0b1e42">23<i>7</i></span><span style="background:rgb(217,223,237); color:#0b1e42">24<i>7</i></span></div></div><div class="hcell" id="s-d2s-h13" style="background:rgb(189,197,220); color:#0b1e42"><em>S13 <s>−64 %</s></em><b>23</b>
+        <div class="pp"><span style="background:rgb(152,163,197); color:#0b1e42">25<i>17</i></span><span style="background:rgb(223,229,241); color:#0b1e42">26<i>6</i></span></div></div><div class="hcell" id="s-d2s-h14" style="background:rgb(189,197,220); color:#0b1e42"><em>S14 <s>−54 %</s></em><b>23</b>
+        <div class="pp"><span style="background:rgb(184,193,217); color:#0b1e42">27<i>12</i></span><span style="background:rgb(191,199,221); color:#0b1e42">28<i>11</i></span></div></div><div class="hcell" id="s-d2s-h15" style="background:rgb(132,144,185); color:#eef2f9"><em>S15 <s>−44 %</s></em><b>38</b>
+        <div class="pp"><span style="background:rgb(152,163,197); color:#0b1e42">29<i>17</i></span><span style="background:rgb(126,138,181); color:#eef2f9">30<i>21</i></span></div></div><div class="hcell" id="s-d2s-h16" style="background:rgb(105,119,168); color:#eef2f9"><em>S16 <s>−38 %</s></em><b>45</b>
+        <div class="pp"><span style="background:rgb(119,132,177); color:#eef2f9">31<i>22</i></span><span style="background:rgb(113,126,173); color:#eef2f9">32<i>23</i></span></div></div><div class="hcell" id="s-d2s-h17" style="background:rgb(59,77,140); color:#eef2f9"><em>S17 <s>−23 %</s></em><b>57</b>
+        <div class="pp"><span style="background:rgb(80,96,153); color:#eef2f9">33<i>28</i></span><span style="background:rgb(74,90,149); color:#eef2f9">34<i>29</i></span></div></div><div class="hcell" id="s-d2s-h18" style="background:rgb(128,140,182); color:#eef2f9"><em>S18 <s>−50 %</s></em><b>39</b>
+        <div class="pp"><span style="background:rgb(152,163,197); color:#0b1e42">35<i>17</i></span><span style="background:rgb(119,132,177); color:#eef2f9">36<i>22</i></span></div></div><div class="hcell" id="s-d2s-h19" style="background:rgb(109,123,171); color:#eef2f9"><em>S19 <s>−56 %</s></em><b>44</b>
+        <div class="pp"><span style="background:rgb(139,151,189); color:#eef2f9">37<i>19</i></span><span style="background:rgb(100,114,165); color:#eef2f9">38<i>25</i></span></div></div><div class="hcell" id="s-d2s-h20" style="background:rgb(48,66,133); color:#eef2f9"><em>S20 <s>−35 %</s></em><b>60</b>
+        <div class="pp"><span style="background:rgb(48,66,133); color:#eef2f9">39<i>33</i></span><span style="background:rgb(87,102,157); color:#eef2f9">40<i>27</i></span></div></div><div class="hcell" id="s-d2s-h1" style="background:rgb(56,73,138); color:#eef2f9"><em>S1 <s>−29 %</s></em><b>58</b>
+        <div class="pp"><span style="background:rgb(54,72,137); color:#eef2f9">1<i>32</i></span><span style="background:rgb(93,108,161); color:#eef2f9">2<i>26</i></span></div></div><div class="hcell" id="s-d2s-h2" style="background:rgb(78,94,152); color:#eef2f9"><em>S2 <s>+2 %</s></em><b>52</b>
+        <div class="pp"><span style="background:rgb(80,96,153); color:#eef2f9">3<i>28</i></span><span style="background:rgb(106,120,169); color:#eef2f9">4<i>24</i></span></div></div><div class="hcell" id="s-d2s-h3" style="background:rgb(151,162,196); color:#0b1e42"><em>S3 <s>−15 %</s></em><b>33</b>
+        <div class="pp"><span style="background:rgb(145,157,193); color:#0b1e42">5<i>18</i></span><span style="background:rgb(165,175,205); color:#0b1e42">6<i>15</i></span></div></div><div class="hcell" id="s-d2s-h4" style="background:rgb(162,172,203); color:#0b1e42"><em>S4 <s>−44 %</s></em><b>30</b>
+        <div class="pp"><span style="background:rgb(145,157,193); color:#0b1e42">7<i>18</i></span><span style="background:rgb(184,193,217); color:#0b1e42">8<i>12</i></span></div></div><div class="hcell" id="s-d2s-h5" style="background:rgb(136,148,187); color:#eef2f9"><em>S5 <s>−27 %</s></em><b>37</b>
+        <div class="pp"><span style="background:rgb(145,157,193); color:#0b1e42">9<i>18</i></span><span style="background:rgb(139,151,189); color:#eef2f9">10<i>19</i></span></div></div><div class="hcell" id="s-d2s-h6" style="background:rgb(147,158,194); color:#0b1e42"><em>S6 <s>−29 %</s></em><b>34</b>
+        <div class="pp"><span style="background:rgb(152,163,197); color:#0b1e42">11<i>17</i></span><span style="background:rgb(152,163,197); color:#0b1e42">12<i>17</i></span></div></div><div class="hcell" id="s-d2s-h7" style="background:rgb(139,151,189); color:#eef2f9"><em>S7 <s>−35 %</s></em><b>36</b>
+        <div class="pp"><span style="background:rgb(132,144,185); color:#eef2f9">13<i>20</i></span><span style="background:rgb(158,169,201); color:#0b1e42">14<i>16</i></span></div></div><div class="hcell" id="s-d2s-h8" style="background:rgb(143,155,192); color:#eef2f9"><em>S8 <s>−35 %</s></em><b>35</b>
+        <div class="pp"><span style="background:rgb(165,175,205); color:#0b1e42">15<i>15</i></span><span style="background:rgb(132,144,185); color:#eef2f9">16<i>20</i></span></div></div><div class="hcell" id="s-d2s-h9" style="background:rgb(143,155,192); color:#eef2f9"><em>S9 <s>−27 %</s></em><b>35</b>
+        <div class="pp"><span style="background:rgb(158,169,201); color:#0b1e42">17<i>16</i></span><span style="background:rgb(139,151,189); color:#eef2f9">18<i>19</i></span></div></div><div class="hcell" id="s-d2s-h10" style="background:rgb(113,126,173); color:#eef2f9"><em>S10 <s>−62 %</s></em><b>43</b>
+        <div class="pp"><span style="background:rgb(119,132,177); color:#eef2f9">19<i>22</i></span><span style="background:rgb(126,138,181); color:#eef2f9">20<i>21</i></span></div></div><div class="bank b2">JV břeh · u lesa</div></div>
+      <div class="pstrip" id="s-d2s-ps"><i id="s-d2s-pb1" style="height:97.0%; background:rgb(54,72,137)"></i><i id="s-d2s-pb2" style="height:78.8%; background:rgb(93,108,161)"></i><i id="s-d2s-pb3" style="height:84.8%; background:rgb(80,96,153)"></i><i id="s-d2s-pb4" style="height:72.7%; background:rgb(106,120,169)"></i><i id="s-d2s-pb5" style="height:54.5%; background:rgb(145,157,193)"></i><i id="s-d2s-pb6" style="height:45.5%; background:rgb(165,175,205)"></i><i id="s-d2s-pb7" style="height:54.5%; background:rgb(145,157,193)"></i><i id="s-d2s-pb8" style="height:36.4%; background:rgb(184,193,217)"></i><i id="s-d2s-pb9" style="height:54.5%; background:rgb(145,157,193)"></i><i id="s-d2s-pb10" style="height:57.6%; background:rgb(139,151,189)"></i><i id="s-d2s-pb11" style="height:51.5%; background:rgb(152,163,197)"></i><i id="s-d2s-pb12" style="height:51.5%; background:rgb(152,163,197)"></i><i id="s-d2s-pb13" style="height:60.6%; background:rgb(132,144,185)"></i><i id="s-d2s-pb14" style="height:48.5%; background:rgb(158,169,201)"></i><i id="s-d2s-pb15" style="height:45.5%; background:rgb(165,175,205)"></i><i id="s-d2s-pb16" style="height:60.6%; background:rgb(132,144,185)"></i><i id="s-d2s-pb17" style="height:48.5%; background:rgb(158,169,201)"></i><i id="s-d2s-pb18" style="height:57.6%; background:rgb(139,151,189)"></i><i id="s-d2s-pb19" style="height:66.7%; background:rgb(119,132,177)"></i><i id="s-d2s-pb20" style="height:63.6%; background:rgb(126,138,181)"></i><i id="s-d2s-pb21" style="height:39.4%; background:rgb(178,187,213)"></i><i id="s-d2s-pb22" style="height:54.5%; background:rgb(145,157,193)"></i><i id="s-d2s-pb23" style="height:21.2%; background:rgb(217,223,237)"></i><i id="s-d2s-pb24" style="height:21.2%; background:rgb(217,223,237)"></i><i id="s-d2s-pb25" style="height:51.5%; background:rgb(152,163,197)"></i><i id="s-d2s-pb26" style="height:18.2%; background:rgb(223,229,241)"></i><i id="s-d2s-pb27" style="height:36.4%; background:rgb(184,193,217)"></i><i id="s-d2s-pb28" style="height:33.3%; background:rgb(191,199,221)"></i><i id="s-d2s-pb29" style="height:51.5%; background:rgb(152,163,197)"></i><i id="s-d2s-pb30" style="height:63.6%; background:rgb(126,138,181)"></i><i id="s-d2s-pb31" style="height:66.7%; background:rgb(119,132,177)"></i><i id="s-d2s-pb32" style="height:69.7%; background:rgb(113,126,173)"></i><i id="s-d2s-pb33" style="height:84.8%; background:rgb(80,96,153)"></i><i id="s-d2s-pb34" style="height:87.9%; background:rgb(74,90,149)"></i><i id="s-d2s-pb35" style="height:51.5%; background:rgb(152,163,197)"></i><i id="s-d2s-pb36" style="height:66.7%; background:rgb(119,132,177)"></i><i id="s-d2s-pb37" style="height:57.6%; background:rgb(139,151,189)"></i><i id="s-d2s-pb38" style="height:75.8%; background:rgb(100,114,165)"></i><i id="s-d2s-pb39" style="height:100.0%; background:rgb(48,66,133)"></i><i id="s-d2s-pb40" style="height:81.8%; background:rgb(87,102,157)"></i><em class="pse">místo 1 → 40</em></div>
+      <div class="hnote" id="s-d2s-note"><b>Nejlepší místo 39: 33 ryb</b> · sektor S20: 60 · nejslabší místo 26: 6 · Ø 19,2 na místo</div>
+      <div class="tiles2"><div class="tile2" id="s-d2s-t0"><b id="s-d2s-tv0">0</b><span>ryb celkem</span><em>−43 % proti sobotě</em></div><div class="tile2" id="s-d2s-t1"><b id="s-d2s-tv1">0</b><span>nejvíc ryb</span><em>Miroslav Kučera</em></div><div class="tile2" id="s-d2s-t2"><b id="s-d2s-tv2">0</b><span>rekord kola</span><em>Miroslav Kučera · 1. kolo</em></div><div class="tile2" id="s-d2s-t3"><b id="s-d2s-tv3">0</b><span>kol bez ryby</span><em>z 468 startů v kolech</em></div></div></section>
   <section id="s-d1l" class="clip" data-start="59.420" data-duration="9.613" data-track-index="2"><div class="bgp" id="bg-s-d1l" style="background-image:url(assets/photos/bg_mcr26_breh_pruty.jpg)"></div><div class="bgo"></div><div class="bgw" id="bg-s-d1lw">SOBOTA</div><div class="h2"><span>Den 1 · celé pořadí</span><em>všech 39 závodníků · body · ryby</em></div>
       <div class="lgh" style="top:183.6px; grid-template-columns:repeat(3, 1fr)"><div class="lr lrh"><b>#</b><span>závodník</span><em>body</em><u>ryby</u></div><div class="lr lrh"><b>#</b><span>závodník</span><em>body</em><u>ryby</u></div><div class="lr lrh"><b>#</b><span>závodník</span><em>body</em><u>ryby</u></div></div>
     <div class="lg" id="s-d1l-lg" style="top:216.0px; height:712.8px; grid-template-columns:repeat(3, 1fr); grid-template-rows:repeat(13, 1fr)"><div class="lr g t" id="s-d1l-l0"><i class="lb" style="width:100.0%"></i><b>1.</b><span>Lumír Kadlčík</span><em>32 b</em><u>65</u></div><div class="lr g t" id="s-d1l-l1"><i class="lb" style="width:67.7%"></i><b>2.</b><span>Denis Zaikin</span><em>29 b</em><u>44</u></div><div class="lr g t" id="s-d1l-l2"><i class="lb" style="width:66.2%"></i><b>3.</b><span>Petr Hrabalík</span><em>27 b</em><u>43</u></div><div class="lr t" id="s-d1l-l3"><i class="lb" style="width:69.2%"></i><b>4.</b><span>Michal Pernický</span><em>27 b</em><u>45</u></div><div class="lr t" id="s-d1l-l4"><i class="lb" style="width:60.0%"></i><b>5.</b><span>Radim Tosecký</span><em>26 b</em><u>39</u></div><div class="lr t" id="s-d1l-l5"><i class="lb" style="width:55.4%"></i><b>6.</b><span>Alexandr Kulaev</span><em>26 b</em><u>36</u></div><div class="lr t" id="s-d1l-l6"><i class="lb" style="width:63.1%"></i><b>7.</b><span>Pavel Bukáček</span><em>25 b</em><u>41</u></div><div class="lr t" id="s-d1l-l7"><i class="lb" style="width:75.4%"></i><b>8.</b><span>Petr Štěpánek</span><em>25 b</em><u>49</u></div><div class="lr t" id="s-d1l-l8"><i class="lb" style="width:53.8%"></i><b>9.</b><span>Miroslav Kučera</span><em>24 b</em><u>35</u></div><div class="lr t" id="s-d1l-l9"><i class="lb" style="width:76.9%"></i><b>10.</b><span>Dominik Švub</span><em>23 b</em><u>50</u></div><div class="lr" id="s-d1l-l10"><i class="lb" style="width:46.2%"></i><b>11.</b><span>Igor Novák</span><em>22 b</em><u>30</u></div><div class="lr" id="s-d1l-l11"><i class="lb" style="width:70.8%"></i><b>12.</b><span>Josef Kulič</span><em>22 b</em><u>46</u></div><div class="lr" id="s-d1l-l12"><i class="lb" style="width:41.5%"></i><b>13.</b><span>Stanislav Lukášek</span><em>20 b</em><u>27</u></div><div class="lr" id="s-d1l-l13"><i class="lb" style="width:60.0%"></i><b>14.</b><span>Martin Stoklasa</span><em>20 b</em><u>39</u></div><div class="lr" id="s-d1l-l14"><i class="lb" style="width:63.1%"></i><b>15.</b><span>Michael Boček</span><em>19 b</em><u>41</u></div><div class="lr" id="s-d1l-l15"><i class="lb" style="width:44.6%"></i><b>16.</b><span>Radek Michalík</span><em>19 b</em><u>29</u></div><div class="lr" id="s-d1l-l16"><i class="lb" style="width:50.8%"></i><b>17.</b><span>Vít Bardon</span><em>19 b</em><u>33</u></div><div class="lr" id="s-d1l-l17"><i class="lb" style="width:52.3%"></i><b>18.</b><span>Martin Saska</span><em>18 b</em><u>34</u></div><div class="lr" id="s-d1l-l18"><i class="lb" style="width:52.3%"></i><b>19.</b><span>David Beran</span><em>18 b</em><u>34</u></div><div class="lr" id="s-d1l-l19"><i class="lb" style="width:55.4%"></i><b>20.</b><span>Luboš Zeman</span><em>18 b</em><u>36</u></div><div class="lr" id="s-d1l-l20"><i class="lb" style="width:83.1%"></i><b>21.</b><span>Petr Fabera</span><em>18 b</em><u>54</u></div><div class="lr" id="s-d1l-l21"><i class="lb" style="width:35.4%"></i><b>22.</b><span>Michal Horák</span><em>18 b</em><u>23</u></div><div class="lr" id="s-d1l-l22"><i class="lb" style="width:60.0%"></i><b>23.</b><span>Jakub Prax</span><em>17 b</em><u>39</u></div><div class="lr" id="s-d1l-l23"><i class="lb" style="width:40.0%"></i><b>24.</b><span>Jakub Hrobar</span><em>17 b</em><u>26</u></div><div class="lr" id="s-d1l-l24"><i class="lb" style="width:41.5%"></i><b>25.</b><span>Yurii Isaiev</span><em>17 b</em><u>27</u></div><div class="lr" id="s-d1l-l25"><i class="lb" style="width:69.2%"></i><b>26.</b><span>Evžen Raus</span><em>16 b</em><u>45</u></div><div class="lr" id="s-d1l-l26"><i class="lb" style="width:36.9%"></i><b>27.</b><span>Jan Kratochvil</span><em>16 b</em><u>24</u></div><div class="lr" id="s-d1l-l27"><i class="lb" style="width:47.7%"></i><b>28.</b><span>Ota Procházka</span><em>16 b</em><u>31</u></div><div class="lr" id="s-d1l-l28"><i class="lb" style="width:38.5%"></i><b>29.</b><span>Tomáš Gašparík</span><em>16 b</em><u>25</u></div><div class="lr" id="s-d1l-l29"><i class="lb" style="width:47.7%"></i><b>30.</b><span>Ondřej Holas</span><em>15 b</em><u>31</u></div><div class="lr" id="s-d1l-l30"><i class="lb" style="width:40.0%"></i><b>31.</b><span>Devid Sribnjak</span><em>15 b</em><u>26</u></div><div class="lr" id="s-d1l-l31"><i class="lb" style="width:29.2%"></i><b>32.</b><span>Jiří Nachlinger</span><em>14 b</em><u>19</u></div><div class="lr" id="s-d1l-l32"><i class="lb" style="width:55.4%"></i><b>33.</b><span>Lukáš Alexander</span><em>13 b</em><u>36</u></div><div class="lr" id="s-d1l-l33"><i class="lb" style="width:44.6%"></i><b>34.</b><span>Martin Vohnout</span><em>12 b</em><u>29</u></div><div class="lr" id="s-d1l-l34"><i class="lb" style="width:35.4%"></i><b>35.</b><span>Volodymyr Voroshylo</span><em>12 b</em><u>23</u></div><div class="lr" id="s-d1l-l35"><i class="lb" style="width:30.8%"></i><b>36.</b><span>Mykhailo Kobets</span><em>11 b</em><u>20</u></div><div class="lr" id="s-d1l-l36"><i class="lb" style="width:40.0%"></i><b>37.</b><span>Pavel Novák</span><em>11 b</em><u>26</u></div><div class="lr" id="s-d1l-l37"><i class="lb" style="width:41.5%"></i><b>38.</b><span>Dušan Kubinák</span><em>10 b</em><u>27</u></div><div class="lr" id="s-d1l-l38"><i class="lb" style="width:21.5%"></i><b>39.</b><span>Petr Homolka</span><em>6 b</em><u>14</u></div></div></section>
@@ -1318,124 +1365,72 @@
   tl.fromTo("#s-d1s", {"rotationY":-14,"z":-260,"opacity":0,"transformPerspective":1800}, {"rotationY":0,"z":0,"opacity":1,"duration":0.7,"ease":"expo.out"}, 45.976);
   tl.fromTo("#s-d1s", {"rotationY":0,"z":0,"opacity":1}, {"immediateRender":false,"rotationY":12,"z":-220,"opacity":0,"duration":0.35,"ease":"power2.in","transformPerspective":1800}, 59.070);
   tl.set("#s-d1s", {visibility:"hidden"}, 0); tl.set("#s-d1s", {visibility:"visible"}, 45.976); tl.set("#s-d1s", {visibility:"hidden"}, 59.420);
-  tl.fromTo("#s-d1s-a", {"opacity":0}, {"opacity":1,"duration":0.5,"ease":"power2.out"}, 46.076);
-  tl.fromTo("#s-d1s-a-x", {"rotationX":0,"scale":0.86}, {"rotationX":56,"scale":1,"duration":1.2,"ease":"power3.out"}, 46.076);
-  tl.fromTo("#s-d1s-a-z", {"rotation":-38}, {"rotation":-12,"duration":13.344,"ease":"sine.inOut"}, 46.076);
-  tl.fromTo("#s-d1s-a .bb", {"rotation":38}, {"rotation":12,"duration":13.344,"ease":"sine.inOut"}, 46.076);
-  tl.fromTo("#s-d1s-a .aol polygon", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.inOut"}, 46.276);
-  tl.set("#s-d1s-c1", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c1", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 46.976);
-  tl.fromTo("#s-d1s-c1 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 47.326);
-  tl.set("#s-d1s-c2", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c2", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.021);
-  tl.set("#s-d1s-c3", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c3", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.066);
-  tl.set("#s-d1s-c4", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c4", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.111);
-  tl.set("#s-d1s-c5", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c5", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.156);
-  tl.set("#s-d1s-c6", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c6", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.201);
-  tl.set("#s-d1s-c7", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c7", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.246);
-  tl.set("#s-d1s-c8", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c8", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.291);
-  tl.set("#s-d1s-c9", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c9", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.336);
-  tl.set("#s-d1s-c10", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c10", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.381);
-  tl.set("#s-d1s-c11", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c11", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.426);
-  tl.set("#s-d1s-c12", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c12", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.471);
-  tl.set("#s-d1s-c13", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c13", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.516);
-  tl.set("#s-d1s-c14", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c14", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.561);
-  tl.set("#s-d1s-c15", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c15", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.606);
-  tl.set("#s-d1s-c16", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c16", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.651);
-  tl.set("#s-d1s-c17", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c17", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.696);
-  tl.set("#s-d1s-c18", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c18", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.741);
-  tl.set("#s-d1s-c19", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c19", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.786);
-  tl.fromTo("#s-d1s-c19 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.136);
-  tl.set("#s-d1s-c20", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c20", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.831);
-  tl.fromTo("#s-d1s-c20 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.181);
-  tl.set("#s-d1s-c21", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c21", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.876);
-  tl.fromTo("#s-d1s-c21 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.226);
-  tl.set("#s-d1s-c22", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c22", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.921);
-  tl.set("#s-d1s-c23", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c23", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 47.966);
-  tl.set("#s-d1s-c24", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c24", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.011);
-  tl.set("#s-d1s-c25", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c25", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.056);
-  tl.set("#s-d1s-c26", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c26", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.101);
-  tl.set("#s-d1s-c27", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c27", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.146);
-  tl.set("#s-d1s-c28", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c28", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.191);
-  tl.set("#s-d1s-c29", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c29", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.236);
-  tl.set("#s-d1s-c30", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c30", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.281);
-  tl.set("#s-d1s-c31", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c31", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.326);
-  tl.fromTo("#s-d1s-c31 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.676);
-  tl.set("#s-d1s-c32", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c32", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.371);
-  tl.set("#s-d1s-c33", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c33", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.416);
-  tl.set("#s-d1s-c34", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c34", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.461);
-  tl.set("#s-d1s-c35", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c35", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.506);
-  tl.fromTo("#s-d1s-c35 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.856);
-  tl.set("#s-d1s-c36", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c36", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.551);
-  tl.set("#s-d1s-c37", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c37", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.596);
-  tl.fromTo("#s-d1s-c37 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.946);
-  tl.set("#s-d1s-c38", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c38", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.641);
-  tl.fromTo("#s-d1s-c38 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 48.991);
-  tl.set("#s-d1s-c39", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c39", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.686);
-  tl.fromTo("#s-d1s-c39 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 49.036);
-  tl.set("#s-d1s-c40", {"rotationX":-90,"transformOrigin":"50% 100%"}, 45.976);
-  tl.fromTo("#s-d1s-c40", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 48.731);
-  tl.fromTo("#s-d1s-c40 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 49.081);
-  tl.fromTo("#s-d1s-r0", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 48.766);
-  tl.fromTo("#s-d1s-c20", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 48.766);
-  tl.fromTo("#s-d1s-r1", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 48.998);
-  tl.fromTo("#s-d1s-c21", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 48.998);
-  tl.fromTo("#s-d1s-r2", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 49.231);
-  tl.fromTo("#s-d1s-c19", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 49.231);
-  tl.fromTo("#s-d1s-r3", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 49.463);
-  tl.fromTo("#s-d1s-c38", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 49.463);
-  tl.fromTo("#s-d1s-r4", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 49.696);
-  tl.fromTo("#s-d1s-c37", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 49.696);
-  tl.fromTo("#s-d1s-r5", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 49.928);
-  tl.fromTo("#s-d1s-c39", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 49.928);
-  tl.fromTo("#s-d1s-r6", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 50.161);
-  tl.fromTo("#s-d1s-c40", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 50.161);
-  tl.fromTo("#s-d1s-r7", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 50.394);
-  tl.fromTo("#s-d1s-c1", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 50.394);
-  tl.fromTo("#s-d1s-r8", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 50.626);
-  tl.fromTo("#s-d1s-c35", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 50.626);
-  tl.fromTo("#s-d1s-r9", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 50.858);
-  tl.fromTo("#s-d1s-c31", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 50.858);
-  tl.fromTo("#s-d1s .side", {"opacity":0}, {"opacity":1,"duration":0.35}, 48.441);
-  tl.fromTo("#s-d1s-low", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 51.324);
-  tl.fromTo("#s-d1s .sth", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 48.533);
+  tl.fromTo("#s-d1s-h11", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 46.906);
+  tl.fromTo("#s-d1s-h12", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 46.966);
+  tl.fromTo("#s-d1s-h13", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.026);
+  tl.fromTo("#s-d1s-h14", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.086);
+  tl.fromTo("#s-d1s-h15", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.146);
+  tl.fromTo("#s-d1s-h16", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.206);
+  tl.fromTo("#s-d1s-h17", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.266);
+  tl.fromTo("#s-d1s-h18", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.326);
+  tl.fromTo("#s-d1s-h19", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.386);
+  tl.fromTo("#s-d1s-h20", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.446);
+  tl.fromTo("#s-d1s-h1", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.506);
+  tl.fromTo("#s-d1s-h2", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.566);
+  tl.fromTo("#s-d1s-h3", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.626);
+  tl.fromTo("#s-d1s-h4", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.686);
+  tl.fromTo("#s-d1s-h5", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.746);
+  tl.fromTo("#s-d1s-h6", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.806);
+  tl.fromTo("#s-d1s-h7", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.866);
+  tl.fromTo("#s-d1s-h8", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.926);
+  tl.fromTo("#s-d1s-h9", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 47.986);
+  tl.fromTo("#s-d1s-h10", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 48.046);
+  tl.fromTo("#s-d1s .pp span", {"opacity":0,"y":10.8}, {"opacity":1,"y":0,"duration":0.3,"stagger":0.025,"ease":"power3.out"}, 48.406);
+  tl.fromTo("#s-d1s .bank", {"opacity":0}, {"opacity":1,"duration":0.4}, 46.906);
+  tl.fromTo("#s-d1s-pb1", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.796);
+  tl.fromTo("#s-d1s-pb2", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.826);
+  tl.fromTo("#s-d1s-pb3", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.856);
+  tl.fromTo("#s-d1s-pb4", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.886);
+  tl.fromTo("#s-d1s-pb5", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.916);
+  tl.fromTo("#s-d1s-pb6", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.946);
+  tl.fromTo("#s-d1s-pb7", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 48.976);
+  tl.fromTo("#s-d1s-pb8", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.006);
+  tl.fromTo("#s-d1s-pb9", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.036);
+  tl.fromTo("#s-d1s-pb10", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.066);
+  tl.fromTo("#s-d1s-pb11", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.096);
+  tl.fromTo("#s-d1s-pb12", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.126);
+  tl.fromTo("#s-d1s-pb13", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.156);
+  tl.fromTo("#s-d1s-pb14", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.186);
+  tl.fromTo("#s-d1s-pb15", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.216);
+  tl.fromTo("#s-d1s-pb16", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.246);
+  tl.fromTo("#s-d1s-pb17", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.276);
+  tl.fromTo("#s-d1s-pb18", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.306);
+  tl.fromTo("#s-d1s-pb19", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.336);
+  tl.fromTo("#s-d1s-pb20", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.366);
+  tl.fromTo("#s-d1s-pb21", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.396);
+  tl.fromTo("#s-d1s-pb22", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.426);
+  tl.fromTo("#s-d1s-pb23", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.456);
+  tl.fromTo("#s-d1s-pb24", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.486);
+  tl.fromTo("#s-d1s-pb25", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.516);
+  tl.fromTo("#s-d1s-pb26", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.546);
+  tl.fromTo("#s-d1s-pb27", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.576);
+  tl.fromTo("#s-d1s-pb28", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.606);
+  tl.fromTo("#s-d1s-pb29", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.636);
+  tl.fromTo("#s-d1s-pb30", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.666);
+  tl.fromTo("#s-d1s-pb31", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.696);
+  tl.fromTo("#s-d1s-pb32", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.726);
+  tl.fromTo("#s-d1s-pb33", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.756);
+  tl.fromTo("#s-d1s-pb34", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.786);
+  tl.fromTo("#s-d1s-pb35", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.816);
+  tl.fromTo("#s-d1s-pb36", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.846);
+  tl.fromTo("#s-d1s-pb37", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.876);
+  tl.fromTo("#s-d1s-pb38", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.906);
+  tl.fromTo("#s-d1s-pb39", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.936);
+  tl.fromTo("#s-d1s-pb40", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 49.966);
+  tl.fromTo("#s-d1s .pse", {"opacity":0}, {"opacity":0.7,"duration":0.4}, 48.766);
+  tl.fromTo("#s-d1s-note", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 50.161);
+  tl.fromTo("#s-d1s-pb20", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8)","duration":0.3,"yoyo":true,"repeat":5}, 50.394);
+  tl.fromTo("#s-d1s-h10", {"boxShadow":"0 0 0 0px rgba(227,30,36,0)"}, {"immediateRender":false,"boxShadow":"0 0 0 7.6px rgba(227,30,36,1)","duration":0.3,"yoyo":true,"repeat":5,"ease":"sine.inOut"}, 50.394);
   tl.fromTo("#s-d1s-t0", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 52.021);
   { const o={v:0}, el=document.getElementById("s-d1s-tv0"); tl.fromTo(o,{v:0},{v:1341,duration:0.900,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"\u2009");}}, 52.071); }
   tl.fromTo("#s-d1s-t1", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 52.486);
@@ -1454,165 +1449,72 @@
   tl.fromTo("#s-d2s", {"rotationY":-14,"z":-260,"opacity":0,"transformPerspective":1800}, {"rotationY":0,"z":0,"opacity":1,"duration":0.7,"ease":"expo.out"}, 97.826);
   tl.fromTo("#s-d2s", {"rotationY":0,"z":0,"opacity":1}, {"immediateRender":false,"rotationY":12,"z":-220,"opacity":0,"duration":0.35,"ease":"power2.in","transformPerspective":1800}, 110.920);
   tl.set("#s-d2s", {visibility:"hidden"}, 0); tl.set("#s-d2s", {visibility:"visible"}, 97.826); tl.set("#s-d2s", {visibility:"hidden"}, 111.270);
-  tl.fromTo("#s-d2s-a", {"opacity":0}, {"opacity":1,"duration":0.5,"ease":"power2.out"}, 97.926);
-  tl.fromTo("#s-d2s-a-x", {"rotationX":0,"scale":0.86}, {"rotationX":42,"scale":1.08,"duration":1.2,"ease":"power3.out"}, 97.926);
-  tl.fromTo("#s-d2s-a-z", {"rotation":206}, {"rotation":168,"duration":13.344,"ease":"sine.inOut"}, 97.926);
-  tl.fromTo("#s-d2s-a .bb", {"rotation":-206}, {"rotation":-168,"duration":13.344,"ease":"sine.inOut"}, 97.926);
-  tl.fromTo("#s-d2s-a .aol polygon", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.inOut"}, 98.126);
-  tl.set("#s-d2s-c1", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g1", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c1", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 98.826);
-  tl.fromTo("#s-d2s-c1 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 99.176);
-  tl.set("#s-d2s-c2", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g2", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c2", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 98.871);
-  tl.fromTo("#s-d2s-c2 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 99.221);
-  tl.set("#s-d2s-c3", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g3", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c3", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 98.916);
-  tl.fromTo("#s-d2s-c3 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 99.266);
-  tl.set("#s-d2s-c4", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g4", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c4", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 98.961);
-  tl.fromTo("#s-d2s-c4 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 99.311);
-  tl.set("#s-d2s-c5", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g5", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c5", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.006);
-  tl.set("#s-d2s-c6", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g6", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c6", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.051);
-  tl.set("#s-d2s-c7", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g7", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c7", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.096);
-  tl.set("#s-d2s-c8", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g8", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c8", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.141);
-  tl.set("#s-d2s-c9", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g9", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c9", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.186);
-  tl.set("#s-d2s-c10", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g10", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c10", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.231);
-  tl.set("#s-d2s-c11", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g11", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c11", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.276);
-  tl.set("#s-d2s-c12", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g12", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c12", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.321);
-  tl.set("#s-d2s-c13", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g13", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c13", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.366);
-  tl.set("#s-d2s-c14", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g14", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c14", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.411);
-  tl.set("#s-d2s-c15", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g15", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c15", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.456);
-  tl.set("#s-d2s-c16", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g16", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c16", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.501);
-  tl.set("#s-d2s-c17", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g17", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c17", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.546);
-  tl.set("#s-d2s-c18", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g18", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c18", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.591);
-  tl.set("#s-d2s-c19", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g19", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c19", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.636);
-  tl.set("#s-d2s-c20", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g20", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c20", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.681);
-  tl.set("#s-d2s-c21", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g21", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c21", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.726);
-  tl.set("#s-d2s-c22", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g22", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c22", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.771);
-  tl.set("#s-d2s-c23", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g23", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c23", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.816);
-  tl.set("#s-d2s-c24", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g24", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c24", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.861);
-  tl.set("#s-d2s-c25", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g25", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c25", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.906);
-  tl.set("#s-d2s-c26", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g26", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c26", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.951);
-  tl.set("#s-d2s-c27", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g27", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c27", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 99.996);
-  tl.set("#s-d2s-c28", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g28", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c28", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.041);
-  tl.set("#s-d2s-c29", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g29", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c29", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.086);
-  tl.set("#s-d2s-c30", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g30", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c30", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.131);
-  tl.set("#s-d2s-c31", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g31", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c31", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.176);
-  tl.set("#s-d2s-c32", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g32", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c32", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.221);
-  tl.fromTo("#s-d2s-c32 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.571);
-  tl.set("#s-d2s-c33", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g33", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c33", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.266);
-  tl.fromTo("#s-d2s-c33 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.616);
-  tl.set("#s-d2s-c34", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g34", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c34", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.311);
-  tl.fromTo("#s-d2s-c34 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.661);
-  tl.set("#s-d2s-c35", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g35", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c35", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.356);
-  tl.set("#s-d2s-c36", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g36", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c36", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.401);
-  tl.set("#s-d2s-c37", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g37", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c37", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.446);
-  tl.set("#s-d2s-c38", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g38", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c38", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.491);
-  tl.fromTo("#s-d2s-c38 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.841);
-  tl.set("#s-d2s-c39", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g39", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c39", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.536);
-  tl.fromTo("#s-d2s-c39 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.886);
-  tl.set("#s-d2s-c40", {"rotationX":-90,"transformOrigin":"50% 100%"}, 97.826);
-  tl.set("#s-d2s-g40", {"rotationX":-90,"transformOrigin":"50% 100%","opacity":0}, 97.826);
-  tl.fromTo("#s-d2s-c40", {"scaleY":0}, {"scaleY":1,"duration":0.55,"ease":"back.out(1.6)"}, 100.581);
-  tl.fromTo("#s-d2s-c40 .cv", {"opacity":0}, {"opacity":1,"duration":0.2}, 100.931);
-  tl.fromTo("#s-d2s .c3g", {"opacity":0}, {"immediateRender":false,"opacity":1,"duration":0.5}, 102.011);
-  tl.fromTo("#s-d2s-r0", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 100.616);
-  tl.fromTo("#s-d2s-c39", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 100.616);
-  tl.fromTo("#s-d2s-r1", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 100.848);
-  tl.fromTo("#s-d2s-c1", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 100.848);
-  tl.fromTo("#s-d2s-r2", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 101.081);
-  tl.fromTo("#s-d2s-c34", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 101.081);
-  tl.fromTo("#s-d2s-r3", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 101.313);
-  tl.fromTo("#s-d2s-c3", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 101.313);
-  tl.fromTo("#s-d2s-r4", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 101.546);
-  tl.fromTo("#s-d2s-c33", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 101.546);
-  tl.fromTo("#s-d2s-r5", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 101.778);
-  tl.fromTo("#s-d2s-c40", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 101.778);
-  tl.fromTo("#s-d2s-r6", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 102.011);
-  tl.fromTo("#s-d2s-c2", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 102.011);
-  tl.fromTo("#s-d2s-r7", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 102.243);
-  tl.fromTo("#s-d2s-c38", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 102.243);
-  tl.fromTo("#s-d2s-r8", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 102.476);
-  tl.fromTo("#s-d2s-c4", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 102.476);
-  tl.fromTo("#s-d2s-r9", {"opacity":0,"x":12.96,"rotationY":-25,"transformPerspective":900}, {"opacity":1,"x":0,"rotationY":0,"duration":0.5,"ease":"expo.out"}, 102.709);
-  tl.fromTo("#s-d2s-c32", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8) drop-shadow(0 0 10px rgba(255,211,107,.9))","duration":0.3,"yoyo":true,"repeat":1}, 102.709);
-  tl.fromTo("#s-d2s .side", {"opacity":0}, {"opacity":1,"duration":0.35}, 100.290);
-  tl.fromTo("#s-d2s-low", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 103.173);
-  tl.fromTo("#s-d2s .sth", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 100.383);
+  tl.fromTo("#s-d2s-h11", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 98.756);
+  tl.fromTo("#s-d2s-h12", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 98.816);
+  tl.fromTo("#s-d2s-h13", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 98.876);
+  tl.fromTo("#s-d2s-h14", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 98.936);
+  tl.fromTo("#s-d2s-h15", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 98.996);
+  tl.fromTo("#s-d2s-h16", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.056);
+  tl.fromTo("#s-d2s-h17", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.116);
+  tl.fromTo("#s-d2s-h18", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.176);
+  tl.fromTo("#s-d2s-h19", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.236);
+  tl.fromTo("#s-d2s-h20", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.296);
+  tl.fromTo("#s-d2s-h1", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.356);
+  tl.fromTo("#s-d2s-h2", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.416);
+  tl.fromTo("#s-d2s-h3", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.476);
+  tl.fromTo("#s-d2s-h4", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.536);
+  tl.fromTo("#s-d2s-h5", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.596);
+  tl.fromTo("#s-d2s-h6", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.656);
+  tl.fromTo("#s-d2s-h7", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.716);
+  tl.fromTo("#s-d2s-h8", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.776);
+  tl.fromTo("#s-d2s-h9", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.836);
+  tl.fromTo("#s-d2s-h10", {"opacity":0,"rotationY":-100,"transformPerspective":600}, {"opacity":1,"rotationY":0,"duration":0.5,"ease":"back.out(1.6)"}, 99.896);
+  tl.fromTo("#s-d2s .pp span", {"opacity":0,"y":10.8}, {"opacity":1,"y":0,"duration":0.3,"stagger":0.025,"ease":"power3.out"}, 100.256);
+  tl.fromTo("#s-d2s .bank", {"opacity":0}, {"opacity":1,"duration":0.4}, 98.756);
+  tl.fromTo("#s-d2s-pb1", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.646);
+  tl.fromTo("#s-d2s-pb2", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.676);
+  tl.fromTo("#s-d2s-pb3", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.706);
+  tl.fromTo("#s-d2s-pb4", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.736);
+  tl.fromTo("#s-d2s-pb5", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.766);
+  tl.fromTo("#s-d2s-pb6", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.796);
+  tl.fromTo("#s-d2s-pb7", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.826);
+  tl.fromTo("#s-d2s-pb8", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.856);
+  tl.fromTo("#s-d2s-pb9", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.886);
+  tl.fromTo("#s-d2s-pb10", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.916);
+  tl.fromTo("#s-d2s-pb11", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.946);
+  tl.fromTo("#s-d2s-pb12", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 100.976);
+  tl.fromTo("#s-d2s-pb13", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.006);
+  tl.fromTo("#s-d2s-pb14", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.036);
+  tl.fromTo("#s-d2s-pb15", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.066);
+  tl.fromTo("#s-d2s-pb16", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.096);
+  tl.fromTo("#s-d2s-pb17", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.126);
+  tl.fromTo("#s-d2s-pb18", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.156);
+  tl.fromTo("#s-d2s-pb19", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.186);
+  tl.fromTo("#s-d2s-pb20", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.216);
+  tl.fromTo("#s-d2s-pb21", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.246);
+  tl.fromTo("#s-d2s-pb22", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.276);
+  tl.fromTo("#s-d2s-pb23", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.306);
+  tl.fromTo("#s-d2s-pb24", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.336);
+  tl.fromTo("#s-d2s-pb25", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.366);
+  tl.fromTo("#s-d2s-pb26", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.396);
+  tl.fromTo("#s-d2s-pb27", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.426);
+  tl.fromTo("#s-d2s-pb28", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.456);
+  tl.fromTo("#s-d2s-pb29", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.486);
+  tl.fromTo("#s-d2s-pb30", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.516);
+  tl.fromTo("#s-d2s-pb31", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.546);
+  tl.fromTo("#s-d2s-pb32", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.576);
+  tl.fromTo("#s-d2s-pb33", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.606);
+  tl.fromTo("#s-d2s-pb34", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.636);
+  tl.fromTo("#s-d2s-pb35", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.666);
+  tl.fromTo("#s-d2s-pb36", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.696);
+  tl.fromTo("#s-d2s-pb37", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.726);
+  tl.fromTo("#s-d2s-pb38", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.756);
+  tl.fromTo("#s-d2s-pb39", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.786);
+  tl.fromTo("#s-d2s-pb40", {"scaleY":0}, {"scaleY":1,"duration":0.4,"ease":"power3.out"}, 101.816);
+  tl.fromTo("#s-d2s .pse", {"opacity":0}, {"opacity":0.7,"duration":0.4}, 100.616);
+  tl.fromTo("#s-d2s-note", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 102.011);
+  tl.fromTo("#s-d2s-pb39", {"filter":"brightness(1)"}, {"immediateRender":false,"filter":"brightness(1.8)","duration":0.3,"yoyo":true,"repeat":5}, 102.243);
+  tl.fromTo("#s-d2s-h20", {"boxShadow":"0 0 0 0px rgba(227,30,36,0)"}, {"immediateRender":false,"boxShadow":"0 0 0 7.6px rgba(227,30,36,1)","duration":0.3,"yoyo":true,"repeat":5,"ease":"sine.inOut"}, 102.243);
   tl.fromTo("#s-d2s-t0", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 103.871);
   { const o={v:0}, el=document.getElementById("s-d2s-tv0"); tl.fromTo(o,{v:0},{v:767,duration:0.900,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"\u2009");}}, 103.921); }
   tl.fromTo("#s-d2s-t1", {"opacity":0,"y":21.6,"scale":0.94,"rotationX":-55,"transformPerspective":900,"transformOrigin":"50% 100%"}, {"opacity":1,"y":0,"scale":1,"rotationX":0,"duration":0.5,"ease":"back.out(1.8)"}, 104.336);
@@ -2734,82 +2636,138 @@
   tl.fromTo("#s-d2-top .dt:nth-child(2)", {filter:"brightness(1.25) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 96.386);
   tl.fromTo("#s-d2-top .dt:nth-child(3)", {filter:"brightness(1.25) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 96.874);
   tl.fromTo("#s-d2-top .dt:nth-child(4)", {filter:"brightness(1.25) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 97.361);
-  tl.fromTo("#s-d1s-c1", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 49.342);
-  tl.fromTo("#s-d1s-c2", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 49.807);
-  tl.fromTo("#s-d1s-c3", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 50.294);
-  tl.fromTo("#s-d1s-c4", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 50.782);
-  tl.fromTo("#s-d1s-c5", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 51.246);
-  tl.fromTo("#s-d1s-c6", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 51.734);
-  tl.fromTo("#s-d1s-c7", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 52.222);
-  tl.fromTo("#s-d1s-c8", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 52.686);
-  tl.fromTo("#s-d1s-c9", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 53.174);
-  tl.fromTo("#s-d1s-c10", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 53.661);
-  tl.fromTo("#s-d1s-c11", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 54.126);
-  tl.fromTo("#s-d1s-c12", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 54.613);
-  tl.fromTo("#s-d1s-c13", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 55.101);
-  tl.fromTo("#s-d1s-c14", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 55.565);
-  tl.fromTo("#s-d1s-c15", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 56.053);
-  tl.fromTo("#s-d1s-c16", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 56.541);
-  tl.fromTo("#s-d1s-c17", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.005);
-  tl.fromTo("#s-d1s-c18", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.493);
-  tl.fromTo("#s-d1s-c19", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.957);
-  tl.fromTo("#s-d1s-c20", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 58.445);
-  tl.fromTo("#s-d1s-c21", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 58.932);
-  tl.fromTo("#s-d1s-r0", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 51.246);
-  tl.fromTo("#s-d1s-r1", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 51.734);
-  tl.fromTo("#s-d1s-r2", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 52.222);
-  tl.fromTo("#s-d1s-r3", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 52.686);
-  tl.fromTo("#s-d1s-r4", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 53.174);
-  tl.fromTo("#s-d1s-r5", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 53.661);
-  tl.fromTo("#s-d1s-r6", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 54.126);
-  tl.fromTo("#s-d1s-r7", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 54.613);
-  tl.fromTo("#s-d1s-r8", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 55.101);
-  tl.fromTo("#s-d1s-r9", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 55.565);
-  tl.fromTo("#s-d1s-r0", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 56.053);
-  tl.fromTo("#s-d1s-r1", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 56.541);
-  tl.fromTo("#s-d1s-r2", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 57.005);
-  tl.fromTo("#s-d1s-r3", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 57.493);
-  tl.fromTo("#s-d1s-r4", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 57.957);
-  tl.fromTo("#s-d1s-r5", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 58.445);
-  tl.fromTo("#s-d1s-r6", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 58.932);
-  tl.fromTo("#s-d2s-c1", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 101.193);
-  tl.fromTo("#s-d2s-c2", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 101.680);
-  tl.fromTo("#s-d2s-c3", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 102.145);
-  tl.fromTo("#s-d2s-c4", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 102.632);
-  tl.fromTo("#s-d2s-c5", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 103.120);
-  tl.fromTo("#s-d2s-c6", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 103.607);
-  tl.fromTo("#s-d2s-c7", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 104.049);
-  tl.fromTo("#s-d2s-c8", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 104.536);
-  tl.fromTo("#s-d2s-c9", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.024);
-  tl.fromTo("#s-d2s-c10", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.511);
-  tl.fromTo("#s-d2s-c11", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.976);
-  tl.fromTo("#s-d2s-c12", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 106.463);
-  tl.fromTo("#s-d2s-c13", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 106.951);
-  tl.fromTo("#s-d2s-c14", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 107.416);
-  tl.fromTo("#s-d2s-c15", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 107.903);
-  tl.fromTo("#s-d2s-c16", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 108.391);
-  tl.fromTo("#s-d2s-c17", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 108.855);
-  tl.fromTo("#s-d2s-c18", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 109.343);
-  tl.fromTo("#s-d2s-c19", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 109.830);
-  tl.fromTo("#s-d2s-c20", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 110.318);
-  tl.fromTo("#s-d2s-c21", {filter:"brightness(1.7) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 110.782);
-  tl.fromTo("#s-d2s-r0", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 103.120);
-  tl.fromTo("#s-d2s-r1", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 103.607);
-  tl.fromTo("#s-d2s-r2", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 104.049);
-  tl.fromTo("#s-d2s-r3", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 104.536);
-  tl.fromTo("#s-d2s-r4", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 105.024);
-  tl.fromTo("#s-d2s-r5", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 105.511);
-  tl.fromTo("#s-d2s-r6", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 105.976);
-  tl.fromTo("#s-d2s-r7", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 106.463);
-  tl.fromTo("#s-d2s-r8", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 106.951);
-  tl.fromTo("#s-d2s-r9", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 107.416);
-  tl.fromTo("#s-d2s-r0", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 107.903);
-  tl.fromTo("#s-d2s-r1", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 108.391);
-  tl.fromTo("#s-d2s-r2", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 108.855);
-  tl.fromTo("#s-d2s-r3", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 109.343);
-  tl.fromTo("#s-d2s-r4", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 109.830);
-  tl.fromTo("#s-d2s-r5", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 110.318);
-  tl.fromTo("#s-d2s-r6", {filter:"brightness(1.12) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.22, ease:"power2.out", immediateRender:false}, 110.782);
+  tl.fromTo("#s-d1s-h1", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 48.367);
+  tl.fromTo("#s-d1s-h2", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 48.855);
+  tl.fromTo("#s-d1s-h3", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 49.342);
+  tl.fromTo("#s-d1s-h4", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 49.807);
+  tl.fromTo("#s-d1s-h5", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 50.294);
+  tl.fromTo("#s-d1s-h6", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 50.782);
+  tl.fromTo("#s-d1s-h7", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 51.246);
+  tl.fromTo("#s-d1s-h8", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 51.734);
+  tl.fromTo("#s-d1s-h9", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 52.222);
+  tl.fromTo("#s-d1s-h10", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 52.686);
+  tl.fromTo("#s-d1s-h11", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 53.174);
+  tl.fromTo("#s-d1s-h12", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 53.661);
+  tl.fromTo("#s-d1s-h13", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 54.126);
+  tl.fromTo("#s-d1s-h14", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 54.613);
+  tl.fromTo("#s-d1s-h15", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 55.101);
+  tl.fromTo("#s-d1s-h16", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 55.565);
+  tl.fromTo("#s-d1s-h17", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 56.053);
+  tl.fromTo("#s-d1s-h18", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 56.541);
+  tl.fromTo("#s-d1s-h19", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 57.005);
+  tl.fromTo("#s-d1s-h20", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 57.493);
+  tl.fromTo("#s-d1s-h1", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 57.957);
+  tl.fromTo("#s-d1s-h2", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 58.445);
+  tl.fromTo("#s-d1s-h3", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 58.932);
+  tl.fromTo("#s-d1s-h1", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 48.367);
+  tl.fromTo("#s-d1s-h2", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 48.855);
+  tl.fromTo("#s-d1s-h3", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 49.342);
+  tl.fromTo("#s-d1s-h4", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 49.807);
+  tl.fromTo("#s-d1s-h5", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 50.294);
+  tl.fromTo("#s-d1s-h6", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 50.782);
+  tl.fromTo("#s-d1s-h7", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 51.246);
+  tl.fromTo("#s-d1s-h8", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 51.734);
+  tl.fromTo("#s-d1s-h9", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 52.222);
+  tl.fromTo("#s-d1s-h10", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 52.686);
+  tl.fromTo("#s-d1s-h11", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 53.174);
+  tl.fromTo("#s-d1s-h12", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 53.661);
+  tl.fromTo("#s-d1s-h13", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 54.126);
+  tl.fromTo("#s-d1s-h14", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 54.613);
+  tl.fromTo("#s-d1s-h15", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 55.101);
+  tl.fromTo("#s-d1s-h16", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 55.565);
+  tl.fromTo("#s-d1s-h17", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 56.053);
+  tl.fromTo("#s-d1s-h18", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 56.541);
+  tl.fromTo("#s-d1s-h19", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 57.005);
+  tl.fromTo("#s-d1s-h20", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 57.493);
+  tl.fromTo("#s-d1s-h1", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 57.957);
+  tl.fromTo("#s-d1s-h2", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 58.445);
+  tl.fromTo("#s-d1s-h3", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 58.932);
+  tl.fromTo("#s-d1s-pb1", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 49.807);
+  tl.fromTo("#s-d1s-pb2", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 50.294);
+  tl.fromTo("#s-d1s-pb3", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 50.782);
+  tl.fromTo("#s-d1s-pb4", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 51.246);
+  tl.fromTo("#s-d1s-pb5", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 51.734);
+  tl.fromTo("#s-d1s-pb6", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 52.222);
+  tl.fromTo("#s-d1s-pb7", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 52.686);
+  tl.fromTo("#s-d1s-pb8", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 53.174);
+  tl.fromTo("#s-d1s-pb9", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 53.661);
+  tl.fromTo("#s-d1s-pb10", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 54.126);
+  tl.fromTo("#s-d1s-pb11", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 54.613);
+  tl.fromTo("#s-d1s-pb12", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 55.101);
+  tl.fromTo("#s-d1s-pb13", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 55.565);
+  tl.fromTo("#s-d1s-pb14", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 56.053);
+  tl.fromTo("#s-d1s-pb15", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 56.541);
+  tl.fromTo("#s-d1s-pb16", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.005);
+  tl.fromTo("#s-d1s-pb17", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.493);
+  tl.fromTo("#s-d1s-pb18", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 57.957);
+  tl.fromTo("#s-d1s-pb19", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 58.445);
+  tl.fromTo("#s-d1s-pb20", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 58.932);
+  tl.fromTo("#s-d2s-h1", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 100.241);
+  tl.fromTo("#s-d2s-h2", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 100.705);
+  tl.fromTo("#s-d2s-h3", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 101.193);
+  tl.fromTo("#s-d2s-h4", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 101.680);
+  tl.fromTo("#s-d2s-h5", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 102.145);
+  tl.fromTo("#s-d2s-h6", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 102.632);
+  tl.fromTo("#s-d2s-h7", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 103.120);
+  tl.fromTo("#s-d2s-h8", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 103.607);
+  tl.fromTo("#s-d2s-h9", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 104.049);
+  tl.fromTo("#s-d2s-h10", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 104.536);
+  tl.fromTo("#s-d2s-h11", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 105.024);
+  tl.fromTo("#s-d2s-h12", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 105.511);
+  tl.fromTo("#s-d2s-h13", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 105.976);
+  tl.fromTo("#s-d2s-h14", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 106.463);
+  tl.fromTo("#s-d2s-h15", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 106.951);
+  tl.fromTo("#s-d2s-h16", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 107.416);
+  tl.fromTo("#s-d2s-h17", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 107.903);
+  tl.fromTo("#s-d2s-h18", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 108.391);
+  tl.fromTo("#s-d2s-h19", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 108.855);
+  tl.fromTo("#s-d2s-h20", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 109.343);
+  tl.fromTo("#s-d2s-h1", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 109.830);
+  tl.fromTo("#s-d2s-h2", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 110.318);
+  tl.fromTo("#s-d2s-h3", {filter:"brightness(1.6) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.24, ease:"power2.out", immediateRender:false}, 110.782);
+  tl.fromTo("#s-d2s-h1", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 100.241);
+  tl.fromTo("#s-d2s-h2", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 100.705);
+  tl.fromTo("#s-d2s-h3", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 101.193);
+  tl.fromTo("#s-d2s-h4", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 101.680);
+  tl.fromTo("#s-d2s-h5", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 102.145);
+  tl.fromTo("#s-d2s-h6", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 102.632);
+  tl.fromTo("#s-d2s-h7", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 103.120);
+  tl.fromTo("#s-d2s-h8", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 103.607);
+  tl.fromTo("#s-d2s-h9", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 104.049);
+  tl.fromTo("#s-d2s-h10", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 104.536);
+  tl.fromTo("#s-d2s-h11", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 105.024);
+  tl.fromTo("#s-d2s-h12", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 105.511);
+  tl.fromTo("#s-d2s-h13", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 105.976);
+  tl.fromTo("#s-d2s-h14", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 106.463);
+  tl.fromTo("#s-d2s-h15", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 106.951);
+  tl.fromTo("#s-d2s-h16", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 107.416);
+  tl.fromTo("#s-d2s-h17", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 107.903);
+  tl.fromTo("#s-d2s-h18", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 108.391);
+  tl.fromTo("#s-d2s-h19", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 108.855);
+  tl.fromTo("#s-d2s-h20", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 109.343);
+  tl.fromTo("#s-d2s-h1", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 109.830);
+  tl.fromTo("#s-d2s-h2", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 110.318);
+  tl.fromTo("#s-d2s-h3", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, 110.782);
+  tl.fromTo("#s-d2s-pb1", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 101.680);
+  tl.fromTo("#s-d2s-pb2", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 102.145);
+  tl.fromTo("#s-d2s-pb3", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 102.632);
+  tl.fromTo("#s-d2s-pb4", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 103.120);
+  tl.fromTo("#s-d2s-pb5", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 103.607);
+  tl.fromTo("#s-d2s-pb6", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 104.049);
+  tl.fromTo("#s-d2s-pb7", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 104.536);
+  tl.fromTo("#s-d2s-pb8", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.024);
+  tl.fromTo("#s-d2s-pb9", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.511);
+  tl.fromTo("#s-d2s-pb10", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 105.976);
+  tl.fromTo("#s-d2s-pb11", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 106.463);
+  tl.fromTo("#s-d2s-pb12", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 106.951);
+  tl.fromTo("#s-d2s-pb13", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 107.416);
+  tl.fromTo("#s-d2s-pb14", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 107.903);
+  tl.fromTo("#s-d2s-pb15", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 108.391);
+  tl.fromTo("#s-d2s-pb16", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 108.855);
+  tl.fromTo("#s-d2s-pb17", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 109.343);
+  tl.fromTo("#s-d2s-pb18", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 109.830);
+  tl.fromTo("#s-d2s-pb19", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 110.318);
+  tl.fromTo("#s-d2s-pb20", {filter:"brightness(2.2) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.18, ease:"power2.out", immediateRender:false}, 110.782);
   tl.fromTo("#s-d1l-l0", {filter:"brightness(1.35) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 62.299);
   tl.fromTo("#s-d1l-l1", {filter:"brightness(1.35) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 62.764);
   tl.fromTo("#s-d1l-l2", {filter:"brightness(1.35) saturate(1.3)"}, {filter:"brightness(1) saturate(1)", duration:0.25, ease:"power2.out", immediateRender:false}, 63.251);
