@@ -21,7 +21,7 @@ const VER = process.env.VER || 'v8';
 
 // ---------- struktura v taktech ----------
 // track_edit2: originál takty 1–53 + kopie 18–53 + originál 54–65 (≈ 101 taktů, 197,9 s)
-const BARS = { intro: [0, 8], d1: [8, 23], d1s: [23, 30], d1l: [30, 35], d2: [35, 50], d2s: [50, 57], d2l: [57, 62], mcr: [62, 70], fpa: [70, 76], pod: [76, 88], sez: [88, 98], end: [98, 101] };
+const BARS = { intro: [0, 8], d1: [8, 23], d1s: [23, 30], d1l: [30, 35], d2: [35, 50], d2s: [50, 57], d2l: [57, 62], mcr: [62, 70], fpa: [70, 76], pod: [76, 88], sez: [88, 99], end: [99, 101] };
 const NBARS = 101;
 
 // ---------- čas: track nebo syntetická mřížka ----------
@@ -67,7 +67,7 @@ const MCR = R.mcr.rows.slice(0, 10).map((x) => ({ name: x.name, d1: x.res[1].pos
 const FINAL10 = MCR.map((x) => x.name);
 const byName = (day, n) => DAYS[day].A.find((a) => a.name === n);
 // celé MČR (39 závodníků, součet umístění) a ryby na závodníka za oba dny
-const MCRALL = R.mcr.rows.filter((x, i, A) => byName(0, x.name) && A.findIndex((y) => y.name === x.name) === i).map((x, i) => ({ name: x.name, d1: x.res[1].pos, d2: x.res[0].pos, rank: i + 1, f1: byName(0, x.name).fish, f2: byName(1, x.name).fish }));
+const MCRALL = R.mcr.rows.filter((x, i, A) => byName(0, x.name) && A.findIndex((y) => y.name === x.name) === i).map((x) => ({ name: x.name, d1: x.res[1].pos, d2: x.res[0].pos }));
 const FPA = DAYS[0].A.map((a) => { const b = byName(1, a.name); return { name: a.name, f1: a.fish, f2: b.fish, t: a.fish + b.fish }; })
   .sort((x, y) => y.t - x.t || x.name.localeCompare(y.name, 'cs'));
 // sezóna: chronologicky (export je od nejnovějšího)
@@ -181,67 +181,72 @@ function build(W, H, file) {
     T('#it3', { opacity: 1 }, { opacity: 0, scale: 0.96, duration: 0.3, ease: 'power2.in' }, b - 0.45);
   }
 
-  // ===================== 2/4) ŽIVÝ PRŮBĚH DNE (styl Klonówiec): fotka, závod lídrů po kolech, karta kola, HUD =====================
-  const RPH = [['bg_mcr26_porada.jpg', 'bg_mcr26_breh_pruty.jpg', 'bg_mcr26_podberak.jpg', 'bg_lib26_1000064829.jpg'], ['bg_mcr26_zarybneni.jpg', 'bg_lib26_1000065065.jpg', 'bg_mcr26_kontrola_vysledku.jpg', 'bg_lib26_1000064885.jpg']];
-  const maxP = Math.max(...DAYS.flatMap((d) => d.A.map((x) => x.points)));
-  const kphoto = (img, id, a, b, zin) => {
-    T0(`#${id}`, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' }, a);
-    T0(`#${id}`, { scale: zin ? 1 : 1.12, xPercent: zin ? -1.5 : 1.5 }, { scale: zin ? 1.12 : 1, xPercent: zin ? 1.5 : -1.5, duration: len(a, b), ease: 'sine.inOut' }, a);
-    T(`#${id}`, { opacity: 1 }, { opacity: 0, duration: 0.35 }, b - 0.35);
-    return `<div class="kph" id="${id}" style="background-image:url(assets/photos/${img})"></div>`; };
+  // ===================== 2/4) ŽIVÝ PRŮBĚH DNE =====================
   const live = (di) => {
     const D = DAYS[di], id = `s-${D.k}`, [b0, b1] = BARS[D.k], a = BAR(b0), b = BAR(b1);
-    const rt = (j) => BAR(b0 + 1 + j);                                   // kolo j = takt b0+1+j
-    const LEAD = D.top.slice(0, 10);                                     // konečná top 10 dne
-    const cumP = (x, k) => x.rounds.slice(0, k + 1).reduce((s0, r) => s0 + (r.pts || 0), 0);
-    const ordAt = (k) => (k === 11 ? LEAD.map((x) => x.name) : [...LEAD].sort((x, y) => D.ranks[k][x.name] - D.ranks[k][y.name]).map((x) => x.name));
-    const rowH = (P ? 5.2 : 4.4) * u, BW = P ? 46 * u : 62 * u;
-    const COLR = (j) => (j === 0 ? '#e31e24' : j < 3 ? '#304285' : '#5a6fb8');
+    const rt = (j) => BAR(b0 + 1 + j);                          // kolo j běží v taktu b0+1+j
+    const CW = P ? W - SAFE.l - SAFE.r : W * 0.62, CH = P ? H * 0.6 : H - SAFE.t - SAFE.b - 17 * u;
+    const padL = P ? 4 * u : 4 * u, padR = P ? 24 * u : 18 * u, padT = 2 * u, padB = 3 * u;
+    const X = (j) => padL + (j / 11) * (CW - padL - padR), Y = (r) => padT + ((r - 1) / 38) * (CH - padT - padB);
+    const COL = ['#e31e24', '#ffd36b', '#ffffff', '#7fb2ff', '#9be3c7', '#c9a7ff', '#ff9e6b', '#5fd3e8', '#b8c4e6', '#f4a3c0'];
+    const lines = FINAL10.map((n, i) => {
+      const pts = D.ranks.map((rk, j) => `${X(j).toFixed(1)},${Y(rk[n]).toFixed(1)}`).join(' ');
+      return `<polyline class="bl${i < 3 ? ' hi' : ''}" points="${pts}" stroke="${COL[i]}" stroke-width="${(i < 3 ? 0.6 : 0.16) * u}"/>`;
+    }).join('');
+    // štítky: skutečná pozice = tečka, text se rozestoupí (min. mezera), mimo top 10 ztlumené
+    const GAP = (P ? 3.1 : 2.7) * u;
+    const LY = D.ranks.map((rk) => { const o = FINAL10.map((n, i) => ({ i, y: Y(rk[n]) })).sort((p, q) => p.y - q.y); let prev = -1e9;
+      o.forEach((e) => { e.d = Math.max(e.y, prev + GAP); prev = e.d; }); const over = prev - (CH - padB); if (over > 0) o.forEach((e) => (e.d -= over * ((e.d - o[0].d) / Math.max(1, prev - o[0].d))));
+      return Object.fromEntries(o.map((e) => [e.i, e.d])); });
+    const dots = FINAL10.map((n, i) => `<i class="bdot${i < 3 ? ' hi' : ''}" id="${id}-o${i}" style="left:${f(X(0))}; top:${f(Y(D.ranks[0][n]))}; background:${COL[i]}"></i>
+      <div class="bd${i < 3 ? ' hi' : ''}" id="${id}-d${i}" style="left:${f(X(0) + 1.4 * u)}; top:${f(LY[0][i])}; color:${i === 0 ? '#ff9a9c' : i < 3 ? COL[i] : '#eef2f9'}"><span>${short(n)}</span><b id="${id}-r${i}">${D.ranks[0][n]}.</b></div>`).join('');
+    const grid = [1, 10, 20, 30, 39].map((r) => `<line x1="${padL}" x2="${CW - padR}" y1="${Y(r)}" y2="${Y(r)}" class="gl"/><text x="${padL - 1 * u}" y="${Y(r) + 1 * u}" text-anchor="end">${r}.</text>`).join('')
+      + Array.from({ length: 12 }, (_, j) => `<text x="${X(j)}" y="${CH - 0.2 * u}" text-anchor="middle" class="kx">${j + 1}</text>`).join('');
+    const band = `<rect x="${padL}" y="${Y(1) - 1.2 * u}" width="${CW - padL - padR}" height="${Y(10) - Y(1) + 2.4 * u}" class="t10"/><text x="${padL + 0.6 * u}" y="${Y(1) - 1.8 * u}" text-anchor="start" class="t10l">TOP 10</text>`;
     const maxR = Math.max(...DAYS[0].perRound);
-    const bestR = (k) => { const mxf = Math.max(...D.A.map((x) => x.rounds[k].fish || 0)), w = D.A.filter((x) => (x.rounds[k].fish || 0) === mxf);
-      return `${w.slice(0, 2).map((x) => x.name).join(', ')}${w.length > 2 ? ` +${w.length - 2}` : ''} · ${mxf} ryb`; };
+    const ghost = di === 1 ? DAYS[0].perRound : null;
     const icon = di === 0
       ? `<svg class="wx sun" viewBox="0 0 40 40"><circle cx="20" cy="20" r="8"/>${Array.from({ length: 8 }, (_, k) => `<line x1="${20 + 12 * Math.cos(k * Math.PI / 4)}" y1="${20 + 12 * Math.sin(k * Math.PI / 4)}" x2="${20 + 17 * Math.cos(k * Math.PI / 4)}" y2="${20 + 17 * Math.sin(k * Math.PI / 4)}"/>`).join('')}</svg>`
       : `<svg class="wx rain" viewBox="0 0 40 40"><path d="M11 22a8 8 0 0 1 2-15.5A10 10 0 0 1 32 10a6 6 0 0 1-1 12z"/>${[12, 19, 26].map((x) => `<line class="drop" x1="${x}" y1="27" x2="${x - 3}" y2="35"/>`).join('')}</svg>`;
-    const ghost = di === 1 ? DAYS[0].perRound : null;
-    const phs = RPH[di].map((img, k) => { const pa = k === 0 ? a : BAR(b0 + k * 4), pb = k === 3 ? b : BAR(b0 + (k + 1) * 4); return kphoto(img, `${id}-ph${k}`, pa, pb, k % 2 === 0); }).join('');
-    const hud = `<div class="khud" id="${id}-hud"><div class="hc"><b>Den ${di + 1}</b><span id="${id}-kl">${di ? 'neděle 25. 10.' : 'sobota 24. 10.'}</span></div>
-      <div class="hn"><b id="${id}-c">0</b><span>ulovených ryb${di ? ` · sobota ${fmt(DAYS[0].total)}` : ''}</span></div>
-      <div class="hr">${D.perRound.map((v, j) => `<div class="hcol" id="${id}-hc${j}">${ghost ? `<s style="height:${((ghost[j] / maxR) * 100).toFixed(1)}%"></s>` : ''}<i id="${id}-hi${j}" style="height:${((v / maxR) * 100).toFixed(1)}%"></i><b class="hon" id="${id}-ho${j}" style="height:${((v / maxR) * 100).toFixed(1)}%"></b><em>${j + 1}</em></div>`).join('')}</div></div>`;
-    const race = `<div class="race" id="${id}-race" style="height:${f(rowH * 10)}">${LEAD.map((x, j) => `<div class="rr" id="${id}-rr${j}"><span class="rn">${short(x.name)}</span><span class="rb"><i id="${id}-rb${j}" style="background:${COLR(j)}; width:${f(BW)}"></i></span><b id="${id}-rv${j}">0</b></div>`).join('')}</div>
-      <div class="rk" id="${id}-rk"><span id="${id}-rkn">1</span><em>po kole</em></div>`;
-    const cards = D.perRound.map((v, k) => `<div class="rc" id="${id}-rc${k}"><div class="rc-n"><span>${k + 1}. kolo</span></div><div class="rc-f"><b>${v}</b><span>ryb v kole${ghost ? ` · sobota ${ghost[k]}` : ''}</span></div><div class="rc-b">Nejvíc: <b>${bestR(k)}</b></div></div>`).join('');
-    scene(id, a, b, `${phs}<div class="kdim"></div>${head(id, P ? `Den ${di + 1}` : `Den ${di + 1} · závod lídrů`, P ? `závod lídrů · ${di ? 'neděle · déšť' : 'sobota · slunečno'}` : `${di ? 'neděle · déšť' : 'sobota · slunečno'} · top 10 dne · body po kolech`, a + 0.05)}${icon}${race}<div class="rcw">${cards}</div>${hud}`);
+    const hud = `<div class="hud"><div class="hf"><div class="hk">kolo <b id="${id}-k">0</b> / 12</div><b id="${id}-c">0</b><span>ulovených ryb</span></div>
+      <div class="hrw"><div class="hrl">ryb v kole${ghost ? ' · <s></s> sobota' : ''}</div><div class="hr">${D.perRound.map((v, j) => `<div class="hcol" id="${id}-hc${j}">${ghost ? `<s style="height:${((ghost[j] / maxR) * 100).toFixed(1)}%"></s>` : ''}<i id="${id}-hi${j}" style="height:${((v / maxR) * 100).toFixed(1)}%"></i><u class="hv" id="${id}-hv${j}" style="bottom:${((v / maxR) * 100).toFixed(1)}%">${v}</u><em>${j + 1}</em></div>`).join('')}</div></div></div>`;
+    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_podberak.jpg' : 'bg_v02_velky_sportak.jpg', a, b, { op: 0.36, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1}`, di === 0 ? 'sobota 24. 10. · slunečno' : 'neděle 25. 10. · déšť', a + 0.05)}${icon}${hud}
+      <div class="bump" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}"><defs><clipPath id="${id}-cp"><rect id="${id}-cr" x="0" y="0" width="${f(X(0) + 1.5 * u)}" height="${CH}"/></clipPath></defs>${band}${grid}<g clip-path="url(#${id}-cp)">${lines}</g></svg>${dots}
+        <div class="bcap">jak se TOP 10 MČR měnila po kolech</div></div>
+      <div class="dtop" id="${id}-top"><div class="dth">Den ${di + 1} · top 10</div><div class="dtg">${D.top.slice(0, 10).map((x, i) => `<div class="dt${i < 3 ? ' t3' : ''}"><b>${i + 1}.</b><span>${x.name}</span><em>${x.points} b · ${x.fish} ryb</em></div>`).join('')}</div></div>`);
     T0(`#${id} .wx`, { opacity: 0, scale: 0.5, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, a + 0.2);
     if (di === 0) out.push(`tl.fromTo("#${id} .sun", {rotation:0}, {rotation:90, duration:${len(a, b)}, ease:"none", immediateRender:false}, ${a.toFixed(3)});`);
     else [0, 1, 2].forEach((k) => out.push(`tl.fromTo("#${id} .drop:nth-of-type(${k + 1})", {y:-4, opacity:0}, {y:4, opacity:1, duration:0.5, ease:"none", repeat:${Math.floor(len(a, b) / 0.5) - 1}, immediateRender:false}, ${(a + k * 0.17).toFixed(3)});`));
-    T0(`#${id}-hud`, { opacity: 0, y: (P ? -4 : 4) * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, a + 0.2);
-    T0(`#${id}-race`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 2);
-    T0(`#${id}-rk`, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)' }, a + BEAT * 3);
-    const o0 = ordAt(0);
-    LEAD.forEach((x, j) => { SET(`#${id}-rr${j}`, { y: o0.indexOf(x.name) * rowH }, a); SET(`#${id}-rb${j}`, { scaleX: 0, transformOrigin: 'left center' }, a);
-      T0(`#${id}-rr${j}`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, a + BEAT * 2 + j * 0.05); });
+    T0(`#${id} .hud`, { opacity: 0, y: -3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + 0.3);
+    T0(`#${id} .bump`, { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + BEAT * 2);
+    const lop = (i, j) => (i < 3 ? 1 : D.ranks[j][FINAL10[i]] <= 10 ? 0.85 : 0.32);
+    FINAL10.forEach((_, i) => { T0(`#${id}-d${i}`, { opacity: 0, x: -2 * u }, { opacity: lop(i, 0), x: 0, duration: 0.3, ease: 'expo.out' }, a + BEAT * 2 + i * 0.05);
+      T0(`#${id}-o${i}`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, a + BEAT * 2 + i * 0.05); });
+    // kola: počítadlo, sloupec kola, linie a body jedou za taktem
     let cum = 0;
-    D.perRound.forEach((v, k) => {
-      const t = rt(k), d = BEAT * 4 - 0.05, ord = ordAt(k), prev = k ? ordAt(k - 1) : ord;
+    D.perRound.forEach((v, j) => {
+      const t = rt(j), d = BEAT * 4 - 0.05;
       CNT(`${id}-c`, cum, cum + v, t, d); cum += v;
-      T0(`#${id}-hi${k}`, { scaleY: 0 }, { scaleY: 1, duration: d, ease: 'none' }, t);
-      T0(`#${id}-ho${k}`, { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: d, ease: 'none' }, t);
-      T(`#${id}-ho${k}`, { opacity: 1 }, { opacity: 0, duration: 0.3 }, t + d);
-      SET(`#${id}-kl`, { innerText: `${k + 1}. kolo · ${di ? 'neděle' : 'sobota'}` }, t);
-      LEAD.forEach((x, j) => { const p0 = k ? cumP(x, k - 1) : 0, p1 = cumP(x, k);
-        T(`#${id}-rb${j}`, { scaleX: p0 / maxP }, { scaleX: p1 / maxP, duration: 0.6, ease: 'power2.out' }, t + BEAT * 2);
-        T(`#${id}-rr${j}`, { y: prev.indexOf(x.name) * rowH }, { y: ord.indexOf(x.name) * rowH, duration: 0.6, ease: 'power3.inOut' }, t + BEAT * 2);
-        out.push(`tl.fromTo("#${id}-rv${j}", {innerText:${p0}}, {innerText:${p1}, snap:{innerText:1}, duration:0.6, ease:"none", immediateRender:false}, ${(t + BEAT * 2).toFixed(3)});`); });
-      SET(`#${id}-rkn`, { innerText: k + 1 }, t + BEAT * 2);
-      T(`#${id}-rk`, { scale: 1.25 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' }, t + BEAT * 2);
-      T0(`#${id}-rc${k}`, { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, t + BEAT * 1.5);
-      if (k < 11) T(`#${id}-rc${k}`, { opacity: 1 }, { opacity: 0, duration: 0.25 }, rt(k + 1) + BEAT * 1.5 - 0.25);
+      SET(`#${id}-k`, { innerText: j + 1 }, t);
+      T(`#${id}-k`, { scale: 1.35 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' }, t);
+      T0(`#${id}-hi${j}`, { scaleY: 0 }, { scaleY: 1, duration: d, ease: 'none' }, t);
+      T0(`#${id}-hv${j}`, { opacity: 0, y: 1 * u }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, t + d * 0.6);
+      T(`#${id}-hc${j}`, { filter: 'brightness(2)' }, { filter: 'brightness(1)', duration: d, ease: 'power2.out' }, t);
+      if (j > 0) {
+        T(`#${id}-cr`, { attr: { width: X(j - 1) + 1.5 * u } }, { attr: { width: X(j) + 1.5 * u }, duration: d * 0.8, ease: 'power2.inOut' }, t);
+        FINAL10.forEach((n, i) => {
+          T(`#${id}-o${i}`, { left: X(j - 1), top: Y(D.ranks[j - 1][n]) }, { left: X(j), top: Y(D.ranks[j][n]), duration: d * 0.8, ease: 'power2.inOut' }, t);
+          T(`#${id}-d${i}`, { left: X(j - 1) + 1.4 * u, top: LY[j - 1][i], opacity: lop(i, j - 1) }, { left: X(j) + 1.4 * u, top: LY[j][i], opacity: lop(i, j), duration: d * 0.8, ease: 'power2.inOut' }, t);
+          if (D.ranks[j - 1][n] !== D.ranks[j][n]) SET(`#${id}-r${i}`, { innerText: `${D.ranks[j][n]}.` }, t + d * 0.4);
+        });
+      }
     });
-    // konec dne: vítěz dne zazáří
+    // závěr dne: top 3 dne
     const te = BAR(b0 + 13);
-    T(`#${id}-rr0`, { backgroundColor: 'rgba(227,30,36,0)' }, { backgroundColor: 'rgba(227,30,36,.2)', duration: 0.3, yoyo: true, repeat: 5 }, te);
-    T(`#${id}-rr1, #${id}-rr2`, { backgroundColor: 'rgba(48,66,133,0)' }, { backgroundColor: 'rgba(48,66,133,.14)', duration: 0.3, yoyo: true, repeat: 3 }, te + BEAT);
+    T(`#${id} .bump`, { opacity: 1 }, { opacity: 0.18, duration: 0.4, ease: 'power2.out' }, te - 0.1);
+    if (!P) T(`#${id} .hud`, { opacity: 1 }, { opacity: 0, y: -3 * u, duration: 0.4, ease: 'power2.in' }, te - 0.2);
+    T0(`#${id}-top`, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.7)' }, te);
+    T0(`#${id}-top .dt`, { opacity: 0, rotationX: -90, transformPerspective: 900, transformOrigin: '50% 0%' }, { opacity: 1, rotationX: 0, duration: 0.4, ease: 'back.out(1.6)', stagger: BEAT / 4 }, te + 0.15);
   };
   live(0); live(1);
 
@@ -322,16 +327,11 @@ function build(W, H, file) {
   const lhi = (id, t) => { [0, 1, 2].forEach((i) => T(`#${id}-l${i}`, { scale: 1 }, { scale: 1.06, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, t + i * BEAT * 0.5)); };
   const dayList = (di) => {
     const D = DAYS[di], id = `s-${D.k}l`, [b0, b1] = BARS[`${D.k}l`], a = BAR(b0), b = BAR(b1);
-    const S = D.top, N = S.length, half = Math.ceil(N / 2), cols = P ? [S] : [S.slice(0, half), S.slice(half)];
-    const sq = (r) => `<i class="q p${r.pts}${(r.fish || 0) >= 8 ? ' hot' : ''}">${r.fish ?? 0}</i>`;
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_breh_pruty.jpg' : 'bg_mcr26_kontrola_vysledku.jpg', a, b, { op: 0.2, id: `bg-${id}` })}${head(id, `Výsledky · Den ${di + 1}`, P ? `všech ${N} · kolo po kole` : `všech ${N} · kolo po kole · číslo = ryby v kole`, a + 0.05)}
-      <div class="qleg" id="${id}-leg"><span><i class="q p3"></i>výhra${P ? '' : ' 3 b.'}</span><span><i class="q p2"></i>remíza s rybou${P ? '' : ' 2 b.'}</span><span><i class="q p1"></i>0:0${P ? '' : ' 1 b.'}</span><span><i class="q p0"></i>prohra</span></div>
-      <div class="allw" id="${id}-w"><div class="allc" id="${id}-allc">${cols.map((c) => `<div class="allcol"><div class="ar arh"><span class="ap">#</span><span class="an">závodník</span><span class="qs">${Array.from({ length: 12 }, (_, k) => `<i>${k + 1}</i>`).join('')}</span><span class="af">ryby</span><b>body</b></div>${c.map((x) => `<div class="ar" id="${id}-ar${x.place}"><span class="ap">${x.place}</span><span class="an">${x.name}</span><span class="qs">${x.rounds.map(sq).join('')}</span><span class="af">${x.fish}</span><b>${x.points}</b></div>`).join('')}</div>`).join('')}</div></div>`);
-    pop(`#${id}-leg`, a + BEAT * 2); T0(`#${id}-w`, { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, a + BEAT * 1.5);
-    S.forEach((x, i) => T0(`#${id}-ar${x.place}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, a + BEAT * 2 + (P ? i * 0.03 : (i % half) * 0.04 + Math.floor(i / half) * 0.25)));
-    for (let k = 0; k < 12; k++) T0(`#${id} .ar:not(.arh) .q:nth-child(${k + 1})`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.5)', stagger: 0.008 }, a + BEAT * 3 + k * 0.12);
-    T(`#${id}-ar1 .q.p3, #${id}-ar2 .q.p3, #${id}-ar3 .q.p3`, { boxShadow: '0 0 0 0 rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${(0.3 * u).toFixed(1)}px rgba(227,30,36,.95)`, duration: 0.3, yoyo: true, repeat: 3 }, a + BEAT * 9);
-    if (P) { const rowH = 4.15 * u, vis = Math.floor((136 * u) / rowH) - 4; T0(`#${id}-allc`, { y: 0 }, { y: -(N - vis) * rowH, duration: len(a + BEAT * 9, b - 0.6), ease: 'sine.inOut' }, a + BEAT * 9); }
+    const mf = Math.max(...D.A.map((x) => x.fish));
+    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_breh_pruty.jpg' : 'bg_mcr26_kontrola_vysledku.jpg', a, b, { op: 0.2, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1} · celé pořadí`, `všech ${D.n} závodníků · body · ryby`, a + 0.05)}
+      ${lgrid(id, D.top.map((x, i) => lrow(id, i, `<span>${x.name}</span><em>${x.points} b</em><u>${x.fish}</u>`, x.fish / mf)), '<b>#</b><span>závodník</span><em>body</em><u>ryby</u>')}`);
+    T0(`#${id} .lgh`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 2);
+    lin(id, D.n, a + BEAT * 2); lhi(id, a + BEAT * 9);
   };
   dayList(0); dayList(1);
 
@@ -340,68 +340,28 @@ function build(W, H, file) {
     const id = 's-mcr', a = BAR(BARS.mcr[0]), b = BAR(BARS.mcr[1]), tl0 = a + BEAT * 8;
     scene(id, a, b, `${bgp('bg_mcr26_kontrola_vysledku.jpg', a, b, { op: 0.24, word: 'MČR 2026', id: 'bg-mcr' })}${head(id, 'Výsledek MČR', 'součet umístění z obou dnů · nižší vyhrává', a + 0.05)}
       <div class="rule big" id="mr-rule"><b>Den 1 + Den 2 = Σ</b><span>soutěžní řád 6.4–6.5 · při shodě rozhoduje řád</span></div>
-      ${lgrid(id, MCRALL.map((x, i) => lrow(id, i, `<span>${x.name}</span><em>${x.d1}.</em><em>${x.d2}.</em><u>${x.d1 + x.d2}</u><em class="fz">${x.f1 + x.f2}</em>`)), '<b>#</b><span>závodník</span><em>D1</em><em>D2</em><u>Σ</u><em>ryby</em>')}`);
+      ${lgrid(id, MCRALL.map((x, i) => lrow(id, i, `<span>${x.name}</span><em>${x.d1}.</em><em>${x.d2}.</em><u>${x.d1 + x.d2}</u>`)), '<b>#</b><span>závodník</span><em>D1</em><em>D2</em><u>Σ</u>')}`);
     T0('#mr-rule', { opacity: 0, scale: 0.6, rotationX: -60, transformPerspective: 900 }, { opacity: 1, scale: 1, rotationX: 0, duration: 0.6, ease: 'back.out(2)' }, a + BEAT * 2);
     T('#mr-rule', { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 }, a + BEAT * 4);
     T('#mr-rule', { opacity: 1 }, { opacity: 0, scale: 0.8, duration: 0.3, ease: 'power2.in' }, tl0 - 0.35);
     T0(`#${id} .lgh`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, tl0);
-    T0(`#${id}-lg`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, tl0 - 0.1);
     lin(id, MCRALL.length, tl0, false);
     [0, 1, 2].forEach((i) => T(`#${id}-l${i}`, { boxShadow: '0 0 0 0px rgba(255,211,107,0)' }, { boxShadow: `0 0 0 ${(0.35 * u).toFixed(1)}px rgba(255,211,107,1), 0 0 ${(2.5 * u).toFixed(0)}px rgba(255,211,107,.45)`, duration: 0.4, ease: 'power2.out' }, b - BEAT * 9 + i * BEAT));
   }
 
-  // ===================== 6b) SROVNÁNÍ DNŮ (styl Klonówiec): okvětní graf Den 1 vs Den 2 → ryby ≠ body =====================
+  // ===================== 6b) RYBY NA ZÁVODNÍKA (oba dny) =====================
   {
-    const id = 's-fpa', a = BAR(BARS.fpa[0]), b = BAR(BARS.fpa[1]), m = BAR(BARS.fpa[0] + 3);
-    const F1 = DAYS[0].perRound, F2 = DAYS[1].perRound, mx = Math.max(...F1, ...F2), T1 = DAYS[0].total, T2 = DAYS[1].total;
-    const S = P ? 76 * u : 66 * u, c = S / 2, rmax = S * 0.42, rmin = S * 0.13;
-    const pet = (k, v, w) => { const a0 = (k * 30 - 90 - w) * Math.PI / 180, a1 = (k * 30 - 90 + w) * Math.PI / 180, r = rmin + (v / mx) * (rmax - rmin);
-      return `M${(c + rmin * Math.cos(a0)).toFixed(1)},${(c + rmin * Math.sin(a0)).toFixed(1)} L${(c + r * Math.cos(a0)).toFixed(1)},${(c + r * Math.sin(a0)).toFixed(1)} A${r.toFixed(1)},${r.toFixed(1)} 0 0 1 ${(c + r * Math.cos(a1)).toFixed(1)},${(c + r * Math.sin(a1)).toFixed(1)} L${(c + rmin * Math.cos(a1)).toFixed(1)},${(c + rmin * Math.sin(a1)).toFixed(1)} A${rmin},${rmin} 0 0 0 ${(c + rmin * Math.cos(a0)).toFixed(1)},${(c + rmin * Math.sin(a0)).toFixed(1)}Z`; };
-    const lab = F1.map((_, k) => { const an = (k * 30 - 90) * Math.PI / 180, r = rmax + S * 0.05; return `<text x="${(c + r * Math.cos(an)).toFixed(1)}" y="${(c + r * Math.sin(an) + S * 0.012).toFixed(1)}" text-anchor="middle" font-size="${(S * 0.034).toFixed(1)}">${k + 1}</text>`; }).join('');
-    const rings = [100, 200, 300].map((v) => `<circle cx="${c}" cy="${c}" r="${(rmin + (v / mx) * (rmax - rmin)).toFixed(1)}" class="rg"/>`).join('');
-    const drop = Math.round((1 - T2 / T1) * 100);
-    // ryby ≠ body: top 10 podle ryb za 2 dny → místo v MČR
-    const SEL = [...MCRALL].sort((x, y) => (y.f1 + y.f2) - (x.f1 + x.f2) || x.rank - y.rank).slice(0, 10), byRank = [...SEL].sort((x, y) => x.rank - y.rank);
-    const CW = P ? 90 * u : 120 * u, CH = P ? 64 * u : 62 * u, padT = 6 * u, padB = 2 * u, lw = P ? 30 * u : 26 * u, rw = P ? 24 * u : 22 * u;
-    const xl = lw, xr = CW - rw, yy = (i) => padT + (i + 0.5) * ((CH - padT - padB) / 10), fs = (P ? 2.5 : 2.1) * u;
-    const fv = (x) => x.f1 + x.f2, fmin = Math.min(...SEL.map(fv)), fmax = Math.max(...SEL.map(fv)), sw = (v) => (0.5 + ((v - fmin) / Math.max(1, fmax - fmin)) * 1.6) * u;
-    const defs = SEL.map((x, i) => `<linearGradient id="fg${i}" gradientUnits="userSpaceOnUse" x1="${xl}" x2="${xr}" y1="0" y2="0"><stop offset="0" stop-color="#8ea2d8"/><stop offset="1" stop-color="${byRank.indexOf(x) - i > 0 ? '#e31e24' : '#304285'}"/></linearGradient>`).join('');
-    const rib = SEL.map((x, i) => { const y1 = yy(i), y2 = yy(byRank.indexOf(x)), xm = (xl + xr) / 2;
-      return `<path class="rbn" id="fr${i}" d="M${xl.toFixed(1)},${y1.toFixed(1)} C${xm.toFixed(1)},${y1.toFixed(1)} ${xm.toFixed(1)},${y2.toFixed(1)} ${xr.toFixed(1)},${y2.toFixed(1)}" stroke="url(#fg${i})" stroke-width="${sw(fv(x)).toFixed(1)}" pathLength="1"/>`; }).join('');
-    const lp = SEL.map((x, i) => `<div class="bl" id="fl${i}" style="top:${f(yy(i))}; width:${f(lw - 1.2 * u)}; font-size:${f(fs)}"><span class="bn">${short(x.name)}</span><b>${fv(x)}</b></div>`).join('');
-    const rp = byRank.map((x, j) => `<div class="br" id="fb${SEL.indexOf(x)}" style="top:${f(yy(j))}; left:${f(xr + 1.2 * u)}; font-size:${f(fs)}"><b>${x.rank}.</b><span>Σ ${x.d1 + x.d2}</span></div>`).join('');
-    const most = SEL[0], champ = MCRALL[0];
-    scene(id, a, b, `${bgp('bg_mcr26_podberak.jpg', a, b, { op: 0.22, id: 'bg-fpa' })}
-      <div id="fpa1"><div class="h2"><span>${P ? 'Den 1 vs Den 2' : 'Den 1 vs Den 2'}</span><em>ryby kolo po kole · sobota vs neděle</em></div>
-        <div class="polar" style="width:${f(S)}; height:${f(S)}"><svg viewBox="0 0 ${S.toFixed(0)} ${S.toFixed(0)}">${rings}${F1.map((v, k) => `<path id="pt1_${k}" class="pt1" d="${pet(k, v, 13)}"/>`).join('')}${F2.map((v, k) => `<path id="pt2_${k}" class="pt2" d="${pet(k, v, 8)}"/>`).join('')}${lab}</svg>
-          <div class="pc"><b id="pcv">0</b><span>neděle</span><i>sobota: ${fmt(T1)}</i></div></div>
-        <div class="cmpt"><div class="ct" id="ct0"><i class="sw1"></i><b>${fmt(T1)}</b><span>ryb · sobota</span></div><div class="ct" id="ct1"><i class="sw2"></i><b>${fmt(T2)}</b><span>ryb · neděle · déšť</span></div>
-          <div class="ct red" id="ct2"><b>−${drop} %</b><span>v neděli braly výrazně hůř</span></div></div></div>
-      <div id="fpa2"><div class="h2"><span>Ryby ≠ body</span><em>top 10 podle ryb za 2 dny → místo v MČR</em></div>
-        <div class="kbump" style="width:${f(CW)}; height:${f(CH)}"><div class="bhd" style="left:0; width:${f(lw)}">ryby · 2 dny</div><div class="bhd" style="left:${f(xr)}; width:${f(rw)}">místo MČR</div>
-          <svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}"><defs>${defs}</defs>${rib}</svg>${lp}${rp}</div>
-        <div class="snote" id="fnote"><b>${short(most.name)}: ${fv(most)} ryb → ${most.rank}. místo</b>${most.rank === 1 ? ' · nejvíc ryb i titul' : ` · ${short(champ.name)}: ${champ.f1 + champ.f2} ryb → 1. místo`}</div></div>`);
-    // 1) polární graf
-    rise('#fpa1 .h2 span', a + 0.05); pop('#fpa1 .h2 em', a + BEAT);
-    T0(`#${id} .polar`, { opacity: 0, rotation: -40, scale: 0.8 }, { opacity: 1, rotation: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, a + 0.2);
-    F1.forEach((_, k) => { T0(`#pt1_${k}`, { scale: 0, transformOrigin: `${c}px ${c}px` }, { scale: 1, duration: 0.5, ease: 'back.out(1.8)' }, a + 0.5 + k * 0.05);
-      T0(`#pt2_${k}`, { scale: 0, transformOrigin: `${c}px ${c}px` }, { scale: 1, duration: 0.45, ease: 'back.out(2.2)' }, a + BEAT * 3 + k * BEAT / 2); });
-    CNT('pcv', 0, T2, a + 0.8, 2.2);
-    [0, 1, 2].forEach((i) => pop(`#ct${i}`, a + BEAT * (2 + i * 2)));
-    out.push(`tl.fromTo("#${id} .polar svg", {rotation:0}, {rotation:12, duration:${len(a, m)}, ease:"none", transformOrigin:"50% 50%", immediateRender:false}, ${a.toFixed(3)});`);
-    T('#fpa1', { opacity: 1 }, { opacity: 0, y: -3 * u, duration: 0.35, ease: 'power2.in' }, m - 0.35);
-    // 2) ryby ≠ body
-    T0('#fpa2', { opacity: 0 }, { opacity: 1, duration: 0.01 }, m);
-    rise('#fpa2 .h2 span', m + 0.05); pop('#fpa2 .h2 em', m + BEAT);
-    T0(`#${id} .kbump`, { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, m + 0.2);
-    SEL.forEach((_, i) => { const t = m + 0.6 + i * BEAT / 2;
-      T0(`#fl${i}`, { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, t);
-      T0(`#fr${i}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, t + 0.1);
-      T0(`#fb${i}`, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, t + 0.9); });
-    const tf = m + BEAT * 9, hi = [0, SEL.findIndex((x) => x.rank === 1)].filter((v, i, z) => v >= 0 && z.indexOf(v) === i);
-    SEL.forEach((_, i) => { if (!hi.includes(i)) { T(`#fr${i}`, { opacity: 1 }, { opacity: 0.18, duration: 0.4 }, tf); T(`#fl${i}, #fb${i}`, { opacity: 1 }, { opacity: 0.35, duration: 0.4 }, tf); } });
-    hi.forEach((i) => T(`#fr${i}`, { filter: 'drop-shadow(0 0 0px rgba(227,30,36,0))' }, { filter: `drop-shadow(0 0 ${(1.2 * u).toFixed(1)}px rgba(227,30,36,.9))`, duration: 0.3, yoyo: true, repeat: 5 }, tf + 0.1));
-    pop('#fnote', tf + 0.2);
+    const id = 's-fpa', a = BAR(BARS.fpa[0]), b = BAR(BARS.fpa[1]), mt = FPA[0].t, avg = FPA.reduce((s0, x) => s0 + x.t, 0) / FPA.length;
+    scene(id, a, b, `${bgp('bg_mcr26_podberak.jpg', a, b, { op: 0.2, word: 'RYBY', id: 'bg-fpa' })}${head(id, 'Ryby na závodníka', `oba dny · Ø ${dec(avg, 1)} ryb na závodníka`, a + 0.05)}
+      <div class="fleg" id="fleg"><span><i></i>sobota</span><span><i class="n"></i>neděle</span></div>
+      ${lgrid(id, FPA.map((x, i) => `<div class="lr fr${i < 3 ? ' g' : ''}" id="${id}-l${i}"><b>${FPA.findIndex((y) => y.t === x.t) + 1}.</b><span>${short(x.name)}</span><i class="fb"><s style="width:${((x.f1 / mt) * 100).toFixed(1)}%"></s><s class="n" style="width:${((x.f2 / mt) * 100).toFixed(1)}%"></s></i><em>${x.f1}+${x.f2}</em><u>${x.t}</u></div>`), '<b>#</b><span>závodník</span><i></i><em>So+Ne</em><u>Σ</u>')}`);
+    pop('#fleg', a + BEAT * 2);
+    T0(`#${id} .lgh`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 2);
+    FPA.forEach((_, i) => { const t = a + BEAT * 2 + i * 0.04;
+      T0(`#${id}-l${i}`, { opacity: 0, x: -2 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, t);
+      T0(`#${id}-l${i} .fb s:first-child`, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t + 0.1);
+      T0(`#${id}-l${i} .fb s.n`, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t + 0.5); });
+    lhi(id, a + BEAT * 10);
   }
 
   // ===================== 7) STUPNĚ VÍTĚZŮ + kde vyhrávali =====================
@@ -456,7 +416,7 @@ function build(W, H, file) {
   // ===================== 8) MISTR TROUT AREA ČR: 6 nejlepších z 8 =====================
   {
     const id = 's-sez', a = BAR(BARS.sez[0]), b = BAR(BARS.sez[1]);
-    const tStrike = BAR(BARS.sez[0] + 3), tSort = BAR(BARS.sez[0] + 4) + BEAT * 2, tFin = BAR(BARS.sez[0] + 6) + BEAT * 2;
+    const tStrike = BAR(BARS.sez[0] + 3) + BEAT * 2, tSort = BAR(BARS.sez[0] + 5) + BEAT * 2, tFin = BAR(BARS.sez[0] + 7) + BEAT * 2;
     const N = SEZ.length, rowH = P ? 7 * u : 6 * u;
     const yAll = (r) => ALL10.indexOf(r.name) >= 0 ? ALL10.indexOf(r.name) : 10 + B6TOP.indexOf(r.name);
     const yB6 = (r) => B6TOP.indexOf(r.name) >= 0 ? B6TOP.indexOf(r.name) : 10 + ALL10.indexOf(r.name);
@@ -504,15 +464,10 @@ function build(W, H, file) {
 
   // ===================== 9) PARTNEŘI (bez textu) =====================
   {
-    const id = 's-end', a0 = BAR(BARS.end[0]), a = a0 + BEAT * 6, b = DUR;
-    scene(id, a0, b, `<div class="fin" id="fin"><div class="fv"><b id="fin-n">0</b><span>ryb za 2 dny · Mistrovství ČR 2026</span></div>
-      <div class="fsp"><span><b>${fmt(DAYS[0].total)}</b> sobota</span><span><b>${fmt(DAYS[1].total)}</b> neděle</span><span><b>39</b> závodníků</span></div><div class="fz"><span>Díky, Liběchov · fair play!</span></div></div>
-      <div class="pgw"><div class="pg">${PARTNERS.map((k, i) => `<div class="pl" id="pl${i}"><img src="assets/logos/light/${k}.png" alt=""></div>`).join('')}</div></div>
+    const id = 's-end', a = BAR(BARS.end[0]), b = DUR;
+    scene(id, a, b, `<div class="pgw"><div class="pg">${PARTNERS.map((k, i) => `<div class="pl" id="pl${i}"><img src="assets/logos/light/${k}.png" alt=""></div>`).join('')}</div></div>
       <div class="tap end" id="tap-end"><img src="assets/ta_logo.png" alt="Trout Area Czech Republic"></div>
       <div class="ghm" id="gh-end"><span class="by">made by</span><span class="gear"><img class="ring" src="assets/gh/ring.png" alt=""><img class="core" src="assets/gh/core.png" alt=""></span><img class="wl2" src="assets/gh/word-line.png" alt="Gausse Holler"></div>`);
-    CNT('fin-n', 0, DAYS[0].total + DAYS[1].total, a0 + 0.2, 1.8);
-    pop('#fin .fv', a0 + 0.05); pop('#fin .fsp', a0 + BEAT * 2); pop('#fin .fz', a0 + BEAT * 3);
-    T('#fin', { opacity: 1 }, { opacity: 0, scale: 0.94, duration: 0.3, ease: 'power2.in' }, a - 0.3);
     PARTNERS.forEach((_, i) => { const t = a + 0.05 + i * BEAT * 0.5, ang = rnd(i + 3) * 16 - 8;
       T0(`#pl${i}`, { opacity: 0, scale: 0.4, rotation: ang, y: (rnd(i) - 0.5) * 20 * u }, { opacity: 1, scale: 1, rotation: 0, y: 0, duration: 0.55, ease: 'back.out(1.8)' }, t); });
     G.beats.filter((t) => t > a + BEAT * 5 && t < b - BEAT * 4).forEach((t, k) => T(`#pl${k % 9}`, { scale: 1.12 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, t));
@@ -532,16 +487,17 @@ function build(W, H, file) {
     out.push(`tl.fromTo(${JSON.stringify(sel)}, {scale:${sc}}, {scale:1, duration:0.25, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`));
   ['d1', 'd2'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k];
     punch(`#${id}-c`, BAR(b0 + 1), BAR(b0 + 13), 1, 1.07);                                           // počítadlo ryb na každou dobu
+    padRun((j) => `#${id}-hc${j}`, 12, BAR(b0 + 1), BAR(b0 + 13), 1.9, 0.2);                        // běžící světlo po sloupcích kol
     eq((j) => `#${id}-hi${j}`, 12, BAR(b0 + 13), BAR(b1), 0.4);                                     // po dni: sloupce kol hrají
-    padRun((j) => `#${id}-rr${j}`, 10, BAR(b0 + 13), BAR(b1), 1.15, 0.25); });
+    padRun((j) => `#${id}-top .dt:nth-child(${j + 1})`, 10, BAR(b0 + 13) + 1.6, BAR(b1), 1.25, 0.25); });
   ['d1s', 'd2s'].forEach((k) => { const id = `s-${k}`, [b0, b1] = BARS[k], a = BAR(b0 + 3) + BEAT * 2, b = BAR(b1);   // sektory: světlo běží přes 20 dlaždic + úder na dobu
     padRun((j) => `#${id}-h${j + 1}`, 20, a, b, 1.6, 0.24);
     beatsIn(a, b).forEach((t, i) => out.push(`tl.fromTo("#${id}-h${(i % 20) + 1}", {scale:0.92}, {scale:1, duration:0.2, ease:"back.out(3)", immediateRender:false}, ${t.toFixed(3)});`));
     padRun((j) => `#${id}-pb${j + 1}`, 40, BAR(b0 + 3) + BEAT * 5, b, 2.2, 0.18); });
   // celé pořadí: světlo běží po řádcích na každou dobu
-  ['d1l', 'd2l'].forEach((k) => padRun((j) => `#s-${k} .ar:not(.arh) .q:nth-child(${j + 1})`, 12, BAR(BARS[k][0]) + BEAT * 6.5, BAR(BARS[k][1]), 1.8, 0.22));   // světlo jede po kolech
+  ['d1l', 'd2l'].forEach((k) => padRun((j) => `#s-${k}-l${j}`, 39, BAR(BARS[k][0]) + BEAT * 6, BAR(BARS[k][1]), 1.35, 0.25));
   padRun((j) => `#s-mcr-l${j}`, 39, BAR(BARS.mcr[0]) + BEAT * 14, BAR(BARS.mcr[1]), 1.35, 0.25);
-  padRun((k) => `#pt2_${k}`, 12, BAR(BARS.fpa[0]) + BEAT * 9.5, BAR(BARS.fpa[0] + 3) - 0.4, 1.7, 0.24);   // okvětní lístky bijí jako pady
+  padRun((j) => `#s-fpa-l${j}`, 39, BAR(BARS.fpa[0]) + BEAT * 8, BAR(BARS.fpa[1]), 1.6, 0.25);
   padRun((j) => `#sm .smh .sc:nth-of-type(${j + 3})`, 8, BAR(BARS.sez[0]) + BEAT * 9, BAR(BARS.sez[0] + 3), 2.2, 0.2);
   // nadpisy dostanou úder na každý takt (silnější každé 4 takty)
   G.downbeats.forEach((t, i) => { if (t < 0.3 || t > DUR - 0.3) return; const big = i % 4 === 0;
@@ -560,21 +516,19 @@ function build(W, H, file) {
     if (big) out.push(`tl.fromTo("#stage", {scale:1.03}, {scale:1, duration:0.5, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`); });
   G.beats.forEach((t) => { if (t < 0.3 || t > DUR - 0.3) return; out.push(`tl.fromTo("#st-rays", {opacity:.3}, {opacity:.14, duration:0.3, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`); });
   out.push(`tl.fromTo("#st-rays", {rotation:0}, {rotation:40, duration:${DUR}, ease:"none"}, 0);`);
-  // pozadí jako v Klonówiec: tah štětcem v barvách vlajky ČR + blikající hvězdy
-  const STARS = Array.from({ length: 24 }, (_, i) => ({ x: rnd(i * 3 + 1) * 100, y: rnd(i * 5 + 2) * 80 + 4, s: 0.6 + rnd(i * 7) * 1.6, p: rnd(i * 11) * 2.2 }));
-  STARS.forEach((st, i) => { const per = 1.6 + rnd(i * 13) * 1.4, rep = Math.floor((DUR - st.p) / per) - 1; out.push(`tl.fromTo("#star${i}", {scale:0, opacity:0}, {scale:1, opacity:1, duration:${(per / 2).toFixed(2)}, ease:"sine.inOut", repeat:${rep * 2 + 1}, yoyo:true}, ${st.p.toFixed(2)});`); });
-  G.downbeats.forEach((t) => out.push(`tl.fromTo("#st-band", {scale:1.02}, {scale:1, duration:0.4, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`));
-  out.push(`tl.fromTo("#st-band", {xPercent:-2}, {xPercent:2, duration:${(DUR / 4).toFixed(2)}, ease:"sine.inOut", yoyo:true, repeat:3}, 0);`);
+  // pomalu plující barevné skvrny (mesh gradient) a stoupající částice (bublinky)
+  [[0, '#2a5bd6', -20, 10], [1, '#e31e24', 25, -15], [2, '#1aa0c8', -10, 25]].forEach(([k, , dx, dy]) =>
+    out.push(`tl.fromTo("#blob${k}", {xPercent:0, yPercent:0}, {xPercent:${dx}, yPercent:${dy}, duration:${(DUR / 4).toFixed(2)}, ease:"sine.inOut", yoyo:true, repeat:3}, 0);`));
+  for (let i = 0; i < 34; i++) { const per = 9 + rnd(i * 5) * 9, st = rnd(i * 11) * per * 0.6, rep = Math.ceil((DUR - st) / per);
+    out.push(`tl.fromTo("#pt${i}", {y:${H * 1.05}, x:0, opacity:0}, {y:${-H * 0.08}, x:${((rnd(i) - 0.5) * 8 * u).toFixed(1)}, opacity:${(0.25 + rnd(i * 13) * 0.4).toFixed(2)}, duration:${per.toFixed(2)}, ease:"none", repeat:${rep}}, ${st.toFixed(2)});`); }
   // paprsky jen v intru, na stupních, u šampiona a na konci; v datových scénách tlumené + vinětace
   const calm = (t, on) => { T('#rays-w', { opacity: on ? 1 : 0.3 }, { opacity: on ? 0.3 : 1, duration: 0.5 }, t); T('#vig', { opacity: on ? 0 : 1 }, { opacity: on ? 1 : 0, duration: 0.5 }, t); };
   SET('#vig', { opacity: 0 }, 0);
-  calm(BAR(BARS.d1[0]), true); calm(BAR(BARS.pod[0]), false); calm(BAR(BARS.sez[0]), true); calm(BAR(BARS.sez[0] + 6) + BEAT * 2, false);
+  calm(BAR(BARS.d1[0]), true); calm(BAR(BARS.pod[0]), false); calm(BAR(BARS.sez[0]), true); calm(BAR(BARS.sez[0] + 7) + BEAT * 2, false);
   // malý TA logo v rohu (mimo intro a konec)
   T0('#corner', { opacity: 0 }, { opacity: 0.9, duration: 0.5 }, BAR(BARS.d1[0]));
   T('#corner', { opacity: 0.9 }, { opacity: 0, duration: 0.4 }, BAR(BARS.end[0]) - 0.4);
 
-  const brush = (yc, th, seed) => { const n = 26, p1 = [], p2 = []; for (let i = 0; i <= n; i++) { const x = -10 + (120 * i) / n; p1.push(`${x.toFixed(1)},${(yc - th / 2 + (rnd(seed + i) - 0.5) * th * 0.35).toFixed(1)}`); p2.unshift(`${x.toFixed(1)},${(yc + th / 2 + (rnd(seed + 50 + i) - 0.5) * th * 0.35).toFixed(1)}`); } return p1.concat(p2).join(' '); };
-  const BAND = `<svg class="band" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="${brush(46, 12, 1)}" fill="#ffffff" opacity=".92"/><polygon points="${brush(58, 12, 2)}" fill="#d7141a" opacity=".95"/><polygon points="-10,38 22,52 -10,66" fill="#11457e"/></svg>`;
   // vložit kruhy výher do SVG rybníka
   let html = scenes.join('\n  ');
   scenesExtra.forEach(({ svg, html: h }) => { html = html.replace(new RegExp(`(<svg class="pond" id="${svg}"[^>]*>)`), `$1${h}`); });
@@ -598,10 +552,7 @@ function build(W, H, file) {
   #rays-w { position:absolute; inset:0; }
   .blob { position:absolute; width:${px(P ? 110 : 80)}; height:${px(P ? 110 : 80)}; border-radius:50%; filter:blur(${px(9)}); opacity:.35; }
   #blob0 { left:-15%; top:-10%; background:radial-gradient(circle, #2a5bd6 0%, transparent 65%); } #blob1 { right:-20%; bottom:-15%; background:radial-gradient(circle, rgba(227,30,36,.75) 0%, transparent 65%); opacity:.22; } #blob2 { left:30%; top:40%; background:radial-gradient(circle, #1aa0c8 0%, transparent 65%); opacity:.18; }
-  .band { position:absolute; left:${px(-10)}; width:calc(100% + ${px(20)}); top:${P ? '10%' : '0%'}; height:${P ? '70%' : '100%'}; }
-  #st-band { position:absolute; inset:0; rotate:${P ? -24 : -12}deg; opacity:.32; }
-  .star { position:absolute; background:#fff; clip-path:polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); box-shadow:0 0 ${px(1)} #fff; opacity:0; }
-  #parts { display:none; } #parts i { position:absolute; top:0; border-radius:50%; background:radial-gradient(circle, rgba(220,236,255,.95), rgba(220,236,255,0) 70%); opacity:0; }
+  #parts { position:absolute; inset:0; pointer-events:none; z-index:1; } #parts i { position:absolute; top:0; border-radius:50%; background:radial-gradient(circle, rgba(220,236,255,.95), rgba(220,236,255,0) 70%); opacity:0; }
   .bgp { position:absolute; inset:-4%; background-size:cover; background-position:50% 40%; filter:grayscale(.15) saturate(.95) brightness(.82) contrast(1.06); opacity:0; }
   .bgo { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,13,34,.45) 0%, rgba(11,30,66,.2) 45%, rgba(5,13,34,.6) 100%); mix-blend-mode:multiply; }
   .bgw { position:absolute; left:0; ${P ? `top:${px(150)}` : `bottom:${px(-4)}`}; white-space:nowrap; font:900 ${px(P ? 30 : 24)} Montserrat; text-transform:uppercase; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:${px(0.22)} rgba(238,242,249,.10); }
@@ -642,38 +593,38 @@ function build(W, H, file) {
   .pond text { font:800 15px Montserrat; fill:#fff; }
   .pond .wd { transform-box:fill-box; }
 
-  /* živý den (styl Klonówiec) */
-  .wx { position:absolute; ${P ? `right:${f(SAFE.r)}; top:${f(SAFE.t)}` : `right:${px(22)}; top:${f(SAFE.t)}`}; width:${px(P ? 12 : 9)}; height:${px(P ? 12 : 9)}; overflow:visible; }
+  /* živý den */
+  .wx { position:absolute; ${P ? `right:${f(SAFE.r)}; top:${f(SAFE.t)}` : `left:${px(36)}; top:${f(SAFE.t)}`}; width:${px(P ? 12 : 9)}; height:${px(P ? 12 : 9)}; overflow:visible; }
   .wx.sun circle { fill:var(--gold); } .wx.sun line { stroke:var(--gold); stroke-width:3; stroke-linecap:round; } .wx.sun { transform-origin:center; }
   .wx.rain path { fill:#cfd8ee; } .wx.rain line { stroke:#7fb2ff; stroke-width:2.6; stroke-linecap:round; }
-  .kph { position:absolute; inset:0; background-size:cover; background-position:50% 35%; opacity:0; }
-  .kdim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,13,34,.55) 0%, rgba(5,13,34,.35) 40%, rgba(5,13,34,.75) 100%); }
-  .race { position:absolute; left:${f(SAFE.l)}; ${P ? `right:${f(SAFE.r)}; top:${px(31)}` : `width:${px(104)}; top:${f(SAFE.t + 15 * u)}`}; opacity:0; }
-  .race::before { content:''; position:absolute; left:${px(-2)}; right:${px(-2)}; top:${px(-1.6)}; bottom:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(2)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); }
-  .rr { position:absolute; left:0; right:0; top:0; height:${px(P ? 5.2 : 4.4)}; display:grid; grid-template-columns:${px(P ? 24 : 20)} 1fr ${px(P ? 6 : 5)}; align-items:center; gap:${px(1.4)}; border-radius:${px(1)}; padding:0 ${px(1)}; color:#0b1e42; font-family:Montserrat; }
-  .rn { font-weight:800; font-size:${px(P ? 2.8 : 2.4)}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .rb { overflow:hidden; } .rb i { display:block; height:${px(P ? 3.4 : 2.9)}; border-radius:0 ${px(1)} ${px(1)} 0; }
-  .rr b { font-weight:900; font-size:${px(P ? 3.6 : 3)}; text-align:right; }
-  .rk { position:absolute; ${P ? `right:${f(SAFE.r)}; top:${px(91)}` : `left:${px(114)}; top:${f(SAFE.t + 14 * u)}`}; text-align:${P ? 'right' : 'left'}; font-family:Montserrat; opacity:0; transform-origin:${P ? 'right' : 'left'} center; }
-  .rk span { display:block; font-weight:900; font-size:${px(P ? 10 : 12)}; line-height:1; color:var(--red); } .rk em { font-style:normal; font-weight:700; font-size:${px(P ? 2.2 : 2)}; letter-spacing:.2em; text-transform:uppercase; }
-  .rcw { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(108)}; height:${px(24)}` : `left:${px(114)}; right:${f(SAFE.r)}; top:${f(SAFE.t + 32 * u)}; height:${px(22)}`}; }
-  .rc { position:absolute; left:0; right:0; top:0; background:rgba(238,242,249,.96); color:#0b1e42; border-left:${px(0.9)} solid var(--red); border-radius:${px(1.6)}; padding:${px(1.8)} ${px(2.6)}; opacity:0; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); font-family:Montserrat; }
-  .rc-n span { display:inline-block; font-weight:800; font-size:${px(P ? 2.8 : 2.3)}; letter-spacing:.14em; text-transform:uppercase; color:var(--red); }
-  .rc-f { display:flex; align-items:baseline; gap:${px(1.6)}; margin-top:${px(0.4)}; } .rc-f b { font-weight:900; font-size:${px(P ? 9 : 7.5)}; line-height:1; } .rc-f span { font-weight:700; font-size:${px(P ? 2.6 : 2.2)}; color:#304285; }
-  .rc-b { font-weight:600; font-size:${px(P ? 2.4 : 2)}; margin-top:${px(0.6)}; } .rc-b b { font-weight:800; color:#304285; }
-  .khud { position:absolute; left:${px(5)}; right:${px(5)}; bottom:${px(P ? 4 : 2.6)}; height:${px(P ? 26 : 11)}; display:grid; box-sizing:border-box;
-    grid-template-columns:${P ? '1fr 1fr' : `${px(26)} ${px(40)} 1fr`}; grid-template-rows:${P ? 'auto 1fr' : '1fr'}; gap:${px(P ? 1.6 : 2)} ${px(3)}; align-items:${P ? 'start' : 'center'};
-    background:rgba(5,13,34,.82); border-radius:${px(2)}; padding:${px(P ? 2.4 : 1.6)} ${px(3)}; border:${px(0.2)} solid rgba(238,242,249,.12); font-family:Montserrat; opacity:0; }
-  .khud .hc b { display:block; font-weight:900; font-size:${px(P ? 6.5 : 5)}; line-height:1; text-transform:uppercase; }
-  .khud .hc span { display:block; font-weight:700; font-size:${px(P ? 2.3 : 1.7)}; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-top:${px(0.6)}; white-space:nowrap; }
-  .khud .hn { text-align:right; } .khud .hn b { display:inline-block; font-weight:900; font-size:${px(P ? 8 : 6.4)}; line-height:1; color:var(--red); transform-origin:right center; }
-  .khud .hn span { display:block; font-weight:600; font-size:${px(P ? 2 : 1.5)}; letter-spacing:.1em; text-transform:uppercase; margin-top:${px(0.5)}; }
-  .khud .hr { ${P ? 'grid-column:1 / span 2;' : 'grid-column:3; grid-row:1;'} display:flex; align-items:flex-end; gap:${px(P ? 1 : 0.8)}; height:100%; padding-bottom:${px(2.4)}; box-sizing:border-box; }
-  .khud .hcol { position:relative; flex:1; height:100%; display:flex; flex-direction:column; justify-content:flex-end; }
-  .khud .hcol i, .khud .hcol .hon { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(180deg, #6d8ff0, var(--blue)); border-radius:${px(0.5)} ${px(0.5)} 0 0; transform-origin:bottom; transform:scaleY(0); }
-  .khud .hcol .hon { background:linear-gradient(180deg, #ff6b6f, var(--red)); box-shadow:0 0 ${px(1.4)} rgba(227,30,36,.8); opacity:0; }
-  .khud .hcol s { position:absolute; left:0; right:0; bottom:0; border:${px(0.18)} dashed rgba(238,242,249,.5); border-bottom:0; border-radius:${px(0.5)} ${px(0.5)} 0 0; }
-  .khud .hcol em { position:absolute; left:0; right:0; bottom:${px(-2.4)}; text-align:center; font-style:normal; font-weight:700; font-size:${px(P ? 1.6 : 1.3)}; opacity:.7; }
+  .hud { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(30)}; height:${px(19)}` : `right:${f(SAFE.r)}; top:${px(19)}; width:${px(54)}; height:${px(52)}; flex-direction:column`}; display:flex; gap:${px(2.4)}; align-items:stretch; }
+  .hf { background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(1.6)}; padding:${px(1.4)} ${px(2.4)}; font-family:Montserrat; display:flex; flex-direction:column; justify-content:center; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); ${P ? `width:${px(36)}` : ''} }
+  .hf .hk { font-weight:800; font-size:${px(2.2)}; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); } .hf .hk b { display:inline-block; font-weight:900; color:var(--red); font-size:${px(3.2)}; min-width:${px(3.6)}; text-align:center; }
+  .hf > b { font-weight:900; font-size:${px(P ? 9 : 8.5)}; line-height:1; color:var(--red); } .hf > span { font-weight:800; font-size:${px(1.9)}; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); }
+  .hrw { flex:1; display:flex; flex-direction:column; } .hrl { font:800 ${px(1.7)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:var(--lb); margin-bottom:${px(2.6)}; } .hrl s { display:inline-block; width:${px(1.6)}; height:${px(1.2)}; border:${px(0.2)} dashed rgba(238,242,249,.7); vertical-align:middle; }
+  .hv { position:absolute; left:-50%; right:-50%; text-align:center; text-decoration:none; font:900 ${px(1.6)} Montserrat; color:#fff; margin-bottom:${px(0.4)}; opacity:0; }
+  .hr { flex:1; display:flex; gap:${px(0.6)}; align-items:flex-end; padding-bottom:${px(2.4)}; position:relative; ${P ? '' : `min-height:${px(18)}`} }
+  .hcol { flex:1; height:100%; position:relative; display:flex; align-items:flex-end; }
+  .hcol i { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(0deg, var(--red), #ff6b6f); border-radius:${px(0.5)} ${px(0.5)} 0 0; transform-origin:bottom; transform:scaleY(0); }
+  .hcol s { position:absolute; left:0; right:0; bottom:0; border:${px(0.2)} dashed rgba(238,242,249,.55); border-bottom:0; border-radius:${px(0.5)} ${px(0.5)} 0 0; }
+  .hcol em { position:absolute; bottom:${px(-2.4)}; left:0; right:0; text-align:center; font:700 ${px(1.4)} Montserrat; font-style:normal; color:var(--lb); }
+  .bump { position:absolute; ${P ? `left:${f(SAFE.l)}; top:${px(52)}` : `left:${f(SAFE.l)}; top:${f(SAFE.t + 15 * u)}`}; }
+  .bump svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .bump polyline { fill:none; stroke-linecap:round; stroke-linejoin:round; opacity:.28; } .bump polyline.hi { opacity:1; filter:drop-shadow(0 0 ${px(0.6)} rgba(0,0,0,.6)); }
+  .bump .gl { stroke:rgba(142,162,216,.25); stroke-width:1; } .bump text { fill:var(--lb); font:700 ${px(1.5)} Montserrat; } .bump .kx { fill:rgba(142,162,216,.8); }
+  .bump .t10 { fill:rgba(255,211,107,.08); stroke:rgba(255,211,107,.35); stroke-dasharray:6 6; } .bump .t10l { fill:var(--gold); font:800 ${px(1.5)} Montserrat; letter-spacing:.15em; }
+  .bd { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(0.8)}; white-space:nowrap; font-family:Montserrat; font-size:${px(P ? 2 : 1.8)}; }
+  .bd span { font-weight:700; } .bd b { font-weight:900; color:var(--gold); }
+  .bd.hi { font-size:${px(P ? 2.7 : 2.5)}; } .bd.hi span { font-weight:900; } .bd.hi b { color:#fff; }
+  .bdot { position:absolute; width:${px(1.2)}; height:${px(1.2)}; margin:${px(-0.6)} 0 0 ${px(-0.6)}; border-radius:50%; box-shadow:0 0 0 ${px(0.25)} rgba(5,13,34,.8); }
+  .bdot.hi { width:${px(2)}; height:${px(2)}; margin:${px(-1)} 0 0 ${px(-1)}; box-shadow:0 0 0 ${px(0.3)} #fff, 0 0 ${px(1.5)} rgba(255,255,255,.6); }
+  .bcap { position:absolute; left:0; bottom:${px(-3.6)}; font:700 ${px(1.5)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:var(--lb); }
+  .dtop { position:absolute; left:50%; top:${P ? '56%' : '56%'}; transform:translate(-50%,-50%); width:${px(P ? 88 : 150)}; display:flex; flex-direction:column; gap:${px(1)}; opacity:0; z-index:3; }
+  .dtg { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; grid-auto-flow:${P ? 'row' : 'column'}; grid-template-rows:${P ? 'none' : 'repeat(5, auto)'}; gap:${px(1)} ${px(1.6)}; }
+  .dth { font:900 ${px(P ? 3.2 : 3)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:${px(0.6)}; }
+  .dt { display:grid; grid-template-columns:${px(5.5)} 1fr auto; align-items:center; gap:${px(1.4)}; background:rgba(238,242,249,.97); color:var(--navy); border-radius:${px(1.2)}; padding:${px(P ? 0.9 : 1)} ${px(1.8)}; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.4); }
+  .dt b { font-weight:900; font-size:${px(P ? 3 : 3.2)}; color:var(--red); } .dt span { font-weight:900; font-size:${px(P ? 2.7 : 2.8)}; } .dt em { font-style:normal; font-weight:800; font-size:${px(P ? 2 : 2.1)}; color:var(--blue); }
+  .dt.t3 { box-shadow:0 0 0 ${px(0.35)} var(--gold), 0 ${px(0.8)} ${px(3)} rgba(0,0,0,.4); }
 
   /* statistika dne */
   .p3w { position:absolute; ${P ? `left:0; right:0; top:${px(24)}; height:${px(80)}` : `left:${f(SAFE.l - 2 * u)}; top:${f(SAFE.t + 8 * u)}; width:${px(100)}; height:${px(84)}`}; perspective:${px(160)}; perspective-origin:50% 40%; display:flex; align-items:center; justify-content:center; }
@@ -788,31 +739,6 @@ function build(W, H, file) {
   .pleg i { display:inline-flex; align-items:center; justify-content:center; width:${px(1.9)}; height:${px(1.9)}; border-radius:50%; box-sizing:border-box; }
   .pleg .lw { background:var(--c); } .pleg .lw svg { width:70%; height:70%; fill:#0b1e42; } .pleg .ld { border:${px(0.4)} solid var(--c); } .pleg .ll { width:${px(1)}; height:${px(1)}; background:rgba(238,242,249,.55); }
   .pleg .l1 { background:var(--c); } .pleg .l2 { background:#fff; box-shadow:inset 0 0 0 ${px(0.4)} var(--c); }
-  /* srovnání dnů + ryby ≠ body (styl Klonówiec) */
-  #fpa2 { opacity:0; }
-  .polar { position:absolute; ${P ? `left:50%; margin-left:${px(-38)}; top:${px(36)};` : `left:${px(16)}; top:${f(SAFE.t + 13 * u)};`} }
-  .polar::before { content:''; position:absolute; inset:${px(-1)}; border-radius:50%; background:radial-gradient(circle, rgba(238,242,249,.96) 0 58%, rgba(238,242,249,0) 72%); }
-  .polar svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-  .polar .rg { fill:none; stroke:rgba(11,30,66,.12); stroke-width:${px(0.15)}; } .polar text { fill:#304285; font-family:Montserrat; font-weight:800; }
-  .polar .pt1 { fill:#c9d3ee; stroke:#8ea2d8; stroke-width:${px(0.12)}; } .polar .pt2 { fill:#304285; } .polar .pt2:first-of-type { fill:var(--red); }
-  .polar .pc { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; font-family:Montserrat; color:#0b1e42; }
-  .polar .pc b { display:block; font-weight:900; font-size:${px(P ? 7 : 5.4)}; line-height:1; color:var(--red); } .polar .pc span { display:block; font-weight:800; font-size:${px(P ? 2.2 : 1.7)}; letter-spacing:.12em; text-transform:uppercase; }
-  .polar .pc i { display:block; font-style:normal; font-weight:600; font-size:${px(P ? 2 : 1.5)}; opacity:.7; margin-top:${px(0.4)}; }
-  .cmpt { position:absolute; ${P ? `left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${px(122)}; display:grid; grid-template-columns:1fr 1fr 1fr; gap:${px(1.6)};` : `right:${px(8)}; width:${px(50)}; top:${f(SAFE.t + 18 * u)}; display:flex; flex-direction:column; gap:${px(1.8)};`} }
-  .ct { background:rgba(238,242,249,.96); border-radius:${px(1.6)}; padding:${px(1.8)} ${px(2.2)}; color:#0b1e42; font-family:Montserrat; box-shadow:0 ${px(0.8)} ${px(3)} rgba(0,0,0,.3); position:relative; opacity:0; }
-  .ct b { display:block; font-weight:900; font-size:${px(P ? 5.4 : 5.4)}; line-height:1; } .ct span { display:block; font-weight:700; font-size:${px(P ? 1.8 : 1.8)}; letter-spacing:.06em; text-transform:uppercase; color:#304285; margin-top:${px(0.5)}; }
-  .ct.red b { color:var(--red); } .ct i { position:absolute; right:${px(1.4)}; top:${px(1.4)}; width:${px(2)}; height:${px(2)}; border-radius:${px(0.4)}; } .ct .sw1 { background:#c9d3ee; border:${px(0.15)} solid #8ea2d8; } .ct .sw2 { background:#304285; }
-  .kbump { position:absolute; left:${P ? px(5) : f(SAFE.l + 1.6 * u)}; top:${P ? px(38) : f(SAFE.t + 15 * u)}; opacity:0; }
-  .kbump::before { content:''; position:absolute; inset:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(2.2)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); }
-  .kbump svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; } .kbump .rbn { fill:none; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
-  .bhd { position:absolute; top:${px(1)}; font:700 ${px(P ? 2 : 1.6)} Montserrat; letter-spacing:.14em; text-transform:uppercase; color:#8ea2d8; text-align:center; }
-  .kbump .bl { position:absolute; left:0; transform:translateY(-50%); display:flex; justify-content:space-between; align-items:center; gap:${px(1)}; font-family:Montserrat; color:#0b1e42; padding:0 ${px(1)}; box-sizing:border-box; }
-  .kbump .bl .bn { font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .kbump .bl b { font-weight:900; background:#dfe5f1; border-radius:${px(1)}; padding:${px(0.2)} ${px(0.9)}; }
-  .kbump .br { position:absolute; transform:translateY(-50%); display:flex; align-items:center; gap:${px(1)}; font-family:Montserrat; color:#0b1e42; transform-origin:left center; }
-  .kbump .br b { font-weight:900; color:#fff; background:#304285; border-radius:${px(1)}; padding:${px(0.2)} ${px(0.9)}; min-width:${px(P ? 4.6 : 3.6)}; text-align:center; } .kbump .br span { font-weight:700; opacity:.75; }
-  .snote { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(110) : px(84)}; font:600 ${px(P ? 3 : 2.5)} Montserrat; text-shadow:0 ${px(0.3)} ${px(1.4)} rgba(0,0,0,.8); opacity:0; }
-  .snote b { font-weight:900; color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
-
   /* sektory (styl Klonówiec) */
   .heat { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(37) : f(SAFE.t + 13 * u)}; display:grid; grid-template-columns:repeat(${P ? 4 : 10}, 1fr); gap:${px(P ? 1.4 : 1)}; }
   .bank { grid-column:1 / -1; font:800 ${px(1.5)} Montserrat; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); opacity:0; } .bank.b2 { margin-top:${px(0.2)}; }
@@ -828,47 +754,23 @@ function build(W, H, file) {
   .hnote b { font-weight:900; color:#fff; background:var(--red); padding:0 ${px(0.8)}; border-radius:${px(0.5)}; text-shadow:none; }
   #s-d1s .tiles2, #s-d2s .tiles2 { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(155) : px(76)}; grid-template-columns:repeat(4, 1fr); }
 
-  /* výsledky dne: matice 12 kol (styl Klonówiec) */
-  .allw { position:absolute; left:${f(SAFE.l - 1 * u)}; right:${f(SAFE.r - 1 * u)}; top:${P ? px(36) : f(SAFE.t + 16 * u)}; bottom:${P ? px(6) : f(SAFE.b - 1 * u)}; overflow:hidden; background:rgba(238,242,249,.96); color:#0b1e42; border-radius:${px(1.6)}; padding:${px(0.8)} ${px(1.6)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); opacity:0; ${P ? '-webkit-mask-image:linear-gradient(180deg, #000 88%, transparent 100%);' : ''} }
-  .allc { display:grid; grid-template-columns:${P ? '1fr' : '1fr 1fr'}; gap:0 ${px(3)}; }
-  .ar { display:grid; grid-template-columns:${px(P ? 4.4 : 3)} ${px(P ? 24 : 17)} 1fr ${px(P ? 5 : 3.6)} ${px(P ? 5 : 3.6)}; align-items:center; gap:${px(1)}; height:${px(P ? 4.15 : 3.4)}; border-bottom:${px(0.1)} solid rgba(11,30,66,.07); font-family:Montserrat; }
-  .ar.arh { height:${px(P ? 3 : 2.4)}; } .ar.arh * { font-weight:800 !important; font-size:${px(P ? 1.4 : 1.1)} !important; letter-spacing:.1em; text-transform:uppercase; color:#8ea2d8 !important; } .ar.arh .qs i { text-align:center; font-style:normal; }
-  .ap { font-weight:900; font-size:${px(P ? 2.3 : 1.8)}; color:#304285; text-align:right; } .an { font-weight:700; font-size:${px(P ? 2.2 : 1.8)}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .qs { display:grid; grid-template-columns:repeat(12, 1fr); gap:${px(0.35)}; }
-  .q { display:flex; align-items:center; justify-content:center; aspect-ratio:1; max-height:${px(P ? 3.5 : 2.6)}; border-radius:${px(0.5)}; font-style:normal; font-weight:800; font-size:${px(P ? 1.7 : 1.3)}; color:#06142e; }
-  .q.hot { box-shadow:inset 0 0 0 ${px(0.18)} rgba(255,255,255,.6); }
-  .q.p3 { background:#304285; color:#eef2f9; } .q.p2 { background:#8ea2d8; color:#0b1e42; } .q.p1 { background:#dfe5f1; color:#0b1e42; } .q.p0 { background:#e31e24; color:#fff; }
-  .qleg { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? px(31.5) : f(SAFE.t + 12.4 * u)}; display:flex; gap:${px(P ? 2 : 3)}; font:600 ${px(P ? 1.9 : 1.6)} Montserrat; letter-spacing:.06em; text-transform:uppercase; opacity:0; }
-  .qleg span { display:flex; align-items:center; gap:${px(0.8)}; } .qleg .q { width:${px(P ? 2.4 : 1.9)}; height:${px(P ? 2.4 : 1.9)}; }
-  .af { font-weight:800; font-size:${px(P ? 2.2 : 1.8)}; text-align:right; color:#304285; } .ar b { font-weight:900; font-size:${px(P ? 2.6 : 2)}; text-align:right; }
-  .allcol .ar:nth-child(-n+4) .ap { color:var(--red); }
-
-  /* celé pořadí – bílý panel jako v Klonówiec */
-  .lg { isolation:isolate; } .lg::before { content:''; position:absolute; left:${px(-1.6)}; right:${px(-1.6)}; top:${px(-4.2)}; bottom:${px(-1.4)}; background:rgba(238,242,249,.96); border-radius:${px(1.8)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); z-index:-1; }
-  .lgh { z-index:2; }
+  /* celé pořadí */
   .lg, .lgh { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; display:grid; grid-auto-flow:column; gap:${px(0.7)} ${px(P ? 1.6 : 2)}; font-family:Montserrat; }
   .lgh { grid-auto-flow:row; opacity:0; }
-  .lr { position:relative; display:grid; grid-template-columns:${px(4.4)} 1fr ${px(P ? 6 : 6.5)} ${px(P ? 5 : 5.5)}; align-items:center; gap:${px(0.8)}; padding:0 ${px(1)}; border-radius:${px(0.8)}; background:none; color:#0b1e42; border-bottom:${px(0.1)} solid rgba(11,30,66,.08); overflow:hidden; opacity:0; }
-  .lr > * { position:relative; } .lr .lb { display:none; }
-  .lr b { font-weight:900; font-size:${px(P ? 2.1 : 2.2)}; color:#304285; text-align:right; } .lr span { font-weight:700; font-size:${px(P ? 1.85 : 2.1)}; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .lr em { font-style:normal; font-weight:700; font-size:${px(P ? 1.8 : 1.9)}; text-align:right; color:#304285; } .lr u { text-decoration:none; font-weight:900; font-size:${px(P ? 2.2 : 2.4)}; text-align:right; }
-  .lr.t { background:rgba(48,66,133,.08); } .lr.t span { font-weight:800; }
-  .lr.g b { color:var(--red); } .lr.g { background:rgba(227,30,36,.08); }
-  #s-mcr .lr { grid-template-columns:${px(P ? 3.6 : 4)} 1fr ${px(P ? 3.6 : 4.2)} ${px(P ? 3.6 : 4.2)} ${px(P ? 3.6 : 4.2)} ${px(P ? 3.8 : 4.4)}; gap:${px(P ? 0.5 : 0.7)}; } #s-mcr .lr u { color:var(--red); } #s-mcr .lr em.fz { color:#8ea2d8; font-weight:800; }
-  .lrh { opacity:1; background:none; height:${px(2.6)}; border:0; } .lrh b, .lrh span, .lrh em, .lrh u { font-weight:800 !important; font-size:${px(1.3)} !important; letter-spacing:.1em; text-transform:uppercase; color:#8ea2d8 !important; }
+  .lr { position:relative; display:grid; grid-template-columns:${px(4.4)} 1fr ${px(P ? 6 : 6.5)} ${px(P ? 5 : 5.5)}; align-items:center; gap:${px(0.8)}; padding:0 ${px(1.2)}; border-radius:${px(1)}; background:rgba(238,242,249,.12); color:var(--ice); overflow:hidden; opacity:0; }
+  .lr > * { position:relative; } .lr .lb { position:absolute; left:0; top:0; bottom:0; background:linear-gradient(90deg, rgba(26,160,200,.0), rgba(26,160,200,.38)); transform-origin:left; }
+  .lr b { font-weight:900; font-size:${px(P ? 2.1 : 2.2)}; color:var(--gold); } .lr span { font-weight:800; font-size:${px(P ? 1.85 : 2.2)}; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .lr em { font-style:normal; font-weight:800; font-size:${px(P ? 1.9 : 2)}; text-align:right; color:var(--lb); } .lr u { text-decoration:none; font-weight:900; font-size:${px(P ? 2.2 : 2.4)}; text-align:right; }
+  .lr.t { background:rgba(238,242,249,.95); color:var(--navy); } .lr.t b { color:var(--red); } .lr.t em { color:var(--blue); } .lr.t .lb { background:linear-gradient(90deg, rgba(255,211,107,0), rgba(255,211,107,.55)); }
+  .lr.g { box-shadow:0 0 0 ${px(0.3)} var(--gold), 0 0 ${px(1.6)} rgba(255,211,107,.35); }
+  #s-mcr .lr { grid-template-columns:${px(P ? 4 : 4.4)} 1fr ${px(P ? 3.9 : 5)} ${px(P ? 3.9 : 5)} ${px(P ? 4.2 : 5)}; gap:${px(P ? 0.5 : 0.8)}; } #s-mcr .lr u { color:var(--red); } #s-mcr .lr:not(.t) u { color:var(--gold); }
+  .lrh { opacity:1; background:none; height:${px(2.6)}; } .lrh b, .lrh span, .lrh em, .lrh u { font-weight:800 !important; font-size:${px(1.4)} !important; letter-spacing:.12em; text-transform:uppercase; color:var(--gold) !important; }
+  #s-fpa .lr { grid-template-columns:${px(4.4)} ${px(P ? 14 : 15)} 1fr ${px(P ? 7 : 7)} ${px(P ? 4.4 : 4.6)}; background:none; padding:0 ${px(0.4)}; }
+  #s-fpa .lr span { font-size:${px(P ? 1.95 : 2)}; } #s-fpa .lr em { font-size:${px(1.6)}; }
   .fb { display:flex; height:58%; background:rgba(142,162,216,.12); border-radius:${px(0.4)}; overflow:hidden; } .fb s { display:block; height:100%; background:var(--gold); transform-origin:left; } .fb s.n { background:#7fd0ff; }
   .fleg { position:absolute; ${P ? `left:${f(SAFE.l)}; top:${px(168.5)}` : `right:${f(SAFE.r)}; top:${f(SAFE.t + 8 * u)}`}; display:flex; gap:${px(2)}; font:800 ${px(1.8)} Montserrat; text-transform:uppercase; letter-spacing:.1em; opacity:0; }
   .fleg span { display:flex; align-items:center; gap:${px(0.7)}; } .fleg i { width:${px(2.4)}; height:${px(1.4)}; border-radius:${px(0.3)}; background:var(--gold); } .fleg i.n { background:#7fd0ff; }
 
-  /* sezóna v bílém panelu (Klonówiec) */
-  .sm { isolation:isolate; color:#0b1e42; } .sm::before { content:''; position:absolute; left:${px(-1.6)}; right:${px(-1.6)}; top:${px(-1.4)}; bottom:${px(-1.6)}; background:rgba(238,242,249,.96); border-radius:${px(1.8)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.35); z-index:-1; }
-  .sm .smh { color:#304285; } .sm .smh .sc.h em { color:#8ea2d8; } .sm .smr .sc i { background:#dfe5f1; color:#0b1e42; } .sm .smr .sc.ab i { background:#f1f4fa; color:#8ea2d8; }
-  .sm .smr .sa b { color:#304285; } .sm .smr .sp b { color:var(--red); } .sm .smb { margin-bottom:${px(0.4)}; }
-  /* finále */
-  .fin { position:absolute; left:${f(SAFE.l)}; right:${f(SAFE.r)}; top:${P ? '30%' : '22%'}; display:flex; flex-direction:column; align-items:center; gap:${px(3)}; text-align:center; font-family:Montserrat; }
-  .fv b { display:block; font-weight:900; font-size:${px(P ? 20 : 15)}; color:var(--red); line-height:1; text-shadow:0 ${px(0.5)} ${px(3)} rgba(0,0,0,.5); } .fv span { font-weight:800; font-size:${px(P ? 3.4 : 2.6)}; letter-spacing:.1em; text-transform:uppercase; }
-  .fsp { display:flex; gap:${px(3)}; font-weight:700; font-size:${px(P ? 3 : 2.3)}; } .fsp b { font-weight:900; color:#fff; font-size:1.3em; }
-  .fz span { display:inline-block; font-weight:700; font-size:${px(P ? 3.2 : 2.4)}; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
   /* partneři */
   .pgw { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
   .pg { width:${px(P ? 84 : 120)}; display:grid; grid-template-columns:repeat(3, 1fr); gap:${px(P ? 2.6 : 2.4)}; }
@@ -880,7 +782,8 @@ function build(W, H, file) {
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
-  <div id="stage"><div id="st-bg"></div><div id="rays-w"><div id="st-rays"></div></div><div id="st-band">${BAND}</div><div id="st-dots"></div>${STARS.map((st, i) => `<i class="star" id="star${i}" style="left:${st.x.toFixed(1)}%; top:${st.y.toFixed(1)}%; width:${px(st.s * 1.6)}; height:${px(st.s * 1.6)}"></i>`).join('')}<div id="vig"></div></div>
+  <div id="stage"><div id="st-bg"></div><i class="blob" id="blob0"></i><i class="blob" id="blob1"></i><i class="blob" id="blob2"></i><div id="rays-w"><div id="st-rays"></div></div><div id="st-dots"></div><div id="vig"></div></div>
+  <div id="parts">${Array.from({ length: 34 }, (_, i) => `<i id="pt${i}" style="left:${(rnd(i * 7 + 1) * 100).toFixed(1)}%; width:${(0.3 + rnd(i * 3) * 0.9).toFixed(2) * u}px; height:${(0.3 + rnd(i * 3) * 0.9).toFixed(2) * u}px"></i>`).join('')}</div>
   <video id="fly" class="clip" src="assets/aerial/flyover_${P ? '9x16' : '16x9'}.mp4" muted playsinline data-start="${FLY_T.toFixed(3)}" data-duration="4" data-track-index="1"></video>
   ${html}
   <div id="corner"><img src="assets/ta_logo.png" alt=""></div>
