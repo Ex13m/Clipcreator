@@ -17,7 +17,7 @@ const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
 const AER = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/aerial.json'), 'utf8'));   // ortofoto ČÚZK, stanoviště v px (malys_ortho.jpg)
-const VER = process.env.VER || 'v8';
+const VER = process.env.VER || 'v9';
 
 // ---------- struktura v taktech ----------
 // track_edit2: originál takty 1–53 + kopie 18–53 + originál 54–65 (≈ 101 taktů, 197,9 s)
@@ -101,7 +101,17 @@ function build(W, H, file) {
   const rise = (sel, t, d = 0.55) => T0(sel, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease: 'expo.out' }, onBeat(t));
   const pop = (sel, t, d = 0.5) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.94, rotationX: -55, transformPerspective: 900, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: d, ease: 'back.out(1.8)' }, t);
   // atmosféra: fotka z TA CZ / Liběchova (tlumená, pomalý Ken Burns) + obří obrysové slovo, které pluje
+  // více fotek z MČR v jedné scéně: střídají se po taktech (prolínačka na dobu), každá s vlastním Ken Burns
   const bgp = (img, a, b, { op = 0.42, word = '', id = `bg${Math.round(a * 100)}` } = {}) => {
+    if (Array.isArray(img)) {
+      const n = img.length, cuts = Array.from({ length: n + 1 }, (_, k) => (k === 0 ? a : k === n ? b : onBeat(a + ((b - a) * k) / n)));
+      img.forEach((im, k) => { const ia = cuts[k], ib = cuts[k + 1], kid = `${id}_${k}`, zin = k % 2 === 0;
+        T0(`#${kid}`, { opacity: 0 }, { opacity: op, duration: k ? 0.45 : 0.6, ease: 'power2.out' }, k ? ia - 0.2 : ia);
+        T0(`#${kid}`, { scale: zin ? 1.14 : 1.02, xPercent: zin ? -1.5 : 1.5 }, { scale: zin ? 1.02 : 1.14, xPercent: zin ? 1.5 : -1.5, duration: len(k ? ia - 0.2 : ia, ib + 0.3), ease: 'none' }, k ? ia - 0.2 : ia);
+        if (k < n - 1) T(`#${kid}`, { opacity: op }, { opacity: 0, duration: 0.45, ease: 'power2.in' }, ib + 0.05); });
+      if (word) { T0(`#${id}w`, { xPercent: 6 }, { xPercent: -10, duration: len(a, b), ease: 'none' }, a); T0(`#${id}w`, { opacity: 0 }, { opacity: 1, duration: 0.6 }, a); T(`#${id}w`, { opacity: 1 }, { opacity: 0, duration: 0.3 }, b - 0.3); }
+      return `${img.map((im, k) => `<div class="bgp" id="${id}_${k}" style="background-image:url(assets/photos/${im})"></div>`).join('')}<div class="bgo"></div>${word ? `<div class="bgw" id="${id}w">${word}</div>` : ''}`;
+    }
     T0(`#${id}`, { opacity: 0 }, { opacity: op, duration: 0.6, ease: 'power2.out' }, a);
     T0(`#${id}`, { scale: 1.12, xPercent: -1.5 }, { scale: 1.0, xPercent: 1.5, duration: len(a, b), ease: 'none' }, a);
     if (word) T0(`#${id}w`, { xPercent: 6 }, { xPercent: -10, duration: len(a, b), ease: 'none' }, a);
@@ -147,7 +157,7 @@ function build(W, H, file) {
   {
     const a = 0, m1 = BAR(1) + BEAT * 2, mf = m1 + 3.75, m2 = BAR(6), b = BAR(BARS.intro[1]);
     const AS = 104 * u, dots = Object.keys(AER.stands).map((n) => { const [x, y] = apos(n, AS, CFULL); return `<i class="ad" id="ad${n}" style="left:${f(x)}; top:${f(y)}"></i>`; }).join('');
-    scene('s-intro', a, b, `${bgp('bg_mcr26_porada.jpg', a, m1, { op: 0.72, id: 'bgi1' })}${bgp('bg_mcr26_breh_pruty.jpg', m2 - 0.5, b, { op: 0.68, id: 'bgi3', word: 'FAIR PLAY' })}
+    scene('s-intro', a, b, `${bgp('bg_mcr26_porada.jpg', a, m1, { op: 0.72, id: 'bgi1' })}${bgp(['bg_mcr26_rada_dest.jpg', 'bg_mcr26_breh_pruty.jpg'], m2 - 0.5, b, { op: 0.72, id: 'bgi3', word: 'FAIR PLAY' })}
       <div class="it" id="it1"><div class="tap"><img src="assets/ta_logo.png" alt="Trout Area Czech Republic"></div>
         <div class="l1"><span>Mistrovství</span></div><div class="l1"><span>České republiky</span></div><div class="l1 red"><span>2026</span></div>
         <div class="l3"><span>Trout Area · hard baits · výsledky v číslech</span></div></div>
@@ -210,7 +220,7 @@ function build(W, H, file) {
       : `<svg class="wx rain" viewBox="0 0 40 40"><path d="M11 22a8 8 0 0 1 2-15.5A10 10 0 0 1 32 10a6 6 0 0 1-1 12z"/>${[12, 19, 26].map((x) => `<line class="drop" x1="${x}" y1="27" x2="${x - 3}" y2="35"/>`).join('')}</svg>`;
     const hud = `<div class="hud"><div class="hf"><div class="hk">kolo <b id="${id}-k">0</b> / 12</div><b id="${id}-c">0</b><span>ulovených ryb</span></div>
       <div class="hrw"><div class="hrl">ryb v kole${ghost ? ' · <s></s> sobota' : ''}</div><div class="hr">${D.perRound.map((v, j) => `<div class="hcol" id="${id}-hc${j}">${ghost ? `<s style="height:${((ghost[j] / maxR) * 100).toFixed(1)}%"></s>` : ''}<i id="${id}-hi${j}" style="height:${((v / maxR) * 100).toFixed(1)}%"></i><u class="hv" id="${id}-hv${j}" style="bottom:${((v / maxR) * 100).toFixed(1)}%">${v}</u><em>${j + 1}</em></div>`).join('')}</div></div></div>`;
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_podberak.jpg' : 'bg_v02_velky_sportak.jpg', a, b, { op: 0.36, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1}`, di === 0 ? 'sobota 24. 10. · slunečno' : 'neděle 25. 10. · déšť', a + 0.05)}${icon}${hud}
+    scene(id, a, b, `${bgp(di === 0 ? ['bg_mcr26_porada.jpg', 'bg_mcr26_stojan.jpg', 'bg_mcr26_tacz_dres.jpg', 'bg_mcr26_breh_pruty.jpg', 'bg_mcr26_podberak.jpg', 'bg_mcr26_navijak_plandavky.jpg'] : ['bg_mcr26_rada_dest.jpg', 'bg_mcr26_dest_nahod.jpg', 'bg_mcr26_kubinak_podberak.jpg', 'bg_mcr26_dest_trojice.jpg', 'bg_mcr26_sploush.jpg', 'bg_mcr26_drep_breh.jpg'], a, b, { op: 0.5, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1}`, di === 0 ? 'sobota 24. 10. · slunečno' : 'neděle 25. 10. · déšť', a + 0.05)}${icon}${hud}
       <div class="bump" style="width:${f(CW)}; height:${f(CH)}"><svg viewBox="0 0 ${CW.toFixed(0)} ${CH.toFixed(0)}"><defs><clipPath id="${id}-cp"><rect id="${id}-cr" x="0" y="0" width="${f(X(0) + 1.5 * u)}" height="${CH}"/></clipPath></defs>${band}${grid}<g clip-path="url(#${id}-cp)">${lines}</g></svg>${dots}
         <div class="bcap">jak se TOP 10 MČR měnila po kolech</div></div>
       <div class="dtop" id="${id}-top"><div class="dth">Den ${di + 1} · top 10</div><div class="dtg">${D.top.slice(0, 10).map((x, i) => `<div class="dt${i < 3 ? ' t3' : ''}"><b>${i + 1}.</b><span>${x.name}</span><em>${x.points} b · ${x.fish} ryb</em></div>`).join('')}</div></div>`);
@@ -285,7 +295,7 @@ function build(W, H, file) {
     const cell = (n) => { const v = SEC[n], p1 = 2 * n - 1, p2 = 2 * n, dlt = di ? Math.round((v / SEC0[n] - 1) * 100) : null;
       return `<div class="hcell" id="${id}-h${n}" style="background:${hs(v)}; color:${ink(v, smin, smax)}"><em>S${n}${dlt !== null ? ` <s>${dlt > 0 ? '+' : '−'}${Math.abs(dlt)} %</s>` : ''}</em><b>${v}</b>
         <div class="pp"><span style="background:${hp(PL[p1])}; color:${ink(PL[p1], pmin, pmax)}">${p1}<i>${PL[p1]}</i></span><span style="background:${hp(PL[p2])}; color:${ink(PL[p2], pmin, pmax)}">${p2}<i>${PL[p2]}</i></span></div></div>`; };
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_zarybneni.jpg' : 'bg__drone_final_last.jpg', a, b, { op: 0.3, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · místa a sektory`, P ? (di ? '20 sektorů · % = proti sobotě' : '20 sektorů · 40 míst · 12 kol') : `20 sektorů · 40 míst · ryby za 12 kol${di ? ' · % = proti sobotě' : ''}`, a + 0.05)}
+    scene(id, a, b, `${bgp(di === 0 ? ['bg_mcr26_zarybneni.jpg', 'bg_mcr26_bedna_pruty.jpg'] : ['bg_mcr26_breh_odraz.jpg', 'bg_mcr26_dest_breh.jpg'], a, b, { op: 0.42, word: 'SEKTORY', id: `bg-${id}` })}${head(id, `Den ${di + 1} · místa a sektory`, P ? (di ? '20 sektorů · % = proti sobotě' : '20 sektorů · 40 míst · 12 kol') : `20 sektorů · 40 míst · ryby za 12 kol${di ? ' · % = proti sobotě' : ''}`, a + 0.05)}
       <div class="aw aw-s" id="${id}-a">${aerial(`${id}-a`, AS, CB, sdots + cols, { outline: true })}</div>
       <div class="acap" id="${id}-acap"><b>výška sloupce = ryby na místě</b> · 40 míst · popsáno top 10</div>
       <div class="heat">${P ? '' : '<div class="bank">SZ břeh · u silnice</div>'}${order.map(cell).join('')}${P ? '' : '<div class="bank b2">JV břeh · u lesa</div>'}</div>
@@ -328,7 +338,7 @@ function build(W, H, file) {
   const dayList = (di) => {
     const D = DAYS[di], id = `s-${D.k}l`, [b0, b1] = BARS[`${D.k}l`], a = BAR(b0), b = BAR(b1);
     const mf = Math.max(...D.A.map((x) => x.fish));
-    scene(id, a, b, `${bgp(di === 0 ? 'bg_mcr26_breh_pruty.jpg' : 'bg_mcr26_kontrola_vysledku.jpg', a, b, { op: 0.2, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1} · celé pořadí`, `všech ${D.n} závodníků · body · ryby`, a + 0.05)}
+    scene(id, a, b, `${bgp(di === 0 ? ['bg_mcr26_klobouk.jpg', 'bg_mcr26_hospoda.jpg'] : ['bg_mcr26_kontrola_vysledku.jpg', 'bg_mcr26_klobouk.jpg'], a, b, { op: 0.34, word: di === 0 ? 'SOBOTA' : 'NEDĚLE', id: `bg-${id}` })}${head(id, `Den ${di + 1} · celé pořadí`, `všech ${D.n} závodníků · body · ryby`, a + 0.05)}
       ${lgrid(id, D.top.map((x, i) => lrow(id, i, `<span>${x.name}</span><em>${x.points} b</em><u>${x.fish}</u>`, x.fish / mf)), '<b>#</b><span>závodník</span><em>body</em><u>ryby</u>')}`);
     T0(`#${id} .lgh`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 2);
     lin(id, D.n, a + BEAT * 2); lhi(id, a + BEAT * 9);
@@ -338,7 +348,7 @@ function build(W, H, file) {
   // ===================== 6) VÝSLEDEK MČR: součet umístění, všech 39 =====================
   {
     const id = 's-mcr', a = BAR(BARS.mcr[0]), b = BAR(BARS.mcr[1]), tl0 = a + BEAT * 8;
-    scene(id, a, b, `${bgp('bg_mcr26_kontrola_vysledku.jpg', a, b, { op: 0.24, word: 'MČR 2026', id: 'bg-mcr' })}${head(id, 'Výsledek MČR', 'součet umístění z obou dnů · nižší vyhrává', a + 0.05)}
+    scene(id, a, b, `${bgp(['bg_mcr26_vyhlaseni_tasky.jpg', 'bg_mcr26_vyhlaseni_ruka.jpg', 'bg_mcr26_kontrola_vysledku.jpg'], a, b, { op: 0.36, word: 'MČR 2026', id: 'bg-mcr' })}${head(id, 'Výsledek MČR', 'součet umístění z obou dnů · nižší vyhrává', a + 0.05)}
       <div class="rule big" id="mr-rule"><b>Den 1 + Den 2 = Σ</b><span>soutěžní řád 6.4–6.5 · při shodě rozhoduje řád</span></div>
       ${lgrid(id, MCRALL.map((x, i) => lrow(id, i, `<span>${x.name}</span><em>${x.d1}.</em><em>${x.d2}.</em><u>${x.d1 + x.d2}</u>`)), '<b>#</b><span>závodník</span><em>D1</em><em>D2</em><u>Σ</u>')}`);
     T0('#mr-rule', { opacity: 0, scale: 0.6, rotationX: -60, transformPerspective: 900 }, { opacity: 1, scale: 1, rotationX: 0, duration: 0.6, ease: 'back.out(2)' }, a + BEAT * 2);
@@ -352,7 +362,7 @@ function build(W, H, file) {
   // ===================== 6b) RYBY NA ZÁVODNÍKA (oba dny) =====================
   {
     const id = 's-fpa', a = BAR(BARS.fpa[0]), b = BAR(BARS.fpa[1]), mt = FPA[0].t, avg = FPA.reduce((s0, x) => s0 + x.t, 0) / FPA.length;
-    scene(id, a, b, `${bgp('bg_mcr26_podberak.jpg', a, b, { op: 0.2, word: 'RYBY', id: 'bg-fpa' })}${head(id, 'Ryby na závodníka', `oba dny · Ø ${dec(avg, 1)} ryb na závodníka`, a + 0.05)}
+    scene(id, a, b, `${bgp(['bg_mcr26_podberak.jpg', 'bg_mcr26_sploush.jpg', 'bg_mcr26_navijak_plandavky.jpg'], a, b, { op: 0.34, word: 'RYBY', id: 'bg-fpa' })}${head(id, 'Ryby na závodníka', `oba dny · Ø ${dec(avg, 1)} ryb na závodníka`, a + 0.05)}
       <div class="fleg" id="fleg"><span><i></i>sobota</span><span><i class="n"></i>neděle</span></div>
       ${lgrid(id, FPA.map((x, i) => `<div class="lr fr${i < 3 ? ' g' : ''}" id="${id}-l${i}"><b>${FPA.findIndex((y) => y.t === x.t) + 1}.</b><span>${short(x.name)}</span><i class="fb"><s style="width:${((x.f1 / mt) * 100).toFixed(1)}%"></s><s class="n" style="width:${((x.f2 / mt) * 100).toFixed(1)}%"></s></i><em>${x.f1}+${x.f2}</em><u>${x.t}</u></div>`), '<b>#</b><span>závodník</span><i></i><em>So+Ne</em><u>Σ</u>')}`);
     pop('#fleg', a + BEAT * 2);
@@ -386,7 +396,7 @@ function build(W, H, file) {
         <div class="pcs"><span><b>${x.r1.wins}+${x.r2.wins}</b>výher</span><span><b>${x.r1.fish}+${x.r2.fish}</b>ryb</span><span><b>${x.d1}.+${x.d2}.</b>místo</span></div>
         <div class="pleg"><span><i class="lw">${TROPHY}</i>výhra</span><span><i class="ld"></i>remíza</span><span><i class="ll"></i>prohra</span><span><i class="l1"></i>sobota</span><span><i class="l2"></i>neděle</span><span>výška = ryby v kole</span></div></div>`).join('');
     const order = [1, 0, 2];
-    scene(id, a, b, `${bgp('bg_t07_gold_cups.jpg', a, b, { op: 0.55, word: 'VÍTĚZOVÉ', id: 'bg-pod' })}${head(id, 'Stupně vítězů', 'Mistrovství ČR v Trout Area 2026', a + 0.05)}
+    scene(id, a, b, `${bgp(['bg_mcr26_trojice_poharu.jpg', 'bg_mcr26_spolecne_foto.jpg', 'bg_mcr26_vyhlaseni_ruka.jpg', 'bg_mcr26_trojice_poharu.jpg'], a, b, { op: 0.6, word: 'VÍTĚZOVÉ', id: 'bg-pod' })}${head(id, 'Stupně vítězů', 'Mistrovství ČR v Trout Area 2026', a + 0.05)}
       <div class="pods" id="pods">${order.map((i) => { const x = top3[i]; return `<div class="pd p${i + 1}" id="pd${i}">${i === 0 ? '<div class="glow" id="pglow"></div>' : ''}<div class="pn">${i + 1}.</div><div class="pnm">${x.name}</div>
         <div class="pst"><span><b>${x.d1}.+${x.d2}.</b>umístění</span><span><b>${x.fish}</b>ryb</span><span><b>${x.wins}</b>výher</span></div>
         <div class="col" style="height:${[0, 1, 2].map((k) => [22, 16, 11][k])[i] * u}px"></div></div>`; }).join('')}</div>
@@ -424,7 +434,7 @@ function build(W, H, file) {
     const champ = SEZ.find((x) => x.b6Rank === 1), s2 = SEZ.find((x) => x.b6Rank === 2), s3 = SEZ.find((x) => x.b6Rank === 3);
     const hra = SEZ.filter((x) => x.allRank > 10).sort((x, y) => (x.allRank - x.b6Rank) - (y.allRank - y.b6Rank)).pop();
     const ph = PHOTOS.winners ? `<div class="chph" style="background-image:url(assets/photos/${PHOTOS.winners})"></div>` : '';
-    scene(id, a, b, `${bgp('bg_mcr26_porada.jpg', a, tFin, { op: 0.24, word: 'SEZÓNA 2026', id: 'bg-sez' })}${head(id, 'Mistr Trout Area ČR 2026', 'sezóna · 8 bodovaných závodů', a + 0.05)}
+    scene(id, a, b, `${bgp(['bg_mcr26_putovni_pohar.jpg', 'bg_mcr26_spolecne_foto.jpg'], a, tFin, { op: 0.36, word: 'SEZÓNA 2026', id: 'bg-sez' })}${head(id, 'Mistr Trout Area ČR 2026', 'sezóna · 8 bodovaných závodů', a + 0.05)}
       <div class="sm" id="sm"><div class="smh"><span class="sp">#</span><span class="sn">závodník</span>${EV.map((e, k) => `<span class="sc h"><i>${EVS[k]}</i><em>${EVD[k]}</em></span>`).join('')}<span class="sa">Ø</span></div>
         <div class="smb" style="height:${f(rowH * 10)}">${SEZ.map((x, i) => `<div class="smr" id="sr${i}" style="top:${f(yAll(x) * rowH)}; height:${f(rowH)}"><span class="sp"><b id="srp${i}">${yAll(x) + 1}</b></span><span class="sn"><i class="snn">${x.name}</i>${x === hra ? `<em class="jmp" id="sz-jump">▲ ${hra.allRank}. → ${hra.b6Rank}.</em>` : ''}</span>${x.pos.map((p, k) => cell(p, x.cnt[k], k)).join('')}<span class="sa"><b id="sra${i}">${dec(x.all)}</b></span></div>`).join('')}</div></div>
       <div class="rule srule" id="sz-rule"><b>Počítá se 6 nejlepších z 8</b><span>2 nejhorší výsledky se škrtají</span></div>
@@ -553,8 +563,8 @@ function build(W, H, file) {
   .blob { position:absolute; width:${px(P ? 110 : 80)}; height:${px(P ? 110 : 80)}; border-radius:50%; filter:blur(${px(9)}); opacity:.35; }
   #blob0 { left:-15%; top:-10%; background:radial-gradient(circle, #2a5bd6 0%, transparent 65%); } #blob1 { right:-20%; bottom:-15%; background:radial-gradient(circle, rgba(227,30,36,.75) 0%, transparent 65%); opacity:.22; } #blob2 { left:30%; top:40%; background:radial-gradient(circle, #1aa0c8 0%, transparent 65%); opacity:.18; }
   #parts { position:absolute; inset:0; pointer-events:none; z-index:1; } #parts i { position:absolute; top:0; border-radius:50%; background:radial-gradient(circle, rgba(220,236,255,.95), rgba(220,236,255,0) 70%); opacity:0; }
-  .bgp { position:absolute; inset:-4%; background-size:cover; background-position:50% 40%; filter:grayscale(.15) saturate(.95) brightness(.82) contrast(1.06); opacity:0; }
-  .bgo { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,13,34,.45) 0%, rgba(11,30,66,.2) 45%, rgba(5,13,34,.6) 100%); mix-blend-mode:multiply; }
+  .bgp { position:absolute; inset:-4%; background-size:cover; background-position:50% 40%; filter:saturate(1.02) brightness(.95) contrast(1.04); opacity:0; }
+  .bgo { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,13,34,.5) 0%, rgba(11,30,66,.12) 38%, rgba(5,13,34,.45) 100%); mix-blend-mode:multiply; }
   .bgw { position:absolute; left:0; ${P ? `top:${px(150)}` : `bottom:${px(-4)}`}; white-space:nowrap; font:900 ${px(P ? 30 : 24)} Montserrat; text-transform:uppercase; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:${px(0.22)} rgba(238,242,249,.10); }
   .pond .secb { fill:none; stroke-width:34; stroke-linecap:round; stroke-linejoin:round; opacity:.55; stroke-dasharray:1; }
   .pond .secl { transform-box:fill-box; } .pond .secl text.sln { font:900 26px Montserrat; fill:#0b1e42; } .pond .secl text.slv { font:900 30px Montserrat; fill:#0b1e42; } #vig { position:absolute; inset:0; background:radial-gradient(75% 70% at 50% 55%, rgba(11,30,66,.65) 0%, rgba(11,30,66,.35) 60%, rgba(5,13,34,.2) 100%); opacity:0; }
