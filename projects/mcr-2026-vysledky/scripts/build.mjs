@@ -17,7 +17,7 @@ const ST = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stats.json'), 'utf8'
 const POND = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pond.json'), 'utf8'));
 const PHOTOS = fs.existsSync(path.join(PROTO, 'assets/photos.json')) ? JSON.parse(fs.readFileSync(path.join(PROTO, 'assets/photos.json'), 'utf8')) : {};
 const AER = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/aerial.json'), 'utf8'));   // ortofoto ČÚZK, stanoviště v px (malys_ortho.jpg)
-const VER = process.env.VER || 'v9';
+const VER = process.env.VER || 'v10';
 
 // ---------- struktura v taktech ----------
 // track_edit2: originál takty 1–53 + kopie 18–53 + originál 54–65 (≈ 101 taktů, 197,9 s)
@@ -102,21 +102,24 @@ function build(W, H, file) {
   const pop = (sel, t, d = 0.5) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.94, rotationX: -55, transformPerspective: 900, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: d, ease: 'back.out(1.8)' }, t);
   // atmosféra: fotka z TA CZ / Liběchova (tlumená, pomalý Ken Burns) + obří obrysové slovo, které pluje
   // více fotek z MČR v jedné scéně: střídají se po taktech (prolínačka na dobu), každá s vlastním Ken Burns
+  // ohnisko každé fotky (x% y%) – ať ořez nesebere hlavy (klobouk, kapuce…)
+  const FOC = { bedna_pruty: '40% 40%', breh_odraz: '50% 18%', breh_pruty: '50% 50%', dest_breh: '50% 28%', dest_nahod: '40% 12%', dest_trojice: '45% 12%', drep_breh: '45% 45%', hospoda: '50% 28%', klobouk: '66% 6%', kontrola_vysledku: '40% 30%', kubinak_podberak: '58% 25%', navijak_plandavky: '70% 40%', podberak: '40% 40%', porada: '50% 50%', putovni_pohar: '50% 50%', rada_dest: '55% 28%', sploush: '50% 55%', spolecne_foto: '50% 45%', stojan: '30% 12%', tacz_dres: '45% 40%', trojice_poharu: '50% 42%', vyhlaseni_ruka: '45% 42%', vyhlaseni_tasky: '50% 38%', zarybneni: '50% 50%' };
+  const bgst = (im) => `background-image:url(assets/photos/${im}); background-position:${FOC[im.replace(/^bg_mcr26_|\.jpg$/g, '')] || '50% 40%'}`;
   const bgp = (img, a, b, { op = 0.42, word = '', id = `bg${Math.round(a * 100)}` } = {}) => {
     if (Array.isArray(img)) {
       const n = img.length, cuts = Array.from({ length: n + 1 }, (_, k) => (k === 0 ? a : k === n ? b : onBeat(a + ((b - a) * k) / n)));
       img.forEach((im, k) => { const ia = cuts[k], ib = cuts[k + 1], kid = `${id}_${k}`, zin = k % 2 === 0;
         T0(`#${kid}`, { opacity: 0 }, { opacity: op, duration: k ? 0.45 : 0.6, ease: 'power2.out' }, k ? ia - 0.2 : ia);
-        T0(`#${kid}`, { scale: zin ? 1.14 : 1.02, xPercent: zin ? -1.5 : 1.5 }, { scale: zin ? 1.02 : 1.14, xPercent: zin ? 1.5 : -1.5, duration: len(k ? ia - 0.2 : ia, ib + 0.3), ease: 'none' }, k ? ia - 0.2 : ia);
+        T0(`#${kid}`, { scale: zin ? 1.08 : 1.0, xPercent: zin ? -1 : 1 }, { scale: zin ? 1.0 : 1.08, xPercent: zin ? 1 : -1, duration: len(k ? ia - 0.2 : ia, ib + 0.3), ease: 'none' }, k ? ia - 0.2 : ia);
         if (k < n - 1) T(`#${kid}`, { opacity: op }, { opacity: 0, duration: 0.45, ease: 'power2.in' }, ib + 0.05); });
       if (word) { T0(`#${id}w`, { xPercent: 6 }, { xPercent: -10, duration: len(a, b), ease: 'none' }, a); T0(`#${id}w`, { opacity: 0 }, { opacity: 1, duration: 0.6 }, a); T(`#${id}w`, { opacity: 1 }, { opacity: 0, duration: 0.3 }, b - 0.3); }
-      return `${img.map((im, k) => `<div class="bgp" id="${id}_${k}" style="background-image:url(assets/photos/${im})"></div>`).join('')}<div class="bgo"></div>${word ? `<div class="bgw" id="${id}w">${word}</div>` : ''}`;
+      return `${img.map((im, k) => `<div class="bgp" id="${id}_${k}" style="${bgst(im)}"></div>`).join('')}<div class="bgo"></div>${word ? `<div class="bgw" id="${id}w">${word}</div>` : ''}`;
     }
     T0(`#${id}`, { opacity: 0 }, { opacity: op, duration: 0.6, ease: 'power2.out' }, a);
     T0(`#${id}`, { scale: 1.12, xPercent: -1.5 }, { scale: 1.0, xPercent: 1.5, duration: len(a, b), ease: 'none' }, a);
     if (word) T0(`#${id}w`, { xPercent: 6 }, { xPercent: -10, duration: len(a, b), ease: 'none' }, a);
     if (word) { T0(`#${id}w`, { opacity: 0 }, { opacity: 1, duration: 0.6 }, a); T(`#${id}w`, { opacity: 1 }, { opacity: 0, duration: 0.3 }, b - 0.3); }
-    return `<div class="bgp" id="${id}" style="background-image:url(assets/photos/${img})"></div><div class="bgo"></div>${word ? `<div class="bgw" id="${id}w">${word}</div>` : ''}`;
+    return `<div class="bgp" id="${id}" style="${bgst(img)}"></div><div class="bgo"></div>${word ? `<div class="bgw" id="${id}w">${word}</div>` : ''}`;
   };
   const head = (id, big, small, t) => { rise(`#${id} .h2 span`, t); pop(`#${id} .h2 em`, t + BEAT); return `<div class="h2"><span>${big}</span><em>${small}</em></div>`; };
   const SAFE = P ? { l: 6 * u, r: 6 * u, t: 13 * u, b: 6 * u } : { l: 5 * u, r: 5 * u, t: 6 * u, b: 5 * u };
@@ -391,7 +394,20 @@ function build(W, H, file) {
       const pw = 6 * u, ph = h + 5 * u;
       return `<div class="pin bb ${kind} dd${d}" id="pn${i}_${d}_${j}" style="left:${f(px0)}; top:${f(py0)}; width:${f(pw)}; height:${f(ph)}; margin:${f(-ph)} 0 0 ${f(-pw / 2)}; --c:${PC[i]}"><i class="stem" style="height:${f(h)}; left:calc(50% + ${f(off)})"></i><b class="hd" style="bottom:${f(h)}; left:calc(50% + ${f(off)})">${kind === 'w' ? TROPHY : ''}</b></div>`; })).join('');
     const sdots = (i) => Object.keys(AER.stands).map((n) => { const [x0, y0] = apos(n, MS, CB); return `<i class="sd3 sm3" style="left:${f(x0)}; top:${f(y0)}"></i>`; }).join('');
-    const maps = top3.map((x, i) => `<div class="aw aw-p" id="wm${i}">${aerial(`wm${i}`, MS, CB, sdots(i) + pinsOf(x, i))}</div>
+    // dorážka: cesta závodníka po břehu – obvod rybníka 1→20, 40→21 (uzavřená smyčka), mezi koly kratší cestou
+    const PER = [...Array.from({ length: 20 }, (_, k) => k + 1), ...Array.from({ length: 20 }, (_, k) => 40 - k)];
+    const route = (s0, s1) => { const a0 = PER.indexOf(+s0), a1 = PER.indexOf(+s1), fw = (a1 - a0 + 40) % 40, dir = fw <= 20 ? 1 : -1, n = dir > 0 ? fw : 40 - fw;
+      return Array.from({ length: n + 1 }, (_, k) => PER[(a0 + dir * k + 40) % 40]); };
+    const trail = (rr, d) => { const off = (d ? 0.9 : -0.9) * u, pts = [apos(rr.rounds[0].los, MS, CB)], cum = [0];
+      rr.rounds.slice(1).forEach((r, j) => { route(rr.rounds[j].los, r.los).slice(1).forEach((n) => pts.push(apos(n, MS, CB))); cum.push(pts.length - 1); });
+      const P2 = pts.map(([x, y]) => [x + off, y]), segL = P2.slice(1).map(([x, y], k) => Math.hypot(x - P2[k][0], y - P2[k][1])), acc = [0];
+      segL.forEach((l) => acc.push(acc[acc.length - 1] + l));
+      return { P2, acc, cum, L: acc[acc.length - 1] }; };
+    const TR = top3.map((x) => [trail(x.r1, 0), trail(x.r2, 1)]);
+    const trSvg = (i) => { const k = MS / CB.w, hh = CB.h * k;
+      return `<svg class="trl" width="${MS.toFixed(1)}" height="${hh.toFixed(1)}" viewBox="0 0 ${MS.toFixed(1)} ${hh.toFixed(1)}">${TR[i].map((t, d) => `<path class="tp tp${d}" id="tp${i}_${d}" d="M${t.P2.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L')}" style="stroke:${d ? '#fff' : PC[i]}; stroke-dasharray:${t.L.toFixed(1)}; stroke-dashoffset:${t.L.toFixed(1)}"/>`).join('')}</svg>`
+        + TR[i].map((t, d) => `<i class="wk wk${d}" id="wk${i}_${d}" style="left:${f(t.P2[0][0])}; top:${f(t.P2[0][1])}; --c:${d ? '#fff' : PC[i]}"></i>`).join(''); };
+    const maps = top3.map((x, i) => `<div class="aw aw-p" id="wm${i}">${aerial(`wm${i}`, MS, CB, sdots(i) + trSvg(i) + pinsOf(x, i))}</div>
       <div class="pcard" id="pcard${i}" style="--c:${PC[i]}"><div class="pcn"><b>${i + 1}.</b> ${x.name}</div>
         <div class="pcs"><span><b>${x.r1.wins}+${x.r2.wins}</b>výher</span><span><b>${x.r1.fish}+${x.r2.fish}</b>ryb</span><span><b>${x.d1}.+${x.d2}.</b>místo</span></div>
         <div class="pleg"><span><i class="lw">${TROPHY}</i>výhra</span><span><i class="ld"></i>remíza</span><span><i class="ll"></i>prohra</span><span><i class="l1"></i>sobota</span><span><i class="l2"></i>neděle</span><span>výška = ryby v kole</span></div></div>`).join('');
@@ -401,7 +417,7 @@ function build(W, H, file) {
         <div class="pst"><span><b>${x.d1}.+${x.d2}.</b>umístění</span><span><b>${x.fish}</b>ryb</span><span><b>${x.wins}</b>výher</span></div>
         <div class="col" style="height:${[0, 1, 2].map((k) => [22, 16, 11][k])[i] * u}px"></div></div>`; }).join('')}</div>
       <div class="prize" id="prize"><img src="assets/logos/gausseholler.png" alt=""><span>hlavní cena <b>Revolut 8</b></span><img class="pb" src="assets/logos/bosset.png" alt=""><span>termosky <b>Zojirushi</b></span></div>
-      ${maps}<div class="wcap" id="wcap">kde medailisté vyhrávali · 24 kol</div>`);
+      ${maps}<div class="wcap" id="wcap">cesta medailistů po břehu · 24 kol</div>`);
     [2, 1, 0].forEach((i, k) => { const t = a + BEAT * (2 + k * 2); T0(`#pd${i}`, { opacity: 0, y: 8 * u, rotationX: 70, transformPerspective: 1200, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, rotationX: 0, duration: 0.7, ease: 'back.out(1.6)' }, t); T0(`#pd${i} .col`, { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'expo.out' }, t + 0.1); });
     T(`#pd0`, { scale: 1 }, { scale: 1.06, duration: 0.25, yoyo: true, repeat: 3 }, a + BEAT * 7);
     T0('#pglow', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, a + BEAT * 6);
@@ -415,11 +431,23 @@ function build(W, H, file) {
       T0(`#wm${i}`, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power2.out' }, t0);
       orbit(`wm${i}`, t0, t1, { x0: 0, x1: C.x1, z0: C.z0, z1: C.z1, s0: 0.85, s1: 1, tin: 1.0 });
       [0, 1].forEach((d) => (d ? x.r2 : x.r1).rounds.forEach((r, j) => SET(`#pn${i}_${d}_${j}`, { rotationX: -90, transformOrigin: '50% 100%' }, t0)));
-      const seq = [0, 1].flatMap((d) => Array.from({ length: 12 }, (_, j) => [d, j]));
-      seq.forEach(([d, j], k) => T0(`#pn${i}_${d}_${j} > *`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.6)', transformOrigin: '50% 100%' }, t0 + 0.6 + k * 0.1));
+      // obě cesty (sobota + neděle) běží souběžně: chodec jde po břehu, za ním se kreslí stopa, na každém stanovišti vyskočí výsledek kola
+      const tS = t0 + 0.8, tAll = t1 - BEAT * 2.2, HOP = (tAll - 0.25 - tS) / 11;
+      [0, 1].forEach((d) => { const t = TR[i][d];
+        T0(`#wk${i}_${d}`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, tS - 0.3);
+        T0(`#pn${i}_${d}_0 > *`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.6)', transformOrigin: '50% 100%' }, tS);
+        for (let j = 1; j < 12; j++) { const h0 = tS + (j - 1) * HOP + 0.05, hd = HOP * 0.8, p0 = t.cum[j - 1], p1 = t.cum[j], D = t.acc[p1] - t.acc[p0] || 1;
+          T(`#tp${i}_${d}`, { strokeDashoffset: t.L - t.acc[p0] }, { strokeDashoffset: t.L - t.acc[p1], duration: hd, ease: 'none' }, h0);
+          let tt = h0; for (let q = p0 + 1; q <= p1; q++) { const dd = (hd * (t.acc[q] - t.acc[q - 1])) / D;
+            T(`#wk${i}_${d}`, { left: t.P2[q - 1][0], top: t.P2[q - 1][1] }, { left: t.P2[q][0], top: t.P2[q][1], duration: Math.max(dd, 0.001), ease: 'none' }, tt); tt += dd; }
+          T0(`#pn${i}_${d}_${j} > *`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2.6)', transformOrigin: '50% 100%' }, h0 + hd); }
+        T(`#wk${i}_${d}`, { opacity: 1 }, { opacity: 0, duration: 0.25 }, tAll - 0.2); });
+      // pak vše najednou: stopy zesílí, všechny piny pulznou
+      T(`#wm${i} .tp`, { opacity: 0.75 }, { opacity: 1, duration: 0.3 }, tAll);
+      T(`#wm${i} .pin .hd`, { scale: 1 }, { scale: 1.3, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.inOut' }, tAll);
+      T(`#wm${i} .pin.w .hd`, { scale: 1 }, { scale: 1.45, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.inOut' }, tAll + BEAT);
       T0(`#pcard${i}`, { opacity: 0, x: (P ? 0 : 4) * u, y: (P ? 2 : 0) * u }, { opacity: 1, x: 0, y: 0, duration: 0.5, ease: 'expo.out' }, t0 + 0.2);
       T0(`#pcard${i} .pcs span`, { opacity: 0, rotationX: -80, transformPerspective: 700 }, { opacity: 1, rotationX: 0, duration: 0.4, ease: 'back.out(2)', stagger: BEAT / 2 }, t0 + BEAT * 2);
-      T(`#wm${i} .pin.w .hd`, { scale: 1 }, { scale: 1.35, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, t0 + BEAT * 9);
       if (i < 2) T(`#wm${i}, #pcard${i}`, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'power2.in' }, t1 - 0.3); });
   }
 
@@ -734,6 +762,10 @@ function build(W, H, file) {
   .sd3.sm3 { width:${px(0.8)}; height:${px(0.8)}; margin:${px(-0.4)} 0 0 ${px(-0.4)}; background:rgba(238,242,249,.7); }
   .side { background:rgba(5,13,34,.78); border-radius:${px(1.8)}; padding:${px(2)}; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.45); }
   /* piny medailistů */
+  .trl { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+  .trl .tp { fill:none; stroke-width:${px(0.55)}; stroke-linecap:round; stroke-linejoin:round; opacity:.75; filter:drop-shadow(0 0 ${px(0.5)} rgba(0,0,0,.8)); }
+  .trl .tp1 { stroke-width:${px(0.4)}; }
+  .wk { position:absolute; width:${px(2.2)}; height:${px(2.2)}; margin:${px(-1.1)} 0 0 ${px(-1.1)}; border-radius:50%; background:var(--c); box-shadow:0 0 0 ${px(0.3)} #0b1e42, 0 0 ${px(2)} var(--c); opacity:0; }
   .pin { position:absolute; }
   .pin .stem { position:absolute; bottom:0; width:${px(0.5)}; margin-left:${px(-0.25)}; box-shadow:0 0 ${px(0.4)} rgba(0,0,0,.6); background:linear-gradient(0deg, rgba(255,255,255,.35), var(--c)); border-radius:${px(0.2)}; }
   .pin .hd { position:absolute; display:flex; align-items:center; justify-content:center; border-radius:50%; box-sizing:border-box; }
