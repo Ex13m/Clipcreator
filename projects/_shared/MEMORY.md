@@ -148,3 +148,9 @@
 - Элементы с 3D-трансформом и нулевым размером (width/height 0) Chrome не рисует — пинам давать реальный бокс.
 - `<video class="clip">` нельзя класть внутрь секции с data-start — только на корень.
 - `pkill -f "<строка>"` убивает и собственный bash, если строка есть в команде.
+
+### MČR 2026 výsledky – finál (2026-10-31)
+- Finál 60 fps (FINAL=1 build bez DRAFT, `-q looks` CRF16): 16:9 83 min, 9:16 105 min souběžně na 4 jádrech; ~290 MB / 274 MB. Dlouhé rendery spouštět `setsid nohup … &` + background watcher `while pgrep -f "^npm exec hyperframes"; do sleep 60; done` (obchází 2h timeout).
+- `pkill -f "<vzor>"` zabije i vlastní bash, pokud vzor je v příkazu → vždy `kill $(pgrep -f "^npm exec hyperframes")`.
+- Cesta závodníka po rybníku: obvod jako uzavřená smyčka stanovišť [1..20, 40..21], mezi koly kratší směr; SVG path na 3D rovině + stroke-dashoffset po kolech, chodec = div tweenovaný left/top přes mezistanoviště; sobota + neděle souběžně, nakonec puls všech pinů.
+- Fotky na pozadí: per-fotka ohnisko (background-position) v mapě FOC, jinak ořez 16:9/9:16 + Ken Burns uřízne hlavy (klobouk, kapuce).
