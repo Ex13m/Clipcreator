@@ -15,7 +15,7 @@ const BAR = (n) => (n < G.downbeats.length ? G.downbeats[n] : G.downbeats.at(-1)
 const DUR = G.duration;
 const len = (a, b) => +(b - a).toFixed(3);
 const rnd = (seed) => { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
-const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]) /g, ' $1 ');   // čeština: předložky nenechat na konci řádku
+const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]|na|do|po|za|ke|ve|se|ze|od) /g, ' $1\u00a0');   // čeština: předložky nenechat na konci řádku
 
 const BARS = { hook: [0, 4], what: [4, 7], duel: [7, 17], all: [17, 21], cr: [21, 24], num: [24, 28], sys: [28, 32], start: [32, 35], crs: [35, 37], cta: [37, 40] };
 // ohniska fotek (x% y%) – ať ořez nesebere hlavy
@@ -66,7 +66,7 @@ function build(W, H, file) {
   {
     const id = 's-what', a = BAR(BARS.what[0]), b = BAR(BARS.what[1]);
     scene(id, a, b, `${photos('wh', [86432, 86408, 86431], a, b, { op: 0.55 })}
-      <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('Sportovní disciplína z Japonska. Lososovité ryby na malých, dobře zarybněných vodách.')}</p></div>`);
+      <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('Sportovní disciplína z Japonska. Lov lososovitých ryb na menších, dobře zarybněných stojatých vodách.')}</p></div>`);
     rise('#wh-h .kick', a + 0.05); rise('#wh-h h1 span', a + BEAT, 0.6, BEAT); pop('#wh-h p', a + BEAT * 3);
     outT('#wh-h', b);
   }
@@ -93,15 +93,15 @@ function build(W, H, file) {
         ${st0.map((n, i) => { const [x, y] = pos(n); return `<i class="ag" id="ag${i}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px; --c:${COLS[i]}"><b>${String.fromCharCode(65 + i)}</b><s class="pt" id="pt${i}">+${res1[i]}</s></i>`; }).join('')}
       </div>
       <div class="duel" id="duel">
-        <div class="dc" id="dcA" style="--c:${COLS[0]}"><b>Závodník A</b><em id="fa">0</em><small>ryb</small></div>
+        <div class="dc" id="dcA" style="--c:${COLS[0]}"><b>Závodník A</b><em id="fa">0</em><small>počet ryb</small></div>
         <div class="vs"><div class="clock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="clk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="clkt">20:00</span></div><i>VS</i></div>
-        <div class="dc" id="dcB" style="--c:${COLS[1]}"><b>Závodník B</b><em id="fb">0</em><small>ryb</small></div>
-        <div class="win" id="win"><span>výhra <b>3</b></span><span>remíza s rybou <b>2</b></span><span>0:0 <b>1</b></span><span>prohra <b>0</b></span></div>
+        <div class="dc" id="dcB" style="--c:${COLS[1]}"><b>Závodník B</b><em id="fb">0</em><small>počet ryb</small></div>
+        <div class="win" id="win"><span>výhra <b>3 b.</b></span><span>remíza s úlovkem <b>2 b.</b></span><span>remíza 0:0 <b>1 b.</b></span><span>prohra <b>0 b.</b></span></div>
       </div>
-      <div class="dcap" id="dcap1">${nb('Každý souboj trvá 20 minut. Kdo uloví víc ryb, bere body.')}</div>
-      <div class="dcap" id="dcap2"><b>Rotace</b> ${nb('· liché místo jde po směru, sudé proti směru → každé kolo nové místo a nový soupeř')}</div>
+      <div class="dcap" id="dcap1">${nb('Souboj trvá 20 minut. Kdo uloví víc ryb, vyhrává.')}</div>
+      <div class="dcap" id="dcap2"><b>Rotace</b> ${nb('· lichá místa se posouvají jedním směrem, sudá opačným → každé kolo jiné místo i jiný soupeř')}</div>
       <div class="rnd" id="rnd"><small>kolo</small><b id="rndn">1</b><small>/ 12</small></div>
-      <div class="dcap fin" id="dcap3">${nb('Jako na mistrovství světa: střídají se místa i soupeři, rozhoduje rybář, ne místo.')}</div>`);
+      <div class="dcap fin" id="dcap3">${nb('Stejný princip jako na mistrovství světa: místa i soupeři se střídají, aby rozhodoval rybář, ne místo.')}</div>`);
     // 0: nadpis + rybník
     rise('#dhd .kick', a + 0.05); rise('#dhd h2 span', a + BEAT);
     T0('#pond', { opacity: 0, rotationX: 55, scale: 0.8, transformPerspective: 1600 }, { opacity: 1, rotationX: P ? 0 : 18, scale: 1, duration: 0.9, ease: 'expo.out' }, a + 0.1);
@@ -155,7 +155,7 @@ function build(W, H, file) {
   // ===================== 3) PRO KAŽDÉHO =====================
   {
     const id = 's-all', a = BAR(BARS.all[0]), b = BAR(BARS.all[1]), tm = BAR(BARS.all[0] + 2);
-    const W4 = [86429, 86412, 86425, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Zkušení'];
+    const W4 = [86429, 86412, 86425, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
     scene(id, a, b, `${photos('al', [86422, 86436], tm, b, { op: 0.55 })}
       <div class="tiles" id="tiles">${W4.map((im, i) => `<div class="tl" id="tl${i}"><div class="tph" style="${ph(im)}"></div></div>`).join('')}</div>
       <div class="words" id="words">${WORDS.map((w, i) => `<b id="wd${i}"><span>${w}</span></b>`).join('')}</div>
@@ -172,7 +172,7 @@ function build(W, H, file) {
   // ===================== 4) CHYŤ A PUSŤ =====================
   {
     const id = 's-cr', a = BAR(BARS.cr[0]), b = BAR(BARS.cr[1]);
-    const CH = [['Umělé nástrahy', 'plandavky a woblery'], ['Háčky bez protihrotu', 'šetrné k rybě'], ['Hned zpět do vody', 'chyť a pusť']];
+    const CH = [['Umělé nástrahy', 'nejčastěji plandavky a woblery'], ['Háčky bez protihrotu', 'šetrné k rybě'], ['Co nejrychleji zpět do vody', 'šetrně podebrat a pustit']];
     scene(id, a, b, `${photos('cr', [86437, 86438, 86434], a, b, { op: 0.75 })}
       <div class="blk crb" id="crb"><h1><span>Chyť</span><span class="red">a pusť.</span></h1>
         <div class="chips">${CH.map(([t, s], i) => `<div class="chip" id="ch${i}"><i>${i + 1}</i><div><b>${t}</b><small>${s}</small></div></div>`).join('')}</div></div>`);
@@ -184,9 +184,9 @@ function build(W, H, file) {
   // ===================== 5) MČR 2026 V ČÍSLECH =====================
   {
     const id = 's-num', a = BAR(BARS.num[0]), b = BAR(BARS.num[1]);
-    const N = [['n0', 40, 'závodníků'], ['n1', 24, 'soutěžních kol'], ['n2', 2108, 'ulovených ryb'], ['n3', 17, 'let – nejmladší závodník']];
+    const N = [['n0', 40, 'závodníků'], ['n1', 24, 'soutěžních kol'], ['n2', 2108, 'ulovených ryb'], ['n3', 17, 'let měl nejmladší závodník']];
     scene(id, a, b, `${photos('nm', [86459, 86450, 86456], a, b, { op: 0.5 })}
-      <div class="blk nmh" id="nmh">${kick('Mistrovství ČR 2026 · Líheň Liběchov')}<h2><span>Vrchol sezóny</span></h2></div>
+      <div class="blk nmh" id="nmh">${kick('Mistrovství ČR 2026 · Líheň\u00a0Liběchov')}<h2><span>Vrchol sezóny</span></h2></div>
       <div class="nums" id="nums">${N.map(([k, v, l]) => `<div class="nm" id="${k}w"><b id="${k}">0</b><small>${l}</small></div>`).join('')}</div>`);
     rise('#nmh .kick', a + 0.05); rise('#nmh h2 span', a + BEAT);
     N.forEach(([k, v], i) => { const t = a + BEAT * (3 + i * 2.5); pop(`#${k}w`, t); CNT(k, v, t, i === 2 ? 1.6 : 0.8); });
@@ -203,7 +203,7 @@ function build(W, H, file) {
     const FISH = Array.from({ length: 11 }, (_, i) => ({ y: 8 + rnd(i * 3 + 1) * 84, s: 0.55 + rnd(i * 7 + 2) * 1.0, sp: 6 + rnd(i * 5 + 3) * 6, ph: rnd(i * 11 + 4), d: rnd(i * 13 + 5) }));
     scene(id, a, b, `<div class="sysbg"></div><div class="fishes">${FISH.map((fh, i) => `<div class="fw" id="fw${i}" style="top:${fh.y.toFixed(1)}%; --s:${fh.s.toFixed(2)}; opacity:${(0.35 + fh.d * 0.5).toFixed(2)}; filter:blur(${((1 - fh.d) * 3).toFixed(1)}px)"><div class="ff" id="ff${i}"><svg viewBox="-14 0 120 56"><g class="tail" id="ft${i}"><path d="${TAIL}"/></g><path d="${BODY}"/></svg></div></div>`).join('')}</div>
       <div class="blk sysh" id="sysh">${kick('Otevřený systém')}<h1><span>Přihlásit se</span><span class="red">může každý.</span></h1>
-        <div class="sysl" id="sysl">${['Registrace a platba online', 'Losování automaticky', 'Výsledky živě'].map((t, i) => `<span id="sl${i}"><i>✓</i>${t}</span>`).join('')}</div></div>
+        <div class="sysl" id="sysl">${['Registrace a platba online', 'Losování automaticky', 'Výsledky online'].map((t, i) => `<span id="sl${i}"><i>✓</i>${t}</span>`).join('')}</div></div>
       <div class="dev" id="dev"><img class="lap" id="lap" src="assets/screens/a036.png" alt=""><img class="phn" id="phn" src="assets/screens/a050.png" alt=""></div>`);
     // ryby: plavou tam a zpět (otočka = scaleX), ocas kmitá, tělo se lehce vlní
     FISH.forEach((fh, i) => { const dur = len(a, b), half = fh.sp, dir = i % 2 ? 1 : -1, x0 = dir > 0 ? -25 : 115, x1 = dir > 0 ? 115 : -25;
@@ -233,12 +233,12 @@ function build(W, H, file) {
       net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
     };
     scene(id, a, b, `${photos('sa', [86439, 86433, 86426], a, b, { op: 0.5 })}
-      <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Drahé vybavení není potřeba.')}</span></h2></div>
+      <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
       <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přijď na závod. Zkušení závodníci rádi poradí.')}</div>`);
     rise('#sth .kick', a + 0.05); rise('#sth h2 span', a + BEAT);
     KIT.forEach((_, i) => { const t = a + BEAT * (3 + i * 1.5); pop(`#ki${i}`, t); T0(`#ki${i} svg *`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t); });
-    pop('#hint', BAR(BARS.start[0] + 2) + BEAT);
+    pop('#hint', BAR(BARS.start[0] + 2) - BEAT);
     outT('#sth, #kit, #hint', b);
   }
 
@@ -246,10 +246,9 @@ function build(W, H, file) {
   {
     const id = 's-crs', a = BAR(BARS.crs[0]), b = BAR(BARS.crs[1]);
     scene(id, a, b, `${photos('cs', [86415], a, b, { op: 0.4 })}
-      <div class="crsw" id="crsw"><small>${nb('Trout Area Czech Republic spolupracuje s')}</small><span class="crsc" id="crsl"><img src="assets/crs.png" alt="Český rybářský svaz"></span><b>Českým rybářským svazem</b></div>`);
+      <div class="crsw" id="crsw"><small>Ve spolupráci s</small><span class="crsc" id="crsl"><img src="assets/crs.png" alt="Český rybářský svaz"></span></div>`);
     T0('#crsw small', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, a + 0.05);
     T0('#crsl', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + BEAT);
-    rise('#crsw b', a + BEAT * 2.5);
     outT('#crsw', b);
   }
 
@@ -259,7 +258,7 @@ function build(W, H, file) {
     scene(id, a, b, `${photos('ct', [86450, 86436], a, b, { op: 0.42 })}
       <div class="cta" id="cta"><img class="tal" id="tal" src="assets/ta_logo.png" alt="Trout Area Czech Republic">
         <h1 id="cth"><span>Přijď si to</span><span class="red">vyzkoušet.</span></h1>
-        <div class="url" id="url"><small>Pravidla · termíny · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>`);
+        <div class="url" id="url"><small>Pravidla · termíny · výsledky · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>`);
     T0('#tal', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + 0.05);
     rise('#cth span', a + BEAT * 2, 0.6, BEAT);
     T0('#url', { opacity: 0, y: 3 * u, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'back.out(2)' }, a + BEAT * 5);
