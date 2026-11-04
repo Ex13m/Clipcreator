@@ -17,7 +17,7 @@ const len = (a, b) => +(b - a).toFixed(3);
 const rnd = (seed) => { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
 const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]) /g, ' $1 ');   // čeština: předložky nenechat na konci řádku
 
-const BARS = { hook: [0, 4], what: [4, 9], all: [9, 13], cr: [13, 16], num: [16, 20], sys: [20, 27], start: [27, 30], cta: [30, 33] };
+const BARS = { hook: [0, 4], what: [4, 7], duel: [7, 17], all: [17, 21], cr: [21, 24], num: [24, 28], sys: [28, 32], start: [32, 35], crs: [35, 37], cta: [37, 40] };
 // ohniska fotek (x% y%) – ať ořez nesebere hlavy
 const FOC = { 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
@@ -62,34 +62,94 @@ function build(W, H, file) {
     outT('#hk-t', b);
   }
 
-  // ===================== 2) CO TO JE: moderní přívlač, souboj 1 na 1, 12 kol × 20 minut =====================
+  // ===================== 2) CO TO JE: moderní přívlač =====================
   {
-    const id = 's-what', a = BAR(BARS.what[0]), b = BAR(BARS.what[1]), td = BAR(BARS.what[0] + 2);
-    const fish = [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2]];   // průběh duelu (ryby A : B)
-    scene(id, a, b, `${photos('wh', [86432, 86408, 86435, 86431], a, b, { op: 0.55 })}
-      <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('sportovní disciplína z Japonska · lososovité ryby na malých, dobře zarybněných vodách')}</p></div>
-      <div class="duel" id="duel">
-        <div class="dc" id="dcA"><b>Závodník A</b><em id="fa">0</em><small>ryb</small></div>
-        <div class="vs"><div class="clock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="clk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="clkt">20:00</span></div><i>VS</i></div>
-        <div class="dc" id="dcB"><b>Závodník B</b><em id="fb">0</em><small>ryb</small></div>
-        <div class="win" id="win">výhra = 3 body · remíza s rybou 2 · 0:0 = 1</div>
-      </div>
-      <div class="rds" id="rds">${Array.from({ length: 12 }, (_, i) => `<i id="rd${i}"><b>${i + 1}</b></i>`).join('')}<span>12 kol × 20 minut · každé kolo jiné stanoviště a nový soupeř</span></div>`);
+    const id = 's-what', a = BAR(BARS.what[0]), b = BAR(BARS.what[1]);
+    scene(id, a, b, `${photos('wh', [86432, 86408, 86431], a, b, { op: 0.55 })}
+      <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('Sportovní disciplína z Japonska. Lososovité ryby na malých, dobře zarybněných vodách.')}</p></div>`);
     rise('#wh-h .kick', a + 0.05); rise('#wh-h h1 span', a + BEAT, 0.6, BEAT); pop('#wh-h p', a + BEAT * 3);
-    T('#wh-h', { opacity: 1 }, { opacity: P ? 0 : 1, duration: 0.3 }, td - 0.3);
-    T0('#duel', { opacity: 0, scale: 0.85, rotationX: 40, transformPerspective: 1200 }, { opacity: 1, scale: 1, rotationX: 0, duration: 0.6, ease: 'expo.out' }, td);
-    T0('#dcA', { x: -12 * u }, { x: 0, duration: 0.5, ease: 'back.out(1.6)' }, td); T0('#dcB', { x: 12 * u }, { x: 0, duration: 0.5, ease: 'back.out(1.6)' }, td);
-    const ta = td + BEAT * 2, tb = BAR(BARS.what[0] + 4) + BEAT;
+    outT('#wh-h', b);
+  }
+
+  // ===================== 2b) JAK PROBÍHÁ SOUBOJ: rybník, dvojice, duel, rotace (liché +, sudé −) =====================
+  {
+    const id = 's-duel', a = BAR(BARS.duel[0]), b = BAR(BARS.duel[1]), BB = (k) => BAR(BARS.duel[0] + k);
+    // rybník = zaoblený obdélník, 16 stanovišť po obvodu (1–8 dolní břeh zleva, 9–16 horní zprava) – jako Liběchov
+    const NS = 16, PW = P ? 84 * u : 96 * u, PH = P ? 46 * u : 40 * u;
+    const pos = (n) => { const k = ((n - 1) % NS + NS) % NS, half = NS / 2;
+      return k < half ? [PW * (0.09 + (0.82 * k) / (half - 1)), PH * 0.97] : [PW * (0.91 - (0.82 * (k - half)) / (half - 1)), PH * 0.03]; };
+    const COLS = ['#e31e24', '#ffd36b', '#7fd0ff', '#9be27a', '#ff8fd0', '#ffb05c', '#b9a6ff', '#ffffff', '#5fe0c8', '#ff6a5a', '#c6e04a', '#8ea2d8', '#f5c2c7', '#e0b37a', '#6fb7ff', '#d0d0d0'];
+    const st0 = Array.from({ length: NS }, (_, i) => i + 1);           // závodník i stojí na stanovišti i+1 (kolo 1)
+    const step = 2;                                                      // liché místo +2, sudé −2 → nová dvojice
+    const at = (i, r) => (i % 2 === 0 ? st0[i] + step * r : st0[i] - step * r);
+    const ROT = [0, 1, 2];
+    const res1 = [3, 0, 2, 2, 0, 3, 3, 0, 1, 1, 3, 0, 0, 3, 3, 0];      // body kola 1 (dvojice 1–2, 3–4, …)
+    scene(id, a, b, `<div class="dbg"></div>
+      <div class="blk dhd" id="dhd">${kick('Jak probíhá souboj')}<h2><span>Jeden na jednoho.</span></h2></div>
+      <div class="pond" id="pond" style="width:${PW.toFixed(0)}px; height:${PH.toFixed(0)}px">
+        <div class="water" id="water"></div>
+        ${st0.map((n) => { const [x, y] = pos(n); return `<i class="sn${n > NS / 2 ? ' up' : ''}" id="sn${n}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px"><em>${n}</em></i>`; }).join('')}
+        ${Array.from({ length: NS / 2 }, (_, p) => { const [x1, y1] = pos(p * 2 + 1), [x2] = pos(p * 2 + 2); return `<i class="pr" id="pr${p}" style="left:${Math.min(x1, x2).toFixed(1)}px; top:${y1.toFixed(1)}px; width:${Math.abs(x2 - x1).toFixed(1)}px"></i>`; }).join('')}
+        ${st0.map((n, i) => { const [x, y] = pos(n); return `<i class="ag" id="ag${i}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px; --c:${COLS[i]}"><b>${String.fromCharCode(65 + i)}</b><s class="pt" id="pt${i}">+${res1[i]}</s></i>`; }).join('')}
+      </div>
+      <div class="duel" id="duel">
+        <div class="dc" id="dcA" style="--c:${COLS[0]}"><b>Závodník A</b><em id="fa">0</em><small>ryb</small></div>
+        <div class="vs"><div class="clock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="clk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="clkt">20:00</span></div><i>VS</i></div>
+        <div class="dc" id="dcB" style="--c:${COLS[1]}"><b>Závodník B</b><em id="fb">0</em><small>ryb</small></div>
+        <div class="win" id="win"><span>výhra <b>3</b></span><span>remíza s rybou <b>2</b></span><span>0:0 <b>1</b></span><span>prohra <b>0</b></span></div>
+      </div>
+      <div class="dcap" id="dcap1">${nb('Každý souboj trvá 20 minut. Kdo uloví víc ryb, bere body.')}</div>
+      <div class="dcap" id="dcap2"><b>Rotace</b> ${nb('· liché místo jde po směru, sudé proti směru → každé kolo nové místo a nový soupeř')}</div>
+      <div class="rnd" id="rnd"><small>kolo</small><b id="rndn">1</b><small>/ 12</small></div>
+      <div class="dcap fin" id="dcap3">${nb('Jako na mistrovství světa: střídají se místa i soupeři, rozhoduje rybář, ne místo.')}</div>`);
+    // 0: nadpis + rybník
+    rise('#dhd .kick', a + 0.05); rise('#dhd h2 span', a + BEAT);
+    T0('#pond', { opacity: 0, rotationX: 55, scale: 0.8, transformPerspective: 1600 }, { opacity: 1, rotationX: P ? 0 : 18, scale: 1, duration: 0.9, ease: 'expo.out' }, a + 0.1);
+    T0('.sn', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.035 }, a + 0.4);
+    // 1: závodníci padnou na místa, dvojice se spojí
+    T0('.ag', { opacity: 0, y: -8 * u, scale: 0.4 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2)', stagger: 0.04 }, BB(1));
+    T0('.pr', { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.35, ease: 'expo.out', stagger: 0.05 }, BB(1) + BEAT * 2);
+    // 2–4: přiblížení na dvojici A–B + karta duelu
+    const [zx, zy] = pos(1.5 > 0 ? 1 : 1), zs = P ? 1.0 : 1.0; void zs;
+    T('#ag2, #ag3, #ag4, #ag5, #ag6, #ag7, #ag8, #ag9, #ag10, #ag11, #ag12, #ag13, #ag14, #ag15', { opacity: 1 }, { opacity: 0.25, duration: 0.3 }, BB(2));
+    T('#ag0, #ag1', { scale: 1 }, { scale: 1.5, duration: 0.4, ease: 'back.out(2)' }, BB(2));
+    T0('#duel', { opacity: 0, y: 6 * u, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, BB(2));
+    pop('#dcap1', BB(2) + BEAT * 2);
+    const ta = BB(2) + BEAT * 2, tb = BB(4) + BEAT;
     T0('#clk', { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: len(ta, tb), ease: 'none' }, ta);
     out.push(`{ const o={v:1200}, el=document.getElementById("clkt"); tl.fromTo(o,{v:1200},{v:0,duration:${len(ta, tb)},ease:"none",immediateRender:false,onUpdate(){const s=Math.round(o.v);el.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}}, ${ta.toFixed(3)}); }`);
-    fish.slice(1).forEach(([fa, fb], k) => { const t = ta + ((tb - ta) * (k + 0.6)) / fish.length, which = fa !== fish[k][0] ? 'a' : 'b';
-      SET(`#f${which}`, { textContent: which === 'a' ? fa : fb }, t);
-      T(`#dc${which.toUpperCase()}`, { scale: 1.12, boxShadow: '0 0 0 6px rgba(227,30,36,.9)' }, { scale: 1, boxShadow: '0 0 0 0px rgba(227,30,36,0)', duration: 0.35, ease: 'power2.out' }, t); });
+    const fish = [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2]];
+    fish.slice(1).forEach(([fa, fb], k) => { const t = ta + ((tb - ta) * (k + 0.6)) / fish.length, w = fa !== fish[k][0] ? 'a' : 'b';
+      SET(`#f${w}`, { textContent: w === 'a' ? fa : fb }, t);
+      T(`#dc${w.toUpperCase()}`, { scale: 1.1 }, { scale: 1, duration: 0.35, ease: 'power2.out' }, t);
+      T(`#ag${w === 'a' ? 0 : 1}`, { scale: 1.9 }, { scale: 1.5, duration: 0.3, ease: 'power2.out' }, t); });
     T0('#win', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, tb);
-    T('#dcA', { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1 }, tb);
-    pop('#rds', BAR(BARS.what[0] + 3));
-    T0('#rds i', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: BEAT / 3 }, BAR(BARS.what[0] + 3) + 0.2);
-    outT('#duel, #rds, #wh-h', b);
+    T0('#win span', { opacity: 0.35 }, { opacity: 1, duration: 0.2, stagger: BEAT / 2 }, tb + 0.1);
+    // 5: konec kola – všichni dostanou body
+    const t5 = BB(5);
+    T('#duel, #dcap1', { opacity: 1 }, { opacity: 0, duration: 0.3 }, t5 - 0.3);
+    T('.ag', { opacity: 0.25, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.35 }, t5);
+    T0('.pt', { opacity: 0, y: 0 }, { opacity: 1, y: -3 * u, duration: 0.35, ease: 'back.out(2)', stagger: 0.03 }, t5 + 0.2);
+    T('.pt', { opacity: 1 }, { opacity: 0, duration: 0.25 }, BB(6) - 0.1);
+    pop('#rnd', t5);
+    // 6–8: rotace ×2
+    ROT.slice(1).forEach((r) => { const tr = BB(4 + r * 2), tm = tr + 0.15;
+      if (r === 1) { pop('#dcap2', tr); }
+      T('.pr', { opacity: 1 }, { opacity: 0.15, duration: 0.2 }, tr);
+      st0.forEach((_, i) => { const s0 = at(i, r - 1), dir = i % 2 === 0 ? 1 : -1, d1 = 0.9 / step;
+        for (let k = 0; k < step; k++) { const [x0, y0] = pos(s0 + dir * k), [x1, y1] = pos(s0 + dir * (k + 1));
+          T(`#ag${i}`, { left: x0, top: y0 }, { left: x1, top: y1, duration: d1, ease: k === 0 ? 'power2.in' : 'power2.out' }, tm + (i % 2) * 0.06 + k * d1); } });
+      T('.pr', { opacity: 0.15 }, { opacity: 1, duration: 0.3 }, tm + 1.0);
+      SET('#rndn', { textContent: r + 1 }, tm + 0.5);
+      T('#rnd', { scale: 1.25 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, tm + 0.5); });
+    // 9: počítadlo kol doběhne + závěrečná věta
+    const t9 = BB(9);
+    out.push(`{ const o={v:3}, el=document.getElementById("rndn"); tl.fromTo(o,{v:3},{v:12,duration:${(BEAT * 2).toFixed(3)},ease:"power1.in",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t9 - BEAT * 2).toFixed(3)}); }`);
+    T('#dcap2', { opacity: 1 }, { opacity: 0, duration: 0.25 }, t9 - 0.2);
+    pop('#dcap3', t9);
+    T('#ag0, #ag1', { scale: 1 }, { scale: 1.4, duration: 0.2, yoyo: true, repeat: 1 }, t9 + BEAT);
+    outT('#pond, #dhd, #rnd, #dcap3', b);
+    void zx; void zy;
   }
 
   // ===================== 3) PRO KAŽDÉHO =====================
@@ -134,49 +194,32 @@ function build(W, H, file) {
     outT('#nmh, #nums', b);
   }
 
-  // ===================== 6) OTEVŘENÝ SYSTÉM: registrace každý, vše automaticky =====================
+  // ===================== 6) OTEVŘENÝ SYSTÉM (jen krátce, pozadí: tmavé siluety pstruhů) =====================
   {
-    const id = 's-sys', a = BAR(BARS.sys[0]), b = BAR(BARS.sys[1]), t1 = BAR(BARS.sys[0] + 2), t2 = BAR(BARS.sys[0] + 3);
-    const STEPS = [
-      ['Účet za minutu', 'jméno · e-mail · heslo', 'form'],
-      ['Přihláška a platba online', 'potvrzení hned v e-mailu', 'pay'],
-      ['Losování automaticky', 'stanoviště i soupeři bez papírů', 'draw'],
-      ['Výsledky živě', 'tabulky, profil a statistiky', 'res'],
-    ];
-    const ui = (k) => k === 'form' ? `<div class="ui uform"><i class="f"><em id="ty0"></em></i><i class="f"><em id="ty1"></em></i><i class="f pw"><em id="ty2"></em></i><span class="btn" id="ubtn0">Vytvořit účet</span></div>`
-      : k === 'pay' ? `<div class="ui upay"><div class="ev"><b>Závod Trout Area</b><small>2 dny · 12 kol</small></div><span class="btn" id="ubtn1">Přihlásit se</span><span class="ok" id="uok1">✓ Zaplaceno · jsi na startovce</span></div>`
-      : k === 'draw' ? `<div class="ui udraw">${Array.from({ length: 6 }, (_, i) => `<i id="dr${i}"><b>${[7, 12, 3, 18, 9, 1][i]}</b><span></span></i>`).join('')}</div>`
-      : `<div class="ui ures">${[[1, 32], [2, 29], [3, 27], [4, 27], [5, 26]].map(([p, s], i) => `<i id="rs${i}"><b>${p}.</b><span style="width:${Math.round(s * 1.7)}%"></span><em>${s} b</em></i>`).join('')}</div>`;
-    scene(id, a, b, `<div class="sysbg"></div>
-      <div class="blk sysh" id="sysh">${kick('Otevřený systém')}<h1><span>Přihlásit se</span><span class="red">může každý.</span></h1><p>${nb('Bez známostí, bez papírování. Vše online a automaticky.')}</p></div>
-      <div class="dev" id="dev"><img class="lap" id="lap" src="assets/screens/a036.png" alt=""><img class="phn" id="phn" src="assets/screens/a050.png" alt=""></div>
-      <div class="blk stph" id="stph">${kick('Vše automaticky')}<h2><span>${nb('Od přihlášky po výsledky')}</span></h2></div>
-      <div class="steps" id="steps">${STEPS.map(([t, s, k], i) => `<div class="st" id="st${i}"><div class="sh"><i>${i + 1}</i><div><b>${t}</b><small>${s}</small></div><em class="ck" id="ck${i}">✓</em></div>${ui(k)}</div>`).join('')}</div>
-      <div class="auto" id="auto"><span>Automaticky</span><i id="autol"></i></div>`);
-    rise('#sysh .kick', a + 0.05); rise('#sysh h1 span', a + BEAT, 0.6, BEAT); pop('#sysh p', a + BEAT * 4);
+    const id = 's-sys', a = BAR(BARS.sys[0]), b = BAR(BARS.sys[1]);
+    // pstruh – silueta z boku (hlava vpravo); ocas je zvlášť kvůli vlnění
+    const BODY = 'M8 30 C20 18 44 12 70 13 C86 14 98 20 104 27 C106 30 104 33 100 35 C92 41 76 45 60 45 C40 45 22 40 8 30 Z M44 13 C48 6 56 4 62 6 C60 9 58 12 56 13 Z M52 45 C56 51 62 53 66 52 C64 49 62 46 60 45 Z M82 41 C84 46 88 48 92 47 C90 44 88 42 86 41 Z';
+    const TAIL = 'M10 30 C4 24 -4 18 -12 14 C-8 22 -8 38 -12 46 C-4 42 4 36 10 30 Z';
+    const FISH = Array.from({ length: 11 }, (_, i) => ({ y: 8 + rnd(i * 3 + 1) * 84, s: 0.55 + rnd(i * 7 + 2) * 1.0, sp: 6 + rnd(i * 5 + 3) * 6, ph: rnd(i * 11 + 4), d: rnd(i * 13 + 5) }));
+    scene(id, a, b, `<div class="sysbg"></div><div class="fishes">${FISH.map((fh, i) => `<div class="fw" id="fw${i}" style="top:${fh.y.toFixed(1)}%; --s:${fh.s.toFixed(2)}; opacity:${(0.35 + fh.d * 0.5).toFixed(2)}; filter:blur(${((1 - fh.d) * 3).toFixed(1)}px)"><div class="ff" id="ff${i}"><svg viewBox="-14 0 120 56"><g class="tail" id="ft${i}"><path d="${TAIL}"/></g><path d="${BODY}"/></svg></div></div>`).join('')}</div>
+      <div class="blk sysh" id="sysh">${kick('Otevřený systém')}<h1><span>Přihlásit se</span><span class="red">může každý.</span></h1>
+        <div class="sysl" id="sysl">${['Registrace a platba online', 'Losování automaticky', 'Výsledky živě'].map((t, i) => `<span id="sl${i}"><i>✓</i>${t}</span>`).join('')}</div></div>
+      <div class="dev" id="dev"><img class="lap" id="lap" src="assets/screens/a036.png" alt=""><img class="phn" id="phn" src="assets/screens/a050.png" alt=""></div>`);
+    // ryby: plavou tam a zpět (otočka = scaleX), ocas kmitá, tělo se lehce vlní
+    FISH.forEach((fh, i) => { const dur = len(a, b), half = fh.sp, dir = i % 2 ? 1 : -1, x0 = dir > 0 ? -25 : 115, x1 = dir > 0 ? 115 : -25;
+      const legs = Math.ceil(dur / half) + 1, st = a - fh.ph * half;
+      for (let k = 0; k < legs; k++) { const t = st + k * half, fwd = k % 2 === 0;
+        T(`#fw${i}`, { left: `${fwd ? x0 : x1}%` }, { left: `${fwd ? x1 : x0}%`, duration: half, ease: 'sine.inOut' }, t);
+        SET(`#ff${i}`, { scaleX: (fwd ? dir : -dir) }, t); }
+      T(`#fw${i}`, { y: 0 }, { y: (rnd(i) - 0.5) * 8 * u, duration: half * 0.7, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(dur / (half * 0.7)) }, a);
+      T(`#ft${i}`, { rotation: -16 }, { rotation: 16, duration: 0.32 + rnd(i) * 0.12, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(dur / 0.32), transformOrigin: '10px 30px' }, a);
+      T(`#ff${i} svg`, { skewY: -2 }, { skewY: 2, duration: 0.64, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(dur / 0.64) }, a); });
+    rise('#sysh .kick', a + 0.05); rise('#sysh h1 span', a + BEAT, 0.6, BEAT);
+    T0('#sysl span', { opacity: 0, x: -3 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out', stagger: BEAT }, a + BEAT * 5);
     T0('#lap', { opacity: 0, x: 20 * u, rotationY: -25, transformPerspective: 1600 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'expo.out' }, a + BEAT * 2);
     T0('#phn', { opacity: 0, y: 25 * u, rotation: 8 }, { opacity: 1, y: 0, rotation: 0, duration: 0.8, ease: 'expo.out' }, a + BEAT * 4);
-    T('#lap', { y: 0 }, { y: -1.5 * u, duration: len(a + 1, t2), ease: 'sine.inOut' }, a + 1);
-    T('#sysh, #dev', { opacity: 1, y: 0 }, { opacity: 0, y: -4 * u, duration: 0.35, ease: 'power2.in' }, t2 - 0.35);
-    // 4 kroky, každý 1 takt
-    pop('#auto', t2); rise('#stph .kick', t2); rise('#stph h2 span', t2 + 0.1);
-    T0('#autol', { scaleX: 0 }, { scaleX: 1, duration: len(t2, b - BEAT * 2), ease: 'none' }, t2);
-    STEPS.forEach((_, i) => { const t = t2 + BAR(1) * i - BAR(0) * i;  // = takt po taktu
-      const ts = BAR(BARS.sys[0] + 3 + i);
-      T0(`#st${i}`, { opacity: 0, y: 6 * u, rotationX: -30, transformPerspective: 1200 }, { opacity: 0.98, y: 0, rotationX: 0, duration: 0.5, ease: 'expo.out' }, ts);
-      T0(`#ck${i}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(3)' }, ts + BEAT * 3);
-      void t; });
-    const s0 = BAR(BARS.sys[0] + 3);
-    ['jan.novak', 'jan@mail.cz', '••••••••'].forEach((txt, k) => out.push(`{ const el=document.getElementById("ty${k}"), s=${JSON.stringify(txt)}, o={v:0}; tl.fromTo(o,{v:0},{v:s.length,duration:${(BEAT * 0.9).toFixed(3)},ease:"none",immediateRender:false,onUpdate(){el.textContent=s.slice(0,Math.round(o.v));}}, ${(s0 + 0.3 + k * BEAT * 0.9).toFixed(3)}); }`));
-    T('#ubtn0', { scale: 1 }, { scale: 0.9, duration: 0.12, yoyo: true, repeat: 1 }, s0 + BEAT * 3);
-    const s1 = BAR(BARS.sys[0] + 4);
-    T('#ubtn1', { scale: 1 }, { scale: 0.9, duration: 0.12, yoyo: true, repeat: 1 }, s1 + BEAT * 1.5);
-    T0('#uok1', { opacity: 0, y: 1 * u }, { opacity: 1, y: 0, duration: 0.3 }, s1 + BEAT * 2);
-    const s2 = BAR(BARS.sys[0] + 5);
-    for (let i = 0; i < 6; i++) T0(`#dr${i}`, { opacity: 0, x: (rnd(i) - 0.5) * 20 * u, y: (rnd(i + 9) - 0.5) * 10 * u, rotation: (rnd(i + 3) - 0.5) * 40 }, { opacity: 1, x: 0, y: 0, rotation: 0, duration: 0.45, ease: 'back.out(1.6)' }, s2 + 0.2 + i * 0.08);
-    const s3 = BAR(BARS.sys[0] + 6);
-    for (let i = 0; i < 5; i++) T0(`#rs${i} span`, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, s3 + 0.2 + i * 0.1);
-    outT('#steps, #auto, #stph', b);
+    T('#lap', { y: 0 }, { y: -1.5 * u, duration: len(a + 1, b), ease: 'sine.inOut' }, a + 1);
+    outT('#sysh, #dev', b);
   }
 
   // ===================== 7) JAK ZAČÍT =====================
@@ -197,6 +240,17 @@ function build(W, H, file) {
     KIT.forEach((_, i) => { const t = a + BEAT * (3 + i * 1.5); pop(`#ki${i}`, t); T0(`#ki${i} svg *`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t); });
     pop('#hint', BAR(BARS.start[0] + 2) + BEAT);
     outT('#sth, #kit, #hint', b);
+  }
+
+  // ===================== 7b) SPOLUPRÁCE S ČRS =====================
+  {
+    const id = 's-crs', a = BAR(BARS.crs[0]), b = BAR(BARS.crs[1]);
+    scene(id, a, b, `${photos('cs', [86415], a, b, { op: 0.4 })}
+      <div class="crsw" id="crsw"><small>${nb('Trout Area Czech Republic spolupracuje s')}</small><span class="crsc" id="crsl"><img src="assets/crs.png" alt="Český rybářský svaz"></span><b>Českým rybářským svazem</b></div>`);
+    T0('#crsw small', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, a + 0.05);
+    T0('#crsl', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + BEAT);
+    rise('#crsw b', a + BEAT * 2.5);
+    outT('#crsw', b);
   }
 
   // ===================== 8) CTA =====================
@@ -286,6 +340,33 @@ function build(W, H, file) {
   .nums { position:absolute; ${P ? `left:${px(7)}; right:${px(7)}; top:${px(52)}` : `left:${px(7)}; right:${px(7)}; bottom:${px(12)}`}; display:grid; grid-template-columns:${P ? '1fr 1fr' : 'repeat(4, 1fr)'}; gap:${px(2)}; }
   .nm { background:rgba(5,13,34,.72); border-top:${px(0.7)} solid var(--red); border-radius:${px(1.4)}; padding:${px(2)} ${px(2.2)}; opacity:0; backdrop-filter:blur(${px(1)}); }
   .nm b { display:block; font:900 ${px(P ? 13 : 10)}/1 Montserrat; font-variant-numeric:tabular-nums; } .nm small { display:block; margin-top:${px(0.8)}; font:700 ${px(P ? 2.6 : 2)} Montserrat; text-transform:uppercase; letter-spacing:.08em; color:var(--gold); }
+  /* souboj */
+  .dbg { position:absolute; inset:0; background:radial-gradient(80% 70% at 50% 60%, #1b3c8c 0%, #0b1e42 60%, #050d22 100%); }
+  .dhd { top:${px(P ? 16 : 13)}; }
+  #s-duel .duel { ${P ? `top:${px(112)}` : `top:${px(13)}`}; } #s-duel .dcap { ${P ? `top:${px(146)}` : ''} }
+  .pond { position:absolute; left:50%; ${P ? `top:${px(60)}` : `top:${px(44)}`}; transform:translateX(-50%); transform-style:preserve-3d; opacity:0; }
+  .water { position:absolute; inset:${px(2.2)} ${px(1)}; border-radius:${px(4)}; background:linear-gradient(180deg, #16407a, #0d2c5c); box-shadow:inset 0 0 ${px(4)} rgba(0,0,0,.6), 0 0 0 ${px(0.5)} rgba(142,162,216,.45); }
+  .water::after { content:''; position:absolute; inset:0; border-radius:inherit; opacity:.25; background:repeating-linear-gradient(170deg, transparent 0 ${px(2)}, rgba(238,242,249,.35) ${px(2)} ${px(2.2)}); }
+  .sn { position:absolute; width:${px(3.4)}; height:${px(3.4)}; margin:${px(-1.7)} 0 0 ${px(-1.7)}; border-radius:50%; border:${px(0.3)} solid rgba(238,242,249,.55); background:rgba(5,13,34,.6); opacity:0; }
+  .sn em { position:absolute; left:50%; transform:translateX(-50%); font:700 ${px(1.4)} Montserrat; font-style:normal; color:var(--lb); white-space:nowrap; }
+  .sn em { top:${px(3.4)}; } .sn.up em { top:${px(-2.6)}; }
+  .pr { position:absolute; height:${px(0.5)}; margin-top:${px(-0.25)}; background:linear-gradient(90deg, var(--red), var(--gold)); transform-origin:50% 50%; opacity:0; border-radius:${px(0.3)}; }
+  .ag { position:absolute; width:${px(4)}; height:${px(4)}; margin:${px(-2)} 0 0 ${px(-2)}; border-radius:50%; background:var(--c); box-shadow:0 0 0 ${px(0.35)} #0b1e42, 0 0 ${px(1.6)} var(--c); display:flex; align-items:center; justify-content:center; opacity:0; z-index:2; }
+  .ag b { font:900 ${px(1.9)} Montserrat; color:#0b1e42; } .pt { position:absolute; bottom:100%; left:50%; transform:translateX(-50%); font:900 ${px(2)} Montserrat; text-decoration:none; color:var(--gold); opacity:0; white-space:nowrap; }
+  .rnd { position:absolute; ${P ? `right:${px(7)}; top:${px(44)}` : `right:${px(7)}; top:${px(10)}`}; display:flex; align-items:baseline; gap:${px(0.8)}; opacity:0; }
+  .rnd small { font:800 ${px(2.2)} Montserrat; text-transform:uppercase; letter-spacing:.12em; color:var(--lb); } .rnd b { font:900 ${px(8)}/1 Montserrat; color:var(--gold); font-variant-numeric:tabular-nums; min-width:${px(9)}; text-align:right; }
+  .dcap { position:absolute; ${P ? `left:${px(7)}; right:${px(7)}; top:${px(120)}` : `left:${px(7)}; right:${px(7)}; bottom:${px(6)}`}; font:700 ${px(P ? 3.3 : 2.6)}/1.35 Montserrat; text-align:${P ? 'left' : 'center'}; opacity:0; }
+  .dcap b { color:var(--gold); text-transform:uppercase; letter-spacing:.1em; } .dcap.fin { font-weight:800; color:var(--ice); } 
+  .win { display:flex; justify-content:center; gap:${px(1.6)}; flex-wrap:wrap; } .win span { white-space:nowrap; } .win b { font-weight:900; }
+  /* ryby */
+  .fishes { position:absolute; inset:0; overflow:hidden; }
+  .fw { position:absolute; left:-25%; width:${px(16)}; height:${px(8)}; margin-top:${px(-4)}; transform:scale(var(--s)); }
+  .ff { width:100%; height:100%; } .ff svg { width:100%; height:100%; overflow:visible; } .ff path { fill:#020610; }
+  .sysl { margin-top:${px(3)}; display:flex; flex-direction:column; gap:${px(1.2)}; } .sysl span { display:flex; align-items:center; gap:${px(1.2)}; font:700 ${px(P ? 3.2 : 2.4)} Montserrat; opacity:0; } .sysl i { width:${px(3.4)}; height:${px(3.4)}; border-radius:50%; background:#1fae5b; color:#fff; display:flex; align-items:center; justify-content:center; font:900 ${px(1.8)} Montserrat; font-style:normal; }
+  /* ČRS */
+  .crsw { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:${px(2.4)}; text-align:center; }
+  .crsw small { font:700 ${px(P ? 3.4 : 2.6)} Montserrat; text-transform:uppercase; letter-spacing:.12em; color:var(--gold); opacity:0; }
+  .crsc { background:#fff; border-radius:${px(2.4)}; padding:${px(2)} ${px(3.2)}; opacity:0; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.5); } .crsc img { display:block; width:${px(P ? 50 : 30)}; } .crsw b { display:block; overflow:hidden; font:900 ${px(P ? 6.4 : 5.4)} Montserrat; text-transform:uppercase; }
   /* systém */
   .sysbg { position:absolute; inset:0; background:radial-gradient(80% 70% at 70% 40%, #2a4aa8 0%, #0b1e42 60%, #050d22 100%); }
   .sysbg::after { content:''; position:absolute; inset:0; opacity:.14; background:linear-gradient(rgba(238,242,249,.6) 1px, transparent 1px) 0 0 / ${px(5)} ${px(5)}, linear-gradient(90deg, rgba(238,242,249,.6) 1px, transparent 1px) 0 0 / ${px(5)} ${px(5)}; -webkit-mask-image:radial-gradient(circle at 60% 50%, #000, transparent 75%); }
