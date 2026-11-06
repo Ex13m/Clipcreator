@@ -19,7 +19,7 @@ const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]|na|do|po|za|ke|ve|se|ze|od) /g
 
 const BARS = { hook: [0, 4], what: [4, 7], duel: [7, 17], all: [17, 21], cr: [21, 24], num: [24, 28], sys: [28, 32], start: [32, 35], crs: [35, 37], cta: [37, 40] };
 // ohniska fotek (x% y%) – ať ořez nesebere hlavy
-const FOC = { 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
+const FOC = { 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
@@ -175,7 +175,7 @@ function build(W, H, file) {
   // ===================== 3) PRO KAŽDÉHO =====================
   {
     const id = 's-all', a = BAR(BARS.all[0]), b = BAR(BARS.all[1]), tm = BAR(BARS.all[0] + 2);
-    const W4 = [86429, 86412, 86425, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
+    const W4 = [86429, 86451, 86425, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
     scene(id, a, b, `${photos('al', [86422, 86436], tm, b, { op: 0.55 })}
       <div class="tiles" id="tiles">${W4.map((im, i) => `<div class="tl" id="tl${i}"><div class="tph" style="${ph(im)}"></div></div>`).join('')}</div>
       <div class="words" id="words">${WORDS.map((w, i) => `<b id="wd${i}"><span>${w}</span></b>`).join('')}</div>
