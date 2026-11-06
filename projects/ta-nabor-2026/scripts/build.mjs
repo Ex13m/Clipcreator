@@ -447,7 +447,7 @@ function build(W, H, file) {
   ${scenes.join('\n  ')}
   </div>
   <div id="corner"><img src="assets/ta_logo.png" alt=""></div>
-  <audio id="music" class="clip" data-start="0" data-duration="${DUR}" data-track-index="0" src="assets/track.wav" data-volume="1"></audio>
+  <audio id="music" class="clip" data-start="0" data-duration="${DUR}" data-track-index="0" src="assets/mix.wav" data-volume="1"></audio>
   <div id="wipe">${Array.from({ length: NW }, (_, i) => `<i id="wp${i}"></i>`).join('')}</div>
   <div id="flash"></div>
   <div id="grain"></div>
