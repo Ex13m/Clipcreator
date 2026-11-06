@@ -19,7 +19,7 @@ const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]|na|do|po|za|ke|ve|se|ze|od) /g
 
 const BARS = { hook: [0, 4], what: [4, 7], duel: [7, 17], all: [17, 21], cr: [21, 24], num: [24, 28], sys: [28, 32], start: [32, 35], crs: [35, 37], cta: [37, 40] };
 // ohniska fotek (x% y%) – ať ořez nesebere hlavy
-const FOC = { 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
+const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
@@ -54,7 +54,7 @@ function build(W, H, file) {
   // ===================== 1) HOOK: rychlé střihy akce + „Rybaření, jak ho neznáš.“ =====================
   {
     const id = 's-hook', a = 0, b = BAR(BARS.hook[1]), t1 = BAR(2);
-    const fast = [86444, 86409, 86438, 86441, 86443, 86410, 86437, 86432];
+    const fast = [9014, 86409, 9055, 86438, 9016, 86443, 86437, 9006];
     scene(id, a, b, `${photos('hk', fast, BAR(0) + 0.0001, t1, { hard: true })}${photos('hk2', [86442], t1, b, { op: 0.7 })}
       <div class="mega" id="hk-t"><div class="ln"><span>Rybaření,</span></div><div class="ln red"><span>jak ho neznáš.</span></div></div>`);
     rise('#hk-t .ln:nth-child(1) span', t1); rise('#hk-t .ln:nth-child(2) span', t1 + BEAT * 2);
@@ -65,7 +65,7 @@ function build(W, H, file) {
   // ===================== 2) CO TO JE: moderní přívlač =====================
   {
     const id = 's-what', a = BAR(BARS.what[0]), b = BAR(BARS.what[1]);
-    scene(id, a, b, `${photos('wh', [86432, 86408, 86431], a, b, { op: 0.55 })}
+    scene(id, a, b, `${photos('wh', [9054, 86408, 9008], a, b, { op: 0.55 })}
       <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('Sportovní disciplína z Japonska. Lov lososovitých ryb na menších, dobře zarybněných stojatých vodách.')}</p></div>`);
     rise('#wh-h .kick', a + 0.05); rise('#wh-h h1 span', a + BEAT, 0.6, BEAT); pop('#wh-h p', a + BEAT * 3);
     outT('#wh-h', b);
@@ -175,8 +175,8 @@ function build(W, H, file) {
   // ===================== 3) PRO KAŽDÉHO =====================
   {
     const id = 's-all', a = BAR(BARS.all[0]), b = BAR(BARS.all[1]), tm = BAR(BARS.all[0] + 2);
-    const W4 = [86429, 86451, 86410, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
-    scene(id, a, b, `${photos('al', [86422, 86436], tm, b, { op: 0.55 })}
+    const W4 = [86429, 9032, 9005, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
+    scene(id, a, b, `${photos('al', [9033, 86436], tm, b, { op: 0.55 })}
       <div class="tiles" id="tiles">${W4.map((im, i) => `<div class="tl" id="tl${i}"><div class="tph" style="${ph(im)}"></div></div>`).join('')}</div>
       <div class="words" id="words">${WORDS.map((w, i) => `<b id="wd${i}"><span>${w}</span></b>`).join('')}</div>
       <div class="tagl" id="tagl">${kick('Jednotná pravidla pro všechny')}<h2><span>Nerozhoduje síla.</span></h2><h2 class="red"><span>${nb('Rozhoduje cit, taktika a přesnost.')}</span></h2></div>`);
@@ -205,7 +205,7 @@ function build(W, H, file) {
   {
     const id = 's-num', a = BAR(BARS.num[0]), b = BAR(BARS.num[1]);
     const RK = [['Závoď celou sezónu', 'každý závod se počítá'], ['Sbírej body do žebříčku', 'průběžně a online'], ['Nejlepší jdou do nominace', 'bez postupů přes několik lig']];
-    scene(id, a, b, `${photos('nm', [86456, 86455, 86458], a, b, { op: 0.5 })}
+    scene(id, a, b, `${photos('nm', [9030, 9028, 9027], a, b, { op: 0.5 })}
       <div class="blk nmh" id="nmh">${kick('Žebříček Trout Area')}<h2><span>${nb('Jedna sezóna')}</span></h2><h2 class="red"><span>stačí.</span></h2>
         <div class="chips rkc">${RK.map(([t, s], i) => `<div class="chip" id="rk${i}"><i>${i + 1}</i><div><b>${t}</b><small>${nb(s)}</small></div></div>`).join('')}</div></div>`);
     rise('#nmh .kick', a + 0.05); rise('#nmh h2:nth-of-type(1) span', a + BEAT); rise('#nmh h2:nth-of-type(2) span', a + BEAT * 2);
@@ -259,7 +259,7 @@ function build(W, H, file) {
       lure: '<path d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle cx="32" cy="20" r="5" stroke-width="4"/>',
       net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
     };
-    scene(id, a, b, `${photos('sa', [86439, 86433, 86426], a, b, { op: 0.5 })}
+    scene(id, a, b, `${photos('sa', [9015, 86433, 9007], a, b, { op: 0.5 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
       <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přijď na závod. Zkušení závodníci rádi poradí.')}</div>`);
@@ -282,7 +282,7 @@ function build(W, H, file) {
   // ===================== 8) CTA =====================
   {
     const id = 's-cta', a = BAR(BARS.cta[0]), b = DUR;
-    scene(id, a, b, `${photos('ct', [86450, 86436], a, b, { op: 0.28 })}
+    scene(id, a, b, `${photos('ct', [9033, 9000], a, b, { op: 0.28 })}
       <div class="cta" id="cta"><img class="tal" id="tal" src="assets/ta_logo.png" alt="Trout Area Czech Republic">
         <h1 id="cth"><span>Přijď si to</span><span class="red">vyzkoušet.</span></h1>
         <div class="url" id="url"><small>Pravidla · termíny · výsledky · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>`);
