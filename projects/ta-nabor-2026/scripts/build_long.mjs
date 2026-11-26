@@ -24,7 +24,7 @@ const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
-Object.assign(FOC, { 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
+Object.assign(FOC, { 9513: '50% 50%', 9526: '50% 55%', 9527: '50% 55%', 9508: '50% 55%', 9511: '50% 55%', 9502: '50% 40%', 9601: '50% 35%', 9802: '50% 55%', 9812: '50% 40%', 9820: '50% 55%', 9813: '50% 40%', 9901: '50% 45%', 9926: '50% 35%', 9902: '50% 30%', 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -63,7 +63,7 @@ function build(W, H, file) {
   // ===================== 1) HOOK: rychlé střihy akce + „Rybaření, jak ho neznáš.“ =====================
   {
     const id = 's-hook', a = 0, b = BAR(BARS.hook[1]), t1 = BAR(2);
-    const fast = [9302, 9708, 9308, 9709, 9304, 86443, 9707, 86444];
+    const fast = [9513, 9302, 9526, 9709, 9308, 9527, 9304, 9707];
     scene(id, a, b, `${photos('hk', fast, BAR(0) + 0.0001, t1, { hard: true })}${photos('hk2', [86442], t1, b, { op: 0.7 })}
       <div class="mega" id="hk-t"><div class="ln"><span>Rybaření,</span></div><div class="ln red"><span>jak ho neznáš.</span></div></div>`);
     rise('#hk-t .ln:nth-child(1) span', t1); rise('#hk-t .ln:nth-child(2) span', t1 + BEAT * 2);
@@ -74,7 +74,7 @@ function build(W, H, file) {
   // ===================== 2) CO TO JE: moderní přívlač =====================
   {
     const id = 's-what', a = BAR(BARS.what[0]), b = BAR(BARS.what[1]);
-    scene(id, a, b, `${photos('wh', [9054, 86408, 9008], a, b, { op: 0.55 })}
+    scene(id, a, b, `${photos('wh', [9502, 86408, 9511], a, b, { op: 0.55 })}
       <div class="blk lft" id="wh-h">${kick('Trout Area')}<h1><span>Moderní</span><span class="red">přívlač</span></h1><p>${nb('Sportovní disciplína z Japonska. Lov pstruhů a sivenů na menších, dobře zarybněných stojatých vodách.')}</p></div>`);
     rise('#wh-h .kick', a + 0.05); rise('#wh-h h1 span', a + BEAT, 0.6, BEAT); pop('#wh-h p', a + BEAT * 3);
     outT('#wh-h', b);
@@ -185,7 +185,7 @@ function build(W, H, file) {
   {
     const id = 's-all', a = BAR(BARS.all[0]), b = BAR(BARS.all[1]), tm = BAR(BARS.all[0] + 2);
     const W4 = [86429, 9032, 9005, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
-    scene(id, a, b, `${photos('al', [9033, 9706], tm, b, { op: 0.55 })}
+    scene(id, a, b, `${photos('al', [9033, 9601], tm, b, { op: 0.55 })}
       <div class="tiles" id="tiles">${W4.map((im, i) => `<div class="tl" id="tl${i}"><div class="tph" style="${ph(im)}"></div></div>`).join('')}</div>
       <div class="words" id="words">${WORDS.map((w, i) => `<b id="wd${i}"><span>${w}</span></b>`).join('')}</div>
       <div class="tagl" id="tagl">${kick('Jednotná pravidla pro všechny')}<h2><span>Nerozhoduje síla.</span></h2><h2 class="red"><span>${nb('Rozhoduje cit, taktika a přesnost.')}</span></h2></div>`);
@@ -202,7 +202,7 @@ function build(W, H, file) {
   {
     const id = 's-cr', a = BAR(BARS.cr[0]), b = BAR(BARS.cr[1]);
     const RU = [['Umělé nástrahy', 'plandavky, woblery i gumy'], ['Jeden jednoháček', 'originální, bez protihrotu'], ['Nástraha min. 18 mm', 'zátěž uvnitř těla'], ['Prut max. 2,7 m', 'bez teleskopů a baitcastu'], ['Podběrák', 'bezuzlová gumová síťka'], ['Chyť a pusť', 'každá ryba zpět do vody']];
-    scene(id, a, b, `${photos('cr', [86437, 86438, 86434], a, b, { op: 0.35 })}
+    scene(id, a, b, `${photos('cr', [9513, 86438, 9508], a, b, { op: 0.35 })}
       <div class="blk rlh" id="rlh">${kick('Soutěžní a závodní řád')}<h2><span>Jednotná pravidla</span></h2><h2 class="red"><span>pro všechny.</span></h2></div>
       <div class="rules" id="rules">${RU.map(([t, s2], i) => `<div class="ru" id="ru${i}"><i>${String(i + 1).padStart(2, '0')}</i><b>${nb(t)}</b><small>${nb(s2)}</small></div>`).join('')}</div>`);
     rise('#rlh .kick', a + 0.05); rise('#rlh h2:nth-of-type(1) span', a + BEAT); rise('#rlh h2:nth-of-type(2) span', a + BEAT * 2);
@@ -215,7 +215,7 @@ function build(W, H, file) {
   {
     const id = 's-season', a = BAR(BARS.season[0]), b = BAR(BARS.season[1]);
     const WK = [['Jaro', 'víkend 1'], ['Jaro', 'víkend 2'], ['Podzim', 'víkend 3'], ['Podzim', 'MČR']];
-    scene(id, a, b, `${photos('se', [9303, 9704, 9305], a, b, { op: 0.3 })}<div class="gridbg"></div>
+    scene(id, a, b, `${photos('se', [9802, 9812, 9820], a, b, { op: 0.3 })}<div class="gridbg"></div>
       <div class="blk seh" id="seh">${kick('Jak probíhá sezóna')}<h2><span>${nb('4 dvoudenní víkendy.')}</span></h2><h2 class="red"><span>${nb('8 závodních dnů.')}</span></h2></div>
       <div class="cal" id="cal"><i class="tline" id="tline"></i>
         <div class="sea s1" id="sea0"><b>Jaro</b><small>březen – květen</small></div><div class="sea s2" id="sea1"><b>Podzim</b><small>září – listopad</small></div>
@@ -296,7 +296,7 @@ function build(W, H, file) {
     const CARDS = [['lg_hb', 'H-Battle', 'evropský pohár na tvrdé nástrahy · dvoudenní'], ['lg_atlas', 'ATLAS', 'mezinárodní unie lig · týmový World Cup'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
     const HH = P ? 92 * u : 62 * u;
     const tc0 = a + BEAT * 12.4;
-    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9307, 9309, 9222], a, b, { op: 0.7 })}<div class="otx" id="otx">Reprezentace</div>
+    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9901, 9926, 9307, 9902], a, b, { op: 0.7 })}<div class="otx" id="otx">Reprezentace</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
     T0('#glb', { rotation: 0, opacity: 0 }, { rotation: 25, opacity: 1, duration: len(a, b), ease: 'none' }, a);
@@ -374,7 +374,7 @@ function build(W, H, file) {
       lure: '<path d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle cx="32" cy="20" r="5" stroke-width="4"/>',
       net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
     };
-    scene(id, a, b, `${photos('sa', [9710, 9711, 9707], a, b, { op: 0.5 })}
+    scene(id, a, b, `${photos('sa', [9813, 9710, 9711], a, b, { op: 0.5 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
       <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
