@@ -212,63 +212,65 @@ function build(W, H, file) {
     outT('#rlh, #rules', b);
   }
 
-  // ===================== 5a) SEZÓNA: jaro + podzim, ~6 bodovaných závodů, jednodenní =====================
+  // ===================== 5a) SEZÓNA: 2 dvoudenní víkendy na jaře + 2 na podzim (vč. MČR) = 8 závodních dnů =====================
   {
     const id = 's-season', a = BAR(BARS.season[0]), b = BAR(BARS.season[1]);
-    const RACES = [['Jaro', 'březen – květen', [1, 2, 3]], ['Podzim', 'září – listopad', [4, 5, 6]]];
-    scene(id, a, b, `${photos('se', [9008, 9016, 86432], a, b, { op: 0.3 })}<div class="gridbg"></div>
-      <div class="blk seh" id="seh">${kick('Jak probíhá sezóna')}<h2><span>Jaro + podzim.</span></h2><h2 class="red"><span>${nb('Cca 6 bodovaných závodů.')}</span></h2></div>
-      <div class="track" id="track"><i class="tline" id="tline"></i>
-        ${RACES.map(([n, m, rr], k) => `<div class="tseg" id="tseg${k}"><b>${n}</b><small>${m}</small><div class="pins">${rr.map((r) => `<span class="pin" id="pin${r}"><em>${r}</em><s>závod</s></span>`).join('')}</div></div>`).join('')}</div>
-      <div class="day" id="day"><div class="dclock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="dclk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="dclkt">08:00</span></div>
-        <div class="dtx"><b>${nb('Jeden den = jeden závod')}</b><small>8:00 první kolo · 12 kol × 20 min · cca 16:00 vyhlášení</small><div class="ticks">${Array.from({ length: 12 }, (_, i) => `<i id="tk${i}"></i>`).join('')}</div></div></div>`);
-    rise('#seh .kick', a + 0.05); rise('#seh h2:nth-of-type(1) span', a + BEAT); rise('#seh h2:nth-of-type(2) span', a + BEAT * 4);
+    const WK = [['Jaro', 'víkend 1'], ['Jaro', 'víkend 2'], ['Podzim', 'víkend 3'], ['Podzim', 'MČR']];
+    scene(id, a, b, `${photos('se', [86406, 86415, 86435], a, b, { op: 0.3 })}<div class="gridbg"></div>
+      <div class="blk seh" id="seh">${kick('Jak probíhá sezóna')}<h2><span>${nb('4 dvoudenní víkendy.')}</span></h2><h2 class="red"><span>${nb('8 závodních dnů.')}</span></h2></div>
+      <div class="cal" id="cal"><i class="tline" id="tline"></i>
+        <div class="sea s1" id="sea0"><b>Jaro</b><small>březen – květen</small></div><div class="sea s2" id="sea1"><b>Podzim</b><small>září – listopad</small></div>
+        <div class="wks">${WK.map(([s2, n], k) => `<div class="wk${n === 'MČR' ? ' mcr' : ''}" id="wk${k}"><small>${n}</small><div class="dd">${[1, 2].map((dn) => `<span class="dpin" id="dp${k * 2 + dn - 1}"><em>${k * 2 + dn}</em><s>den ${dn}</s></span>`).join('')}</div></div>`).join('')}</div>
+        <div class="free" id="free"><b>${nb('Volné termíny')}</b><small>${nb('pro další závody doma i v zahraničí')}</small></div></div>`);
+    rise('#seh .kick', a + 0.05); rise('#seh h2:nth-of-type(1) span', a + BEAT); rise('#seh h2:nth-of-type(2) span', a + BEAT * 10);
     T0('#tline', { scaleX: 0 }, { scaleX: 1, duration: BEAT * 4, ease: 'power2.inOut' }, a + BEAT * 1.5);
-    [0, 1].forEach((k) => T0(`#tseg${k}`, { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * (2 + k * 2)));
-    [1, 2, 3, 4, 5, 6].forEach((r, i) => T0(`#pin${r}`, { opacity: 0, y: -6 * u, scale: 0.5 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2.2)' }, a + BEAT * (5 + i)));
-    const td = a + BEAT * 13;
-    T0('#day', { opacity: 0, y: 4 * u }, { opacity: 1, y: 0, duration: 0.55, ease: 'expo.out' }, td);
-    T0('#dclk', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: BEAT * 10, ease: 'none' }, td + 0.3);
-    out.push(`{ const o={v:480}, el=document.getElementById("dclkt"); tl.fromTo(o,{v:480},{v:960,duration:${(BEAT * 10).toFixed(3)},ease:"none",immediateRender:false,onUpdate(){const m=Math.round(o.v/10)*10;el.textContent=String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");}}, ${(td + 0.3).toFixed(3)}); }`);
-    T0('.ticks i', { scaleY: 0, opacity: 0.3 }, { scaleY: 1, opacity: 1, duration: 0.2, ease: 'back.out(3)', stagger: (BEAT * 10) / 12 }, td + 0.3);
-    outT('#seh, #track, #day', b);
+    T0('#sea0', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 2);
+    T0('#sea1', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 6);
+    [0, 1, 2, 3].forEach((k) => { const t = a + BEAT * (3 + k * 2 + (k > 1 ? 1 : 0));
+      T0(`#wk${k}`, { opacity: 0, y: 4 * u, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2)' }, t);
+      [0, 1].forEach((j) => T0(`#dp${k * 2 + j}`, { opacity: 0, y: -4 * u }, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2.5)' }, t + 0.15 + j * 0.15)); });
+    T('#wk3', { boxShadow: '0 0 0 0px rgba(255,211,107,0)' }, { boxShadow: `0 0 0 ${px(0.6)} rgba(255,211,107,1)`, duration: 0.3, yoyo: true, repeat: 3 }, a + BEAT * 11);
+    T0('#free', { opacity: 0, x: 4 * u }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 14);
+    T0('.dpin em', { scale: 1 }, { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1, stagger: 0.08 }, a + BEAT * 10);
+    outT('#seh, #cal', b);
   }
 
-  // ===================== 5b) ŽEBŘÍČEK: umístění = body, součet, škrtání nejhoršího =====================
+  // ===================== 5b) ŽEBŘÍČEK: 8 dnů, umístění = body, 2 nejhorší se škrtají (pojistka i pro neúčast) =====================
   {
     const id = 's-rank', a = BAR(BARS.rank[0]), b = BAR(BARS.rank[1]);
-    const R = { A: [3, 1, 4, 2, 9, 2], B: [1, 5, 2, 6, 4, 8], C: [6, 2, 1, 8, 2, 3], D: [2, 9, 3, 1, 5, 4], E: [4, 3, 6, 3, 1, 6] };
-    const K = Object.keys(R), CC = { A: '#e31e24', B: '#ffd36b', C: '#7fd0ff', D: '#9be27a', E: '#ff8fd0' };
-    const sum = (k, n = 6) => R[k].slice(0, n).reduce((x, y) => x + y, 0);
-    const worst = (k) => R[k].indexOf(Math.max(...R[k]));
-    const fin = (k) => sum(k) - Math.max(...R[k]);
-    const RH = P ? 9.5 * u : 6.6 * u;
-    scene(id, a, b, `<div class="rbg"></div>${hero('rk-h', 9030, P ? 62 * u : 92 * u)}
-      <div class="blk rkh" id="rkh">${kick('Celoroční žebříček')}<h2><span>${nb('Umístění = body.')}</span></h2><h2 class="red"><span>${nb('Nejméně bodů vede.')}</span></h2></div>
-      <div class="tbl" id="tbl"><div class="thd"><span></span>${[1, 2, 3, 4, 5, 6].map((n) => `<span>Z${n}</span>`).join('')}<span>Σ</span></div>
-        <div class="tbd" style="height:${(RH * 5).toFixed(0)}px">${K.map((k, r) => `<div class="tr" id="tr${k}" style="height:${RH.toFixed(0)}px"><span class="who" style="--c:${CC[k]}"><b>${k}</b></span>${R[k].map((v, c) => `<span class="cl" id="c${k}${c}"><em>${v}</em><s class="x" id="x${k}${c}"></s></span>`).join('')}<span class="sm" id="sm${k}">0</span><i class="lead" id="ld${k}">1.</i></div>`).join('')}</div></div>
-      <div class="rnote" id="rnote"><b>${nb('Nejhorší výsledky se škrtají')}</b><small>${nb('6–7 závodů: −1 nejhorší · 8–9 závodů: −2 nejhorší')}</small></div>`);
+    const AB = 60;   // neúčast = počet závodníků (40) + 20
+    const R = { A: [3, 1, 4, 2, 9, 2, 5, 3], B: [1, 5, 2, 6, 4, 8, 2, 7], C: [6, 2, 1, 8, 2, 3, 4, 6], D: [2, AB, 3, 1, 5, 4, AB, 2], E: [4, 3, 6, 3, 1, 6, 5, 9] };
+    const K = Object.keys(R), CC = { A: '#e31e24', B: '#ffd36b', C: '#7fd0ff', D: '#9be27a', E: '#ff8fd0' }, ND = 8;
+    const sum = (k, n = ND) => R[k].slice(0, n).reduce((x, y) => x + y, 0);
+    const worst2 = (k) => R[k].map((v, i) => [v, i]).sort((x, y) => y[0] - x[0]).slice(0, 2).map(([, i]) => i);
+    const fin = (k) => sum(k) - worst2(k).reduce((s2, i) => s2 + R[k][i], 0);
+    const RH = P ? 9.2 * u : 6.4 * u;
+    scene(id, a, b, `<div class="rbg"></div>${hero('rk-h', 9030, P ? 60 * u : 92 * u)}
+      <div class="blk rkh" id="rkh">${kick('Celoroční žebříček')}<h2><span>${nb('Umístění = body.')}</span></h2><h2 class="red"><span>${nb('Nejmenší součet vede.')}</span></h2></div>
+      <div class="tbl t8" id="tbl"><div class="thd"><span></span>${Array.from({ length: ND }, (_, n) => `<span>${n + 1}</span>`).join('')}<span>Σ</span></div>
+        <div class="tbd" style="height:${(RH * 5).toFixed(0)}px">${K.map((k) => `<div class="tr" id="tr${k}" style="height:${RH.toFixed(0)}px"><span class="who" style="--c:${CC[k]}"><b>${k}</b></span>${R[k].map((v, c) => `<span class="cl${v === AB ? ' ab' : ''}" id="c${k}${c}"><em>${v === AB ? '×' : v}</em><s class="x" id="x${k}${c}"></s></span>`).join('')}<span class="sm" id="sm${k}">0</span><i class="lead" id="ld${k}">1.</i></div>`).join('')}</div>
+        <div class="tleg"><span><i>×</i> ${nb('neúčast = počet závodníků + 20 bodů')}</span></div></div>
+      <div class="rnote" id="rnote"><b>${nb('Z 8 dnů se 2 nejhorší škrtají')}</b><small>${nb('pojistka, když nestihneš víkend nebo druhý den')}</small></div>`);
     heroIn('rk-h', a + BEAT * 2, 1);
-    rise('#rkh .kick', a + 0.05); rise('#rkh h2:nth-of-type(1) span', a + BEAT); rise('#rkh h2:nth-of-type(2) span', a + BEAT * 9);
-    const order0 = [...K]; order0.forEach((k, r) => SET(`#tr${k}`, { y: r * RH }, a));
+    rise('#rkh .kick', a + 0.05); rise('#rkh h2:nth-of-type(1) span', a + BEAT); rise('#rkh h2:nth-of-type(2) span', a + BEAT * 8);
+    K.forEach((k, r) => SET(`#tr${k}`, { y: r * RH }, a));
     T0('#tbl', { opacity: 0, y: 4 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 2);
     T0('.tr', { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out', stagger: 0.07 }, a + BEAT * 2.5);
-    for (let c = 0; c < 6; c++) { const t = a + BEAT * (4 + c * 1.5);
+    for (let c = 0; c < ND; c++) { const t = a + BEAT * (4 + c * 1.1);
       K.forEach((k) => { T0(`#c${k}${c} em`, { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, t); SET(`#sm${k}`, { textContent: sum(k, c + 1) }, t + 0.05); });
       T0(`.thd span:nth-child(${c + 2})`, { color: '#ffd36b' }, { color: '#8ea2d8', duration: 0.6 }, t); }
     const sortRows = (key, t) => { const ord = [...K].sort((x, y) => key(x) - key(y)); ord.forEach((k, r) => T(`#tr${k}`, {}, { y: r * RH, duration: 0.7, ease: 'power3.inOut' }, t)); return ord; };
-    const t1 = a + BEAT * 14; sortRows((k) => sum(k), t1);
+    const t1 = a + BEAT * 13.5; sortRows((k) => sum(k), t1);
     const t2 = a + BEAT * 18;
     T0('#rnote', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(2)' }, t2 - BEAT);
-    K.forEach((k) => { const w = worst(k);
-      T0(`#x${k}${w}`, { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: 'power2.out' }, t2);
-      T(`#c${k}${w} em`, { opacity: 1 }, { opacity: 0.35, duration: 0.3 }, t2 + 0.1);
-      const o = { v: sum(k) };
-      out.push(`{ const o={v:${sum(k)}}, el=document.getElementById("sm${k}"); tl.fromTo(o,{v:${sum(k)}},{v:${fin(k)},duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t2 + 0.3).toFixed(3)}); }`); });
+    K.forEach((k) => { worst2(k).forEach((w, j) => {
+        T0(`#x${k}${w}`, { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: 'power2.out' }, t2 + j * 0.25);
+        T(`#c${k}${w} em`, { opacity: 1 }, { opacity: 0.35, duration: 0.3 }, t2 + 0.1 + j * 0.25); });
+      out.push(`{ const o={v:${sum(k)}}, el=document.getElementById("sm${k}"); tl.fromTo(o,{v:${sum(k)}},{v:${fin(k)},duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t2 + 0.5).toFixed(3)}); }`); });
     const ord2 = sortRows(fin, t2 + BEAT * 3);
-    T0(`#ld${ord2[0]}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(3)' }, t2 + BEAT * 4.5);
-    T(`#tr${ord2[0]}`, { backgroundColor: 'rgba(255,211,107,0)' }, { backgroundColor: 'rgba(255,211,107,.22)', duration: 0.4 }, t2 + BEAT * 4.5);
-    T('#trD', { backgroundColor: 'rgba(155,226,122,0)' }, { backgroundColor: 'rgba(155,226,122,.25)', duration: 0.3, yoyo: true, repeat: 1 }, t2 + BEAT * 3);
+    T('#trD', { backgroundColor: 'rgba(155,226,122,0)' }, { backgroundColor: 'rgba(155,226,122,.28)', duration: 0.35, yoyo: true, repeat: 3 }, t2 + BEAT * 3);
+    T0(`#ld${ord2[0]}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(3)' }, t2 + BEAT * 5);
+    T(`#tr${ord2[0]}`, { backgroundColor: 'rgba(255,211,107,0)' }, { backgroundColor: 'rgba(255,211,107,.22)', duration: 0.4 }, t2 + BEAT * 5);
     outT('#rkh, #tbl, #rnote, #rk-h', b);
   }
 
@@ -292,10 +294,10 @@ function build(W, H, file) {
   // ===================== 5d) MEZINÁRODNÍ SCÉNA: reprezentace → H-Battle, ATLAS, MS FIPSed =====================
   {
     const id = 's-world', a = BAR(BARS.world[0]), b = BAR(BARS.world[1]);
-    const CARDS = [['lg_hb', 'H-Battle', 'Hard Bait liga · týmové závody'], ['lg_atlas', 'ATLAS', 'Area Trout Leagues Association'], ['lg_fips', 'Mistrovství světa', 'FIPSed']];
+    const CARDS = [['lg_hb', 'H-Battle', 'mezinárodní Hard Bait liga · dvoudenní turnaje · nominace každý rok'], ['lg_atlas', 'ATLAS', 'mezinárodní Trout Area liga · nominace každý rok'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
     const HH = P ? 58 * u : 70 * u;
     scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div><div class="otx" id="otx">Reprezentace</div>
-      <div class="heroes" id="heroes">${hero('wh0', 9028, HH * 0.96)}${hero('wh1', 9032, HH)}${hero('wh2', 9030, HH * 0.98)}</div>
+      <div class="heroes" id="heroes">${hero('wh0', 9028, HH * 0.96)}${hero('wh1', 9027, HH * 0.8)}${hero('wh2', 9054, HH * 0.9)}</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
     T0('#glb', { rotation: 0, opacity: 0 }, { rotation: 25, opacity: 1, duration: len(a, b), ease: 'none' }, a);
@@ -317,7 +319,7 @@ function build(W, H, file) {
       <div class="blk nmh" id="nmh">${kick('Nominace')}<div class="ladder" id="ladder"><span>Krajská liga</span><span>2. liga</span><span>1. liga</span><i class="lx" id="lx"></i></div>
         <h2><span>${nb('Jedna sezóna')}</span></h2><h2 class="red"><span>stačí.</span></h2>
         <div class="flow" id="flow"><b>Žebříček</b><i>→</i><b>Nominace</b><i>→</i><b class="r">Reprezentace</b></div>
-        <small class="fnote" id="fnote">${nb('ATLAS a H-Battle: 6 nejlepších výsledků z posledních 8 závodů. MS FIPSed: nominaci navrhuje státní trenér, žebříček je hlavní kritérium.')}</small></div>`);
+        <small class="fnote" id="fnote">${nb('ATLAS a H-Battle: 6 nejlepších výsledků z posledních 8 závodů. MS FIPSed: nominaci navrhuje státní trenér, žebříček je hlavní kritérium. Max. 2 mezinárodní závody ročně na závodníka.')}</small></div>`);
     heroIn('nm-h', a + 0.1, 1);
     rise('#nmh .kick', a + 0.05);
     T0('#ladder span', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.3, stagger: BEAT / 2 }, a + BEAT * 0.5);
@@ -616,6 +618,20 @@ function build(W, H, file) {
   .flow { display:flex; flex-wrap:wrap; align-items:center; gap:${px(1.2)}; margin-top:${px(3)}; } .flow b { font:900 ${px(P ? 3.4 : 2.6)} Montserrat; text-transform:uppercase; background:rgba(238,242,249,.95); color:var(--navy); padding:${px(0.8)} ${px(1.6)}; border-radius:${px(1)}; opacity:0; } .flow b.r { background:var(--red); color:#fff; } .flow i { font:900 ${px(3)} Montserrat; font-style:normal; color:var(--gold); opacity:0; }
   .fnote { display:block; margin-top:${px(2.4)}; max-width:${px(P ? 60 : 92)}; font:600 ${px(P ? 2.5 : 1.9)}/1.35 Montserrat; color:rgba(238,242,249,.75); opacity:0; }
 
+  /* sezóna – víkendy */
+  .cal { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; top:${px(62)}` : `left:${px(7)}; right:${px(7)}; top:${px(40)}`}; }
+  .cal .tline { top:${px(P ? 13 : 10)}; }
+  .sea { position:absolute; top:0; opacity:0; } .sea.s1 { left:0; } .sea.s2 { left:50%; } .sea b { display:block; font:900 ${px(P ? 5.6 : 4.4)} Montserrat; text-transform:uppercase; } .sea small { display:block; font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; }
+  .wks { position:absolute; left:0; right:0; top:${px(P ? 19 : 15)}; display:grid; grid-template-columns:repeat(4, 1fr); gap:${px(P ? 1.6 : 2.4)}; }
+  .wk { background:rgba(5,13,34,.8); border:${px(0.22)} solid rgba(238,242,249,.2); border-radius:${px(1.6)}; padding:${px(1.4)}; opacity:0; } .wk:nth-child(-n+2) { border-top:${px(0.7)} solid #7fd0ff; } .wk:nth-child(n+3) { border-top:${px(0.7)} solid var(--red); }
+  .wk > small { display:block; font:800 ${px(P ? 2.4 : 1.9)} Montserrat; text-transform:uppercase; letter-spacing:.1em; color:var(--lb); } .wk.mcr > small { color:var(--gold); }
+  .dd { display:flex; gap:${px(P ? 1 : 1.4)}; margin-top:${px(1)}; } .dpin { flex:1; border-radius:${px(1.2)}; background:var(--red); display:flex; flex-direction:column; align-items:center; padding:${px(0.8)} 0; opacity:0; } .wk:nth-child(-n+2) .dpin { background:#2a5bd6; }
+  .dpin em { font:900 ${px(P ? 4.2 : 3.4)}/1 Montserrat; font-style:normal; } .dpin s { text-decoration:none; font:700 ${px(P ? 1.6 : 1.3)} Montserrat; text-transform:uppercase; letter-spacing:.06em; }
+  .free { position:absolute; left:0; ${P ? `top:${px(50)}` : `top:${px(36)}`}; border-left:${px(0.8)} solid var(--gold); padding-left:${px(2)}; opacity:0; } .free b { display:block; font:900 ${px(P ? 4 : 3)} Montserrat; text-transform:uppercase; } .free small { font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--lb); }
+  /* žebříček 8 dnů */
+  .t8 .thd, .t8 .tr { grid-template-columns:${P ? `${px(9)} repeat(8, 1fr) ${px(11)}` : `${px(8)} repeat(8, 1fr) ${px(10)}`}; }
+  .t8 .cl { font-size:${px(P ? 3.2 : 2.4)}; } .cl.ab em { color:var(--red); }
+  .tleg { margin-top:${px(1.2)}; font:700 ${px(P ? 2.3 : 1.7)} Montserrat; color:var(--lb); } .tleg i { color:var(--red); font-style:normal; font-weight:900; }
   /* globální */
   #corner { position:absolute; ${P ? `left:${px(7)}; top:${px(6)}; width:${px(30)}` : `left:${px(7)}; top:${px(5)}; width:${px(18)}`}; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }

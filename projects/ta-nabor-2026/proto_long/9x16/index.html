@@ -203,6 +203,20 @@
   .flow { display:flex; flex-wrap:wrap; align-items:center; gap:13px; margin-top:32px; } .flow b { font:900 37px Montserrat; text-transform:uppercase; background:rgba(238,242,249,.95); color:var(--navy); padding:9px 17px; border-radius:11px; opacity:0; } .flow b.r { background:var(--red); color:#fff; } .flow i { font:900 32px Montserrat; font-style:normal; color:var(--gold); opacity:0; }
   .fnote { display:block; margin-top:26px; max-width:648px; font:600 27px/1.35 Montserrat; color:rgba(238,242,249,.75); opacity:0; }
 
+  /* sezóna – víkendy */
+  .cal { position:absolute; left:65px; right:65px; top:670px; }
+  .cal .tline { top:140px; }
+  .sea { position:absolute; top:0; opacity:0; } .sea.s1 { left:0; } .sea.s2 { left:50%; } .sea b { display:block; font:900 60px Montserrat; text-transform:uppercase; } .sea small { display:block; font:700 28px Montserrat; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; }
+  .wks { position:absolute; left:0; right:0; top:205px; display:grid; grid-template-columns:repeat(4, 1fr); gap:17px; }
+  .wk { background:rgba(5,13,34,.8); border:2px solid rgba(238,242,249,.2); border-radius:17px; padding:15px; opacity:0; } .wk:nth-child(-n+2) { border-top:8px solid #7fd0ff; } .wk:nth-child(n+3) { border-top:8px solid var(--red); }
+  .wk > small { display:block; font:800 26px Montserrat; text-transform:uppercase; letter-spacing:.1em; color:var(--lb); } .wk.mcr > small { color:var(--gold); }
+  .dd { display:flex; gap:11px; margin-top:11px; } .dpin { flex:1; border-radius:13px; background:var(--red); display:flex; flex-direction:column; align-items:center; padding:9px 0; opacity:0; } .wk:nth-child(-n+2) .dpin { background:#2a5bd6; }
+  .dpin em { font:900 45px/1 Montserrat; font-style:normal; } .dpin s { text-decoration:none; font:700 17px Montserrat; text-transform:uppercase; letter-spacing:.06em; }
+  .free { position:absolute; left:0; top:540px; border-left:9px solid var(--gold); padding-left:22px; opacity:0; } .free b { display:block; font:900 43px Montserrat; text-transform:uppercase; } .free small { font:700 28px Montserrat; color:var(--lb); }
+  /* žebříček 8 dnů */
+  .t8 .thd, .t8 .tr { grid-template-columns:97px repeat(8, 1fr) 119px; }
+  .t8 .cl { font-size:35px; } .cl.ab em { color:var(--red); }
+  .tleg { margin-top:13px; font:700 25px Montserrat; color:var(--lb); } .tleg i { color:var(--red); font-style:normal; font-weight:900; }
   /* globální */
   #corner { position:absolute; left:76px; top:65px; width:324px; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }
@@ -243,29 +257,30 @@
   <section id="s-cr" class="clip" data-start="39.776" data-duration="11.401" data-track-index="2"><div class="ph" id="cr_0" style="background-image:url(assets/photos/p86437.jpg); background-position:50% 50%"></div><div class="ph" id="cr_1" style="background-image:url(assets/photos/p86438.jpg); background-position:50% 60%"></div><div class="ph" id="cr_2" style="background-image:url(assets/photos/p86434.jpg); background-position:50% 45%"></div><div class="pho"></div>
       <div class="blk rlh" id="rlh"><div class="kick"><i></i>Soutěžní a závodní řád</div><h2><span>Jednotná pravidla</span></h2><h2 class="red"><span>pro všechny.</span></h2></div>
       <div class="rules" id="rules"><div class="ru" id="ru0"><i>01</i><b>Umělé nástrahy</b><small>plandavky, woblery i gumy</small></div><div class="ru" id="ru1"><i>02</i><b>Jeden jednoháček</b><small>originální, bez protihrotu</small></div><div class="ru" id="ru2"><i>03</i><b>Nástraha min. 18 mm</b><small>zátěž uvnitř těla</small></div><div class="ru" id="ru3"><i>04</i><b>Prut max. 2,7 m</b><small>bez teleskopů a baitcastu</small></div><div class="ru" id="ru4"><i>05</i><b>Podběrák</b><small>bezuzlová gumová síťka</small></div><div class="ru" id="ru5"><i>06</i><b>Chyť a pusť</b><small>každá ryba zpět do vody</small></div></div></section>
-  <section id="s-season" class="clip" data-start="60.697" data-duration="13.305" data-track-index="2"><div class="ph" id="se_0" style="background-image:url(assets/photos/p9008.jpg); background-position:35% 55%"></div><div class="ph" id="se_1" style="background-image:url(assets/photos/p9016.jpg); background-position:40% 55%"></div><div class="ph" id="se_2" style="background-image:url(assets/photos/p86432.jpg); background-position:50% 40%"></div><div class="pho"></div><div class="gridbg"></div>
-      <div class="blk seh" id="seh"><div class="kick"><i></i>Jak probíhá sezóna</div><h2><span>Jaro + podzim.</span></h2><h2 class="red"><span>Cca 6 bodovaných závodů.</span></h2></div>
-      <div class="track" id="track"><i class="tline" id="tline"></i>
-        <div class="tseg" id="tseg0"><b>Jaro</b><small>březen – květen</small><div class="pins"><span class="pin" id="pin1"><em>1</em><s>závod</s></span><span class="pin" id="pin2"><em>2</em><s>závod</s></span><span class="pin" id="pin3"><em>3</em><s>závod</s></span></div></div><div class="tseg" id="tseg1"><b>Podzim</b><small>září – listopad</small><div class="pins"><span class="pin" id="pin4"><em>4</em><s>závod</s></span><span class="pin" id="pin5"><em>5</em><s>závod</s></span><span class="pin" id="pin6"><em>6</em><s>závod</s></span></div></div></div>
-      <div class="day" id="day"><div class="dclock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="dclk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="dclkt">08:00</span></div>
-        <div class="dtx"><b>Jeden den = jeden závod</b><small>8:00 první kolo · 12 kol × 20 min · cca 16:00 vyhlášení</small><div class="ticks"><i id="tk0"></i><i id="tk1"></i><i id="tk2"></i><i id="tk3"></i><i id="tk4"></i><i id="tk5"></i><i id="tk6"></i><i id="tk7"></i><i id="tk8"></i><i id="tk9"></i><i id="tk10"></i><i id="tk11"></i></div></div></div></section>
-  <section id="s-rank" class="clip" data-start="74.002" data-duration="15.209" data-track-index="2"><div class="rbg"></div><div class="hero" id="rk-h" style="width:349px; height:670px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9030.png" alt=""></div>
-      <div class="blk rkh" id="rkh"><div class="kick"><i></i>Celoroční žebříček</div><h2><span>Umístění = body.</span></h2><h2 class="red"><span>Nejméně bodů vede.</span></h2></div>
-      <div class="tbl" id="tbl"><div class="thd"><span></span><span>Z1</span><span>Z2</span><span>Z3</span><span>Z4</span><span>Z5</span><span>Z6</span><span>Σ</span></div>
-        <div class="tbd" style="height:513px"><div class="tr" id="trA" style="height:103px"><span class="who" style="--c:#e31e24"><b>A</b></span><span class="cl" id="cA0"><em>3</em><s class="x" id="xA0"></s></span><span class="cl" id="cA1"><em>1</em><s class="x" id="xA1"></s></span><span class="cl" id="cA2"><em>4</em><s class="x" id="xA2"></s></span><span class="cl" id="cA3"><em>2</em><s class="x" id="xA3"></s></span><span class="cl" id="cA4"><em>9</em><s class="x" id="xA4"></s></span><span class="cl" id="cA5"><em>2</em><s class="x" id="xA5"></s></span><span class="sm" id="smA">0</span><i class="lead" id="ldA">1.</i></div><div class="tr" id="trB" style="height:103px"><span class="who" style="--c:#ffd36b"><b>B</b></span><span class="cl" id="cB0"><em>1</em><s class="x" id="xB0"></s></span><span class="cl" id="cB1"><em>5</em><s class="x" id="xB1"></s></span><span class="cl" id="cB2"><em>2</em><s class="x" id="xB2"></s></span><span class="cl" id="cB3"><em>6</em><s class="x" id="xB3"></s></span><span class="cl" id="cB4"><em>4</em><s class="x" id="xB4"></s></span><span class="cl" id="cB5"><em>8</em><s class="x" id="xB5"></s></span><span class="sm" id="smB">0</span><i class="lead" id="ldB">1.</i></div><div class="tr" id="trC" style="height:103px"><span class="who" style="--c:#7fd0ff"><b>C</b></span><span class="cl" id="cC0"><em>6</em><s class="x" id="xC0"></s></span><span class="cl" id="cC1"><em>2</em><s class="x" id="xC1"></s></span><span class="cl" id="cC2"><em>1</em><s class="x" id="xC2"></s></span><span class="cl" id="cC3"><em>8</em><s class="x" id="xC3"></s></span><span class="cl" id="cC4"><em>2</em><s class="x" id="xC4"></s></span><span class="cl" id="cC5"><em>3</em><s class="x" id="xC5"></s></span><span class="sm" id="smC">0</span><i class="lead" id="ldC">1.</i></div><div class="tr" id="trD" style="height:103px"><span class="who" style="--c:#9be27a"><b>D</b></span><span class="cl" id="cD0"><em>2</em><s class="x" id="xD0"></s></span><span class="cl" id="cD1"><em>9</em><s class="x" id="xD1"></s></span><span class="cl" id="cD2"><em>3</em><s class="x" id="xD2"></s></span><span class="cl" id="cD3"><em>1</em><s class="x" id="xD3"></s></span><span class="cl" id="cD4"><em>5</em><s class="x" id="xD4"></s></span><span class="cl" id="cD5"><em>4</em><s class="x" id="xD5"></s></span><span class="sm" id="smD">0</span><i class="lead" id="ldD">1.</i></div><div class="tr" id="trE" style="height:103px"><span class="who" style="--c:#ff8fd0"><b>E</b></span><span class="cl" id="cE0"><em>4</em><s class="x" id="xE0"></s></span><span class="cl" id="cE1"><em>3</em><s class="x" id="xE1"></s></span><span class="cl" id="cE2"><em>6</em><s class="x" id="xE2"></s></span><span class="cl" id="cE3"><em>3</em><s class="x" id="xE3"></s></span><span class="cl" id="cE4"><em>1</em><s class="x" id="xE4"></s></span><span class="cl" id="cE5"><em>6</em><s class="x" id="xE5"></s></span><span class="sm" id="smE">0</span><i class="lead" id="ldE">1.</i></div></div></div>
-      <div class="rnote" id="rnote"><b>Nejhorší výsledky se škrtají</b><small>6–7 závodů: −1 nejhorší · 8–9 závodů: −2 nejhorší</small></div></section>
+  <section id="s-season" class="clip" data-start="60.697" data-duration="13.305" data-track-index="2"><div class="ph" id="se_0" style="background-image:url(assets/photos/p86406.jpg); background-position:50% 30%"></div><div class="ph" id="se_1" style="background-image:url(assets/photos/p86415.jpg); background-position:50% 40%"></div><div class="ph" id="se_2" style="background-image:url(assets/photos/p86435.jpg); background-position:50% 55%"></div><div class="pho"></div><div class="gridbg"></div>
+      <div class="blk seh" id="seh"><div class="kick"><i></i>Jak probíhá sezóna</div><h2><span>4 dvoudenní víkendy.</span></h2><h2 class="red"><span>8 závodních dnů.</span></h2></div>
+      <div class="cal" id="cal"><i class="tline" id="tline"></i>
+        <div class="sea s1" id="sea0"><b>Jaro</b><small>březen – květen</small></div><div class="sea s2" id="sea1"><b>Podzim</b><small>září – listopad</small></div>
+        <div class="wks"><div class="wk" id="wk0"><small>víkend 1</small><div class="dd"><span class="dpin" id="dp0"><em>1</em><s>den 1</s></span><span class="dpin" id="dp1"><em>2</em><s>den 2</s></span></div></div><div class="wk" id="wk1"><small>víkend 2</small><div class="dd"><span class="dpin" id="dp2"><em>3</em><s>den 1</s></span><span class="dpin" id="dp3"><em>4</em><s>den 2</s></span></div></div><div class="wk" id="wk2"><small>víkend 3</small><div class="dd"><span class="dpin" id="dp4"><em>5</em><s>den 1</s></span><span class="dpin" id="dp5"><em>6</em><s>den 2</s></span></div></div><div class="wk mcr" id="wk3"><small>MČR</small><div class="dd"><span class="dpin" id="dp6"><em>7</em><s>den 1</s></span><span class="dpin" id="dp7"><em>8</em><s>den 2</s></span></div></div></div>
+        <div class="free" id="free"><b>Volné termíny</b><small>pro další závody doma i v zahraničí</small></div></div></section>
+  <section id="s-rank" class="clip" data-start="74.002" data-duration="15.209" data-track-index="2"><div class="rbg"></div><div class="hero" id="rk-h" style="width:337px; height:648px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9030.png" alt=""></div>
+      <div class="blk rkh" id="rkh"><div class="kick"><i></i>Celoroční žebříček</div><h2><span>Umístění = body.</span></h2><h2 class="red"><span>Nejmenší součet vede.</span></h2></div>
+      <div class="tbl t8" id="tbl"><div class="thd"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>Σ</span></div>
+        <div class="tbd" style="height:497px"><div class="tr" id="trA" style="height:99px"><span class="who" style="--c:#e31e24"><b>A</b></span><span class="cl" id="cA0"><em>3</em><s class="x" id="xA0"></s></span><span class="cl" id="cA1"><em>1</em><s class="x" id="xA1"></s></span><span class="cl" id="cA2"><em>4</em><s class="x" id="xA2"></s></span><span class="cl" id="cA3"><em>2</em><s class="x" id="xA3"></s></span><span class="cl" id="cA4"><em>9</em><s class="x" id="xA4"></s></span><span class="cl" id="cA5"><em>2</em><s class="x" id="xA5"></s></span><span class="cl" id="cA6"><em>5</em><s class="x" id="xA6"></s></span><span class="cl" id="cA7"><em>3</em><s class="x" id="xA7"></s></span><span class="sm" id="smA">0</span><i class="lead" id="ldA">1.</i></div><div class="tr" id="trB" style="height:99px"><span class="who" style="--c:#ffd36b"><b>B</b></span><span class="cl" id="cB0"><em>1</em><s class="x" id="xB0"></s></span><span class="cl" id="cB1"><em>5</em><s class="x" id="xB1"></s></span><span class="cl" id="cB2"><em>2</em><s class="x" id="xB2"></s></span><span class="cl" id="cB3"><em>6</em><s class="x" id="xB3"></s></span><span class="cl" id="cB4"><em>4</em><s class="x" id="xB4"></s></span><span class="cl" id="cB5"><em>8</em><s class="x" id="xB5"></s></span><span class="cl" id="cB6"><em>2</em><s class="x" id="xB6"></s></span><span class="cl" id="cB7"><em>7</em><s class="x" id="xB7"></s></span><span class="sm" id="smB">0</span><i class="lead" id="ldB">1.</i></div><div class="tr" id="trC" style="height:99px"><span class="who" style="--c:#7fd0ff"><b>C</b></span><span class="cl" id="cC0"><em>6</em><s class="x" id="xC0"></s></span><span class="cl" id="cC1"><em>2</em><s class="x" id="xC1"></s></span><span class="cl" id="cC2"><em>1</em><s class="x" id="xC2"></s></span><span class="cl" id="cC3"><em>8</em><s class="x" id="xC3"></s></span><span class="cl" id="cC4"><em>2</em><s class="x" id="xC4"></s></span><span class="cl" id="cC5"><em>3</em><s class="x" id="xC5"></s></span><span class="cl" id="cC6"><em>4</em><s class="x" id="xC6"></s></span><span class="cl" id="cC7"><em>6</em><s class="x" id="xC7"></s></span><span class="sm" id="smC">0</span><i class="lead" id="ldC">1.</i></div><div class="tr" id="trD" style="height:99px"><span class="who" style="--c:#9be27a"><b>D</b></span><span class="cl" id="cD0"><em>2</em><s class="x" id="xD0"></s></span><span class="cl ab" id="cD1"><em>×</em><s class="x" id="xD1"></s></span><span class="cl" id="cD2"><em>3</em><s class="x" id="xD2"></s></span><span class="cl" id="cD3"><em>1</em><s class="x" id="xD3"></s></span><span class="cl" id="cD4"><em>5</em><s class="x" id="xD4"></s></span><span class="cl" id="cD5"><em>4</em><s class="x" id="xD5"></s></span><span class="cl ab" id="cD6"><em>×</em><s class="x" id="xD6"></s></span><span class="cl" id="cD7"><em>2</em><s class="x" id="xD7"></s></span><span class="sm" id="smD">0</span><i class="lead" id="ldD">1.</i></div><div class="tr" id="trE" style="height:99px"><span class="who" style="--c:#ff8fd0"><b>E</b></span><span class="cl" id="cE0"><em>4</em><s class="x" id="xE0"></s></span><span class="cl" id="cE1"><em>3</em><s class="x" id="xE1"></s></span><span class="cl" id="cE2"><em>6</em><s class="x" id="xE2"></s></span><span class="cl" id="cE3"><em>3</em><s class="x" id="xE3"></s></span><span class="cl" id="cE4"><em>1</em><s class="x" id="xE4"></s></span><span class="cl" id="cE5"><em>6</em><s class="x" id="xE5"></s></span><span class="cl" id="cE6"><em>5</em><s class="x" id="xE6"></s></span><span class="cl" id="cE7"><em>9</em><s class="x" id="xE7"></s></span><span class="sm" id="smE">0</span><i class="lead" id="ldE">1.</i></div></div>
+        <div class="tleg"><span><i>×</i> neúčast = počet závodníků + 20 bodů</span></div></div>
+      <div class="rnote" id="rnote"><b>Z 8 dnů se 2 nejhorší škrtají</b><small>pojistka, když nestihneš víkend nebo druhý den</small></div></section>
   <section id="s-champ" class="clip" data-start="89.211" data-duration="7.617" data-track-index="2"><div class="ph" id="ch_0" style="background-image:url(assets/photos/p86445.jpg); background-position:50% 45%"></div><div class="pho"></div><div class="burst" id="burst"></div>
       <div class="sparks"><i id="sp0" style="left:9.4%; --d:0.67"></i><i id="sp1" style="left:0.8%; --d:0.49"></i><i id="sp2" style="left:68.4%; --d:0.41"></i><i id="sp3" style="left:9.5%; --d:1.07"></i><i id="sp4" style="left:74.0%; --d:0.93"></i><i id="sp5" style="left:24.6%; --d:0.87"></i><i id="sp6" style="left:2.4%; --d:0.93"></i><i id="sp7" style="left:15.0%; --d:0.84"></i><i id="sp8" style="left:20.0%; --d:1.08"></i><i id="sp9" style="left:25.0%; --d:0.99"></i><i id="sp10" style="left:56.8%; --d:0.42"></i><i id="sp11" style="left:67.8%; --d:1.06"></i><i id="sp12" style="left:19.7%; --d:0.62"></i><i id="sp13" style="left:34.3%; --d:0.68"></i><i id="sp14" style="left:91.4%; --d:1.11"></i><i id="sp15" style="left:89.2%; --d:0.77"></i><i id="sp16" style="left:30.4%; --d:0.52"></i><i id="sp17" style="left:91.0%; --d:0.78"></i><i id="sp18" style="left:43.5%; --d:1.03"></i><i id="sp19" style="left:33.0%; --d:1.06"></i><i id="sp20" style="left:6.5%; --d:0.68"></i><i id="sp21" style="left:74.8%; --d:0.93"></i><i id="sp22" style="left:99.4%; --d:0.60"></i><i id="sp23" style="left:33.3%; --d:0.85"></i><i id="sp24" style="left:39.6%; --d:1.03"></i><i id="sp25" style="left:75.0%; --d:0.54"></i></div>
       <div class="chw" id="chw"><div class="kick"><i></i>Vítěz celé sezóny</div><h1 id="chh"><span>Mistr ČR</span><span class="gold">Trout Area</span></h1><small>putovní pohár · vyhlášení nejlepší trojice · zvlášť i kategorie HB</small></div></section>
   <section id="s-world" class="clip" data-start="96.828" data-duration="15.163" data-track-index="2"><div class="wbg"><i class="glb" id="glb"></i></div><div class="otx" id="otx">Reprezentace</div>
-      <div class="heroes" id="heroes"><div class="hero" id="wh0" style="width:247px; height:601px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9028.png); mask-image:url(assets/cut/c9028.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9028.png); mask-image:url(assets/cut/c9028.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9028.png" alt=""></div><div class="hero" id="wh1" style="width:459px; height:626px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9032.png); mask-image:url(assets/cut/c9032.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9032.png); mask-image:url(assets/cut/c9032.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9032.png" alt=""></div><div class="hero" id="wh2" style="width:320px; height:614px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9030.png); mask-image:url(assets/cut/c9030.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9030.png" alt=""></div></div>
+      <div class="heroes" id="heroes"><div class="hero" id="wh0" style="width:247px; height:601px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9028.png); mask-image:url(assets/cut/c9028.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9028.png); mask-image:url(assets/cut/c9028.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9028.png" alt=""></div><div class="hero" id="wh1" style="width:515px; height:501px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9027.png); mask-image:url(assets/cut/c9027.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9027.png); mask-image:url(assets/cut/c9027.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9027.png" alt=""></div><div class="hero" id="wh2" style="width:442px; height:564px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9054.png); mask-image:url(assets/cut/c9054.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9054.png); mask-image:url(assets/cut/c9054.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9054.png" alt=""></div></div>
       <div class="blk wdh" id="wdh"><div class="kick"><i></i>Mezinárodní scéna</div><h2><span>Žebříček otevírá</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
-      <div class="wcards" id="wcards"><div class="wc" id="wc0"><span class="wl"><img src="assets/lg_hb.png" alt=""></span><div><b>H-Battle</b><small>Hard Bait liga · týmové závody</small></div></div><div class="wc" id="wc1"><span class="wl"><img src="assets/lg_atlas.png" alt=""></span><div><b>ATLAS</b><small>Area Trout Leagues Association</small></div></div><div class="wc" id="wc2"><span class="wl"><img src="assets/lg_fips.png" alt=""></span><div><b>Mistrovství světa</b><small>FIPSed</small></div></div></div></section>
+      <div class="wcards" id="wcards"><div class="wc" id="wc0"><span class="wl"><img src="assets/lg_hb.png" alt=""></span><div><b>H-Battle</b><small>mezinárodní Hard Bait liga · dvoudenní turnaje · nominace každý rok</small></div></div><div class="wc" id="wc1"><span class="wl"><img src="assets/lg_atlas.png" alt=""></span><div><b>ATLAS</b><small>mezinárodní Trout Area liga · nominace každý rok</small></div></div><div class="wc" id="wc2"><span class="wl"><img src="assets/lg_fips.png" alt=""></span><div><b>Mistrovství světa</b><small>FIPSed · reprezentace ČR</small></div></div></div></section>
   <section id="s-num" class="clip" data-start="111.991" data-duration="7.593" data-track-index="2"><div class="rbg alt"></div><div class="hero" id="nm-h" style="width:553px; height:756px"><i class="e2" style="-webkit-mask-image:url(assets/cut/c9032.png); mask-image:url(assets/cut/c9032.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><i class="e1" style="-webkit-mask-image:url(assets/cut/c9032.png); mask-image:url(assets/cut/c9032.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;"></i><img src="assets/cut/c9032.png" alt=""></div>
       <div class="blk nmh" id="nmh"><div class="kick"><i></i>Nominace</div><div class="ladder" id="ladder"><span>Krajská liga</span><span>2. liga</span><span>1. liga</span><i class="lx" id="lx"></i></div>
         <h2><span>Jedna sezóna</span></h2><h2 class="red"><span>stačí.</span></h2>
         <div class="flow" id="flow"><b>Žebříček</b><i>→</i><b>Nominace</b><i>→</i><b class="r">Reprezentace</b></div>
-        <small class="fnote" id="fnote">ATLAS a H-Battle: 6 nejlepších výsledků z posledních 8 závodů. MS FIPSed: nominaci navrhuje státní trenér, žebříček je hlavní kritérium.</small></div></section>
+        <small class="fnote" id="fnote">ATLAS a H-Battle: 6 nejlepších výsledků z posledních 8 závodů. MS FIPSed: nominaci navrhuje státní trenér, žebříček je hlavní kritérium. Max. 2 mezinárodní závody ročně na závodníka.</small></div></section>
   <section id="s-sys" class="clip" data-start="119.584" data-duration="13.281" data-track-index="2"><div class="sysbg"></div><div class="fishes"><div class="fw" id="fw0" style="top:9.7%; --s:0.61; opacity:0.50; filter:blur(2.7px)"><div class="ff" id="ff0"><svg viewBox="0 0 120 40"><g id="fr0"><g id="ft0"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw1" style="top:91.3%; --s:0.76; opacity:0.57; filter:blur(2.2px)"><div class="ff" id="ff1"><svg viewBox="0 0 120 40"><g id="fr1"><g id="ft1"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw2" style="top:16.1%; --s:0.52; opacity:0.46; filter:blur(2.9px)"><div class="ff" id="ff2"><svg viewBox="0 0 120 40"><g id="fr2"><g id="ft2"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw3" style="top:87.3%; --s:1.39; opacity:0.85; filter:blur(0.3px)"><div class="ff" id="ff3"><svg viewBox="0 0 120 40"><g id="fr3"><g id="ft3"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw4" style="top:18.0%; --s:0.70; opacity:0.54; filter:blur(2.4px)"><div class="ff" id="ff4"><svg viewBox="0 0 120 40"><g id="fr4"><g id="ft4"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw5" style="top:92.7%; --s:1.24; opacity:0.78; filter:blur(0.8px)"><div class="ff" id="ff5"><svg viewBox="0 0 120 40"><g id="fr5"><g id="ft5"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div><div class="fw" id="fw6" style="top:9.0%; --s:1.02; opacity:0.68; filter:blur(1.4px)"><div class="ff" id="ff6"><svg viewBox="0 0 120 40"><g id="fr6"><g id="ft6"><path d="M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z"/></g><path d="M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z"/></g><path d="M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z"/></svg></div></div></div>
       <div class="blk sysh" id="sysh"><div class="kick"><i></i>Otevřený systém</div><h1><span>Přihlásit se</span><span class="red">může každý.</span></h1>
         <div class="sysl" id="sysl"><span id="sl0"><i>✓</i>Registrace a platba online</span><span id="sl1"><i>✓</i>Losování automaticky</span><span id="sl2"><i>✓</i>Výsledky a žebříček online</span></div></div>
@@ -793,33 +808,38 @@
   tl.set("#s-season", {visibility:"hidden"}, 0); tl.set("#s-season", {visibility:"visible"}, 60.697); tl.set("#s-season", {visibility:"hidden"}, 74.002);
   tl.fromTo("#seh .kick", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 60.747);
   tl.fromTo("#seh h2:nth-of-type(1) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 61.173);
-  tl.fromTo("#seh h2:nth-of-type(2) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 62.601);
+  tl.fromTo("#seh h2:nth-of-type(2) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 65.457);
   tl.fromTo("#tline", {"scaleX":0}, {"scaleX":1,"duration":1.904,"ease":"power2.inOut"}, 61.411);
-  tl.fromTo("#tseg0", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out"}, 61.649);
-  tl.fromTo("#tseg1", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out"}, 62.601);
-  tl.fromTo("#pin1", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 63.077);
-  tl.fromTo("#pin2", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 63.553);
-  tl.fromTo("#pin3", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 64.029);
-  tl.fromTo("#pin4", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 64.505);
-  tl.fromTo("#pin5", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 64.981);
-  tl.fromTo("#pin6", {"opacity":0,"y":-64.80000000000001,"scale":0.5}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2.2)"}, 65.457);
-  tl.fromTo("#day", {"opacity":0,"y":43.2}, {"opacity":1,"y":0,"duration":0.55,"ease":"expo.out"}, 66.885);
-  tl.fromTo("#dclk", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":4.76,"ease":"none"}, 67.185);
-  { const o={v:480}, el=document.getElementById("dclkt"); tl.fromTo(o,{v:480},{v:960,duration:4.760,ease:"none",immediateRender:false,onUpdate(){const m=Math.round(o.v/10)*10;el.textContent=String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");}}, 67.185); }
-  tl.fromTo(".ticks i", {"scaleY":0,"opacity":0.3}, {"scaleY":1,"opacity":1,"duration":0.2,"ease":"back.out(3)","stagger":0.39666666666666667}, 67.185);
-  tl.fromTo("#seh, #track, #day", {"opacity":1}, {"immediateRender":false,"opacity":0,"duration":0.3,"ease":"power2.in"}, 73.702);
+  tl.fromTo("#sea0", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out"}, 61.649);
+  tl.fromTo("#sea1", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out"}, 63.553);
+  tl.fromTo("#wk0", {"opacity":0,"y":43.2,"scale":0.85}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2)"}, 62.125);
+  tl.fromTo("#dp0", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 62.275);
+  tl.fromTo("#dp1", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 62.425);
+  tl.fromTo("#wk1", {"opacity":0,"y":43.2,"scale":0.85}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2)"}, 63.077);
+  tl.fromTo("#dp2", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 63.227);
+  tl.fromTo("#dp3", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 63.377);
+  tl.fromTo("#wk2", {"opacity":0,"y":43.2,"scale":0.85}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2)"}, 64.505);
+  tl.fromTo("#dp4", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 64.655);
+  tl.fromTo("#dp5", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 64.805);
+  tl.fromTo("#wk3", {"opacity":0,"y":43.2,"scale":0.85}, {"opacity":1,"y":0,"scale":1,"duration":0.45,"ease":"back.out(2)"}, 65.457);
+  tl.fromTo("#dp6", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 65.607);
+  tl.fromTo("#dp7", {"opacity":0,"y":-43.2}, {"opacity":1,"y":0,"duration":0.35,"ease":"back.out(2.5)"}, 65.757);
+  tl.fromTo("#wk3", {"boxShadow":"0 0 0 0px rgba(255,211,107,0)"}, {"immediateRender":false,"boxShadow":"0 0 0 6px rgba(255,211,107,1)","duration":0.3,"yoyo":true,"repeat":3}, 65.933);
+  tl.fromTo("#free", {"opacity":0,"x":43.2}, {"opacity":1,"x":0,"duration":0.5,"ease":"expo.out"}, 67.361);
+  tl.fromTo(".dpin em", {"scale":1}, {"scale":1.25,"duration":0.15,"yoyo":true,"repeat":1,"stagger":0.08}, 65.457);
+  tl.fromTo("#seh, #cal", {"opacity":1}, {"immediateRender":false,"opacity":0,"duration":0.3,"ease":"power2.in"}, 73.702);
   tl.set("#s-rank", {visibility:"hidden"}, 0); tl.set("#s-rank", {visibility:"visible"}, 74.002); tl.set("#s-rank", {visibility:"hidden"}, 89.211);
   tl.fromTo("#rk-h", {"opacity":0,"x":194.4}, {"opacity":1,"x":0,"duration":0.7,"ease":"expo.out"}, 74.954);
   tl.fromTo("#rk-h .e1", {"x":0,"y":0,"opacity":0}, {"x":-19.44,"y":6.48,"opacity":1,"duration":0.6,"ease":"expo.out"}, 75.074);
   tl.fromTo("#rk-h .e2", {"x":0,"y":0,"opacity":0}, {"x":-38.88,"y":12.96,"opacity":1,"duration":0.6,"ease":"expo.out"}, 75.174);
   tl.fromTo("#rkh .kick", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 74.052);
   tl.fromTo("#rkh h2:nth-of-type(1) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 74.478);
-  tl.fromTo("#rkh h2:nth-of-type(2) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 78.286);
+  tl.fromTo("#rkh h2:nth-of-type(2) span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 77.810);
   tl.set("#trA", {"y":0}, 74.002);
-  tl.set("#trB", {"y":102.60000000000001}, 74.002);
-  tl.set("#trC", {"y":205.20000000000002}, 74.002);
-  tl.set("#trD", {"y":307.8}, 74.002);
-  tl.set("#trE", {"y":410.40000000000003}, 74.002);
+  tl.set("#trB", {"y":99.36}, 74.002);
+  tl.set("#trC", {"y":198.72}, 74.002);
+  tl.set("#trD", {"y":298.08}, 74.002);
+  tl.set("#trE", {"y":397.44}, 74.002);
   tl.fromTo("#tbl", {"opacity":0,"y":43.2}, {"opacity":1,"y":0,"duration":0.5,"ease":"expo.out"}, 74.954);
   tl.fromTo(".tr", {"opacity":0,"x":-43.2}, {"opacity":1,"x":0,"duration":0.4,"ease":"expo.out","stagger":0.07}, 75.192);
   tl.fromTo("#cA0 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 75.906);
@@ -833,90 +853,122 @@
   tl.fromTo("#cE0 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 75.906);
   tl.set("#smE", {"textContent":4}, 75.956);
   tl.fromTo(".thd span:nth-child(2)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 75.906);
-  tl.fromTo("#cA1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.620);
-  tl.set("#smA", {"textContent":4}, 76.670);
-  tl.fromTo("#cB1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.620);
-  tl.set("#smB", {"textContent":6}, 76.670);
-  tl.fromTo("#cC1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.620);
-  tl.set("#smC", {"textContent":8}, 76.670);
-  tl.fromTo("#cD1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.620);
-  tl.set("#smD", {"textContent":11}, 76.670);
-  tl.fromTo("#cE1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.620);
-  tl.set("#smE", {"textContent":7}, 76.670);
-  tl.fromTo(".thd span:nth-child(3)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 76.620);
-  tl.fromTo("#cA2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.334);
-  tl.set("#smA", {"textContent":8}, 77.384);
-  tl.fromTo("#cB2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.334);
-  tl.set("#smB", {"textContent":8}, 77.384);
-  tl.fromTo("#cC2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.334);
-  tl.set("#smC", {"textContent":9}, 77.384);
-  tl.fromTo("#cD2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.334);
-  tl.set("#smD", {"textContent":14}, 77.384);
-  tl.fromTo("#cE2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.334);
-  tl.set("#smE", {"textContent":13}, 77.384);
-  tl.fromTo(".thd span:nth-child(4)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 77.334);
-  tl.fromTo("#cA3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.048);
-  tl.set("#smA", {"textContent":10}, 78.098);
-  tl.fromTo("#cB3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.048);
-  tl.set("#smB", {"textContent":14}, 78.098);
-  tl.fromTo("#cC3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.048);
-  tl.set("#smC", {"textContent":17}, 78.098);
-  tl.fromTo("#cD3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.048);
-  tl.set("#smD", {"textContent":15}, 78.098);
-  tl.fromTo("#cE3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.048);
-  tl.set("#smE", {"textContent":16}, 78.098);
-  tl.fromTo(".thd span:nth-child(5)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 78.048);
-  tl.fromTo("#cA4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.762);
-  tl.set("#smA", {"textContent":19}, 78.812);
-  tl.fromTo("#cB4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.762);
-  tl.set("#smB", {"textContent":18}, 78.812);
-  tl.fromTo("#cC4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.762);
-  tl.set("#smC", {"textContent":19}, 78.812);
-  tl.fromTo("#cD4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.762);
-  tl.set("#smD", {"textContent":20}, 78.812);
-  tl.fromTo("#cE4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.762);
-  tl.set("#smE", {"textContent":17}, 78.812);
-  tl.fromTo(".thd span:nth-child(6)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 78.762);
-  tl.fromTo("#cA5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.476);
-  tl.set("#smA", {"textContent":21}, 79.526);
-  tl.fromTo("#cB5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.476);
-  tl.set("#smB", {"textContent":26}, 79.526);
-  tl.fromTo("#cC5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.476);
-  tl.set("#smC", {"textContent":22}, 79.526);
-  tl.fromTo("#cD5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.476);
-  tl.set("#smD", {"textContent":24}, 79.526);
-  tl.fromTo("#cE5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.476);
-  tl.set("#smE", {"textContent":23}, 79.526);
-  tl.fromTo(".thd span:nth-child(7)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 79.476);
-  tl.fromTo("#trA", {}, {"immediateRender":false,"y":0,"duration":0.7,"ease":"power3.inOut"}, 80.666);
-  tl.fromTo("#trC", {}, {"immediateRender":false,"y":102.60000000000001,"duration":0.7,"ease":"power3.inOut"}, 80.666);
-  tl.fromTo("#trE", {}, {"immediateRender":false,"y":205.20000000000002,"duration":0.7,"ease":"power3.inOut"}, 80.666);
-  tl.fromTo("#trD", {}, {"immediateRender":false,"y":307.8,"duration":0.7,"ease":"power3.inOut"}, 80.666);
-  tl.fromTo("#trB", {}, {"immediateRender":false,"y":410.40000000000003,"duration":0.7,"ease":"power3.inOut"}, 80.666);
+  tl.fromTo("#cA1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.430);
+  tl.set("#smA", {"textContent":4}, 76.480);
+  tl.fromTo("#cB1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.430);
+  tl.set("#smB", {"textContent":6}, 76.480);
+  tl.fromTo("#cC1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.430);
+  tl.set("#smC", {"textContent":8}, 76.480);
+  tl.fromTo("#cD1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.430);
+  tl.set("#smD", {"textContent":62}, 76.480);
+  tl.fromTo("#cE1 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.430);
+  tl.set("#smE", {"textContent":7}, 76.480);
+  tl.fromTo(".thd span:nth-child(3)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 76.430);
+  tl.fromTo("#cA2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.953);
+  tl.set("#smA", {"textContent":8}, 77.003);
+  tl.fromTo("#cB2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.953);
+  tl.set("#smB", {"textContent":8}, 77.003);
+  tl.fromTo("#cC2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.953);
+  tl.set("#smC", {"textContent":9}, 77.003);
+  tl.fromTo("#cD2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.953);
+  tl.set("#smD", {"textContent":65}, 77.003);
+  tl.fromTo("#cE2 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 76.953);
+  tl.set("#smE", {"textContent":13}, 77.003);
+  tl.fromTo(".thd span:nth-child(4)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 76.953);
+  tl.fromTo("#cA3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.477);
+  tl.set("#smA", {"textContent":10}, 77.527);
+  tl.fromTo("#cB3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.477);
+  tl.set("#smB", {"textContent":14}, 77.527);
+  tl.fromTo("#cC3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.477);
+  tl.set("#smC", {"textContent":17}, 77.527);
+  tl.fromTo("#cD3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.477);
+  tl.set("#smD", {"textContent":66}, 77.527);
+  tl.fromTo("#cE3 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 77.477);
+  tl.set("#smE", {"textContent":16}, 77.527);
+  tl.fromTo(".thd span:nth-child(5)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 77.477);
+  tl.fromTo("#cA4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.000);
+  tl.set("#smA", {"textContent":19}, 78.050);
+  tl.fromTo("#cB4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.000);
+  tl.set("#smB", {"textContent":18}, 78.050);
+  tl.fromTo("#cC4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.000);
+  tl.set("#smC", {"textContent":19}, 78.050);
+  tl.fromTo("#cD4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.000);
+  tl.set("#smD", {"textContent":71}, 78.050);
+  tl.fromTo("#cE4 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.000);
+  tl.set("#smE", {"textContent":17}, 78.050);
+  tl.fromTo(".thd span:nth-child(6)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 78.000);
+  tl.fromTo("#cA5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.524);
+  tl.set("#smA", {"textContent":21}, 78.574);
+  tl.fromTo("#cB5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.524);
+  tl.set("#smB", {"textContent":26}, 78.574);
+  tl.fromTo("#cC5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.524);
+  tl.set("#smC", {"textContent":22}, 78.574);
+  tl.fromTo("#cD5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.524);
+  tl.set("#smD", {"textContent":75}, 78.574);
+  tl.fromTo("#cE5 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 78.524);
+  tl.set("#smE", {"textContent":23}, 78.574);
+  tl.fromTo(".thd span:nth-child(7)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 78.524);
+  tl.fromTo("#cA6 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.048);
+  tl.set("#smA", {"textContent":26}, 79.098);
+  tl.fromTo("#cB6 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.048);
+  tl.set("#smB", {"textContent":28}, 79.098);
+  tl.fromTo("#cC6 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.048);
+  tl.set("#smC", {"textContent":26}, 79.098);
+  tl.fromTo("#cD6 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.048);
+  tl.set("#smD", {"textContent":135}, 79.098);
+  tl.fromTo("#cE6 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.048);
+  tl.set("#smE", {"textContent":28}, 79.098);
+  tl.fromTo(".thd span:nth-child(8)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 79.048);
+  tl.fromTo("#cA7 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.571);
+  tl.set("#smA", {"textContent":29}, 79.621);
+  tl.fromTo("#cB7 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.571);
+  tl.set("#smB", {"textContent":35}, 79.621);
+  tl.fromTo("#cC7 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.571);
+  tl.set("#smC", {"textContent":32}, 79.621);
+  tl.fromTo("#cD7 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.571);
+  tl.set("#smD", {"textContent":137}, 79.621);
+  tl.fromTo("#cE7 em", {"opacity":0,"scale":1.8}, {"opacity":1,"scale":1,"duration":0.3,"ease":"back.out(2)"}, 79.571);
+  tl.set("#smE", {"textContent":37}, 79.621);
+  tl.fromTo(".thd span:nth-child(9)", {"color":"#ffd36b"}, {"color":"#8ea2d8","duration":0.6}, 79.571);
+  tl.fromTo("#trA", {}, {"immediateRender":false,"y":0,"duration":0.7,"ease":"power3.inOut"}, 80.428);
+  tl.fromTo("#trC", {}, {"immediateRender":false,"y":99.36,"duration":0.7,"ease":"power3.inOut"}, 80.428);
+  tl.fromTo("#trB", {}, {"immediateRender":false,"y":198.72,"duration":0.7,"ease":"power3.inOut"}, 80.428);
+  tl.fromTo("#trE", {}, {"immediateRender":false,"y":298.08,"duration":0.7,"ease":"power3.inOut"}, 80.428);
+  tl.fromTo("#trD", {}, {"immediateRender":false,"y":397.44,"duration":0.7,"ease":"power3.inOut"}, 80.428);
   tl.fromTo("#rnote", {"opacity":0,"y":32.400000000000006}, {"opacity":1,"y":0,"duration":0.45,"ease":"back.out(2)"}, 82.094);
   tl.fromTo("#xA4", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
   tl.fromTo("#cA4 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
-  { const o={v:21}, el=document.getElementById("smA"); tl.fromTo(o,{v:21},{v:12,duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 82.870); }
+  tl.fromTo("#xA6", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.820);
+  tl.fromTo("#cA6 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.920);
+  { const o={v:29}, el=document.getElementById("smA"); tl.fromTo(o,{v:29},{v:15,duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 83.070); }
   tl.fromTo("#xB5", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
   tl.fromTo("#cB5 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
-  { const o={v:26}, el=document.getElementById("smB"); tl.fromTo(o,{v:26},{v:18,duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 82.870); }
+  tl.fromTo("#xB7", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.820);
+  tl.fromTo("#cB7 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.920);
+  { const o={v:35}, el=document.getElementById("smB"); tl.fromTo(o,{v:35},{v:20,duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 83.070); }
   tl.fromTo("#xC3", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
   tl.fromTo("#cC3 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
-  { const o={v:22}, el=document.getElementById("smC"); tl.fromTo(o,{v:22},{v:14,duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 82.870); }
+  tl.fromTo("#xC0", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.820);
+  tl.fromTo("#cC0 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.920);
+  { const o={v:32}, el=document.getElementById("smC"); tl.fromTo(o,{v:32},{v:18,duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 83.070); }
   tl.fromTo("#xD1", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
   tl.fromTo("#cD1 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
-  { const o={v:24}, el=document.getElementById("smD"); tl.fromTo(o,{v:24},{v:15,duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 82.870); }
-  tl.fromTo("#xE2", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
-  tl.fromTo("#cE2 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
-  { const o={v:23}, el=document.getElementById("smE"); tl.fromTo(o,{v:23},{v:17,duration:0.6,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 82.870); }
+  tl.fromTo("#xD6", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.820);
+  tl.fromTo("#cD6 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.920);
+  { const o={v:137}, el=document.getElementById("smD"); tl.fromTo(o,{v:137},{v:17,duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 83.070); }
+  tl.fromTo("#xE7", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.570);
+  tl.fromTo("#cE7 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.670);
+  tl.fromTo("#xE2", {"scaleX":0,"rotation":-14}, {"scaleX":1,"rotation":-14,"duration":0.3,"ease":"power2.out"}, 82.820);
+  tl.fromTo("#cE2 em", {"opacity":1}, {"immediateRender":false,"opacity":0.35,"duration":0.3}, 82.920);
+  { const o={v:37}, el=document.getElementById("smE"); tl.fromTo(o,{v:37},{v:22,duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, 83.070); }
   tl.fromTo("#trA", {}, {"immediateRender":false,"y":0,"duration":0.7,"ease":"power3.inOut"}, 83.998);
-  tl.fromTo("#trC", {}, {"immediateRender":false,"y":102.60000000000001,"duration":0.7,"ease":"power3.inOut"}, 83.998);
-  tl.fromTo("#trD", {}, {"immediateRender":false,"y":205.20000000000002,"duration":0.7,"ease":"power3.inOut"}, 83.998);
-  tl.fromTo("#trE", {}, {"immediateRender":false,"y":307.8,"duration":0.7,"ease":"power3.inOut"}, 83.998);
-  tl.fromTo("#trB", {}, {"immediateRender":false,"y":410.40000000000003,"duration":0.7,"ease":"power3.inOut"}, 83.998);
-  tl.fromTo("#ldA", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.45,"ease":"back.out(3)"}, 84.712);
-  tl.fromTo("#trA", {"backgroundColor":"rgba(255,211,107,0)"}, {"immediateRender":false,"backgroundColor":"rgba(255,211,107,.22)","duration":0.4}, 84.712);
-  tl.fromTo("#trD", {"backgroundColor":"rgba(155,226,122,0)"}, {"immediateRender":false,"backgroundColor":"rgba(155,226,122,.25)","duration":0.3,"yoyo":true,"repeat":1}, 83.998);
+  tl.fromTo("#trD", {}, {"immediateRender":false,"y":99.36,"duration":0.7,"ease":"power3.inOut"}, 83.998);
+  tl.fromTo("#trC", {}, {"immediateRender":false,"y":198.72,"duration":0.7,"ease":"power3.inOut"}, 83.998);
+  tl.fromTo("#trB", {}, {"immediateRender":false,"y":298.08,"duration":0.7,"ease":"power3.inOut"}, 83.998);
+  tl.fromTo("#trE", {}, {"immediateRender":false,"y":397.44,"duration":0.7,"ease":"power3.inOut"}, 83.998);
+  tl.fromTo("#trD", {"backgroundColor":"rgba(155,226,122,0)"}, {"immediateRender":false,"backgroundColor":"rgba(155,226,122,.28)","duration":0.35,"yoyo":true,"repeat":3}, 83.998);
+  tl.fromTo("#ldA", {"opacity":0,"scale":0.4}, {"opacity":1,"scale":1,"duration":0.45,"ease":"back.out(3)"}, 84.950);
+  tl.fromTo("#trA", {"backgroundColor":"rgba(255,211,107,0)"}, {"immediateRender":false,"backgroundColor":"rgba(255,211,107,.22)","duration":0.4}, 84.950);
   tl.fromTo("#rkh, #tbl, #rnote, #rk-h", {"opacity":1}, {"immediateRender":false,"opacity":0,"duration":0.3,"ease":"power2.in"}, 88.911);
   tl.set("#ch_0", {"opacity":0}, 0.000);
   tl.fromTo("#ch_0", {"opacity":0}, {"opacity":0.5,"duration":0.45,"ease":"power2.out"}, 89.211);
