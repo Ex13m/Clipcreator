@@ -63,7 +63,7 @@ function build(W, H, file) {
   // ===================== 1) HOOK: rychlé střihy akce + „Rybaření, jak ho neznáš.“ =====================
   {
     const id = 's-hook', a = 0, b = BAR(BARS.hook[1]), t1 = BAR(2);
-    const fast = [9014, 9708, 9055, 9709, 9016, 86443, 9707, 9006];
+    const fast = [9014, 9708, 9055, 9709, 9016, 86443, 9707, 86444];
     scene(id, a, b, `${photos('hk', fast, BAR(0) + 0.0001, t1, { hard: true })}${photos('hk2', [86442], t1, b, { op: 0.7 })}
       <div class="mega" id="hk-t"><div class="ln"><span>Rybaření,</span></div><div class="ln red"><span>jak ho neznáš.</span></div></div>`);
     rise('#hk-t .ln:nth-child(1) span', t1); rise('#hk-t .ln:nth-child(2) span', t1 + BEAT * 2);
@@ -296,7 +296,7 @@ function build(W, H, file) {
     const CARDS = [['lg_hb', 'H-Battle', 'evropský pohár na tvrdé nástrahy · dvoudenní'], ['lg_atlas', 'ATLAS', 'mezinárodní unie lig · týmový World Cup'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
     const HH = P ? 92 * u : 62 * u;
     const tc0 = a + BEAT * 12.4;
-    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9224, 9203, 9222], tc0, b, { op: 0.42 })}<div class="otx" id="otx">Reprezentace</div>
+    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9224, 9210, 9222], tc0, b, { op: 0.42 })}<div class="otx" id="otx">Reprezentace</div>
       <div class="heroes" id="heroes">${hero('wh0', 9028, HH)}${hero('wh1', 9005, HH * 0.86)}${P ? '' : hero('wh2', 9054, HH * 0.95)}</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
