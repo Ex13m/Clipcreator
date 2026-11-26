@@ -24,7 +24,7 @@ const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
-Object.assign(FOC, { 86445: '50% 45%', 9056: '50% 55%' });
+Object.assign(FOC, { 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -56,15 +56,14 @@ function build(W, H, file) {
   // sportovec – výřez s barevnými ozvěnami (červená/modrá silueta posunutá za postavou)
   const hero = (id, n, hgt) => { const [w, h] = pngWH(path.join(PROTO, `assets/cut/c${n}.png`)), wd = (hgt * w) / h, src = `assets/cut/c${n}.png`;
     const m = `-webkit-mask-image:url(${src}); mask-image:url(${src}); -webkit-mask-size:100% 100%; mask-size:100% 100%;`;
-    return `<div class="hero" id="${id}" style="width:${wd.toFixed(0)}px; height:${hgt.toFixed(0)}px"><i class="e2" style="${m}"></i><i class="e1" style="${m}"></i><img src="${src}" alt=""></div>`; };
+    return `<div class="hero" id="${id}" style="width:${wd.toFixed(0)}px; height:${hgt.toFixed(0)}px"><img src="${src}" alt=""></div>`; };
   const heroIn = (id, t, dir = 1) => { T0(`#${id}`, { opacity: 0, x: dir * 18 * u }, { opacity: 1, x: 0, duration: 0.7, ease: 'expo.out' }, t);
-    T0(`#${id} .e1`, { x: 0, y: 0, opacity: 0 }, { x: -dir * 1.8 * u, y: 0.6 * u, opacity: 1, duration: 0.6, ease: 'expo.out' }, t + 0.12);
-    T0(`#${id} .e2`, { x: 0, y: 0, opacity: 0 }, { x: -dir * 3.6 * u, y: 1.2 * u, opacity: 1, duration: 0.6, ease: 'expo.out' }, t + 0.22); };
+ };
 
   // ===================== 1) HOOK: rychlé střihy akce + „Rybaření, jak ho neznáš.“ =====================
   {
     const id = 's-hook', a = 0, b = BAR(BARS.hook[1]), t1 = BAR(2);
-    const fast = [9014, 86409, 9055, 86438, 9016, 86443, 86437, 9006];
+    const fast = [9014, 9708, 9055, 9709, 9016, 86443, 9707, 9006];
     scene(id, a, b, `${photos('hk', fast, BAR(0) + 0.0001, t1, { hard: true })}${photos('hk2', [86442], t1, b, { op: 0.7 })}
       <div class="mega" id="hk-t"><div class="ln"><span>Rybaření,</span></div><div class="ln red"><span>jak ho neznáš.</span></div></div>`);
     rise('#hk-t .ln:nth-child(1) span', t1); rise('#hk-t .ln:nth-child(2) span', t1 + BEAT * 2);
@@ -186,7 +185,7 @@ function build(W, H, file) {
   {
     const id = 's-all', a = BAR(BARS.all[0]), b = BAR(BARS.all[1]), tm = BAR(BARS.all[0] + 2);
     const W4 = [86429, 9032, 9005, 86423], WORDS = ['Muži', 'Ženy', 'Junioři', 'Začátečníci'];
-    scene(id, a, b, `${photos('al', [9033, 86436], tm, b, { op: 0.55 })}
+    scene(id, a, b, `${photos('al', [9033, 9706], tm, b, { op: 0.55 })}
       <div class="tiles" id="tiles">${W4.map((im, i) => `<div class="tl" id="tl${i}"><div class="tph" style="${ph(im)}"></div></div>`).join('')}</div>
       <div class="words" id="words">${WORDS.map((w, i) => `<b id="wd${i}"><span>${w}</span></b>`).join('')}</div>
       <div class="tagl" id="tagl">${kick('Jednotná pravidla pro všechny')}<h2><span>Nerozhoduje síla.</span></h2><h2 class="red"><span>${nb('Rozhoduje cit, taktika a přesnost.')}</span></h2></div>`);
@@ -216,7 +215,7 @@ function build(W, H, file) {
   {
     const id = 's-season', a = BAR(BARS.season[0]), b = BAR(BARS.season[1]);
     const WK = [['Jaro', 'víkend 1'], ['Jaro', 'víkend 2'], ['Podzim', 'víkend 3'], ['Podzim', 'MČR']];
-    scene(id, a, b, `${photos('se', [86406, 86415, 86435], a, b, { op: 0.3 })}<div class="gridbg"></div>
+    scene(id, a, b, `${photos('se', [9704, 9706, 86415], a, b, { op: 0.3 })}<div class="gridbg"></div>
       <div class="blk seh" id="seh">${kick('Jak probíhá sezóna')}<h2><span>${nb('4 dvoudenní víkendy.')}</span></h2><h2 class="red"><span>${nb('8 závodních dnů.')}</span></h2></div>
       <div class="cal" id="cal"><i class="tline" id="tline"></i>
         <div class="sea s1" id="sea0"><b>Jaro</b><small>březen – květen</small></div><div class="sea s2" id="sea1"><b>Podzim</b><small>září – listopad</small></div>
@@ -278,7 +277,7 @@ function build(W, H, file) {
   {
     const id = 's-champ', a = BAR(BARS.champ[0]), b = BAR(BARS.champ[1]);
     const NP = 26;
-    scene(id, a, b, `${photos('ch', [86445], a, b, { op: 0.5 })}<div class="burst" id="burst"></div>
+    scene(id, a, b, `${photos('ch', [9714, 9713], a, b, { op: 0.5 })}<div class="burst" id="burst"></div>
       <div class="sparks">${Array.from({ length: NP }, (_, i) => `<i id="sp${i}" style="left:${(rnd(i * 7 + 1) * 100).toFixed(1)}%; --d:${(0.4 + rnd(i * 3 + 2) * 0.8).toFixed(2)}"></i>`).join('')}</div>
       <div class="chw" id="chw">${kick('Vítěz celé sezóny')}<h1 id="chh"><span>Mistr ČR</span><span class="gold">Trout Area</span></h1><small>${nb('putovní pohár · vyhlášení nejlepší trojice · zvlášť i kategorie HB')}</small></div>`);
     T0('#burst', { opacity: 0, scale: 0.6, rotation: 0 }, { opacity: 1, scale: 1.1, rotation: 40, duration: len(a, b), ease: 'none' }, a);
@@ -294,22 +293,22 @@ function build(W, H, file) {
   // ===================== 5d) MEZINÁRODNÍ SCÉNA: reprezentace → H-Battle, ATLAS, MS FIPSed =====================
   {
     const id = 's-world', a = BAR(BARS.world[0]), b = BAR(BARS.world[1]);
-    const CARDS = [['lg_hb', 'H-Battle', 'mezinárodní Hard Bait liga · dvoudenní turnaje · nominace každý rok'], ['lg_atlas', 'ATLAS', 'mezinárodní Trout Area liga · nominace každý rok'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
-    const HH = P ? 58 * u : 70 * u;
+    const CARDS = [['lg_hb', 'H-Battle', 'evropský pohár na tvrdé nástrahy · dvoudenní'], ['lg_atlas', 'ATLAS', 'mezinárodní unie lig · týmový World Cup'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
+    const HH = P ? 92 * u : 62 * u;
     scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div><div class="otx" id="otx">Reprezentace</div>
-      <div class="heroes" id="heroes">${hero('wh0', 9028, HH * 0.96)}${hero('wh1', 9027, HH * 0.8)}${hero('wh2', 9054, HH * 0.9)}</div>
+      <div class="heroes" id="heroes">${hero('wh0', 9028, HH)}${hero('wh1', 9005, HH * 0.86)}${P ? '' : hero('wh2', 9054, HH * 0.95)}</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
     T0('#glb', { rotation: 0, opacity: 0 }, { rotation: 25, opacity: 1, duration: len(a, b), ease: 'none' }, a);
     T0('#otx', { opacity: 0, xPercent: P ? -5 : 8 }, { opacity: 1, xPercent: P ? -25 : -12, duration: len(a, b), ease: 'none' }, a);
     rise('#wdh .kick', a + 0.05); rise('#wdh h2:nth-of-type(1) span', a + BEAT); rise('#wdh h2:nth-of-type(2) span', a + BEAT * 2);
-    heroIn('wh1', a + BEAT * 3, 1); heroIn('wh0', a + BEAT * 4, -1); heroIn('wh2', a + BEAT * 5, 1);
-    const tc = a + BEAT * 11;
-    T('#heroes', { opacity: 1, scale: 1 }, { opacity: P ? 0.55 : 0.6, scale: 0.92, duration: 0.6, ease: 'power2.inOut' }, tc - BEAT);
+    heroIn('wh1', a + BEAT * 3, 1); heroIn('wh0', a + BEAT * 4, -1); if (!P) heroIn('wh2', a + BEAT * 5, 1);
+    const tc = a + BEAT * 13;
+    T('#heroes', { opacity: 1, y: 0 }, { opacity: 0, y: 6 * u, duration: 0.5, ease: 'power2.in' }, tc - BEAT * 0.8);
     CARDS.forEach((_, i) => { const t = tc + BEAT * i * 2.2;
       T0(`#wc${i}`, { opacity: 0, x: 12 * u, rotationY: -50, transformPerspective: 1200 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.6, ease: 'expo.out' }, t);
       T0(`#wc${i} .wl`, { scale: 0.3, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, t + 0.1); });
-    outT('#wdh, #heroes, #wcards, #otx', b);
+    outT('#wdh, #wcards, #otx', b);
   }
 
   // ===================== 5e) NOMINACE: žádné roky postupů, jedna sezóna =====================
@@ -377,7 +376,7 @@ function build(W, H, file) {
       lure: '<path d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle cx="32" cy="20" r="5" stroke-width="4"/>',
       net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
     };
-    scene(id, a, b, `${photos('sa', [9015, 86433, 9007], a, b, { op: 0.5 })}
+    scene(id, a, b, `${photos('sa', [9710, 9711, 9707], a, b, { op: 0.5 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
       <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
@@ -400,7 +399,7 @@ function build(W, H, file) {
   // ===================== 8) CTA =====================
   {
     const id = 's-cta', a = BAR(BARS.cta[0]), b = DUR;
-    scene(id, a, b, `${photos('ct', [9033, 9000], a, b, { op: 0.28 })}
+    scene(id, a, b, `${photos('ct', [9701, 9033], a, b, { op: 0.28 })}
       <div class="cta" id="cta"><img class="tal" id="tal" src="assets/ta_logo.png" alt="Trout Area Czech Republic">
         <h1 id="cth"><span>Přijď si to</span><span class="red">vyzkoušet.</span></h1>
         <div class="url" id="url"><small>Pravidla · termíny · výsledky · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>`);
@@ -603,10 +602,9 @@ function build(W, H, file) {
   .glb { position:absolute; left:50%; top:${P ? '36%' : '55%'}; width:${px(P ? 150 : 120)}; height:${px(P ? 150 : 120)}; margin:${px(P ? -75 : -60)} 0 0 ${px(P ? -75 : -60)}; border-radius:50%; border:${px(0.3)} solid rgba(142,162,216,.35);
     background:repeating-linear-gradient(0deg, transparent 0 ${px(7.5)}, rgba(142,162,216,.22) ${px(7.5)} ${px(7.8)}), repeating-radial-gradient(ellipse 30% 100% at 50% 50%, transparent 0 ${px(7.5)}, rgba(142,162,216,.18) ${px(7.5)} ${px(7.8)}); -webkit-mask-image:radial-gradient(circle, #000 55%, transparent 72%); }
   .otx { position:absolute; ${P ? `left:0; top:${px(66)}` : `left:0; top:${px(30)}`}; white-space:nowrap; font:900 ${px(P ? 26 : 22)}/1 Montserrat; text-transform:uppercase; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:${px(0.25)} rgba(238,242,249,.22); opacity:0; }
-  .heroes { position:absolute; ${P ? `left:0; right:0; top:${px(36)}; height:${px(58)}` : `right:${px(2)}; bottom:0; width:${px(100)}; height:${px(70)}`}; transform-origin:50% 100%; }
-  #wh1 { left:50%; bottom:0; transform:translateX(-50%); z-index:2; } #wh0 { left:${P ? '4%' : '6%'}; bottom:0; z-index:1; } #wh2 { right:${P ? '4%' : '6%'}; bottom:0; z-index:1; }
+  .heroes { position:absolute; left:0; right:0; bottom:0; height:${px(P ? 92 : 62)}; display:flex; justify-content:center; align-items:flex-end; gap:${px(P ? 2 : 5)}; } .heroes .hero { position:relative; }
   .wdh { top:${px(P ? 16 : 11)}; }
-  .wcards { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; top:${px(100)}` : `left:${px(7)}; width:${px(84)}; top:${px(40)}`}; display:flex; flex-direction:column; gap:${px(1.8)}; }
+  .wcards { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; top:${px(70)}` : `left:50%; width:${px(96)}; margin-left:${px(-48)}; top:${px(40)}`}; display:flex; flex-direction:column; gap:${px(1.8)}; }
   .wc { display:flex; align-items:center; gap:${px(2.4)}; background:rgba(238,242,249,.96); color:var(--navy); border-radius:${px(2)}; padding:${px(1.6)} ${px(2.4)}; opacity:0; box-shadow:0 ${px(1.4)} ${px(5)} rgba(0,0,0,.45); }
   .wl { width:${px(P ? 12 : 9)}; height:${px(P ? 12 : 9)}; flex-shrink:0; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 0 0 ${px(0.4)} rgba(48,66,133,.25); } .wl img { width:92%; height:92%; object-fit:contain; }
   .wc b { display:block; font:900 ${px(P ? 4.6 : 3.4)} Montserrat; text-transform:uppercase; color:var(--blue); } .wc small { display:block; font:700 ${px(P ? 2.6 : 2)} Montserrat; color:#5a6a9a; }
