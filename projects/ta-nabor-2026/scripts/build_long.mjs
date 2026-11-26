@@ -376,7 +376,7 @@ function build(W, H, file) {
     };
     scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.5 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
-      <div class="kit" id="kit">${KIT.map(([t, k, n, sz, pos], i) => `<div class="ki kip" id="ki${i}"><div class="kph" style="background-image:url(assets/photos/p${n}.jpg); background-size:${sz}; background-position:${pos}"></div><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
+      <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
     rise('#sth .kick', a + 0.05); rise('#sth h2 span', a + BEAT);
     KIT.forEach((_, i) => { const t = a + BEAT * (3 + i * 1.5); pop(`#ki${i}`, t); T0(`#ki${i} svg *`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t); });
