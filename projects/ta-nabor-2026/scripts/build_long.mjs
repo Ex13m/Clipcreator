@@ -364,23 +364,59 @@ function build(W, H, file) {
     outT('#sysh, #dev', b);
   }
 
-  // ===================== 7) JAK ZAČÍT =====================
+  // ===================== 7) JAK ZAČÍT – animované vybavení (prut pruží, naviják se točí, plandavky se houpou, ryba padá do podběráku) =====================
   {
     const id = 's-start', a = BAR(BARS.start[0]), b = BAR(BARS.start[1]);
-    const KIT = [['Prut · Rodio Craft 999.9 Chimera 62', 'rod', 9502, 'cover', '50% 40%'], ['Naviják · Daiwa Exist', 'reel', 9305, '300% auto', '69% 72%'], ['Sada plandavek a woblerů', 'lure', 9305, '330% auto', '36% 73%'], ['Podběrák · Timon', 'net', 9513, 'cover', '50% 50%']];
-    const ICO = {
-      rod: '<path d="M8 92 L88 8" stroke-width="5"/><path d="M8 92 L24 76" stroke-width="10"/><circle cx="56" cy="40" r="3"/><circle cx="72" cy="24" r="2.5"/>',
-      reel: '<circle cx="50" cy="52" r="26" stroke-width="6"/><circle cx="50" cy="52" r="9" stroke-width="5"/><path d="M50 26 V10 M40 10 H60" stroke-width="6"/><path d="M76 52 H90" stroke-width="6"/>',
-      lure: '<path d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle cx="32" cy="20" r="5" stroke-width="4"/>',
-      net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
+    const ICE = '#eef2f9', GOLD = '#ffd36b', CORK = '#c89b6a', RED = '#e31e24';
+    const D = 'pathLength="1" class="dr"';
+    const SP = (fill) => `<path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="${fill}" stroke="${ICE}" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="${ICE}" stroke-width="1.6"/>`;
+    const TROUT = 'M-26 0 C-18 -9 2 -11 16 -5 C21 -3 25 -1 27 0 C25 1 21 3 16 5 C2 11 -18 9 -26 0 Z M-26 0 L-36 -8 L-33 0 L-36 8 Z';
+    const SVG = {
+      rod: `<g ${D.replace('class="dr"', '')}></g>
+        <path ${D} d="M14 138 L54 112" stroke="${CORK}" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path ${D} d="M54 112 L68 103" stroke="#9aa6c4" stroke-width="7" fill="none"/>
+        <g id="rodtip"><path ${D} d="M68 103 L186 24" stroke="${ICE}" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          ${[[92, 87], [116, 71], [140, 55], [163, 40]].map(([x, y]) => `<circle ${D} cx="${x}" cy="${y}" r="3" stroke="${GOLD}" stroke-width="1.8" fill="none"/>`).join('')}
+          <path ${D} d="M186 24 L186 76" stroke="${ICE}" stroke-width="1" fill="none" opacity=".8"/>
+          <g id="rodsp" transform="translate(186 76) scale(.6)">${SP(RED)}</g></g>`,
+      reel: `<path ${D} d="M100 18 V40 M80 18 H120" stroke="${ICE}" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <circle ${D} cx="100" cy="80" r="40" stroke="${ICE}" stroke-width="5" fill="none"/>
+        <g id="spool"><circle cx="100" cy="80" r="26" fill="url(#gsp)" class="fl"/>${[0, 45, 90, 135].map((r) => `<path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(${r} 100 80)" class="fl"/>`).join('')}</g>
+        <g id="rhandle"><path ${D} d="M100 80 L162 80" stroke="${ICE}" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="162" cy="80" r="8" fill="${RED}" class="fl"/></g>
+        <circle cx="100" cy="80" r="6" fill="${ICE}" class="fl"/>`,
+      lure: `<path ${D} d="M20 18 H180" stroke="${ICE}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        ${[[40, RED], [70, GOLD], [100, '#7fd0ff'], [130, '#9be27a'], [160, '#ff8fd0']].map(([x, c], k) => `<g transform="translate(${x} 22)"><g id="lsp${k}"><circle cx="0" cy="4" r="3.2" fill="none" stroke="${ICE}" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl">${SP(c)}</g></g></g>`).join('')}`,
+      net: `<defs><clipPath id="nclip"><ellipse cx="80" cy="64" rx="50" ry="36"/></clipPath></defs>
+        <g clip-path="url(#nclip)" id="mesh">${Array.from({ length: 12 }, (_, k) => `<path ${D} d="M${k * 16 - 30} 20 L${k * 16 + 50} 110 M${k * 16 + 50} 20 L${k * 16 - 30} 110" stroke="${ICE}" stroke-width="1.2" opacity=".55" fill="none"/>`).join('')}
+          <g id="nfish"><path d="${TROUT}" transform="translate(80 70) rotate(-12) scale(1.15)" fill="#9fb3d9" stroke="${ICE}" stroke-width="1"/></g></g>
+        <ellipse ${D} cx="80" cy="64" rx="50" ry="36" stroke="${GOLD}" stroke-width="5" fill="none"/>
+        <path ${D} d="M124 82 L192 140" stroke="${CORK}" stroke-width="7" stroke-linecap="round" fill="none"/>`,
     };
-    scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.5 })}
+    const KIT = [['Prut', 'Rodio Craft 999.9 Chimera 62', 'rod'], ['Naviják', 'Daiwa Exist', 'reel'], ['Nástrahy', 'plandavky a woblery', 'lure'], ['Podběrák', 'Timon', 'net']];
+    scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.42 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
-      <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
+      <div class="kit gk" id="kit">${KIT.map(([t, br, k], i) => `<div class="ki" id="ki${i}"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="${GOLD}"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs>${SVG[k]}</svg><b>${t}</b><small>${br}</small></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
     rise('#sth .kick', a + 0.05); rise('#sth h2 span', a + BEAT);
-    KIT.forEach((_, i) => { const t = a + BEAT * (3 + i * 1.5); pop(`#ki${i}`, t); T0(`#ki${i} svg *`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t); });
-    pop('#hint', BAR(BARS.start[0] + 2) - BEAT);
+    const tk = KIT.map((_, i) => a + BEAT * (3 + i * 1.6));
+    KIT.forEach((_, i) => { const t = tk[i]; pop(`#ki${i}`, t);
+      T0(`#ki${i} .dr`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.out', stagger: 0.04 }, t + 0.05);
+      T0(`#ki${i} .fl`, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.03 }, t + 0.45); });
+    const life = (t) => len(t, b + 0.5);
+    // prut: špička pruží, plandavka se houpe
+    T0('#rodtip', { rotation: 0 }, { rotation: 5, duration: 0.55, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 0.55), svgOrigin: '68 103' }, tk[0] + 0.9);
+    T0('#rodsp', { rotation: -16 }, { rotation: 16, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 0.7), svgOrigin: '186 76' }, tk[0] + 0.6);
+    // naviják: klika a cívka se točí
+    T0('#rhandle', { rotation: 0 }, { rotation: 360 * Math.ceil(life(tk[1]) / 1.1), duration: life(tk[1]), ease: 'none', svgOrigin: '100 80' }, tk[1] + 0.5);
+    T0('#spool', { rotation: 0 }, { rotation: -720 * Math.ceil(life(tk[1]) / 1.1), duration: life(tk[1]), ease: 'none', svgOrigin: '100 80' }, tk[1] + 0.5);
+    // plandavky: houpání s fázovým posunem
+    [0, 1, 2, 3, 4].forEach((k) => { const x = 40 + k * 30;
+      T0(`#lsp${k}`, { rotation: -14 }, { rotation: 14, duration: 0.8 + k * 0.07, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[2]) / 0.8), transformOrigin: '50% 0%' }, tk[2] + 0.3 + k * 0.12); });
+    // podběrák: ryba spadne do sítě a mrská se
+    T0('#nfish', { y: -70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'bounce.out' }, tk[3] + 0.8);
+    T0('#nfish', { rotation: -4 }, { rotation: 4, duration: 0.18, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[3] + 1.4) / 0.18), svgOrigin: '80 70' }, tk[3] + 1.4);
+    T0('#mesh', { y: 0 }, { y: 3, duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }, tk[3] + 1.35);
+    pop('#hint', tk[3] + BEAT * 3);
     outT('#sth, #kit, #hint', b);
   }
 
@@ -540,7 +576,7 @@ function build(W, H, file) {
   .sth { top:${px(P ? 24 : 14)}; }
   .kit { position:absolute; ${P ? `left:${px(7)}; right:${px(7)}; top:${px(68)}` : `left:${px(7)}; right:${px(7)}; top:${px(42)}`}; display:grid; grid-template-columns:${P ? '1fr 1fr' : 'repeat(4, 1fr)'}; gap:${px(2)}; }
   .ki { background:rgba(5,13,34,.72); border:${px(0.25)} solid rgba(238,242,249,.25); border-radius:${px(2)}; padding:${px(2.4)}; display:flex; flex-direction:column; align-items:flex-start; gap:${px(1.4)}; opacity:0; backdrop-filter:blur(${px(1)}); }
-  .ki svg { width:${px(P ? 13 : 10)}; height:${px(P ? 13 : 10)}; } .ki svg * { fill:none; stroke:var(--ice); stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; } .ki svg circle[r="3"], .ki svg circle[r="2.5"] { stroke-width:4; }
+  .kit:not(.gk) .ki svg { width:${px(P ? 13 : 10)}; height:${px(P ? 13 : 10)}; } .kit:not(.gk) .ki svg * { fill:none; stroke:var(--ice); stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; } .kit:not(.gk) .ki svg circle[r="3"], .kit:not(.gk) .ki svg circle[r="2.5"] { stroke-width:4; }
   .ki b { font:800 ${px(P ? 3.2 : 2.4)}/1.2 Montserrat; }
   .hint { position:absolute; ${P ? `left:${px(7)}; right:${px(7)}; top:${px(132)}` : `left:${px(7)}; right:${px(7)}; bottom:${px(10)}`}; font:800 ${px(P ? 3.6 : 2.8)} Montserrat; color:var(--gold); opacity:0; }
   /* CTA */
@@ -636,6 +672,10 @@ function build(W, H, file) {
   .kip { padding:0; overflow:hidden; gap:0; } .kip .kph { width:100%; height:${px(P ? 18 : 14)}; background-size:cover; filter:saturate(1.08) brightness(1.05); }
   .kip svg { position:absolute; margin:${px(1.2)}; width:${px(P ? 7 : 5.5)} !important; height:${px(P ? 7 : 5.5)} !important; filter:drop-shadow(0 0 ${px(0.6)} rgba(0,0,0,.8)); } .kip b { padding:${px(1.6)} ${px(2)} ${px(2)}; }
   .ki { position:relative; }
+  #s-start .hint { ${P ? `top:${px(160)}` : ''} }
+  .gk .ki { align-items:center; text-align:center; } .gk .gsv { width:100% !important; height:${px(P ? 20 : 15)} !important; overflow:visible; }
+  .gk .gsv .dr { stroke-dasharray:1; }
+  .gk .ki b { font:900 ${px(P ? 3.6 : 2.8)} Montserrat; text-transform:uppercase; letter-spacing:.04em; } .gk .ki small { font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--gold); }
   /* globální */
   #corner { position:absolute; ${P ? `left:${px(7)}; top:${px(6)}; width:${px(30)}` : `left:${px(7)}; top:${px(5)}; width:${px(18)}`}; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }

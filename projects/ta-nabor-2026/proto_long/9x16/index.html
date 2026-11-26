@@ -125,7 +125,7 @@
   .sth { top:259px; }
   .kit { position:absolute; left:76px; right:76px; top:734px; display:grid; grid-template-columns:1fr 1fr; gap:22px; }
   .ki { background:rgba(5,13,34,.72); border:3px solid rgba(238,242,249,.25); border-radius:22px; padding:26px; display:flex; flex-direction:column; align-items:flex-start; gap:15px; opacity:0; backdrop-filter:blur(11px); }
-  .ki svg { width:140px; height:140px; } .ki svg * { fill:none; stroke:var(--ice); stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; } .ki svg circle[r="3"], .ki svg circle[r="2.5"] { stroke-width:4; }
+  .kit:not(.gk) .ki svg { width:140px; height:140px; } .kit:not(.gk) .ki svg * { fill:none; stroke:var(--ice); stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; } .kit:not(.gk) .ki svg circle[r="3"], .kit:not(.gk) .ki svg circle[r="2.5"] { stroke-width:4; }
   .ki b { font:800 35px/1.2 Montserrat; }
   .hint { position:absolute; left:76px; right:76px; top:1426px; font:800 39px Montserrat; color:var(--gold); opacity:0; }
   /* CTA */
@@ -221,6 +221,10 @@
   .kip { padding:0; overflow:hidden; gap:0; } .kip .kph { width:100%; height:194px; background-size:cover; filter:saturate(1.08) brightness(1.05); }
   .kip svg { position:absolute; margin:13px; width:76px !important; height:76px !important; filter:drop-shadow(0 0 6px rgba(0,0,0,.8)); } .kip b { padding:17px 22px 22px; }
   .ki { position:relative; }
+  #s-start .hint { top:1728px }
+  .gk .ki { align-items:center; text-align:center; } .gk .gsv { width:100% !important; height:216px !important; overflow:visible; }
+  .gk .gsv .dr { stroke-dasharray:1; }
+  .gk .ki b { font:900 39px Montserrat; text-transform:uppercase; letter-spacing:.04em; } .gk .ki small { font:700 28px Montserrat; color:var(--gold); }
   /* globální */
   #corner { position:absolute; left:76px; top:65px; width:324px; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }
@@ -290,7 +294,22 @@
       <div class="dev" id="dev"><img class="lap" id="lap" src="assets/screens/a036.png" alt=""><img class="phn" id="phn" src="assets/screens/a050.png" alt=""></div></section>
   <section id="s-start" class="clip" data-start="132.961" data-duration="11.355" data-track-index="2"><div class="ph" id="sa_0" style="background-image:url(assets/photos/p9627.jpg); background-position:45% 70%"></div><div class="ph" id="sa_1" style="background-image:url(assets/photos/p9305.jpg); background-position:50% 50%"></div><div class="ph" id="sa_2" style="background-image:url(assets/photos/p9813.jpg); background-position:50% 40%"></div><div class="pho"></div>
       <div class="blk sth" id="sth"><div class="kick"><i></i>Jak začít?</div><h2><span>Na začátek stačí základní výbava.</span></h2></div>
-      <div class="kit" id="kit"><div class="ki" id="ki0"><svg viewBox="0 0 100 100"><path pathLength="1" d="M8 92 L88 8" stroke-width="5"/><path pathLength="1" d="M8 92 L24 76" stroke-width="10"/><circle pathLength="1" cx="56" cy="40" r="3"/><circle pathLength="1" cx="72" cy="24" r="2.5"/></svg><b>Prut · Rodio Craft 999.9 Chimera 62</b></div><div class="ki" id="ki1"><svg viewBox="0 0 100 100"><circle pathLength="1" cx="50" cy="52" r="26" stroke-width="6"/><circle pathLength="1" cx="50" cy="52" r="9" stroke-width="5"/><path pathLength="1" d="M50 26 V10 M40 10 H60" stroke-width="6"/><path pathLength="1" d="M76 52 H90" stroke-width="6"/></svg><b>Naviják · Daiwa Exist</b></div><div class="ki" id="ki2"><svg viewBox="0 0 100 100"><path pathLength="1" d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path pathLength="1" d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle pathLength="1" cx="32" cy="20" r="5" stroke-width="4"/></svg><b>Sada plandavek a woblerů</b></div><div class="ki" id="ki3"><svg viewBox="0 0 100 100"><ellipse pathLength="1" cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path pathLength="1" d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path pathLength="1" d="M66 50 L92 90" stroke-width="7"/></svg><b>Podběrák · Timon</b></div></div>
+      <div class="kit gk" id="kit"><div class="ki" id="ki0"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="#ffd36b"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs><g pathLength="1" ></g>
+        <path pathLength="1" class="dr" d="M14 138 L54 112" stroke="#c89b6a" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path pathLength="1" class="dr" d="M54 112 L68 103" stroke="#9aa6c4" stroke-width="7" fill="none"/>
+        <g id="rodtip"><path pathLength="1" class="dr" d="M68 103 L186 24" stroke="#eef2f9" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <circle pathLength="1" class="dr" cx="92" cy="87" r="3" stroke="#ffd36b" stroke-width="1.8" fill="none"/><circle pathLength="1" class="dr" cx="116" cy="71" r="3" stroke="#ffd36b" stroke-width="1.8" fill="none"/><circle pathLength="1" class="dr" cx="140" cy="55" r="3" stroke="#ffd36b" stroke-width="1.8" fill="none"/><circle pathLength="1" class="dr" cx="163" cy="40" r="3" stroke="#ffd36b" stroke-width="1.8" fill="none"/>
+          <path pathLength="1" class="dr" d="M186 24 L186 76" stroke="#eef2f9" stroke-width="1" fill="none" opacity=".8"/>
+          <g id="rodsp" transform="translate(186 76) scale(.6)"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#e31e24" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></svg><b>Prut</b><small>Rodio Craft 999.9 Chimera 62</small></div><div class="ki" id="ki1"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="#ffd36b"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs><path pathLength="1" class="dr" d="M100 18 V40 M80 18 H120" stroke="#eef2f9" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <circle pathLength="1" class="dr" cx="100" cy="80" r="40" stroke="#eef2f9" stroke-width="5" fill="none"/>
+        <g id="spool"><circle cx="100" cy="80" r="26" fill="url(#gsp)" class="fl"/><path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(0 100 80)" class="fl"/><path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(45 100 80)" class="fl"/><path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(90 100 80)" class="fl"/><path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(135 100 80)" class="fl"/></g>
+        <g id="rhandle"><path pathLength="1" class="dr" d="M100 80 L162 80" stroke="#eef2f9" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="162" cy="80" r="8" fill="#e31e24" class="fl"/></g>
+        <circle cx="100" cy="80" r="6" fill="#eef2f9" class="fl"/></svg><b>Naviják</b><small>Daiwa Exist</small></div><div class="ki" id="ki2"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="#ffd36b"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs><path pathLength="1" class="dr" d="M20 18 H180" stroke="#eef2f9" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <g transform="translate(40 22)"><g id="lsp0"><circle cx="0" cy="4" r="3.2" fill="none" stroke="#eef2f9" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#e31e24" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></g><g transform="translate(70 22)"><g id="lsp1"><circle cx="0" cy="4" r="3.2" fill="none" stroke="#eef2f9" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#ffd36b" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></g><g transform="translate(100 22)"><g id="lsp2"><circle cx="0" cy="4" r="3.2" fill="none" stroke="#eef2f9" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#7fd0ff" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></g><g transform="translate(130 22)"><g id="lsp3"><circle cx="0" cy="4" r="3.2" fill="none" stroke="#eef2f9" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#9be27a" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></g><g transform="translate(160 22)"><g id="lsp4"><circle cx="0" cy="4" r="3.2" fill="none" stroke="#eef2f9" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl"><path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="#ff8fd0" stroke="#eef2f9" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="#eef2f9" stroke-width="1.6"/></g></g></g></svg><b>Nástrahy</b><small>plandavky a woblery</small></div><div class="ki" id="ki3"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="#ffd36b"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs><defs><clipPath id="nclip"><ellipse cx="80" cy="64" rx="50" ry="36"/></clipPath></defs>
+        <g clip-path="url(#nclip)" id="mesh"><path pathLength="1" class="dr" d="M-30 20 L50 110 M50 20 L-30 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M-14 20 L66 110 M66 20 L-14 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M2 20 L82 110 M82 20 L2 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M18 20 L98 110 M98 20 L18 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M34 20 L114 110 M114 20 L34 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M50 20 L130 110 M130 20 L50 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M66 20 L146 110 M146 20 L66 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M82 20 L162 110 M162 20 L82 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M98 20 L178 110 M178 20 L98 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M114 20 L194 110 M194 20 L114 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M130 20 L210 110 M210 20 L130 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/><path pathLength="1" class="dr" d="M146 20 L226 110 M226 20 L146 110" stroke="#eef2f9" stroke-width="1.2" opacity=".55" fill="none"/>
+          <g id="nfish"><path d="M-26 0 C-18 -9 2 -11 16 -5 C21 -3 25 -1 27 0 C25 1 21 3 16 5 C2 11 -18 9 -26 0 Z M-26 0 L-36 -8 L-33 0 L-36 8 Z" transform="translate(80 70) rotate(-12) scale(1.15)" fill="#9fb3d9" stroke="#eef2f9" stroke-width="1"/></g></g>
+        <ellipse pathLength="1" class="dr" cx="80" cy="64" rx="50" ry="36" stroke="#ffd36b" stroke-width="5" fill="none"/>
+        <path pathLength="1" class="dr" d="M124 82 L192 140" stroke="#c89b6a" stroke-width="7" stroke-linecap="round" fill="none"/></svg><b>Podběrák</b><small>Timon</small></div></div>
       <div class="hint" id="hint">Přátelská atmosféra. Zkušení rádi poradí.</div></section>
   <section id="s-crs" class="clip" data-start="144.316" data-duration="5.689" data-track-index="2"><div class="ph" id="cs_0" style="background-image:url(assets/photos/p86415.jpg); background-position:50% 40%"></div><div class="pho"></div>
       <div class="crsw" id="crsw"><small>Ve spolupráci s</small><span class="crsc" id="crsl"><img src="assets/crs.png" alt="Český rybářský svaz"></span></div></section>
@@ -1204,28 +1223,44 @@
   tl.fromTo("#lap", {"y":0}, {"immediateRender":false,"y":-16.200000000000003,"duration":12.258,"ease":"sine.inOut"}, 120.703);
   tl.fromTo("#sysh, #dev", {"opacity":1}, {"immediateRender":false,"opacity":0,"duration":0.3,"ease":"power2.in"}, 132.661);
   tl.set("#sa_0", {"opacity":0}, 0.000);
-  tl.fromTo("#sa_0", {"opacity":0}, {"opacity":0.5,"duration":0.45,"ease":"power2.out"}, 132.961);
-  tl.fromTo("#sa_0", {"opacity":0.5}, {"immediateRender":false,"opacity":0,"duration":0.3}, 136.846);
+  tl.fromTo("#sa_0", {"opacity":0}, {"opacity":0.42,"duration":0.45,"ease":"power2.out"}, 132.961);
+  tl.fromTo("#sa_0", {"opacity":0.42}, {"immediateRender":false,"opacity":0,"duration":0.3}, 136.846);
   tl.fromTo("#sa_0", {"scale":1.12,"xPercent":-1.5}, {"scale":1.02,"xPercent":1.5,"duration":4.285,"ease":"none"}, 132.861);
   tl.set("#sa_1", {"opacity":0}, 0.000);
-  tl.fromTo("#sa_1", {"opacity":0}, {"opacity":0.5,"duration":0.25,"ease":"power2.out"}, 136.646);
-  tl.fromTo("#sa_1", {"opacity":0.5}, {"immediateRender":false,"opacity":0,"duration":0.3}, 140.631);
+  tl.fromTo("#sa_1", {"opacity":0}, {"opacity":0.42,"duration":0.25,"ease":"power2.out"}, 136.646);
+  tl.fromTo("#sa_1", {"opacity":0.42}, {"immediateRender":false,"opacity":0,"duration":0.3}, 140.631);
   tl.fromTo("#sa_1", {"scale":1.02,"xPercent":1.5}, {"scale":1.12,"xPercent":-1.5,"duration":4.285,"ease":"none"}, 136.646);
   tl.set("#sa_2", {"opacity":0}, 0.000);
-  tl.fromTo("#sa_2", {"opacity":0}, {"opacity":0.5,"duration":0.25,"ease":"power2.out"}, 140.431);
+  tl.fromTo("#sa_2", {"opacity":0}, {"opacity":0.42,"duration":0.25,"ease":"power2.out"}, 140.431);
   tl.fromTo("#sa_2", {"scale":1.12,"xPercent":-1.5}, {"scale":1.02,"xPercent":1.5,"duration":4.285,"ease":"none"}, 140.431);
   tl.set("#s-start", {visibility:"hidden"}, 0); tl.set("#s-start", {visibility:"visible"}, 132.961); tl.set("#s-start", {visibility:"hidden"}, 144.316);
   tl.fromTo("#sth .kick", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 133.011);
   tl.fromTo("#sth h2 span", {"yPercent":115,"opacity":0}, {"yPercent":0,"opacity":1,"duration":0.55,"ease":"expo.out","stagger":0}, 133.437);
   tl.fromTo("#ki0", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 134.389);
-  tl.fromTo("#ki0 svg *", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.out"}, 134.389);
-  tl.fromTo("#ki1", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 135.103);
-  tl.fromTo("#ki1 svg *", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.out"}, 135.103);
-  tl.fromTo("#ki2", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 135.817);
-  tl.fromTo("#ki2 svg *", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.out"}, 135.817);
-  tl.fromTo("#ki3", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 136.531);
-  tl.fromTo("#ki3 svg *", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.7,"ease":"power2.out"}, 136.531);
-  tl.fromTo("#hint", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 136.270);
+  tl.fromTo("#ki0 .dr", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.out","stagger":0.04}, 134.439);
+  tl.fromTo("#ki0 .fl", {"opacity":0}, {"opacity":1,"duration":0.4,"stagger":0.03}, 134.839);
+  tl.fromTo("#ki1", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 135.151);
+  tl.fromTo("#ki1 .dr", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.out","stagger":0.04}, 135.201);
+  tl.fromTo("#ki1 .fl", {"opacity":0}, {"opacity":1,"duration":0.4,"stagger":0.03}, 135.601);
+  tl.fromTo("#ki2", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 135.912);
+  tl.fromTo("#ki2 .dr", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.out","stagger":0.04}, 135.962);
+  tl.fromTo("#ki2 .fl", {"opacity":0}, {"opacity":1,"duration":0.4,"stagger":0.03}, 136.362);
+  tl.fromTo("#ki3", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 136.674);
+  tl.fromTo("#ki3 .dr", {"strokeDashoffset":1}, {"strokeDashoffset":0,"duration":0.9,"ease":"power2.out","stagger":0.04}, 136.724);
+  tl.fromTo("#ki3 .fl", {"opacity":0}, {"opacity":1,"duration":0.4,"stagger":0.03}, 137.124);
+  tl.fromTo("#rodtip", {"rotation":0}, {"rotation":5,"duration":0.55,"ease":"sine.inOut","yoyo":true,"repeat":19,"svgOrigin":"68 103"}, 135.289);
+  tl.fromTo("#rodsp", {"rotation":-16}, {"rotation":16,"duration":0.7,"ease":"sine.inOut","yoyo":true,"repeat":15,"svgOrigin":"186 76"}, 134.989);
+  tl.fromTo("#rhandle", {"rotation":0}, {"rotation":3240,"duration":9.665,"ease":"none","svgOrigin":"100 80"}, 135.651);
+  tl.fromTo("#spool", {"rotation":0}, {"rotation":-6480,"duration":9.665,"ease":"none","svgOrigin":"100 80"}, 135.651);
+  tl.fromTo("#lsp0", {"rotation":-14}, {"rotation":14,"duration":0.8,"ease":"sine.inOut","yoyo":true,"repeat":12,"transformOrigin":"50% 0%"}, 136.212);
+  tl.fromTo("#lsp1", {"rotation":-14}, {"rotation":14,"duration":0.8700000000000001,"ease":"sine.inOut","yoyo":true,"repeat":12,"transformOrigin":"50% 0%"}, 136.332);
+  tl.fromTo("#lsp2", {"rotation":-14}, {"rotation":14,"duration":0.9400000000000001,"ease":"sine.inOut","yoyo":true,"repeat":12,"transformOrigin":"50% 0%"}, 136.452);
+  tl.fromTo("#lsp3", {"rotation":-14}, {"rotation":14,"duration":1.01,"ease":"sine.inOut","yoyo":true,"repeat":12,"transformOrigin":"50% 0%"}, 136.572);
+  tl.fromTo("#lsp4", {"rotation":-14}, {"rotation":14,"duration":1.08,"ease":"sine.inOut","yoyo":true,"repeat":12,"transformOrigin":"50% 0%"}, 136.692);
+  tl.fromTo("#nfish", {"y":-70,"opacity":0}, {"y":0,"opacity":1,"duration":0.6,"ease":"bounce.out"}, 137.474);
+  tl.fromTo("#nfish", {"rotation":-4}, {"rotation":4,"duration":0.18,"ease":"sine.inOut","yoyo":true,"repeat":38,"svgOrigin":"80 70"}, 138.074);
+  tl.fromTo("#mesh", {"y":0}, {"y":3,"duration":0.25,"ease":"power2.out","yoyo":true,"repeat":1}, 138.024);
+  tl.fromTo("#hint", {"opacity":0,"y":21.6,"scale":0.92}, {"opacity":1,"y":0,"scale":1,"duration":0.5,"ease":"back.out(1.8)"}, 138.102);
   tl.fromTo("#sth, #kit, #hint", {"opacity":1}, {"immediateRender":false,"opacity":0,"duration":0.3,"ease":"power2.in"}, 144.016);
   tl.set("#cs_0", {"opacity":0}, 0.000);
   tl.fromTo("#cs_0", {"opacity":0}, {"opacity":0.4,"duration":0.45,"ease":"power2.out"}, 144.316);
