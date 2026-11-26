@@ -24,7 +24,7 @@ const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
-Object.assign(FOC, { 9513: '50% 50%', 9526: '50% 55%', 9527: '50% 55%', 9508: '50% 55%', 9511: '50% 55%', 9502: '50% 40%', 9601: '50% 35%', 9802: '50% 55%', 9812: '50% 40%', 9820: '50% 55%', 9813: '50% 40%', 9901: '50% 45%', 9926: '50% 35%', 9902: '50% 30%', 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
+Object.assign(FOC, { 9627: '45% 70%', 9305: '30% 75%', 9513: '50% 50%', 9526: '50% 55%', 9527: '50% 55%', 9508: '50% 55%', 9511: '50% 55%', 9502: '50% 40%', 9601: '50% 35%', 9802: '50% 55%', 9812: '50% 40%', 9820: '50% 55%', 9813: '50% 40%', 9901: '50% 45%', 9926: '50% 35%', 9902: '50% 30%', 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -367,16 +367,16 @@ function build(W, H, file) {
   // ===================== 7) JAK ZAČÍT =====================
   {
     const id = 's-start', a = BAR(BARS.start[0]), b = BAR(BARS.start[1]);
-    const KIT = [['Prut do 2,7 m', 'rod'], ['Naviják', 'reel'], ['Nástrahy s jednoháčkem bez protihrotu', 'lure'], ['Podběrák s gumovou síťkou', 'net']];
+    const KIT = [['Prut · Rodio Craft 999.9 Chimera 62', 'rod', 9502, 'cover', '50% 40%'], ['Naviják · Daiwa Exist', 'reel', 9305, '300% auto', '69% 72%'], ['Sada plandavek a woblerů', 'lure', 9305, '330% auto', '36% 73%'], ['Podběrák · Timon', 'net', 9513, 'cover', '50% 50%']];
     const ICO = {
       rod: '<path d="M8 92 L88 8" stroke-width="5"/><path d="M8 92 L24 76" stroke-width="10"/><circle cx="56" cy="40" r="3"/><circle cx="72" cy="24" r="2.5"/>',
       reel: '<circle cx="50" cy="52" r="26" stroke-width="6"/><circle cx="50" cy="52" r="9" stroke-width="5"/><path d="M50 26 V10 M40 10 H60" stroke-width="6"/><path d="M76 52 H90" stroke-width="6"/>',
       lure: '<path d="M30 20 C70 20 80 60 50 84 C24 64 22 36 30 20 Z" stroke-width="6"/><path d="M50 84 C46 92 54 96 58 90" stroke-width="5"/><circle cx="32" cy="20" r="5" stroke-width="4"/>',
       net: '<ellipse cx="44" cy="36" rx="28" ry="22" stroke-width="6"/><path d="M24 46 C30 70 56 72 64 48 M34 52 L54 30 M44 58 L62 38" stroke-width="3"/><path d="M66 50 L92 90" stroke-width="7"/>',
     };
-    scene(id, a, b, `${photos('sa', [9813, 9710, 9711], a, b, { op: 0.5 })}
+    scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.5 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
-      <div class="kit" id="kit">${KIT.map(([t, k], i) => `<div class="ki" id="ki${i}"><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
+      <div class="kit" id="kit">${KIT.map(([t, k, n, sz, pos], i) => `<div class="ki kip" id="ki${i}"><div class="kph" style="background-image:url(assets/photos/p${n}.jpg); background-size:${sz}; background-position:${pos}"></div><svg viewBox="0 0 100 100">${ICO[k].replace(/<(path|circle|ellipse) /g, '<$1 pathLength="1" ')}</svg><b>${t}</b></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
     rise('#sth .kick', a + 0.05); rise('#sth h2 span', a + BEAT);
     KIT.forEach((_, i) => { const t = a + BEAT * (3 + i * 1.5); pop(`#ki${i}`, t); T0(`#ki${i} svg *`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, t); });
@@ -400,14 +400,17 @@ function build(W, H, file) {
     scene(id, a, b, `${photos('ct', [9701, 9033], a, b, { op: 0.28 })}
       <div class="cta" id="cta"><img class="tal" id="tal" src="assets/ta_logo.png" alt="Trout Area Czech Republic">
         <h1 id="cth"><span>Přijď si to</span><span class="red">vyzkoušet.</span></h1>
-        <div class="url" id="url"><small>Pravidla · termíny · výsledky · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>`);
+        <div class="url" id="url"><small>Pravidla · termíny · výsledky · registrace</small><b>troutareacz.cz</b><i class="cur" id="cur"></i></div></div>
+      <div class="ghm" id="gh-end"><span class="by">made by</span><span class="gear"><img class="ring" src="assets/gh/ring.png" alt=""><img class="core" src="assets/gh/core.png" alt=""></span><img class="wl2" src="assets/gh/word-line.png" alt="Gausse Holler"></div>`);
+    T0('#gh-end', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, a + BEAT * 10);
+    T0('#gh-end .ring', { rotation: 0 }, { rotation: 360, duration: len(a + BEAT * 10, b), ease: 'none' }, a + BEAT * 10);
     T0('#tal', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + 0.05);
     rise('#cth span', a + BEAT * 2, 0.6, BEAT);
     T0('#url', { opacity: 0, y: 3 * u, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'back.out(2)' }, a + BEAT * 5);
     T0('#cur', { opacity: 0, x: 10 * u, y: 8 * u }, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: 'power3.out' }, a + BEAT * 6);
     T('#url', { scale: 1 }, { scale: 0.95, duration: 0.12, yoyo: true, repeat: 1 }, a + BEAT * 7.5);
     T('#url', { boxShadow: '0 0 0 0px rgba(227,30,36,.0)' }, { boxShadow: `0 0 0 ${px(1.4)} rgba(227,30,36,.9)`, duration: 0.3, yoyo: true, repeat: 3 }, a + BEAT * 7.5);
-    T('#cta', { opacity: 1 }, { opacity: 0, duration: 0.8 }, b - 0.8);
+    T('#cta, #gh-end', { opacity: 1 }, { opacity: 0, duration: 0.8 }, b - 0.8);
   }
 
   // ===================== globální rytmus =====================
@@ -628,6 +631,11 @@ function build(W, H, file) {
   .t8 .thd, .t8 .tr { grid-template-columns:${P ? `${px(9)} repeat(8, 1fr) ${px(11)}` : `${px(8)} repeat(8, 1fr) ${px(10)}`}; }
   .t8 .cl { font-size:${px(P ? 3.2 : 2.4)}; } .cl.ab em { color:var(--red); }
   .tleg { margin-top:${px(1.2)}; font:700 ${px(P ? 2.3 : 1.7)} Montserrat; color:var(--lb); } .tleg i { color:var(--red); font-style:normal; font-weight:900; }
+  .ghm { position:absolute; left:0; right:0; top:${P ? '84%' : '86%'}; display:flex; align-items:center; justify-content:center; gap:${px(1.4)}; opacity:0; font:800 ${px(2)} Montserrat; letter-spacing:.24em; text-transform:uppercase; color:rgba(238,242,249,.88); z-index:6; }
+  .ghm .gear { position:relative; width:${px(6.4)}; height:${px(6.4)}; } .ghm .gear img { position:absolute; inset:0; width:100%; height:100%; } .ghm .wl2 { height:${px(2.8)}; }
+  .kip { padding:0; overflow:hidden; gap:0; } .kip .kph { width:100%; height:${px(P ? 18 : 14)}; background-size:cover; filter:saturate(1.08) brightness(1.05); }
+  .kip svg { position:absolute; margin:${px(1.2)}; width:${px(P ? 7 : 5.5)} !important; height:${px(P ? 7 : 5.5)} !important; filter:drop-shadow(0 0 ${px(0.6)} rgba(0,0,0,.8)); } .kip b { padding:${px(1.6)} ${px(2)} ${px(2)}; }
+  .ki { position:relative; }
   /* globální */
   #corner { position:absolute; ${P ? `left:${px(7)}; top:${px(6)}; width:${px(30)}` : `left:${px(7)}; top:${px(5)}; width:${px(18)}`}; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }
