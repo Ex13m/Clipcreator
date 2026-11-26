@@ -24,7 +24,7 @@ const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
-Object.assign(FOC, { 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 50%', 9308: '50% 55%', 9309: '50% 45%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
+Object.assign(FOC, { 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -296,16 +296,13 @@ function build(W, H, file) {
     const CARDS = [['lg_hb', 'H-Battle', 'evropský pohár na tvrdé nástrahy · dvoudenní'], ['lg_atlas', 'ATLAS', 'mezinárodní unie lig · týmový World Cup'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
     const HH = P ? 92 * u : 62 * u;
     const tc0 = a + BEAT * 12.4;
-    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9307, 9309, 9222], tc0, b, { op: 0.42 })}<div class="otx" id="otx">Reprezentace</div>
-      <div class="heroes" id="heroes">${hero('wh0', 9301, HH * 0.95)}${hero('wh1', 9306, HH * (P ? 0.78 : 0.9))}${P ? '' : hero('wh2', 9028, HH)}</div>
+    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9307, 9309, 9222], a, b, { op: 0.7 })}<div class="otx" id="otx">Reprezentace</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
     T0('#glb', { rotation: 0, opacity: 0 }, { rotation: 25, opacity: 1, duration: len(a, b), ease: 'none' }, a);
     T0('#otx', { opacity: 0, xPercent: P ? -5 : 8 }, { opacity: 1, xPercent: P ? -25 : -12, duration: len(a, b), ease: 'none' }, a);
     rise('#wdh .kick', a + 0.05); rise('#wdh h2:nth-of-type(1) span', a + BEAT); rise('#wdh h2:nth-of-type(2) span', a + BEAT * 2);
-    heroIn('wh1', a + BEAT * 3, 1); heroIn('wh0', a + BEAT * 4, -1); if (!P) heroIn('wh2', a + BEAT * 5, 1);
     const tc = a + BEAT * 13;
-    T('#heroes', { opacity: 1, y: 0 }, { opacity: 0, y: 6 * u, duration: 0.5, ease: 'power2.in' }, tc - BEAT * 0.8);
     CARDS.forEach((_, i) => { const t = tc + BEAT * i * 2.2;
       T0(`#wc${i}`, { opacity: 0, x: 12 * u, rotationY: -50, transformPerspective: 1200 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.6, ease: 'expo.out' }, t);
       T0(`#wc${i} .wl`, { scale: 0.3, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, t + 0.1); });
