@@ -246,7 +246,7 @@ function build(W, H, file) {
     const worst2 = (k) => R[k].map((v, i) => [v, i]).sort((x, y) => y[0] - x[0]).slice(0, 2).map(([, i]) => i);
     const fin = (k) => (sum(k) - worst2(k).reduce((s2, i) => s2 + R[k][i], 0)) / (ND - 2);
     const RH = P ? 9.2 * u : 6.4 * u;
-    scene(id, a, b, `<div class="rbg"></div>${hero('rk-h', 9030, P ? 60 * u : 92 * u)}
+    scene(id, a, b, `<div class="rbg"></div>${hero('rk-h', 9306, P ? 52 * u : 80 * u)}
       <div class="blk rkh" id="rkh">${kick('Celoroční žebříček')}<h2><span>${nb('Umístění = body.')}</span></h2><h2 class="red"><span>${nb('Nejnižší průměr vede.')}</span></h2></div>
       <div class="tbl t8" id="tbl"><div class="thd"><span></span>${Array.from({ length: ND }, (_, n) => `<span>${n + 1}</span>`).join('')}<span>Ø</span></div>
         <div class="tbd" style="height:${(RH * 5).toFixed(0)}px">${K.map((k) => `<div class="tr" id="tr${k}" style="height:${RH.toFixed(0)}px"><span class="who" style="--c:${CC[k]}"><b>${k}</b></span>${R[k].map((v, c) => `<span class="cl${v === AB ? ' ab' : ''}" id="c${k}${c}"><em>${v === AB ? '×' : v}</em><s class="x" id="x${k}${c}"></s></span>`).join('')}<span class="sm" id="sm${k}">0</span><i class="lead" id="ld${k}">1.</i></div>`).join('')}</div>
@@ -371,10 +371,10 @@ function build(W, H, file) {
     const id = 's-start', a = BAR(BARS.start[0]), b = BAR(BARS.start[1]);
     const KIT = [['Prut', 'Rodio Craft 999.9 Chimera 62L+', 'rod'], ['Naviják', 'Daiwa Exist', 'reel'], ['Nástrahy', 'Rodio Craft NOA', 'lure'], ['Podběrák', 'Timon T-Connection', 'net']];
     const VIS = {
-      rod: `<img class="pr-rod" src="assets/cut/g_rod.png" alt=""><img class="pr-rodlogo" src="assets/cut/g_rodlogo.png" alt="">`,
-      reel: `<img class="pr-reel" src="assets/cut/g_reel.png" alt="">`,
-      lure: [0, 1, 2, 3, 4].map((k) => `<img class="pr-noa" id="noa${k}" src="assets/cut/g_noa${k}.png" alt="">`).join(''),
-      net: `<img class="pr-net" src="assets/cut/g_net.png" alt="">`,
+      rod: `<img class="pr-rod" src="assets/cut/g2_rod.png" alt="">`,
+      reel: `<img class="pr-reel" src="assets/cut/g2_reel.png" alt="">`,
+      lure: [0, 2, 5].map((n, k) => `<img class="pr-noa" id="noa${k}" src="assets/cut/g2_noa${n}.png" alt="">`).join(''),
+      net: `<img class="pr-net" src="assets/cut/g2_net.png" alt="">`,
     };
     scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.45 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
@@ -386,14 +386,13 @@ function build(W, H, file) {
       T0(`#gl${i}`, { xPercent: -160 }, { xPercent: 260, duration: 0.9, ease: 'power2.inOut' }, t + 0.5);
       T0(`#gl${i}`, { xPercent: -160 }, { xPercent: 260, duration: 0.9, ease: 'power2.inOut' }, t + 0.5 + BEAT * 8); });
     // prut: vjede zleva, mírně se vlní
-    T0('#ki0 .pr-rod', { xPercent: -60, opacity: 0, rotation: -6 }, { xPercent: 0, opacity: 1, rotation: -4, duration: 0.8, ease: 'expo.out' }, tk[0] + 0.1);
-    T0('#ki0 .pr-rod', { rotation: -4 }, { rotation: -2, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 1.2) }, tk[0] + 0.9);
-    T0('#ki0 .pr-rodlogo', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tk[0] + 0.6);
+    T0('#ki0 .pr-rod', { xPercent: -50, opacity: 0, rotation: -8 }, { xPercent: 0, opacity: 1, rotation: 0, duration: 0.8, ease: 'expo.out' }, tk[0] + 0.1);
+    T0('#ki0 .pr-rod', { rotation: -1.5, scale: 1 }, { rotation: 1.5, scale: 1.04, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 1.2) }, tk[0] + 0.9);
     // naviják: přiletí s rotací, pak se vznáší
     T0('#ki1 .pr-reel', { scale: 0.3, rotation: -40, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.8)' }, tk[1] + 0.1);
     T0('#ki1 .pr-reel', { y: -1 * u, rotation: -3 }, { y: 1 * u, rotation: 3, duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[1]) / 1.1) }, tk[1] + 0.9);
     // nástrahy: vějíř balení
-    [0, 1, 2, 3, 4].forEach((k) => { const r = (k - 2) * 13, dx = (k - 2) * 18;
+    [0, 1, 2].forEach((k) => { const r = (k - 1) * 16, dx = (k - 1) * 22;
       T0(`#noa${k}`, { rotation: 0, xPercent: 0, opacity: 0, y: 4 * u }, { rotation: r, xPercent: dx, opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.6)' }, tk[2] + 0.1 + k * 0.07);
       T0(`#noa${k}`, { rotation: r - 2 }, { rotation: r + 2, duration: 0.9 + k * 0.1, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[2]) / 0.9) }, tk[2] + 0.8); });
     // podběrák: šikmo vjede, houpe se
@@ -683,10 +682,10 @@ function build(W, H, file) {
   .gk .ki b { font:900 ${px(P ? 3.6 : 2.8)} Montserrat; text-transform:uppercase; letter-spacing:.04em; } .gk .ki small { font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--gold); }
   .gp { overflow:hidden; } .gvis { position:relative; width:100%; height:${px(P ? 20 : 15)}; display:flex; align-items:center; justify-content:center; background:radial-gradient(60% 70% at 50% 55%, rgba(127,208,255,.28), transparent 70%); border-radius:${px(1.4)}; overflow:hidden; }
   .gvis img { position:absolute; filter:drop-shadow(0 ${px(0.8)} ${px(1.6)} rgba(0,0,0,.6)); }
-  .pr-rod { width:96%; left:2%; top:28%; transform-origin:12% 50%; } .pr-rodlogo { width:70%; left:15%; bottom:8%; opacity:0; }
-  .pr-reel { height:92%; left:50%; top:4%; margin-left:${px(P ? -7.8 : -5.9)}; }
-  .pr-noa { height:88%; left:50%; top:8%; margin-left:${px(P ? -3.6 : -2.7)}; transform-origin:50% 100%; }
-  .pr-net { width:92%; left:4%; top:22%; transform-origin:85% 60%; }
+  .pr-rod { height:96%; left:0; right:0; top:2%; margin:auto; transform-origin:30% 80%; }
+  .pr-reel { height:94%; left:0; right:0; top:3%; margin:auto; }
+  .pr-noa { width:62%; left:19%; top:18%; transform-origin:50% 120%; }
+  .pr-net { height:100%; left:0; right:0; top:0; margin:auto; transform-origin:70% 70%; }
   .glint { position:absolute; top:-20%; bottom:-20%; left:0; width:35%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); mix-blend-mode:overlay; transform:skewX(-18deg); pointer-events:none; }
   /* hudební prvky */
   #spec { position:absolute; left:0; right:0; bottom:0; height:${px(P ? 7 : 6)}; display:flex; align-items:flex-end; gap:${px(0.35)}; padding:0 ${px(1)}; z-index:4; pointer-events:none; opacity:.0; mix-blend-mode:screen; }
