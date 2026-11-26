@@ -11,6 +11,7 @@ const FONTS = fs.readFileSync(path.join(PROTO, 'assets/fonts.css'), 'utf8');
 const VER = process.env.VER || 'v1';
 const G = JSON.parse(fs.readFileSync(path.join(ROOT, '03_MUSIC/track_long.beats.json'), 'utf8'));
 G.beats = G.downbeats.flatMap((t, i) => { const n = G.downbeats[i + 1] ?? t + (t - G.downbeats[i - 1]); return [0, 1, 2, 3].map((k) => +(t + ((n - t) * k) / 4).toFixed(4)); });
+const SPEC = JSON.parse(fs.readFileSync(path.join(ROOT, 'proto/assets/spec_long.json'), 'utf8'));
 const pngWH = (f) => { const b = fs.readFileSync(f); return [b.readUInt32BE(16), b.readUInt32BE(20)]; };
 const BEAT = G.beats[1] - G.beats[0];
 const BAR = (n) => (n < G.downbeats.length ? G.downbeats[n] : G.downbeats.at(-1) + (n - G.downbeats.length + 1) * BEAT * 4);
@@ -43,7 +44,7 @@ function build(W, H, file) {
   const pop = (sel, t, d = 0.5) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: d, ease: 'back.out(1.8)' }, t);
   const outT = (sel, t, d = 0.3) => T(sel, { opacity: 1 }, { opacity: 0, duration: d, ease: 'power2.in' }, t - d);
   // fotky: sled střihů; každá s vlastním pomalým Ken Burns, střih na dobu
-  const photos = (id, list, a, b, { op = 1, hard = false } = {}) => {
+  const photos = (id, list, a, b, { op = 1, hard = false } = {}) => { op = Math.min(1, op * 1.35);
     const n = list.length, cuts = Array.from({ length: n + 1 }, (_, k) => (k === 0 ? a : k === n ? b : G.beats.find((t) => t >= a + ((b - a) * k) / n - 0.05) ?? a + ((b - a) * k) / n));
     list.forEach((im, k) => { const ia = cuts[k], ib = cuts[k + 1], zin = k % 2 === 0, el = `#${id}_${k}`;
       SET(el, { opacity: 0 }, 0);
@@ -97,7 +98,7 @@ function build(W, H, file) {
     const sOf = (n) => { const k = (((n - 1) % NS) + NS) % NS; return k < 8 ? xs(k) : A + B + xs(k - 8); };
     const XY = (s, lane = 0) => { const { p, n } = rim(s); const [nx, ny] = P ? [-n[1], n[0]] : n; const [x, y] = map(p); return [x + nx * lane, y + ny * lane]; };
     const COLS = ['#e31e24', '#ffd36b', '#7fd0ff', '#9be27a', '#ff8fd0', '#ffb05c', '#b9a6ff', '#ffffff', '#5fe0c8', '#ff6a5a', '#c6e04a', '#8ea2d8', '#f5c2c7', '#e0b37a', '#6fb7ff', '#d0d0d0'];
-    const st0 = Array.from({ length: NS }, (_, i) => i + 1), step = 2;
+    const st0 = Array.from({ length: NS }, (_, i) => i + 1), step = 6;
     const at = (i, r) => (i % 2 === 0 ? st0[i] + step * r : st0[i] - step * r);
     const nrm = (n) => ((((n - 1) % NS) + NS) % NS) + 1;
     const opp = (r) => { const sa = nrm(at(0, r)), sp = sa % 2 ? sa + 1 : sa - 1; return st0.findIndex((_, j) => nrm(at(j, r)) === sp); };
@@ -120,7 +121,7 @@ function build(W, H, file) {
         <div class="win" id="win"><span>výhra <b>3 b.</b></span><span>remíza s úlovkem <b>2 b.</b></span><span>remíza 0:0 <b>1 b.</b></span><span>prohra <b>0 b.</b></span></div>
       </div>
       <div class="dcap" id="dcap1">${nb('Souboj trvá 20 minut. Kdo uloví víc ryb, vyhrává.')}</div>
-      <div class="dcap" id="dcap2"><b>Rotace</b> <span class="lg lo">● lichá místa ↻</span> <span class="lg le">● sudá místa ↺</span><br>${nb('každé kolo jiné místo i jiný soupeř')}</div>
+      <div class="dcap" id="dcap2"><b>Rotace</b> <span class="lg lo">● lichá místa ↻</span> <span class="lg le">● sudá místa ↺</span><br>${nb('posun o 2–10 míst podle počtu závodníků (40–50 závodníků: 6–8 míst)')}</div>
       <div class="rnd" id="rnd"><small>kolo</small><b id="rndn">1</b><small>/ 12</small></div>
       <div class="dcap fin" id="dcap3">${nb('Stejný princip jako na mistrovství světa: místa i soupeři se střídají, aby rozhodoval rybář, ne místo.')}</div>`);
     const others = (keep) => st0.map((_, i) => i).filter((i) => !keep.includes(i)).map((i) => `#ag${i}`).join(', ');
@@ -241,31 +242,32 @@ function build(W, H, file) {
     const R = { A: [3, 1, 4, 2, 9, 2, 5, 3], B: [1, 5, 2, 6, 4, 8, 2, 7], C: [6, 2, 1, 8, 2, 3, 4, 6], D: [2, AB, 3, 1, 5, 4, AB, 2], E: [4, 3, 6, 3, 1, 6, 5, 9] };
     const K = Object.keys(R), CC = { A: '#e31e24', B: '#ffd36b', C: '#7fd0ff', D: '#9be27a', E: '#ff8fd0' }, ND = 8;
     const sum = (k, n = ND) => R[k].slice(0, n).reduce((x, y) => x + y, 0);
+    const avg = (k, n = ND) => sum(k, n) / n, cz = (v) => v.toFixed(2).replace('.', ',');
     const worst2 = (k) => R[k].map((v, i) => [v, i]).sort((x, y) => y[0] - x[0]).slice(0, 2).map(([, i]) => i);
-    const fin = (k) => sum(k) - worst2(k).reduce((s2, i) => s2 + R[k][i], 0);
+    const fin = (k) => (sum(k) - worst2(k).reduce((s2, i) => s2 + R[k][i], 0)) / (ND - 2);
     const RH = P ? 9.2 * u : 6.4 * u;
     scene(id, a, b, `<div class="rbg"></div>${hero('rk-h', 9030, P ? 60 * u : 92 * u)}
-      <div class="blk rkh" id="rkh">${kick('Celoroční žebříček')}<h2><span>${nb('Umístění = body.')}</span></h2><h2 class="red"><span>${nb('Nejmenší součet vede.')}</span></h2></div>
-      <div class="tbl t8" id="tbl"><div class="thd"><span></span>${Array.from({ length: ND }, (_, n) => `<span>${n + 1}</span>`).join('')}<span>Σ</span></div>
+      <div class="blk rkh" id="rkh">${kick('Celoroční žebříček')}<h2><span>${nb('Umístění = body.')}</span></h2><h2 class="red"><span>${nb('Nejnižší průměr vede.')}</span></h2></div>
+      <div class="tbl t8" id="tbl"><div class="thd"><span></span>${Array.from({ length: ND }, (_, n) => `<span>${n + 1}</span>`).join('')}<span>Ø</span></div>
         <div class="tbd" style="height:${(RH * 5).toFixed(0)}px">${K.map((k) => `<div class="tr" id="tr${k}" style="height:${RH.toFixed(0)}px"><span class="who" style="--c:${CC[k]}"><b>${k}</b></span>${R[k].map((v, c) => `<span class="cl${v === AB ? ' ab' : ''}" id="c${k}${c}"><em>${v === AB ? '×' : v}</em><s class="x" id="x${k}${c}"></s></span>`).join('')}<span class="sm" id="sm${k}">0</span><i class="lead" id="ld${k}">1.</i></div>`).join('')}</div>
         <div class="tleg"><span><i>×</i> ${nb('neúčast = počet závodníků + 20 bodů')}</span></div></div>
-      <div class="rnote" id="rnote"><b>${nb('Z 8 dnů se 2 nejhorší škrtají')}</b><small>${nb('pojistka, když nestihneš víkend nebo druhý den')}</small></div>`);
+      <div class="rnote" id="rnote"><b>${nb('Ø = součet umístění / počet závodů')}</b><small>${nb('z 8 dnů se 2 nejhorší škrtají · pojistka, když nestihneš víkend')}</small></div>`);
     heroIn('rk-h', a + BEAT * 2, 1);
     rise('#rkh .kick', a + 0.05); rise('#rkh h2:nth-of-type(1) span', a + BEAT); rise('#rkh h2:nth-of-type(2) span', a + BEAT * 8);
     K.forEach((k, r) => SET(`#tr${k}`, { y: r * RH }, a));
     T0('#tbl', { opacity: 0, y: 4 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + BEAT * 2);
     T0('.tr', { opacity: 0, x: -4 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out', stagger: 0.07 }, a + BEAT * 2.5);
     for (let c = 0; c < ND; c++) { const t = a + BEAT * (4 + c * 1.1);
-      K.forEach((k) => { T0(`#c${k}${c} em`, { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, t); SET(`#sm${k}`, { textContent: sum(k, c + 1) }, t + 0.05); });
+      K.forEach((k) => { T0(`#c${k}${c} em`, { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, t); SET(`#sm${k}`, { textContent: cz(avg(k, c + 1)) }, t + 0.05); });
       T0(`.thd span:nth-child(${c + 2})`, { color: '#ffd36b' }, { color: '#8ea2d8', duration: 0.6 }, t); }
     const sortRows = (key, t) => { const ord = [...K].sort((x, y) => key(x) - key(y)); ord.forEach((k, r) => T(`#tr${k}`, {}, { y: r * RH, duration: 0.7, ease: 'power3.inOut' }, t)); return ord; };
-    const t1 = a + BEAT * 13.5; sortRows((k) => sum(k), t1);
+    const t1 = a + BEAT * 13.5; sortRows((k) => avg(k), t1);
     const t2 = a + BEAT * 18;
     T0('#rnote', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(2)' }, t2 - BEAT);
     K.forEach((k) => { worst2(k).forEach((w, j) => {
         T0(`#x${k}${w}`, { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: 'power2.out' }, t2 + j * 0.25);
         T(`#c${k}${w} em`, { opacity: 1 }, { opacity: 0.35, duration: 0.3 }, t2 + 0.1 + j * 0.25); });
-      out.push(`{ const o={v:${sum(k)}}, el=document.getElementById("sm${k}"); tl.fromTo(o,{v:${sum(k)}},{v:${fin(k)},duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t2 + 0.5).toFixed(3)}); }`); });
+      out.push(`{ const o={v:${avg(k)}}, el=document.getElementById("sm${k}"); tl.fromTo(o,{v:${avg(k)}},{v:${fin(k)},duration:0.8,ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=o.v.toFixed(2).replace(".",",");}}, ${(t2 + 0.5).toFixed(3)}); }`); });
     const ord2 = sortRows(fin, t2 + BEAT * 3);
     T('#trD', { backgroundColor: 'rgba(155,226,122,0)' }, { backgroundColor: 'rgba(155,226,122,.28)', duration: 0.35, yoyo: true, repeat: 3 }, t2 + BEAT * 3);
     T0(`#ld${ord2[0]}`, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(3)' }, t2 + BEAT * 5);
@@ -364,58 +366,39 @@ function build(W, H, file) {
     outT('#sysh, #dev', b);
   }
 
-  // ===================== 7) JAK ZAČÍT – animované vybavení (prut pruží, naviják se točí, plandavky se houpou, ryba padá do podběráku) =====================
+  // ===================== 7) JAK ZAČÍT – reálné vybavení (výřezy produktů) v kartách s animací =====================
   {
     const id = 's-start', a = BAR(BARS.start[0]), b = BAR(BARS.start[1]);
-    const ICE = '#eef2f9', GOLD = '#ffd36b', CORK = '#c89b6a', RED = '#e31e24';
-    const D = 'pathLength="1" class="dr"';
-    const SP = (fill) => `<path d="M0 0 C9 0 13 16 0 34 C-13 16 -9 0 0 0Z" fill="${fill}" stroke="${ICE}" stroke-width="1.5"/><path d="M0 34 C-3 40 3 45 6 39" fill="none" stroke="${ICE}" stroke-width="1.6"/>`;
-    const TROUT = 'M-26 0 C-18 -9 2 -11 16 -5 C21 -3 25 -1 27 0 C25 1 21 3 16 5 C2 11 -18 9 -26 0 Z M-26 0 L-36 -8 L-33 0 L-36 8 Z';
-    const SVG = {
-      rod: `<g ${D.replace('class="dr"', '')}></g>
-        <path ${D} d="M14 138 L54 112" stroke="${CORK}" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <path ${D} d="M54 112 L68 103" stroke="#9aa6c4" stroke-width="7" fill="none"/>
-        <g id="rodtip"><path ${D} d="M68 103 L186 24" stroke="${ICE}" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-          ${[[92, 87], [116, 71], [140, 55], [163, 40]].map(([x, y]) => `<circle ${D} cx="${x}" cy="${y}" r="3" stroke="${GOLD}" stroke-width="1.8" fill="none"/>`).join('')}
-          <path ${D} d="M186 24 L186 76" stroke="${ICE}" stroke-width="1" fill="none" opacity=".8"/>
-          <g id="rodsp" transform="translate(186 76) scale(.6)">${SP(RED)}</g></g>`,
-      reel: `<path ${D} d="M100 18 V40 M80 18 H120" stroke="${ICE}" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <circle ${D} cx="100" cy="80" r="40" stroke="${ICE}" stroke-width="5" fill="none"/>
-        <g id="spool"><circle cx="100" cy="80" r="26" fill="url(#gsp)" class="fl"/>${[0, 45, 90, 135].map((r) => `<path d="M74 80 H126" stroke="#0b1e42" stroke-width="2" opacity=".35" transform="rotate(${r} 100 80)" class="fl"/>`).join('')}</g>
-        <g id="rhandle"><path ${D} d="M100 80 L162 80" stroke="${ICE}" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="162" cy="80" r="8" fill="${RED}" class="fl"/></g>
-        <circle cx="100" cy="80" r="6" fill="${ICE}" class="fl"/>`,
-      lure: `<path ${D} d="M20 18 H180" stroke="${ICE}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        ${[[40, RED], [70, GOLD], [100, '#7fd0ff'], [130, '#9be27a'], [160, '#ff8fd0']].map(([x, c], k) => `<g transform="translate(${x} 22)"><g id="lsp${k}"><circle cx="0" cy="4" r="3.2" fill="none" stroke="${ICE}" stroke-width="1.5" class="fl"/><g transform="translate(0 8) scale(1.6)" class="fl">${SP(c)}</g></g></g>`).join('')}`,
-      net: `<defs><clipPath id="nclip"><ellipse cx="80" cy="64" rx="50" ry="36"/></clipPath></defs>
-        <g clip-path="url(#nclip)" id="mesh">${Array.from({ length: 12 }, (_, k) => `<path ${D} d="M${k * 16 - 30} 20 L${k * 16 + 50} 110 M${k * 16 + 50} 20 L${k * 16 - 30} 110" stroke="${ICE}" stroke-width="1.2" opacity=".55" fill="none"/>`).join('')}
-          <g id="nfish"><path d="${TROUT}" transform="translate(80 70) rotate(-12) scale(1.15)" fill="#9fb3d9" stroke="${ICE}" stroke-width="1"/></g></g>
-        <ellipse ${D} cx="80" cy="64" rx="50" ry="36" stroke="${GOLD}" stroke-width="5" fill="none"/>
-        <path ${D} d="M124 82 L192 140" stroke="${CORK}" stroke-width="7" stroke-linecap="round" fill="none"/>`,
+    const KIT = [['Prut', 'Rodio Craft 999.9 Chimera 62L+', 'rod'], ['Naviják', 'Daiwa Exist', 'reel'], ['Nástrahy', 'Rodio Craft NOA', 'lure'], ['Podběrák', 'Timon T-Connection', 'net']];
+    const VIS = {
+      rod: `<img class="pr-rod" src="assets/cut/g_rod.png" alt=""><img class="pr-rodlogo" src="assets/cut/g_rodlogo.png" alt="">`,
+      reel: `<img class="pr-reel" src="assets/cut/g_reel.png" alt="">`,
+      lure: [0, 1, 2, 3, 4].map((k) => `<img class="pr-noa" id="noa${k}" src="assets/cut/g_noa${k}.png" alt="">`).join(''),
+      net: `<img class="pr-net" src="assets/cut/g_net.png" alt="">`,
     };
-    const KIT = [['Prut', 'Rodio Craft 999.9 Chimera 62', 'rod'], ['Naviják', 'Daiwa Exist', 'reel'], ['Nástrahy', 'plandavky a woblery', 'lure'], ['Podběrák', 'Timon', 'net']];
-    scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.42 })}
+    scene(id, a, b, `${photos('sa', [9627, 9305, 9813], a, b, { op: 0.45 })}
       <div class="blk sth" id="sth">${kick('Jak začít?')}<h2><span>${nb('Na začátek stačí základní výbava.')}</span></h2></div>
-      <div class="kit gk" id="kit">${KIT.map(([t, br, k], i) => `<div class="ki" id="ki${i}"><svg class="gsv" viewBox="0 0 200 150"><defs><radialGradient id="gsp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c9"/><stop offset=".55" stop-color="${GOLD}"/><stop offset="1" stop-color="#b7852a"/></radialGradient></defs>${SVG[k]}</svg><b>${t}</b><small>${br}</small></div>`).join('')}</div>
+      <div class="kit gk" id="kit">${KIT.map(([t, br, k], i) => `<div class="ki gp" id="ki${i}"><div class="gvis" id="gv${i}">${VIS[k]}<i class="glint" id="gl${i}"></i></div><b>${t}</b><small>${br}</small></div>`).join('')}</div>
       <div class="hint" id="hint">${nb('Přátelská atmosféra. Zkušení rádi poradí.')}</div>`);
     rise('#sth .kick', a + 0.05); rise('#sth h2 span', a + BEAT);
-    const tk = KIT.map((_, i) => a + BEAT * (3 + i * 1.6));
+    const tk = KIT.map((_, i) => a + BEAT * (3 + i * 1.6)), life = (t) => len(t, b + 0.5);
     KIT.forEach((_, i) => { const t = tk[i]; pop(`#ki${i}`, t);
-      T0(`#ki${i} .dr`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.out', stagger: 0.04 }, t + 0.05);
-      T0(`#ki${i} .fl`, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.03 }, t + 0.45); });
-    const life = (t) => len(t, b + 0.5);
-    // prut: špička pruží, plandavka se houpe
-    T0('#rodtip', { rotation: 0 }, { rotation: 5, duration: 0.55, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 0.55), svgOrigin: '68 103' }, tk[0] + 0.9);
-    T0('#rodsp', { rotation: -16 }, { rotation: 16, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 0.7), svgOrigin: '186 76' }, tk[0] + 0.6);
-    // naviják: klika a cívka se točí
-    T0('#rhandle', { rotation: 0 }, { rotation: 360 * Math.ceil(life(tk[1]) / 1.1), duration: life(tk[1]), ease: 'none', svgOrigin: '100 80' }, tk[1] + 0.5);
-    T0('#spool', { rotation: 0 }, { rotation: -720 * Math.ceil(life(tk[1]) / 1.1), duration: life(tk[1]), ease: 'none', svgOrigin: '100 80' }, tk[1] + 0.5);
-    // plandavky: houpání s fázovým posunem
-    [0, 1, 2, 3, 4].forEach((k) => { const x = 40 + k * 30;
-      T0(`#lsp${k}`, { rotation: -14 }, { rotation: 14, duration: 0.8 + k * 0.07, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[2]) / 0.8), transformOrigin: '50% 0%' }, tk[2] + 0.3 + k * 0.12); });
-    // podběrák: ryba spadne do sítě a mrská se
-    T0('#nfish', { y: -70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'bounce.out' }, tk[3] + 0.8);
-    T0('#nfish', { rotation: -4 }, { rotation: 4, duration: 0.18, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[3] + 1.4) / 0.18), svgOrigin: '80 70' }, tk[3] + 1.4);
-    T0('#mesh', { y: 0 }, { y: 3, duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }, tk[3] + 1.35);
+      T0(`#gl${i}`, { xPercent: -160 }, { xPercent: 260, duration: 0.9, ease: 'power2.inOut' }, t + 0.5);
+      T0(`#gl${i}`, { xPercent: -160 }, { xPercent: 260, duration: 0.9, ease: 'power2.inOut' }, t + 0.5 + BEAT * 8); });
+    // prut: vjede zleva, mírně se vlní
+    T0('#ki0 .pr-rod', { xPercent: -60, opacity: 0, rotation: -6 }, { xPercent: 0, opacity: 1, rotation: -4, duration: 0.8, ease: 'expo.out' }, tk[0] + 0.1);
+    T0('#ki0 .pr-rod', { rotation: -4 }, { rotation: -2, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[0]) / 1.2) }, tk[0] + 0.9);
+    T0('#ki0 .pr-rodlogo', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, tk[0] + 0.6);
+    // naviják: přiletí s rotací, pak se vznáší
+    T0('#ki1 .pr-reel', { scale: 0.3, rotation: -40, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.8)' }, tk[1] + 0.1);
+    T0('#ki1 .pr-reel', { y: -1 * u, rotation: -3 }, { y: 1 * u, rotation: 3, duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[1]) / 1.1) }, tk[1] + 0.9);
+    // nástrahy: vějíř balení
+    [0, 1, 2, 3, 4].forEach((k) => { const r = (k - 2) * 13, dx = (k - 2) * 18;
+      T0(`#noa${k}`, { rotation: 0, xPercent: 0, opacity: 0, y: 4 * u }, { rotation: r, xPercent: dx, opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.6)' }, tk[2] + 0.1 + k * 0.07);
+      T0(`#noa${k}`, { rotation: r - 2 }, { rotation: r + 2, duration: 0.9 + k * 0.1, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[2]) / 0.9) }, tk[2] + 0.8); });
+    // podběrák: šikmo vjede, houpe se
+    T0('#ki3 .pr-net', { xPercent: 40, yPercent: 30, rotation: 12, opacity: 0 }, { xPercent: 0, yPercent: 0, rotation: -8, opacity: 1, duration: 0.8, ease: 'expo.out' }, tk[3] + 0.1);
+    T0('#ki3 .pr-net', { rotation: -8 }, { rotation: -4, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: Math.ceil(life(tk[3]) / 1.0) }, tk[3] + 0.9);
     pop('#hint', tk[3] + BEAT * 3);
     outT('#sth, #kit, #hint', b);
   }
@@ -449,6 +432,28 @@ function build(W, H, file) {
     T('#cta, #gh-end', { opacity: 1 }, { opacity: 0, duration: 0.8 }, b - 0.8);
   }
 
+  // ===================== hudební prvky: přehrávač, spektrum, bokeh, light leak =====================
+  {
+    const pa = BAR(BARS.what[0]), pb = BAR(BARS.cta[0]);
+    T0('#player', { opacity: 0, y: 4 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, pa + 0.3);
+    T('#player', { opacity: 1 }, { opacity: 0, duration: 0.5 }, pb - 0.5);
+    T0('#vinyl', { rotation: 0 }, { rotation: 200 * DUR, duration: DUR, ease: 'none' }, 0);
+    T0('#pfill', { scaleX: 0 }, { scaleX: 1, duration: DUR, ease: 'none' }, 0);
+    T0('#spec', { opacity: 0 }, { opacity: 0.6, duration: 0.8 }, 0.2);
+    T('#spec', { opacity: 0.6 }, { opacity: 0, duration: 1.2 }, DUR - 1.4);
+    T0('#bokeh i', { opacity: 0 }, { opacity: 0.8, duration: 1.0, stagger: 0.05 }, 0.5);
+    for (let i = 0; i < 22; i++) T0(`#bk${i}`, { x: 0, y: 0 }, { x: (rnd(i * 3) - 0.5) * 16 * u, y: -(6 + rnd(i * 7) * 14) * u, duration: DUR, ease: 'none' }, 0);
+    G.downbeats.forEach((t, i) => { if (i % 8 === 4 && t > 2 && t < DUR - 4) T0('#leak', { opacity: 0, xPercent: -40 }, { opacity: 1, xPercent: 40, duration: 1.6, ease: 'sine.inOut', yoyo: false }, t); });
+    G.downbeats.forEach((t, i) => { if (i % 8 === 4 && t > 2 && t < DUR - 4) T('#leak', { opacity: 1 }, { opacity: 0, duration: 0.6 }, t + 1.1); });
+    out.push(`{ const SP=${JSON.stringify(SPEC.spec)}, RM=${JSON.stringify(SPEC.rms)}, sb=[...document.querySelectorAll("#spec i")], eq=[...document.querySelectorAll("#peq i")], bk=[...document.querySelectorAll("#bokeh i")], pt=document.getElementById("ptime"), st=document.getElementById("stage"), o={t:0};
+      tl.fromTo(o,{t:0},{t:${DUR.toFixed(2)},duration:${DUR.toFixed(2)},ease:"none",onUpdate(){ const f=Math.min(SP.length-1,Math.max(0,Math.round(o.t*30))), fr=SP[f], r=RM[f]/99;
+        for(let i=0;i<sb.length;i++){ sb[i].style.transform="scaleY("+(0.04+0.96*Math.pow(fr[i]/99,1.6)).toFixed(3)+")"; }
+        for(let i=0;i<eq.length;i++){ eq[i].style.transform="scaleY("+(0.15+0.85*fr[2+i*4]/99).toFixed(3)+")"; }
+        for(let i=0;i<bk.length;i++){ bk[i].style.filter="brightness("+(0.6+1.4*r*(0.5+((i*37)%10)/20)).toFixed(2)+")"; }
+        pt.textContent=Math.floor(o.t/60)+":"+String(Math.floor(o.t%60)).padStart(2,"0");
+        st.style.setProperty("--pulse",(r*r).toFixed(3)); }},0); }`);
+  }
+
   // ===================== globální rytmus =====================
   const NW = 14;
   starts.filter((t) => t > 1).forEach((t0) => { const t = t0 - 0.16;
@@ -474,11 +479,11 @@ function build(W, H, file) {
   * { font-family:Montserrat, sans-serif !important; box-sizing:border-box; }
   #root { position:relative; width:${W}px; height:${H}px; overflow:hidden; background:var(--deep); }
   .clip { position:absolute; inset:0; }
-  #stage { position:absolute; inset:0; overflow:hidden; background:radial-gradient(90% 60% at 50% 42%, #1d3a86 0%, #0b1e42 62%, #050d22 100%); }
+  #stage { --pulse:0; position:absolute; inset:0; overflow:hidden; background:radial-gradient(90% 60% at 50% 42%, #1d3a86 0%, #0b1e42 62%, #050d22 100%); }
   .blob { position:absolute; width:${px(P ? 110 : 80)}; height:${px(P ? 110 : 80)}; border-radius:50%; filter:blur(${px(9)}); }
   #blob0 { left:-15%; top:-10%; background:radial-gradient(circle, rgba(42,91,214,.5) 0%, transparent 65%); } #blob1 { right:-20%; bottom:-15%; background:radial-gradient(circle, rgba(227,30,36,.3) 0%, transparent 65%); }
-  .ph { position:absolute; inset:-4%; background-size:cover; opacity:0; filter:saturate(1.08) brightness(1.06) contrast(1.06); }
-  .pho { position:absolute; inset:0; background:linear-gradient(${P ? '180deg' : '90deg'}, rgba(5,13,34,.78) 0%, rgba(5,13,34,.35) 45%, rgba(5,13,34,.1) 70%, rgba(5,13,34,.35) 100%); }
+  .ph { position:absolute; inset:-4%; background-size:cover; opacity:0; filter:saturate(1.3) brightness(1.12) contrast(1.12); }
+  .pho { position:absolute; inset:0; background:linear-gradient(${P ? '180deg' : '90deg'}, rgba(5,13,34,.72) 0%, rgba(5,13,34,.22) 45%, rgba(5,13,34,0) 70%, rgba(5,13,34,.2) 100%); }
   .red { color:var(--red); }
   .kick { display:inline-flex; align-items:center; gap:${px(1.2)}; font:800 ${px(P ? 3 : 2.3)} Montserrat; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); overflow:hidden; padding-top:.1em; }
   .kick i { width:${px(4)}; height:${px(0.5)}; background:var(--red); display:inline-block; }
@@ -623,7 +628,7 @@ function build(W, H, file) {
   .who { display:flex; justify-content:center; } .who b { width:${px(P ? 6.4 : 4.6)}; height:${px(P ? 6.4 : 4.6)}; border-radius:50%; background:var(--c); color:#0b1e42; display:flex; align-items:center; justify-content:center; font:900 ${px(P ? 3 : 2.2)} Montserrat; }
   .cl { position:relative; font:800 ${px(P ? 3.6 : 2.6)} Montserrat; font-variant-numeric:tabular-nums; } .cl em { display:inline-block; font-style:normal; opacity:0; }
   .x { position:absolute; left:20%; right:20%; top:50%; height:${px(0.45)}; background:var(--red); transform:scaleX(0); transform-origin:50% 50%; border-radius:${px(0.3)}; box-shadow:0 0 ${px(0.8)} rgba(227,30,36,.8); }
-  .sm { font:900 ${px(P ? 4.6 : 3.4)} Montserrat; color:var(--gold); font-variant-numeric:tabular-nums; }
+  .sm { font:900 ${px(P ? 3.6 : 2.7)} Montserrat; color:var(--gold); font-variant-numeric:tabular-nums; }
   .lead { position:absolute; left:${px(P ? -4.2 : -3.4)}; top:50%; margin-top:${px(P ? -3 : -2.3)}; font:900 ${px(P ? 3.4 : 2.4)} Montserrat; font-style:normal; color:var(--gold); opacity:0; }
   .rnote { position:absolute; ${P ? `left:${px(5)}; right:${px(5)}; top:${px(140)}` : `left:${px(7)}; width:${px(108)}; bottom:${px(5)}`}; opacity:0; border-left:${px(0.8)} solid var(--red); padding-left:${px(2)}; }
   .rnote b { display:block; font:900 ${px(P ? 4 : 2.9)} Montserrat; text-transform:uppercase; } .rnote small { font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--lb); }
@@ -672,10 +677,34 @@ function build(W, H, file) {
   .kip { padding:0; overflow:hidden; gap:0; } .kip .kph { width:100%; height:${px(P ? 18 : 14)}; background-size:cover; filter:saturate(1.08) brightness(1.05); }
   .kip svg { position:absolute; margin:${px(1.2)}; width:${px(P ? 7 : 5.5)} !important; height:${px(P ? 7 : 5.5)} !important; filter:drop-shadow(0 0 ${px(0.6)} rgba(0,0,0,.8)); } .kip b { padding:${px(1.6)} ${px(2)} ${px(2)}; }
   .ki { position:relative; }
-  #s-start .hint { ${P ? `top:${px(160)}` : ''} }
+  #s-start .hint { ${P ? `top:${px(146)}` : ''} }
   .gk .ki { align-items:center; text-align:center; } .gk .gsv { width:100% !important; height:${px(P ? 20 : 15)} !important; overflow:visible; }
   .gk .gsv .dr { stroke-dasharray:1; }
   .gk .ki b { font:900 ${px(P ? 3.6 : 2.8)} Montserrat; text-transform:uppercase; letter-spacing:.04em; } .gk .ki small { font:700 ${px(P ? 2.6 : 2)} Montserrat; color:var(--gold); }
+  .gp { overflow:hidden; } .gvis { position:relative; width:100%; height:${px(P ? 20 : 15)}; display:flex; align-items:center; justify-content:center; background:radial-gradient(60% 70% at 50% 55%, rgba(127,208,255,.28), transparent 70%); border-radius:${px(1.4)}; overflow:hidden; }
+  .gvis img { position:absolute; filter:drop-shadow(0 ${px(0.8)} ${px(1.6)} rgba(0,0,0,.6)); }
+  .pr-rod { width:96%; left:2%; top:28%; transform-origin:12% 50%; } .pr-rodlogo { width:70%; left:15%; bottom:8%; opacity:0; }
+  .pr-reel { height:92%; left:50%; top:4%; margin-left:${px(P ? -7.8 : -5.9)}; }
+  .pr-noa { height:88%; left:50%; top:8%; margin-left:${px(P ? -3.6 : -2.7)}; transform-origin:50% 100%; }
+  .pr-net { width:92%; left:4%; top:22%; transform-origin:85% 60%; }
+  .glint { position:absolute; top:-20%; bottom:-20%; left:0; width:35%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); mix-blend-mode:overlay; transform:skewX(-18deg); pointer-events:none; }
+  /* hudební prvky */
+  #spec { position:absolute; left:0; right:0; bottom:0; height:${px(P ? 7 : 6)}; display:flex; align-items:flex-end; gap:${px(0.35)}; padding:0 ${px(1)}; z-index:4; pointer-events:none; opacity:.0; mix-blend-mode:screen; }
+  #spec i { flex:1; height:100%; transform-origin:50% 100%; transform:scaleY(.05); background:linear-gradient(0deg, rgba(227,30,36,.95), rgba(255,211,107,.85) 60%, rgba(238,242,249,.6)); border-radius:${px(0.3)} ${px(0.3)} 0 0; }
+  #bokeh { position:absolute; inset:0; pointer-events:none; z-index:3; mix-blend-mode:screen; } #bokeh i { position:absolute; width:${px(1.6)}; height:${px(1.6)}; border-radius:50%; background:radial-gradient(circle, rgba(255,230,170,.9), rgba(255,211,107,0) 70%); scale:var(--z); opacity:.0; }
+  #leak { position:absolute; inset:-20%; pointer-events:none; z-index:7; mix-blend-mode:screen; opacity:0; background:linear-gradient(115deg, transparent 30%, rgba(255,150,60,.35) 45%, rgba(255,230,180,.5) 50%, rgba(227,30,36,.25) 56%, transparent 70%); }
+  #player { position:absolute; ${P ? `left:${px(6)}; right:${px(6)}; bottom:${px(8.5)}; height:${px(12)}` : `right:${px(3)}; bottom:${px(8)}; width:${px(44)}; height:${px(11)}`}; z-index:6; opacity:0; }
+  #pcard { position:absolute; inset:0; border-radius:${px(3)}; background:rgba(11,30,66,.72); backdrop-filter:blur(${px(2)}); box-shadow:0 ${px(1.2)} ${px(4)} rgba(0,0,0,.45), inset 0 0 0 1px rgba(238,242,249,.14); }
+  #vwrap { position:absolute; left:${px(1.2)}; top:${px(1)}; width:${px(P ? 11 : 9)}; height:${px(P ? 11 : 9)}; }
+  #vinyl { position:absolute; inset:0; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, #0d0d10 0 ${px(0.12)}, #1c1c22 ${px(0.12)} ${px(0.22)}); box-shadow:0 ${px(0.6)} ${px(1.6)} rgba(0,0,0,.6); }
+  #vinyl img { position:absolute; left:28%; top:28%; width:44%; height:44%; border-radius:50%; } #vinyl .hole { position:absolute; left:48.5%; top:48.5%; width:3%; height:3%; border-radius:50%; background:#c9ced8; }
+  #sheen { position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.16) 12%, transparent 18% 52%, rgba(255,255,255,.12) 60%, transparent 66%); }
+  #ptext { position:absolute; left:${px(P ? 14.5 : 12)}; right:${px(2)}; top:${px(1.4)}; bottom:${px(1.3)}; display:flex; flex-direction:column; justify-content:space-between; }
+  .ptitle { font:900 ${px(P ? 3.2 : 2.2)}/1.1 Montserrat; letter-spacing:.04em; } .partist { font:600 ${px(P ? 2.4 : 1.6)} Montserrat; opacity:.75; }
+  .prow { display:flex; align-items:center; gap:${px(1)}; font:600 ${px(P ? 2.1 : 1.4)} Montserrat; opacity:.9; font-variant-numeric:tabular-nums; }
+  .pbar { position:relative; flex:1; height:${px(0.45)}; background:rgba(238,242,249,.22); border-radius:${px(0.5)}; overflow:hidden; } #pfill { position:absolute; inset:0; background:var(--red); transform-origin:left center; transform:scaleX(0); }
+  #peq { display:flex; align-items:flex-end; gap:${px(0.35)}; height:${px(P ? 2.2 : 1.5)}; } #peq i { display:block; width:${px(0.5)}; height:100%; background:var(--ice); transform-origin:bottom center; }
+  #stage::after { content:''; position:absolute; inset:0; pointer-events:none; z-index:2; background:radial-gradient(70% 60% at 50% 110%, rgba(227,30,36,calc(.28 * var(--pulse))), transparent 70%), radial-gradient(60% 50% at 0% 0%, rgba(42,91,214,calc(.35 * var(--pulse))), transparent 70%); }
   /* globální */
   #corner { position:absolute; ${P ? `left:${px(7)}; top:${px(6)}; width:${px(30)}` : `left:${px(7)}; top:${px(5)}; width:${px(18)}`}; opacity:0; z-index:5; } #corner img { width:100%; display:block; }
   #wipe { position:absolute; inset:0; display:flex; pointer-events:none; z-index:8; } #wipe i { flex:1; background:var(--red); transform:scaleY(0); } #wipe i:nth-child(even) { background:var(--blue); transform-origin:50% 0; } #wipe i:nth-child(odd) { transform-origin:50% 100%; }
@@ -689,6 +718,13 @@ function build(W, H, file) {
   ${scenes.join('\n  ')}
   </div>
   <div id="corner"><img src="assets/ta_logo.png" alt=""></div>
+  <div id="spec">${Array.from({ length: 24 }, (_, i) => `<i id="sb${i}"></i>`).join('')}</div>
+  <div id="bokeh">${Array.from({ length: 22 }, (_, i) => `<i id="bk${i}" style="left:${(rnd(i * 31 + 7) * 100).toFixed(1)}%; top:${(rnd(i * 17 + 3) * 100).toFixed(1)}%; --z:${(0.4 + rnd(i * 5 + 1) * 1.2).toFixed(2)}"></i>`).join('')}</div>
+  <div id="leak"></div>
+  <div id="player"><div id="pcard"></div>
+    <div id="vwrap"><div id="vinyl"><img src="assets/ta_label.png" alt=""><div class="hole"></div></div><div id="sheen"></div></div>
+    <div id="ptext"><div class="ptitle">TROUT AREA CZ</div><div class="partist">Pojď hrát · sezóna 2027</div>
+      <div class="prow"><div id="peq">${Array.from({ length: 5 }, () => '<i></i>').join('')}</div><span id="ptime">0:00</span><div class="pbar"><div id="pfill"></div></div><span>${Math.floor(DUR / 60)}:${String(Math.round(DUR % 60)).padStart(2, '0')}</span></div></div></div>
   <audio id="music" class="clip" data-start="0" data-duration="${DUR}" data-track-index="0" src="assets/mix_long.wav" data-volume="1"></audio>
   <div id="wipe">${Array.from({ length: NW }, (_, i) => `<i id="wp${i}"></i>`).join('')}</div>
   <div id="flash"></div>
