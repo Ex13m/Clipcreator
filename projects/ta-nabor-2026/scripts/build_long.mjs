@@ -24,7 +24,7 @@ const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
-Object.assign(FOC, { 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
+Object.assign(FOC, { 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 50%', 9308: '50% 55%', 9309: '50% 45%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -63,7 +63,7 @@ function build(W, H, file) {
   // ===================== 1) HOOK: rychlé střihy akce + „Rybaření, jak ho neznáš.“ =====================
   {
     const id = 's-hook', a = 0, b = BAR(BARS.hook[1]), t1 = BAR(2);
-    const fast = [9014, 9708, 9055, 9709, 9016, 86443, 9707, 86444];
+    const fast = [9302, 9708, 9308, 9709, 9304, 86443, 9707, 86444];
     scene(id, a, b, `${photos('hk', fast, BAR(0) + 0.0001, t1, { hard: true })}${photos('hk2', [86442], t1, b, { op: 0.7 })}
       <div class="mega" id="hk-t"><div class="ln"><span>Rybaření,</span></div><div class="ln red"><span>jak ho neznáš.</span></div></div>`);
     rise('#hk-t .ln:nth-child(1) span', t1); rise('#hk-t .ln:nth-child(2) span', t1 + BEAT * 2);
@@ -215,7 +215,7 @@ function build(W, H, file) {
   {
     const id = 's-season', a = BAR(BARS.season[0]), b = BAR(BARS.season[1]);
     const WK = [['Jaro', 'víkend 1'], ['Jaro', 'víkend 2'], ['Podzim', 'víkend 3'], ['Podzim', 'MČR']];
-    scene(id, a, b, `${photos('se', [9704, 9706, 86415], a, b, { op: 0.3 })}<div class="gridbg"></div>
+    scene(id, a, b, `${photos('se', [9303, 9704, 9305], a, b, { op: 0.3 })}<div class="gridbg"></div>
       <div class="blk seh" id="seh">${kick('Jak probíhá sezóna')}<h2><span>${nb('4 dvoudenní víkendy.')}</span></h2><h2 class="red"><span>${nb('8 závodních dnů.')}</span></h2></div>
       <div class="cal" id="cal"><i class="tline" id="tline"></i>
         <div class="sea s1" id="sea0"><b>Jaro</b><small>březen – květen</small></div><div class="sea s2" id="sea1"><b>Podzim</b><small>září – listopad</small></div>
@@ -296,8 +296,8 @@ function build(W, H, file) {
     const CARDS = [['lg_hb', 'H-Battle', 'evropský pohár na tvrdé nástrahy · dvoudenní'], ['lg_atlas', 'ATLAS', 'mezinárodní unie lig · týmový World Cup'], ['lg_fips', 'Mistrovství světa', 'FIPSed · reprezentace ČR']];
     const HH = P ? 92 * u : 62 * u;
     const tc0 = a + BEAT * 12.4;
-    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9224, 9210, 9222], tc0, b, { op: 0.42 })}<div class="otx" id="otx">Reprezentace</div>
-      <div class="heroes" id="heroes">${hero('wh0', 9028, HH)}${hero('wh1', 9005, HH * 0.86)}${P ? '' : hero('wh2', 9054, HH * 0.95)}</div>
+    scene(id, a, b, `<div class="wbg"><i class="glb" id="glb"></i></div>${photos('wp', [9307, 9309, 9222], tc0, b, { op: 0.42 })}<div class="otx" id="otx">Reprezentace</div>
+      <div class="heroes" id="heroes">${hero('wh0', 9301, HH * 0.95)}${hero('wh1', 9306, HH * (P ? 0.78 : 0.9))}${P ? '' : hero('wh2', 9028, HH)}</div>
       <div class="blk wdh" id="wdh">${kick('Mezinárodní scéna')}<h2><span>${nb('Žebříček otevírá')}</span></h2><h2 class="red"><span>dveře do světa.</span></h2></div>
       <div class="wcards" id="wcards">${CARDS.map(([lg, t, s2], i) => `<div class="wc" id="wc${i}"><span class="wl"><img src="assets/${lg}.png" alt=""></span><div><b>${t}</b><small>${s2}</small></div></div>`).join('')}</div>`);
     T0('#glb', { rotation: 0, opacity: 0 }, { rotation: 25, opacity: 1, duration: len(a, b), ease: 'none' }, a);
