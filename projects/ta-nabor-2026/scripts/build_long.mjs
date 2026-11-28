@@ -20,12 +20,15 @@ const len = (a, b) => +(b - a).toFixed(3);
 const rnd = (seed) => { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x); };
 const nb = (s) => s.replace(/ ([vkszouaiVKSZOUAI]|na|do|po|za|ke|ve|se|ze|od) /g, ' $1\u00a0');   // čeština: předložky nenechat na konci řádku
 
-const BARS = { hook: [0, 4], what: [4, 10], duel: [10, 21], cr: [21, 27], all: [27, 32], season: [32, 39], rank: [39, 47], champ: [47, 51], world: [51, 59], num: [59, 63], sys: [63, 70], start: [70, 76], crs: [76, 79], cta: [79, 88] };
+const BARS = { hook: [0, 4], what: [4, 10], glad: [10, 16], duel: [16, 24], cr: [24, 30], all: [30, 35], season: [35, 42], rank: [42, 50], champ: [50, 54], world: [54, 62], num: [62, 66], nomr: [66, 76], sys: [76, 83], start: [83, 89], docs: [89, 94], crs: [94, 101], cta: [101, 106] };
 // ohniska fotek (x% y%) – ať ořez nesebere hlavy
 const FOC = { 9027: '50% 30%', 9032: '50% 25%', 9005: '50% 30%', 9030: '50% 25%', 9050: '50% 40%', 9028: '50% 20%', 9033: '50% 40%', 9054: '45% 40%', 9014: '50% 60%', 9055: '60% 60%', 9016: '40% 55%', 9006: '35% 60%', 9008: '35% 55%', 9015: '60% 60%', 9007: '50% 40%', 9000: '50% 50%', 86451: '95% 35%', 86406: '50% 30%', 86407: '40% 30%', 86408: '55% 35%', 86409: '50% 55%', 86410: '50% 20%', 86412: '50% 30%', 86422: '60% 25%', 86423: '60% 15%', 86425: '60% 25%',
   86429: '50% 25%', 86430: '50% 20%', 86431: '50% 30%', 86432: '50% 40%', 86434: '50% 45%', 86435: '50% 55%', 86436: '50% 25%', 86437: '50% 50%', 86438: '50% 60%', 86439: '50% 45%',
   86442: '50% 55%', 86443: '50% 55%', 86444: '50% 55%', 86450: '50% 40%', 86456: '50% 35%', 86459: '50% 40%', 86440: '50% 40%', 86433: '45% 45%', 86426: '50% 25%', 86420: '50% 30%' };
 Object.assign(FOC, { 9627: '45% 70%', 9305: '30% 75%', 9513: '50% 50%', 9526: '50% 55%', 9527: '50% 55%', 9508: '50% 55%', 9511: '50% 55%', 9502: '50% 40%', 9601: '50% 35%', 9802: '50% 55%', 9812: '50% 40%', 9820: '50% 55%', 9813: '50% 40%', 9901: '50% 45%', 9926: '50% 35%', 9902: '50% 30%', 9302: '45% 55%', 9303: '50% 55%', 9304: '35% 55%', 9305: '50% 50%', 9307: '50% 8%', 9308: '50% 55%', 9309: '50% 35%', 9224: '50% 50%', 9203: '50% 45%', 9222: '50% 30%', 9223: '55% 40%', 9210: '50% 50%', 9200: '50% 45%', 9225: '50% 60%', 86445: '50% 45%', 9056: '50% 55%', 9701: '45% 50%', 9704: '60% 45%', 9705: '50% 40%', 9706: '50% 50%', 9707: '50% 40%', 9708: '50% 40%', 9709: '50% 50%', 9710: '60% 40%', 9711: '40% 40%', 9713: '50% 60%', 9714: '50% 45%' });
+const FRONT = 'M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z';
+const REAR = 'M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z';
+const TAIL = 'M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z';
 const ph = (n) => `background-image:url(assets/photos/p${n}.jpg); background-position:${FOC[n] || '50% 40%'}`;
 
 function build(W, H, file) {
@@ -37,9 +40,12 @@ function build(W, H, file) {
   const SET = (sel, v, pos) => out.push(`tl.set(${JSON.stringify(sel)}, ${JSON.stringify(v)}, ${(+pos).toFixed(3)});`);
   const CNT = (id, to, pos, d) => out.push(`{ const o={v:0}, el=document.getElementById("${id}"); tl.fromTo(o,{v:0},{v:${to},duration:${d.toFixed(3)},ease:"power2.out",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g,"\\u00a0");}}, ${(+pos).toFixed(3)}); }`);
   const scenes = [], starts = [];
-  const scene = (id, a, b, html) => { starts.push(a);
-    out.push(`tl.set("#${id}", {visibility:"hidden"}, 0); tl.set("#${id}", {visibility:"visible"}, ${a.toFixed(3)}); tl.set("#${id}", {visibility:"hidden"}, ${b.toFixed(3)});`);
-    scenes.push(`<section id="${id}" class="clip" data-start="${a.toFixed(3)}" data-duration="${len(a, b)}" data-track-index="2">${html}</section>`); };
+  // scéna: měkký přechod – nová scéna se prolne přes předchozí (XF), předchozí zůstává pod ní, dokud prolnutí neskončí
+  const XF = 0.4;
+  const scene = (id, a, b, html, pre = '') => { starts.push(a); if (pre) scenes.push(pre); const va = Math.max(0, a - XF), vb = Math.min(DUR, b + XF);
+    out.push(`tl.set("#${id}", {visibility:"hidden"}, 0); tl.set("#${id}", {visibility:"visible"}, ${va.toFixed(3)}); tl.set("#${id}", {visibility:"hidden"}, ${vb.toFixed(3)});`);
+    if (a > 0.5) out.push(`tl.fromTo("#${id}", {opacity:0, scale:1.03}, {opacity:1, scale:1, duration:${(XF * 2).toFixed(2)}, ease:"sine.inOut", immediateRender:false}, ${va.toFixed(3)});`);
+    scenes.push(`<section id="${id}" class="clip" data-start="${va.toFixed(3)}" data-duration="${len(va, vb)}" data-track-index="2">${html}</section>`); };
   const rise = (sel, t, d = 0.55, st = 0) => T0(sel, { yPercent: 115, opacity: 0 }, { yPercent: 0, opacity: 1, duration: d, ease: 'expo.out', stagger: st }, t);
   const pop = (sel, t, d = 0.5) => T0(sel, { opacity: 0, y: 2 * u, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: d, ease: 'back.out(1.8)' }, t);
   const outT = (sel, t, d = 0.3) => T(sel, { opacity: 1 }, { opacity: 0, duration: d, ease: 'power2.in' }, t - d);
@@ -81,14 +87,74 @@ function build(W, H, file) {
     outT('#wh-h', b);
   }
 
-  // ===================== 2b) JAK PROBÍHÁ SOUBOJ: rybník, dvojice, duel, rotace (lichá místa jedním směrem, sudá opačným) =====================
+  // ===================== 2a) SOUBOJ JAKO GLADIÁTOŘI: dva skuteční závodníci, prut vs. podběrák, každý úspěšný výpad = ryba na straně vítěze =====================
+  {
+    const id = 's-glad', a = BAR(BARS.glad[0]), b = BAR(BARS.glad[1]);
+    const F = [['c9301', 'a08', 'Dominik Švub'], ['c9306', 'a21', 'Miroslav Kučera']];
+    const FH = 70 * u;
+    const fsz = (c) => { const [w, h] = pngWH(path.join(PROTO, `assets/cut/${c}.png`)); return (FH * w) / h; };
+    const WIN = [0, 1, 0, 0, 1, 0], LT = [4.5, 6.5, 8.5, 10.5, 12.5, 14.5].map((k) => a + BEAT * k);
+    const fishSvg = (cls) => `<svg viewBox="0 0 120 40" class="${cls}"><path d="${TAIL}"/><path d="${REAR}"/><path d="${FRONT}"/></svg>`;
+    scene(id, a, b, `${photos('gl', [9526, 9704], a, b, { op: 0.4 })}<div class="arena" id="arena"><i class="spot s0"></i><i class="spot s1"></i><div class="gvs" id="gvs">VS</div>
+      ${F.map(([c], i) => `<div class="gf gf${i}" id="gf${i}" style="width:${fsz(c).toFixed(0)}px; height:${FH.toFixed(0)}px"><img src="assets/cut/${c}.png" alt=""></div>`).join('')}
+      <img class="wpn wr" id="wr" src="assets/cut/g2_rod.png" alt=""><img class="wpn wn" id="wn" src="assets/cut/g2_net.png" alt="">
+      <i class="clash" id="clash"></i>
+      ${WIN.map((w, k) => `<div class="gfish" id="gfi${k}">${fishSvg('')}</div>`).join('')}</div>
+      <div class="ghud" id="ghud">${F.map(([, av, nm], i) => `<div class="gp${i} gpl" id="gp${i}"><span class="gav" style="background-image:url(assets/av/${av}.jpg)"></span><div><b>${nm}</b><small>${nb('počet ryb')}</small></div><em id="gs${i}">0</em></div>`).join('')}
+        <div class="gclk"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="gck" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="gckt">20:00</span></div></div>
+      <div class="gtt" id="gtt">${kick('Souboj jeden na jednoho')}<h2><span>${nb('20 minut. Kdo uloví víc, vyhrává.')}</span></h2></div>
+      <div class="gwin" id="gwin"><b>Výhra</b><em>+3</em></div>
+      <div class="gleg" id="gleg"><span>výhra <b>3 b.</b></span><span>remíza s úlovkem <b>2 b.</b></span><span>remíza 0:0 <b>1 b.</b></span><span>prohra <b>0 b.</b></span></div>`);
+    // nástup
+    T0('#gf0', { opacity: 0, x: -30 * u }, { opacity: 1, x: 0, duration: 0.8, ease: 'expo.out' }, a + 0.1);
+    T0('#gf1', { opacity: 0, x: 30 * u }, { opacity: 1, x: 0, duration: 0.8, ease: 'expo.out' }, a + 0.25);
+    T0('#gvs', { opacity: 0, scale: 2.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' }, a + BEAT * 1.5);
+    T0('#wr', { opacity: 0, rotation: -70 }, { opacity: 1, rotation: -28, duration: 0.6, ease: 'back.out(1.6)' }, a + BEAT * 2);
+    T0('#wn', { opacity: 0, rotation: 70 }, { opacity: 1, rotation: 24, duration: 0.6, ease: 'back.out(1.6)' }, a + BEAT * 2.3);
+    T0('#ghud', { opacity: 0, y: -6 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, a + BEAT);
+    rise('#gtt .kick', a + BEAT * 2); rise('#gtt h2 span', a + BEAT * 3);
+    // dýchání postav a zbraní
+    [0, 1].forEach((i) => T0(`#gf${i} img`, { y: 0, scaleY: 1 }, { y: -0.8 * u, scaleY: 1.012, duration: BEAT * 2, ease: 'sine.inOut', yoyo: true, repeat: 7 }, a + i * BEAT));
+    // hodiny 20:00 → 0:00
+    const ca = a + BEAT * 4, cb = LT.at(-1) + BEAT * 1.5;
+    T0('#gck', { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: len(ca, cb), ease: 'none' }, ca);
+    out.push(`{ const o={v:1200}, el=document.getElementById("gckt"); tl.fromTo(o,{v:1200},{v:0,duration:${len(ca, cb)},ease:"none",immediateRender:false,onUpdate(){const s=Math.round(o.v);el.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}}, ${ca.toFixed(3)}); }`);
+    // výpady
+    const sc = [0, 0];
+    LT.forEach((t, k) => { const w = WIN[k], l = 1 - w, dx = w ? -1 : 1, hit = t + 0.2;
+      T(`#gf${w}`, { x: 0 }, { x: dx * 9 * u, duration: 0.2, ease: 'power3.in' }, t);
+      T(`#gf${w}`, { x: dx * 9 * u }, { x: 0, duration: 0.5, ease: 'power2.out' }, hit + 0.05);
+      T(`#gf${l}`, { x: 0 }, { x: dx * 3 * u, duration: 0.12, ease: 'power2.out' }, hit);
+      T(`#gf${l}`, { x: dx * 3 * u }, { x: 0, duration: 0.45, ease: 'power2.out' }, hit + 0.12);
+      T('#wr', { rotation: -28, x: 0 }, { rotation: 6, x: (w ? 6 : 14) * u, duration: 0.2, ease: 'power3.in' }, t);
+      T('#wr', { rotation: 6, x: (w ? 6 : 14) * u }, { rotation: -28, x: 0, duration: 0.5, ease: 'power2.out' }, hit + 0.05);
+      T('#wn', { rotation: 24, x: 0 }, { rotation: -6, x: -(w ? 14 : 6) * u, duration: 0.2, ease: 'power3.in' }, t);
+      T('#wn', { rotation: -6, x: -(w ? 14 : 6) * u }, { rotation: 24, x: 0, duration: 0.5, ease: 'power2.out' }, hit + 0.05);
+      T0('#clash', { opacity: 1, scale: 0.2, rotation: k * 37 }, { opacity: 0, scale: 1.5, rotation: k * 37 + 25, duration: 0.45, ease: 'expo.out' }, hit);
+      T('#arena', { x: 0 }, { x: (k % 2 ? 1 : -1) * 0.8 * u, duration: 0.05, yoyo: true, repeat: 3, ease: 'none' }, hit);
+      // ryba: vyskočí ve středu a letí ke straně vítěze
+      T0(`#gfi${k}`, { opacity: 0, scale: 0.2, left: '50%', top: '52%', rotation: 0, scaleX: w ? 1 : -1 }, { opacity: 1, scale: 1.3, rotation: -15, duration: 0.2, ease: 'back.out(2)' }, hit + 0.05);
+      T(`#gfi${k}`, { left: '50%', top: '52%', scale: 1.3, rotation: -15 }, { left: w ? '84%' : '16%', top: '13%', scale: 0.45, rotation: w ? 30 : -30, duration: 0.55, ease: 'power2.in' }, hit + 0.3);
+      T(`#gfi${k}`, { opacity: 1 }, { opacity: 0, duration: 0.1 }, hit + 0.8);
+      sc[w]++; SET(`#gs${w}`, { textContent: sc[w] }, hit + 0.85);
+      T(`#gp${w}`, { scale: 1.12 }, { scale: 1, duration: 0.4, ease: 'power2.out' }, hit + 0.85);
+      T(`#gp${w} em`, { color: '#ffffff' }, { color: '#ffd36b', duration: 0.5 }, hit + 0.85); });
+    const tw = LT.at(-1) + BEAT * 2;
+    T('#gtt', { opacity: 1 }, { opacity: 0, duration: 0.3 }, tw - 0.3);
+    T('#gf1', { opacity: 1, filter: 'brightness(1)' }, { opacity: 0.55, filter: 'brightness(0.6)', duration: 0.4 }, tw);
+    T('#gf0', { scale: 1 }, { scale: 1.06, duration: 0.5, ease: 'back.out(2)' }, tw);
+    T0('#gwin', { opacity: 0, scale: 0.4, rotation: -12 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.45, ease: 'back.out(2.5)' }, tw);
+    T0('#gleg span', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out', stagger: BEAT / 2 }, tw + BEAT);
+    T('#wr, #wn, #gvs', { opacity: 1 }, { opacity: 0.25, duration: 0.4 }, tw);
+    outT('#ghud, #gwin, #gleg, #gf0, #gf1, #wr, #wn, #gvs', b);
+  }
+
+  // ===================== 2b) ROTACE PO RYBNÍKU: skuteční závodníci (avatary), lichá místa jedním směrem, sudá opačným =====================
   {
     const id = 's-duel', a = BAR(BARS.duel[0]), b = BAR(BARS.duel[1]), BB = (k) => BAR(BARS.duel[0] + k);
-    const snap = (t) => G.beats.reduce((p, c) => (Math.abs(c - t) < Math.abs(p - t) ? c : p));
-    // rybník: obdélník A×B (na šířku), 16 stanovišť po dvojicích na dlouhých březích; v 9:16 otočený na výšku
     const A = P ? 100 * u : 96 * u, B = P ? 46 * u : 38 * u, L = 2 * A + 2 * B, NS = 16;
-    const CW = P ? B : A, CH = P ? A : B;                               // rozměr kontejneru
-    const map = ([x, y]) => (P ? [B - y, x] : [x, y]);                  // 9:16: dolní břeh → levý, zleva doprava → shora dolů
+    const CW = P ? B : A, CH = P ? A : B;
+    const map = ([x, y]) => (P ? [B - y, x] : [x, y]);
     const rim = (s) => { s = ((s % L) + L) % L;
       if (s < A) return { p: [s, B], n: [0, 1] }; s -= A;
       if (s < B) return { p: [A, B - s], n: [1, 0] }; s -= B;
@@ -98,6 +164,7 @@ function build(W, H, file) {
     const sOf = (n) => { const k = (((n - 1) % NS) + NS) % NS; return k < 8 ? xs(k) : A + B + xs(k - 8); };
     const XY = (s, lane = 0) => { const { p, n } = rim(s); const [nx, ny] = P ? [-n[1], n[0]] : n; const [x, y] = map(p); return [x + nx * lane, y + ny * lane]; };
     const COLS = ['#e31e24', '#ffd36b', '#7fd0ff', '#9be27a', '#ff8fd0', '#ffb05c', '#b9a6ff', '#ffffff', '#5fe0c8', '#ff6a5a', '#c6e04a', '#8ea2d8', '#f5c2c7', '#e0b37a', '#6fb7ff', '#d0d0d0'];
+    const AV = [8, 21, 0, 2, 6, 7, 9, 11, 12, 14, 15, 16, 17, 23, 24, 25].map((n) => `a${String(n).padStart(2, '0')}`);   // jen avatary s lidmi
     const st0 = Array.from({ length: NS }, (_, i) => i + 1), step = 6;
     const at = (i, r) => (i % 2 === 0 ? st0[i] + step * r : st0[i] - step * r);
     const nrm = (n) => ((((n - 1) % NS) + NS) % NS) + 1;
@@ -105,80 +172,55 @@ function build(W, H, file) {
     const res1 = [3, 0, 2, 2, 0, 3, 3, 0, 1, 1, 3, 0, 0, 3, 3, 0];
     const xy0 = (n) => XY(sOf(n));
     scene(id, a, b, `<div class="dbg"></div>
-      <div class="blk dhd" id="dhd">${kick('Jak probíhá souboj')}<h2><span>Jeden na jednoho.</span></h2></div>
+      <div class="blk dhd" id="dhd">${kick('Rotace po rybníku')}<h2><span>${nb('12 kol. Pořád nový soupeř.')}</span></h2></div>
       <div class="pond" id="pond" style="width:${CW.toFixed(0)}px; height:${CH.toFixed(0)}px; left:${((W - CW) / 2).toFixed(0)}px">
         <div class="water" id="water"></div>
-        ${st0.map((n) => { const [x, y] = xy0(n); const out = n > NS / 2; return `<i class="sn${out ? ' up' : ''}" id="sn${n}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px"><em>${n}</em></i>`; }).join('')}
+        ${st0.map((n) => { const [x, y] = xy0(n); const up = n > NS / 2; return `<i class="sn${up ? ' up' : ''}" id="sn${n}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px"><em>${n}</em></i>`; }).join('')}
         ${Array.from({ length: NS / 2 }, (_, p) => { const [x1, y1] = xy0(p * 2 + 1), [x2, y2] = xy0(p * 2 + 2); const w = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
           return `<i class="pr" id="pr${p}" style="left:${x1.toFixed(1)}px; top:${y1.toFixed(1)}px; width:${w.toFixed(1)}px; transform:rotate(${ang.toFixed(1)}deg)"></i>`; }).join('')}
-        ${st0.map((n, i) => { const [x, y] = xy0(n); return `<i class="ag" id="ag${i}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px; --c:${COLS[i]}"><b>${String.fromCharCode(65 + i)}</b><s class="pt" id="pt${i}">+${res1[i]}</s></i>`; }).join('')}
+        ${st0.map((n, i) => { const [x, y] = xy0(n); return `<i class="ag" id="ag${i}" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px; --c:${COLS[i]}; background-image:url(assets/av/${AV[i]}.jpg)"><s class="pt" id="pt${i}">+${res1[i]}</s></i>`; }).join('')}
         <span class="ntag" id="ntag">nový soupeř</span>
       </div>
-      <div class="duel" id="duel">
-        <div class="dc" id="dcA"><b>Závodník A</b><em id="fa">0</em><small>počet ryb</small></div>
-        <div class="vs"><div class="clock"><svg viewBox="0 0 100 100"><circle class="cb" cx="50" cy="50" r="44"/><circle class="cf" id="clk" cx="50" cy="50" r="44" pathLength="1"/></svg><span id="clkt">20:00</span></div><i>VS</i></div>
-        <div class="dc" id="dcB"><b>Závodník B</b><em id="fb">0</em><small>počet ryb</small></div>
-        <div class="win" id="win"><span>výhra <b>3 b.</b></span><span>remíza s úlovkem <b>2 b.</b></span><span>remíza 0:0 <b>1 b.</b></span><span>prohra <b>0 b.</b></span></div>
-      </div>
-      <div class="dcap" id="dcap1">${nb('Souboj trvá 20 minut. Kdo uloví víc ryb, vyhrává.')}</div>
       <div class="dcap" id="dcap2"><b>Rotace</b> <span class="lg lo">● lichá místa ↻</span> <span class="lg le">● sudá místa ↺</span><br>${nb('posun o 2–10 míst podle počtu závodníků (40–50 závodníků: 6–8 míst)')}</div>
       <div class="rnd" id="rnd"><small>kolo</small><b id="rndn">1</b><small>/ 12</small></div>
       <div class="dcap fin" id="dcap3">${nb('Stejný princip jako na mistrovství světa: místa i soupeři se střídají, aby rozhodoval rybář, ne místo.')}</div>`);
     const others = (keep) => st0.map((_, i) => i).filter((i) => !keep.includes(i)).map((i) => `#ag${i}`).join(', ');
-    // 0–1: nadpis, rybník, místa, závodníci, dvojice
     rise('#dhd .kick', a + 0.05); rise('#dhd h2 span', a + BEAT);
-    T0('#pond', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, a + 0.1);
-    T0('.sn', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: BEAT / 4 }, a + BEAT);
-    T0('.ag', { opacity: 0, y: -8 * u, scale: 0.4 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2)', stagger: BEAT / 4 }, BB(1));
-    T0('.pr', { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.35, ease: 'expo.out', stagger: BEAT / 2, transformOrigin: '0% 50%' }, BB(1) + BEAT * 2);
-    // 2–5: duel A–B
-    T(others([0, 1]), { opacity: 1 }, { opacity: 0.3, duration: 0.3 }, BB(2));
-    T('#ag0, #ag1', { scale: 1 }, { scale: 1.4, duration: 0.4, ease: 'back.out(2)' }, BB(2));
-    T0('#duel', { opacity: 0, y: 6 * u, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, BB(2));
-    pop('#dcap1', BB(2) + BEAT * 2);
-    const ta = BB(2) + BEAT * 2, tb = BB(4);
-    T0('#clk', { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: len(ta, tb), ease: 'none' }, ta);
-    out.push(`{ const o={v:1200}, el=document.getElementById("clkt"); tl.fromTo(o,{v:1200},{v:0,duration:${len(ta, tb)},ease:"none",immediateRender:false,onUpdate(){const s=Math.round(o.v);el.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}}, ${ta.toFixed(3)}); }`);
-    const fish = [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2]];
-    fish.slice(1).forEach(([fa, fb], k) => { const t = snap(ta + ((tb - BEAT - ta) * (k + 0.5)) / (fish.length - 1)), w = fa !== fish[k][0] ? 'a' : 'b';
-      SET(`#f${w}`, { textContent: w === 'a' ? fa : fb }, t);
-      T(`#dc${w.toUpperCase()}`, { scale: 1.1 }, { scale: 1, duration: 0.35, ease: 'power2.out' }, t);
-      T(`#ag${w === 'a' ? 0 : 1}`, { scale: 1.8 }, { scale: 1.4, duration: 0.3, ease: 'power2.out' }, t); });
-    T0('#win', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, tb - BEAT * 2);
-    T0('#win span', { opacity: 0.3 }, { opacity: 1, duration: 0.2, stagger: BEAT / 2 }, tb - BEAT * 2 + 0.1);
-    const t5 = BB(5) + BEAT * 2;
-    T('#duel, #dcap1', { opacity: 1 }, { opacity: 0, duration: 0.3 }, t5 - 0.3);
-    T(others([0, 1]), { opacity: 0.3 }, { opacity: 1, duration: 0.3 }, t5);
-    T('#ag1', { scale: 1.4 }, { scale: 1, duration: 0.3 }, t5);
-    T0('.pt', { opacity: 0, y: 0 }, { opacity: 1, y: -2.5 * u, duration: 0.35, ease: 'back.out(2)', stagger: 0.03 }, t5);
-    T('.pt', { opacity: 1 }, { opacity: 0, duration: 0.25 }, BB(6) + BEAT * 0.5);
-    pop('#rnd', t5);
-    // 6–9: dvě rotace; lichá místa po vnějším pruhu, sudá po vnitřním; A zůstává hrdina, nový soupeř se rozsvítí
-    [1, 2].forEach((r) => { const tr = BB(4 + r * 2) + BEAT, d = BEAT * 2, N = 10;
-      if (r === 1) pop('#dcap2', BB(6));
+    T0('#pond', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, a + 0.1);
+    T0('.sn', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: BEAT / 6 }, a + BEAT * 0.5);
+    T0('.ag', { opacity: 0, y: -6 * u, scale: 0.4 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2)', stagger: BEAT / 5 }, a + BEAT * 1.5);
+    T0('.pr', { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.35, ease: 'expo.out', stagger: BEAT / 3, transformOrigin: '0% 50%' }, BB(1) + BEAT * 2);
+    pop('#rnd', BB(1) + BEAT * 2);
+    // body po 1. kole
+    const tp = BB(2) + BEAT;
+    T0('.pt', { opacity: 0, y: 0 }, { opacity: 1, y: -2.5 * u, duration: 0.35, ease: 'back.out(2)', stagger: 0.03 }, tp);
+    T('.pt', { opacity: 1 }, { opacity: 0, duration: 0.25 }, BB(3) + BEAT * 0.5);
+    T('#ag0, #ag1', { scale: 1 }, { scale: 1.35, duration: 0.4, ease: 'back.out(2)' }, BB(2));
+    T('#ag1', { scale: 1.35 }, { scale: 1, duration: 0.3 }, BB(3));
+    pop('#dcap2', BB(3));
+    [1, 2].forEach((r) => { const tr = BB(1 + r * 2) + BEAT, d = BEAT * 2, N = 10;
       T('.pr', { opacity: 1 }, { opacity: 0.12, duration: 0.2 }, tr);
-      T(others([0]), { opacity: 1 }, { opacity: 0.5, duration: 0.2 }, tr);
-      st0.forEach((_, i) => { const dir = i % 2 === 0 ? 1 : -1, sa = sOf(at(i, r - 1)); let sb = sOf(at(i, r)); 
+      T(others([0]), { opacity: 1 }, { opacity: 0.55, duration: 0.2 }, tr);
+      st0.forEach((_, i) => { const dir = i % 2 === 0 ? 1 : -1, sa = sOf(at(i, r - 1)); let sb = sOf(at(i, r));
         if (dir > 0 && sb < sa) sb += L; if (dir < 0 && sb > sa) sb -= L;
-        const lane = (dir > 0 ? 3.2 : -3.2) * u, sm = (x) => x * x * (3 - 2 * x);
+        const lane = (dir > 0 ? 3.4 : -3.4) * u, sm = (x) => x * x * (3 - 2 * x);
         for (let k = 0; k < N; k++) { const f0 = k / N, f1 = (k + 1) / N, p0 = XY(sa + (sb - sa) * sm(f0), lane * Math.sin(Math.PI * f0)), p1 = XY(sa + (sb - sa) * sm(f1), lane * Math.sin(Math.PI * f1));
           T(`#ag${i}`, { left: p0[0], top: p0[1] }, { left: p1[0], top: p1[1], duration: d / N, ease: 'none' }, tr + (d * k) / N); } });
       const tl2 = tr + d, o = opp(r);
       T('.pr', { opacity: 0.12 }, { opacity: 1, duration: 0.3 }, tl2);
-      T(others([0, o]), { opacity: 0.5 }, { opacity: 0.35, duration: 0.2 }, tl2);
-      T(`#ag${o}`, { opacity: 0.5, scale: 1 }, { opacity: 1, scale: 1.4, duration: 0.35, ease: 'back.out(2.5)' }, tl2);
+      T(others([0, o]), { opacity: 0.55 }, { opacity: 0.4, duration: 0.2 }, tl2);
+      T(`#ag${o}`, { opacity: 0.55, scale: 1 }, { opacity: 1, scale: 1.35, duration: 0.35, ease: 'back.out(2.5)' }, tl2);
       const [ox, oy] = xy0(nrm(at(o, r)));
       T('#ntag', { opacity: 0, left: ox, top: oy, scale: 0.6 }, { opacity: 1, left: ox, top: oy, scale: 1, duration: 0.35, ease: 'back.out(2)' }, tl2 + 0.05);
-      T('#ntag', { opacity: 1 }, { opacity: 0, duration: 0.2 }, tl2 + BEAT * 3);
-      T(`#ag${o}`, { scale: 1.4 }, { scale: 1, duration: 0.3 }, tl2 + BEAT * 4 - 0.1);
+      T('#ntag', { opacity: 1 }, { opacity: 0, duration: 0.2 }, tl2 + BEAT * 2.5);
+      T(`#ag${o}`, { scale: 1.35 }, { scale: 1, duration: 0.3 }, tl2 + BEAT * 3 - 0.1);
       SET('#rndn', { textContent: r + 1 }, tl2);
       T('#rnd', { scale: 1.25 }, { scale: 1, duration: 0.3, ease: 'power2.out' }, tl2); });
-    T('#ag0', { scale: 1.4 }, { scale: 1.4, duration: 0.01 }, t5);
-    const t9 = BB(9);
-    T(others([0]), { opacity: 0.35 }, { opacity: 1, duration: 0.3 }, t9 - BEAT);
-    out.push(`{ const o={v:3}, el=document.getElementById("rndn"); tl.fromTo(o,{v:3},{v:12,duration:${(BEAT * 2).toFixed(3)},ease:"power1.in",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t9 - BEAT * 2).toFixed(3)}); }`);
-    T('#dcap2', { opacity: 1 }, { opacity: 0, duration: 0.25 }, t9 - 0.2);
-    pop('#dcap3', t9);
+    const t7 = BB(7) - BEAT;
+    T(others([0]), { opacity: 0.4 }, { opacity: 1, duration: 0.3 }, t7 - BEAT);
+    out.push(`{ const o={v:3}, el=document.getElementById("rndn"); tl.fromTo(o,{v:3},{v:12,duration:${(BEAT * 2).toFixed(3)},ease:"power1.in",immediateRender:false,onUpdate(){el.textContent=Math.round(o.v);}}, ${(t7 - BEAT * 2).toFixed(3)}); }`);
+    T('#dcap2', { opacity: 1 }, { opacity: 0, duration: 0.25 }, t7 - 0.2);
+    pop('#dcap3', t7);
     outT('#pond, #dhd, #rnd, #dcap3', b);
   }
 
@@ -317,8 +359,7 @@ function build(W, H, file) {
     scene(id, a, b, `<div class="rbg alt"></div>${hero('nm-h', 9032, P ? 70 * u : 96 * u)}
       <div class="blk nmh" id="nmh">${kick('Nominace')}<div class="ladder" id="ladder"><span>Krajská liga</span><span>2. liga</span><span>1. liga</span><i class="lx" id="lx"></i></div>
         <h2><span>${nb('Jedna sezóna')}</span></h2><h2 class="red"><span>stačí.</span></h2>
-        <div class="flow" id="flow"><b>Žebříček</b><i>→</i><b>Nominace</b><i>→</i><b class="r">Reprezentace</b></div>
-        <small class="fnote" id="fnote">${nb('ATLAS a H-Battle: 6 nejlepších výsledků z posledních 8 závodů. MS FIPSed: nominaci navrhuje státní trenér, žebříček je hlavní kritérium. Max. 2 mezinárodní závody ročně na závodníka.')}</small></div>`);
+        <div class="flow" id="flow"><b>Žebříček</b><i>→</i><b>Nominace</b><i>→</i><b class="r">Reprezentace</b></div></div>`);
     heroIn('nm-h', a + 0.1, 1);
     rise('#nmh .kick', a + 0.05);
     T0('#ladder span', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.3, stagger: BEAT / 2 }, a + BEAT * 0.5);
@@ -326,17 +367,44 @@ function build(W, H, file) {
     T('#ladder', { opacity: 1 }, { opacity: 0.45, duration: 0.3 }, a + BEAT * 4);
     rise('#nmh h2:nth-of-type(1) span', a + BEAT * 4.5); rise('#nmh h2:nth-of-type(2) span', a + BEAT * 5.5);
     T0('#flow b, #flow i', { opacity: 0, x: -2 * u }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out', stagger: BEAT / 2 }, a + BEAT * 7);
-    T0('#fnote', { opacity: 0 }, { opacity: 1, duration: 0.4 }, a + BEAT * 9);
     outT('#nmh, #nm-h', b);
+  }
+
+  // ===================== 5f) PRAVIDLA NOMINACE: H-Battle/ATLAS = 6 z 8; MS FIPSed = 2 žebříček + 2 trenér + 5. trenér se souhlasem týmu =====================
+  {
+    const id = 's-nomr', a = BAR(BARS.nomr[0]), b = BAR(BARS.nomr[1]);
+    const RES = [4, 12, 2, 7, 15, 3, 5, 9], worst = [1, 4];
+    const SEAT = [['1', 'žebříček', 'rk'], ['2', 'žebříček', 'rk'], ['3', 'trenér', 'co'], ['4', 'trenér', 'co'], ['5', 'trenér + tým', 'tm']];
+    scene(id, a, b, `${photos('nr', [9901, 9601], a, b, { op: 0.22 })}<div class="nrbg"></div>
+      <div class="blk nrh" id="nrh">${kick('Nominace na mezinárodní závody')}<h2><span>Jak se nominuje?</span></h2></div>
+      <div class="nc nc0" id="nc0"><div class="nct"><span class="ncl"><img src="assets/lg_hb.png" alt=""></span><span class="ncl"><img src="assets/lg_atlas.png" alt=""></span><div><b>H-Battle · ATLAS</b><small>${nb('rozhoduje průběžný žebříček')}</small></div></div>
+        <div class="slots">${RES.map((v, i) => `<span class="slt" id="sl${i}"><em>${v}.</em><s class="x" id="slx${i}"></s><i>${i + 1}</i></span>`).join('')}</div>
+        <div class="ncf" id="ncf0"><b>6</b> ${nb('nejlepších výsledků z posledních')} <b>8</b> ${nb('závodů')}</div></div>
+      <div class="nc nc1" id="nc1"><div class="nct"><span class="ncl"><img src="assets/lg_fips.png" alt=""></span><div><b>Mistrovství světa</b><small>FIPSed · reprezentace ČR</small></div></div>
+        <div class="seats">${SEAT.map(([n, t, c], i) => `<div class="seat ${c}" id="se${i}"><i>${n}</i><small>${t}</small></div>`).join('')}<span class="tok" id="tok">✓ ${nb('schvaluje tým')}</span></div>
+        <div class="ncf" id="ncf1"><span class="lgd rk">● žebříček 6 z 8</span><span class="lgd co">● návrh trenéra</span><span class="lgd tm">● trenér + souhlas týmu</span></div></div>`);
+    rise('#nrh .kick', a + 0.05); rise('#nrh h2 span', a + BEAT);
+    T0('#nc0', { opacity: 0, x: -8 * u, rotationY: 25, transformPerspective: 1400 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.7, ease: 'expo.out' }, a + 1.5);
+    T0('#nc0 .ncl', { scale: 0.3, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)', stagger: 0.12 }, a + 1.7);
+    T0('.slt', { opacity: 0, y: -3 * u, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'back.out(2.5)', stagger: 0.16 }, a + 3.3);
+    worst.forEach((w, j) => { T0(`#slx${w}`, { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: 'power2.out' }, a + 6.2 + j * 0.25);
+      T(`#sl${w}`, { opacity: 1 }, { opacity: 0.4, duration: 0.3 }, a + 6.3 + j * 0.25); });
+    T(RES.map((_, i) => i).filter((i) => !worst.includes(i)).map((i) => `#sl${i}`).join(', '), { backgroundColor: 'rgba(255,211,107,0)' }, { backgroundColor: 'rgba(255,211,107,.9)', color: '#0b1e42', duration: 0.3, stagger: 0.07 }, a + 6.9);
+    pop('#ncf0', a + 7.2);
+    T0('#nc1', { opacity: 0, x: 8 * u, rotationY: -25, transformPerspective: 1400 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.7, ease: 'expo.out' }, a + 8.6);
+    T0('#nc1 .ncl', { scale: 0.3, rotation: 40 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, a + 8.8);
+    T(`#nc0`, { opacity: 1 }, { opacity: 0.55, duration: 0.4 }, a + 8.6);
+    [[0, 1, 10.3], [2, 3, 12.6], [4, 4, 14.4]].forEach(([i0, i1, t]) => { for (let i = i0; i <= i1; i++) T0(`#se${i}`, { opacity: 0, y: 4 * u, scale: 0.5 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(2.2)' }, a + t + (i - i0) * 0.2); });
+    T0('#tok', { opacity: 0, scale: 0.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.45, ease: 'back.out(3)' }, a + 16.0);
+    T('#se4', { boxShadow: '0 0 0 0px rgba(227,30,36,0)' }, { boxShadow: `0 0 0 ${px(0.8)} rgba(227,30,36,.9)`, duration: 0.3, yoyo: true, repeat: 3 }, a + 16.0);
+    T0('#ncf1 span', { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.15 }, a + 10.8);
+    outT('#nrh, #nc0, #nc1', b);
   }
 
   // ===================== 6) OTEVŘENÝ SYSTÉM (jen krátce, pozadí: tmavé siluety pstruhů) =====================
   {
     const id = 's-sys', a = BAR(BARS.sys[0]), b = BAR(BARS.sys[1]);
     // pstruh – silueta z boku (hlava vpravo): přední část pevná, zadní část + ocas se vlní (posunutá fáze)
-    const FRONT = 'M56 9 C70 7 88 8 102 13 C110 15 116 18 117 20 C116 23 110 26 102 28 C88 32 70 33 56 31 Z M63 8.5 C65 3 72 2 75 6.5 C71 7.2 67 8 65 8.6 Z M90 28 C92 33 96 34 98 32 C96 30 94 29 92 28 Z M60 31 C62 35 66 36 68 34 C66 33 63 32 61 31 Z';
-    const REAR = 'M59 9 C44 9 30 12 16 16.5 L16 23.5 C30 28 44 31 59 31 Z M26 14 C27 10.5 30.5 10.5 31.5 13 Z M31 27.5 C33 32 36.5 33 38.5 30 Z';
-    const TAIL = 'M17.5 16.5 C11 13 5 9 0.5 6.5 C2.5 13 3.5 17 4.5 20 C3.5 23 2.5 27 0.5 33.5 C5 31 11 27 17.5 23.5 Z';
     const NF = 7;
     const FISH = Array.from({ length: NF }, (_, i) => { const d = rnd(i * 13 + 5);
       const band = P ? [8 + rnd(i * 3 + 1) * 18, 70 + rnd(i * 3 + 1) * 24][i % 2] : [10 + rnd(i * 3 + 1) * 14, 58 + rnd(i * 3 + 1) * 34][i % 2];
@@ -402,14 +470,58 @@ function build(W, H, file) {
     outT('#sth, #kit, #hint', b);
   }
 
-  // ===================== 7b) SPOLUPRÁCE S ČRS =====================
+  // ===================== 7a) DOKUMENTY: kde najdeš pravidla =====================
+  {
+    const id = 's-docs', a = BAR(BARS.docs[0]), b = BAR(BARS.docs[1]);
+    const DOCS = [['tournament-rules-02', 'Závodní řád'], ['competition-rules-2', 'Soutěžní řád'], ['nomination-regulations-2', 'Nominační řád'], ['codex-2', 'Kodex závodníka']];
+    const TD = [3.6, 4.6, 5.6, 6.7];
+    scene(id, a, b, `<div class="dcbg"></div>
+      <div class="blk dch" id="dch">${kick('Dokumenty')}<h2><span>${nb('Všechna pravidla')}</span></h2><h2 class="red"><span>na webu.</span></h2></div>
+      <div class="brw" id="brw"><i></i><i></i><i></i><span class="addr">troutareacz.cz <em>›</em> <b id="dkw">Dokumenty</b></span><i class="cur" id="dcur"></i></div>
+      <div class="docs" id="docs">${DOCS.map(([f, t], i) => `<div class="doc" id="dc${i}"><div class="dpg"><img src="assets/docs/${f}.png" alt=""><i class="pdf">PDF</i></div><b>${t}</b></div>`).join('')}</div>`);
+    rise('#dch .kick', a + 0.05); rise('#dch h2:nth-of-type(1) span', a + BEAT); rise('#dch h2:nth-of-type(2) span', a + BEAT * 2);
+    T0('#brw', { opacity: 0, y: -3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, a + 0.6);
+    T0('#dcur', { opacity: 0, x: 12 * u, y: 8 * u }, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: 'power3.out' }, a + 1.6);
+    T('#dkw', { backgroundColor: 'rgba(227,30,36,0)', color: '#0b1e42' }, { backgroundColor: 'rgba(227,30,36,1)', color: '#ffffff', duration: 0.2 }, a + 2.3);
+    T('#brw', { scale: 1 }, { scale: 0.97, duration: 0.1, yoyo: true, repeat: 1 }, a + 2.3);
+    DOCS.forEach((_, i) => { const t = a + TD[i];
+      T0(`#dc${i}`, { opacity: 0, y: 10 * u, rotationX: -70, transformPerspective: 1200 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.6, ease: 'expo.out' }, t);
+      T0(`#dc${i} .dpg`, { y: 0 }, { y: -1.2 * u, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: 5 }, t + 0.6 + i * 0.2);
+      T(`#dc${i} b`, { color: '#ffd36b' }, { color: '#eef2f9', duration: 0.8 }, t + 0.2); });
+    outT('#dch, #brw, #docs', b);
+  }
+
+  // ===================== 7b) PARTNEŘI: ČRS hlavní, svazy/ligy, revíry, sponzoři – pozadí: rychlé přelety dronem =====================
   {
     const id = 's-crs', a = BAR(BARS.crs[0]), b = BAR(BARS.crs[1]);
-    scene(id, a, b, `${photos('cs', [86415], a, b, { op: 0.4 })}
-      <div class="crsw" id="crsw"><small>Ve spolupráci s</small><span class="crsc" id="crsl"><img src="assets/crs.png" alt="Český rybářský svaz"></span></div>`);
-    T0('#crsw small', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, a + 0.05);
-    T0('#crsl', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + BEAT);
-    outT('#crsw', b);
+    const ORG = [['lg_fips', 'FIPSed'], ['lg_atlas', 'ATLAS'], ['lg_hb', 'H-Battle']];
+    const REV = [['partners/libechov', 'Líheň Liběchov'], ['partners/klonowiec', 'Klonowiec (PL)']];
+    const SPO = [['troutshop', 'w'], ['activefishing', 'w'], ['bosset', 'w'], ['jigovky', 'd'], ['moonky', 'd'], ['velkaryba', 'w']];
+    const FLY = [[a - 0.4, a + 3.6, ''], [a + 3.2, a + 7.2, 'scaleX(-1)'], [a + 6.8, a + 10.8, 'scale(1.2) rotate(5deg)'], [a + 10.4, b + 0.4, 'scaleX(-1) scale(1.15)']];
+    const t2 = a + 3.4, t3 = a + 8.3;
+    const pre = `<div class="flyw">${FLY.map(([fa, fb, tf], k) => `<video id="fly${k}" class="clip fly" src="assets/vid/flyover.mp4" muted playsinline data-start="${fa.toFixed(3)}" data-duration="${len(fa, fb)}" data-track-index="${3 + k}" style="transform:${tf || 'none'}"></video>`).join('')}</div>`;
+    scene(id, a, b, `<div class="flyo"></div>
+      <div class="pmain" id="pmain"><small>Hlavní partner</small><span class="crsc"><img src="assets/crs.png" alt="Český rybářský svaz"></span></div>
+      <div class="pgrid" id="pgrid">
+        <div class="pg pg0" id="pg0"><small>Svazy a ligy</small><div class="prow2">${ORG.map(([f, t], i) => `<span class="plc" id="po${i}"><img src="assets/${f}.png" alt="${t}"></span>`).join('')}</div></div>
+        <div class="pg pg1" id="pg1"><small>Revíry</small><div class="prow2">${REV.map(([f, t], i) => `<span class="plc" id="pr2${i}"><img src="assets/${f}.png" alt="${t}"></span>`).join('')}</div></div>
+        <div class="pg pg2" id="pg2"><small>Partneři</small><div class="prow3">${SPO.map(([f, c], i) => `<span class="psp ${c}" id="ps${i}"><img src="assets/partners/${f}.png" alt=""></span>`).join('')}<span class="psp d gh" id="ps6"><img class="ring" src="assets/gh/ring.png" alt=""><img class="core" src="assets/gh/core.png" alt=""><img class="wl3" src="assets/gh/word-line.png" alt="Gausse Holler"></span></div></div>
+      </div>
+      <div class="popen" id="popen"><b>${nb('Otevřeni další spolupráci')}</b><span>${nb('pro rozvoj tohoto sportu')}</span></div>`, pre);
+    FLY.forEach(([fa, fb], k) => { T0(`#fly${k}`, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'sine.inOut' }, fa); });
+    T0('.flyw', { scale: 1.08 }, { scale: 1, duration: len(a, b), ease: 'none' }, a);
+    T0('#pmain small', { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, a + 0.1);
+    T0('#pmain .crsc', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, a + 0.3);
+    T('#pmain', { y: 0, scale: 1 }, { y: -26 * u, scale: 0.55, duration: 0.8, ease: 'power3.inOut' }, t2);
+    [0, 1, 2].forEach((k) => T0(`#pg${k} small`, { opacity: 0, x: -2 * u }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, t2 + 0.5 + k * 0.9));
+    T0('#pg0 .plc', { opacity: 0, scale: 0.3, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.14 }, t2 + 0.6);
+    T0('#pg1 .plc', { opacity: 0, scale: 0.3, rotation: 30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.14 }, t2 + 1.5);
+    T0('#pg2 .psp', { opacity: 0, y: 4 * u, rotationX: -80, transformPerspective: 900 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.5, ease: 'expo.out', stagger: 0.12 }, t2 + 2.4);
+    T0('#ps6 .ring', { rotation: 0 }, { rotation: 360, duration: len(t2, b), ease: 'none' }, t2);
+    T0('.plc, .psp', { y: 0 }, { y: -0.6 * u, duration: BEAT * 2, ease: 'sine.inOut', yoyo: true, repeat: 7, stagger: 0.1 }, t2 + 3.6);
+    T0('#popen', { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, t3);
+    T0('#popen b', { backgroundPosition: '-150% 0' }, { backgroundPosition: '250% 0', duration: 1.4, ease: 'power2.inOut' }, t3 + 0.4);
+    outT('#pmain, #pgrid, #popen', b);
   }
 
   // ===================== 8) CTA =====================
@@ -433,8 +545,9 @@ function build(W, H, file) {
 
   // ===================== hudební prvky: přehrávač, spektrum, bokeh, light leak =====================
   {
-    const pa = BAR(BARS.what[0]), pb = BAR(BARS.cta[0]);
-    T0('#player', { opacity: 0, y: 4 * u }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, pa + 0.3);
+    const pb = BAR(BARS.cta[0]), HERO = 2.1, dockX = 25 * u - W / 2, dockY = 13.5 * u - H / 2;
+    T0('#player', { x: dockX, y: dockY, scale: HERO, opacity: 0 }, { x: dockX, y: dockY, scale: HERO, opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.1);
+    T('#player', { x: dockX, y: dockY, scale: HERO }, { x: 0, y: 0, scale: 1, duration: 0.9, ease: 'power3.inOut' }, BAR(2) - 0.5);
     T('#player', { opacity: 1 }, { opacity: 0, duration: 0.5 }, pb - 0.5);
     T0('#vinyl', { rotation: 0 }, { rotation: 200 * DUR, duration: DUR, ease: 'none' }, 0);
     T0('#pfill', { scaleX: 0 }, { scaleX: 1, duration: DUR, ease: 'none' }, 0);
@@ -454,14 +567,9 @@ function build(W, H, file) {
   }
 
   // ===================== globální rytmus =====================
-  const NW = 14;
-  starts.filter((t) => t > 1).forEach((t0) => { const t = t0 - 0.16;
-    for (let i = 0; i < NW; i++) { const dl = Math.abs(i - (NW - 1) / 2) * 0.012;
-      out.push(`tl.fromTo("#wp${i}", {scaleY:0}, {scaleY:1, duration:0.15, ease:"power3.out", immediateRender:false}, ${(t + dl).toFixed(3)});`);
-      out.push(`tl.to("#wp${i}", {scaleY:0, duration:0.2, ease:"power3.in"}, ${(t + 0.19 + dl).toFixed(3)});`); } });
-  G.downbeats.forEach((t, i) => { if (t < 0.3 || t > DUR - 2.5) return; const big = i % 4 === 0;
-    out.push(`tl.fromTo("#flash", {opacity:${big ? 0.18 : 0.07}}, {opacity:0, duration:${big ? 0.45 : 0.25}, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`);
-    out.push(`tl.fromTo("#stage", {scale:${big ? 1.035 : 1.012}}, {scale:1, duration:0.4, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`); });
+  G.downbeats.forEach((t, i) => { if (t < 0.3 || t > DUR - 2.5) return; const big = i % 4 === 0; if (!big) return;
+    out.push(`tl.fromTo("#flash", {opacity:0.07}, {opacity:0, duration:0.6, ease:"power2.out", immediateRender:false}, ${t.toFixed(3)});`);
+    out.push(`tl.fromTo("#stage", {scale:1.012}, {scale:1, duration:0.7, ease:"sine.out", immediateRender:false}, ${t.toFixed(3)});`); });
   G.beats.filter((t) => t < BAR(2)).forEach((t) => out.push(`tl.fromTo("#stage", {filter:"brightness(1.35)"}, {filter:"brightness(1)", duration:0.18, immediateRender:false}, ${t.toFixed(3)});`));
   T0('#corner', { opacity: 0 }, { opacity: 0.92, duration: 0.5 }, BAR(BARS.what[0]));
   T('#corner', { opacity: 0.92 }, { opacity: 0, duration: 0.4 }, BAR(BARS.cta[0]) - 0.4);
@@ -687,6 +795,83 @@ function build(W, H, file) {
   .pr-noa { width:62%; left:19%; top:18%; transform-origin:50% 120%; }
   .pr-net { height:100%; left:0; right:0; top:0; margin:auto; transform-origin:70% 70%; }
   .glint { position:absolute; top:-20%; bottom:-20%; left:0; width:35%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); mix-blend-mode:overlay; transform:skewX(-18deg); pointer-events:none; }
+
+  /* gladiátoři */
+  .arena { position:absolute; inset:0; }
+  #s-glad .pho { background:radial-gradient(70% 80% at 50% 60%, rgba(5,13,34,.35), rgba(5,13,34,.9)); }
+  .spot { position:absolute; top:-10%; width:${px(60)}; height:120%; background:linear-gradient(180deg, rgba(255,230,170,.32), rgba(255,230,170,0) 85%); filter:blur(${px(2)}); mix-blend-mode:screen; }
+  .spot.s0 { left:${px(8)}; transform:skewX(12deg); } .spot.s1 { right:${px(8)}; transform:skewX(-12deg); }
+  .gvs { position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); font:900 ${px(24)}/1 Montserrat; font-style:italic; color:transparent; -webkit-text-stroke:${px(0.35)} rgba(255,211,107,.85); text-shadow:0 0 ${px(4)} rgba(227,30,36,.6); opacity:0; }
+  .gf { position:absolute; bottom:0; opacity:0; } .gf0 { left:${px(8)}; } .gf1 { right:${px(8)}; } .gf img { width:100%; height:100%; display:block; transform-origin:50% 100%; filter:drop-shadow(0 ${px(1.4)} ${px(3)} rgba(0,0,0,.6)) saturate(1.08); }
+  .wpn { position:absolute; opacity:0; filter:drop-shadow(0 ${px(1)} ${px(2)} rgba(0,0,0,.6)); z-index:2; }
+  .wr { left:${px(40)}; top:${px(44)}; width:${px(50)}; transform-origin:12% 85%; }
+  .wn { right:${px(36)}; top:${px(52)}; width:${px(48)}; transform-origin:92% 50%; }
+  .clash { position:absolute; left:50%; top:52%; width:${px(30)}; height:${px(30)}; margin:${px(-15)} 0 0 ${px(-15)}; border-radius:50%; opacity:0; z-index:3; mix-blend-mode:screen;
+    background:radial-gradient(circle, #fff 0 8%, rgba(255,211,107,.9) 14%, rgba(227,30,36,.5) 30%, transparent 55%), repeating-conic-gradient(rgba(255,230,170,.9) 0 4deg, transparent 4deg 22deg); -webkit-mask-image:radial-gradient(circle, #000 25%, transparent 70%); }
+  .gfish { position:absolute; width:${px(14)}; height:${px(5)}; margin:${px(-2.5)} 0 0 ${px(-7)}; opacity:0; z-index:4; } .gfish svg { width:100%; height:100%; overflow:visible; } .gfish path { fill:#e8edf5; stroke:#ffd36b; stroke-width:.6; } .gfish svg { filter:drop-shadow(0 0 ${px(1.2)} rgba(255,211,107,.9)); }
+  .ghud { position:absolute; left:${px(28)}; right:${px(6)}; top:${px(4)}; display:flex; justify-content:space-between; align-items:center; opacity:0; z-index:5; }
+  .gpl { display:flex; align-items:center; gap:${px(1.4)}; background:rgba(5,13,34,.8); border-radius:${px(6)}; padding:${px(0.8)} ${px(2.2)} ${px(0.8)} ${px(0.8)}; box-shadow:inset 0 0 0 1px rgba(238,242,249,.18); min-width:${px(52)}; }
+  .gp1 { flex-direction:row-reverse; padding:${px(0.8)} ${px(0.8)} ${px(0.8)} ${px(2.2)}; text-align:right; }
+  .gav { width:${px(7.4)}; height:${px(7.4)}; border-radius:50%; background:center/cover; box-shadow:0 0 0 ${px(0.4)} var(--red); flex-shrink:0; } .gp1 .gav { box-shadow:0 0 0 ${px(0.4)} #2a5bd6; }
+  .gpl div { flex:1; } .gpl b { display:block; font:900 ${px(2.4)} Montserrat; text-transform:uppercase; } .gpl small { font:700 ${px(1.6)} Montserrat; text-transform:uppercase; letter-spacing:.12em; color:var(--lb); }
+  .gpl em { font:900 ${px(6)}/1 Montserrat; font-style:normal; color:var(--gold); font-variant-numeric:tabular-nums; min-width:${px(4)}; text-align:center; }
+  .gclk { position:relative; width:${px(11)}; height:${px(11)}; } .gclk svg { width:100%; height:100%; transform:rotate(-90deg); } .gclk circle { fill:rgba(5,13,34,.6); stroke-width:7; }
+  .gclk span { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font:800 ${px(2.2)} Montserrat; font-variant-numeric:tabular-nums; }
+  .gtt { position:absolute; left:0; right:0; bottom:${px(22)}; text-align:center; z-index:5; } .gtt h2 { margin:${px(0.6)} 0 0; font:900 ${px(4.2)}/1.05 Montserrat; text-transform:uppercase; text-shadow:0 ${px(0.5)} ${px(2)} rgba(0,0,0,.7); } .gtt h2 span { display:block; overflow:hidden; padding-top:.1em; }
+  .gwin { position:absolute; left:${px(20)}; top:${px(22)}; background:var(--red); border-radius:${px(1.4)}; padding:${px(1)} ${px(2.4)}; display:flex; align-items:baseline; gap:${px(1.2)}; opacity:0; z-index:6; box-shadow:0 ${px(1)} ${px(3)} rgba(0,0,0,.5); }
+  .gwin b { font:900 ${px(3)} Montserrat; text-transform:uppercase; } .gwin em { font:900 ${px(6)}/1 Montserrat; font-style:normal; color:var(--gold); }
+  .gleg { position:absolute; left:0; right:0; bottom:${px(22)}; display:flex; justify-content:center; gap:${px(1.4)}; z-index:5; } .gleg span { opacity:0; background:rgba(5,13,34,.85); border:1px solid rgba(238,242,249,.2); border-radius:${px(1)}; padding:${px(0.8)} ${px(1.6)}; font:800 ${px(2.2)} Montserrat; text-transform:uppercase; letter-spacing:.06em; white-space:nowrap; } .gleg b { color:var(--gold); font-weight:900; } .gleg span:first-child { background:var(--red); }
+  #s-duel .dcap { right:${px(52)}; text-align:left; }
+  /* avatary v rybníku */
+  .ag { width:${px(5.4)} !important; height:${px(5.4)} !important; margin:${px(-2.7)} 0 0 ${px(-2.7)} !important; background:#0b1e42 center/cover no-repeat; box-shadow:0 0 0 ${px(0.4)} var(--c), 0 0 ${px(1.6)} var(--c) !important; }
+  /* nominace – pravidla */
+  .nrbg { position:absolute; inset:0; background:radial-gradient(70% 70% at 50% 60%, rgba(42,74,168,.55), rgba(5,13,34,.6) 70%); }
+  .nrh { top:${px(13)}; }
+  .nc { position:absolute; top:${px(36)}; width:${px(78)}; background:rgba(238,242,249,.97); color:var(--navy); border-radius:${px(2)}; padding:${px(2.4)}; opacity:0; box-shadow:0 ${px(1.4)} ${px(5)} rgba(0,0,0,.5); }
+  .nc0 { left:${px(7)}; } .nc1 { left:${px(92)}; }
+  .nct { display:flex; align-items:center; gap:${px(1.4)}; } .ncl { width:${px(8.4)}; height:${px(8.4)}; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 0 0 ${px(0.3)} rgba(48,66,133,.25); flex-shrink:0; } .ncl img { width:92%; height:92%; object-fit:contain; }
+  .nct b { display:block; font:900 ${px(3.4)} Montserrat; text-transform:uppercase; color:var(--blue); } .nct small { display:block; font:700 ${px(1.9)} Montserrat; color:#5a6a9a; }
+  .slots { display:grid; grid-template-columns:repeat(8, 1fr); gap:${px(0.9)}; margin-top:${px(2.6)}; }
+  .slt { position:relative; height:${px(9)}; border-radius:${px(1)}; background:#dfe6f4; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; }
+  .slt em { font:900 ${px(3.4)} Montserrat; font-style:normal; } .slt i { position:absolute; bottom:${px(0.4)}; font:700 ${px(1.3)} Montserrat; font-style:normal; color:#7f8db5; } .slt .x { left:10%; right:10%; }
+  .ncf { margin-top:${px(2)}; font:800 ${px(2.3)} Montserrat; text-transform:uppercase; letter-spacing:.03em; } .ncf b { font-size:${px(3.6)}; color:var(--red); } #ncf0 { opacity:0; }
+  .seats { position:relative; display:grid; grid-template-columns:repeat(5, 1fr); gap:${px(1.2)}; margin-top:${px(2.6)}; }
+  .seat { height:${px(13)}; border-radius:${px(1.4)}; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:${px(0.6)}; opacity:0; color:#fff; }
+  .seat i { width:${px(6)}; height:${px(6)}; border-radius:50%; background:rgba(255,255,255,.22); display:flex; align-items:center; justify-content:center; font:900 ${px(3.2)} Montserrat; font-style:normal; }
+  .seat small { font:800 ${px(1.55)} Montserrat; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  .seat.rk { background:#d9a520; color:#0b1e42; } .seat.co { background:var(--blue); } .seat.tm { background:var(--red); }
+  .tok { position:absolute; right:${px(-2)}; top:${px(-5)}; background:#1fae5b; color:#fff; border-radius:${px(1)}; padding:${px(0.6)} ${px(1.2)}; font:900 ${px(1.8)} Montserrat; text-transform:uppercase; white-space:nowrap; opacity:0; box-shadow:0 ${px(0.6)} ${px(1.6)} rgba(0,0,0,.4); }
+  #ncf1 { display:flex; gap:${px(1.6)}; flex-wrap:wrap; font-size:${px(1.6)}; } .lgd { opacity:0; } .lgd.rk { color:#b88a10; } .lgd.co { color:var(--blue); } .lgd.tm { color:var(--red); }
+  /* dokumenty */
+  .dcbg { position:absolute; inset:0; background:radial-gradient(70% 70% at 70% 50%, #2a4aa8 0%, #0b1e42 55%, #050d22 100%); }
+  .dch { top:${px(13)}; }
+  .brw { position:absolute; left:${px(92)}; top:${px(14)}; width:${px(78)}; height:${px(7)}; background:var(--ice); border-radius:${px(3.5)}; display:flex; align-items:center; gap:${px(0.7)}; padding:0 ${px(2)}; color:var(--navy); opacity:0; box-shadow:0 ${px(1)} ${px(4)} rgba(0,0,0,.45); }
+  .brw > i:not(.cur) { width:${px(1.3)}; height:${px(1.3)}; border-radius:50%; background:#c3cbe0; } .brw > i:first-child { background:var(--red); }
+  .addr { margin-left:${px(1.6)}; font:700 ${px(2.4)} Montserrat; } .addr em { font-style:normal; color:#8a96b8; margin:0 ${px(0.4)}; } .addr b { font-weight:900; padding:${px(0.2)} ${px(0.8)}; border-radius:${px(0.6)}; }
+  #dcur { right:auto; left:${px(52)}; bottom:${px(-2)}; }
+  .docs { position:absolute; left:${px(7)}; right:${px(7)}; top:${px(36)}; display:grid; grid-template-columns:repeat(4, 1fr); gap:${px(3)}; }
+  .doc { opacity:0; text-align:center; } .doc b { display:block; margin-top:${px(1.6)}; font:900 ${px(2.8)} Montserrat; text-transform:uppercase; }
+  .dpg { position:relative; height:${px(40)}; border-radius:${px(1)}; background:#fff; overflow:hidden; box-shadow:0 ${px(1.4)} ${px(5)} rgba(0,0,0,.55); } .dpg img { width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block; }
+  .pdf { position:absolute; right:${px(1)}; top:${px(1)}; background:var(--red); color:#fff; border-radius:${px(0.6)}; padding:${px(0.3)} ${px(0.9)}; font:900 ${px(1.6)} Montserrat; font-style:normal; }
+  /* partneři */
+  .flyw { position:absolute; inset:0; overflow:hidden; } .fly { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; filter:saturate(1.15) brightness(.95); }
+  .flyo { position:absolute; inset:0; background:radial-gradient(75% 70% at 50% 55%, rgba(5,13,34,.35), rgba(5,13,34,.82)); }
+  .pmain { position:absolute; left:0; right:0; top:${px(32)}; display:flex; flex-direction:column; align-items:center; gap:${px(1.6)}; }
+  .pmain small { font:800 ${px(2.6)} Montserrat; text-transform:uppercase; letter-spacing:.16em; color:var(--gold); opacity:0; }
+  .pmain .crsc { opacity:0; } .pmain .crsc img { width:${px(52)}; }
+  .pgrid { position:absolute; left:${px(7)}; right:${px(7)}; top:${px(25)}; }
+  .pg { position:absolute; } .pg > small { display:block; font:800 ${px(2.1)} Montserrat; text-transform:uppercase; letter-spacing:.16em; color:var(--gold); margin-bottom:${px(1.4)}; opacity:0; }
+  .pg0 { left:0; top:0; } .pg1 { right:0; top:0; text-align:right; } .pg2 { left:0; right:0; top:${px(25)}; }
+  .prow2 { display:flex; gap:${px(2)}; } .pg1 .prow2 { justify-content:flex-end; }
+  .plc { width:${px(15)}; height:${px(15)}; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 ${px(1)} ${px(3)} rgba(0,0,0,.5); opacity:0; } .plc img { width:94%; height:94%; object-fit:contain; }
+  .prow3 { display:grid; grid-template-columns:repeat(7, 1fr); gap:${px(1.6)}; }
+  .psp { position:relative; height:${px(11)}; border-radius:${px(1.4)}; display:flex; align-items:center; justify-content:center; padding:${px(1.2)}; opacity:0; box-shadow:0 ${px(1)} ${px(3)} rgba(0,0,0,.5); }
+  .psp.w { background:#fff; } .psp.d { background:rgba(11,30,66,.92); box-shadow:0 ${px(1)} ${px(3)} rgba(0,0,0,.5), inset 0 0 0 1px rgba(238,242,249,.25); } .psp img { max-width:100%; max-height:100%; object-fit:contain; }
+  .psp.gh { gap:${px(0.8)}; } .psp.gh .ring, .psp.gh .core { position:absolute; left:${px(1.2)}; top:50%; width:${px(5.6)}; height:${px(5.6)}; margin-top:${px(-2.8)}; } .psp.gh .wl3 { filter:brightness(1.8); margin-left:${px(6.4)}; max-height:${px(3.2)}; max-width:70%; }
+  .popen { position:absolute; left:0; right:0; bottom:${px(21)}; text-align:center; opacity:0; }
+  .popen b { display:block; font:900 ${px(5)}/1.05 Montserrat; text-transform:uppercase; background:linear-gradient(100deg, #fff 0%, #fff 38%, #ffd36b 50%, #fff 62%, #fff 100%) 0 0 / 300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 ${px(0.5)} ${px(2)} rgba(0,0,0,.7)); }
+  .popen span { display:block; margin-top:${px(0.6)}; font:800 ${px(2.6)} Montserrat; text-transform:uppercase; letter-spacing:.14em; color:var(--gold); }
+  .mega { bottom:${px(22)} !important; }
   /* hudební prvky */
   #spec { position:absolute; left:0; right:0; bottom:0; height:${px(P ? 7 : 6)}; display:flex; align-items:flex-end; gap:${px(0.35)}; padding:0 ${px(1)}; z-index:4; pointer-events:none; opacity:.0; mix-blend-mode:screen; }
   #spec i { flex:1; height:100%; transform-origin:50% 100%; transform:scaleY(.05); background:linear-gradient(0deg, rgba(227,30,36,.95), rgba(255,211,107,.85) 60%, rgba(238,242,249,.6)); border-radius:${px(0.3)} ${px(0.3)} 0 0; }
@@ -725,7 +910,6 @@ function build(W, H, file) {
     <div id="ptext"><div class="ptitle">TROUT AREA CZ</div><div class="partist">Pojď hrát · sezóna 2027</div>
       <div class="prow"><div id="peq">${Array.from({ length: 5 }, () => '<i></i>').join('')}</div><span id="ptime">0:00</span><div class="pbar"><div id="pfill"></div></div><span>${Math.floor(DUR / 60)}:${String(Math.round(DUR % 60)).padStart(2, '0')}</span></div></div></div>
   <audio id="music" class="clip" data-start="0" data-duration="${DUR}" data-track-index="0" src="assets/mix_long.wav" data-volume="1"></audio>
-  <div id="wipe">${Array.from({ length: NW }, (_, i) => `<i id="wp${i}"></i>`).join('')}</div>
   <div id="flash"></div>
   <div id="grain"></div>
   ${process.env.FINAL ? '' : `<div id="badge">DRAFT · ${VER}</div>`}
@@ -744,5 +928,4 @@ function build(W, H, file) {
   fs.writeFileSync(path.join(dir, 'index.html'), doc);
   console.log(file, 'DUR', DUR, 'tweens', out.length);
 }
-build(1080, 1920, '9x16');
 build(1920, 1080, '16x9');
